@@ -118,7 +118,7 @@ export class PhoneManager {
     const { client } = this.adb();
     if (!(await client.isInstalled(s.serial, 'com.vivo.pcsuite'))) {
       if (!options.installApk) throw new ApiError(409, 'PHONE_APP_MISSING', '手机未安装官方 com.vivo.pcsuite；可显式设置 installApk=true 安装随包 APK');
-      await client.install(s.serial, path.join(ROOT, 'pcsuite/updateApk/pcsuite.apk'));
+      await client.install(s.serial, path.join(ROOT, 'samples/windows/v7.0.6.0-cn/pcsuite/updateApk/pcsuite.apk'));
     }
     await client.startActivity(s.serial, { action: 'vivo.intent.action.PCSUITE_INTENT', flags: 268435456, extras: { intent_from: 1104 } });
     const service = { component: 'com.vivo.pcsuite/.service.AdbPortalService', extras: { from: 'pc', foreground: 0,

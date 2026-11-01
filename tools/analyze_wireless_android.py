@@ -11,7 +11,7 @@ out=root/'evidence/wireless/android';out.mkdir(parents=True,exist_ok=True)
 needles=['PAY_LOAD_1','vivo_connect','com.vivo.pcsuite.SERVICE','auth_status','compatGsonStr','10191','2200','randomId','pcCustomizedData','M-SEARCH','getPhone','scan/sid']
 index=[];classes=[]
 for apk in ['connbase','pcsuite']:
- path=root/f'pcsuite/updateApk/{apk}.apk'
+ path=root/f'samples/windows/v7.0.6.0-cn/pcsuite/updateApk/{apk}.apk'
  with zipfile.ZipFile(path) as z:
   for name in z.namelist():
    if not re.fullmatch(r'classes\d*\.dex',name):continue

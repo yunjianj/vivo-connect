@@ -2,7 +2,7 @@
 """Annotate local PE disassembly with string references; no target execution."""
 import pathlib,struct,re,json,bisect,subprocess
 root=pathlib.Path(__file__).resolve().parent.parent
-exe=root/'pcsuite/vivoesService/win32/vivoesService.exe';b=exe.read_bytes();pe=struct.unpack_from('<I',b,0x3c)[0];count=struct.unpack_from('<H',b,pe+6)[0];opt=struct.unpack_from('<H',b,pe+20)[0];base=struct.unpack_from('<I',b,pe+24+28)[0];sections=[]
+exe=root/'samples/windows/v7.0.6.0-cn/pcsuite/vivoesService/win32/vivoesService.exe';b=exe.read_bytes();pe=struct.unpack_from('<I',b,0x3c)[0];count=struct.unpack_from('<H',b,pe+6)[0];opt=struct.unpack_from('<H',b,pe+20)[0];base=struct.unpack_from('<I',b,pe+24+28)[0];sections=[]
 for i in range(count):
  at=pe+24+opt+40*i;name=b[at:at+8].rstrip(b'\0').decode();vsize,rva,size,off=struct.unpack_from('<IIII',b,at+8);sections.append(dict(name=name,va=base+rva,off=off,size=size))
 def va_offset(va):

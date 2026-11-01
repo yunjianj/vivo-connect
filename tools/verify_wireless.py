@@ -9,8 +9,8 @@ root = pathlib.Path(__file__).resolve().parent.parent
 run = subprocess.run([sys.executable, str(root/'tools/test_wireless_pairing.py')],
                      cwd=root, text=True, capture_output=True)
 print(run.stdout + run.stderr, end='')
-files = ['pcsuite/vivoesService/win32/vivoesService.exe',
-         'pcsuite/updateApk/connbase.apk', 'pcsuite/updateApk/pcsuite.apk',
+files = ['samples/windows/v7.0.6.0-cn/pcsuite/vivoesService/win32/vivoesService.exe',
+         'samples/windows/v7.0.6.0-cn/pcsuite/updateApk/connbase.apk', 'samples/windows/v7.0.6.0-cn/pcsuite/updateApk/pcsuite.apk',
          'tools/wireless_pairing.py', 'tools/test_wireless_pairing.py']
 report = {
     'scope': 'static reconstruction and offline reference-code tests',

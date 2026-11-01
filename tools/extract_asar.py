@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """Read ASAR without executing the target; record missing unpacked files."""
 import argparse, hashlib, json, pathlib, struct
-p=argparse.ArgumentParser(); p.add_argument('archive',nargs='?',default='pcsuite/resources/app.asar'); p.add_argument('--output',default='analysis/app'); a=p.parse_args()
+p=argparse.ArgumentParser(); p.add_argument('archive',nargs='?',default='samples/windows/v7.0.6.0-cn/pcsuite/resources/app.asar'); p.add_argument('--output',default='analysis/app'); a=p.parse_args()
 archive=pathlib.Path(a.archive); out=pathlib.Path(a.output); report={'archive':str(archive),'sha256':hashlib.sha256(archive.read_bytes()).hexdigest(),'extracted':0,'missing_unpacked':[]}
 with archive.open('rb') as f:
     _,header_size,_,json_size=struct.unpack('<4I', f.read(16)); header=json.loads(f.read(json_size)); base=8+header_size

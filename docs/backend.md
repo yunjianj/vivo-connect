@@ -27,7 +27,7 @@
 
 ```sh
 cd /home/archuser/Projects/vivo_connect
-# 已有 analysis/app 时无需重复提取；原始 pcsuite/ 样本须保留在本机
+# 已有 analysis/app 时无需重复提取；原始 Windows 样本须保留在 `samples/windows/v7.0.6.0-cn/`
 python tools/extract_asar.py
 # 自动检测已安装的 Chromium/Chrome；有匹配 chromedriver 时优先采用 WebDriver
 npm start

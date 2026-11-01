@@ -3,7 +3,7 @@
 import pathlib,zipfile,struct,json,re
 root=pathlib.Path(__file__).resolve().parent.parent;result=[]
 for apk in ['connbase','pcsuite']:
- with zipfile.ZipFile(root/f'pcsuite/updateApk/{apk}.apk') as z:
+ with zipfile.ZipFile(root/f'samples/windows/v7.0.6.0-cn/pcsuite/updateApk/{apk}.apk') as z:
   for dex in z.namelist():
    if not re.fullmatch(r'classes\d*\.dex',dex):continue
    b=z.read(dex)

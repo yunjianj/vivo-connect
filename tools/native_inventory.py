@@ -19,7 +19,7 @@ for name in files:
  records.append({'file':str(p.relative_to(root)),'sha256':hashlib.sha256(data).hexdigest(),'pe_headers':str(dest.relative_to(root)),'strings':strings})
 (root/'evidence/native.json').write_text(json.dumps(records,indent=2)+'\n')
 apks=[]
-for p in (root/'pcsuite/updateApk').glob('*.apk'):
+for p in (root/'samples/windows/v7.0.6.0-cn/pcsuite/updateApk').glob('*.apk'):
  with zipfile.ZipFile(p) as z:
   hits=[]
   for name in z.namelist():

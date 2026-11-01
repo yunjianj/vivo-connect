@@ -2,7 +2,7 @@
 
 ## 样本和结论等级
 
-主样本为 `pcsuite/resources/app.asar`，package.json 声明 `name=pcsuite`、`version=7.0.6`、入口 `dist/electron/main.js`。ASAR SHA256 为 `35ffb46ab7979ddc5250c66393dd6fb35210739dab4fd125a94462f72a7f96e0`。同目录包含 SyncService、vivoScreen、vivoExtScreen、vdfs、vivorelay、phoneCall、vivoCamera、vivoControl，以及 `updateApk/pcsuite.apk` 和 `connbase.apk`。
+主样本为 `samples/windows/v7.0.6.0-cn/pcsuite/resources/app.asar`，package.json 声明 `name=pcsuite`、`version=7.0.6`、入口 `dist/electron/main.js`。安装包发行标识为 7.0.6.0-cn，PE 文件版本为 7.0.6.0，内嵌 Electron 22 / Chromium 108；对应的 Windows 兼容线和样本哈希见 [Windows 样本清单](../samples/windows/v7.0.6.0-cn/README.md)。ASAR SHA256 为 `35ffb46ab7979ddc5250c66393dd6fb35210739dab4fd125a94462f72a7f96e0`。同目录包含 SyncService、vivoScreen、vivoExtScreen、vdfs、vivorelay、phoneCall、vivoCamera、vivoControl，以及 `updateApk/pcsuite.apk` 和 `connbase.apk`。
 
 本文中的“确认”表示打包 JavaScript 中存在注册、序列化或调用实现；“交叉印证”表示同一路径还出现在 Android DEX 字符串；“候选”表示仅字符串或符号线索。没有执行动态抓包或完成真机互通。返回字段以代码实际消费项为准，不表示服务端完整 schema。
 
