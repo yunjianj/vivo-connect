@@ -2,6 +2,10 @@
 
 本仓库以提供的 Windows 安装目录和内嵌 Android APK 为样本，整理连接、文件管理、本机服务、Electron IPC、同步与原生组件边界。可以据此设计新的跨平台客户端；投屏媒体传输、蓝牙配对底层和云同步引擎仍需进一步还原，不能仅凭已列出的 HTTP 接口实现全部功能。
 
+## 基础后端
+
+已新增账号登录、手机连接和文件收发后端，优先复用官方账号网页、手机 APK、`@vivo/adbkit`、WebSocket 和 TAR 库。运行 `npm start` 启动后端，再运行 `npm run scan` 打开可自动刷新的手机扫码页；校园网隔离场景新增实验性 Wi-Fi Direct（默认用项目独立 supplicant 管理 P2P GO，不修改 NetworkManager；首次运行前执行 `python tools/build_p2p_supplicant.py`），已实测手机直连成功；真实文件收发仍待验证。依赖准备、API 和当前验证范围见 [后端使用文档](docs/backend.md)。
+
 ## 文档入口
 
 | 文档 | 内容 |

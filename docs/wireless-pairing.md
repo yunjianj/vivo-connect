@@ -182,3 +182,7 @@ python tools/verify_evidence.py
 8 个离线测试覆盖 UTF-8 字节长度、大端帧头、拆包/粘包、非法长度、发现响应、嵌套 JSON、token、忙碌中间响应和加密解密一致性。加密往返只验证参考代码内部一致性，不能代替与原生程序/手机比对。[测试源码](../tools/test_wireless_pairing.py)、[验证记录](../evidence/wireless/verification.json)
 
 下一步最有价值的证据是：目标手机的 connection/connbase 组件版本、同网段首次配对的双向 UDP/TCP 流量及 PC 日志。需要据此确认旧版 10191 是否仍接受、现代 peerChallenge 的实际字段来源、授权返回枚举，以及 token 到 HTTPS/WSS 的完整交接。当前不扩展到其他业务。
+
+## 后续实现：Linux 本地扫码直连
+
+已新增实验性 Station + P2P GO 并发助手及手机官方本地二维码分支，详见 [基础后端的 Wi-Fi Direct 说明](backend.md)。默认路径使用项目内的上游 supplicant 独立副本和官方手机 APK，不修改 NetworkManager，也不要求先恢复 BLE 挑战。已观测到独立 GO 在 2412 MHz 运行、校园网 Station 同时保持 5785 MHz，后端注册 ready；补齐针对请求手机的 WPS PBC 授权后，已实测手机入组并建立 HTTPS/WSS 会话；真实文件收发尚未验证。旧的系统 D-Bus 路径仅保留为显式选项。

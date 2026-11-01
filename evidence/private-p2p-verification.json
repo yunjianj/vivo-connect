@@ -1,0 +1,112 @@
+{
+  "observedAt": "2026-11-01T07:43:34.379887+00:00",
+  "driver": "private",
+  "build": {
+    "version": "2.12",
+    "sourceUrl": "https://w1.fi/releases/wpa_supplicant-2.12.tar.gz",
+    "sourceSha256": "08e23937e16d0155e55cab2b51f51fbe10d80a1aa91c4e15442645059b737ef6",
+    "inputs": {
+      "patches/wpa_supplicant-2.12-private-go.patch": "b0ed3f20e1fe792da40a428a46e09d0d4603c0f2471f6030ecf640c6dfee58f1",
+      "tools/p2p_supplicant.config": "43c16cb17f5ee08a09f3834ea6bdb4d009e6375369ee30b9badfa1e6f2975ff1",
+      "tools/build_p2p_supplicant.py": "7e743f7a33982044b5e699d630c3eb2014ffc844286f723317ad32c00778ac7d"
+    },
+    "binarySha256": "1158934c1c44267c15a1dc9e1ba61c7691202fc28eb7b15342af18079c8e7fd4",
+    "systemInstallationPerformed": false,
+    "dbusEnabled": false,
+    "goOnly": true
+  },
+  "compiled": true,
+  "installedAsSystemComponent": false,
+  "networkManagerModifiedOrRestarted": false,
+  "realExecutableControlRegression": {
+    "passed": true,
+    "interfacesAdded": 0,
+    "buildMarkerConfirmed": true,
+    "ordinaryStationNameRefused": true
+  },
+  "simulatedLifecycleTests": {
+    "passed": 17,
+    "failed": 0
+  },
+  "liveBackendStatus": {
+    "ready": true,
+    "experimental": true,
+    "stationInterface": "wlp2s0",
+    "groupInterface": "p2p-vc-2c42f9",
+    "ip": "192.168.49.1",
+    "frequency": 2412,
+    "progress": {
+      "associatedStations": 1,
+      "authorizedStations": 1,
+      "dhcpDiscoveries": 3,
+      "dhcpOffers": 3,
+      "dhcpAcks": 1,
+      "provisionRequests": 1,
+      "pairingAuthorizations": 1,
+      "wpsFailures": 0,
+      "wpsSuccesses": 2,
+      "pskFailures": 0
+    },
+    "pairingActive": false,
+    "requiresAdmin": true
+  },
+  "liveKernelInterfaces": [
+    {
+      "name": "p2p-vc-2c42f9",
+      "index": 14,
+      "phy": 0,
+      "type": 9,
+      "frequency": 2412
+    },
+    {
+      "name": "wlp2s0",
+      "index": 3,
+      "phy": 0,
+      "type": 2,
+      "frequency": 5785
+    }
+  ],
+  "p2pJobs": [
+    {
+      "id": "e3f0177c-eb4e-4547-9fed-cc7965be50eb",
+      "status": "succeeded",
+      "phase": "connecting",
+      "networkProgress": {
+        "associatedStations": 1,
+        "authorizedStations": 1,
+        "dhcpDiscoveries": 0,
+        "dhcpOffers": 0,
+        "dhcpAcks": 0,
+        "provisionRequests": 1,
+        "pairingAuthorizations": 1,
+        "wpsFailures": 0,
+        "wpsSuccesses": 2,
+        "pskFailures": 0
+      }
+    }
+  ],
+  "privateGoReadyObserved": true,
+  "realPhoneJoinedVerified": true,
+  "realFileTransferVerified": false,
+  "campusObservation": "Station at 5785 MHz and GO at 2412 MHz remain concurrent during real phone pairing and HTTPS/WSS session; helper verifies baseline campus IPv4 and NM UUID each heartbeat. No load/roaming stress test.",
+  "sessions": [
+    {
+      "id": "4ce3d9f5-5748-48ee-b48b-547cb5ea82fb",
+      "status": "connected",
+      "ip": "192.168.49.79",
+      "pcIp": "192.168.49.1",
+      "transport": "wifi-direct"
+    }
+  ],
+  "userReportedPhoneConnectionSuccessful": true,
+  "missingPbcAuthorization": {
+    "beforeFix": {
+      "provisionRequests": 1,
+      "associatedStations": 0,
+      "authorizedStations": 0,
+      "dhcpAcks": 0
+    },
+    "fix": "Authorize recent requesting P2P Device with WPS_PBC p2p_dev_addr only while QR job is pending; cancel window when pending QR ends",
+    "verifiedAfterFix": true
+  }
+}

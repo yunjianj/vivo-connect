@@ -1,0 +1,7 @@
+<!doctype html><html lang="zh-CN"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>vivo 手机扫码连接</title><link rel="stylesheet" href="/scan/style.css"><script src="/scan/app.js" defer></script></head><body><main>
+<p class="eyebrow">VIVO CONNECT · 本地后端</p><h1>连接你的手机</h1><p>用手机官方互传的“连接电脑 / 扫一扫”扫描下方二维码。</p>
+<section id="locked"><p>请在项目终端运行 <code>npm run scan</code>，自动打开已授权的本地页面。</p></section>
+<section id="controls" hidden><div class="row"><label for="transport">连接通路</label><select id="transport"><option value="lan">局域网 / 云扫码</option><option value="p2p">Wi-Fi Direct（保留校园网，实验性）</option></select><label for="network">电脑网络</label><select id="network"><option value="">自动选择 Wi-Fi / 有线网卡</option></select><button id="refresh">生成 / 刷新二维码</button><button id="stop">停止等待</button></div><p id="account"></p></section>
+<section class="card"><div id="image"><span>等待生成二维码</span></div><div class="details"><h2 id="status" role="status">尚未开始</h2><p id="message">生成链接后，还需要手机实际扫描二维码。</p><p id="expiry"></p><pre id="diagnostic"></pre></div></section>
+<p class="note">扫码结果通过 vivo 官方云接口返回。扫码成功后仍需电脑能访问手机：校园网可能隔离设备；校园网隔离时请选择 Wi-Fi Direct；需先在终端启动管理员直连助手，手机兼容性仍在验证。</p>
+</main></body></html>
