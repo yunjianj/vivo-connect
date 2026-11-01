@@ -91,6 +91,12 @@ node tools/import-account.mjs /绝对路径/保存的回调页.html
 
 `DELETE /api/account` 清除本地账号、关闭本后端打开的受控浏览器并断开手机；手动打开的个人浏览器不受影响，不撤销服务端其他设备的登录。恢复的本地凭据不代表远端永久有效，当前未实现账号 token 自动刷新。基础近场连接允许未登录用户手动授权；账号和手机授权是两条独立链路。
 
+## 原生 GUI
+
+默认前端现为 Rust + Slint 原生桌面程序。后端运行后执行 `./tools/run-native.sh`；`npm run ui` / `npm run scan` 也指向原生入口。设备管理、二维码、账号登录与文件收发均在原生窗口中操作。构建、依赖与内存实测见 [原生 GUI 文档](native-gui.md)。
+
+下文网页相关描述仅适用于可选的旧调试入口 `npm run ui:web`。
+
 ## 连接手机
 
 USB 优先复用官方路径：
@@ -124,15 +130,29 @@ curl -H "Authorization: Bearer $TOKEN" http://127.0.0.1:8765/api/jobs/<连接请
 
 USB、LAN 和 existing 均返回 202 和连接任务 ID。轮询 `GET /api/jobs/<id>`：成功任务的 `result.id` 是 session ID。只有版本/基础信息检查通过且心跳通道打开后才报告 connected。连接 token 只保存在进程内，重启需要重新连接。
 
-官方扫码连接推荐使用已提供的本地页面。保持后端运行，在另一个终端执行：
+旧的网页扫码调试界面可按以下方式使用。保持后端运行，在另一个终端执行：
 
 ```sh
-npm run scan
+npm run ui:web
 ```
 
 命令自动读取本地 API 配置，通过一次性票据打开系统默认浏览器。页面自动选择本机网卡、显示真实二维码图片及倒计时，轮询连接阶段；官方返回扫码超时 10003 时自动刷新。手机使用**官方互传的“连接电脑 / 扫一扫”**扫描图片，而不是用普通浏览器打开 qrText 链接。进入页面后也可明确选择网卡、刷新或停止等待。
 
-页面使用同一后端的 `/scan`，无需单独启动前端、填写 API token 或把账号凭据贴到聊天。60 秒一次性票据只在浏览器 fragment 中传递，兑换后从 URL 清除；浏览器得到的是一小时有效、仅允许扫码/任务查询与取消等操作的临时凭据，不能用来发起账号登录、文件操作或签发新票据。直接打开裸 `/scan` 页面时会提示先运行 `npm run scan`。
+### 旧网页调试界面
+
+运行 `npm run ui:web` 打开旧网页调试界面。布局参考 [KDE Connect](https://apps.kde.org/kdeconnect/) 的桌面设备管理方式，采用 Breeze 浅色、侧边设备列表与右侧功能区域，保持项目自己的名称和图标。
+
+- 已连接设备直接显示概览；添加设备使用二维码弹窗，仍有刷新、停止及配对阶段反馈。
+- 左下角可启动官方账号登录，页面轮询登录结果，不读取或显示账号 token。
+- 支持系统文件选择器、多文件与拖放发送，可设置手机保存目录；浏览器单文件上限 512 MiB，重名默认保留并改名。
+- 手机文件页使用官方 FILELIST 请求（data 为官方虚拟首页 `/` 或手机返回的实际目录路径，versionTag=1）。可进入文件夹、接收文件，也可直接输入手机文件路径接收。
+- 传输记录展示真实任务进度、失败原因与取消按钮，接收完成后可保存到浏览器的下载目录。重启后端不保留内存中的任务历史。
+
+页面使用同一后端的 `/scan`，无需单独启动前端或填写 API token。60 秒一次性票据只在浏览器 fragment 中传递，兑换后从 URL 清除；浏览器得到一小时有效的界面凭据，仅存于当前标签页 sessionStorage。它允许账号登录、设备查询/扫码、手机文件查询/下载、浏览器选中文件上传及任务查询/取消；不允许系统网络注册、签发新票据、导入账号回调或直接传入电脑任意路径上传。直接打开未授权页面时会提示先运行 `npm run ui`。
+
+浏览器通过 `POST /api/ui/files?sessionId=…&name=…&savePath=…` 发送文件二进制，`X-File-Size` 声明大小。后端检查名称、实际大小、空间和会话，仅在私有随机暂存目录落盘，再交给已有官方上传流程；完成、失败或取消后清理暂存文件。页面凭据不能访问原有 paths 上传接口，从而避免变成任意本地文件读取入口。更新到本版需重启后端；现有手机会话随重启失效，需要重新连接。
+
+验证：`npm run test:web-ui` 使用真实无头浏览器和模拟手机，覆盖已有设备概览、拖放上传、手机目录、接收操作与 390px 窄屏布局；`npm run test:scan-ui` 验证二维码及配对进度。预览图在 `/tmp/vivo-desktop-ui.png`。
 
 API 方式仍保留，并且 pcIp 现在可省略自动选择：
 
@@ -186,7 +206,7 @@ npm run scan
 
 [独立助手](../tools/p2p_private.py) 将临时控制目录设为仅管理员可读写，输出白名单阶段与错误类别，丢弃事件内的密码；为本次新接口记录 ifindex、名称、phy 和类型。失败或 Ctrl-C 时停止自身进程与 DHCP，清理自身地址，仅在接口身份仍匹配时删除它。旧组、身份变化的接口及校园网 station 不在清理范围。
 
-真实构建产物的无网卡回归可执行 `python tools/smoke_p2p_private.py`：实际启动独立全局控制服务，不添加无线接口，检查 PING、构建标记、空接口列表和拒绝普通 station 名称。`python tools/test_p2p_private.py` 的 17 项检查覆盖模拟启动/注册、拒绝组创建、频率不符、校园网变化、组结束、凭据日志过滤和清理边界。随后通过只读检查已观测到 `p2p-vc-*` 独立接口（2412 MHz）与校园网 `wlp2s0`（5785 MHz）同时运行，后端 `ready=true`，网关 `192.168.49.1`，并已有等待手机加入的直连扫码任务。后续补齐 WPS 授权后，已确认真实手机取得 `192.168.49.79` 并建立 `wifi-direct` 会话，HTTPS/WSS 连接成功；真实文件收发仍待验证。
+真实构建产物的无网卡回归可执行 `python tools/smoke_p2p_private.py`：实际启动独立全局控制服务，不添加无线接口，检查 PING、构建标记、空接口列表和拒绝普通 station 名称。`python tools/test_p2p_private.py` 的 17 项检查覆盖模拟启动/注册、拒绝组创建、频率不符、校园网变化、组结束、凭据日志过滤和清理边界。随后通过只读检查已观测到 `p2p-vc-*` 独立接口（2412 MHz）与校园网 `wlp2s0`（5785 MHz）同时运行，后端 `ready=true`，网关 `192.168.49.1`，并已有等待手机加入的直连扫码任务。后续补齐 WPS 授权后，已确认真实手机取得 `192.168.49.79` 并建立 `wifi-direct` 会话，HTTPS/WSS 连接成功；已实测 8 字节 example.txt 上传、回读及 SHA-256 一致；大文件和目录的真机表现尚未验证。
 
 2026-11-01 手机扫码实测曾出现连接超时：当时新增进度显示 `provisionRequests=1`，而关联、认证及 DHCP 均为 0，确认手机已请求 P2P 配对但 GO 尚未授权。已补上上游要求的 WPS PBC 步骤：仅当后端有等待中的二维码时，对最近 15 秒内发起 PBC 请求的单个 P2P Device Address 执行 `WPS_PBC p2p_dev_addr=...`。窗口最长 120 秒，二维码取消、过期或更换时关闭；实测修复后无线认证、DHCP 及手机回调均成功，不会在无二维码时向周围所有设备开放 WPS。依据为构建源码中的 `wpa_supplicant/README-P2P` 与 `ctrl_iface.c` 的 WPS_PBC 处理。补丁仍复用上游 WPS 实现，不改系统 supplicant。
 
@@ -237,7 +257,7 @@ sudo python tools/p2p_helper.py --interface wlp2s0 --driver system --recover-sta
 
 手机证据：[ConnectModel.startConnect / accessPcDirectIp](../evidence/wireless/android/pcsuite__classes2.dex__affb821f01e7.txt#L530)、[qrConnectP2P 派发](../evidence/wireless/android/pcsuite__classes2.dex__e29cb877fbfe.txt#L1096)、[手机 P2P ConfigBuilder](../evidence/wireless/android/connbase__classes2.dex__a21229ab8bff.txt)、[PC 本地回调](../analysis/pretty/main.js#L28794)。系统接口依据 [wpa_supplicant D-Bus 文档](https://w1.fi/wpa_supplicant/devel/dbus.html)；NetworkManager 的 wifi-p2p peer/WPS 设置本身不等同于这里所需的自主 GO 创建，[设置参考](https://networkmanager.dev/docs/api/latest/settings-wifi-p2p.html)。
 
-新 API：`GET /api/p2p/status`、`GET /api/p2p/capabilities?interface=wlp2s0`、`POST /api/sessions/p2p`。`/api/p2p/register`、heartbeat、unregister 由本地管理员助手通过现有 API token 调用；扫码页临时凭据只能查询 status 和创建 P2P 扫码任务，不能注册网络。二维码任务阶段为 waiting-for-p2p → connecting → succeeded/failed。能力接口不会创建网络。
+新 API：`GET /api/p2p/status`、`GET /api/p2p/capabilities?interface=wlp2s0`、`POST /api/sessions/p2p`。`/api/p2p/register`、heartbeat、unregister 由本地管理员助手通过现有 API token 调用；设备界面的临时凭据可查询 status 和创建 P2P 扫码任务，但不能注册网络。二维码任务阶段为 waiting-for-p2p → connecting → succeeded/failed。能力接口不会创建网络。
 
 默认独立助手运行时依赖项目构建产物，以及系统 `ip`、`nmcli`、`dnsmasq`、Python 3；旧的 `--driver system` 才额外依赖 `busctl` 和系统 supplicant。可用 `--state-dir` 和 `--port` 指定实际后端位置。首次运行若遇到监管频率、GroupAdd、固件、DHCP 或回调错误，应保留不含密码的终端错误以继续定位；不要为绕过错误手动断开校园网、停止系统网络服务或关闭防火墙。
 
@@ -257,7 +277,7 @@ curl -X POST -H "Authorization: Bearer $TOKEN" -H 'Content-Type: application/jso
   http://127.0.0.1:8765/api/sessions/<sessionId>/uploads
 ```
 
-本地 paths 为绝对路径，支持普通文件/目录；根文件名不可重复，不接受符号链接或特殊文件。先暂存快照，再发送官方 drop_files_info 预检和 TAR 流；预检拒绝时不发送文件体。上传成功要求手机业务响应确认，不把写入 TCP 视为完成。`ifDuplicated` 可为 rename 或 overwrite，覆盖须由调用方明确选择。
+本地 paths 为绝对路径，支持普通文件/目录；根文件名不可重复，不接受符号链接或特殊文件。先暂存快照，再发送官方 drop_files_info 预检和 TAR 流；预检拒绝时不发送文件体。预检按官方 [checkUploadInfo](../evidence/main-modules/1704.js) → [handleUploadRes(response)](../evidence/main-modules/162.js#L74) 的调用规则接受 HTTP 200，不要求响应体含 status；空响应和缺少 status 均兼容，同时保留显式非零 status/code 的拒绝检查。上传最终响应的完成确认独立处理，不因预检成功就报告文件已发送。上传成功要求手机业务响应确认，不把写入 TCP 视为完成。本次实测上传 `/sdcard/Download/example.txt` 成功，再通过下载接口回读，与原始 8 字节文件的 SHA-256 一致，见 [真机验证记录](../evidence/upload-preflight-verification.json)。`ifDuplicated` 可为 rename 或 overwrite，覆盖须由调用方明确选择。
 
 手机接收到电脑：
 
@@ -273,7 +293,7 @@ curl -X POST -H "Authorization: Bearer $TOKEN" -H 'Content-Type: application/jso
 
 ## 任务、取消与错误
 
-`GET /api/jobs` 或 `GET /api/jobs/<id>` 返回 queued/running/succeeded/failed/cancelled、phase、bytes、totalSize、result/error。bytes 是实际传输流字节数，可能含 TAR 头，不能直接当作文件内容百分比；totalSize 来自文件或手机预检。任务状态仅在内存中，进程重启不恢复，已下载文件保留在本地。
+`GET /api/jobs` 或 `GET /api/jobs/<id>` 返回 queued/running/succeeded/failed/cancelled、phase、bytes、totalSize、result/error。上传接口刚返回的 `queued` 只表示任务已创建；需要继续查询返回的任务 id，才能获知最终成功或 error。bytes 是实际传输流字节数，可能含 TAR 头，不能直接当作文件内容百分比；totalSize 来自文件或手机预检。任务状态仅在内存中，进程重启不恢复，已下载文件保留在本地。
 
 `POST /api/jobs/<id>/cancel` 取消传输/连接。上传取消会中止本地流，不承诺回滚手机端已收到的数据；下载失败/取消会清理临时文件，不公布为成功。单任务基础上限为 50 GiB，不支持断点续传。不要对失败上传自动无限重试，避免产生重名副本。
 
@@ -286,6 +306,12 @@ npm test
 python tools/test_p2p_helper.py
 ```
 
-当前 24 项 Node 测试、30 项旧网络助手测试及 17 项独立模式测试通过，见 [验证记录](../evidence/backend-verification.json)。测试使用本机模拟手机的 TCP、HTTPS、自签名证书和 WSS，以及模拟 CDP/WebDriver 回调，不连接真实账号或真实手机。扫码 UI 的真实浏览器回归可执行 `npm run test:scan-ui`，它使用模拟云返回、真实二维码生成器，验证图片显示和任务轮询。另可执行 `npm run test:browser`，用真实无头 Chromium/ChromeDriver 访问本地延迟 10 秒才出现回调字段且一直加载资源的页面，回归旧版 8 秒退出问题；不会访问官方账号。覆盖官方扫码 sid/getPhone 到会话的 token 交接、帧拆包、授权忙碌后接受、同 token 鉴权、会话建立、上传/下载后哈希一致、拒绝预检、大小不一致、归档路径/链接拒绝、API 鉴权、取消、账号回调持久化和 USB 启动参数/转发清理。
+当前 26 项 Node 测试、30 项旧网络助手测试及 17 项独立模式测试通过，见 [验证记录](../evidence/backend-verification.json)。测试使用本机模拟手机的 TCP、HTTPS、自签名证书和 WSS，以及模拟 CDP/WebDriver 回调，不连接真实账号或真实手机。扫码 UI 的真实浏览器回归可执行 `npm run test:scan-ui`，它使用模拟云返回、真实二维码生成器，验证图片显示和任务轮询。另可执行 `npm run test:browser`，用真实无头 Chromium/ChromeDriver 访问本地延迟 10 秒才出现回调字段且一直加载资源的页面，回归旧版 8 秒退出问题；不会访问官方账号。覆盖官方扫码 sid/getPhone 到会话的 token 交接、帧拆包、授权忙碌后接受、同 token 鉴权、会话建立、上传/下载后哈希一致、拒绝预检、大小不一致、归档路径/链接拒绝、API 鉴权、取消、账号回调持久化和 USB 启动参数/转发清理。
 
 真机仍需确认：官方网页和回调是否保持样本契约、手机是否允许旧版 LAN 配对、Linux 平台字段、HTTPS/HTTP 切换与证书、目录归档及权限响应。后端会暴露这些真实失败，不将模拟测试结果表述为真机已通过。
+
+### 保留设备的断连与重连
+
+原生 GUI 使用 `POST /api/sessions/:id/disconnect` 关闭传输和心跳但保留设备记录，返回断连会话；使用 `POST /api/sessions/:id/reconnect` 提交恢复任务，返回 202 的 job。恢复成功后 result 为恢复的会话，复用原设备 ID；重新扫码也按手机稳定身份合并旧条目；失败保留旧设备供再次重试或扫码。手机已关闭服务或原地址不可达时，GUI 回退原连接方式的扫码。凭据仅在后端内存中保留，不通过公开会话/任务接口返回。原 `DELETE /api/sessions/:id` 仍表示删除会话。
+
+Wi-Fi Direct 的启动授权由原生客户端调用系统 pkexec 完成，后端 HTTP 接口不执行提权命令。详见[原生客户端](native-gui.md)。

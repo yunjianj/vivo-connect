@@ -21,6 +21,6 @@ export class Jobs {
   get(id) { const j = this.items.get(id); if (!j) throw new ApiError(404, 'JOB_NOT_FOUND', '任务不存在'); return j; }
   public(job) { const { controller, done, ...safe } = job; return safe; }
   cancel(id) { const j = this.get(id); if (['queued', 'running'].includes(j.status)) j.controller.abort(new Error('任务已取消')); return this.public(j); }
-  async cancelSession(id) { const jobs = [...this.items.values()].filter(j => j.sessionId === id); for (const j of jobs) this.cancel(j.id); await Promise.all(jobs.map(j => j.done)); }
+  async cancelSession(id, { exceptKind } = {}) { const jobs = [...this.items.values()].filter(j => j.sessionId === id && (!exceptKind || j.kind !== exceptKind)); for (const j of jobs) this.cancel(j.id); await Promise.all(jobs.map(j => j.done)); }
   async close() { for (const j of this.items.values()) this.cancel(j.id); await Promise.all([...this.items.values()].map(j => j.done)); }
 }

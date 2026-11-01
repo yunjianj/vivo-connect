@@ -13,5 +13,5 @@ try {
  // Only a one-use, 60-second ticket is passed to the system browser, not the API token.
  const child=spawn('xdg-open',[url],{stdio:'ignore',detached:true});
  child.on('error',()=>{console.log('请在本机浏览器打开以下一次性链接：\n'+url);});child.unref();
- console.log('已打开本地扫码页面。请用手机官方互传扫描二维码；过期后页面会自动刷新。');
+ console.log('已打开 vivo Connect 设备界面，可连接手机、发送文件并查看传输记录。');
 }catch(error){console.error(error.message);process.exitCode=1;}

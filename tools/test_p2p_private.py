@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """Private P2P lifecycle guards: simulated kernel/process, no real Wi-Fi changes."""
-import collections,contextlib,io,json,pathlib,socket,struct,tempfile,threading,unittest,time
+import os,errno,collections,contextlib,io,json,pathlib,socket,struct,tempfile,threading,unittest,time
 from types import SimpleNamespace
 from unittest.mock import Mock,patch
 import p2p_helper as h
@@ -69,6 +69,34 @@ def private_environment(fail_add=False,frequency=2412):
         yield SimpleNamespace(helper=helper,state=state,nl=nl,control=control,process=process,stage=stage,popen=popen,commands=commands,api_calls=api_calls,system=system,name=name)
 
 class PrivateTests(unittest.TestCase):
+    def test_orphan_recovery_requires_private_inactive_group_and_protected_record(self):
+        info={'name':'p2p-vc-aaaaaa','index':9,'phy':0,'type':9,'frequency':0}
+        self.assertTrue(p.inactive_private_group(info,0))
+        for changed in [{'type':2},{'frequency':2412},{'phy':1},{'name':'wlp2s0'},{'name':'p2p-other'}]:
+            self.assertFalse(p.inactive_private_group({**info,**changed},0))
+        with tempfile.TemporaryDirectory() as directory:
+            root=pathlib.Path(directory);runtime=root/'vivo-p2p-test';runtime.mkdir(mode=0o700)
+            ctrl=runtime/'ctrl';ctrl.mkdir()
+            (runtime/'supplicant.conf').write_text('ctrl_interface='+str(ctrl)+'\ndevice_name=vivo-connect-linux\n')
+            (runtime/'interface.json').write_text(json.dumps(info))
+            self.assertEqual(list(p.owned_runtime_groups(root,os.getuid()))[0][2],info)
+            runtime.chmod(0o755)
+            self.assertEqual(list(p.owned_runtime_groups(root,os.getuid())),[])
+    def test_orphan_recovery_never_removes_answering_control_service(self):
+        helper=object.__new__(p.PrivateHelper)
+        info={'name':'p2p-vc-aaaaaa','index':9,'phy':0,'type':9,'frequency':0}
+        control=Mock();control.request.return_value='PONG'
+        with patch.object(p,'owned_runtime_groups',return_value=[(pathlib.Path('/run/vivo-test'),pathlib.Path('/run/vivo-test/ctrl/p2p-vc-aaaaaa'),None)]),patch.object(p,'kernel_interfaces',return_value=[info]),patch.object(p,'Control',return_value=control),patch.object(p,'Nl80211') as nl:
+            helper.recover_private_orphans({'phy':0})
+            nl.assert_not_called()
+    def test_orphan_recovery_deletes_only_attested_inactive_interface(self):
+        helper=object.__new__(p.PrivateHelper);helper.stop=False;helper.args=SimpleNamespace(interface='wlp2s0');helper.original={'campus':'preserved'};helper.stage=Mock()
+        info={'name':'p2p-vc-aaaaaa','index':9,'phy':0,'type':9,'frequency':0}
+        with patch.object(p,'owned_runtime_groups',return_value=[(pathlib.Path('/run/vivo-test'),pathlib.Path('/run/vivo-test/ctrl/p2p-vc-aaaaaa'),info)]),patch.object(p,'kernel_interfaces',return_value=[info]),patch.object(p,'Control',side_effect=ConnectionRefusedError(errno.ECONNREFUSED,'gone')),patch.object(p,'station_snapshot',return_value=helper.original),patch.object(p,'Nl80211') as nl:
+            helper.recover_private_orphans({'phy':0})
+            nl.return_value.delete_interface.assert_called_once_with(9)
+            nl.return_value.close.assert_called_once()
+
     def test_create_go_packet_never_allocates_station_or_p2p_device(self):
         client=object.__new__(Nl80211);client.seq=0;client.family=42;client.socket=Mock()
         client.socket.recv.return_value=struct.pack('IHHIIi',20,2,0,1,0,0)

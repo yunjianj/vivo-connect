@@ -1,0 +1,152 @@
+import { Button, LineEdit, ComboBox, ScrollView, ProgressIndicator } from "std-widgets.slint";
+export struct Device { id: string, name: string, detail: string, connected: bool }
+export struct Transfer { id: string, name: string, detail: string, state: string, active: bool, downloadable: bool, progress: float }
+export struct PhoneFile { name: string, path: string, detail: string, directory: bool }
+component Label inherits Text { font-size: 13px; color: #727e87; }
+component Title inherits Text { font-size: 16px; font-weight: 600; color: #27343d; }
+component Card inherits Rectangle { background: white; border-width: 1px; border-color: #d9e0e5; border-radius: 6px; }
+export component AppWindow inherits Window {
+    title: "vivo Connect"; preferred-width: 1080px; preferred-height: 760px; min-width: 820px; min-height: 620px;
+    background: #eff1f3; default-font-family: "Noto Sans CJK SC"; default-font-size: 13px;
+    in property <[Device]> devices; in property <[Transfer]> transfers; in property <[PhoneFile]> files;
+    in property <int> device-index: -1; in-out property <int> tab-index: 0;
+    in property <string> device-name: "连接你的手机"; in property <string> device-detail: "使用手机官方互传扫码连接。";
+    in property <bool> connected: false; in property <bool> service-ready: false;
+    in property <string> transport: "—"; in property <string> phone-ip: "—"; in property <string> pc-ip: "—";
+    in property <string> account: "登录 vivo 账号"; in property <string> notice: "正在连接本机服务…";
+    in-out property <string> save-path: "/sdcard/Download"; in-out property <string> phone-path: "/storage/emulated/0/"; in property <string> storage-root: "/storage/emulated/0";
+    in property <bool> pair-visible: false; in property <bool> p2p-ready: false;
+    in property <bool> pairing-busy: false;
+    in property <[string]> wifi-interfaces; in-out property <string> wifi-interface;
+    in-out property <int> pair-mode: 1; in property <image> qr-image;
+    in property <string> pair-status: "正在生成二维码"; in property <string> pair-message;
+    in property <string> file-message: "打开目录，或输入完整文件路径接收到电脑。";
+    callback select-device(int); callback refresh(); callback login(); callback disconnect(); callback reconnect();
+    callback choose-files(); callback send-path(string); callback browse(string); callback parent-directory(); callback receive(string);
+    callback cancel-transfer(string); callback save-transfer(string); callback pair-open(); callback pair-start(int); callback pair-close(); callback pair-change();
+    HorizontalLayout { spacing: 0px;
+        Rectangle { width: 232px; background: #f8f9fa; border-color: #d8dfe4; border-width: 1px;
+            VerticalLayout { padding: 18px; spacing: 15px;
+                HorizontalLayout { spacing: 10px; height: 54px;
+                    Rectangle { width: 36px; height: 36px; background: #3daee9; border-radius: 8px; Text { text: "↔"; color: white; font-size: 26px; horizontal-alignment: center; vertical-alignment: center; } }
+                    VerticalLayout { spacing: 3px; Text { text: "vivo Connect"; font-size: 18px; font-weight: 700; } Label { text: "让设备，近一点"; font-size: 11px; } }
+                }
+                Label { text: "我的设备"; font-size: 11px; }
+                for device[index] in root.devices: Rectangle {
+                    height: 66px; border-radius: 4px; background: index == root.device-index ? #dceffa : transparent;
+                    border-width: 1px; border-color: index == root.device-index ? #b3daf0 : transparent;
+                    HorizontalLayout { padding: 11px; spacing: 10px;
+                        Text { text: "▯"; font-size: 30px; color: #368ab6; }
+                        VerticalLayout { spacing: 4px; Text { text: device.name; font-size: 13px; overflow: elide; } Label { text: device.detail; font-size: 11px; } }
+                        Rectangle { width: 6px; height: 6px; background: device.connected ? #27ae81 : #aab2b7; border-radius: 3px; }
+                    }
+                    TouchArea { clicked => { root.select-device(index); } }
+                }
+                if root.devices.length == 0: Label { text: "还没有连接的设备"; font-size: 12px; }
+                Button { text: "+  添加新设备"; enabled: root.service-ready; clicked => { root.pair-open(); } }
+                Rectangle { height: 1px; background: #dde3e7; }
+                Button { text: "传输记录"; clicked => { root.tab-index = 2; } }
+                Rectangle { vertical-stretch: 1; }
+                Label { text: "这台电脑 · Linux"; font-size: 12px; }
+                Label { text: root.service-ready ? "● 本机服务已连接" : "○ 本机服务未连接"; color: root.service-ready ? #258567 : #8d6767; font-size: 11px; }
+                Button { text: root.account; enabled: root.service-ready; clicked => { root.login(); } }
+            }
+        }
+        VerticalLayout { padding: 28px; spacing: 20px;
+            HorizontalLayout { height: 26px; Label { text: "设备互联 / 我的设备"; font-size: 12px; } Rectangle { horizontal-stretch: 1; } Button { text: "刷新"; clicked => { root.refresh(); } } }
+            HorizontalLayout { height: 90px; spacing: 18px;
+                Rectangle { width: 66px; height: 80px; background: #dfeaf1; border-radius: 10px; Text { text: "▯"; font-size: 54px; color: #5c8eac; horizontal-alignment: center; vertical-alignment: center; } }
+                VerticalLayout { spacing: 8px;
+                    Text { text: root.device-name; font-size: 26px; font-weight: 600; color: #263640; }
+                    Label { text: root.device-detail; font-size: 12px; }
+                    Text { text: root.connected ? "● 已连接 · " + root.transport : "○ 尚未连接"; color: root.connected ? #23865f : #82919b; font-size: 12px; }
+                }
+                if !root.connected: Button { width: 100px; height: 32px; text: root.device-index >= 0 ? "重新连接" : "连接手机"; enabled: root.service-ready && !root.pairing-busy; clicked => { root.reconnect(); } }
+                if root.connected: Button { width: 90px; height: 32px; text: "断开连接"; clicked => { root.disconnect(); } }
+            }
+            HorizontalLayout { height: 34px; spacing: 12px;
+                Button { text: "设备概览"; primary: root.tab-index == 0; clicked => { root.tab-index = 0; } }
+                Button { text: "手机文件"; primary: root.tab-index == 1; clicked => { root.tab-index = 1; root.browse(root.phone-path); } }
+                Button { text: "传输记录"; primary: root.tab-index == 2; clicked => { root.tab-index = 2; } }
+                Rectangle { horizontal-stretch: 1; }
+            }
+            if root.tab-index == 0: HorizontalLayout { spacing: 18px;
+                Card { horizontal-stretch: 2;
+                    VerticalLayout { padding: 22px; spacing: 16px;
+                        Title { text: "文件互传"; } Label { text: "从电脑到手机，轻松传递。"; font-size: 12px; }
+                        Rectangle { background: #f6fafd; border-width: 1px; border-color: #b4d0df; border-radius: 5px; min-height: 190px;
+                            VerticalLayout { padding: 22px; spacing: 15px; alignment: center;
+                                Text { text: "↑"; font-size: 42px; color: #6fa9ca; horizontal-alignment: center; }
+                                Text { text: "选择电脑中的文件，发送到手机"; horizontal-alignment: center; color: #596e7c; }
+                                Button { text: "选择文件"; primary: true; enabled: root.connected; clicked => { root.choose-files(); } }
+                            }
+                        }
+                        Label { text: "保存到手机"; font-size: 11px; }
+                        LineEdit { text <=> root.save-path; enabled: root.connected; }
+                        Button { text: "从手机接收 →"; enabled: root.connected; clicked => { root.tab-index = 1; root.browse(root.phone-path); } }
+                    }
+                }
+                Card { horizontal-stretch: 1; max-width: 300px;
+                    VerticalLayout { padding: 22px; spacing: 16px;
+                        Title { text: "连接信息"; }
+                        Label { text: "连接方式"; font-size: 11px; } Text { text: root.transport; }
+                        Rectangle { height: 1px; background: #edf0f2; }
+                        Label { text: "手机地址"; font-size: 11px; } Text { text: root.phone-ip; }
+                        Label { text: "电脑地址"; font-size: 11px; } Text { text: root.pc-ip; }
+                        Rectangle { vertical-stretch: 1; }
+                        Label { text: root.transport == "Wi-Fi Direct" ? "手机通过独立网络连接，电脑继续使用原来的网络。" : "连接手机后即可发送和接收文件。"; wrap: word-wrap; font-size: 11px; }
+                        Button { text: "连接另一台设备"; enabled: root.service-ready; clicked => { root.pair-open(); } }
+                    }
+                }
+            }
+            if root.tab-index == 1: Card { VerticalLayout { padding: 20px; spacing: 14px;
+                Title { text: "手机文件"; }
+                HorizontalLayout {
+                    Button { text: "手机存储"; enabled: root.connected; clicked => { root.browse(root.storage-root + "/"); } }
+                    Button { text: "上一级"; enabled: root.connected && root.phone-path != "/" && root.phone-path != root.storage-root && root.phone-path != root.storage-root + "/"; clicked => { root.parent-directory(); } }
+                    Text { text: root.phone-path; overflow: elide; color: #596e7c; }
+                }
+                HorizontalLayout {
+                    LineEdit { text <=> root.phone-path; placeholder-text: "手机存储中的目录"; accepted => { root.browse(root.phone-path); } }
+                    Button { text: "打开目录"; enabled: root.connected; clicked => { root.browse(root.phone-path); } }
+                }
+                Label { text: root.file-message; wrap: word-wrap; font-size: 11px; }
+                ScrollView { VerticalLayout { spacing: 0px; padding: 0px; alignment: start; for file in root.files: Rectangle { height: 54px; background: white; border-width: 1px; border-color: #edf0f2;
+                    HorizontalLayout { padding: 8px; spacing: 10px; Text { text: file.directory ? "▣" : "▤"; color: #609fbe; font-size: 22px; } VerticalLayout { Text { text: file.name; overflow: elide; } Label { text: file.detail; font-size: 10px; } } Button { text: file.directory ? "打开" : "接收"; enabled: root.connected; clicked => { if file.directory { root.phone-path = file.path; root.browse(file.path); } else { root.receive(file.path); } } } }
+                } } }
+            } }
+            if root.tab-index == 2: Card { VerticalLayout { padding: 20px; spacing: 14px;
+                Title { text: "传输记录"; }
+                if root.transfers.length == 0: Label { text: "还没有传输记录"; }
+                ScrollView { VerticalLayout { spacing: 0px; padding: 0px; alignment: start; for item in root.transfers: Rectangle { height: 82px; background: white; border-width: 1px; border-color: #edf0f2;
+                    HorizontalLayout { padding: 10px; spacing: 12px;
+                        VerticalLayout { spacing: 5px; Text { text: item.name; overflow: elide; } Label { text: item.detail; font-size: 11px; } if item.active: ProgressIndicator { progress: item.progress; indeterminate: item.progress < 0; } }
+                        Text { text: item.state; color: #36886b; font-size: 12px; }
+                        if item.active: Button { text: "取消"; clicked => { root.cancel-transfer(item.id); } }
+                        if item.downloadable: Button { text: "保存到电脑"; clicked => { root.save-transfer(item.id); } }
+                    }
+                } } }
+            } }
+            Label { text: root.notice; font-size: 11px; wrap: word-wrap; }
+        }
+    }
+    if root.pair-visible: Rectangle { background: #22344388;
+        TouchArea { clicked => {} }
+        Card { width: 460px; height: 620px; x: (parent.width - self.width)/2; y: (parent.height - self.height)/2;
+            VerticalLayout { padding: 22px; spacing: 13px;
+                HorizontalLayout { Title { text: "连接新设备"; } Button { text: "关闭"; clicked => { root.pair-close(); } } }
+                Label { text: "请用手机官方互传的“连接电脑 / 扫一扫”扫描。"; font-size: 11px; wrap: word-wrap; }
+                ComboBox { model: ["局域网扫码", "Wi-Fi Direct · 保留校园网"]; current-index <=> root.pair-mode; enabled: !root.pairing-busy; selected(value) => { root.pair-change(); } }
+                if root.pair-mode == 1: HorizontalLayout {
+                    Label { text: "无线网卡"; }
+                    ComboBox { model: root.wifi-interfaces; current-value <=> root.wifi-interface; enabled: !root.pairing-busy && !root.p2p-ready; }
+                }
+                if root.pair-mode == 1: Label { text: root.p2p-ready ? "独立无线网络已就绪" : "生成二维码时将请求系统授权，无需在终端输入命令。"; wrap: word-wrap; font-size: 11px; }
+                Rectangle { height: 246px; background: white; Image { source: root.qr-image; width: 240px; height: 240px; x: (parent.width - self.width)/2; image-fit: contain; } }
+                Text { text: root.pair-status; horizontal-alignment: center; font-size: 15px; color: #2b526b; }
+                Label { text: root.pair-message; wrap: word-wrap; font-size: 11px; }
+                Button { text: root.pairing-busy ? "正在准备连接…" : "生成 / 刷新二维码"; primary: true; enabled: !root.pairing-busy; clicked => { root.pair-start(root.pair-mode); } }
+            }
+        }
+    }
+}

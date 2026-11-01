@@ -74,9 +74,16 @@ export class Transfers {
       abortError(signal); job.phase = 'preflight'; job.totalSize = totalSize;
       const body = { id: job.id, dropFileItems: items, totalSize, totalCount, screen_w: 0, screen_h: 0, x: 0, y: 0,
         type: 'TO_PC_FILE_MANAGER', savePath: options.savePath };
-      const pre = await this.phones.json(s, `/pc_file_manager/drop_files_info?id=${job.id}`, body, signal);
-      // Official handleUploadRes requires status == 0, even on HTTP 200.
-      if (Number(pre?.status) !== 0 || pre?.status === undefined) throw new ApiError(409, 'UPLOAD_PREFLIGHT_REJECTED', '手机拒绝上传预检', { status: pre?.status });
+      const preResponse = await this.phones.stream(s, `/pc_file_manager/drop_files_info?id=${job.id}`,
+        { method: 'POST', json: body, signal });
+      const preBody = (await collect(preResponse)).toString('utf8').trim();
+      // Official checkUploadInfo calls handleUploadRes(response) WITHOUT the
+      // optional body-status check. HTTP 200 may have no body or no status key.
+      let pre;try { pre = preBody ? JSON.parse(preBody) : undefined; } catch { /* Some versions return plain text. */ }
+      const statusRejected = pre?.status !== undefined && pre.status !== 0 && pre.status !== '0';
+      const codeRejected = pre?.code !== undefined && !/^0+$/.test(String(pre.code));
+      if (preResponse.statusCode !== 200 || statusRejected || codeRejected) throw new ApiError(409, 'UPLOAD_PREFLIGHT_REJECTED', '手机拒绝上传预检',
+        { httpStatus: preResponse.statusCode, status: pre?.status, phoneCode: pre?.code });
       const archive = official('tar').c({ cwd: stage, portable: true, strict: true }, [...roots]);
       const counter = new Transform({ transform(chunk, enc, done) { job.bytes += chunk.length; done(null, chunk); } });
       archive.on('error', error => counter.destroy(error)); counter.on('close', () => archive.destroy());

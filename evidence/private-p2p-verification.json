@@ -87,7 +87,7 @@
   ],
   "privateGoReadyObserved": true,
   "realPhoneJoinedVerified": true,
-  "realFileTransferVerified": false,
+  "realFileTransferVerified": true,
   "campusObservation": "Station at 5785 MHz and GO at 2412 MHz remain concurrent during real phone pairing and HTTPS/WSS session; helper verifies baseline campus IPv4 and NM UUID each heartbeat. No load/roaming stress test.",
   "sessions": [
     {
@@ -108,5 +108,7 @@
     },
     "fix": "Authorize recent requesting P2P Device with WPS_PBC p2p_dev_addr only while QR job is pending; cancel window when pending QR ends",
     "verifiedAfterFix": true
-  }
+  },
+  "fileTransferEvidence": "evidence/upload-preflight-verification.json",
+  "fileTransferScope": "Later reconnected session: one 8-byte example.txt upload, readback and matching SHA-256"
 }

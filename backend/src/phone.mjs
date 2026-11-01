@@ -31,7 +31,7 @@ export class PhoneManager {
     if (options.mode === 'existing' && options.pcIp !== undefined) return { ...options, pcIp: selectInterface(options.pcIp, { targetIp: options.ip }).address };
     return options;
   }
-  async connect(options, signal) {
+  async connect(options, signal, replacing) {
     options = this.prepareConnection(options);
     requireThat(['lan', 'usb', 'existing'].includes(options.mode), 'mode 应为 lan、usb 或 existing');
     const mode = options.mode;
@@ -79,10 +79,31 @@ export class PhoneManager {
         token: s.token, isPcOsSupportExtScreen: false, pcBleId: '', deviceAvatarUri: '' }, signal);
       s.info = checkBusiness(base, '/base-info').data;
       await this.heartbeat(s, signal);
-      s.status = 'connected'; return this.public(s);
+      s.status = 'connected'; await this.adoptDevice(s, replacing); return this.public(s);
     } catch (error) {
       await this.cleanup(s); this.sessions.delete(s.id); throw error;
     }
+  }
+  sameDevice(a, b) {
+    const left = a.info || {}, right = b.info || {};
+    const ble = value => value === undefined || value === null || String(value) === '0' ? '' : String(value).toLowerCase();
+    const x = ble(left.phoneBleId), y = ble(right.phoneBleId);
+    if (x && y) return x === y;
+    if (left.mobileDeviceId && right.mobileDeviceId) return left.mobileDeviceId === right.mobileDeviceId;
+    return Boolean(a.serial && b.serial && a.serial === b.serial);
+  }
+  async adoptDevice(session, replacing) {
+    const previous = [...this.sessions.values()].filter(s => s !== session && (s === replacing || this.sameDevice(s, session)));
+    if (!previous.length) return;
+    const stableId = replacing?.id || previous[0].id;
+    for (const old of previous) {
+      await this.onReplace?.(old.id);
+      await this.cleanup(old);
+      this.sessions.delete(old.id);
+    }
+    this.sessions.delete(session.id);
+    session.id = stableId;
+    this.sessions.set(stableId, session);
   }
   versionBody(s) { return { version: '7.0.6', connBaseVersionCode: 1155, pcSuiteVersionCode: 70007,
     timestamp: Date.now(), connectionId: s.connectionId, pcDeviceId: this.state.deviceId, isAutoConnect: false,
@@ -136,6 +157,27 @@ export class PhoneManager {
   async cleanup(s) {
     clearInterval(s.heartTimer); s.ws?.terminate();
     if (s.forwardPort) await exec(process.env.ADB || 'adb', ['-s', s.serial, 'forward', '--remove', `tcp:${s.forwardPort}`], { timeout: 5000 }).catch(() => {});
+  }
+  async pause(id) {
+    const s = this.get(id); await this.cleanup(s); s.status = 'disconnected';
+    return this.public(s);
+  }
+  async reconnect(id, signal) {
+    const s = this.get(id);
+    if (s.status === 'connected') return this.public(s);
+    if (s.reconnecting) throw new ApiError(409, 'RECONNECT_ACTIVE', '设备正在重新连接');
+    s.reconnecting = true;
+    try {
+      await this.cleanup(s);
+      const url = new URL(s.baseUrl);
+      const result = await this.connect(s.mode === 'usb'
+        ? { mode: 'usb', serial: s.serial, verifyTls: s.rejectUnauthorized }
+        : { mode: 'existing', ip: s.ip, pcIp: s.localIp, token: s.token,
+            port: Number(url.port || (url.protocol === 'http:' ? 80 : 443)),
+            scheme: url.protocol.slice(0, -1), transport: s.transport || s.mode,
+            verifyTls: s.rejectUnauthorized }, signal, s);
+      return result;
+    } finally { s.reconnecting = false; }
   }
   async disconnect(id) { const s = this.get(id); await this.cleanup(s); this.sessions.delete(id); }
   async close() { await Promise.all([...this.sessions.values()].map(s => this.cleanup(s))); this.sessions.clear(); }

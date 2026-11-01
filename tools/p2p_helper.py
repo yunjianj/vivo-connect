@@ -9,6 +9,28 @@ from wifi_capabilities import Nl80211,attributes,number
 ROOT=pathlib.Path(__file__).resolve().parent.parent
 SERVICE='fi.w1.wpa_supplicant1'; BASE='/fi/w1/wpa_supplicant1'; IFACE=SERVICE+'.Interface'; P2P=IFACE+'.P2PDevice'; GROUP=SERVICE+'.Group'
 
+def process_identity(pid):
+    """Linux start time prevents a reused PID from extending a GUI-owned group."""
+    try:
+        proc=pathlib.Path('/proc')/str(pid)
+        fields=(proc/'stat').read_text().rsplit(')',1)[1].split()
+        if fields[0]=='Z':return None
+        return proc.stat().st_uid,fields[19]
+    except (OSError,ValueError,IndexError):return None
+
+def watch_owner(helper,pid,start_time):
+    expected=(pathlib.Path(helper.args.state_dir)/'config.json').stat().st_uid,str(start_time)
+    lease=getattr(helper.args,'owner_lease',None)
+    def alive():return process_identity(pid)==expected and (not lease or pathlib.Path(lease).is_file())
+    if not alive():raise RuntimeError('启动窗口已关闭或进程身份不匹配，取消无线启动')
+    def watch():
+        while not helper.stop:
+            if not alive():
+                helper.stop=True
+                return
+            time.sleep(.5)
+    threading.Thread(target=watch,daemon=True).start()
+
 def run(args,timeout=10):
     result=subprocess.run(args,check=False,capture_output=True,text=True,timeout=timeout,env={**os.environ,'LC_ALL':'C'})
     if result.returncode:
@@ -247,7 +269,9 @@ class Helper:
                 try:client.delete_interface(info['index'])
                 finally:client.close()
             else:self.stage('cleanup-pending',interface=info['name'],reason='active-unregistered-group-not-deleted')
+    def recover_private_orphans(self,cap):pass
     def preflight(self):
+        if self.stop:raise RuntimeError('启动窗口已关闭，取消无线启动')
         if os.geteuid()!=0:raise RuntimeError('需要管理员权限：请用 sudo python tools/p2p_helper.py --interface '+self.args.interface)
         self.lock=os.open('/run/lock/vivo-connect-p2p.lock',os.O_CREAT|os.O_RDWR|os.O_NOFOLLOW|os.O_CLOEXEC,0o600)
         try:fcntl.flock(self.lock,fcntl.LOCK_EX|fcntl.LOCK_NB)
@@ -267,6 +291,7 @@ class Helper:
         if getattr(self.args,'recover_stale',None):
             self.recover_stale(self.args.recover_stale,cap['phy'])
             if station_snapshot(self.args.interface)!=self.original:raise RuntimeError('清理后校园网状态变化，已停止')
+        self.recover_private_orphans(cap)
         existing=kernel_interfaces()
         groups=[i for i in existing if i['phy']==cap['phy'] and i['type'] in (8,9)]
         if groups:raise RuntimeError('已有 P2P 数据接口 '+','.join(i['name'] for i in groups)+'；拒绝叠加创建。仅可对已确认的无活动残留使用 --recover-stale <接口名>')
@@ -348,9 +373,11 @@ class Helper:
             'ssid':ssid,'passphrase':passphrase,'bssid':bssid,'frequency':self.frequency_plan['goFrequency'],'stationFrequency':cap['frequency']})
         self.registered=True
         print(json.dumps({'status':'ready','interface':group_iface,'gateway':ip,'stationPreserved':True,'frequency':self.frequency_plan['goFrequency'],'stationFrequency':cap['frequency']},ensure_ascii=False),flush=True)
-        print('保持本终端运行；另一个终端执行 npm run scan 并选择 Wi-Fi Direct。Ctrl-C 清理本次直连网络。',flush=True)
+        if getattr(self.args,'owner_pid',None):self.stage('gui-owned',cleanupOnWindowExit=True)
+        else:print('保持本终端运行；另一个终端执行 npm run scan 并选择 Wi-Fi Direct。Ctrl-C 清理本次直连网络。',flush=True)
         while not self.stop:
             time.sleep(2)
+            if self.stop:break
             self.check_group_alive()
             if self.dhcp.poll() is not None:raise RuntimeError('P2P DHCP 已退出，正在清理')
             if station_snapshot(self.args.interface)!=self.original:raise RuntimeError('校园网连接发生变化，停止本次 P2P 组')
@@ -383,8 +410,14 @@ if __name__=='__main__':
     parser.add_argument('--recover-stale',metavar='INTERFACE')
     parser.add_argument('--state-dir',default=str(ROOT/'.vivo-connect'))
     parser.add_argument('--port',type=int,default=8765)
+    parser.add_argument('--owner-pid',type=int)
+    parser.add_argument('--owner-start-time')
+    parser.add_argument('--owner-lease')
     args=parser.parse_args()
     if not 0<args.port<65536:parser.error('port 不合法')
+    if args.owner_lease and not args.owner_pid:parser.error('owner-lease 需要 owner-pid')
+    if bool(args.owner_pid) != bool(args.owner_start_time):parser.error('owner-pid 与 owner-start-time 必须同时提供')
+    if args.owner_pid is not None and (args.owner_pid<=1 or not args.owner_start_time.isdecimal()):parser.error('owner 进程身份不合法')
     if args.driver=='private':
         from p2p_private import PrivateHelper,verified_binary
         if args.recover_stale:parser.error('--recover-stale 仅用于 --driver system；独立模式不接管系统 supplicant 的残留组')
@@ -408,6 +441,8 @@ if __name__=='__main__':
     helper=PrivateHelper(args) if args.driver=='private' else Helper(args)
     def stop(*unused):helper.stop=True
     for name in [signal.SIGINT,signal.SIGTERM]:signal.signal(name,stop)
-    try:helper.start()
+    try:
+        if args.owner_pid is not None:watch_owner(helper,args.owner_pid,args.owner_start_time)
+        helper.start()
     except Exception as error:print(str(error),file=__import__('sys').stderr);raise SystemExit(1)
     finally:helper.cleanup()

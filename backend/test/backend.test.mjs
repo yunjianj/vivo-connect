@@ -45,10 +45,16 @@ async function mockPhone(t, dir) {
       const url = new URL(req.url, 'https://localhost');
       const json = value => { res.setHeader('content-type', 'application/json'); res.end(JSON.stringify(value)); };
       if (url.pathname === '/version') return json({ code: records.rejectVersion ? '0004' : '0000', data: { enpVer: 1 } });
-      if (url.pathname === '/base-info') return json({ code: '0000', data: { mobileDeviceName: 'mock vivo', mobileDeviceId: 'mock-phone' } });
+      if (url.pathname === '/base-info') return json({ code: '0000', data: records.baseInfo || { mobileDeviceName: 'mock vivo', mobileDeviceId: 'mock-phone' } });
       if (url.pathname === '/pc_file_manager/channel') return json({ code: '0000', data: [{ savePath: '/sdcard/手机.txt', fileSize: size }] });
       if (url.pathname === '/pc_file_manager/drop_files_info') {
-        records.preflight = JSON.parse((await collect(req)).toString()); return json({ status: records.rejectUpload ? 1 : 0 });
+        records.preflight = JSON.parse((await collect(req)).toString());
+        if(records.preflightMode==='http-rejected'){res.writeHead(403);return res.end();}
+        if(records.rejectUpload)return json({status:1});
+        if(records.preflightMode==='code-rejected')return json({code:'0004'});
+        if(records.preflightMode==='empty')return res.end();
+        if(records.preflightMode==='text')return res.end('OK');
+        return json(records.preflightMode==='status'?{status:0}:{});
       }
       if (url.pathname === '/upload/drop_file_to_phone') {
         records.uploadCount++;
@@ -57,7 +63,7 @@ async function mockPhone(t, dir) {
         records.uploadManifest = await inspectTar(file);
         const out = path.join(dir, 'uploaded'); await fs.mkdir(out, { recursive: true });
         await tar.x({ file, cwd: out, strict: true });
-        return json({ data: { dropFileItems: records.preflight.dropFileItems.map(item => ({ fileName: item.fileName, savePath: '/sdcard/Download/' + item.fileName })) } });
+        return json(records.unconfirmedUpload?{}:{ data: { dropFileItems: records.preflight.dropFileItems.map(item => ({ fileName: item.fileName, savePath: '/sdcard/Download/' + item.fileName })) } });
       }
       if (url.pathname === '/pc_file_manager/download_info') return json({ totalCount: 1, totalSize: records.badDownloadSize ? size+1 : size });
       if (url.pathname === '/pc_file_manager/download' && records.slowDownload) { res.writeHead(200); res.write(Buffer.alloc(1024)); return; }
@@ -171,6 +177,29 @@ test('HTTPS/WSS connection, upload, download, hashes and failure states', async 
   assert.equal((await waitJob(app, failed.data.id)).status, 'failed'); assert.equal(app.phones.list().length, 0);
 });
 
+test('upload accepts official HTTP-200 preflight without status but still requires final confirmation',async t=>{
+ const dir=await temp(t);const phone=await mockPhone(t,dir);
+ const app=await createBackend({stateDir:path.join(dir,'state')});t.after(()=>app.close());await listen(app.server);
+ const start=await api(app,'POST','/api/sessions',{mode:'existing',ip:'127.0.0.1',port:phone.port,token:'test-token'});
+ const id=(await waitJob(app,start.data.id)).result.id;
+ const source=path.join(dir,'tiny.txt');await fs.writeFile(source,'12345678');
+ const upload=async()=>{
+  const result=await api(app,'POST',`/api/sessions/${id}/uploads`,{paths:[source],savePath:'/sdcard/Download'});
+  return waitJob(app,result.data.id);
+ };
+ for(const mode of ['no-status','status','empty','text']){
+  phone.records.preflightMode=mode;
+  const job=await upload();assert.equal(job.status,'succeeded',`${mode}: ${JSON.stringify(job.error)}`);
+  assert.equal(await fs.readFile(path.join(dir,'uploaded','tiny.txt'),'utf8'),'12345678');
+ }
+ const count=phone.records.uploadCount;
+ for(const mode of ['code-rejected','http-rejected']){
+  phone.records.preflightMode=mode;const job=await upload();assert.equal(job.status,'failed');assert.equal(phone.records.uploadCount,count);
+ }
+ phone.records.preflightMode='empty';phone.records.unconfirmedUpload=true;
+ const job=await upload();assert.equal(job.status,'failed');assert.equal(job.error.code,'UPLOAD_UNCONFIRMED');
+});
+
 test('archive validation rejects links and unsafe paths', async t => {
   assert(!validArchivePath('../escape')); assert(!validArchivePath('/absolute')); assert(!validArchivePath('a/../../b')); assert(!validArchivePath('C:\\escape')); assert(validArchivePath('正常/文件.txt'));
   const dir = await temp(t); await fs.writeFile(path.join(dir, 'real'), 'data'); await fs.symlink('real', path.join(dir, 'link'));
@@ -205,4 +234,56 @@ server.listen(0,'127.0.0.1',()=>{port=server.address().port;fs.writeFileSync(pro
   assert.equal((await fs.stat(path.join(dir, 'account.json'))).mode & 0o777, 0o600);
   await accounts.logout(); assert.equal(accounts.status().loggedIn, false);
   await assert.rejects(fs.stat(path.join(dir, 'account.json')), { code: 'ENOENT' });
+});
+
+test('retained device reconnects after manual and heartbeat disconnect; failed retry keeps history', async t => {
+  const dir = await temp(t); const phone = await mockPhone(t, dir);
+  const app = await createBackend({stateDir: path.join(dir, 'state')});
+  t.after(() => app.close()); await listen(app.server);
+  const start = await api(app, 'POST', '/api/sessions', {mode:'existing', ip:'127.0.0.1', port:phone.port, token:'reconnect-private-token', transport:'wifi-direct'});
+  let id = (await waitJob(app, start.data.id)).result.id;
+  assert.equal((await api(app,'POST',`/api/sessions/${id}/disconnect`,{})).status, 200);
+  assert.equal(app.phones.list()[0].status,'disconnected');
+  const retry = await api(app,'POST',`/api/sessions/${id}/reconnect`,{});
+  const done = await waitJob(app,retry.data.id);
+  assert.equal(done.status,'succeeded',JSON.stringify(done.error));
+  assert.equal(app.phones.list().length,1);
+  id = done.result.id;
+  assert.equal(done.result.transport,'wifi-direct');
+  assert(!JSON.stringify(done).includes('reconnect-private-token'));
+  app.phones.get(id).ws.terminate();
+  for(let i=0;i<100 && app.phones.get(id).status==='connected';i++)await delay(5);
+  phone.records.rejectVersion = true;
+  const failed = await api(app,'POST',`/api/sessions/${id}/reconnect`,{});
+  assert.equal((await waitJob(app,failed.data.id)).status,'failed');
+  assert.equal(app.phones.list().length,1);
+  assert.equal(app.phones.get(id).status,'disconnected');
+  phone.records.rejectVersion = false;
+  const again = await api(app,'POST',`/api/sessions/${id}/reconnect`,{});
+  assert.equal((await waitJob(app,again.data.id)).status,'succeeded');
+  assert.equal(app.phones.list().length,1);
+});
+
+
+test('QR fallback and explicit reconnect retain one stable device while distinct phones stay separate', async t => {
+  const dir=await temp(t), phone=await mockPhone(t,dir);
+  const app=await createBackend({stateDir:path.join(dir,'state')});t.after(()=>app.close());await listen(app.server);
+  phone.records.baseInfo={mobileDeviceName:'same name',mobileDeviceId:'build-id',phoneBleId:'phone-a',innerRoot:'/storage/emulated/0'};
+  const connect=async token=>{
+    const job=await api(app,'POST','/api/sessions',{mode:'existing',ip:'127.0.0.1',port:phone.port,token,transport:'wifi-direct'});
+    const done=await waitJob(app,job.data.id);assert.equal(done.status,'succeeded',JSON.stringify(done.error));return done.result.id;
+  };
+  const id=await connect('first-token');
+  await api(app,'POST',`/api/sessions/${id}/disconnect`,{});
+  app.phones.sessions.set('stale-history', {...app.phones.get(id), id:'stale-history', ws:undefined, heartTimer:undefined});
+  assert.equal(await connect('new-qr-token'),id);
+  assert.equal(app.phones.list().length,1);
+  await api(app,'POST',`/api/sessions/${id}/disconnect`,{});
+  const retry=await api(app,'POST',`/api/sessions/${id}/reconnect`,{});
+  const done=await waitJob(app,retry.data.id);
+  assert.equal(done.status,'succeeded',JSON.stringify(done.error));assert.equal(done.result.id,id);
+  assert.equal(app.phones.list().length,1);
+  phone.records.baseInfo={...phone.records.baseInfo,phoneBleId:'phone-b'};
+  assert.notEqual(await connect('other-phone-token'),id);
+  assert.equal(app.phones.list().length,2,'same model/build/name/IP is not device identity');
 });

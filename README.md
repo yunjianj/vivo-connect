@@ -4,7 +4,9 @@
 
 ## 基础后端
 
-已新增账号登录、手机连接和文件收发后端，优先复用官方账号网页、手机 APK、`@vivo/adbkit`、WebSocket 和 TAR 库。运行 `npm start` 启动后端，再运行 `npm run scan` 打开可自动刷新的手机扫码页；校园网隔离场景新增实验性 Wi-Fi Direct（默认用项目独立 supplicant 管理 P2P GO，不修改 NetworkManager；首次运行前执行 `python tools/build_p2p_supplicant.py`），已实测手机直连成功；真实文件收发仍待验证。依赖准备、API 和当前验证范围见 [后端使用文档](docs/backend.md)。
+已新增账号登录、手机连接和文件收发后端，优先复用官方账号网页、手机 APK、`@vivo/adbkit`、WebSocket 和 TAR 库。原生 GUI 使用 **Rust + Slint**，采用软件渲染；运行 `./tools/run-native.sh` 打开设备界面，后端可用 `node backend/src/server.mjs` 启动。详情见 [原生 GUI](docs/native-gui.md)。
+
+校园网隔离场景使用项目独立 supplicant 管理 P2P GO，不修改 NetworkManager；已实测手机直连、文件上传及回读哈希一致。API、依赖和验证范围见 [后端使用文档](docs/backend.md)。
 
 ## 文档入口
 

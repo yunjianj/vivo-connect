@@ -185,4 +185,4 @@ python tools/verify_evidence.py
 
 ## 后续实现：Linux 本地扫码直连
 
-已新增实验性 Station + P2P GO 并发助手及手机官方本地二维码分支，详见 [基础后端的 Wi-Fi Direct 说明](backend.md)。默认路径使用项目内的上游 supplicant 独立副本和官方手机 APK，不修改 NetworkManager，也不要求先恢复 BLE 挑战。已观测到独立 GO 在 2412 MHz 运行、校园网 Station 同时保持 5785 MHz，后端注册 ready；补齐针对请求手机的 WPS PBC 授权后，已实测手机入组并建立 HTTPS/WSS 会话；真实文件收发尚未验证。旧的系统 D-Bus 路径仅保留为显式选项。
+已新增实验性 Station + P2P GO 并发助手及手机官方本地二维码分支，详见 [基础后端的 Wi-Fi Direct 说明](backend.md)。默认路径使用项目内的上游 supplicant 独立副本和官方手机 APK，不修改 NetworkManager，也不要求先恢复 BLE 挑战。已观测到独立 GO 在 2412 MHz 运行、校园网 Station 同时保持 5785 MHz，后端注册 ready；补齐针对请求手机的 WPS PBC 授权后，已实测手机入组并建立 HTTPS/WSS 会话；已实测 8 字节文件上传、下载回读及哈希一致；大文件、目录及稳定性压力测试尚未完成。旧的系统 D-Bus 路径仅保留为显式选项。

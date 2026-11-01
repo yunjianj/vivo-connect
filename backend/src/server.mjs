@@ -21,7 +21,9 @@ export async function createBackend({ stateDir, accountManager, phoneManager } =
   const accounts = accountManager || new AccountManager(state); await accounts.load();
   const phones = phoneManager || new PhoneManager(state, accounts);
   const ui = new LocalUi();
-  const jobs = new Jobs(); const transfers = new Transfers(state, phones);
+  const jobs = new Jobs();
+  phones.onReplace = id => jobs.cancelSession(id, { exceptKind: 'reconnect' });
+  const transfers = new Transfers(state, phones);
   const p2p = new P2pManager(state, phones, jobs);
   const scans = new ScanManager(state, accounts, phones, jobs);
   const reply = (res, status, value) => {
@@ -38,6 +40,7 @@ export async function createBackend({ stateDir, accountManager, phoneManager } =
       if (req.method === 'GET' && url.pathname === '/health') return reply(res, 200, { ok: true });
       const authorization = Buffer.from(req.headers.authorization || ''); const expected = Buffer.from(`Bearer ${state.apiToken}`);
       if ((authorization.length !== expected.length || !crypto.timingSafeEqual(authorization, expected)) && !ui.authorized(req.headers.authorization, `${req.method} ${url.pathname}`)) throw new ApiError(401, 'UNAUTHORIZED', '需要本地 API Bearer token');
+      if(req.method==='POST'&&url.pathname==='/api/ui/files')return reply(res,202,await ui.upload(req,url,{state,transfers,jobs}));
       let body = {};
       if (['POST', 'PUT', 'PATCH'].includes(req.method)) {
         const raw = await collect(req, 1024 * 1024);
@@ -71,6 +74,16 @@ export async function createBackend({ stateDir, accountManager, phoneManager } =
         return reply(res, 202, jobs.create('connect', (_job, signal) => phones.connect(options, signal)));
       }
       if (route === 'GET /api/jobs') return reply(res, 200, [...jobs.items.values()].map(j => jobs.public(j)));
+      const connectionAction = url.pathname.match(/^\/api\/sessions\/([\w-]+)\/(disconnect|reconnect)$/);
+      if (req.method === 'POST' && connectionAction) {
+        const [, id, action] = connectionAction;
+        phones.get(id);
+        if (action === 'disconnect') {
+          await jobs.cancelSession(id);
+          return reply(res, 200, await phones.pause(id));
+        }
+        return reply(res, 202, jobs.create('reconnect', (_job, signal) => phones.reconnect(id, signal), id));
+      }
       let match = url.pathname.match(/^\/api\/sessions\/([\w-]+)(?:\/(files|uploads|downloads))?$/);
       if (match) {
         const [, id, action] = match;
@@ -103,7 +116,8 @@ export async function createBackend({ stateDir, accountManager, phoneManager } =
       else res.destroy();
     }
   });
-  server.requestTimeout = 30000; server.headersTimeout = 10000;
+  // Browser-selected files are streamed locally before the phone job starts.
+  server.requestTimeout = 300000; server.headersTimeout = 10000;
   return { state, server, accounts, phones, jobs, transfers, scans, p2p, async close() {
     const closed = server.listening ? new Promise(resolve => server.close(resolve)) : Promise.resolve();
     await p2p.close(); await jobs.close(); await phones.close(); await accounts.close();

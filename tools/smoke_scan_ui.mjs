@@ -33,7 +33,7 @@ try{
   if(result.ready&&result.status==='等待手机加入 Wi-Fi Direct')break;await delay(100);
  }
  assert(result.ready);assert.equal(result.status,'等待手机加入 Wi-Fi Direct');
- for(const [progress,expected] of [[{associatedStations:1,authorizedStations:1,dhcpAcks:0},'手机已通过无线验证，等待分配地址'],[{associatedStations:1,authorizedStations:1,dhcpAcks:1},'已分配手机地址，等待手机确认连接']]){
+ for(const [progress,expected] of [[{associatedStations:1,authorizedStations:1,dhcpAcks:0},'正在为手机分配地址'],[{associatedStations:1,authorizedStations:1,dhcpAcks:1},'等待手机确认连接']]){
   app.p2p.heartbeat('offline-p2p',progress);
   for(let i=0;i<30;i++){
    result=await browser.execute(`return {status:document.querySelector('#status').textContent,diagnostic:document.querySelector('#diagnostic').textContent}`);

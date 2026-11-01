@@ -1,11 +1,41 @@
 #!/usr/bin/env python3
 """Offline guard/decoder tests. Never starts a real P2P group."""
-import ipaddress,json,struct,unittest
+import ipaddress,json,struct,unittest,os,pathlib,tempfile,time
+from types import SimpleNamespace
 from unittest.mock import patch
 import p2p_helper as h
 from wifi_capabilities import attr,parse_combinations
 
 class P2pTests(unittest.TestCase):
+    def test_gui_owner_identity_and_stale_pid_guard(self):
+        identity=h.process_identity(os.getpid())
+        self.assertEqual(identity[0],os.getuid())
+        self.assertTrue(identity[1].isdecimal())
+        self.assertIsNone(h.process_identity(2147483647))
+        with tempfile.TemporaryDirectory() as directory:
+            pathlib.Path(directory,'config.json').write_text('{}')
+            helper=SimpleNamespace(args=SimpleNamespace(state_dir=directory),stop=False)
+            with self.assertRaisesRegex(RuntimeError,'身份不匹配'):
+                h.watch_owner(helper,os.getpid(),'0')
+            h.watch_owner(helper,os.getpid(),identity[1])
+            with patch.object(h,'process_identity',return_value=None):
+                for _ in range(30):
+                    if helper.stop:break
+                    time.sleep(.05)
+                self.assertTrue(helper.stop)
+
+    def test_gui_lease_revocation_stops_helper_without_killing_window(self):
+        with tempfile.TemporaryDirectory() as directory:
+            pathlib.Path(directory,'config.json').write_text('{}')
+            lease=pathlib.Path(directory,'lease');lease.touch()
+            helper=SimpleNamespace(args=SimpleNamespace(state_dir=directory,owner_lease=str(lease)),stop=False)
+            h.watch_owner(helper,os.getpid(),h.process_identity(os.getpid())[1])
+            lease.unlink()
+            for _ in range(30):
+                if helper.stop:break
+                time.sleep(.05)
+            self.assertTrue(helper.stop)
+
     def test_driver_concurrency(self):
         def u(n):return struct.pack('I',n)
         limits=attr(1,attr(1,u(1))+attr(2,attr(2,b'')))+attr(2,attr(1,u(1))+attr(2,attr(8,b'')+attr(9,b'')))

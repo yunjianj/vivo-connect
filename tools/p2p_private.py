@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """Project-local supplicant on an owned GO; no writes to system wpa/NM D-Bus."""
-import collections,hashlib,json,os,pathlib,queue,re,select,shutil,socket,subprocess,tempfile,threading,time
+import errno,stat,collections,hashlib,json,os,pathlib,queue,re,select,shutil,socket,subprocess,tempfile,threading,time
 from p2p_helper import Helper,ROOT,Nl80211,kernel_interfaces,station_snapshot,run
 
 BINARY=ROOT/'build/private-p2p/bin/wpa_supplicant'
@@ -68,12 +68,65 @@ DIAGNOSTICS={
     'Failed to set beacon':'beacon-start-failed',
 }
 
+def owned_runtime_groups(root=pathlib.Path('/run'),owner_uid=0):
+    """Root-protected control sockets attest which private netdevs we created."""
+    for runtime in root.glob('vivo-p2p-*'):
+        try:
+            metadata=runtime.lstat()
+            if not stat.S_ISDIR(metadata.st_mode) or metadata.st_uid!=owner_uid or metadata.st_mode&0o077:continue
+            config=runtime/'supplicant.conf'
+            if config.is_symlink() or config.stat().st_uid!=owner_uid:continue
+            content=config.read_text()
+            if not content.startswith('ctrl_interface='+str(runtime/'ctrl')+'\n') or '\ndevice_name=vivo-connect-linux\n' not in content:continue
+            ctrl=runtime/'ctrl'
+            if ctrl.is_symlink() or ctrl.stat().st_uid!=owner_uid:continue
+            for server in ctrl.iterdir():
+                info=server.lstat()
+                if re.fullmatch(r'p2p-vc-[0-9a-f]{6}',server.name) and stat.S_ISSOCK(info.st_mode) and info.st_uid==owner_uid:
+                    yield runtime,server,None
+            record=runtime/'interface.json'
+            if record.is_file() and not record.is_symlink() and record.stat().st_uid==owner_uid:
+                proof=json.loads(record.read_text())
+                if re.fullmatch(r'p2p-vc-[0-9a-f]{6}',proof.get('name','')):
+                    server=ctrl/proof['name']
+                    if not server.exists():yield runtime,server,proof
+        except (OSError,ValueError):continue
+
+def inactive_private_group(info,phy):
+    return bool(info and info.get('phy')==phy and info.get('type')==9 and not info.get('frequency')
+                and re.fullmatch(r'p2p-vc-[0-9a-f]{6}',info.get('name','')))
+
 class PrivateHelper(Helper):
     def __init__(self,args):
         super().__init__(args);self.private=None;self.control=None;self.runtime=None;self.owned=None
         self.diagnostics=collections.deque(maxlen=16);self.reader=None;self.dhcp_reader=None
         self.link_events=queue.SimpleQueue();self.progress={'associatedStations':0,'authorizedStations':0,'dhcpDiscoveries':0,'dhcpOffers':0,'dhcpAcks':0,'provisionRequests':0,'pairingAuthorizations':0,'wpsFailures':0,'wpsSuccesses':0,'pskFailures':0};self.last_progress=None
         self.pairing_id=None;self.pairing_peer=None;self.pairing_until=0
+    def recover_private_orphans(self,cap):
+        for runtime,server,proof in owned_runtime_groups():
+            info=next((i for i in kernel_interfaces() if i['name']==server.name),None)
+            if not inactive_private_group(info,cap['phy']):continue
+            if proof and any(info.get(k)!=proof.get(k) for k in ('name','index','phy','type')):continue
+            control=None
+            try:
+                control=Control(server,runtime/'recovery-client')
+                control.request('PING')
+                continue # An answering or busy service must never be taken over.
+            except OSError as error:
+                if error.errno not in (errno.ECONNREFUSED,errno.ENOENT):continue
+            except (TimeoutError,ValueError):continue
+            finally:
+                if control:control.close()
+            if self.stop:raise RuntimeError('已取消')
+            if station_snapshot(self.args.interface)!=self.original:raise RuntimeError('校园网状态已变化，停止残留接口恢复')
+            current=next((i for i in kernel_interfaces() if i['name']==server.name),None)
+            if current!=info or not inactive_private_group(current,cap['phy']):continue
+            client=Nl80211()
+            try:client.delete_interface(current['index'])
+            finally:client.close()
+            self.stage('recovered-private-orphan',interface=server.name)
+            if station_snapshot(self.args.interface)!=self.original:raise RuntimeError('残留接口恢复后校园网状态变化，已停止')
+
     def same_owned(self):
         if not self.owned:return None
         return next((i for i in kernel_interfaces() if all(i[k]==self.owned[k] for k in ('index','name','phy','type'))),None)
@@ -101,6 +154,8 @@ class PrivateHelper(Helper):
         self.owned=next((i for i in kernel_interfaces() if i['name']==name),None)
         if not self.owned or self.owned['phy']!=cap['phy'] or self.owned['type']!=9:
             raise RuntimeError('内核未创建独立 P2P GO，拒绝启动进程')
+        record=self.runtime/'interface.json'
+        record.write_text(json.dumps({k:self.owned[k] for k in ('name','index','phy','type')}));record.chmod(0o600)
         self.guard()
         self.private=subprocess.Popen([str(binary),'-Dnl80211','-i',name,'-c',str(config)],
             stdout=subprocess.PIPE,stderr=subprocess.STDOUT,text=True,env={**os.environ,'LC_ALL':'C'})
