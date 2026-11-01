@@ -1,0 +1,28 @@
+APK pcsuite/updateApk/connbase.apk
+DEX classes2.dex
+CLASS Lcom/vivo/pcsuite/pcconnect/ShareLinkService$l;
+SUPER Ljava/lang/Object;
+FIELDS
+a Lcom/vivo/pcsuite/pcconnect/ShareLinkService; = None
+
+METHOD <init>(Lcom/vivo/pcsuite/pcconnect/ShareLinkService;)V
+000000: iput-object v1, v0, Lcom/vivo/pcsuite/pcconnect/ShareLinkService$l;->a Lcom/vivo/pcsuite/pcconnect/ShareLinkService;
+000004: invoke-direct v0, Ljava/lang/Object;-><init>()V
+00000a: return-void 
+
+METHOD a(Z)V
+000000: iget-object v0, v2, Lcom/vivo/pcsuite/pcconnect/ShareLinkService$l;->a Lcom/vivo/pcsuite/pcconnect/ShareLinkService;
+000004: invoke-static v0, Lcom/vivo/pcsuite/pcconnect/ShareLinkService;->v(Lcom/vivo/pcsuite/pcconnect/ShareLinkService;)Lcom/vivo/pcsuite/pcconnect/ble/IBluetoothLe;
+00000a: move-result-object v0
+00000c: if-eqz v0, +016h
+000010: iget-object v0, v2, Lcom/vivo/pcsuite/pcconnect/ShareLinkService$l;->a Lcom/vivo/pcsuite/pcconnect/ShareLinkService;
+000014: invoke-static v0, Lcom/vivo/pcsuite/pcconnect/ShareLinkService;->v(Lcom/vivo/pcsuite/pcconnect/ShareLinkService;)Lcom/vivo/pcsuite/pcconnect/ble/IBluetoothLe;
+00001a: move-result-object v0
+00001c: invoke-interface v0, v3, Lcom/vivo/pcsuite/pcconnect/ble/IBluetoothLe;->improveFrequency(Z)V
+000022: goto +bh
+000024: move-exception v3
+000026: invoke-static Lcom/vivo/pcsuite/pcconnect/ShareLinkService;->k()Ljava/lang/String;
+00002c: move-result-object v0
+00002e: const-string v1, "Invoke improveFrequency(boolean) failed."
+000032: invoke-static v0, v1, v3, Lc/c/f/a/b;->e(Ljava/lang/String; Ljava/lang/String; Ljava/lang/Throwable;)V
+000038: return-void 

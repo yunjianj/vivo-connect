@@ -1,0 +1,1636 @@
+APK pcsuite/updateApk/pcsuite.apk
+DEX classes2.dex
+CLASS Lcom/vivo/pcsuite/service/PcSuiteInCallService;
+SUPER Landroid/telecom/InCallService;
+FIELDS
+i Landroid/telecom/Call; = None
+j Z = False
+k Z = False
+l Z = False
+m Z = None
+a Ljava/lang/String; = None
+b Ljava/util/HashMap; = None
+c I = None
+d Z = None
+e Landroid/telecom/Call$Callback; = None
+f Landroid/telecom/Call$Callback; = None
+g Landroid/telecom/Call$Callback; = None
+h Lcom/vivo/castsdk/source/telecom/CallActionListener; = None
+
+METHOD <init>()V
+000000: invoke-direct v1, Landroid/telecom/InCallService;-><init>()V
+000006: const-string v0, ""
+00000a: iput-object v0, v1, Lcom/vivo/pcsuite/service/PcSuiteInCallService;->a Ljava/lang/String;
+00000e: new-instance v0, Ljava/util/HashMap;
+000012: invoke-direct v0, Ljava/util/HashMap;-><init>()V
+000018: iput-object v0, v1, Lcom/vivo/pcsuite/service/PcSuiteInCallService;->b Ljava/util/HashMap;
+00001c: const/4 v0, -1
+00001e: iput v0, v1, Lcom/vivo/pcsuite/service/PcSuiteInCallService;->c I
+000022: new-instance v0, Lcom/vivo/pcsuite/service/PcSuiteInCallService$a;
+000026: invoke-direct v0, v1, Lcom/vivo/pcsuite/service/PcSuiteInCallService$a;-><init>(Lcom/vivo/pcsuite/service/PcSuiteInCallService;)V
+00002c: iput-object v0, v1, Lcom/vivo/pcsuite/service/PcSuiteInCallService;->e Landroid/telecom/Call$Callback;
+000030: new-instance v0, Lcom/vivo/pcsuite/service/PcSuiteInCallService$b;
+000034: invoke-direct v0, v1, Lcom/vivo/pcsuite/service/PcSuiteInCallService$b;-><init>(Lcom/vivo/pcsuite/service/PcSuiteInCallService;)V
+00003a: iput-object v0, v1, Lcom/vivo/pcsuite/service/PcSuiteInCallService;->f Landroid/telecom/Call$Callback;
+00003e: new-instance v0, Lcom/vivo/pcsuite/service/PcSuiteInCallService$c;
+000042: invoke-direct v0, v1, Lcom/vivo/pcsuite/service/PcSuiteInCallService$c;-><init>(Lcom/vivo/pcsuite/service/PcSuiteInCallService;)V
+000048: iput-object v0, v1, Lcom/vivo/pcsuite/service/PcSuiteInCallService;->g Landroid/telecom/Call$Callback;
+00004c: new-instance v0, Lcom/vivo/pcsuite/service/PcSuiteInCallService$d;
+000050: invoke-direct v0, v1, Lcom/vivo/pcsuite/service/PcSuiteInCallService$d;-><init>(Lcom/vivo/pcsuite/service/PcSuiteInCallService;)V
+000056: iput-object v0, v1, Lcom/vivo/pcsuite/service/PcSuiteInCallService;->h Lcom/vivo/castsdk/source/telecom/CallActionListener;
+00005a: return-void 
+
+METHOD A(Landroid/telecom/Call;)V
+000000: new-instance v0, Landroid/os/Bundle;
+000004: invoke-direct v0, Landroid/os/Bundle;-><init>()V
+00000a: invoke-static Lcom/vivo/pcsuite/service/PcSuiteInCallService;->r()Z
+000010: move-result v1
+000012: sget-object v2, Lcom/vivo/pcsuite/PcSuiteApplication;->I1 Lcom/vivo/pcsuite/PcSuiteApplication;
+000016: invoke-virtual v2, Lcom/vivo/pcsuite/PcSuiteApplication;->o()Ljava/lang/String;
+00001c: move-result-object v2
+00001e: const-string v3, "isSupportHandOff"
+000022: invoke-virtual v0, v3, v1, Landroid/os/BaseBundle;->putBoolean(Ljava/lang/String; Z)V
+000028: const-string v3, "pcName"
+00002c: invoke-virtual v0, v3, v2, Landroid/os/BaseBundle;->putString(Ljava/lang/String; Ljava/lang/String;)V
+000032: new-instance v3, Ljava/lang/StringBuilder;
+000036: const-string v4, "sendPcData to telecom switchState:"
+00003a: invoke-direct v3, v4, Ljava/lang/StringBuilder;-><init>(Ljava/lang/String;)V
+000040: sget-boolean v4, Lcom/vivo/pcsuite/service/PcSuiteInCallService;->l Z
+000044: invoke-virtual v3, v4, Ljava/lang/StringBuilder;->append(Z)Ljava/lang/StringBuilder;
+00004a: const-string v4, " isSupportHandOff:"
+00004e: invoke-virtual v3, v4, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+000054: invoke-virtual v3, v1, Ljava/lang/StringBuilder;->append(Z)Ljava/lang/StringBuilder;
+00005a: const-string v1, " pcName:"
+00005e: invoke-virtual v3, v1, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+000064: const-string v1, "PcSuiteInCallService"
+000068: invoke-static v3, v2, v1, Landroidx/appcompat/widget/a;->g(Ljava/lang/StringBuilder; Ljava/lang/String; Ljava/lang/String;)V
+00006e: const-string v1, "pc_send_data_event"
+000072: invoke-virtual v5, v1, v0, Landroid/telecom/Call;->sendCallEvent(Ljava/lang/String; Landroid/os/Bundle;)V
+000078: return-void 
+
+METHOD B(I I Landroid/telecom/Call;)V
+000000: const-string v0, "PcSuiteInCallService"
+000004: const-string v1, "sendTwoCallEventData"
+000008: invoke-static v0, v1, LD1/a;->h(Ljava/lang/String; Ljava/lang/String;)V
+00000e: new-instance v0, Landroid/os/Bundle;
+000012: invoke-direct v0, Landroid/os/Bundle;-><init>()V
+000018: const-string/jumbo v1, type
+00001e: invoke-virtual v0, v1, v2, Landroid/os/BaseBundle;->putInt(Ljava/lang/String; I)V
+000024: const-string v2, "isSupportHandOff"
+000028: invoke-static Lcom/vivo/pcsuite/service/PcSuiteInCallService;->r()Z
+00002e: move-result v1
+000030: invoke-virtual v0, v2, v1, Landroid/os/BaseBundle;->putBoolean(Ljava/lang/String; Z)V
+000036: const/4 v2, -1
+000038: if-eq v2, v3, +007h
+00003c: const-string v2, "reason"
+000040: invoke-virtual v0, v2, v3, Landroid/os/BaseBundle;->putInt(Ljava/lang/String; I)V
+000046: const-string v2, "pc_send_action_event"
+00004a: invoke-virtual v4, v2, v0, Landroid/telecom/Call;->sendCallEvent(Ljava/lang/String; Landroid/os/Bundle;)V
+000050: return-void 
+
+METHOD C()V
+000000: sget-object v0, Lcom/vivo/pcsuite/PcSuiteApplication;->I1 Lcom/vivo/pcsuite/PcSuiteApplication;
+000004: invoke-virtual v0, Landroid/content/Context;->getApplicationContext()Landroid/content/Context;
+00000a: move-result-object v0
+00000c: const-string v1, "audio"
+000010: invoke-virtual v0, v1, Landroid/content/Context;->getSystemService(Ljava/lang/String;)Ljava/lang/Object;
+000016: move-result-object v0
+000018: check-cast v0, Landroid/media/AudioManager;
+00001c: const-string v1, "PcSuiteInCallService"
+000020: if-eqz v0, +024h
+000024: const-string v2, "listen_jovi_call=false"
+000028: invoke-virtual v0, v2, Landroid/media/AudioManager;->setParameters(Ljava/lang/String;)V
+00002e: const-string v2, "jovi_pickup=true"
+000032: invoke-virtual v0, v2, Landroid/media/AudioManager;->setParameters(Ljava/lang/String;)V
+000038: new-instance v2, Ljava/lang/StringBuilder;
+00003c: const-string v3, "setMicrophoneMute true current mute:"
+000040: invoke-direct v2, v3, Ljava/lang/StringBuilder;-><init>(Ljava/lang/String;)V
+000046: sget-boolean v3, Lcom/vivo/pcsuite/service/PcSuiteInCallService;->m Z
+00004a: invoke-virtual v2, v3, Ljava/lang/StringBuilder;->append(Z)Ljava/lang/StringBuilder;
+000050: invoke-virtual v2, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
+000056: move-result-object v2
+000058: invoke-static v1, v2, LD1/a;->h(Ljava/lang/String; Ljava/lang/String;)V
+00005e: const/4 v1, 1
+000060: invoke-virtual v0, v1, Landroid/media/AudioManager;->setMicrophoneMute(Z)V
+000066: return-void 
+000068: const-string v0, "setAudioMuteData error"
+00006c: invoke-static v1, v0, LD1/a;->h(Ljava/lang/String; Ljava/lang/String;)V
+000072: return-void 
+
+METHOD D(Z)V
+000000: const-string v0, "PcSuiteInCallService"
+000004: const-string v1, "save setCallState："
+000008: invoke-static v1, v0, v2, LV5/S;->i(Ljava/lang/String; Ljava/lang/String; Z)V
+00000e: sget-object v0, Lcom/vivo/pcsuite/PcSuiteApplication;->I1 Lcom/vivo/pcsuite/PcSuiteApplication;
+000012: invoke-virtual v0, Landroid/content/Context;->getApplicationContext()Landroid/content/Context;
+000018: move-result-object v0
+00001a: invoke-virtual v0, Landroid/content/Context;->getContentResolver()Landroid/content/ContentResolver;
+000020: move-result-object v0
+000022: const-string v1, "is_pcsuite_call"
+000026: invoke-static v0, v1, v2, Landroid/provider/Settings$Global;->putInt(Landroid/content/ContentResolver; Ljava/lang/String; I)Z
+00002c: return-void 
+
+METHOD E(Z)V
+000000: sget-object v0, Lcom/vivo/pcsuite/service/PcSuiteInCallService;->i Landroid/telecom/Call;
+000004: if-eqz v0, +04bh
+000008: new-instance v0, Ljava/lang/StringBuilder;
+00000c: const-string v1, "setConnectState:"
+000010: invoke-direct v0, v1, Ljava/lang/StringBuilder;-><init>(Ljava/lang/String;)V
+000016: invoke-virtual v0, v3, Ljava/lang/StringBuilder;->append(Z)Ljava/lang/StringBuilder;
+00001c: invoke-virtual v0, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
+000022: move-result-object v0
+000024: const-string v1, "PcSuiteInCallService"
+000028: invoke-static v1, v0, LD1/a;->h(Ljava/lang/String; Ljava/lang/String;)V
+00002e: new-instance v0, Landroid/os/Bundle;
+000032: invoke-direct v0, Landroid/os/Bundle;-><init>()V
+000038: invoke-static Lcom/vivo/pcsuite/service/PcSuiteInCallService;->r()Z
+00003e: move-result v1
+000040: if-eqz v1, +006h
+000044: if-eqz v3, +004h
+000048: const/4 v1, 1
+00004a: goto +2h
+00004c: const/4 v1, 0
+00004e: const-string v2, "isSupportHandOff"
+000052: invoke-virtual v0, v2, v1, Landroid/os/BaseBundle;->putBoolean(Ljava/lang/String; Z)V
+000058: if-eqz v3, +004h
+00005c: const/4 v1, 4
+00005e: goto +2h
+000060: const/4 v1, 3
+000062: const-string/jumbo v2, type
+000068: invoke-virtual v0, v2, v1, Landroid/os/BaseBundle;->putInt(Ljava/lang/String; I)V
+00006e: sget-object v1, Lcom/vivo/pcsuite/service/PcSuiteInCallService;->i Landroid/telecom/Call;
+000072: const-string v2, "pc_send_action_event"
+000076: invoke-virtual v1, v2, v0, Landroid/telecom/Call;->sendCallEvent(Ljava/lang/String; Landroid/os/Bundle;)V
+00007c: if-nez v3, +00fh
+000080: invoke-static Lcom/vivo/castsdk/source/telecom/TelecomHandOffManager;->getInstance()Lcom/vivo/castsdk/source/telecom/TelecomHandOffManager;
+000086: move-result-object v3
+000088: const/4 v0, 0
+00008a: invoke-virtual v3, v0, Lcom/vivo/castsdk/source/telecom/TelecomHandOffManager;->setListener(Lcom/vivo/castsdk/source/telecom/CallActionListener;)V
+000090: const/16 v3, 14
+000094: invoke-static v3, Lcom/vivo/pcsuite/service/PcSuiteInCallService;->G(I)V
+00009a: return-void 
+
+METHOD F(Z)V
+000000: const-string v0, "PcSuiteInCallService"
+000004: const-string v1, "setSwitchState:"
+000008: invoke-static v1, v0, v5, LV5/S;->i(Ljava/lang/String; Ljava/lang/String; Z)V
+00000e: sget-object v0, Lcom/vivo/pcsuite/service/PcSuiteInCallService;->i Landroid/telecom/Call;
+000012: if-eqz v0, +039h
+000016: new-instance v0, Landroid/os/Bundle;
+00001a: invoke-direct v0, Landroid/os/Bundle;-><init>()V
+000020: invoke-static Lcom/vivo/pcsuite/service/PcSuiteInCallService;->r()Z
+000026: move-result v1
+000028: const/4 v2, 0
+00002a: const/4 v3, 1
+00002c: if-eqz v1, +006h
+000030: if-eqz v5, +004h
+000034: move v1, v3
+000036: goto +2h
+000038: move v1, v2
+00003a: const-string v4, "isSupportHandOff"
+00003e: invoke-virtual v0, v4, v1, Landroid/os/BaseBundle;->putBoolean(Ljava/lang/String; Z)V
+000044: if-eqz v5, +003h
+000048: const/4 v3, 2
+00004a: const-string/jumbo v1, type
+000050: invoke-virtual v0, v1, v3, Landroid/os/BaseBundle;->putInt(Ljava/lang/String; I)V
+000056: sget-object v1, Lcom/vivo/pcsuite/service/PcSuiteInCallService;->i Landroid/telecom/Call;
+00005a: const-string v3, "pc_send_action_event"
+00005e: invoke-virtual v1, v3, v0, Landroid/telecom/Call;->sendCallEvent(Ljava/lang/String; Landroid/os/Bundle;)V
+000064: if-nez v5, +010h
+000068: const/16 v0, 14
+00006c: invoke-static v0, Lcom/vivo/pcsuite/service/PcSuiteInCallService;->G(I)V
+000072: const/16 v0, 21
+000076: invoke-static v2, Ljava/lang/String;->valueOf(Z)Ljava/lang/String;
+00007c: move-result-object v1
+00007e: invoke-static v0, v1, Lcom/vivo/pcsuite/service/PcSuiteInCallService;->y(I Ljava/lang/String;)V
+000084: sput-boolean v5, Lcom/vivo/pcsuite/service/PcSuiteInCallService;->l Z
+000088: return-void 
+
+METHOD G(I)V
+000000: const-string/jumbo v0, switchHandOffToPhone
+000006: const-string v1, "PcSuiteInCallService"
+00000a: invoke-static v1, v0, LD1/a;->h(Ljava/lang/String; Ljava/lang/String;)V
+000010: const/4 v0, 0
+000012: sput-boolean v0, Lcom/vivo/pcsuite/service/PcSuiteInCallService;->j Z
+000016: invoke-static Lcom/vivo/castsdk/source/MirrorService;->getInstance()Lcom/vivo/castsdk/source/MirrorService;
+00001c: move-result-object v2
+00001e: if-nez v2, +00eh
+000022: const-string v2, "stopRecord audio"
+000026: invoke-static v1, v2, LD1/a;->h(Ljava/lang/String; Ljava/lang/String;)V
+00002c: invoke-static Lcom/vivo/castsdk/source/telecom/MicAudioThread;->getInstance()Lcom/vivo/castsdk/source/telecom/MicAudioThread;
+000032: move-result-object v2
+000034: invoke-virtual v2, Lcom/vivo/castsdk/source/telecom/MicAudioThread;->stopRecord()V
+00003a: sget-object v2, Lcom/vivo/pcsuite/PcSuiteApplication;->I1 Lcom/vivo/pcsuite/PcSuiteApplication;
+00003e: invoke-virtual v2, Landroid/content/Context;->getApplicationContext()Landroid/content/Context;
+000044: move-result-object v2
+000046: const-string v3, "audio"
+00004a: invoke-virtual v2, v3, Landroid/content/Context;->getSystemService(Ljava/lang/String;)Ljava/lang/Object;
+000050: move-result-object v2
+000052: check-cast v2, Landroid/media/AudioManager;
+000056: if-eqz v2, +02bh
+00005a: sget-boolean v3, Lcom/vivo/pcsuite/service/PcSuiteInCallService;->m Z
+00005e: if-nez v3, +005h
+000062: invoke-virtual v2, v0, Landroid/media/AudioManager;->setMicrophoneMute(Z)V
+000068: const-string v0, "jovi_pickup=false"
+00006c: invoke-virtual v2, v0, Landroid/media/AudioManager;->setParameters(Ljava/lang/String;)V
+000072: const-string v0, "listen_jovi_call=true"
+000076: invoke-virtual v2, v0, Landroid/media/AudioManager;->setParameters(Ljava/lang/String;)V
+00007c: new-instance v0, Ljava/lang/StringBuilder;
+000080: const-string v3, "reset mute localMute:"
+000084: invoke-direct v0, v3, Ljava/lang/StringBuilder;-><init>(Ljava/lang/String;)V
+00008a: sget-boolean v3, Lcom/vivo/pcsuite/service/PcSuiteInCallService;->m Z
+00008e: invoke-static v0, v3, v1, LZ1/b;->e(Ljava/lang/StringBuilder; Z Ljava/lang/String;)V
+000094: sget-boolean v0, Lcom/vivo/pcsuite/service/PcSuiteInCallService;->m Z
+000098: if-eqz v0, +005h
+00009c: invoke-virtual v2, v0, Landroid/media/AudioManager;->setMicrophoneMute(Z)V
+0000a2: const/4 v0, 6
+0000a4: invoke-static v0, v4, Lcom/vivo/pcsuite/service/PcSuiteInCallService;->x(I I)V
+0000aa: return-void 
+0000ac: const/4 v4, 5
+0000ae: const/4 v0, -1
+0000b0: invoke-static v4, v0, Lcom/vivo/pcsuite/service/PcSuiteInCallService;->x(I I)V
+0000b6: return-void 
+
+METHOD H(Landroid/telecom/Call;)V
+000000: invoke-virtual v4, Landroid/telecom/Call;->getDetails()Landroid/telecom/Call$Details;
+000006: move-result-object v4
+000008: invoke-virtual v4, Landroid/telecom/Call$Details;->getExtras()Landroid/os/Bundle;
+00000e: move-result-object v4
+000010: const-string v0, "sos_type_key"
+000014: const/4 v1, -1
+000016: invoke-virtual v4, v0, v1, Landroid/os/BaseBundle;->getInt(Ljava/lang/String; I)I
+00001c: move-result v4
+00001e: const/4 v0, 1
+000020: if-ne v4, v0, +003h
+000024: goto +2h
+000026: const/4 v0, 0
+000028: const-string v1, "PcSuiteInCallService"
+00002c: const-string v2, "enhance_sos_state："
+000030: invoke-static v4, v2, v1, Landroidx/constraintlayout/core/motion/a;->c(I Ljava/lang/String; Ljava/lang/String;)V
+000036: if-eqz v0, +027h
+00003a: new-instance v4, Lcom/vivo/castsdk/sdk/common/gson/CommandEvent;
+00003e: const/16 v1, 8
+000042: invoke-static v0, Ljava/lang/String;->valueOf(Z)Ljava/lang/String;
+000048: move-result-object v2
+00004a: const/16 v3, 25
+00004e: invoke-direct v4, v1, v3, v2, Lcom/vivo/castsdk/sdk/common/gson/CommandEvent;-><init>(I I Ljava/lang/String;)V
+000054: sget-object v1, Lcom/vivo/pcsuite/PcSuiteApplication;->I1 Lcom/vivo/pcsuite/PcSuiteApplication;
+000058: invoke-virtual v1, Lcom/vivo/pcsuite/PcSuiteApplication;->p()Lcom/google/gson/Gson;
+00005e: move-result-object v1
+000060: invoke-virtual v1, v4, Lcom/google/gson/Gson;->toJson(Ljava/lang/Object;)Ljava/lang/String;
+000066: move-result-object v4
+000068: invoke-static Lcom/vivo/castsdk/source/telecom/TelecomChannelHandler;->getInstance()Lcom/vivo/castsdk/source/telecom/TelecomChannelHandler;
+00006e: move-result-object v1
+000070: invoke-virtual v1, v4, Lcom/vivo/castsdk/source/telecom/TelecomChannelHandler;->setEnhanceSosData(Ljava/lang/String;)V
+000076: invoke-static v0, Ljava/lang/String;->valueOf(Z)Ljava/lang/String;
+00007c: move-result-object v4
+00007e: invoke-static v3, v4, Lcom/vivo/pcsuite/service/PcSuiteInCallService;->y(I Ljava/lang/String;)V
+000084: return-void 
+
+METHOD I(Landroid/telecom/Call;)V
+000000: const/4 v0, 0
+000002: sput-boolean v0, Lcom/vivo/pcsuite/service/PcSuiteInCallService;->j Z
+000006: invoke-static Lcom/vivo/pcsuite/service/PcSuiteObserver;->q()I
+00000c: move-result v0
+00000e: const-string v1, "onCallAdded call connect state:"
+000012: const-string v2, " switchState:"
+000016: invoke-static v0, v1, v2, LS5/f;->d(I Ljava/lang/String; Ljava/lang/String;)Ljava/lang/StringBuilder;
+00001c: move-result-object v1
+00001e: sget-boolean v2, Lcom/vivo/pcsuite/service/PcSuiteInCallService;->l Z
+000022: const-string v3, "PcSuiteInCallService"
+000026: invoke-static v1, v2, v3, LZ1/b;->e(Ljava/lang/StringBuilder; Z Ljava/lang/String;)V
+00002c: const/4 v1, 1
+00002e: if-ne v1, v0, +025h
+000032: sget-boolean v0, Lcom/vivo/pcsuite/service/PcSuiteInCallService;->l Z
+000036: if-eqz v0, +021h
+00003a: const-string v0, "init"
+00003e: invoke-static v3, v0, LD1/a;->h(Ljava/lang/String; Ljava/lang/String;)V
+000044: invoke-static Lcom/vivo/castsdk/source/httpServer/HttpServer;->getInstance()Lcom/vivo/castsdk/source/httpServer/HttpServer;
+00004a: move-result-object v0
+00004c: const/16 v1, 10381
+000050: invoke-virtual v0, v1, Lcom/vivo/castsdk/source/httpServer/HttpServer;->startASync(I)V
+000056: iget-object v0, v4, Lcom/vivo/pcsuite/service/PcSuiteInCallService;->e Landroid/telecom/Call$Callback;
+00005a: invoke-virtual v5, v0, Landroid/telecom/Call;->registerCallback(Landroid/telecom/Call$Callback;)V
+000060: invoke-static Lcom/vivo/castsdk/source/telecom/TelecomHandOffManager;->getInstance()Lcom/vivo/castsdk/source/telecom/TelecomHandOffManager;
+000066: move-result-object v0
+000068: iget-object v4, v4, Lcom/vivo/pcsuite/service/PcSuiteInCallService;->h Lcom/vivo/castsdk/source/telecom/CallActionListener;
+00006c: invoke-virtual v0, v4, Lcom/vivo/castsdk/source/telecom/TelecomHandOffManager;->setListener(Lcom/vivo/castsdk/source/telecom/CallActionListener;)V
+000072: invoke-static v5, Lcom/vivo/pcsuite/service/PcSuiteInCallService;->A(Landroid/telecom/Call;)V
+000078: return-void 
+
+METHOD a(Lcom/vivo/pcsuite/service/PcSuiteInCallService;)Ljava/lang/String;
+000000: iget-object v0, v0, Lcom/vivo/pcsuite/service/PcSuiteInCallService;->a Ljava/lang/String;
+000004: return-object v0
+
+METHOD b(Lcom/vivo/pcsuite/service/PcSuiteInCallService; Landroid/telecom/Call;)V
+000000: const-string v3, "TwoCallSwitchHandOffToPhone"
+000004: const-string v0, "PcSuiteInCallService"
+000008: invoke-static v0, v3, LD1/a;->h(Ljava/lang/String; Ljava/lang/String;)V
+00000e: sget-object v3, Lcom/vivo/pcsuite/PcSuiteApplication;->I1 Lcom/vivo/pcsuite/PcSuiteApplication;
+000012: invoke-virtual v3, Landroid/content/Context;->getApplicationContext()Landroid/content/Context;
+000018: move-result-object v3
+00001a: const-string v1, "audio"
+00001e: invoke-virtual v3, v1, Landroid/content/Context;->getSystemService(Ljava/lang/String;)Ljava/lang/Object;
+000024: move-result-object v3
+000026: check-cast v3, Landroid/media/AudioManager;
+00002a: const/4 v1, 0
+00002c: if-eqz v3, +01bh
+000030: invoke-virtual v3, v1, Landroid/media/AudioManager;->setMicrophoneMute(Z)V
+000036: const-string v2, "jovi_pickup=false"
+00003a: invoke-virtual v3, v2, Landroid/media/AudioManager;->setParameters(Ljava/lang/String;)V
+000040: const-string v2, "listen_jovi_call=true"
+000044: invoke-virtual v3, v2, Landroid/media/AudioManager;->setParameters(Ljava/lang/String;)V
+00004a: const-string v3, "reset mute"
+00004e: invoke-static v0, v3, LD1/a;->h(Ljava/lang/String; Ljava/lang/String;)V
+000054: const/4 v3, 6
+000056: const/16 v0, 11
+00005a: invoke-static v3, v0, v4, Lcom/vivo/pcsuite/service/PcSuiteInCallService;->B(I I Landroid/telecom/Call;)V
+000060: goto +6h
+000062: const/4 v3, 5
+000064: const/4 v0, -1
+000066: invoke-static v3, v0, v4, Lcom/vivo/pcsuite/service/PcSuiteInCallService;->B(I I Landroid/telecom/Call;)V
+00006c: const/4 v3, 0
+00006e: sput-object v3, Lcom/vivo/pcsuite/service/PcSuiteInCallService;->i Landroid/telecom/Call;
+000072: sput-boolean v1, Lcom/vivo/pcsuite/service/PcSuiteInCallService;->j Z
+000076: return-void 
+
+METHOD c(Lcom/vivo/pcsuite/service/PcSuiteInCallService;)V
+000000: invoke-virtual v0, Ljava/lang/Object;->getClass()Ljava/lang/Class;
+000006: invoke-static Lcom/vivo/pcsuite/service/PcSuiteInCallService;->p()V
+00000c: return-void 
+
+METHOD d(Lcom/vivo/pcsuite/service/PcSuiteInCallService; Landroid/telecom/Call; Landroid/os/Bundle;)V
+000000: if-eqz v7, +1ddh
+000004: const-string/jumbo v0, type
+00000a: invoke-virtual v7, v0, Landroid/os/BaseBundle;->getInt(Ljava/lang/String;)I
+000010: move-result v0
+000012: const-string v1, "eventCommend type："
+000016: const-string v2, "PcSuiteInCallService"
+00001a: invoke-static v0, v1, v2, Landroidx/constraintlayout/core/motion/a;->c(I Ljava/lang/String; Ljava/lang/String;)V
+000020: const/4 v1, 1
+000022: if-eq v0, v1, +1ach
+000026: const/4 v3, 6
+000028: if-eq v0, v3, +1a0h
+00002c: const/16 v3, 13
+000030: const/4 v4, 0
+000032: if-eq v0, v3, +15dh
+000036: const/16 v5, 29
+00003a: const/16 v6, 8
+00003e: if-eq v0, v5, +129h
+000042: const/16 v5, 22
+000046: if-eq v0, v5, +0f6h
+00004a: const/16 v5, 23
+00004e: if-eq v0, v5, +0beh
+000052: packed-switch v0, +00001b5h
+000058: const-string v5, "isAutoRecord"
+00005c: const-string v1, "isAutoAssistRecord"
+000060: const-string v2, "isAutoAssistTranslate"
+000064: packed-switch v0, +00001b6h
+00006a: goto/16 +1a8h
+00006e: new-instance v0, Ljava/util/HashMap;
+000072: invoke-direct v0, Ljava/util/HashMap;-><init>()V
+000078: invoke-virtual v7, v2, Landroid/os/BaseBundle;->getBoolean(Ljava/lang/String;)Z
+00007e: move-result v3
+000080: invoke-static v3, Ljava/lang/Boolean;->valueOf(Z)Ljava/lang/Boolean;
+000086: move-result-object v3
+000088: invoke-virtual v0, v2, v3, Ljava/util/HashMap;->put(Ljava/lang/Object; Ljava/lang/Object;)Ljava/lang/Object;
+00008e: invoke-virtual v7, v1, Landroid/os/BaseBundle;->getBoolean(Ljava/lang/String;)Z
+000094: move-result v2
+000096: invoke-static v2, Ljava/lang/Boolean;->valueOf(Z)Ljava/lang/Boolean;
+00009c: move-result-object v2
+00009e: invoke-virtual v0, v1, v2, Ljava/util/HashMap;->put(Ljava/lang/Object; Ljava/lang/Object;)Ljava/lang/Object;
+0000a4: invoke-virtual v7, v5, Landroid/os/BaseBundle;->getBoolean(Ljava/lang/String;)Z
+0000aa: move-result v7
+0000ac: invoke-static v7, Ljava/lang/Boolean;->valueOf(Z)Ljava/lang/Boolean;
+0000b2: move-result-object v7
+0000b4: invoke-virtual v0, v5, v7, Ljava/util/HashMap;->put(Ljava/lang/Object; Ljava/lang/Object;)Ljava/lang/Object;
+0000ba: sget-object v5, Lcom/vivo/pcsuite/PcSuiteApplication;->I1 Lcom/vivo/pcsuite/PcSuiteApplication;
+0000be: invoke-virtual v5, Lcom/vivo/pcsuite/PcSuiteApplication;->p()Lcom/google/gson/Gson;
+0000c4: move-result-object v5
+0000c6: invoke-virtual v5, v0, Lcom/google/gson/Gson;->toJson(Ljava/lang/Object;)Ljava/lang/String;
+0000cc: move-result-object v5
+0000ce: new-instance v7, Lcom/vivo/castsdk/sdk/common/gson/CommandEvent;
+0000d2: const/16 v0, 20
+0000d6: invoke-direct v7, v6, v0, v5, Lcom/vivo/castsdk/sdk/common/gson/CommandEvent;-><init>(I I Ljava/lang/String;)V
+0000dc: sget-object v5, Lcom/vivo/pcsuite/PcSuiteApplication;->I1 Lcom/vivo/pcsuite/PcSuiteApplication;
+0000e0: invoke-virtual v5, Lcom/vivo/pcsuite/PcSuiteApplication;->p()Lcom/google/gson/Gson;
+0000e6: move-result-object v5
+0000e8: invoke-virtual v5, v7, Lcom/google/gson/Gson;->toJson(Ljava/lang/Object;)Ljava/lang/String;
+0000ee: move-result-object v5
+0000f0: invoke-static Lcom/vivo/castsdk/source/telecom/TelecomChannelHandler;->getInstance()Lcom/vivo/castsdk/source/telecom/TelecomChannelHandler;
+0000f6: move-result-object v6
+0000f8: invoke-virtual v6, v5, Lcom/vivo/castsdk/source/telecom/TelecomChannelHandler;->setTelecomAIData(Ljava/lang/String;)V
+0000fe: return-void 
+000100: invoke-static v0, Lcom/vivo/pcsuite/service/PcSuiteInCallService;->G(I)V
+000106: invoke-virtual v7, v5, Landroid/os/BaseBundle;->getBoolean(Ljava/lang/String;)Z
+00010c: move-result v5
+00010e: invoke-static v5, Ljava/lang/String;->valueOf(Z)Ljava/lang/String;
+000114: move-result-object v5
+000116: const/16 v6, 17
+00011a: invoke-static v6, v5, Lcom/vivo/pcsuite/service/PcSuiteInCallService;->y(I Ljava/lang/String;)V
+000120: return-void 
+000122: invoke-static v0, Lcom/vivo/pcsuite/service/PcSuiteInCallService;->G(I)V
+000128: invoke-virtual v7, v1, Landroid/os/BaseBundle;->getBoolean(Ljava/lang/String;)Z
+00012e: move-result v5
+000130: invoke-static v5, Ljava/lang/String;->valueOf(Z)Ljava/lang/String;
+000136: move-result-object v5
+000138: const/16 v6, 16
+00013c: invoke-static v6, v5, Lcom/vivo/pcsuite/service/PcSuiteInCallService;->y(I Ljava/lang/String;)V
+000142: return-void 
+000144: invoke-static v0, Lcom/vivo/pcsuite/service/PcSuiteInCallService;->G(I)V
+00014a: invoke-virtual v7, v2, Landroid/os/BaseBundle;->getBoolean(Ljava/lang/String;)Z
+000150: move-result v5
+000152: invoke-static v5, Ljava/lang/String;->valueOf(Z)Ljava/lang/String;
+000158: move-result-object v5
+00015a: const/16 v6, 15
+00015e: invoke-static v6, v5, Lcom/vivo/pcsuite/service/PcSuiteInCallService;->y(I Ljava/lang/String;)V
+000164: return-void 
+000166: const-string v5, "isAccepted"
+00016a: invoke-virtual v7, v5, Landroid/os/BaseBundle;->getInt(Ljava/lang/String;)I
+000170: move-result v5
+000172: const/16 v6, 10
+000176: if-ne v1, v5, +00dh
+00017a: invoke-static v0, Lcom/vivo/pcsuite/service/PcSuiteInCallService;->G(I)V
+000180: invoke-static v5, Ljava/lang/String;->valueOf(I)Ljava/lang/String;
+000186: move-result-object v5
+000188: invoke-static v6, v5, Lcom/vivo/pcsuite/service/PcSuiteInCallService;->y(I Ljava/lang/String;)V
+00018e: return-void 
+000190: const/4 v7, -1
+000192: if-ne v7, v5, +00ah
+000196: invoke-static v5, Ljava/lang/String;->valueOf(I)Ljava/lang/String;
+00019c: move-result-object v5
+00019e: invoke-static v6, v5, Lcom/vivo/pcsuite/service/PcSuiteInCallService;->y(I Ljava/lang/String;)V
+0001a4: return-void 
+0001a6: if-nez v5, +00ah
+0001aa: invoke-static v5, Ljava/lang/String;->valueOf(I)Ljava/lang/String;
+0001b0: move-result-object v5
+0001b2: invoke-static v6, v5, Lcom/vivo/pcsuite/service/PcSuiteInCallService;->y(I Ljava/lang/String;)V
+0001b8: return-void 
+0001ba: invoke-static v5, Ljava/lang/String;->valueOf(I)Ljava/lang/String;
+0001c0: move-result-object v5
+0001c2: invoke-static v6, v5, Lcom/vivo/pcsuite/service/PcSuiteInCallService;->y(I Ljava/lang/String;)V
+0001c8: return-void 
+0001ca: const-string v5, "isMutiNumContact"
+0001ce: invoke-virtual v7, v5, v4, Landroid/os/BaseBundle;->getBoolean(Ljava/lang/String; Z)Z
+0001d4: move-result v5
+0001d6: new-instance v7, Ljava/lang/StringBuilder;
+0001da: const-string v0, "isMutiNumContact:"
+0001de: invoke-direct v7, v0, Ljava/lang/StringBuilder;-><init>(Ljava/lang/String;)V
+0001e4: invoke-virtual v7, v5, Ljava/lang/StringBuilder;->append(Z)Ljava/lang/StringBuilder;
+0001ea: invoke-virtual v7, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
+0001f0: move-result-object v7
+0001f2: invoke-static v2, v7, LD1/a;->h(Ljava/lang/String; Ljava/lang/String;)V
+0001f8: new-instance v7, Lcom/vivo/castsdk/sdk/common/gson/CommandEvent;
+0001fc: const/16 v0, 28
+000200: invoke-static v5, Ljava/lang/String;->valueOf(Z)Ljava/lang/String;
+000206: move-result-object v5
+000208: invoke-direct v7, v6, v0, v5, Lcom/vivo/castsdk/sdk/common/gson/CommandEvent;-><init>(I I Ljava/lang/String;)V
+00020e: sget-object v5, Lcom/vivo/pcsuite/PcSuiteApplication;->I1 Lcom/vivo/pcsuite/PcSuiteApplication;
+000212: invoke-virtual v5, Lcom/vivo/pcsuite/PcSuiteApplication;->p()Lcom/google/gson/Gson;
+000218: move-result-object v5
+00021a: invoke-virtual v5, v7, Lcom/google/gson/Gson;->toJson(Ljava/lang/Object;)Ljava/lang/String;
+000220: move-result-object v5
+000222: invoke-static Lcom/vivo/castsdk/source/telecom/TelecomChannelHandler;->getInstance()Lcom/vivo/castsdk/source/telecom/TelecomChannelHandler;
+000228: move-result-object v6
+00022a: invoke-virtual v6, v5, Lcom/vivo/castsdk/source/telecom/TelecomChannelHandler;->setMutiNumberData(Ljava/lang/String;)V
+000230: return-void 
+000232: new-instance v0, Ljava/util/HashMap;
+000236: invoke-direct v0, Ljava/util/HashMap;-><init>()V
+00023c: const-string v1, "SOSLocation"
+000240: invoke-virtual v7, v1, Landroid/os/BaseBundle;->getString(Ljava/lang/String;)Ljava/lang/String;
+000246: move-result-object v7
+000248: invoke-virtual v0, v1, v7, Ljava/util/HashMap;->put(Ljava/lang/Object; Ljava/lang/Object;)Ljava/lang/Object;
+00024e: sget-object v7, Lcom/vivo/pcsuite/PcSuiteApplication;->I1 Lcom/vivo/pcsuite/PcSuiteApplication;
+000252: invoke-virtual v7, Lcom/vivo/pcsuite/PcSuiteApplication;->p()Lcom/google/gson/Gson;
+000258: move-result-object v7
+00025a: invoke-virtual v7, v0, Lcom/google/gson/Gson;->toJson(Ljava/lang/Object;)Ljava/lang/String;
+000260: move-result-object v7
+000262: new-instance v0, Lcom/vivo/castsdk/sdk/common/gson/CommandEvent;
+000266: invoke-direct v0, v6, v5, v7, Lcom/vivo/castsdk/sdk/common/gson/CommandEvent;-><init>(I I Ljava/lang/String;)V
+00026c: sget-object v5, Lcom/vivo/pcsuite/PcSuiteApplication;->I1 Lcom/vivo/pcsuite/PcSuiteApplication;
+000270: invoke-virtual v5, Lcom/vivo/pcsuite/PcSuiteApplication;->p()Lcom/google/gson/Gson;
+000276: move-result-object v5
+000278: invoke-virtual v5, v0, Lcom/google/gson/Gson;->toJson(Ljava/lang/Object;)Ljava/lang/String;
+00027e: move-result-object v5
+000280: invoke-static Lcom/vivo/castsdk/source/telecom/TelecomChannelHandler;->getInstance()Lcom/vivo/castsdk/source/telecom/TelecomChannelHandler;
+000286: move-result-object v6
+000288: invoke-virtual v6, v5, Lcom/vivo/castsdk/source/telecom/TelecomChannelHandler;->setTelecomAIData(Ljava/lang/String;)V
+00028e: return-void 
+000290: const-string v0, "numberMarkType"
+000294: invoke-virtual v7, v0, Landroid/os/BaseBundle;->getString(Ljava/lang/String;)Ljava/lang/String;
+00029a: move-result-object v7
+00029c: new-instance v0, Ljava/lang/StringBuilder;
+0002a0: const-string v1, "numberMarkType:"
+0002a4: invoke-direct v0, v1, Ljava/lang/StringBuilder;-><init>(Ljava/lang/String;)V
+0002aa: invoke-virtual v0, v7, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+0002b0: invoke-virtual v0, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
+0002b6: move-result-object v0
+0002b8: invoke-static v2, v0, Lcom/vivo/connect/logger/EasyLog;->i(Ljava/lang/String; Ljava/lang/String;)V
+0002be: new-instance v0, Lcom/vivo/castsdk/sdk/common/gson/CommandEvent;
+0002c2: invoke-direct v0, v6, v5, v7, Lcom/vivo/castsdk/sdk/common/gson/CommandEvent;-><init>(I I Ljava/lang/String;)V
+0002c8: sget-object v5, Lcom/vivo/pcsuite/PcSuiteApplication;->I1 Lcom/vivo/pcsuite/PcSuiteApplication;
+0002cc: invoke-virtual v5, Lcom/vivo/pcsuite/PcSuiteApplication;->p()Lcom/google/gson/Gson;
+0002d2: move-result-object v5
+0002d4: invoke-virtual v5, v0, Lcom/google/gson/Gson;->toJson(Ljava/lang/Object;)Ljava/lang/String;
+0002da: move-result-object v5
+0002dc: invoke-static Lcom/vivo/castsdk/source/telecom/TelecomChannelHandler;->getInstance()Lcom/vivo/castsdk/source/telecom/TelecomChannelHandler;
+0002e2: move-result-object v6
+0002e4: invoke-virtual v6, v5, Lcom/vivo/castsdk/source/telecom/TelecomChannelHandler;->setNumberMarkType(Ljava/lang/String;)V
+0002ea: return-void 
+0002ec: const-string v1, "isVideoCall"
+0002f0: invoke-virtual v7, v1, v4, Landroid/os/BaseBundle;->getBoolean(Ljava/lang/String; Z)Z
+0002f6: move-result v1
+0002f8: if-nez v1, +032h
+0002fc: sget-object v1, Lcom/vivo/pcsuite/PcSuiteApplication;->I1 Lcom/vivo/pcsuite/PcSuiteApplication;
+000300: const-string v3, "android.permission.RECORD_AUDIO"
+000304: filled-new-array v3, [Ljava/lang/String;
+00030a: move-result-object v4
+00030c: invoke-static v1, v4, Lcom/vivo/pcsuite/permission/f;->f(Landroid/content/Context; [Ljava/lang/String;)Z
+000312: move-result v1
+000314: const-string v4, " mid way call hasPermission:"
+000318: invoke-static v4, v2, v1, LV5/S;->i(Ljava/lang/String; Ljava/lang/String; Z)V
+00031e: if-eqz v1, +006h
+000322: invoke-direct v5, v6, v7, Lcom/vivo/pcsuite/service/PcSuiteInCallService;->t(Landroid/telecom/Call; Landroid/os/Bundle;)V
+000328: return-void 
+00032a: sget-object v1, Lcom/vivo/pcsuite/PcSuiteApplication;->I1 Lcom/vivo/pcsuite/PcSuiteApplication;
+00032e: invoke-static v1, Lcom/vivo/pcsuite/permission/Permission;->b(Landroid/content/Context;)Lcom/vivo/pcsuite/permission/Permission;
+000334: move-result-object v1
+000336: filled-new-array v3, [Ljava/lang/String;
+00033c: move-result-object v2
+00033e: invoke-virtual v1, v2, Lcom/vivo/pcsuite/permission/Permission;->d([Ljava/lang/String;)V
+000344: new-instance v2, Lcom/vivo/pcsuite/service/b;
+000348: invoke-direct v2, v5, v0, v6, v7, Lcom/vivo/pcsuite/service/b;-><init>(Lcom/vivo/pcsuite/service/PcSuiteInCallService; I Landroid/telecom/Call; Landroid/os/Bundle;)V
+00034e: invoke-virtual v1, v2, Lcom/vivo/pcsuite/permission/Permission;->c(Lcom/vivo/pcsuite/permission/Permission$PermissionResultCallback;)V
+000354: invoke-virtual v1, Lcom/vivo/pcsuite/permission/Permission;->e()V
+00035a: return-void 
+00035c: const-string v5, "mid way call is video call"
+000360: invoke-static v2, v5, LD1/a;->h(Ljava/lang/String; Ljava/lang/String;)V
+000366: return-void 
+000368: invoke-static v0, Lcom/vivo/pcsuite/service/PcSuiteInCallService;->G(I)V
+00036e: const-string v5, ""
+000372: invoke-static v0, v5, Lcom/vivo/pcsuite/service/PcSuiteInCallService;->y(I Ljava/lang/String;)V
+000378: return-void 
+00037a: const-string v5, "isMuted"
+00037e: invoke-virtual v7, v5, Landroid/os/BaseBundle;->getBoolean(Ljava/lang/String;)Z
+000384: move-result v5
+000386: sput-boolean v5, Lcom/vivo/pcsuite/service/PcSuiteInCallService;->m Z
+00038a: new-instance v6, Ljava/lang/StringBuilder;
+00038e: const-string v7, "isMuted："
+000392: invoke-direct v6, v7, Ljava/lang/StringBuilder;-><init>(Ljava/lang/String;)V
+000398: invoke-virtual v6, v5, Ljava/lang/StringBuilder;->append(Z)Ljava/lang/StringBuilder;
+00039e: invoke-virtual v6, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
+0003a4: move-result-object v6
+0003a6: invoke-static v2, v6, LD1/a;->h(Ljava/lang/String; Ljava/lang/String;)V
+0003ac: invoke-static v5, Ljava/lang/String;->valueOf(Z)Ljava/lang/String;
+0003b2: move-result-object v5
+0003b4: invoke-static v1, v5, Lcom/vivo/pcsuite/service/PcSuiteInCallService;->y(I Ljava/lang/String;)V
+0003ba: return-void 
+0003bc: packed-switch-payload 8 9 a
+0003d0: packed-switch-payload f 10 11 12 13 14
+
+METHOD e(Lcom/vivo/pcsuite/service/PcSuiteInCallService; Landroid/telecom/Call;)V
+000000: const-string v0, "PcSuiteInCallService"
+000004: const-string v1, "onChanged oldCallId："
+000008: const-string v2, "current state:"
+00000c: sget-object v3, Lcom/vivo/pcsuite/service/PcSuiteInCallService;->i Landroid/telecom/Call;
+000010: if-nez v3, +004h
+000014: goto/16 +10dh
+000018: invoke-virtual v7, Landroid/telecom/Call;->getState()I
+00001e: move-result v3
+000020: new-instance v4, Ljava/lang/StringBuilder;
+000024: invoke-direct v4, v2, Ljava/lang/StringBuilder;-><init>(Ljava/lang/String;)V
+00002a: invoke-virtual v4, v3, Ljava/lang/StringBuilder;->append(I)Ljava/lang/StringBuilder;
+000030: const-string v2, " oldSate:"
+000034: invoke-virtual v4, v2, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+00003a: iget v2, v6, Lcom/vivo/pcsuite/service/PcSuiteInCallService;->c I
+00003e: invoke-virtual v4, v2, Ljava/lang/StringBuilder;->append(I)Ljava/lang/StringBuilder;
+000044: invoke-virtual v4, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
+00004a: move-result-object v2
+00004c: invoke-static v0, v2, LD1/a;->h(Ljava/lang/String; Ljava/lang/String;)V
+000052: const/4 v2, 2
+000054: if-ne v2, v3, +009h
+000058: invoke-static v7, Lcom/vivo/pcsuite/service/PcSuiteInCallService;->H(Landroid/telecom/Call;)V
+00005e: goto +4h
+000060: move-exception v6
+000062: goto/16 +0edh
+000066: iget v4, v6, Lcom/vivo/pcsuite/service/PcSuiteInCallService;->c I
+00006a: if-ne v4, v3, +004h
+00006e: goto/16 +0e0h
+000072: iput v3, v6, Lcom/vivo/pcsuite/service/PcSuiteInCallService;->c I
+000076: invoke-virtual v7, Landroid/telecom/Call;->getDetails()Landroid/telecom/Call$Details;
+00007c: move-result-object v4
+00007e: invoke-virtual v4, Landroid/telecom/Call$Details;->getTelecomCallId()Ljava/lang/String;
+000084: move-result-object v4
+000086: new-instance v5, Ljava/lang/StringBuilder;
+00008a: invoke-direct v5, v1, Ljava/lang/StringBuilder;-><init>(Ljava/lang/String;)V
+000090: iget-object v1, v6, Lcom/vivo/pcsuite/service/PcSuiteInCallService;->a Ljava/lang/String;
+000094: invoke-virtual v5, v1, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+00009a: const-string v1, " newCallId:"
+00009e: invoke-virtual v5, v1, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+0000a4: invoke-virtual v5, v4, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+0000aa: const-string v1, " state "
+0000ae: invoke-virtual v5, v1, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+0000b4: invoke-virtual v5, v3, Ljava/lang/StringBuilder;->append(I)Ljava/lang/StringBuilder;
+0000ba: invoke-virtual v5, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
+0000c0: move-result-object v1
+0000c2: invoke-static v0, v1, LD1/a;->h(Ljava/lang/String; Ljava/lang/String;)V
+0000c8: sget-boolean v1, Lcom/vivo/pcsuite/service/PcSuiteInCallService;->j Z
+0000cc: const/16 v5, 14
+0000d0: if-nez v1, +00eh
+0000d4: invoke-virtual v7, Landroid/telecom/Call;->getState()I
+0000da: move-result v6
+0000dc: invoke-static v6, Ljava/lang/String;->valueOf(I)Ljava/lang/String;
+0000e2: move-result-object v6
+0000e4: invoke-static v5, v6, Lcom/vivo/pcsuite/service/PcSuiteInCallService;->y(I Ljava/lang/String;)V
+0000ea: return-void 
+0000ec: const/4 v1, 3
+0000ee: if-eq v3, v1, +08fh
+0000f2: const/4 v1, 4
+0000f4: if-eq v3, v1, +02eh
+0000f8: const/4 v1, 7
+0000fa: if-eq v3, v1, +004h
+0000fe: goto/16 +098h
+000102: iget-object v1, v6, Lcom/vivo/pcsuite/service/PcSuiteInCallService;->a Ljava/lang/String;
+000106: invoke-static v1, Landroid/text/TextUtils;->isEmpty(Ljava/lang/CharSequence;)Z
+00010c: move-result v1
+00010e: if-nez v1, +00ah
+000112: iget-object v1, v6, Lcom/vivo/pcsuite/service/PcSuiteInCallService;->a Ljava/lang/String;
+000116: invoke-static v1, v4, Landroid/text/TextUtils;->equals(Ljava/lang/CharSequence; Ljava/lang/CharSequence;)Z
+00011c: move-result v1
+00011e: if-eqz v1, +088h
+000122: invoke-virtual v7, Landroid/telecom/Call;->getState()I
+000128: move-result v7
+00012a: invoke-static v7, Ljava/lang/String;->valueOf(I)Ljava/lang/String;
+000130: move-result-object v7
+000132: invoke-static v5, v7, Lcom/vivo/pcsuite/service/PcSuiteInCallService;->y(I Ljava/lang/String;)V
+000138: const/4 v7, 0
+00013a: invoke-static v7, Lcom/vivo/pcsuite/service/PcSuiteInCallService;->D(Z)V
+000140: iget-boolean v6, v6, Lcom/vivo/pcsuite/service/PcSuiteInCallService;->d Z
+000144: if-nez v6, +075h
+000148: invoke-static v5, Lcom/vivo/pcsuite/service/PcSuiteInCallService;->G(I)V
+00014e: return-void 
+000150: iget-object v1, v6, Lcom/vivo/pcsuite/service/PcSuiteInCallService;->a Ljava/lang/String;
+000154: invoke-static v1, Landroid/text/TextUtils;->isEmpty(Ljava/lang/CharSequence;)Z
+00015a: move-result v1
+00015c: if-nez v1, +00ah
+000160: iget-object v6, v6, Lcom/vivo/pcsuite/service/PcSuiteInCallService;->a Ljava/lang/String;
+000164: invoke-static v6, v4, Landroid/text/TextUtils;->equals(Ljava/lang/CharSequence; Ljava/lang/CharSequence;)Z
+00016a: move-result v6
+00016c: if-eqz v6, +061h
+000170: invoke-static Lcom/vivo/pcsuite/service/PcSuiteInCallService;->C()V
+000176: const/4 v6, 1
+000178: invoke-static v6, Lcom/vivo/pcsuite/service/PcSuiteInCallService;->D(Z)V
+00017e: invoke-virtual v7, Landroid/telecom/Call;->getDetails()Landroid/telecom/Call$Details;
+000184: move-result-object v6
+000186: if-nez v6, +007h
+00018a: invoke-static Ljava/lang/System;->currentTimeMillis()J
+000190: move-result-wide v1
+000192: goto +9h
+000194: invoke-virtual v7, Landroid/telecom/Call;->getDetails()Landroid/telecom/Call$Details;
+00019a: move-result-object v6
+00019c: invoke-virtual v6, Landroid/telecom/Call$Details;->getConnectTimeMillis()J
+0001a2: move-result-wide v1
+0001a4: invoke-static Ljava/lang/System;->currentTimeMillis()J
+0001aa: move-result-wide v3
+0001ac: sub-long/2addr v3, v1
+0001ae: const-wide/16 v1, 0
+0001b2: cmp-long v6, v3, v1
+0001b6: if-gez v6, +003h
+0001ba: move-wide v3, v1
+0001bc: invoke-static v3, v4, Ljava/lang/String;->valueOf(J)Ljava/lang/String;
+0001c2: move-result-object v6
+0001c4: const/16 v1, 12
+0001c8: invoke-static v1, v6, Lcom/vivo/pcsuite/service/PcSuiteInCallService;->y(I Ljava/lang/String;)V
+0001ce: invoke-virtual v7, Landroid/telecom/Call;->getState()I
+0001d4: move-result v6
+0001d6: invoke-static v6, Ljava/lang/String;->valueOf(I)Ljava/lang/String;
+0001dc: move-result-object v6
+0001de: invoke-static v5, v6, Lcom/vivo/pcsuite/service/PcSuiteInCallService;->y(I Ljava/lang/String;)V
+0001e4: sget-object v6, Lcom/vivo/pcsuite/PcSuiteApplication;->I1 Lcom/vivo/pcsuite/PcSuiteApplication;
+0001e8: invoke-virtual v6, Ljava/lang/Object;->getClass()Ljava/lang/Class;
+0001ee: invoke-static Lcom/vivo/pcsuite/PcSuiteApplication;->q()Landroid/os/Handler;
+0001f4: move-result-object v6
+0001f6: new-instance v7, Lcom/vivo/pcsuite/service/a;
+0001fa: invoke-direct v7, Ljava/lang/Object;-><init>()V
+000200: const-wide/16 v1, 150
+000204: invoke-virtual v6, v7, v1, v2, Landroid/os/Handler;->postDelayed(Ljava/lang/Runnable; J)Z
+00020a: return-void 
+00020c: iget-object v7, v6, Lcom/vivo/pcsuite/service/PcSuiteInCallService;->a Ljava/lang/String;
+000210: invoke-static v7, Landroid/text/TextUtils;->isEmpty(Ljava/lang/CharSequence;)Z
+000216: move-result v7
+000218: if-nez v7, +00ch
+00021c: iget-object v6, v6, Lcom/vivo/pcsuite/service/PcSuiteInCallService;->a Ljava/lang/String;
+000220: invoke-static v6, v4, Landroid/text/TextUtils;->equals(Ljava/lang/CharSequence; Ljava/lang/CharSequence;)Z
+000226: move-result v6
+000228: if-eqz v6, +003h
+00022c: goto +2h
+00022e: return-void 
+000230: const-string v6, ""
+000234: invoke-static v2, v6, Lcom/vivo/pcsuite/service/PcSuiteInCallService;->y(I Ljava/lang/String;)V
+00023a: return-void 
+00023c: new-instance v7, Ljava/lang/StringBuilder;
+000240: const-string v1, "onStateChanged error："
+000244: invoke-direct v7, v1, Ljava/lang/StringBuilder;-><init>(Ljava/lang/String;)V
+00024a: invoke-static v6, v7, v0, LP/d;->f(Ljava/lang/Exception; Ljava/lang/StringBuilder; Ljava/lang/String;)V
+000250: return-void 
+
+METHOD f(Lcom/vivo/pcsuite/service/PcSuiteInCallService; I)V
+000000: const/4 v5, 4
+000002: const-string v0, "PcSuiteInCallService"
+000006: const/4 v1, 0
+000008: const/4 v2, 1
+00000a: if-ne v5, v6, +033h
+00000e: invoke-static Lcom/vivo/castsdk/source/mediasource/CameraServiceManager;->getInstance()Lcom/vivo/castsdk/source/mediasource/CameraServiceManager;
+000014: move-result-object v5
+000016: invoke-virtual v5, Lcom/vivo/castsdk/source/mediasource/CameraServiceManager;->isCameraShareUsing()Z
+00001c: move-result v6
+00001e: if-eqz v6, +054h
+000022: invoke-static Lcom/vivo/castsdk/source/mediasource/CameraEncoderManager;->getInstance()Lcom/vivo/castsdk/source/mediasource/CameraEncoderManager;
+000028: move-result-object v6
+00002a: invoke-virtual v6, Lcom/vivo/castsdk/source/mediasource/CameraEncoderManager;->isPaused()Z
+000030: move-result v6
+000032: if-nez v6, +04ah
+000036: invoke-virtual v5, Lcom/vivo/castsdk/source/mediasource/CameraServiceManager;->getCameraShareMode()I
+00003c: move-result v6
+00003e: if-ne v6, v2, +011h
+000042: new-instance v6, Lcom/vivo/vcamera/service/CameraRunState;
+000046: invoke-static Ljava/lang/System;->currentTimeMillis()J
+00004c: move-result-wide v3
+00004e: invoke-direct v6, v1, v3, v4, Lcom/vivo/vcamera/service/CameraRunState;-><init>(I J)V
+000054: invoke-virtual v5, v6, Lcom/vivo/castsdk/source/mediasource/CameraServiceManager;->updateCameraRunState(Lcom/vivo/vcamera/service/CameraRunState;)V
+00005a: goto +3h
+00005c: move-exception v5
+00005e: goto +28h
+000060: sput-boolean v2, Lcom/vivo/pcsuite/service/PcSuiteInCallService;->k Z
+000064: const-string v5, "Camera share auto paused by incoming call"
+000068: invoke-static v0, v5, LD1/a;->h(Ljava/lang/String; Ljava/lang/String;)V
+00006e: return-void 
+000070: const/4 v5, 7
+000072: if-ne v5, v6, +02ah
+000076: sget-boolean v5, Lcom/vivo/pcsuite/service/PcSuiteInCallService;->k Z
+00007a: if-eqz v5, +026h
+00007e: invoke-static Lcom/vivo/castsdk/source/mediasource/CameraServiceManager;->getInstance()Lcom/vivo/castsdk/source/mediasource/CameraServiceManager;
+000084: move-result-object v5
+000086: new-instance v6, Lcom/vivo/vcamera/service/CameraRunState;
+00008a: invoke-static Ljava/lang/System;->currentTimeMillis()J
+000090: move-result-wide v3
+000092: invoke-direct v6, v2, v3, v4, Lcom/vivo/vcamera/service/CameraRunState;-><init>(I J)V
+000098: invoke-virtual v5, v6, Lcom/vivo/castsdk/source/mediasource/CameraServiceManager;->updateCameraRunState(Lcom/vivo/vcamera/service/CameraRunState;)V
+00009e: sput-boolean v1, Lcom/vivo/pcsuite/service/PcSuiteInCallService;->k Z
+0000a2: const-string v5, "Camera share auto resumed after call"
+0000a6: invoke-static v0, v5, LD1/a;->h(Ljava/lang/String; Ljava/lang/String;)V
+0000ac: return-void 
+0000ae: new-instance v6, Ljava/lang/StringBuilder;
+0000b2: const-string v2, "handleCameraShareForCall error: "
+0000b6: invoke-direct v6, v2, Ljava/lang/StringBuilder;-><init>(Ljava/lang/String;)V
+0000bc: invoke-static v5, v6, v0, LP/d;->f(Ljava/lang/Exception; Ljava/lang/StringBuilder; Ljava/lang/String;)V
+0000c2: sput-boolean v1, Lcom/vivo/pcsuite/service/PcSuiteInCallService;->k Z
+0000c6: return-void 
+
+METHOD g(Lcom/vivo/pcsuite/service/PcSuiteInCallService; Landroid/telecom/Call; Landroid/os/Bundle;)V
+000000: invoke-direct v0, v1, v2, Lcom/vivo/pcsuite/service/PcSuiteInCallService;->t(Landroid/telecom/Call; Landroid/os/Bundle;)V
+000006: return-void 
+
+METHOD h(Lcom/vivo/pcsuite/service/PcSuiteInCallService; Landroid/telecom/Call; Landroid/os/Bundle;)V
+000000: invoke-direct v0, v1, v2, Lcom/vivo/pcsuite/service/PcSuiteInCallService;->z(Landroid/telecom/Call; Landroid/os/Bundle;)V
+000006: return-void 
+
+METHOD i(Landroid/telecom/Call;)V
+000000: invoke-static v0, Lcom/vivo/pcsuite/service/PcSuiteInCallService;->A(Landroid/telecom/Call;)V
+000006: return-void 
+
+METHOD j()Z
+000000: sget-boolean v0, Lcom/vivo/pcsuite/service/PcSuiteInCallService;->j Z
+000004: return v0
+
+METHOD k()Landroid/telecom/Call;
+000000: sget-object v0, Lcom/vivo/pcsuite/service/PcSuiteInCallService;->i Landroid/telecom/Call;
+000004: return-object v0
+
+METHOD l(Z)V
+000000: sput-boolean v0, Lcom/vivo/pcsuite/service/PcSuiteInCallService;->j Z
+000004: return-void 
+
+METHOD m()V
+000000: const/4 v0, 7
+000002: const/4 v1, 1
+000004: invoke-static v0, v1, Lcom/vivo/pcsuite/service/PcSuiteInCallService;->x(I I)V
+00000a: return-void 
+
+METHOD n(I Ljava/lang/String;)V
+000000: invoke-static v0, v1, Lcom/vivo/pcsuite/service/PcSuiteInCallService;->y(I Ljava/lang/String;)V
+000006: return-void 
+
+METHOD p()V
+000000: sget-object v0, Lcom/vivo/pcsuite/PcSuiteApplication;->I1 Lcom/vivo/pcsuite/PcSuiteApplication;
+000004: invoke-virtual v0, Landroid/content/Context;->getPackageName()Ljava/lang/String;
+00000a: move-result-object v0
+00000c: const-string v1, "isStealthModeSensorPrivacyEnabled"
+000010: const-string v2, "PcSuiteInCallService"
+000014: const/4 v3, 0
+000016: invoke-static v2, v1, LD1/a;->h(Ljava/lang/String; Ljava/lang/String;)V
+00001c: const-string v4, "com.vivo.services.security.client.VivoPermissionManager"
+000020: invoke-static v4, Ljava/lang/Class;->forName(Ljava/lang/String;)Ljava/lang/Class;
+000026: move-result-object v4
+000028: sget-object v5, Ljava/lang/Integer;->TYPE Ljava/lang/Class;
+00002c: const-class v6, Ljava/lang/String;
+000030: filled-new-array v5, v6, [Ljava/lang/Class;
+000036: move-result-object v5
+000038: invoke-virtual v4, v1, v5, Ljava/lang/Class;->getMethod(Ljava/lang/String; [Ljava/lang/Class;)Ljava/lang/reflect/Method;
+00003e: move-result-object v1
+000040: invoke-virtual v4, Ljava/lang/Class;->newInstance()Ljava/lang/Object;
+000046: move-result-object v4
+000048: const/4 v5, 1
+00004a: invoke-static v5, Ljava/lang/Integer;->valueOf(I)Ljava/lang/Integer;
+000050: move-result-object v5
+000052: filled-new-array v5, v0, [Ljava/lang/Object;
+000058: move-result-object v0
+00005a: invoke-virtual v1, v4, v0, Ljava/lang/reflect/Method;->invoke(Ljava/lang/Object; [Ljava/lang/Object;)Ljava/lang/Object;
+000060: move-result-object v0
+000062: check-cast v0, Ljava/lang/Boolean;
+000066: invoke-virtual v0, Ljava/lang/Boolean;->booleanValue()Z
+00006c: move-result v0
+00006e: goto +7h
+000070: const-string v0, "isStealthModeSensorPrivacyEnabled exception"
+000074: invoke-static v2, v0, LD1/a;->d(Ljava/lang/String; Ljava/lang/String;)V
+00007a: move v0, v3
+00007c: const-string v1, "stealthModeSensorPrivacyEnabled:"
+000080: invoke-static v1, v2, v0, LV5/S;->i(Ljava/lang/String; Ljava/lang/String; Z)V
+000086: sget-object v1, Lcom/vivo/pcsuite/service/PcSuiteInCallService;->i Landroid/telecom/Call;
+00008a: invoke-virtual v1, v3, Landroid/telecom/Call;->answer(I)V
+000090: if-eqz v0, +009h
+000094: const/16 v0, 24
+000098: const-string v1, "1"
+00009c: invoke-static v0, v1, Lcom/vivo/pcsuite/service/PcSuiteInCallService;->y(I Ljava/lang/String;)V
+0000a2: return-void 
+
+METHOD q()V
+000000: sget-object v0, Lcom/vivo/pcsuite/service/PcSuiteInCallService;->i Landroid/telecom/Call;
+000004: if-eqz v0, +00eh
+000008: const-string v0, "PcSuiteInCallService"
+00000c: const-string v1, "disConnectCall"
+000010: invoke-static v0, v1, LD1/a;->h(Ljava/lang/String; Ljava/lang/String;)V
+000016: sget-object v0, Lcom/vivo/pcsuite/service/PcSuiteInCallService;->i Landroid/telecom/Call;
+00001a: invoke-virtual v0, Landroid/telecom/Call;->disconnect()V
+000020: return-void 
+
+METHOD r()Z
+000000: invoke-static Lcom/vivo/pcsuite/service/PcSuiteObserver;->q()I
+000006: move-result v0
+000008: invoke-static Lk2/g;->Q()Z
+00000e: move-result v1
+000010: invoke-static Lcom/vivo/castsdk/common/SupportVersionCheck;->getInstance()Lcom/vivo/castsdk/common/SupportVersionCheck;
+000016: move-result-object v2
+000018: invoke-virtual v2, Lcom/vivo/castsdk/common/SupportVersionCheck;->isSupportHandOff()Z
+00001e: move-result v2
+000020: invoke-static Lcom/vivo/pcsuite/util/StringUtils;->s()Z
+000026: move-result v3
+000028: new-instance v4, Ljava/lang/StringBuilder;
+00002c: const-string v5, "isSupportHandOff:"
+000030: invoke-direct v4, v5, Ljava/lang/StringBuilder;-><init>(Ljava/lang/String;)V
+000036: invoke-virtual v4, v0, Ljava/lang/StringBuilder;->append(I)Ljava/lang/StringBuilder;
+00003c: const-string v5, " newVersion："
+000040: invoke-virtual v4, v5, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+000046: invoke-virtual v4, v2, Ljava/lang/StringBuilder;->append(Z)Ljava/lang/StringBuilder;
+00004c: const-string v5, " connectCloud："
+000050: invoke-virtual v4, v5, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+000056: invoke-virtual v4, v1, Ljava/lang/StringBuilder;->append(Z)Ljava/lang/StringBuilder;
+00005c: const-string v5, " switchState："
+000060: invoke-virtual v4, v5, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+000066: sget-boolean v5, Lcom/vivo/pcsuite/service/PcSuiteInCallService;->l Z
+00006a: invoke-virtual v4, v5, Ljava/lang/StringBuilder;->append(Z)Ljava/lang/StringBuilder;
+000070: const-string v5, " supportCall："
+000074: invoke-virtual v4, v5, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+00007a: invoke-virtual v4, v3, Ljava/lang/StringBuilder;->append(Z)Ljava/lang/StringBuilder;
+000080: invoke-virtual v4, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
+000086: move-result-object v4
+000088: const-string v5, "PcSuiteInCallService"
+00008c: invoke-static v5, v4, LD1/a;->h(Ljava/lang/String; Ljava/lang/String;)V
+000092: const/4 v4, 1
+000094: if-ne v0, v4, +00dh
+000098: if-eqz v2, +00bh
+00009c: if-nez v1, +009h
+0000a0: sget-boolean v0, Lcom/vivo/pcsuite/service/PcSuiteInCallService;->l Z
+0000a4: if-eqz v0, +005h
+0000a8: if-eqz v3, +003h
+0000ac: return v4
+0000ae: const/4 v0, 0
+0000b0: return v0
+
+METHOD s()Z
+000000: sget-boolean v0, Lcom/vivo/pcsuite/service/PcSuiteInCallService;->l Z
+000004: return v0
+
+METHOD t(Landroid/telecom/Call; Landroid/os/Bundle;)V
+000000: const/4 v0, 1
+000002: sput-boolean v0, Lcom/vivo/pcsuite/service/PcSuiteInCallService;->j Z
+000006: invoke-static Lcom/vivo/pcsuite/service/PcSuiteInCallService;->C()V
+00000c: invoke-static Lcom/vivo/castsdk/source/httpServer/HttpServer;->getInstance()Lcom/vivo/castsdk/source/httpServer/HttpServer;
+000012: move-result-object v1
+000014: const/16 v2, 10381
+000018: invoke-virtual v1, v2, Lcom/vivo/castsdk/source/httpServer/HttpServer;->startASync(I)V
+00001e: invoke-static Lcom/vivo/castsdk/source/telecom/TelecomHandOffManager;->getInstance()Lcom/vivo/castsdk/source/telecom/TelecomHandOffManager;
+000024: move-result-object v1
+000026: iget-object v2, v4, Lcom/vivo/pcsuite/service/PcSuiteInCallService;->h Lcom/vivo/castsdk/source/telecom/CallActionListener;
+00002a: invoke-virtual v1, v2, Lcom/vivo/castsdk/source/telecom/TelecomHandOffManager;->setListener(Lcom/vivo/castsdk/source/telecom/CallActionListener;)V
+000030: invoke-static Lcom/vivo/castsdk/source/telecom/TelecomChannelHandler;->getInstance()Lcom/vivo/castsdk/source/telecom/TelecomChannelHandler;
+000036: move-result-object v1
+000038: invoke-virtual v1, Lcom/vivo/castsdk/source/telecom/TelecomChannelHandler;->getmTelecomChannel()Lio/netty/channel/Channel;
+00003e: move-result-object v1
+000040: if-eqz v1, +089h
+000044: sput-object v5, Lcom/vivo/pcsuite/service/PcSuiteInCallService;->i Landroid/telecom/Call;
+000048: invoke-virtual v5, Landroid/telecom/Call;->getDetails()Landroid/telecom/Call$Details;
+00004e: move-result-object v1
+000050: invoke-virtual v1, Landroid/telecom/Call$Details;->getTelecomCallId()Ljava/lang/String;
+000056: move-result-object v1
+000058: iput-object v1, v4, Lcom/vivo/pcsuite/service/PcSuiteInCallService;->a Ljava/lang/String;
+00005c: const/16 v4, 13
+000060: const-string v1, "0"
+000064: invoke-static v4, v1, Lcom/vivo/pcsuite/service/PcSuiteInCallService;->y(I Ljava/lang/String;)V
+00006a: const-string v4, "SOSLocation"
+00006e: invoke-virtual v6, v4, Landroid/os/BaseBundle;->getString(Ljava/lang/String;)Ljava/lang/String;
+000074: move-result-object v4
+000076: const-string v1, "isMutiNumContact"
+00007a: const/4 v2, 0
+00007c: invoke-virtual v6, v1, v2, Landroid/os/BaseBundle;->getBoolean(Ljava/lang/String; Z)Z
+000082: move-result v1
+000084: invoke-static v4, Landroid/text/TextUtils;->isEmpty(Ljava/lang/CharSequence;)Z
+00008a: move-result v2
+00008c: if-nez v2, +007h
+000090: const/16 v2, 22
+000094: invoke-static v2, v4, Lcom/vivo/pcsuite/service/PcSuiteInCallService;->y(I Ljava/lang/String;)V
+00009a: new-instance v2, Ljava/lang/StringBuilder;
+00009e: const-string v3, "isMutiNumContact:"
+0000a2: invoke-direct v2, v3, Ljava/lang/StringBuilder;-><init>(Ljava/lang/String;)V
+0000a8: invoke-virtual v2, v1, Ljava/lang/StringBuilder;->append(Z)Ljava/lang/StringBuilder;
+0000ae: const-string v3, " sosLocation:"
+0000b2: invoke-virtual v2, v3, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+0000b8: invoke-virtual v2, v4, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+0000be: invoke-virtual v2, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
+0000c4: move-result-object v4
+0000c6: const-string v2, "PcSuiteInCallService"
+0000ca: invoke-static v2, v4, LD1/a;->h(Ljava/lang/String; Ljava/lang/String;)V
+0000d0: if-eqz v1, +00bh
+0000d4: const/16 v4, 28
+0000d8: invoke-static v0, Ljava/lang/String;->valueOf(Z)Ljava/lang/String;
+0000de: move-result-object v1
+0000e0: invoke-static v4, v1, Lcom/vivo/pcsuite/service/PcSuiteInCallService;->y(I Ljava/lang/String;)V
+0000e6: const-string v4, "isMuted"
+0000ea: invoke-virtual v6, v4, Landroid/os/BaseBundle;->getBoolean(Ljava/lang/String;)Z
+0000f0: move-result v4
+0000f2: invoke-static v4, Ljava/lang/String;->valueOf(Z)Ljava/lang/String;
+0000f8: move-result-object v4
+0000fa: invoke-static v0, v4, Lcom/vivo/pcsuite/service/PcSuiteInCallService;->y(I Ljava/lang/String;)V
+000100: invoke-virtual v5, Landroid/telecom/Call;->getDetails()Landroid/telecom/Call$Details;
+000106: move-result-object v4
+000108: if-nez v4, +007h
+00010c: invoke-static Ljava/lang/System;->currentTimeMillis()J
+000112: move-result-wide v4
+000114: goto +9h
+000116: invoke-virtual v5, Landroid/telecom/Call;->getDetails()Landroid/telecom/Call$Details;
+00011c: move-result-object v4
+00011e: invoke-virtual v4, Landroid/telecom/Call$Details;->getConnectTimeMillis()J
+000124: move-result-wide v4
+000126: invoke-static Ljava/lang/System;->currentTimeMillis()J
+00012c: move-result-wide v0
+00012e: sub-long/2addr v0, v4
+000130: const-wide/16 v4, 0
+000134: cmp-long v6, v0, v4
+000138: if-gez v6, +003h
+00013c: move-wide v0, v4
+00013e: invoke-static v0, v1, Ljava/lang/String;->valueOf(J)Ljava/lang/String;
+000144: move-result-object v4
+000146: const/16 v5, 12
+00014a: invoke-static v5, v4, Lcom/vivo/pcsuite/service/PcSuiteInCallService;->y(I Ljava/lang/String;)V
+000150: goto +4h
+000152: invoke-direct v4, v5, v6, Lcom/vivo/pcsuite/service/PcSuiteInCallService;->z(Landroid/telecom/Call; Landroid/os/Bundle;)V
+000158: const/4 v4, 7
+00015a: const/4 v5, 2
+00015c: invoke-static v4, v5, Lcom/vivo/pcsuite/service/PcSuiteInCallService;->x(I I)V
+000162: return-void 
+
+METHOD u(Z)V
+000000: sget-object v0, Lcom/vivo/pcsuite/service/PcSuiteInCallService;->i Landroid/telecom/Call;
+000004: if-eqz v0, +02dh
+000008: const-string v0, "PcSuiteInCallService"
+00000c: const-string v1, "notifyCallUIMuted:"
+000010: invoke-static v1, v0, v3, LV5/S;->i(Ljava/lang/String; Ljava/lang/String; Z)V
+000016: sput-boolean v3, Lcom/vivo/pcsuite/service/PcSuiteInCallService;->m Z
+00001a: new-instance v0, Landroid/os/Bundle;
+00001e: invoke-direct v0, Landroid/os/Bundle;-><init>()V
+000024: const-string/jumbo v1, type
+00002a: const/16 v2, 9
+00002e: invoke-virtual v0, v1, v2, Landroid/os/BaseBundle;->putInt(Ljava/lang/String; I)V
+000034: const-string v1, "isSupportHandOff"
+000038: invoke-static Lcom/vivo/pcsuite/service/PcSuiteInCallService;->r()Z
+00003e: move-result v2
+000040: invoke-virtual v0, v1, v2, Landroid/os/BaseBundle;->putBoolean(Ljava/lang/String; Z)V
+000046: const-string v1, "isMuted"
+00004a: invoke-virtual v0, v1, v3, Landroid/os/BaseBundle;->putBoolean(Ljava/lang/String; Z)V
+000050: sget-object v3, Lcom/vivo/pcsuite/service/PcSuiteInCallService;->i Landroid/telecom/Call;
+000054: const-string v1, "pc_send_action_event"
+000058: invoke-virtual v3, v1, v0, Landroid/telecom/Call;->sendCallEvent(Ljava/lang/String; Landroid/os/Bundle;)V
+00005e: return-void 
+
+METHOD v()V
+000000: const-string v0, "PcSuiteInCallService"
+000004: const-string v1, "permissionSetting"
+000008: invoke-static v0, v1, LD1/a;->h(Ljava/lang/String; Ljava/lang/String;)V
+00000e: const/4 v0, 7
+000010: const/4 v1, 3
+000012: invoke-static v0, v1, Lcom/vivo/pcsuite/service/PcSuiteInCallService;->x(I I)V
+000018: return-void 
+
+METHOD w()V
+000000: sget-object v0, Lcom/vivo/pcsuite/service/PcSuiteInCallService;->i Landroid/telecom/Call;
+000004: if-eqz v0, +00fh
+000008: const-string v0, "PcSuiteInCallService"
+00000c: const-string v1, "rejectCall"
+000010: invoke-static v0, v1, LD1/a;->h(Ljava/lang/String; Ljava/lang/String;)V
+000016: sget-object v0, Lcom/vivo/pcsuite/service/PcSuiteInCallService;->i Landroid/telecom/Call;
+00001a: const/4 v1, 1
+00001c: invoke-virtual v0, v1, Landroid/telecom/Call;->reject(I)V
+000022: return-void 
+
+METHOD x(I I)V
+000000: sget-object v0, Lcom/vivo/pcsuite/service/PcSuiteInCallService;->i Landroid/telecom/Call;
+000004: if-eqz v0, +040h
+000008: new-instance v0, Ljava/lang/StringBuilder;
+00000c: const-string v1, "send data to telecom type:"
+000010: invoke-direct v0, v1, Ljava/lang/StringBuilder;-><init>(Ljava/lang/String;)V
+000016: invoke-virtual v0, v2, Ljava/lang/StringBuilder;->append(I)Ljava/lang/StringBuilder;
+00001c: const-string v1, " reason:"
+000020: invoke-virtual v0, v1, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+000026: invoke-virtual v0, v3, Ljava/lang/StringBuilder;->append(I)Ljava/lang/StringBuilder;
+00002c: invoke-virtual v0, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
+000032: move-result-object v0
+000034: const-string v1, "PcSuiteInCallService"
+000038: invoke-static v1, v0, LD1/a;->h(Ljava/lang/String; Ljava/lang/String;)V
+00003e: new-instance v0, Landroid/os/Bundle;
+000042: invoke-direct v0, Landroid/os/Bundle;-><init>()V
+000048: const-string/jumbo v1, type
+00004e: invoke-virtual v0, v1, v2, Landroid/os/BaseBundle;->putInt(Ljava/lang/String; I)V
+000054: const-string v2, "isSupportHandOff"
+000058: invoke-static Lcom/vivo/pcsuite/service/PcSuiteInCallService;->r()Z
+00005e: move-result v1
+000060: invoke-virtual v0, v2, v1, Landroid/os/BaseBundle;->putBoolean(Ljava/lang/String; Z)V
+000066: const/4 v2, -1
+000068: if-eq v2, v3, +007h
+00006c: const-string v2, "reason"
+000070: invoke-virtual v0, v2, v3, Landroid/os/BaseBundle;->putInt(Ljava/lang/String; I)V
+000076: sget-object v2, Lcom/vivo/pcsuite/service/PcSuiteInCallService;->i Landroid/telecom/Call;
+00007a: const-string v3, "pc_send_action_event"
+00007e: invoke-virtual v2, v3, v0, Landroid/telecom/Call;->sendCallEvent(Ljava/lang/String; Landroid/os/Bundle;)V
+000084: return-void 
+
+METHOD y(I Ljava/lang/String;)V
+000000: sget-boolean v0, Lcom/vivo/pcsuite/service/PcSuiteInCallService;->l Z
+000004: if-eqz v0, +050h
+000008: new-instance v0, Lcom/vivo/castsdk/sdk/common/gson/CommandEvent;
+00000c: const/16 v1, 8
+000010: invoke-direct v0, v1, v2, v3, Lcom/vivo/castsdk/sdk/common/gson/CommandEvent;-><init>(I I Ljava/lang/String;)V
+000016: new-instance v2, Ljava/lang/StringBuilder;
+00001a: const-string v3, "TELECOM_HANDOFF_EVENT:"
+00001e: invoke-direct v2, v3, Ljava/lang/StringBuilder;-><init>(Ljava/lang/String;)V
+000024: sget-object v3, Lcom/vivo/pcsuite/PcSuiteApplication;->I1 Lcom/vivo/pcsuite/PcSuiteApplication;
+000028: invoke-virtual v3, Lcom/vivo/pcsuite/PcSuiteApplication;->p()Lcom/google/gson/Gson;
+00002e: move-result-object v3
+000030: invoke-virtual v3, v0, Lcom/google/gson/Gson;->toJson(Ljava/lang/Object;)Ljava/lang/String;
+000036: move-result-object v3
+000038: invoke-virtual v2, v3, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+00003e: invoke-virtual v2, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
+000044: move-result-object v2
+000046: invoke-static Lcom/vivo/castsdk/source/telecom/TelecomChannelHandler;->getInstance()Lcom/vivo/castsdk/source/telecom/TelecomChannelHandler;
+00004c: move-result-object v3
+00004e: invoke-virtual v3, Lcom/vivo/castsdk/source/telecom/TelecomChannelHandler;->getmTelecomChannel()Lio/netty/channel/Channel;
+000054: move-result-object v3
+000056: if-eqz v3, +00ah
+00005a: invoke-static Lcom/vivo/castsdk/source/telecom/TelecomChannelHandler;->getInstance()Lcom/vivo/castsdk/source/telecom/TelecomChannelHandler;
+000060: move-result-object v3
+000062: invoke-virtual v3, v2, Lcom/vivo/castsdk/source/telecom/TelecomChannelHandler;->sendTelecomMessageToSink(Ljava/lang/String;)V
+000068: return-void 
+00006a: const-string v3, "PcSuiteInCallService"
+00006e: const-string/jumbo v0, telecom channel is null send message by ws channel：
+000074: invoke-static v3, v0, Lcom/vivo/connect/logger/EasyLog;->i(Ljava/lang/String; Ljava/lang/String;)V
+00007a: invoke-static Lr2/g;->f()Lr2/g;
+000080: move-result-object v3
+000082: new-instance v0, Ljava/lang/StringBuilder;
+000086: const-string v1, "forward_telecom_message:"
+00008a: invoke-direct v0, v1, Ljava/lang/StringBuilder;-><init>(Ljava/lang/String;)V
+000090: invoke-virtual v0, v2, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+000096: invoke-virtual v0, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
+00009c: move-result-object v2
+00009e: invoke-virtual v3, v2, Lr2/g;->i(Ljava/lang/String;)V
+0000a4: return-void 
+
+METHOD z(Landroid/telecom/Call; Landroid/os/Bundle;)V
+000000: const-string v0, "isEnhanceSos"
+000004: const-string v1, "send call info to pc sos:"
+000008: sget-boolean v2, Lcom/vivo/pcsuite/service/PcSuiteInCallService;->l Z
+00000c: if-eqz v2, +175h
+000010: if-eqz v13, +173h
+000014: const-string v2, "isVideoCall"
+000018: const/4 v3, 0
+00001a: invoke-virtual v13, v2, v3, Landroid/os/BaseBundle;->getBoolean(Ljava/lang/String; Z)Z
+000020: move-result v4
+000022: const-string v5, "isVideoCall:"
+000026: const-string v6, "PcSuiteInCallService"
+00002a: invoke-static v5, v6, v4, LV5/S;->i(Ljava/lang/String; Ljava/lang/String; Z)V
+000030: if-nez v4, +163h
+000034: sput-object v12, Lcom/vivo/pcsuite/service/PcSuiteInCallService;->i Landroid/telecom/Call;
+000038: invoke-virtual v12, Landroid/telecom/Call;->getDetails()Landroid/telecom/Call$Details;
+00003e: move-result-object v4
+000040: invoke-virtual v4, Landroid/telecom/Call$Details;->getTelecomCallId()Ljava/lang/String;
+000046: move-result-object v4
+000048: iput-object v4, v11, Lcom/vivo/pcsuite/service/PcSuiteInCallService;->a Ljava/lang/String;
+00004c: new-instance v11, Ljava/util/HashMap;
+000050: invoke-direct v11, Ljava/util/HashMap;-><init>()V
+000056: const-string v4, "name"
+00005a: invoke-virtual v13, v4, Landroid/os/BaseBundle;->getString(Ljava/lang/String;)Ljava/lang/String;
+000060: move-result-object v5
+000062: invoke-virtual v11, v4, v5, Ljava/util/HashMap;->put(Ljava/lang/Object; Ljava/lang/Object;)Ljava/lang/Object;
+000068: const-string v4, "phoneNumber"
+00006c: invoke-virtual v13, v4, Landroid/os/BaseBundle;->getString(Ljava/lang/String;)Ljava/lang/String;
+000072: move-result-object v4
+000074: sget v5, Lcom/vivo/pcsuite/util/StringUtils;->b I
+000078: invoke-static v4, Landroid/text/TextUtils;->isEmpty(Ljava/lang/CharSequence;)Z
+00007e: move-result v5
+000080: const-string v7, ""
+000084: if-eqz v5, +004h
+000088: move-object v4, v7
+00008a: goto +2dh
+00008c: const-string v5, " "
+000090: invoke-virtual v4, v5, v7, Ljava/lang/String;->replaceAll(Ljava/lang/String; Ljava/lang/String;)Ljava/lang/String;
+000096: move-result-object v7
+000098: invoke-static v7, Landroid/text/TextUtils;->isEmpty(Ljava/lang/CharSequence;)Z
+00009e: move-result v8
+0000a0: if-eqz v8, +003h
+0000a4: goto +20h
+0000a6: const-string v8, "-"
+0000aa: invoke-virtual v7, v8, Ljava/lang/String;->contains(Ljava/lang/CharSequence;)Z
+0000b0: move-result v9
+0000b2: const-string v10, "CN"
+0000b6: invoke-static v7, v10, Landroid/telephony/PhoneNumberUtils;->formatNumber(Ljava/lang/String; Ljava/lang/String;)Ljava/lang/String;
+0000bc: move-result-object v7
+0000be: invoke-static v7, Landroid/text/TextUtils;->isEmpty(Ljava/lang/CharSequence;)Z
+0000c4: move-result v10
+0000c6: if-eqz v10, +003h
+0000ca: goto +dh
+0000cc: if-nez v9, -022h
+0000d0: invoke-virtual v7, v8, Ljava/lang/String;->contains(Ljava/lang/CharSequence;)Z
+0000d6: move-result v4
+0000d8: if-eqz v4, -028h
+0000dc: invoke-virtual v7, v8, v5, Ljava/lang/String;->replace(Ljava/lang/CharSequence; Ljava/lang/CharSequence;)Ljava/lang/String;
+0000e2: move-result-object v4
+0000e4: const-string v5, "number"
+0000e8: invoke-virtual v11, v5, v4, Ljava/util/HashMap;->put(Ljava/lang/Object; Ljava/lang/Object;)Ljava/lang/Object;
+0000ee: const-string v4, "sim"
+0000f2: invoke-virtual v13, v4, Landroid/os/BaseBundle;->getInt(Ljava/lang/String;)I
+0000f8: move-result v5
+0000fa: invoke-static v5, Ljava/lang/Integer;->valueOf(I)Ljava/lang/Integer;
+000100: move-result-object v5
+000102: invoke-virtual v11, v4, v5, Ljava/util/HashMap;->put(Ljava/lang/Object; Ljava/lang/Object;)Ljava/lang/Object;
+000108: const-string v4, "numberMarkType"
+00010c: invoke-virtual v13, v4, Landroid/os/BaseBundle;->getString(Ljava/lang/String;)Ljava/lang/String;
+000112: move-result-object v5
+000114: invoke-virtual v11, v4, v5, Ljava/util/HashMap;->put(Ljava/lang/Object; Ljava/lang/Object;)Ljava/lang/Object;
+00011a: const-string v4, "location"
+00011e: invoke-virtual v13, v4, Landroid/os/BaseBundle;->getString(Ljava/lang/String;)Ljava/lang/String;
+000124: move-result-object v5
+000126: invoke-virtual v11, v4, v5, Ljava/util/HashMap;->put(Ljava/lang/Object; Ljava/lang/Object;)Ljava/lang/Object;
+00012c: const-string v4, "op"
+000130: invoke-virtual v13, v4, Landroid/os/BaseBundle;->getInt(Ljava/lang/String;)I
+000136: move-result v5
+000138: invoke-static v5, Ljava/lang/Integer;->valueOf(I)Ljava/lang/Integer;
+00013e: move-result-object v5
+000140: invoke-virtual v11, v4, v5, Ljava/util/HashMap;->put(Ljava/lang/Object; Ljava/lang/Object;)Ljava/lang/Object;
+000146: const-string v4, "remoteOp"
+00014a: invoke-virtual v13, v4, Landroid/os/BaseBundle;->getInt(Ljava/lang/String;)I
+000150: move-result v5
+000152: invoke-static v5, Ljava/lang/Integer;->valueOf(I)Ljava/lang/Integer;
+000158: move-result-object v5
+00015a: invoke-virtual v11, v4, v5, Ljava/util/HashMap;->put(Ljava/lang/Object; Ljava/lang/Object;)Ljava/lang/Object;
+000160: invoke-virtual v12, Landroid/telecom/Call;->getDetails()Landroid/telecom/Call$Details;
+000166: move-result-object v4
+000168: invoke-virtual v4, Landroid/telecom/Call$Details;->getExtras()Landroid/os/Bundle;
+00016e: move-result-object v4
+000170: const-string v5, "sos_type_key"
+000174: const/4 v7, -1
+000176: invoke-virtual v4, v5, v7, Landroid/os/BaseBundle;->getInt(Ljava/lang/String; I)I
+00017c: move-result v4
+00017e: new-instance v5, Ljava/lang/StringBuilder;
+000182: invoke-direct v5, v1, Ljava/lang/StringBuilder;-><init>(Ljava/lang/String;)V
+000188: invoke-virtual v5, v4, Ljava/lang/StringBuilder;->append(I)Ljava/lang/StringBuilder;
+00018e: invoke-virtual v5, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
+000194: move-result-object v1
+000196: invoke-static v6, v1, LD1/a;->h(Ljava/lang/String; Ljava/lang/String;)V
+00019c: const/4 v1, 1
+00019e: if-ne v4, v1, +003h
+0001a2: goto +2h
+0001a4: move v1, v3
+0001a6: invoke-static v1, Ljava/lang/Boolean;->valueOf(Z)Ljava/lang/Boolean;
+0001ac: move-result-object v1
+0001ae: invoke-virtual v11, v0, v1, Ljava/util/HashMap;->put(Ljava/lang/Object; Ljava/lang/Object;)Ljava/lang/Object;
+0001b4: goto +ch
+0001b6: invoke-virtual v13, v0, v3, Landroid/os/BaseBundle;->getBoolean(Ljava/lang/String; Z)Z
+0001bc: move-result v1
+0001be: invoke-static v1, Ljava/lang/Boolean;->valueOf(Z)Ljava/lang/Boolean;
+0001c4: move-result-object v1
+0001c6: invoke-virtual v11, v0, v1, Ljava/util/HashMap;->put(Ljava/lang/Object; Ljava/lang/Object;)Ljava/lang/Object;
+0001cc: invoke-virtual v12, Landroid/telecom/Call;->getDetails()Landroid/telecom/Call$Details;
+0001d2: move-result-object v0
+0001d4: if-nez v0, +007h
+0001d8: invoke-static Ljava/lang/System;->currentTimeMillis()J
+0001de: move-result-wide v0
+0001e0: goto +9h
+0001e2: invoke-virtual v12, Landroid/telecom/Call;->getDetails()Landroid/telecom/Call$Details;
+0001e8: move-result-object v0
+0001ea: invoke-virtual v0, Landroid/telecom/Call$Details;->getConnectTimeMillis()J
+0001f0: move-result-wide v0
+0001f2: invoke-static Ljava/lang/System;->currentTimeMillis()J
+0001f8: move-result-wide v4
+0001fa: sub-long/2addr v4, v0
+0001fc: const-wide/16 v0, 0
+000200: cmp-long v7, v4, v0
+000204: if-gez v7, +003h
+000208: move-wide v4, v0
+00020a: invoke-static v4, v5, Ljava/lang/Long;->valueOf(J)Ljava/lang/Long;
+000210: move-result-object v0
+000212: const-string v1, "keepActiveTime"
+000216: invoke-virtual v11, v1, v0, Ljava/util/HashMap;->put(Ljava/lang/Object; Ljava/lang/Object;)Ljava/lang/Object;
+00021c: const-string v0, "SOSLocation"
+000220: invoke-virtual v13, v0, Landroid/os/BaseBundle;->getString(Ljava/lang/String;)Ljava/lang/String;
+000226: move-result-object v1
+000228: invoke-virtual v11, v0, v1, Ljava/util/HashMap;->put(Ljava/lang/Object; Ljava/lang/Object;)Ljava/lang/Object;
+00022e: const-string v0, "isMutiNumContact"
+000232: invoke-virtual v13, v0, v3, Landroid/os/BaseBundle;->getBoolean(Ljava/lang/String; Z)Z
+000238: move-result v1
+00023a: invoke-static v1, Ljava/lang/Boolean;->valueOf(Z)Ljava/lang/Boolean;
+000240: move-result-object v1
+000242: invoke-virtual v11, v0, v1, Ljava/util/HashMap;->put(Ljava/lang/Object; Ljava/lang/Object;)Ljava/lang/Object;
+000248: const-string v0, "isMuted"
+00024c: invoke-virtual v13, v0, Landroid/os/BaseBundle;->getBoolean(Ljava/lang/String;)Z
+000252: move-result v1
+000254: sput-boolean v1, Lcom/vivo/pcsuite/service/PcSuiteInCallService;->m Z
+000258: invoke-static v1, Ljava/lang/Boolean;->valueOf(Z)Ljava/lang/Boolean;
+00025e: move-result-object v1
+000260: invoke-virtual v11, v0, v1, Ljava/util/HashMap;->put(Ljava/lang/Object; Ljava/lang/Object;)Ljava/lang/Object;
+000266: invoke-virtual v13, v2, v3, Landroid/os/BaseBundle;->getBoolean(Ljava/lang/String; Z)Z
+00026c: move-result v13
+00026e: invoke-static v13, Ljava/lang/Boolean;->valueOf(Z)Ljava/lang/Boolean;
+000274: move-result-object v13
+000276: invoke-virtual v11, v2, v13, Ljava/util/HashMap;->put(Ljava/lang/Object; Ljava/lang/Object;)Ljava/lang/Object;
+00027c: invoke-virtual v12, Landroid/telecom/Call;->getState()I
+000282: move-result v12
+000284: invoke-static v12, Ljava/lang/Integer;->valueOf(I)Ljava/lang/Integer;
+00028a: move-result-object v12
+00028c: const-string v13, "callState"
+000290: invoke-virtual v11, v13, v12, Ljava/util/HashMap;->put(Ljava/lang/Object; Ljava/lang/Object;)Ljava/lang/Object;
+000296: sget-object v12, Lcom/vivo/pcsuite/PcSuiteApplication;->I1 Lcom/vivo/pcsuite/PcSuiteApplication;
+00029a: invoke-virtual v12, Lcom/vivo/pcsuite/PcSuiteApplication;->p()Lcom/google/gson/Gson;
+0002a0: move-result-object v12
+0002a2: invoke-virtual v12, v11, Lcom/google/gson/Gson;->toJson(Ljava/lang/Object;)Ljava/lang/String;
+0002a8: move-result-object v11
+0002aa: new-instance v12, Ljava/lang/StringBuilder;
+0002ae: const-string v13, "send call info to pc:"
+0002b2: invoke-direct v12, v13, Ljava/lang/StringBuilder;-><init>(Ljava/lang/String;)V
+0002b8: invoke-virtual v12, v11, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+0002be: invoke-virtual v12, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
+0002c4: move-result-object v12
+0002c6: invoke-static v6, v12, LD1/a;->h(Ljava/lang/String; Ljava/lang/String;)V
+0002cc: invoke-static Lr2/g;->f()Lr2/g;
+0002d2: move-result-object v12
+0002d4: new-instance v13, Ljava/lang/StringBuilder;
+0002d8: const-string v0, "TELECOM_INFO:"
+0002dc: invoke-direct v13, v0, Ljava/lang/StringBuilder;-><init>(Ljava/lang/String;)V
+0002e2: invoke-virtual v13, v11, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+0002e8: invoke-virtual v13, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
+0002ee: move-result-object v11
+0002f0: invoke-virtual v12, v11, Lr2/g;->i(Ljava/lang/String;)V
+0002f6: return-void 
+
+METHOD o()V
+000000: sget-object v0, Lcom/vivo/pcsuite/service/PcSuiteInCallService;->i Landroid/telecom/Call;
+000004: if-eqz v0, +042h
+000008: const-string v0, "answerCall"
+00000c: const-string v1, "PcSuiteInCallService"
+000010: invoke-static v1, v0, LD1/a;->h(Ljava/lang/String; Ljava/lang/String;)V
+000016: sget-object v0, Lcom/vivo/pcsuite/PcSuiteApplication;->I1 Lcom/vivo/pcsuite/PcSuiteApplication;
+00001a: const-string v2, "android.permission.RECORD_AUDIO"
+00001e: filled-new-array v2, [Ljava/lang/String;
+000024: move-result-object v3
+000026: invoke-static v0, v3, Lcom/vivo/pcsuite/permission/f;->f(Landroid/content/Context; [Ljava/lang/String;)Z
+00002c: move-result v0
+00002e: const-string v3, "hasPermission:"
+000032: invoke-static v3, v1, v0, LV5/S;->i(Ljava/lang/String; Ljava/lang/String; Z)V
+000038: if-eqz v0, +006h
+00003c: invoke-static Lcom/vivo/pcsuite/service/PcSuiteInCallService;->p()V
+000042: return-void 
+000044: const/16 v0, 24
+000048: const-string v1, "2"
+00004c: invoke-static v0, v1, Lcom/vivo/pcsuite/service/PcSuiteInCallService;->y(I Ljava/lang/String;)V
+000052: invoke-static Lcom/vivo/pcsuite/service/PcSuiteInCallService;->v()V
+000058: sget-object v0, Lcom/vivo/pcsuite/PcSuiteApplication;->I1 Lcom/vivo/pcsuite/PcSuiteApplication;
+00005c: invoke-static v0, Lcom/vivo/pcsuite/permission/Permission;->b(Landroid/content/Context;)Lcom/vivo/pcsuite/permission/Permission;
+000062: move-result-object v0
+000064: filled-new-array v2, [Ljava/lang/String;
+00006a: move-result-object v1
+00006c: invoke-virtual v0, v1, Lcom/vivo/pcsuite/permission/Permission;->d([Ljava/lang/String;)V
+000072: new-instance v1, Lcom/vivo/pcsuite/service/PcSuiteInCallService$f;
+000076: invoke-direct v1, v4, Lcom/vivo/pcsuite/service/PcSuiteInCallService$f;-><init>(Lcom/vivo/pcsuite/service/PcSuiteInCallService;)V
+00007c: invoke-virtual v0, v1, Lcom/vivo/pcsuite/permission/Permission;->c(Lcom/vivo/pcsuite/permission/Permission$PermissionResultCallback;)V
+000082: invoke-virtual v0, Lcom/vivo/pcsuite/permission/Permission;->e()V
+000088: return-void 
+
+METHOD onBind(Landroid/content/Intent;)Landroid/os/IBinder;
+000000: const-string v0, "PcSuiteInCallService"
+000004: const-string v1, "onBind"
+000008: invoke-static v0, v1, LD1/a;->h(Ljava/lang/String; Ljava/lang/String;)V
+00000e: invoke-super v2, v3, Landroid/telecom/InCallService;->onBind(Landroid/content/Intent;)Landroid/os/IBinder;
+000014: move-result-object v2
+000016: return-object v2
+
+METHOD onCallAdded(Landroid/telecom/Call;)V
+000000: const-string v0, "PcSuiteInCallService"
+000004: const-string v1, "callMap add last:"
+000008: const-string v2, "onCallAdded add two call :"
+00000c: const-string v3, "onCallAdded add one call :"
+000010: const-string v4, "onCallAdded two call ring:"
+000014: const-string v5, "callMap size:"
+000018: const-string v6, "onCallAdded call callDirection:"
+00001c: invoke-super v13, v14, Landroid/telecom/InCallService;->onCallAdded(Landroid/telecom/Call;)V
+000022: iget-object v7, v13, Lcom/vivo/pcsuite/service/PcSuiteInCallService;->g Landroid/telecom/Call$Callback;
+000026: invoke-virtual v14, v7, Landroid/telecom/Call;->registerCallback(Landroid/telecom/Call$Callback;)V
+00002c: invoke-static Lcom/vivo/pcsuite/service/PcSuiteInCallService;->r()Z
+000032: move-result v7
+000034: if-nez v7, +003h
+000038: return-void 
+00003a: invoke-virtual v14, Landroid/telecom/Call;->getDetails()Landroid/telecom/Call$Details;
+000040: move-result-object v7
+000042: invoke-virtual v7, Landroid/telecom/Call$Details;->getTelecomCallId()Ljava/lang/String;
+000048: move-result-object v8
+00004a: invoke-virtual v7, Landroid/telecom/Call$Details;->getCallDirection()I
+000050: move-result v7
+000052: invoke-virtual v14, Landroid/telecom/Call;->getState()I
+000058: move-result v9
+00005a: new-instance v10, Ljava/lang/StringBuilder;
+00005e: invoke-direct v10, v6, Ljava/lang/StringBuilder;-><init>(Ljava/lang/String;)V
+000064: invoke-virtual v10, v7, Ljava/lang/StringBuilder;->append(I)Ljava/lang/StringBuilder;
+00006a: const-string v6, " add id:"
+00006e: invoke-virtual v10, v6, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+000074: invoke-virtual v10, v8, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+00007a: const-string v6, " oldCallId:"
+00007e: invoke-virtual v10, v6, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+000084: iget-object v6, v13, Lcom/vivo/pcsuite/service/PcSuiteInCallService;->a Ljava/lang/String;
+000088: invoke-virtual v10, v6, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+00008e: const-string v6, " state:"
+000092: invoke-virtual v10, v6, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+000098: invoke-virtual v10, v9, Ljava/lang/StringBuilder;->append(I)Ljava/lang/StringBuilder;
+00009e: invoke-virtual v10, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
+0000a4: move-result-object v6
+0000a6: invoke-static v0, v6, LD1/a;->h(Ljava/lang/String; Ljava/lang/String;)V
+0000ac: const/4 v6, 2
+0000ae: const-string v7, ""
+0000b2: iget-object v10, v13, Lcom/vivo/pcsuite/service/PcSuiteInCallService;->f Landroid/telecom/Call$Callback;
+0000b6: const/4 v11, 1
+0000b8: iget-object v12, v13, Lcom/vivo/pcsuite/service/PcSuiteInCallService;->b Ljava/util/HashMap;
+0000bc: if-ne v6, v9, +045h
+0000c0: new-instance v2, Ljava/lang/StringBuilder;
+0000c4: invoke-direct v2, v5, Ljava/lang/StringBuilder;-><init>(Ljava/lang/String;)V
+0000ca: invoke-virtual v12, Ljava/util/HashMap;->size()I
+0000d0: move-result v3
+0000d2: invoke-virtual v2, v3, Ljava/lang/StringBuilder;->append(I)Ljava/lang/StringBuilder;
+0000d8: invoke-virtual v2, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
+0000de: move-result-object v2
+0000e0: invoke-static v0, v2, LD1/a;->h(Ljava/lang/String; Ljava/lang/String;)V
+0000e6: invoke-virtual v12, Ljava/util/HashMap;->isEmpty()Z
+0000ec: move-result v2
+0000ee: if-eqz v2, +00bh
+0000f2: invoke-static v14, Lcom/vivo/pcsuite/service/PcSuiteInCallService;->H(Landroid/telecom/Call;)V
+0000f8: invoke-direct v13, v14, Lcom/vivo/pcsuite/service/PcSuiteInCallService;->I(Landroid/telecom/Call;)V
+0000fe: goto +5bh
+000100: move-exception v13
+000102: goto +70h
+000104: new-instance v2, Ljava/lang/StringBuilder;
+000108: invoke-direct v2, v4, Ljava/lang/StringBuilder;-><init>(Ljava/lang/String;)V
+00010e: invoke-virtual v2, v9, Ljava/lang/StringBuilder;->append(I)Ljava/lang/StringBuilder;
+000114: invoke-virtual v2, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
+00011a: move-result-object v2
+00011c: invoke-static v0, v2, LD1/a;->h(Ljava/lang/String; Ljava/lang/String;)V
+000122: iget-object v2, v13, Lcom/vivo/pcsuite/service/PcSuiteInCallService;->a Ljava/lang/String;
+000126: invoke-static v2, Landroid/text/TextUtils;->isEmpty(Ljava/lang/CharSequence;)Z
+00012c: move-result v2
+00012e: if-nez v2, +043h
+000132: iput-boolean v11, v13, Lcom/vivo/pcsuite/service/PcSuiteInCallService;->d Z
+000136: invoke-virtual v14, v10, Landroid/telecom/Call;->registerCallback(Landroid/telecom/Call$Callback;)V
+00013c: const/4 v13, 5
+00013e: invoke-static v13, v7, Lcom/vivo/pcsuite/service/PcSuiteInCallService;->y(I Ljava/lang/String;)V
+000144: goto +38h
+000146: if-eq v11, v9, +006h
+00014a: const/16 v4, 9
+00014e: if-ne v4, v9, +033h
+000152: invoke-virtual v12, Ljava/util/HashMap;->isEmpty()Z
+000158: move-result v4
+00015a: if-eqz v4, +012h
+00015e: new-instance v13, Ljava/lang/StringBuilder;
+000162: invoke-direct v13, v3, Ljava/lang/StringBuilder;-><init>(Ljava/lang/String;)V
+000168: invoke-virtual v13, v9, Ljava/lang/StringBuilder;->append(I)Ljava/lang/StringBuilder;
+00016e: invoke-virtual v13, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
+000174: move-result-object v13
+000176: invoke-static v0, v13, LD1/a;->h(Ljava/lang/String; Ljava/lang/String;)V
+00017c: goto +1ch
+00017e: new-instance v3, Ljava/lang/StringBuilder;
+000182: invoke-direct v3, v2, Ljava/lang/StringBuilder;-><init>(Ljava/lang/String;)V
+000188: invoke-virtual v3, v9, Ljava/lang/StringBuilder;->append(I)Ljava/lang/StringBuilder;
+00018e: invoke-virtual v3, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
+000194: move-result-object v2
+000196: invoke-static v0, v2, LD1/a;->h(Ljava/lang/String; Ljava/lang/String;)V
+00019c: iput-boolean v11, v13, Lcom/vivo/pcsuite/service/PcSuiteInCallService;->d Z
+0001a0: invoke-virtual v14, v10, Landroid/telecom/Call;->registerCallback(Landroid/telecom/Call$Callback;)V
+0001a6: const/4 v13, 7
+0001a8: invoke-static v13, Lcom/vivo/pcsuite/service/PcSuiteInCallService;->G(I)V
+0001ae: invoke-static v13, v7, Lcom/vivo/pcsuite/service/PcSuiteInCallService;->y(I Ljava/lang/String;)V
+0001b4: invoke-virtual v12, v8, v14, Ljava/util/HashMap;->put(Ljava/lang/Object; Ljava/lang/Object;)Ljava/lang/Object;
+0001ba: new-instance v13, Ljava/lang/StringBuilder;
+0001be: invoke-direct v13, v1, Ljava/lang/StringBuilder;-><init>(Ljava/lang/String;)V
+0001c4: invoke-virtual v12, Ljava/util/HashMap;->size()I
+0001ca: move-result v14
+0001cc: invoke-virtual v13, v14, Ljava/lang/StringBuilder;->append(I)Ljava/lang/StringBuilder;
+0001d2: invoke-virtual v13, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
+0001d8: move-result-object v13
+0001da: invoke-static v0, v13, LD1/a;->h(Ljava/lang/String; Ljava/lang/String;)V
+0001e0: return-void 
+0001e2: new-instance v14, Ljava/lang/StringBuilder;
+0001e6: const-string v1, "onCallAdded error :"
+0001ea: invoke-direct v14, v1, Ljava/lang/StringBuilder;-><init>(Ljava/lang/String;)V
+0001f0: invoke-static v13, v14, v0, LP/d;->f(Ljava/lang/Exception; Ljava/lang/StringBuilder; Ljava/lang/String;)V
+0001f6: return-void 
+
+METHOD onCallRemoved(Landroid/telecom/Call;)V
+000000: invoke-super v7, v8, Landroid/telecom/InCallService;->onCallRemoved(Landroid/telecom/Call;)V
+000006: iget-object v0, v7, Lcom/vivo/pcsuite/service/PcSuiteInCallService;->g Landroid/telecom/Call$Callback;
+00000a: invoke-virtual v8, v0, Landroid/telecom/Call;->unregisterCallback(Landroid/telecom/Call$Callback;)V
+000010: invoke-virtual v8, Landroid/telecom/Call;->getDetails()Landroid/telecom/Call$Details;
+000016: move-result-object v0
+000018: invoke-virtual v0, Landroid/telecom/Call$Details;->getTelecomCallId()Ljava/lang/String;
+00001e: move-result-object v1
+000020: invoke-virtual v0, Landroid/telecom/Call$Details;->getCallDirection()I
+000026: move-result v0
+000028: new-instance v2, Ljava/lang/StringBuilder;
+00002c: const-string v3, "onCallRemoved call callDirection:"
+000030: invoke-direct v2, v3, Ljava/lang/StringBuilder;-><init>(Ljava/lang/String;)V
+000036: invoke-virtual v2, v0, Ljava/lang/StringBuilder;->append(I)Ljava/lang/StringBuilder;
+00003c: const-string v3, " remove id:"
+000040: invoke-virtual v2, v3, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+000046: invoke-virtual v2, v1, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+00004c: const-string v3, " oldCallId:"
+000050: invoke-virtual v2, v3, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+000056: iget-object v3, v7, Lcom/vivo/pcsuite/service/PcSuiteInCallService;->a Ljava/lang/String;
+00005a: const-string v4, "PcSuiteInCallService"
+00005e: invoke-static v2, v3, v4, Landroidx/appcompat/widget/a;->g(Ljava/lang/StringBuilder; Ljava/lang/String; Ljava/lang/String;)V
+000064: invoke-static Lcom/vivo/pcsuite/service/PcSuiteInCallService;->r()Z
+00006a: move-result v2
+00006c: if-nez v2, +003h
+000070: return-void 
+000072: const/4 v2, 0
+000074: if-nez v0, +0e8h
+000078: iget-object v0, v7, Lcom/vivo/pcsuite/service/PcSuiteInCallService;->a Ljava/lang/String;
+00007c: invoke-static v0, v1, Landroid/text/TextUtils;->equals(Ljava/lang/CharSequence; Ljava/lang/CharSequence;)Z
+000082: move-result v0
+000084: if-eqz v0, +0e0h
+000088: invoke-static v2, Lcom/vivo/pcsuite/service/PcSuiteInCallService;->D(Z)V
+00008e: iget-object v0, v7, Lcom/vivo/pcsuite/service/PcSuiteInCallService;->e Landroid/telecom/Call$Callback;
+000092: invoke-virtual v8, v0, Landroid/telecom/Call;->unregisterCallback(Landroid/telecom/Call$Callback;)V
+000098: invoke-static Lcom/vivo/castsdk/source/telecom/TelecomHandOffManager;->getInstance()Lcom/vivo/castsdk/source/telecom/TelecomHandOffManager;
+00009e: move-result-object v8
+0000a0: const/4 v0, 0
+0000a2: invoke-virtual v8, v0, Lcom/vivo/castsdk/source/telecom/TelecomHandOffManager;->setListener(Lcom/vivo/castsdk/source/telecom/CallActionListener;)V
+0000a8: invoke-static Lcom/vivo/castsdk/source/MirrorService;->getInstance()Lcom/vivo/castsdk/source/MirrorService;
+0000ae: move-result-object v8
+0000b0: new-instance v3, Ljava/lang/StringBuilder;
+0000b4: const-string v5, "onCallRemoved  instance："
+0000b8: invoke-direct v3, v5, Ljava/lang/StringBuilder;-><init>(Ljava/lang/String;)V
+0000be: const/4 v5, 1
+0000c0: if-nez v8, +004h
+0000c4: move v6, v5
+0000c6: goto +2h
+0000c8: move v6, v2
+0000ca: invoke-static v3, v6, v4, LZ1/b;->e(Ljava/lang/StringBuilder; Z Ljava/lang/String;)V
+0000d0: if-nez v8, +004h
+0000d4: move-object v8, v0
+0000d6: goto +5h
+0000d8: invoke-virtual v8, Lcom/vivo/castsdk/source/MirrorService;->getmMediaProjection()Landroid/media/projection/MediaProjection;
+0000de: move-result-object v8
+0000e0: new-instance v3, Ljava/lang/StringBuilder;
+0000e4: const-string v6, "onCallRemoved  mediaProjection："
+0000e8: invoke-direct v3, v6, Ljava/lang/StringBuilder;-><init>(Ljava/lang/String;)V
+0000ee: if-nez v8, +003h
+0000f2: goto +2h
+0000f4: move v5, v2
+0000f6: invoke-static v3, v5, v4, LZ1/b;->e(Ljava/lang/StringBuilder; Z Ljava/lang/String;)V
+0000fc: if-nez v8, +027h
+000100: invoke-static Lcom/vivo/castsdk/source/mediasource/CameraServiceManager;->getInstance()Lcom/vivo/castsdk/source/mediasource/CameraServiceManager;
+000106: move-result-object v8
+000108: invoke-virtual v8, Lcom/vivo/castsdk/source/mediasource/CameraServiceManager;->isCameraShareUsing()Z
+00010e: move-result v8
+000110: if-nez v8, +01dh
+000114: sget-object v8, Lcom/vivo/pcsuite/PcSuiteApplication;->I1 Lcom/vivo/pcsuite/PcSuiteApplication;
+000118: invoke-virtual v8, Ljava/lang/Object;->getClass()Ljava/lang/Class;
+00011e: invoke-static Lcom/vivo/pcsuite/PcSuiteApplication;->q()Landroid/os/Handler;
+000124: move-result-object v8
+000126: new-instance v3, Lcom/vivo/pcsuite/service/PcSuiteInCallService$e;
+00012a: invoke-direct v3, Ljava/lang/Object;-><init>()V
+000130: const-wide/16 v5, 500
+000134: invoke-virtual v8, v3, v5, v6, Landroid/os/Handler;->postDelayed(Ljava/lang/Runnable; J)Z
+00013a: invoke-static Lcom/vivo/castsdk/source/telecom/MicAudioThread;->getInstance()Lcom/vivo/castsdk/source/telecom/MicAudioThread;
+000140: move-result-object v8
+000142: invoke-virtual v8, Lcom/vivo/castsdk/source/telecom/MicAudioThread;->stopRecord()V
+000148: goto +3dh
+00014a: invoke-static Lcom/vivo/castsdk/source/telecom/MicAudioThread;->getInstance()Lcom/vivo/castsdk/source/telecom/MicAudioThread;
+000150: move-result-object v8
+000152: invoke-virtual v8, Lcom/vivo/castsdk/source/telecom/MicAudioThread;->stopRecord()V
+000158: invoke-static Lcom/vivo/castsdk/source/encode/AudioRecordManager;->getInstance()Lcom/vivo/castsdk/source/encode/AudioRecordManager;
+00015e: move-result-object v8
+000160: invoke-virtual v7, Landroid/content/Context;->getApplicationContext()Landroid/content/Context;
+000166: move-result-object v3
+000168: invoke-virtual v8, v3, Lcom/vivo/castsdk/source/encode/AudioRecordManager;->init(Landroid/content/Context;)V
+00016e: new-instance v8, Ljava/lang/StringBuilder;
+000172: const-string v3, "onCallRemoved  isOutputToPc："
+000176: invoke-direct v8, v3, Ljava/lang/StringBuilder;-><init>(Ljava/lang/String;)V
+00017c: invoke-static Lcom/vivo/castsdk/source/encode/AudioRecordManager;->getInstance()Lcom/vivo/castsdk/source/encode/AudioRecordManager;
+000182: move-result-object v3
+000184: invoke-virtual v3, Lcom/vivo/castsdk/source/encode/AudioRecordManager;->isOutputToPc()Z
+00018a: move-result v3
+00018c: invoke-virtual v8, v3, Ljava/lang/StringBuilder;->append(Z)Ljava/lang/StringBuilder;
+000192: invoke-virtual v8, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
+000198: move-result-object v8
+00019a: invoke-static v4, v8, LD1/a;->h(Ljava/lang/String; Ljava/lang/String;)V
+0001a0: invoke-static Lcom/vivo/castsdk/source/encode/AudioRecordManager;->getInstance()Lcom/vivo/castsdk/source/encode/AudioRecordManager;
+0001a6: move-result-object v8
+0001a8: invoke-virtual v8, Lcom/vivo/castsdk/source/encode/AudioRecordManager;->isOutputToPc()Z
+0001ae: move-result v8
+0001b0: if-eqz v8, +009h
+0001b4: invoke-static Lcom/vivo/castsdk/source/encode/AudioThread;->getInstance()Lcom/vivo/castsdk/source/encode/AudioThread;
+0001ba: move-result-object v8
+0001bc: invoke-virtual v8, Lcom/vivo/castsdk/source/encode/AudioThread;->startRecord()V
+0001c2: const-string v8, "audio"
+0001c6: invoke-static v8, Landroidx/appcompat/widget/view/b;->a(Ljava/lang/String;)Ljava/lang/Object;
+0001cc: move-result-object v8
+0001ce: check-cast v8, Landroid/media/AudioManager;
+0001d2: if-eqz v8, +02bh
+0001d6: sget-boolean v3, Lcom/vivo/pcsuite/service/PcSuiteInCallService;->m Z
+0001da: if-nez v3, +005h
+0001de: invoke-virtual v8, v2, Landroid/media/AudioManager;->setMicrophoneMute(Z)V
+0001e4: const-string v3, "jovi_pickup=false"
+0001e8: invoke-virtual v8, v3, Landroid/media/AudioManager;->setParameters(Ljava/lang/String;)V
+0001ee: const-string v3, "listen_jovi_call=true"
+0001f2: invoke-virtual v8, v3, Landroid/media/AudioManager;->setParameters(Ljava/lang/String;)V
+0001f8: new-instance v3, Ljava/lang/StringBuilder;
+0001fc: const-string v5, "reset mute localMute:"
+000200: invoke-direct v3, v5, Ljava/lang/StringBuilder;-><init>(Ljava/lang/String;)V
+000206: sget-boolean v5, Lcom/vivo/pcsuite/service/PcSuiteInCallService;->m Z
+00020a: invoke-static v3, v5, v4, LZ1/b;->e(Ljava/lang/StringBuilder; Z Ljava/lang/String;)V
+000210: sget-boolean v3, Lcom/vivo/pcsuite/service/PcSuiteInCallService;->m Z
+000214: if-eqz v3, +005h
+000218: invoke-virtual v8, v3, Landroid/media/AudioManager;->setMicrophoneMute(Z)V
+00021e: const-string v8, "removeCall reset mute"
+000222: invoke-static v4, v8, LD1/a;->b(Ljava/lang/String; Ljava/lang/String;)V
+000228: iput-object v0, v7, Lcom/vivo/pcsuite/service/PcSuiteInCallService;->a Ljava/lang/String;
+00022c: sput-boolean v2, Lcom/vivo/pcsuite/service/PcSuiteInCallService;->j Z
+000230: sput-object v0, Lcom/vivo/pcsuite/service/PcSuiteInCallService;->i Landroid/telecom/Call;
+000234: invoke-static Lcom/vivo/castsdk/source/telecom/TelecomChannelHandler;->getInstance()Lcom/vivo/castsdk/source/telecom/TelecomChannelHandler;
+00023a: move-result-object v8
+00023c: invoke-virtual v8, Lcom/vivo/castsdk/source/telecom/TelecomChannelHandler;->stop()V
+000242: goto +8h
+000244: iput-boolean v2, v7, Lcom/vivo/pcsuite/service/PcSuiteInCallService;->d Z
+000248: iget-object v0, v7, Lcom/vivo/pcsuite/service/PcSuiteInCallService;->f Landroid/telecom/Call$Callback;
+00024c: invoke-virtual v8, v0, Landroid/telecom/Call;->unregisterCallback(Landroid/telecom/Call$Callback;)V
+000252: iget-object v7, v7, Lcom/vivo/pcsuite/service/PcSuiteInCallService;->b Ljava/util/HashMap;
+000256: invoke-virtual v7, v1, Ljava/util/HashMap;->remove(Ljava/lang/Object;)Ljava/lang/Object;
+00025c: new-instance v8, Ljava/lang/StringBuilder;
+000260: const-string v0, "callMap remove last:"
+000264: invoke-direct v8, v0, Ljava/lang/StringBuilder;-><init>(Ljava/lang/String;)V
+00026a: invoke-virtual v7, Ljava/util/HashMap;->size()I
+000270: move-result v7
+000272: invoke-virtual v8, v7, Ljava/lang/StringBuilder;->append(I)Ljava/lang/StringBuilder;
+000278: invoke-virtual v8, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
+00027e: move-result-object v7
+000280: invoke-static v4, v7, LD1/a;->h(Ljava/lang/String; Ljava/lang/String;)V
+000286: return-void 
+
+METHOD onCreate()V
+000000: const-string v0, "PcSuiteInCallService"
+000004: const-string v1, "onCreate"
+000008: invoke-static v0, v1, LD1/a;->h(Ljava/lang/String; Ljava/lang/String;)V
+00000e: const/4 v0, 0
+000010: sput-boolean v0, Lcom/vivo/pcsuite/service/PcSuiteInCallService;->m Z
+000014: invoke-super v2, Landroid/app/Service;->onCreate()V
+00001a: return-void 
+
+METHOD onUnbind(Landroid/content/Intent;)Z
+000000: const-string v0, "PcSuiteInCallService"
+000004: const-string v1, "onUnbind"
+000008: invoke-static v0, v1, LD1/a;->h(Ljava/lang/String; Ljava/lang/String;)V
+00000e: invoke-super v2, v3, Landroid/telecom/InCallService;->onUnbind(Landroid/content/Intent;)Z
+000014: move-result v2
+000016: return v2

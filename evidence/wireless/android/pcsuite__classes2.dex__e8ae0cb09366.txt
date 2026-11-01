@@ -1,0 +1,60 @@
+APK pcsuite/updateApk/pcsuite.apk
+DEX classes2.dex
+CLASS Lcom/vivo/pcsuite/connect/ConnectControlModel$2$2;
+SUPER Ljava/lang/Object;
+FIELDS
+a Lcom/vivo/pcsuite/connect/ConnectControlModel$2; = None
+
+METHOD <init>(Lcom/vivo/pcsuite/connect/ConnectControlModel$2;)V
+000000: invoke-direct v0, Ljava/lang/Object;-><init>()V
+000006: iput-object v1, v0, Lcom/vivo/pcsuite/connect/ConnectControlModel$2$2;->a Lcom/vivo/pcsuite/connect/ConnectControlModel$2;
+00000a: return-void 
+
+METHOD onStatus(Z Z)V
+000000: iget-object v5, v4, Lcom/vivo/pcsuite/connect/ConnectControlModel$2$2;->a Lcom/vivo/pcsuite/connect/ConnectControlModel$2;
+000004: iget-object v0, v5, Lcom/vivo/pcsuite/connect/ConnectControlModel$2;->d Lcom/vivo/pcsuite/connect/ConnectControlModel;
+000008: iget-object v1, v5, Lcom/vivo/pcsuite/connect/ConnectControlModel$2;->c Ljava/lang/String;
+00000c: const-string v2, "agree connect ble"
+000010: const-string v3, "pcsuite_ConnectControlModel"
+000014: invoke-static v3, v2, Lcom/vivo/connect/logger/EasyLog;->i(Ljava/lang/String; Ljava/lang/String;)V
+00001a: if-eqz v6, +00bh
+00001e: invoke-static v1, Landroid/text/TextUtils;->isEmpty(Ljava/lang/CharSequence;)Z
+000024: move-result v2
+000026: if-nez v2, +005h
+00002a: invoke-static v1, Lcom/vivo/pcsuite/util/j0;->i(Ljava/lang/String;)V
+000030: iget-object v2, v5, Lcom/vivo/pcsuite/connect/ConnectControlModel$2;->a Ljava/lang/String;
+000034: iget-object v5, v5, Lcom/vivo/pcsuite/connect/ConnectControlModel$2;->b Ljava/lang/String;
+000038: invoke-static v0, v2, v1, v5, v6, Lcom/vivo/pcsuite/connect/ConnectControlModel;->g(Lcom/vivo/pcsuite/connect/ConnectControlModel; Ljava/lang/String; Ljava/lang/String; Ljava/lang/String; Z)V
+00003e: sget-object v5, Lcom/vivo/pcsuite/PcSuiteApplication;->I1 Lcom/vivo/pcsuite/PcSuiteApplication;
+000042: const-string v1, "bluetooth"
+000046: invoke-virtual v5, v1, Landroid/content/Context;->getSystemService(Ljava/lang/String;)Ljava/lang/Object;
+00004c: move-result-object v5
+00004e: check-cast v5, Landroid/bluetooth/BluetoothManager;
+000052: if-eqz v5, +007h
+000056: invoke-virtual v5, Landroid/bluetooth/BluetoothManager;->getAdapter()Landroid/bluetooth/BluetoothAdapter;
+00005c: move-result-object v5
+00005e: goto +2h
+000060: const/4 v5, 0
+000062: if-eqz v5, +01ch
+000066: invoke-virtual v5, Landroid/bluetooth/BluetoothAdapter;->isEnabled()Z
+00006c: move-result v5
+00006e: if-nez v5, +016h
+000072: const-string v5, "bluetooth closed"
+000076: invoke-static v3, v5, Lcom/vivo/connect/logger/EasyLog;->i(Ljava/lang/String; Ljava/lang/String;)V
+00007c: invoke-static v0, Lcom/vivo/pcsuite/connect/ConnectControlModel;->e(Lcom/vivo/pcsuite/connect/ConnectControlModel;)Landroid/os/Handler;
+000082: move-result-object v5
+000084: new-instance v6, Lcom/vivo/pcsuite/connect/ConnectControlModel$2$2$1;
+000088: invoke-direct v6, v4, Lcom/vivo/pcsuite/connect/ConnectControlModel$2$2$1;-><init>(Lcom/vivo/pcsuite/connect/ConnectControlModel$2$2;)V
+00008e: const-wide/16 v0, 1000
+000092: invoke-virtual v5, v6, v0, v1, Landroid/os/Handler;->postDelayed(Ljava/lang/Runnable; J)Z
+000098: return-void 
+00009a: const-string v4, "bluetooth opened"
+00009e: invoke-static v3, v4, Lcom/vivo/connect/logger/EasyLog;->i(Ljava/lang/String; Ljava/lang/String;)V
+0000a4: const-string v4, "1"
+0000a8: if-eqz v6, +004h
+0000ac: move-object v5, v4
+0000ae: goto +3h
+0000b0: const-string v5, "0"
+0000b4: invoke-static v4, v5, Lcom/vivo/pcsuite/util/o0;->U(Ljava/lang/String; Ljava/lang/String;)V
+0000ba: invoke-virtual v0, Lcom/vivo/pcsuite/connect/ConnectControlModel;->agreeBle()V
+0000c0: return-void 

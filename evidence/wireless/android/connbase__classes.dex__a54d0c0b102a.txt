@@ -1,0 +1,114 @@
+APK pcsuite/updateApk/connbase.apk
+DEX classes.dex
+CLASS Lcom/vivo/connbase/view/AutoDialogButtonPanel;
+SUPER Landroid/widget/LinearLayout;
+FIELDS
+
+
+METHOD <init>(Landroid/content/Context;)V
+000000: invoke-direct v0, v1, Landroid/widget/LinearLayout;-><init>(Landroid/content/Context;)V
+000006: return-void 
+
+METHOD <init>(Landroid/content/Context; Landroid/util/AttributeSet;)V
+000000: invoke-direct v0, v1, v2, Landroid/widget/LinearLayout;-><init>(Landroid/content/Context; Landroid/util/AttributeSet;)V
+000006: return-void 
+
+METHOD <init>(Landroid/content/Context; Landroid/util/AttributeSet; I)V
+000000: invoke-direct v0, v1, v2, v3, Landroid/widget/LinearLayout;-><init>(Landroid/content/Context; Landroid/util/AttributeSet; I)V
+000006: return-void 
+
+METHOD setStacked(Z)V
+000000: invoke-virtual v0, v1, Landroid/widget/LinearLayout;->setOrientation(I)V
+000006: return-void 
+
+METHOD generateDefaultLayoutParams()Landroid/view/ViewGroup$LayoutParams;
+000000: invoke-super v1, Landroid/widget/LinearLayout;->generateDefaultLayoutParams()Landroid/widget/LinearLayout$LayoutParams;
+000006: move-result-object v0
+000008: return-object v0
+
+METHOD generateLayoutParams(Landroid/util/AttributeSet;)Landroid/view/ViewGroup$LayoutParams;
+000000: invoke-super v0, v1, Landroid/widget/LinearLayout;->generateLayoutParams(Landroid/util/AttributeSet;)Landroid/widget/LinearLayout$LayoutParams;
+000006: move-result-object v1
+000008: return-object v1
+
+METHOD generateLayoutParams(Landroid/view/ViewGroup$LayoutParams;)Landroid/view/ViewGroup$LayoutParams;
+000000: invoke-super v0, v1, Landroid/widget/LinearLayout;->generateLayoutParams(Landroid/view/ViewGroup$LayoutParams;)Landroid/widget/LinearLayout$LayoutParams;
+000006: move-result-object v1
+000008: return-object v1
+
+METHOD getOverlay()Landroid/view/ViewOverlay;
+000000: invoke-super v1, Landroid/widget/LinearLayout;->getOverlay()Landroid/view/ViewGroupOverlay;
+000006: move-result-object v0
+000008: return-object v0
+
+METHOD onMeasure(I I)V
+000000: invoke-virtual v8, Landroid/widget/LinearLayout;->getChildCount()I
+000006: move-result v0
+000008: const/4 v1, 0
+00000a: move v2, v1
+00000c: move v3, v2
+00000e: if-ge v2, v0, +038h
+000012: invoke-virtual v8, v2, Landroid/widget/LinearLayout;->getChildAt(I)Landroid/view/View;
+000018: move-result-object v4
+00001a: invoke-virtual v4, Landroid/view/View;->getVisibility()I
+000020: move-result v5
+000022: const/4 v6, 1
+000024: if-nez v5, +02ah
+000028: instance-of v5, v4, Landroid/widget/TextView;
+00002c: if-nez v5, +003h
+000030: goto +24h
+000032: check-cast v4, Landroid/widget/TextView;
+000036: invoke-virtual v4, Landroid/widget/TextView;->getText()Ljava/lang/CharSequence;
+00003c: move-result-object v5
+00003e: if-eqz v5, +01dh
+000042: invoke-virtual v4, Landroid/widget/TextView;->getLineCount()I
+000048: move-result v5
+00004a: invoke-virtual v4, Landroid/widget/TextView;->getLayout()Landroid/text/Layout;
+000050: move-result-object v7
+000052: if-eqz v7, +00ch
+000056: invoke-virtual v4, Landroid/widget/TextView;->getLayout()Landroid/text/Layout;
+00005c: move-result-object v4
+00005e: sub-int/2addr v5, v6
+000060: invoke-virtual v4, v5, Landroid/text/Layout;->getEllipsisCount(I)I
+000066: move-result v4
+000068: goto +2h
+00006a: move v4, v1
+00006c: if-eqz v4, +006h
+000070: invoke-direct v8, v6, Lcom/vivo/connbase/view/AutoDialogButtonPanel;->setStacked(Z)V
+000076: move v3, v6
+000078: add-int/lit8 v2, v2, 1
+00007c: goto -37h
+00007e: if-eqz v3, +040h
+000082: move v0, v1
+000084: invoke-virtual v8, Landroid/widget/LinearLayout;->getChildCount()I
+00008a: move-result v2
+00008c: if-ge v0, v2, +039h
+000090: invoke-virtual v8, v0, Landroid/widget/LinearLayout;->getChildAt(I)Landroid/view/View;
+000096: move-result-object v2
+000098: instance-of v3, v2, Landroid/widget/TextView;
+00009c: if-eqz v3, +014h
+0000a0: new-instance v3, Landroid/widget/LinearLayout$LayoutParams;
+0000a4: const/4 v4, -1
+0000a6: invoke-virtual v2, Landroid/view/View;->getMeasuredHeight()I
+0000ac: move-result v5
+0000ae: invoke-direct v3, v4, v5, Landroid/widget/LinearLayout$LayoutParams;-><init>(I I)V
+0000b4: const/16 v4, 17
+0000b8: iput v4, v3, Landroid/widget/LinearLayout$LayoutParams;->gravity I
+0000bc: invoke-virtual v2, v3, Landroid/view/View;->setLayoutParams(Landroid/view/ViewGroup$LayoutParams;)V
+0000c2: goto +1bh
+0000c4: const v3, 2131296441
+0000ca: invoke-virtual v8, v3, Landroid/widget/LinearLayout;->findViewById(I)Landroid/view/View;
+0000d0: move-result-object v3
+0000d2: invoke-virtual v3, Landroid/view/View;->getId()I
+0000d8: move-result v3
+0000da: invoke-virtual v2, Landroid/view/View;->getId()I
+0000e0: move-result v4
+0000e2: if-ne v3, v4, +008h
+0000e6: const/16 v3, 8
+0000ea: invoke-virtual v2, v3, Landroid/view/View;->setVisibility(I)V
+0000f0: goto +4h
+0000f2: invoke-virtual v2, v1, Landroid/view/View;->setVisibility(I)V
+0000f8: add-int/lit8 v0, v0, 1
+0000fc: goto -3ch
+0000fe: invoke-super v8, v9, v10, Landroid/widget/LinearLayout;->onMeasure(I I)V
+000104: return-void 

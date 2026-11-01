@@ -1,0 +1,285 @@
+APK pcsuite/updateApk/pcsuite.apk
+DEX classes2.dex
+CLASS Lcom/vivo/pcsuite/pcconnect/IShareLinkManager$Stub;
+SUPER Landroid/os/Binder;
+FIELDS
+DESCRIPTOR Ljava/lang/String; = 'com.vivo.pcsuite.pcconnect.IShareLinkManager'
+TRANSACTION_QRconnectP2P I = 26
+TRANSACTION_appResponse I = 17
+TRANSACTION_cancelConnect I = 19
+TRANSACTION_close I = 2
+TRANSACTION_connect I = 7
+TRANSACTION_connectSuccess I = 21
+TRANSACTION_connectbyPort I = 27
+TRANSACTION_connectbyrfcomm I = 8
+TRANSACTION_disconnect I = 9
+TRANSACTION_disconnectBle I = 10
+TRANSACTION_getDevicesSignal I = 6
+TRANSACTION_isConnected I = 14
+TRANSACTION_isConnecting I = 15
+TRANSACTION_isDeviceInMatch I = 5
+TRANSACTION_isScanning I = 16
+TRANSACTION_isShareOpened I = 13
+TRANSACTION_onExOne I = 24
+TRANSACTION_onExTwo I = 25
+TRANSACTION_open I = 1
+TRANSACTION_registerLinkObserver I = 11
+TRANSACTION_sendInfo I = 18
+TRANSACTION_sendIsAuto I = 20
+TRANSACTION_startAdvertising I = 23
+TRANSACTION_startScan I = 3
+TRANSACTION_stopAdvertising I = 22
+TRANSACTION_stopScan I = 4
+TRANSACTION_unregisterLinkObserver I = 12
+
+METHOD <init>()V
+000000: invoke-direct v1, Landroid/os/Binder;-><init>()V
+000006: const-string v0, "com.vivo.pcsuite.pcconnect.IShareLinkManager"
+00000a: invoke-virtual v1, v1, v0, Landroid/os/Binder;->attachInterface(Landroid/os/IInterface; Ljava/lang/String;)V
+000010: return-void 
+
+METHOD asInterface(Landroid/os/IBinder;)Lcom/vivo/pcsuite/pcconnect/IShareLinkManager;
+000000: if-nez v2, +004h
+000004: const/4 v2, 0
+000006: return-object v2
+000008: const-string v0, "com.vivo.pcsuite.pcconnect.IShareLinkManager"
+00000c: invoke-interface v2, v0, Landroid/os/IBinder;->queryLocalInterface(Ljava/lang/String;)Landroid/os/IInterface;
+000012: move-result-object v0
+000014: if-eqz v0, +009h
+000018: instance-of v1, v0, Lcom/vivo/pcsuite/pcconnect/IShareLinkManager;
+00001c: if-eqz v1, +005h
+000020: check-cast v0, Lcom/vivo/pcsuite/pcconnect/IShareLinkManager;
+000024: return-object v0
+000026: new-instance v0, Lcom/vivo/pcsuite/pcconnect/IShareLinkManager$Stub$Proxy;
+00002a: invoke-direct v0, v2, Lcom/vivo/pcsuite/pcconnect/IShareLinkManager$Stub$Proxy;-><init>(Landroid/os/IBinder;)V
+000030: return-object v0
+
+METHOD getDefaultImpl()Lcom/vivo/pcsuite/pcconnect/IShareLinkManager;
+000000: sget-object v0, Lcom/vivo/pcsuite/pcconnect/IShareLinkManager$Stub$Proxy;->sDefaultImpl Lcom/vivo/pcsuite/pcconnect/IShareLinkManager;
+000004: return-object v0
+
+METHOD setDefaultImpl(Lcom/vivo/pcsuite/pcconnect/IShareLinkManager;)Z
+000000: sget-object v0, Lcom/vivo/pcsuite/pcconnect/IShareLinkManager$Stub$Proxy;->sDefaultImpl Lcom/vivo/pcsuite/pcconnect/IShareLinkManager;
+000004: if-nez v0, +00ah
+000008: if-eqz v1, +006h
+00000c: sput-object v1, Lcom/vivo/pcsuite/pcconnect/IShareLinkManager$Stub$Proxy;->sDefaultImpl Lcom/vivo/pcsuite/pcconnect/IShareLinkManager;
+000010: const/4 v1, 1
+000012: return v1
+000014: const/4 v1, 0
+000016: return v1
+000018: new-instance v1, Ljava/lang/IllegalStateException;
+00001c: const-string v0, "setDefaultImpl() called twice"
+000020: invoke-direct v1, v0, Ljava/lang/IllegalStateException;-><init>(Ljava/lang/String;)V
+000026: throw v1
+
+METHOD asBinder()Landroid/os/IBinder;
+000000: return-object v0
+
+METHOD onTransact(I Landroid/os/Parcel; Landroid/os/Parcel; I)Z
+000000: const v0, 1598968902
+000006: const/4 v1, 1
+000008: const-string v2, "com.vivo.pcsuite.pcconnect.IShareLinkManager"
+00000c: if-eq v9, v0, +1c3h
+000010: const/4 v0, 0
+000012: packed-switch v9, +00001c5h
+000018: invoke-super v8, v9, v10, v11, v12, Landroid/os/Binder;->onTransact(I Landroid/os/Parcel; Landroid/os/Parcel; I)Z
+00001e: move-result v8
+000020: return v8
+000022: invoke-virtual v10, v2, Landroid/os/Parcel;->enforceInterface(Ljava/lang/String;)V
+000028: invoke-virtual v10, Landroid/os/Parcel;->readInt()I
+00002e: move-result v3
+000030: invoke-virtual v10, Landroid/os/Parcel;->readString()Ljava/lang/String;
+000036: move-result-object v4
+000038: invoke-virtual v10, Landroid/os/Parcel;->readString()Ljava/lang/String;
+00003e: move-result-object v5
+000040: invoke-virtual v10, Landroid/os/Parcel;->readInt()I
+000046: move-result v6
+000048: invoke-virtual v10, Landroid/os/Parcel;->readString()Ljava/lang/String;
+00004e: move-result-object v7
+000050: move-object v2, v8
+000052: invoke-interface/range v2 ... v7, Lcom/vivo/pcsuite/pcconnect/IShareLinkManager;->connectbyPort(I Ljava/lang/String; Ljava/lang/String; I Ljava/lang/String;)V
+000058: invoke-virtual v11, Landroid/os/Parcel;->writeNoException()V
+00005e: return v1
+000060: invoke-virtual v10, v2, Landroid/os/Parcel;->enforceInterface(Ljava/lang/String;)V
+000066: invoke-virtual v10, Landroid/os/Parcel;->readString()Ljava/lang/String;
+00006c: move-result-object v9
+00006e: invoke-virtual v10, Landroid/os/Parcel;->readString()Ljava/lang/String;
+000074: move-result-object v12
+000076: invoke-virtual v10, Landroid/os/Parcel;->readString()Ljava/lang/String;
+00007c: move-result-object v10
+00007e: invoke-interface v8, v9, v12, v10, Lcom/vivo/pcsuite/pcconnect/IShareLinkManager;->QRconnectP2P(Ljava/lang/String; Ljava/lang/String; Ljava/lang/String;)V
+000084: invoke-virtual v11, Landroid/os/Parcel;->writeNoException()V
+00008a: return v1
+00008c: invoke-virtual v10, v2, Landroid/os/Parcel;->enforceInterface(Ljava/lang/String;)V
+000092: invoke-virtual v10, Landroid/os/Parcel;->readString()Ljava/lang/String;
+000098: move-result-object v9
+00009a: invoke-virtual v10, Landroid/os/Parcel;->createByteArray()[B
+0000a0: move-result-object v10
+0000a2: invoke-interface v8, v9, v10, Lcom/vivo/pcsuite/pcconnect/IShareLinkManager;->onExTwo(Ljava/lang/String; [B)Ljava/lang/String;
+0000a8: move-result-object v8
+0000aa: invoke-virtual v11, Landroid/os/Parcel;->writeNoException()V
+0000b0: invoke-virtual v11, v8, Landroid/os/Parcel;->writeString(Ljava/lang/String;)V
+0000b6: invoke-virtual v11, v10, Landroid/os/Parcel;->writeByteArray([B)V
+0000bc: return v1
+0000be: invoke-virtual v10, v2, Landroid/os/Parcel;->enforceInterface(Ljava/lang/String;)V
+0000c4: invoke-virtual v10, Landroid/os/Parcel;->readString()Ljava/lang/String;
+0000ca: move-result-object v9
+0000cc: invoke-virtual v10, Landroid/os/Parcel;->readString()Ljava/lang/String;
+0000d2: move-result-object v10
+0000d4: invoke-interface v8, v9, v10, Lcom/vivo/pcsuite/pcconnect/IShareLinkManager;->onExOne(Ljava/lang/String; Ljava/lang/String;)Ljava/lang/String;
+0000da: move-result-object v8
+0000dc: invoke-virtual v11, Landroid/os/Parcel;->writeNoException()V
+0000e2: invoke-virtual v11, v8, Landroid/os/Parcel;->writeString(Ljava/lang/String;)V
+0000e8: return v1
+0000ea: invoke-virtual v10, v2, Landroid/os/Parcel;->enforceInterface(Ljava/lang/String;)V
+0000f0: invoke-virtual v10, Landroid/os/Parcel;->readInt()I
+0000f6: move-result v9
+0000f8: if-eqz v9, +003h
+0000fc: move v0, v1
+0000fe: invoke-interface v8, v0, Lcom/vivo/pcsuite/pcconnect/IShareLinkManager;->startAdvertising(Z)V
+000104: invoke-virtual v11, Landroid/os/Parcel;->writeNoException()V
+00010a: return v1
+00010c: invoke-virtual v10, v2, Landroid/os/Parcel;->enforceInterface(Ljava/lang/String;)V
+000112: invoke-interface v8, Lcom/vivo/pcsuite/pcconnect/IShareLinkManager;->stopAdvertising()V
+000118: invoke-virtual v11, Landroid/os/Parcel;->writeNoException()V
+00011e: return v1
+000120: invoke-virtual v10, v2, Landroid/os/Parcel;->enforceInterface(Ljava/lang/String;)V
+000126: invoke-virtual v10, Landroid/os/Parcel;->readString()Ljava/lang/String;
+00012c: move-result-object v9
+00012e: invoke-interface v8, v9, Lcom/vivo/pcsuite/pcconnect/IShareLinkManager;->connectSuccess(Ljava/lang/String;)V
+000134: invoke-virtual v11, Landroid/os/Parcel;->writeNoException()V
+00013a: return v1
+00013c: invoke-virtual v10, v2, Landroid/os/Parcel;->enforceInterface(Ljava/lang/String;)V
+000142: invoke-virtual v10, Landroid/os/Parcel;->readString()Ljava/lang/String;
+000148: move-result-object v9
+00014a: invoke-virtual v10, Landroid/os/Parcel;->readInt()I
+000150: move-result v10
+000152: if-eqz v10, +003h
+000156: move v0, v1
+000158: invoke-interface v8, v9, v0, Lcom/vivo/pcsuite/pcconnect/IShareLinkManager;->sendIsAuto(Ljava/lang/String; Z)V
+00015e: invoke-virtual v11, Landroid/os/Parcel;->writeNoException()V
+000164: return v1
+000166: invoke-virtual v10, v2, Landroid/os/Parcel;->enforceInterface(Ljava/lang/String;)V
+00016c: invoke-interface v8, Lcom/vivo/pcsuite/pcconnect/IShareLinkManager;->cancelConnect()V
+000172: invoke-virtual v11, Landroid/os/Parcel;->writeNoException()V
+000178: return v1
+00017a: invoke-virtual v10, v2, Landroid/os/Parcel;->enforceInterface(Ljava/lang/String;)V
+000180: invoke-virtual v10, Landroid/os/Parcel;->readString()Ljava/lang/String;
+000186: move-result-object v9
+000188: invoke-interface v8, v9, Lcom/vivo/pcsuite/pcconnect/IShareLinkManager;->sendInfo(Ljava/lang/String;)V
+00018e: invoke-virtual v11, Landroid/os/Parcel;->writeNoException()V
+000194: return v1
+000196: invoke-virtual v10, v2, Landroid/os/Parcel;->enforceInterface(Ljava/lang/String;)V
+00019c: invoke-virtual v10, Landroid/os/Parcel;->readInt()I
+0001a2: move-result v9
+0001a4: invoke-interface v8, v9, Lcom/vivo/pcsuite/pcconnect/IShareLinkManager;->appResponse(I)V
+0001aa: invoke-virtual v11, Landroid/os/Parcel;->writeNoException()V
+0001b0: return v1
+0001b2: invoke-virtual v10, v2, Landroid/os/Parcel;->enforceInterface(Ljava/lang/String;)V
+0001b8: invoke-interface v8, Lcom/vivo/pcsuite/pcconnect/IShareLinkManager;->isScanning()Z
+0001be: move-result v8
+0001c0: invoke-virtual v11, Landroid/os/Parcel;->writeNoException()V
+0001c6: invoke-virtual v11, v8, Landroid/os/Parcel;->writeInt(I)V
+0001cc: return v1
+0001ce: invoke-virtual v10, v2, Landroid/os/Parcel;->enforceInterface(Ljava/lang/String;)V
+0001d4: invoke-interface v8, Lcom/vivo/pcsuite/pcconnect/IShareLinkManager;->isConnecting()Z
+0001da: move-result v8
+0001dc: invoke-virtual v11, Landroid/os/Parcel;->writeNoException()V
+0001e2: invoke-virtual v11, v8, Landroid/os/Parcel;->writeInt(I)V
+0001e8: return v1
+0001ea: invoke-virtual v10, v2, Landroid/os/Parcel;->enforceInterface(Ljava/lang/String;)V
+0001f0: invoke-interface v8, Lcom/vivo/pcsuite/pcconnect/IShareLinkManager;->isConnected()Z
+0001f6: move-result v8
+0001f8: invoke-virtual v11, Landroid/os/Parcel;->writeNoException()V
+0001fe: invoke-virtual v11, v8, Landroid/os/Parcel;->writeInt(I)V
+000204: return v1
+000206: invoke-virtual v10, v2, Landroid/os/Parcel;->enforceInterface(Ljava/lang/String;)V
+00020c: invoke-interface v8, Lcom/vivo/pcsuite/pcconnect/IShareLinkManager;->isShareOpened()Z
+000212: move-result v8
+000214: invoke-virtual v11, Landroid/os/Parcel;->writeNoException()V
+00021a: invoke-virtual v11, v8, Landroid/os/Parcel;->writeInt(I)V
+000220: return v1
+000222: invoke-virtual v10, v2, Landroid/os/Parcel;->enforceInterface(Ljava/lang/String;)V
+000228: invoke-virtual v10, Landroid/os/Parcel;->readStrongBinder()Landroid/os/IBinder;
+00022e: move-result-object v9
+000230: invoke-static v9, Lcom/vivo/pcsuite/pcconnect/ShareLinkObserver$Stub;->asInterface(Landroid/os/IBinder;)Lcom/vivo/pcsuite/pcconnect/ShareLinkObserver;
+000236: move-result-object v9
+000238: invoke-interface v8, v9, Lcom/vivo/pcsuite/pcconnect/IShareLinkManager;->unregisterLinkObserver(Lcom/vivo/pcsuite/pcconnect/ShareLinkObserver;)V
+00023e: invoke-virtual v11, Landroid/os/Parcel;->writeNoException()V
+000244: return v1
+000246: invoke-virtual v10, v2, Landroid/os/Parcel;->enforceInterface(Ljava/lang/String;)V
+00024c: invoke-virtual v10, Landroid/os/Parcel;->readStrongBinder()Landroid/os/IBinder;
+000252: move-result-object v9
+000254: invoke-static v9, Lcom/vivo/pcsuite/pcconnect/ShareLinkObserver$Stub;->asInterface(Landroid/os/IBinder;)Lcom/vivo/pcsuite/pcconnect/ShareLinkObserver;
+00025a: move-result-object v9
+00025c: invoke-interface v8, v9, Lcom/vivo/pcsuite/pcconnect/IShareLinkManager;->registerLinkObserver(Lcom/vivo/pcsuite/pcconnect/ShareLinkObserver;)V
+000262: invoke-virtual v11, Landroid/os/Parcel;->writeNoException()V
+000268: return v1
+00026a: invoke-virtual v10, v2, Landroid/os/Parcel;->enforceInterface(Ljava/lang/String;)V
+000270: invoke-interface v8, Lcom/vivo/pcsuite/pcconnect/IShareLinkManager;->disconnectBle()V
+000276: invoke-virtual v11, Landroid/os/Parcel;->writeNoException()V
+00027c: return v1
+00027e: invoke-virtual v10, v2, Landroid/os/Parcel;->enforceInterface(Ljava/lang/String;)V
+000284: invoke-interface v8, Lcom/vivo/pcsuite/pcconnect/IShareLinkManager;->disconnect()V
+00028a: invoke-virtual v11, Landroid/os/Parcel;->writeNoException()V
+000290: return v1
+000292: invoke-virtual v10, v2, Landroid/os/Parcel;->enforceInterface(Ljava/lang/String;)V
+000298: invoke-virtual v10, Landroid/os/Parcel;->readInt()I
+00029e: move-result v9
+0002a0: invoke-virtual v10, Landroid/os/Parcel;->readString()Ljava/lang/String;
+0002a6: move-result-object v12
+0002a8: invoke-virtual v10, Landroid/os/Parcel;->readString()Ljava/lang/String;
+0002ae: move-result-object v0
+0002b0: invoke-virtual v10, Landroid/os/Parcel;->readInt()I
+0002b6: move-result v10
+0002b8: invoke-interface v8, v9, v12, v0, v10, Lcom/vivo/pcsuite/pcconnect/IShareLinkManager;->connectbyrfcomm(I Ljava/lang/String; Ljava/lang/String; I)V
+0002be: invoke-virtual v11, Landroid/os/Parcel;->writeNoException()V
+0002c4: return v1
+0002c6: invoke-virtual v10, v2, Landroid/os/Parcel;->enforceInterface(Ljava/lang/String;)V
+0002cc: invoke-virtual v10, Landroid/os/Parcel;->readString()Ljava/lang/String;
+0002d2: move-result-object v9
+0002d4: invoke-interface v8, v9, Lcom/vivo/pcsuite/pcconnect/IShareLinkManager;->connect(Ljava/lang/String;)V
+0002da: invoke-virtual v11, Landroid/os/Parcel;->writeNoException()V
+0002e0: return v1
+0002e2: invoke-virtual v10, v2, Landroid/os/Parcel;->enforceInterface(Ljava/lang/String;)V
+0002e8: invoke-virtual v10, Landroid/os/Parcel;->readInt()I
+0002ee: move-result v9
+0002f0: invoke-virtual v10, Landroid/os/Parcel;->readInt()I
+0002f6: move-result v10
+0002f8: invoke-interface v8, v9, v10, Lcom/vivo/pcsuite/pcconnect/IShareLinkManager;->getDevicesSignal(I I)Ljava/util/Map;
+0002fe: move-result-object v8
+000300: invoke-virtual v11, Landroid/os/Parcel;->writeNoException()V
+000306: invoke-virtual v11, v8, Landroid/os/Parcel;->writeMap(Ljava/util/Map;)V
+00030c: return v1
+00030e: invoke-virtual v10, v2, Landroid/os/Parcel;->enforceInterface(Ljava/lang/String;)V
+000314: invoke-virtual v10, Landroid/os/Parcel;->readString()Ljava/lang/String;
+00031a: move-result-object v9
+00031c: invoke-interface v8, v9, Lcom/vivo/pcsuite/pcconnect/IShareLinkManager;->isDeviceInMatch(Ljava/lang/String;)Z
+000322: move-result v8
+000324: invoke-virtual v11, Landroid/os/Parcel;->writeNoException()V
+00032a: invoke-virtual v11, v8, Landroid/os/Parcel;->writeInt(I)V
+000330: return v1
+000332: invoke-virtual v10, v2, Landroid/os/Parcel;->enforceInterface(Ljava/lang/String;)V
+000338: invoke-interface v8, Lcom/vivo/pcsuite/pcconnect/IShareLinkManager;->stopScan()V
+00033e: invoke-virtual v11, Landroid/os/Parcel;->writeNoException()V
+000344: return v1
+000346: invoke-virtual v10, v2, Landroid/os/Parcel;->enforceInterface(Ljava/lang/String;)V
+00034c: invoke-interface v8, Lcom/vivo/pcsuite/pcconnect/IShareLinkManager;->startScan()V
+000352: invoke-virtual v11, Landroid/os/Parcel;->writeNoException()V
+000358: return v1
+00035a: invoke-virtual v10, v2, Landroid/os/Parcel;->enforceInterface(Ljava/lang/String;)V
+000360: invoke-interface v8, Lcom/vivo/pcsuite/pcconnect/IShareLinkManager;->close()V
+000366: invoke-virtual v11, Landroid/os/Parcel;->writeNoException()V
+00036c: return v1
+00036e: invoke-virtual v10, v2, Landroid/os/Parcel;->enforceInterface(Ljava/lang/String;)V
+000374: invoke-virtual v10, Landroid/os/Parcel;->readString()Ljava/lang/String;
+00037a: move-result-object v9
+00037c: invoke-virtual v10, Landroid/os/Parcel;->readString()Ljava/lang/String;
+000382: move-result-object v10
+000384: invoke-interface v8, v9, v10, Lcom/vivo/pcsuite/pcconnect/IShareLinkManager;->open(Ljava/lang/String; Ljava/lang/String;)V
+00038a: invoke-virtual v11, Landroid/os/Parcel;->writeNoException()V
+000390: return v1
+000392: invoke-virtual v11, v2, Landroid/os/Parcel;->writeString(Ljava/lang/String;)V
+000398: return v1
+00039a: nop 
+00039c: packed-switch-payload 1 2 3 4 5 6 7 8 9 a b c d e f 10 11 12 13 14 15 16 17 18 19 1a 1b

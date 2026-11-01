@@ -1,0 +1,127 @@
+APK pcsuite/updateApk/connbase.apk
+DEX classes.dex
+CLASS Lcom/vivo/connbase/l0/d/b$b;
+SUPER Ljava/lang/Object;
+FIELDS
+e Ljava/lang/String; = 'b$b'
+a [Landroid/os/ParcelFileDescriptor; = None
+b Ljava/io/InputStream; = None
+c J = None
+d Ljava/lang/String; = None
+
+METHOD <clinit>()V
+000000: return-void 
+
+METHOD <init>([Landroid/os/ParcelFileDescriptor; Ljava/io/InputStream; Ljava/lang/String; J)V
+000000: invoke-direct v0, Ljava/lang/Object;-><init>()V
+000006: iput-object v1, v0, Lcom/vivo/connbase/l0/d/b$b;->a [Landroid/os/ParcelFileDescriptor;
+00000a: iput-object v2, v0, Lcom/vivo/connbase/l0/d/b$b;->b Ljava/io/InputStream;
+00000e: iput-wide v4, v0, Lcom/vivo/connbase/l0/d/b$b;->c J
+000012: iput-object v3, v0, Lcom/vivo/connbase/l0/d/b$b;->d Ljava/lang/String;
+000016: return-void 
+
+METHOD a(Ljava/io/InputStream; Ljava/lang/String; J)Lcom/vivo/connbase/l0/d/b$b;
+000000: const-string v0, "Cannot create Payload.Stream from null InputStream."
+000004: invoke-static v7, v0, Lcom/vivo/connbase/e0/g/g;->a(Ljava/lang/Object; Ljava/lang/Object;)Ljava/lang/Object;
+00000a: invoke-static Landroid/os/ParcelFileDescriptor;->createPipe()[Landroid/os/ParcelFileDescriptor;
+000010: move-result-object v0
+000012: move-object v2, v0
+000014: goto +7h
+000016: move-exception v0
+000018: invoke-virtual v0, Ljava/io/IOException;->printStackTrace()V
+00001e: const/4 v0, 0
+000020: goto -7h
+000022: new-instance v0, Lcom/vivo/connbase/l0/d/b$b;
+000026: move-object v1, v0
+000028: move-object v3, v7
+00002a: move-object v4, v8
+00002c: move-wide v5, v9
+00002e: invoke-direct/range v1 ... v6, Lcom/vivo/connbase/l0/d/b$b;-><init>([Landroid/os/ParcelFileDescriptor; Ljava/io/InputStream; Ljava/lang/String; J)V
+000034: return-object v0
+
+METHOD a([Landroid/os/ParcelFileDescriptor;)V
+000000: iput-object v1, v0, Lcom/vivo/connbase/l0/d/b$b;->a [Landroid/os/ParcelFileDescriptor;
+000004: return-void 
+
+METHOD a()Z
+000000: iget-object v0, v9, Lcom/vivo/connbase/l0/d/b$b;->b Ljava/io/InputStream;
+000004: const-string v1, "flush error"
+000008: const/4 v2, 0
+00000a: if-eqz v0, +05ch
+00000e: iget-object v3, v9, Lcom/vivo/connbase/l0/d/b$b;->a [Landroid/os/ParcelFileDescriptor;
+000012: if-nez v3, +003h
+000016: goto +56h
+000018: new-instance v3, Landroid/os/ParcelFileDescriptor$AutoCloseOutputStream;
+00001c: invoke-virtual v9, Lcom/vivo/connbase/l0/d/b$b;->e()Landroid/os/ParcelFileDescriptor;
+000022: move-result-object v4
+000024: invoke-direct v3, v4, Landroid/os/ParcelFileDescriptor$AutoCloseOutputStream;-><init>(Landroid/os/ParcelFileDescriptor;)V
+00002a: const/16 v4, 2048
+00002e: new-array v4, v4, [B
+000032: const-wide/16 v5, 0
+000036: invoke-virtual v0, v4, Ljava/io/InputStream;->read([B)I
+00003c: move-result v7
+00003e: const/4 v8, -1
+000040: if-eq v7, v8, +014h
+000044: invoke-virtual v3, v4, v2, v7, Ljava/io/OutputStream;->write([B I I)V
+00004a: int-to-long v7, v7
+00004c: add-long/2addr v5, v7
+00004e: iget-wide v7, v9, Lcom/vivo/connbase/l0/d/b$b;->c J
+000052: cmp-long v7, v5, v7
+000056: if-ltz v7, -010h
+00005a: sget-object v4, Lcom/vivo/connbase/l0/d/b$b;->e Ljava/lang/String;
+00005e: const-string v5, "flush end"
+000062: invoke-static v4, v5, Lc/c/f/a/b;->k(Ljava/lang/String; Ljava/lang/String;)V
+000068: invoke-virtual v0, Ljava/io/InputStream;->close()V
+00006e: invoke-virtual v3, Ljava/io/OutputStream;->close()V
+000074: goto +5h
+000076: move-exception v0
+000078: invoke-virtual v0, Ljava/io/IOException;->printStackTrace()V
+00007e: const/4 v0, 1
+000080: return v0
+000082: move-exception v1
+000084: goto +13h
+000086: move-exception v4
+000088: sget-object v5, Lcom/vivo/connbase/l0/d/b$b;->e Ljava/lang/String;
+00008c: invoke-static v5, v1, v4, Lc/c/f/a/b;->b(Ljava/lang/String; Ljava/lang/String; Ljava/lang/Throwable;)V
+000092: invoke-virtual v0, Ljava/io/InputStream;->close()V
+000098: invoke-virtual v3, Ljava/io/OutputStream;->close()V
+00009e: goto +5h
+0000a0: move-exception v0
+0000a2: invoke-virtual v0, Ljava/io/IOException;->printStackTrace()V
+0000a8: return v2
+0000aa: invoke-virtual v0, Ljava/io/InputStream;->close()V
+0000b0: invoke-virtual v3, Ljava/io/OutputStream;->close()V
+0000b6: goto +5h
+0000b8: move-exception v0
+0000ba: invoke-virtual v0, Ljava/io/IOException;->printStackTrace()V
+0000c0: throw v1
+0000c2: sget-object v0, Lcom/vivo/connbase/l0/d/b$b;->e Ljava/lang/String;
+0000c6: new-instance v3, Ljava/lang/Throwable;
+0000ca: const-string v4, "input or output is null!"
+0000ce: invoke-direct v3, v4, Ljava/lang/Throwable;-><init>(Ljava/lang/String;)V
+0000d4: invoke-static v0, v1, v3, Lc/c/f/a/b;->b(Ljava/lang/String; Ljava/lang/String; Ljava/lang/Throwable;)V
+0000da: return v2
+
+METHOD b()Ljava/lang/String;
+000000: iget-object v0, v1, Lcom/vivo/connbase/l0/d/b$b;->d Ljava/lang/String;
+000004: return-object v0
+
+METHOD c()[Landroid/os/ParcelFileDescriptor;
+000000: iget-object v0, v1, Lcom/vivo/connbase/l0/d/b$b;->a [Landroid/os/ParcelFileDescriptor;
+000004: return-object v0
+
+METHOD d()Landroid/os/ParcelFileDescriptor;
+000000: iget-object v0, v2, Lcom/vivo/connbase/l0/d/b$b;->a [Landroid/os/ParcelFileDescriptor;
+000004: const/4 v1, 0
+000006: aget-object v0, v0, v1
+00000a: return-object v0
+
+METHOD e()Landroid/os/ParcelFileDescriptor;
+000000: iget-object v0, v2, Lcom/vivo/connbase/l0/d/b$b;->a [Landroid/os/ParcelFileDescriptor;
+000004: const/4 v1, 1
+000006: aget-object v0, v0, v1
+00000a: return-object v0
+
+METHOD f()J
+000000: iget-wide v0, v2, Lcom/vivo/connbase/l0/d/b$b;->c J
+000004: return-wide v0

@@ -1,0 +1,269 @@
+APK pcsuite/updateApk/connbase.apk
+DEX classes.dex
+CLASS Lcom/vivo/connbase/h0/c/d;
+SUPER Ljava/lang/Object;
+FIELDS
+a Ljava/lang/Object; = None
+b Ljava/lang/String; = None
+c Ljava/lang/String; = None
+d Ljava/lang/String; = None
+e Ljava/util/Map; = None
+f Ljava/util/Map; = None
+g I = None
+h I = None
+i I = None
+j I = None
+k Ljava/lang/String; = None
+l Ljava/lang/String; = None
+m Z = None
+n Ljava/lang/String; = None
+o Ljava/lang/String; = None
+p Ljava/lang/String; = None
+q Ljava/lang/String; = None
+
+METHOD <init>()V
+000000: invoke-direct v1, Ljava/lang/Object;-><init>()V
+000006: new-instance v0, Ljava/lang/Object;
+00000a: invoke-direct v0, Ljava/lang/Object;-><init>()V
+000010: iput-object v0, v1, Lcom/vivo/connbase/h0/c/d;->a Ljava/lang/Object;
+000014: new-instance v0, Landroid/util/ArrayMap;
+000018: invoke-direct v0, Landroid/util/ArrayMap;-><init>()V
+00001e: iput-object v0, v1, Lcom/vivo/connbase/h0/c/d;->e Ljava/util/Map;
+000022: new-instance v0, Landroid/util/ArrayMap;
+000026: invoke-direct v0, Landroid/util/ArrayMap;-><init>()V
+00002c: iput-object v0, v1, Lcom/vivo/connbase/h0/c/d;->f Ljava/util/Map;
+000030: return-void 
+
+METHOD a(I)V
+000000: iput v1, v0, Lcom/vivo/connbase/h0/c/d;->h I
+000004: return-void 
+
+METHOD a(Lcom/vivo/connbase/h0/c/d; I)V
+000000: invoke-direct v0, v1, Lcom/vivo/connbase/h0/c/d;->d(I)V
+000006: return-void 
+
+METHOD a(Lcom/vivo/connbase/h0/c/d; Ljava/lang/String;)V
+000000: invoke-direct v0, v1, Lcom/vivo/connbase/h0/c/d;->j(Ljava/lang/String;)V
+000006: return-void 
+
+METHOD b(I)V
+000000: iput v1, v0, Lcom/vivo/connbase/h0/c/d;->g I
+000004: return-void 
+
+METHOD b(Lcom/vivo/connbase/h0/c/d; I)V
+000000: invoke-direct v0, v1, Lcom/vivo/connbase/h0/c/d;->c(I)V
+000006: return-void 
+
+METHOD b(Lcom/vivo/connbase/h0/c/d; Ljava/lang/String;)V
+000000: invoke-direct v0, v1, Lcom/vivo/connbase/h0/c/d;->k(Ljava/lang/String;)V
+000006: return-void 
+
+METHOD c(I)V
+000000: iput v1, v0, Lcom/vivo/connbase/h0/c/d;->j I
+000004: return-void 
+
+METHOD c(Lcom/vivo/connbase/h0/c/d; Ljava/lang/String;)V
+000000: invoke-direct v0, v1, Lcom/vivo/connbase/h0/c/d;->i(Ljava/lang/String;)V
+000006: return-void 
+
+METHOD d(I)V
+000000: iput v1, v0, Lcom/vivo/connbase/h0/c/d;->i I
+000004: return-void 
+
+METHOD i(Ljava/lang/String;)V
+000000: iput-object v1, v0, Lcom/vivo/connbase/h0/c/d;->l Ljava/lang/String;
+000004: return-void 
+
+METHOD j(Ljava/lang/String;)V
+000000: iput-object v1, v0, Lcom/vivo/connbase/h0/c/d;->c Ljava/lang/String;
+000004: return-void 
+
+METHOD k(Ljava/lang/String;)V
+000000: iput-object v1, v0, Lcom/vivo/connbase/h0/c/d;->k Ljava/lang/String;
+000004: return-void 
+
+METHOD a()Ljava/lang/String;
+000000: iget-object v0, v1, Lcom/vivo/connbase/h0/c/d;->o Ljava/lang/String;
+000004: return-object v0
+
+METHOD a(Ljava/lang/String;)Ljava/lang/String;
+000000: iget-object v0, v2, Lcom/vivo/connbase/h0/c/d;->a Ljava/lang/Object;
+000004: monitor-enter v0
+000006: iget-object v1, v2, Lcom/vivo/connbase/h0/c/d;->f Ljava/util/Map;
+00000a: invoke-interface v1, v3, Ljava/util/Map;->containsKey(Ljava/lang/Object;)Z
+000010: move-result v1
+000012: if-eqz v1, +00ch
+000016: iget-object v1, v2, Lcom/vivo/connbase/h0/c/d;->f Ljava/util/Map;
+00001a: invoke-interface v1, v3, Ljava/util/Map;->get(Ljava/lang/Object;)Ljava/lang/Object;
+000020: move-result-object v3
+000022: check-cast v3, Ljava/lang/String;
+000026: monitor-exit v0
+000028: return-object v3
+00002a: monitor-exit v0
+00002c: const-string v3, ""
+000030: return-object v3
+000032: move-exception v3
+000034: monitor-exit v0
+000036: throw v3
+
+METHOD a(Ljava/lang/String; I Ljava/lang/String;)V
+000000: iget-object v0, v2, Lcom/vivo/connbase/h0/c/d;->a Ljava/lang/Object;
+000004: monitor-enter v0
+000006: iget-object v1, v2, Lcom/vivo/connbase/h0/c/d;->e Ljava/util/Map;
+00000a: invoke-static v4, Ljava/lang/Integer;->valueOf(I)Ljava/lang/Integer;
+000010: move-result-object v4
+000012: invoke-interface v1, v3, v4, Ljava/util/Map;->put(Ljava/lang/Object; Ljava/lang/Object;)Ljava/lang/Object;
+000018: iget-object v4, v2, Lcom/vivo/connbase/h0/c/d;->f Ljava/util/Map;
+00001c: invoke-interface v4, v3, v5, Ljava/util/Map;->put(Ljava/lang/Object; Ljava/lang/Object;)Ljava/lang/Object;
+000022: monitor-exit v0
+000024: return-void 
+000026: move-exception v3
+000028: monitor-exit v0
+00002a: throw v3
+
+METHOD a(Z)V
+000000: iput-boolean v1, v0, Lcom/vivo/connbase/h0/c/d;->m Z
+000004: return-void 
+
+METHOD b()I
+000000: iget v0, v1, Lcom/vivo/connbase/h0/c/d;->h I
+000004: return v0
+
+METHOD b(Ljava/lang/String;)V
+000000: iget-object v0, v2, Lcom/vivo/connbase/h0/c/d;->a Ljava/lang/Object;
+000004: monitor-enter v0
+000006: iget-object v1, v2, Lcom/vivo/connbase/h0/c/d;->e Ljava/util/Map;
+00000a: invoke-interface v1, v3, Ljava/util/Map;->remove(Ljava/lang/Object;)Ljava/lang/Object;
+000010: iget-object v1, v2, Lcom/vivo/connbase/h0/c/d;->f Ljava/util/Map;
+000014: invoke-interface v1, v3, Ljava/util/Map;->remove(Ljava/lang/Object;)Ljava/lang/Object;
+00001a: monitor-exit v0
+00001c: return-void 
+00001e: move-exception v3
+000020: monitor-exit v0
+000022: throw v3
+
+METHOD c()Ljava/lang/String;
+000000: iget-object v0, v1, Lcom/vivo/connbase/h0/c/d;->l Ljava/lang/String;
+000004: return-object v0
+
+METHOD c(Ljava/lang/String;)V
+000000: iput-object v1, v0, Lcom/vivo/connbase/h0/c/d;->o Ljava/lang/String;
+000004: return-void 
+
+METHOD d()Ljava/lang/String;
+000000: iget-object v0, v1, Lcom/vivo/connbase/h0/c/d;->q Ljava/lang/String;
+000004: return-object v0
+
+METHOD d(Ljava/lang/String;)V
+000000: iput-object v1, v0, Lcom/vivo/connbase/h0/c/d;->q Ljava/lang/String;
+000004: return-void 
+
+METHOD e()Ljava/lang/String;
+000000: iget-object v0, v1, Lcom/vivo/connbase/h0/c/d;->d Ljava/lang/String;
+000004: return-object v0
+
+METHOD e(Ljava/lang/String;)V
+000000: iput-object v1, v0, Lcom/vivo/connbase/h0/c/d;->d Ljava/lang/String;
+000004: return-void 
+
+METHOD f()Ljava/lang/String;
+000000: iget-object v0, v1, Lcom/vivo/connbase/h0/c/d;->p Ljava/lang/String;
+000004: return-object v0
+
+METHOD f(Ljava/lang/String;)V
+000000: iput-object v1, v0, Lcom/vivo/connbase/h0/c/d;->p Ljava/lang/String;
+000004: return-void 
+
+METHOD g()Ljava/lang/String;
+000000: iget-object v0, v1, Lcom/vivo/connbase/h0/c/d;->c Ljava/lang/String;
+000004: return-object v0
+
+METHOD g(Ljava/lang/String;)V
+000000: iput-object v1, v0, Lcom/vivo/connbase/h0/c/d;->b Ljava/lang/String;
+000004: return-void 
+
+METHOD h()Ljava/lang/String;
+000000: iget-object v0, v1, Lcom/vivo/connbase/h0/c/d;->b Ljava/lang/String;
+000004: return-object v0
+
+METHOD h(Ljava/lang/String;)V
+000000: iput-object v1, v0, Lcom/vivo/connbase/h0/c/d;->n Ljava/lang/String;
+000004: return-void 
+
+METHOD i()Ljava/lang/String;
+000000: iget-object v0, v1, Lcom/vivo/connbase/h0/c/d;->k Ljava/lang/String;
+000004: return-object v0
+
+METHOD j()I
+000000: iget v0, v1, Lcom/vivo/connbase/h0/c/d;->g I
+000004: return v0
+
+METHOD k()Ljava/lang/String;
+000000: iget-object v0, v1, Lcom/vivo/connbase/h0/c/d;->n Ljava/lang/String;
+000004: return-object v0
+
+METHOD l()I
+000000: iget v0, v1, Lcom/vivo/connbase/h0/c/d;->j I
+000004: return v0
+
+METHOD m()I
+000000: iget v0, v1, Lcom/vivo/connbase/h0/c/d;->i I
+000004: return v0
+
+METHOD n()Ljava/lang/Boolean;
+000000: iget-boolean v0, v1, Lcom/vivo/connbase/h0/c/d;->m Z
+000004: invoke-static v0, Ljava/lang/Boolean;->valueOf(Z)Ljava/lang/Boolean;
+00000a: move-result-object v0
+00000c: return-object v0
+
+METHOD toString()Ljava/lang/String;
+000000: new-instance v0, Ljava/lang/StringBuilder;
+000004: invoke-direct v0, Ljava/lang/StringBuilder;-><init>()V
+00000a: const-string v1, "Device{mc='"
+00000e: invoke-virtual v0, v1, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+000014: iget-object v1, v3, Lcom/vivo/connbase/h0/c/d;->b Ljava/lang/String;
+000018: invoke-static v1, Lcom/vivo/connbase/e0/g/h;->b(Ljava/lang/String;)Ljava/lang/String;
+00001e: move-result-object v1
+000020: invoke-virtual v0, v1, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+000026: const/16 v1, 39
+00002a: invoke-virtual v0, v1, Ljava/lang/StringBuilder;->append(C)Ljava/lang/StringBuilder;
+000030: const-string v2, ", dd='"
+000034: invoke-virtual v0, v2, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+00003a: iget-object v2, v3, Lcom/vivo/connbase/h0/c/d;->c Ljava/lang/String;
+00003e: invoke-virtual v0, v2, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+000044: invoke-virtual v0, v1, Ljava/lang/StringBuilder;->append(C)Ljava/lang/StringBuilder;
+00004a: const-string v2, ", dName='"
+00004e: invoke-virtual v0, v2, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+000054: iget-object v2, v3, Lcom/vivo/connbase/h0/c/d;->d Ljava/lang/String;
+000058: invoke-virtual v0, v2, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+00005e: invoke-virtual v0, v1, Ljava/lang/StringBuilder;->append(C)Ljava/lang/StringBuilder;
+000064: const-string v2, ", version="
+000068: invoke-virtual v0, v2, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+00006e: iget v2, v3, Lcom/vivo/connbase/h0/c/d;->i I
+000072: invoke-virtual v0, v2, Ljava/lang/StringBuilder;->append(I)Ljava/lang/StringBuilder;
+000078: const-string v2, ", type="
+00007c: invoke-virtual v0, v2, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+000082: iget v2, v3, Lcom/vivo/connbase/h0/c/d;->j I
+000086: invoke-virtual v0, v2, Ljava/lang/StringBuilder;->append(I)Ljava/lang/StringBuilder;
+00008c: const-string v2, ", avatar='"
+000090: invoke-virtual v0, v2, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+000096: iget-object v2, v3, Lcom/vivo/connbase/h0/c/d;->l Ljava/lang/String;
+00009a: invoke-virtual v0, v2, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+0000a0: invoke-virtual v0, v1, Ljava/lang/StringBuilder;->append(C)Ljava/lang/StringBuilder;
+0000a6: const-string v2, ", isOd='"
+0000aa: invoke-virtual v0, v2, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+0000b0: iget-boolean v2, v3, Lcom/vivo/connbase/h0/c/d;->m Z
+0000b4: invoke-virtual v0, v2, Ljava/lang/StringBuilder;->append(Z)Ljava/lang/StringBuilder;
+0000ba: invoke-virtual v0, v1, Ljava/lang/StringBuilder;->append(C)Ljava/lang/StringBuilder;
+0000c0: const-string v2, ", mp='"
+0000c4: invoke-virtual v0, v2, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+0000ca: iget-object v2, v3, Lcom/vivo/connbase/h0/c/d;->n Ljava/lang/String;
+0000ce: invoke-static v2, Lcom/vivo/connbase/e0/g/h;->a(Ljava/lang/String;)Ljava/lang/String;
+0000d4: move-result-object v2
+0000d6: invoke-virtual v0, v2, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+0000dc: invoke-virtual v0, v1, Ljava/lang/StringBuilder;->append(C)Ljava/lang/StringBuilder;
+0000e2: const/16 v1, 125
+0000e6: invoke-virtual v0, v1, Ljava/lang/StringBuilder;->append(C)Ljava/lang/StringBuilder;
+0000ec: invoke-virtual v0, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
+0000f2: move-result-object v0
+0000f4: return-object v0

@@ -1,0 +1,30 @@
+APK pcsuite/updateApk/pcsuite.apk
+DEX classes2.dex
+CLASS Lcom/vivo/pcsuite/service/PcSuiteObserver$j;
+SUPER Ljava/lang/Object;
+FIELDS
+a Ljava/lang/ref/WeakReference; = None
+
+METHOD <init>(Lcom/vivo/pcsuite/service/PcSuiteObserver;)V
+000000: invoke-direct v1, Ljava/lang/Object;-><init>()V
+000006: new-instance v0, Ljava/lang/ref/WeakReference;
+00000a: invoke-direct v0, v2, Ljava/lang/ref/WeakReference;-><init>(Ljava/lang/Object;)V
+000010: iput-object v0, v1, Lcom/vivo/pcsuite/service/PcSuiteObserver$j;->a Ljava/lang/ref/WeakReference;
+000014: return-void 
+
+METHOD run()V
+000000: iget-object v2, v2, Lcom/vivo/pcsuite/service/PcSuiteObserver$j;->a Ljava/lang/ref/WeakReference;
+000004: invoke-virtual v2, Ljava/lang/ref/Reference;->get()Ljava/lang/Object;
+00000a: move-result-object v2
+00000c: check-cast v2, Lcom/vivo/pcsuite/service/PcSuiteObserver;
+000010: if-eqz v2, +016h
+000014: sget v2, Lcom/vivo/pcsuite/service/PcSuiteObserver;->D I
+000018: const-string v2, "enter DelayDisconnectRunnable "
+00001c: const-string v0, "pcsuite_PcSuiteObserver"
+000020: invoke-static v0, v2, Lcom/vivo/connect/logger/EasyLog;->i(Ljava/lang/String; Ljava/lang/String;)V
+000026: invoke-static Lk2/g;->w0()V
+00002c: invoke-static Lde/greenrobot/event/EventBus;->getDefault()Lde/greenrobot/event/EventBus;
+000032: move-result-object v2
+000034: const/4 v1, 3
+000036: invoke-static v1, v0, v2, Landroidx/constraintlayout/core/motion/a;->b(I Ljava/lang/String; Lde/greenrobot/event/EventBus;)V
+00003c: return-void 

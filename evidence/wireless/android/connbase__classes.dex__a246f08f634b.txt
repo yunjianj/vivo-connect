@@ -1,0 +1,46 @@
+APK pcsuite/updateApk/connbase.apk
+DEX classes.dex
+CLASS Lcom/vivo/connbase/o/d;
+SUPER Ljava/lang/Object;
+FIELDS
+b Ljava/lang/String; = 'BaseEv'
+a I = None
+
+METHOD <init>()V
+000000: invoke-direct v0, Ljava/lang/Object;-><init>()V
+000006: return-void 
+
+METHOD <init>(I)V
+000000: invoke-direct v0, Ljava/lang/Object;-><init>()V
+000006: iput v1, v0, Lcom/vivo/connbase/o/d;->a I
+00000a: return-void 
+
+METHOD a()I
+000000: iget v0, v1, Lcom/vivo/connbase/o/d;->a I
+000004: return v0
+
+METHOD a(I)V
+000000: iput v1, v0, Lcom/vivo/connbase/o/d;->a I
+000004: return-void 
+
+METHOD b()V
+000000: new-instance v0, Ljava/lang/StringBuilder;
+000004: invoke-direct v0, Ljava/lang/StringBuilder;-><init>()V
+00000a: const-string v1, "post event:"
+00000e: invoke-virtual v0, v1, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+000014: invoke-virtual v2, Ljava/lang/Object;->getClass()Ljava/lang/Class;
+00001a: move-result-object v1
+00001c: invoke-virtual v0, v1, Ljava/lang/StringBuilder;->append(Ljava/lang/Object;)Ljava/lang/StringBuilder;
+000022: const-string v1, ",event = "
+000026: invoke-virtual v0, v1, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+00002c: invoke-virtual v2, Ljava/lang/Object;->toString()Ljava/lang/String;
+000032: move-result-object v1
+000034: invoke-virtual v0, v1, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+00003a: invoke-virtual v0, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
+000040: move-result-object v0
+000042: const-string v1, "BaseEv"
+000046: invoke-static v1, v0, Lc/c/f/a/b;->k(Ljava/lang/String; Ljava/lang/String;)V
+00004c: invoke-static Lorg/greenrobot/eventbus/EventBus;->getDefault()Lorg/greenrobot/eventbus/EventBus;
+000052: move-result-object v0
+000054: invoke-virtual v0, v2, Lorg/greenrobot/eventbus/EventBus;->post(Ljava/lang/Object;)V
+00005a: return-void 

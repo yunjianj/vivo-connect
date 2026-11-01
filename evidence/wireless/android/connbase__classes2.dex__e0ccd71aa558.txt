@@ -1,0 +1,85 @@
+APK pcsuite/updateApk/connbase.apk
+DEX classes2.dex
+CLASS Lcom/vivo/pcsuite/pcconnect/ble/g;
+SUPER Ljava/lang/Object;
+FIELDS
+a Ljava/util/Map; = None
+b Ljava/util/Map; = None
+
+METHOD <clinit>()V
+000000: new-instance v0, Ljava/util/HashMap;
+000004: invoke-direct v0, Ljava/util/HashMap;-><init>()V
+00000a: sput-object v0, Lcom/vivo/pcsuite/pcconnect/ble/g;->a Ljava/util/Map;
+00000e: new-instance v0, Ljava/util/HashMap;
+000012: invoke-direct v0, Ljava/util/HashMap;-><init>()V
+000018: sput-object v0, Lcom/vivo/pcsuite/pcconnect/ble/g;->b Ljava/util/Map;
+00001c: const-string v1, "00001801-0000-1000-8000-00805f9b34fb"
+000020: const-string v2, "Generic Attribute"
+000024: invoke-interface v0, v1, v2, Ljava/util/Map;->put(Ljava/lang/Object; Ljava/lang/Object;)Ljava/lang/Object;
+00002a: sget-object v0, Lcom/vivo/pcsuite/pcconnect/ble/g;->b Ljava/util/Map;
+00002e: const-string v1, "00001800-0000-1000-8000-00805f9b34fb"
+000032: const-string v2, "Generic Access"
+000036: invoke-interface v0, v1, v2, Ljava/util/Map;->put(Ljava/lang/Object; Ljava/lang/Object;)Ljava/lang/Object;
+00003c: sget-object v0, Lcom/vivo/pcsuite/pcconnect/ble/g;->a Ljava/util/Map;
+000040: const-string v1, "00002a05-0000-1000-8000-00805f9b34fb"
+000044: const-string v2, "Service Changed"
+000048: invoke-interface v0, v1, v2, Ljava/util/Map;->put(Ljava/lang/Object; Ljava/lang/Object;)Ljava/lang/Object;
+00004e: sget-object v0, Lcom/vivo/pcsuite/pcconnect/ble/g;->a Ljava/util/Map;
+000052: const-string v1, "00002a00-0000-1000-8000-00805f9b34fb"
+000056: const-string v2, "Device Name"
+00005a: invoke-interface v0, v1, v2, Ljava/util/Map;->put(Ljava/lang/Object; Ljava/lang/Object;)Ljava/lang/Object;
+000060: sget-object v0, Lcom/vivo/pcsuite/pcconnect/ble/g;->a Ljava/util/Map;
+000064: const-string v1, "00002a01-0000-1000-8000-00805f9b34fb"
+000068: const-string v2, "Appearance"
+00006c: invoke-interface v0, v1, v2, Ljava/util/Map;->put(Ljava/lang/Object; Ljava/lang/Object;)Ljava/lang/Object;
+000072: sget-object v0, Lcom/vivo/pcsuite/pcconnect/ble/g;->a Ljava/util/Map;
+000076: const-string v1, "00002aa6-0000-1000-8000-00805f9b34fb"
+00007a: const-string v2, "Central Address Resolution"
+00007e: invoke-interface v0, v1, v2, Ljava/util/Map;->put(Ljava/lang/Object; Ljava/lang/Object;)Ljava/lang/Object;
+000084: sget-object v0, Lcom/vivo/pcsuite/pcconnect/ble/g;->b Ljava/util/Map;
+000088: sget-object v1, Lcom/vivo/pcsuite/pcconnect/ble/g$c;->c Landroid/os/ParcelUuid;
+00008c: invoke-virtual v1, Landroid/os/ParcelUuid;->toString()Ljava/lang/String;
+000092: move-result-object v1
+000094: const-string v2, "VivoShare"
+000098: invoke-interface v0, v1, v2, Ljava/util/Map;->put(Ljava/lang/Object; Ljava/lang/Object;)Ljava/lang/Object;
+00009e: sget-object v0, Lcom/vivo/pcsuite/pcconnect/ble/g;->a Ljava/util/Map;
+0000a2: sget-object v1, Lcom/vivo/pcsuite/pcconnect/ble/g$c;->j Landroid/os/ParcelUuid;
+0000a6: invoke-virtual v1, Landroid/os/ParcelUuid;->toString()Ljava/lang/String;
+0000ac: move-result-object v1
+0000ae: const-string v2, "Request connect"
+0000b2: invoke-interface v0, v1, v2, Ljava/util/Map;->put(Ljava/lang/Object; Ljava/lang/Object;)Ljava/lang/Object;
+0000b8: sget-object v0, Lcom/vivo/pcsuite/pcconnect/ble/g;->a Ljava/util/Map;
+0000bc: sget-object v1, Lcom/vivo/pcsuite/pcconnect/ble/g$c;->k Landroid/os/ParcelUuid;
+0000c0: invoke-virtual v1, Landroid/os/ParcelUuid;->toString()Ljava/lang/String;
+0000c6: move-result-object v1
+0000c8: const-string v2, "Response connect"
+0000cc: invoke-interface v0, v1, v2, Ljava/util/Map;->put(Ljava/lang/Object; Ljava/lang/Object;)Ljava/lang/Object;
+0000d2: sget-object v0, Lcom/vivo/pcsuite/pcconnect/ble/g;->a Ljava/util/Map;
+0000d6: sget-object v1, Lcom/vivo/pcsuite/pcconnect/ble/g$c;->l Landroid/os/ParcelUuid;
+0000da: invoke-virtual v1, Landroid/os/ParcelUuid;->toString()Ljava/lang/String;
+0000e0: move-result-object v1
+0000e2: const-string v2, "Send extra"
+0000e6: invoke-interface v0, v1, v2, Ljava/util/Map;->put(Ljava/lang/Object; Ljava/lang/Object;)Ljava/lang/Object;
+0000ec: return-void 
+
+METHOD <init>()V
+000000: invoke-direct v0, Ljava/lang/Object;-><init>()V
+000006: return-void 
+
+METHOD a(Ljava/lang/String;)Ljava/lang/String;
+000000: sget-object v0, Lcom/vivo/pcsuite/pcconnect/ble/g;->a Ljava/util/Map;
+000004: invoke-interface v0, v1, Ljava/util/Map;->get(Ljava/lang/Object;)Ljava/lang/Object;
+00000a: move-result-object v0
+00000c: check-cast v0, Ljava/lang/String;
+000010: if-eqz v0, +003h
+000014: return-object v0
+000016: return-object v1
+
+METHOD b(Ljava/lang/String;)Ljava/lang/String;
+000000: sget-object v0, Lcom/vivo/pcsuite/pcconnect/ble/g;->b Ljava/util/Map;
+000004: invoke-interface v0, v1, Ljava/util/Map;->get(Ljava/lang/Object;)Ljava/lang/Object;
+00000a: move-result-object v0
+00000c: check-cast v0, Ljava/lang/String;
+000010: if-eqz v0, +003h
+000014: return-object v0
+000016: return-object v1

@@ -1,0 +1,109 @@
+APK pcsuite/updateApk/pcsuite.apk
+DEX classes2.dex
+CLASS Lcom/vivo/connect/sdk/d/a$b;
+SUPER Landroid/os/Binder;
+FIELDS
+a Ljava/lang/String; = 'com.vivo.connbase.IPushApi'
+b I = 1
+c I = 2
+d I = 3
+
+METHOD <init>()V
+000000: invoke-direct v1, Landroid/os/Binder;-><init>()V
+000006: const-string v0, "com.vivo.connbase.IPushApi"
+00000a: invoke-virtual v1, v1, v0, Landroid/os/Binder;->attachInterface(Landroid/os/IInterface; Ljava/lang/String;)V
+000010: return-void 
+
+METHOD a(Landroid/os/IBinder;)Lcom/vivo/connect/sdk/d/a;
+000000: if-nez v2, +004h
+000004: const/4 v2, 0
+000006: return-object v2
+000008: const-string v0, "com.vivo.connbase.IPushApi"
+00000c: invoke-interface v2, v0, Landroid/os/IBinder;->queryLocalInterface(Ljava/lang/String;)Landroid/os/IInterface;
+000012: move-result-object v0
+000014: if-eqz v0, +009h
+000018: instance-of v1, v0, Lcom/vivo/connect/sdk/d/a;
+00001c: if-eqz v1, +005h
+000020: check-cast v0, Lcom/vivo/connect/sdk/d/a;
+000024: return-object v0
+000026: new-instance v0, Lcom/vivo/connect/sdk/d/a$b$a;
+00002a: invoke-direct v0, v2, Lcom/vivo/connect/sdk/d/a$b$a;-><init>(Landroid/os/IBinder;)V
+000030: return-object v0
+
+METHOD a(Lcom/vivo/connect/sdk/d/a;)Z
+000000: sget-object v0, Lcom/vivo/connect/sdk/d/a$b$a;->b Lcom/vivo/connect/sdk/d/a;
+000004: if-nez v0, +00ah
+000008: if-eqz v1, +006h
+00000c: sput-object v1, Lcom/vivo/connect/sdk/d/a$b$a;->b Lcom/vivo/connect/sdk/d/a;
+000010: const/4 v1, 1
+000012: return v1
+000014: const/4 v1, 0
+000016: return v1
+000018: new-instance v1, Ljava/lang/IllegalStateException;
+00001c: const-string v0, "setDefaultImpl() called twice"
+000020: invoke-direct v1, v0, Ljava/lang/IllegalStateException;-><init>(Ljava/lang/String;)V
+000026: throw v1
+
+METHOD b()Lcom/vivo/connect/sdk/d/a;
+000000: sget-object v0, Lcom/vivo/connect/sdk/d/a$b$a;->b Lcom/vivo/connect/sdk/d/a;
+000004: return-object v0
+
+METHOD asBinder()Landroid/os/IBinder;
+000000: return-object v0
+
+METHOD onTransact(I Landroid/os/Parcel; Landroid/os/Parcel; I)Z
+000000: const/4 v0, 0
+000002: const-string v1, "com.vivo.connbase.IPushApi"
+000006: const/4 v2, 1
+000008: if-eq v5, v2, +04dh
+00000c: const/4 v3, 2
+00000e: if-eq v5, v3, +030h
+000012: const/4 v3, 3
+000014: if-eq v5, v3, +010h
+000018: const v0, 1598968902
+00001e: if-eq v5, v0, +007h
+000022: invoke-super v4, v5, v6, v7, v8, Landroid/os/Binder;->onTransact(I Landroid/os/Parcel; Landroid/os/Parcel; I)Z
+000028: move-result v4
+00002a: return v4
+00002c: invoke-virtual v7, v1, Landroid/os/Parcel;->writeString(Ljava/lang/String;)V
+000032: return v2
+000034: invoke-virtual v6, v1, Landroid/os/Parcel;->enforceInterface(Ljava/lang/String;)V
+00003a: invoke-virtual v6, Landroid/os/Parcel;->readInt()I
+000040: move-result v5
+000042: if-eqz v5, +00bh
+000046: sget-object v5, Landroid/os/Messenger;->CREATOR Landroid/os/Parcelable$Creator;
+00004a: invoke-interface v5, v6, Landroid/os/Parcelable$Creator;->createFromParcel(Landroid/os/Parcel;)Ljava/lang/Object;
+000050: move-result-object v5
+000052: move-object v0, v5
+000054: check-cast v0, Landroid/os/Messenger;
+000058: invoke-virtual v6, Landroid/os/Parcel;->readString()Ljava/lang/String;
+00005e: move-result-object v5
+000060: invoke-interface v4, v0, v5, Lcom/vivo/connect/sdk/d/a;->a(Landroid/os/Messenger; Ljava/lang/String;)V
+000066: invoke-virtual v7, Landroid/os/Parcel;->writeNoException()V
+00006c: return v2
+00006e: invoke-virtual v6, v1, Landroid/os/Parcel;->enforceInterface(Ljava/lang/String;)V
+000074: invoke-virtual v6, Landroid/os/Parcel;->readInt()I
+00007a: move-result v5
+00007c: if-eqz v5, +00bh
+000080: sget-object v5, Landroid/os/Messenger;->CREATOR Landroid/os/Parcelable$Creator;
+000084: invoke-interface v5, v6, Landroid/os/Parcelable$Creator;->createFromParcel(Landroid/os/Parcel;)Ljava/lang/Object;
+00008a: move-result-object v5
+00008c: move-object v0, v5
+00008e: check-cast v0, Landroid/os/Messenger;
+000092: invoke-virtual v6, Landroid/os/Parcel;->readString()Ljava/lang/String;
+000098: move-result-object v5
+00009a: invoke-interface v4, v0, v5, Lcom/vivo/connect/sdk/d/a;->c(Landroid/os/Messenger; Ljava/lang/String;)V
+0000a0: goto -1dh
+0000a2: invoke-virtual v6, v1, Landroid/os/Parcel;->enforceInterface(Ljava/lang/String;)V
+0000a8: invoke-virtual v6, Landroid/os/Parcel;->readInt()I
+0000ae: move-result v5
+0000b0: if-eqz v5, +00bh
+0000b4: sget-object v5, Landroid/os/Messenger;->CREATOR Landroid/os/Parcelable$Creator;
+0000b8: invoke-interface v5, v6, Landroid/os/Parcelable$Creator;->createFromParcel(Landroid/os/Parcel;)Ljava/lang/Object;
+0000be: move-result-object v5
+0000c0: move-object v0, v5
+0000c2: check-cast v0, Landroid/os/Messenger;
+0000c6: invoke-virtual v6, Landroid/os/Parcel;->readString()Ljava/lang/String;
+0000cc: move-result-object v5
+0000ce: invoke-interface v4, v0, v5, Lcom/vivo/connect/sdk/d/a;->b(Landroid/os/Messenger; Ljava/lang/String;)V
+0000d4: goto -37h

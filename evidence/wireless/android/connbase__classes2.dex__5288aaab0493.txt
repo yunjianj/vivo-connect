@@ -1,0 +1,50 @@
+APK pcsuite/updateApk/connbase.apk
+DEX classes2.dex
+CLASS Lcom/vivo/pcsuite/pcconnect/ShareLinkService$h;
+SUPER Ljava/lang/Object;
+FIELDS
+a Lcom/vivo/pcsuite/pcconnect/ShareLinkService; = None
+
+METHOD <init>(Lcom/vivo/pcsuite/pcconnect/ShareLinkService;)V
+000000: iput-object v1, v0, Lcom/vivo/pcsuite/pcconnect/ShareLinkService$h;->a Lcom/vivo/pcsuite/pcconnect/ShareLinkService;
+000004: invoke-direct v0, Ljava/lang/Object;-><init>()V
+00000a: return-void 
+
+METHOD onServiceConnected(Landroid/content/ComponentName; Landroid/os/IBinder;)V
+000000: invoke-static Lcom/vivo/pcsuite/pcconnect/ShareLinkService;->k()Ljava/lang/String;
+000006: move-result-object v2
+000008: const-string v0, "WifiP2p service connected"
+00000c: invoke-static v2, v0, Lc/c/f/a/b;->k(Ljava/lang/String; Ljava/lang/String;)V
+000012: iget-object v2, v1, Lcom/vivo/pcsuite/pcconnect/ShareLinkService$h;->a Lcom/vivo/pcsuite/pcconnect/ShareLinkService;
+000016: invoke-static v3, Lcom/vivo/pcsuite/pcconnect/wifip2p/IWifiP2p$Stub;->asInterface(Landroid/os/IBinder;)Lcom/vivo/pcsuite/pcconnect/wifip2p/IWifiP2p;
+00001c: move-result-object v3
+00001e: invoke-static v2, v3, Lcom/vivo/pcsuite/pcconnect/ShareLinkService;->a(Lcom/vivo/pcsuite/pcconnect/ShareLinkService; Lcom/vivo/pcsuite/pcconnect/wifip2p/IWifiP2p;)Lcom/vivo/pcsuite/pcconnect/wifip2p/IWifiP2p;
+000024: iget-object v2, v1, Lcom/vivo/pcsuite/pcconnect/ShareLinkService$h;->a Lcom/vivo/pcsuite/pcconnect/ShareLinkService;
+000028: invoke-static v2, Lcom/vivo/pcsuite/pcconnect/ShareLinkService;->D(Lcom/vivo/pcsuite/pcconnect/ShareLinkService;)Lcom/vivo/pcsuite/pcconnect/wifip2p/IWifiP2p;
+00002e: move-result-object v2
+000030: if-eqz v2, +016h
+000034: iget-object v2, v1, Lcom/vivo/pcsuite/pcconnect/ShareLinkService$h;->a Lcom/vivo/pcsuite/pcconnect/ShareLinkService;
+000038: invoke-static v2, Lcom/vivo/pcsuite/pcconnect/ShareLinkService;->D(Lcom/vivo/pcsuite/pcconnect/ShareLinkService;)Lcom/vivo/pcsuite/pcconnect/wifip2p/IWifiP2p;
+00003e: move-result-object v2
+000040: iget-object v3, v1, Lcom/vivo/pcsuite/pcconnect/ShareLinkService$h;->a Lcom/vivo/pcsuite/pcconnect/ShareLinkService;
+000044: invoke-static v3, Lcom/vivo/pcsuite/pcconnect/ShareLinkService;->a(Lcom/vivo/pcsuite/pcconnect/ShareLinkService;)Lcom/vivo/pcsuite/pcconnect/wifip2p/WifiP2pObserver;
+00004a: move-result-object v3
+00004c: invoke-interface v2, v3, Lcom/vivo/pcsuite/pcconnect/wifip2p/IWifiP2p;->registerWifiP2pObserver(Lcom/vivo/pcsuite/pcconnect/wifip2p/WifiP2pObserver;)V
+000052: goto +5h
+000054: move-exception v2
+000056: invoke-virtual v2, Landroid/os/RemoteException;->printStackTrace()V
+00005c: iget-object v2, v1, Lcom/vivo/pcsuite/pcconnect/ShareLinkService$h;->a Lcom/vivo/pcsuite/pcconnect/ShareLinkService;
+000060: invoke-static v2, Lcom/vivo/pcsuite/pcconnect/ShareLinkService;->z(Lcom/vivo/pcsuite/pcconnect/ShareLinkService;)Ljava/util/concurrent/CountDownLatch;
+000066: move-result-object v2
+000068: invoke-virtual v2, Ljava/util/concurrent/CountDownLatch;->countDown()V
+00006e: return-void 
+
+METHOD onServiceDisconnected(Landroid/content/ComponentName;)V
+000000: invoke-static Lcom/vivo/pcsuite/pcconnect/ShareLinkService;->k()Ljava/lang/String;
+000006: move-result-object v2
+000008: const-string v0, "WifiP2p service disconnected"
+00000c: invoke-static v2, v0, Lc/c/f/a/b;->g(Ljava/lang/String; Ljava/lang/String;)V
+000012: iget-object v2, v1, Lcom/vivo/pcsuite/pcconnect/ShareLinkService$h;->a Lcom/vivo/pcsuite/pcconnect/ShareLinkService;
+000016: const/4 v0, 0
+000018: invoke-static v2, v0, Lcom/vivo/pcsuite/pcconnect/ShareLinkService;->a(Lcom/vivo/pcsuite/pcconnect/ShareLinkService; Lcom/vivo/pcsuite/pcconnect/wifip2p/IWifiP2p;)Lcom/vivo/pcsuite/pcconnect/wifip2p/IWifiP2p;
+00001e: return-void 

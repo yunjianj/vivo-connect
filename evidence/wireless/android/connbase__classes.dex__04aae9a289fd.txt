@@ -1,0 +1,61 @@
+APK pcsuite/updateApk/connbase.apk
+DEX classes.dex
+CLASS Lcom/vivo/connbase/wifi/utils/h;
+SUPER Ljava/lang/Object;
+FIELDS
+b Ljava/lang/String; = 'WorkThread'
+c I = 0
+d I = 2147483647
+e I = 20
+f Ljava/util/concurrent/TimeUnit; = None
+g Ljava/util/concurrent/BlockingQueue; = None
+a Ljava/util/concurrent/ExecutorService; = None
+
+METHOD <clinit>()V
+000000: sget-object v0, Ljava/util/concurrent/TimeUnit;->SECONDS Ljava/util/concurrent/TimeUnit;
+000004: sput-object v0, Lcom/vivo/connbase/wifi/utils/h;->f Ljava/util/concurrent/TimeUnit;
+000008: new-instance v0, Ljava/util/concurrent/SynchronousQueue;
+00000c: invoke-direct v0, Ljava/util/concurrent/SynchronousQueue;-><init>()V
+000012: sput-object v0, Lcom/vivo/connbase/wifi/utils/h;->g Ljava/util/concurrent/BlockingQueue;
+000016: return-void 
+
+METHOD <init>()V
+000000: invoke-direct v8, Ljava/lang/Object;-><init>()V
+000006: new-instance v7, Ljava/util/concurrent/ThreadPoolExecutor;
+00000a: sget-object v5, Lcom/vivo/connbase/wifi/utils/h;->f Ljava/util/concurrent/TimeUnit;
+00000e: sget-object v6, Lcom/vivo/connbase/wifi/utils/h;->g Ljava/util/concurrent/BlockingQueue;
+000012: const/4 v1, 0
+000014: const v2, 2147483647
+00001a: const-wide/16 v3, 20
+00001e: move-object v0, v7
+000020: invoke-direct/range v0 ... v6, Ljava/util/concurrent/ThreadPoolExecutor;-><init>(I I J Ljava/util/concurrent/TimeUnit; Ljava/util/concurrent/BlockingQueue;)V
+000026: iput-object v7, v8, Lcom/vivo/connbase/wifi/utils/h;->a Ljava/util/concurrent/ExecutorService;
+00002a: return-void 
+
+METHOD <init>(Lcom/vivo/connbase/wifi/utils/h$a;)V
+000000: invoke-direct v0, Lcom/vivo/connbase/wifi/utils/h;-><init>()V
+000006: return-void 
+
+METHOD a(Ljava/lang/Runnable; Ljava/lang/String;)V
+000000: new-instance v0, Ljava/lang/StringBuilder;
+000004: invoke-direct v0, Ljava/lang/StringBuilder;-><init>()V
+00000a: const-string v1, "Submit task: "
+00000e: invoke-virtual v0, v1, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+000014: invoke-virtual v0, v4, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+00001a: invoke-virtual v0, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
+000020: move-result-object v0
+000022: const-string v1, "WorkThread"
+000026: invoke-static v1, v0, Lc/c/f/a/b;->k(Ljava/lang/String; Ljava/lang/String;)V
+00002c: sget-object v0, Lcom/vivo/connbase/wifi/utils/h$b;->a Lcom/vivo/connbase/wifi/utils/h;
+000030: iget-object v0, v0, Lcom/vivo/connbase/wifi/utils/h;->a Ljava/util/concurrent/ExecutorService;
+000034: new-instance v2, Lcom/vivo/connbase/wifi/utils/h$a;
+000038: invoke-direct v2, v4, v3, Lcom/vivo/connbase/wifi/utils/h$a;-><init>(Ljava/lang/String; Ljava/lang/Runnable;)V
+00003e: invoke-interface v0, v2, Ljava/util/concurrent/ExecutorService;->submit(Ljava/lang/Runnable;)Ljava/util/concurrent/Future;
+000044: goto +bh
+000046: move-exception v3
+000048: const-string v4, "Submit runnable failed."
+00004c: goto +4h
+00004e: move-exception v3
+000050: const-string v4, "Submit runnable failed with RejectedExecutionException."
+000054: invoke-static v1, v4, v3, Lc/c/f/a/b;->b(Ljava/lang/String; Ljava/lang/String; Ljava/lang/Throwable;)V
+00005a: return-void 

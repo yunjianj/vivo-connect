@@ -1,0 +1,349 @@
+APK pcsuite/updateApk/connbase.apk
+DEX classes.dex
+CLASS Lcom/vivo/connbase/f0/m;
+SUPER Ljava/lang/Object;
+FIELDS
+a Ljava/lang/String; = 'ConnBaseCipherUtilsTAG'
+b Z = False
+
+METHOD <clinit>()V
+000000: return-void 
+
+METHOD <init>()V
+000000: invoke-direct v0, Ljava/lang/Object;-><init>()V
+000006: return-void 
+
+METHOD a(Ljava/util/concurrent/CountDownLatch;)V
+000000: const-string v0, "ConnBaseCipherUtilsTAG"
+000004: const-string v1, "getNodeReady completed."
+000008: invoke-static v0, v1, Lc/c/f/a/b;->l(Ljava/lang/String; Ljava/lang/String;)V
+00000e: const/4 v1, 1
+000010: sput-boolean v1, Lcom/vivo/connbase/f0/m;->b Z
+000014: new-instance v1, Ljava/lang/StringBuilder;
+000018: invoke-direct v1, Ljava/lang/StringBuilder;-><init>()V
+00001e: const-string v2, "cipherLatch count:"
+000022: invoke-virtual v1, v2, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+000028: invoke-virtual v5, Ljava/util/concurrent/CountDownLatch;->getCount()J
+00002e: move-result-wide v2
+000030: invoke-virtual v1, v2, v3, Ljava/lang/StringBuilder;->append(J)Ljava/lang/StringBuilder;
+000036: invoke-virtual v1, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
+00003c: move-result-object v1
+00003e: invoke-static v0, v1, Lc/c/f/a/b;->l(Ljava/lang/String; Ljava/lang/String;)V
+000044: invoke-virtual v5, Ljava/util/concurrent/CountDownLatch;->getCount()J
+00004a: move-result-wide v1
+00004c: const-wide/16 v3, 0
+000050: cmp-long v1, v1, v3
+000054: if-lez v1, +01dh
+000058: invoke-virtual v5, Ljava/util/concurrent/CountDownLatch;->countDown()V
+00005e: new-instance v1, Ljava/lang/StringBuilder;
+000062: invoke-direct v1, Ljava/lang/StringBuilder;-><init>()V
+000068: const-string v2, "cipherLatch countdown end, count:"
+00006c: invoke-virtual v1, v2, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+000072: invoke-virtual v5, Ljava/util/concurrent/CountDownLatch;->getCount()J
+000078: move-result-wide v2
+00007a: invoke-virtual v1, v2, v3, Ljava/lang/StringBuilder;->append(J)Ljava/lang/StringBuilder;
+000080: invoke-virtual v1, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
+000086: move-result-object v5
+000088: invoke-static v0, v5, Lc/c/f/a/b;->l(Ljava/lang/String; Ljava/lang/String;)V
+00008e: return-void 
+
+METHOD a(Ljava/util/concurrent/CountDownLatch; Ljava/lang/Throwable;)V
+000000: new-instance v0, Ljava/lang/StringBuilder;
+000004: invoke-direct v0, Ljava/lang/StringBuilder;-><init>()V
+00000a: const-string v1, "getNodeReady failed:"
+00000e: invoke-virtual v0, v1, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+000014: invoke-virtual v6, Ljava/lang/Throwable;->toString()Ljava/lang/String;
+00001a: move-result-object v6
+00001c: invoke-virtual v0, v6, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+000022: invoke-virtual v0, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
+000028: move-result-object v6
+00002a: const-string v0, "ConnBaseCipherUtilsTAG"
+00002e: invoke-static v0, v6, Lc/c/f/a/b;->h(Ljava/lang/String; Ljava/lang/String;)V
+000034: const/4 v6, 0
+000036: sput-boolean v6, Lcom/vivo/connbase/f0/m;->b Z
+00003a: new-instance v6, Ljava/lang/StringBuilder;
+00003e: invoke-direct v6, Ljava/lang/StringBuilder;-><init>()V
+000044: const-string v1, "cipherLatch count:"
+000048: invoke-virtual v6, v1, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+00004e: invoke-virtual v5, Ljava/util/concurrent/CountDownLatch;->getCount()J
+000054: move-result-wide v1
+000056: invoke-virtual v6, v1, v2, Ljava/lang/StringBuilder;->append(J)Ljava/lang/StringBuilder;
+00005c: invoke-virtual v6, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
+000062: move-result-object v6
+000064: invoke-static v0, v6, Lc/c/f/a/b;->l(Ljava/lang/String; Ljava/lang/String;)V
+00006a: invoke-virtual v5, Ljava/util/concurrent/CountDownLatch;->getCount()J
+000070: move-result-wide v1
+000072: const-wide/16 v3, 0
+000076: cmp-long v6, v1, v3
+00007a: if-lez v6, +01dh
+00007e: invoke-virtual v5, Ljava/util/concurrent/CountDownLatch;->countDown()V
+000084: new-instance v6, Ljava/lang/StringBuilder;
+000088: invoke-direct v6, Ljava/lang/StringBuilder;-><init>()V
+00008e: const-string v1, "cipherLatch countdown end, count:"
+000092: invoke-virtual v6, v1, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+000098: invoke-virtual v5, Ljava/util/concurrent/CountDownLatch;->getCount()J
+00009e: move-result-wide v1
+0000a0: invoke-virtual v6, v1, v2, Ljava/lang/StringBuilder;->append(J)Ljava/lang/StringBuilder;
+0000a6: invoke-virtual v6, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
+0000ac: move-result-object v5
+0000ae: invoke-static v0, v5, Lc/c/f/a/b;->l(Ljava/lang/String; Ljava/lang/String;)V
+0000b4: return-void 
+
+METHOD a()Z
+000000: const-class v0, Lcom/vivo/connbase/f0/m;
+000004: monitor-enter v0
+000006: const/4 v1, 0
+000008: invoke-static v1, Lcom/vivo/connbase/f0/m;->a(Landroid/os/Messenger;)Z
+00000e: move-result v1
+000010: monitor-exit v0
+000012: return v1
+000014: move-exception v1
+000016: monitor-exit v0
+000018: throw v1
+
+METHOD a(J)Z
+000000: invoke-static Lcom/vivo/connbase/App;->m()Lcom/vivo/connbase/App;
+000006: move-result-object v0
+000008: invoke-static v0, Lcom/vivo/connbase/e0/g/i;->b(Landroid/content/Context;)J
+00000e: move-result-wide v0
+000010: sub-long/2addr v2, v0
+000012: const-wide/32 v0, 432000000
+000018: cmp-long v2, v2, v0
+00001c: if-gtz v2, +004h
+000020: const/4 v2, 1
+000022: goto +2h
+000024: const/4 v2, 0
+000026: return v2
+
+METHOD a(Landroid/os/Messenger;)Z
+000000: const-class v6, Lcom/vivo/connbase/f0/m;
+000004: monitor-enter v6
+000006: const-string v0, "ConnBaseCipherUtilsTAG"
+00000a: const-string v1, "checkCipherNodeReady"
+00000e: invoke-static v0, v1, Lc/c/f/a/b;->k(Ljava/lang/String; Ljava/lang/String;)V
+000014: invoke-static Lcom/vivo/connbase/f0/j;->f()Lcom/vivo/connbase/f0/j;
+00001a: move-result-object v0
+00001c: invoke-virtual v0, Lcom/vivo/connbase/f0/j;->d()Z
+000022: move-result v0
+000024: invoke-static Lcom/vivo/connbase/f0/j;->f()Lcom/vivo/connbase/f0/j;
+00002a: move-result-object v1
+00002c: invoke-virtual v1, Lcom/vivo/connbase/f0/j;->c()I
+000032: move-result v1
+000034: const-string v2, "ConnBaseCipherUtilsTAG"
+000038: new-instance v3, Ljava/lang/StringBuilder;
+00003c: invoke-direct v3, Ljava/lang/StringBuilder;-><init>()V
+000042: const-string v4, "isCipherNodeReady:"
+000046: invoke-virtual v3, v4, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+00004c: invoke-virtual v3, v0, Ljava/lang/StringBuilder;->append(Z)Ljava/lang/StringBuilder;
+000052: const-string v4, ", cipherNodeState:"
+000056: invoke-virtual v3, v4, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+00005c: invoke-virtual v3, v1, Ljava/lang/StringBuilder;->append(I)Ljava/lang/StringBuilder;
+000062: invoke-virtual v3, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
+000068: move-result-object v1
+00006a: invoke-static v2, v1, Lc/c/f/a/b;->l(Ljava/lang/String; Ljava/lang/String;)V
+000070: const/4 v1, 1
+000072: if-nez v0, +0d6h
+000076: const-string v0, "ConnBaseCipherUtilsTAG"
+00007a: new-instance v2, Ljava/lang/StringBuilder;
+00007e: invoke-direct v2, Ljava/lang/StringBuilder;-><init>()V
+000084: const-string v3, "user account is null:"
+000088: invoke-virtual v2, v3, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+00008e: invoke-static Lcom/vivo/connbase/e0/g/e;->b()Ljava/lang/String;
+000094: move-result-object v3
+000096: invoke-static v3, Landroid/text/TextUtils;->isEmpty(Ljava/lang/CharSequence;)Z
+00009c: move-result v3
+00009e: invoke-virtual v2, v3, Ljava/lang/StringBuilder;->append(Z)Ljava/lang/StringBuilder;
+0000a4: invoke-virtual v2, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
+0000aa: move-result-object v2
+0000ac: invoke-static v0, v2, Lc/c/f/a/b;->l(Ljava/lang/String; Ljava/lang/String;)V
+0000b2: const-string v0, "ConnBaseCipherUtilsTAG"
+0000b6: new-instance v2, Ljava/lang/StringBuilder;
+0000ba: invoke-direct v2, Ljava/lang/StringBuilder;-><init>()V
+0000c0: const-string v3, "isLogin:"
+0000c4: invoke-virtual v2, v3, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+0000ca: invoke-static Lcom/vivo/connbase/App;->m()Lcom/vivo/connbase/App;
+0000d0: move-result-object v3
+0000d2: invoke-static v3, Lcom/bbk/account/base/BBKAccountManager;->getInstance(Landroid/content/Context;)Lcom/bbk/account/base/BBKAccountManager;
+0000d8: move-result-object v3
+0000da: invoke-virtual v3, Lcom/bbk/account/base/BBKAccountManager;->isLogin()Z
+0000e0: move-result v3
+0000e2: invoke-virtual v2, v3, Ljava/lang/StringBuilder;->append(Z)Ljava/lang/StringBuilder;
+0000e8: invoke-virtual v2, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
+0000ee: move-result-object v2
+0000f0: invoke-static v0, v2, Lc/c/f/a/b;->k(Ljava/lang/String; Ljava/lang/String;)V
+0000f6: invoke-static Lcom/vivo/connbase/e0/g/e;->b()Ljava/lang/String;
+0000fc: move-result-object v0
+0000fe: invoke-static v0, Landroid/text/TextUtils;->isEmpty(Ljava/lang/CharSequence;)Z
+000104: move-result v0
+000106: const/4 v2, 0
+000108: if-eqz v0, +00bh
+00010c: const-string v0, "ConnBaseCipherUtilsTAG"
+000110: const-string v1, "cipher node is empty, is account not login?"
+000114: invoke-static v0, v1, Lc/c/f/a/b;->l(Ljava/lang/String; Ljava/lang/String;)V
+00011a: monitor-exit v6
+00011c: return v2
+00011e: invoke-static Lcom/vivo/connbase/f0/j;->f()Lcom/vivo/connbase/f0/j;
+000124: move-result-object v0
+000126: invoke-virtual v0, Lcom/vivo/connbase/f0/j;->b()Lcom/vivo/connbase/f0/k;
+00012c: move-result-object v0
+00012e: const-string v3, "ConnBaseCipherUtilsTAG"
+000132: new-instance v4, Ljava/lang/StringBuilder;
+000136: invoke-direct v4, Ljava/lang/StringBuilder;-><init>()V
+00013c: const-string v5, "cipherNode:"
+000140: invoke-virtual v4, v5, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+000146: invoke-virtual v4, v0, Ljava/lang/StringBuilder;->append(Ljava/lang/Object;)Ljava/lang/StringBuilder;
+00014c: invoke-virtual v4, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
+000152: move-result-object v4
+000154: invoke-static v3, v4, Lc/c/f/a/b;->k(Ljava/lang/String; Ljava/lang/String;)V
+00015a: new-instance v3, Ljava/util/concurrent/CountDownLatch;
+00015e: invoke-direct v3, v1, Ljava/util/concurrent/CountDownLatch;-><init>(I)V
+000164: sput-boolean v2, Lcom/vivo/connbase/f0/m;->b Z
+000168: invoke-virtual v0, Lcom/vivo/connbase/f0/k;->c()Ld/a/a/c/j;
+00016e: move-result-object v0
+000170: invoke-static Ld/a/a/n/b;->b()Ld/a/a/c/q0;
+000176: move-result-object v1
+000178: invoke-virtual v0, v1, Ld/a/a/c/j;->b(Ld/a/a/c/q0;)Ld/a/a/c/j;
+00017e: move-result-object v0
+000180: new-instance v1, Lcom/vivo/connbase/f0/g;
+000184: invoke-direct v1, v3, Lcom/vivo/connbase/f0/g;-><init>(Ljava/util/concurrent/CountDownLatch;)V
+00018a: new-instance v4, Lcom/vivo/connbase/f0/h;
+00018e: invoke-direct v4, v3, Lcom/vivo/connbase/f0/h;-><init>(Ljava/util/concurrent/CountDownLatch;)V
+000194: invoke-virtual v0, v1, v4, Ld/a/a/c/j;->b(Ld/a/a/g/a; Ld/a/a/g/g;)Ld/a/a/d/e;
+00019a: const-string v0, "ConnBaseCipherUtilsTAG"
+00019e: const-string v1, "cipherLatch await start..."
+0001a2: invoke-static v0, v1, Lc/c/f/a/b;->l(Ljava/lang/String; Ljava/lang/String;)V
+0001a8: const-wide/16 v0, 5000
+0001ac: sget-object v4, Ljava/util/concurrent/TimeUnit;->MILLISECONDS Ljava/util/concurrent/TimeUnit;
+0001b0: invoke-virtual v3, v0, v1, v4, Ljava/util/concurrent/CountDownLatch;->await(J Ljava/util/concurrent/TimeUnit;)Z
+0001b6: move-result v0
+0001b8: if-eqz v0, +00ah
+0001bc: const-string v0, "ConnBaseCipherUtilsTAG"
+0001c0: const-string v1, "cipherLatch await end"
+0001c4: invoke-static v0, v1, Lc/c/f/a/b;->l(Ljava/lang/String; Ljava/lang/String;)V
+0001ca: goto +26h
+0001cc: const-string v0, "ConnBaseCipherUtilsTAG"
+0001d0: const-string v1, "cipherLatch await timeout"
+0001d4: invoke-static v0, v1, Lc/c/f/a/b;->q(Ljava/lang/String; Ljava/lang/String;)V
+0001da: goto +1eh
+0001dc: move-exception v0
+0001de: const-string v1, "ConnBaseCipherUtilsTAG"
+0001e2: new-instance v3, Ljava/lang/StringBuilder;
+0001e6: invoke-direct v3, Ljava/lang/StringBuilder;-><init>()V
+0001ec: const-string v4, "cipherLatch await error:"
+0001f0: invoke-virtual v3, v4, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+0001f6: invoke-virtual v0, Ljava/lang/InterruptedException;->toString()Ljava/lang/String;
+0001fc: move-result-object v0
+0001fe: invoke-virtual v3, v0, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+000204: invoke-virtual v3, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
+00020a: move-result-object v0
+00020c: invoke-static v1, v0, Lc/c/f/a/b;->q(Ljava/lang/String; Ljava/lang/String;)V
+000212: sput-boolean v2, Lcom/vivo/connbase/f0/m;->b Z
+000216: sget-boolean v0, Lcom/vivo/connbase/f0/m;->b Z
+00021a: monitor-exit v6
+00021c: return v0
+00021e: monitor-exit v6
+000220: return v1
+000222: move-exception v0
+000224: monitor-exit v6
+000226: throw v0
+
+METHOD a(Ljava/lang/String;)Z
+000000: const-string v0, "parse request_time failed:"
+000004: const-string v1, "ConnBaseCipherUtilsTAG"
+000008: new-instance v2, Lorg/json/JSONObject;
+00000c: invoke-direct v2, v7, Lorg/json/JSONObject;-><init>(Ljava/lang/String;)V
+000012: goto +1bh
+000014: move-exception v7
+000016: new-instance v2, Ljava/lang/StringBuilder;
+00001a: invoke-direct v2, Ljava/lang/StringBuilder;-><init>()V
+000020: const-string v3, "parse request message failed:"
+000024: invoke-virtual v2, v3, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+00002a: invoke-virtual v7, Lorg/json/JSONException;->toString()Ljava/lang/String;
+000030: move-result-object v7
+000032: invoke-virtual v2, v7, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+000038: invoke-virtual v2, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
+00003e: move-result-object v7
+000040: invoke-static v1, v7, Lc/c/f/a/b;->l(Ljava/lang/String; Ljava/lang/String;)V
+000046: const/4 v2, 0
+000048: const/4 v7, 1
+00004a: const/4 v3, 0
+00004c: if-eqz v2, +062h
+000050: const-string v4, "seckey_session_exist"
+000054: invoke-virtual v2, v4, Lorg/json/JSONObject;->getBoolean(Ljava/lang/String;)Z
+00005a: move v4, v7
+00005c: goto +1bh
+00005e: move-exception v4
+000060: new-instance v5, Ljava/lang/StringBuilder;
+000064: invoke-direct v5, Ljava/lang/StringBuilder;-><init>()V
+00006a: const-string v6, "parse seckey_session_exist failed:"
+00006e: invoke-virtual v5, v6, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+000074: invoke-virtual v4, Ljava/lang/Exception;->toString()Ljava/lang/String;
+00007a: move-result-object v4
+00007c: invoke-virtual v5, v4, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+000082: invoke-virtual v5, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
+000088: move-result-object v4
+00008a: invoke-static v1, v4, Lc/c/f/a/b;->l(Ljava/lang/String; Ljava/lang/String;)V
+000090: move v4, v3
+000092: const-string v5, "request_time"
+000096: invoke-virtual v2, v5, Lorg/json/JSONObject;->getLong(Ljava/lang/String;)J
+00009c: move v5, v7
+00009e: goto +19h
+0000a0: move-exception v5
+0000a2: new-instance v6, Ljava/lang/StringBuilder;
+0000a6: invoke-direct v6, Ljava/lang/StringBuilder;-><init>()V
+0000ac: invoke-virtual v6, v0, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+0000b2: invoke-virtual v5, Ljava/lang/Exception;->toString()Ljava/lang/String;
+0000b8: move-result-object v5
+0000ba: invoke-virtual v6, v5, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+0000c0: invoke-virtual v6, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
+0000c6: move-result-object v5
+0000c8: invoke-static v1, v5, Lc/c/f/a/b;->l(Ljava/lang/String; Ljava/lang/String;)V
+0000ce: move v5, v3
+0000d0: const-string v6, "version"
+0000d4: invoke-virtual v2, v6, Lorg/json/JSONObject;->getInt(Ljava/lang/String;)I
+0000da: move v0, v7
+0000dc: goto +1dh
+0000de: move-exception v2
+0000e0: new-instance v6, Ljava/lang/StringBuilder;
+0000e4: invoke-direct v6, Ljava/lang/StringBuilder;-><init>()V
+0000ea: invoke-virtual v6, v0, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+0000f0: invoke-virtual v2, Ljava/lang/Exception;->toString()Ljava/lang/String;
+0000f6: move-result-object v0
+0000f8: invoke-virtual v6, v0, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+0000fe: invoke-virtual v6, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
+000104: move-result-object v0
+000106: invoke-static v1, v0, Lc/c/f/a/b;->l(Ljava/lang/String; Ljava/lang/String;)V
+00010c: move v0, v3
+00010e: goto +4h
+000110: move v0, v3
+000112: move v4, v0
+000114: move v5, v4
+000116: new-instance v2, Ljava/lang/StringBuilder;
+00011a: invoke-direct v2, Ljava/lang/StringBuilder;-><init>()V
+000120: const-string v6, "hasRequestTimeKey:"
+000124: invoke-virtual v2, v6, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+00012a: invoke-virtual v2, v5, Ljava/lang/StringBuilder;->append(Z)Ljava/lang/StringBuilder;
+000130: const-string v6, ", hasSessionExistKey:"
+000134: invoke-virtual v2, v6, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+00013a: invoke-virtual v2, v4, Ljava/lang/StringBuilder;->append(Z)Ljava/lang/StringBuilder;
+000140: const-string v6, ", hasVersion:"
+000144: invoke-virtual v2, v6, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+00014a: invoke-virtual v2, v0, Ljava/lang/StringBuilder;->append(Z)Ljava/lang/StringBuilder;
+000150: invoke-virtual v2, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
+000156: move-result-object v2
+000158: invoke-static v1, v2, Lc/c/f/a/b;->l(Ljava/lang/String; Ljava/lang/String;)V
+00015e: if-eqz v5, +008h
+000162: if-eqz v4, +005h
+000166: if-nez v0, +003h
+00016a: goto +2h
+00016c: move v7, v3
+00016e: return v7
+
+METHOD b()Ljava/lang/String;
+000000: invoke-static Lcom/vivo/connbase/App;->m()Lcom/vivo/connbase/App;
+000006: move-result-object v0
+000008: invoke-static v0, Lcom/vivo/connbase/e0/g/i;->b(Landroid/content/Context;)J
+00000e: move-result-wide v0
+000010: invoke-static v0, v1, Lcom/vivo/connbase/e0/g/k;->a(J)Ljava/lang/String;
+000016: move-result-object v0
+000018: return-object v0

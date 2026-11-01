@@ -1,0 +1,236 @@
+APK pcsuite/updateApk/pcsuite.apk
+DEX classes2.dex
+CLASS Lcom/vivo/pcsuite/pcconnect/PCBean;
+SUPER Ljava/lang/Object;
+FIELDS
+address Ljava/lang/String; = None
+band I = None
+cause Z = None
+deviceId Ljava/lang/String; = None
+deviceName Ljava/lang/String; = None
+extraInfo Ljava/lang/String; = None
+findType I = None
+isAutoLink Z = None
+isLast Z = None
+isOnLine Z = None
+isOwnerId Z = None
+signal I = None
+time J = None
+userName Ljava/lang/String; = None
+version I = None
+
+METHOD <init>()V
+000000: invoke-direct v1, Ljava/lang/Object;-><init>()V
+000006: const/4 v0, 0
+000008: iput-boolean v0, v1, Lcom/vivo/pcsuite/pcconnect/PCBean;->isLast Z
+00000c: iput-boolean v0, v1, Lcom/vivo/pcsuite/pcconnect/PCBean;->isAutoLink Z
+000010: iput-boolean v0, v1, Lcom/vivo/pcsuite/pcconnect/PCBean;->isOnLine Z
+000014: const/4 v0, 1
+000016: iput-boolean v0, v1, Lcom/vivo/pcsuite/pcconnect/PCBean;->cause Z
+00001a: return-void 
+
+METHOD <init>(Ljava/lang/String; Ljava/lang/String; I I)V
+000000: invoke-direct v1, Ljava/lang/Object;-><init>()V
+000006: const/4 v0, 0
+000008: iput-boolean v0, v1, Lcom/vivo/pcsuite/pcconnect/PCBean;->isLast Z
+00000c: iput-boolean v0, v1, Lcom/vivo/pcsuite/pcconnect/PCBean;->isAutoLink Z
+000010: iput-boolean v0, v1, Lcom/vivo/pcsuite/pcconnect/PCBean;->isOnLine Z
+000014: const/4 v0, 1
+000016: iput-boolean v0, v1, Lcom/vivo/pcsuite/pcconnect/PCBean;->cause Z
+00001a: iput v4, v1, Lcom/vivo/pcsuite/pcconnect/PCBean;->signal I
+00001e: iput-object v3, v1, Lcom/vivo/pcsuite/pcconnect/PCBean;->deviceId Ljava/lang/String;
+000022: iput-object v2, v1, Lcom/vivo/pcsuite/pcconnect/PCBean;->deviceName Ljava/lang/String;
+000026: iput v5, v1, Lcom/vivo/pcsuite/pcconnect/PCBean;->version I
+00002a: return-void 
+
+METHOD equals(Ljava/lang/Object;)Z
+000000: instance-of v0, v2, Lcom/vivo/pcsuite/pcconnect/PCBean;
+000004: if-eqz v0, +010h
+000008: iget-object v1, v1, Lcom/vivo/pcsuite/pcconnect/PCBean;->deviceId Ljava/lang/String;
+00000c: check-cast v2, Lcom/vivo/pcsuite/pcconnect/PCBean;
+000010: iget-object v2, v2, Lcom/vivo/pcsuite/pcconnect/PCBean;->deviceId Ljava/lang/String;
+000014: invoke-virtual v1, v2, Ljava/lang/String;->equals(Ljava/lang/Object;)Z
+00001a: move-result v1
+00001c: if-eqz v1, +004h
+000020: const/4 v1, 1
+000022: return v1
+000024: const/4 v1, 0
+000026: return v1
+
+METHOD getAddress()Ljava/lang/String;
+000000: iget-object v0, v0, Lcom/vivo/pcsuite/pcconnect/PCBean;->address Ljava/lang/String;
+000004: return-object v0
+
+METHOD getBand()I
+000000: iget v0, v0, Lcom/vivo/pcsuite/pcconnect/PCBean;->band I
+000004: return v0
+
+METHOD getDeviceId()Ljava/lang/String;
+000000: iget-object v0, v0, Lcom/vivo/pcsuite/pcconnect/PCBean;->deviceId Ljava/lang/String;
+000004: return-object v0
+
+METHOD getDeviceName()Ljava/lang/String;
+000000: iget-object v0, v0, Lcom/vivo/pcsuite/pcconnect/PCBean;->deviceName Ljava/lang/String;
+000004: return-object v0
+
+METHOD getExtraInfo()Ljava/lang/String;
+000000: iget-object v0, v0, Lcom/vivo/pcsuite/pcconnect/PCBean;->extraInfo Ljava/lang/String;
+000004: return-object v0
+
+METHOD getFindType()I
+000000: iget v0, v0, Lcom/vivo/pcsuite/pcconnect/PCBean;->findType I
+000004: return v0
+
+METHOD getSignal()I
+000000: iget v0, v0, Lcom/vivo/pcsuite/pcconnect/PCBean;->signal I
+000004: return v0
+
+METHOD getTime()J
+000000: iget-wide v0, v2, Lcom/vivo/pcsuite/pcconnect/PCBean;->time J
+000004: return-wide v0
+
+METHOD getUserName()Ljava/lang/String;
+000000: iget-object v0, v0, Lcom/vivo/pcsuite/pcconnect/PCBean;->userName Ljava/lang/String;
+000004: return-object v0
+
+METHOD getVersion()I
+000000: iget v0, v0, Lcom/vivo/pcsuite/pcconnect/PCBean;->version I
+000004: return v0
+
+METHOD isAutoLink()Z
+000000: iget-boolean v0, v0, Lcom/vivo/pcsuite/pcconnect/PCBean;->isAutoLink Z
+000004: return v0
+
+METHOD isCause()Z
+000000: iget-boolean v0, v0, Lcom/vivo/pcsuite/pcconnect/PCBean;->cause Z
+000004: return v0
+
+METHOD isLast()Z
+000000: iget-boolean v0, v0, Lcom/vivo/pcsuite/pcconnect/PCBean;->isLast Z
+000004: return v0
+
+METHOD isOnLine()Z
+000000: iget-boolean v0, v0, Lcom/vivo/pcsuite/pcconnect/PCBean;->isOnLine Z
+000004: return v0
+
+METHOD isOwnerId()Z
+000000: iget-boolean v0, v0, Lcom/vivo/pcsuite/pcconnect/PCBean;->isOwnerId Z
+000004: return v0
+
+METHOD setAddress(Ljava/lang/String;)V
+000000: iput-object v1, v0, Lcom/vivo/pcsuite/pcconnect/PCBean;->address Ljava/lang/String;
+000004: return-void 
+
+METHOD setAutoLink(Z)V
+000000: iput-boolean v1, v0, Lcom/vivo/pcsuite/pcconnect/PCBean;->isAutoLink Z
+000004: return-void 
+
+METHOD setBand(I)V
+000000: iput v1, v0, Lcom/vivo/pcsuite/pcconnect/PCBean;->band I
+000004: return-void 
+
+METHOD setCause(Z)V
+000000: iput-boolean v1, v0, Lcom/vivo/pcsuite/pcconnect/PCBean;->cause Z
+000004: return-void 
+
+METHOD setDeviceId(Ljava/lang/String;)V
+000000: iput-object v1, v0, Lcom/vivo/pcsuite/pcconnect/PCBean;->deviceId Ljava/lang/String;
+000004: return-void 
+
+METHOD setDeviceName(Ljava/lang/String;)V
+000000: iput-object v1, v0, Lcom/vivo/pcsuite/pcconnect/PCBean;->deviceName Ljava/lang/String;
+000004: return-void 
+
+METHOD setExtraInfo(Ljava/lang/String;)V
+000000: iput-object v1, v0, Lcom/vivo/pcsuite/pcconnect/PCBean;->extraInfo Ljava/lang/String;
+000004: return-void 
+
+METHOD setFindType(I)V
+000000: iput v1, v0, Lcom/vivo/pcsuite/pcconnect/PCBean;->findType I
+000004: return-void 
+
+METHOD setLast(Z)V
+000000: iput-boolean v1, v0, Lcom/vivo/pcsuite/pcconnect/PCBean;->isLast Z
+000004: return-void 
+
+METHOD setOnLine(Z)V
+000000: iput-boolean v1, v0, Lcom/vivo/pcsuite/pcconnect/PCBean;->isOnLine Z
+000004: return-void 
+
+METHOD setOwnerId(Z)V
+000000: iput-boolean v1, v0, Lcom/vivo/pcsuite/pcconnect/PCBean;->isOwnerId Z
+000004: return-void 
+
+METHOD setSignal(I)V
+000000: iput v1, v0, Lcom/vivo/pcsuite/pcconnect/PCBean;->signal I
+000004: return-void 
+
+METHOD setTime(J)V
+000000: iput-wide v1, v0, Lcom/vivo/pcsuite/pcconnect/PCBean;->time J
+000004: return-void 
+
+METHOD setUserName(Ljava/lang/String;)V
+000000: iput-object v1, v0, Lcom/vivo/pcsuite/pcconnect/PCBean;->userName Ljava/lang/String;
+000004: return-void 
+
+METHOD setVersion(I)V
+000000: iput v1, v0, Lcom/vivo/pcsuite/pcconnect/PCBean;->version I
+000004: return-void 
+
+METHOD toString()Ljava/lang/String;
+000000: new-instance v0, Ljava/lang/StringBuilder;
+000004: const-string v1, "PCBean{, deviceName='"
+000008: invoke-direct v0, v1, Ljava/lang/StringBuilder;-><init>(Ljava/lang/String;)V
+00000e: iget-object v1, v3, Lcom/vivo/pcsuite/pcconnect/PCBean;->deviceName Ljava/lang/String;
+000012: invoke-virtual v0, v1, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+000018: const-string v1, "', userName='"
+00001c: invoke-virtual v0, v1, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+000022: iget-object v1, v3, Lcom/vivo/pcsuite/pcconnect/PCBean;->userName Ljava/lang/String;
+000026: invoke-virtual v0, v1, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+00002c: const-string v1, "', isOd="
+000030: invoke-virtual v0, v1, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+000036: iget-boolean v1, v3, Lcom/vivo/pcsuite/pcconnect/PCBean;->isOwnerId Z
+00003a: invoke-virtual v0, v1, Ljava/lang/StringBuilder;->append(Z)Ljava/lang/StringBuilder;
+000040: const-string v1, ", signal="
+000044: invoke-virtual v0, v1, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+00004a: iget v1, v3, Lcom/vivo/pcsuite/pcconnect/PCBean;->signal I
+00004e: invoke-virtual v0, v1, Ljava/lang/StringBuilder;->append(I)Ljava/lang/StringBuilder;
+000054: const-string v1, ", version="
+000058: invoke-virtual v0, v1, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+00005e: iget v1, v3, Lcom/vivo/pcsuite/pcconnect/PCBean;->version I
+000062: invoke-virtual v0, v1, Ljava/lang/StringBuilder;->append(I)Ljava/lang/StringBuilder;
+000068: const-string v1, ", band="
+00006c: invoke-virtual v0, v1, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+000072: iget v1, v3, Lcom/vivo/pcsuite/pcconnect/PCBean;->band I
+000076: invoke-virtual v0, v1, Ljava/lang/StringBuilder;->append(I)Ljava/lang/StringBuilder;
+00007c: const-string v1, ", time="
+000080: invoke-virtual v0, v1, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+000086: iget-wide v1, v3, Lcom/vivo/pcsuite/pcconnect/PCBean;->time J
+00008a: invoke-virtual v0, v1, v2, Ljava/lang/StringBuilder;->append(J)Ljava/lang/StringBuilder;
+000090: const-string v1, ", findType="
+000094: invoke-virtual v0, v1, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+00009a: iget v1, v3, Lcom/vivo/pcsuite/pcconnect/PCBean;->findType I
+00009e: invoke-virtual v0, v1, Ljava/lang/StringBuilder;->append(I)Ljava/lang/StringBuilder;
+0000a4: const-string v1, ", isLast="
+0000a8: invoke-virtual v0, v1, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+0000ae: iget-boolean v1, v3, Lcom/vivo/pcsuite/pcconnect/PCBean;->isLast Z
+0000b2: invoke-virtual v0, v1, Ljava/lang/StringBuilder;->append(Z)Ljava/lang/StringBuilder;
+0000b8: const-string v1, ", isAutoLink="
+0000bc: invoke-virtual v0, v1, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+0000c2: iget-boolean v1, v3, Lcom/vivo/pcsuite/pcconnect/PCBean;->isAutoLink Z
+0000c6: invoke-virtual v0, v1, Ljava/lang/StringBuilder;->append(Z)Ljava/lang/StringBuilder;
+0000cc: const-string v1, ", isOnLine="
+0000d0: invoke-virtual v0, v1, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+0000d6: iget-boolean v1, v3, Lcom/vivo/pcsuite/pcconnect/PCBean;->isOnLine Z
+0000da: invoke-virtual v0, v1, Ljava/lang/StringBuilder;->append(Z)Ljava/lang/StringBuilder;
+0000e0: const-string v1, ", cause="
+0000e4: invoke-virtual v0, v1, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+0000ea: iget-boolean v1, v3, Lcom/vivo/pcsuite/pcconnect/PCBean;->cause Z
+0000ee: invoke-virtual v0, v1, Ljava/lang/StringBuilder;->append(Z)Ljava/lang/StringBuilder;
+0000f4: const-string v1, ", extraInfo="
+0000f8: invoke-virtual v0, v1, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+0000fe: iget-object v3, v3, Lcom/vivo/pcsuite/pcconnect/PCBean;->extraInfo Ljava/lang/String;
+000102: const/16 v1, 125
+000106: invoke-static v0, v3, v1, Landroidx/constraintlayout/core/motion/a;->a(Ljava/lang/StringBuilder; Ljava/lang/String; C)Ljava/lang/String;
+00010c: move-result-object v3
+00010e: return-object v3

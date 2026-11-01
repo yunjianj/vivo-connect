@@ -1,0 +1,81 @@
+APK pcsuite/updateApk/connbase.apk
+DEX classes.dex
+CLASS Lcom/vivo/connbase/AccountLoginLaunchActivity;
+SUPER Landroidx/fragment/app/d;
+FIELDS
+a Ljava/lang/String; = 'AccountLoginLaunchActivityTAG'
+
+METHOD <init>()V
+000000: invoke-direct v0, Landroidx/fragment/app/d;-><init>()V
+000006: return-void 
+
+METHOD a(Ljava/lang/String;)V
+000000: new-instance v0, Landroid/content/Intent;
+000004: invoke-direct v0, Landroid/content/Intent;-><init>()V
+00000a: invoke-virtual v0, v3, Landroid/content/Intent;->setAction(Ljava/lang/String;)Landroid/content/Intent;
+000010: invoke-virtual v2, v0, Landroid/app/Activity;->startActivity(Landroid/content/Intent;)V
+000016: goto +1ch
+000018: move-exception v3
+00001a: new-instance v0, Ljava/lang/StringBuilder;
+00001e: invoke-direct v0, Ljava/lang/StringBuilder;-><init>()V
+000024: const-string v1, ""
+000028: invoke-virtual v0, v1, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+00002e: invoke-virtual v3, Ljava/lang/Exception;->getMessage()Ljava/lang/String;
+000034: move-result-object v3
+000036: invoke-virtual v0, v3, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+00003c: invoke-virtual v0, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
+000042: move-result-object v3
+000044: const-string v0, "AccountLoginLaunchActivityTAG"
+000048: invoke-static v0, v3, Lc/c/f/a/b;->g(Ljava/lang/String; Ljava/lang/String;)V
+00004e: return-void 
+
+METHOD onCreate(Landroid/os/Bundle;)V
+000000: invoke-super v2, v3, Landroidx/fragment/app/d;->onCreate(Landroid/os/Bundle;)V
+000006: invoke-virtual v2, Landroid/app/Activity;->getWindow()Landroid/view/Window;
+00000c: move-result-object v3
+00000e: const/high16 v0, 67108864
+000012: invoke-virtual v3, v0, Landroid/view/Window;->addFlags(I)V
+000018: invoke-virtual v2, Landroid/app/Activity;->getIntent()Landroid/content/Intent;
+00001e: move-result-object v3
+000020: const-string v0, "startType"
+000024: const/4 v1, -1
+000026: invoke-virtual v3, v0, v1, Landroid/content/Intent;->getIntExtra(Ljava/lang/String; I)I
+00002c: move-result v3
+00002e: new-instance v0, Ljava/lang/StringBuilder;
+000032: invoke-direct v0, Ljava/lang/StringBuilder;-><init>()V
+000038: const-string v1, "AccountLoginLaunchActivity enter"
+00003c: invoke-virtual v0, v1, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+000042: invoke-virtual v0, v3, Ljava/lang/StringBuilder;->append(I)Ljava/lang/StringBuilder;
+000048: invoke-virtual v0, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
+00004e: move-result-object v0
+000050: const-string v1, "AccountLoginLaunchActivityTAG"
+000054: invoke-static v1, v0, Lc/c/f/a/b;->l(Ljava/lang/String; Ljava/lang/String;)V
+00005a: if-eqz v3, +018h
+00005e: const/4 v0, 1
+000060: if-eq v3, v0, +00fh
+000064: const/4 v0, 2
+000066: if-eq v3, v0, +009h
+00006a: const/4 v0, 3
+00006c: if-eq v3, v0, +003h
+000070: goto +18h
+000072: const-string v3, "android.settings.WIRELESS_SETTINGS"
+000076: goto +6h
+000078: const-string v3, "android.settings.WIFI_SETTINGS"
+00007c: goto +3h
+00007e: const-string v3, "android.settings.BLUETOOTH_SETTINGS"
+000082: invoke-direct v2, v3, Lcom/vivo/connbase/AccountLoginLaunchActivity;->a(Ljava/lang/String;)V
+000088: goto +ch
+00008a: invoke-static Lcom/vivo/connbase/App;->m()Lcom/vivo/connbase/App;
+000090: move-result-object v3
+000092: invoke-static v3, Lcom/bbk/account/base/BBKAccountManager;->getInstance(Landroid/content/Context;)Lcom/bbk/account/base/BBKAccountManager;
+000098: move-result-object v3
+00009a: invoke-virtual v3, v2, Lcom/bbk/account/base/BBKAccountManager;->toVivoAccount(Landroid/app/Activity;)V
+0000a0: invoke-virtual v2, Landroid/app/Activity;->finish()V
+0000a6: return-void 
+
+METHOD onDestroy()V
+000000: invoke-super v2, Landroidx/fragment/app/d;->onDestroy()V
+000006: const-string v0, "AccountLoginLaunchActivityTAG"
+00000a: const-string v1, "AccountLoginLaunchActivity onDestroy"
+00000e: invoke-static v0, v1, Lc/c/f/a/b;->l(Ljava/lang/String; Ljava/lang/String;)V
+000014: return-void 

@@ -1,0 +1,30 @@
+APK pcsuite/updateApk/connbase.apk
+DEX classes2.dex
+CLASS Lcom/vivo/pcsuite/pcconnect/ble/BluetoothLeService$a;
+SUPER Ljava/lang/Object;
+FIELDS
+a Lcom/vivo/pcsuite/pcconnect/ble/BluetoothLeService; = None
+
+METHOD <init>(Lcom/vivo/pcsuite/pcconnect/ble/BluetoothLeService;)V
+000000: iput-object v1, v0, Lcom/vivo/pcsuite/pcconnect/ble/BluetoothLeService$a;->a Lcom/vivo/pcsuite/pcconnect/ble/BluetoothLeService;
+000004: invoke-direct v0, Ljava/lang/Object;-><init>()V
+00000a: return-void 
+
+METHOD run()V
+000000: const-string v0, "pcsuite_BluetoothLeService"
+000004: const-string v1, "Connect timeout, take this as failure."
+000008: invoke-static v0, v1, Lc/c/f/a/b;->p(Ljava/lang/String; Ljava/lang/String;)V
+00000e: iget-object v0, v3, Lcom/vivo/pcsuite/pcconnect/ble/BluetoothLeService$a;->a Lcom/vivo/pcsuite/pcconnect/ble/BluetoothLeService;
+000012: invoke-static v0, Lcom/vivo/pcsuite/pcconnect/ble/BluetoothLeService;->a(Lcom/vivo/pcsuite/pcconnect/ble/BluetoothLeService;)Lcom/vivo/pcsuite/pcconnect/ble/BluetoothLeService$i;
+000018: move-result-object v0
+00001a: invoke-virtual v0, Lcom/vivo/pcsuite/pcconnect/ble/BluetoothLeService$i;->connectDone()V
+000020: goto +5h
+000022: move-exception v0
+000024: invoke-virtual v0, Landroid/os/RemoteException;->printStackTrace()V
+00002a: iget-object v0, v3, Lcom/vivo/pcsuite/pcconnect/ble/BluetoothLeService$a;->a Lcom/vivo/pcsuite/pcconnect/ble/BluetoothLeService;
+00002e: invoke-virtual v0, Lcom/vivo/pcsuite/pcconnect/ble/BluetoothLeService;->b()V
+000034: iget-object v0, v3, Lcom/vivo/pcsuite/pcconnect/ble/BluetoothLeService$a;->a Lcom/vivo/pcsuite/pcconnect/ble/BluetoothLeService;
+000038: const/4 v1, 3
+00003a: const/16 v2, 8
+00003e: invoke-static v0, v1, v2, Lcom/vivo/pcsuite/pcconnect/ble/BluetoothLeService;->a(Lcom/vivo/pcsuite/pcconnect/ble/BluetoothLeService; I I)V
+000044: return-void 

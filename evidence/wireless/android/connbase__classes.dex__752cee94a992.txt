@@ -1,0 +1,53 @@
+APK pcsuite/updateApk/connbase.apk
+DEX classes.dex
+CLASS Lcom/vivo/connbase/e0/g/e$a;
+SUPER Ljava/lang/Object;
+FIELDS
+a J = None
+
+METHOD <init>(J)V
+000000: iput-wide v1, v0, Lcom/vivo/connbase/e0/g/e$a;->a J
+000004: invoke-direct v0, Ljava/lang/Object;-><init>()V
+00000a: return-void 
+
+METHOD onPhotoError(I Ljava/lang/String;)V
+000000: new-instance v0, Ljava/lang/StringBuilder;
+000004: invoke-direct v0, Ljava/lang/StringBuilder;-><init>()V
+00000a: const-string v1, "onPhotoError stat="
+00000e: invoke-virtual v0, v1, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+000014: invoke-virtual v0, v3, Ljava/lang/StringBuilder;->append(I)Ljava/lang/StringBuilder;
+00001a: const-string v3, ", msg="
+00001e: invoke-virtual v0, v3, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+000024: invoke-virtual v0, v4, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+00002a: invoke-virtual v0, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
+000030: move-result-object v3
+000032: const-string v4, "OpenIdUtilsTAG"
+000036: invoke-static v4, v3, Lc/c/f/a/b;->p(Ljava/lang/String; Ljava/lang/String;)V
+00003c: return-void 
+
+METHOD onPhotoLoad(I Ljava/lang/String;)V
+000000: new-instance v0, Ljava/lang/StringBuilder;
+000004: invoke-direct v0, Ljava/lang/StringBuilder;-><init>()V
+00000a: const-string v1, "onPhotoLoad stat="
+00000e: invoke-virtual v0, v1, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+000014: invoke-virtual v0, v6, Ljava/lang/StringBuilder;->append(I)Ljava/lang/StringBuilder;
+00001a: const-string v1, ", url="
+00001e: invoke-virtual v0, v1, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+000024: invoke-virtual v0, v7, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+00002a: const-string v1, ", cost="
+00002e: invoke-virtual v0, v1, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+000034: invoke-static Ljava/lang/System;->currentTimeMillis()J
+00003a: move-result-wide v1
+00003c: iget-wide v3, v5, Lcom/vivo/connbase/e0/g/e$a;->a J
+000040: sub-long/2addr v1, v3
+000042: invoke-virtual v0, v1, v2, Ljava/lang/StringBuilder;->append(J)Ljava/lang/StringBuilder;
+000048: const-string v1, "ms"
+00004c: invoke-virtual v0, v1, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+000052: invoke-virtual v0, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
+000058: move-result-object v0
+00005a: const-string v1, "OpenIdUtilsTAG"
+00005e: invoke-static v1, v0, Lc/c/f/a/b;->k(Ljava/lang/String; Ljava/lang/String;)V
+000064: const/16 v0, 200
+000068: if-ne v6, v0, +005h
+00006c: invoke-static v7, Lcom/vivo/connbase/e0/g/e;->a(Ljava/lang/String;)Ljava/lang/String;
+000072: return-void 

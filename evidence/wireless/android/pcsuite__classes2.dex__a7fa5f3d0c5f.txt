@@ -1,0 +1,41 @@
+APK pcsuite/updateApk/pcsuite.apk
+DEX classes2.dex
+CLASS Lcom/vivo/pcsuite/service/PcSuiteInCallService$a;
+SUPER Landroid/telecom/Call$Callback;
+FIELDS
+a Lcom/vivo/pcsuite/service/PcSuiteInCallService; = None
+
+METHOD <init>(Lcom/vivo/pcsuite/service/PcSuiteInCallService;)V
+000000: iput-object v1, v0, Lcom/vivo/pcsuite/service/PcSuiteInCallService$a;->a Lcom/vivo/pcsuite/service/PcSuiteInCallService;
+000004: invoke-direct v0, Landroid/telecom/Call$Callback;-><init>()V
+00000a: return-void 
+
+METHOD onConnectionEvent(Landroid/telecom/Call; Ljava/lang/String; Landroid/os/Bundle;)V
+000000: invoke-super v1, v2, v3, v4, Landroid/telecom/Call$Callback;->onConnectionEvent(Landroid/telecom/Call; Ljava/lang/String; Landroid/os/Bundle;)V
+000006: const-string v0, "phone_to_pc_data_event"
+00000a: invoke-virtual v0, v3, Ljava/lang/String;->equals(Ljava/lang/Object;)Z
+000010: move-result v0
+000012: iget-object v1, v1, Lcom/vivo/pcsuite/service/PcSuiteInCallService$a;->a Lcom/vivo/pcsuite/service/PcSuiteInCallService;
+000016: if-eqz v0, +006h
+00001a: invoke-static v1, v2, v4, Lcom/vivo/pcsuite/service/PcSuiteInCallService;->h(Lcom/vivo/pcsuite/service/PcSuiteInCallService; Landroid/telecom/Call; Landroid/os/Bundle;)V
+000020: return-void 
+000022: const-string v0, "phone_to_pc_action_event"
+000026: invoke-virtual v0, v3, Ljava/lang/String;->equals(Ljava/lang/Object;)Z
+00002c: move-result v0
+00002e: if-eqz v0, +006h
+000032: invoke-static v1, v2, v4, Lcom/vivo/pcsuite/service/PcSuiteInCallService;->d(Lcom/vivo/pcsuite/service/PcSuiteInCallService; Landroid/telecom/Call; Landroid/os/Bundle;)V
+000038: return-void 
+00003a: const-string v1, "phone_request_pc_data_event"
+00003e: invoke-virtual v1, v3, Ljava/lang/String;->equals(Ljava/lang/Object;)Z
+000044: move-result v1
+000046: if-eqz v1, +005h
+00004a: invoke-static v2, Lcom/vivo/pcsuite/service/PcSuiteInCallService;->i(Landroid/telecom/Call;)V
+000050: return-void 
+
+METHOD onStateChanged(Landroid/telecom/Call; I)V
+000000: const-string v3, "PcSuiteInCallService"
+000004: const-string v0, "onStateChanged"
+000008: invoke-static v3, v0, LD1/a;->h(Ljava/lang/String; Ljava/lang/String;)V
+00000e: iget-object v1, v1, Lcom/vivo/pcsuite/service/PcSuiteInCallService$a;->a Lcom/vivo/pcsuite/service/PcSuiteInCallService;
+000012: invoke-static v1, v2, Lcom/vivo/pcsuite/service/PcSuiteInCallService;->e(Lcom/vivo/pcsuite/service/PcSuiteInCallService; Landroid/telecom/Call;)V
+000018: return-void 

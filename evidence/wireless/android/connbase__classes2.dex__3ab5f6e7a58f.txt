@@ -1,0 +1,318 @@
+APK pcsuite/updateApk/connbase.apk
+DEX classes2.dex
+CLASS Lcom/vivo/pcsuite/pcconnect/p/b;
+SUPER Ljava/lang/Object;
+FIELDS
+a Ljava/lang/String; = 'BaseReflectUtils'
+b Ljava/util/HashMap; = None
+
+METHOD <clinit>()V
+000000: new-instance v0, Ljava/util/HashMap;
+000004: invoke-direct v0, Ljava/util/HashMap;-><init>()V
+00000a: sput-object v0, Lcom/vivo/pcsuite/pcconnect/p/b;->b Ljava/util/HashMap;
+00000e: return-void 
+
+METHOD <init>()V
+000000: invoke-direct v0, Ljava/lang/Object;-><init>()V
+000006: return-void 
+
+METHOD a(Ljava/lang/String;)Ljava/lang/Class;
+000000: invoke-static v0, Ljava/lang/Class;->forName(Ljava/lang/String;)Ljava/lang/Class;
+000006: move-result-object v0
+000008: return-object v0
+
+METHOD a(Ljava/lang/Class;)Ljava/lang/Object;
+000000: const/4 v0, 0
+000002: if-nez v3, +003h
+000006: return-object v0
+000008: invoke-virtual v3, Ljava/lang/Class;->newInstance()Ljava/lang/Object;
+00000e: move-result-object v3
+000010: return-object v3
+000012: move-exception v3
+000014: goto +2h
+000016: move-exception v3
+000018: new-instance v1, Ljava/lang/StringBuilder;
+00001c: invoke-direct v1, Ljava/lang/StringBuilder;-><init>()V
+000022: const-string v2, "newInstance error : "
+000026: invoke-virtual v1, v2, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+00002c: invoke-virtual v3, Ljava/lang/ReflectiveOperationException;->getMessage()Ljava/lang/String;
+000032: move-result-object v3
+000034: invoke-virtual v1, v3, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+00003a: invoke-virtual v1, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
+000040: move-result-object v3
+000042: const-string v1, "BaseReflectUtils"
+000046: invoke-static v1, v3, Lc/c/f/a/b;->g(Ljava/lang/String; Ljava/lang/String;)V
+00004c: return-object v0
+
+METHOD a(Ljava/lang/Class; Ljava/lang/Class; Ljava/lang/String; [Ljava/lang/Class; [Ljava/lang/Object;)Ljava/lang/Object;
+000000: invoke-virtual v0, v2, v3, Ljava/lang/Class;->getDeclaredMethod(Ljava/lang/String; [Ljava/lang/Class;)Ljava/lang/reflect/Method;
+000006: move-result-object v0
+000008: const/4 v1, 1
+00000a: invoke-virtual v0, v1, Ljava/lang/reflect/Method;->setAccessible(Z)V
+000010: const/4 v1, 0
+000012: invoke-virtual v0, v1, v4, Ljava/lang/reflect/Method;->invoke(Ljava/lang/Object; [Ljava/lang/Object;)Ljava/lang/Object;
+000018: move-result-object v0
+00001a: return-object v0
+
+METHOD a(Ljava/lang/Class; Ljava/lang/String;)Ljava/lang/Object;
+000000: const/4 v0, 0
+000002: new-array v1, v0, [Ljava/lang/Class;
+000006: invoke-virtual v2, v3, v1, Ljava/lang/Class;->getMethod(Ljava/lang/String; [Ljava/lang/Class;)Ljava/lang/reflect/Method;
+00000c: move-result-object v2
+00000e: new-array v3, v0, [Ljava/lang/Object;
+000012: const/4 v0, 0
+000014: invoke-virtual v2, v0, v3, Ljava/lang/reflect/Method;->invoke(Ljava/lang/Object; [Ljava/lang/Object;)Ljava/lang/Object;
+00001a: move-result-object v2
+00001c: return-object v2
+
+METHOD a(Ljava/lang/Class; Ljava/lang/String; Ljava/lang/Class;)Ljava/lang/Object;
+000000: invoke-virtual v0, v1, Ljava/lang/Class;->getDeclaredField(Ljava/lang/String;)Ljava/lang/reflect/Field;
+000006: move-result-object v0
+000008: const/4 v1, 1
+00000a: invoke-virtual v0, v1, Ljava/lang/reflect/Field;->setAccessible(Z)V
+000010: const/4 v1, 0
+000012: invoke-virtual v0, v1, Ljava/lang/reflect/Field;->get(Ljava/lang/Object;)Ljava/lang/Object;
+000018: move-result-object v0
+00001a: return-object v0
+
+METHOD a(Ljava/lang/Class; Ljava/lang/String; [Ljava/lang/Class; [Ljava/lang/Object;)Ljava/lang/Object;
+000000: invoke-virtual v0, v1, v2, Ljava/lang/Class;->getDeclaredMethod(Ljava/lang/String; [Ljava/lang/Class;)Ljava/lang/reflect/Method;
+000006: move-result-object v0
+000008: const/4 v1, 1
+00000a: invoke-virtual v0, v1, Ljava/lang/reflect/Method;->setAccessible(Z)V
+000010: const/4 v1, 0
+000012: invoke-virtual v0, v1, v3, Ljava/lang/reflect/Method;->invoke(Ljava/lang/Object; [Ljava/lang/Object;)Ljava/lang/Object;
+000018: move-result-object v0
+00001a: return-object v0
+
+METHOD a(Ljava/lang/Class; [Ljava/lang/Class; [Ljava/lang/Object;)Ljava/lang/Object;
+000000: invoke-virtual v0, v1, Ljava/lang/Class;->getConstructor([Ljava/lang/Class;)Ljava/lang/reflect/Constructor;
+000006: move-result-object v0
+000008: invoke-virtual v0, v2, Ljava/lang/reflect/Constructor;->newInstance([Ljava/lang/Object;)Ljava/lang/Object;
+00000e: move-result-object v0
+000010: return-object v0
+
+METHOD a(Ljava/lang/Object; Ljava/lang/Class; Ljava/lang/String; [Ljava/lang/Class; [Ljava/lang/Object;)Ljava/lang/Object;
+000000: invoke-virtual v0, Ljava/lang/Object;->getClass()Ljava/lang/Class;
+000006: move-result-object v1
+000008: invoke-virtual v1, v2, v3, Ljava/lang/Class;->getDeclaredMethod(Ljava/lang/String; [Ljava/lang/Class;)Ljava/lang/reflect/Method;
+00000e: move-result-object v1
+000010: const/4 v2, 1
+000012: invoke-virtual v1, v2, Ljava/lang/reflect/Method;->setAccessible(Z)V
+000018: invoke-virtual v1, v0, v4, Ljava/lang/reflect/Method;->invoke(Ljava/lang/Object; [Ljava/lang/Object;)Ljava/lang/Object;
+00001e: move-result-object v0
+000020: return-object v0
+
+METHOD a(Ljava/lang/Object; Ljava/lang/String;)Ljava/lang/Object;
+000000: invoke-virtual v3, Ljava/lang/Object;->getClass()Ljava/lang/Class;
+000006: move-result-object v0
+000008: const/4 v1, 0
+00000a: new-array v2, v1, [Ljava/lang/Class;
+00000e: invoke-virtual v0, v4, v2, Ljava/lang/Class;->getMethod(Ljava/lang/String; [Ljava/lang/Class;)Ljava/lang/reflect/Method;
+000014: move-result-object v4
+000016: const/4 v0, 1
+000018: invoke-virtual v4, v0, Ljava/lang/reflect/Method;->setAccessible(Z)V
+00001e: new-array v0, v1, [Ljava/lang/Object;
+000022: invoke-virtual v4, v3, v0, Ljava/lang/reflect/Method;->invoke(Ljava/lang/Object; [Ljava/lang/Object;)Ljava/lang/Object;
+000028: move-result-object v3
+00002a: return-object v3
+
+METHOD a(Ljava/lang/Object; Ljava/lang/String; Ljava/lang/Class;)Ljava/lang/Object;
+000000: invoke-virtual v0, Ljava/lang/Object;->getClass()Ljava/lang/Class;
+000006: move-result-object v2
+000008: invoke-virtual v2, v1, Ljava/lang/Class;->getDeclaredField(Ljava/lang/String;)Ljava/lang/reflect/Field;
+00000e: move-result-object v1
+000010: const/4 v2, 1
+000012: invoke-virtual v1, v2, Ljava/lang/reflect/Field;->setAccessible(Z)V
+000018: invoke-virtual v1, v0, Ljava/lang/reflect/Field;->get(Ljava/lang/Object;)Ljava/lang/Object;
+00001e: move-result-object v0
+000020: return-object v0
+
+METHOD a(Ljava/lang/Object; Ljava/lang/String; Ljava/lang/String; Ljava/lang/reflect/InvocationHandler;)Ljava/lang/Object;
+000000: invoke-virtual v5, Ljava/lang/Object;->getClass()Ljava/lang/Class;
+000006: move-result-object v0
+000008: invoke-static v7, Lcom/vivo/pcsuite/pcconnect/p/b;->a(Ljava/lang/String;)Ljava/lang/Class;
+00000e: move-result-object v7
+000010: const-class v1, Lcom/vivo/pcsuite/pcconnect/p/b;
+000014: invoke-virtual v1, Ljava/lang/Class;->getClassLoader()Ljava/lang/ClassLoader;
+00001a: move-result-object v1
+00001c: const/4 v2, 1
+00001e: new-array v3, v2, [Ljava/lang/Class;
+000022: const/4 v4, 0
+000024: aput-object v7, v3, v4
+000028: invoke-static v1, v3, v8, Ljava/lang/reflect/Proxy;->newProxyInstance(Ljava/lang/ClassLoader; [Ljava/lang/Class; Ljava/lang/reflect/InvocationHandler;)Ljava/lang/Object;
+00002e: move-result-object v8
+000030: new-array v1, v2, [Ljava/lang/Class;
+000034: aput-object v7, v1, v4
+000038: invoke-virtual v0, v6, v1, Ljava/lang/Class;->getDeclaredMethod(Ljava/lang/String; [Ljava/lang/Class;)Ljava/lang/reflect/Method;
+00003e: move-result-object v6
+000040: invoke-virtual v6, v2, Ljava/lang/reflect/Method;->setAccessible(Z)V
+000046: new-array v7, v2, [Ljava/lang/Object;
+00004a: aput-object v8, v7, v4
+00004e: invoke-virtual v6, v5, v7, Ljava/lang/reflect/Method;->invoke(Ljava/lang/Object; [Ljava/lang/Object;)Ljava/lang/Object;
+000054: move-result-object v5
+000056: return-object v5
+
+METHOD a(Ljava/lang/Object; Ljava/lang/String; [Ljava/lang/Class; [Ljava/lang/Object;)Ljava/lang/Object;
+000000: invoke-virtual v1, Ljava/lang/Object;->getClass()Ljava/lang/Class;
+000006: move-result-object v0
+000008: invoke-virtual v0, v2, v3, Ljava/lang/Class;->getDeclaredMethod(Ljava/lang/String; [Ljava/lang/Class;)Ljava/lang/reflect/Method;
+00000e: move-result-object v2
+000010: const/4 v3, 1
+000012: invoke-virtual v2, v3, Ljava/lang/reflect/Method;->setAccessible(Z)V
+000018: invoke-virtual v2, v1, v4, Ljava/lang/reflect/Method;->invoke(Ljava/lang/Object; [Ljava/lang/Object;)Ljava/lang/Object;
+00001e: move-result-object v1
+000020: return-object v1
+
+METHOD a(Ljava/lang/String; [Ljava/lang/Class; [Ljava/lang/Object;)Ljava/lang/Object;
+000000: invoke-static v0, Lcom/vivo/pcsuite/pcconnect/p/b;->a(Ljava/lang/String;)Ljava/lang/Class;
+000006: move-result-object v0
+000008: invoke-static v0, v1, v2, Lcom/vivo/pcsuite/pcconnect/p/b;->a(Ljava/lang/Class; [Ljava/lang/Class; [Ljava/lang/Object;)Ljava/lang/Object;
+00000e: move-result-object v0
+000010: return-object v0
+
+METHOD a(Ljava/lang/Class; Ljava/lang/String; Ljava/lang/Object;)V
+000000: invoke-virtual v0, v1, Ljava/lang/Class;->getDeclaredField(Ljava/lang/String;)Ljava/lang/reflect/Field;
+000006: move-result-object v0
+000008: const/4 v1, 1
+00000a: invoke-virtual v0, v1, Ljava/lang/reflect/Field;->setAccessible(Z)V
+000010: const/4 v1, 0
+000012: invoke-virtual v0, v1, v2, Ljava/lang/reflect/Field;->set(Ljava/lang/Object; Ljava/lang/Object;)V
+000018: return-void 
+
+METHOD a(Ljava/lang/Object; Ljava/lang/String; Ljava/lang/Object;)Z
+000000: invoke-virtual v1, Ljava/lang/Object;->getClass()Ljava/lang/Class;
+000006: move-result-object v0
+000008: invoke-virtual v0, v2, Ljava/lang/Class;->getDeclaredField(Ljava/lang/String;)Ljava/lang/reflect/Field;
+00000e: move-result-object v2
+000010: const/4 v0, 1
+000012: invoke-virtual v2, v0, Ljava/lang/reflect/Field;->setAccessible(Z)V
+000018: invoke-virtual v2, v1, v3, Ljava/lang/reflect/Field;->set(Ljava/lang/Object; Ljava/lang/Object;)V
+00001e: return v0
+000020: move-exception v1
+000022: new-instance v2, Ljava/lang/StringBuilder;
+000026: invoke-direct v2, Ljava/lang/StringBuilder;-><init>()V
+00002c: const-string v3, "setObjectField error : "
+000030: invoke-virtual v2, v3, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+000036: invoke-virtual v1, Ljava/lang/Exception;->getMessage()Ljava/lang/String;
+00003c: move-result-object v1
+00003e: invoke-virtual v2, v1, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+000044: invoke-virtual v2, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
+00004a: move-result-object v1
+00004c: const-string v2, "BaseReflectUtils"
+000050: invoke-static v2, v1, Lc/c/f/a/b;->g(Ljava/lang/String; Ljava/lang/String;)V
+000056: const/4 v1, 0
+000058: return v1
+
+METHOD b(Ljava/lang/Class; Ljava/lang/String;)Ljava/lang/Object;
+000000: const/4 v0, 0
+000002: new-array v1, v0, [Ljava/lang/Class;
+000006: invoke-virtual v2, v3, v1, Ljava/lang/Class;->getDeclaredMethod(Ljava/lang/String; [Ljava/lang/Class;)Ljava/lang/reflect/Method;
+00000c: move-result-object v2
+00000e: const/4 v3, 1
+000010: invoke-virtual v2, v3, Ljava/lang/reflect/Method;->setAccessible(Z)V
+000016: new-array v3, v0, [Ljava/lang/Object;
+00001a: const/4 v0, 0
+00001c: invoke-virtual v2, v0, v3, Ljava/lang/reflect/Method;->invoke(Ljava/lang/Object; [Ljava/lang/Object;)Ljava/lang/Object;
+000022: move-result-object v2
+000024: return-object v2
+
+METHOD b(Ljava/lang/Object; Ljava/lang/String;)Ljava/lang/Object;
+000000: invoke-virtual v1, Ljava/lang/Object;->getClass()Ljava/lang/Class;
+000006: move-result-object v0
+000008: invoke-virtual v0, v2, Ljava/lang/Class;->getDeclaredField(Ljava/lang/String;)Ljava/lang/reflect/Field;
+00000e: move-result-object v2
+000010: const/4 v0, 1
+000012: invoke-virtual v2, v0, Ljava/lang/reflect/Field;->setAccessible(Z)V
+000018: invoke-virtual v2, v1, Ljava/lang/reflect/Field;->get(Ljava/lang/Object;)Ljava/lang/Object;
+00001e: move-result-object v1
+000020: return-object v1
+
+METHOD b(Ljava/lang/String;)Ljava/lang/Object;
+000000: invoke-static v0, Lcom/vivo/pcsuite/pcconnect/p/b;->a(Ljava/lang/String;)Ljava/lang/Class;
+000006: move-result-object v0
+000008: invoke-virtual v0, Ljava/lang/Class;->newInstance()Ljava/lang/Object;
+00000e: move-result-object v0
+000010: return-object v0
+
+METHOD c(Ljava/lang/Class; Ljava/lang/String;)Ljava/lang/reflect/Field;
+000000: new-instance v0, Ljava/lang/StringBuilder;
+000004: invoke-direct v0, Ljava/lang/StringBuilder;-><init>()V
+00000a: invoke-virtual v4, Ljava/lang/Class;->getName()Ljava/lang/String;
+000010: move-result-object v1
+000012: invoke-virtual v0, v1, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+000018: const/16 v1, 35
+00001c: invoke-virtual v0, v1, Ljava/lang/StringBuilder;->append(C)Ljava/lang/StringBuilder;
+000022: invoke-virtual v0, v5, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+000028: invoke-virtual v0, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
+00002e: move-result-object v0
+000030: sget-object v1, Lcom/vivo/pcsuite/pcconnect/p/b;->b Ljava/util/HashMap;
+000034: monitor-enter v1
+000036: sget-object v2, Lcom/vivo/pcsuite/pcconnect/p/b;->b Ljava/util/HashMap;
+00003a: invoke-virtual v2, v0, Ljava/util/HashMap;->containsKey(Ljava/lang/Object;)Z
+000040: move-result v2
+000042: if-eqz v2, +014h
+000046: sget-object v4, Lcom/vivo/pcsuite/pcconnect/p/b;->b Ljava/util/HashMap;
+00004a: invoke-virtual v4, v0, Ljava/util/HashMap;->get(Ljava/lang/Object;)Ljava/lang/Object;
+000050: move-result-object v4
+000052: check-cast v4, Ljava/lang/reflect/Field;
+000056: if-eqz v4, +004h
+00005a: monitor-exit v1
+00005c: return-object v4
+00005e: new-instance v4, Ljava/lang/NoSuchFieldException;
+000062: invoke-direct v4, v0, Ljava/lang/NoSuchFieldException;-><init>(Ljava/lang/String;)V
+000068: throw v4
+00006a: invoke-static v4, v5, Lcom/vivo/pcsuite/pcconnect/p/b;->d(Ljava/lang/Class; Ljava/lang/String;)Ljava/lang/reflect/Field;
+000070: move-result-object v4
+000072: const/4 v5, 1
+000074: invoke-virtual v4, v5, Ljava/lang/reflect/Field;->setAccessible(Z)V
+00007a: sget-object v5, Lcom/vivo/pcsuite/pcconnect/p/b;->b Ljava/util/HashMap;
+00007e: monitor-enter v5
+000080: sget-object v2, Lcom/vivo/pcsuite/pcconnect/p/b;->b Ljava/util/HashMap;
+000084: invoke-virtual v2, v0, v4, Ljava/util/HashMap;->put(Ljava/lang/Object; Ljava/lang/Object;)Ljava/lang/Object;
+00008a: monitor-exit v5
+00008c: monitor-exit v1
+00008e: return-object v4
+000090: move-exception v4
+000092: monitor-exit v5
+000094: throw v4
+000096: move-exception v4
+000098: sget-object v5, Lcom/vivo/pcsuite/pcconnect/p/b;->b Ljava/util/HashMap;
+00009c: monitor-enter v5
+00009e: sget-object v2, Lcom/vivo/pcsuite/pcconnect/p/b;->b Ljava/util/HashMap;
+0000a2: const/4 v3, 0
+0000a4: invoke-virtual v2, v0, v3, Ljava/util/HashMap;->put(Ljava/lang/Object; Ljava/lang/Object;)Ljava/lang/Object;
+0000aa: throw v4
+0000ac: move-exception v4
+0000ae: monitor-exit v5
+0000b0: throw v4
+0000b2: move-exception v4
+0000b4: monitor-exit v1
+0000b6: throw v4
+
+METHOD d(Ljava/lang/Class; Ljava/lang/String;)Ljava/lang/reflect/Field;
+000000: invoke-virtual v2, v3, Ljava/lang/Class;->getDeclaredField(Ljava/lang/String;)Ljava/lang/reflect/Field;
+000006: move-result-object v2
+000008: return-object v2
+00000a: move-exception v0
+00000c: invoke-virtual v2, Ljava/lang/Class;->getSuperclass()Ljava/lang/Class;
+000012: move-result-object v2
+000014: if-eqz v2, +00fh
+000018: const-class v1, Ljava/lang/Object;
+00001c: invoke-virtual v2, v1, Ljava/lang/Object;->equals(Ljava/lang/Object;)Z
+000022: move-result v1
+000024: if-nez v1, +007h
+000028: invoke-static v2, v3, Lcom/vivo/pcsuite/pcconnect/p/b;->d(Ljava/lang/Class; Ljava/lang/String;)Ljava/lang/reflect/Field;
+00002e: move-result-object v2
+000030: return-object v2
+000032: throw v0
+
+METHOD e(Ljava/lang/Class; Ljava/lang/String;)Ljava/lang/Object;
+000000: invoke-virtual v0, v1, Ljava/lang/Class;->getDeclaredField(Ljava/lang/String;)Ljava/lang/reflect/Field;
+000006: move-result-object v0
+000008: const/4 v1, 1
+00000a: invoke-virtual v0, v1, Ljava/lang/reflect/Field;->setAccessible(Z)V
+000010: const/4 v1, 0
+000012: invoke-virtual v0, v1, Ljava/lang/reflect/Field;->get(Ljava/lang/Object;)Ljava/lang/Object;
+000018: move-result-object v0
+00001a: return-object v0

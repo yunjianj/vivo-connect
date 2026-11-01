@@ -1,0 +1,38 @@
+APK pcsuite/updateApk/connbase.apk
+DEX classes2.dex
+CLASS Lcom/vivo/pcsuite/pcconnect/wifip2p/g/c$c;
+SUPER Ljava/lang/Object;
+FIELDS
+a Lcom/vivo/pcsuite/pcconnect/wifip2p/g/c$d; = None
+
+METHOD <init>(Lcom/vivo/pcsuite/pcconnect/wifip2p/g/c$d;)V
+000000: iput-object v1, v0, Lcom/vivo/pcsuite/pcconnect/wifip2p/g/c$c;->a Lcom/vivo/pcsuite/pcconnect/wifip2p/g/c$d;
+000004: invoke-direct v0, Ljava/lang/Object;-><init>()V
+00000a: return-void 
+
+METHOD invoke(Ljava/lang/Object; Ljava/lang/reflect/Method; [Ljava/lang/Object;)Ljava/lang/Object;
+000000: invoke-virtual v3, Ljava/lang/reflect/Method;->getName()Ljava/lang/String;
+000006: move-result-object v2
+000008: const-string v3, "onDeviceInfoAvailable"
+00000c: invoke-virtual v3, v2, Ljava/lang/String;->equals(Ljava/lang/Object;)Z
+000012: move-result v2
+000014: const/4 v3, 0
+000016: if-eqz v2, +023h
+00001a: if-eqz v4, +013h
+00001e: array-length v2, v4
+000020: const/4 v0, 1
+000022: if-ne v2, v0, +00fh
+000026: const/4 v2, 0
+000028: aget-object v2, v4, v2
+00002c: check-cast v2, Landroid/net/wifi/p2p/WifiP2pDevice;
+000030: iget-object v4, v1, Lcom/vivo/pcsuite/pcconnect/wifip2p/g/c$c;->a Lcom/vivo/pcsuite/pcconnect/wifip2p/g/c$d;
+000034: if-eqz v4, +014h
+000038: invoke-interface v4, v2, Lcom/vivo/pcsuite/pcconnect/wifip2p/g/c$d;->onDeviceInfoAvailable(Landroid/net/wifi/p2p/WifiP2pDevice;)V
+00003e: goto +fh
+000040: const-string v2, "WifiP2pManagerProxy"
+000044: const-string v4, "onDeviceInfoAvailable invoked but args are wrong."
+000048: invoke-static v2, v4, Lc/c/f/a/b;->g(Ljava/lang/String; Ljava/lang/String;)V
+00004e: iget-object v2, v1, Lcom/vivo/pcsuite/pcconnect/wifip2p/g/c$c;->a Lcom/vivo/pcsuite/pcconnect/wifip2p/g/c$d;
+000052: if-eqz v2, +005h
+000056: invoke-interface v2, v3, Lcom/vivo/pcsuite/pcconnect/wifip2p/g/c$d;->onDeviceInfoAvailable(Landroid/net/wifi/p2p/WifiP2pDevice;)V
+00005c: return-object v3

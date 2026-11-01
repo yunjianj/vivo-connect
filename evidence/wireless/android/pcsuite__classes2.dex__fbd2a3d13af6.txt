@@ -1,0 +1,29 @@
+APK pcsuite/updateApk/pcsuite.apk
+DEX classes2.dex
+CLASS Lcom/vivo/pcsuite/connect/ConnectControlModel$6;
+SUPER Ljava/lang/Object;
+FIELDS
+a Lcom/vivo/pcsuite/connect/ConnectControlModel; = None
+
+METHOD <init>(Lcom/vivo/pcsuite/connect/ConnectControlModel;)V
+000000: invoke-direct v0, Ljava/lang/Object;-><init>()V
+000006: iput-object v1, v0, Lcom/vivo/pcsuite/connect/ConnectControlModel$6;->a Lcom/vivo/pcsuite/connect/ConnectControlModel;
+00000a: return-void 
+
+METHOD run()V
+000000: invoke-static Lcom/vivo/pcsuite/connect/ConnectControlModel;->i()Lcom/vivo/pcsuite/pcconnect/PcOtherShare;
+000006: move-result-object v0
+000008: iget-object v2, v2, Lcom/vivo/pcsuite/connect/ConnectControlModel$6;->a Lcom/vivo/pcsuite/connect/ConnectControlModel;
+00000c: if-eqz v0, +00ch
+000010: invoke-virtual v2, Lcom/vivo/pcsuite/connect/ConnectControlModel;->disconnectBle()V
+000016: const-string v0, "pcsuite_ConnectControlModel"
+00001a: const-string v1, "disconnect end"
+00001e: invoke-static v0, v1, Lcom/vivo/connect/logger/EasyLog;->d(Ljava/lang/String; Ljava/lang/String;)V
+000024: sget-object v0, Lcom/vivo/pcsuite/connect/ConnectControlModel;->currentConnectBean Lcom/vivo/pcsuite/pcconnect/PCBean;
+000028: if-eqz v0, +009h
+00002c: invoke-virtual v0, Lcom/vivo/pcsuite/pcconnect/PCBean;->getDeviceId()Ljava/lang/String;
+000032: move-result-object v0
+000034: invoke-virtual v2, v0, Lcom/vivo/pcsuite/connect/ConnectControlModel;->disconnectWlan(Ljava/lang/String;)V
+00003a: const/4 v2, 0
+00003c: sput-object v2, Lcom/vivo/pcsuite/connect/ConnectControlModel;->currentConnectBean Lcom/vivo/pcsuite/pcconnect/PCBean;
+000040: return-void 

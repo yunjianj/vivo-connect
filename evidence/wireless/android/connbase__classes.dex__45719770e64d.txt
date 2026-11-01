@@ -1,0 +1,17 @@
+APK pcsuite/updateApk/connbase.apk
+DEX classes.dex
+CLASS Lcom/vivo/connbase/nfc/SceneSyncService;
+SUPER Landroid/app/Service;
+FIELDS
+
+
+METHOD <init>()V
+000000: invoke-direct v0, Landroid/app/Service;-><init>()V
+000006: return-void 
+
+METHOD onBind(Landroid/content/Intent;)Landroid/os/IBinder;
+000000: invoke-static Lcom/vivo/connbase/nfc/l;->c()Lcom/vivo/connbase/nfc/l;
+000006: move-result-object v1
+000008: invoke-virtual v1, Lcom/vivo/connbase/nfc/l;->a()Lcom/vivo/connbase/nfc/l$g;
+00000e: move-result-object v1
+000010: return-object v1

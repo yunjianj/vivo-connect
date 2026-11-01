@@ -1,0 +1,1297 @@
+APK pcsuite/updateApk/connbase.apk
+DEX classes.dex
+CLASS Lcom/vivo/connbase/discovery/message/b;
+SUPER Ljava/lang/Object;
+FIELDS
+a Ljava/lang/String; = 'MessageUtils'
+
+METHOD <init>()V
+000000: invoke-direct v0, Ljava/lang/Object;-><init>()V
+000006: return-void 
+
+METHOD a(Ljava/lang/String; Lcom/vivo/connbase/discovery/message/RequestMessage; Ljava/lang/String; Ljava/lang/String; Z Ljava/lang/String;)Lcom/vivo/connbase/connect/b;
+000000: new-instance v0, Ljava/lang/StringBuilder;
+000004: invoke-direct v0, Ljava/lang/StringBuilder;-><init>()V
+00000a: const-string v1, "generateCipherRequestMessage, deviceSessionId:"
+00000e: invoke-virtual v0, v1, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+000014: invoke-virtual v0, v6, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+00001a: const-string v1, ", readyForSC:"
+00001e: invoke-virtual v0, v1, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+000024: invoke-virtual v0, v7, Ljava/lang/StringBuilder;->append(Z)Ljava/lang/StringBuilder;
+00002a: const-string v1, ", keyAgreementParams:"
+00002e: invoke-virtual v0, v1, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+000034: invoke-virtual v0, v5, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+00003a: invoke-virtual v0, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
+000040: move-result-object v0
+000042: const-string v1, "MessageUtils"
+000046: invoke-static v1, v0, Lc/c/f/a/b;->l(Ljava/lang/String; Ljava/lang/String;)V
+00004c: invoke-static Lcom/vivo/connbase/e0/g/e;->b()Ljava/lang/String;
+000052: move-result-object v0
+000054: new-instance v1, Lcom/vivo/connbase/connect/b$a;
+000058: invoke-direct v1, Lcom/vivo/connbase/connect/b$a;-><init>()V
+00005e: invoke-virtual v1, v3, Lcom/vivo/connbase/connect/b$a;->e(Ljava/lang/String;)Lcom/vivo/connbase/connect/b$a;
+000064: move-result-object v3
+000066: invoke-virtual v4, Lcom/vivo/connbase/discovery/message/RequestMessage;->getDeviceName()Ljava/lang/String;
+00006c: move-result-object v1
+00006e: invoke-virtual v3, v1, Lcom/vivo/connbase/connect/b$a;->f(Ljava/lang/String;)Lcom/vivo/connbase/connect/b$a;
+000074: move-result-object v3
+000076: invoke-virtual v4, Lcom/vivo/connbase/discovery/message/RequestMessage;->getPinCode()Ljava/lang/String;
+00007c: move-result-object v1
+00007e: invoke-virtual v3, v1, Lcom/vivo/connbase/connect/b$a;->i(Ljava/lang/String;)Lcom/vivo/connbase/connect/b$a;
+000084: move-result-object v3
+000086: invoke-virtual v4, Lcom/vivo/connbase/discovery/message/RequestMessage;->getServiceId()Ljava/lang/String;
+00008c: move-result-object v1
+00008e: invoke-virtual v3, v1, Lcom/vivo/connbase/connect/b$a;->k(Ljava/lang/String;)Lcom/vivo/connbase/connect/b$a;
+000094: move-result-object v3
+000096: invoke-virtual v4, Lcom/vivo/connbase/discovery/message/RequestMessage;->isWakeUp()Z
+00009c: move-result v1
+00009e: invoke-static v1, Ljava/lang/Boolean;->valueOf(Z)Ljava/lang/Boolean;
+0000a4: move-result-object v1
+0000a6: invoke-virtual v3, v1, Lcom/vivo/connbase/connect/b$a;->a(Ljava/lang/Boolean;)Lcom/vivo/connbase/connect/b$a;
+0000ac: move-result-object v3
+0000ae: invoke-virtual v4, Lcom/vivo/connbase/discovery/message/RequestMessage;->getDataAmount()I
+0000b4: move-result v1
+0000b6: invoke-virtual v3, v1, Lcom/vivo/connbase/connect/b$a;->a(I)Lcom/vivo/connbase/connect/b$a;
+0000bc: move-result-object v3
+0000be: invoke-virtual v4, Lcom/vivo/connbase/discovery/message/RequestMessage;->getTimeOut()J
+0000c4: move-result-wide v1
+0000c6: invoke-virtual v3, v1, v2, Lcom/vivo/connbase/connect/b$a;->a(J)Lcom/vivo/connbase/connect/b$a;
+0000cc: move-result-object v3
+0000ce: invoke-virtual v4, Lcom/vivo/connbase/discovery/message/RequestMessage;->getTransferMode()I
+0000d4: move-result v1
+0000d6: invoke-virtual v3, v1, Lcom/vivo/connbase/connect/b$a;->b(I)Lcom/vivo/connbase/connect/b$a;
+0000dc: move-result-object v3
+0000de: invoke-virtual v4, Lcom/vivo/connbase/discovery/message/RequestMessage;->getPackageName()Ljava/lang/String;
+0000e4: move-result-object v1
+0000e6: invoke-virtual v3, v1, Lcom/vivo/connbase/connect/b$a;->h(Ljava/lang/String;)Lcom/vivo/connbase/connect/b$a;
+0000ec: move-result-object v3
+0000ee: invoke-static Lcom/vivo/connbase/e0/g/e;->a()Ljava/lang/String;
+0000f4: move-result-object v1
+0000f6: invoke-virtual v3, v1, Lcom/vivo/connbase/connect/b$a;->a(Ljava/lang/String;)Lcom/vivo/connbase/connect/b$a;
+0000fc: move-result-object v3
+0000fe: invoke-virtual v4, Lcom/vivo/connbase/discovery/message/RequestMessage;->getConnectExtraInfo()Ljava/lang/String;
+000104: move-result-object v4
+000106: invoke-virtual v3, v4, Lcom/vivo/connbase/connect/b$a;->d(Ljava/lang/String;)Lcom/vivo/connbase/connect/b$a;
+00010c: move-result-object v3
+00010e: invoke-virtual v3, v5, Lcom/vivo/connbase/connect/b$a;->b(Ljava/lang/String;)Lcom/vivo/connbase/connect/b$a;
+000114: move-result-object v3
+000116: invoke-virtual v3, v6, Lcom/vivo/connbase/connect/b$a;->g(Ljava/lang/String;)Lcom/vivo/connbase/connect/b$a;
+00011c: move-result-object v3
+00011e: invoke-virtual v3, v7, Lcom/vivo/connbase/connect/b$a;->a(Z)Lcom/vivo/connbase/connect/b$a;
+000124: move-result-object v3
+000126: invoke-virtual v3, v8, Lcom/vivo/connbase/connect/b$a;->l(Ljava/lang/String;)Lcom/vivo/connbase/connect/b$a;
+00012c: move-result-object v3
+00012e: invoke-virtual v3, v0, Lcom/vivo/connbase/connect/b$a;->j(Ljava/lang/String;)Lcom/vivo/connbase/connect/b$a;
+000134: move-result-object v3
+000136: invoke-virtual v3, Lcom/vivo/connbase/connect/b$a;->a()Lcom/vivo/connbase/connect/b;
+00013c: move-result-object v3
+00013e: return-object v3
+
+METHOD a(Ljava/lang/String; Ljava/lang/String; Ljava/lang/String; Lcom/vivo/connbase/connect/c; Ljava/lang/String; Ljava/lang/String; Ljava/lang/String; I J I)Lcom/vivo/connbase/discovery/message/RequestMessage;
+000000: invoke-static Lcom/vivo/connbase/e0/g/e;->b()Ljava/lang/String;
+000006: move-result-object v0
+000008: new-instance v1, Ljava/lang/StringBuilder;
+00000c: invoke-direct v1, Ljava/lang/StringBuilder;-><init>()V
+000012: const-string v2, "RequestMessage sod "
+000016: invoke-virtual v1, v2, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+00001c: invoke-virtual v1, v0, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+000022: invoke-virtual v1, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
+000028: move-result-object v1
+00002a: const-string v2, "MessageUtils"
+00002e: invoke-static v2, v1, Lc/c/f/a/b;->k(Ljava/lang/String; Ljava/lang/String;)V
+000034: new-instance v1, Ljava/lang/StringBuilder;
+000038: invoke-direct v1, Ljava/lang/StringBuilder;-><init>()V
+00003e: const-string v3, "dd:"
+000042: invoke-virtual v1, v3, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+000048: invoke-virtual v1, v4, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+00004e: const-string v3, ", cipherUd:"
+000052: invoke-virtual v1, v3, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+000058: invoke-virtual v1, v10, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+00005e: const-string v3, ", requestTimeMillis:"
+000062: invoke-virtual v1, v3, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+000068: invoke-virtual v1, v12, v13, Ljava/lang/StringBuilder;->append(J)Ljava/lang/StringBuilder;
+00006e: const-string v3, ", version:"
+000072: invoke-virtual v1, v3, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+000078: invoke-virtual v1, v14, Ljava/lang/StringBuilder;->append(I)Ljava/lang/StringBuilder;
+00007e: invoke-virtual v1, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
+000084: move-result-object v1
+000086: invoke-static v2, v1, Lc/c/f/a/b;->l(Ljava/lang/String; Ljava/lang/String;)V
+00008c: new-instance v1, Ljava/lang/StringBuilder;
+000090: invoke-direct v1, Ljava/lang/StringBuilder;-><init>()V
+000096: const-string v3, "my nodeD:"
+00009a: invoke-virtual v1, v3, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+0000a0: invoke-virtual v1, v9, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+0000a6: invoke-virtual v1, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
+0000ac: move-result-object v1
+0000ae: invoke-static v2, v1, Lc/c/f/a/b;->l(Ljava/lang/String; Ljava/lang/String;)V
+0000b4: new-instance v1, Lcom/vivo/connbase/discovery/message/RequestMessage$a;
+0000b8: invoke-direct v1, Lcom/vivo/connbase/discovery/message/RequestMessage$a;-><init>()V
+0000be: invoke-virtual v1, v4, Lcom/vivo/connbase/discovery/message/RequestMessage$a;->e(Ljava/lang/String;)Lcom/vivo/connbase/discovery/message/RequestMessage$a;
+0000c4: move-result-object v4
+0000c6: invoke-virtual v4, v5, Lcom/vivo/connbase/discovery/message/RequestMessage$a;->f(Ljava/lang/String;)Lcom/vivo/connbase/discovery/message/RequestMessage$a;
+0000cc: move-result-object v4
+0000ce: invoke-virtual v4, v6, Lcom/vivo/connbase/discovery/message/RequestMessage$a;->h(Ljava/lang/String;)Lcom/vivo/connbase/discovery/message/RequestMessage$a;
+0000d4: move-result-object v4
+0000d6: invoke-virtual v7, Lcom/vivo/connbase/connect/c;->e()Ljava/lang/String;
+0000dc: move-result-object v5
+0000de: invoke-virtual v4, v5, Lcom/vivo/connbase/discovery/message/RequestMessage$a;->j(Ljava/lang/String;)Lcom/vivo/connbase/discovery/message/RequestMessage$a;
+0000e4: move-result-object v4
+0000e6: invoke-virtual v7, Lcom/vivo/connbase/connect/c;->g()Z
+0000ec: move-result v5
+0000ee: invoke-static v5, Ljava/lang/Boolean;->valueOf(Z)Ljava/lang/Boolean;
+0000f4: move-result-object v5
+0000f6: invoke-virtual v4, v5, Lcom/vivo/connbase/discovery/message/RequestMessage$a;->b(Ljava/lang/Boolean;)Lcom/vivo/connbase/discovery/message/RequestMessage$a;
+0000fc: move-result-object v4
+0000fe: invoke-virtual v7, Lcom/vivo/connbase/connect/c;->c()I
+000104: move-result v5
+000106: invoke-virtual v4, v5, Lcom/vivo/connbase/discovery/message/RequestMessage$a;->a(I)Lcom/vivo/connbase/discovery/message/RequestMessage$a;
+00010c: move-result-object v4
+00010e: invoke-virtual v7, Lcom/vivo/connbase/connect/c;->a()J
+000114: move-result-wide v5
+000116: invoke-virtual v4, v5, v6, Lcom/vivo/connbase/discovery/message/RequestMessage$a;->b(J)Lcom/vivo/connbase/discovery/message/RequestMessage$a;
+00011c: move-result-object v4
+00011e: invoke-virtual v7, Lcom/vivo/connbase/connect/c;->f()I
+000124: move-result v5
+000126: invoke-virtual v4, v5, Lcom/vivo/connbase/discovery/message/RequestMessage$a;->f(I)Lcom/vivo/connbase/discovery/message/RequestMessage$a;
+00012c: move-result-object v4
+00012e: invoke-virtual v4, v8, Lcom/vivo/connbase/discovery/message/RequestMessage$a;->g(Ljava/lang/String;)Lcom/vivo/connbase/discovery/message/RequestMessage$a;
+000134: move-result-object v4
+000136: invoke-virtual v4, v9, Lcom/vivo/connbase/discovery/message/RequestMessage$a;->b(Ljava/lang/String;)Lcom/vivo/connbase/discovery/message/RequestMessage$a;
+00013c: move-result-object v4
+00013e: invoke-static Lcom/vivo/connbase/e0/g/e;->a()Ljava/lang/String;
+000144: move-result-object v5
+000146: invoke-virtual v4, v5, Lcom/vivo/connbase/discovery/message/RequestMessage$a;->a(Ljava/lang/String;)Lcom/vivo/connbase/discovery/message/RequestMessage$a;
+00014c: move-result-object v4
+00014e: invoke-virtual v7, Lcom/vivo/connbase/connect/c;->d()Ljava/lang/String;
+000154: move-result-object v5
+000156: invoke-virtual v4, v5, Lcom/vivo/connbase/discovery/message/RequestMessage$a;->d(Ljava/lang/String;)Lcom/vivo/connbase/discovery/message/RequestMessage$a;
+00015c: move-result-object v4
+00015e: invoke-virtual v4, v0, Lcom/vivo/connbase/discovery/message/RequestMessage$a;->i(Ljava/lang/String;)Lcom/vivo/connbase/discovery/message/RequestMessage$a;
+000164: move-result-object v4
+000166: invoke-virtual v4, v11, Lcom/vivo/connbase/discovery/message/RequestMessage$a;->c(I)Lcom/vivo/connbase/discovery/message/RequestMessage$a;
+00016c: move-result-object v4
+00016e: invoke-virtual v7, Lcom/vivo/connbase/connect/c;->b()I
+000174: move-result v5
+000176: invoke-virtual v4, v5, Lcom/vivo/connbase/discovery/message/RequestMessage$a;->d(I)Lcom/vivo/connbase/discovery/message/RequestMessage$a;
+00017c: move-result-object v4
+00017e: invoke-virtual v4, v12, v13, Lcom/vivo/connbase/discovery/message/RequestMessage$a;->a(J)Lcom/vivo/connbase/discovery/message/RequestMessage$a;
+000184: move-result-object v4
+000186: invoke-virtual v4, v10, Lcom/vivo/connbase/discovery/message/RequestMessage$a;->c(Ljava/lang/String;)Lcom/vivo/connbase/discovery/message/RequestMessage$a;
+00018c: move-result-object v4
+00018e: invoke-virtual v4, v14, Lcom/vivo/connbase/discovery/message/RequestMessage$a;->g(I)Lcom/vivo/connbase/discovery/message/RequestMessage$a;
+000194: move-result-object v4
+000196: const/4 v5, 1
+000198: invoke-virtual v4, v5, Lcom/vivo/connbase/discovery/message/RequestMessage$a;->a(Z)Lcom/vivo/connbase/discovery/message/RequestMessage$a;
+00019e: move-result-object v4
+0001a0: invoke-static Lcom/vivo/connbase/wifi/utils/PhoneUtils;->isVivoPad()Z
+0001a6: move-result v5
+0001a8: invoke-virtual v4, v5, Lcom/vivo/connbase/discovery/message/RequestMessage$a;->b(I)Lcom/vivo/connbase/discovery/message/RequestMessage$a;
+0001ae: move-result-object v4
+0001b0: invoke-virtual v4, Lcom/vivo/connbase/discovery/message/RequestMessage$a;->a()Lcom/vivo/connbase/discovery/message/RequestMessage;
+0001b6: move-result-object v4
+0001b8: return-object v4
+
+METHOD a(Ljava/lang/String; Ljava/lang/String; Ljava/lang/String; [B J)Lcom/vivo/connbase/l0/d/a;
+000000: new-instance v0, Lcom/vivo/connbase/l0/d/a$b;
+000004: invoke-direct v0, Lcom/vivo/connbase/l0/d/a$b;-><init>()V
+00000a: invoke-virtual v0, v1, Lcom/vivo/connbase/l0/d/a$b;->a(Ljava/lang/String;)Lcom/vivo/connbase/l0/d/a$b;
+000010: move-result-object v1
+000012: invoke-virtual v1, v2, Lcom/vivo/connbase/l0/d/a$b;->c(Ljava/lang/String;)Lcom/vivo/connbase/l0/d/a$b;
+000018: move-result-object v1
+00001a: invoke-virtual v1, v3, Lcom/vivo/connbase/l0/d/a$b;->b(Ljava/lang/String;)Lcom/vivo/connbase/l0/d/a$b;
+000020: move-result-object v1
+000022: invoke-virtual v1, v4, Lcom/vivo/connbase/l0/d/a$b;->a([B)Lcom/vivo/connbase/l0/d/a$b;
+000028: move-result-object v1
+00002a: invoke-virtual v1, v5, v6, Lcom/vivo/connbase/l0/d/a$b;->a(J)Lcom/vivo/connbase/l0/d/a$b;
+000030: move-result-object v1
+000032: invoke-virtual v1, Lcom/vivo/connbase/l0/d/a$b;->a()Lcom/vivo/connbase/l0/d/a;
+000038: move-result-object v1
+00003a: return-object v1
+
+METHOD a(Ljava/lang/String; Ljava/lang/Object;)Ljava/lang/Object;
+000000: const-string v0, "customized"
+000004: const-string v1, "is_customized"
+000008: const-string v2, "service_id"
+00000c: const-string v3, "simulation"
+000010: const-string v4, "MessageUtils"
+000014: new-instance v5, Lorg/json/JSONObject;
+000018: invoke-direct v5, Lorg/json/JSONObject;-><init>()V
+00001e: const/4 v6, 0
+000020: instance-of v7, v9, Lorg/json/JSONObject;
+000024: if-eqz v7, +005h
+000028: move-object v6, v9
+00002a: check-cast v6, Lorg/json/JSONObject;
+00002e: invoke-virtual v5, v3, v3, Lorg/json/JSONObject;->put(Ljava/lang/String; Ljava/lang/Object;)Lorg/json/JSONObject;
+000034: const-string v9, "device_id"
+000038: invoke-static Lcom/vivo/connbase/App;->m()Lcom/vivo/connbase/App;
+00003e: move-result-object v3
+000040: invoke-virtual v3, Lcom/vivo/connbase/App;->d()Ljava/lang/String;
+000046: move-result-object v3
+000048: invoke-virtual v5, v9, v3, Lorg/json/JSONObject;->put(Ljava/lang/String; Ljava/lang/Object;)Lorg/json/JSONObject;
+00004e: invoke-virtual v6, v2, Lorg/json/JSONObject;->getString(Ljava/lang/String;)Ljava/lang/String;
+000054: move-result-object v9
+000056: invoke-virtual v5, v2, v9, Lorg/json/JSONObject;->put(Ljava/lang/String; Ljava/lang/Object;)Lorg/json/JSONObject;
+00005c: const-string v9, "fake_service_id"
+000060: invoke-virtual v5, v9, v8, Lorg/json/JSONObject;->put(Ljava/lang/String; Ljava/lang/Object;)Lorg/json/JSONObject;
+000066: const-string v8, "self_open_id"
+00006a: invoke-static Lcom/vivo/connbase/App;->m()Lcom/vivo/connbase/App;
+000070: move-result-object v9
+000072: invoke-static v9, Lcom/bbk/account/base/BBKAccountManager;->getInstance(Landroid/content/Context;)Lcom/bbk/account/base/BBKAccountManager;
+000078: move-result-object v9
+00007a: invoke-virtual v9, Lcom/bbk/account/base/BBKAccountManager;->getOpenid()Ljava/lang/String;
+000080: move-result-object v9
+000082: invoke-virtual v5, v8, v9, Lorg/json/JSONObject;->put(Ljava/lang/String; Ljava/lang/Object;)Lorg/json/JSONObject;
+000088: const-string v8, "username"
+00008c: const/4 v9, 1
+00008e: invoke-static v9, Lcom/vivo/connbase/e0/g/e;->a(Z)Ljava/lang/String;
+000094: move-result-object v2
+000096: invoke-virtual v5, v8, v2, Lorg/json/JSONObject;->put(Ljava/lang/String; Ljava/lang/Object;)Lorg/json/JSONObject;
+00009c: invoke-static Lcom/vivo/connbase/wifi/utils/PhoneUtils;->isVivoPad()Z
+0000a2: move-result v8
+0000a4: if-eqz v8, +003h
+0000a8: goto +2h
+0000aa: const/4 v9, 0
+0000ac: const-string v8, "device_type"
+0000b0: invoke-virtual v5, v8, v9, Lorg/json/JSONObject;->put(Ljava/lang/String; I)Lorg/json/JSONObject;
+0000b6: invoke-static Lcom/vivo/connbase/c0/z;->a()Ljava/lang/String;
+0000bc: move-result-object v8
+0000be: const-string v9, "device_name"
+0000c2: invoke-virtual v5, v9, v8, Lorg/json/JSONObject;->put(Ljava/lang/String; Ljava/lang/Object;)Lorg/json/JSONObject;
+0000c8: invoke-virtual v6, v1, Lorg/json/JSONObject;->getBoolean(Ljava/lang/String;)Z
+0000ce: move-result v8
+0000d0: invoke-virtual v5, v1, v8, Lorg/json/JSONObject;->put(Ljava/lang/String; Z)Lorg/json/JSONObject;
+0000d6: if-eqz v8, +009h
+0000da: invoke-virtual v6, v0, Lorg/json/JSONObject;->get(Ljava/lang/String;)Ljava/lang/Object;
+0000e0: move-result-object v8
+0000e2: invoke-virtual v5, v0, v8, Lorg/json/JSONObject;->put(Ljava/lang/String; Ljava/lang/Object;)Lorg/json/JSONObject;
+0000e8: new-instance v8, Ljava/lang/StringBuilder;
+0000ec: invoke-direct v8, Ljava/lang/StringBuilder;-><init>()V
+0000f2: const-string v9, "generateSimulationAdvertise:"
+0000f6: invoke-virtual v8, v9, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+0000fc: invoke-virtual v5, Lorg/json/JSONObject;->toString()Ljava/lang/String;
+000102: move-result-object v9
+000104: invoke-virtual v8, v9, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+00010a: invoke-virtual v8, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
+000110: move-result-object v8
+000112: invoke-static v4, v8, Lc/c/f/a/b;->k(Ljava/lang/String; Ljava/lang/String;)V
+000118: goto +1ah
+00011a: move-exception v8
+00011c: new-instance v9, Ljava/lang/StringBuilder;
+000120: invoke-direct v9, Ljava/lang/StringBuilder;-><init>()V
+000126: const-string v0, "generateSimulationAdvertise error:"
+00012a: invoke-virtual v9, v0, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+000130: invoke-virtual v8, Ljava/lang/Exception;->toString()Ljava/lang/String;
+000136: move-result-object v8
+000138: invoke-virtual v9, v8, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+00013e: invoke-virtual v9, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
+000144: move-result-object v8
+000146: invoke-static v4, v8, Lc/c/f/a/b;->g(Ljava/lang/String; Ljava/lang/String;)V
+00014c: return-object v5
+
+METHOD a(Ljava/lang/String;)Lorg/json/JSONObject;
+000000: new-instance v0, Lorg/json/JSONObject;
+000004: invoke-direct v0, Lorg/json/JSONObject;-><init>()V
+00000a: const-string v1, "socket"
+00000e: invoke-virtual v0, v1, v3, Lorg/json/JSONObject;->put(Ljava/lang/String; Ljava/lang/Object;)Lorg/json/JSONObject;
+000014: goto +1ch
+000016: move-exception v3
+000018: new-instance v1, Ljava/lang/StringBuilder;
+00001c: invoke-direct v1, Ljava/lang/StringBuilder;-><init>()V
+000022: const-string v2, "generateResponseMessage:"
+000026: invoke-virtual v1, v2, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+00002c: invoke-virtual v3, Ljava/lang/Exception;->toString()Ljava/lang/String;
+000032: move-result-object v3
+000034: invoke-virtual v1, v3, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+00003a: invoke-virtual v1, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
+000040: move-result-object v3
+000042: const-string v1, "MessageUtils"
+000046: invoke-static v1, v3, Lc/c/f/a/b;->g(Ljava/lang/String; Ljava/lang/String;)V
+00004c: return-object v0
+
+METHOD a(Ljava/lang/String; I I)Lorg/json/JSONObject;
+000000: new-instance v0, Lorg/json/JSONObject;
+000004: invoke-direct v0, Lorg/json/JSONObject;-><init>()V
+00000a: const-string v1, "p2pState"
+00000e: invoke-virtual v0, v1, v4, Lorg/json/JSONObject;->put(Ljava/lang/String; I)Lorg/json/JSONObject;
+000014: const-string v4, "frequency"
+000018: invoke-virtual v0, v4, v3, Lorg/json/JSONObject;->put(Ljava/lang/String; I)Lorg/json/JSONObject;
+00001e: const-string v3, "service_id"
+000022: invoke-virtual v0, v3, v2, Lorg/json/JSONObject;->put(Ljava/lang/String; Ljava/lang/Object;)Lorg/json/JSONObject;
+000028: goto +1ch
+00002a: move-exception v2
+00002c: new-instance v3, Ljava/lang/StringBuilder;
+000030: invoke-direct v3, Ljava/lang/StringBuilder;-><init>()V
+000036: const-string v4, "generateSwitchLayerMessage:"
+00003a: invoke-virtual v3, v4, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+000040: invoke-virtual v2, Ljava/lang/Exception;->toString()Ljava/lang/String;
+000046: move-result-object v2
+000048: invoke-virtual v3, v2, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+00004e: invoke-virtual v3, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
+000054: move-result-object v2
+000056: const-string v3, "MessageUtils"
+00005a: invoke-static v3, v2, Lc/c/f/a/b;->g(Ljava/lang/String; Ljava/lang/String;)V
+000060: return-object v0
+
+METHOD a(Ljava/lang/String; Ljava/lang/String;)Lorg/json/JSONObject;
+000000: new-instance v0, Lorg/json/JSONObject;
+000004: invoke-direct v0, Lorg/json/JSONObject;-><init>()V
+00000a: const-string v1, "cipherMessage"
+00000e: invoke-virtual v0, v1, v3, Lorg/json/JSONObject;->put(Ljava/lang/String; Ljava/lang/Object;)Lorg/json/JSONObject;
+000014: const-string v3, "service_id"
+000018: invoke-virtual v0, v3, v2, Lorg/json/JSONObject;->put(Ljava/lang/String; Ljava/lang/Object;)Lorg/json/JSONObject;
+00001e: const-string v2, "device_id"
+000022: invoke-static Lcom/vivo/connbase/App;->m()Lcom/vivo/connbase/App;
+000028: move-result-object v3
+00002a: invoke-virtual v3, Lcom/vivo/connbase/App;->d()Ljava/lang/String;
+000030: move-result-object v3
+000032: invoke-virtual v0, v2, v3, Lorg/json/JSONObject;->put(Ljava/lang/String; Ljava/lang/Object;)Lorg/json/JSONObject;
+000038: const-string v2, "avatar_url"
+00003c: invoke-static Lcom/vivo/connbase/e0/g/e;->a()Ljava/lang/String;
+000042: move-result-object v3
+000044: invoke-virtual v0, v2, v3, Lorg/json/JSONObject;->put(Ljava/lang/String; Ljava/lang/Object;)Lorg/json/JSONObject;
+00004a: goto +1ch
+00004c: move-exception v2
+00004e: new-instance v3, Ljava/lang/StringBuilder;
+000052: invoke-direct v3, Ljava/lang/StringBuilder;-><init>()V
+000058: const-string v1, "generateCipherMessage2Server error:"
+00005c: invoke-virtual v3, v1, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+000062: invoke-virtual v2, Lorg/json/JSONException;->toString()Ljava/lang/String;
+000068: move-result-object v2
+00006a: invoke-virtual v3, v2, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+000070: invoke-virtual v3, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
+000076: move-result-object v2
+000078: const-string v3, "MessageUtils"
+00007c: invoke-static v3, v2, Lc/c/f/a/b;->l(Ljava/lang/String; Ljava/lang/String;)V
+000082: return-object v0
+
+METHOD a(Ljava/lang/String; Ljava/lang/String; I)Lorg/json/JSONObject;
+000000: new-instance v0, Lorg/json/JSONObject;
+000004: invoke-direct v0, Lorg/json/JSONObject;-><init>()V
+00000a: const-string v1, "switch"
+00000e: invoke-virtual v0, v1, v4, Lorg/json/JSONObject;->put(Ljava/lang/String; I)Lorg/json/JSONObject;
+000014: const-string v4, "service_id"
+000018: invoke-virtual v0, v4, v2, Lorg/json/JSONObject;->put(Ljava/lang/String; Ljava/lang/Object;)Lorg/json/JSONObject;
+00001e: const-string v2, "device_id"
+000022: invoke-virtual v0, v2, v3, Lorg/json/JSONObject;->put(Ljava/lang/String; Ljava/lang/Object;)Lorg/json/JSONObject;
+000028: goto +1ch
+00002a: move-exception v2
+00002c: new-instance v3, Ljava/lang/StringBuilder;
+000030: invoke-direct v3, Ljava/lang/StringBuilder;-><init>()V
+000036: const-string v4, "generateNotifySwitchLayerMessage error:"
+00003a: invoke-virtual v3, v4, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+000040: invoke-virtual v2, Lorg/json/JSONException;->toString()Ljava/lang/String;
+000046: move-result-object v2
+000048: invoke-virtual v3, v2, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+00004e: invoke-virtual v3, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
+000054: move-result-object v2
+000056: const-string v3, "MessageUtils"
+00005a: invoke-static v3, v2, Lc/c/f/a/b;->g(Ljava/lang/String; Ljava/lang/String;)V
+000060: return-object v0
+
+METHOD a(Ljava/lang/String; Ljava/lang/String; Ljava/lang/String;)Lorg/json/JSONObject;
+000000: const-string v0, "MessageUtils"
+000004: new-instance v1, Lorg/json/JSONObject;
+000008: invoke-direct v1, Lorg/json/JSONObject;-><init>()V
+00000e: const-string v2, "status"
+000012: invoke-virtual v1, v2, v5, Lorg/json/JSONObject;->put(Ljava/lang/String; Ljava/lang/Object;)Lorg/json/JSONObject;
+000018: const-string v5, "service_id"
+00001c: invoke-virtual v1, v5, v3, Lorg/json/JSONObject;->put(Ljava/lang/String; Ljava/lang/Object;)Lorg/json/JSONObject;
+000022: const-string v3, "device_id"
+000026: invoke-virtual v1, v3, v4, Lorg/json/JSONObject;->put(Ljava/lang/String; Ljava/lang/Object;)Lorg/json/JSONObject;
+00002c: invoke-static Lcom/vivo/connbase/e0/g/e;->b()Ljava/lang/String;
+000032: move-result-object v3
+000034: const-string v4, "self_open_id"
+000038: invoke-virtual v1, v4, v3, Lorg/json/JSONObject;->put(Ljava/lang/String; Ljava/lang/Object;)Lorg/json/JSONObject;
+00003e: new-instance v4, Ljava/lang/StringBuilder;
+000042: invoke-direct v4, Ljava/lang/StringBuilder;-><init>()V
+000048: const-string v5, "generateAuthMessage:selfOpenId0 ="
+00004c: invoke-virtual v4, v5, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+000052: invoke-virtual v4, v3, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+000058: invoke-virtual v4, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
+00005e: move-result-object v3
+000060: invoke-static v0, v3, Lc/c/f/a/b;->k(Ljava/lang/String; Ljava/lang/String;)V
+000066: goto +1ah
+000068: move-exception v3
+00006a: new-instance v4, Ljava/lang/StringBuilder;
+00006e: invoke-direct v4, Ljava/lang/StringBuilder;-><init>()V
+000074: const-string v5, "generateRejectMessage:"
+000078: invoke-virtual v4, v5, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+00007e: invoke-virtual v3, Ljava/lang/Exception;->toString()Ljava/lang/String;
+000084: move-result-object v3
+000086: invoke-virtual v4, v3, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+00008c: invoke-virtual v4, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
+000092: move-result-object v3
+000094: invoke-static v0, v3, Lc/c/f/a/b;->g(Ljava/lang/String; Ljava/lang/String;)V
+00009a: return-object v1
+
+METHOD a(Ljava/lang/String; Ljava/lang/String; Ljava/lang/String; I I Z Landroid/net/wifi/WifiConfiguration;)Lorg/json/JSONObject;
+000000: new-instance v0, Lorg/json/JSONObject;
+000004: invoke-direct v0, Lorg/json/JSONObject;-><init>()V
+00000a: const-string v1, "ssid"
+00000e: invoke-virtual v0, v1, v3, Lorg/json/JSONObject;->put(Ljava/lang/String; Ljava/lang/Object;)Lorg/json/JSONObject;
+000014: const-string v3, "psk"
+000018: invoke-virtual v0, v3, v4, Lorg/json/JSONObject;->put(Ljava/lang/String; Ljava/lang/Object;)Lorg/json/JSONObject;
+00001e: const-string v3, "frequency"
+000022: invoke-virtual v0, v3, v5, Lorg/json/JSONObject;->put(Ljava/lang/String; I)Lorg/json/JSONObject;
+000028: const-string v3, "service_id"
+00002c: invoke-virtual v0, v3, v2, Lorg/json/JSONObject;->put(Ljava/lang/String; Ljava/lang/Object;)Lorg/json/JSONObject;
+000032: const-string v2, "p2pState"
+000036: invoke-virtual v0, v2, v6, Lorg/json/JSONObject;->put(Ljava/lang/String; I)Lorg/json/JSONObject;
+00003c: const-string v2, "switch_wifi"
+000040: invoke-virtual v0, v2, v7, Lorg/json/JSONObject;->put(Ljava/lang/String; Z)Lorg/json/JSONObject;
+000046: const-string v2, "device_id"
+00004a: invoke-static Lcom/vivo/connbase/App;->m()Lcom/vivo/connbase/App;
+000050: move-result-object v3
+000052: invoke-virtual v3, Lcom/vivo/connbase/App;->d()Ljava/lang/String;
+000058: move-result-object v3
+00005a: invoke-virtual v0, v2, v3, Lorg/json/JSONObject;->put(Ljava/lang/String; Ljava/lang/Object;)Lorg/json/JSONObject;
+000060: if-eqz v7, +0ceh
+000064: if-eqz v8, +0cch
+000068: const-string v2, "wifi_ssid"
+00006c: iget-object v3, v8, Landroid/net/wifi/WifiConfiguration;->SSID Ljava/lang/String;
+000070: invoke-virtual v0, v2, v3, Lorg/json/JSONObject;->put(Ljava/lang/String; Ljava/lang/Object;)Lorg/json/JSONObject;
+000076: const-string v2, "wifi_psk"
+00007a: iget-object v3, v8, Landroid/net/wifi/WifiConfiguration;->preSharedKey Ljava/lang/String;
+00007e: invoke-virtual v0, v2, v3, Lorg/json/JSONObject;->put(Ljava/lang/String; Ljava/lang/Object;)Lorg/json/JSONObject;
+000084: const-string v2, "key_mgmt"
+000088: iget-object v3, v8, Landroid/net/wifi/WifiConfiguration;->allowedKeyManagement Ljava/util/BitSet;
+00008c: invoke-static v3, Lcom/vivo/connbase/wifi/utils/g;->c(Ljava/util/BitSet;)Ljava/lang/String;
+000092: move-result-object v3
+000094: invoke-virtual v0, v2, v3, Lorg/json/JSONObject;->put(Ljava/lang/String; Ljava/lang/Object;)Lorg/json/JSONObject;
+00009a: const-string v2, "proto"
+00009e: iget-object v3, v8, Landroid/net/wifi/WifiConfiguration;->allowedProtocols Ljava/util/BitSet;
+0000a2: invoke-static v3, Lcom/vivo/connbase/wifi/utils/g;->e(Ljava/util/BitSet;)Ljava/lang/String;
+0000a8: move-result-object v3
+0000aa: invoke-virtual v0, v2, v3, Lorg/json/JSONObject;->put(Ljava/lang/String; Ljava/lang/Object;)Lorg/json/JSONObject;
+0000b0: const-string v2, "auth_alg"
+0000b4: iget-object v3, v8, Landroid/net/wifi/WifiConfiguration;->allowedAuthAlgorithms Ljava/util/BitSet;
+0000b8: invoke-static v3, Lcom/vivo/connbase/wifi/utils/g;->a(Ljava/util/BitSet;)Ljava/lang/String;
+0000be: move-result-object v3
+0000c0: invoke-virtual v0, v2, v3, Lorg/json/JSONObject;->put(Ljava/lang/String; Ljava/lang/Object;)Lorg/json/JSONObject;
+0000c6: const-string v2, "pairwise"
+0000ca: iget-object v3, v8, Landroid/net/wifi/WifiConfiguration;->allowedPairwiseCiphers Ljava/util/BitSet;
+0000ce: invoke-static v3, Lcom/vivo/connbase/wifi/utils/g;->d(Ljava/util/BitSet;)Ljava/lang/String;
+0000d4: move-result-object v3
+0000d6: invoke-virtual v0, v2, v3, Lorg/json/JSONObject;->put(Ljava/lang/String; Ljava/lang/Object;)Lorg/json/JSONObject;
+0000dc: const-string v2, "group"
+0000e0: iget-object v3, v8, Landroid/net/wifi/WifiConfiguration;->allowedGroupCiphers Ljava/util/BitSet;
+0000e4: invoke-static v3, Lcom/vivo/connbase/wifi/utils/g;->b(Ljava/util/BitSet;)Ljava/lang/String;
+0000ea: move-result-object v3
+0000ec: invoke-virtual v0, v2, v3, Lorg/json/JSONObject;->put(Ljava/lang/String; Ljava/lang/Object;)Lorg/json/JSONObject;
+0000f2: const-string v2, "wep_tx_keyidx"
+0000f6: iget v3, v8, Landroid/net/wifi/WifiConfiguration;->wepTxKeyIndex I
+0000fa: invoke-virtual v0, v2, v3, Lorg/json/JSONObject;->put(Ljava/lang/String; I)Lorg/json/JSONObject;
+000100: const-string v2, "hide_ssid"
+000104: iget-boolean v3, v8, Landroid/net/wifi/WifiConfiguration;->hiddenSSID Z
+000108: const/4 v4, 1
+00010a: const/4 v5, 0
+00010c: if-eqz v3, +004h
+000110: move v3, v4
+000112: goto +2h
+000114: move v3, v5
+000116: invoke-virtual v0, v2, v3, Lorg/json/JSONObject;->put(Ljava/lang/String; I)Lorg/json/JSONObject;
+00011c: const-string v2, "require_pmf"
+000120: sget-object v3, Lcom/vivo/connbase/wifi/utils/g;->b Ljava/lang/String;
+000124: invoke-static v5, Ljava/lang/Boolean;->valueOf(Z)Ljava/lang/Boolean;
+00012a: move-result-object v6
+00012c: invoke-static v8, v3, v6, Lcom/vivo/connbase/wifi/utils/g;->a(Landroid/net/wifi/WifiConfiguration; Ljava/lang/String; Ljava/lang/Object;)Ljava/lang/Object;
+000132: move-result-object v3
+000134: check-cast v3, Ljava/lang/Boolean;
+000138: invoke-virtual v3, Ljava/lang/Boolean;->booleanValue()Z
+00013e: move-result v3
+000140: if-eqz v3, +004h
+000144: move v3, v4
+000146: goto +2h
+000148: move v3, v5
+00014a: invoke-virtual v0, v2, v3, Lorg/json/JSONObject;->put(Ljava/lang/String; I)Lorg/json/JSONObject;
+000150: const-string v2, "dhcp_server"
+000154: sget-object v3, Lcom/vivo/connbase/wifi/utils/g;->d Ljava/lang/String;
+000158: const-string v6, ""
+00015c: invoke-static v8, v3, v6, Lcom/vivo/connbase/wifi/utils/g;->a(Landroid/net/wifi/WifiConfiguration; Ljava/lang/String; Ljava/lang/Object;)Ljava/lang/Object;
+000162: move-result-object v3
+000164: invoke-virtual v0, v2, v3, Lorg/json/JSONObject;->put(Ljava/lang/String; Ljava/lang/Object;)Lorg/json/JSONObject;
+00016a: const-string v2, "validated_internet_access"
+00016e: sget-object v3, Lcom/vivo/connbase/wifi/utils/g;->e Ljava/lang/String;
+000172: invoke-static v5, Ljava/lang/Boolean;->valueOf(Z)Ljava/lang/Boolean;
+000178: move-result-object v6
+00017a: invoke-static v8, v3, v6, Lcom/vivo/connbase/wifi/utils/g;->a(Landroid/net/wifi/WifiConfiguration; Ljava/lang/String; Ljava/lang/Object;)Ljava/lang/Object;
+000180: move-result-object v3
+000182: check-cast v3, Ljava/lang/Boolean;
+000186: invoke-virtual v3, Ljava/lang/Boolean;->booleanValue()Z
+00018c: move-result v3
+00018e: if-eqz v3, +003h
+000192: move v5, v4
+000194: invoke-virtual v0, v2, v5, Lorg/json/JSONObject;->put(Ljava/lang/String; I)Lorg/json/JSONObject;
+00019a: const-string v2, "mac_randomization_setting"
+00019e: sget-object v3, Lcom/vivo/connbase/wifi/utils/g;->f Ljava/lang/String;
+0001a2: invoke-static v4, Ljava/lang/Integer;->valueOf(I)Ljava/lang/Integer;
+0001a8: move-result-object v4
+0001aa: invoke-static v8, v3, v4, Lcom/vivo/connbase/wifi/utils/g;->a(Landroid/net/wifi/WifiConfiguration; Ljava/lang/String; Ljava/lang/Object;)Ljava/lang/Object;
+0001b0: move-result-object v3
+0001b2: check-cast v3, Ljava/lang/Integer;
+0001b6: invoke-virtual v3, Ljava/lang/Integer;->intValue()I
+0001bc: move-result v3
+0001be: invoke-virtual v0, v2, v3, Lorg/json/JSONObject;->put(Ljava/lang/String; I)Lorg/json/JSONObject;
+0001c4: goto +1ch
+0001c6: move-exception v2
+0001c8: new-instance v3, Ljava/lang/StringBuilder;
+0001cc: invoke-direct v3, Ljava/lang/StringBuilder;-><init>()V
+0001d2: const-string v4, "generateSwitchLayerMessage:"
+0001d6: invoke-virtual v3, v4, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+0001dc: invoke-virtual v2, Ljava/lang/Exception;->toString()Ljava/lang/String;
+0001e2: move-result-object v2
+0001e4: invoke-virtual v3, v2, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+0001ea: invoke-virtual v3, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
+0001f0: move-result-object v2
+0001f2: const-string v3, "MessageUtils"
+0001f6: invoke-static v3, v2, Lc/c/f/a/b;->g(Ljava/lang/String; Ljava/lang/String;)V
+0001fc: return-object v0
+
+METHOD a(Ljava/lang/String; Ljava/lang/String; Ljava/lang/String; Ljava/lang/Integer;)Lorg/json/JSONObject;
+000000: const-string v0, "MessageUtils"
+000004: new-instance v1, Lorg/json/JSONObject;
+000008: invoke-direct v1, Lorg/json/JSONObject;-><init>()V
+00000e: const-string v2, "status"
+000012: invoke-virtual v1, v2, v5, Lorg/json/JSONObject;->put(Ljava/lang/String; Ljava/lang/Object;)Lorg/json/JSONObject;
+000018: const-string v5, "service_id"
+00001c: invoke-virtual v1, v5, v3, Lorg/json/JSONObject;->put(Ljava/lang/String; Ljava/lang/Object;)Lorg/json/JSONObject;
+000022: const-string v3, "device_id"
+000026: invoke-virtual v1, v3, v4, Lorg/json/JSONObject;->put(Ljava/lang/String; Ljava/lang/Object;)Lorg/json/JSONObject;
+00002c: invoke-static Lcom/vivo/connbase/e0/g/e;->b()Ljava/lang/String;
+000032: move-result-object v3
+000034: const-string v4, "self_open_id"
+000038: invoke-virtual v1, v4, v3, Lorg/json/JSONObject;->put(Ljava/lang/String; Ljava/lang/Object;)Lorg/json/JSONObject;
+00003e: new-instance v4, Ljava/lang/StringBuilder;
+000042: invoke-direct v4, Ljava/lang/StringBuilder;-><init>()V
+000048: const-string v5, "generateAuthMessage:selfOpenId1 ="
+00004c: invoke-virtual v4, v5, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+000052: invoke-virtual v4, v3, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+000058: invoke-virtual v4, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
+00005e: move-result-object v3
+000060: invoke-static v0, v3, Lc/c/f/a/b;->k(Ljava/lang/String; Ljava/lang/String;)V
+000066: if-eqz v6, +021h
+00006a: const-string v3, "key_rejectconnection_error_code"
+00006e: invoke-virtual v1, v3, v6, Lorg/json/JSONObject;->put(Ljava/lang/String; Ljava/lang/Object;)Lorg/json/JSONObject;
+000074: goto +1ah
+000076: move-exception v3
+000078: new-instance v4, Ljava/lang/StringBuilder;
+00007c: invoke-direct v4, Ljava/lang/StringBuilder;-><init>()V
+000082: const-string v5, "generateRejectMessage:"
+000086: invoke-virtual v4, v5, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+00008c: invoke-virtual v3, Ljava/lang/Exception;->toString()Ljava/lang/String;
+000092: move-result-object v3
+000094: invoke-virtual v4, v3, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+00009a: invoke-virtual v4, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
+0000a0: move-result-object v3
+0000a2: invoke-static v0, v3, Lc/c/f/a/b;->g(Ljava/lang/String; Ljava/lang/String;)V
+0000a8: return-object v1
+
+METHOD a(Ljava/lang/String; Ljava/lang/String; Ljava/lang/String; Ljava/lang/String; Ljava/lang/String; Z Ljava/lang/String; Ljava/lang/String; I Z)Lorg/json/JSONObject;
+000000: new-instance v0, Ljava/lang/StringBuilder;
+000004: invoke-direct v0, Ljava/lang/StringBuilder;-><init>()V
+00000a: const-string v1, "generateResponseMessage dd:"
+00000e: invoke-virtual v0, v1, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+000014: invoke-virtual v0, v4, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+00001a: const-string v1, ", cipherUD:"
+00001e: invoke-virtual v0, v1, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+000024: invoke-virtual v0, v9, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+00002a: const-string v1, ", sessionD:"
+00002e: invoke-virtual v0, v1, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+000034: invoke-virtual v0, v7, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+00003a: const-string v1, ", readyForSC:"
+00003e: invoke-virtual v0, v1, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+000044: invoke-virtual v0, v8, Ljava/lang/StringBuilder;->append(Z)Ljava/lang/StringBuilder;
+00004a: invoke-virtual v0, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
+000050: move-result-object v0
+000052: const-string v1, "MessageUtils"
+000056: invoke-static v1, v0, Lc/c/f/a/b;->l(Ljava/lang/String; Ljava/lang/String;)V
+00005c: new-instance v0, Lorg/json/JSONObject;
+000060: invoke-direct v0, Lorg/json/JSONObject;-><init>()V
+000066: const-string v2, "response"
+00006a: invoke-virtual v0, v2, v10, Lorg/json/JSONObject;->put(Ljava/lang/String; Ljava/lang/Object;)Lorg/json/JSONObject;
+000070: const-string v10, "device_id"
+000074: invoke-virtual v0, v10, v4, Lorg/json/JSONObject;->put(Ljava/lang/String; Ljava/lang/Object;)Lorg/json/JSONObject;
+00007a: const-string v4, "service_id"
+00007e: invoke-virtual v0, v4, v3, Lorg/json/JSONObject;->put(Ljava/lang/String; Ljava/lang/Object;)Lorg/json/JSONObject;
+000084: const-string v3, "device_name"
+000088: sget-object v4, Landroid/os/Build;->MODEL Ljava/lang/String;
+00008c: invoke-virtual v0, v3, v4, Lorg/json/JSONObject;->put(Ljava/lang/String; Ljava/lang/Object;)Lorg/json/JSONObject;
+000092: const-string v3, "avatar_url"
+000096: invoke-static Lcom/vivo/connbase/e0/g/e;->a()Ljava/lang/String;
+00009c: move-result-object v4
+00009e: invoke-virtual v0, v3, v4, Lorg/json/JSONObject;->put(Ljava/lang/String; Ljava/lang/Object;)Lorg/json/JSONObject;
+0000a4: const-string v3, "cipher_node_id"
+0000a8: invoke-virtual v0, v3, v5, Lorg/json/JSONObject;->put(Ljava/lang/String; Ljava/lang/Object;)Lorg/json/JSONObject;
+0000ae: const-string v3, "key_agreement_params"
+0000b2: invoke-virtual v0, v3, v6, Lorg/json/JSONObject;->put(Ljava/lang/String; Ljava/lang/Object;)Lorg/json/JSONObject;
+0000b8: const-string v3, "key_cipher_session_uuid"
+0000bc: invoke-virtual v0, v3, v9, Lorg/json/JSONObject;->put(Ljava/lang/String; Ljava/lang/Object;)Lorg/json/JSONObject;
+0000c2: const-string v3, "key_cipher_session_id"
+0000c6: invoke-virtual v0, v3, v7, Lorg/json/JSONObject;->put(Ljava/lang/String; Ljava/lang/Object;)Lorg/json/JSONObject;
+0000cc: const-string v3, "is_ready_for_sc"
+0000d0: invoke-virtual v0, v3, v8, Lorg/json/JSONObject;->put(Ljava/lang/String; Z)Lorg/json/JSONObject;
+0000d6: const-string v3, "connection_version"
+0000da: invoke-virtual v0, v3, v11, Lorg/json/JSONObject;->put(Ljava/lang/String; I)Lorg/json/JSONObject;
+0000e0: const-string v3, "key_cipher_session_exist"
+0000e4: const/4 v4, 1
+0000e6: invoke-virtual v0, v3, v4, Lorg/json/JSONObject;->put(Ljava/lang/String; Z)Lorg/json/JSONObject;
+0000ec: const-string v3, "create_go_as_client"
+0000f0: invoke-virtual v0, v3, v12, Lorg/json/JSONObject;->put(Ljava/lang/String; Z)Lorg/json/JSONObject;
+0000f6: goto +1ah
+0000f8: move-exception v3
+0000fa: new-instance v4, Ljava/lang/StringBuilder;
+0000fe: invoke-direct v4, Ljava/lang/StringBuilder;-><init>()V
+000104: const-string v5, "generateResponseMessage:"
+000108: invoke-virtual v4, v5, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+00010e: invoke-virtual v3, Ljava/lang/Exception;->toString()Ljava/lang/String;
+000114: move-result-object v3
+000116: invoke-virtual v4, v3, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+00011c: invoke-virtual v4, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
+000122: move-result-object v3
+000124: invoke-static v1, v3, Lc/c/f/a/b;->g(Ljava/lang/String; Ljava/lang/String;)V
+00012a: return-object v0
+
+METHOD a(Ljava/lang/String; Ljava/lang/String; Ljava/lang/String; Z Lcom/vivo/connbase/connect/k;)Lorg/json/JSONObject;
+000000: const-string v0, "MessageUtils"
+000004: new-instance v1, Lorg/json/JSONObject;
+000008: invoke-direct v1, Lorg/json/JSONObject;-><init>()V
+00000e: const-string v2, "status"
+000012: invoke-virtual v1, v2, v5, Lorg/json/JSONObject;->put(Ljava/lang/String; Ljava/lang/Object;)Lorg/json/JSONObject;
+000018: const-string v5, "service_id"
+00001c: invoke-virtual v1, v5, v3, Lorg/json/JSONObject;->put(Ljava/lang/String; Ljava/lang/Object;)Lorg/json/JSONObject;
+000022: const-string v3, "device_id"
+000026: invoke-virtual v1, v3, v4, Lorg/json/JSONObject;->put(Ljava/lang/String; Ljava/lang/Object;)Lorg/json/JSONObject;
+00002c: invoke-static Lcom/vivo/connbase/e0/g/e;->b()Ljava/lang/String;
+000032: move-result-object v3
+000034: const-string v4, "self_open_id"
+000038: invoke-virtual v1, v4, v3, Lorg/json/JSONObject;->put(Ljava/lang/String; Ljava/lang/Object;)Lorg/json/JSONObject;
+00003e: new-instance v4, Ljava/lang/StringBuilder;
+000042: invoke-direct v4, Ljava/lang/StringBuilder;-><init>()V
+000048: const-string v5, "generateAuthMessage:selfOpenId2 = "
+00004c: invoke-virtual v4, v5, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+000052: invoke-virtual v4, v3, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+000058: invoke-virtual v4, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
+00005e: move-result-object v3
+000060: invoke-static v0, v3, Lc/c/f/a/b;->k(Ljava/lang/String; Ljava/lang/String;)V
+000066: if-nez v6, +080h
+00006a: invoke-static Lcom/vivo/connbase/App;->m()Lcom/vivo/connbase/App;
+000070: move-result-object v3
+000072: invoke-virtual v3, Lcom/vivo/connbase/App;->c()Lcom/vivo/connbase/h0/c/e;
+000078: move-result-object v3
+00007a: invoke-virtual v7, Lcom/vivo/connbase/connect/k;->w()Ljava/lang/String;
+000080: move-result-object v4
+000082: invoke-virtual v3, v4, Lcom/vivo/connbase/h0/c/e;->a(Ljava/lang/String;)Z
+000088: move-result v3
+00008a: if-eqz v3, +04fh
+00008e: const-string v3, "is_sameopen_id"
+000092: invoke-static Lcom/vivo/connbase/App;->m()Lcom/vivo/connbase/App;
+000098: move-result-object v4
+00009a: invoke-virtual v4, Lcom/vivo/connbase/App;->c()Lcom/vivo/connbase/h0/c/e;
+0000a0: move-result-object v4
+0000a2: invoke-virtual v7, Lcom/vivo/connbase/connect/k;->w()Ljava/lang/String;
+0000a8: move-result-object v5
+0000aa: invoke-virtual v4, v5, Lcom/vivo/connbase/h0/c/e;->c(Ljava/lang/String;)Lcom/vivo/connbase/h0/c/d;
+0000b0: move-result-object v4
+0000b2: invoke-virtual v4, Lcom/vivo/connbase/h0/c/d;->n()Ljava/lang/Boolean;
+0000b8: move-result-object v4
+0000ba: invoke-virtual v1, v3, v4, Lorg/json/JSONObject;->put(Ljava/lang/String; Ljava/lang/Object;)Lorg/json/JSONObject;
+0000c0: new-instance v3, Ljava/lang/StringBuilder;
+0000c4: invoke-direct v3, Ljava/lang/StringBuilder;-><init>()V
+0000ca: const-string v4, "generateAuthMessage client :"
+0000ce: invoke-virtual v3, v4, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+0000d4: invoke-static Lcom/vivo/connbase/App;->m()Lcom/vivo/connbase/App;
+0000da: move-result-object v4
+0000dc: invoke-virtual v4, Lcom/vivo/connbase/App;->c()Lcom/vivo/connbase/h0/c/e;
+0000e2: move-result-object v4
+0000e4: invoke-virtual v7, Lcom/vivo/connbase/connect/k;->w()Ljava/lang/String;
+0000ea: move-result-object v5
+0000ec: invoke-virtual v4, v5, Lcom/vivo/connbase/h0/c/e;->c(Ljava/lang/String;)Lcom/vivo/connbase/h0/c/d;
+0000f2: move-result-object v4
+0000f4: invoke-virtual v4, Lcom/vivo/connbase/h0/c/d;->n()Ljava/lang/Boolean;
+0000fa: move-result-object v4
+0000fc: invoke-virtual v3, v4, Ljava/lang/StringBuilder;->append(Ljava/lang/Object;)Ljava/lang/StringBuilder;
+000102: const-string v4, "---"
+000106: invoke-virtual v3, v4, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+00010c: invoke-virtual v7, Lcom/vivo/connbase/connect/k;->w()Ljava/lang/String;
+000112: move-result-object v4
+000114: invoke-virtual v3, v4, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+00011a: invoke-virtual v3, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
+000120: move-result-object v3
+000122: invoke-static v0, v3, Lc/c/f/a/b;->k(Ljava/lang/String; Ljava/lang/String;)V
+000128: const-string v3, "generateAuthMessage:"
+00012c: invoke-static v0, v3, Lc/c/f/a/b;->k(Ljava/lang/String; Ljava/lang/String;)V
+000132: goto +1ah
+000134: move-exception v3
+000136: new-instance v4, Ljava/lang/StringBuilder;
+00013a: invoke-direct v4, Ljava/lang/StringBuilder;-><init>()V
+000140: const-string v5, "generateRejectMessage:"
+000144: invoke-virtual v4, v5, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+00014a: invoke-virtual v3, Ljava/lang/Exception;->toString()Ljava/lang/String;
+000150: move-result-object v3
+000152: invoke-virtual v4, v3, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+000158: invoke-virtual v4, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
+00015e: move-result-object v3
+000160: invoke-static v0, v3, Lc/c/f/a/b;->g(Ljava/lang/String; Ljava/lang/String;)V
+000166: return-object v1
+
+METHOD b(Ljava/lang/String; Lcom/vivo/connbase/discovery/message/RequestMessage; Ljava/lang/String; Ljava/lang/String; Z Ljava/lang/String;)Lcom/vivo/connbase/connect/p;
+000000: new-instance v0, Ljava/lang/StringBuilder;
+000004: invoke-direct v0, Ljava/lang/StringBuilder;-><init>()V
+00000a: const-string v1, "generateSkipSecMessage, deviceSessionId:"
+00000e: invoke-virtual v0, v1, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+000014: invoke-virtual v0, v6, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+00001a: const-string v1, ", readyForSC:"
+00001e: invoke-virtual v0, v1, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+000024: invoke-virtual v0, v7, Ljava/lang/StringBuilder;->append(Z)Ljava/lang/StringBuilder;
+00002a: const-string v1, ", keyAgreementParams:"
+00002e: invoke-virtual v0, v1, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+000034: invoke-virtual v0, v5, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+00003a: invoke-virtual v0, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
+000040: move-result-object v0
+000042: const-string v1, "MessageUtils"
+000046: invoke-static v1, v0, Lc/c/f/a/b;->l(Ljava/lang/String; Ljava/lang/String;)V
+00004c: invoke-static Lcom/vivo/connbase/e0/g/e;->b()Ljava/lang/String;
+000052: move-result-object v0
+000054: new-instance v1, Lcom/vivo/connbase/connect/p$a;
+000058: invoke-direct v1, Lcom/vivo/connbase/connect/p$a;-><init>()V
+00005e: invoke-virtual v1, v3, Lcom/vivo/connbase/connect/p$a;->e(Ljava/lang/String;)Lcom/vivo/connbase/connect/p$a;
+000064: move-result-object v3
+000066: invoke-virtual v4, Lcom/vivo/connbase/discovery/message/RequestMessage;->getDeviceName()Ljava/lang/String;
+00006c: move-result-object v1
+00006e: invoke-virtual v3, v1, Lcom/vivo/connbase/connect/p$a;->f(Ljava/lang/String;)Lcom/vivo/connbase/connect/p$a;
+000074: move-result-object v3
+000076: invoke-virtual v4, Lcom/vivo/connbase/discovery/message/RequestMessage;->getPinCode()Ljava/lang/String;
+00007c: move-result-object v1
+00007e: invoke-virtual v3, v1, Lcom/vivo/connbase/connect/p$a;->i(Ljava/lang/String;)Lcom/vivo/connbase/connect/p$a;
+000084: move-result-object v3
+000086: invoke-virtual v4, Lcom/vivo/connbase/discovery/message/RequestMessage;->getServiceId()Ljava/lang/String;
+00008c: move-result-object v1
+00008e: invoke-virtual v3, v1, Lcom/vivo/connbase/connect/p$a;->k(Ljava/lang/String;)Lcom/vivo/connbase/connect/p$a;
+000094: move-result-object v3
+000096: invoke-virtual v4, Lcom/vivo/connbase/discovery/message/RequestMessage;->isWakeUp()Z
+00009c: move-result v1
+00009e: invoke-static v1, Ljava/lang/Boolean;->valueOf(Z)Ljava/lang/Boolean;
+0000a4: move-result-object v1
+0000a6: invoke-virtual v3, v1, Lcom/vivo/connbase/connect/p$a;->a(Ljava/lang/Boolean;)Lcom/vivo/connbase/connect/p$a;
+0000ac: move-result-object v3
+0000ae: invoke-virtual v4, Lcom/vivo/connbase/discovery/message/RequestMessage;->getDataAmount()I
+0000b4: move-result v1
+0000b6: invoke-virtual v3, v1, Lcom/vivo/connbase/connect/p$a;->a(I)Lcom/vivo/connbase/connect/p$a;
+0000bc: move-result-object v3
+0000be: invoke-virtual v4, Lcom/vivo/connbase/discovery/message/RequestMessage;->getTimeOut()J
+0000c4: move-result-wide v1
+0000c6: invoke-virtual v3, v1, v2, Lcom/vivo/connbase/connect/p$a;->a(J)Lcom/vivo/connbase/connect/p$a;
+0000cc: move-result-object v3
+0000ce: invoke-virtual v4, Lcom/vivo/connbase/discovery/message/RequestMessage;->getTransferMode()I
+0000d4: move-result v1
+0000d6: invoke-virtual v3, v1, Lcom/vivo/connbase/connect/p$a;->b(I)Lcom/vivo/connbase/connect/p$a;
+0000dc: move-result-object v3
+0000de: invoke-virtual v4, Lcom/vivo/connbase/discovery/message/RequestMessage;->getPackageName()Ljava/lang/String;
+0000e4: move-result-object v1
+0000e6: invoke-virtual v3, v1, Lcom/vivo/connbase/connect/p$a;->h(Ljava/lang/String;)Lcom/vivo/connbase/connect/p$a;
+0000ec: move-result-object v3
+0000ee: invoke-static Lcom/vivo/connbase/e0/g/e;->a()Ljava/lang/String;
+0000f4: move-result-object v1
+0000f6: invoke-virtual v3, v1, Lcom/vivo/connbase/connect/p$a;->a(Ljava/lang/String;)Lcom/vivo/connbase/connect/p$a;
+0000fc: move-result-object v3
+0000fe: invoke-virtual v4, Lcom/vivo/connbase/discovery/message/RequestMessage;->getConnectExtraInfo()Ljava/lang/String;
+000104: move-result-object v4
+000106: invoke-virtual v3, v4, Lcom/vivo/connbase/connect/p$a;->d(Ljava/lang/String;)Lcom/vivo/connbase/connect/p$a;
+00010c: move-result-object v3
+00010e: invoke-virtual v3, v5, Lcom/vivo/connbase/connect/p$a;->b(Ljava/lang/String;)Lcom/vivo/connbase/connect/p$a;
+000114: move-result-object v3
+000116: invoke-virtual v3, v6, Lcom/vivo/connbase/connect/p$a;->g(Ljava/lang/String;)Lcom/vivo/connbase/connect/p$a;
+00011c: move-result-object v3
+00011e: invoke-virtual v3, v7, Lcom/vivo/connbase/connect/p$a;->a(Z)Lcom/vivo/connbase/connect/p$a;
+000124: move-result-object v3
+000126: invoke-virtual v3, v8, Lcom/vivo/connbase/connect/p$a;->l(Ljava/lang/String;)Lcom/vivo/connbase/connect/p$a;
+00012c: move-result-object v3
+00012e: invoke-virtual v3, v0, Lcom/vivo/connbase/connect/p$a;->j(Ljava/lang/String;)Lcom/vivo/connbase/connect/p$a;
+000134: move-result-object v3
+000136: invoke-virtual v3, Lcom/vivo/connbase/connect/p$a;->a()Lcom/vivo/connbase/connect/p;
+00013c: move-result-object v3
+00013e: return-object v3
+
+METHOD b(Ljava/lang/String; Ljava/lang/String; Ljava/lang/String; [B J)Lcom/vivo/connbase/proto/TransferData;
+000000: invoke-static Lcom/vivo/connbase/proto/TransferData;->newBuilder()Lcom/vivo/connbase/proto/TransferData$Builder;
+000006: move-result-object v0
+000008: invoke-virtual v0, v1, Lcom/vivo/connbase/proto/TransferData$Builder;->setDeviceId(Ljava/lang/String;)Lcom/vivo/connbase/proto/TransferData$Builder;
+00000e: move-result-object v1
+000010: invoke-virtual v1, v2, Lcom/vivo/connbase/proto/TransferData$Builder;->setServiceId(Ljava/lang/String;)Lcom/vivo/connbase/proto/TransferData$Builder;
+000016: move-result-object v1
+000018: if-eqz v3, +003h
+00001c: goto +3h
+00001e: const-string v3, ""
+000022: invoke-virtual v1, v3, Lcom/vivo/connbase/proto/TransferData$Builder;->setExtraInfo(Ljava/lang/String;)Lcom/vivo/connbase/proto/TransferData$Builder;
+000028: move-result-object v1
+00002a: invoke-static v4, Lcom/google/protobuf/ByteString;->copyFrom([B)Lcom/google/protobuf/ByteString;
+000030: move-result-object v2
+000032: invoke-virtual v1, v2, Lcom/vivo/connbase/proto/TransferData$Builder;->setContent(Lcom/google/protobuf/ByteString;)Lcom/vivo/connbase/proto/TransferData$Builder;
+000038: move-result-object v1
+00003a: invoke-virtual v1, v5, v6, Lcom/vivo/connbase/proto/TransferData$Builder;->setPayloadId(J)Lcom/vivo/connbase/proto/TransferData$Builder;
+000040: move-result-object v1
+000042: invoke-virtual v1, Lcom/google/protobuf/GeneratedMessageLite$Builder;->build()Lcom/google/protobuf/GeneratedMessageLite;
+000048: move-result-object v1
+00004a: check-cast v1, Lcom/vivo/connbase/proto/TransferData;
+00004e: return-object v1
+
+METHOD b(Ljava/lang/String;)Lorg/json/JSONObject;
+000000: const-string v0, "disShortConn"
+000004: new-instance v1, Lorg/json/JSONObject;
+000008: invoke-direct v1, Lorg/json/JSONObject;-><init>()V
+00000e: invoke-virtual v1, v0, v0, Lorg/json/JSONObject;->put(Ljava/lang/String; Ljava/lang/Object;)Lorg/json/JSONObject;
+000014: const-string v0, "device_id"
+000018: invoke-virtual v1, v0, v3, Lorg/json/JSONObject;->put(Ljava/lang/String; Ljava/lang/Object;)Lorg/json/JSONObject;
+00001e: goto +1ch
+000020: move-exception v3
+000022: new-instance v0, Ljava/lang/StringBuilder;
+000026: invoke-direct v0, Ljava/lang/StringBuilder;-><init>()V
+00002c: const-string v2, "generateDisShortConnectMessage error:"
+000030: invoke-virtual v0, v2, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+000036: invoke-virtual v3, Lorg/json/JSONException;->toString()Ljava/lang/String;
+00003c: move-result-object v3
+00003e: invoke-virtual v0, v3, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+000044: invoke-virtual v0, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
+00004a: move-result-object v3
+00004c: const-string v0, "MessageUtils"
+000050: invoke-static v0, v3, Lc/c/f/a/b;->g(Ljava/lang/String; Ljava/lang/String;)V
+000056: return-object v1
+
+METHOD b(Ljava/lang/String; Ljava/lang/String;)Lorg/json/JSONObject;
+000000: new-instance v0, Lorg/json/JSONObject;
+000004: invoke-direct v0, Lorg/json/JSONObject;-><init>()V
+00000a: const-string v1, "disconn"
+00000e: const-string v2, "disconnect"
+000012: invoke-virtual v0, v1, v2, Lorg/json/JSONObject;->put(Ljava/lang/String; Ljava/lang/Object;)Lorg/json/JSONObject;
+000018: const-string v1, "device_id"
+00001c: invoke-virtual v0, v1, v4, Lorg/json/JSONObject;->put(Ljava/lang/String; Ljava/lang/Object;)Lorg/json/JSONObject;
+000022: const-string v4, "service_id"
+000026: invoke-virtual v0, v4, v3, Lorg/json/JSONObject;->put(Ljava/lang/String; Ljava/lang/Object;)Lorg/json/JSONObject;
+00002c: goto +1ch
+00002e: move-exception v3
+000030: new-instance v4, Ljava/lang/StringBuilder;
+000034: invoke-direct v4, Ljava/lang/StringBuilder;-><init>()V
+00003a: const-string v1, "generateResponseMessage:"
+00003e: invoke-virtual v4, v1, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+000044: invoke-virtual v3, Ljava/lang/Exception;->toString()Ljava/lang/String;
+00004a: move-result-object v3
+00004c: invoke-virtual v4, v3, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+000052: invoke-virtual v4, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
+000058: move-result-object v3
+00005a: const-string v4, "MessageUtils"
+00005e: invoke-static v4, v3, Lc/c/f/a/b;->g(Ljava/lang/String; Ljava/lang/String;)V
+000064: return-object v0
+
+METHOD b(Ljava/lang/String; Ljava/lang/String; I)Lorg/json/JSONObject;
+000000: new-instance v0, Lorg/json/JSONObject;
+000004: invoke-direct v0, Lorg/json/JSONObject;-><init>()V
+00000a: const-string v1, "p2pbusy"
+00000e: const/16 v2, 508
+000012: invoke-virtual v0, v1, v2, Lorg/json/JSONObject;->put(Ljava/lang/String; I)Lorg/json/JSONObject;
+000018: const-string v1, "device_id"
+00001c: invoke-virtual v0, v1, v4, Lorg/json/JSONObject;->put(Ljava/lang/String; Ljava/lang/Object;)Lorg/json/JSONObject;
+000022: const-string v4, "service_id"
+000026: invoke-virtual v0, v4, v3, Lorg/json/JSONObject;->put(Ljava/lang/String; Ljava/lang/Object;)Lorg/json/JSONObject;
+00002c: const-string v3, "p2pBusyStatus"
+000030: invoke-virtual v0, v3, v5, Lorg/json/JSONObject;->put(Ljava/lang/String; I)Lorg/json/JSONObject;
+000036: goto +1ch
+000038: move-exception v3
+00003a: new-instance v4, Ljava/lang/StringBuilder;
+00003e: invoke-direct v4, Ljava/lang/StringBuilder;-><init>()V
+000044: const-string v5, "generateResponseMessage:"
+000048: invoke-virtual v4, v5, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+00004e: invoke-virtual v3, Ljava/lang/Exception;->toString()Ljava/lang/String;
+000054: move-result-object v3
+000056: invoke-virtual v4, v3, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+00005c: invoke-virtual v4, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
+000062: move-result-object v3
+000064: const-string v4, "MessageUtils"
+000068: invoke-static v4, v3, Lc/c/f/a/b;->g(Ljava/lang/String; Ljava/lang/String;)V
+00006e: return-object v0
+
+METHOD b(Ljava/lang/String; Ljava/lang/String; Ljava/lang/String;)Lorg/json/JSONObject;
+000000: new-instance v0, Lorg/json/JSONObject;
+000004: invoke-direct v0, Lorg/json/JSONObject;-><init>()V
+00000a: const-string v1, "serverConn"
+00000e: invoke-virtual v0, v1, v2, Lorg/json/JSONObject;->put(Ljava/lang/String; Ljava/lang/Object;)Lorg/json/JSONObject;
+000014: const-string v2, "package"
+000018: invoke-virtual v0, v2, v3, Lorg/json/JSONObject;->put(Ljava/lang/String; Ljava/lang/Object;)Lorg/json/JSONObject;
+00001e: const-string v2, "conn_opt"
+000022: invoke-virtual v0, v2, v4, Lorg/json/JSONObject;->put(Ljava/lang/String; Ljava/lang/Object;)Lorg/json/JSONObject;
+000028: goto +1ch
+00002a: move-exception v2
+00002c: new-instance v3, Ljava/lang/StringBuilder;
+000030: invoke-direct v3, Ljava/lang/StringBuilder;-><init>()V
+000036: const-string v4, "generateResponseMessage:"
+00003a: invoke-virtual v3, v4, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+000040: invoke-virtual v2, Ljava/lang/Exception;->toString()Ljava/lang/String;
+000046: move-result-object v2
+000048: invoke-virtual v3, v2, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+00004e: invoke-virtual v3, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
+000054: move-result-object v2
+000056: const-string v3, "MessageUtils"
+00005a: invoke-static v3, v2, Lc/c/f/a/b;->g(Ljava/lang/String; Ljava/lang/String;)V
+000060: return-object v0
+
+METHOD b(Ljava/lang/String; Ljava/lang/String; Ljava/lang/String; Ljava/lang/Integer;)Lorg/json/JSONObject;
+000000: new-instance v0, Lorg/json/JSONObject;
+000004: invoke-direct v0, Lorg/json/JSONObject;-><init>()V
+00000a: const-string v1, "status"
+00000e: invoke-virtual v0, v1, v4, Lorg/json/JSONObject;->put(Ljava/lang/String; Ljava/lang/Object;)Lorg/json/JSONObject;
+000014: const-string v4, "service_id"
+000018: invoke-virtual v0, v4, v2, Lorg/json/JSONObject;->put(Ljava/lang/String; Ljava/lang/Object;)Lorg/json/JSONObject;
+00001e: const-string v2, "device_id"
+000022: invoke-virtual v0, v2, v3, Lorg/json/JSONObject;->put(Ljava/lang/String; Ljava/lang/Object;)Lorg/json/JSONObject;
+000028: if-eqz v5, +007h
+00002c: const-string v2, "key_rejectconnection_error_code"
+000030: invoke-virtual v0, v2, v5, Lorg/json/JSONObject;->put(Ljava/lang/String; Ljava/lang/Object;)Lorg/json/JSONObject;
+000036: invoke-static Lcom/vivo/connbase/e0/g/e;->b()Ljava/lang/String;
+00003c: move-result-object v2
+00003e: const-string v3, "self_open_id"
+000042: invoke-virtual v0, v3, v2, Lorg/json/JSONObject;->put(Ljava/lang/String; Ljava/lang/Object;)Lorg/json/JSONObject;
+000048: goto +1ch
+00004a: move-exception v2
+00004c: new-instance v3, Ljava/lang/StringBuilder;
+000050: invoke-direct v3, Ljava/lang/StringBuilder;-><init>()V
+000056: const-string v4, "generateRejectMessage:"
+00005a: invoke-virtual v3, v4, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+000060: invoke-virtual v2, Ljava/lang/Exception;->toString()Ljava/lang/String;
+000066: move-result-object v2
+000068: invoke-virtual v3, v2, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+00006e: invoke-virtual v3, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
+000074: move-result-object v2
+000076: const-string v3, "MessageUtils"
+00007a: invoke-static v3, v2, Lc/c/f/a/b;->g(Ljava/lang/String; Ljava/lang/String;)V
+000080: return-object v0
+
+METHOD c(Ljava/lang/String;)Lorg/json/JSONObject;
+000000: const-string v0, "diQueryConnection"
+000004: new-instance v1, Lorg/json/JSONObject;
+000008: invoke-direct v1, Lorg/json/JSONObject;-><init>()V
+00000e: invoke-virtual v1, v0, v0, Lorg/json/JSONObject;->put(Ljava/lang/String; Ljava/lang/Object;)Lorg/json/JSONObject;
+000014: const-string v0, "device_id"
+000018: invoke-static Lcom/vivo/connbase/App;->m()Lcom/vivo/connbase/App;
+00001e: move-result-object v2
+000020: invoke-virtual v2, Lcom/vivo/connbase/App;->d()Ljava/lang/String;
+000026: move-result-object v2
+000028: invoke-virtual v1, v0, v2, Lorg/json/JSONObject;->put(Ljava/lang/String; Ljava/lang/Object;)Lorg/json/JSONObject;
+00002e: const-string v0, "service_id"
+000032: invoke-virtual v1, v0, v3, Lorg/json/JSONObject;->put(Ljava/lang/String; Ljava/lang/Object;)Lorg/json/JSONObject;
+000038: goto +1ch
+00003a: move-exception v3
+00003c: new-instance v0, Ljava/lang/StringBuilder;
+000040: invoke-direct v0, Ljava/lang/StringBuilder;-><init>()V
+000046: const-string v2, "generateDisconnectQueryConnection error:"
+00004a: invoke-virtual v0, v2, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+000050: invoke-virtual v3, Lorg/json/JSONException;->toString()Ljava/lang/String;
+000056: move-result-object v3
+000058: invoke-virtual v0, v3, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+00005e: invoke-virtual v0, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
+000064: move-result-object v3
+000066: const-string v0, "MessageUtils"
+00006a: invoke-static v0, v3, Lc/c/f/a/b;->g(Ljava/lang/String; Ljava/lang/String;)V
+000070: return-object v1
+
+METHOD c(Ljava/lang/String; Ljava/lang/String;)Lorg/json/JSONObject;
+000000: const-string v0, "duplicateChannel"
+000004: new-instance v1, Lorg/json/JSONObject;
+000008: invoke-direct v1, Lorg/json/JSONObject;-><init>()V
+00000e: invoke-virtual v1, v0, v0, Lorg/json/JSONObject;->put(Ljava/lang/String; Ljava/lang/Object;)Lorg/json/JSONObject;
+000014: const-string v0, "device_id"
+000018: invoke-virtual v1, v0, v3, Lorg/json/JSONObject;->put(Ljava/lang/String; Ljava/lang/Object;)Lorg/json/JSONObject;
+00001e: const-string v3, "service_id"
+000022: invoke-virtual v1, v3, v2, Lorg/json/JSONObject;->put(Ljava/lang/String; Ljava/lang/Object;)Lorg/json/JSONObject;
+000028: goto +1ch
+00002a: move-exception v2
+00002c: new-instance v3, Ljava/lang/StringBuilder;
+000030: invoke-direct v3, Ljava/lang/StringBuilder;-><init>()V
+000036: const-string v0, "generateDuplicateChannelMessage:"
+00003a: invoke-virtual v3, v0, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+000040: invoke-virtual v2, Ljava/lang/Exception;->toString()Ljava/lang/String;
+000046: move-result-object v2
+000048: invoke-virtual v3, v2, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+00004e: invoke-virtual v3, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
+000054: move-result-object v2
+000056: const-string v3, "MessageUtils"
+00005a: invoke-static v3, v2, Lc/c/f/a/b;->g(Ljava/lang/String; Ljava/lang/String;)V
+000060: return-object v1
+
+METHOD d(Ljava/lang/String;)Lorg/json/JSONObject;
+000000: const-string v0, "p2pconnectFail"
+000004: new-instance v1, Lorg/json/JSONObject;
+000008: invoke-direct v1, Lorg/json/JSONObject;-><init>()V
+00000e: invoke-virtual v1, v0, v0, Lorg/json/JSONObject;->put(Ljava/lang/String; Ljava/lang/Object;)Lorg/json/JSONObject;
+000014: const-string v0, "device_id"
+000018: invoke-static Lcom/vivo/connbase/App;->m()Lcom/vivo/connbase/App;
+00001e: move-result-object v2
+000020: invoke-virtual v2, Lcom/vivo/connbase/App;->d()Ljava/lang/String;
+000026: move-result-object v2
+000028: invoke-virtual v1, v0, v2, Lorg/json/JSONObject;->put(Ljava/lang/String; Ljava/lang/Object;)Lorg/json/JSONObject;
+00002e: const-string v0, "service_id"
+000032: invoke-virtual v1, v0, v3, Lorg/json/JSONObject;->put(Ljava/lang/String; Ljava/lang/Object;)Lorg/json/JSONObject;
+000038: goto +1ch
+00003a: move-exception v3
+00003c: new-instance v0, Ljava/lang/StringBuilder;
+000040: invoke-direct v0, Ljava/lang/StringBuilder;-><init>()V
+000046: const-string v2, "generateP2pConnectFailMessage error:"
+00004a: invoke-virtual v0, v2, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+000050: invoke-virtual v3, Lorg/json/JSONException;->toString()Ljava/lang/String;
+000056: move-result-object v3
+000058: invoke-virtual v0, v3, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+00005e: invoke-virtual v0, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
+000064: move-result-object v3
+000066: const-string v0, "MessageUtils"
+00006a: invoke-static v0, v3, Lc/c/f/a/b;->g(Ljava/lang/String; Ljava/lang/String;)V
+000070: return-object v1
+
+METHOD d(Ljava/lang/String; Ljava/lang/String;)Lorg/json/JSONObject;
+000000: new-instance v0, Lorg/json/JSONObject;
+000004: invoke-direct v0, Lorg/json/JSONObject;-><init>()V
+00000a: const-string v1, "fakedisc"
+00000e: const-string v2, "disconnect"
+000012: invoke-virtual v0, v1, v2, Lorg/json/JSONObject;->put(Ljava/lang/String; Ljava/lang/Object;)Lorg/json/JSONObject;
+000018: const-string v1, "device_id"
+00001c: invoke-virtual v0, v1, v4, Lorg/json/JSONObject;->put(Ljava/lang/String; Ljava/lang/Object;)Lorg/json/JSONObject;
+000022: const-string v4, "service_id"
+000026: invoke-virtual v0, v4, v3, Lorg/json/JSONObject;->put(Ljava/lang/String; Ljava/lang/Object;)Lorg/json/JSONObject;
+00002c: goto +1ch
+00002e: move-exception v3
+000030: new-instance v4, Ljava/lang/StringBuilder;
+000034: invoke-direct v4, Ljava/lang/StringBuilder;-><init>()V
+00003a: const-string v1, "generateResponseMessage:"
+00003e: invoke-virtual v4, v1, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+000044: invoke-virtual v3, Ljava/lang/Exception;->toString()Ljava/lang/String;
+00004a: move-result-object v3
+00004c: invoke-virtual v4, v3, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+000052: invoke-virtual v4, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
+000058: move-result-object v3
+00005a: const-string v4, "MessageUtils"
+00005e: invoke-static v4, v3, Lc/c/f/a/b;->g(Ljava/lang/String; Ljava/lang/String;)V
+000064: return-object v0
+
+METHOD e(Ljava/lang/String;)Lorg/json/JSONObject;
+000000: const-string v0, "queryConnState"
+000004: new-instance v1, Lorg/json/JSONObject;
+000008: invoke-direct v1, Lorg/json/JSONObject;-><init>()V
+00000e: invoke-virtual v1, v0, v0, Lorg/json/JSONObject;->put(Ljava/lang/String; Ljava/lang/Object;)Lorg/json/JSONObject;
+000014: const-string v0, "device_id"
+000018: invoke-static Lcom/vivo/connbase/App;->m()Lcom/vivo/connbase/App;
+00001e: move-result-object v2
+000020: invoke-virtual v2, Lcom/vivo/connbase/App;->d()Ljava/lang/String;
+000026: move-result-object v2
+000028: invoke-virtual v1, v0, v2, Lorg/json/JSONObject;->put(Ljava/lang/String; Ljava/lang/Object;)Lorg/json/JSONObject;
+00002e: const-string v0, "service_id"
+000032: invoke-virtual v1, v0, v3, Lorg/json/JSONObject;->put(Ljava/lang/String; Ljava/lang/Object;)Lorg/json/JSONObject;
+000038: goto +1ch
+00003a: move-exception v3
+00003c: new-instance v0, Ljava/lang/StringBuilder;
+000040: invoke-direct v0, Ljava/lang/StringBuilder;-><init>()V
+000046: const-string v2, "generateQueryConnectionStateMessage error:"
+00004a: invoke-virtual v0, v2, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+000050: invoke-virtual v3, Lorg/json/JSONException;->toString()Ljava/lang/String;
+000056: move-result-object v3
+000058: invoke-virtual v0, v3, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+00005e: invoke-virtual v0, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
+000064: move-result-object v3
+000066: const-string v0, "MessageUtils"
+00006a: invoke-static v0, v3, Lc/c/f/a/b;->g(Ljava/lang/String; Ljava/lang/String;)V
+000070: return-object v1
+
+METHOD e(Ljava/lang/String; Ljava/lang/String;)Lorg/json/JSONObject;
+000000: const-string v0, "callP2pSuccess"
+000004: new-instance v1, Lorg/json/JSONObject;
+000008: invoke-direct v1, Lorg/json/JSONObject;-><init>()V
+00000e: invoke-virtual v1, v0, v0, Lorg/json/JSONObject;->put(Ljava/lang/String; Ljava/lang/Object;)Lorg/json/JSONObject;
+000014: const-string v0, "service_id"
+000018: invoke-virtual v1, v0, v2, Lorg/json/JSONObject;->put(Ljava/lang/String; Ljava/lang/Object;)Lorg/json/JSONObject;
+00001e: const-string v2, "device_id"
+000022: invoke-virtual v1, v2, v3, Lorg/json/JSONObject;->put(Ljava/lang/String; Ljava/lang/Object;)Lorg/json/JSONObject;
+000028: goto +1ch
+00002a: move-exception v2
+00002c: new-instance v3, Ljava/lang/StringBuilder;
+000030: invoke-direct v3, Ljava/lang/StringBuilder;-><init>()V
+000036: const-string v0, "generateNotifyRemoteCallSwitchP2pSuccessMessage error:"
+00003a: invoke-virtual v3, v0, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+000040: invoke-virtual v2, Lorg/json/JSONException;->toString()Ljava/lang/String;
+000046: move-result-object v2
+000048: invoke-virtual v3, v2, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+00004e: invoke-virtual v3, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
+000054: move-result-object v2
+000056: const-string v3, "MessageUtils"
+00005a: invoke-static v3, v2, Lc/c/f/a/b;->g(Ljava/lang/String; Ljava/lang/String;)V
+000060: return-object v1
+
+METHOD f(Ljava/lang/String;)Lorg/json/JSONObject;
+000000: const-string v0, "setDisconnType"
+000004: new-instance v1, Lorg/json/JSONObject;
+000008: invoke-direct v1, Lorg/json/JSONObject;-><init>()V
+00000e: invoke-virtual v1, v0, v0, Lorg/json/JSONObject;->put(Ljava/lang/String; Ljava/lang/Object;)Lorg/json/JSONObject;
+000014: const-string v0, "service_id"
+000018: invoke-virtual v1, v0, v3, Lorg/json/JSONObject;->put(Ljava/lang/String; Ljava/lang/Object;)Lorg/json/JSONObject;
+00001e: const-string v3, "device_id"
+000022: invoke-static Lcom/vivo/connbase/App;->m()Lcom/vivo/connbase/App;
+000028: move-result-object v0
+00002a: invoke-virtual v0, Lcom/vivo/connbase/App;->d()Ljava/lang/String;
+000030: move-result-object v0
+000032: invoke-virtual v1, v3, v0, Lorg/json/JSONObject;->put(Ljava/lang/String; Ljava/lang/Object;)Lorg/json/JSONObject;
+000038: goto +1ch
+00003a: move-exception v3
+00003c: new-instance v0, Ljava/lang/StringBuilder;
+000040: invoke-direct v0, Ljava/lang/StringBuilder;-><init>()V
+000046: const-string v2, "generateSetDisconnectTypeMessage error:"
+00004a: invoke-virtual v0, v2, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+000050: invoke-virtual v3, Lorg/json/JSONException;->toString()Ljava/lang/String;
+000056: move-result-object v3
+000058: invoke-virtual v0, v3, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+00005e: invoke-virtual v0, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
+000064: move-result-object v3
+000066: const-string v0, "MessageUtils"
+00006a: invoke-static v0, v3, Lc/c/f/a/b;->g(Ljava/lang/String; Ljava/lang/String;)V
+000070: return-object v1
+
+METHOD g(Ljava/lang/String;)Lorg/json/JSONObject;
+000000: const-string v0, "shortConn"
+000004: new-instance v1, Lorg/json/JSONObject;
+000008: invoke-direct v1, Lorg/json/JSONObject;-><init>()V
+00000e: invoke-virtual v1, v0, v0, Lorg/json/JSONObject;->put(Ljava/lang/String; Ljava/lang/Object;)Lorg/json/JSONObject;
+000014: const-string v0, "device_id"
+000018: invoke-virtual v1, v0, v3, Lorg/json/JSONObject;->put(Ljava/lang/String; Ljava/lang/Object;)Lorg/json/JSONObject;
+00001e: goto +1ch
+000020: move-exception v3
+000022: new-instance v0, Ljava/lang/StringBuilder;
+000026: invoke-direct v0, Ljava/lang/StringBuilder;-><init>()V
+00002c: const-string v2, "generateShortConnectMessage error:"
+000030: invoke-virtual v0, v2, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+000036: invoke-virtual v3, Lorg/json/JSONException;->toString()Ljava/lang/String;
+00003c: move-result-object v3
+00003e: invoke-virtual v0, v3, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+000044: invoke-virtual v0, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
+00004a: move-result-object v3
+00004c: const-string v0, "MessageUtils"
+000050: invoke-static v0, v3, Lc/c/f/a/b;->g(Ljava/lang/String; Ljava/lang/String;)V
+000056: return-object v1
+
+METHOD h(Ljava/lang/String;)Lorg/json/JSONObject;
+000000: const-string v0, "wifiDisable"
+000004: new-instance v1, Lorg/json/JSONObject;
+000008: invoke-direct v1, Lorg/json/JSONObject;-><init>()V
+00000e: invoke-virtual v1, v0, v0, Lorg/json/JSONObject;->put(Ljava/lang/String; Ljava/lang/Object;)Lorg/json/JSONObject;
+000014: const-string v0, "device_id"
+000018: invoke-static Lcom/vivo/connbase/App;->m()Lcom/vivo/connbase/App;
+00001e: move-result-object v2
+000020: invoke-virtual v2, Lcom/vivo/connbase/App;->d()Ljava/lang/String;
+000026: move-result-object v2
+000028: invoke-virtual v1, v0, v2, Lorg/json/JSONObject;->put(Ljava/lang/String; Ljava/lang/Object;)Lorg/json/JSONObject;
+00002e: const-string v0, "service_id"
+000032: invoke-virtual v1, v0, v3, Lorg/json/JSONObject;->put(Ljava/lang/String; Ljava/lang/Object;)Lorg/json/JSONObject;
+000038: goto +1ch
+00003a: move-exception v3
+00003c: new-instance v0, Ljava/lang/StringBuilder;
+000040: invoke-direct v0, Ljava/lang/StringBuilder;-><init>()V
+000046: const-string v2, "generateWifiDisableMessage error:"
+00004a: invoke-virtual v0, v2, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+000050: invoke-virtual v3, Lorg/json/JSONException;->toString()Ljava/lang/String;
+000056: move-result-object v3
+000058: invoke-virtual v0, v3, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+00005e: invoke-virtual v0, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
+000064: move-result-object v3
+000066: const-string v0, "MessageUtils"
+00006a: invoke-static v0, v3, Lc/c/f/a/b;->g(Ljava/lang/String; Ljava/lang/String;)V
+000070: return-object v1
+
+METHOD i(Ljava/lang/String;)Lcom/vivo/connbase/discovery/message/a;
+000000: const-string v0, "MessageUtils"
+000004: new-instance v1, Lorg/json/JSONObject;
+000008: invoke-direct v1, v8, Lorg/json/JSONObject;-><init>(Ljava/lang/String;)V
+00000e: const-string v8, "status"
+000012: invoke-virtual v1, v8, Lorg/json/JSONObject;->getString(Ljava/lang/String;)Ljava/lang/String;
+000018: move-result-object v8
+00001a: new-instance v2, Lcom/vivo/connbase/discovery/message/a;
+00001e: invoke-direct v2, Lcom/vivo/connbase/discovery/message/a;-><init>()V
+000024: const-string v3, "accept"
+000028: invoke-static v8, v3, Landroid/text/TextUtils;->equals(Ljava/lang/CharSequence; Ljava/lang/CharSequence;)Z
+00002e: move-result v3
+000030: if-eqz v3, +007h
+000034: const/4 v8, 0
+000036: invoke-virtual v2, v8, Lcom/vivo/connbase/discovery/message/a;->a(I)V
+00003c: goto +15h
+00003e: const-string v3, "reject"
+000042: invoke-static v8, v3, Landroid/text/TextUtils;->equals(Ljava/lang/CharSequence; Ljava/lang/CharSequence;)Z
+000048: move-result v3
+00004a: if-eqz v3, +004h
+00004e: const/4 v8, 1
+000050: goto -dh
+000052: const-string v3, "timeout"
+000056: invoke-static v8, v3, Landroid/text/TextUtils;->equals(Ljava/lang/CharSequence; Ljava/lang/CharSequence;)Z
+00005c: move-result v8
+00005e: if-eqz v8, +004h
+000062: const/4 v8, 2
+000064: goto -17h
+000066: const-string v8, "service_id"
+00006a: invoke-virtual v1, v8, Lorg/json/JSONObject;->getString(Ljava/lang/String;)Ljava/lang/String;
+000070: move-result-object v8
+000072: const-string v3, "device_id"
+000076: invoke-virtual v1, v3, Lorg/json/JSONObject;->getString(Ljava/lang/String;)Ljava/lang/String;
+00007c: move-result-object v3
+00007e: invoke-virtual v2, v8, Lcom/vivo/connbase/discovery/message/a;->d(Ljava/lang/String;)V
+000084: invoke-virtual v2, v3, Lcom/vivo/connbase/discovery/message/a;->a(Ljava/lang/String;)V
+00008a: const-string v4, "self_open_id"
+00008e: invoke-virtual v1, v4, Lorg/json/JSONObject;->optString(Ljava/lang/String;)Ljava/lang/String;
+000094: move-result-object v4
+000096: invoke-virtual v2, v4, Lcom/vivo/connbase/discovery/message/a;->c(Ljava/lang/String;)V
+00009c: new-instance v5, Ljava/lang/StringBuilder;
+0000a0: invoke-direct v5, Ljava/lang/StringBuilder;-><init>()V
+0000a6: const-string v6, " parseAuthMessage selfOpenId="
+0000aa: invoke-virtual v5, v6, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+0000b0: invoke-virtual v5, v4, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+0000b6: invoke-virtual v5, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
+0000bc: move-result-object v5
+0000be: invoke-static v0, v5, Lc/c/f/a/b;->g(Ljava/lang/String; Ljava/lang/String;)V
+0000c4: const-string v5, "is_sameopen_id"
+0000c8: invoke-virtual v1, v5, Lorg/json/JSONObject;->getBoolean(Ljava/lang/String;)Z
+0000ce: move-result v5
+0000d0: invoke-virtual v2, v5, Lcom/vivo/connbase/discovery/message/a;->a(Z)V
+0000d6: new-instance v6, Ljava/lang/StringBuilder;
+0000da: invoke-direct v6, Ljava/lang/StringBuilder;-><init>()V
+0000e0: const-string v7, " parseAuthMessage is_sameopen_id="
+0000e4: invoke-virtual v6, v7, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+0000ea: invoke-virtual v6, v5, Ljava/lang/StringBuilder;->append(Z)Ljava/lang/StringBuilder;
+0000f0: const-string v5, ",selfOpenId="
+0000f4: invoke-virtual v6, v5, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+0000fa: invoke-virtual v6, v4, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+000100: invoke-virtual v6, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
+000106: move-result-object v4
+000108: invoke-static v0, v4, Lc/c/f/a/b;->g(Ljava/lang/String; Ljava/lang/String;)V
+00010e: goto +1ah
+000110: move-exception v4
+000112: new-instance v5, Ljava/lang/StringBuilder;
+000116: invoke-direct v5, Ljava/lang/StringBuilder;-><init>()V
+00011c: const-string v6, " parseAuthMessage is_sameod:"
+000120: invoke-virtual v5, v6, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+000126: invoke-virtual v4, Ljava/lang/Exception;->toString()Ljava/lang/String;
+00012c: move-result-object v4
+00012e: invoke-virtual v5, v4, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+000134: invoke-virtual v5, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
+00013a: move-result-object v4
+00013c: invoke-static v0, v4, Lc/c/f/a/b;->g(Ljava/lang/String; Ljava/lang/String;)V
+000142: invoke-virtual v2, v8, Lcom/vivo/connbase/discovery/message/a;->d(Ljava/lang/String;)V
+000148: invoke-virtual v2, v3, Lcom/vivo/connbase/discovery/message/a;->a(Ljava/lang/String;)V
+00014e: const-string v8, "key_rejectconnection_error_code"
+000152: invoke-virtual v1, v8, Lorg/json/JSONObject;->getInt(Ljava/lang/String;)I
+000158: move-result v8
+00015a: invoke-static v8, Ljava/lang/Integer;->valueOf(I)Ljava/lang/Integer;
+000160: move-result-object v8
+000162: invoke-virtual v2, v8, Lcom/vivo/connbase/discovery/message/a;->a(Ljava/lang/Integer;)V
+000168: goto +1ah
+00016a: move-exception v8
+00016c: new-instance v1, Ljava/lang/StringBuilder;
+000170: invoke-direct v1, Ljava/lang/StringBuilder;-><init>()V
+000176: const-string v3, "parseAuthMessageerrorCode:"
+00017a: invoke-virtual v1, v3, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+000180: invoke-virtual v8, Ljava/lang/Exception;->toString()Ljava/lang/String;
+000186: move-result-object v8
+000188: invoke-virtual v1, v8, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+00018e: invoke-virtual v1, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
+000194: move-result-object v8
+000196: invoke-static v0, v8, Lc/c/f/a/b;->g(Ljava/lang/String; Ljava/lang/String;)V
+00019c: return-object v2

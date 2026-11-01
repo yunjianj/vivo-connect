@@ -1,0 +1,47 @@
+APK pcsuite/updateApk/pcsuite.apk
+DEX classes2.dex
+CLASS Lcom/vivo/connect/sdk/f/c$z;
+SUPER Ljava/lang/Object;
+FIELDS
+d Ljava/lang/String; = ':enableAdvertiseConfigByServiceId'
+a Landroid/os/Messenger; = None
+b Ljava/lang/String; = None
+c Lcom/vivo/connect/sdk/f/c; = None
+
+METHOD <init>(Lcom/vivo/connect/sdk/f/c; Landroid/os/Messenger; Ljava/lang/String;)V
+000000: iput-object v1, v0, Lcom/vivo/connect/sdk/f/c$z;->c Lcom/vivo/connect/sdk/f/c;
+000004: iput-object v2, v0, Lcom/vivo/connect/sdk/f/c$z;->a Landroid/os/Messenger;
+000008: iput-object v3, v0, Lcom/vivo/connect/sdk/f/c$z;->b Ljava/lang/String;
+00000c: invoke-direct v0, Ljava/lang/Object;-><init>()V
+000012: return-void 
+
+METHOD run()V
+000000: iget-object v0, v2, Lcom/vivo/connect/sdk/f/c$z;->c Lcom/vivo/connect/sdk/f/c;
+000004: invoke-static v0, Lcom/vivo/connect/sdk/f/c;->a(Lcom/vivo/connect/sdk/f/c;)Lcom/vivo/connbase/IClient;
+00000a: move-result-object v0
+00000c: if-eqz v0, +010h
+000010: iget-object v0, v2, Lcom/vivo/connect/sdk/f/c$z;->c Lcom/vivo/connect/sdk/f/c;
+000014: invoke-static v0, Lcom/vivo/connect/sdk/f/c;->a(Lcom/vivo/connect/sdk/f/c;)Lcom/vivo/connbase/IClient;
+00001a: move-result-object v0
+00001c: iget-object v1, v2, Lcom/vivo/connect/sdk/f/c$z;->a Landroid/os/Messenger;
+000020: iget-object v2, v2, Lcom/vivo/connect/sdk/f/c$z;->b Ljava/lang/String;
+000024: invoke-interface v0, v1, v2, Lcom/vivo/connbase/IClient;->enableAdvertisingConfigByServiceID(Landroid/os/Messenger; Ljava/lang/String;)V
+00002a: return-void 
+00002c: iget-object v0, v2, Lcom/vivo/connect/sdk/f/c$z;->c Lcom/vivo/connect/sdk/f/c;
+000030: const-string v1, ":enableAdvertiseConfigByServiceId"
+000034: invoke-static v0, v1, Lcom/vivo/connect/sdk/f/c;->a(Lcom/vivo/connect/sdk/f/c; Ljava/lang/String;)Z
+00003a: move-result v0
+00003c: if-nez v0, +003h
+000040: return-void 
+000042: iget-object v0, v2, Lcom/vivo/connect/sdk/f/c$z;->c Lcom/vivo/connect/sdk/f/c;
+000046: invoke-static v0, Lcom/vivo/connect/sdk/f/c;->a(Lcom/vivo/connect/sdk/f/c;)Lcom/vivo/connbase/IClient;
+00004c: move-result-object v0
+00004e: iget-object v1, v2, Lcom/vivo/connect/sdk/f/c$z;->a Landroid/os/Messenger;
+000052: iget-object v2, v2, Lcom/vivo/connect/sdk/f/c$z;->b Ljava/lang/String;
+000056: invoke-interface v0, v1, v2, Lcom/vivo/connbase/IClient;->removeAdvertisingConfig(Landroid/os/Messenger; Ljava/lang/String;)V
+00005c: return-void 
+00005e: move-exception v2
+000060: const-string v0, "enableAdvertiseConfig error:"
+000064: const-string v1, "ConnectClientImpl"
+000068: invoke-static v2, v0, v1, LV5/S;->h(Ljava/lang/Exception; Ljava/lang/String; Ljava/lang/String;)V
+00006e: return-void 

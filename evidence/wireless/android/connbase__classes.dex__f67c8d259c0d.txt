@@ -1,0 +1,60 @@
+APK pcsuite/updateApk/connbase.apk
+DEX classes.dex
+CLASS Lcom/vivo/connbase/nfc/j$g;
+SUPER Ljava/lang/Object;
+FIELDS
+a Ljava/lang/String; = None
+b Ljava/lang/String; = None
+c Lcom/vivo/connbase/nfc/j; = None
+
+METHOD <init>(Lcom/vivo/connbase/nfc/j; Ljava/lang/String; Ljava/lang/String;)V
+000000: iput-object v1, v0, Lcom/vivo/connbase/nfc/j$g;->c Lcom/vivo/connbase/nfc/j;
+000004: invoke-direct v0, Ljava/lang/Object;-><init>()V
+00000a: iput-object v2, v0, Lcom/vivo/connbase/nfc/j$g;->a Ljava/lang/String;
+00000e: iput-object v3, v0, Lcom/vivo/connbase/nfc/j$g;->b Ljava/lang/String;
+000012: return-void 
+
+METHOD equals(Ljava/lang/Object;)Z
+000000: const/4 v0, 1
+000002: if-ne v4, v5, +003h
+000006: return v0
+000008: instance-of v1, v5, Lcom/vivo/connbase/nfc/j$g;
+00000c: const/4 v2, 0
+00000e: if-nez v1, +003h
+000012: return v2
+000014: check-cast v5, Lcom/vivo/connbase/nfc/j$g;
+000018: iget-object v1, v4, Lcom/vivo/connbase/nfc/j$g;->a Ljava/lang/String;
+00001c: iget-object v3, v5, Lcom/vivo/connbase/nfc/j$g;->a Ljava/lang/String;
+000020: invoke-virtual v1, v3, Ljava/lang/String;->equals(Ljava/lang/Object;)Z
+000026: move-result v1
+000028: if-eqz v1, +00dh
+00002c: iget-object v1, v4, Lcom/vivo/connbase/nfc/j$g;->b Ljava/lang/String;
+000030: iget-object v5, v5, Lcom/vivo/connbase/nfc/j$g;->b Ljava/lang/String;
+000034: invoke-virtual v1, v5, Ljava/lang/String;->equals(Ljava/lang/Object;)Z
+00003a: move-result v5
+00003c: if-eqz v5, +003h
+000040: goto +2h
+000042: move v0, v2
+000044: return v0
+
+METHOD hashCode()I
+000000: const/4 v0, 2
+000002: new-array v0, v0, [Ljava/lang/Object;
+000006: iget-object v1, v3, Lcom/vivo/connbase/nfc/j$g;->a Ljava/lang/String;
+00000a: const/4 v2, 0
+00000c: aput-object v1, v0, v2
+000010: iget-object v1, v3, Lcom/vivo/connbase/nfc/j$g;->b Ljava/lang/String;
+000014: const/4 v2, 1
+000016: aput-object v1, v0, v2
+00001a: invoke-static v0, Ljava/util/Objects;->hash([Ljava/lang/Object;)I
+000020: move-result v0
+000022: return v0
+
+METHOD onAlarm()V
+000000: const-string v0, "NfcDiscoveryUseCaseImpl"
+000004: const-string v1, "DisconnectListener : execute onAlarm"
+000008: invoke-static v0, v1, Lc/c/f/a/b;->k(Ljava/lang/String; Ljava/lang/String;)V
+00000e: iget-object v0, v2, Lcom/vivo/connbase/nfc/j$g;->c Lcom/vivo/connbase/nfc/j;
+000012: iget-object v1, v2, Lcom/vivo/connbase/nfc/j$g;->a Ljava/lang/String;
+000016: invoke-static v0, v1, Lcom/vivo/connbase/nfc/j;->c(Lcom/vivo/connbase/nfc/j; Ljava/lang/String;)V
+00001c: return-void 

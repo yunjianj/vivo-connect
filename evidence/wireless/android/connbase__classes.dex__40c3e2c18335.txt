@@ -1,0 +1,66 @@
+APK pcsuite/updateApk/connbase.apk
+DEX classes.dex
+CLASS Lcom/vivo/connbase/VivoConnectService$c;
+SUPER Ljava/lang/Object;
+FIELDS
+a Ljava/lang/String; = None
+b Ljava/lang/String; = None
+c Lcom/vivo/connbase/VivoConnectService; = None
+
+METHOD <init>(Lcom/vivo/connbase/VivoConnectService; Ljava/lang/String; Ljava/lang/String;)V
+000000: iput-object v1, v0, Lcom/vivo/connbase/VivoConnectService$c;->c Lcom/vivo/connbase/VivoConnectService;
+000004: iput-object v2, v0, Lcom/vivo/connbase/VivoConnectService$c;->a Ljava/lang/String;
+000008: iput-object v3, v0, Lcom/vivo/connbase/VivoConnectService$c;->b Ljava/lang/String;
+00000c: invoke-direct v0, Ljava/lang/Object;-><init>()V
+000012: return-void 
+
+METHOD a(Ljava/lang/Throwable;)V
+000000: iget-object v2, v1, Lcom/vivo/connbase/VivoConnectService$c;->c Lcom/vivo/connbase/VivoConnectService;
+000004: const/4 v0, 2
+000006: invoke-static v2, v0, Lcom/vivo/connbase/VivoConnectService;->c(Lcom/vivo/connbase/VivoConnectService; I)V
+00000c: return-void 
+
+METHOD onSuccess()V
+000000: new-instance v0, Ljava/lang/StringBuilder;
+000004: invoke-direct v0, Ljava/lang/StringBuilder;-><init>()V
+00000a: const-string v1, "sendMessage as server success, countdown:"
+00000e: invoke-virtual v0, v1, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+000014: iget-object v1, v4, Lcom/vivo/connbase/VivoConnectService$c;->c Lcom/vivo/connbase/VivoConnectService;
+000018: invoke-static v1, Lcom/vivo/connbase/VivoConnectService;->t(Lcom/vivo/connbase/VivoConnectService;)Ljava/util/concurrent/CountDownLatch;
+00001e: move-result-object v1
+000020: invoke-virtual v1, Ljava/util/concurrent/CountDownLatch;->getCount()J
+000026: move-result-wide v1
+000028: invoke-virtual v0, v1, v2, Ljava/lang/StringBuilder;->append(J)Ljava/lang/StringBuilder;
+00002e: invoke-virtual v0, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
+000034: move-result-object v0
+000036: const-string v1, "VivoConnectService"
+00003a: invoke-static v1, v0, Lc/c/f/a/b;->k(Ljava/lang/String; Ljava/lang/String;)V
+000040: iget-object v0, v4, Lcom/vivo/connbase/VivoConnectService$c;->c Lcom/vivo/connbase/VivoConnectService;
+000044: invoke-static v0, Lcom/vivo/connbase/VivoConnectService;->t(Lcom/vivo/connbase/VivoConnectService;)Ljava/util/concurrent/CountDownLatch;
+00004a: move-result-object v0
+00004c: invoke-virtual v0, Ljava/util/concurrent/CountDownLatch;->await()V
+000052: iget-object v0, v4, Lcom/vivo/connbase/VivoConnectService$c;->c Lcom/vivo/connbase/VivoConnectService;
+000056: invoke-static v0, Lcom/vivo/connbase/VivoConnectService;->b(Lcom/vivo/connbase/VivoConnectService;)Lcom/vivo/connbase/l0/d/f;
+00005c: move-result-object v0
+00005e: iget-object v2, v4, Lcom/vivo/connbase/VivoConnectService$c;->a Ljava/lang/String;
+000062: iget-object v3, v4, Lcom/vivo/connbase/VivoConnectService$c;->b Ljava/lang/String;
+000066: invoke-interface v0, v2, v3, Lcom/vivo/connbase/l0/d/f;->a(Ljava/lang/String; Ljava/lang/String;)V
+00006c: iget-object v0, v4, Lcom/vivo/connbase/VivoConnectService$c;->c Lcom/vivo/connbase/VivoConnectService;
+000070: const/4 v2, 0
+000072: invoke-static v0, v2, Lcom/vivo/connbase/VivoConnectService;->c(Lcom/vivo/connbase/VivoConnectService; I)V
+000078: goto +20h
+00007a: move-exception v0
+00007c: new-instance v2, Ljava/lang/StringBuilder;
+000080: invoke-direct v2, Ljava/lang/StringBuilder;-><init>()V
+000086: const-string v3, "send payload err:"
+00008a: invoke-virtual v2, v3, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+000090: invoke-virtual v0, Ljava/lang/InterruptedException;->getMessage()Ljava/lang/String;
+000096: move-result-object v0
+000098: invoke-virtual v2, v0, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+00009e: invoke-virtual v2, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
+0000a4: move-result-object v0
+0000a6: invoke-static v1, v0, Lc/c/f/a/b;->g(Ljava/lang/String; Ljava/lang/String;)V
+0000ac: iget-object v0, v4, Lcom/vivo/connbase/VivoConnectService$c;->c Lcom/vivo/connbase/VivoConnectService;
+0000b0: const/4 v1, 1
+0000b2: invoke-static v0, v1, Lcom/vivo/connbase/VivoConnectService;->c(Lcom/vivo/connbase/VivoConnectService; I)V
+0000b8: return-void 

@@ -1,0 +1,227 @@
+APK pcsuite/updateApk/connbase.apk
+DEX classes.dex
+CLASS Lcom/vivo/connbase/h0/d/u4;
+SUPER Ljava/lang/Object;
+FIELDS
+e Ljava/lang/String; = 'DiscoverySessionManagerImpl'
+a Ljava/lang/Object; = None
+b Lcom/vivo/connbase/e0/d/c; = None
+c Ljava/util/Map; = None
+d Ljava/util/Map; = None
+
+METHOD <init>(Lcom/vivo/connbase/e0/d/c;)V
+000000: invoke-direct v1, Ljava/lang/Object;-><init>()V
+000006: new-instance v0, Ljava/lang/Object;
+00000a: invoke-direct v0, Ljava/lang/Object;-><init>()V
+000010: iput-object v0, v1, Lcom/vivo/connbase/h0/d/u4;->a Ljava/lang/Object;
+000014: new-instance v0, Lb/d/a;
+000018: invoke-direct v0, Lb/d/a;-><init>()V
+00001e: iput-object v0, v1, Lcom/vivo/connbase/h0/d/u4;->c Ljava/util/Map;
+000022: new-instance v0, Ljava/util/concurrent/ConcurrentHashMap;
+000026: invoke-direct v0, Ljava/util/concurrent/ConcurrentHashMap;-><init>()V
+00002c: iput-object v0, v1, Lcom/vivo/connbase/h0/d/u4;->d Ljava/util/Map;
+000030: if-eqz v2, +005h
+000034: iput-object v2, v1, Lcom/vivo/connbase/h0/d/u4;->b Lcom/vivo/connbase/e0/d/c;
+000038: return-void 
+00003a: new-instance v2, Ljava/lang/NullPointerException;
+00003e: const-string v0, "ProcessDataSource is null."
+000042: invoke-direct v2, v0, Ljava/lang/NullPointerException;-><init>(Ljava/lang/String;)V
+000048: throw v2
+
+METHOD a(Ljava/lang/String; Landroid/app/AlarmManager$OnAlarmListener;)Landroid/app/AlarmManager$OnAlarmListener;
+000000: invoke-static v2, Landroid/text/TextUtils;->isEmpty(Ljava/lang/CharSequence;)Z
+000006: move-result v0
+000008: if-eqz v0, +00bh
+00000c: const-string v2, "DiscoverySessionManagerImpl"
+000010: const-string v3, "service ID should not be empty."
+000014: invoke-static v2, v3, Lc/c/f/a/b;->p(Ljava/lang/String; Ljava/lang/String;)V
+00001a: const/4 v2, 0
+00001c: return-object v2
+00001e: iget-object v0, v1, Lcom/vivo/connbase/h0/d/u4;->d Ljava/util/Map;
+000022: invoke-interface v0, v2, v3, Ljava/util/Map;->put(Ljava/lang/Object; Ljava/lang/Object;)Ljava/lang/Object;
+000028: move-result-object v2
+00002a: check-cast v2, Landroid/app/AlarmManager$OnAlarmListener;
+00002e: return-object v2
+
+METHOD a(I Ljava/lang/String;)Lcom/vivo/connbase/h0/c/g;
+000000: const/4 v0, 0
+000002: invoke-virtual v1, v2, v0, v3, Lcom/vivo/connbase/h0/d/u4;->a(I Z Ljava/lang/String;)Lcom/vivo/connbase/h0/c/g;
+000008: move-result-object v2
+00000a: return-object v2
+
+METHOD a(I Z Ljava/lang/String;)Lcom/vivo/connbase/h0/c/g;
+000000: iget-object v0, v5, Lcom/vivo/connbase/h0/d/u4;->a Ljava/lang/Object;
+000004: monitor-enter v0
+000006: iget-object v1, v5, Lcom/vivo/connbase/h0/d/u4;->c Ljava/util/Map;
+00000a: invoke-interface v1, v8, Ljava/util/Map;->get(Ljava/lang/Object;)Ljava/lang/Object;
+000010: move-result-object v1
+000012: check-cast v1, Lcom/vivo/connbase/h0/c/g;
+000016: if-nez v1, +03eh
+00001a: if-eqz v7, +03ch
+00001e: iget-object v7, v5, Lcom/vivo/connbase/h0/d/u4;->b Lcom/vivo/connbase/e0/d/c;
+000022: invoke-interface v7, v6, Lcom/vivo/connbase/e0/d/c;->b(I)Ljava/lang/String;
+000028: move-result-object v7
+00002a: iget-object v1, v5, Lcom/vivo/connbase/h0/d/u4;->b Lcom/vivo/connbase/e0/d/c;
+00002e: invoke-interface v1, v6, Lcom/vivo/connbase/e0/d/c;->a(I)Ljava/lang/String;
+000034: move-result-object v1
+000036: new-instance v2, Lcom/vivo/connbase/h0/c/g;
+00003a: invoke-direct v2, v6, v7, v1, v8, Lcom/vivo/connbase/h0/c/g;-><init>(I Ljava/lang/String; Ljava/lang/String; Ljava/lang/String;)V
+000040: const-string v1, "DiscoverySessionManagerImpl"
+000044: new-instance v3, Ljava/lang/StringBuilder;
+000048: invoke-direct v3, Ljava/lang/StringBuilder;-><init>()V
+00004e: const-string v4, "Adding new discovery session for "
+000052: invoke-virtual v3, v4, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+000058: invoke-virtual v3, v7, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+00005e: const-string v7, "["
+000062: invoke-virtual v3, v7, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+000068: invoke-virtual v3, v6, Ljava/lang/StringBuilder;->append(I)Ljava/lang/StringBuilder;
+00006e: const-string v6, "]"
+000072: invoke-virtual v3, v6, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+000078: invoke-virtual v3, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
+00007e: move-result-object v6
+000080: invoke-static v1, v6, Lc/c/f/a/b;->a(Ljava/lang/String; Ljava/lang/String;)V
+000086: iget-object v6, v5, Lcom/vivo/connbase/h0/d/u4;->c Ljava/util/Map;
+00008a: invoke-interface v6, v8, v2, Ljava/util/Map;->put(Ljava/lang/Object; Ljava/lang/Object;)Ljava/lang/Object;
+000090: move-object v1, v2
+000092: monitor-exit v0
+000094: return-object v1
+000096: move-exception v6
+000098: monitor-exit v0
+00009a: throw v6
+
+METHOD a(Ljava/lang/String;)Lcom/vivo/connbase/h0/c/g;
+000000: new-instance v0, Ljava/lang/StringBuilder;
+000004: invoke-direct v0, Ljava/lang/StringBuilder;-><init>()V
+00000a: const-string v1, "removeSession: "
+00000e: invoke-virtual v0, v1, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+000014: invoke-virtual v0, v3, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+00001a: invoke-virtual v0, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
+000020: move-result-object v0
+000022: const-string v1, "DiscoverySessionManagerImpl"
+000026: invoke-static v1, v0, Lc/c/f/a/b;->a(Ljava/lang/String; Ljava/lang/String;)V
+00002c: iget-object v0, v2, Lcom/vivo/connbase/h0/d/u4;->a Ljava/lang/Object;
+000030: monitor-enter v0
+000032: iget-object v1, v2, Lcom/vivo/connbase/h0/d/u4;->c Ljava/util/Map;
+000036: invoke-interface v1, v3, Ljava/util/Map;->remove(Ljava/lang/Object;)Ljava/lang/Object;
+00003c: move-result-object v3
+00003e: check-cast v3, Lcom/vivo/connbase/h0/c/g;
+000042: monitor-exit v0
+000044: return-object v3
+000046: move-exception v3
+000048: monitor-exit v0
+00004a: throw v3
+
+METHOD a()Ljava/util/List;
+000000: iget-object v0, v7, Lcom/vivo/connbase/h0/d/u4;->a Ljava/lang/Object;
+000004: monitor-enter v0
+000006: new-instance v1, Ljava/util/ArrayList;
+00000a: invoke-direct v1, Ljava/util/ArrayList;-><init>()V
+000010: invoke-virtual v7, Lcom/vivo/connbase/h0/d/u4;->b()Ljava/util/List;
+000016: move-result-object v2
+000018: invoke-interface v2, Ljava/util/List;->iterator()Ljava/util/Iterator;
+00001e: move-result-object v2
+000020: invoke-interface v2, Ljava/util/Iterator;->hasNext()Z
+000026: move-result v3
+000028: if-eqz v3, +04eh
+00002c: invoke-interface v2, Ljava/util/Iterator;->next()Ljava/lang/Object;
+000032: move-result-object v3
+000034: check-cast v3, Lcom/vivo/connbase/h0/c/g;
+000038: const-string v4, "DiscoverySessionManagerImpl"
+00003c: new-instance v5, Ljava/lang/StringBuilder;
+000040: invoke-direct v5, Ljava/lang/StringBuilder;-><init>()V
+000046: const-string v6, "getWlanSessions session sd="
+00004a: invoke-virtual v5, v6, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+000050: invoke-virtual v3, Lcom/vivo/connbase/h0/c/g;->e()Ljava/lang/String;
+000056: move-result-object v6
+000058: invoke-virtual v5, v6, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+00005e: const-string v6, " --getScanOptions="
+000062: invoke-virtual v5, v6, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+000068: invoke-virtual v3, Lcom/vivo/connbase/h0/c/g;->d()Lcom/vivo/connbase/h0/c/l;
+00006e: move-result-object v6
+000070: invoke-virtual v5, v6, Ljava/lang/StringBuilder;->append(Ljava/lang/Object;)Ljava/lang/StringBuilder;
+000076: invoke-virtual v5, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
+00007c: move-result-object v5
+00007e: invoke-static v4, v5, Lc/c/f/a/b;->k(Ljava/lang/String; Ljava/lang/String;)V
+000084: invoke-virtual v3, Lcom/vivo/connbase/h0/c/g;->d()Lcom/vivo/connbase/h0/c/l;
+00008a: move-result-object v4
+00008c: if-eqz v4, -036h
+000090: const/4 v4, 1
+000092: invoke-virtual v3, Lcom/vivo/connbase/h0/c/g;->d()Lcom/vivo/connbase/h0/c/l;
+000098: move-result-object v5
+00009a: invoke-virtual v5, Lcom/vivo/connbase/h0/c/l;->b()I
+0000a0: move-result v5
+0000a2: if-eq v4, v5, +00dh
+0000a6: const/4 v4, 2
+0000a8: invoke-virtual v3, Lcom/vivo/connbase/h0/c/g;->d()Lcom/vivo/connbase/h0/c/l;
+0000ae: move-result-object v5
+0000b0: invoke-virtual v5, Lcom/vivo/connbase/h0/c/l;->b()I
+0000b6: move-result v5
+0000b8: if-ne v4, v5, -04ch
+0000bc: invoke-interface v1, v3, Ljava/util/List;->add(Ljava/lang/Object;)Z
+0000c2: goto -51h
+0000c4: monitor-exit v0
+0000c6: return-object v1
+0000c8: move-exception v1
+0000ca: monitor-exit v0
+0000cc: throw v1
+
+METHOD b(Ljava/lang/String;)Landroid/app/AlarmManager$OnAlarmListener;
+000000: iget-object v0, v1, Lcom/vivo/connbase/h0/d/u4;->d Ljava/util/Map;
+000004: invoke-interface v0, v2, Ljava/util/Map;->remove(Ljava/lang/Object;)Ljava/lang/Object;
+00000a: move-result-object v2
+00000c: check-cast v2, Landroid/app/AlarmManager$OnAlarmListener;
+000010: return-object v2
+
+METHOD b()Ljava/util/List;
+000000: iget-object v0, v3, Lcom/vivo/connbase/h0/d/u4;->a Ljava/lang/Object;
+000004: monitor-enter v0
+000006: new-instance v1, Ljava/util/ArrayList;
+00000a: iget-object v2, v3, Lcom/vivo/connbase/h0/d/u4;->c Ljava/util/Map;
+00000e: invoke-interface v2, Ljava/util/Map;->values()Ljava/util/Collection;
+000014: move-result-object v2
+000016: invoke-direct v1, v2, Ljava/util/ArrayList;-><init>(Ljava/util/Collection;)V
+00001c: monitor-exit v0
+00001e: return-object v1
+000020: move-exception v1
+000022: monitor-exit v0
+000024: throw v1
+
+METHOD c()Ljava/util/List;
+000000: iget-object v0, v6, Lcom/vivo/connbase/h0/d/u4;->a Ljava/lang/Object;
+000004: monitor-enter v0
+000006: new-instance v1, Ljava/util/ArrayList;
+00000a: invoke-direct v1, Ljava/util/ArrayList;-><init>()V
+000010: invoke-virtual v6, Lcom/vivo/connbase/h0/d/u4;->b()Ljava/util/List;
+000016: move-result-object v2
+000018: invoke-interface v2, Ljava/util/List;->iterator()Ljava/util/Iterator;
+00001e: move-result-object v2
+000020: invoke-interface v2, Ljava/util/Iterator;->hasNext()Z
+000026: move-result v3
+000028: if-eqz v3, +021h
+00002c: invoke-interface v2, Ljava/util/Iterator;->next()Ljava/lang/Object;
+000032: move-result-object v3
+000034: check-cast v3, Lcom/vivo/connbase/h0/c/g;
+000038: invoke-virtual v3, Lcom/vivo/connbase/h0/c/g;->d()Lcom/vivo/connbase/h0/c/l;
+00003e: move-result-object v4
+000040: invoke-virtual v4, Lcom/vivo/connbase/h0/c/l;->b()I
+000046: move-result v4
+000048: if-eqz v4, +00dh
+00004c: const/4 v4, 2
+00004e: invoke-virtual v3, Lcom/vivo/connbase/h0/c/g;->d()Lcom/vivo/connbase/h0/c/l;
+000054: move-result-object v5
+000056: invoke-virtual v5, Lcom/vivo/connbase/h0/c/l;->b()I
+00005c: move-result v5
+00005e: if-ne v4, v5, -01fh
+000062: invoke-interface v1, v3, Ljava/util/List;->add(Ljava/lang/Object;)Z
+000068: goto -24h
+00006a: monitor-exit v0
+00006c: return-object v1
+00006e: move-exception v1
+000070: monitor-exit v0
+000072: throw v1
+
+METHOD c(Ljava/lang/String;)Z
+000000: iget-object v0, v1, Lcom/vivo/connbase/h0/d/u4;->c Ljava/util/Map;
+000004: invoke-interface v0, v2, Ljava/util/Map;->containsKey(Ljava/lang/Object;)Z
+00000a: move-result v2
+00000c: return v2

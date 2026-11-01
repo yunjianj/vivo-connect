@@ -1,0 +1,510 @@
+APK pcsuite/updateApk/connbase.apk
+DEX classes.dex
+CLASS Lcom/vivo/connbase/c0/h0;
+SUPER Landroid/bluetooth/BluetoothGattCallback;
+FIELDS
+l Ljava/lang/String; = 'RxBtGattCallback'
+m I = 3
+n J = 300
+a Ld/a/a/c/t0; = None
+b Ld/a/a/c/t0; = None
+c Ld/a/a/c/l; = None
+d Ld/a/a/c/u; = None
+e Lcom/vivo/connbase/c0/h0$b; = None
+f Ljava/lang/String; = None
+g Lcom/vivo/connbase/c0/h0$a; = None
+h Ljava/util/Queue; = None
+i Ljava/util/concurrent/CountDownLatch; = None
+j I = None
+k Z = None
+
+METHOD <init>()V
+000000: invoke-direct v1, Landroid/bluetooth/BluetoothGattCallback;-><init>()V
+000006: new-instance v0, Ljava/util/LinkedList;
+00000a: invoke-direct v0, Ljava/util/LinkedList;-><init>()V
+000010: iput-object v0, v1, Lcom/vivo/connbase/c0/h0;->h Ljava/util/Queue;
+000014: const/4 v0, 3
+000016: iput v0, v1, Lcom/vivo/connbase/c0/h0;->j I
+00001a: return-void 
+
+METHOD a()V
+000000: return-void 
+
+METHOD a(Landroid/bluetooth/BluetoothGatt; I I I I)V
+000000: new-instance v1, Ljava/lang/StringBuilder;
+000004: invoke-direct v1, Ljava/lang/StringBuilder;-><init>()V
+00000a: const-string v2, "onConnectionUpdated client, status:"
+00000e: invoke-virtual v1, v2, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+000014: invoke-virtual v1, v5, Ljava/lang/StringBuilder;->append(I)Ljava/lang/StringBuilder;
+00001a: invoke-virtual v1, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
+000020: move-result-object v1
+000022: const-string v2, "RxBtGattCallback"
+000026: invoke-static v2, v1, Lc/c/f/a/b;->k(Ljava/lang/String; Ljava/lang/String;)V
+00002c: iget-object v1, v0, Lcom/vivo/connbase/c0/h0;->e Lcom/vivo/connbase/c0/h0$b;
+000030: if-eqz v1, +005h
+000034: invoke-interface v1, Lcom/vivo/connbase/c0/h0$b;->a()V
+00003a: return-void 
+
+METHOD a(Lcom/vivo/connbase/c0/h0$a;)V
+000000: iput-object v1, v0, Lcom/vivo/connbase/c0/h0;->g Lcom/vivo/connbase/c0/h0$a;
+000004: return-void 
+
+METHOD a(Lcom/vivo/connbase/c0/h0$b;)V
+000000: iput-object v1, v0, Lcom/vivo/connbase/c0/h0;->e Lcom/vivo/connbase/c0/h0$b;
+000004: return-void 
+
+METHOD a(Ld/a/a/c/l;)V
+000000: iput-object v1, v0, Lcom/vivo/connbase/c0/h0;->c Ld/a/a/c/l;
+000004: return-void 
+
+METHOD a(Ld/a/a/c/t0;)V
+000000: iput-object v1, v0, Lcom/vivo/connbase/c0/h0;->a Ld/a/a/c/t0;
+000004: return-void 
+
+METHOD a(Ld/a/a/c/u;)V
+000000: iput-object v1, v0, Lcom/vivo/connbase/c0/h0;->d Ld/a/a/c/u;
+000004: return-void 
+
+METHOD a(Ljava/lang/String;)V
+000000: iput-object v1, v0, Lcom/vivo/connbase/c0/h0;->f Ljava/lang/String;
+000004: return-void 
+
+METHOD a(Ljava/util/concurrent/CountDownLatch;)V
+000000: iput-object v1, v0, Lcom/vivo/connbase/c0/h0;->i Ljava/util/concurrent/CountDownLatch;
+000004: return-void 
+
+METHOD b(Ld/a/a/c/t0;)V
+000000: iput-object v1, v0, Lcom/vivo/connbase/c0/h0;->b Ld/a/a/c/t0;
+000004: return-void 
+
+METHOD onCharacteristicChanged(Landroid/bluetooth/BluetoothGatt; Landroid/bluetooth/BluetoothGattCharacteristic;)V
+000000: new-instance v7, Ljava/lang/StringBuilder;
+000004: invoke-direct v7, Ljava/lang/StringBuilder;-><init>()V
+00000a: const-string v0, "onCharacteristicChanged: "
+00000e: invoke-virtual v7, v0, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+000014: invoke-virtual v7, v8, Ljava/lang/StringBuilder;->append(Ljava/lang/Object;)Ljava/lang/StringBuilder;
+00001a: invoke-virtual v7, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
+000020: move-result-object v7
+000022: const-string v0, "RxBtGattCallback"
+000026: invoke-static v0, v7, Lc/c/f/a/b;->k(Ljava/lang/String; Ljava/lang/String;)V
+00002c: iget-object v7, v6, Lcom/vivo/connbase/c0/h0;->d Ld/a/a/c/u;
+000030: if-eqz v7, +0bdh
+000034: const-string v7, "mChangedEmitter is not null"
+000038: invoke-static v0, v7, Lc/c/f/a/b;->k(Ljava/lang/String; Ljava/lang/String;)V
+00003e: invoke-virtual v8, Landroid/bluetooth/BluetoothGattCharacteristic;->getValue()[B
+000044: move-result-object v7
+000046: if-eqz v7, +0a3h
+00004a: invoke-virtual v8, Landroid/bluetooth/BluetoothGattCharacteristic;->getValue()[B
+000050: move-result-object v7
+000052: array-length v7, v7
+000054: const/4 v1, 2
+000056: if-gt v7, v1, +004h
+00005a: goto/16 +099h
+00005e: invoke-virtual v8, Landroid/bluetooth/BluetoothGattCharacteristic;->getValue()[B
+000064: move-result-object v7
+000066: const/4 v2, 0
+000068: aget-byte v7, v7, v2
+00006c: invoke-virtual v8, Landroid/bluetooth/BluetoothGattCharacteristic;->getValue()[B
+000072: move-result-object v2
+000074: const/4 v3, 1
+000076: aget-byte v2, v2, v3
+00007a: invoke-virtual v8, Landroid/bluetooth/BluetoothGattCharacteristic;->getValue()[B
+000080: move-result-object v4
+000082: invoke-virtual v8, Landroid/bluetooth/BluetoothGattCharacteristic;->getValue()[B
+000088: move-result-object v5
+00008a: array-length v5, v5
+00008c: invoke-static v4, v1, v5, Ljava/util/Arrays;->copyOfRange([B I I)[B
+000092: move-result-object v1
+000094: new-instance v4, Ljava/lang/StringBuilder;
+000098: invoke-direct v4, Ljava/lang/StringBuilder;-><init>()V
+00009e: const-string v5, "onCharacteristicChanged totalPkgNum="
+0000a2: invoke-virtual v4, v5, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+0000a8: invoke-virtual v4, v7, Ljava/lang/StringBuilder;->append(I)Ljava/lang/StringBuilder;
+0000ae: const-string v5, ", curPkgIdx="
+0000b2: invoke-virtual v4, v5, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+0000b8: invoke-virtual v4, v2, Ljava/lang/StringBuilder;->append(I)Ljava/lang/StringBuilder;
+0000be: const-string v5, ", content len-"
+0000c2: invoke-virtual v4, v5, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+0000c8: array-length v5, v1
+0000ca: invoke-virtual v4, v5, Ljava/lang/StringBuilder;->append(I)Ljava/lang/StringBuilder;
+0000d0: invoke-virtual v4, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
+0000d6: move-result-object v4
+0000d8: invoke-static v0, v4, Lc/c/f/a/b;->k(Ljava/lang/String; Ljava/lang/String;)V
+0000de: if-ne v3, v2, +007h
+0000e2: iget-object v3, v6, Lcom/vivo/connbase/c0/h0;->h Ljava/util/Queue;
+0000e6: invoke-interface v3, Ljava/util/Queue;->clear()V
+0000ec: iget-object v3, v6, Lcom/vivo/connbase/c0/h0;->h Ljava/util/Queue;
+0000f0: invoke-interface v3, v1, Ljava/util/Queue;->offer(Ljava/lang/Object;)Z
+0000f6: if-ge v2, v7, +003h
+0000fa: return-void 
+0000fc: const/4 v7, 0
+0000fe: iget-object v1, v6, Lcom/vivo/connbase/c0/h0;->h Ljava/util/Queue;
+000102: invoke-interface v1, Ljava/util/Queue;->isEmpty()Z
+000108: move-result v1
+00010a: if-nez v1, +00fh
+00010e: iget-object v1, v6, Lcom/vivo/connbase/c0/h0;->h Ljava/util/Queue;
+000112: invoke-interface v1, Ljava/util/Queue;->poll()Ljava/lang/Object;
+000118: move-result-object v1
+00011a: check-cast v1, [B
+00011e: invoke-static v7, v1, Lcom/vivo/connbase/e0/g/b;->a([B [B)[B
+000124: move-result-object v7
+000126: goto -14h
+000128: new-instance v1, Ljava/lang/StringBuilder;
+00012c: invoke-direct v1, Ljava/lang/StringBuilder;-><init>()V
+000132: const-string v2, "received mergedBytes.len="
+000136: invoke-virtual v1, v2, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+00013c: array-length v2, v7
+00013e: invoke-virtual v1, v2, Ljava/lang/StringBuilder;->append(I)Ljava/lang/StringBuilder;
+000144: invoke-virtual v1, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
+00014a: move-result-object v1
+00014c: invoke-static v0, v1, Lc/c/f/a/b;->a(Ljava/lang/String; Ljava/lang/String;)V
+000152: new-instance v0, Landroid/os/Bundle;
+000156: invoke-direct v0, Landroid/os/Bundle;-><init>()V
+00015c: invoke-virtual v8, Landroid/bluetooth/BluetoothGattCharacteristic;->getUuid()Ljava/util/UUID;
+000162: move-result-object v8
+000164: invoke-virtual v8, Ljava/util/UUID;->toString()Ljava/lang/String;
+00016a: move-result-object v8
+00016c: const-string v1, "characteristic_uuid"
+000170: invoke-virtual v0, v1, v8, Landroid/os/Bundle;->putString(Ljava/lang/String; Ljava/lang/String;)V
+000176: const-string v8, "characteristic_value"
+00017a: invoke-virtual v0, v8, v7, Landroid/os/Bundle;->putByteArray(Ljava/lang/String; [B)V
+000180: iget-object v7, v6, Lcom/vivo/connbase/c0/h0;->d Ld/a/a/c/u;
+000184: invoke-interface v7, v0, Ld/a/a/c/r;->onNext(Ljava/lang/Object;)V
+00018a: goto +10h
+00018c: const-string v7, "received slide size is less than 3 and invalid."
+000190: invoke-static v0, v7, Lc/c/f/a/b;->p(Ljava/lang/String; Ljava/lang/String;)V
+000196: iget-object v8, v6, Lcom/vivo/connbase/c0/h0;->d Ld/a/a/c/u;
+00019a: new-instance v0, Ljava/lang/Throwable;
+00019e: invoke-direct v0, v7, Ljava/lang/Throwable;-><init>(Ljava/lang/String;)V
+0001a4: invoke-interface v8, v0, Ld/a/a/c/r;->onError(Ljava/lang/Throwable;)V
+0001aa: return-void 
+
+METHOD onCharacteristicRead(Landroid/bluetooth/BluetoothGatt; Landroid/bluetooth/BluetoothGattCharacteristic; I)V
+000000: return-void 
+
+METHOD onCharacteristicWrite(Landroid/bluetooth/BluetoothGatt; Landroid/bluetooth/BluetoothGattCharacteristic; I)V
+000000: new-instance v0, Ljava/lang/StringBuilder;
+000004: invoke-direct v0, Ljava/lang/StringBuilder;-><init>()V
+00000a: const-string v1, "onCharacteristicWrite: characteristic="
+00000e: invoke-virtual v0, v1, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+000014: invoke-virtual v11, Landroid/bluetooth/BluetoothGattCharacteristic;->getUuid()Ljava/util/UUID;
+00001a: move-result-object v1
+00001c: invoke-virtual v0, v1, Ljava/lang/StringBuilder;->append(Ljava/lang/Object;)Ljava/lang/StringBuilder;
+000022: const-string v1, ", status="
+000026: invoke-virtual v0, v1, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+00002c: invoke-virtual v0, v12, Ljava/lang/StringBuilder;->append(I)Ljava/lang/StringBuilder;
+000032: invoke-virtual v0, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
+000038: move-result-object v0
+00003a: const-string v1, "RxBtGattCallback"
+00003e: invoke-static v1, v0, Lc/c/f/a/b;->a(Ljava/lang/String; Ljava/lang/String;)V
+000044: new-instance v0, Ljava/lang/StringBuilder;
+000048: invoke-direct v0, Ljava/lang/StringBuilder;-><init>()V
+00004e: const-string v2, "mWriteCharacteristicLatch is null:"
+000052: invoke-virtual v0, v2, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+000058: iget-object v2, v9, Lcom/vivo/connbase/c0/h0;->i Ljava/util/concurrent/CountDownLatch;
+00005c: const/4 v3, 1
+00005e: const/4 v4, 0
+000060: if-nez v2, +004h
+000064: move v2, v3
+000066: goto +2h
+000068: move v2, v4
+00006a: invoke-virtual v0, v2, Ljava/lang/StringBuilder;->append(Z)Ljava/lang/StringBuilder;
+000070: invoke-virtual v0, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
+000076: move-result-object v0
+000078: invoke-static v1, v0, Lc/c/f/a/b;->k(Ljava/lang/String; Ljava/lang/String;)V
+00007e: iget-object v0, v9, Lcom/vivo/connbase/c0/h0;->i Ljava/util/concurrent/CountDownLatch;
+000082: if-eqz v0, +018h
+000086: iget-object v0, v9, Lcom/vivo/connbase/c0/h0;->i Ljava/util/concurrent/CountDownLatch;
+00008a: invoke-virtual v0, Ljava/util/concurrent/CountDownLatch;->getCount()J
+000090: move-result-wide v5
+000092: const-wide/16 v7, 0
+000096: cmp-long v0, v5, v7
+00009a: if-lez v0, +00ch
+00009e: iget-object v0, v9, Lcom/vivo/connbase/c0/h0;->i Ljava/util/concurrent/CountDownLatch;
+0000a2: invoke-virtual v0, Ljava/util/concurrent/CountDownLatch;->countDown()V
+0000a8: const-string v0, "mWriteCharacteristicLatch countdown"
+0000ac: invoke-static v1, v0, Lc/c/f/a/b;->k(Ljava/lang/String; Ljava/lang/String;)V
+0000b2: new-instance v0, Ljava/lang/StringBuilder;
+0000b6: invoke-direct v0, Ljava/lang/StringBuilder;-><init>()V
+0000bc: const-string v2, "mWriteEmitter is null:"
+0000c0: invoke-virtual v0, v2, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+0000c6: iget-object v2, v9, Lcom/vivo/connbase/c0/h0;->c Ld/a/a/c/l;
+0000ca: if-nez v2, +003h
+0000ce: goto +2h
+0000d0: move v3, v4
+0000d2: invoke-virtual v0, v3, Ljava/lang/StringBuilder;->append(Z)Ljava/lang/StringBuilder;
+0000d8: invoke-virtual v0, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
+0000de: move-result-object v0
+0000e0: invoke-static v1, v0, Lc/c/f/a/b;->k(Ljava/lang/String; Ljava/lang/String;)V
+0000e6: iget-object v0, v9, Lcom/vivo/connbase/c0/h0;->c Ld/a/a/c/l;
+0000ea: if-eqz v0, +063h
+0000ee: const-string v0, "mOnCharacteristicWriteCallback is not null and call onWriteCompleted"
+0000f2: if-nez v12, +019h
+0000f6: const-string v2, "mWriteEmitter.onComplete call"
+0000fa: invoke-static v1, v2, Lc/c/f/a/b;->k(Ljava/lang/String; Ljava/lang/String;)V
+000100: iget-object v2, v9, Lcom/vivo/connbase/c0/h0;->c Ld/a/a/c/l;
+000104: invoke-interface v2, Ld/a/a/c/l;->onComplete()V
+00010a: iget-object v2, v9, Lcom/vivo/connbase/c0/h0;->g Lcom/vivo/connbase/c0/h0$a;
+00010e: if-eqz v2, +051h
+000112: invoke-static v1, v0, Lc/c/f/a/b;->k(Ljava/lang/String; Ljava/lang/String;)V
+000118: iget-object v0, v9, Lcom/vivo/connbase/c0/h0;->g Lcom/vivo/connbase/c0/h0$a;
+00011c: invoke-interface v0, v10, v11, v12, Lcom/vivo/connbase/c0/h0$a;->a(Landroid/bluetooth/BluetoothGatt; Landroid/bluetooth/BluetoothGattCharacteristic; I)V
+000122: goto +47h
+000124: const/16 v2, 100
+000128: if-ne v12, v2, +008h
+00012c: const-string v10, "remote server received slide."
+000130: invoke-static v1, v10, Lc/c/f/a/b;->k(Ljava/lang/String; Ljava/lang/String;)V
+000136: goto +3dh
+000138: new-instance v2, Ljava/lang/StringBuilder;
+00013c: invoke-direct v2, Ljava/lang/StringBuilder;-><init>()V
+000142: const-string v3, "writeCharacteristic: Return error status: "
+000146: invoke-virtual v2, v3, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+00014c: invoke-virtual v2, v12, Ljava/lang/StringBuilder;->append(I)Ljava/lang/StringBuilder;
+000152: invoke-virtual v2, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
+000158: move-result-object v2
+00015a: invoke-static v1, v2, Lc/c/f/a/b;->g(Ljava/lang/String; Ljava/lang/String;)V
+000160: iget-object v2, v9, Lcom/vivo/connbase/c0/h0;->c Ld/a/a/c/l;
+000164: if-eqz v2, +021h
+000168: invoke-interface v2, Ld/a/a/c/l;->a()Z
+00016e: move-result v2
+000170: if-nez v2, +01bh
+000174: iget-object v2, v9, Lcom/vivo/connbase/c0/h0;->c Ld/a/a/c/l;
+000178: new-instance v4, Ljava/lang/RuntimeException;
+00017c: new-instance v5, Ljava/lang/StringBuilder;
+000180: invoke-direct v5, Ljava/lang/StringBuilder;-><init>()V
+000186: invoke-virtual v5, v3, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+00018c: invoke-virtual v5, v12, Ljava/lang/StringBuilder;->append(I)Ljava/lang/StringBuilder;
+000192: invoke-virtual v5, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
+000198: move-result-object v3
+00019a: invoke-direct v4, v3, Ljava/lang/RuntimeException;-><init>(Ljava/lang/String;)V
+0001a0: invoke-interface v2, v4, Ld/a/a/c/l;->onError(Ljava/lang/Throwable;)V
+0001a6: iget-object v2, v9, Lcom/vivo/connbase/c0/h0;->g Lcom/vivo/connbase/c0/h0$a;
+0001aa: if-eqz v2, +003h
+0001ae: goto -4eh
+0001b0: return-void 
+
+METHOD onConnectionStateChange(Landroid/bluetooth/BluetoothGatt; I I)V
+000000: new-instance v0, Ljava/lang/StringBuilder;
+000004: invoke-direct v0, Ljava/lang/StringBuilder;-><init>()V
+00000a: const-string v1, "onConnectionStateChange: "
+00000e: invoke-virtual v0, v1, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+000014: invoke-virtual v9, Landroid/bluetooth/BluetoothGatt;->getDevice()Landroid/bluetooth/BluetoothDevice;
+00001a: move-result-object v1
+00001c: invoke-virtual v0, v1, Ljava/lang/StringBuilder;->append(Ljava/lang/Object;)Ljava/lang/StringBuilder;
+000022: const-string v1, ", "
+000026: invoke-virtual v0, v1, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+00002c: invoke-virtual v0, v10, Ljava/lang/StringBuilder;->append(I)Ljava/lang/StringBuilder;
+000032: invoke-virtual v0, v1, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+000038: invoke-virtual v0, v11, Ljava/lang/StringBuilder;->append(I)Ljava/lang/StringBuilder;
+00003e: const-string v1, ", isConnected:"
+000042: invoke-virtual v0, v1, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+000048: iget-boolean v1, v8, Lcom/vivo/connbase/c0/h0;->k Z
+00004c: invoke-virtual v0, v1, Ljava/lang/StringBuilder;->append(Z)Ljava/lang/StringBuilder;
+000052: invoke-virtual v0, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
+000058: move-result-object v0
+00005a: const-string v1, "RxBtGattCallback"
+00005e: invoke-static v1, v0, Lc/c/f/a/b;->k(Ljava/lang/String; Ljava/lang/String;)V
+000064: const/4 v0, 1
+000066: const/4 v2, 2
+000068: if-ne v11, v2, +03ch
+00006c: invoke-static Lcom/vivo/connbase/h0/d/y4;->b()Lcom/vivo/connbase/h0/d/y4;
+000072: move-result-object v10
+000074: invoke-virtual v10, Lcom/vivo/connbase/h0/d/y4;->a()Z
+00007a: move-result v10
+00007c: if-nez v10, +008h
+000080: const-string v9, "it is not my user, do nothing."
+000084: invoke-static v1, v9, Lc/c/f/a/b;->s(Ljava/lang/String; Ljava/lang/String;)V
+00008a: return-void 
+00008c: iget-boolean v10, v8, Lcom/vivo/connbase/c0/h0;->k Z
+000090: if-nez v10, +145h
+000094: iput-boolean v0, v8, Lcom/vivo/connbase/c0/h0;->k Z
+000098: const-string v10, "onConnectionStateChange: enter:"
+00009c: invoke-static v1, v10, Lc/c/f/a/b;->k(Ljava/lang/String; Ljava/lang/String;)V
+0000a2: invoke-virtual v9, Landroid/bluetooth/BluetoothGatt;->getDevice()Landroid/bluetooth/BluetoothDevice;
+0000a8: move-result-object v10
+0000aa: if-nez v10, +004h
+0000ae: const/4 v10, 0
+0000b0: goto +9h
+0000b2: invoke-virtual v9, Landroid/bluetooth/BluetoothGatt;->getDevice()Landroid/bluetooth/BluetoothDevice;
+0000b8: move-result-object v10
+0000ba: invoke-virtual v10, Landroid/bluetooth/BluetoothDevice;->getAddress()Ljava/lang/String;
+0000c0: move-result-object v10
+0000c2: iget-object v11, v8, Lcom/vivo/connbase/c0/h0;->f Ljava/lang/String;
+0000c6: invoke-static v11, v10, Landroid/text/TextUtils;->equals(Ljava/lang/CharSequence; Ljava/lang/CharSequence;)Z
+0000cc: move-result v10
+0000ce: if-eqz v10, +126h
+0000d2: const/16 v10, 512
+0000d6: invoke-virtual v9, v10, Landroid/bluetooth/BluetoothGatt;->requestMtu(I)Z
+0000dc: goto/16 +11fh
+0000e0: if-nez v11, +11dh
+0000e4: iget-boolean v11, v8, Lcom/vivo/connbase/c0/h0;->k Z
+0000e8: const/4 v3, 0
+0000ea: if-eqz v11, +025h
+0000ee: iput-boolean v3, v8, Lcom/vivo/connbase/c0/h0;->k Z
+0000f2: invoke-virtual v9, Landroid/bluetooth/BluetoothGatt;->close()V
+0000f8: iget-object v10, v8, Lcom/vivo/connbase/c0/h0;->e Lcom/vivo/connbase/c0/h0$b;
+0000fc: if-eqz v10, +00dh
+000100: invoke-virtual v9, Landroid/bluetooth/BluetoothGatt;->getDevice()Landroid/bluetooth/BluetoothDevice;
+000106: move-result-object v9
+000108: invoke-virtual v9, Landroid/bluetooth/BluetoothDevice;->getAddress()Ljava/lang/String;
+00010e: move-result-object v9
+000110: invoke-interface v10, v9, Lcom/vivo/connbase/c0/h0$b;->onDisconnected(Ljava/lang/String;)V
+000116: iget-object v9, v8, Lcom/vivo/connbase/c0/h0;->a Ld/a/a/c/t0;
+00011a: if-eqz v9, +100h
+00011e: sget-object v10, Lcom/vivo/connbase/c0/g;->a Lcom/vivo/connbase/c0/g;
+000122: invoke-static v10, Ld/a/a/d/e;->a(Ld/a/a/g/a;)Ld/a/a/d/e;
+000128: move-result-object v10
+00012a: invoke-interface v9, v10, Ld/a/a/c/t0;->a(Ld/a/a/d/e;)V
+000130: goto/16 +0f5h
+000134: if-eqz v10, +0f3h
+000138: iget-object v11, v8, Lcom/vivo/connbase/c0/h0;->a Ld/a/a/c/t0;
+00013c: if-eqz v11, +0efh
+000140: invoke-interface v11, Ld/a/a/c/t0;->a()Z
+000146: move-result v11
+000148: if-nez v11, +0e9h
+00014c: const/16 v11, 133
+000150: if-ne v10, v11, +0b6h
+000154: const-string v11, "get 133 error"
+000158: invoke-static v1, v11, Lc/c/f/a/b;->p(Ljava/lang/String; Ljava/lang/String;)V
+00015e: iget v11, v8, Lcom/vivo/connbase/c0/h0;->j I
+000162: if-lez v11, +086h
+000166: sub-int/2addr v11, v0
+000168: iput v11, v8, Lcom/vivo/connbase/c0/h0;->j I
+00016c: new-instance v10, Ljava/lang/StringBuilder;
+000170: invoke-direct v10, Ljava/lang/StringBuilder;-><init>()V
+000176: const-string v11, "retry connect: "
+00017a: invoke-virtual v10, v11, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+000180: iget v11, v8, Lcom/vivo/connbase/c0/h0;->j I
+000184: invoke-virtual v10, v11, Ljava/lang/StringBuilder;->append(I)Ljava/lang/StringBuilder;
+00018a: invoke-virtual v10, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
+000190: move-result-object v10
+000192: invoke-static v1, v10, Lc/c/f/a/b;->p(Ljava/lang/String; Ljava/lang/String;)V
+000198: invoke-static Landroid/bluetooth/BluetoothAdapter;->getDefaultAdapter()Landroid/bluetooth/BluetoothAdapter;
+00019e: move-result-object v10
+0001a0: iget-object v11, v8, Lcom/vivo/connbase/c0/h0;->f Ljava/lang/String;
+0001a4: invoke-virtual v10, v11, Landroid/bluetooth/BluetoothAdapter;->getRemoteDevice(Ljava/lang/String;)Landroid/bluetooth/BluetoothDevice;
+0001aa: move-result-object v10
+0001ac: if-nez v10, +020h
+0001b0: iget-object v9, v8, Lcom/vivo/connbase/c0/h0;->a Ld/a/a/c/t0;
+0001b4: new-instance v10, Ljava/lang/IllegalArgumentException;
+0001b8: new-instance v11, Ljava/lang/StringBuilder;
+0001bc: invoke-direct v11, Ljava/lang/StringBuilder;-><init>()V
+0001c2: const-string v0, "cannot find device:"
+0001c6: invoke-virtual v11, v0, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+0001cc: iget-object v0, v8, Lcom/vivo/connbase/c0/h0;->f Ljava/lang/String;
+0001d0: invoke-virtual v11, v0, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+0001d6: invoke-virtual v11, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
+0001dc: move-result-object v11
+0001de: invoke-direct v10, v11, Ljava/lang/IllegalArgumentException;-><init>(Ljava/lang/String;)V
+0001e4: invoke-interface v9, v10, Ld/a/a/c/t0;->onError(Ljava/lang/Throwable;)V
+0001ea: return-void 
+0001ec: invoke-virtual v9, Landroid/bluetooth/BluetoothGatt;->disconnect()V
+0001f2: invoke-virtual v9, Landroid/bluetooth/BluetoothGatt;->close()V
+0001f8: const-string v9, "retry connect after close gatt."
+0001fc: invoke-static v1, v9, Lc/c/f/a/b;->p(Ljava/lang/String; Ljava/lang/String;)V
+000202: invoke-static Ljava/lang/Math;->random()D
+000208: move-result-wide v4
+00020a: const-wide v6, 4647503709213818880
+000214: mul-double/2addr v4, v6
+000216: const-wide v6, 4652007308841189376
+000220: add-double/2addr v4, v6
+000222: double-to-long v4, v4
+000224: invoke-static v4, v5, Ljava/lang/Thread;->sleep(J)V
+00022a: goto +1ah
+00022c: move-exception v9
+00022e: new-instance v11, Ljava/lang/StringBuilder;
+000232: invoke-direct v11, Ljava/lang/StringBuilder;-><init>()V
+000238: const-string v0, "sleep before retry err:"
+00023c: invoke-virtual v11, v0, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+000242: invoke-virtual v9, Ljava/lang/InterruptedException;->getMessage()Ljava/lang/String;
+000248: move-result-object v9
+00024a: invoke-virtual v11, v9, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+000250: invoke-virtual v11, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
+000256: move-result-object v9
+000258: invoke-static v1, v9, Lc/c/f/a/b;->g(Ljava/lang/String; Ljava/lang/String;)V
+00025e: invoke-static Lcom/vivo/connbase/App;->m()Lcom/vivo/connbase/App;
+000264: move-result-object v9
+000266: invoke-virtual v10, v9, v3, v8, v2, Landroid/bluetooth/BluetoothDevice;->connectGatt(Landroid/content/Context; Z Landroid/bluetooth/BluetoothGattCallback; I)Landroid/bluetooth/BluetoothGatt;
+00026c: goto +57h
+00026e: const-string v11, "finished retry connect"
+000272: invoke-static v1, v11, Lc/c/f/a/b;->p(Ljava/lang/String; Ljava/lang/String;)V
+000278: const/4 v11, 3
+00027a: iput v11, v8, Lcom/vivo/connbase/c0/h0;->j I
+00027e: iget-object v11, v8, Lcom/vivo/connbase/c0/h0;->a Ld/a/a/c/t0;
+000282: new-instance v0, Ljava/lang/RuntimeException;
+000286: new-instance v1, Ljava/lang/StringBuilder;
+00028a: invoke-direct v1, Ljava/lang/StringBuilder;-><init>()V
+000290: const-string v2, "gatt inner error:"
+000294: invoke-virtual v1, v2, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+00029a: invoke-virtual v1, v10, Ljava/lang/StringBuilder;->append(I)Ljava/lang/StringBuilder;
+0002a0: invoke-virtual v1, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
+0002a6: move-result-object v10
+0002a8: invoke-direct v0, v10, Ljava/lang/RuntimeException;-><init>(Ljava/lang/String;)V
+0002ae: invoke-interface v11, v0, Ld/a/a/c/t0;->onError(Ljava/lang/Throwable;)V
+0002b4: invoke-virtual v9, Landroid/bluetooth/BluetoothGatt;->close()V
+0002ba: goto +30h
+0002bc: new-instance v9, Ljava/lang/StringBuilder;
+0002c0: invoke-direct v9, Ljava/lang/StringBuilder;-><init>()V
+0002c6: const-string v11, "gatt connect error:"
+0002ca: invoke-virtual v9, v11, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+0002d0: invoke-virtual v9, v10, Ljava/lang/StringBuilder;->append(I)Ljava/lang/StringBuilder;
+0002d6: invoke-virtual v9, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
+0002dc: move-result-object v9
+0002de: invoke-static v1, v9, Lc/c/f/a/b;->g(Ljava/lang/String; Ljava/lang/String;)V
+0002e4: iget-object v9, v8, Lcom/vivo/connbase/c0/h0;->a Ld/a/a/c/t0;
+0002e8: new-instance v11, Ljava/lang/RuntimeException;
+0002ec: new-instance v0, Ljava/lang/StringBuilder;
+0002f0: invoke-direct v0, Ljava/lang/StringBuilder;-><init>()V
+0002f6: const-string v1, "gatt unknown error:"
+0002fa: invoke-virtual v0, v1, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+000300: invoke-virtual v0, v10, Ljava/lang/StringBuilder;->append(I)Ljava/lang/StringBuilder;
+000306: invoke-virtual v0, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
+00030c: move-result-object v10
+00030e: invoke-direct v11, v10, Ljava/lang/RuntimeException;-><init>(Ljava/lang/String;)V
+000314: invoke-interface v9, v11, Ld/a/a/c/t0;->onError(Ljava/lang/Throwable;)V
+00031a: return-void 
+
+METHOD onMtuChanged(Landroid/bluetooth/BluetoothGatt; I I)V
+000000: new-instance v0, Ljava/lang/StringBuilder;
+000004: invoke-direct v0, Ljava/lang/StringBuilder;-><init>()V
+00000a: const-string v1, "onMtuChanged: "
+00000e: invoke-virtual v0, v1, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+000014: invoke-virtual v3, Landroid/bluetooth/BluetoothGatt;->getDevice()Landroid/bluetooth/BluetoothDevice;
+00001a: move-result-object v1
+00001c: invoke-virtual v0, v1, Ljava/lang/StringBuilder;->append(Ljava/lang/Object;)Ljava/lang/StringBuilder;
+000022: const-string v1, ", "
+000026: invoke-virtual v0, v1, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+00002c: invoke-virtual v0, v4, Ljava/lang/StringBuilder;->append(I)Ljava/lang/StringBuilder;
+000032: invoke-virtual v0, v1, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+000038: invoke-virtual v0, v5, Ljava/lang/StringBuilder;->append(I)Ljava/lang/StringBuilder;
+00003e: invoke-virtual v0, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
+000044: move-result-object v4
+000046: const-string v5, "RxBtGattCallback"
+00004a: invoke-static v5, v4, Lc/c/f/a/b;->k(Ljava/lang/String; Ljava/lang/String;)V
+000050: invoke-virtual v3, Landroid/bluetooth/BluetoothGatt;->discoverServices()Z
+000056: return-void 
+
+METHOD onServicesDiscovered(Landroid/bluetooth/BluetoothGatt; I)V
+000000: new-instance v0, Ljava/lang/StringBuilder;
+000004: invoke-direct v0, Ljava/lang/StringBuilder;-><init>()V
+00000a: const-string v1, "onServicesDiscovered: "
+00000e: invoke-virtual v0, v1, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+000014: invoke-virtual v3, Landroid/bluetooth/BluetoothGatt;->getDevice()Landroid/bluetooth/BluetoothDevice;
+00001a: move-result-object v1
+00001c: invoke-virtual v0, v1, Ljava/lang/StringBuilder;->append(Ljava/lang/Object;)Ljava/lang/StringBuilder;
+000022: const-string v1, ", "
+000026: invoke-virtual v0, v1, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+00002c: invoke-virtual v0, v4, Ljava/lang/StringBuilder;->append(I)Ljava/lang/StringBuilder;
+000032: invoke-virtual v0, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
+000038: move-result-object v4
+00003a: const-string v0, "RxBtGattCallback"
+00003e: invoke-static v0, v4, Lc/c/f/a/b;->k(Ljava/lang/String; Ljava/lang/String;)V
+000044: iget-object v4, v2, Lcom/vivo/connbase/c0/h0;->a Ld/a/a/c/t0;
+000048: if-eqz v4, +00fh
+00004c: new-instance v4, Ljava/util/AbstractMap$SimpleEntry;
+000050: invoke-direct v4, v3, v2, Ljava/util/AbstractMap$SimpleEntry;-><init>(Ljava/lang/Object; Ljava/lang/Object;)V
+000056: iget-object v3, v2, Lcom/vivo/connbase/c0/h0;->a Ld/a/a/c/t0;
+00005a: invoke-interface v3, v4, Ld/a/a/c/t0;->onSuccess(Ljava/lang/Object;)V
+000060: const/4 v3, 0
+000062: iput-object v3, v2, Lcom/vivo/connbase/c0/h0;->a Ld/a/a/c/t0;
+000066: return-void 

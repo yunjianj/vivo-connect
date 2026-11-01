@@ -1,0 +1,103 @@
+APK pcsuite/updateApk/pcsuite.apk
+DEX classes.dex
+CLASS LG0/a;
+SUPER Ljava/lang/Object;
+FIELDS
+a Ljava/lang/ThreadLocal; = None
+b I = None
+
+METHOD b(I)D
+000000: sget-object v0, LG0/a;->a Ljava/lang/ThreadLocal;
+000004: invoke-virtual v0, Ljava/lang/ThreadLocal;->get()Ljava/lang/Object;
+00000a: move-result-object v1
+00000c: check-cast v1, [D
+000010: const/4 v2, 3
+000012: if-nez v1, +007h
+000016: new-array v1, v2, [D
+00001a: invoke-virtual v0, v1, Ljava/lang/ThreadLocal;->set(Ljava/lang/Object;)V
+000020: invoke-static/range v21, Landroid/graphics/Color;->red(I)I
+000026: move-result v0
+000028: invoke-static/range v21, Landroid/graphics/Color;->green(I)I
+00002e: move-result v3
+000030: invoke-static/range v21, Landroid/graphics/Color;->blue(I)I
+000036: move-result v4
+000038: array-length v5, v1
+00003a: if-ne v5, v2, +09dh
+00003e: int-to-double v5, v0
+000040: const-wide v7, 4643176031446892544
+00004a: div-double/2addr v5, v7
+00004c: const-wide v9, 4585990280393462802
+000056: cmpg-double v0, v5, v9
+00005a: const-wide v11, 4612586738352862003
+000064: const-wide v13, 4607430116779522785
+00006e: const-wide v15, 4588087156379966505
+000078: const-wide v17, 4623462931452961751
+000082: if-gez v0, +005h
+000086: div-double v5, v5, v17
+00008a: goto +7h
+00008c: add-double/2addr v5, v15
+00008e: div-double/2addr v5, v13
+000090: invoke-static v5, v6, v11, v12, Ljava/lang/Math;->pow(D D)D
+000096: move-result-wide v5
+000098: int-to-double v2, v3
+00009a: div-double/2addr v2, v7
+00009c: cmpg-double v0, v2, v9
+0000a0: if-gez v0, +007h
+0000a4: div-double v2, v2, v17
+0000a8: move-wide/from16 v19, v7
+0000ac: goto +8h
+0000ae: add-double/2addr v2, v15
+0000b0: div-double/2addr v2, v13
+0000b2: invoke-static v2, v3, v11, v12, Ljava/lang/Math;->pow(D D)D
+0000b8: move-result-wide v2
+0000ba: goto -9h
+0000bc: int-to-double v7, v4
+0000be: div-double v7, v7, v19
+0000c2: cmpg-double v0, v7, v9
+0000c6: if-gez v0, +005h
+0000ca: div-double v7, v7, v17
+0000ce: goto +7h
+0000d0: add-double/2addr v7, v15
+0000d2: div-double/2addr v7, v13
+0000d4: invoke-static v7, v8, v11, v12, Ljava/lang/Math;->pow(D D)D
+0000da: move-result-wide v7
+0000dc: const-wide v9, 4601100757863216290
+0000e6: mul-double/2addr v9, v5
+0000e8: const-wide v11, 4600113568824896677
+0000f2: mul-double/2addr v11, v2
+0000f4: add-double/2addr v11, v9
+0000f6: const-wide v9, 4595671218152458420
+000100: mul-double/2addr v9, v7
+000102: add-double/2addr v9, v11
+000104: const-wide/high16 v11, 4636737291354636288
+000108: mul-double/2addr v9, v11
+00010a: const/4 v0, 0
+00010c: aput-wide v9, v1, v0
+000110: const-wide v9, 4596827742536767164
+00011a: mul-double/2addr v9, v5
+00011c: const-wide v13, 4604617168452267173
+000126: mul-double/2addr v13, v2
+000128: add-double/2addr v13, v9
+00012a: const-wide v9, 4589866978952703325
+000134: mul-double/2addr v9, v7
+000136: add-double/2addr v9, v13
+000138: mul-double/2addr v9, v11
+00013a: const/4 v0, 1
+00013c: aput-wide v9, v1, v0
+000140: const-wide v13, 4581220067668151973
+00014a: mul-double/2addr v5, v13
+00014c: const-wide v13, 4593253685872485938
+000156: mul-double/2addr v2, v13
+000158: add-double/2addr v2, v5
+00015a: const-wide v4, 4606736562436907729
+000164: mul-double/2addr v7, v4
+000166: add-double/2addr v7, v2
+000168: mul-double/2addr v7, v11
+00016a: const/4 v0, 2
+00016c: aput-wide v7, v1, v0
+000170: div-double/2addr v9, v11
+000172: return-wide v9
+000174: new-instance v0, Ljava/lang/IllegalArgumentException;
+000178: const-string v1, "outXyz must have a length of 3."
+00017c: invoke-direct v0, v1, Ljava/lang/IllegalArgumentException;-><init>(Ljava/lang/String;)V
+000182: throw v0

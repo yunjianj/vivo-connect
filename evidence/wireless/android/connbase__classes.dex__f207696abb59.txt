@@ -1,0 +1,801 @@
+APK pcsuite/updateApk/connbase.apk
+DEX classes.dex
+CLASS Lcom/vivo/connbase/g0/a;
+SUPER Ljava/lang/Object;
+FIELDS
+d Ljava/lang/String; = 'ConnectDialogHelper'
+e Ljava/lang/String; = 'vivo.intent.action.ACTION_HANDOFF_SETTING_HELP'
+a Landroid/app/AlertDialog; = None
+b Landroid/widget/TextView; = None
+c Landroid/widget/TextView; = None
+
+METHOD <init>()V
+000000: invoke-direct v0, Ljava/lang/Object;-><init>()V
+000006: return-void 
+
+METHOD a(Lcom/vivo/connbase/g0/a;)Landroid/app/AlertDialog;
+000000: iget-object v0, v0, Lcom/vivo/connbase/g0/a;->a Landroid/app/AlertDialog;
+000004: return-object v0
+
+METHOD a(Landroid/view/View; Landroid/widget/TextView;)Landroid/widget/TextView;
+000000: const v0, 2131296792
+000006: invoke-virtual v10, v0, Landroid/view/View;->findViewById(I)Landroid/view/View;
+00000c: move-result-object v10
+00000e: check-cast v10, Landroid/widget/TextView;
+000012: invoke-static Lcom/vivo/connbase/App;->m()Lcom/vivo/connbase/App;
+000018: move-result-object v0
+00001a: const/4 v1, 2
+00001c: new-array v1, v1, [Ljava/lang/Object;
+000020: invoke-static Lcom/vivo/connbase/App;->m()Lcom/vivo/connbase/App;
+000026: move-result-object v2
+000028: invoke-virtual v2, Landroid/app/Application;->getResources()Landroid/content/res/Resources;
+00002e: move-result-object v2
+000030: const v3, 2131689681
+000036: invoke-virtual v2, v3, Landroid/content/res/Resources;->getString(I)Ljava/lang/String;
+00003c: move-result-object v2
+00003e: const/4 v3, 0
+000040: aput-object v2, v1, v3
+000044: invoke-static Lcom/vivo/connbase/App;->m()Lcom/vivo/connbase/App;
+00004a: move-result-object v2
+00004c: invoke-virtual v2, Landroid/app/Application;->getResources()Landroid/content/res/Resources;
+000052: move-result-object v2
+000054: const/4 v4, 1
+000056: new-array v5, v4, [Ljava/lang/Object;
+00005a: invoke-static Lcom/vivo/connbase/App;->m()Lcom/vivo/connbase/App;
+000060: move-result-object v6
+000062: invoke-virtual v6, Landroid/app/Application;->getResources()Landroid/content/res/Resources;
+000068: move-result-object v6
+00006a: const v7, 2131689503
+000070: invoke-virtual v6, v7, Landroid/content/res/Resources;->getString(I)Ljava/lang/String;
+000076: move-result-object v6
+000078: aput-object v6, v5, v3
+00007c: const v6, 2131689517
+000082: invoke-virtual v2, v6, v5, Landroid/content/res/Resources;->getString(I [Ljava/lang/Object;)Ljava/lang/String;
+000088: move-result-object v2
+00008a: aput-object v2, v1, v4
+00008e: const v2, 2131689520
+000094: invoke-virtual v0, v2, v1, Landroid/app/Application;->getString(I [Ljava/lang/Object;)Ljava/lang/String;
+00009a: move-result-object v0
+00009c: new-array v1, v4, [Ljava/lang/String;
+0000a0: invoke-static Lcom/vivo/connbase/App;->m()Lcom/vivo/connbase/App;
+0000a6: move-result-object v2
+0000a8: invoke-virtual v2, Landroid/app/Application;->getResources()Landroid/content/res/Resources;
+0000ae: move-result-object v2
+0000b0: new-array v5, v4, [Ljava/lang/Object;
+0000b4: invoke-static Lcom/vivo/connbase/App;->m()Lcom/vivo/connbase/App;
+0000ba: move-result-object v8
+0000bc: invoke-virtual v8, Landroid/app/Application;->getResources()Landroid/content/res/Resources;
+0000c2: move-result-object v8
+0000c4: invoke-virtual v8, v7, Landroid/content/res/Resources;->getString(I)Ljava/lang/String;
+0000ca: move-result-object v7
+0000cc: aput-object v7, v5, v3
+0000d0: invoke-virtual v2, v6, v5, Landroid/content/res/Resources;->getString(I [Ljava/lang/Object;)Ljava/lang/String;
+0000d6: move-result-object v2
+0000d8: aput-object v2, v1, v3
+0000dc: new-array v2, v4, [Landroid/text/style/ClickableSpan;
+0000e0: new-instance v4, Lcom/vivo/connbase/g0/a$b;
+0000e4: invoke-direct v4, v9, Lcom/vivo/connbase/g0/a$b;-><init>(Lcom/vivo/connbase/g0/a;)V
+0000ea: aput-object v4, v2, v3
+0000ee: invoke-static v0, v1, v2, Lcom/vivo/utils/u;->a(Ljava/lang/String; [Ljava/lang/String; [Landroid/text/style/ClickableSpan;)Landroid/text/SpannableStringBuilder;
+0000f4: move-result-object v0
+0000f6: invoke-virtual v11, v0, Landroid/widget/TextView;->setText(Ljava/lang/CharSequence;)V
+0000fc: invoke-static Landroid/text/method/LinkMovementMethod;->getInstance()Landroid/text/method/MovementMethod;
+000102: move-result-object v0
+000104: invoke-virtual v11, v0, Landroid/widget/TextView;->setMovementMethod(Landroid/text/method/MovementMethod;)V
+00010a: return-object v10
+
+METHOD a(Z I)Ljava/lang/String;
+000000: invoke-static Lcom/vivo/connbase/App;->m()Lcom/vivo/connbase/App;
+000006: move-result-object v0
+000008: const/4 v1, 4
+00000a: new-array v2, v1, [Ljava/lang/Object;
+00000e: invoke-static Lcom/vivo/connbase/App;->m()Lcom/vivo/connbase/App;
+000014: move-result-object v3
+000016: invoke-virtual v3, v15, Landroid/app/Application;->getString(I)Ljava/lang/String;
+00001c: move-result-object v3
+00001e: const/4 v4, 0
+000020: aput-object v3, v2, v4
+000024: invoke-static Lcom/vivo/connbase/App;->m()Lcom/vivo/connbase/App;
+00002a: move-result-object v3
+00002c: const v5, 2131689701
+000032: invoke-virtual v3, v5, Landroid/app/Application;->getString(I)Ljava/lang/String;
+000038: move-result-object v3
+00003a: const/4 v6, 1
+00003c: aput-object v3, v2, v6
+000040: invoke-static Lcom/vivo/connbase/App;->m()Lcom/vivo/connbase/App;
+000046: move-result-object v3
+000048: const v7, 2131689692
+00004e: invoke-virtual v3, v7, Landroid/app/Application;->getString(I)Ljava/lang/String;
+000054: move-result-object v3
+000056: const/4 v8, 2
+000058: aput-object v3, v2, v8
+00005c: invoke-static Lcom/vivo/connbase/App;->m()Lcom/vivo/connbase/App;
+000062: move-result-object v3
+000064: invoke-virtual v3, Landroid/app/Application;->getResources()Landroid/content/res/Resources;
+00006a: move-result-object v3
+00006c: const v9, 2131689703
+000072: invoke-virtual v3, v9, Landroid/content/res/Resources;->getString(I)Ljava/lang/String;
+000078: move-result-object v3
+00007a: const/4 v10, 3
+00007c: aput-object v3, v2, v10
+000080: const v3, 2131689500
+000086: invoke-virtual v0, v3, v2, Landroid/app/Application;->getString(I [Ljava/lang/Object;)Ljava/lang/String;
+00008c: move-result-object v0
+00008e: invoke-static Lcom/vivo/connbase/App;->m()Lcom/vivo/connbase/App;
+000094: move-result-object v2
+000096: invoke-static v2, Lcom/bbk/account/base/BBKAccountManager;->getInstance(Landroid/content/Context;)Lcom/bbk/account/base/BBKAccountManager;
+00009c: move-result-object v2
+00009e: invoke-virtual v2, Lcom/bbk/account/base/BBKAccountManager;->isLogin()Z
+0000a4: move-result v2
+0000a6: new-instance v11, Ljava/lang/StringBuilder;
+0000aa: invoke-direct v11, Ljava/lang/StringBuilder;-><init>()V
+0000b0: const-string v12, "isLogin "
+0000b4: invoke-virtual v11, v12, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+0000ba: invoke-virtual v11, v2, Ljava/lang/StringBuilder;->append(Z)Ljava/lang/StringBuilder;
+0000c0: const-string v12, "--"
+0000c4: invoke-virtual v11, v12, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+0000ca: invoke-virtual v11, v14, Ljava/lang/StringBuilder;->append(Z)Ljava/lang/StringBuilder;
+0000d0: invoke-virtual v11, v12, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+0000d6: invoke-virtual v11, v15, Ljava/lang/StringBuilder;->append(I)Ljava/lang/StringBuilder;
+0000dc: invoke-virtual v11, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
+0000e2: move-result-object v11
+0000e4: const-string v12, "ConnectDialogHelper"
+0000e8: invoke-static v12, v11, Lc/c/f/a/b;->l(Ljava/lang/String; Ljava/lang/String;)V
+0000ee: if-nez v2, +04eh
+0000f2: invoke-static Lcom/vivo/connbase/App;->m()Lcom/vivo/connbase/App;
+0000f8: move-result-object v14
+0000fa: new-array v0, v1, [Ljava/lang/Object;
+0000fe: invoke-static Lcom/vivo/connbase/App;->m()Lcom/vivo/connbase/App;
+000104: move-result-object v1
+000106: invoke-virtual v1, v15, Landroid/app/Application;->getString(I)Ljava/lang/String;
+00010c: move-result-object v15
+00010e: aput-object v15, v0, v4
+000112: invoke-static Lcom/vivo/connbase/App;->m()Lcom/vivo/connbase/App;
+000118: move-result-object v15
+00011a: invoke-virtual v15, v5, Landroid/app/Application;->getString(I)Ljava/lang/String;
+000120: move-result-object v15
+000122: aput-object v15, v0, v6
+000126: invoke-static Lcom/vivo/connbase/App;->m()Lcom/vivo/connbase/App;
+00012c: move-result-object v15
+00012e: invoke-virtual v15, v7, Landroid/app/Application;->getString(I)Ljava/lang/String;
+000134: move-result-object v15
+000136: aput-object v15, v0, v8
+00013a: invoke-static Lcom/vivo/connbase/App;->m()Lcom/vivo/connbase/App;
+000140: move-result-object v15
+000142: invoke-virtual v15, Landroid/app/Application;->getResources()Landroid/content/res/Resources;
+000148: move-result-object v15
+00014a: invoke-virtual v15, v9, Landroid/content/res/Resources;->getString(I)Ljava/lang/String;
+000150: move-result-object v15
+000152: aput-object v15, v0, v10
+000156: invoke-virtual v14, v3, v0, Landroid/app/Application;->getString(I [Ljava/lang/Object;)Ljava/lang/String;
+00015c: move-result-object v0
+00015e: iget-object v14, v13, Lcom/vivo/connbase/g0/a;->b Landroid/widget/TextView;
+000162: invoke-static Lcom/vivo/connbase/App;->m()Lcom/vivo/connbase/App;
+000168: move-result-object v15
+00016a: invoke-virtual v15, Landroid/app/Application;->getResources()Landroid/content/res/Resources;
+000170: move-result-object v15
+000172: const v1, 2131689690
+000178: invoke-virtual v15, v1, Landroid/content/res/Resources;->getString(I)Ljava/lang/String;
+00017e: move-result-object v15
+000180: invoke-virtual v14, v15, Landroid/widget/TextView;->setText(Ljava/lang/CharSequence;)V
+000186: goto/16 +101h
+00018a: const v2, 2131689502
+000190: const v3, 2131689555
+000196: const/4 v11, 5
+000198: if-eqz v14, +057h
+00019c: invoke-static Lcom/vivo/connbase/c0/z;->b()Z
+0001a2: move-result v12
+0001a4: if-nez v12, +051h
+0001a8: invoke-static Lcom/vivo/connbase/App;->m()Lcom/vivo/connbase/App;
+0001ae: move-result-object v14
+0001b0: new-array v0, v11, [Ljava/lang/Object;
+0001b4: invoke-static Lcom/vivo/connbase/App;->m()Lcom/vivo/connbase/App;
+0001ba: move-result-object v11
+0001bc: invoke-virtual v11, v15, Landroid/app/Application;->getString(I)Ljava/lang/String;
+0001c2: move-result-object v15
+0001c4: aput-object v15, v0, v4
+0001c8: invoke-static Lcom/vivo/connbase/App;->m()Lcom/vivo/connbase/App;
+0001ce: move-result-object v15
+0001d0: invoke-virtual v15, v5, Landroid/app/Application;->getString(I)Ljava/lang/String;
+0001d6: move-result-object v15
+0001d8: aput-object v15, v0, v6
+0001dc: invoke-static Lcom/vivo/connbase/App;->m()Lcom/vivo/connbase/App;
+0001e2: move-result-object v15
+0001e4: invoke-virtual v15, v7, Landroid/app/Application;->getString(I)Ljava/lang/String;
+0001ea: move-result-object v15
+0001ec: aput-object v15, v0, v8
+0001f0: invoke-static Lcom/vivo/connbase/App;->m()Lcom/vivo/connbase/App;
+0001f6: move-result-object v15
+0001f8: invoke-virtual v15, v7, Landroid/app/Application;->getString(I)Ljava/lang/String;
+0001fe: move-result-object v15
+000200: aput-object v15, v0, v10
+000204: invoke-static Lcom/vivo/connbase/App;->m()Lcom/vivo/connbase/App;
+00020a: move-result-object v15
+00020c: invoke-virtual v15, Landroid/app/Application;->getResources()Landroid/content/res/Resources;
+000212: move-result-object v15
+000214: invoke-virtual v15, v9, Landroid/content/res/Resources;->getString(I)Ljava/lang/String;
+00021a: move-result-object v15
+00021c: aput-object v15, v0, v1
+000220: invoke-virtual v14, v2, v0, Landroid/app/Application;->getString(I [Ljava/lang/Object;)Ljava/lang/String;
+000226: move-result-object v0
+000228: iget-object v14, v13, Lcom/vivo/connbase/g0/a;->b Landroid/widget/TextView;
+00022c: invoke-static Lcom/vivo/connbase/App;->m()Lcom/vivo/connbase/App;
+000232: move-result-object v15
+000234: invoke-virtual v15, Landroid/app/Application;->getResources()Landroid/content/res/Resources;
+00023a: move-result-object v15
+00023c: invoke-virtual v15, v3, Landroid/content/res/Resources;->getString(I)Ljava/lang/String;
+000242: move-result-object v15
+000244: goto -62h
+000246: if-nez v14, +049h
+00024a: invoke-static Lcom/vivo/connbase/c0/z;->b()Z
+000250: move-result v12
+000252: if-eqz v12, +043h
+000256: invoke-static Lcom/vivo/connbase/App;->m()Lcom/vivo/connbase/App;
+00025c: move-result-object v14
+00025e: new-array v0, v11, [Ljava/lang/Object;
+000262: invoke-static Lcom/vivo/connbase/App;->m()Lcom/vivo/connbase/App;
+000268: move-result-object v11
+00026a: invoke-virtual v11, v15, Landroid/app/Application;->getString(I)Ljava/lang/String;
+000270: move-result-object v15
+000272: aput-object v15, v0, v4
+000276: invoke-static Lcom/vivo/connbase/App;->m()Lcom/vivo/connbase/App;
+00027c: move-result-object v15
+00027e: invoke-virtual v15, v5, Landroid/app/Application;->getString(I)Ljava/lang/String;
+000284: move-result-object v15
+000286: aput-object v15, v0, v6
+00028a: invoke-static Lcom/vivo/connbase/App;->m()Lcom/vivo/connbase/App;
+000290: move-result-object v15
+000292: invoke-virtual v15, v7, Landroid/app/Application;->getString(I)Ljava/lang/String;
+000298: move-result-object v15
+00029a: aput-object v15, v0, v8
+00029e: invoke-static Lcom/vivo/connbase/App;->m()Lcom/vivo/connbase/App;
+0002a4: move-result-object v15
+0002a6: invoke-virtual v15, v5, Landroid/app/Application;->getString(I)Ljava/lang/String;
+0002ac: move-result-object v15
+0002ae: aput-object v15, v0, v10
+0002b2: invoke-static Lcom/vivo/connbase/App;->m()Lcom/vivo/connbase/App;
+0002b8: move-result-object v15
+0002ba: invoke-virtual v15, Landroid/app/Application;->getResources()Landroid/content/res/Resources;
+0002c0: move-result-object v15
+0002c2: invoke-virtual v15, v9, Landroid/content/res/Resources;->getString(I)Ljava/lang/String;
+0002c8: move-result-object v15
+0002ca: aput-object v15, v0, v1
+0002ce: invoke-virtual v14, v2, v0, Landroid/app/Application;->getString(I [Ljava/lang/Object;)Ljava/lang/String;
+0002d4: move-result-object v0
+0002d6: goto -57h
+0002d8: if-nez v14, +058h
+0002dc: invoke-static Lcom/vivo/connbase/c0/z;->b()Z
+0002e2: move-result v14
+0002e4: if-nez v14, +052h
+0002e8: invoke-static Lcom/vivo/connbase/App;->m()Lcom/vivo/connbase/App;
+0002ee: move-result-object v14
+0002f0: const v0, 2131689501
+0002f6: const/4 v2, 6
+0002f8: new-array v2, v2, [Ljava/lang/Object;
+0002fc: invoke-static Lcom/vivo/connbase/App;->m()Lcom/vivo/connbase/App;
+000302: move-result-object v12
+000304: invoke-virtual v12, v15, Landroid/app/Application;->getString(I)Ljava/lang/String;
+00030a: move-result-object v15
+00030c: aput-object v15, v2, v4
+000310: invoke-static Lcom/vivo/connbase/App;->m()Lcom/vivo/connbase/App;
+000316: move-result-object v15
+000318: invoke-virtual v15, v5, Landroid/app/Application;->getString(I)Ljava/lang/String;
+00031e: move-result-object v15
+000320: aput-object v15, v2, v6
+000324: invoke-static Lcom/vivo/connbase/App;->m()Lcom/vivo/connbase/App;
+00032a: move-result-object v15
+00032c: invoke-virtual v15, v7, Landroid/app/Application;->getString(I)Ljava/lang/String;
+000332: move-result-object v15
+000334: aput-object v15, v2, v8
+000338: invoke-static Lcom/vivo/connbase/App;->m()Lcom/vivo/connbase/App;
+00033e: move-result-object v15
+000340: invoke-virtual v15, v5, Landroid/app/Application;->getString(I)Ljava/lang/String;
+000346: move-result-object v15
+000348: aput-object v15, v2, v10
+00034c: invoke-static Lcom/vivo/connbase/App;->m()Lcom/vivo/connbase/App;
+000352: move-result-object v15
+000354: invoke-virtual v15, v7, Landroid/app/Application;->getString(I)Ljava/lang/String;
+00035a: move-result-object v15
+00035c: aput-object v15, v2, v1
+000360: invoke-static Lcom/vivo/connbase/App;->m()Lcom/vivo/connbase/App;
+000366: move-result-object v15
+000368: invoke-virtual v15, Landroid/app/Application;->getResources()Landroid/content/res/Resources;
+00036e: move-result-object v15
+000370: invoke-virtual v15, v9, Landroid/content/res/Resources;->getString(I)Ljava/lang/String;
+000376: move-result-object v15
+000378: aput-object v15, v2, v11
+00037c: invoke-virtual v14, v0, v2, Landroid/app/Application;->getString(I [Ljava/lang/Object;)Ljava/lang/String;
+000382: move-result-object v0
+000384: goto/16 -0aeh
+000388: return-object v0
+
+METHOD a(Landroid/view/View;)V
+000000: const v0, 2131296792
+000006: invoke-virtual v6, v0, Landroid/view/View;->findViewById(I)Landroid/view/View;
+00000c: move-result-object v0
+00000e: check-cast v0, Landroid/widget/TextView;
+000012: const v1, 2131296351
+000018: invoke-virtual v6, v1, Landroid/view/View;->findViewById(I)Landroid/view/View;
+00001e: move-result-object v6
+000020: check-cast v6, Landroid/widget/TextView;
+000024: iput-object v6, v5, Lcom/vivo/connbase/g0/a;->b Landroid/widget/TextView;
+000028: invoke-static Lcom/vivo/connbase/App;->m()Lcom/vivo/connbase/App;
+00002e: move-result-object v6
+000030: invoke-virtual v6, Landroid/app/Application;->getApplicationContext()Landroid/content/Context;
+000036: move-result-object v6
+000038: invoke-static v6, Lcom/vivo/connbase/wifi/utils/WifiUtils;->isWifiEnable(Landroid/content/Context;)Z
+00003e: move-result v6
+000040: invoke-static Lcom/vivo/connbase/wifi/utils/PhoneUtils;->isVivoPad()Z
+000046: move-result v1
+000048: if-eqz v1, +006h
+00004c: const v1, 2131689699
+000052: goto +4h
+000054: const v1, 2131689698
+00005a: invoke-direct v5, v6, v1, Lcom/vivo/connbase/g0/a;->a(Z I)Ljava/lang/String;
+000060: move-result-object v6
+000062: const/4 v1, 1
+000064: new-array v2, v1, [Ljava/lang/String;
+000068: invoke-static Lcom/vivo/connbase/App;->m()Lcom/vivo/connbase/App;
+00006e: move-result-object v3
+000070: invoke-virtual v3, Landroid/app/Application;->getResources()Landroid/content/res/Resources;
+000076: move-result-object v3
+000078: const v4, 2131689703
+00007e: invoke-virtual v3, v4, Landroid/content/res/Resources;->getString(I)Ljava/lang/String;
+000084: move-result-object v3
+000086: const/4 v4, 0
+000088: aput-object v3, v2, v4
+00008c: new-array v1, v1, [Landroid/text/style/ClickableSpan;
+000090: new-instance v3, Lcom/vivo/connbase/g0/a$c;
+000094: invoke-direct v3, v5, Lcom/vivo/connbase/g0/a$c;-><init>(Lcom/vivo/connbase/g0/a;)V
+00009a: aput-object v3, v1, v4
+00009e: invoke-static v6, v2, v1, Lcom/vivo/utils/u;->a(Ljava/lang/String; [Ljava/lang/String; [Landroid/text/style/ClickableSpan;)Landroid/text/SpannableStringBuilder;
+0000a4: move-result-object v6
+0000a6: invoke-virtual v0, v6, Landroid/widget/TextView;->setText(Ljava/lang/CharSequence;)V
+0000ac: invoke-static Landroid/text/method/LinkMovementMethod;->getInstance()Landroid/text/method/MovementMethod;
+0000b2: move-result-object v6
+0000b4: invoke-virtual v0, v6, Landroid/widget/TextView;->setMovementMethod(Landroid/text/method/MovementMethod;)V
+0000ba: return-void 
+
+METHOD a(Landroid/view/Window;)V
+000000: if-eqz v9, +07ch
+000004: invoke-virtual v9, Landroid/view/Window;->getAttributes()Landroid/view/WindowManager$LayoutParams;
+00000a: move-result-object v0
+00000c: sget v1, Landroid/os/Build$VERSION;->SDK_INT I
+000010: const/16 v2, 19
+000014: if-lt v1, v2, +007h
+000018: const/16 v1, 1024
+00001c: invoke-virtual v9, v1, Landroid/view/Window;->addFlags(I)V
+000022: const v1, 2131755242
+000028: invoke-virtual v9, v1, Landroid/view/Window;->setWindowAnimations(I)V
+00002e: const v1, 2131100054
+000034: invoke-virtual v9, v1, Landroid/view/Window;->setBackgroundDrawableResource(I)V
+00003a: new-instance v1, Landroid/graphics/drawable/ColorDrawable;
+00003e: const/4 v2, 0
+000040: invoke-direct v1, v2, Landroid/graphics/drawable/ColorDrawable;-><init>(I)V
+000046: invoke-virtual v9, v1, Landroid/view/Window;->setBackgroundDrawable(Landroid/graphics/drawable/Drawable;)V
+00004c: invoke-static Lcom/vivo/connbase/App;->m()Lcom/vivo/connbase/App;
+000052: move-result-object v1
+000054: invoke-virtual v1, Landroid/app/Application;->getResources()Landroid/content/res/Resources;
+00005a: move-result-object v1
+00005c: const v3, 2131165335
+000062: invoke-virtual v1, v3, Landroid/content/res/Resources;->getDimensionPixelOffset(I)I
+000068: move-result v1
+00006a: invoke-static Lcom/vivo/utils/r;->a()Z
+000070: move-result v3
+000072: if-eqz v3, +021h
+000076: invoke-static Lcom/vivo/connbase/App;->m()Lcom/vivo/connbase/App;
+00007c: move-result-object v3
+00007e: invoke-virtual v3, Landroid/app/Application;->getResources()Landroid/content/res/Resources;
+000084: move-result-object v3
+000086: invoke-static Lcom/vivo/connbase/App;->m()Lcom/vivo/connbase/App;
+00008c: move-result-object v4
+00008e: invoke-virtual v4, Landroid/app/Application;->getResources()Landroid/content/res/Resources;
+000094: move-result-object v4
+000096: const-string v5, "navigation_bar_height"
+00009a: const-string v6, "dimen"
+00009e: const-string v7, "android"
+0000a2: invoke-virtual v4, v5, v6, v7, Landroid/content/res/Resources;->getIdentifier(Ljava/lang/String; Ljava/lang/String; Ljava/lang/String;)I
+0000a8: move-result v4
+0000aa: invoke-virtual v3, v4, Landroid/content/res/Resources;->getDimensionPixelSize(I)I
+0000b0: move-result v3
+0000b2: sub-int/2addr v1, v3
+0000b4: invoke-static Lcom/vivo/connbase/wifi/utils/PhoneUtils;->isVivoPad()Z
+0000ba: move-result v3
+0000bc: invoke-virtual v9, Landroid/view/Window;->getDecorView()Landroid/view/View;
+0000c2: move-result-object v4
+0000c4: invoke-virtual v4, v2, v2, v2, v1, Landroid/view/View;->setPadding(I I I I)V
+0000ca: const/4 v1, -2
+0000cc: iput v1, v0, Landroid/view/WindowManager$LayoutParams;->width I
+0000d0: iput v1, v0, Landroid/view/WindowManager$LayoutParams;->height I
+0000d4: if-eqz v3, +008h
+0000d8: const/16 v1, 17
+0000dc: iput v1, v0, Landroid/view/WindowManager$LayoutParams;->gravity I
+0000e0: const/4 v1, -1
+0000e2: goto +6h
+0000e4: const/16 v1, 80
+0000e8: iput v1, v0, Landroid/view/WindowManager$LayoutParams;->gravity I
+0000ec: const/4 v1, 1
+0000ee: iput v1, v0, Landroid/view/WindowManager$LayoutParams;->screenOrientation I
+0000f2: invoke-virtual v9, v0, Landroid/view/Window;->setAttributes(Landroid/view/WindowManager$LayoutParams;)V
+0000f8: return-void 
+
+METHOD a(Landroid/widget/TextView;)V
+000000: invoke-static Lcom/vivo/connbase/App;->m()Lcom/vivo/connbase/App;
+000006: move-result-object v0
+000008: invoke-virtual v0, Landroid/app/Application;->getResources()Landroid/content/res/Resources;
+00000e: move-result-object v0
+000010: const v1, 2131689500
+000016: invoke-virtual v0, v1, Landroid/content/res/Resources;->getString(I)Ljava/lang/String;
+00001c: move-result-object v0
+00001e: invoke-static v0, Landroid/text/Html;->fromHtml(Ljava/lang/String;)Landroid/text/Spanned;
+000024: move-result-object v0
+000026: sget-object v1, Landroid/widget/TextView$BufferType;->SPANNABLE Landroid/widget/TextView$BufferType;
+00002a: invoke-virtual v3, v0, v1, Landroid/widget/TextView;->setText(Ljava/lang/CharSequence; Landroid/widget/TextView$BufferType;)V
+000030: return-void 
+
+METHOD a(Landroid/content/Context;)Landroid/app/AlertDialog;
+000000: const-string v0, "ConnectDialogHelper"
+000004: const-string v1, "showAccountLogInPromptDialog"
+000008: invoke-static v0, v1, Lc/c/f/a/b;->l(Ljava/lang/String; Ljava/lang/String;)V
+00000e: invoke-static Lcom/vivo/connbase/App;->m()Lcom/vivo/connbase/App;
+000014: move-result-object v0
+000016: const v1, 2131492919
+00001c: const/4 v2, 0
+00001e: invoke-static v0, v1, v2, Landroid/view/View;->inflate(Landroid/content/Context; I Landroid/view/ViewGroup;)Landroid/view/View;
+000024: move-result-object v0
+000026: new-instance v1, Landroid/app/AlertDialog$Builder;
+00002a: invoke-static Lcom/vivo/connbase/App;->m()Lcom/vivo/connbase/App;
+000030: move-result-object v2
+000032: const v3, 2131755552
+000038: invoke-direct v1, v2, v3, Landroid/app/AlertDialog$Builder;-><init>(Landroid/content/Context; I)V
+00003e: invoke-virtual v1, v0, Landroid/app/AlertDialog$Builder;->setView(Landroid/view/View;)Landroid/app/AlertDialog$Builder;
+000044: move-result-object v1
+000046: invoke-virtual v1, Landroid/app/AlertDialog$Builder;->create()Landroid/app/AlertDialog;
+00004c: move-result-object v1
+00004e: iput-object v1, v5, Lcom/vivo/connbase/g0/a;->a Landroid/app/AlertDialog;
+000052: invoke-virtual v1, Landroid/app/AlertDialog;->getWindow()Landroid/view/Window;
+000058: move-result-object v1
+00005a: if-eqz v1, +013h
+00005e: sget v2, Landroid/os/Build$VERSION;->SDK_INT I
+000062: const/16 v3, 26
+000066: if-lt v2, v3, +005h
+00006a: const/16 v2, 2038
+00006e: goto +3h
+000070: const/16 v2, 2003
+000074: invoke-virtual v1, v2, Landroid/view/Window;->setType(I)V
+00007a: invoke-direct v5, v1, Lcom/vivo/connbase/g0/a;->a(Landroid/view/Window;)V
+000080: const v1, 2131296446
+000086: invoke-virtual v0, v1, Landroid/view/View;->findViewById(I)Landroid/view/View;
+00008c: move-result-object v1
+00008e: const/4 v2, 0
+000090: invoke-static v1, v2, Lcom/vivo/utils/x;->a(Landroid/view/View; I)V
+000096: const v1, 2131296800
+00009c: invoke-virtual v0, v1, Landroid/view/View;->findViewById(I)Landroid/view/View;
+0000a2: move-result-object v1
+0000a4: check-cast v1, Landroid/widget/TextView;
+0000a8: const v3, 2131296792
+0000ae: invoke-virtual v0, v3, Landroid/view/View;->findViewById(I)Landroid/view/View;
+0000b4: move-result-object v3
+0000b6: check-cast v3, Landroid/widget/TextView;
+0000ba: invoke-virtual v6, Landroid/content/Context;->getResources()Landroid/content/res/Resources;
+0000c0: move-result-object v6
+0000c2: const v4, 2131689503
+0000c8: invoke-virtual v6, v4, Landroid/content/res/Resources;->getString(I)Ljava/lang/String;
+0000ce: move-result-object v6
+0000d0: invoke-virtual v1, v6, Landroid/widget/TextView;->setText(Ljava/lang/CharSequence;)V
+0000d6: const v6, 2131296351
+0000dc: invoke-virtual v0, v6, Landroid/view/View;->findViewById(I)Landroid/view/View;
+0000e2: move-result-object v6
+0000e4: check-cast v6, Landroid/widget/TextView;
+0000e8: iput-object v6, v5, Lcom/vivo/connbase/g0/a;->b Landroid/widget/TextView;
+0000ec: const v6, 2131296350
+0000f2: invoke-virtual v0, v6, Landroid/view/View;->findViewById(I)Landroid/view/View;
+0000f8: move-result-object v6
+0000fa: check-cast v6, Landroid/widget/TextView;
+0000fe: iput-object v6, v5, Lcom/vivo/connbase/g0/a;->c Landroid/widget/TextView;
+000102: iget-object v6, v5, Lcom/vivo/connbase/g0/a;->b Landroid/widget/TextView;
+000106: const/16 v4, 70
+00010a: invoke-static v6, v4, v2, Lcom/vivo/utils/h;->a(Landroid/widget/TextView; I I)V
+000110: iget-object v6, v5, Lcom/vivo/connbase/g0/a;->c Landroid/widget/TextView;
+000114: const/16 v4, 60
+000118: invoke-static v6, v4, v2, Lcom/vivo/utils/h;->a(Landroid/widget/TextView; I I)V
+00011e: const/16 v6, 75
+000122: invoke-static v1, v6, v2, Lcom/vivo/utils/h;->a(Landroid/widget/TextView; I I)V
+000128: const/16 v6, 55
+00012c: invoke-static v3, v6, v2, Lcom/vivo/utils/h;->a(Landroid/widget/TextView; I I)V
+000132: invoke-direct v5, v0, Lcom/vivo/connbase/g0/a;->a(Landroid/view/View;)V
+000138: iget-object v6, v5, Lcom/vivo/connbase/g0/a;->a Landroid/app/AlertDialog;
+00013c: const/4 v0, 1
+00013e: invoke-virtual v6, v0, Landroid/app/AlertDialog;->setCanceledOnTouchOutside(Z)V
+000144: iget-object v6, v5, Lcom/vivo/connbase/g0/a;->a Landroid/app/AlertDialog;
+000148: invoke-virtual v6, v2, Landroid/app/AlertDialog;->setCancelable(Z)V
+00014e: iget-object v6, v5, Lcom/vivo/connbase/g0/a;->a Landroid/app/AlertDialog;
+000152: return-object v6
+
+METHOD a(Ljava/lang/String;)Landroid/app/AlertDialog;
+000000: const/4 v0, 0
+000002: invoke-virtual v1, v2, v0, Lcom/vivo/connbase/g0/a;->a(Ljava/lang/String; Ljava/lang/String;)Landroid/app/AlertDialog;
+000008: move-result-object v2
+00000a: return-object v2
+
+METHOD a(Ljava/lang/String; Ljava/lang/String;)Landroid/app/AlertDialog;
+000000: const-string v0, "ConnectDialogHelper"
+000004: const-string v1, "showUsePcSharePromptDialog()"
+000008: invoke-static v0, v1, Lc/c/f/a/b;->k(Ljava/lang/String; Ljava/lang/String;)V
+00000e: invoke-static Lcom/vivo/connbase/App;->m()Lcom/vivo/connbase/App;
+000014: move-result-object v0
+000016: const v1, 2131492918
+00001c: const/4 v2, 0
+00001e: invoke-static v0, v1, v2, Landroid/view/View;->inflate(Landroid/content/Context; I Landroid/view/ViewGroup;)Landroid/view/View;
+000024: move-result-object v0
+000026: new-instance v1, Landroid/app/AlertDialog$Builder;
+00002a: invoke-static Lcom/vivo/connbase/App;->m()Lcom/vivo/connbase/App;
+000030: move-result-object v2
+000032: const v3, 2131755552
+000038: invoke-direct v1, v2, v3, Landroid/app/AlertDialog$Builder;-><init>(Landroid/content/Context; I)V
+00003e: invoke-virtual v1, v0, Landroid/app/AlertDialog$Builder;->setView(Landroid/view/View;)Landroid/app/AlertDialog$Builder;
+000044: move-result-object v1
+000046: invoke-virtual v1, Landroid/app/AlertDialog$Builder;->create()Landroid/app/AlertDialog;
+00004c: move-result-object v1
+00004e: iput-object v1, v4, Lcom/vivo/connbase/g0/a;->a Landroid/app/AlertDialog;
+000052: invoke-virtual v1, Landroid/app/AlertDialog;->getWindow()Landroid/view/Window;
+000058: move-result-object v1
+00005a: if-eqz v1, +013h
+00005e: sget v2, Landroid/os/Build$VERSION;->SDK_INT I
+000062: const/16 v3, 26
+000066: if-lt v2, v3, +005h
+00006a: const/16 v2, 2038
+00006e: goto +3h
+000070: const/16 v2, 2003
+000074: invoke-virtual v1, v2, Landroid/view/Window;->setType(I)V
+00007a: invoke-direct v4, v1, Lcom/vivo/connbase/g0/a;->a(Landroid/view/Window;)V
+000080: const v1, 2131296446
+000086: invoke-virtual v0, v1, Landroid/view/View;->findViewById(I)Landroid/view/View;
+00008c: move-result-object v1
+00008e: const/4 v2, 0
+000090: invoke-static v1, v2, Lcom/vivo/utils/x;->a(Landroid/view/View; I)V
+000096: const v1, 2131296800
+00009c: invoke-virtual v0, v1, Landroid/view/View;->findViewById(I)Landroid/view/View;
+0000a2: move-result-object v1
+0000a4: check-cast v1, Landroid/widget/TextView;
+0000a8: if-eqz v6, +003h
+0000ac: goto +ch
+0000ae: invoke-static Lcom/vivo/connbase/App;->m()Lcom/vivo/connbase/App;
+0000b4: move-result-object v6
+0000b6: const v3, 2131689700
+0000bc: invoke-virtual v6, v3, Landroid/app/Application;->getString(I)Ljava/lang/String;
+0000c2: move-result-object v6
+0000c4: invoke-virtual v1, v6, Landroid/widget/TextView;->setText(Ljava/lang/CharSequence;)V
+0000ca: const v6, 2131296351
+0000d0: invoke-virtual v0, v6, Landroid/view/View;->findViewById(I)Landroid/view/View;
+0000d6: move-result-object v6
+0000d8: check-cast v6, Landroid/widget/TextView;
+0000dc: iput-object v6, v4, Lcom/vivo/connbase/g0/a;->b Landroid/widget/TextView;
+0000e0: invoke-static Lcom/vivo/connbase/App;->m()Lcom/vivo/connbase/App;
+0000e6: move-result-object v1
+0000e8: const v3, 2131689694
+0000ee: invoke-virtual v1, v3, Landroid/app/Application;->getString(I)Ljava/lang/String;
+0000f4: move-result-object v1
+0000f6: invoke-virtual v6, v1, Landroid/widget/TextView;->setText(Ljava/lang/CharSequence;)V
+0000fc: const v6, 2131296792
+000102: invoke-virtual v0, v6, Landroid/view/View;->findViewById(I)Landroid/view/View;
+000108: move-result-object v6
+00010a: check-cast v6, Landroid/widget/TextView;
+00010e: invoke-virtual v6, v5, Landroid/widget/TextView;->setText(Ljava/lang/CharSequence;)V
+000114: iget-object v5, v4, Lcom/vivo/connbase/g0/a;->a Landroid/app/AlertDialog;
+000118: const/4 v6, 1
+00011a: invoke-virtual v5, v6, Landroid/app/AlertDialog;->setCanceledOnTouchOutside(Z)V
+000120: iget-object v5, v4, Lcom/vivo/connbase/g0/a;->a Landroid/app/AlertDialog;
+000124: invoke-virtual v5, v2, Landroid/app/AlertDialog;->setCancelable(Z)V
+00012a: iget-object v5, v4, Lcom/vivo/connbase/g0/a;->a Landroid/app/AlertDialog;
+00012e: return-object v5
+
+METHOD a()V
+000000: iget-object v0, v1, Lcom/vivo/connbase/g0/a;->a Landroid/app/AlertDialog;
+000004: if-eqz v0, +00dh
+000008: invoke-virtual v0, Landroid/app/AlertDialog;->isShowing()Z
+00000e: move-result v0
+000010: if-eqz v0, +007h
+000014: iget-object v0, v1, Lcom/vivo/connbase/g0/a;->a Landroid/app/AlertDialog;
+000018: invoke-virtual v0, Landroid/app/AlertDialog;->dismiss()V
+00001e: return-void 
+
+METHOD a(Landroid/view/View$OnClickListener;)V
+000000: iget-object v0, v1, Lcom/vivo/connbase/g0/a;->c Landroid/widget/TextView;
+000004: if-eqz v0, +005h
+000008: invoke-virtual v0, v2, Landroid/widget/TextView;->setOnClickListener(Landroid/view/View$OnClickListener;)V
+00000e: invoke-virtual v1, Lcom/vivo/connbase/g0/a;->c()V
+000014: return-void 
+
+METHOD b(Landroid/content/Context;)Landroid/app/AlertDialog;
+000000: const-string v11, "ConnectDialogHelper"
+000004: const-string v0, "showUsePcSharePromptDialog()"
+000008: invoke-static v11, v0, Lc/c/f/a/b;->k(Ljava/lang/String; Ljava/lang/String;)V
+00000e: invoke-static Lcom/vivo/connbase/App;->m()Lcom/vivo/connbase/App;
+000014: move-result-object v11
+000016: const v0, 2131492927
+00001c: const/4 v1, 0
+00001e: invoke-static v11, v0, v1, Landroid/view/View;->inflate(Landroid/content/Context; I Landroid/view/ViewGroup;)Landroid/view/View;
+000024: move-result-object v11
+000026: new-instance v0, Landroid/app/AlertDialog$Builder;
+00002a: invoke-static Lcom/vivo/connbase/App;->m()Lcom/vivo/connbase/App;
+000030: move-result-object v1
+000032: const v2, 2131755552
+000038: invoke-direct v0, v1, v2, Landroid/app/AlertDialog$Builder;-><init>(Landroid/content/Context; I)V
+00003e: invoke-virtual v0, v11, Landroid/app/AlertDialog$Builder;->setView(Landroid/view/View;)Landroid/app/AlertDialog$Builder;
+000044: move-result-object v0
+000046: invoke-virtual v0, Landroid/app/AlertDialog$Builder;->create()Landroid/app/AlertDialog;
+00004c: move-result-object v0
+00004e: iput-object v0, v10, Lcom/vivo/connbase/g0/a;->a Landroid/app/AlertDialog;
+000052: invoke-virtual v0, Landroid/app/AlertDialog;->getWindow()Landroid/view/Window;
+000058: move-result-object v0
+00005a: if-eqz v0, +013h
+00005e: sget v1, Landroid/os/Build$VERSION;->SDK_INT I
+000062: const/16 v2, 26
+000066: if-lt v1, v2, +005h
+00006a: const/16 v1, 2038
+00006e: goto +3h
+000070: const/16 v1, 2003
+000074: invoke-virtual v0, v1, Landroid/view/Window;->setType(I)V
+00007a: invoke-direct v10, v0, Lcom/vivo/connbase/g0/a;->a(Landroid/view/Window;)V
+000080: const v0, 2131296351
+000086: invoke-virtual v11, v0, Landroid/view/View;->findViewById(I)Landroid/view/View;
+00008c: move-result-object v0
+00008e: check-cast v0, Landroid/widget/TextView;
+000092: iput-object v0, v10, Lcom/vivo/connbase/g0/a;->b Landroid/widget/TextView;
+000096: const v0, 2131296350
+00009c: invoke-virtual v11, v0, Landroid/view/View;->findViewById(I)Landroid/view/View;
+0000a2: move-result-object v0
+0000a4: check-cast v0, Landroid/widget/TextView;
+0000a8: iput-object v0, v10, Lcom/vivo/connbase/g0/a;->c Landroid/widget/TextView;
+0000ac: const v0, 2131296324
+0000b2: invoke-virtual v11, v0, Landroid/view/View;->findViewById(I)Landroid/view/View;
+0000b8: move-result-object v0
+0000ba: check-cast v0, Landroid/widget/TextView;
+0000be: const v1, 2131296806
+0000c4: invoke-virtual v11, v1, Landroid/view/View;->findViewById(I)Landroid/view/View;
+0000ca: move-result-object v1
+0000cc: check-cast v1, Landroid/widget/TextView;
+0000d0: const v2, 2131296808
+0000d6: invoke-virtual v11, v2, Landroid/view/View;->findViewById(I)Landroid/view/View;
+0000dc: move-result-object v2
+0000de: check-cast v2, Landroid/widget/TextView;
+0000e2: const v3, 2131296804
+0000e8: invoke-virtual v11, v3, Landroid/view/View;->findViewById(I)Landroid/view/View;
+0000ee: move-result-object v3
+0000f0: check-cast v3, Landroid/widget/TextView;
+0000f4: const v4, 2131296807
+0000fa: invoke-virtual v11, v4, Landroid/view/View;->findViewById(I)Landroid/view/View;
+000100: move-result-object v4
+000102: check-cast v4, Landroid/widget/TextView;
+000106: const v5, 2131296802
+00010c: invoke-virtual v11, v5, Landroid/view/View;->findViewById(I)Landroid/view/View;
+000112: move-result-object v5
+000114: check-cast v5, Landroid/widget/TextView;
+000118: const v6, 2131296805
+00011e: invoke-virtual v11, v6, Landroid/view/View;->findViewById(I)Landroid/view/View;
+000124: move-result-object v6
+000126: check-cast v6, Landroid/widget/TextView;
+00012a: const v7, 2131296803
+000130: invoke-virtual v11, v7, Landroid/view/View;->findViewById(I)Landroid/view/View;
+000136: move-result-object v7
+000138: check-cast v7, Landroid/widget/TextView;
+00013c: const v8, 2131296801
+000142: invoke-virtual v11, v8, Landroid/view/View;->findViewById(I)Landroid/view/View;
+000148: move-result-object v11
+00014a: check-cast v11, Landroid/widget/TextView;
+00014e: const/16 v8, 55
+000152: const/4 v9, 0
+000154: invoke-static v1, v8, v9, Lcom/vivo/utils/h;->a(Landroid/widget/TextView; I I)V
+00015a: const/16 v1, 70
+00015e: invoke-static v2, v1, v9, Lcom/vivo/utils/h;->a(Landroid/widget/TextView; I I)V
+000164: const/16 v2, 60
+000168: invoke-static v4, v2, v9, Lcom/vivo/utils/h;->a(Landroid/widget/TextView; I I)V
+00016e: invoke-static v3, v1, v9, Lcom/vivo/utils/h;->a(Landroid/widget/TextView; I I)V
+000174: invoke-static v5, v2, v9, Lcom/vivo/utils/h;->a(Landroid/widget/TextView; I I)V
+00017a: invoke-static v6, v2, v9, Lcom/vivo/utils/h;->a(Landroid/widget/TextView; I I)V
+000180: invoke-static v7, v2, v9, Lcom/vivo/utils/h;->a(Landroid/widget/TextView; I I)V
+000186: invoke-static v11, v2, v9, Lcom/vivo/utils/h;->a(Landroid/widget/TextView; I I)V
+00018c: iget-object v11, v10, Lcom/vivo/connbase/g0/a;->b Landroid/widget/TextView;
+000190: invoke-static v11, v1, v9, Lcom/vivo/utils/h;->a(Landroid/widget/TextView; I I)V
+000196: iget-object v11, v10, Lcom/vivo/connbase/g0/a;->c Landroid/widget/TextView;
+00019a: invoke-static v11, v2, v9, Lcom/vivo/utils/h;->a(Landroid/widget/TextView; I I)V
+0001a0: invoke-static Lcom/vivo/connbase/wifi/utils/PhoneUtils;->isVivoPad()Z
+0001a6: move-result v11
+0001a8: if-eqz v11, +006h
+0001ac: invoke-static v0, v8, v9, Lcom/vivo/utils/h;->a(Landroid/widget/TextView; I I)V
+0001b2: goto +4h
+0001b4: invoke-static v0, v2, v9, Lcom/vivo/utils/h;->a(Landroid/widget/TextView; I I)V
+0001ba: invoke-static Lcom/vivo/connbase/App;->m()Lcom/vivo/connbase/App;
+0001c0: move-result-object v11
+0001c2: const v1, 2131689520
+0001c8: const/4 v2, 2
+0001ca: new-array v2, v2, [Ljava/lang/Object;
+0001ce: invoke-static Lcom/vivo/connbase/App;->m()Lcom/vivo/connbase/App;
+0001d4: move-result-object v3
+0001d6: invoke-virtual v3, Landroid/app/Application;->getResources()Landroid/content/res/Resources;
+0001dc: move-result-object v3
+0001de: const v4, 2131689681
+0001e4: invoke-virtual v3, v4, Landroid/content/res/Resources;->getString(I)Ljava/lang/String;
+0001ea: move-result-object v3
+0001ec: aput-object v3, v2, v9
+0001f0: invoke-static Lcom/vivo/connbase/App;->m()Lcom/vivo/connbase/App;
+0001f6: move-result-object v3
+0001f8: invoke-virtual v3, Landroid/app/Application;->getResources()Landroid/content/res/Resources;
+0001fe: move-result-object v3
+000200: const/4 v4, 1
+000202: new-array v5, v4, [Ljava/lang/Object;
+000206: invoke-static Lcom/vivo/connbase/App;->m()Lcom/vivo/connbase/App;
+00020c: move-result-object v6
+00020e: invoke-virtual v6, Landroid/app/Application;->getResources()Landroid/content/res/Resources;
+000214: move-result-object v6
+000216: const v7, 2131689503
+00021c: invoke-virtual v6, v7, Landroid/content/res/Resources;->getString(I)Ljava/lang/String;
+000222: move-result-object v6
+000224: aput-object v6, v5, v9
+000228: const v6, 2131689517
+00022e: invoke-virtual v3, v6, v5, Landroid/content/res/Resources;->getString(I [Ljava/lang/Object;)Ljava/lang/String;
+000234: move-result-object v3
+000236: aput-object v3, v2, v4
+00023a: invoke-virtual v11, v1, v2, Landroid/app/Application;->getString(I [Ljava/lang/Object;)Ljava/lang/String;
+000240: move-result-object v11
+000242: new-array v1, v4, [Ljava/lang/String;
+000246: invoke-static Lcom/vivo/connbase/App;->m()Lcom/vivo/connbase/App;
+00024c: move-result-object v2
+00024e: invoke-virtual v2, Landroid/app/Application;->getResources()Landroid/content/res/Resources;
+000254: move-result-object v2
+000256: new-array v3, v4, [Ljava/lang/Object;
+00025a: invoke-static Lcom/vivo/connbase/App;->m()Lcom/vivo/connbase/App;
+000260: move-result-object v5
+000262: invoke-virtual v5, Landroid/app/Application;->getResources()Landroid/content/res/Resources;
+000268: move-result-object v5
+00026a: invoke-virtual v5, v7, Landroid/content/res/Resources;->getString(I)Ljava/lang/String;
+000270: move-result-object v5
+000272: aput-object v5, v3, v9
+000276: invoke-virtual v2, v6, v3, Landroid/content/res/Resources;->getString(I [Ljava/lang/Object;)Ljava/lang/String;
+00027c: move-result-object v2
+00027e: aput-object v2, v1, v9
+000282: new-array v2, v4, [Landroid/text/style/ClickableSpan;
+000286: new-instance v3, Lcom/vivo/connbase/g0/a$a;
+00028a: invoke-direct v3, v10, Lcom/vivo/connbase/g0/a$a;-><init>(Lcom/vivo/connbase/g0/a;)V
+000290: aput-object v3, v2, v9
+000294: invoke-static v11, v1, v2, Lcom/vivo/utils/u;->a(Ljava/lang/String; [Ljava/lang/String; [Landroid/text/style/ClickableSpan;)Landroid/text/SpannableStringBuilder;
+00029a: move-result-object v11
+00029c: invoke-virtual v0, v11, Landroid/widget/TextView;->setText(Ljava/lang/CharSequence;)V
+0002a2: invoke-static Landroid/text/method/LinkMovementMethod;->getInstance()Landroid/text/method/MovementMethod;
+0002a8: move-result-object v11
+0002aa: invoke-virtual v0, v11, Landroid/widget/TextView;->setMovementMethod(Landroid/text/method/MovementMethod;)V
+0002b0: iget-object v11, v10, Lcom/vivo/connbase/g0/a;->a Landroid/app/AlertDialog;
+0002b4: invoke-virtual v11, v4, Landroid/app/AlertDialog;->setCanceledOnTouchOutside(Z)V
+0002ba: iget-object v11, v10, Lcom/vivo/connbase/g0/a;->a Landroid/app/AlertDialog;
+0002be: invoke-virtual v11, v9, Landroid/app/AlertDialog;->setCancelable(Z)V
+0002c4: iget-object v11, v10, Lcom/vivo/connbase/g0/a;->a Landroid/app/AlertDialog;
+0002c8: return-object v11
+
+METHOD b(Landroid/view/View$OnClickListener;)V
+000000: iget-object v0, v1, Lcom/vivo/connbase/g0/a;->b Landroid/widget/TextView;
+000004: if-eqz v0, +005h
+000008: invoke-virtual v0, v2, Landroid/widget/TextView;->setOnClickListener(Landroid/view/View$OnClickListener;)V
+00000e: invoke-virtual v1, Lcom/vivo/connbase/g0/a;->c()V
+000014: return-void 
+
+METHOD b()Z
+000000: iget-object v0, v1, Lcom/vivo/connbase/g0/a;->a Landroid/app/AlertDialog;
+000004: if-eqz v0, +00ah
+000008: invoke-virtual v0, Landroid/app/AlertDialog;->isShowing()Z
+00000e: move-result v0
+000010: if-eqz v0, +004h
+000014: const/4 v0, 1
+000016: return v0
+000018: const/4 v0, 0
+00001a: return v0
+
+METHOD c()V
+000000: iget-object v0, v1, Lcom/vivo/connbase/g0/a;->a Landroid/app/AlertDialog;
+000004: if-eqz v0, +00dh
+000008: invoke-virtual v0, Landroid/app/AlertDialog;->isShowing()Z
+00000e: move-result v0
+000010: if-nez v0, +007h
+000014: iget-object v0, v1, Lcom/vivo/connbase/g0/a;->a Landroid/app/AlertDialog;
+000018: invoke-virtual v0, Landroid/app/AlertDialog;->show()V
+00001e: return-void 

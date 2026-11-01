@@ -1,0 +1,70 @@
+APK pcsuite/updateApk/connbase.apk
+DEX classes.dex
+CLASS Lcom/vivo/connbase/VivoConnectService$b;
+SUPER Ljava/lang/Object;
+FIELDS
+a Ljava/lang/String; = None
+b Ljava/lang/String; = None
+c Landroid/os/Messenger; = None
+d Lcom/vivo/connbase/VivoConnectService; = None
+
+METHOD <init>(Lcom/vivo/connbase/VivoConnectService; Ljava/lang/String; Ljava/lang/String; Landroid/os/Messenger;)V
+000000: iput-object v1, v0, Lcom/vivo/connbase/VivoConnectService$b;->d Lcom/vivo/connbase/VivoConnectService;
+000004: iput-object v2, v0, Lcom/vivo/connbase/VivoConnectService$b;->a Ljava/lang/String;
+000008: iput-object v3, v0, Lcom/vivo/connbase/VivoConnectService$b;->b Ljava/lang/String;
+00000c: iput-object v4, v0, Lcom/vivo/connbase/VivoConnectService$b;->c Landroid/os/Messenger;
+000010: invoke-direct v0, Ljava/lang/Object;-><init>()V
+000016: return-void 
+
+METHOD a(Ljava/lang/Throwable;)V
+000000: new-instance v0, Ljava/lang/StringBuilder;
+000004: invoke-direct v0, Ljava/lang/StringBuilder;-><init>()V
+00000a: const-string v1, "send set disconnect message error:"
+00000e: invoke-virtual v0, v1, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+000014: invoke-virtual v3, Ljava/lang/Throwable;->toString()Ljava/lang/String;
+00001a: move-result-object v3
+00001c: invoke-virtual v0, v3, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+000022: invoke-virtual v0, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
+000028: move-result-object v3
+00002a: const-string v0, "VivoConnectService"
+00002e: invoke-static v0, v3, Lc/c/f/a/b;->k(Ljava/lang/String; Ljava/lang/String;)V
+000034: return-void 
+
+METHOD onSuccess()V
+000000: const-string v0, "VivoConnectService"
+000004: const-string v1, "send set disconnect message success"
+000008: invoke-static v0, v1, Lc/c/f/a/b;->k(Ljava/lang/String; Ljava/lang/String;)V
+00000e: iget-object v0, v4, Lcom/vivo/connbase/VivoConnectService$b;->d Lcom/vivo/connbase/VivoConnectService;
+000012: invoke-static v0, Lcom/vivo/connbase/VivoConnectService;->e(Lcom/vivo/connbase/VivoConnectService;)Landroid/os/Handler;
+000018: move-result-object v0
+00001a: new-instance v1, Lcom/vivo/connbase/VivoConnectService$b$a;
+00001e: invoke-direct v1, v4, Lcom/vivo/connbase/VivoConnectService$b$a;-><init>(Lcom/vivo/connbase/VivoConnectService$b;)V
+000024: invoke-virtual v0, v1, Landroid/os/Handler;->post(Ljava/lang/Runnable;)Z
+00002a: iget-object v0, v4, Lcom/vivo/connbase/VivoConnectService$b;->d Lcom/vivo/connbase/VivoConnectService;
+00002e: invoke-static v0, Lcom/vivo/connbase/VivoConnectService;->h(Lcom/vivo/connbase/VivoConnectService;)Lcom/vivo/connbase/connect/d;
+000034: move-result-object v0
+000036: invoke-interface v0, Lcom/vivo/connbase/connect/d;->f()Ljava/util/List;
+00003c: move-result-object v0
+00003e: invoke-interface v0, Ljava/util/List;->iterator()Ljava/util/Iterator;
+000044: move-result-object v0
+000046: invoke-interface v0, Ljava/util/Iterator;->hasNext()Z
+00004c: move-result v1
+00004e: const/4 v2, 1
+000050: if-eqz v1, +01bh
+000054: invoke-interface v0, Ljava/util/Iterator;->next()Ljava/lang/Object;
+00005a: move-result-object v1
+00005c: check-cast v1, Lcom/vivo/connbase/connect/k;
+000060: invoke-virtual v1, Lcom/vivo/connbase/connect/k;->l()I
+000066: move-result v3
+000068: if-ne v3, v2, -011h
+00006c: invoke-virtual v1, Lcom/vivo/connbase/connect/k;->y()Ljava/lang/String;
+000072: move-result-object v1
+000074: iget-object v2, v4, Lcom/vivo/connbase/VivoConnectService$b;->a Ljava/lang/String;
+000078: invoke-static v1, v2, Landroid/text/TextUtils;->equals(Ljava/lang/CharSequence; Ljava/lang/CharSequence;)Z
+00007e: move-result v1
+000080: if-nez v1, -01dh
+000084: const/4 v2, 0
+000086: if-eqz v2, +007h
+00008a: iget-object v0, v4, Lcom/vivo/connbase/VivoConnectService$b;->d Lcom/vivo/connbase/VivoConnectService;
+00008e: invoke-static v0, Lcom/vivo/connbase/VivoConnectService;->G(Lcom/vivo/connbase/VivoConnectService;)V
+000094: return-void 

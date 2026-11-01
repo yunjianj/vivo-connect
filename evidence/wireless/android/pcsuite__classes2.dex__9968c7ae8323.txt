@@ -1,0 +1,30 @@
+APK pcsuite/updateApk/pcsuite.apk
+DEX classes2.dex
+CLASS Lcom/vivo/pcsuite/connect/ConnectControlModel$11;
+SUPER Ljava/lang/Object;
+FIELDS
+a Lcom/vivo/connect/discovery/ScanInfo; = None
+
+METHOD <init>(Lcom/vivo/pcsuite/connect/ConnectControlModel; Lcom/vivo/connect/discovery/ScanInfo;)V
+000000: invoke-direct v0, Ljava/lang/Object;-><init>()V
+000006: iput-object v2, v0, Lcom/vivo/pcsuite/connect/ConnectControlModel$11;->a Lcom/vivo/connect/discovery/ScanInfo;
+00000a: return-void 
+
+METHOD run()V
+000000: const-string v0, "accept wlan connect"
+000004: const-string v1, "pcsuite_ConnectControlModel"
+000008: invoke-static v1, v0, Lcom/vivo/connect/logger/EasyLog;->i(Ljava/lang/String; Ljava/lang/String;)V
+00000e: iget-object v4, v4, Lcom/vivo/pcsuite/connect/ConnectControlModel$11;->a Lcom/vivo/connect/discovery/ScanInfo;
+000012: invoke-virtual v4, Lcom/vivo/connect/discovery/ScanInfo;->getDeviceId()Ljava/lang/String;
+000018: move-result-object v4
+00001a: invoke-static v4, Lcom/vivo/pcsuite/connect/ConnectControlModel;->f(Ljava/lang/String;)V
+000020: invoke-static Lde/greenrobot/event/EventBus;->getDefault()Lde/greenrobot/event/EventBus;
+000026: move-result-object v4
+000028: new-instance v0, Lcom/vivo/pcsuite/entity/EventBean;
+00002c: const/4 v2, 5
+00002e: invoke-static v2, Ljava/lang/Integer;->valueOf(I)Ljava/lang/Integer;
+000034: move-result-object v2
+000036: const/4 v3, 2
+000038: invoke-direct v0, v3, v1, v2, Lcom/vivo/pcsuite/entity/EventBean;-><init>(I Ljava/lang/String; Ljava/lang/Object;)V
+00003e: invoke-virtual v4, v0, Lde/greenrobot/event/EventBus;->post(Ljava/lang/Object;)V
+000044: return-void 

@@ -1,0 +1,40 @@
+APK pcsuite/updateApk/connbase.apk
+DEX classes2.dex
+CLASS Lcom/vivo/pcsuite/pcconnect/i$b;
+SUPER Ljava/lang/Object;
+FIELDS
+a Lcom/vivo/pcsuite/pcconnect/i; = None
+
+METHOD <init>(Lcom/vivo/pcsuite/pcconnect/i;)V
+000000: iput-object v1, v0, Lcom/vivo/pcsuite/pcconnect/i$b;->a Lcom/vivo/pcsuite/pcconnect/i;
+000004: invoke-direct v0, Ljava/lang/Object;-><init>()V
+00000a: return-void 
+
+METHOD binderDied()V
+000000: iget-object v0, v3, Lcom/vivo/pcsuite/pcconnect/i$b;->a Lcom/vivo/pcsuite/pcconnect/i;
+000004: invoke-static v0, Lcom/vivo/pcsuite/pcconnect/i;->e(Lcom/vivo/pcsuite/pcconnect/i;)Lcom/vivo/pcsuite/pcconnect/d$c;
+00000a: move-result-object v0
+00000c: const/4 v1, 0
+00000e: if-eqz v0, +00bh
+000012: iget-object v0, v3, Lcom/vivo/pcsuite/pcconnect/i$b;->a Lcom/vivo/pcsuite/pcconnect/i;
+000016: invoke-static v0, Lcom/vivo/pcsuite/pcconnect/i;->e(Lcom/vivo/pcsuite/pcconnect/i;)Lcom/vivo/pcsuite/pcconnect/d$c;
+00001c: move-result-object v0
+00001e: invoke-interface v0, v1, Lcom/vivo/pcsuite/pcconnect/d$c;->a(Z)V
+000024: const-string v0, "pcsuite_PcOtherShare"
+000028: const-string v2, "pcconnect death and unLink"
+00002c: invoke-static v0, v2, Lc/c/c/z/a;->c(Ljava/lang/String; Ljava/lang/String;)V
+000032: iget-object v0, v3, Lcom/vivo/pcsuite/pcconnect/i$b;->a Lcom/vivo/pcsuite/pcconnect/i;
+000036: invoke-static v0, Lcom/vivo/pcsuite/pcconnect/i;->a(Lcom/vivo/pcsuite/pcconnect/i;)Lcom/vivo/pcsuite/pcconnect/IShareLinkManager;
+00003c: move-result-object v0
+00003e: if-eqz v0, +017h
+000042: iget-object v0, v3, Lcom/vivo/pcsuite/pcconnect/i$b;->a Lcom/vivo/pcsuite/pcconnect/i;
+000046: invoke-static v0, Lcom/vivo/pcsuite/pcconnect/i;->a(Lcom/vivo/pcsuite/pcconnect/i;)Lcom/vivo/pcsuite/pcconnect/IShareLinkManager;
+00004c: move-result-object v0
+00004e: invoke-interface v0, Landroid/os/IInterface;->asBinder()Landroid/os/IBinder;
+000054: move-result-object v0
+000056: if-eqz v0, +00bh
+00005a: iget-object v2, v3, Lcom/vivo/pcsuite/pcconnect/i$b;->a Lcom/vivo/pcsuite/pcconnect/i;
+00005e: invoke-static v2, Lcom/vivo/pcsuite/pcconnect/i;->c(Lcom/vivo/pcsuite/pcconnect/i;)Landroid/os/IBinder$DeathRecipient;
+000064: move-result-object v2
+000066: invoke-interface v0, v2, v1, Landroid/os/IBinder;->unlinkToDeath(Landroid/os/IBinder$DeathRecipient; I)Z
+00006c: return-void 

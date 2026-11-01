@@ -1,0 +1,150 @@
+APK pcsuite/updateApk/pcsuite.apk
+DEX classes2.dex
+CLASS Lcom/vivo/pcsuite/service/e;
+SUPER Ljava/lang/Object;
+FIELDS
+
+
+METHOD onCameraAuthStateChanged(I Ljava/lang/String;)V
+000000: sget v2, Lcom/vivo/pcsuite/service/PcSuiteObserver;->D I
+000004: const-string v2, "pcsuite_PcSuiteObserver"
+000008: const-string v0, "onCameraAuthStateChanged: "
+00000c: invoke-static v3, v0, v2, LV5/S;->j(I Ljava/lang/String; Ljava/lang/String;)V
+000012: const/16 v2, 11
+000016: const/4 v0, 2
+000018: const/4 v1, 0
+00001a: if-ne v3, v2, +016h
+00001e: new-instance v2, Lcom/vivo/pcsuite/common/gson/AuthorizationStatus;
+000022: invoke-direct v2, Lcom/vivo/pcsuite/common/gson/AuthorizationStatus;-><init>()V
+000028: const/16 v3, 31
+00002c: invoke-virtual v2, v3, Lcom/vivo/pcsuite/common/gson/AuthorizationStatus;->setAuth(I)V
+000032: invoke-virtual v2, v1, Lcom/vivo/pcsuite/common/gson/AuthorizationStatus;->setSource(I)V
+000038: invoke-virtual v2, v4, Lcom/vivo/pcsuite/common/gson/AuthorizationStatus;->setStart_from(Ljava/lang/String;)V
+00003e: invoke-static v2, v0, Lcom/vivo/pcsuite/permission/PermissionActivity;->n(Lcom/vivo/pcsuite/common/gson/AuthorizationStatus; I)V
+000044: return-void 
+000046: const/16 v2, 10
+00004a: if-eq v3, v2, +006h
+00004e: if-nez v3, +003h
+000052: goto +2h
+000054: return-void 
+000056: new-instance v2, Lcom/vivo/pcsuite/common/gson/AuthorizationStatus;
+00005a: invoke-direct v2, Lcom/vivo/pcsuite/common/gson/AuthorizationStatus;-><init>()V
+000060: const/4 v3, 1
+000062: invoke-virtual v2, v3, Lcom/vivo/pcsuite/common/gson/AuthorizationStatus;->setAuth(I)V
+000068: invoke-virtual v2, v1, Lcom/vivo/pcsuite/common/gson/AuthorizationStatus;->setSource(I)V
+00006e: invoke-virtual v2, v4, Lcom/vivo/pcsuite/common/gson/AuthorizationStatus;->setStart_from(Ljava/lang/String;)V
+000074: invoke-static v2, v0, Lcom/vivo/pcsuite/permission/PermissionActivity;->n(Lcom/vivo/pcsuite/common/gson/AuthorizationStatus; I)V
+00007a: return-void 
+
+METHOD onCameraConfigInitialized(Lcom/vivo/vcamera/service/CameraCapabilitySummary; Lcom/vivo/vcamera/service/CameraConfigSummary;)V
+000000: sget v2, Lcom/vivo/pcsuite/service/PcSuiteObserver;->D I
+000004: const-string v2, "pcsuite_PcSuiteObserver"
+000008: const-string v0, "onCameraConfigInitialized: "
+00000c: invoke-static v2, v0, Lcom/vivo/connect/logger/EasyLog;->i(Ljava/lang/String; Ljava/lang/String;)V
+000012: invoke-static Lr2/g;->f()Lr2/g;
+000018: move-result-object v2
+00001a: new-instance v0, Ljava/lang/StringBuilder;
+00001e: const-string v1, "PC_GET_CAMERA_CAPABILITY:"
+000022: invoke-direct v0, v1, Ljava/lang/StringBuilder;-><init>(Ljava/lang/String;)V
+000028: invoke-virtual v3, Ljava/lang/Object;->getClass()Ljava/lang/Class;
+00002e: invoke-static v3, Lcom/vivo/castsdk/source/utils/GsonUtils;->toJson(Ljava/lang/Object;)Ljava/lang/String;
+000034: move-result-object v3
+000036: invoke-virtual v0, v3, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+00003c: invoke-virtual v0, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
+000042: move-result-object v3
+000044: invoke-virtual v2, v3, Lr2/g;->i(Ljava/lang/String;)V
+00004a: invoke-static Lr2/g;->f()Lr2/g;
+000050: move-result-object v2
+000052: new-instance v3, Ljava/lang/StringBuilder;
+000056: const-string v0, "PC_GET_CAMERA_CONFIG:"
+00005a: invoke-direct v3, v0, Ljava/lang/StringBuilder;-><init>(Ljava/lang/String;)V
+000060: invoke-virtual v4, Ljava/lang/Object;->getClass()Ljava/lang/Class;
+000066: invoke-static v4, Lcom/vivo/castsdk/source/utils/GsonUtils;->toJson(Ljava/lang/Object;)Ljava/lang/String;
+00006c: move-result-object v4
+00006e: invoke-virtual v3, v4, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+000074: invoke-virtual v3, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
+00007a: move-result-object v3
+00007c: invoke-virtual v2, v3, Lr2/g;->i(Ljava/lang/String;)V
+000082: return-void 
+
+METHOD onCameraConfigUpdated(Lcom/vivo/vcamera/service/CameraConfigSummary;)V
+000000: invoke-static Lr2/g;->f()Lr2/g;
+000006: move-result-object v2
+000008: new-instance v0, Ljava/lang/StringBuilder;
+00000c: const-string v1, "PC_GET_CAMERA_CONFIG:"
+000010: invoke-direct v0, v1, Ljava/lang/StringBuilder;-><init>(Ljava/lang/String;)V
+000016: invoke-virtual v3, Ljava/lang/Object;->getClass()Ljava/lang/Class;
+00001c: invoke-static v3, Lcom/vivo/castsdk/source/utils/GsonUtils;->toJson(Ljava/lang/Object;)Ljava/lang/String;
+000022: move-result-object v3
+000024: invoke-virtual v0, v3, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+00002a: invoke-virtual v0, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
+000030: move-result-object v3
+000032: invoke-virtual v2, v3, Lr2/g;->i(Ljava/lang/String;)V
+000038: return-void 
+
+METHOD onCameraPageOpen()V
+000000: sget v3, Lcom/vivo/pcsuite/service/PcSuiteObserver;->D I
+000004: const-string v3, "pcsuite_PcSuiteObserver"
+000008: const-string v0, "onCameraPageOpen: "
+00000c: invoke-static v3, v0, Lcom/vivo/connect/logger/EasyLog;->i(Ljava/lang/String; Ljava/lang/String;)V
+000012: invoke-static Lr2/g;->f()Lr2/g;
+000018: move-result-object v3
+00001a: new-instance v0, Ljava/lang/StringBuilder;
+00001e: const-string v1, "PHONE_TO_PC_LIVE_PAGE_OPEN:{"state":1,"timestamp":"
+000022: invoke-direct v0, v1, Ljava/lang/StringBuilder;-><init>(Ljava/lang/String;)V
+000028: invoke-static Ljava/lang/System;->currentTimeMillis()J
+00002e: move-result-wide v1
+000030: invoke-virtual v0, v1, v2, Ljava/lang/StringBuilder;->append(J)Ljava/lang/StringBuilder;
+000036: const-string/jumbo v1, }
+00003c: invoke-virtual v0, v1, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+000042: invoke-virtual v0, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
+000048: move-result-object v0
+00004a: invoke-virtual v3, v0, Lr2/g;->i(Ljava/lang/String;)V
+000050: return-void 
+
+METHOD onCameraRunStateChanged(Lcom/vivo/vcamera/service/CameraRunState;)V
+000000: sget v2, Lcom/vivo/pcsuite/service/PcSuiteObserver;->D I
+000004: new-instance v2, Ljava/lang/StringBuilder;
+000008: const-string v0, "onCameraRunStateChanged: "
+00000c: invoke-direct v2, v0, Ljava/lang/StringBuilder;-><init>(Ljava/lang/String;)V
+000012: invoke-virtual v3, Lcom/vivo/vcamera/service/CameraRunState;->toString()Ljava/lang/String;
+000018: move-result-object v0
+00001a: invoke-virtual v2, v0, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+000020: invoke-virtual v2, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
+000026: move-result-object v2
+000028: const-string v0, "pcsuite_PcSuiteObserver"
+00002c: invoke-static v0, v2, Lcom/vivo/connect/logger/EasyLog;->i(Ljava/lang/String; Ljava/lang/String;)V
+000032: invoke-static Lr2/g;->f()Lr2/g;
+000038: move-result-object v2
+00003a: new-instance v0, Ljava/lang/StringBuilder;
+00003e: const-string v1, "PHONE_TO_PC_CAMERA_RUN_STATE:"
+000042: invoke-direct v0, v1, Ljava/lang/StringBuilder;-><init>(Ljava/lang/String;)V
+000048: invoke-static v3, Lcom/vivo/castsdk/source/utils/GsonUtils;->toJson(Ljava/lang/Object;)Ljava/lang/String;
+00004e: move-result-object v3
+000050: invoke-virtual v0, v3, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+000056: invoke-virtual v0, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
+00005c: move-result-object v3
+00005e: invoke-virtual v2, v3, Lr2/g;->i(Ljava/lang/String;)V
+000064: return-void 
+
+METHOD onGetLiveServiceConnectType()I
+000000: invoke-static Lcom/vivo/pcsuite/service/PcSuiteObserver;->q()I
+000006: move-result v2
+000008: const/4 v0, 1
+00000a: if-ne v2, v0, +016h
+00000e: invoke-static Lk2/g;->Q()Z
+000014: move-result v2
+000016: if-nez v2, +010h
+00001a: invoke-static Lcom/vivo/pcsuite/service/PcSuiteObserver;->t()Lcom/vivo/pcsuite/service/PcSuiteObserver;
+000020: move-result-object v2
+000022: if-eqz v2, +00bh
+000026: invoke-static Lcom/vivo/pcsuite/service/PcSuiteObserver;->r()I
+00002c: move-result v2
+00002e: if-nez v2, +005h
+000032: const/4 v0, 0
+000034: goto +2h
+000036: const/4 v0, -1
+000038: const-string v2, "pcsuite_PcSuiteObserver"
+00003c: const-string v1, "onGetLiveServiceConnectType: "
+000040: invoke-static v0, v1, v2, LV5/S;->j(I Ljava/lang/String; Ljava/lang/String;)V
+000046: return v0

@@ -1,0 +1,40 @@
+APK pcsuite/updateApk/connbase.apk
+DEX classes2.dex
+CLASS Lcom/vivo/pcsuite/pcconnect/wifip2p/WifiP2pService$p;
+SUPER Ljava/lang/Object;
+FIELDS
+a Lcom/vivo/pcsuite/pcconnect/wifip2p/WifiP2pService; = None
+
+METHOD <init>(Lcom/vivo/pcsuite/pcconnect/wifip2p/WifiP2pService;)V
+000000: iput-object v1, v0, Lcom/vivo/pcsuite/pcconnect/wifip2p/WifiP2pService$p;->a Lcom/vivo/pcsuite/pcconnect/wifip2p/WifiP2pService;
+000004: invoke-direct v0, Ljava/lang/Object;-><init>()V
+00000a: return-void 
+
+METHOD run()V
+000000: sget-boolean v0, Lcom/vivo/pcsuite/pcconnect/j;->b Z
+000004: const/4 v1, 1
+000006: if-eqz v0, +02ah
+00000a: sget v0, Landroid/os/Build$VERSION;->SDK_INT I
+00000e: const/16 v2, 29
+000012: if-lt v0, v2, +024h
+000016: iget-object v0, v3, Lcom/vivo/pcsuite/pcconnect/wifip2p/WifiP2pService$p;->a Lcom/vivo/pcsuite/pcconnect/wifip2p/WifiP2pService;
+00001a: invoke-static v0, Lcom/vivo/pcsuite/pcconnect/wifip2p/WifiP2pService;->q(Lcom/vivo/pcsuite/pcconnect/wifip2p/WifiP2pService;)Landroid/net/wifi/WifiManager;
+000020: move-result-object v0
+000022: invoke-virtual v0, v1, Landroid/net/wifi/WifiManager;->setWifiEnabled(Z)Z
+000028: move-result v0
+00002a: if-nez v0, +022h
+00002e: sget-boolean v0, Lcom/vivo/pcsuite/pcconnect/wifip2p/WifiP2pService;->x Z
+000032: if-nez v0, +01eh
+000036: const-string v0, "pcsuite_WifiP2pService"
+00003a: const-string v1, "setWifiEnabled(true) failed, were hotspot or airplane mode activated?"
+00003e: invoke-static v0, v1, Lc/c/f/a/b;->g(Ljava/lang/String; Ljava/lang/String;)V
+000044: iget-object v0, v3, Lcom/vivo/pcsuite/pcconnect/wifip2p/WifiP2pService$p;->a Lcom/vivo/pcsuite/pcconnect/wifip2p/WifiP2pService;
+000048: invoke-static v0, Lcom/vivo/pcsuite/pcconnect/wifip2p/WifiP2pService;->o(Lcom/vivo/pcsuite/pcconnect/wifip2p/WifiP2pService;)V
+00004e: iget-object v0, v3, Lcom/vivo/pcsuite/pcconnect/wifip2p/WifiP2pService$p;->a Lcom/vivo/pcsuite/pcconnect/wifip2p/WifiP2pService;
+000052: invoke-virtual v0, Lcom/vivo/pcsuite/pcconnect/wifip2p/WifiP2pService;->a()V
+000058: goto +bh
+00005a: iget-object v0, v3, Lcom/vivo/pcsuite/pcconnect/wifip2p/WifiP2pService$p;->a Lcom/vivo/pcsuite/pcconnect/wifip2p/WifiP2pService;
+00005e: invoke-static v0, Lcom/vivo/pcsuite/pcconnect/wifip2p/WifiP2pService;->r(Lcom/vivo/pcsuite/pcconnect/wifip2p/WifiP2pService;)V
+000064: iget-object v0, v3, Lcom/vivo/pcsuite/pcconnect/wifip2p/WifiP2pService$p;->a Lcom/vivo/pcsuite/pcconnect/wifip2p/WifiP2pService;
+000068: invoke-static v0, v1, Lcom/vivo/pcsuite/pcconnect/wifip2p/WifiP2pService;->e(Lcom/vivo/pcsuite/pcconnect/wifip2p/WifiP2pService; Z)V
+00006e: return-void 

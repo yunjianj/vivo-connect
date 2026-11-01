@@ -1,0 +1,34 @@
+APK pcsuite/updateApk/pcsuite.apk
+DEX classes2.dex
+CLASS Lcom/vivo/connbase/connectcenter/ConnectCenterImpl$18;
+SUPER Lcom/vivo/connbase/connectcenter/ConnectCenterTask;
+FIELDS
+this$0 Lcom/vivo/connbase/connectcenter/ConnectCenterImpl; = None
+val$deviceId Ljava/lang/String; = None
+val$extMap Ljava/util/Map; = None
+
+METHOD <init>(Lcom/vivo/connbase/connectcenter/ConnectCenterImpl; Landroid/content/Context; Lcom/vivo/connbase/connectcenter/ICallbackResult; Ljava/lang/String; Ljava/util/Map;)V
+000000: iput-object v1, v0, Lcom/vivo/connbase/connectcenter/ConnectCenterImpl$18;->this$0 Lcom/vivo/connbase/connectcenter/ConnectCenterImpl;
+000004: iput-object v4, v0, Lcom/vivo/connbase/connectcenter/ConnectCenterImpl$18;->val$deviceId Ljava/lang/String;
+000008: iput-object v5, v0, Lcom/vivo/connbase/connectcenter/ConnectCenterImpl$18;->val$extMap Ljava/util/Map;
+00000c: invoke-direct v0, v2, v3, Lcom/vivo/connbase/connectcenter/ConnectCenterTask;-><init>(Landroid/content/Context; Ljava/lang/Object;)V
+000012: return-void 
+
+METHOD callConnectCenterMethod(Lcom/vivo/connbase/IClient; Lcom/vivo/connbase/connectcenter/ICallbackResult;)V
+000000: invoke-interface v2, Lcom/vivo/connbase/IClient;->getConnectCenterService()Lcom/vivo/connbase/connectcenter/IConnectCenterService;
+000006: move-result-object v2
+000008: iget-object v0, v1, Lcom/vivo/connbase/connectcenter/ConnectCenterImpl$18;->val$deviceId Ljava/lang/String;
+00000c: iget-object v1, v1, Lcom/vivo/connbase/connectcenter/ConnectCenterImpl$18;->val$extMap Ljava/util/Map;
+000010: invoke-interface v2, v0, v1, v3, Lcom/vivo/connbase/connectcenter/IConnectCenterService;->updateDeviceExt(Ljava/lang/String; Ljava/util/Map; Lcom/vivo/connbase/connectcenter/ICallbackResult;)V
+000016: return-void 
+
+METHOD callConnectCenterMethod(Lcom/vivo/connbase/IClient; Ljava/lang/Object;)V
+000000: check-cast v2, Lcom/vivo/connbase/connectcenter/ICallbackResult;
+000004: invoke-virtual v0, v1, v2, Lcom/vivo/connbase/connectcenter/ConnectCenterImpl$18;->callConnectCenterMethod(Lcom/vivo/connbase/IClient; Lcom/vivo/connbase/connectcenter/ICallbackResult;)V
+00000a: return-void 
+
+METHOD callError()V
+000000: const-string v1, "ConnectCenterImpl"
+000004: const-string v0, "callError: notifyDeviceEvent"
+000008: invoke-static v1, v0, Lcom/vivo/aiengine/find/device/sdk/impl/util/LogUtil;->e(Ljava/lang/String; Ljava/lang/String;)V
+00000e: return-void 

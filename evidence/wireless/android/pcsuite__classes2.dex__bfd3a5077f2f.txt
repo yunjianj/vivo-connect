@@ -1,0 +1,50 @@
+APK pcsuite/updateApk/pcsuite.apk
+DEX classes2.dex
+CLASS Lcom/vivo/connect/sdk/f/c$w0;
+SUPER Ljava/lang/Object;
+FIELDS
+d Ljava/lang/String; = ':notifyUseBleConnect'
+a Landroid/os/Messenger; = None
+b Z = None
+c Lcom/vivo/connect/sdk/f/c; = None
+
+METHOD <init>(Lcom/vivo/connect/sdk/f/c; Landroid/os/Messenger; Z)V
+000000: iput-object v1, v0, Lcom/vivo/connect/sdk/f/c$w0;->c Lcom/vivo/connect/sdk/f/c;
+000004: iput-object v2, v0, Lcom/vivo/connect/sdk/f/c$w0;->a Landroid/os/Messenger;
+000008: iput-boolean v3, v0, Lcom/vivo/connect/sdk/f/c$w0;->b Z
+00000c: invoke-direct v0, Ljava/lang/Object;-><init>()V
+000012: return-void 
+
+METHOD run()V
+000000: const-string v0, "ConnectClientImpl"
+000004: const-string v1, "run notifyUseBleConnect "
+000008: invoke-static v0, v1, Lcom/vivo/connect/logger/EasyLog;->i(Ljava/lang/String; Ljava/lang/String;)V
+00000e: iget-object v1, v3, Lcom/vivo/connect/sdk/f/c$w0;->c Lcom/vivo/connect/sdk/f/c;
+000012: invoke-static v1, Lcom/vivo/connect/sdk/f/c;->a(Lcom/vivo/connect/sdk/f/c;)Lcom/vivo/connbase/IClient;
+000018: move-result-object v1
+00001a: if-eqz v1, +00fh
+00001e: iget-object v1, v3, Lcom/vivo/connect/sdk/f/c$w0;->c Lcom/vivo/connect/sdk/f/c;
+000022: invoke-static v1, Lcom/vivo/connect/sdk/f/c;->a(Lcom/vivo/connect/sdk/f/c;)Lcom/vivo/connbase/IClient;
+000028: move-result-object v1
+00002a: iget-object v2, v3, Lcom/vivo/connect/sdk/f/c$w0;->a Landroid/os/Messenger;
+00002e: iget-boolean v3, v3, Lcom/vivo/connect/sdk/f/c$w0;->b Z
+000032: goto +1ah
+000034: move-exception v3
+000036: goto +1ch
+000038: const-string v1, "run else notifyUseBleConnect"
+00003c: invoke-static v0, v1, Lcom/vivo/connect/logger/EasyLog;->i(Ljava/lang/String; Ljava/lang/String;)V
+000042: iget-object v1, v3, Lcom/vivo/connect/sdk/f/c$w0;->c Lcom/vivo/connect/sdk/f/c;
+000046: const-string v2, ":notifyUseBleConnect"
+00004a: invoke-static v1, v2, Lcom/vivo/connect/sdk/f/c;->a(Lcom/vivo/connect/sdk/f/c; Ljava/lang/String;)Z
+000050: move-result v1
+000052: if-nez v1, +003h
+000056: return-void 
+000058: iget-object v1, v3, Lcom/vivo/connect/sdk/f/c$w0;->c Lcom/vivo/connect/sdk/f/c;
+00005c: invoke-static v1, Lcom/vivo/connect/sdk/f/c;->a(Lcom/vivo/connect/sdk/f/c;)Lcom/vivo/connbase/IClient;
+000062: move-result-object v1
+000064: goto -1dh
+000066: invoke-interface v1, v2, v3, Lcom/vivo/connbase/IClient;->notifyUseBleConnect(Landroid/os/Messenger; Z)V
+00006c: return-void 
+00006e: const-string v1, "notifyUseBleConnect  error:"
+000072: invoke-static v3, v1, v0, LV5/S;->h(Ljava/lang/Exception; Ljava/lang/String; Ljava/lang/String;)V
+000078: return-void 

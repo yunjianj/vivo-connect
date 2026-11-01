@@ -1,0 +1,84 @@
+APK pcsuite/updateApk/connbase.apk
+DEX classes.dex
+CLASS Lcom/vivo/handoff/service/ScreenOnOffListenerReceiver$1;
+SUPER Ljava/lang/Object;
+FIELDS
+
+
+METHOD onAlarm()V
+000000: invoke-static Ljava/lang/System;->currentTimeMillis()J
+000006: move-result-wide v0
+000008: new-instance v2, Ljava/lang/StringBuilder;
+00000c: invoke-direct v2, Ljava/lang/StringBuilder;-><init>()V
+000012: const-string v3, "AlarmManager start: currentTime:"
+000016: invoke-virtual v2, v3, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+00001c: invoke-virtual v2, v0, v1, Ljava/lang/StringBuilder;->append(J)Ljava/lang/StringBuilder;
+000022: const-string v3, "  lastUpdateTime:"
+000026: invoke-virtual v2, v3, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+00002c: sget-wide v3, Lcom/vivo/handoff/service/ScreenOnOffListenerReceiver;->lastUpdateMill J
+000030: invoke-virtual v2, v3, v4, Ljava/lang/StringBuilder;->append(J)Ljava/lang/StringBuilder;
+000036: const-string v3, " isScreenOn:"
+00003a: invoke-virtual v2, v3, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+000040: sget-boolean v3, Lcom/vivo/handoff/service/ScreenOnOffListenerReceiver;->isScreenOn Z
+000044: invoke-virtual v2, v3, Ljava/lang/StringBuilder;->append(Z)Ljava/lang/StringBuilder;
+00004a: const-string v3, " isWifiP2POn:"
+00004e: invoke-virtual v2, v3, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+000054: sget-boolean v3, Lcom/vivo/handoff/service/ScreenOnOffListenerReceiver;->isWifiP2POn Z
+000058: invoke-virtual v2, v3, Ljava/lang/StringBuilder;->append(Z)Ljava/lang/StringBuilder;
+00005e: invoke-virtual v2, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
+000064: move-result-object v2
+000066: const-string v3, "ScreenOnOffListenerReceiver"
+00006a: invoke-static v3, v2, Lc/c/d/f/a;->a(Ljava/lang/String; Ljava/lang/String;)V
+000070: sget-wide v4, Lcom/vivo/handoff/service/ScreenOnOffListenerReceiver;->lastUpdateMill J
+000074: cmp-long v2, v4, v0
+000078: if-lez v2, +008h
+00007c: sput-wide v0, Lcom/vivo/handoff/service/ScreenOnOffListenerReceiver;->lastUpdateMill J
+000080: invoke-static Lcom/vivo/handoff/service/ScreenOnOffListenerReceiver;->checkTimeout3min()V
+000086: goto +5bh
+000088: sget-wide v4, Lcom/vivo/handoff/service/ScreenOnOffListenerReceiver;->lastUpdateMill J
+00008c: sub-long/2addr v0, v4
+00008e: const-wide/32 v4, 220000
+000094: cmp-long v0, v0, v4
+000098: if-ltz v0, +04ch
+00009c: sget-boolean v0, Lcom/vivo/handoff/service/ScreenOnOffListenerReceiver;->isScreenOn Z
+0000a0: if-nez v0, +04eh
+0000a4: invoke-static Lcom/vivo/handoff/service/agreement/HandOffAgreementAdapterManager;->getInstance()Lcom/vivo/handoff/service/agreement/IHandOffAgreementManager;
+0000aa: move-result-object v0
+0000ac: const/4 v1, 1
+0000ae: invoke-interface v0, v1, Lcom/vivo/handoff/service/agreement/IHandOffAgreementManager;->getAgreementAdapter(I)Lcom/vivo/handoff/service/agreement/AbsHandOffAgreementAdapter;
+0000b4: move-result-object v0
+0000b6: check-cast v0, Lcom/vivo/handoff/service/agreement/ble/BleHandOffAgreementAdapter;
+0000ba: if-eqz v0, +035h
+0000be: invoke-virtual v0, Lcom/vivo/handoff/service/agreement/ble/BleHandOffAgreementAdapter;->isHandoffing()Z
+0000c4: move-result v2
+0000c6: if-eqz v2, +03bh
+0000ca: sget-boolean v2, Lcom/vivo/handoff/service/ScreenOnOffListenerReceiver;->isWifiP2POn Z
+0000ce: const/4 v4, 0
+0000d0: if-nez v2, +019h
+0000d4: new-array v1, v1, [Ljava/lang/Object;
+0000d8: sget-boolean v2, Lcom/vivo/handoff/service/ScreenOnOffListenerReceiver;->isWifiP2POn Z
+0000dc: invoke-static v2, Ljava/lang/Boolean;->valueOf(Z)Ljava/lang/Boolean;
+0000e2: move-result-object v2
+0000e4: aput-object v2, v1, v4
+0000e8: const-string v2, "AlarmManager isWifiP2POn:%s adapter.disconnectAllConnection"
+0000ec: invoke-static v2, v1, Ljava/lang/String;->format(Ljava/lang/String; [Ljava/lang/Object;)Ljava/lang/String;
+0000f2: move-result-object v1
+0000f4: invoke-static v3, v1, Lc/c/d/f/a;->a(Ljava/lang/String; Ljava/lang/String;)V
+0000fa: invoke-virtual v0, Lcom/vivo/handoff/service/agreement/ble/BleHandOffAgreementAdapter;->disconnectAllConnection()V
+000100: goto +1eh
+000102: new-array v0, v1, [Ljava/lang/Object;
+000106: sget-boolean v1, Lcom/vivo/handoff/service/ScreenOnOffListenerReceiver;->isWifiP2POn Z
+00010a: invoke-static v1, Ljava/lang/Boolean;->valueOf(Z)Ljava/lang/Boolean;
+000110: move-result-object v1
+000112: aput-object v1, v0, v4
+000116: const-string v1, "AlarmManager isWifiP2POn:%s checkTimeout3min"
+00011a: invoke-static v1, v0, Ljava/lang/String;->format(Ljava/lang/String; [Ljava/lang/Object;)Ljava/lang/String;
+000120: move-result-object v0
+000122: goto +9h
+000124: const-string v0, "AlarmManager BleHandOffAgreementAdapter is null"
+000128: invoke-static v3, v0, Lc/c/d/f/a;->a(Ljava/lang/String; Ljava/lang/String;)V
+00012e: goto +7h
+000130: const-string v0, "AlarmManager checkTimeout3min"
+000134: invoke-static v3, v0, Lc/c/d/f/a;->a(Ljava/lang/String; Ljava/lang/String;)V
+00013a: goto -5dh
+00013c: return-void 

@@ -1,0 +1,29 @@
+APK pcsuite/updateApk/pcsuite.apk
+DEX classes2.dex
+CLASS Lcom/vivo/pcsuite/connect/ConnectControlModel$10$2;
+SUPER Ljava/lang/Object;
+FIELDS
+a Lcom/vivo/pcsuite/connect/ConnectControlModel$10; = None
+
+METHOD <init>(Lcom/vivo/pcsuite/connect/ConnectControlModel$10;)V
+000000: invoke-direct v0, Ljava/lang/Object;-><init>()V
+000006: iput-object v1, v0, Lcom/vivo/pcsuite/connect/ConnectControlModel$10$2;->a Lcom/vivo/pcsuite/connect/ConnectControlModel$10;
+00000a: return-void 
+
+METHOD onStatus(Z Z)V
+000000: const-string v3, "pcsuite_ConnectControlModel"
+000004: const-string/jumbo v0, wlan connect click accept button
+00000a: invoke-static v3, v0, Lcom/vivo/connect/logger/EasyLog;->i(Ljava/lang/String; Ljava/lang/String;)V
+000010: iget-object v2, v2, Lcom/vivo/pcsuite/connect/ConnectControlModel$10$2;->a Lcom/vivo/pcsuite/connect/ConnectControlModel$10;
+000014: iget-object v3, v2, Lcom/vivo/pcsuite/connect/ConnectControlModel$10;->c Lcom/vivo/pcsuite/connect/ConnectControlModel;
+000018: invoke-virtual v3, Lcom/vivo/pcsuite/connect/ConnectControlModel;->removeDialogRunnable()V
+00001e: const-string v0, "1"
+000022: if-eqz v4, +004h
+000026: move-object v1, v0
+000028: goto +3h
+00002a: const-string v1, "0"
+00002e: invoke-static v0, v1, Lcom/vivo/pcsuite/util/o0;->U(Ljava/lang/String; Ljava/lang/String;)V
+000034: iget-object v0, v2, Lcom/vivo/pcsuite/connect/ConnectControlModel$10;->a Lcom/vivo/connect/discovery/ScanInfo;
+000038: iget-object v2, v2, Lcom/vivo/pcsuite/connect/ConnectControlModel$10;->b Ljava/lang/String;
+00003c: invoke-static v3, v0, v4, v2, Lcom/vivo/pcsuite/connect/ConnectControlModel;->h(Lcom/vivo/pcsuite/connect/ConnectControlModel; Lcom/vivo/connect/discovery/ScanInfo; Z Ljava/lang/String;)V
+000042: return-void 

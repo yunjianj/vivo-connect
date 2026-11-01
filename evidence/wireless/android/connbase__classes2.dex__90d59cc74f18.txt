@@ -1,0 +1,188 @@
+APK pcsuite/updateApk/connbase.apk
+DEX classes2.dex
+CLASS Lcom/vivo/upgradelibrary/normal/d/a;
+SUPER Ljava/lang/Object;
+FIELDS
+a Ljava/lang/String; = None
+b Ljava/lang/String; = 'ro.vivo.product.solution'
+c Ljava/lang/String; = 'QCOM'
+d Ljava/lang/String; = 'MTK'
+e Z = False
+f Z = False
+g Z = False
+h Ljava/lang/String; = ''
+i Z = None
+j Ljava/lang/String; = None
+
+METHOD a(Landroid/content/Context;)Ljava/lang/String;
+000000: const-string v0, "Exception:"
+000004: const-string v1, "phone"
+000008: invoke-virtual v9, v1, Landroid/content/Context;->getSystemService(Ljava/lang/String;)Ljava/lang/Object;
+00000e: move-result-object v1
+000010: check-cast v1, Landroid/telephony/TelephonyManager;
+000014: sget-object v2, Lcom/vivo/upgradelibrary/normal/d/a;->h Ljava/lang/String;
+000018: invoke-static v2, Landroid/text/TextUtils;->isEmpty(Ljava/lang/CharSequence;)Z
+00001e: move-result v2
+000020: if-nez v2, +00ch
+000024: sget-object v2, Lcom/vivo/upgradelibrary/normal/d/a;->j Ljava/lang/String;
+000028: sget-object v3, Lcom/vivo/upgradelibrary/normal/d/a;->h Ljava/lang/String;
+00002c: invoke-virtual v2, v3, Ljava/lang/String;->equals(Ljava/lang/Object;)Z
+000032: move-result v2
+000034: if-eqz v2, +126h
+000038: sget v2, Landroid/os/Build$VERSION;->SDK_INT I
+00003c: const/16 v3, 22
+000040: if-lt v2, v3, +008h
+000044: invoke-static v9, Lcom/vivo/upgradelibrary/normal/d/a;->b(Landroid/content/Context;)Ljava/lang/String;
+00004a: move-result-object v9
+00004c: sput-object v9, Lcom/vivo/upgradelibrary/normal/d/a;->h Ljava/lang/String;
+000050: sget-object v9, Lcom/vivo/upgradelibrary/normal/d/a;->h Ljava/lang/String;
+000054: invoke-static v9, Landroid/text/TextUtils;->isEmpty(Ljava/lang/CharSequence;)Z
+00005a: move-result v9
+00005c: if-eqz v9, +01fh
+000060: sget-boolean v9, Lcom/vivo/upgradelibrary/normal/d/a;->i Z
+000064: if-eqz v9, +009h
+000068: invoke-static Lcom/vivo/upgradelibrary/normal/d/a;->a()Ljava/lang/String;
+00006e: move-result-object v9
+000070: sput-object v9, Lcom/vivo/upgradelibrary/normal/d/a;->h Ljava/lang/String;
+000074: goto +13h
+000076: sget-boolean v9, Lcom/vivo/upgradelibrary/normal/d/a;->g Z
+00007a: if-eqz v9, +010h
+00007e: sget-boolean v9, Lcom/vivo/upgradelibrary/normal/d/a;->e Z
+000082: if-eqz v9, +007h
+000086: invoke-static Lcom/vivo/upgradelibrary/normal/d/a;->b()Ljava/lang/String;
+00008c: move-result-object v9
+00008e: goto -fh
+000090: invoke-static Lcom/vivo/upgradelibrary/normal/d/a;->c()Ljava/lang/String;
+000096: move-result-object v9
+000098: goto -14h
+00009a: sget-object v9, Lcom/vivo/upgradelibrary/normal/d/a;->h Ljava/lang/String;
+00009e: invoke-static v9, Landroid/text/TextUtils;->isEmpty(Ljava/lang/CharSequence;)Z
+0000a4: move-result v9
+0000a6: const-string v2, "ImeiUtils"
+0000aa: if-eqz v9, +0a1h
+0000ae: const/4 v9, -1
+0000b0: const/4 v3, 1
+0000b2: const/4 v4, 0
+0000b4: invoke-virtual v1, Ljava/lang/Object;->getClass()Ljava/lang/Class;
+0000ba: move-result-object v5
+0000bc: const-string v6, "getPhoneCount"
+0000c0: new-array v7, v4, [Ljava/lang/Class;
+0000c4: invoke-virtual v5, v6, v7, Ljava/lang/Class;->getMethod(Ljava/lang/String; [Ljava/lang/Class;)Ljava/lang/reflect/Method;
+0000ca: move-result-object v5
+0000cc: invoke-virtual v5, Ljava/lang/reflect/Method;->isAccessible()Z
+0000d2: move-result v6
+0000d4: invoke-virtual v5, v3, Ljava/lang/reflect/Method;->setAccessible(Z)V
+0000da: new-instance v7, Ljava/lang/StringBuilder;
+0000de: invoke-direct v7, Ljava/lang/StringBuilder;-><init>()V
+0000e4: new-array v8, v4, [Ljava/lang/Object;
+0000e8: invoke-virtual v5, v1, v8, Ljava/lang/reflect/Method;->invoke(Ljava/lang/Object; [Ljava/lang/Object;)Ljava/lang/Object;
+0000ee: move-result-object v8
+0000f0: invoke-virtual v7, v8, Ljava/lang/StringBuilder;->append(Ljava/lang/Object;)Ljava/lang/StringBuilder;
+0000f6: invoke-virtual v7, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
+0000fc: move-result-object v7
+0000fe: invoke-static v7, Ljava/lang/Integer;->parseInt(Ljava/lang/String;)I
+000104: move-result v9
+000106: invoke-virtual v5, v6, Ljava/lang/reflect/Method;->setAccessible(Z)V
+00010c: goto +15h
+00010e: move-exception v5
+000110: goto +8h
+000112: move-exception v5
+000114: goto +6h
+000116: move-exception v5
+000118: goto +4h
+00011a: move-exception v5
+00011c: goto +2h
+00011e: move-exception v5
+000120: invoke-static v5, Ljava/lang/String;->valueOf(Ljava/lang/Object;)Ljava/lang/String;
+000126: move-result-object v6
+000128: invoke-virtual v0, v6, Ljava/lang/String;->concat(Ljava/lang/String;)Ljava/lang/String;
+00012e: move-result-object v6
+000130: invoke-static v2, v6, v5, Lcom/vivo/upgradelibrary/common/b/a;->b(Ljava/lang/String; Ljava/lang/String; Ljava/lang/Throwable;)V
+000136: const-string v5, "getImei"
+00013a: if-gt v9, v3, +021h
+00013e: invoke-virtual v1, Ljava/lang/Object;->getClass()Ljava/lang/Class;
+000144: move-result-object v9
+000146: new-array v6, v4, [Ljava/lang/Class;
+00014a: invoke-virtual v9, v5, v6, Ljava/lang/Class;->getMethod(Ljava/lang/String; [Ljava/lang/Class;)Ljava/lang/reflect/Method;
+000150: move-result-object v9
+000152: invoke-virtual v9, Ljava/lang/reflect/Method;->isAccessible()Z
+000158: move-result v5
+00015a: invoke-virtual v9, v3, Ljava/lang/reflect/Method;->setAccessible(Z)V
+000160: new-array v3, v4, [Ljava/lang/Object;
+000164: invoke-virtual v9, v1, v3, Ljava/lang/reflect/Method;->invoke(Ljava/lang/Object; [Ljava/lang/Object;)Ljava/lang/Object;
+00016a: move-result-object v3
+00016c: check-cast v3, Ljava/lang/String;
+000170: sput-object v3, Lcom/vivo/upgradelibrary/normal/d/a;->h Ljava/lang/String;
+000174: invoke-virtual v9, v5, Ljava/lang/reflect/Method;->setAccessible(Z)V
+00017a: goto +39h
+00017c: invoke-virtual v1, Ljava/lang/Object;->getClass()Ljava/lang/Class;
+000182: move-result-object v9
+000184: new-array v6, v3, [Ljava/lang/Class;
+000188: sget-object v7, Ljava/lang/Integer;->TYPE Ljava/lang/Class;
+00018c: aput-object v7, v6, v4
+000190: invoke-virtual v9, v5, v6, Ljava/lang/Class;->getMethod(Ljava/lang/String; [Ljava/lang/Class;)Ljava/lang/reflect/Method;
+000196: move-result-object v9
+000198: invoke-virtual v9, Ljava/lang/reflect/Method;->isAccessible()Z
+00019e: move-result v5
+0001a0: invoke-virtual v9, v3, Ljava/lang/reflect/Method;->setAccessible(Z)V
+0001a6: new-array v3, v3, [Ljava/lang/Object;
+0001aa: invoke-static v4, Ljava/lang/Integer;->valueOf(I)Ljava/lang/Integer;
+0001b0: move-result-object v6
+0001b2: aput-object v6, v3, v4
+0001b6: invoke-virtual v9, v1, v3, Ljava/lang/reflect/Method;->invoke(Ljava/lang/Object; [Ljava/lang/Object;)Ljava/lang/Object;
+0001bc: move-result-object v3
+0001be: check-cast v3, Ljava/lang/String;
+0001c2: sput-object v3, Lcom/vivo/upgradelibrary/normal/d/a;->h Ljava/lang/String;
+0001c6: goto -29h
+0001c8: move-exception v9
+0001ca: goto +6h
+0001cc: move-exception v9
+0001ce: goto +4h
+0001d0: move-exception v9
+0001d2: goto +2h
+0001d4: move-exception v9
+0001d6: invoke-static v9, Ljava/lang/String;->valueOf(Ljava/lang/Object;)Ljava/lang/String;
+0001dc: move-result-object v3
+0001de: invoke-virtual v0, v3, Ljava/lang/String;->concat(Ljava/lang/String;)Ljava/lang/String;
+0001e4: move-result-object v0
+0001e6: invoke-static v2, v0, v9, Lcom/vivo/upgradelibrary/common/b/a;->b(Ljava/lang/String; Ljava/lang/String; Ljava/lang/Throwable;)V
+0001ec: sget-object v9, Lcom/vivo/upgradelibrary/normal/d/a;->h Ljava/lang/String;
+0001f0: invoke-static v9, Landroid/text/TextUtils;->isEmpty(Ljava/lang/CharSequence;)Z
+0001f6: move-result v9
+0001f8: if-eqz v9, +017h
+0001fc: invoke-virtual v1, Landroid/telephony/TelephonyManager;->getDeviceId()Ljava/lang/String;
+000202: move-result-object v9
+000204: sput-object v9, Lcom/vivo/upgradelibrary/normal/d/a;->h Ljava/lang/String;
+000208: goto +fh
+00020a: move-exception v9
+00020c: invoke-static v9, Ljava/lang/String;->valueOf(Ljava/lang/Object;)Ljava/lang/String;
+000212: move-result-object v9
+000214: const-string v0, "getDeviceId SecurityException "
+000218: invoke-virtual v0, v9, Ljava/lang/String;->concat(Ljava/lang/String;)Ljava/lang/String;
+00021e: move-result-object v9
+000220: invoke-static v2, v9, Lcom/vivo/upgradelibrary/common/b/a;->d(Ljava/lang/String; Ljava/lang/String;)V
+000226: sget-object v9, Lcom/vivo/upgradelibrary/normal/d/a;->h Ljava/lang/String;
+00022a: invoke-static v9, Landroid/text/TextUtils;->isEmpty(Ljava/lang/CharSequence;)Z
+000230: move-result v9
+000232: if-eqz v9, +00bh
+000236: const/4 v9, 0
+000238: const-string v0, "persist.sys.updater.imei"
+00023c: invoke-static v0, v9, Lcom/vivo/upgradelibrary/common/utils/n;->a(Ljava/lang/String; Ljava/lang/String;)Ljava/lang/String;
+000242: move-result-object v9
+000244: sput-object v9, Lcom/vivo/upgradelibrary/normal/d/a;->h Ljava/lang/String;
+000248: sget-object v9, Lcom/vivo/upgradelibrary/normal/d/a;->h Ljava/lang/String;
+00024c: invoke-static v9, Landroid/text/TextUtils;->isEmpty(Ljava/lang/CharSequence;)Z
+000252: move-result v9
+000254: if-eqz v9, +006h
+000258: sget-object v9, Lcom/vivo/upgradelibrary/normal/d/a;->j Ljava/lang/String;
+00025c: sput-object v9, Lcom/vivo/upgradelibrary/normal/d/a;->h Ljava/lang/String;
+000260: invoke-static Lcom/vivo/upgradelibrary/common/modulebridge/b;->b()Lcom/vivo/upgradelibrary/common/modulebridge/b;
+000266: move-result-object v9
+000268: invoke-virtual v9, Lcom/vivo/upgradelibrary/common/modulebridge/b;->n()Lcom/vivo/upgradelibrary/common/modulebridge/bridge/d;
+00026e: move-result-object v9
+000270: sget-object v0, Lcom/vivo/upgradelibrary/normal/d/a;->h Ljava/lang/String;
+000274: invoke-interface v9, v0, Lcom/vivo/upgradelibrary/common/modulebridge/bridge/d;->c(Ljava/lang/String;)Ljava/lang/String;
+00027a: move-result-object v9
+00027c: sput-object v9, Lcom/vivo/upgradelibrary/normal/d/a;->h Ljava/lang/String;
+000280: sget-object v9, Lcom/vivo/upgradelibrary/normal/d/a;->h Ljava/lang/String;
+000284: return-object v9

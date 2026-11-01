@@ -1,0 +1,80 @@
+APK pcsuite/updateApk/connbase.apk
+DEX classes2.dex
+CLASS Lcom/vivo/pcsuite/pcconnect/wifip2p/deputy/c;
+SUPER Landroid/content/BroadcastReceiver;
+FIELDS
+c Ljava/lang/String; = 'DeputyWifiStateReceiver'
+d Ljava/lang/String; = 'android.net.extwifi.STATE_CHANGE'
+a Z = None
+b Lcom/vivo/pcsuite/pcconnect/wifip2p/deputy/c$a; = None
+
+METHOD <init>()V
+000000: invoke-direct v1, Landroid/content/BroadcastReceiver;-><init>()V
+000006: const/4 v0, 0
+000008: iput-boolean v0, v1, Lcom/vivo/pcsuite/pcconnect/wifip2p/deputy/c;->a Z
+00000c: return-void 
+
+METHOD a()Landroid/content/IntentFilter;
+000000: new-instance v0, Landroid/content/IntentFilter;
+000004: const-string v1, "android.net.extwifi.STATE_CHANGE"
+000008: invoke-direct v0, v1, Landroid/content/IntentFilter;-><init>(Ljava/lang/String;)V
+00000e: return-object v0
+
+METHOD a(Landroid/content/Context; Z)V
+000000: iget-boolean v0, v1, Lcom/vivo/pcsuite/pcconnect/wifip2p/deputy/c;->a Z
+000004: if-eq v3, v0, +01ah
+000008: if-eqz v3, +00eh
+00000c: invoke-virtual v2, Landroid/content/Context;->getApplicationContext()Landroid/content/Context;
+000012: move-result-object v2
+000014: invoke-direct v1, Lcom/vivo/pcsuite/pcconnect/wifip2p/deputy/c;->a()Landroid/content/IntentFilter;
+00001a: move-result-object v0
+00001c: invoke-virtual v2, v1, v0, Landroid/content/Context;->registerReceiver(Landroid/content/BroadcastReceiver; Landroid/content/IntentFilter;)Landroid/content/Intent;
+000022: goto +8h
+000024: invoke-virtual v2, Landroid/content/Context;->getApplicationContext()Landroid/content/Context;
+00002a: move-result-object v2
+00002c: invoke-virtual v2, v1, Landroid/content/Context;->unregisterReceiver(Landroid/content/BroadcastReceiver;)V
+000032: iput-boolean v3, v1, Lcom/vivo/pcsuite/pcconnect/wifip2p/deputy/c;->a Z
+000036: goto +8h
+000038: const-string v2, "DeputyWifiStateReceiver"
+00003c: const-string v3, "BroadcastReceiver state equals to command, do nothing."
+000040: invoke-static v2, v3, Lc/c/f/a/b;->p(Ljava/lang/String; Ljava/lang/String;)V
+000046: return-void 
+
+METHOD a(Lcom/vivo/pcsuite/pcconnect/wifip2p/deputy/c$a;)V
+000000: iput-object v1, v0, Lcom/vivo/pcsuite/pcconnect/wifip2p/deputy/c;->b Lcom/vivo/pcsuite/pcconnect/wifip2p/deputy/c$a;
+000004: return-void 
+
+METHOD onReceive(Landroid/content/Context; Landroid/content/Intent;)V
+000000: new-instance v2, Ljava/lang/StringBuilder;
+000004: invoke-direct v2, Ljava/lang/StringBuilder;-><init>()V
+00000a: const-string v0, "onReceive: action="
+00000e: invoke-virtual v2, v0, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+000014: invoke-virtual v3, Landroid/content/Intent;->getAction()Ljava/lang/String;
+00001a: move-result-object v0
+00001c: invoke-virtual v2, v0, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+000022: const-string v0, ", isSticky="
+000026: invoke-virtual v2, v0, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+00002c: invoke-virtual v1, Landroid/content/BroadcastReceiver;->isInitialStickyBroadcast()Z
+000032: move-result v0
+000034: invoke-virtual v2, v0, Ljava/lang/StringBuilder;->append(Z)Ljava/lang/StringBuilder;
+00003a: invoke-virtual v2, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
+000040: move-result-object v2
+000042: const-string v0, "DeputyWifiStateReceiver"
+000046: invoke-static v0, v2, Lc/c/f/a/b;->a(Ljava/lang/String; Ljava/lang/String;)V
+00004c: invoke-virtual v3, Landroid/content/Intent;->getAction()Ljava/lang/String;
+000052: move-result-object v2
+000054: const-string v0, "android.net.extwifi.STATE_CHANGE"
+000058: invoke-virtual v0, v2, Ljava/lang/String;->equals(Ljava/lang/Object;)Z
+00005e: move-result v2
+000060: if-eqz v2, +017h
+000064: invoke-virtual v1, Landroid/content/BroadcastReceiver;->isInitialStickyBroadcast()Z
+00006a: move-result v2
+00006c: if-nez v2, +011h
+000070: const-string v2, "networkInfo"
+000074: invoke-virtual v3, v2, Landroid/content/Intent;->getParcelableExtra(Ljava/lang/String;)Landroid/os/Parcelable;
+00007a: move-result-object v2
+00007c: check-cast v2, Landroid/net/NetworkInfo;
+000080: iget-object v3, v1, Lcom/vivo/pcsuite/pcconnect/wifip2p/deputy/c;->b Lcom/vivo/pcsuite/pcconnect/wifip2p/deputy/c$a;
+000084: if-eqz v3, +005h
+000088: invoke-interface v3, v2, Lcom/vivo/pcsuite/pcconnect/wifip2p/deputy/c$a;->a(Landroid/net/NetworkInfo;)V
+00008e: return-void 

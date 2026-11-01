@@ -1,0 +1,60 @@
+APK pcsuite/updateApk/pcsuite.apk
+DEX classes2.dex
+CLASS Lcom/vivo/connect/sdk/f/c$d1;
+SUPER Ljava/lang/Object;
+FIELDS
+c Ljava/lang/String; = ':getNickNameAvatarUrlRunnable'
+a Landroid/os/Messenger; = None
+b Lcom/vivo/connect/sdk/f/c; = None
+
+METHOD <init>(Lcom/vivo/connect/sdk/f/c; Landroid/os/Messenger;)V
+000000: iput-object v1, v0, Lcom/vivo/connect/sdk/f/c$d1;->b Lcom/vivo/connect/sdk/f/c;
+000004: iput-object v2, v0, Lcom/vivo/connect/sdk/f/c$d1;->a Landroid/os/Messenger;
+000008: invoke-direct v0, Ljava/lang/Object;-><init>()V
+00000e: return-void 
+
+METHOD run()V
+000000: const-string v0, "ConnectClientImpl"
+000004: const-string v1, "mConnectApi is null:"
+000008: new-instance v2, Ljava/lang/StringBuilder;
+00000c: invoke-direct v2, v1, Ljava/lang/StringBuilder;-><init>(Ljava/lang/String;)V
+000012: iget-object v1, v3, Lcom/vivo/connect/sdk/f/c$d1;->b Lcom/vivo/connect/sdk/f/c;
+000016: invoke-static v1, Lcom/vivo/connect/sdk/f/c;->a(Lcom/vivo/connect/sdk/f/c;)Lcom/vivo/connbase/IClient;
+00001c: move-result-object v1
+00001e: if-nez v1, +004h
+000022: const/4 v1, 1
+000024: goto +2h
+000026: const/4 v1, 0
+000028: invoke-virtual v2, v1, Ljava/lang/StringBuilder;->append(Z)Ljava/lang/StringBuilder;
+00002e: invoke-virtual v2, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
+000034: move-result-object v1
+000036: invoke-static v0, v1, Lcom/vivo/connect/logger/EasyLog;->i(Ljava/lang/String; Ljava/lang/String;)V
+00003c: iget-object v1, v3, Lcom/vivo/connect/sdk/f/c$d1;->b Lcom/vivo/connect/sdk/f/c;
+000040: invoke-static v1, Lcom/vivo/connect/sdk/f/c;->a(Lcom/vivo/connect/sdk/f/c;)Lcom/vivo/connbase/IClient;
+000046: move-result-object v1
+000048: if-eqz v1, +010h
+00004c: iget-object v1, v3, Lcom/vivo/connect/sdk/f/c$d1;->b Lcom/vivo/connect/sdk/f/c;
+000050: invoke-static v1, Lcom/vivo/connect/sdk/f/c;->a(Lcom/vivo/connect/sdk/f/c;)Lcom/vivo/connbase/IClient;
+000056: move-result-object v1
+000058: iget-object v3, v3, Lcom/vivo/connect/sdk/f/c$d1;->a Landroid/os/Messenger;
+00005c: invoke-interface v1, v3, Lcom/vivo/connbase/IClient;->getNickNameAvatarUrl(Landroid/os/Messenger;)V
+000062: return-void 
+000064: move-exception v3
+000066: goto +1dh
+000068: iget-object v1, v3, Lcom/vivo/connect/sdk/f/c$d1;->b Lcom/vivo/connect/sdk/f/c;
+00006c: const-string v2, ":getNickNameAvatarUrlRunnable"
+000070: invoke-static v1, v2, Lcom/vivo/connect/sdk/f/c;->a(Lcom/vivo/connect/sdk/f/c; Ljava/lang/String;)Z
+000076: move-result v1
+000078: if-nez v1, +003h
+00007c: return-void 
+00007e: iget-object v1, v3, Lcom/vivo/connect/sdk/f/c$d1;->b Lcom/vivo/connect/sdk/f/c;
+000082: invoke-static v1, Lcom/vivo/connect/sdk/f/c;->a(Lcom/vivo/connect/sdk/f/c;)Lcom/vivo/connbase/IClient;
+000088: move-result-object v1
+00008a: iget-object v3, v3, Lcom/vivo/connect/sdk/f/c$d1;->a Landroid/os/Messenger;
+00008e: invoke-interface v1, v3, Lcom/vivo/connbase/IClient;->getNickNameAvatarUrl(Landroid/os/Messenger;)V
+000094: const-string v3, "getNickNameAvatarUrl called"
+000098: invoke-static v0, v3, Lcom/vivo/connect/logger/EasyLog;->i(Ljava/lang/String; Ljava/lang/String;)V
+00009e: return-void 
+0000a0: const-string v1, "getNickNameAvatarUrl error:"
+0000a4: invoke-static v3, v1, v0, LV5/S;->h(Ljava/lang/Exception; Ljava/lang/String; Ljava/lang/String;)V
+0000aa: return-void 

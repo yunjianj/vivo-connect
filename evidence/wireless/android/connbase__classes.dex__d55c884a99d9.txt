@@ -1,0 +1,580 @@
+APK pcsuite/updateApk/connbase.apk
+DEX classes.dex
+CLASS Lcom/vivo/connbase/h0/c/j;
+SUPER Ljava/lang/Object;
+FIELDS
+e Ljava/lang/String; = 'RecordManager'
+a Ljava/util/Map; = None
+b Landroid/os/HandlerThread; = None
+c Landroid/os/Handler; = None
+d Ljava/lang/Runnable; = None
+
+METHOD <init>()V
+000000: invoke-direct v2, Ljava/lang/Object;-><init>()V
+000006: new-instance v0, Ljava/util/concurrent/ConcurrentHashMap;
+00000a: invoke-direct v0, Ljava/util/concurrent/ConcurrentHashMap;-><init>()V
+000010: iput-object v0, v2, Lcom/vivo/connbase/h0/c/j;->a Ljava/util/Map;
+000014: new-instance v0, Landroid/os/HandlerThread;
+000018: const-string v1, "findLostRecord"
+00001c: invoke-direct v0, v1, Landroid/os/HandlerThread;-><init>(Ljava/lang/String;)V
+000022: iput-object v0, v2, Lcom/vivo/connbase/h0/c/j;->b Landroid/os/HandlerThread;
+000026: new-instance v0, Lcom/vivo/connbase/h0/c/j$a;
+00002a: invoke-direct v0, v2, Lcom/vivo/connbase/h0/c/j$a;-><init>(Lcom/vivo/connbase/h0/c/j;)V
+000030: iput-object v0, v2, Lcom/vivo/connbase/h0/c/j;->d Ljava/lang/Runnable;
+000034: return-void 
+
+METHOD <init>(Lcom/vivo/connbase/h0/c/j$a;)V
+000000: invoke-direct v0, Lcom/vivo/connbase/h0/c/j;-><init>()V
+000006: return-void 
+
+METHOD a()Ljava/util/List;
+000000: new-instance v0, Ljava/util/ArrayList;
+000004: invoke-direct v0, Ljava/util/ArrayList;-><init>()V
+00000a: iget-object v1, v4, Lcom/vivo/connbase/h0/c/j;->a Ljava/util/Map;
+00000e: invoke-interface v1, Ljava/util/Map;->size()I
+000014: move-result v1
+000016: if-lez v1, +027h
+00001a: iget-object v1, v4, Lcom/vivo/connbase/h0/c/j;->a Ljava/util/Map;
+00001e: invoke-interface v1, Ljava/util/Map;->keySet()Ljava/util/Set;
+000024: move-result-object v1
+000026: invoke-interface v0, v1, Ljava/util/List;->addAll(Ljava/util/Collection;)Z
+00002c: goto +1ch
+00002e: move-exception v1
+000030: new-instance v2, Ljava/lang/StringBuilder;
+000034: invoke-direct v2, Ljava/lang/StringBuilder;-><init>()V
+00003a: const-string v3, "copyKey err:"
+00003e: invoke-virtual v2, v3, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+000044: invoke-virtual v1, Ljava/lang/NegativeArraySizeException;->getMessage()Ljava/lang/String;
+00004a: move-result-object v1
+00004c: invoke-virtual v2, v1, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+000052: invoke-virtual v2, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
+000058: move-result-object v1
+00005a: const-string v2, "RecordManager"
+00005e: invoke-static v2, v1, Lc/c/f/a/b;->g(Ljava/lang/String; Ljava/lang/String;)V
+000064: return-object v0
+
+METHOD b()Lcom/vivo/connbase/h0/c/j;
+000000: invoke-static Lcom/vivo/connbase/h0/c/j$b;->a()Lcom/vivo/connbase/h0/c/j;
+000006: move-result-object v0
+000008: return-object v0
+
+METHOD c(Ljava/lang/String;)Ljava/util/List;
+000000: new-instance v0, Ljava/util/ArrayList;
+000004: invoke-direct v0, Ljava/util/ArrayList;-><init>()V
+00000a: invoke-static v4, Landroid/text/TextUtils;->isEmpty(Ljava/lang/CharSequence;)Z
+000010: move-result v1
+000012: if-eqz v1, +003h
+000016: return-object v0
+000018: iget-object v1, v3, Lcom/vivo/connbase/h0/c/j;->a Ljava/util/Map;
+00001c: invoke-interface v1, v4, Ljava/util/Map;->containsKey(Ljava/lang/Object;)Z
+000022: move-result v1
+000024: if-eqz v1, +029h
+000028: iget-object v1, v3, Lcom/vivo/connbase/h0/c/j;->a Ljava/util/Map;
+00002c: invoke-interface v1, v4, Ljava/util/Map;->get(Ljava/lang/Object;)Ljava/lang/Object;
+000032: move-result-object v4
+000034: check-cast v4, Ljava/util/Collection;
+000038: invoke-interface v0, v4, Ljava/util/List;->addAll(Ljava/util/Collection;)Z
+00003e: goto +1ch
+000040: move-exception v4
+000042: new-instance v1, Ljava/lang/StringBuilder;
+000046: invoke-direct v1, Ljava/lang/StringBuilder;-><init>()V
+00004c: const-string v2, "copyRecord err:"
+000050: invoke-virtual v1, v2, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+000056: invoke-virtual v4, Ljava/lang/NegativeArraySizeException;->getMessage()Ljava/lang/String;
+00005c: move-result-object v4
+00005e: invoke-virtual v1, v4, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+000064: invoke-virtual v1, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
+00006a: move-result-object v4
+00006c: const-string v1, "RecordManager"
+000070: invoke-static v1, v4, Lc/c/f/a/b;->g(Ljava/lang/String; Ljava/lang/String;)V
+000076: return-object v0
+
+METHOD a(Ljava/lang/String;)V
+000000: const-string v0, "RecordManager"
+000004: const-string v1, "clearDeviceRecord"
+000008: invoke-static v0, v1, Lc/c/f/a/b;->b(Ljava/lang/String; Ljava/lang/String;)V
+00000e: invoke-static v4, Landroid/text/TextUtils;->isEmpty(Ljava/lang/CharSequence;)Z
+000014: move-result v1
+000016: if-nez v1, +011h
+00001a: iget-object v1, v3, Lcom/vivo/connbase/h0/c/j;->a Ljava/util/Map;
+00001e: invoke-interface v1, v4, Ljava/util/Map;->containsKey(Ljava/lang/Object;)Z
+000024: move-result v1
+000026: if-nez v1, +003h
+00002a: goto +7h
+00002c: iget-object v0, v3, Lcom/vivo/connbase/h0/c/j;->a Ljava/util/Map;
+000030: invoke-interface v0, v4, Ljava/util/Map;->remove(Ljava/lang/Object;)Ljava/lang/Object;
+000036: return-void 
+000038: new-instance v1, Ljava/lang/StringBuilder;
+00003c: invoke-direct v1, Ljava/lang/StringBuilder;-><init>()V
+000042: const-string v2, "findLost null, dd = "
+000046: invoke-virtual v1, v2, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+00004c: invoke-virtual v1, v4, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+000052: invoke-virtual v1, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
+000058: move-result-object v4
+00005a: invoke-static v0, v4, Lc/c/f/a/b;->b(Ljava/lang/String; Ljava/lang/String;)V
+000060: return-void 
+
+METHOD a(Ljava/lang/String; Lcom/vivo/connbase/h0/c/n;)V
+000000: const-string v0, "RecordManager"
+000004: const-string v1, "addRecord"
+000008: invoke-static v0, v1, Lc/c/f/a/b;->b(Ljava/lang/String; Ljava/lang/String;)V
+00000e: invoke-static v6, Landroid/text/TextUtils;->isEmpty(Ljava/lang/CharSequence;)Z
+000014: move-result v1
+000016: if-nez v1, +0a2h
+00001a: if-eqz v7, +0a0h
+00001e: invoke-virtual v7, Lcom/vivo/connbase/h0/c/n;->e()[B
+000024: move-result-object v1
+000026: if-eqz v1, +09ah
+00002a: invoke-virtual v7, Lcom/vivo/connbase/h0/c/n;->e()[B
+000030: move-result-object v1
+000032: array-length v1, v1
+000034: if-nez v1, +004h
+000038: goto/16 +091h
+00003c: iget-object v1, v5, Lcom/vivo/connbase/h0/c/j;->a Ljava/util/Map;
+000040: invoke-interface v1, v6, Ljava/util/Map;->containsKey(Ljava/lang/Object;)Z
+000046: move-result v1
+000048: if-eqz v1, +047h
+00004c: invoke-direct v5, v6, Lcom/vivo/connbase/h0/c/j;->c(Ljava/lang/String;)Ljava/util/List;
+000052: move-result-object v1
+000054: invoke-interface v1, Ljava/util/List;->iterator()Ljava/util/Iterator;
+00005a: move-result-object v1
+00005c: invoke-interface v1, Ljava/util/Iterator;->hasNext()Z
+000062: move-result v2
+000064: if-eqz v2, +02dh
+000068: invoke-interface v1, Ljava/util/Iterator;->next()Ljava/lang/Object;
+00006e: move-result-object v2
+000070: check-cast v2, Lcom/vivo/connbase/h0/c/n;
+000074: invoke-virtual v2, Lcom/vivo/connbase/h0/c/n;->e()[B
+00007a: move-result-object v3
+00007c: invoke-virtual v7, Lcom/vivo/connbase/h0/c/n;->e()[B
+000082: move-result-object v4
+000084: invoke-static v3, v4, Lcom/vivo/connbase/e0/g/b;->b([B [B)Z
+00008a: move-result v3
+00008c: if-eqz v3, -018h
+000090: iget-object v7, v5, Lcom/vivo/connbase/h0/c/j;->a Ljava/util/Map;
+000094: invoke-interface v7, v6, Ljava/util/Map;->get(Ljava/lang/Object;)Ljava/lang/Object;
+00009a: move-result-object v7
+00009c: check-cast v7, Ljava/util/List;
+0000a0: invoke-interface v7, v2, Ljava/util/List;->remove(Ljava/lang/Object;)Z
+0000a6: iget-object v7, v5, Lcom/vivo/connbase/h0/c/j;->a Ljava/util/Map;
+0000aa: invoke-interface v7, v6, Ljava/util/Map;->get(Ljava/lang/Object;)Ljava/lang/Object;
+0000b0: move-result-object v6
+0000b2: check-cast v6, Ljava/util/List;
+0000b6: invoke-interface v6, v2, Ljava/util/List;->add(Ljava/lang/Object;)Z
+0000bc: return-void 
+0000be: iget-object v1, v5, Lcom/vivo/connbase/h0/c/j;->a Ljava/util/Map;
+0000c2: invoke-interface v1, v6, Ljava/util/Map;->get(Ljava/lang/Object;)Ljava/lang/Object;
+0000c8: move-result-object v6
+0000ca: check-cast v6, Ljava/util/List;
+0000ce: invoke-interface v6, v7, Ljava/util/List;->add(Ljava/lang/Object;)Z
+0000d4: goto +eh
+0000d6: new-instance v1, Ljava/util/ArrayList;
+0000da: invoke-direct v1, Ljava/util/ArrayList;-><init>()V
+0000e0: invoke-interface v1, v7, Ljava/util/List;->add(Ljava/lang/Object;)Z
+0000e6: iget-object v7, v5, Lcom/vivo/connbase/h0/c/j;->a Ljava/util/Map;
+0000ea: invoke-interface v7, v6, v1, Ljava/util/Map;->put(Ljava/lang/Object; Ljava/lang/Object;)Ljava/lang/Object;
+0000f0: new-instance v6, Ljava/lang/StringBuilder;
+0000f4: invoke-direct v6, Ljava/lang/StringBuilder;-><init>()V
+0000fa: const-string v7, "added "
+0000fe: invoke-virtual v6, v7, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+000104: iget-object v7, v5, Lcom/vivo/connbase/h0/c/j;->a Ljava/util/Map;
+000108: invoke-interface v7, Ljava/util/Map;->size()I
+00010e: move-result v7
+000110: invoke-virtual v6, v7, Ljava/lang/StringBuilder;->append(I)Ljava/lang/StringBuilder;
+000116: invoke-virtual v6, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
+00011c: move-result-object v6
+00011e: invoke-static v0, v6, Lc/c/f/a/b;->b(Ljava/lang/String; Ljava/lang/String;)V
+000124: goto +1ah
+000126: move-exception v6
+000128: new-instance v7, Ljava/lang/StringBuilder;
+00012c: invoke-direct v7, Ljava/lang/StringBuilder;-><init>()V
+000132: const-string v1, "addRecord e："
+000136: invoke-virtual v7, v1, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+00013c: invoke-virtual v6, Ljava/lang/Exception;->getMessage()Ljava/lang/String;
+000142: move-result-object v6
+000144: invoke-virtual v7, v6, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+00014a: invoke-virtual v7, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
+000150: move-result-object v6
+000152: invoke-static v0, v6, Lc/c/f/a/b;->g(Ljava/lang/String; Ljava/lang/String;)V
+000158: return-void 
+00015a: new-instance v7, Ljava/lang/StringBuilder;
+00015e: invoke-direct v7, Ljava/lang/StringBuilder;-><init>()V
+000164: const-string v1, "findLost null, dd = "
+000168: invoke-virtual v7, v1, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+00016e: invoke-virtual v7, v6, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+000174: const-string v6, ",serviceRecord ="
+000178: invoke-virtual v7, v6, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+00017e: invoke-virtual v7, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
+000184: move-result-object v6
+000186: invoke-static v0, v6, Lc/c/f/a/b;->b(Ljava/lang/String; Ljava/lang/String;)V
+00018c: return-void 
+
+METHOD a(Ljava/lang/String; Ljava/util/List;)V
+000000: monitor-enter v8
+000002: invoke-static v9, Landroid/text/TextUtils;->isEmpty(Ljava/lang/CharSequence;)Z
+000008: move-result v0
+00000a: if-nez v0, +00ah
+00000e: iget-object v0, v8, Lcom/vivo/connbase/h0/c/j;->a Ljava/util/Map;
+000012: invoke-interface v0, v9, Ljava/util/Map;->containsKey(Ljava/lang/Object;)Z
+000018: move-result v0
+00001a: if-nez v0, +018h
+00001e: const-string v0, "RecordManager"
+000022: new-instance v1, Ljava/lang/StringBuilder;
+000026: invoke-direct v1, Ljava/lang/StringBuilder;-><init>()V
+00002c: const-string v2, "findLost null, dd = "
+000030: invoke-virtual v1, v2, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+000036: invoke-virtual v1, v9, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+00003c: invoke-virtual v1, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
+000042: move-result-object v1
+000044: invoke-static v0, v1, Lc/c/f/a/b;->b(Ljava/lang/String; Ljava/lang/String;)V
+00004a: iget-object v0, v8, Lcom/vivo/connbase/h0/c/j;->c Landroid/os/Handler;
+00004e: const-wide/16 v1, 20000
+000052: if-nez v0, +020h
+000056: const-string v0, "RecordManager"
+00005a: const-string v3, "create handler"
+00005e: invoke-static v0, v3, Lc/c/f/a/b;->b(Ljava/lang/String; Ljava/lang/String;)V
+000064: iget-object v0, v8, Lcom/vivo/connbase/h0/c/j;->b Landroid/os/HandlerThread;
+000068: invoke-virtual v0, Landroid/os/HandlerThread;->start()V
+00006e: new-instance v0, Landroid/os/Handler;
+000072: iget-object v3, v8, Lcom/vivo/connbase/h0/c/j;->b Landroid/os/HandlerThread;
+000076: invoke-virtual v3, Landroid/os/HandlerThread;->getLooper()Landroid/os/Looper;
+00007c: move-result-object v3
+00007e: invoke-direct v0, v3, Landroid/os/Handler;-><init>(Landroid/os/Looper;)V
+000084: iput-object v0, v8, Lcom/vivo/connbase/h0/c/j;->c Landroid/os/Handler;
+000088: iget-object v3, v8, Lcom/vivo/connbase/h0/c/j;->d Ljava/lang/Runnable;
+00008c: invoke-virtual v0, v3, v1, v2, Landroid/os/Handler;->postDelayed(Ljava/lang/Runnable; J)Z
+000092: invoke-direct v8, v9, Lcom/vivo/connbase/h0/c/j;->c(Ljava/lang/String;)Ljava/util/List;
+000098: move-result-object v9
+00009a: if-eqz v9, +088h
+00009e: invoke-interface v9, Ljava/util/List;->size()I
+0000a4: move-result v0
+0000a6: if-lez v0, +082h
+0000aa: if-eqz v10, +080h
+0000ae: invoke-interface v10, Ljava/util/List;->size()I
+0000b4: move-result v0
+0000b6: if-lez v0, +07ah
+0000ba: const-string v0, "RecordManager"
+0000be: new-instance v3, Ljava/lang/StringBuilder;
+0000c2: invoke-direct v3, Ljava/lang/StringBuilder;-><init>()V
+0000c8: const-string v4, "findLost start: new "
+0000cc: invoke-virtual v3, v4, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+0000d2: invoke-interface v10, Ljava/util/List;->size()I
+0000d8: move-result v4
+0000da: invoke-virtual v3, v4, Ljava/lang/StringBuilder;->append(I)Ljava/lang/StringBuilder;
+0000e0: invoke-virtual v3, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
+0000e6: move-result-object v3
+0000e8: invoke-static v0, v3, Lc/c/f/a/b;->b(Ljava/lang/String; Ljava/lang/String;)V
+0000ee: invoke-interface v10, Ljava/util/List;->iterator()Ljava/util/Iterator;
+0000f4: move-result-object v10
+0000f6: invoke-interface v10, Ljava/util/Iterator;->hasNext()Z
+0000fc: move-result v0
+0000fe: if-eqz v0, +056h
+000102: invoke-interface v10, Ljava/util/Iterator;->next()Ljava/lang/Object;
+000108: move-result-object v0
+00010a: check-cast v0, Lcom/vivo/connbase/h0/c/n;
+00010e: invoke-interface v9, Ljava/util/List;->iterator()Ljava/util/Iterator;
+000114: move-result-object v3
+000116: invoke-interface v3, Ljava/util/Iterator;->hasNext()Z
+00011c: move-result v4
+00011e: if-eqz v4, -014h
+000122: invoke-interface v3, Ljava/util/Iterator;->next()Ljava/lang/Object;
+000128: move-result-object v4
+00012a: check-cast v4, Lcom/vivo/connbase/h0/c/n;
+00012e: if-eqz v0, -00ch
+000132: if-eqz v4, -00eh
+000136: invoke-virtual v0, Lcom/vivo/connbase/h0/c/n;->e()[B
+00013c: move-result-object v5
+00013e: invoke-virtual v4, Lcom/vivo/connbase/h0/c/n;->e()[B
+000144: move-result-object v6
+000146: invoke-static v5, v6, Lcom/vivo/connbase/e0/g/b;->b([B [B)Z
+00014c: move-result v5
+00014e: if-eqz v5, -01ch
+000152: invoke-virtual v0, Lcom/vivo/connbase/h0/c/n;->b()Ljava/lang/String;
+000158: move-result-object v5
+00015a: invoke-virtual v4, Lcom/vivo/connbase/h0/c/n;->b()Ljava/lang/String;
+000160: move-result-object v6
+000162: invoke-static v5, v6, Landroid/text/TextUtils;->equals(Ljava/lang/CharSequence; Ljava/lang/CharSequence;)Z
+000168: move-result v5
+00016a: if-eqz v5, -02ah
+00016e: invoke-static Landroid/os/SystemClock;->elapsedRealtime()J
+000174: move-result-wide v5
+000176: invoke-virtual v4, v5, v6, Lcom/vivo/connbase/h0/c/n;->a(J)Lcom/vivo/connbase/h0/c/n;
+00017c: const-string v5, "RecordManager"
+000180: new-instance v6, Ljava/lang/StringBuilder;
+000184: invoke-direct v6, Ljava/lang/StringBuilder;-><init>()V
+00018a: const-string v7, "updateTime:"
+00018e: invoke-virtual v6, v7, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+000194: invoke-virtual v6, v4, Ljava/lang/StringBuilder;->append(Ljava/lang/Object;)Ljava/lang/StringBuilder;
+00019a: invoke-virtual v6, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
+0001a0: move-result-object v4
+0001a2: invoke-static v5, v4, Lc/c/f/a/b;->b(Ljava/lang/String; Ljava/lang/String;)V
+0001a8: goto -49h
+0001aa: const-string v9, "RecordManager"
+0001ae: new-instance v10, Ljava/lang/StringBuilder;
+0001b2: invoke-direct v10, Ljava/lang/StringBuilder;-><init>()V
+0001b8: const-string v0, "findLost start: local "
+0001bc: invoke-virtual v10, v0, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+0001c2: iget-object v0, v8, Lcom/vivo/connbase/h0/c/j;->a Ljava/util/Map;
+0001c6: invoke-interface v0, Ljava/util/Map;->size()I
+0001cc: move-result v0
+0001ce: invoke-virtual v10, v0, Ljava/lang/StringBuilder;->append(I)Ljava/lang/StringBuilder;
+0001d4: invoke-virtual v10, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
+0001da: move-result-object v10
+0001dc: invoke-static v9, v10, Lc/c/f/a/b;->b(Ljava/lang/String; Ljava/lang/String;)V
+0001e2: invoke-direct v8, Lcom/vivo/connbase/h0/c/j;->a()Ljava/util/List;
+0001e8: move-result-object v9
+0001ea: if-eqz v9, +09ah
+0001ee: invoke-interface v9, Ljava/util/List;->size()I
+0001f4: move-result v10
+0001f6: if-lez v10, +094h
+0001fa: const-string v10, "RecordManager"
+0001fe: const-string v0, "keySet != null && keySet.size() > 0"
+000202: invoke-static v10, v0, Lc/c/f/a/b;->b(Ljava/lang/String; Ljava/lang/String;)V
+000208: invoke-interface v9, Ljava/util/List;->iterator()Ljava/util/Iterator;
+00020e: move-result-object v9
+000210: invoke-interface v9, Ljava/util/Iterator;->hasNext()Z
+000216: move-result v10
+000218: if-eqz v10, +083h
+00021c: invoke-interface v9, Ljava/util/Iterator;->next()Ljava/lang/Object;
+000222: move-result-object v10
+000224: check-cast v10, Ljava/lang/String;
+000228: invoke-direct v8, v10, Lcom/vivo/connbase/h0/c/j;->c(Ljava/lang/String;)Ljava/util/List;
+00022e: move-result-object v0
+000230: if-eqz v0, -010h
+000234: invoke-interface v0, Ljava/util/List;->size()I
+00023a: move-result v3
+00023c: if-gtz v3, +003h
+000240: goto -18h
+000242: invoke-interface v0, Ljava/util/List;->iterator()Ljava/util/Iterator;
+000248: move-result-object v0
+00024a: invoke-interface v0, Ljava/util/Iterator;->hasNext()Z
+000250: move-result v3
+000252: if-eqz v3, -021h
+000256: invoke-interface v0, Ljava/util/Iterator;->next()Ljava/lang/Object;
+00025c: move-result-object v3
+00025e: check-cast v3, Lcom/vivo/connbase/h0/c/n;
+000262: if-eqz v3, +056h
+000266: invoke-static Landroid/os/SystemClock;->elapsedRealtime()J
+00026c: move-result-wide v4
+00026e: invoke-virtual v3, Lcom/vivo/connbase/h0/c/n;->c()J
+000274: move-result-wide v6
+000276: sub-long/2addr v4, v6
+000278: const-wide/16 v6, 15000
+00027c: cmp-long v4, v4, v6
+000280: if-lez v4, -01bh
+000284: const-string v4, "RecordManager"
+000288: new-instance v5, Ljava/lang/StringBuilder;
+00028c: invoke-direct v5, Ljava/lang/StringBuilder;-><init>()V
+000292: const-string v6, "find lost:"
+000296: invoke-virtual v5, v6, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+00029c: invoke-virtual v5, v3, Ljava/lang/StringBuilder;->append(Ljava/lang/Object;)Ljava/lang/StringBuilder;
+0002a2: invoke-virtual v5, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
+0002a8: move-result-object v5
+0002aa: invoke-static v4, v5, Lc/c/f/a/b;->b(Ljava/lang/String; Ljava/lang/String;)V
+0002b0: new-instance v4, Lcom/vivo/connbase/o/k;
+0002b4: invoke-direct v4, v3, Lcom/vivo/connbase/o/k;-><init>(Lcom/vivo/connbase/h0/c/n;)V
+0002ba: invoke-virtual v4, Lcom/vivo/connbase/o/d;->b()V
+0002c0: iget-object v4, v8, Lcom/vivo/connbase/h0/c/j;->a Ljava/util/Map;
+0002c4: invoke-interface v4, v10, Ljava/util/Map;->get(Ljava/lang/Object;)Ljava/lang/Object;
+0002ca: move-result-object v4
+0002cc: check-cast v4, Ljava/util/List;
+0002d0: invoke-interface v4, v3, Ljava/util/List;->remove(Ljava/lang/Object;)Z
+0002d6: iget-object v3, v8, Lcom/vivo/connbase/h0/c/j;->a Ljava/util/Map;
+0002da: invoke-interface v3, v10, Ljava/util/Map;->containsKey(Ljava/lang/Object;)Z
+0002e0: move-result v3
+0002e2: if-eqz v3, -04ch
+0002e6: iget-object v3, v8, Lcom/vivo/connbase/h0/c/j;->a Ljava/util/Map;
+0002ea: invoke-interface v3, v10, Ljava/util/Map;->get(Ljava/lang/Object;)Ljava/lang/Object;
+0002f0: move-result-object v3
+0002f2: check-cast v3, Ljava/util/List;
+0002f6: invoke-interface v3, Ljava/util/List;->size()I
+0002fc: move-result v3
+0002fe: if-nez v3, -05ah
+000302: iget-object v3, v8, Lcom/vivo/connbase/h0/c/j;->a Ljava/util/Map;
+000306: invoke-interface v3, v10, Ljava/util/Map;->remove(Ljava/lang/Object;)Ljava/lang/Object;
+00030c: goto -61h
+00030e: const-string v3, "RecordManager"
+000312: const-string v4, "record is null"
+000316: invoke-static v3, v4, Lc/c/f/a/b;->g(Ljava/lang/String; Ljava/lang/String;)V
+00031c: goto -69h
+00031e: iget-object v9, v8, Lcom/vivo/connbase/h0/c/j;->c Landroid/os/Handler;
+000322: iget-object v10, v8, Lcom/vivo/connbase/h0/c/j;->d Ljava/lang/Runnable;
+000326: invoke-virtual v9, v10, Landroid/os/Handler;->removeCallbacks(Ljava/lang/Runnable;)V
+00032c: iget-object v9, v8, Lcom/vivo/connbase/h0/c/j;->c Landroid/os/Handler;
+000330: iget-object v10, v8, Lcom/vivo/connbase/h0/c/j;->d Ljava/lang/Runnable;
+000334: invoke-virtual v9, v10, v1, v2, Landroid/os/Handler;->postDelayed(Ljava/lang/Runnable; J)Z
+00033a: const-string v9, "RecordManager"
+00033e: const-string v10, "findLost end"
+000342: invoke-static v9, v10, Lc/c/f/a/b;->b(Ljava/lang/String; Ljava/lang/String;)V
+000348: monitor-exit v8
+00034a: return-void 
+00034c: move-exception v9
+00034e: monitor-exit v8
+000350: throw v9
+
+METHOD a(Z)V
+000000: new-instance v0, Ljava/lang/StringBuilder;
+000004: invoke-direct v0, Ljava/lang/StringBuilder;-><init>()V
+00000a: const-string v1, "onScreenEvent "
+00000e: invoke-virtual v0, v1, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+000014: invoke-virtual v0, v3, Ljava/lang/StringBuilder;->append(Z)Ljava/lang/StringBuilder;
+00001a: const-string v1, " handler: "
+00001e: invoke-virtual v0, v1, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+000024: iget-object v1, v2, Lcom/vivo/connbase/h0/c/j;->c Landroid/os/Handler;
+000028: invoke-virtual v0, v1, Ljava/lang/StringBuilder;->append(Ljava/lang/Object;)Ljava/lang/StringBuilder;
+00002e: invoke-virtual v0, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
+000034: move-result-object v0
+000036: const-string v1, "RecordManager"
+00003a: invoke-static v1, v0, Lc/c/f/a/b;->b(Ljava/lang/String; Ljava/lang/String;)V
+000040: iget-object v0, v2, Lcom/vivo/connbase/h0/c/j;->c Landroid/os/Handler;
+000044: if-eqz v0, +00eh
+000048: if-nez v3, +00ch
+00004c: iget-object v3, v2, Lcom/vivo/connbase/h0/c/j;->d Ljava/lang/Runnable;
+000050: invoke-virtual v0, v3, Landroid/os/Handler;->removeCallbacks(Ljava/lang/Runnable;)V
+000056: const-string v3, "onScreenEvent stop "
+00005a: invoke-static v1, v3, Lc/c/f/a/b;->b(Ljava/lang/String; Ljava/lang/String;)V
+000060: return-void 
+
+METHOD a(Ljava/lang/String; [B)Z
+000000: const-string v0, "RecordManager"
+000004: const-string v1, "containsRecord"
+000008: invoke-static v0, v1, Lc/c/f/a/b;->b(Ljava/lang/String; Ljava/lang/String;)V
+00000e: invoke-static v5, Landroid/text/TextUtils;->isEmpty(Ljava/lang/CharSequence;)Z
+000014: move-result v1
+000016: const/4 v2, 0
+000018: if-nez v1, +033h
+00001c: iget-object v1, v4, Lcom/vivo/connbase/h0/c/j;->a Ljava/util/Map;
+000020: invoke-interface v1, v5, Ljava/util/Map;->containsKey(Ljava/lang/Object;)Z
+000026: move-result v1
+000028: if-eqz v1, +02bh
+00002c: if-eqz v6, +029h
+000030: array-length v1, v6
+000032: if-nez v1, +003h
+000036: goto +24h
+000038: invoke-direct v4, v5, Lcom/vivo/connbase/h0/c/j;->c(Ljava/lang/String;)Ljava/util/List;
+00003e: move-result-object v5
+000040: invoke-interface v5, Ljava/util/List;->iterator()Ljava/util/Iterator;
+000046: move-result-object v5
+000048: invoke-interface v5, Ljava/util/Iterator;->hasNext()Z
+00004e: move-result v0
+000050: if-eqz v0, +016h
+000054: invoke-interface v5, Ljava/util/Iterator;->next()Ljava/lang/Object;
+00005a: move-result-object v0
+00005c: check-cast v0, Lcom/vivo/connbase/h0/c/n;
+000060: if-eqz v0, -00ch
+000064: invoke-virtual v0, Lcom/vivo/connbase/h0/c/n;->e()[B
+00006a: move-result-object v0
+00006c: invoke-virtual v6, v0, Ljava/lang/Object;->equals(Ljava/lang/Object;)Z
+000072: move-result v0
+000074: if-eqz v0, -016h
+000078: const/4 v5, 1
+00007a: return v5
+00007c: return v2
+00007e: new-instance v1, Ljava/lang/StringBuilder;
+000082: invoke-direct v1, Ljava/lang/StringBuilder;-><init>()V
+000088: const-string v3, "findLost null, dd = "
+00008c: invoke-virtual v1, v3, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+000092: invoke-virtual v1, v5, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+000098: const-string v5, ",serviceHash ="
+00009c: invoke-virtual v1, v5, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+0000a2: invoke-virtual v1, v6, Ljava/lang/StringBuilder;->append(Ljava/lang/Object;)Ljava/lang/StringBuilder;
+0000a8: const-string v5, ",recordMap = "
+0000ac: invoke-virtual v1, v5, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+0000b2: iget-object v5, v4, Lcom/vivo/connbase/h0/c/j;->a Ljava/util/Map;
+0000b6: invoke-interface v5, Ljava/util/Map;->size()I
+0000bc: move-result v5
+0000be: invoke-virtual v1, v5, Ljava/lang/StringBuilder;->append(I)Ljava/lang/StringBuilder;
+0000c4: invoke-virtual v1, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
+0000ca: move-result-object v5
+0000cc: invoke-static v0, v5, Lc/c/f/a/b;->b(Ljava/lang/String; Ljava/lang/String;)V
+0000d2: return v2
+
+METHOD b(Ljava/lang/String;)Ljava/util/List;
+000000: const-string v0, "RecordManager"
+000004: const-string v1, "getRecordsById"
+000008: invoke-static v0, v1, Lc/c/f/a/b;->b(Ljava/lang/String; Ljava/lang/String;)V
+00000e: invoke-static v4, Landroid/text/TextUtils;->isEmpty(Ljava/lang/CharSequence;)Z
+000014: move-result v1
+000016: if-nez v1, +014h
+00001a: iget-object v1, v3, Lcom/vivo/connbase/h0/c/j;->a Ljava/util/Map;
+00001e: invoke-interface v1, v4, Ljava/util/Map;->containsKey(Ljava/lang/Object;)Z
+000024: move-result v1
+000026: if-nez v1, +003h
+00002a: goto +ah
+00002c: iget-object v0, v3, Lcom/vivo/connbase/h0/c/j;->a Ljava/util/Map;
+000030: invoke-interface v0, v4, Ljava/util/Map;->get(Ljava/lang/Object;)Ljava/lang/Object;
+000036: move-result-object v4
+000038: check-cast v4, Ljava/util/List;
+00003c: return-object v4
+00003e: new-instance v1, Ljava/lang/StringBuilder;
+000042: invoke-direct v1, Ljava/lang/StringBuilder;-><init>()V
+000048: const-string v2, "findLost null, dd = "
+00004c: invoke-virtual v1, v2, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+000052: invoke-virtual v1, v4, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+000058: invoke-virtual v1, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
+00005e: move-result-object v4
+000060: invoke-static v0, v4, Lc/c/f/a/b;->b(Ljava/lang/String; Ljava/lang/String;)V
+000066: const/4 v4, 0
+000068: return-object v4
+
+METHOD b(Ljava/lang/String; [B)V
+000000: new-instance v0, Ljava/lang/StringBuilder;
+000004: invoke-direct v0, Ljava/lang/StringBuilder;-><init>()V
+00000a: const-string v1, "removeRecord serviceHash:"
+00000e: invoke-virtual v0, v1, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+000014: invoke-virtual v0, v6, Ljava/lang/StringBuilder;->append(Ljava/lang/Object;)Ljava/lang/StringBuilder;
+00001a: invoke-virtual v0, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
+000020: move-result-object v0
+000022: const-string v1, "RecordManager"
+000026: invoke-static v1, v0, Lc/c/f/a/b;->b(Ljava/lang/String; Ljava/lang/String;)V
+00002c: invoke-static v5, Landroid/text/TextUtils;->isEmpty(Ljava/lang/CharSequence;)Z
+000032: move-result v0
+000034: if-nez v0, +03dh
+000038: iget-object v0, v4, Lcom/vivo/connbase/h0/c/j;->a Ljava/util/Map;
+00003c: invoke-interface v0, v5, Ljava/util/Map;->containsKey(Ljava/lang/Object;)Z
+000042: move-result v0
+000044: if-eqz v0, +035h
+000048: if-eqz v6, +033h
+00004c: array-length v0, v6
+00004e: if-nez v0, +003h
+000052: goto +2eh
+000054: invoke-direct v4, v5, Lcom/vivo/connbase/h0/c/j;->c(Ljava/lang/String;)Ljava/util/List;
+00005a: move-result-object v0
+00005c: invoke-interface v0, Ljava/util/List;->iterator()Ljava/util/Iterator;
+000062: move-result-object v1
+000064: invoke-interface v1, Ljava/util/Iterator;->hasNext()Z
+00006a: move-result v2
+00006c: if-eqz v2, +020h
+000070: invoke-interface v1, Ljava/util/Iterator;->next()Ljava/lang/Object;
+000076: move-result-object v2
+000078: check-cast v2, Lcom/vivo/connbase/h0/c/n;
+00007c: invoke-virtual v2, Lcom/vivo/connbase/h0/c/n;->e()[B
+000082: move-result-object v3
+000084: invoke-virtual v6, v3, Ljava/lang/Object;->equals(Ljava/lang/Object;)Z
+00008a: move-result v3
+00008c: if-eqz v3, -014h
+000090: invoke-interface v0, v2, Ljava/util/List;->remove(Ljava/lang/Object;)Z
+000096: invoke-interface v0, Ljava/util/List;->size()I
+00009c: move-result v6
+00009e: if-nez v6, +007h
+0000a2: iget-object v6, v4, Lcom/vivo/connbase/h0/c/j;->a Ljava/util/Map;
+0000a6: invoke-interface v6, v5, Ljava/util/Map;->remove(Ljava/lang/Object;)Ljava/lang/Object;
+0000ac: return-void 
+0000ae: new-instance v0, Ljava/lang/StringBuilder;
+0000b2: invoke-direct v0, Ljava/lang/StringBuilder;-><init>()V
+0000b8: const-string v2, "findLost null, dd = "
+0000bc: invoke-virtual v0, v2, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+0000c2: invoke-virtual v0, v5, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+0000c8: const-string v5, ",serviceHash ="
+0000cc: invoke-virtual v0, v5, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+0000d2: invoke-virtual v0, v6, Ljava/lang/StringBuilder;->append(Ljava/lang/Object;)Ljava/lang/StringBuilder;
+0000d8: const-string v5, ",recordMap = "
+0000dc: invoke-virtual v0, v5, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+0000e2: iget-object v5, v4, Lcom/vivo/connbase/h0/c/j;->a Ljava/util/Map;
+0000e6: invoke-interface v5, Ljava/util/Map;->size()I
+0000ec: move-result v5
+0000ee: invoke-virtual v0, v5, Ljava/lang/StringBuilder;->append(I)Ljava/lang/StringBuilder;
+0000f4: invoke-virtual v0, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
+0000fa: move-result-object v5
+0000fc: invoke-static v1, v5, Lc/c/f/a/b;->b(Ljava/lang/String; Ljava/lang/String;)V
+000102: return-void 

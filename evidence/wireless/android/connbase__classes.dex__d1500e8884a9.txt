@@ -1,0 +1,38 @@
+APK pcsuite/updateApk/connbase.apk
+DEX classes.dex
+CLASS Lcom/vivo/connbase/App$a;
+SUPER Ljava/lang/Object;
+FIELDS
+a Lcom/vivo/connbase/App; = None
+
+METHOD <init>(Lcom/vivo/connbase/App;)V
+000000: iput-object v1, v0, Lcom/vivo/connbase/App$a;->a Lcom/vivo/connbase/App;
+000004: invoke-direct v0, Ljava/lang/Object;-><init>()V
+00000a: return-void 
+
+METHOD onBindingDied(Landroid/content/ComponentName;)V
+000000: const-string v2, "App"
+000004: const-string v0, "shareLinkConnection onBindingDied"
+000008: invoke-static v2, v0, Lc/c/f/a/b;->k(Ljava/lang/String; Ljava/lang/String;)V
+00000e: iget-object v2, v1, Lcom/vivo/connbase/App$a;->a Lcom/vivo/connbase/App;
+000012: invoke-static v2, Lcom/vivo/connbase/App;->b(Lcom/vivo/connbase/App;)V
+000018: return-void 
+
+METHOD onServiceConnected(Landroid/content/ComponentName; Landroid/os/IBinder;)V
+000000: iget-object v1, v0, Lcom/vivo/connbase/App$a;->a Lcom/vivo/connbase/App;
+000004: invoke-static v1, Lcom/vivo/connbase/App;->a(Lcom/vivo/connbase/App;)Ljava/util/concurrent/atomic/AtomicBoolean;
+00000a: move-result-object v1
+00000c: const/4 v2, 1
+00000e: invoke-virtual v1, v2, Ljava/util/concurrent/atomic/AtomicBoolean;->set(Z)V
+000014: const-string v1, "App"
+000018: const-string v2, "shareLinkConnection onServiceConnected"
+00001c: invoke-static v1, v2, Lc/c/f/a/b;->k(Ljava/lang/String; Ljava/lang/String;)V
+000022: return-void 
+
+METHOD onServiceDisconnected(Landroid/content/ComponentName;)V
+000000: iget-object v2, v1, Lcom/vivo/connbase/App$a;->a Lcom/vivo/connbase/App;
+000004: invoke-static v2, Lcom/vivo/connbase/App;->b(Lcom/vivo/connbase/App;)V
+00000a: const-string v2, "App"
+00000e: const-string v0, "shareLinkConnection onServiceConnected"
+000012: invoke-static v2, v0, Lc/c/f/a/b;->k(Ljava/lang/String; Ljava/lang/String;)V
+000018: return-void 

@@ -1,0 +1,53 @@
+APK pcsuite/updateApk/connbase.apk
+DEX classes.dex
+CLASS Lcom/vivo/connbase/h0/c/g$a;
+SUPER Ljava/lang/Object;
+FIELDS
+
+
+METHOD <init>()V
+000000: invoke-direct v0, Ljava/lang/Object;-><init>()V
+000006: return-void 
+
+METHOD a()Z
+000000: invoke-static Lcom/vivo/connbase/e0/g/j;->c()Z
+000006: move-result v0
+000008: const/4 v1, 0
+00000a: const-string v2, "DiscoverySession"
+00000e: if-nez v0, +008h
+000012: const-string v0, "wlan is disable, we will not wakeup for vdfs"
+000016: invoke-static v2, v0, Lc/c/f/a/b;->e(Ljava/lang/String; Ljava/lang/String;)V
+00001c: return v1
+00001e: invoke-static Lcom/vivo/connbase/e0/g/j;->b()Z
+000024: move-result v0
+000026: if-nez v0, +005h
+00002a: const-string v0, "cross device is disable, we will not wakeup for vdfs"
+00002e: goto -ch
+000030: const/4 v0, 1
+000032: return v0
+
+METHOD a(Ljava/lang/String; Lcom/vivo/connbase/h0/c/l;)Z
+000000: invoke-virtual v2, Lcom/vivo/connbase/h0/c/l;->g()Z
+000006: move-result v2
+000008: const/4 v0, 1
+00000a: if-nez v2, +003h
+00000e: return v0
+000010: const-string v2, "com.vivo.vdfs.device.discovery"
+000014: invoke-static v2, v1, Landroid/text/TextUtils;->equals(Ljava/lang/CharSequence; Ljava/lang/CharSequence;)Z
+00001a: move-result v1
+00001c: if-eqz v1, +007h
+000020: invoke-static Lcom/vivo/connbase/h0/c/g$a;->a()Z
+000026: move-result v1
+000028: return v1
+00002a: return v0
+
+METHOD a(Ljava/lang/String; Lcom/vivo/connbase/h0/c/l; Z)Z
+000000: invoke-virtual v2, Lcom/vivo/connbase/h0/c/l;->f()Z
+000006: move-result v0
+000008: if-eqz v0, +006h
+00000c: if-nez v3, +004h
+000010: const/4 v1, 0
+000012: return v1
+000014: invoke-static v1, v2, Lcom/vivo/connbase/h0/c/g$a;->a(Ljava/lang/String; Lcom/vivo/connbase/h0/c/l;)Z
+00001a: move-result v1
+00001c: return v1

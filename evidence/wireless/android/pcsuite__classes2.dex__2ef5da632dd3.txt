@@ -1,0 +1,53 @@
+APK pcsuite/updateApk/pcsuite.apk
+DEX classes2.dex
+CLASS Lcom/vivo/pcsuite/service/PcSuiteObserver$i;
+SUPER Ljava/lang/Object;
+FIELDS
+a Z = None
+b Lcom/vivo/pcsuite/service/PcSuiteObserver; = None
+
+METHOD <init>(Lcom/vivo/pcsuite/service/PcSuiteObserver; Z)V
+000000: invoke-direct v0, Ljava/lang/Object;-><init>()V
+000006: iput-object v1, v0, Lcom/vivo/pcsuite/service/PcSuiteObserver$i;->b Lcom/vivo/pcsuite/service/PcSuiteObserver;
+00000a: iput-boolean v2, v0, Lcom/vivo/pcsuite/service/PcSuiteObserver$i;->a Z
+00000e: return-void 
+
+METHOD run()V
+000000: invoke-static LL2/i;->q()LL2/i;
+000006: move-result-object v0
+000008: invoke-static Lcom/vivo/pcsuite/service/PcSuiteObserver;->k()I
+00000e: move-result v1
+000010: iget-object v2, v4, Lcom/vivo/pcsuite/service/PcSuiteObserver$i;->b Lcom/vivo/pcsuite/service/PcSuiteObserver;
+000014: invoke-static v2, Lcom/vivo/pcsuite/service/PcSuiteObserver;->a(Lcom/vivo/pcsuite/service/PcSuiteObserver;)Ljava/lang/String;
+00001a: move-result-object v3
+00001c: invoke-virtual v0, v1, v3, LL2/i;->s(I Ljava/lang/String;)V
+000022: invoke-static Lcom/vivo/pcsuite/service/PcSuiteObserver;->l()Ljava/lang/String;
+000028: move-result-object v1
+00002a: invoke-virtual v0, v1, LL2/i;->x(Ljava/lang/String;)V
+000030: invoke-static Lcom/vivo/pcsuite/service/PcSuiteObserver;->m()Ljava/lang/String;
+000036: move-result-object v1
+000038: invoke-virtual v0, v1, LL2/i;->A(Ljava/lang/String;)V
+00003e: new-instance v1, Lcom/vivo/pcsuite/service/PcSuiteObserver$i$a;
+000042: invoke-direct v1, v4, Lcom/vivo/pcsuite/service/PcSuiteObserver$i$a;-><init>(Lcom/vivo/pcsuite/service/PcSuiteObserver$i;)V
+000048: invoke-virtual v0, v1, LL2/i;->y(LL2/i$c;)V
+00004e: invoke-virtual v0, LL2/i;->B()V
+000054: iget-boolean v4, v4, Lcom/vivo/pcsuite/service/PcSuiteObserver$i;->a Z
+000058: if-eqz v4, +009h
+00005c: invoke-static LL2/i;->q()LL2/i;
+000062: move-result-object v4
+000064: invoke-virtual v4, LL2/i;->r()V
+00006a: invoke-static Lcom/vivo/pcsuite/service/PcSuiteObserver;->v()Z
+000070: move-result v4
+000072: if-eqz v4, +01bh
+000076: invoke-static LL2/i;->q()LL2/i;
+00007c: move-result-object v4
+00007e: invoke-virtual v4, LL2/i;->t()V
+000084: invoke-static Lde/greenrobot/event/EventBus;->getDefault()Lde/greenrobot/event/EventBus;
+00008a: move-result-object v4
+00008c: new-instance v0, Lcom/vivo/pcsuite/entity/EventBean;
+000090: const/4 v1, 2
+000092: const-string v3, "pcsuite_PcSuiteObserver"
+000096: invoke-direct v0, v1, v3, Lcom/vivo/pcsuite/entity/EventBean;-><init>(I Ljava/lang/String;)V
+00009c: invoke-virtual v4, v0, Lde/greenrobot/event/EventBus;->post(Ljava/lang/Object;)V
+0000a2: invoke-virtual v2, Lcom/vivo/pcsuite/service/PcSuiteObserver;->Q()V
+0000a8: return-void 

@@ -1,0 +1,405 @@
+APK pcsuite/updateApk/pcsuite.apk
+DEX classes2.dex
+CLASS Lcom/vivo/connbase/nfc/NfcTouchedInfo;
+SUPER Ljava/lang/Object;
+FIELDS
+CREATOR Landroid/os/Parcelable$Creator; = None
+deviceId Ljava/lang/String; = None
+deviceName Ljava/lang/String; = None
+deviceType I = None
+extra Ljava/lang/String; = None
+isLocal Z = None
+isPassive Z = None
+isTransferScene Z = None
+openId Ljava/lang/String; = None
+packageName Ljava/lang/String; = None
+realVivoNickName Ljava/lang/String; = None
+remotDeviceType I = None
+selfAvatarUrl Ljava/lang/String; = None
+selfVivoNickName Ljava/lang/String; = None
+sequenceId J = None
+serviceId Ljava/lang/String; = None
+token Ljava/lang/String; = None
+touchVersion J = None
+
+METHOD <clinit>()V
+000000: new-instance v0, Lcom/vivo/connbase/nfc/NfcTouchedInfo$a;
+000004: invoke-direct v0, Lcom/vivo/connbase/nfc/NfcTouchedInfo$a;-><init>()V
+00000a: sput-object v0, Lcom/vivo/connbase/nfc/NfcTouchedInfo;->CREATOR Landroid/os/Parcelable$Creator;
+00000e: return-void 
+
+METHOD <init>()V
+000000: invoke-direct v0, Ljava/lang/Object;-><init>()V
+000006: return-void 
+
+METHOD <init>(Landroid/os/Parcel;)V
+000000: invoke-direct v3, Ljava/lang/Object;-><init>()V
+000006: invoke-virtual v4, Landroid/os/Parcel;->readString()Ljava/lang/String;
+00000c: move-result-object v0
+00000e: iput-object v0, v3, Lcom/vivo/connbase/nfc/NfcTouchedInfo;->deviceId Ljava/lang/String;
+000012: invoke-virtual v4, Landroid/os/Parcel;->readString()Ljava/lang/String;
+000018: move-result-object v0
+00001a: iput-object v0, v3, Lcom/vivo/connbase/nfc/NfcTouchedInfo;->deviceName Ljava/lang/String;
+00001e: invoke-virtual v4, Landroid/os/Parcel;->readString()Ljava/lang/String;
+000024: move-result-object v0
+000026: iput-object v0, v3, Lcom/vivo/connbase/nfc/NfcTouchedInfo;->serviceId Ljava/lang/String;
+00002a: invoke-virtual v4, Landroid/os/Parcel;->readString()Ljava/lang/String;
+000030: move-result-object v0
+000032: iput-object v0, v3, Lcom/vivo/connbase/nfc/NfcTouchedInfo;->selfAvatarUrl Ljava/lang/String;
+000036: invoke-virtual v4, Landroid/os/Parcel;->readString()Ljava/lang/String;
+00003c: move-result-object v0
+00003e: iput-object v0, v3, Lcom/vivo/connbase/nfc/NfcTouchedInfo;->selfVivoNickName Ljava/lang/String;
+000042: invoke-virtual v4, Landroid/os/Parcel;->readString()Ljava/lang/String;
+000048: move-result-object v0
+00004a: iput-object v0, v3, Lcom/vivo/connbase/nfc/NfcTouchedInfo;->packageName Ljava/lang/String;
+00004e: invoke-virtual v4, Landroid/os/Parcel;->readByte()B
+000054: move-result v0
+000056: const/4 v1, 0
+000058: const/4 v2, 1
+00005a: if-eqz v0, +004h
+00005e: move v0, v2
+000060: goto +2h
+000062: move v0, v1
+000064: iput-boolean v0, v3, Lcom/vivo/connbase/nfc/NfcTouchedInfo;->isTransferScene Z
+000068: invoke-virtual v4, Landroid/os/Parcel;->readString()Ljava/lang/String;
+00006e: move-result-object v0
+000070: iput-object v0, v3, Lcom/vivo/connbase/nfc/NfcTouchedInfo;->openId Ljava/lang/String;
+000074: invoke-virtual v4, Landroid/os/Parcel;->readString()Ljava/lang/String;
+00007a: move-result-object v0
+00007c: iput-object v0, v3, Lcom/vivo/connbase/nfc/NfcTouchedInfo;->extra Ljava/lang/String;
+000080: invoke-virtual v4, Landroid/os/Parcel;->readInt()I
+000086: move-result v0
+000088: iput v0, v3, Lcom/vivo/connbase/nfc/NfcTouchedInfo;->deviceType I
+00008c: invoke-virtual v4, Landroid/os/Parcel;->readByte()B
+000092: move-result v0
+000094: if-eqz v0, +004h
+000098: move v0, v2
+00009a: goto +2h
+00009c: move v0, v1
+00009e: iput-boolean v0, v3, Lcom/vivo/connbase/nfc/NfcTouchedInfo;->isPassive Z
+0000a2: invoke-virtual v4, Landroid/os/Parcel;->readByte()B
+0000a8: move-result v0
+0000aa: if-eqz v0, +003h
+0000ae: move v1, v2
+0000b0: iput-boolean v1, v3, Lcom/vivo/connbase/nfc/NfcTouchedInfo;->isLocal Z
+0000b4: invoke-virtual v4, Landroid/os/Parcel;->readString()Ljava/lang/String;
+0000ba: move-result-object v0
+0000bc: iput-object v0, v3, Lcom/vivo/connbase/nfc/NfcTouchedInfo;->realVivoNickName Ljava/lang/String;
+0000c0: invoke-virtual v4, Landroid/os/Parcel;->readInt()I
+0000c6: move-result v0
+0000c8: iput v0, v3, Lcom/vivo/connbase/nfc/NfcTouchedInfo;->remotDeviceType I
+0000cc: invoke-virtual v4, Landroid/os/Parcel;->readString()Ljava/lang/String;
+0000d2: move-result-object v4
+0000d4: iput-object v4, v3, Lcom/vivo/connbase/nfc/NfcTouchedInfo;->token Ljava/lang/String;
+0000d8: return-void 
+
+METHOD <init>(Lcom/vivo/connbase/nfc/NfcTouchedInfo$a;)V
+000000: invoke-direct v0, Lcom/vivo/connbase/nfc/NfcTouchedInfo;-><init>()V
+000006: return-void 
+
+METHOD access$102(Lcom/vivo/connbase/nfc/NfcTouchedInfo; J)J
+000000: iput-wide v1, v0, Lcom/vivo/connbase/nfc/NfcTouchedInfo;->touchVersion J
+000004: return-wide v1
+
+METHOD access$202(Lcom/vivo/connbase/nfc/NfcTouchedInfo; Ljava/lang/String;)Ljava/lang/String;
+000000: iput-object v1, v0, Lcom/vivo/connbase/nfc/NfcTouchedInfo;->realVivoNickName Ljava/lang/String;
+000004: return-object v1
+
+METHOD access$302(Lcom/vivo/connbase/nfc/NfcTouchedInfo; I)I
+000000: iput v1, v0, Lcom/vivo/connbase/nfc/NfcTouchedInfo;->remotDeviceType I
+000004: return v1
+
+METHOD access$402(Lcom/vivo/connbase/nfc/NfcTouchedInfo; Ljava/lang/String;)Ljava/lang/String;
+000000: iput-object v1, v0, Lcom/vivo/connbase/nfc/NfcTouchedInfo;->token Ljava/lang/String;
+000004: return-object v1
+
+METHOD describeContents()I
+000000: const/4 v0, 0
+000002: return v0
+
+METHOD getDeviceId()Ljava/lang/String;
+000000: iget-object v0, v0, Lcom/vivo/connbase/nfc/NfcTouchedInfo;->deviceId Ljava/lang/String;
+000004: return-object v0
+
+METHOD getDeviceName()Ljava/lang/String;
+000000: iget-object v0, v0, Lcom/vivo/connbase/nfc/NfcTouchedInfo;->deviceName Ljava/lang/String;
+000004: return-object v0
+
+METHOD getDeviceType()I
+000000: iget v0, v0, Lcom/vivo/connbase/nfc/NfcTouchedInfo;->deviceType I
+000004: return v0
+
+METHOD getExtra()Ljava/lang/String;
+000000: iget-object v0, v0, Lcom/vivo/connbase/nfc/NfcTouchedInfo;->extra Ljava/lang/String;
+000004: return-object v0
+
+METHOD getOpenId()Ljava/lang/String;
+000000: iget-object v0, v0, Lcom/vivo/connbase/nfc/NfcTouchedInfo;->openId Ljava/lang/String;
+000004: return-object v0
+
+METHOD getPackageName()Ljava/lang/String;
+000000: iget-object v0, v0, Lcom/vivo/connbase/nfc/NfcTouchedInfo;->packageName Ljava/lang/String;
+000004: return-object v0
+
+METHOD getRealVivoNickName()Ljava/lang/String;
+000000: iget-object v0, v0, Lcom/vivo/connbase/nfc/NfcTouchedInfo;->realVivoNickName Ljava/lang/String;
+000004: return-object v0
+
+METHOD getRemotDeviceType()I
+000000: iget v0, v0, Lcom/vivo/connbase/nfc/NfcTouchedInfo;->remotDeviceType I
+000004: return v0
+
+METHOD getSelfAvatarUrl()Ljava/lang/String;
+000000: iget-object v0, v0, Lcom/vivo/connbase/nfc/NfcTouchedInfo;->selfAvatarUrl Ljava/lang/String;
+000004: return-object v0
+
+METHOD getSelfVivoNickName()Ljava/lang/String;
+000000: iget-object v0, v0, Lcom/vivo/connbase/nfc/NfcTouchedInfo;->selfVivoNickName Ljava/lang/String;
+000004: return-object v0
+
+METHOD getSequenceId()J
+000000: iget-wide v0, v2, Lcom/vivo/connbase/nfc/NfcTouchedInfo;->sequenceId J
+000004: return-wide v0
+
+METHOD getServiceId()Ljava/lang/String;
+000000: iget-object v0, v0, Lcom/vivo/connbase/nfc/NfcTouchedInfo;->serviceId Ljava/lang/String;
+000004: return-object v0
+
+METHOD getToken()Ljava/lang/String;
+000000: iget-object v0, v0, Lcom/vivo/connbase/nfc/NfcTouchedInfo;->token Ljava/lang/String;
+000004: return-object v0
+
+METHOD getTouchVersion()J
+000000: iget-wide v0, v2, Lcom/vivo/connbase/nfc/NfcTouchedInfo;->touchVersion J
+000004: return-wide v0
+
+METHOD isLocal()Z
+000000: iget-boolean v0, v0, Lcom/vivo/connbase/nfc/NfcTouchedInfo;->isLocal Z
+000004: return v0
+
+METHOD isPassive()Z
+000000: iget-boolean v0, v0, Lcom/vivo/connbase/nfc/NfcTouchedInfo;->isPassive Z
+000004: return v0
+
+METHOD isTransferScene()Z
+000000: iget-boolean v0, v0, Lcom/vivo/connbase/nfc/NfcTouchedInfo;->isTransferScene Z
+000004: return v0
+
+METHOD readFromParcel(Landroid/os/Parcel;)V
+000000: invoke-virtual v4, Landroid/os/Parcel;->readString()Ljava/lang/String;
+000006: move-result-object v0
+000008: iput-object v0, v3, Lcom/vivo/connbase/nfc/NfcTouchedInfo;->deviceId Ljava/lang/String;
+00000c: invoke-virtual v4, Landroid/os/Parcel;->readString()Ljava/lang/String;
+000012: move-result-object v0
+000014: iput-object v0, v3, Lcom/vivo/connbase/nfc/NfcTouchedInfo;->deviceName Ljava/lang/String;
+000018: invoke-virtual v4, Landroid/os/Parcel;->readString()Ljava/lang/String;
+00001e: move-result-object v0
+000020: iput-object v0, v3, Lcom/vivo/connbase/nfc/NfcTouchedInfo;->serviceId Ljava/lang/String;
+000024: invoke-virtual v4, Landroid/os/Parcel;->readString()Ljava/lang/String;
+00002a: move-result-object v0
+00002c: iput-object v0, v3, Lcom/vivo/connbase/nfc/NfcTouchedInfo;->selfAvatarUrl Ljava/lang/String;
+000030: invoke-virtual v4, Landroid/os/Parcel;->readString()Ljava/lang/String;
+000036: move-result-object v0
+000038: iput-object v0, v3, Lcom/vivo/connbase/nfc/NfcTouchedInfo;->selfVivoNickName Ljava/lang/String;
+00003c: invoke-virtual v4, Landroid/os/Parcel;->readString()Ljava/lang/String;
+000042: move-result-object v0
+000044: iput-object v0, v3, Lcom/vivo/connbase/nfc/NfcTouchedInfo;->packageName Ljava/lang/String;
+000048: invoke-virtual v4, Landroid/os/Parcel;->readByte()B
+00004e: move-result v0
+000050: const/4 v1, 0
+000052: const/4 v2, 1
+000054: if-eqz v0, +004h
+000058: move v0, v2
+00005a: goto +2h
+00005c: move v0, v1
+00005e: iput-boolean v0, v3, Lcom/vivo/connbase/nfc/NfcTouchedInfo;->isTransferScene Z
+000062: invoke-virtual v4, Landroid/os/Parcel;->readString()Ljava/lang/String;
+000068: move-result-object v0
+00006a: iput-object v0, v3, Lcom/vivo/connbase/nfc/NfcTouchedInfo;->openId Ljava/lang/String;
+00006e: invoke-virtual v4, Landroid/os/Parcel;->readString()Ljava/lang/String;
+000074: move-result-object v0
+000076: iput-object v0, v3, Lcom/vivo/connbase/nfc/NfcTouchedInfo;->extra Ljava/lang/String;
+00007a: invoke-virtual v4, Landroid/os/Parcel;->readInt()I
+000080: move-result v0
+000082: iput v0, v3, Lcom/vivo/connbase/nfc/NfcTouchedInfo;->deviceType I
+000086: invoke-virtual v4, Landroid/os/Parcel;->readByte()B
+00008c: move-result v0
+00008e: if-eqz v0, +004h
+000092: move v0, v2
+000094: goto +2h
+000096: move v0, v1
+000098: iput-boolean v0, v3, Lcom/vivo/connbase/nfc/NfcTouchedInfo;->isPassive Z
+00009c: invoke-virtual v4, Landroid/os/Parcel;->readByte()B
+0000a2: move-result v0
+0000a4: if-eqz v0, +003h
+0000a8: move v1, v2
+0000aa: iput-boolean v1, v3, Lcom/vivo/connbase/nfc/NfcTouchedInfo;->isLocal Z
+0000ae: invoke-virtual v4, Landroid/os/Parcel;->readString()Ljava/lang/String;
+0000b4: move-result-object v0
+0000b6: iput-object v0, v3, Lcom/vivo/connbase/nfc/NfcTouchedInfo;->realVivoNickName Ljava/lang/String;
+0000ba: invoke-virtual v4, Landroid/os/Parcel;->readInt()I
+0000c0: move-result v0
+0000c2: iput v0, v3, Lcom/vivo/connbase/nfc/NfcTouchedInfo;->remotDeviceType I
+0000c6: invoke-virtual v4, Landroid/os/Parcel;->readString()Ljava/lang/String;
+0000cc: move-result-object v4
+0000ce: iput-object v4, v3, Lcom/vivo/connbase/nfc/NfcTouchedInfo;->token Ljava/lang/String;
+0000d2: return-void 
+
+METHOD setDeviceId(Ljava/lang/String;)V
+000000: iput-object v1, v0, Lcom/vivo/connbase/nfc/NfcTouchedInfo;->deviceId Ljava/lang/String;
+000004: return-void 
+
+METHOD setDeviceName(Ljava/lang/String;)V
+000000: iput-object v1, v0, Lcom/vivo/connbase/nfc/NfcTouchedInfo;->deviceName Ljava/lang/String;
+000004: return-void 
+
+METHOD setDeviceType(I)V
+000000: iput v1, v0, Lcom/vivo/connbase/nfc/NfcTouchedInfo;->deviceType I
+000004: return-void 
+
+METHOD setExtra(Ljava/lang/String;)V
+000000: iput-object v1, v0, Lcom/vivo/connbase/nfc/NfcTouchedInfo;->extra Ljava/lang/String;
+000004: return-void 
+
+METHOD setIsLocal(Z)V
+000000: iput-boolean v1, v0, Lcom/vivo/connbase/nfc/NfcTouchedInfo;->isLocal Z
+000004: return-void 
+
+METHOD setOpenId(Ljava/lang/String;)V
+000000: iput-object v1, v0, Lcom/vivo/connbase/nfc/NfcTouchedInfo;->openId Ljava/lang/String;
+000004: return-void 
+
+METHOD setPackageName(Ljava/lang/String;)V
+000000: iput-object v1, v0, Lcom/vivo/connbase/nfc/NfcTouchedInfo;->packageName Ljava/lang/String;
+000004: return-void 
+
+METHOD setPassive(Z)V
+000000: iput-boolean v1, v0, Lcom/vivo/connbase/nfc/NfcTouchedInfo;->isPassive Z
+000004: return-void 
+
+METHOD setRealVivoNickName(Ljava/lang/String;)V
+000000: iput-object v1, v0, Lcom/vivo/connbase/nfc/NfcTouchedInfo;->realVivoNickName Ljava/lang/String;
+000004: return-void 
+
+METHOD setRemotDeviceType(I)V
+000000: iput v1, v0, Lcom/vivo/connbase/nfc/NfcTouchedInfo;->remotDeviceType I
+000004: return-void 
+
+METHOD setSelfAvatarUrl(Ljava/lang/String;)V
+000000: iput-object v1, v0, Lcom/vivo/connbase/nfc/NfcTouchedInfo;->selfAvatarUrl Ljava/lang/String;
+000004: return-void 
+
+METHOD setSelfVivoNickName(Ljava/lang/String;)V
+000000: iput-object v1, v0, Lcom/vivo/connbase/nfc/NfcTouchedInfo;->selfVivoNickName Ljava/lang/String;
+000004: return-void 
+
+METHOD setSequenceId(J)V
+000000: iput-wide v1, v0, Lcom/vivo/connbase/nfc/NfcTouchedInfo;->sequenceId J
+000004: return-void 
+
+METHOD setServiceId(Ljava/lang/String;)V
+000000: iput-object v1, v0, Lcom/vivo/connbase/nfc/NfcTouchedInfo;->serviceId Ljava/lang/String;
+000004: return-void 
+
+METHOD setToken(Ljava/lang/String;)V
+000000: iput-object v1, v0, Lcom/vivo/connbase/nfc/NfcTouchedInfo;->token Ljava/lang/String;
+000004: return-void 
+
+METHOD setTransferScene(Z)V
+000000: iput-boolean v1, v0, Lcom/vivo/connbase/nfc/NfcTouchedInfo;->isTransferScene Z
+000004: return-void 
+
+METHOD toString()Ljava/lang/String;
+000000: new-instance v0, Ljava/lang/StringBuilder;
+000004: const-string v1, "NfcTouchedInfo{dd='"
+000008: invoke-direct v0, v1, Ljava/lang/StringBuilder;-><init>(Ljava/lang/String;)V
+00000e: iget-object v1, v3, Lcom/vivo/connbase/nfc/NfcTouchedInfo;->deviceId Ljava/lang/String;
+000012: invoke-virtual v0, v1, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+000018: const-string v1, "', deviceName='"
+00001c: invoke-virtual v0, v1, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+000022: iget-object v1, v3, Lcom/vivo/connbase/nfc/NfcTouchedInfo;->deviceName Ljava/lang/String;
+000026: invoke-virtual v0, v1, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+00002c: const-string v1, "', sd='"
+000030: invoke-virtual v0, v1, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+000036: iget-object v1, v3, Lcom/vivo/connbase/nfc/NfcTouchedInfo;->serviceId Ljava/lang/String;
+00003a: invoke-virtual v0, v1, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+000040: const-string v1, "', selfAvatar='"
+000044: invoke-virtual v0, v1, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+00004a: iget-object v1, v3, Lcom/vivo/connbase/nfc/NfcTouchedInfo;->selfAvatarUrl Ljava/lang/String;
+00004e: invoke-virtual v0, v1, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+000054: const-string v1, "', packageName='"
+000058: invoke-virtual v0, v1, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+00005e: iget-object v1, v3, Lcom/vivo/connbase/nfc/NfcTouchedInfo;->packageName Ljava/lang/String;
+000062: invoke-virtual v0, v1, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+000068: const-string v1, "', extra='"
+00006c: invoke-virtual v0, v1, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+000072: iget-object v1, v3, Lcom/vivo/connbase/nfc/NfcTouchedInfo;->extra Ljava/lang/String;
+000076: invoke-virtual v0, v1, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+00007c: const-string v1, "', deviceType="
+000080: invoke-virtual v0, v1, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+000086: iget v1, v3, Lcom/vivo/connbase/nfc/NfcTouchedInfo;->deviceType I
+00008a: invoke-virtual v0, v1, Ljava/lang/StringBuilder;->append(I)Ljava/lang/StringBuilder;
+000090: const-string v1, ", isTransferScene="
+000094: invoke-virtual v0, v1, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+00009a: iget-boolean v1, v3, Lcom/vivo/connbase/nfc/NfcTouchedInfo;->isTransferScene Z
+00009e: invoke-virtual v0, v1, Ljava/lang/StringBuilder;->append(Z)Ljava/lang/StringBuilder;
+0000a4: const-string v1, ", sequenceId="
+0000a8: invoke-virtual v0, v1, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+0000ae: iget-wide v1, v3, Lcom/vivo/connbase/nfc/NfcTouchedInfo;->sequenceId J
+0000b2: invoke-virtual v0, v1, v2, Ljava/lang/StringBuilder;->append(J)Ljava/lang/StringBuilder;
+0000b8: const-string v1, ", touchVersion="
+0000bc: invoke-virtual v0, v1, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+0000c2: iget-wide v1, v3, Lcom/vivo/connbase/nfc/NfcTouchedInfo;->touchVersion J
+0000c6: invoke-virtual v0, v1, v2, Ljava/lang/StringBuilder;->append(J)Ljava/lang/StringBuilder;
+0000cc: const-string v1, ", isPassive="
+0000d0: invoke-virtual v0, v1, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+0000d6: iget-boolean v1, v3, Lcom/vivo/connbase/nfc/NfcTouchedInfo;->isPassive Z
+0000da: invoke-virtual v0, v1, Ljava/lang/StringBuilder;->append(Z)Ljava/lang/StringBuilder;
+0000e0: const-string v1, ", realVivoNickName="
+0000e4: invoke-virtual v0, v1, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+0000ea: iget-object v1, v3, Lcom/vivo/connbase/nfc/NfcTouchedInfo;->realVivoNickName Ljava/lang/String;
+0000ee: invoke-virtual v0, v1, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+0000f4: const-string v1, ", remotDeviceType="
+0000f8: invoke-virtual v0, v1, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+0000fe: iget v1, v3, Lcom/vivo/connbase/nfc/NfcTouchedInfo;->remotDeviceType I
+000102: invoke-virtual v0, v1, Ljava/lang/StringBuilder;->append(I)Ljava/lang/StringBuilder;
+000108: const-string v1, ", token="
+00010c: invoke-virtual v0, v1, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+000112: iget-object v3, v3, Lcom/vivo/connbase/nfc/NfcTouchedInfo;->token Ljava/lang/String;
+000116: const/16 v1, 125
+00011a: invoke-static v0, v3, v1, Landroidx/constraintlayout/core/motion/a;->a(Ljava/lang/StringBuilder; Ljava/lang/String; C)Ljava/lang/String;
+000120: move-result-object v3
+000122: return-object v3
+
+METHOD writeToParcel(Landroid/os/Parcel; I)V
+000000: iget-object v2, v0, Lcom/vivo/connbase/nfc/NfcTouchedInfo;->deviceId Ljava/lang/String;
+000004: invoke-virtual v1, v2, Landroid/os/Parcel;->writeString(Ljava/lang/String;)V
+00000a: iget-object v2, v0, Lcom/vivo/connbase/nfc/NfcTouchedInfo;->deviceName Ljava/lang/String;
+00000e: invoke-virtual v1, v2, Landroid/os/Parcel;->writeString(Ljava/lang/String;)V
+000014: iget-object v2, v0, Lcom/vivo/connbase/nfc/NfcTouchedInfo;->serviceId Ljava/lang/String;
+000018: invoke-virtual v1, v2, Landroid/os/Parcel;->writeString(Ljava/lang/String;)V
+00001e: iget-object v2, v0, Lcom/vivo/connbase/nfc/NfcTouchedInfo;->selfAvatarUrl Ljava/lang/String;
+000022: invoke-virtual v1, v2, Landroid/os/Parcel;->writeString(Ljava/lang/String;)V
+000028: iget-object v2, v0, Lcom/vivo/connbase/nfc/NfcTouchedInfo;->selfVivoNickName Ljava/lang/String;
+00002c: invoke-virtual v1, v2, Landroid/os/Parcel;->writeString(Ljava/lang/String;)V
+000032: iget-object v2, v0, Lcom/vivo/connbase/nfc/NfcTouchedInfo;->packageName Ljava/lang/String;
+000036: invoke-virtual v1, v2, Landroid/os/Parcel;->writeString(Ljava/lang/String;)V
+00003c: iget-boolean v2, v0, Lcom/vivo/connbase/nfc/NfcTouchedInfo;->isTransferScene Z
+000040: invoke-virtual v1, v2, Landroid/os/Parcel;->writeByte(B)V
+000046: iget-object v2, v0, Lcom/vivo/connbase/nfc/NfcTouchedInfo;->openId Ljava/lang/String;
+00004a: invoke-virtual v1, v2, Landroid/os/Parcel;->writeString(Ljava/lang/String;)V
+000050: iget-object v2, v0, Lcom/vivo/connbase/nfc/NfcTouchedInfo;->extra Ljava/lang/String;
+000054: invoke-virtual v1, v2, Landroid/os/Parcel;->writeString(Ljava/lang/String;)V
+00005a: iget v2, v0, Lcom/vivo/connbase/nfc/NfcTouchedInfo;->deviceType I
+00005e: invoke-virtual v1, v2, Landroid/os/Parcel;->writeInt(I)V
+000064: iget-boolean v2, v0, Lcom/vivo/connbase/nfc/NfcTouchedInfo;->isPassive Z
+000068: invoke-virtual v1, v2, Landroid/os/Parcel;->writeByte(B)V
+00006e: iget-boolean v2, v0, Lcom/vivo/connbase/nfc/NfcTouchedInfo;->isLocal Z
+000072: invoke-virtual v1, v2, Landroid/os/Parcel;->writeByte(B)V
+000078: iget-object v2, v0, Lcom/vivo/connbase/nfc/NfcTouchedInfo;->realVivoNickName Ljava/lang/String;
+00007c: invoke-virtual v1, v2, Landroid/os/Parcel;->writeString(Ljava/lang/String;)V
+000082: iget v2, v0, Lcom/vivo/connbase/nfc/NfcTouchedInfo;->remotDeviceType I
+000086: invoke-virtual v1, v2, Landroid/os/Parcel;->writeInt(I)V
+00008c: iget-object v0, v0, Lcom/vivo/connbase/nfc/NfcTouchedInfo;->token Ljava/lang/String;
+000090: invoke-virtual v1, v0, Landroid/os/Parcel;->writeString(Ljava/lang/String;)V
+000096: return-void 

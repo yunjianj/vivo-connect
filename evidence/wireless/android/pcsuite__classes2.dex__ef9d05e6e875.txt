@@ -1,0 +1,57 @@
+APK pcsuite/updateApk/pcsuite.apk
+DEX classes2.dex
+CLASS Lcom/vivo/ic/webview/rebound/widget/ReboundLayout$a;
+SUPER Ljava/lang/Object;
+FIELDS
+a I = None
+b Z = None
+c Z = None
+d Lcom/vivo/ic/webview/rebound/widget/ReboundLayout; = None
+
+METHOD j(Landroid/view/MotionEvent; Landroid/view/MotionEvent; F)V
+000000: invoke-virtual v11, Landroid/view/MotionEvent;->getY()F
+000006: move-result v11
+000008: invoke-virtual v10, Landroid/view/MotionEvent;->getY()F
+00000e: move-result v10
+000010: sub-float/2addr v11, v10
+000012: float-to-int v10, v11
+000014: iget-object v11, v9, Lcom/vivo/ic/webview/rebound/widget/ReboundLayout$a;->d Lcom/vivo/ic/webview/rebound/widget/ReboundLayout;
+000018: invoke-static v11, Lcom/vivo/ic/webview/rebound/widget/ReboundLayout;->access$1500(Lcom/vivo/ic/webview/rebound/widget/ReboundLayout;)I
+00001e: move-result v0
+000020: neg-int v0, v0
+000022: if-ge v10, v0, +007h
+000026: iget-boolean v0, v9, Lcom/vivo/ic/webview/rebound/widget/ReboundLayout$a;->c Z
+00002a: if-eqz v0, +003h
+00002e: goto +39h
+000030: invoke-static v11, Lcom/vivo/ic/webview/rebound/widget/ReboundLayout;->access$1500(Lcom/vivo/ic/webview/rebound/widget/ReboundLayout;)I
+000036: move-result v0
+000038: if-le v10, v0, +007h
+00003c: iget-boolean v9, v9, Lcom/vivo/ic/webview/rebound/widget/ReboundLayout$a;->b Z
+000040: if-eqz v9, +003h
+000044: goto +2eh
+000046: invoke-static v11, Lcom/vivo/ic/webview/rebound/widget/ReboundLayout;->access$2200(Lcom/vivo/ic/webview/rebound/widget/ReboundLayout;)Z
+00004c: move-result v9
+00004e: if-nez v9, +029h
+000052: invoke-static v12, Ljava/lang/Math;->abs(F)F
+000058: move-result v9
+00005a: invoke-static v11, Lcom/vivo/ic/webview/rebound/widget/ReboundLayout;->access$2300(Lcom/vivo/ic/webview/rebound/widget/ReboundLayout;)I
+000060: move-result v10
+000062: int-to-float v10, v10
+000064: cmpl-float v9, v9, v10
+000068: if-ltz v9, +01ch
+00006c: const/4 v9, 0
+00006e: invoke-static v11, v9, Lcom/vivo/ic/webview/rebound/widget/ReboundLayout;->access$2002(Lcom/vivo/ic/webview/rebound/widget/ReboundLayout; I)I
+000074: invoke-static v11, Lcom/vivo/ic/webview/rebound/widget/ReboundLayout;->access$2100(Lcom/vivo/ic/webview/rebound/widget/ReboundLayout;)Lcom/vivo/ic/webview/rebound/springkit/scorller/ReboundOverScroller;
+00007a: move-result-object v0
+00007c: neg-float v9, v12
+00007e: float-to-int v4, v9
+000080: const/high16 v7, -2147483648
+000084: const v8, 2147483647
+00008a: const/4 v1, 0
+00008c: const/4 v2, 0
+00008e: const/4 v3, 0
+000090: const/4 v5, 0
+000092: const/4 v6, 0
+000094: invoke-virtual/range v0 ... v8, Lcom/vivo/ic/webview/rebound/springkit/scorller/ReboundOverScroller;->fling(I I I I I I I I)V
+00009a: invoke-virtual v11, Landroid/view/View;->invalidate()V
+0000a0: return-void 

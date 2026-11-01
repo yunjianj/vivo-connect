@@ -1,0 +1,53 @@
+APK pcsuite/updateApk/connbase.apk
+DEX classes2.dex
+CLASS Lcom/vivo/pcsuite/pcconnect/wifip2p/deputy/a$a;
+SUPER Ljava/lang/Object;
+FIELDS
+
+
+METHOD <init>()V
+000000: invoke-direct v0, Ljava/lang/Object;-><init>()V
+000006: return-void 
+
+METHOD onServiceConnected(Landroid/content/ComponentName; Landroid/os/IBinder;)V
+000000: new-instance v0, Ljava/lang/StringBuilder;
+000004: invoke-direct v0, Ljava/lang/StringBuilder;-><init>()V
+00000a: const-string v1, "onServiceConnected: "
+00000e: invoke-virtual v0, v1, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+000014: invoke-virtual v0, v3, Ljava/lang/StringBuilder;->append(Ljava/lang/Object;)Ljava/lang/StringBuilder;
+00001a: invoke-virtual v0, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
+000020: move-result-object v3
+000022: const-string v0, "Daemon"
+000026: invoke-static v0, v3, Lc/c/f/a/b;->k(Ljava/lang/String; Ljava/lang/String;)V
+00002c: invoke-static v4, Lc/c/e/a/a$b;->a(Landroid/os/IBinder;)Lc/c/e/a/a;
+000032: move-result-object v3
+000034: invoke-static v3, Lcom/vivo/pcsuite/pcconnect/wifip2p/deputy/a;->a(Lc/c/e/a/a;)Lc/c/e/a/a;
+00003a: invoke-static Lcom/vivo/pcsuite/pcconnect/wifip2p/deputy/a;->a()Lc/c/e/a/a;
+000040: move-result-object v3
+000042: invoke-interface v3, Lc/c/e/a/a;->b()V
+000048: goto +7h
+00004a: move-exception v3
+00004c: const-string v4, "registerProcessObserver failed."
+000050: invoke-static v0, v4, v3, Lc/c/f/a/b;->b(Ljava/lang/String; Ljava/lang/String; Ljava/lang/Throwable;)V
+000056: return-void 
+
+METHOD onServiceDisconnected(Landroid/content/ComponentName;)V
+000000: new-instance v0, Ljava/lang/StringBuilder;
+000004: invoke-direct v0, Ljava/lang/StringBuilder;-><init>()V
+00000a: const-string v1, "onServiceDisconnected: "
+00000e: invoke-virtual v0, v1, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+000014: invoke-virtual v0, v3, Ljava/lang/StringBuilder;->append(Ljava/lang/Object;)Ljava/lang/StringBuilder;
+00001a: invoke-virtual v0, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
+000020: move-result-object v3
+000022: const-string v0, "Daemon"
+000026: invoke-static v0, v3, Lc/c/f/a/b;->k(Ljava/lang/String; Ljava/lang/String;)V
+00002c: invoke-static Lcom/vivo/pcsuite/pcconnect/wifip2p/deputy/a;->a()Lc/c/e/a/a;
+000032: move-result-object v3
+000034: invoke-interface v3, Lc/c/e/a/a;->a()V
+00003a: goto +7h
+00003c: move-exception v3
+00003e: const-string v1, "unregisterProcessObserver failed."
+000042: invoke-static v0, v1, v3, Lc/c/f/a/b;->b(Ljava/lang/String; Ljava/lang/String; Ljava/lang/Throwable;)V
+000048: const/4 v3, 0
+00004a: invoke-static v3, Lcom/vivo/pcsuite/pcconnect/wifip2p/deputy/a;->a(Lc/c/e/a/a;)Lc/c/e/a/a;
+000050: return-void 

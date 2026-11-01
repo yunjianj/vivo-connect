@@ -1,0 +1,35 @@
+APK pcsuite/updateApk/pcsuite.apk
+DEX classes2.dex
+CLASS Lcom/vivo/httpdns/k/e2401;
+SUPER Ljava/lang/Object;
+FIELDS
+a Ljava/lang/String; = 'NetworkUtils'
+b I = 255
+c I = 1
+d I = 2
+e I = 3
+f I = 4
+g I = 5
+h I = 6
+i I = 252
+j I = 251
+k I = 10
+l I = 16
+m I = 17
+n I = 18
+o I = 20
+p Ljava/util/concurrent/atomic/AtomicInteger; = None
+q Ljava/util/concurrent/atomic/AtomicReference; = None
+r Ljava/util/concurrent/atomic/AtomicReference; = None
+
+METHOD c(Landroid/content/Context;)I
+000000: const-string v0, "phone"
+000004: invoke-virtual v1, v0, Landroid/content/Context;->getSystemService(Ljava/lang/String;)Ljava/lang/Object;
+00000a: move-result-object v1
+00000c: check-cast v1, Landroid/telephony/TelephonyManager;
+000010: if-eqz v1, +007h
+000014: invoke-virtual v1, Landroid/telephony/TelephonyManager;->getPhoneType()I
+00001a: move-result v1
+00001c: return v1
+00001e: const/4 v1, -1
+000020: return v1

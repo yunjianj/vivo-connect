@@ -1,0 +1,72 @@
+APK pcsuite/updateApk/connbase.apk
+DEX classes.dex
+CLASS Lcom/vivo/connbase/l0/b;
+SUPER Ljava/lang/Object;
+FIELDS
+f Ljava/lang/String; = 'IPayloadCallbackWrapper'
+e Lcom/vivo/connbase/IPayloadCallback; = None
+
+METHOD <init>(Lcom/vivo/connbase/IPayloadCallback;)V
+000000: invoke-direct v2, Ljava/lang/Object;-><init>()V
+000006: new-instance v0, Ljava/lang/StringBuilder;
+00000a: invoke-direct v0, Ljava/lang/StringBuilder;-><init>()V
+000010: const-string v1, "new IPayloadCallback:"
+000014: invoke-virtual v0, v1, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+00001a: invoke-virtual v0, v3, Ljava/lang/StringBuilder;->append(Ljava/lang/Object;)Ljava/lang/StringBuilder;
+000020: invoke-virtual v0, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
+000026: move-result-object v0
+000028: const-string v1, "IPayloadCallbackWrapper"
+00002c: invoke-static v1, v0, Lc/c/f/a/b;->k(Ljava/lang/String; Ljava/lang/String;)V
+000032: iput-object v3, v2, Lcom/vivo/connbase/l0/b;->e Lcom/vivo/connbase/IPayloadCallback;
+000036: return-void 
+
+METHOD asBinder()Landroid/os/IBinder;
+000000: iget-object v0, v1, Lcom/vivo/connbase/l0/b;->e Lcom/vivo/connbase/IPayloadCallback;
+000004: invoke-interface v0, Landroid/os/IInterface;->asBinder()Landroid/os/IBinder;
+00000a: move-result-object v0
+00000c: return-object v0
+
+METHOD onFileReceived(Ljava/lang/String; Ljava/lang/String; Landroid/os/ParcelFileDescriptor;)V
+000000: new-instance v0, Ljava/lang/StringBuilder;
+000004: invoke-direct v0, Ljava/lang/StringBuilder;-><init>()V
+00000a: const-string v1, "onFileReceived IPayloadCallback:"
+00000e: invoke-virtual v0, v1, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+000014: iget-object v1, v2, Lcom/vivo/connbase/l0/b;->e Lcom/vivo/connbase/IPayloadCallback;
+000018: invoke-virtual v0, v1, Ljava/lang/StringBuilder;->append(Ljava/lang/Object;)Ljava/lang/StringBuilder;
+00001e: invoke-virtual v0, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
+000024: move-result-object v0
+000026: const-string v1, "IPayloadCallbackWrapper"
+00002a: invoke-static v1, v0, Lc/c/f/a/b;->k(Ljava/lang/String; Ljava/lang/String;)V
+000030: iget-object v0, v2, Lcom/vivo/connbase/l0/b;->e Lcom/vivo/connbase/IPayloadCallback;
+000034: invoke-interface v0, v3, v4, v5, Lcom/vivo/connbase/IPayloadCallback;->onFileReceived(Ljava/lang/String; Ljava/lang/String; Landroid/os/ParcelFileDescriptor;)V
+00003a: return-void 
+
+METHOD onPayloadReceived(Ljava/lang/String; Ljava/lang/String;)V
+000000: new-instance v0, Ljava/lang/StringBuilder;
+000004: invoke-direct v0, Ljava/lang/StringBuilder;-><init>()V
+00000a: const-string v1, "onPayloadReceived IPayloadCallback:"
+00000e: invoke-virtual v0, v1, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+000014: iget-object v1, v2, Lcom/vivo/connbase/l0/b;->e Lcom/vivo/connbase/IPayloadCallback;
+000018: invoke-virtual v0, v1, Ljava/lang/StringBuilder;->append(Ljava/lang/Object;)Ljava/lang/StringBuilder;
+00001e: invoke-virtual v0, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
+000024: move-result-object v0
+000026: const-string v1, "IPayloadCallbackWrapper"
+00002a: invoke-static v1, v0, Lc/c/f/a/b;->k(Ljava/lang/String; Ljava/lang/String;)V
+000030: iget-object v0, v2, Lcom/vivo/connbase/l0/b;->e Lcom/vivo/connbase/IPayloadCallback;
+000034: invoke-interface v0, v3, v4, Lcom/vivo/connbase/IPayloadCallback;->onPayloadReceived(Ljava/lang/String; Ljava/lang/String;)V
+00003a: return-void 
+
+METHOD onPayloadTransferUpdate(Ljava/lang/String; Ljava/lang/String;)V
+000000: new-instance v0, Ljava/lang/StringBuilder;
+000004: invoke-direct v0, Ljava/lang/StringBuilder;-><init>()V
+00000a: const-string v1, "onPayloadTransferUpdate IPayloadCallback:"
+00000e: invoke-virtual v0, v1, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+000014: iget-object v1, v2, Lcom/vivo/connbase/l0/b;->e Lcom/vivo/connbase/IPayloadCallback;
+000018: invoke-virtual v0, v1, Ljava/lang/StringBuilder;->append(Ljava/lang/Object;)Ljava/lang/StringBuilder;
+00001e: invoke-virtual v0, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
+000024: move-result-object v0
+000026: const-string v1, "IPayloadCallbackWrapper"
+00002a: invoke-static v1, v0, Lc/c/f/a/b;->k(Ljava/lang/String; Ljava/lang/String;)V
+000030: iget-object v0, v2, Lcom/vivo/connbase/l0/b;->e Lcom/vivo/connbase/IPayloadCallback;
+000034: invoke-interface v0, v3, v4, Lcom/vivo/connbase/IPayloadCallback;->onPayloadTransferUpdate(Ljava/lang/String; Ljava/lang/String;)V
+00003a: return-void 

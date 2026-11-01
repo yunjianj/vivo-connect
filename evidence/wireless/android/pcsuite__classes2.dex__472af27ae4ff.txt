@@ -1,0 +1,47 @@
+APK pcsuite/updateApk/pcsuite.apk
+DEX classes2.dex
+CLASS Lcom/vivo/connbase/connectcenter/ConnCoworkImpl$1;
+SUPER Ls1/a$a;
+FIELDS
+this$0 Lcom/vivo/connbase/connectcenter/ConnCoworkImpl; = None
+
+METHOD <init>(Lcom/vivo/connbase/connectcenter/ConnCoworkImpl;)V
+000000: iput-object v1, v0, Lcom/vivo/connbase/connectcenter/ConnCoworkImpl$1;->this$0 Lcom/vivo/connbase/connectcenter/ConnCoworkImpl;
+000004: invoke-direct v0, Ls1/a$a;-><init>()V
+00000a: return-void 
+
+METHOD onConnectCenterEvent(Landroid/os/Bundle;)V
+000000: const-string v0, "ConnCoworkImpl"
+000004: const-string v1, "null"
+000008: const-string v2, "onConnectCenterEvent  start, cmd = "
+00000c: invoke-super v5, v6, Ls1/a$a;->onConnectCenterEvent(Landroid/os/Bundle;)V
+000012: if-nez v6, +003h
+000016: goto +34h
+000018: const-string v3, "cmd"
+00001c: invoke-virtual v6, v3, v1, Landroid/os/BaseBundle;->getString(Ljava/lang/String; Ljava/lang/String;)Ljava/lang/String;
+000022: move-result-object v3
+000024: const-string v4, "cmd2"
+000028: invoke-virtual v6, v4, v1, Landroid/os/BaseBundle;->getString(Ljava/lang/String; Ljava/lang/String;)Ljava/lang/String;
+00002e: move-result-object v1
+000030: new-instance v4, Ljava/lang/StringBuilder;
+000034: invoke-direct v4, v2, Ljava/lang/StringBuilder;-><init>(Ljava/lang/String;)V
+00003a: invoke-virtual v4, v3, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+000040: const-string v2, ", cmd2 ="
+000044: invoke-virtual v4, v2, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+00004a: invoke-virtual v4, v1, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+000050: invoke-virtual v4, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
+000056: move-result-object v2
+000058: invoke-static v0, v2, Lcom/vivo/aiengine/find/device/sdk/impl/util/LogUtil;->i(Ljava/lang/String; Ljava/lang/String;)V
+00005e: const-string v2, "cowork"
+000062: invoke-static v3, v2, Landroid/text/TextUtils;->equals(Ljava/lang/CharSequence; Ljava/lang/CharSequence;)Z
+000068: move-result v2
+00006a: if-eqz v2, +00ah
+00006e: iget-object v5, v5, Lcom/vivo/connbase/connectcenter/ConnCoworkImpl$1;->this$0 Lcom/vivo/connbase/connectcenter/ConnCoworkImpl;
+000072: invoke-static v5, v6, v1, Lcom/vivo/connbase/connectcenter/ConnCoworkImpl;->access$000(Lcom/vivo/connbase/connectcenter/ConnCoworkImpl; Landroid/os/Bundle; Ljava/lang/String;)V
+000078: return-void 
+00007a: move-exception v5
+00007c: goto +2h
+00007e: return-void 
+000080: const-string v6, "onDeviceStateChanged error"
+000084: invoke-static v0, v6, v5, Lcom/vivo/aiengine/find/device/sdk/impl/util/LogUtil;->e(Ljava/lang/String; Ljava/lang/String; Ljava/lang/Throwable;)V
+00008a: return-void 

@@ -1,0 +1,64 @@
+APK pcsuite/updateApk/pcsuite.apk
+DEX classes2.dex
+CLASS Lcom/vivo/pcsuite/service/PcSuiteObserver$f;
+SUPER Ljava/lang/Object;
+FIELDS
+a Lcom/vivo/pcsuite/service/PcSuiteObserver; = None
+
+METHOD <init>(Lcom/vivo/pcsuite/service/PcSuiteObserver;)V
+000000: invoke-direct v0, Ljava/lang/Object;-><init>()V
+000006: iput-object v1, v0, Lcom/vivo/pcsuite/service/PcSuiteObserver$f;->a Lcom/vivo/pcsuite/service/PcSuiteObserver;
+00000a: return-void 
+
+METHOD onPrimaryClipChanged()V
+000000: sget v0, Lcom/vivo/pcsuite/service/PcSuiteObserver;->D I
+000004: const-string v0, "onPrimaryClipChanged"
+000008: const-string v1, "pcsuite_PcSuiteObserver"
+00000c: invoke-static v1, v0, Lcom/vivo/connect/logger/EasyLog;->i(Ljava/lang/String; Ljava/lang/String;)V
+000012: invoke-static Lcom/vivo/castsdk/sdk/source/CastSource;->getInstance()Lcom/vivo/castsdk/sdk/source/CastSource;
+000018: move-result-object v0
+00001a: sget-object v2, Lcom/vivo/pcsuite/PcSuiteApplication;->I1 Lcom/vivo/pcsuite/PcSuiteApplication;
+00001e: invoke-virtual v0, v2, Lcom/vivo/castsdk/sdk/source/CastSource;->isMirrorScreen(Landroid/content/Context;)Z
+000024: move-result v0
+000026: if-eqz v0, +003h
+00002a: goto +51h
+00002c: iget-object v3, v3, Lcom/vivo/pcsuite/service/PcSuiteObserver$f;->a Lcom/vivo/pcsuite/service/PcSuiteObserver;
+000030: invoke-static v3, Lcom/vivo/pcsuite/service/PcSuiteObserver;->b(Lcom/vivo/pcsuite/service/PcSuiteObserver;)Landroid/content/ClipboardManager;
+000036: move-result-object v0
+000038: invoke-virtual v0, Landroid/content/ClipboardManager;->getPrimaryClip()Landroid/content/ClipData;
+00003e: move-result-object v0
+000040: if-eqz v0, +046h
+000044: invoke-virtual v0, Landroid/content/ClipData;->getItemCount()I
+00004a: move-result v2
+00004c: if-lez v2, +040h
+000050: const/4 v2, 0
+000052: invoke-virtual v0, v2, Landroid/content/ClipData;->getItemAt(I)Landroid/content/ClipData$Item;
+000058: move-result-object v0
+00005a: if-eqz v0, +039h
+00005e: invoke-virtual v0, Landroid/content/ClipData$Item;->getText()Ljava/lang/CharSequence;
+000064: move-result-object v2
+000066: if-eqz v2, +033h
+00006a: invoke-virtual v0, Landroid/content/ClipData$Item;->getText()Ljava/lang/CharSequence;
+000070: move-result-object v0
+000072: invoke-interface v0, Ljava/lang/CharSequence;->toString()Ljava/lang/String;
+000078: move-result-object v0
+00007a: invoke-static v3, Lcom/vivo/pcsuite/service/PcSuiteObserver;->d(Lcom/vivo/pcsuite/service/PcSuiteObserver;)Ljava/lang/String;
+000080: move-result-object v2
+000082: invoke-virtual v0, v2, Ljava/lang/String;->equals(Ljava/lang/Object;)Z
+000088: move-result v2
+00008a: if-eqz v2, +008h
+00008e: const-string v3, "onPrimaryClipChanged duplicate text, skip"
+000092: invoke-static v1, v3, Lcom/vivo/connect/logger/EasyLog;->i(Ljava/lang/String; Ljava/lang/String;)V
+000098: return-void 
+00009a: invoke-static v3, v0, Lcom/vivo/pcsuite/service/PcSuiteObserver;->g(Lcom/vivo/pcsuite/service/PcSuiteObserver; Ljava/lang/String;)V
+0000a0: const-string v3, "onPrimaryClipChanged text="
+0000a4: invoke-virtual v3, v0, Ljava/lang/String;->concat(Ljava/lang/String;)Ljava/lang/String;
+0000aa: move-result-object v3
+0000ac: invoke-static v1, v3, Lcom/vivo/connect/logger/EasyLog;->i(Ljava/lang/String; Ljava/lang/String;)V
+0000b2: invoke-static Lr2/g;->f()Lr2/g;
+0000b8: move-result-object v3
+0000ba: const-string v1, "CLIPBOARD_TEXT:"
+0000be: invoke-virtual v1, v0, Ljava/lang/String;->concat(Ljava/lang/String;)Ljava/lang/String;
+0000c4: move-result-object v0
+0000c6: invoke-virtual v3, v0, Lr2/g;->i(Ljava/lang/String;)V
+0000cc: return-void 

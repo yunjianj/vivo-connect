@@ -1,0 +1,151 @@
+APK pcsuite/updateApk/connbase.apk
+DEX classes2.dex
+CLASS Lcom/vivo/pcsuite/pcconnect/p/a$b;
+SUPER Landroid/app/a$b;
+FIELDS
+j Lcom/vivo/pcsuite/pcconnect/p/a; = None
+
+METHOD <init>(Lcom/vivo/pcsuite/pcconnect/p/a;)V
+000000: iput-object v1, v0, Lcom/vivo/pcsuite/pcconnect/p/a$b;->j Lcom/vivo/pcsuite/pcconnect/p/a;
+000004: invoke-direct v0, Landroid/app/a$b;-><init>()V
+00000a: return-void 
+
+METHOD a(I I Ljava/lang/String; Ljava/lang/String;)V
+000000: invoke-static Lcom/vivo/pcsuite/pcconnect/p/a;->a()Ljava/lang/String;
+000006: move-result-object v0
+000008: new-instance v1, Ljava/lang/StringBuilder;
+00000c: invoke-direct v1, Ljava/lang/StringBuilder;-><init>()V
+000012: const-string v2, "onProcessCreated pid="
+000016: invoke-virtual v1, v2, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+00001c: invoke-virtual v1, v4, Ljava/lang/StringBuilder;->append(I)Ljava/lang/StringBuilder;
+000022: const-string v2, ",uid="
+000026: invoke-virtual v1, v2, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+00002c: invoke-virtual v1, v5, Ljava/lang/StringBuilder;->append(I)Ljava/lang/StringBuilder;
+000032: const-string v2, ",packageName="
+000036: invoke-virtual v1, v2, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+00003c: invoke-virtual v1, v6, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+000042: const-string v2, ",processName="
+000046: invoke-virtual v1, v2, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+00004c: invoke-virtual v1, v7, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+000052: invoke-virtual v1, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
+000058: move-result-object v1
+00005a: invoke-static v0, v1, Lc/c/f/a/b;->k(Ljava/lang/String; Ljava/lang/String;)V
+000060: iget-object v0, v3, Lcom/vivo/pcsuite/pcconnect/p/a$b;->j Lcom/vivo/pcsuite/pcconnect/p/a;
+000064: invoke-static v0, Lcom/vivo/pcsuite/pcconnect/p/a;->a(Lcom/vivo/pcsuite/pcconnect/p/a;)Lcom/vivo/pcsuite/pcconnect/p/a$c;
+00006a: move-result-object v0
+00006c: if-eqz v0, +00bh
+000070: iget-object v0, v3, Lcom/vivo/pcsuite/pcconnect/p/a$b;->j Lcom/vivo/pcsuite/pcconnect/p/a;
+000074: invoke-static v0, Lcom/vivo/pcsuite/pcconnect/p/a;->a(Lcom/vivo/pcsuite/pcconnect/p/a;)Lcom/vivo/pcsuite/pcconnect/p/a$c;
+00007a: move-result-object v0
+00007c: invoke-virtual v0, v4, v5, v6, v7, Lcom/vivo/pcsuite/pcconnect/p/a$c;->a(I I Ljava/lang/String; Ljava/lang/String;)V
+000082: return-void 
+
+METHOD a(I I Z Ljava/lang/String; Ljava/lang/String; Landroid/content/ComponentName;)V
+000000: invoke-static Lcom/vivo/pcsuite/pcconnect/p/a;->a()Ljava/lang/String;
+000006: move-result-object v0
+000008: new-instance v1, Ljava/lang/StringBuilder;
+00000c: invoke-direct v1, Ljava/lang/StringBuilder;-><init>()V
+000012: const-string v2, "onForegroundActivitiesChanged pid="
+000016: invoke-virtual v1, v2, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+00001c: invoke-virtual v1, v9, Ljava/lang/StringBuilder;->append(I)Ljava/lang/StringBuilder;
+000022: const-string v2, ",uid="
+000026: invoke-virtual v1, v2, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+00002c: invoke-virtual v1, v10, Ljava/lang/StringBuilder;->append(I)Ljava/lang/StringBuilder;
+000032: const-string v2, ",foregroundActivities="
+000036: invoke-virtual v1, v2, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+00003c: invoke-virtual v1, v11, Ljava/lang/StringBuilder;->append(Z)Ljava/lang/StringBuilder;
+000042: const-string v2, ",packageName="
+000046: invoke-virtual v1, v2, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+00004c: invoke-virtual v1, v12, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+000052: const-string v2, ",processName="
+000056: invoke-virtual v1, v2, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+00005c: invoke-virtual v1, v13, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+000062: const-string v2, ",cpn="
+000066: invoke-virtual v1, v2, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+00006c: invoke-virtual v1, v14, Ljava/lang/StringBuilder;->append(Ljava/lang/Object;)Ljava/lang/StringBuilder;
+000072: invoke-virtual v1, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
+000078: move-result-object v1
+00007a: invoke-static v0, v1, Lc/c/f/a/b;->k(Ljava/lang/String; Ljava/lang/String;)V
+000080: iget-object v0, v8, Lcom/vivo/pcsuite/pcconnect/p/a$b;->j Lcom/vivo/pcsuite/pcconnect/p/a;
+000084: invoke-static v0, Lcom/vivo/pcsuite/pcconnect/p/a;->a(Lcom/vivo/pcsuite/pcconnect/p/a;)Lcom/vivo/pcsuite/pcconnect/p/a$c;
+00008a: move-result-object v0
+00008c: if-eqz v0, +011h
+000090: iget-object v0, v8, Lcom/vivo/pcsuite/pcconnect/p/a$b;->j Lcom/vivo/pcsuite/pcconnect/p/a;
+000094: invoke-static v0, Lcom/vivo/pcsuite/pcconnect/p/a;->a(Lcom/vivo/pcsuite/pcconnect/p/a;)Lcom/vivo/pcsuite/pcconnect/p/a$c;
+00009a: move-result-object v1
+00009c: move v2, v9
+00009e: move v3, v10
+0000a0: move v4, v11
+0000a2: move-object v5, v12
+0000a4: move-object v6, v13
+0000a6: move-object v7, v14
+0000a8: invoke-virtual/range v1 ... v7, Lcom/vivo/pcsuite/pcconnect/p/a$c;->a(I I Z Ljava/lang/String; Ljava/lang/String; Landroid/content/ComponentName;)V
+0000ae: return-void 
+
+METHOD b(I I I Ljava/lang/String; Ljava/lang/String;)V
+000000: invoke-static Lcom/vivo/pcsuite/pcconnect/p/a;->a()Ljava/lang/String;
+000006: move-result-object v0
+000008: new-instance v1, Ljava/lang/StringBuilder;
+00000c: invoke-direct v1, Ljava/lang/StringBuilder;-><init>()V
+000012: const-string v2, "onForegroundServicesChanged pid="
+000016: invoke-virtual v1, v2, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+00001c: invoke-virtual v1, v8, Ljava/lang/StringBuilder;->append(I)Ljava/lang/StringBuilder;
+000022: const-string v2, ",uid="
+000026: invoke-virtual v1, v2, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+00002c: invoke-virtual v1, v9, Ljava/lang/StringBuilder;->append(I)Ljava/lang/StringBuilder;
+000032: const-string v2, ",serviceTypes="
+000036: invoke-virtual v1, v2, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+00003c: invoke-virtual v1, v10, Ljava/lang/StringBuilder;->append(I)Ljava/lang/StringBuilder;
+000042: const-string v2, ",packageName="
+000046: invoke-virtual v1, v2, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+00004c: invoke-virtual v1, v11, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+000052: const-string v2, ",processName="
+000056: invoke-virtual v1, v2, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+00005c: invoke-virtual v1, v12, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+000062: invoke-virtual v1, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
+000068: move-result-object v1
+00006a: invoke-static v0, v1, Lc/c/f/a/b;->k(Ljava/lang/String; Ljava/lang/String;)V
+000070: iget-object v0, v7, Lcom/vivo/pcsuite/pcconnect/p/a$b;->j Lcom/vivo/pcsuite/pcconnect/p/a;
+000074: invoke-static v0, Lcom/vivo/pcsuite/pcconnect/p/a;->a(Lcom/vivo/pcsuite/pcconnect/p/a;)Lcom/vivo/pcsuite/pcconnect/p/a$c;
+00007a: move-result-object v0
+00007c: if-eqz v0, +010h
+000080: iget-object v0, v7, Lcom/vivo/pcsuite/pcconnect/p/a$b;->j Lcom/vivo/pcsuite/pcconnect/p/a;
+000084: invoke-static v0, Lcom/vivo/pcsuite/pcconnect/p/a;->a(Lcom/vivo/pcsuite/pcconnect/p/a;)Lcom/vivo/pcsuite/pcconnect/p/a$c;
+00008a: move-result-object v1
+00008c: move v2, v8
+00008e: move v3, v9
+000090: move v4, v10
+000092: move-object v5, v11
+000094: move-object v6, v12
+000096: invoke-virtual/range v1 ... v6, Lcom/vivo/pcsuite/pcconnect/p/a$c;->b(I I I Ljava/lang/String; Ljava/lang/String;)V
+00009c: return-void 
+
+METHOD b(I I Ljava/lang/String; Ljava/lang/String;)V
+000000: invoke-static Lcom/vivo/pcsuite/pcconnect/p/a;->a()Ljava/lang/String;
+000006: move-result-object v0
+000008: new-instance v1, Ljava/lang/StringBuilder;
+00000c: invoke-direct v1, Ljava/lang/StringBuilder;-><init>()V
+000012: const-string v2, "onProcessDied pid="
+000016: invoke-virtual v1, v2, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+00001c: invoke-virtual v1, v4, Ljava/lang/StringBuilder;->append(I)Ljava/lang/StringBuilder;
+000022: const-string v2, ",uid="
+000026: invoke-virtual v1, v2, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+00002c: invoke-virtual v1, v5, Ljava/lang/StringBuilder;->append(I)Ljava/lang/StringBuilder;
+000032: const-string v2, ",packageName="
+000036: invoke-virtual v1, v2, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+00003c: invoke-virtual v1, v6, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+000042: const-string v2, ",processName="
+000046: invoke-virtual v1, v2, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+00004c: invoke-virtual v1, v7, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+000052: invoke-virtual v1, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
+000058: move-result-object v1
+00005a: invoke-static v0, v1, Lc/c/f/a/b;->k(Ljava/lang/String; Ljava/lang/String;)V
+000060: iget-object v0, v3, Lcom/vivo/pcsuite/pcconnect/p/a$b;->j Lcom/vivo/pcsuite/pcconnect/p/a;
+000064: invoke-static v0, Lcom/vivo/pcsuite/pcconnect/p/a;->a(Lcom/vivo/pcsuite/pcconnect/p/a;)Lcom/vivo/pcsuite/pcconnect/p/a$c;
+00006a: move-result-object v0
+00006c: if-eqz v0, +00bh
+000070: iget-object v0, v3, Lcom/vivo/pcsuite/pcconnect/p/a$b;->j Lcom/vivo/pcsuite/pcconnect/p/a;
+000074: invoke-static v0, Lcom/vivo/pcsuite/pcconnect/p/a;->a(Lcom/vivo/pcsuite/pcconnect/p/a;)Lcom/vivo/pcsuite/pcconnect/p/a$c;
+00007a: move-result-object v0
+00007c: invoke-virtual v0, v4, v5, v6, v7, Lcom/vivo/pcsuite/pcconnect/p/a$c;->b(I I Ljava/lang/String; Ljava/lang/String;)V
+000082: return-void 

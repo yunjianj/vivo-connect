@@ -1,0 +1,110 @@
+APK pcsuite/updateApk/pcsuite.apk
+DEX classes2.dex
+CLASS Lcom/vivo/pcsuite/connect/ConnectModel$4;
+SUPER Ljava/lang/Object;
+FIELDS
+
+
+METHOD onFail(Ljava/lang/String;)V
+000000: new-instance v1, Ljava/lang/StringBuilder;
+000004: const-string v0, "postRequest onFail :"
+000008: invoke-direct v1, v0, Ljava/lang/StringBuilder;-><init>(Ljava/lang/String;)V
+00000e: invoke-virtual v1, v2, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+000014: invoke-virtual v1, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
+00001a: move-result-object v1
+00001c: const-string v2, "ConnectModel"
+000020: invoke-static v2, v1, Lcom/vivo/connect/logger/EasyLog;->i(Ljava/lang/String; Ljava/lang/String;)V
+000026: const-string v1, "Eventbus form onFail"
+00002a: invoke-static v2, v1, Lcom/vivo/connect/logger/EasyLog;->i(Ljava/lang/String; Ljava/lang/String;)V
+000030: invoke-static Lde/greenrobot/event/EventBus;->getDefault()Lde/greenrobot/event/EventBus;
+000036: move-result-object v1
+000038: const/4 v0, 2
+00003a: invoke-static v0, v2, v1, Landroidx/constraintlayout/core/motion/a;->b(I Ljava/lang/String; Lde/greenrobot/event/EventBus;)V
+000040: const-string v1, "0"
+000044: const-string v2, "1"
+000048: invoke-static v1, v2, v1, Lcom/vivo/pcsuite/util/o0;->P0(Ljava/lang/String; Ljava/lang/String; Ljava/lang/String;)V
+00004e: return-void 
+
+METHOD onSuccess(Ljava/lang/Object;)V
+000000: check-cast v1, Ljava/lang/String;
+000004: invoke-virtual v0, v1, Lcom/vivo/pcsuite/connect/ConnectModel$4;->onSuccess(Ljava/lang/String;)V
+00000a: return-void 
+
+METHOD onSuccess(Ljava/lang/String;)V
+000000: const-string v7, "0000"
+000004: const-string v0, "qr request fail : "
+000008: new-instance v1, Ljava/lang/StringBuilder;
+00000c: const-string v2, "postRequest onSuccess:"
+000010: invoke-direct v1, v2, Ljava/lang/StringBuilder;-><init>(Ljava/lang/String;)V
+000016: invoke-virtual v1, v8, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+00001c: invoke-virtual v1, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
+000022: move-result-object v1
+000024: const-string v2, "ConnectModel"
+000028: invoke-static v2, v1, Lcom/vivo/connect/logger/EasyLog;->i(Ljava/lang/String; Ljava/lang/String;)V
+00002e: invoke-static v8, Landroid/text/TextUtils;->isEmpty(Ljava/lang/CharSequence;)Z
+000034: move-result v1
+000036: const-string v3, "0"
+00003a: const-string v4, "1"
+00003e: if-nez v1, +08bh
+000042: const/4 v1, 2
+000044: sget-object v5, Lcom/vivo/pcsuite/PcSuiteApplication;->I1 Lcom/vivo/pcsuite/PcSuiteApplication;
+000048: invoke-virtual v5, Lcom/vivo/pcsuite/PcSuiteApplication;->p()Lcom/google/gson/Gson;
+00004e: move-result-object v5
+000050: const-class v6, Lcom/vivo/pcsuite/connect/ConnectModel$Service;
+000054: invoke-virtual v5, v8, v6, Lcom/google/gson/Gson;->fromJson(Ljava/lang/String; Ljava/lang/Class;)Ljava/lang/Object;
+00005a: move-result-object v5
+00005c: check-cast v5, Lcom/vivo/pcsuite/connect/ConnectModel$Service;
+000060: invoke-virtual v5, Lcom/vivo/pcsuite/connect/ConnectModel$Service;->getCode()I
+000066: move-result v5
+000068: if-eqz v5, +037h
+00006c: new-instance v6, Ljava/lang/StringBuilder;
+000070: invoke-direct v6, v0, Ljava/lang/StringBuilder;-><init>(Ljava/lang/String;)V
+000076: invoke-virtual v6, v5, Ljava/lang/StringBuilder;->append(I)Ljava/lang/StringBuilder;
+00007c: invoke-virtual v6, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
+000082: move-result-object v0
+000084: invoke-static v2, v0, Lcom/vivo/connect/logger/EasyLog;->i(Ljava/lang/String; Ljava/lang/String;)V
+00008a: const-string v0, "Eventbus form sendHttpRequest"
+00008e: invoke-static v2, v0, Lcom/vivo/connect/logger/EasyLog;->i(Ljava/lang/String; Ljava/lang/String;)V
+000094: invoke-static Lde/greenrobot/event/EventBus;->getDefault()Lde/greenrobot/event/EventBus;
+00009a: move-result-object v0
+00009c: new-instance v5, Lcom/vivo/pcsuite/entity/EventBean;
+0000a0: invoke-direct v5, v1, v2, Lcom/vivo/pcsuite/entity/EventBean;-><init>(I Ljava/lang/String;)V
+0000a6: invoke-virtual v0, v5, Lde/greenrobot/event/EventBus;->post(Ljava/lang/Object;)V
+0000ac: const-string v0, "qr connect report server fail,code is not 0,append 0000"
+0000b0: invoke-static v2, v0, Lcom/vivo/connect/logger/EasyLog;->i(Ljava/lang/String; Ljava/lang/String;)V
+0000b6: sget-object v0, Lcom/vivo/pcsuite/PcSuiteApplication;->I1 Lcom/vivo/pcsuite/PcSuiteApplication;
+0000ba: invoke-virtual v0, Lcom/vivo/pcsuite/PcSuiteApplication;->E()Ljava/lang/StringBuffer;
+0000c0: move-result-object v0
+0000c2: invoke-virtual v0, v7, Ljava/lang/StringBuffer;->append(Ljava/lang/String;)Ljava/lang/StringBuffer;
+0000c8: invoke-static v4, v3, v3, Lcom/vivo/pcsuite/util/o0;->P0(Ljava/lang/String; Ljava/lang/String; Ljava/lang/String;)V
+0000ce: invoke-static Lcom/vivo/pcsuite/util/o0;->O0()V
+0000d4: return-void 
+0000d6: const-string v0, "qr connect report server success,append 1"
+0000da: invoke-static v2, v0, Lcom/vivo/connect/logger/EasyLog;->i(Ljava/lang/String; Ljava/lang/String;)V
+0000e0: sget-object v0, Lcom/vivo/pcsuite/PcSuiteApplication;->I1 Lcom/vivo/pcsuite/PcSuiteApplication;
+0000e4: invoke-virtual v0, Lcom/vivo/pcsuite/PcSuiteApplication;->E()Ljava/lang/StringBuffer;
+0000ea: move-result-object v0
+0000ec: invoke-virtual v0, v4, Ljava/lang/StringBuffer;->append(Ljava/lang/String;)Ljava/lang/StringBuffer;
+0000f2: invoke-static v4, v3, v4, Lcom/vivo/pcsuite/util/o0;->P0(Ljava/lang/String; Ljava/lang/String; Ljava/lang/String;)V
+0000f8: return-void 
+0000fa: new-instance v0, Ljava/lang/StringBuilder;
+0000fe: const-string v5, "sendHttpRequest result Exception:"
+000102: invoke-direct v0, v5, Ljava/lang/StringBuilder;-><init>(Ljava/lang/String;)V
+000108: invoke-virtual v0, v8, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+00010e: invoke-virtual v0, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
+000114: move-result-object v8
+000116: invoke-static v2, v8, Lcom/vivo/connect/logger/EasyLog;->i(Ljava/lang/String; Ljava/lang/String;)V
+00011c: const-string v8, "qr connect report server fail,result is empty 0,append 0000"
+000120: invoke-static v2, v8, Lcom/vivo/connect/logger/EasyLog;->i(Ljava/lang/String; Ljava/lang/String;)V
+000126: invoke-static v4, v3, v3, Lcom/vivo/pcsuite/util/o0;->P0(Ljava/lang/String; Ljava/lang/String; Ljava/lang/String;)V
+00012c: sget-object v8, Lcom/vivo/pcsuite/PcSuiteApplication;->I1 Lcom/vivo/pcsuite/PcSuiteApplication;
+000130: invoke-virtual v8, Lcom/vivo/pcsuite/PcSuiteApplication;->E()Ljava/lang/StringBuffer;
+000136: move-result-object v8
+000138: invoke-virtual v8, v7, Ljava/lang/StringBuffer;->append(Ljava/lang/String;)Ljava/lang/StringBuffer;
+00013e: invoke-static Lcom/vivo/pcsuite/util/o0;->O0()V
+000144: invoke-static Lde/greenrobot/event/EventBus;->getDefault()Lde/greenrobot/event/EventBus;
+00014a: move-result-object v7
+00014c: invoke-static v1, v2, v7, Landroidx/constraintlayout/core/motion/a;->b(I Ljava/lang/String; Lde/greenrobot/event/EventBus;)V
+000152: return-void 
+000154: invoke-static v4, v4, v3, Lcom/vivo/pcsuite/util/o0;->P0(Ljava/lang/String; Ljava/lang/String; Ljava/lang/String;)V
+00015a: return-void 

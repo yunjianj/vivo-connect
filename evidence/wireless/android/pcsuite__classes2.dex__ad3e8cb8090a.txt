@@ -1,0 +1,59 @@
+APK pcsuite/updateApk/pcsuite.apk
+DEX classes2.dex
+CLASS Lcom/vivo/pcsuite/connect/ConnectControlModel$CloudConnectRunnable;
+SUPER Ljava/lang/Object;
+FIELDS
+a Ljava/lang/ref/WeakReference; = None
+b Ljava/util/List; = None
+c I = None
+d Lcom/vivo/pcsuite/entity/PcDeviceInfo; = None
+e Landroid/app/Activity; = None
+
+METHOD <init>(Lcom/vivo/pcsuite/PcSuiteApplication; Ljava/util/List; I Lcom/vivo/pcsuite/entity/PcDeviceInfo; Landroid/app/Activity;)V
+000000: invoke-direct v1, Ljava/lang/Object;-><init>()V
+000006: new-instance v0, Ljava/lang/ref/WeakReference;
+00000a: invoke-direct v0, v2, Ljava/lang/ref/WeakReference;-><init>(Ljava/lang/Object;)V
+000010: iput-object v0, v1, Lcom/vivo/pcsuite/connect/ConnectControlModel$CloudConnectRunnable;->a Ljava/lang/ref/WeakReference;
+000014: iput-object v3, v1, Lcom/vivo/pcsuite/connect/ConnectControlModel$CloudConnectRunnable;->b Ljava/util/List;
+000018: iput v4, v1, Lcom/vivo/pcsuite/connect/ConnectControlModel$CloudConnectRunnable;->c I
+00001c: iput-object v5, v1, Lcom/vivo/pcsuite/connect/ConnectControlModel$CloudConnectRunnable;->d Lcom/vivo/pcsuite/entity/PcDeviceInfo;
+000020: iput-object v6, v1, Lcom/vivo/pcsuite/connect/ConnectControlModel$CloudConnectRunnable;->e Landroid/app/Activity;
+000024: invoke-static Lk2/y;->H()Lk2/y;
+00002a: move-result-object v1
+00002c: invoke-virtual v1, v5, Lk2/y;->V(Lcom/vivo/pcsuite/entity/PcDeviceInfo;)V
+000032: return-void 
+
+METHOD a(Lcom/vivo/pcsuite/connect/ConnectControlModel$CloudConnectRunnable;)Landroid/app/Activity;
+000000: iget-object v0, v0, Lcom/vivo/pcsuite/connect/ConnectControlModel$CloudConnectRunnable;->e Landroid/app/Activity;
+000004: return-object v0
+
+METHOD run()V
+000000: iget-object v0, v4, Lcom/vivo/pcsuite/connect/ConnectControlModel$CloudConnectRunnable;->a Ljava/lang/ref/WeakReference;
+000004: invoke-virtual v0, Ljava/lang/ref/Reference;->get()Ljava/lang/Object;
+00000a: move-result-object v0
+00000c: check-cast v0, Lcom/vivo/pcsuite/PcSuiteApplication;
+000010: if-eqz v0, +035h
+000014: const-string v0, "pcsuite_ConnectControlModel"
+000018: const-string v1, "cloud transfer"
+00001c: invoke-static v0, v1, Lcom/vivo/connect/logger/EasyLog;->i(Ljava/lang/String; Ljava/lang/String;)V
+000022: invoke-static Lcom/vivo/pcsuite/common/AtomNotificationFactory;->s0()Lcom/vivo/pcsuite/common/AtomNotificationFactory;
+000028: move-result-object v0
+00002a: invoke-static Lk2/y;->H()Lk2/y;
+000030: move-result-object v1
+000032: invoke-static v1, Ljava/util/Objects;->requireNonNull(Ljava/lang/Object;)Ljava/lang/Object;
+000038: const/16 v1, 999
+00003c: invoke-virtual v0, v1, Lcom/vivo/pcsuite/common/AtomNotificationFactory;->D(I)V
+000042: const/4 v0, 1
+000044: invoke-static v0, Lcom/vivo/pcsuite/connect/ConnectControlModel;->k(Z)V
+00004a: sget-object v0, Lcom/vivo/pcsuite/PcSuiteApplication;->I1 Lcom/vivo/pcsuite/PcSuiteApplication;
+00004e: const/4 v1, 0
+000050: invoke-virtual v0, v1, Lcom/vivo/pcsuite/PcSuiteApplication;->t0(Z)V
+000056: invoke-static Lk2/y;->H()Lk2/y;
+00005c: move-result-object v0
+00005e: new-instance v1, Lcom/vivo/pcsuite/connect/ConnectControlModel$CloudConnectRunnable$1;
+000062: invoke-direct v1, v4, Lcom/vivo/pcsuite/connect/ConnectControlModel$CloudConnectRunnable$1;-><init>(Lcom/vivo/pcsuite/connect/ConnectControlModel$CloudConnectRunnable;)V
+000068: iget-object v2, v4, Lcom/vivo/pcsuite/connect/ConnectControlModel$CloudConnectRunnable;->b Ljava/util/List;
+00006c: iget v3, v4, Lcom/vivo/pcsuite/connect/ConnectControlModel$CloudConnectRunnable;->c I
+000070: iget-object v4, v4, Lcom/vivo/pcsuite/connect/ConnectControlModel$CloudConnectRunnable;->d Lcom/vivo/pcsuite/entity/PcDeviceInfo;
+000074: invoke-virtual v0, v2, v3, v4, v1, Lk2/y;->M(Ljava/util/List; I Lcom/vivo/pcsuite/entity/PcDeviceInfo; Lcom/vivo/pcsuite/interfaces/QueryTrafficCallback;)V
+00007a: return-void 

@@ -1,0 +1,78 @@
+APK pcsuite/updateApk/connbase.apk
+DEX classes.dex
+CLASS Lcom/vivo/connbase/n0/d/e;
+SUPER Ljava/lang/Object;
+FIELDS
+a Ljava/net/MulticastSocket; = None
+b Ljava/net/InetAddress; = None
+
+METHOD <init>()V
+000000: invoke-direct v2, Ljava/lang/Object;-><init>()V
+000006: new-instance v0, Ljava/net/MulticastSocket;
+00000a: const/16 v1, 2200
+00000e: invoke-direct v0, v1, Ljava/net/MulticastSocket;-><init>(I)V
+000014: iput-object v0, v2, Lcom/vivo/connbase/n0/d/e;->a Ljava/net/MulticastSocket;
+000018: const-string v0, "239.255.255.250"
+00001c: invoke-static v0, Ljava/net/InetAddress;->getByName(Ljava/lang/String;)Ljava/net/InetAddress;
+000022: move-result-object v0
+000024: iput-object v0, v2, Lcom/vivo/connbase/n0/d/e;->b Ljava/net/InetAddress;
+000028: iget-object v1, v2, Lcom/vivo/connbase/n0/d/e;->a Ljava/net/MulticastSocket;
+00002c: invoke-virtual v1, v0, Ljava/net/MulticastSocket;->joinGroup(Ljava/net/InetAddress;)V
+000032: return-void 
+
+METHOD a()V
+000000: iget-object v0, v3, Lcom/vivo/connbase/n0/d/e;->a Ljava/net/MulticastSocket;
+000004: if-eqz v0, +028h
+000008: iget-object v1, v3, Lcom/vivo/connbase/n0/d/e;->b Ljava/net/InetAddress;
+00000c: invoke-virtual v0, v1, Ljava/net/MulticastSocket;->leaveGroup(Ljava/net/InetAddress;)V
+000012: goto +1ch
+000014: move-exception v0
+000016: new-instance v1, Ljava/lang/StringBuilder;
+00001a: invoke-direct v1, Ljava/lang/StringBuilder;-><init>()V
+000020: const-string v2, "stopWlanSearch err:"
+000024: invoke-virtual v1, v2, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+00002a: invoke-virtual v0, Ljava/io/IOException;->getMessage()Ljava/lang/String;
+000030: move-result-object v0
+000032: invoke-virtual v1, v0, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+000038: invoke-virtual v1, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
+00003e: move-result-object v0
+000040: const-string v1, "SSDPSocket"
+000044: invoke-static v1, v0, Lc/c/f/a/b;->g(Ljava/lang/String; Ljava/lang/String;)V
+00004a: iget-object v0, v3, Lcom/vivo/connbase/n0/d/e;->a Ljava/net/MulticastSocket;
+00004e: invoke-virtual v0, Ljava/net/MulticastSocket;->close()V
+000054: return-void 
+
+METHOD a(Ljava/lang/String; Ljava/lang/String;)V
+000000: invoke-static v5, Landroid/text/TextUtils;->isEmpty(Ljava/lang/CharSequence;)Z
+000006: move-result v0
+000008: const/16 v1, 2200
+00000c: if-eqz v0, +012h
+000010: new-instance v5, Ljava/net/DatagramPacket;
+000014: invoke-virtual v4, Ljava/lang/String;->getBytes()[B
+00001a: move-result-object v0
+00001c: invoke-virtual v4, Ljava/lang/String;->length()I
+000022: move-result v4
+000024: iget-object v2, v3, Lcom/vivo/connbase/n0/d/e;->b Ljava/net/InetAddress;
+000028: invoke-direct v5, v0, v4, v2, v1, Ljava/net/DatagramPacket;-><init>([B I Ljava/net/InetAddress; I)V
+00002e: goto +13h
+000030: invoke-static v5, Ljava/net/InetAddress;->getByName(Ljava/lang/String;)Ljava/net/InetAddress;
+000036: move-result-object v5
+000038: new-instance v0, Ljava/net/DatagramPacket;
+00003c: invoke-virtual v4, Ljava/lang/String;->getBytes()[B
+000042: move-result-object v2
+000044: invoke-virtual v4, Ljava/lang/String;->length()I
+00004a: move-result v4
+00004c: invoke-direct v0, v2, v4, v5, v1, Ljava/net/DatagramPacket;-><init>([B I Ljava/net/InetAddress; I)V
+000052: move-object v5, v0
+000054: iget-object v4, v3, Lcom/vivo/connbase/n0/d/e;->a Ljava/net/MulticastSocket;
+000058: invoke-virtual v4, v5, Ljava/net/MulticastSocket;->send(Ljava/net/DatagramPacket;)V
+00005e: return-void 
+
+METHOD b()Ljava/net/DatagramPacket;
+000000: const/16 v0, 4096
+000004: new-array v1, v0, [B
+000008: new-instance v2, Ljava/net/DatagramPacket;
+00000c: invoke-direct v2, v1, v0, Ljava/net/DatagramPacket;-><init>([B I)V
+000012: iget-object v0, v3, Lcom/vivo/connbase/n0/d/e;->a Ljava/net/MulticastSocket;
+000016: invoke-virtual v0, v2, Ljava/net/MulticastSocket;->receive(Ljava/net/DatagramPacket;)V
+00001c: return-object v2

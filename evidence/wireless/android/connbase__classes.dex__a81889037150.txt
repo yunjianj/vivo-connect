@@ -1,0 +1,148 @@
+APK pcsuite/updateApk/connbase.apk
+DEX classes.dex
+CLASS Lcom/vivo/connbase/e0/g/f;
+SUPER Ljava/lang/Object;
+FIELDS
+a Ljava/lang/String; = 'PingUtilsTAG'
+
+METHOD <init>()V
+000000: invoke-direct v0, Ljava/lang/Object;-><init>()V
+000006: return-void 
+
+METHOD a(Ljava/io/InputStream;)V
+000000: const-string v0, "reader close error:"
+000004: const-string v1, "PingUtilsTAG"
+000008: const/4 v2, 0
+00000a: new-instance v3, Ljava/io/BufferedReader;
+00000e: new-instance v4, Ljava/io/InputStreamReader;
+000012: invoke-direct v4, v5, Ljava/io/InputStreamReader;-><init>(Ljava/io/InputStream;)V
+000018: invoke-direct v3, v4, Ljava/io/BufferedReader;-><init>(Ljava/io/Reader;)V
+00001e: invoke-virtual v3, Ljava/io/BufferedReader;->readLine()Ljava/lang/String;
+000024: move-result-object v5
+000026: if-eqz v5, +017h
+00002a: new-instance v2, Ljava/lang/StringBuilder;
+00002e: invoke-direct v2, Ljava/lang/StringBuilder;-><init>()V
+000034: const-string v4, "ping cmd output:"
+000038: invoke-virtual v2, v4, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+00003e: invoke-virtual v2, v5, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+000044: invoke-virtual v2, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
+00004a: move-result-object v5
+00004c: invoke-static v1, v5, Lc/c/f/a/b;->k(Ljava/lang/String; Ljava/lang/String;)V
+000052: goto -1ah
+000054: invoke-virtual v3, Ljava/io/BufferedReader;->close()V
+00005a: goto +47h
+00005c: move-exception v5
+00005e: new-instance v2, Ljava/lang/StringBuilder;
+000062: invoke-direct v2, Ljava/lang/StringBuilder;-><init>()V
+000068: invoke-virtual v2, v0, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+00006e: invoke-virtual v5, Ljava/io/IOException;->toString()Ljava/lang/String;
+000074: move-result-object v5
+000076: invoke-virtual v2, v5, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+00007c: invoke-virtual v2, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
+000082: move-result-object v5
+000084: invoke-static v1, v5, Lc/c/f/a/b;->g(Ljava/lang/String; Ljava/lang/String;)V
+00008a: goto +2fh
+00008c: move-exception v5
+00008e: move-object v2, v3
+000090: goto +2dh
+000092: move-exception v5
+000094: move-object v2, v3
+000096: goto +4h
+000098: move-exception v5
+00009a: goto +28h
+00009c: move-exception v5
+00009e: new-instance v3, Ljava/lang/StringBuilder;
+0000a2: invoke-direct v3, Ljava/lang/StringBuilder;-><init>()V
+0000a8: const-string v4, "readyCmdData falied :"
+0000ac: invoke-virtual v3, v4, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+0000b2: invoke-virtual v5, Ljava/lang/Exception;->toString()Ljava/lang/String;
+0000b8: move-result-object v5
+0000ba: invoke-virtual v3, v5, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+0000c0: invoke-virtual v3, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
+0000c6: move-result-object v5
+0000c8: invoke-static v1, v5, Lc/c/f/a/b;->g(Ljava/lang/String; Ljava/lang/String;)V
+0000ce: if-eqz v2, +00dh
+0000d2: invoke-virtual v2, Ljava/io/BufferedReader;->close()V
+0000d8: goto +8h
+0000da: move-exception v5
+0000dc: new-instance v2, Ljava/lang/StringBuilder;
+0000e0: invoke-direct v2, Ljava/lang/StringBuilder;-><init>()V
+0000e6: goto -3fh
+0000e8: return-void 
+0000ea: if-eqz v2, +01dh
+0000ee: invoke-virtual v2, Ljava/io/BufferedReader;->close()V
+0000f4: goto +18h
+0000f6: move-exception v2
+0000f8: new-instance v3, Ljava/lang/StringBuilder;
+0000fc: invoke-direct v3, Ljava/lang/StringBuilder;-><init>()V
+000102: invoke-virtual v3, v0, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+000108: invoke-virtual v2, Ljava/io/IOException;->toString()Ljava/lang/String;
+00010e: move-result-object v0
+000110: invoke-virtual v3, v0, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+000116: invoke-virtual v3, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
+00011c: move-result-object v0
+00011e: invoke-static v1, v0, Lc/c/f/a/b;->g(Ljava/lang/String; Ljava/lang/String;)V
+000124: throw v5
+
+METHOD a(Ljava/lang/String;)V
+000000: new-instance v0, Ljava/lang/StringBuilder;
+000004: invoke-direct v0, Ljava/lang/StringBuilder;-><init>()V
+00000a: const-string v1, "ping ip:"
+00000e: invoke-virtual v0, v1, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+000014: invoke-virtual v0, v4, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+00001a: invoke-virtual v0, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
+000020: move-result-object v0
+000022: const-string v1, "PingUtilsTAG"
+000026: invoke-static v1, v0, Lc/c/f/a/b;->k(Ljava/lang/String; Ljava/lang/String;)V
+00002c: invoke-static v4, Landroid/text/TextUtils;->isEmpty(Ljava/lang/CharSequence;)Z
+000032: move-result v0
+000034: if-eqz v0, +008h
+000038: const-string v4, "ip is null, do nothing."
+00003c: invoke-static v1, v4, Lc/c/f/a/b;->p(Ljava/lang/String; Ljava/lang/String;)V
+000042: return-void 
+000044: new-instance v0, Ljava/lang/StringBuilder;
+000048: invoke-direct v0, Ljava/lang/StringBuilder;-><init>()V
+00004e: const-string v2, "ping -c 4 -w 5 "
+000052: invoke-virtual v0, v2, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+000058: invoke-virtual v0, v4, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+00005e: invoke-virtual v0, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
+000064: move-result-object v4
+000066: new-instance v0, Ljava/lang/StringBuilder;
+00006a: invoke-direct v0, Ljava/lang/StringBuilder;-><init>()V
+000070: const-string v2, "cmd:"
+000074: invoke-virtual v0, v2, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+00007a: invoke-virtual v0, v4, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+000080: invoke-virtual v0, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
+000086: move-result-object v0
+000088: invoke-static v1, v0, Lc/c/f/a/b;->k(Ljava/lang/String; Ljava/lang/String;)V
+00008e: const/4 v0, 0
+000090: invoke-static Ljava/lang/Runtime;->getRuntime()Ljava/lang/Runtime;
+000096: move-result-object v2
+000098: invoke-virtual v2, v4, Ljava/lang/Runtime;->exec(Ljava/lang/String;)Ljava/lang/Process;
+00009e: move-result-object v0
+0000a0: goto +1ah
+0000a2: move-exception v4
+0000a4: new-instance v2, Ljava/lang/StringBuilder;
+0000a8: invoke-direct v2, Ljava/lang/StringBuilder;-><init>()V
+0000ae: const-string v3, "exec error:"
+0000b2: invoke-virtual v2, v3, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+0000b8: invoke-virtual v4, Ljava/io/IOException;->toString()Ljava/lang/String;
+0000be: move-result-object v4
+0000c0: invoke-virtual v2, v4, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+0000c6: invoke-virtual v2, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
+0000cc: move-result-object v4
+0000ce: invoke-static v1, v4, Lc/c/f/a/b;->g(Ljava/lang/String; Ljava/lang/String;)V
+0000d4: if-eqz v0, +010h
+0000d8: invoke-virtual v0, Ljava/lang/Process;->getInputStream()Ljava/io/InputStream;
+0000de: move-result-object v4
+0000e0: invoke-static v4, Lcom/vivo/connbase/e0/g/f;->b(Ljava/io/InputStream;)V
+0000e6: invoke-virtual v0, Ljava/lang/Process;->getErrorStream()Ljava/io/InputStream;
+0000ec: move-result-object v4
+0000ee: invoke-static v4, Lcom/vivo/connbase/e0/g/f;->b(Ljava/io/InputStream;)V
+0000f4: return-void 
+
+METHOD b(Ljava/io/InputStream;)V
+000000: new-instance v0, Lcom/vivo/connbase/e0/g/a;
+000004: invoke-direct v0, v1, Lcom/vivo/connbase/e0/g/a;-><init>(Ljava/io/InputStream;)V
+00000a: invoke-static v0, Landroid/os/AsyncTask;->execute(Ljava/lang/Runnable;)V
+000010: return-void 

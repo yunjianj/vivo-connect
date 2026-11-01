@@ -1,0 +1,47 @@
+APK pcsuite/updateApk/connbase.apk
+DEX classes.dex
+CLASS Lcom/vivo/connbase/PermissionActivity$a;
+SUPER Ljava/lang/Object;
+FIELDS
+a Lcom/vivo/connbase/PermissionActivity; = None
+
+METHOD <init>(Lcom/vivo/connbase/PermissionActivity;)V
+000000: iput-object v1, v0, Lcom/vivo/connbase/PermissionActivity$a;->a Lcom/vivo/connbase/PermissionActivity;
+000004: invoke-direct v0, Ljava/lang/Object;-><init>()V
+00000a: return-void 
+
+METHOD a(Ljava/lang/Boolean;)V
+000000: iget-object v0, v3, Lcom/vivo/connbase/PermissionActivity$a;->a Lcom/vivo/connbase/PermissionActivity;
+000004: iget-object v0, v0, Lcom/vivo/connbase/PermissionActivity;->a Ljava/lang/String;
+000008: new-instance v1, Ljava/lang/StringBuilder;
+00000c: invoke-direct v1, Ljava/lang/StringBuilder;-><init>()V
+000012: const-string v2, "onNetStateChanged, isNetworkActive=1"
+000016: invoke-virtual v1, v2, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+00001c: invoke-virtual v1, v4, Ljava/lang/StringBuilder;->append(Ljava/lang/Object;)Ljava/lang/StringBuilder;
+000022: invoke-virtual v1, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
+000028: move-result-object v1
+00002a: invoke-static v0, v1, Lc/c/f/a/b;->k(Ljava/lang/String; Ljava/lang/String;)V
+000030: invoke-virtual v4, Ljava/lang/Boolean;->booleanValue()Z
+000036: move-result v4
+000038: const/4 v0, 0
+00003a: if-eqz v4, +00dh
+00003e: invoke-static Lorg/greenrobot/eventbus/EventBus;->getDefault()Lorg/greenrobot/eventbus/EventBus;
+000044: move-result-object v4
+000046: new-instance v1, Lcom/vivo/connbase/o/g;
+00004a: const/4 v2, 3
+00004c: invoke-direct v1, v2, v0, Lcom/vivo/connbase/o/g;-><init>(I Ljava/lang/Object;)V
+000052: goto +bh
+000054: invoke-static Lorg/greenrobot/eventbus/EventBus;->getDefault()Lorg/greenrobot/eventbus/EventBus;
+00005a: move-result-object v4
+00005c: new-instance v1, Lcom/vivo/connbase/o/g;
+000060: const/4 v2, 2
+000062: invoke-direct v1, v2, v0, Lcom/vivo/connbase/o/g;-><init>(I Ljava/lang/Object;)V
+000068: invoke-virtual v4, v1, Lorg/greenrobot/eventbus/EventBus;->post(Ljava/lang/Object;)V
+00006e: iget-object v4, v3, Lcom/vivo/connbase/PermissionActivity$a;->a Lcom/vivo/connbase/PermissionActivity;
+000072: invoke-virtual v4, Landroid/app/Activity;->finish()V
+000078: return-void 
+
+METHOD a(Ljava/lang/Object;)V
+000000: check-cast v1, Ljava/lang/Boolean;
+000004: invoke-virtual v0, v1, Lcom/vivo/connbase/PermissionActivity$a;->a(Ljava/lang/Boolean;)V
+00000a: return-void 

@@ -1,0 +1,23 @@
+APK pcsuite/updateApk/pcsuite.apk
+DEX classes.dex
+CLASS Lcom/bbk/account/base/BBKAccountManager;
+SUPER Ljava/lang/Object;
+FIELDS
+TAG Ljava/lang/String; = 'BBKAccountManager'
+instance Lcom/bbk/account/base/BBKAccountManager; = None
+mInited Ljava/util/concurrent/atomic/AtomicBoolean; = None
+mPassportInited Ljava/util/concurrent/atomic/AtomicBoolean; = None
+
+METHOD getPhonenum()Ljava/lang/String;
+000000: invoke-static Lcom/bbk/account/base/AccountManagerProxy;->getInstance()Lcom/bbk/account/base/absinterface/AccountInfoInterface;
+000006: move-result-object v0
+000008: invoke-interface v0, Lcom/bbk/account/base/absinterface/AccountInfoInterface;->getPhonenum()Ljava/lang/String;
+00000e: move-result-object v0
+000010: return-object v0
+
+METHOD getPhonenum(Z)Ljava/lang/String;
+000000: invoke-static Lcom/bbk/account/base/AccountManagerProxy;->getInstance()Lcom/bbk/account/base/absinterface/AccountInfoInterface;
+000006: move-result-object v0
+000008: invoke-interface v0, v1, Lcom/bbk/account/base/absinterface/AccountInfoInterface;->getPhonenum(Z)Ljava/lang/String;
+00000e: move-result-object v0
+000010: return-object v0

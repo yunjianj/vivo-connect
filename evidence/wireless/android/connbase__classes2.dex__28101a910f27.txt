@@ -1,0 +1,32 @@
+APK pcsuite/updateApk/connbase.apk
+DEX classes2.dex
+CLASS Lcom/vivo/pcsuite/pcconnect/wifip2p/WifiP2pService$f$a;
+SUPER Ljava/lang/Object;
+FIELDS
+a Lcom/vivo/pcsuite/pcconnect/wifip2p/WifiP2pService$f; = None
+
+METHOD <init>(Lcom/vivo/pcsuite/pcconnect/wifip2p/WifiP2pService$f;)V
+000000: iput-object v1, v0, Lcom/vivo/pcsuite/pcconnect/wifip2p/WifiP2pService$f$a;->a Lcom/vivo/pcsuite/pcconnect/wifip2p/WifiP2pService$f;
+000004: invoke-direct v0, Ljava/lang/Object;-><init>()V
+00000a: return-void 
+
+METHOD onGroupInfoAvailable(Landroid/net/wifi/p2p/WifiP2pGroup;)V
+000000: new-instance v0, Ljava/lang/StringBuilder;
+000004: invoke-direct v0, Ljava/lang/StringBuilder;-><init>()V
+00000a: const-string v1, "Actually group: "
+00000e: invoke-virtual v0, v1, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+000014: invoke-virtual v0, v3, Ljava/lang/StringBuilder;->append(Ljava/lang/Object;)Ljava/lang/StringBuilder;
+00001a: invoke-virtual v0, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
+000020: move-result-object v0
+000022: const-string v1, "pcsuite_WifiP2pService"
+000026: invoke-static v1, v0, Lc/c/f/a/b;->a(Ljava/lang/String; Ljava/lang/String;)V
+00002c: if-eqz v3, +00fh
+000030: const-string v0, "P2p-createGroup"
+000034: invoke-static v0, Lcom/vivo/pcsuite/pcconnect/b;->a(Ljava/lang/String;)V
+00003a: iget-object v0, v2, Lcom/vivo/pcsuite/pcconnect/wifip2p/WifiP2pService$f$a;->a Lcom/vivo/pcsuite/pcconnect/wifip2p/WifiP2pService$f;
+00003e: iget-object v0, v0, Lcom/vivo/pcsuite/pcconnect/wifip2p/WifiP2pService$f;->a Lcom/vivo/pcsuite/pcconnect/wifip2p/WifiP2pService;
+000042: invoke-static v0, v3, Lcom/vivo/pcsuite/pcconnect/wifip2p/WifiP2pService;->a(Lcom/vivo/pcsuite/pcconnect/wifip2p/WifiP2pService; Landroid/net/wifi/p2p/WifiP2pGroup;)V
+000048: goto +6h
+00004a: const-string v3, "Group in broadcast isn't null but request return null."
+00004e: invoke-static v1, v3, Lc/c/f/a/b;->p(Ljava/lang/String; Ljava/lang/String;)V
+000054: return-void 

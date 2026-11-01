@@ -1,0 +1,286 @@
+APK pcsuite/updateApk/pcsuite.apk
+DEX classes2.dex
+CLASS Lcom/vivo/pcsuite/pcconnect/ble/IBluetoothLe$Stub;
+SUPER Landroid/os/Binder;
+FIELDS
+DESCRIPTOR Ljava/lang/String; = 'com.vivo.pcsuite.pcconnect.ble.IBluetoothLe'
+TRANSACTION_WiFiDirectConnectDone I = 28
+TRANSACTION_cancelConnect I = 23
+TRANSACTION_close I = 2
+TRANSACTION_connect I = 9
+TRANSACTION_connectDone I = 12
+TRANSACTION_disconnect I = 11
+TRANSACTION_disconnectWithoutState I = 13
+TRANSACTION_getBandById I = 20
+TRANSACTION_getDevicesSignal I = 7
+TRANSACTION_getVersionById I = 21
+TRANSACTION_improveFrequency I = 3
+TRANSACTION_isDeviceInMatch I = 6
+TRANSACTION_nfcConnect I = 10
+TRANSACTION_notifyRfCommApConnected I = 18
+TRANSACTION_notifyRfCommApConnectedWithExtra I = 27
+TRANSACTION_notityRfCommApConnectFailed I = 19
+TRANSACTION_onClientBind I = 26
+TRANSACTION_open I = 1
+TRANSACTION_registerBluetoothLeObserver I = 14
+TRANSACTION_sendInfo I = 22
+TRANSACTION_setP2pDeviceMac I = 8
+TRANSACTION_startBleAdvertising I = 25
+TRANSACTION_startScan I = 4
+TRANSACTION_stopBleAdvertising I = 24
+TRANSACTION_stopScan I = 5
+TRANSACTION_unregisterBluetoothLeObserver I = 15
+TRANSACTION_writeRequest I = 17
+TRANSACTION_writeResponse I = 16
+
+METHOD <init>()V
+000000: invoke-direct v1, Landroid/os/Binder;-><init>()V
+000006: const-string v0, "com.vivo.pcsuite.pcconnect.ble.IBluetoothLe"
+00000a: invoke-virtual v1, v1, v0, Landroid/os/Binder;->attachInterface(Landroid/os/IInterface; Ljava/lang/String;)V
+000010: return-void 
+
+METHOD asInterface(Landroid/os/IBinder;)Lcom/vivo/pcsuite/pcconnect/ble/IBluetoothLe;
+000000: if-nez v2, +004h
+000004: const/4 v2, 0
+000006: return-object v2
+000008: const-string v0, "com.vivo.pcsuite.pcconnect.ble.IBluetoothLe"
+00000c: invoke-interface v2, v0, Landroid/os/IBinder;->queryLocalInterface(Ljava/lang/String;)Landroid/os/IInterface;
+000012: move-result-object v0
+000014: if-eqz v0, +009h
+000018: instance-of v1, v0, Lcom/vivo/pcsuite/pcconnect/ble/IBluetoothLe;
+00001c: if-eqz v1, +005h
+000020: check-cast v0, Lcom/vivo/pcsuite/pcconnect/ble/IBluetoothLe;
+000024: return-object v0
+000026: new-instance v0, Lcom/vivo/pcsuite/pcconnect/ble/IBluetoothLe$Stub$Proxy;
+00002a: invoke-direct v0, v2, Lcom/vivo/pcsuite/pcconnect/ble/IBluetoothLe$Stub$Proxy;-><init>(Landroid/os/IBinder;)V
+000030: return-object v0
+
+METHOD getDefaultImpl()Lcom/vivo/pcsuite/pcconnect/ble/IBluetoothLe;
+000000: sget-object v0, Lcom/vivo/pcsuite/pcconnect/ble/IBluetoothLe$Stub$Proxy;->sDefaultImpl Lcom/vivo/pcsuite/pcconnect/ble/IBluetoothLe;
+000004: return-object v0
+
+METHOD setDefaultImpl(Lcom/vivo/pcsuite/pcconnect/ble/IBluetoothLe;)Z
+000000: sget-object v0, Lcom/vivo/pcsuite/pcconnect/ble/IBluetoothLe$Stub$Proxy;->sDefaultImpl Lcom/vivo/pcsuite/pcconnect/ble/IBluetoothLe;
+000004: if-nez v0, +00ah
+000008: if-eqz v1, +006h
+00000c: sput-object v1, Lcom/vivo/pcsuite/pcconnect/ble/IBluetoothLe$Stub$Proxy;->sDefaultImpl Lcom/vivo/pcsuite/pcconnect/ble/IBluetoothLe;
+000010: const/4 v1, 1
+000012: return v1
+000014: const/4 v1, 0
+000016: return v1
+000018: new-instance v1, Ljava/lang/IllegalStateException;
+00001c: const-string v0, "setDefaultImpl() called twice"
+000020: invoke-direct v1, v0, Ljava/lang/IllegalStateException;-><init>(Ljava/lang/String;)V
+000026: throw v1
+
+METHOD asBinder()Landroid/os/IBinder;
+000000: return-object v0
+
+METHOD onTransact(I Landroid/os/Parcel; Landroid/os/Parcel; I)Z
+000000: const v3, 1598968902
+000006: const/4 v6, 1
+000008: const-string v4, "com.vivo.pcsuite.pcconnect.ble.IBluetoothLe"
+00000c: if-eq v8, v3, +1c3h
+000010: const/4 v3, 0
+000012: packed-switch v8, +00001c5h
+000018: invoke-super/range v7 ... v11, Landroid/os/Binder;->onTransact(I Landroid/os/Parcel; Landroid/os/Parcel; I)Z
+00001e: move-result v0
+000020: return v0
+000022: invoke-virtual v9, v4, Landroid/os/Parcel;->enforceInterface(Ljava/lang/String;)V
+000028: invoke-virtual v9, Landroid/os/Parcel;->readString()Ljava/lang/String;
+00002e: move-result-object v1
+000030: invoke-interface v7, v1, Lcom/vivo/pcsuite/pcconnect/ble/IBluetoothLe;->WiFiDirectConnectDone(Ljava/lang/String;)V
+000036: invoke-virtual v10, Landroid/os/Parcel;->writeNoException()V
+00003c: return v6
+00003e: invoke-virtual v9, v4, Landroid/os/Parcel;->enforceInterface(Ljava/lang/String;)V
+000044: invoke-virtual v9, Landroid/os/Parcel;->readString()Ljava/lang/String;
+00004a: move-result-object v1
+00004c: invoke-interface v7, v1, Lcom/vivo/pcsuite/pcconnect/ble/IBluetoothLe;->notifyRfCommApConnectedWithExtra(Ljava/lang/String;)V
+000052: invoke-virtual v10, Landroid/os/Parcel;->writeNoException()V
+000058: return v6
+00005a: invoke-virtual v9, v4, Landroid/os/Parcel;->enforceInterface(Ljava/lang/String;)V
+000060: invoke-interface v7, Lcom/vivo/pcsuite/pcconnect/ble/IBluetoothLe;->onClientBind()V
+000066: invoke-virtual v10, Landroid/os/Parcel;->writeNoException()V
+00006c: return v6
+00006e: invoke-virtual v9, v4, Landroid/os/Parcel;->enforceInterface(Ljava/lang/String;)V
+000074: invoke-virtual v9, Landroid/os/Parcel;->readInt()I
+00007a: move-result v1
+00007c: if-eqz v1, +003h
+000080: move v3, v6
+000082: invoke-interface v7, v3, Lcom/vivo/pcsuite/pcconnect/ble/IBluetoothLe;->startBleAdvertising(Z)V
+000088: invoke-virtual v10, Landroid/os/Parcel;->writeNoException()V
+00008e: return v6
+000090: invoke-virtual v9, v4, Landroid/os/Parcel;->enforceInterface(Ljava/lang/String;)V
+000096: invoke-interface v7, Lcom/vivo/pcsuite/pcconnect/ble/IBluetoothLe;->stopBleAdvertising()V
+00009c: invoke-virtual v10, Landroid/os/Parcel;->writeNoException()V
+0000a2: return v6
+0000a4: invoke-virtual v9, v4, Landroid/os/Parcel;->enforceInterface(Ljava/lang/String;)V
+0000aa: invoke-interface v7, Lcom/vivo/pcsuite/pcconnect/ble/IBluetoothLe;->cancelConnect()V
+0000b0: invoke-virtual v10, Landroid/os/Parcel;->writeNoException()V
+0000b6: return v6
+0000b8: invoke-virtual v9, v4, Landroid/os/Parcel;->enforceInterface(Ljava/lang/String;)V
+0000be: invoke-virtual v9, Landroid/os/Parcel;->readString()Ljava/lang/String;
+0000c4: move-result-object v1
+0000c6: invoke-interface v7, v1, Lcom/vivo/pcsuite/pcconnect/ble/IBluetoothLe;->sendInfo(Ljava/lang/String;)V
+0000cc: invoke-virtual v10, Landroid/os/Parcel;->writeNoException()V
+0000d2: return v6
+0000d4: invoke-virtual v9, v4, Landroid/os/Parcel;->enforceInterface(Ljava/lang/String;)V
+0000da: invoke-virtual v9, Landroid/os/Parcel;->readString()Ljava/lang/String;
+0000e0: move-result-object v1
+0000e2: invoke-interface v7, v1, Lcom/vivo/pcsuite/pcconnect/ble/IBluetoothLe;->getVersionById(Ljava/lang/String;)I
+0000e8: move-result v0
+0000ea: invoke-virtual v10, Landroid/os/Parcel;->writeNoException()V
+0000f0: invoke-virtual v10, v0, Landroid/os/Parcel;->writeInt(I)V
+0000f6: return v6
+0000f8: invoke-virtual v9, v4, Landroid/os/Parcel;->enforceInterface(Ljava/lang/String;)V
+0000fe: invoke-virtual v9, Landroid/os/Parcel;->readString()Ljava/lang/String;
+000104: move-result-object v1
+000106: invoke-interface v7, v1, Lcom/vivo/pcsuite/pcconnect/ble/IBluetoothLe;->getBandById(Ljava/lang/String;)I
+00010c: move-result v0
+00010e: invoke-virtual v10, Landroid/os/Parcel;->writeNoException()V
+000114: invoke-virtual v10, v0, Landroid/os/Parcel;->writeInt(I)V
+00011a: return v6
+00011c: invoke-virtual v9, v4, Landroid/os/Parcel;->enforceInterface(Ljava/lang/String;)V
+000122: invoke-interface v7, Lcom/vivo/pcsuite/pcconnect/ble/IBluetoothLe;->notityRfCommApConnectFailed()V
+000128: invoke-virtual v10, Landroid/os/Parcel;->writeNoException()V
+00012e: return v6
+000130: invoke-virtual v9, v4, Landroid/os/Parcel;->enforceInterface(Ljava/lang/String;)V
+000136: invoke-interface v7, Lcom/vivo/pcsuite/pcconnect/ble/IBluetoothLe;->notifyRfCommApConnected()V
+00013c: invoke-virtual v10, Landroid/os/Parcel;->writeNoException()V
+000142: return v6
+000144: invoke-virtual v9, v4, Landroid/os/Parcel;->enforceInterface(Ljava/lang/String;)V
+00014a: invoke-virtual v9, Landroid/os/Parcel;->readString()Ljava/lang/String;
+000150: move-result-object v1
+000152: invoke-virtual v9, Landroid/os/Parcel;->readString()Ljava/lang/String;
+000158: move-result-object v2
+00015a: invoke-virtual v9, Landroid/os/Parcel;->readString()Ljava/lang/String;
+000160: move-result-object v3
+000162: invoke-virtual v9, Landroid/os/Parcel;->readString()Ljava/lang/String;
+000168: move-result-object v4
+00016a: invoke-virtual v9, Landroid/os/Parcel;->readString()Ljava/lang/String;
+000170: move-result-object v5
+000172: move-object v0, v7
+000174: invoke-interface/range v0 ... v5, Lcom/vivo/pcsuite/pcconnect/ble/IBluetoothLe;->writeRequest(Ljava/lang/String; Ljava/lang/String; Ljava/lang/String; Ljava/lang/String; Ljava/lang/String;)V
+00017a: invoke-virtual v10, Landroid/os/Parcel;->writeNoException()V
+000180: return v6
+000182: invoke-virtual v9, v4, Landroid/os/Parcel;->enforceInterface(Ljava/lang/String;)V
+000188: invoke-virtual v9, Landroid/os/Parcel;->readInt()I
+00018e: move-result v1
+000190: invoke-virtual v9, Landroid/os/Parcel;->readInt()I
+000196: move-result v2
+000198: invoke-virtual v9, Landroid/os/Parcel;->readString()Ljava/lang/String;
+00019e: move-result-object v3
+0001a0: invoke-virtual v9, Landroid/os/Parcel;->readString()Ljava/lang/String;
+0001a6: move-result-object v4
+0001a8: invoke-virtual v9, Landroid/os/Parcel;->readString()Ljava/lang/String;
+0001ae: move-result-object v5
+0001b0: move-object v0, v7
+0001b2: invoke-interface/range v0 ... v5, Lcom/vivo/pcsuite/pcconnect/ble/IBluetoothLe;->writeResponse(I I Ljava/lang/String; Ljava/lang/String; Ljava/lang/String;)V
+0001b8: invoke-virtual v10, Landroid/os/Parcel;->writeNoException()V
+0001be: return v6
+0001c0: invoke-virtual v9, v4, Landroid/os/Parcel;->enforceInterface(Ljava/lang/String;)V
+0001c6: invoke-virtual v9, Landroid/os/Parcel;->readStrongBinder()Landroid/os/IBinder;
+0001cc: move-result-object v1
+0001ce: invoke-static v1, Lcom/vivo/pcsuite/pcconnect/ble/BluetoothLeObserver$Stub;->asInterface(Landroid/os/IBinder;)Lcom/vivo/pcsuite/pcconnect/ble/BluetoothLeObserver;
+0001d4: move-result-object v1
+0001d6: invoke-interface v7, v1, Lcom/vivo/pcsuite/pcconnect/ble/IBluetoothLe;->unregisterBluetoothLeObserver(Lcom/vivo/pcsuite/pcconnect/ble/BluetoothLeObserver;)V
+0001dc: invoke-virtual v10, Landroid/os/Parcel;->writeNoException()V
+0001e2: return v6
+0001e4: invoke-virtual v9, v4, Landroid/os/Parcel;->enforceInterface(Ljava/lang/String;)V
+0001ea: invoke-virtual v9, Landroid/os/Parcel;->readStrongBinder()Landroid/os/IBinder;
+0001f0: move-result-object v1
+0001f2: invoke-static v1, Lcom/vivo/pcsuite/pcconnect/ble/BluetoothLeObserver$Stub;->asInterface(Landroid/os/IBinder;)Lcom/vivo/pcsuite/pcconnect/ble/BluetoothLeObserver;
+0001f8: move-result-object v1
+0001fa: invoke-interface v7, v1, Lcom/vivo/pcsuite/pcconnect/ble/IBluetoothLe;->registerBluetoothLeObserver(Lcom/vivo/pcsuite/pcconnect/ble/BluetoothLeObserver;)V
+000200: invoke-virtual v10, Landroid/os/Parcel;->writeNoException()V
+000206: return v6
+000208: invoke-virtual v9, v4, Landroid/os/Parcel;->enforceInterface(Ljava/lang/String;)V
+00020e: invoke-interface v7, Lcom/vivo/pcsuite/pcconnect/ble/IBluetoothLe;->disconnectWithoutState()V
+000214: invoke-virtual v10, Landroid/os/Parcel;->writeNoException()V
+00021a: return v6
+00021c: invoke-virtual v9, v4, Landroid/os/Parcel;->enforceInterface(Ljava/lang/String;)V
+000222: invoke-interface v7, Lcom/vivo/pcsuite/pcconnect/ble/IBluetoothLe;->connectDone()V
+000228: invoke-virtual v10, Landroid/os/Parcel;->writeNoException()V
+00022e: return v6
+000230: invoke-virtual v9, v4, Landroid/os/Parcel;->enforceInterface(Ljava/lang/String;)V
+000236: invoke-interface v7, Lcom/vivo/pcsuite/pcconnect/ble/IBluetoothLe;->disconnect()V
+00023c: invoke-virtual v10, Landroid/os/Parcel;->writeNoException()V
+000242: return v6
+000244: invoke-virtual v9, v4, Landroid/os/Parcel;->enforceInterface(Ljava/lang/String;)V
+00024a: invoke-virtual v9, Landroid/os/Parcel;->readString()Ljava/lang/String;
+000250: move-result-object v1
+000252: invoke-virtual v9, Landroid/os/Parcel;->readString()Ljava/lang/String;
+000258: move-result-object v2
+00025a: invoke-interface v7, v1, v2, Lcom/vivo/pcsuite/pcconnect/ble/IBluetoothLe;->nfcConnect(Ljava/lang/String; Ljava/lang/String;)Z
+000260: move-result v0
+000262: invoke-virtual v10, Landroid/os/Parcel;->writeNoException()V
+000268: invoke-virtual v10, v0, Landroid/os/Parcel;->writeInt(I)V
+00026e: return v6
+000270: invoke-virtual v9, v4, Landroid/os/Parcel;->enforceInterface(Ljava/lang/String;)V
+000276: invoke-virtual v9, Landroid/os/Parcel;->readInt()I
+00027c: move-result v1
+00027e: invoke-virtual v9, Landroid/os/Parcel;->readString()Ljava/lang/String;
+000284: move-result-object v2
+000286: invoke-virtual v9, Landroid/os/Parcel;->readString()Ljava/lang/String;
+00028c: move-result-object v3
+00028e: invoke-interface v7, v1, v2, v3, Lcom/vivo/pcsuite/pcconnect/ble/IBluetoothLe;->connect(I Ljava/lang/String; Ljava/lang/String;)Z
+000294: move-result v0
+000296: invoke-virtual v10, Landroid/os/Parcel;->writeNoException()V
+00029c: invoke-virtual v10, v0, Landroid/os/Parcel;->writeInt(I)V
+0002a2: return v6
+0002a4: invoke-virtual v9, v4, Landroid/os/Parcel;->enforceInterface(Ljava/lang/String;)V
+0002aa: invoke-virtual v9, Landroid/os/Parcel;->readString()Ljava/lang/String;
+0002b0: move-result-object v1
+0002b2: invoke-interface v7, v1, Lcom/vivo/pcsuite/pcconnect/ble/IBluetoothLe;->setP2pDeviceMac(Ljava/lang/String;)V
+0002b8: invoke-virtual v10, Landroid/os/Parcel;->writeNoException()V
+0002be: return v6
+0002c0: invoke-virtual v9, v4, Landroid/os/Parcel;->enforceInterface(Ljava/lang/String;)V
+0002c6: invoke-virtual v9, Landroid/os/Parcel;->readInt()I
+0002cc: move-result v1
+0002ce: invoke-virtual v9, Landroid/os/Parcel;->readInt()I
+0002d4: move-result v2
+0002d6: invoke-interface v7, v1, v2, Lcom/vivo/pcsuite/pcconnect/ble/IBluetoothLe;->getDevicesSignal(I I)Ljava/util/Map;
+0002dc: move-result-object v0
+0002de: invoke-virtual v10, Landroid/os/Parcel;->writeNoException()V
+0002e4: invoke-virtual v10, v0, Landroid/os/Parcel;->writeMap(Ljava/util/Map;)V
+0002ea: return v6
+0002ec: invoke-virtual v9, v4, Landroid/os/Parcel;->enforceInterface(Ljava/lang/String;)V
+0002f2: invoke-virtual v9, Landroid/os/Parcel;->readString()Ljava/lang/String;
+0002f8: move-result-object v1
+0002fa: invoke-interface v7, v1, Lcom/vivo/pcsuite/pcconnect/ble/IBluetoothLe;->isDeviceInMatch(Ljava/lang/String;)Z
+000300: move-result v0
+000302: invoke-virtual v10, Landroid/os/Parcel;->writeNoException()V
+000308: invoke-virtual v10, v0, Landroid/os/Parcel;->writeInt(I)V
+00030e: return v6
+000310: invoke-virtual v9, v4, Landroid/os/Parcel;->enforceInterface(Ljava/lang/String;)V
+000316: invoke-interface v7, Lcom/vivo/pcsuite/pcconnect/ble/IBluetoothLe;->stopScan()V
+00031c: invoke-virtual v10, Landroid/os/Parcel;->writeNoException()V
+000322: return v6
+000324: invoke-virtual v9, v4, Landroid/os/Parcel;->enforceInterface(Ljava/lang/String;)V
+00032a: invoke-interface v7, Lcom/vivo/pcsuite/pcconnect/ble/IBluetoothLe;->startScan()V
+000330: invoke-virtual v10, Landroid/os/Parcel;->writeNoException()V
+000336: return v6
+000338: invoke-virtual v9, v4, Landroid/os/Parcel;->enforceInterface(Ljava/lang/String;)V
+00033e: invoke-virtual v9, Landroid/os/Parcel;->readInt()I
+000344: move-result v1
+000346: if-eqz v1, +003h
+00034a: move v3, v6
+00034c: invoke-interface v7, v3, Lcom/vivo/pcsuite/pcconnect/ble/IBluetoothLe;->improveFrequency(Z)V
+000352: invoke-virtual v10, Landroid/os/Parcel;->writeNoException()V
+000358: return v6
+00035a: invoke-virtual v9, v4, Landroid/os/Parcel;->enforceInterface(Ljava/lang/String;)V
+000360: invoke-interface v7, Lcom/vivo/pcsuite/pcconnect/ble/IBluetoothLe;->close()V
+000366: invoke-virtual v10, Landroid/os/Parcel;->writeNoException()V
+00036c: return v6
+00036e: invoke-virtual v9, v4, Landroid/os/Parcel;->enforceInterface(Ljava/lang/String;)V
+000374: invoke-virtual v9, Landroid/os/Parcel;->readString()Ljava/lang/String;
+00037a: move-result-object v1
+00037c: invoke-virtual v9, Landroid/os/Parcel;->readString()Ljava/lang/String;
+000382: move-result-object v2
+000384: invoke-interface v7, v1, v2, Lcom/vivo/pcsuite/pcconnect/ble/IBluetoothLe;->open(Ljava/lang/String; Ljava/lang/String;)V
+00038a: invoke-virtual v10, Landroid/os/Parcel;->writeNoException()V
+000390: return v6
+000392: invoke-virtual v10, v4, Landroid/os/Parcel;->writeString(Ljava/lang/String;)V
+000398: return v6
+00039a: nop 
+00039c: packed-switch-payload 1 2 3 4 5 6 7 8 9 a b c d e f 10 11 12 13 14 15 16 17 18 19 1a 1b 1c

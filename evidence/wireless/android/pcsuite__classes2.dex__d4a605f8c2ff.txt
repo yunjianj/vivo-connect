@@ -1,0 +1,43 @@
+APK pcsuite/updateApk/pcsuite.apk
+DEX classes2.dex
+CLASS Lcom/vivo/connect/sdk/f/g$c;
+SUPER Ljava/lang/Object;
+FIELDS
+d Ljava/lang/String; = ':setTagTouchedCallBack'
+a Ljava/lang/String; = None
+b Lcom/vivo/connbase/ITagTouchedCallback; = None
+c Lcom/vivo/connect/sdk/f/g; = None
+
+METHOD <init>(Lcom/vivo/connect/sdk/f/g; Ljava/lang/String; Lcom/vivo/connbase/ITagTouchedCallback;)V
+000000: iput-object v1, v0, Lcom/vivo/connect/sdk/f/g$c;->c Lcom/vivo/connect/sdk/f/g;
+000004: iput-object v2, v0, Lcom/vivo/connect/sdk/f/g$c;->a Ljava/lang/String;
+000008: iput-object v3, v0, Lcom/vivo/connect/sdk/f/g$c;->b Lcom/vivo/connbase/ITagTouchedCallback;
+00000c: invoke-direct v0, Ljava/lang/Object;-><init>()V
+000012: return-void 
+
+METHOD run()V
+000000: iget-object v0, v2, Lcom/vivo/connect/sdk/f/g$c;->c Lcom/vivo/connect/sdk/f/g;
+000004: iget-object v0, v0, Lcom/vivo/connect/sdk/f/g;->e Lcom/vivo/connbase/ISceneSync;
+000008: if-nez v0, +016h
+00000c: iget-object v0, v2, Lcom/vivo/connect/sdk/f/g$c;->c Lcom/vivo/connect/sdk/f/g;
+000010: const-string v1, ":setTagTouchedCallBack"
+000014: invoke-static v0, v1, Lcom/vivo/connect/sdk/f/g;->a(Lcom/vivo/connect/sdk/f/g; Ljava/lang/String;)Z
+00001a: move-result v0
+00001c: if-nez v0, +003h
+000020: return-void 
+000022: iget-object v0, v2, Lcom/vivo/connect/sdk/f/g$c;->c Lcom/vivo/connect/sdk/f/g;
+000026: iget-object v0, v0, Lcom/vivo/connect/sdk/f/g;->e Lcom/vivo/connbase/ISceneSync;
+00002a: iget-object v1, v2, Lcom/vivo/connect/sdk/f/g$c;->a Ljava/lang/String;
+00002e: iget-object v2, v2, Lcom/vivo/connect/sdk/f/g$c;->b Lcom/vivo/connbase/ITagTouchedCallback;
+000032: goto +6h
+000034: iget-object v0, v2, Lcom/vivo/connect/sdk/f/g$c;->c Lcom/vivo/connect/sdk/f/g;
+000038: iget-object v0, v0, Lcom/vivo/connect/sdk/f/g;->e Lcom/vivo/connbase/ISceneSync;
+00003c: goto -9h
+00003e: invoke-interface v0, v1, v2, Lcom/vivo/connbase/ISceneSync;->setTagTouchedCallback(Ljava/lang/String; Lcom/vivo/connbase/ITagTouchedCallback;)V
+000044: return-void 
+000046: move-exception v2
+000048: invoke-virtual v2, Ljava/lang/Object;->toString()Ljava/lang/String;
+00004e: move-result-object v2
+000050: const-string v0, "ScenceSyncImpl"
+000054: invoke-static v0, v2, Lcom/vivo/connect/logger/EasyLog;->e(Ljava/lang/String; Ljava/lang/String;)V
+00005a: return-void 

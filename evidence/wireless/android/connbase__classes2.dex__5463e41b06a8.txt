@@ -1,0 +1,44 @@
+APK pcsuite/updateApk/connbase.apk
+DEX classes2.dex
+CLASS Lcom/vivo/pcsuite/pcconnect/ShareLinkService$a;
+SUPER Ljava/lang/Object;
+FIELDS
+a Z = None
+b Lcom/vivo/pcsuite/pcconnect/ShareLinkService; = None
+
+METHOD <init>(Lcom/vivo/pcsuite/pcconnect/ShareLinkService;)V
+000000: iput-object v1, v0, Lcom/vivo/pcsuite/pcconnect/ShareLinkService$a;->b Lcom/vivo/pcsuite/pcconnect/ShareLinkService;
+000004: invoke-direct v0, Ljava/lang/Object;-><init>()V
+00000a: const/4 v1, 1
+00000c: iput-boolean v1, v0, Lcom/vivo/pcsuite/pcconnect/ShareLinkService$a;->a Z
+000010: return-void 
+
+METHOD onAccountsUpdated([Landroid/accounts/Account;)V
+000000: invoke-static Lcom/vivo/pcsuite/pcconnect/ShareLinkService;->k()Ljava/lang/String;
+000006: move-result-object v0
+000008: new-instance v1, Ljava/lang/StringBuilder;
+00000c: invoke-direct v1, Ljava/lang/StringBuilder;-><init>()V
+000012: const-string v2, "onAccountsUpdated, accounts="
+000016: invoke-virtual v1, v2, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+00001c: invoke-static v4, Ljava/util/Arrays;->toString([Ljava/lang/Object;)Ljava/lang/String;
+000022: move-result-object v4
+000024: invoke-virtual v1, v4, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+00002a: const-string v4, ",isInit:"
+00002e: invoke-virtual v1, v4, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+000034: iget-boolean v4, v3, Lcom/vivo/pcsuite/pcconnect/ShareLinkService$a;->a Z
+000038: invoke-virtual v1, v4, Ljava/lang/StringBuilder;->append(Z)Ljava/lang/StringBuilder;
+00003e: invoke-virtual v1, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
+000044: move-result-object v4
+000046: invoke-static v0, v4, Lc/c/f/a/b;->k(Ljava/lang/String; Ljava/lang/String;)V
+00004c: iget-boolean v4, v3, Lcom/vivo/pcsuite/pcconnect/ShareLinkService$a;->a Z
+000050: if-eqz v4, +006h
+000054: const/4 v4, 0
+000056: iput-boolean v4, v3, Lcom/vivo/pcsuite/pcconnect/ShareLinkService$a;->a Z
+00005a: return-void 
+00005c: iget-object v4, v3, Lcom/vivo/pcsuite/pcconnect/ShareLinkService$a;->b Lcom/vivo/pcsuite/pcconnect/ShareLinkService;
+000060: invoke-static v4, Lcom/vivo/pcsuite/pcconnect/ShareLinkService;->e(Lcom/vivo/pcsuite/pcconnect/ShareLinkService;)Landroid/os/Handler;
+000066: move-result-object v4
+000068: new-instance v0, Lcom/vivo/pcsuite/pcconnect/ShareLinkService$a$a;
+00006c: invoke-direct v0, v3, Lcom/vivo/pcsuite/pcconnect/ShareLinkService$a$a;-><init>(Lcom/vivo/pcsuite/pcconnect/ShareLinkService$a;)V
+000072: invoke-virtual v4, v0, Landroid/os/Handler;->post(Ljava/lang/Runnable;)Z
+000078: return-void 

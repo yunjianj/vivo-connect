@@ -1,0 +1,20 @@
+APK pcsuite/updateApk/pcsuite.apk
+DEX classes2.dex
+CLASS Lcom/vivo/pcsuite/pcconnect/PcOtherShare$1$1;
+SUPER Ljava/lang/Object;
+FIELDS
+this$1 Lcom/vivo/pcsuite/pcconnect/PcOtherShare$1; = None
+
+METHOD <init>(Lcom/vivo/pcsuite/pcconnect/PcOtherShare$1;)V
+000000: iput-object v1, v0, Lcom/vivo/pcsuite/pcconnect/PcOtherShare$1$1;->this$1 Lcom/vivo/pcsuite/pcconnect/PcOtherShare$1;
+000004: invoke-direct v0, Ljava/lang/Object;-><init>()V
+00000a: return-void 
+
+METHOD run()V
+000000: iget-object v1, v1, Lcom/vivo/pcsuite/pcconnect/PcOtherShare$1$1;->this$1 Lcom/vivo/pcsuite/pcconnect/PcOtherShare$1;
+000004: iget-object v1, v1, Lcom/vivo/pcsuite/pcconnect/PcOtherShare$1;->this$0 Lcom/vivo/pcsuite/pcconnect/PcOtherShare;
+000008: invoke-static v1, Lcom/vivo/pcsuite/pcconnect/PcOtherShare;->access$400(Lcom/vivo/pcsuite/pcconnect/PcOtherShare;)Lcom/vivo/pcsuite/pcconnect/IPcShare$PcShareCallback;
+00000e: move-result-object v1
+000010: const/4 v0, 1
+000012: invoke-interface v1, v0, Lcom/vivo/pcsuite/pcconnect/IPcShare$PcShareCallback;->onInitStatus(Z)V
+000018: return-void 

@@ -1,0 +1,43 @@
+APK pcsuite/updateApk/pcsuite.apk
+DEX classes2.dex
+CLASS Lcom/vivo/pcsuite/service/h;
+SUPER Ljava/lang/Object;
+FIELDS
+
+
+METHOD onComplete(Lcom/vivo/connect/tasks/Task;)V
+000000: new-instance v1, Lorg/json/JSONObject;
+000004: invoke-virtual v2, Lcom/vivo/connect/tasks/Task;->getResult()Ljava/lang/Object;
+00000a: move-result-object v2
+00000c: check-cast v2, Ljava/lang/String;
+000010: invoke-direct v1, v2, Lorg/json/JSONObject;-><init>(Ljava/lang/String;)V
+000016: sget-object v2, Lcom/vivo/pcsuite/PcSuiteApplication;->I1 Lcom/vivo/pcsuite/PcSuiteApplication;
+00001a: const-string v0, "netWorkFrequency"
+00001e: invoke-virtual v1, v0, Lorg/json/JSONObject;->get(Ljava/lang/String;)Ljava/lang/Object;
+000024: move-result-object v0
+000026: check-cast v0, Ljava/lang/Integer;
+00002a: invoke-virtual v0, Ljava/lang/Integer;->intValue()I
+000030: move-result v0
+000032: iput v0, v2, Lcom/vivo/pcsuite/PcSuiteApplication;->J I
+000036: sget-object v2, Lcom/vivo/pcsuite/PcSuiteApplication;->I1 Lcom/vivo/pcsuite/PcSuiteApplication;
+00003a: const-string v0, "P2Pfrequency"
+00003e: invoke-virtual v1, v0, Lorg/json/JSONObject;->get(Ljava/lang/String;)Ljava/lang/Object;
+000044: move-result-object v1
+000046: check-cast v1, Ljava/lang/Integer;
+00004a: invoke-virtual v1, Ljava/lang/Integer;->intValue()I
+000050: move-result v1
+000052: iput v1, v2, Lcom/vivo/pcsuite/PcSuiteApplication;->I I
+000056: return-void 
+000058: move-exception v1
+00005a: sget v2, Lcom/vivo/pcsuite/service/PcSuiteObserver;->D I
+00005e: new-instance v2, Ljava/lang/StringBuilder;
+000062: const-string v0, "getFrequency e : "
+000066: invoke-direct v2, v0, Ljava/lang/StringBuilder;-><init>(Ljava/lang/String;)V
+00006c: invoke-virtual v1, Ljava/lang/Throwable;->getMessage()Ljava/lang/String;
+000072: move-result-object v1
+000074: invoke-virtual v2, v1, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+00007a: invoke-virtual v2, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
+000080: move-result-object v1
+000082: const-string v2, "pcsuite_PcSuiteObserver"
+000086: invoke-static v2, v1, Lcom/vivo/connect/logger/EasyLog;->i(Ljava/lang/String; Ljava/lang/String;)V
+00008c: return-void 

@@ -1,0 +1,213 @@
+APK pcsuite/updateApk/connbase.apk
+DEX classes.dex
+CLASS Lcom/vivo/connbase/nfc/c$c;
+SUPER Ljava/lang/Object;
+FIELDS
+e I = 1
+f Lcom/vivo/connbase/nfc/c$c; = None
+a Ljava/util/List; = None
+b I = None
+c Lcom/google/gson/Gson; = None
+d Z = None
+
+METHOD <clinit>()V
+000000: new-instance v0, Lcom/vivo/connbase/nfc/c$c;
+000004: invoke-direct v0, Lcom/vivo/connbase/nfc/c$c;-><init>()V
+00000a: sput-object v0, Lcom/vivo/connbase/nfc/c$c;->f Lcom/vivo/connbase/nfc/c$c;
+00000e: return-void 
+
+METHOD <init>()V
+000000: invoke-direct v3, Ljava/lang/Object;-><init>()V
+000006: new-instance v0, Ljava/util/ArrayList;
+00000a: invoke-direct v0, Ljava/util/ArrayList;-><init>()V
+000010: iput-object v0, v3, Lcom/vivo/connbase/nfc/c$c;->a Ljava/util/List;
+000014: const/4 v0, 0
+000016: iput v0, v3, Lcom/vivo/connbase/nfc/c$c;->b I
+00001a: new-instance v0, Lcom/google/gson/Gson;
+00001e: invoke-direct v0, Lcom/google/gson/Gson;-><init>()V
+000024: iput-object v0, v3, Lcom/vivo/connbase/nfc/c$c;->c Lcom/google/gson/Gson;
+000028: invoke-static Lcom/vivo/connbase/App;->m()Lcom/vivo/connbase/App;
+00002e: move-result-object v0
+000030: invoke-static v0, Lcom/vivo/connbase/e0/g/i;->e(Landroid/content/Context;)Z
+000036: move-result v0
+000038: iput-boolean v0, v3, Lcom/vivo/connbase/nfc/c$c;->d Z
+00003c: invoke-static Lcom/vivo/connbase/App;->m()Lcom/vivo/connbase/App;
+000042: move-result-object v0
+000044: invoke-static v0, Lcom/vivo/connbase/e0/g/i;->d(Landroid/content/Context;)Ljava/lang/String;
+00004a: move-result-object v0
+00004c: iget-object v1, v3, Lcom/vivo/connbase/nfc/c$c;->c Lcom/google/gson/Gson;
+000050: new-instance v2, Lcom/vivo/connbase/nfc/c$c$a;
+000054: invoke-direct v2, v3, Lcom/vivo/connbase/nfc/c$c$a;-><init>(Lcom/vivo/connbase/nfc/c$c;)V
+00005a: invoke-virtual v2, Lcom/google/gson/reflect/TypeToken;->getType()Ljava/lang/reflect/Type;
+000060: move-result-object v2
+000062: invoke-virtual v1, v0, v2, Lcom/google/gson/Gson;->fromJson(Ljava/lang/String; Ljava/lang/reflect/Type;)Ljava/lang/Object;
+000068: move-result-object v0
+00006a: check-cast v0, Ljava/util/List;
+00006e: if-eqz v0, +007h
+000072: iget-object v1, v3, Lcom/vivo/connbase/nfc/c$c;->a Ljava/util/List;
+000076: invoke-interface v1, v0, Ljava/util/List;->addAll(Ljava/util/Collection;)Z
+00007c: iget-object v0, v3, Lcom/vivo/connbase/nfc/c$c;->a Ljava/util/List;
+000080: invoke-static v0, Ljava/util/Collections;->sort(Ljava/util/List;)V
+000086: return-void 
+
+METHOD b(Ljava/lang/String;)Lcom/vivo/connbase/nfc/c$b;
+000000: iget-object v0, v3, Lcom/vivo/connbase/nfc/c$c;->a Ljava/util/List;
+000004: invoke-interface v0, Ljava/util/List;->iterator()Ljava/util/Iterator;
+00000a: move-result-object v0
+00000c: invoke-interface v0, Ljava/util/Iterator;->hasNext()Z
+000012: move-result v1
+000014: if-eqz v1, +011h
+000018: invoke-interface v0, Ljava/util/Iterator;->next()Ljava/lang/Object;
+00001e: move-result-object v1
+000020: check-cast v1, Lcom/vivo/connbase/nfc/c$b;
+000024: iget-object v2, v1, Lcom/vivo/connbase/nfc/c$b;->a Ljava/lang/String;
+000028: invoke-virtual v4, v2, Ljava/lang/String;->equals(Ljava/lang/Object;)Z
+00002e: move-result v2
+000030: if-eqz v2, -012h
+000034: return-object v1
+000036: const/4 v4, 0
+000038: return-object v4
+
+METHOD e()Lcom/vivo/connbase/nfc/c$c;
+000000: sget-object v0, Lcom/vivo/connbase/nfc/c$c;->f Lcom/vivo/connbase/nfc/c$c;
+000004: return-object v0
+
+METHOD f()V
+000000: iget-object v0, v3, Lcom/vivo/connbase/nfc/c$c;->a Ljava/util/List;
+000004: invoke-interface v0, Ljava/util/List;->iterator()Ljava/util/Iterator;
+00000a: move-result-object v0
+00000c: invoke-interface v0, Ljava/util/Iterator;->hasNext()Z
+000012: move-result v1
+000014: if-eqz v1, +011h
+000018: invoke-interface v0, Ljava/util/Iterator;->next()Ljava/lang/Object;
+00001e: move-result-object v1
+000020: check-cast v1, Lcom/vivo/connbase/nfc/c$b;
+000024: iget-object v2, v3, Lcom/vivo/connbase/nfc/c$c;->a Ljava/util/List;
+000028: invoke-interface v2, v1, Ljava/util/List;->indexOf(Ljava/lang/Object;)I
+00002e: move-result v2
+000030: iput v2, v1, Lcom/vivo/connbase/nfc/c$b;->b I
+000034: goto -14h
+000036: return-void 
+
+METHOD a()Ljava/lang/String;
+000000: monitor-enter v4
+000002: iget-object v0, v4, Lcom/vivo/connbase/nfc/c$c;->a Ljava/util/List;
+000006: iget v1, v4, Lcom/vivo/connbase/nfc/c$c;->b I
+00000a: invoke-interface v0, v1, Ljava/util/List;->get(I)Ljava/lang/Object;
+000010: move-result-object v0
+000012: check-cast v0, Lcom/vivo/connbase/nfc/c$b;
+000016: iget v1, v4, Lcom/vivo/connbase/nfc/c$c;->b I
+00001a: add-int/lit8 v1, v1, 1
+00001e: iput v1, v4, Lcom/vivo/connbase/nfc/c$c;->b I
+000022: iget-object v2, v4, Lcom/vivo/connbase/nfc/c$c;->a Ljava/util/List;
+000026: invoke-interface v2, Ljava/util/List;->size()I
+00002c: move-result v2
+00002e: if-lt v1, v2, +00dh
+000032: iget v1, v4, Lcom/vivo/connbase/nfc/c$c;->b I
+000036: iget-object v2, v4, Lcom/vivo/connbase/nfc/c$c;->a Ljava/util/List;
+00003a: invoke-interface v2, Ljava/util/List;->size()I
+000040: move-result v2
+000042: rem-int/2addr v1, v2
+000044: iput v1, v4, Lcom/vivo/connbase/nfc/c$c;->b I
+000048: const-string v1, "BtAutoConnectManager"
+00004c: new-instance v2, Ljava/lang/StringBuilder;
+000050: invoke-direct v2, Ljava/lang/StringBuilder;-><init>()V
+000056: const-string v3, "getNextRetryAddress:"
+00005a: invoke-virtual v2, v3, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+000060: iget-object v3, v0, Lcom/vivo/connbase/nfc/c$b;->a Ljava/lang/String;
+000064: invoke-static v3, Lcom/vivo/connbase/e0/g/h;->b(Ljava/lang/String;)Ljava/lang/String;
+00006a: move-result-object v3
+00006c: invoke-virtual v2, v3, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+000072: invoke-virtual v2, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
+000078: move-result-object v2
+00007a: invoke-static v1, v2, Lc/c/f/a/b;->k(Ljava/lang/String; Ljava/lang/String;)V
+000080: iget-object v0, v0, Lcom/vivo/connbase/nfc/c$b;->a Ljava/lang/String;
+000084: monitor-exit v4
+000086: return-object v0
+000088: move-exception v0
+00008a: monitor-exit v4
+00008c: throw v0
+
+METHOD a(Ljava/lang/String;)V
+000000: monitor-enter v3
+000002: const-string v0, "BtAutoConnectManager"
+000006: new-instance v1, Ljava/lang/StringBuilder;
+00000a: invoke-direct v1, Ljava/lang/StringBuilder;-><init>()V
+000010: const-string v2, "cache:"
+000014: invoke-virtual v1, v2, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+00001a: invoke-static v4, Lcom/vivo/connbase/e0/g/h;->b(Ljava/lang/String;)Ljava/lang/String;
+000020: move-result-object v2
+000022: invoke-virtual v1, v2, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+000028: invoke-virtual v1, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
+00002e: move-result-object v1
+000030: invoke-static v0, v1, Lc/c/f/a/b;->k(Ljava/lang/String; Ljava/lang/String;)V
+000036: invoke-static v4, Landroid/text/TextUtils;->isEmpty(Ljava/lang/CharSequence;)Z
+00003c: move-result v0
+00003e: if-eqz v0, +004h
+000042: monitor-exit v3
+000044: return-void 
+000046: invoke-direct v3, v4, Lcom/vivo/connbase/nfc/c$c;->b(Ljava/lang/String;)Lcom/vivo/connbase/nfc/c$b;
+00004c: move-result-object v0
+00004e: const/4 v1, 0
+000050: if-eqz v0, +00dh
+000054: iget-object v4, v3, Lcom/vivo/connbase/nfc/c$c;->a Ljava/util/List;
+000058: invoke-interface v4, v0, Ljava/util/List;->remove(Ljava/lang/Object;)Z
+00005e: iget-object v4, v3, Lcom/vivo/connbase/nfc/c$c;->a Ljava/util/List;
+000062: invoke-interface v4, v1, v0, Ljava/util/List;->add(I Ljava/lang/Object;)V
+000068: goto +22h
+00006a: new-instance v0, Lcom/vivo/connbase/nfc/c$b;
+00006e: invoke-direct v0, Lcom/vivo/connbase/nfc/c$b;-><init>()V
+000074: iput-object v4, v0, Lcom/vivo/connbase/nfc/c$b;->a Ljava/lang/String;
+000078: iget-object v4, v3, Lcom/vivo/connbase/nfc/c$c;->a Ljava/util/List;
+00007c: invoke-interface v4, v1, v0, Ljava/util/List;->add(I Ljava/lang/Object;)V
+000082: iget-object v4, v3, Lcom/vivo/connbase/nfc/c$c;->a Ljava/util/List;
+000086: invoke-interface v4, Ljava/util/List;->size()I
+00008c: move-result v4
+00008e: const/4 v0, 1
+000090: if-le v4, v0, +00eh
+000094: iget-object v4, v3, Lcom/vivo/connbase/nfc/c$c;->a Ljava/util/List;
+000098: iget-object v1, v3, Lcom/vivo/connbase/nfc/c$c;->a Ljava/util/List;
+00009c: invoke-interface v1, Ljava/util/List;->size()I
+0000a2: move-result v1
+0000a4: sub-int/2addr v1, v0
+0000a6: invoke-interface v4, v1, Ljava/util/List;->remove(I)Ljava/lang/Object;
+0000ac: invoke-direct v3, Lcom/vivo/connbase/nfc/c$c;->f()V
+0000b2: invoke-static Lcom/vivo/connbase/App;->m()Lcom/vivo/connbase/App;
+0000b8: move-result-object v4
+0000ba: iget-object v0, v3, Lcom/vivo/connbase/nfc/c$c;->c Lcom/google/gson/Gson;
+0000be: iget-object v1, v3, Lcom/vivo/connbase/nfc/c$c;->a Ljava/util/List;
+0000c2: invoke-virtual v0, v1, Lcom/google/gson/Gson;->toJson(Ljava/lang/Object;)Ljava/lang/String;
+0000c8: move-result-object v0
+0000ca: invoke-static v4, v0, Lcom/vivo/connbase/e0/g/i;->c(Landroid/content/Context; Ljava/lang/String;)V
+0000d0: monitor-exit v3
+0000d2: return-void 
+0000d4: move-exception v4
+0000d6: monitor-exit v3
+0000d8: throw v4
+
+METHOD b()Z
+000000: iget-boolean v0, v1, Lcom/vivo/connbase/nfc/c$c;->d Z
+000004: return v0
+
+METHOD c()Z
+000000: monitor-enter v1
+000002: iget-object v0, v1, Lcom/vivo/connbase/nfc/c$c;->a Ljava/util/List;
+000006: invoke-interface v0, Ljava/util/List;->size()I
+00000c: move-result v0
+00000e: if-lez v0, +004h
+000012: const/4 v0, 1
+000014: goto +2h
+000016: const/4 v0, 0
+000018: monitor-exit v1
+00001a: return v0
+00001c: move-exception v0
+00001e: monitor-exit v1
+000020: throw v0
+
+METHOD d()V
+000000: const/4 v0, 1
+000002: iput-boolean v0, v1, Lcom/vivo/connbase/nfc/c$c;->d Z
+000006: invoke-static Lcom/vivo/connbase/App;->m()Lcom/vivo/connbase/App;
+00000c: move-result-object v0
+00000e: invoke-static v0, Lcom/vivo/connbase/e0/g/i;->f(Landroid/content/Context;)V
+000014: return-void 

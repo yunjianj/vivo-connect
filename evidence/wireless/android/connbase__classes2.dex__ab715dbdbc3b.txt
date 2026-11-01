@@ -1,0 +1,26 @@
+APK pcsuite/updateApk/connbase.apk
+DEX classes2.dex
+CLASS Lcom/vivo/pcsuite/pcconnect/ble/h$a;
+SUPER Landroid/os/Handler;
+FIELDS
+a Lcom/vivo/pcsuite/pcconnect/ble/h; = None
+
+METHOD <init>(Lcom/vivo/pcsuite/pcconnect/ble/h; Landroid/os/Looper;)V
+000000: iput-object v1, v0, Lcom/vivo/pcsuite/pcconnect/ble/h$a;->a Lcom/vivo/pcsuite/pcconnect/ble/h;
+000004: invoke-direct v0, v2, Landroid/os/Handler;-><init>(Landroid/os/Looper;)V
+00000a: return-void 
+
+METHOD handleMessage(Landroid/os/Message;)V
+000000: iget v6, v6, Landroid/os/Message;->what I
+000004: const/4 v0, 4
+000006: if-ne v6, v0, +015h
+00000a: iget-object v6, v5, Lcom/vivo/pcsuite/pcconnect/ble/h$a;->a Lcom/vivo/pcsuite/pcconnect/ble/h;
+00000e: invoke-static Landroid/os/SystemClock;->elapsedRealtime()J
+000014: move-result-wide v1
+000016: invoke-static v6, v1, v2, Lcom/vivo/pcsuite/pcconnect/ble/h;->a(Lcom/vivo/pcsuite/pcconnect/ble/h; J)J
+00001c: move-result-wide v1
+00001e: const-wide/16 v3, 0
+000022: cmp-long v6, v1, v3
+000026: if-lez v6, +005h
+00002a: invoke-virtual v5, v0, v1, v2, Landroid/os/Handler;->sendEmptyMessageDelayed(I J)Z
+000030: return-void 

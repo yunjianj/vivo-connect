@@ -1,0 +1,20 @@
+APK pcsuite/updateApk/pcsuite.apk
+DEX classes.dex
+CLASS Lcom/google/android/material/bottomappbar/BottomAppBar$9;
+SUPER Landroid/animation/AnimatorListenerAdapter;
+FIELDS
+this$0 Lcom/google/android/material/bottomappbar/BottomAppBar; = None
+
+METHOD onAnimationStart(Landroid/animation/Animator;)V
+000000: iget-object v0, v1, Lcom/google/android/material/bottomappbar/BottomAppBar$9;->this$0 Lcom/google/android/material/bottomappbar/BottomAppBar;
+000004: iget-object v0, v0, Lcom/google/android/material/bottomappbar/BottomAppBar;->fabAnimationListener Landroid/animation/AnimatorListenerAdapter;
+000008: invoke-virtual v0, v2, Landroid/animation/AnimatorListenerAdapter;->onAnimationStart(Landroid/animation/Animator;)V
+00000e: iget-object v2, v1, Lcom/google/android/material/bottomappbar/BottomAppBar$9;->this$0 Lcom/google/android/material/bottomappbar/BottomAppBar;
+000012: invoke-static v2, Lcom/google/android/material/bottomappbar/BottomAppBar;->access$2200(Lcom/google/android/material/bottomappbar/BottomAppBar;)Lcom/google/android/material/floatingactionbutton/FloatingActionButton;
+000018: move-result-object v2
+00001a: if-eqz v2, +00bh
+00001e: iget-object v1, v1, Lcom/google/android/material/bottomappbar/BottomAppBar$9;->this$0 Lcom/google/android/material/bottomappbar/BottomAppBar;
+000022: invoke-static v1, Lcom/google/android/material/bottomappbar/BottomAppBar;->access$2300(Lcom/google/android/material/bottomappbar/BottomAppBar;)F
+000028: move-result v1
+00002a: invoke-virtual v2, v1, Lcom/google/android/material/floatingactionbutton/FloatingActionButton;->setTranslationX(F)V
+000030: return-void 

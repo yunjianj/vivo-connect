@@ -1,0 +1,15 @@
+APK pcsuite/updateApk/pcsuite.apk
+DEX classes2.dex
+CLASS Lcom/vivo/pcsuite/service/PcSuiteInCallService$e;
+SUPER Ljava/lang/Object;
+FIELDS
+
+
+METHOD run()V
+000000: const-string v1, "PcSuiteInCallService"
+000004: const-string v0, "shutdownSync http"
+000008: invoke-static v1, v0, LD1/a;->h(Ljava/lang/String; Ljava/lang/String;)V
+00000e: invoke-static Lcom/vivo/castsdk/source/httpServer/HttpServer;->getInstance()Lcom/vivo/castsdk/source/httpServer/HttpServer;
+000014: move-result-object v1
+000016: invoke-virtual v1, Lcom/vivo/castsdk/source/httpServer/HttpServer;->shutdownSync()V
+00001c: return-void 

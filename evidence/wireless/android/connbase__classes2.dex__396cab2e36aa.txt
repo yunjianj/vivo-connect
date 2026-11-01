@@ -1,0 +1,91 @@
+APK pcsuite/updateApk/connbase.apk
+DEX classes2.dex
+CLASS Lcom/vivo/pcsuite/pcconnect/b;
+SUPER Ljava/lang/Object;
+FIELDS
+a Ljava/lang/String; = 'DebugTools'
+b Landroid/util/ArrayMap; = None
+
+METHOD <clinit>()V
+000000: new-instance v0, Landroid/util/ArrayMap;
+000004: invoke-direct v0, Landroid/util/ArrayMap;-><init>()V
+00000a: sput-object v0, Lcom/vivo/pcsuite/pcconnect/b;->b Landroid/util/ArrayMap;
+00000e: return-void 
+
+METHOD <init>()V
+000000: invoke-direct v0, Ljava/lang/Object;-><init>()V
+000006: return-void 
+
+METHOD a(Ljava/lang/String;)V
+000000: invoke-static Ljava/lang/System;->currentTimeMillis()J
+000006: move-result-wide v0
+000008: sget-object v2, Lcom/vivo/pcsuite/pcconnect/b;->b Landroid/util/ArrayMap;
+00000c: monitor-enter v2
+00000e: sget-object v3, Lcom/vivo/pcsuite/pcconnect/b;->b Landroid/util/ArrayMap;
+000012: invoke-virtual v3, v6, Landroid/util/ArrayMap;->containsKey(Ljava/lang/Object;)Z
+000018: move-result v3
+00001a: if-eqz v3, +033h
+00001e: sget-object v3, Lcom/vivo/pcsuite/pcconnect/b;->b Landroid/util/ArrayMap;
+000022: invoke-virtual v3, v6, Landroid/util/ArrayMap;->remove(Ljava/lang/Object;)Ljava/lang/Object;
+000028: move-result-object v3
+00002a: check-cast v3, Ljava/lang/Long;
+00002e: invoke-virtual v3, Ljava/lang/Long;->longValue()J
+000034: move-result-wide v3
+000036: sub-long/2addr v0, v3
+000038: const-string v3, "DebugTools"
+00003c: new-instance v4, Ljava/lang/StringBuilder;
+000040: invoke-direct v4, Ljava/lang/StringBuilder;-><init>()V
+000046: const-string v5, "Event: "
+00004a: invoke-virtual v4, v5, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+000050: invoke-virtual v4, v6, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+000056: const-string v6, " cost "
+00005a: invoke-virtual v4, v6, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+000060: invoke-virtual v4, v0, v1, Ljava/lang/StringBuilder;->append(J)Ljava/lang/StringBuilder;
+000066: const-string v6, " ms."
+00006a: invoke-virtual v4, v6, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+000070: invoke-virtual v4, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
+000076: move-result-object v6
+000078: invoke-static v3, v6, Lc/c/f/a/b;->a(Ljava/lang/String; Ljava/lang/String;)V
+00007e: goto +1ch
+000080: const-string v0, "DebugTools"
+000084: new-instance v1, Ljava/lang/StringBuilder;
+000088: invoke-direct v1, Ljava/lang/StringBuilder;-><init>()V
+00008e: const-string v3, "Event: "
+000092: invoke-virtual v1, v3, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+000098: invoke-virtual v1, v6, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+00009e: const-string v6, " not exist."
+0000a2: invoke-virtual v1, v6, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+0000a8: invoke-virtual v1, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
+0000ae: move-result-object v6
+0000b0: invoke-static v0, v6, Lc/c/f/a/b;->p(Ljava/lang/String; Ljava/lang/String;)V
+0000b6: monitor-exit v2
+0000b8: return-void 
+0000ba: move-exception v6
+0000bc: monitor-exit v2
+0000be: throw v6
+
+METHOD b(Ljava/lang/String;)V
+000000: invoke-static Ljava/lang/System;->currentTimeMillis()J
+000006: move-result-wide v0
+000008: new-instance v2, Ljava/lang/StringBuilder;
+00000c: invoke-direct v2, Ljava/lang/StringBuilder;-><init>()V
+000012: const-string v3, "Event: "
+000016: invoke-virtual v2, v3, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+00001c: invoke-virtual v2, v4, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+000022: const-string v3, " start."
+000026: invoke-virtual v2, v3, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+00002c: invoke-virtual v2, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
+000032: move-result-object v2
+000034: const-string v3, "DebugTools"
+000038: invoke-static v3, v2, Lc/c/f/a/b;->a(Ljava/lang/String; Ljava/lang/String;)V
+00003e: sget-object v2, Lcom/vivo/pcsuite/pcconnect/b;->b Landroid/util/ArrayMap;
+000042: monitor-enter v2
+000044: sget-object v3, Lcom/vivo/pcsuite/pcconnect/b;->b Landroid/util/ArrayMap;
+000048: invoke-static v0, v1, Ljava/lang/Long;->valueOf(J)Ljava/lang/Long;
+00004e: move-result-object v0
+000050: invoke-virtual v3, v4, v0, Landroid/util/ArrayMap;->put(Ljava/lang/Object; Ljava/lang/Object;)Ljava/lang/Object;
+000056: monitor-exit v2
+000058: return-void 
+00005a: move-exception v4
+00005c: monitor-exit v2
+00005e: throw v4

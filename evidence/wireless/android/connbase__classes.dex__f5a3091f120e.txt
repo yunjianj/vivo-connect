@@ -1,0 +1,906 @@
+APK pcsuite/updateApk/connbase.apk
+DEX classes.dex
+CLASS Lcom/vivo/connbase/l0/f/c;
+SUPER Ljava/lang/Object;
+FIELDS
+i Ljava/lang/String; = 'SendDataThread'
+j I = 20480
+a Ljava/io/OutputStream; = None
+b Lcom/vivo/connbase/l0/f/c$a; = None
+c Z = None
+d Z = None
+e I = None
+f J = None
+g Z = None
+h Ljava/util/Queue; = None
+
+METHOD <init>(Ljava/net/Socket;)V
+000000: invoke-direct v3, Ljava/lang/Object;-><init>()V
+000006: const/4 v0, 0
+000008: iput-boolean v0, v3, Lcom/vivo/connbase/l0/f/c;->c Z
+00000c: iput-boolean v0, v3, Lcom/vivo/connbase/l0/f/c;->d Z
+000010: iput-boolean v0, v3, Lcom/vivo/connbase/l0/f/c;->g Z
+000014: new-instance v0, Ljava/util/concurrent/ConcurrentLinkedDeque;
+000018: invoke-direct v0, Ljava/util/concurrent/ConcurrentLinkedDeque;-><init>()V
+00001e: iput-object v0, v3, Lcom/vivo/connbase/l0/f/c;->h Ljava/util/Queue;
+000022: new-instance v0, Ljava/lang/StringBuilder;
+000026: invoke-direct v0, Ljava/lang/StringBuilder;-><init>()V
+00002c: const-string v1, "SendDataThread."
+000030: invoke-virtual v0, v1, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+000036: invoke-virtual v0, v4, Ljava/lang/StringBuilder;->append(Ljava/lang/Object;)Ljava/lang/StringBuilder;
+00003c: invoke-virtual v0, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
+000042: move-result-object v0
+000044: const-string v1, "SendDataThread"
+000048: invoke-static v1, v0, Lc/c/f/a/b;->k(Ljava/lang/String; Ljava/lang/String;)V
+00004e: if-eqz v4, +021h
+000052: new-instance v0, Ljava/lang/StringBuilder;
+000056: invoke-direct v0, Ljava/lang/StringBuilder;-><init>()V
+00005c: const-string v2, "SendDataRunnable socket:"
+000060: invoke-virtual v0, v2, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+000066: invoke-virtual v4, Ljava/lang/Object;->hashCode()I
+00006c: move-result v2
+00006e: invoke-virtual v0, v2, Ljava/lang/StringBuilder;->append(I)Ljava/lang/StringBuilder;
+000074: invoke-virtual v0, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
+00007a: move-result-object v0
+00007c: invoke-static v1, v0, Lc/c/f/a/b;->k(Ljava/lang/String; Ljava/lang/String;)V
+000082: invoke-virtual v4, Ljava/net/Socket;->getOutputStream()Ljava/io/OutputStream;
+000088: move-result-object v4
+00008a: iput-object v4, v3, Lcom/vivo/connbase/l0/f/c;->a Ljava/io/OutputStream;
+00008e: goto +20h
+000090: const-string v4, "client socket is null"
+000094: invoke-static v1, v4, Lc/c/f/a/b;->g(Ljava/lang/String; Ljava/lang/String;)V
+00009a: goto +1ah
+00009c: move-exception v4
+00009e: new-instance v0, Ljava/lang/StringBuilder;
+0000a2: invoke-direct v0, Ljava/lang/StringBuilder;-><init>()V
+0000a8: const-string v2, "SendDataThread:"
+0000ac: invoke-virtual v0, v2, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+0000b2: invoke-virtual v4, Ljava/io/IOException;->toString()Ljava/lang/String;
+0000b8: move-result-object v4
+0000ba: invoke-virtual v0, v4, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+0000c0: invoke-virtual v0, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
+0000c6: move-result-object v4
+0000c8: invoke-static v1, v4, Lc/c/f/a/b;->g(Ljava/lang/String; Ljava/lang/String;)V
+0000ce: return-void 
+
+METHOD a(Ljava/io/InputStream; Ljava/io/OutputStream; Lcom/vivo/connbase/l0/d/b;)Z
+000000: move-object/from16 v1, v19
+000004: invoke-virtual/range v22, Lcom/vivo/connbase/l0/d/b;->c()Lcom/vivo/connbase/l0/d/b$b;
+00000a: move-result-object v0
+00000c: invoke-virtual v0, Lcom/vivo/connbase/l0/d/b$b;->f()J
+000012: move-result-wide v9
+000014: new-instance v0, Ljava/lang/StringBuilder;
+000018: invoke-direct v0, Ljava/lang/StringBuilder;-><init>()V
+00001e: const-string v2, "copyStream begin total:"
+000022: invoke-virtual v0, v2, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+000028: invoke-virtual v0, v9, v10, Ljava/lang/StringBuilder;->append(J)Ljava/lang/StringBuilder;
+00002e: invoke-virtual v0, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
+000034: move-result-object v0
+000036: const-string v11, "SendDataThread"
+00003a: invoke-static v11, v0, Lc/c/f/a/b;->k(Ljava/lang/String; Ljava/lang/String;)V
+000040: const/16 v0, 20480
+000044: new-array v0, v0, [B
+000048: const-wide/16 v2, 0
+00004c: cmp-long v4, v2, v9
+000050: const-string v12, "sendListener is not null and call onSendUpdate:0"
+000054: const-string v13, ", pd:"
+000058: const-string v14, "send stream finished:"
+00005c: const-string v7, "copyStream end"
+000060: const/4 v8, 0
+000062: if-ltz v4, +041h
+000066: new-instance v0, Ljava/lang/StringBuilder;
+00006a: invoke-direct v0, Ljava/lang/StringBuilder;-><init>()V
+000070: invoke-virtual v0, v14, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+000076: invoke-virtual v0, v2, v3, Ljava/lang/StringBuilder;->append(J)Ljava/lang/StringBuilder;
+00007c: invoke-virtual v0, v13, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+000082: invoke-virtual/range v22, Lcom/vivo/connbase/l0/d/b;->h()J
+000088: move-result-wide v2
+00008a: invoke-virtual v0, v2, v3, Ljava/lang/StringBuilder;->append(J)Ljava/lang/StringBuilder;
+000090: invoke-virtual v0, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
+000096: move-result-object v0
+000098: invoke-static v11, v0, Lc/c/f/a/b;->k(Ljava/lang/String; Ljava/lang/String;)V
+00009e: invoke-direct v1, v8, Lcom/vivo/connbase/l0/f/c;->b(Z)V
+0000a4: iget-object v0, v1, Lcom/vivo/connbase/l0/f/c;->b Lcom/vivo/connbase/l0/f/c$a;
+0000a8: if-eqz v0, +0edh
+0000ac: invoke-static v11, v12, Lc/c/f/a/b;->k(Ljava/lang/String; Ljava/lang/String;)V
+0000b2: iget-object v2, v1, Lcom/vivo/connbase/l0/f/c;->b Lcom/vivo/connbase/l0/f/c$a;
+0000b6: const/4 v3, 0
+0000b8: move-object/from16 v4, v22
+0000bc: move-wide v5, v9
+0000be: move-object v13, v7
+0000c0: move v12, v8
+0000c2: move-wide v7, v9
+0000c4: invoke-interface/range v2 ... v8, Lcom/vivo/connbase/l0/f/c$a;->a(I Lcom/vivo/connbase/l0/d/b; J J)V
+0000ca: move-object/from16 v18, v13
+0000ce: goto/16 +0dch
+0000d2: move-exception v0
+0000d4: move-object v2, v13
+0000d6: goto/16 +0f7h
+0000da: move-exception v0
+0000dc: move v15, v12
+0000de: move-object v2, v13
+0000e0: goto/16 +0e3h
+0000e4: move-object/from16 v5, v20
+0000e8: move v4, v8
+0000ea: invoke-virtual v5, v0, Ljava/io/InputStream;->read([B)I
+0000f0: move-result v6
+0000f2: const/4 v15, -1
+0000f4: if-eq v6, v15, +0c7h
+0000f8: move-object/from16 v15, v21
+0000fc: invoke-virtual v15, v0, v8, v6, Ljava/io/OutputStream;->write([B I I)V
+000102: move-wide/from16 v16, v9
+000106: int-to-long v8, v6
+000108: add-long/2addr v8, v2
+00010a: const/4 v2, 1
+00010c: add-int/2addr v4, v2
+00010e: rem-int/lit16 v2, v4, 200
+000112: if-nez v2, +022h
+000116: iget-object v2, v1, Lcom/vivo/connbase/l0/f/c;->b Lcom/vivo/connbase/l0/f/c$a;
+00011a: if-eqz v2, +018h
+00011e: const-string v2, "sendListener is not null and call onSendUpdate:301"
+000122: invoke-static v11, v2, Lc/c/f/a/b;->k(Ljava/lang/String; Ljava/lang/String;)V
+000128: iget-object v2, v1, Lcom/vivo/connbase/l0/f/c;->b Lcom/vivo/connbase/l0/f/c$a;
+00012c: const/16 v3, 301
+000130: move-object/from16 v4, v22
+000134: move-wide v5, v8
+000136: move-object/from16 v18, v7
+00013a: move-wide v9, v8
+00013c: const/4 v15, 0
+00013e: move-wide/from16 v7, v16
+000142: invoke-interface/range v2 ... v8, Lcom/vivo/connbase/l0/f/c$a;->a(I Lcom/vivo/connbase/l0/d/b; J J)V
+000148: goto +5h
+00014a: move-object/from16 v18, v7
+00014e: move-wide v9, v8
+000150: const/4 v15, 0
+000152: move v4, v15
+000154: goto +5h
+000156: move-object/from16 v18, v7
+00015a: move-wide v9, v8
+00015c: const/4 v15, 0
+00015e: cmp-long v2, v9, v16
+000162: if-ltz v2, +035h
+000166: new-instance v0, Ljava/lang/StringBuilder;
+00016a: invoke-direct v0, Ljava/lang/StringBuilder;-><init>()V
+000170: invoke-virtual v0, v14, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+000176: invoke-virtual v0, v9, v10, Ljava/lang/StringBuilder;->append(J)Ljava/lang/StringBuilder;
+00017c: invoke-virtual v0, v13, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+000182: invoke-virtual/range v22, Lcom/vivo/connbase/l0/d/b;->h()J
+000188: move-result-wide v2
+00018a: invoke-virtual v0, v2, v3, Ljava/lang/StringBuilder;->append(J)Ljava/lang/StringBuilder;
+000190: invoke-virtual v0, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
+000196: move-result-object v0
+000198: invoke-static v11, v0, Lc/c/f/a/b;->k(Ljava/lang/String; Ljava/lang/String;)V
+00019e: invoke-direct v1, v15, Lcom/vivo/connbase/l0/f/c;->b(Z)V
+0001a4: iget-object v0, v1, Lcom/vivo/connbase/l0/f/c;->b Lcom/vivo/connbase/l0/f/c$a;
+0001a8: if-eqz v0, +06fh
+0001ac: invoke-static v11, v12, Lc/c/f/a/b;->k(Ljava/lang/String; Ljava/lang/String;)V
+0001b2: iget-object v2, v1, Lcom/vivo/connbase/l0/f/c;->b Lcom/vivo/connbase/l0/f/c$a;
+0001b6: const/4 v3, 0
+0001b8: move-object/from16 v4, v22
+0001bc: move-wide/from16 v5, v16
+0001c0: move-wide/from16 v7, v16
+0001c4: invoke-interface/range v2 ... v8, Lcom/vivo/connbase/l0/f/c$a;->a(I Lcom/vivo/connbase/l0/d/b; J J)V
+0001ca: goto +5eh
+0001cc: iget-boolean v2, v1, Lcom/vivo/connbase/l0/f/c;->g Z
+0001d0: if-eqz v2, +040h
+0001d4: new-instance v0, Ljava/lang/StringBuilder;
+0001d8: invoke-direct v0, Ljava/lang/StringBuilder;-><init>()V
+0001de: const-string v2, "payload id:"
+0001e2: invoke-virtual v0, v2, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+0001e8: invoke-virtual/range v22, Lcom/vivo/connbase/l0/d/b;->h()J
+0001ee: move-result-wide v2
+0001f0: invoke-virtual v0, v2, v3, Ljava/lang/StringBuilder;->append(J)Ljava/lang/StringBuilder;
+0001f6: const-string v2, " stream transmit cancelled."
+0001fa: invoke-virtual v0, v2, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+000200: invoke-virtual v0, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
+000206: move-result-object v0
+000208: invoke-static v11, v0, Lc/c/f/a/b;->k(Ljava/lang/String; Ljava/lang/String;)V
+00020e: invoke-virtual v1, v15, Lcom/vivo/connbase/l0/f/c;->a(Z)V
+000214: iget-object v0, v1, Lcom/vivo/connbase/l0/f/c;->b Lcom/vivo/connbase/l0/f/c$a;
+000218: if-eqz v0, +013h
+00021c: const-string v0, "sendListener is not null and call onSendUpdate:303"
+000220: invoke-static v11, v0, Lc/c/f/a/b;->k(Ljava/lang/String; Ljava/lang/String;)V
+000226: iget-object v2, v1, Lcom/vivo/connbase/l0/f/c;->b Lcom/vivo/connbase/l0/f/c$a;
+00022a: const/16 v3, 303
+00022e: move-object/from16 v4, v22
+000232: move-wide v5, v9
+000234: move-wide/from16 v7, v16
+000238: invoke-interface/range v2 ... v8, Lcom/vivo/connbase/l0/f/c$a;->a(I Lcom/vivo/connbase/l0/d/b; J J)V
+00023e: invoke-virtual/range v20, Ljava/io/InputStream;->close()V
+000244: iget-object v0, v1, Lcom/vivo/connbase/l0/f/c;->a Ljava/io/OutputStream;
+000248: invoke-virtual v0, Ljava/io/OutputStream;->close()V
+00024e: goto +1ch
+000250: move-object/from16 v5, v20
+000254: move-wide v2, v9
+000256: move v8, v15
+000258: move-wide/from16 v9, v16
+00025c: move-object/from16 v7, v18
+000260: goto/16 -0bbh
+000264: move-exception v0
+000266: move-object/from16 v2, v18
+00026a: goto +2dh
+00026c: move-exception v0
+00026e: move-object/from16 v2, v18
+000272: goto +1ah
+000274: move-exception v0
+000276: const/4 v15, 0
+000278: goto +3h
+00027a: move-exception v0
+00027c: move v15, v8
+00027e: move-object v2, v7
+000280: goto +13h
+000282: move-object/from16 v18, v7
+000286: invoke-virtual/range v20, Ljava/io/InputStream;->close()V
+00028c: move-object/from16 v2, v18
+000290: invoke-static v11, v2, Lc/c/f/a/b;->k(Ljava/lang/String; Ljava/lang/String;)V
+000296: const/4 v0, 1
+000298: return v0
+00029a: move-exception v0
+00029c: move-object v2, v7
+00029e: goto +13h
+0002a0: move-exception v0
+0002a2: move-object v2, v7
+0002a4: move v15, v8
+0002a6: invoke-virtual v0, Ljava/io/IOException;->toString()Ljava/lang/String;
+0002ac: move-result-object v0
+0002ae: invoke-static v11, v0, Lc/c/f/a/b;->k(Ljava/lang/String; Ljava/lang/String;)V
+0002b4: invoke-virtual/range v20, Ljava/io/InputStream;->close()V
+0002ba: invoke-static v11, v2, Lc/c/f/a/b;->k(Ljava/lang/String; Ljava/lang/String;)V
+0002c0: return v15
+0002c2: move-exception v0
+0002c4: invoke-virtual/range v20, Ljava/io/InputStream;->close()V
+0002ca: invoke-static v11, v2, Lc/c/f/a/b;->k(Ljava/lang/String; Ljava/lang/String;)V
+0002d0: throw v0
+
+METHOD a(Ljava/io/RandomAccessFile; Ljava/io/OutputStream; J Lcom/vivo/connbase/l0/d/b;)Z
+000000: move-object/from16 v1, v16
+000004: move-object/from16 v2, v17
+000008: move-wide/from16 v10, v19
+00000c: new-instance v0, Ljava/lang/StringBuilder;
+000010: invoke-direct v0, Ljava/lang/StringBuilder;-><init>()V
+000016: const-string v3, "copyFile:"
+00001a: invoke-virtual v0, v3, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+000020: invoke-virtual v0, v10, v11, Ljava/lang/StringBuilder;->append(J)Ljava/lang/StringBuilder;
+000026: invoke-virtual v0, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
+00002c: move-result-object v0
+00002e: const-string v12, "SendDataThread"
+000032: invoke-static v12, v0, Lc/c/f/a/b;->k(Ljava/lang/String; Ljava/lang/String;)V
+000038: invoke-virtual/range v21, Lcom/vivo/connbase/l0/d/b;->b()Lcom/vivo/connbase/l0/d/b$a;
+00003e: move-result-object v0
+000040: invoke-virtual v0, Lcom/vivo/connbase/l0/d/b$a;->c()J
+000046: move-result-wide v3
+000048: const-wide/16 v5, 0
+00004c: cmp-long v0, v3, v5
+000050: if-nez v0, +005h
+000054: invoke-virtual v2, v10, v11, Ljava/io/RandomAccessFile;->setLength(J)V
+00005a: invoke-virtual v2, v3, v4, Ljava/io/RandomAccessFile;->seek(J)V
+000060: const/16 v0, 20480
+000064: new-array v0, v0, [B
+000068: const/4 v13, 0
+00006a: move v5, v13
+00006c: invoke-virtual v2, v0, Ljava/io/RandomAccessFile;->read([B)I
+000072: move-result v6
+000074: const/4 v7, -1
+000076: const/4 v14, 1
+000078: if-eq v6, v7, +08ch
+00007c: move-object/from16 v15, v18
+000080: invoke-virtual v15, v0, v13, v6, Ljava/io/OutputStream;->write([B I I)V
+000086: int-to-long v6, v6
+000088: add-long v8, v3, v6
+00008c: add-int/2addr v5, v14
+00008e: rem-int/lit16 v3, v5, 200
+000092: if-nez v3, +017h
+000096: iget-object v3, v1, Lcom/vivo/connbase/l0/f/c;->b Lcom/vivo/connbase/l0/f/c$a;
+00009a: if-eqz v3, +010h
+00009e: iget-object v3, v1, Lcom/vivo/connbase/l0/f/c;->b Lcom/vivo/connbase/l0/f/c$a;
+0000a2: const/16 v4, 301
+0000a6: move-object/from16 v5, v21
+0000aa: move-wide v6, v8
+0000ac: move-wide v14, v8
+0000ae: move-wide/from16 v8, v19
+0000b2: invoke-interface/range v3 ... v9, Lcom/vivo/connbase/l0/f/c$a;->a(I Lcom/vivo/connbase/l0/d/b; J J)V
+0000b8: goto +2h
+0000ba: move-wide v14, v8
+0000bc: move v5, v13
+0000be: goto +2h
+0000c0: move-wide v14, v8
+0000c2: cmp-long v3, v14, v10
+0000c6: if-ltz v3, +02ah
+0000ca: new-instance v0, Ljava/lang/StringBuilder;
+0000ce: invoke-direct v0, Ljava/lang/StringBuilder;-><init>()V
+0000d4: const-string v3, "send file finished:"
+0000d8: invoke-virtual v0, v3, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+0000de: invoke-virtual v0, v14, v15, Ljava/lang/StringBuilder;->append(J)Ljava/lang/StringBuilder;
+0000e4: invoke-virtual v0, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
+0000ea: move-result-object v0
+0000ec: invoke-static v12, v0, Lc/c/f/a/b;->k(Ljava/lang/String; Ljava/lang/String;)V
+0000f2: invoke-direct v1, v13, Lcom/vivo/connbase/l0/f/c;->b(Z)V
+0000f8: iget-object v0, v1, Lcom/vivo/connbase/l0/f/c;->b Lcom/vivo/connbase/l0/f/c$a;
+0000fc: if-eqz v0, +04ah
+000100: iget-object v3, v1, Lcom/vivo/connbase/l0/f/c;->b Lcom/vivo/connbase/l0/f/c$a;
+000104: const/4 v4, 0
+000106: move-object/from16 v5, v21
+00010a: move-wide/from16 v6, v19
+00010e: move-wide/from16 v8, v19
+000112: invoke-interface/range v3 ... v9, Lcom/vivo/connbase/l0/f/c$a;->a(I Lcom/vivo/connbase/l0/d/b; J J)V
+000118: goto +3ch
+00011a: iget-boolean v3, v1, Lcom/vivo/connbase/l0/f/c;->g Z
+00011e: if-eqz v3, +036h
+000122: new-instance v0, Ljava/lang/StringBuilder;
+000126: invoke-direct v0, Ljava/lang/StringBuilder;-><init>()V
+00012c: const-string v3, "payload id:"
+000130: invoke-virtual v0, v3, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+000136: invoke-virtual/range v21, Lcom/vivo/connbase/l0/d/b;->h()J
+00013c: move-result-wide v3
+00013e: invoke-virtual v0, v3, v4, Ljava/lang/StringBuilder;->append(J)Ljava/lang/StringBuilder;
+000144: const-string v3, " file transmit cancelled."
+000148: invoke-virtual v0, v3, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+00014e: invoke-virtual v0, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
+000154: move-result-object v0
+000156: invoke-static v12, v0, Lc/c/f/a/b;->k(Ljava/lang/String; Ljava/lang/String;)V
+00015c: iget-object v0, v1, Lcom/vivo/connbase/l0/f/c;->b Lcom/vivo/connbase/l0/f/c$a;
+000160: if-eqz v0, +00eh
+000164: iget-object v3, v1, Lcom/vivo/connbase/l0/f/c;->b Lcom/vivo/connbase/l0/f/c$a;
+000168: const/16 v4, 303
+00016c: move-object/from16 v5, v21
+000170: move-wide v6, v14
+000172: move-wide/from16 v8, v19
+000176: invoke-interface/range v3 ... v9, Lcom/vivo/connbase/l0/f/c$a;->a(I Lcom/vivo/connbase/l0/d/b; J J)V
+00017c: invoke-virtual/range v17, Ljava/io/RandomAccessFile;->close()V
+000182: invoke-virtual/range v18, Ljava/io/OutputStream;->close()V
+000188: goto +4h
+00018a: move-wide v3, v14
+00018c: goto/16 -090h
+000190: invoke-virtual/range v17, Ljava/io/RandomAccessFile;->close()V
+000196: const/4 v0, 1
+000198: return v0
+00019a: move-exception v0
+00019c: goto +dh
+00019e: move-exception v0
+0001a0: invoke-virtual v0, Ljava/io/IOException;->toString()Ljava/lang/String;
+0001a6: move-result-object v0
+0001a8: invoke-static v12, v0, Lc/c/f/a/b;->k(Ljava/lang/String; Ljava/lang/String;)V
+0001ae: invoke-virtual/range v17, Ljava/io/RandomAccessFile;->close()V
+0001b4: return v13
+0001b6: invoke-virtual/range v17, Ljava/io/RandomAccessFile;->close()V
+0001bc: throw v0
+
+METHOD b(Lcom/vivo/connbase/l0/d/b;)J
+000000: const-wide/16 v0, 0
+000004: invoke-virtual v5, Lcom/vivo/connbase/l0/d/b;->l()I
+00000a: move-result v2
+00000c: const/4 v3, 2
+00000e: if-ne v2, v3, +00fh
+000012: invoke-virtual v5, Lcom/vivo/connbase/l0/d/b;->b()Lcom/vivo/connbase/l0/d/b$a;
+000018: move-result-object v5
+00001a: invoke-virtual v5, Lcom/vivo/connbase/l0/d/b$a;->a()Ljava/io/File;
+000020: move-result-object v5
+000022: invoke-virtual v5, Ljava/io/File;->length()J
+000028: move-result-wide v0
+00002a: goto +3ah
+00002c: invoke-virtual v5, Lcom/vivo/connbase/l0/d/b;->l()I
+000032: move-result v2
+000034: const/4 v3, 1
+000036: if-ne v2, v3, +009h
+00003a: invoke-virtual v5, Lcom/vivo/connbase/l0/d/b;->a()[B
+000040: move-result-object v5
+000042: array-length v5, v5
+000044: int-to-long v0, v5
+000046: goto +2ch
+000048: invoke-virtual v5, Lcom/vivo/connbase/l0/d/b;->l()I
+00004e: move-result v2
+000050: const/4 v3, 3
+000052: if-ne v2, v3, +026h
+000056: invoke-virtual v5, Lcom/vivo/connbase/l0/d/b;->c()Lcom/vivo/connbase/l0/d/b$b;
+00005c: move-result-object v5
+00005e: invoke-virtual v5, Lcom/vivo/connbase/l0/d/b$b;->f()J
+000064: move-result-wide v0
+000066: goto +1ch
+000068: move-exception v5
+00006a: new-instance v2, Ljava/lang/StringBuilder;
+00006e: invoke-direct v2, Ljava/lang/StringBuilder;-><init>()V
+000074: const-string v3, "getPayloadSize:"
+000078: invoke-virtual v2, v3, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+00007e: invoke-virtual v5, Ljava/lang/NullPointerException;->toString()Ljava/lang/String;
+000084: move-result-object v5
+000086: invoke-virtual v2, v5, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+00008c: invoke-virtual v2, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
+000092: move-result-object v5
+000094: const-string v2, "SendDataThread"
+000098: invoke-static v2, v5, Lc/c/f/a/b;->g(Ljava/lang/String; Ljava/lang/String;)V
+00009e: return-wide v0
+
+METHOD b(Z)V
+000000: iput-boolean v1, v0, Lcom/vivo/connbase/l0/f/c;->c Z
+000004: return-void 
+
+METHOD f()V
+000000: iget-object v0, v3, Lcom/vivo/connbase/l0/f/c;->a Ljava/io/OutputStream;
+000004: if-eqz v0, +021h
+000008: invoke-virtual v0, Ljava/io/OutputStream;->close()V
+00000e: goto +1ch
+000010: move-exception v0
+000012: new-instance v1, Ljava/lang/StringBuilder;
+000016: invoke-direct v1, Ljava/lang/StringBuilder;-><init>()V
+00001c: const-string v2, "closeStream error:"
+000020: invoke-virtual v1, v2, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+000026: invoke-virtual v0, Ljava/io/IOException;->toString()Ljava/lang/String;
+00002c: move-result-object v0
+00002e: invoke-virtual v1, v0, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+000034: invoke-virtual v1, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
+00003a: move-result-object v0
+00003c: const-string v1, "SendDataThread"
+000040: invoke-static v1, v0, Lc/c/f/a/b;->g(Ljava/lang/String; Ljava/lang/String;)V
+000046: return-void 
+
+METHOD a()I
+000000: iget v0, v1, Lcom/vivo/connbase/l0/f/c;->e I
+000004: return v0
+
+METHOD a(I)V
+000000: iput v1, v0, Lcom/vivo/connbase/l0/f/c;->e I
+000004: return-void 
+
+METHOD a(J)V
+000000: const-wide/16 v0, 0
+000004: cmp-long v0, v7, v0
+000008: const-string v1, "SendDataThread"
+00000c: if-nez v0, +017h
+000010: new-instance v0, Ljava/lang/StringBuilder;
+000014: invoke-direct v0, Ljava/lang/StringBuilder;-><init>()V
+00001a: const-string v2, "payloadId===="
+00001e: invoke-virtual v0, v2, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+000024: invoke-virtual v0, v7, v8, Ljava/lang/StringBuilder;->append(J)Ljava/lang/StringBuilder;
+00002a: invoke-virtual v0, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
+000030: move-result-object v7
+000032: invoke-static v1, v7, Lc/c/f/a/b;->k(Ljava/lang/String; Ljava/lang/String;)V
+000038: return-void 
+00003a: new-instance v0, Ljava/lang/StringBuilder;
+00003e: invoke-direct v0, Ljava/lang/StringBuilder;-><init>()V
+000044: const-string v2, "cancelTransmit currentPayloadId:"
+000048: invoke-virtual v0, v2, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+00004e: iget-wide v2, v6, Lcom/vivo/connbase/l0/f/c;->f J
+000052: invoke-virtual v0, v2, v3, Ljava/lang/StringBuilder;->append(J)Ljava/lang/StringBuilder;
+000058: const-string v2, ", payloadId:"
+00005c: invoke-virtual v0, v2, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+000062: invoke-virtual v0, v7, v8, Ljava/lang/StringBuilder;->append(J)Ljava/lang/StringBuilder;
+000068: invoke-virtual v0, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
+00006e: move-result-object v0
+000070: invoke-static v1, v0, Lc/c/f/a/b;->k(Ljava/lang/String; Ljava/lang/String;)V
+000076: iget-wide v2, v6, Lcom/vivo/connbase/l0/f/c;->f J
+00007a: cmp-long v0, v7, v2
+00007e: if-nez v0, +006h
+000082: const/4 v7, 1
+000084: iput-boolean v7, v6, Lcom/vivo/connbase/l0/f/c;->g Z
+000088: goto +56h
+00008a: new-instance v0, Ljava/util/concurrent/ConcurrentLinkedDeque;
+00008e: iget-object v2, v6, Lcom/vivo/connbase/l0/f/c;->h Ljava/util/Queue;
+000092: invoke-direct v0, v2, Ljava/util/concurrent/ConcurrentLinkedDeque;-><init>(Ljava/util/Collection;)V
+000098: new-instance v2, Ljava/lang/StringBuilder;
+00009c: invoke-direct v2, Ljava/lang/StringBuilder;-><init>()V
+0000a2: const-string v3, "cancelTransmit temp payload queue size:"
+0000a6: invoke-virtual v2, v3, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+0000ac: invoke-interface v0, Ljava/util/Queue;->size()I
+0000b2: move-result v3
+0000b4: invoke-virtual v2, v3, Ljava/lang/StringBuilder;->append(I)Ljava/lang/StringBuilder;
+0000ba: invoke-virtual v2, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
+0000c0: move-result-object v2
+0000c2: invoke-static v1, v2, Lc/c/f/a/b;->k(Ljava/lang/String; Ljava/lang/String;)V
+0000c8: invoke-interface v0, Ljava/util/Queue;->iterator()Ljava/util/Iterator;
+0000ce: move-result-object v0
+0000d0: invoke-interface v0, Ljava/util/Iterator;->hasNext()Z
+0000d6: move-result v2
+0000d8: if-eqz v2, +02eh
+0000dc: invoke-interface v0, Ljava/util/Iterator;->next()Ljava/lang/Object;
+0000e2: move-result-object v2
+0000e4: check-cast v2, Lcom/vivo/connbase/l0/d/b;
+0000e8: invoke-virtual v2, Lcom/vivo/connbase/l0/d/b;->h()J
+0000ee: move-result-wide v3
+0000f0: cmp-long v3, v7, v3
+0000f4: if-nez v3, -012h
+0000f8: new-instance v3, Ljava/lang/StringBuilder;
+0000fc: invoke-direct v3, Ljava/lang/StringBuilder;-><init>()V
+000102: const-string v4, "cancelTransmit remove payload in queue:"
+000106: invoke-virtual v3, v4, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+00010c: invoke-virtual v2, Lcom/vivo/connbase/l0/d/b;->h()J
+000112: move-result-wide v4
+000114: invoke-virtual v3, v4, v5, Ljava/lang/StringBuilder;->append(J)Ljava/lang/StringBuilder;
+00011a: invoke-virtual v3, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
+000120: move-result-object v3
+000122: invoke-static v1, v3, Lc/c/f/a/b;->k(Ljava/lang/String; Ljava/lang/String;)V
+000128: iget-object v3, v6, Lcom/vivo/connbase/l0/f/c;->h Ljava/util/Queue;
+00012c: invoke-interface v3, v2, Ljava/util/Queue;->remove(Ljava/lang/Object;)Z
+000132: goto -31h
+000134: return-void 
+
+METHOD a(Lcom/vivo/connbase/l0/d/b;)V
+000000: new-instance v0, Ljava/lang/StringBuilder;
+000004: invoke-direct v0, Ljava/lang/StringBuilder;-><init>()V
+00000a: const-string v1, "setPayload:"
+00000e: invoke-virtual v0, v1, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+000014: invoke-virtual v4, Lcom/vivo/connbase/l0/d/b;->h()J
+00001a: move-result-wide v1
+00001c: invoke-virtual v0, v1, v2, Ljava/lang/StringBuilder;->append(J)Ljava/lang/StringBuilder;
+000022: invoke-virtual v0, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
+000028: move-result-object v0
+00002a: const-string v1, "SendDataThread"
+00002e: invoke-static v1, v0, Lc/c/f/a/b;->k(Ljava/lang/String; Ljava/lang/String;)V
+000034: iget-object v0, v3, Lcom/vivo/connbase/l0/f/c;->h Ljava/util/Queue;
+000038: invoke-interface v0, v4, Ljava/util/Queue;->add(Ljava/lang/Object;)Z
+00003e: return-void 
+
+METHOD a(Lcom/vivo/connbase/l0/f/c$a;)V
+000000: iput-object v1, v0, Lcom/vivo/connbase/l0/f/c;->b Lcom/vivo/connbase/l0/f/c$a;
+000004: return-void 
+
+METHOD a(Z)V
+000000: new-instance v0, Ljava/lang/StringBuilder;
+000004: invoke-direct v0, Ljava/lang/StringBuilder;-><init>()V
+00000a: const-string v1, "set stop:"
+00000e: invoke-virtual v0, v1, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+000014: invoke-virtual v0, v3, Ljava/lang/StringBuilder;->append(Z)Ljava/lang/StringBuilder;
+00001a: invoke-virtual v0, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
+000020: move-result-object v0
+000022: const-string v1, "SendDataThread"
+000026: invoke-static v1, v0, Lc/c/f/a/b;->k(Ljava/lang/String; Ljava/lang/String;)V
+00002c: iput-boolean v3, v2, Lcom/vivo/connbase/l0/f/c;->d Z
+000030: return-void 
+
+METHOD b()Ljava/util/Queue;
+000000: iget-object v0, v1, Lcom/vivo/connbase/l0/f/c;->h Ljava/util/Queue;
+000004: return-object v0
+
+METHOD c()I
+000000: iget-object v0, v1, Lcom/vivo/connbase/l0/f/c;->h Ljava/util/Queue;
+000004: invoke-interface v0, Ljava/util/Queue;->size()I
+00000a: move-result v0
+00000c: return v0
+
+METHOD d()Z
+000000: iget-boolean v0, v1, Lcom/vivo/connbase/l0/f/c;->d Z
+000004: return v0
+
+METHOD e()Z
+000000: iget-boolean v0, v1, Lcom/vivo/connbase/l0/f/c;->c Z
+000004: return v0
+
+METHOD run()V
+000000: iget-boolean v0, v13, Lcom/vivo/connbase/l0/f/c;->d Z
+000004: const-string v1, "SendDataThread"
+000008: if-nez v0, +2e5h
+00000c: new-instance v0, Ljava/lang/StringBuilder;
+000010: invoke-direct v0, Ljava/lang/StringBuilder;-><init>()V
+000016: const-string v2, "send thread running, size:"
+00001a: invoke-virtual v0, v2, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+000020: iget-object v2, v13, Lcom/vivo/connbase/l0/f/c;->h Ljava/util/Queue;
+000024: invoke-interface v2, Ljava/util/Queue;->size()I
+00002a: move-result v2
+00002c: invoke-virtual v0, v2, Ljava/lang/StringBuilder;->append(I)Ljava/lang/StringBuilder;
+000032: invoke-virtual v0, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
+000038: move-result-object v0
+00003a: invoke-static v1, v0, Lc/c/f/a/b;->p(Ljava/lang/String; Ljava/lang/String;)V
+000040: iget-object v0, v13, Lcom/vivo/connbase/l0/f/c;->h Ljava/util/Queue;
+000044: invoke-interface v0, Ljava/util/Queue;->size()I
+00004a: move-result v0
+00004c: const/4 v2, 1
+00004e: const/4 v3, 0
+000050: if-lez v0, +2bah
+000054: invoke-direct v13, v2, Lcom/vivo/connbase/l0/f/c;->b(Z)V
+00005a: iget-object v0, v13, Lcom/vivo/connbase/l0/f/c;->h Ljava/util/Queue;
+00005e: invoke-interface v0, Ljava/util/Queue;->poll()Ljava/lang/Object;
+000064: move-result-object v0
+000066: check-cast v0, Lcom/vivo/connbase/l0/d/b;
+00006a: invoke-virtual v0, Lcom/vivo/connbase/l0/d/b;->h()J
+000070: move-result-wide v4
+000072: iput-wide v4, v13, Lcom/vivo/connbase/l0/f/c;->f J
+000076: invoke-static v0, Lcom/vivo/connbase/l0/d/b;->a(Lcom/vivo/connbase/l0/d/b;)Lcom/vivo/connbase/l0/d/b;
+00007c: move-result-object v4
+00007e: new-instance v5, Ljava/lang/StringBuilder;
+000082: invoke-direct v5, Ljava/lang/StringBuilder;-><init>()V
+000088: const-string v6, "origin payload, SD: "
+00008c: invoke-virtual v5, v6, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+000092: invoke-virtual v4, Lcom/vivo/connbase/l0/d/b;->j()Ljava/lang/String;
+000098: move-result-object v6
+00009a: invoke-virtual v5, v6, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+0000a0: const-string v6, ", DD:"
+0000a4: invoke-virtual v5, v6, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+0000aa: invoke-virtual v0, Lcom/vivo/connbase/l0/d/b;->k()Ljava/lang/String;
+0000b0: move-result-object v6
+0000b2: invoke-virtual v5, v6, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+0000b8: const-string v6, ", pd:"
+0000bc: invoke-virtual v5, v6, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+0000c2: invoke-virtual v0, Lcom/vivo/connbase/l0/d/b;->h()J
+0000c8: move-result-wide v6
+0000ca: invoke-virtual v5, v6, v7, Ljava/lang/StringBuilder;->append(J)Ljava/lang/StringBuilder;
+0000d0: const-string v6, ", type:"
+0000d4: invoke-virtual v5, v6, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+0000da: invoke-virtual v0, Lcom/vivo/connbase/l0/d/b;->l()I
+0000e0: move-result v6
+0000e2: invoke-virtual v5, v6, Ljava/lang/StringBuilder;->append(I)Ljava/lang/StringBuilder;
+0000e8: invoke-virtual v5, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
+0000ee: move-result-object v5
+0000f0: invoke-static v1, v5, Lc/c/f/a/b;->k(Ljava/lang/String; Ljava/lang/String;)V
+0000f6: invoke-static Lcom/vivo/connbase/App;->m()Lcom/vivo/connbase/App;
+0000fc: move-result-object v5
+0000fe: invoke-virtual v5, Lcom/vivo/connbase/App;->d()Ljava/lang/String;
+000104: move-result-object v5
+000106: invoke-virtual v4, v5, Lcom/vivo/connbase/l0/d/b;->f(Ljava/lang/String;)V
+00010c: invoke-static v4, Lcom/vivo/connbase/e0/g/d;->a(Lcom/vivo/connbase/l0/d/b;)Ljava/lang/String;
+000112: move-result-object v5
+000114: new-instance v6, Ljava/lang/StringBuilder;
+000118: invoke-direct v6, Ljava/lang/StringBuilder;-><init>()V
+00011e: const-string v7, "sendPayload:"
+000122: invoke-virtual v6, v7, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+000128: invoke-virtual v6, v5, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+00012e: invoke-virtual v6, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
+000134: move-result-object v6
+000136: invoke-static v1, v6, Lc/c/f/a/b;->k(Ljava/lang/String; Ljava/lang/String;)V
+00013c: invoke-static v5, Landroid/text/TextUtils;->isEmpty(Ljava/lang/CharSequence;)Z
+000142: move-result v6
+000144: if-eqz v6, +01ch
+000148: const-string v4, "sendPayload payload str is null."
+00014c: invoke-static v1, v4, Lc/c/f/a/b;->g(Ljava/lang/String; Ljava/lang/String;)V
+000152: invoke-direct v13, v3, Lcom/vivo/connbase/l0/f/c;->b(Z)V
+000158: iget-object v4, v13, Lcom/vivo/connbase/l0/f/c;->b Lcom/vivo/connbase/l0/f/c$a;
+00015c: if-eqz v4, +00ch
+000160: const/16 v5, 302
+000164: const-wide/16 v7, 0
+000168: const-wide/16 v9, 0
+00016c: move-object v6, v0
+00016e: invoke-interface/range v4 ... v10, Lcom/vivo/connbase/l0/f/c$a;->a(I Lcom/vivo/connbase/l0/d/b; J J)V
+000174: iput-boolean v2, v13, Lcom/vivo/connbase/l0/f/c;->d Z
+000178: goto/16 +22dh
+00017c: invoke-virtual v5, Ljava/lang/String;->getBytes()[B
+000182: move-result-object v5
+000184: array-length v6, v5
+000186: new-instance v7, Ljava/lang/StringBuilder;
+00018a: invoke-direct v7, Ljava/lang/StringBuilder;-><init>()V
+000190: const-string v8, "payload info length:"
+000194: invoke-virtual v7, v8, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+00019a: invoke-virtual v7, v6, Ljava/lang/StringBuilder;->append(I)Ljava/lang/StringBuilder;
+0001a0: invoke-virtual v7, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
+0001a6: move-result-object v7
+0001a8: invoke-static v1, v7, Lc/c/f/a/b;->k(Ljava/lang/String; Ljava/lang/String;)V
+0001ae: new-instance v7, Ljava/lang/StringBuilder;
+0001b2: invoke-direct v7, Ljava/lang/StringBuilder;-><init>()V
+0001b8: const-string v8, "PAY_LOAD_"
+0001bc: invoke-virtual v7, v8, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+0001c2: invoke-virtual v0, Lcom/vivo/connbase/l0/d/b;->l()I
+0001c8: move-result v8
+0001ca: invoke-virtual v7, v8, Ljava/lang/StringBuilder;->append(I)Ljava/lang/StringBuilder;
+0001d0: invoke-virtual v7, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
+0001d6: move-result-object v7
+0001d8: new-instance v8, Ljava/io/ByteArrayOutputStream;
+0001dc: invoke-direct v8, Ljava/io/ByteArrayOutputStream;-><init>()V
+0001e2: invoke-virtual v7, Ljava/lang/String;->getBytes()[B
+0001e8: move-result-object v7
+0001ea: invoke-virtual v8, v7, Ljava/io/ByteArrayOutputStream;->write([B)V
+0001f0: invoke-static v6, Lcom/vivo/connbase/e0/g/b;->a(I)[B
+0001f6: move-result-object v6
+0001f8: invoke-virtual v8, v6, Ljava/io/ByteArrayOutputStream;->write([B)V
+0001fe: invoke-virtual v8, v5, Ljava/io/ByteArrayOutputStream;->write([B)V
+000204: invoke-direct v13, v0, Lcom/vivo/connbase/l0/f/c;->b(Lcom/vivo/connbase/l0/d/b;)J
+00020a: move-result-wide v11
+00020c: new-instance v5, Ljava/lang/StringBuilder;
+000210: invoke-direct v5, Ljava/lang/StringBuilder;-><init>()V
+000216: const-string v6, "totalContentSize:"
+00021a: invoke-virtual v5, v6, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+000220: invoke-virtual v5, v11, v12, Ljava/lang/StringBuilder;->append(J)Ljava/lang/StringBuilder;
+000226: invoke-virtual v5, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
+00022c: move-result-object v5
+00022e: invoke-static v1, v5, Lc/c/f/a/b;->k(Ljava/lang/String; Ljava/lang/String;)V
+000234: iget-object v5, v13, Lcom/vivo/connbase/l0/f/c;->a Ljava/io/OutputStream;
+000238: if-nez v5, +01eh
+00023c: const-string v4, "SendDataThread output stream is null."
+000240: invoke-static v1, v4, Lc/c/f/a/b;->g(Ljava/lang/String; Ljava/lang/String;)V
+000246: invoke-direct v13, v3, Lcom/vivo/connbase/l0/f/c;->b(Z)V
+00024c: iget-object v4, v13, Lcom/vivo/connbase/l0/f/c;->b Lcom/vivo/connbase/l0/f/c$a;
+000250: if-eqz v4, +00eh
+000254: iget-object v4, v13, Lcom/vivo/connbase/l0/f/c;->b Lcom/vivo/connbase/l0/f/c$a;
+000258: const/16 v5, 302
+00025c: const-wide/16 v7, 0
+000260: const-wide/16 v9, 0
+000264: move-object v6, v0
+000266: invoke-interface/range v4 ... v10, Lcom/vivo/connbase/l0/f/c$a;->a(I Lcom/vivo/connbase/l0/d/b; J J)V
+00026c: iput-boolean v2, v13, Lcom/vivo/connbase/l0/f/c;->d Z
+000270: goto/16 +1b1h
+000274: iget-object v5, v13, Lcom/vivo/connbase/l0/f/c;->a Ljava/io/OutputStream;
+000278: invoke-virtual v8, Ljava/io/ByteArrayOutputStream;->toByteArray()[B
+00027e: move-result-object v6
+000280: invoke-virtual v5, v6, Ljava/io/OutputStream;->write([B)V
+000286: new-instance v5, Ljava/lang/StringBuilder;
+00028a: invoke-direct v5, Ljava/lang/StringBuilder;-><init>()V
+000290: const-string v6, "type:"
+000294: invoke-virtual v5, v6, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+00029a: invoke-virtual v0, Lcom/vivo/connbase/l0/d/b;->l()I
+0002a0: move-result v6
+0002a2: invoke-virtual v5, v6, Ljava/lang/StringBuilder;->append(I)Ljava/lang/StringBuilder;
+0002a8: invoke-virtual v5, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
+0002ae: move-result-object v5
+0002b0: invoke-static v1, v5, Lc/c/f/a/b;->k(Ljava/lang/String; Ljava/lang/String;)V
+0002b6: invoke-virtual v0, Lcom/vivo/connbase/l0/d/b;->l()I
+0002bc: move-result v5
+0002be: if-ne v5, v2, +031h
+0002c2: invoke-direct v13, v3, Lcom/vivo/connbase/l0/f/c;->b(Z)V
+0002c8: new-instance v4, Ljava/lang/StringBuilder;
+0002cc: invoke-direct v4, Ljava/lang/StringBuilder;-><init>()V
+0002d2: const-string v5, "send BYTES end:"
+0002d6: invoke-virtual v4, v5, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+0002dc: invoke-virtual v0, Lcom/vivo/connbase/l0/d/b;->h()J
+0002e2: move-result-wide v5
+0002e4: invoke-virtual v4, v5, v6, Ljava/lang/StringBuilder;->append(J)Ljava/lang/StringBuilder;
+0002ea: invoke-virtual v4, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
+0002f0: move-result-object v4
+0002f2: invoke-static v1, v4, Lc/c/f/a/b;->k(Ljava/lang/String; Ljava/lang/String;)V
+0002f8: iget-object v4, v13, Lcom/vivo/connbase/l0/f/c;->b Lcom/vivo/connbase/l0/f/c$a;
+0002fc: if-eqz v4, +166h
+000300: const-string v4, "sendListener is not null and call onSendUpdate:0"
+000304: invoke-static v1, v4, Lc/c/f/a/b;->k(Ljava/lang/String; Ljava/lang/String;)V
+00030a: iget-object v4, v13, Lcom/vivo/connbase/l0/f/c;->b Lcom/vivo/connbase/l0/f/c$a;
+00030e: const/4 v5, 0
+000310: move-object v6, v0
+000312: move-wide v7, v11
+000314: move-wide v9, v11
+000316: invoke-interface/range v4 ... v10, Lcom/vivo/connbase/l0/f/c$a;->a(I Lcom/vivo/connbase/l0/d/b; J J)V
+00031c: goto/16 +156h
+000320: invoke-virtual v0, Lcom/vivo/connbase/l0/d/b;->l()I
+000326: move-result v5
+000328: const/4 v6, 2
+00032a: const-string v10, ", stop:"
+00032e: if-ne v5, v6, +08ah
+000332: new-instance v4, Ljava/io/File;
+000336: invoke-virtual v0, Lcom/vivo/connbase/l0/d/b;->b()Lcom/vivo/connbase/l0/d/b$a;
+00033c: move-result-object v5
+00033e: invoke-virtual v5, Lcom/vivo/connbase/l0/d/b$a;->a()Ljava/io/File;
+000344: move-result-object v5
+000346: invoke-virtual v5, Ljava/io/File;->getAbsolutePath()Ljava/lang/String;
+00034c: move-result-object v5
+00034e: invoke-direct v4, v5, Ljava/io/File;-><init>(Ljava/lang/String;)V
+000354: new-instance v5, Ljava/lang/StringBuilder;
+000358: invoke-direct v5, Ljava/lang/StringBuilder;-><init>()V
+00035e: const-string v6, "file isExist:"
+000362: invoke-virtual v5, v6, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+000368: invoke-virtual v4, Ljava/io/File;->exists()Z
+00036e: move-result v6
+000370: invoke-virtual v5, v6, Ljava/lang/StringBuilder;->append(Z)Ljava/lang/StringBuilder;
+000376: invoke-virtual v5, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
+00037c: move-result-object v5
+00037e: invoke-static v1, v5, Lc/c/f/a/b;->k(Ljava/lang/String; Ljava/lang/String;)V
+000384: new-instance v5, Ljava/io/RandomAccessFile;
+000388: const-string v6, "rwd"
+00038c: invoke-direct v5, v4, v6, Ljava/io/RandomAccessFile;-><init>(Ljava/io/File; Ljava/lang/String;)V
+000392: iget-object v6, v13, Lcom/vivo/connbase/l0/f/c;->a Ljava/io/OutputStream;
+000396: invoke-virtual v4, Ljava/io/File;->length()J
+00039c: move-result-wide v7
+00039e: move-object v4, v13
+0003a0: move-object v9, v0
+0003a2: invoke-direct/range v4 ... v9, Lcom/vivo/connbase/l0/f/c;->a(Ljava/io/RandomAccessFile; Ljava/io/OutputStream; J Lcom/vivo/connbase/l0/d/b;)Z
+0003a8: move-result v4
+0003aa: new-instance v5, Ljava/lang/StringBuilder;
+0003ae: invoke-direct v5, Ljava/lang/StringBuilder;-><init>()V
+0003b4: const-string v6, "after send file:"
+0003b8: invoke-virtual v5, v6, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+0003be: invoke-virtual v5, v4, Ljava/lang/StringBuilder;->append(Z)Ljava/lang/StringBuilder;
+0003c4: invoke-virtual v5, v10, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+0003ca: iget-boolean v6, v13, Lcom/vivo/connbase/l0/f/c;->g Z
+0003ce: invoke-virtual v5, v6, Ljava/lang/StringBuilder;->append(Z)Ljava/lang/StringBuilder;
+0003d4: invoke-virtual v5, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
+0003da: move-result-object v5
+0003dc: invoke-static v1, v5, Lc/c/f/a/b;->k(Ljava/lang/String; Ljava/lang/String;)V
+0003e2: iget-boolean v5, v13, Lcom/vivo/connbase/l0/f/c;->g Z
+0003e6: if-eqz v5, +016h
+0003ea: iput-boolean v3, v13, Lcom/vivo/connbase/l0/f/c;->g Z
+0003ee: invoke-direct v13, v3, Lcom/vivo/connbase/l0/f/c;->b(Z)V
+0003f4: iget-object v5, v13, Lcom/vivo/connbase/l0/f/c;->b Lcom/vivo/connbase/l0/f/c$a;
+0003f8: if-eqz v5, +00bh
+0003fc: iget-object v5, v13, Lcom/vivo/connbase/l0/f/c;->b Lcom/vivo/connbase/l0/f/c$a;
+000400: invoke-virtual v0, Lcom/vivo/connbase/l0/d/b;->j()Ljava/lang/String;
+000406: move-result-object v6
+000408: invoke-interface v5, v6, Lcom/vivo/connbase/l0/f/c$a;->a(Ljava/lang/String;)V
+00040e: iput-boolean v2, v13, Lcom/vivo/connbase/l0/f/c;->d Z
+000412: if-nez v4, +0dbh
+000416: invoke-direct v13, v3, Lcom/vivo/connbase/l0/f/c;->b(Z)V
+00041c: iget-object v4, v13, Lcom/vivo/connbase/l0/f/c;->b Lcom/vivo/connbase/l0/f/c$a;
+000420: if-eqz v4, +00dh
+000424: iget-object v4, v13, Lcom/vivo/connbase/l0/f/c;->b Lcom/vivo/connbase/l0/f/c$a;
+000428: const/16 v5, 302
+00042c: const-wide/16 v7, 0
+000430: move-object v6, v0
+000432: move-wide v9, v11
+000434: invoke-interface/range v4 ... v10, Lcom/vivo/connbase/l0/f/c$a;->a(I Lcom/vivo/connbase/l0/d/b; J J)V
+00043a: iput-boolean v2, v13, Lcom/vivo/connbase/l0/f/c;->d Z
+00043e: goto/16 +0c5h
+000442: invoke-virtual v0, Lcom/vivo/connbase/l0/d/b;->l()I
+000448: move-result v5
+00044a: const/4 v6, 3
+00044c: if-ne v5, v6, +0beh
+000450: new-instance v5, Landroid/os/ParcelFileDescriptor$AutoCloseInputStream;
+000454: invoke-virtual v0, Lcom/vivo/connbase/l0/d/b;->c()Lcom/vivo/connbase/l0/d/b$b;
+00045a: move-result-object v6
+00045c: invoke-virtual v6, Lcom/vivo/connbase/l0/d/b$b;->d()Landroid/os/ParcelFileDescriptor;
+000462: move-result-object v6
+000464: invoke-direct v5, v6, Landroid/os/ParcelFileDescriptor$AutoCloseInputStream;-><init>(Landroid/os/ParcelFileDescriptor;)V
+00046a: new-instance v6, Ljava/lang/StringBuilder;
+00046e: invoke-direct v6, Ljava/lang/StringBuilder;-><init>()V
+000474: const-string v7, "begin send stream. pd:"
+000478: invoke-virtual v6, v7, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+00047e: invoke-virtual v4, Lcom/vivo/connbase/l0/d/b;->h()J
+000484: move-result-wide v7
+000486: invoke-virtual v6, v7, v8, Ljava/lang/StringBuilder;->append(J)Ljava/lang/StringBuilder;
+00048c: invoke-virtual v6, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
+000492: move-result-object v4
+000494: invoke-static v1, v4, Lc/c/f/a/b;->k(Ljava/lang/String; Ljava/lang/String;)V
+00049a: iget-object v4, v13, Lcom/vivo/connbase/l0/f/c;->a Ljava/io/OutputStream;
+00049e: invoke-direct v13, v5, v4, v0, Lcom/vivo/connbase/l0/f/c;->a(Ljava/io/InputStream; Ljava/io/OutputStream; Lcom/vivo/connbase/l0/d/b;)Z
+0004a4: move-result v4
+0004a6: new-instance v5, Ljava/lang/StringBuilder;
+0004aa: invoke-direct v5, Ljava/lang/StringBuilder;-><init>()V
+0004b0: const-string v6, "after send stream:"
+0004b4: invoke-virtual v5, v6, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+0004ba: invoke-virtual v5, v4, Ljava/lang/StringBuilder;->append(Z)Ljava/lang/StringBuilder;
+0004c0: invoke-virtual v5, v10, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+0004c6: iget-boolean v6, v13, Lcom/vivo/connbase/l0/f/c;->g Z
+0004ca: invoke-virtual v5, v6, Ljava/lang/StringBuilder;->append(Z)Ljava/lang/StringBuilder;
+0004d0: invoke-virtual v5, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
+0004d6: move-result-object v5
+0004d8: invoke-static v1, v5, Lc/c/f/a/b;->k(Ljava/lang/String; Ljava/lang/String;)V
+0004de: iget-boolean v5, v13, Lcom/vivo/connbase/l0/f/c;->g Z
+0004e2: if-eqz v5, +014h
+0004e6: invoke-direct v13, v3, Lcom/vivo/connbase/l0/f/c;->b(Z)V
+0004ec: iput-boolean v3, v13, Lcom/vivo/connbase/l0/f/c;->g Z
+0004f0: iget-object v5, v13, Lcom/vivo/connbase/l0/f/c;->b Lcom/vivo/connbase/l0/f/c$a;
+0004f4: if-eqz v5, +00bh
+0004f8: iget-object v5, v13, Lcom/vivo/connbase/l0/f/c;->b Lcom/vivo/connbase/l0/f/c$a;
+0004fc: invoke-virtual v0, Lcom/vivo/connbase/l0/d/b;->j()Ljava/lang/String;
+000502: move-result-object v6
+000504: invoke-interface v5, v6, Lcom/vivo/connbase/l0/f/c$a;->a(Ljava/lang/String;)V
+00050a: if-nez v4, +05fh
+00050e: invoke-direct v13, v3, Lcom/vivo/connbase/l0/f/c;->b(Z)V
+000514: iget-object v4, v13, Lcom/vivo/connbase/l0/f/c;->b Lcom/vivo/connbase/l0/f/c$a;
+000518: if-eqz v4, -06fh
+00051c: iget-object v4, v13, Lcom/vivo/connbase/l0/f/c;->b Lcom/vivo/connbase/l0/f/c$a;
+000520: const/16 v5, 302
+000524: const-wide/16 v7, 0
+000528: move-object v6, v0
+00052a: move-wide v9, v11
+00052c: invoke-interface/range v4 ... v10, Lcom/vivo/connbase/l0/f/c$a;->a(I Lcom/vivo/connbase/l0/d/b; J J)V
+000532: goto -7ch
+000534: move-exception v4
+000536: new-instance v5, Ljava/lang/StringBuilder;
+00053a: invoke-direct v5, Ljava/lang/StringBuilder;-><init>()V
+000540: const-string v6, "send data err:"
+000544: invoke-virtual v5, v6, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+00054a: invoke-virtual v5, v4, Ljava/lang/StringBuilder;->append(Ljava/lang/Object;)Ljava/lang/StringBuilder;
+000550: invoke-virtual v5, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
+000556: move-result-object v4
+000558: invoke-static v1, v4, Lc/c/f/a/b;->g(Ljava/lang/String; Ljava/lang/String;)V
+00055e: invoke-direct v13, v3, Lcom/vivo/connbase/l0/f/c;->b(Z)V
+000564: iget-object v4, v13, Lcom/vivo/connbase/l0/f/c;->b Lcom/vivo/connbase/l0/f/c$a;
+000568: if-eqz v4, +02eh
+00056c: const/16 v5, 302
+000570: const-wide/16 v7, 0
+000574: move-object v6, v0
+000576: move-wide v9, v11
+000578: invoke-interface/range v4 ... v10, Lcom/vivo/connbase/l0/f/c$a;->a(I Lcom/vivo/connbase/l0/d/b; J J)V
+00057e: goto +23h
+000580: move-exception v4
+000582: new-instance v5, Ljava/lang/StringBuilder;
+000586: invoke-direct v5, Ljava/lang/StringBuilder;-><init>()V
+00058c: const-string v6, "SendDataThread run:"
+000590: invoke-virtual v5, v6, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+000596: invoke-virtual v4, Ljava/io/IOException;->toString()Ljava/lang/String;
+00059c: move-result-object v4
+00059e: invoke-virtual v5, v4, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+0005a4: invoke-virtual v5, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
+0005aa: move-result-object v4
+0005ac: invoke-static v1, v4, Lc/c/f/a/b;->g(Ljava/lang/String; Ljava/lang/String;)V
+0005b2: invoke-direct v13, v3, Lcom/vivo/connbase/l0/f/c;->b(Z)V
+0005b8: iget-object v4, v13, Lcom/vivo/connbase/l0/f/c;->b Lcom/vivo/connbase/l0/f/c$a;
+0005bc: if-eqz v4, -224h
+0005c0: goto/16 -230h
+0005c4: iput-boolean v2, v13, Lcom/vivo/connbase/l0/f/c;->d Z
+0005c8: invoke-direct v13, v3, Lcom/vivo/connbase/l0/f/c;->b(Z)V
+0005ce: goto/16 -2e7h
+0005d2: const-string v0, "SendDataThread stopped"
+0005d6: invoke-static v1, v0, Lc/c/f/a/b;->k(Ljava/lang/String; Ljava/lang/String;)V
+0005dc: return-void 

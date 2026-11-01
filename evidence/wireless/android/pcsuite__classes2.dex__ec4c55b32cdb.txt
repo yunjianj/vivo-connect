@@ -1,0 +1,72 @@
+APK pcsuite/updateApk/pcsuite.apk
+DEX classes2.dex
+CLASS Lcom/vivo/connect/sdk/f/c$s0;
+SUPER Ljava/lang/Object;
+FIELDS
+h Ljava/lang/String; = ':startOriginalAdvertising'
+a Landroid/os/Messenger; = None
+b Ljava/lang/String; = None
+c Landroid/bluetooth/le/AdvertiseSettings; = None
+d Landroid/bluetooth/le/AdvertiseData; = None
+e Landroid/bluetooth/le/AdvertiseData; = None
+f Lcom/vivo/connbase/IAdvertiseCallback; = None
+g Lcom/vivo/connect/sdk/f/c; = None
+
+METHOD <init>(Lcom/vivo/connect/sdk/f/c; Landroid/os/Messenger; Ljava/lang/String; Landroid/bluetooth/le/AdvertiseSettings; Landroid/bluetooth/le/AdvertiseData; Landroid/bluetooth/le/AdvertiseData; Lcom/vivo/connbase/IAdvertiseCallback;)V
+000000: iput-object v1, v0, Lcom/vivo/connect/sdk/f/c$s0;->g Lcom/vivo/connect/sdk/f/c;
+000004: iput-object v2, v0, Lcom/vivo/connect/sdk/f/c$s0;->a Landroid/os/Messenger;
+000008: iput-object v3, v0, Lcom/vivo/connect/sdk/f/c$s0;->b Ljava/lang/String;
+00000c: iput-object v4, v0, Lcom/vivo/connect/sdk/f/c$s0;->c Landroid/bluetooth/le/AdvertiseSettings;
+000010: iput-object v5, v0, Lcom/vivo/connect/sdk/f/c$s0;->d Landroid/bluetooth/le/AdvertiseData;
+000014: iput-object v6, v0, Lcom/vivo/connect/sdk/f/c$s0;->e Landroid/bluetooth/le/AdvertiseData;
+000018: iput-object v7, v0, Lcom/vivo/connect/sdk/f/c$s0;->f Lcom/vivo/connbase/IAdvertiseCallback;
+00001c: invoke-direct v0, Ljava/lang/Object;-><init>()V
+000022: return-void 
+
+METHOD run()V
+000000: iget-object v0, v13, Lcom/vivo/connect/sdk/f/c$s0;->g Lcom/vivo/connect/sdk/f/c;
+000004: invoke-static v0, Lcom/vivo/connect/sdk/f/c;->a(Lcom/vivo/connect/sdk/f/c;)Lcom/vivo/connbase/IClient;
+00000a: move-result-object v0
+00000c: if-nez v0, +027h
+000010: iget-object v0, v13, Lcom/vivo/connect/sdk/f/c$s0;->g Lcom/vivo/connect/sdk/f/c;
+000014: const-string v1, ":startOriginalAdvertising"
+000018: invoke-static v0, v1, Lcom/vivo/connect/sdk/f/c;->a(Lcom/vivo/connect/sdk/f/c; Ljava/lang/String;)Z
+00001e: move-result v0
+000020: if-nez v0, +003h
+000024: return-void 
+000026: iget-object v0, v13, Lcom/vivo/connect/sdk/f/c$s0;->g Lcom/vivo/connect/sdk/f/c;
+00002a: invoke-static v0, Lcom/vivo/connect/sdk/f/c;->a(Lcom/vivo/connect/sdk/f/c;)Lcom/vivo/connbase/IClient;
+000030: move-result-object v0
+000032: iget-object v1, v13, Lcom/vivo/connect/sdk/f/c$s0;->a Landroid/os/Messenger;
+000036: iget-object v2, v13, Lcom/vivo/connect/sdk/f/c$s0;->b Ljava/lang/String;
+00003a: iget-object v3, v13, Lcom/vivo/connect/sdk/f/c$s0;->c Landroid/bluetooth/le/AdvertiseSettings;
+00003e: iget-object v4, v13, Lcom/vivo/connect/sdk/f/c$s0;->d Landroid/bluetooth/le/AdvertiseData;
+000042: iget-object v5, v13, Lcom/vivo/connect/sdk/f/c$s0;->e Landroid/bluetooth/le/AdvertiseData;
+000046: iget-object v13, v13, Lcom/vivo/connect/sdk/f/c$s0;->f Lcom/vivo/connbase/IAdvertiseCallback;
+00004a: move-object v12, v13
+00004c: move-object v6, v0
+00004e: move-object v7, v1
+000050: move-object v8, v2
+000052: move-object v9, v3
+000054: move-object v10, v4
+000056: move-object v11, v5
+000058: goto +12h
+00005a: iget-object v0, v13, Lcom/vivo/connect/sdk/f/c$s0;->g Lcom/vivo/connect/sdk/f/c;
+00005e: invoke-static v0, Lcom/vivo/connect/sdk/f/c;->a(Lcom/vivo/connect/sdk/f/c;)Lcom/vivo/connbase/IClient;
+000064: move-result-object v0
+000066: iget-object v1, v13, Lcom/vivo/connect/sdk/f/c$s0;->a Landroid/os/Messenger;
+00006a: iget-object v2, v13, Lcom/vivo/connect/sdk/f/c$s0;->b Ljava/lang/String;
+00006e: iget-object v3, v13, Lcom/vivo/connect/sdk/f/c$s0;->c Landroid/bluetooth/le/AdvertiseSettings;
+000072: iget-object v4, v13, Lcom/vivo/connect/sdk/f/c$s0;->d Landroid/bluetooth/le/AdvertiseData;
+000076: iget-object v5, v13, Lcom/vivo/connect/sdk/f/c$s0;->e Landroid/bluetooth/le/AdvertiseData;
+00007a: goto -1ah
+00007c: invoke-interface/range v6 ... v12, Lcom/vivo/connbase/IClient;->startOriginalAdvertising(Landroid/os/Messenger; Ljava/lang/String; Landroid/bluetooth/le/AdvertiseSettings; Landroid/bluetooth/le/AdvertiseData; Landroid/bluetooth/le/AdvertiseData; Lcom/vivo/connbase/IAdvertiseCallback;)V
+000082: return-void 
+000084: move-exception v0
+000086: move-object v13, v0
+000088: new-instance v0, Ljava/lang/StringBuilder;
+00008c: const-string v1, "start original advertise err:"
+000090: invoke-direct v0, v1, Ljava/lang/StringBuilder;-><init>(Ljava/lang/String;)V
+000096: const-string v1, "ConnectClientImpl"
+00009a: invoke-static v13, v0, v1, LS5/f;->g(Ljava/lang/Exception; Ljava/lang/StringBuilder; Ljava/lang/String;)V
+0000a0: return-void 

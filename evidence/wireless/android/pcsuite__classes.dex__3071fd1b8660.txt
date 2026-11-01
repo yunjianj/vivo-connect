@@ -1,0 +1,65 @@
+APK pcsuite/updateApk/pcsuite.apk
+DEX classes.dex
+CLASS Lcom/bbk/account/base/presenter/AccountRecoveryPresenter;
+SUPER Ljava/lang/Object;
+FIELDS
+ACCOUNT_RECOVERY_URI Landroid/net/Uri; = None
+TAG Ljava/lang/String; = 'AccountRecoveryPresenter'
+
+METHOD getAccountOldRecovery()Landroid/os/Bundle;
+000000: const-string v6, "getAccountOldRecovery"
+000004: const-string v0, "AccountRecoveryPresenter"
+000008: invoke-static v0, v6, LA3/d;->a(Ljava/lang/String; Ljava/lang/String;)V
+00000e: new-instance v6, Landroid/os/Bundle;
+000012: invoke-direct v6, Landroid/os/Bundle;-><init>()V
+000018: invoke-static Lcom/bbk/account/base/AccountBase;->getInstance()Lcom/bbk/account/base/AccountBase;
+00001e: move-result-object v1
+000020: invoke-virtual v1, Lcom/bbk/account/base/AccountBase;->isLogin()Z
+000026: move-result v1
+000028: if-eqz v1, +063h
+00002c: const-string v1, "isLogin true"
+000030: invoke-static v0, v1, LA3/d;->a(Ljava/lang/String; Ljava/lang/String;)V
+000036: invoke-static Lcom/bbk/account/base/AccountBase;->getInstance()Lcom/bbk/account/base/AccountBase;
+00003c: move-result-object v1
+00003e: const/4 v2, 1
+000040: invoke-virtual v1, v2, Lcom/bbk/account/base/AccountBase;->getPhonenum(Z)Ljava/lang/String;
+000046: move-result-object v1
+000048: invoke-static Lcom/bbk/account/base/AccountBase;->getInstance()Lcom/bbk/account/base/AccountBase;
+00004e: move-result-object v3
+000050: invoke-virtual v3, v2, Lcom/bbk/account/base/AccountBase;->getEmail(Z)Ljava/lang/String;
+000056: move-result-object v3
+000058: invoke-static Lcom/bbk/account/base/AccountBase;->getInstance()Lcom/bbk/account/base/AccountBase;
+00005e: move-result-object v4
+000060: invoke-virtual v4, v2, Lcom/bbk/account/base/AccountBase;->getUserName(Z)Ljava/lang/String;
+000066: move-result-object v2
+000068: invoke-static Lcom/bbk/account/base/AccountBase;->getInstance()Lcom/bbk/account/base/AccountBase;
+00006e: move-result-object v4
+000070: invoke-virtual v4, Lcom/bbk/account/base/AccountBase;->getOpenid()Ljava/lang/String;
+000076: move-result-object v4
+000078: invoke-static v1, Landroid/text/TextUtils;->isEmpty(Ljava/lang/CharSequence;)Z
+00007e: move-result v5
+000080: if-nez v5, +00ch
+000084: const-string v5, "encryptPhone not empty"
+000088: invoke-static v0, v5, LA3/d;->a(Ljava/lang/String; Ljava/lang/String;)V
+00008e: const-string v5, "encryptPhone"
+000092: invoke-virtual v6, v5, v1, Landroid/os/BaseBundle;->putString(Ljava/lang/String; Ljava/lang/String;)V
+000098: invoke-static v3, Landroid/text/TextUtils;->isEmpty(Ljava/lang/CharSequence;)Z
+00009e: move-result v1
+0000a0: if-nez v1, +00ch
+0000a4: const-string v1, "encryptEmail not empty"
+0000a8: invoke-static v0, v1, LA3/d;->a(Ljava/lang/String; Ljava/lang/String;)V
+0000ae: const-string v1, "encryptEmail"
+0000b2: invoke-virtual v6, v1, v3, Landroid/os/BaseBundle;->putString(Ljava/lang/String; Ljava/lang/String;)V
+0000b8: invoke-static v2, Landroid/text/TextUtils;->isEmpty(Ljava/lang/CharSequence;)Z
+0000be: move-result v1
+0000c0: if-nez v1, +00ch
+0000c4: const-string v1, "name not empty"
+0000c8: invoke-static v0, v1, LA3/d;->a(Ljava/lang/String; Ljava/lang/String;)V
+0000ce: const-string v0, "name"
+0000d2: invoke-virtual v6, v0, v2, Landroid/os/BaseBundle;->putString(Ljava/lang/String; Ljava/lang/String;)V
+0000d8: invoke-static v4, Landroid/text/TextUtils;->isEmpty(Ljava/lang/CharSequence;)Z
+0000de: move-result v0
+0000e0: if-nez v0, +007h
+0000e4: const-string v0, "openid"
+0000e8: invoke-virtual v6, v0, v4, Landroid/os/BaseBundle;->putString(Ljava/lang/String; Ljava/lang/String;)V
+0000ee: return-object v6

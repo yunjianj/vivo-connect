@@ -1,0 +1,123 @@
+APK pcsuite/updateApk/connbase.apk
+DEX classes.dex
+CLASS Lcom/vivo/connbase/wifi/utils/d;
+SUPER Ljava/lang/Object;
+FIELDS
+a Ljava/lang/String; = 'IpUtils'
+
+METHOD <clinit>()V
+000000: return-void 
+
+METHOD <init>()V
+000000: invoke-direct v0, Ljava/lang/Object;-><init>()V
+000006: return-void 
+
+METHOD a([B)Ljava/lang/String;
+000000: new-instance v0, Ljava/lang/StringBuffer;
+000004: invoke-direct v0, Ljava/lang/StringBuffer;-><init>()V
+00000a: const/4 v1, 1
+00000c: aget-byte v1, v3, v1
+000010: and-int/lit16 v1, v1, 255
+000014: invoke-virtual v0, v1, Ljava/lang/StringBuffer;->append(I)Ljava/lang/StringBuffer;
+00001a: const/16 v1, 46
+00001e: invoke-virtual v0, v1, Ljava/lang/StringBuffer;->append(C)Ljava/lang/StringBuffer;
+000024: const/4 v2, 2
+000026: aget-byte v2, v3, v2
+00002a: and-int/lit16 v2, v2, 255
+00002e: invoke-virtual v0, v2, Ljava/lang/StringBuffer;->append(I)Ljava/lang/StringBuffer;
+000034: invoke-virtual v0, v1, Ljava/lang/StringBuffer;->append(C)Ljava/lang/StringBuffer;
+00003a: const/4 v2, 3
+00003c: aget-byte v2, v3, v2
+000040: and-int/lit16 v2, v2, 255
+000044: invoke-virtual v0, v2, Ljava/lang/StringBuffer;->append(I)Ljava/lang/StringBuffer;
+00004a: invoke-virtual v0, v1, Ljava/lang/StringBuffer;->append(C)Ljava/lang/StringBuffer;
+000050: const/4 v1, 4
+000052: aget-byte v3, v3, v1
+000056: and-int/lit16 v3, v3, 255
+00005a: invoke-virtual v0, v3, Ljava/lang/StringBuffer;->append(I)Ljava/lang/StringBuffer;
+000060: invoke-virtual v0, Ljava/lang/StringBuffer;->toString()Ljava/lang/String;
+000066: move-result-object v3
+000068: return-object v3
+
+METHOD a(Ljava/lang/String;)Z
+000000: if-eqz v1, +013h
+000004: invoke-virtual v1, Ljava/lang/String;->length()I
+00000a: move-result v0
+00000c: if-eqz v0, +00dh
+000010: const-string v0, "0.0.0.0"
+000014: invoke-virtual v1, v0, Ljava/lang/String;->equals(Ljava/lang/Object;)Z
+00001a: move-result v1
+00001c: if-eqz v1, +003h
+000020: goto +3h
+000022: const/4 v1, 1
+000024: return v1
+000026: const/4 v1, 0
+000028: return v1
+
+METHOD b(Ljava/lang/String;)[B
+000000: invoke-static v2, Ljava/net/InetAddress;->getByName(Ljava/lang/String;)Ljava/net/InetAddress;
+000006: move-result-object v0
+000008: invoke-virtual v0, Ljava/net/InetAddress;->getAddress()[B
+00000e: move-result-object v2
+000010: return-object v2
+000012: new-instance v0, Ljava/lang/IllegalArgumentException;
+000016: new-instance v1, Ljava/lang/StringBuilder;
+00001a: invoke-direct v1, Ljava/lang/StringBuilder;-><init>()V
+000020: invoke-virtual v1, v2, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+000026: const-string v2, " is invalid IP"
+00002a: invoke-virtual v1, v2, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+000030: invoke-virtual v1, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
+000036: move-result-object v2
+000038: invoke-direct v0, v2, Ljava/lang/IllegalArgumentException;-><init>(Ljava/lang/String;)V
+00003e: throw v0
+
+METHOD c(Ljava/lang/String;)[B
+000000: const/4 v0, 4
+000002: new-array v0, v0, [B
+000006: const-string v1, "\."
+00000a: invoke-virtual v4, v1, Ljava/lang/String;->split(Ljava/lang/String;)[Ljava/lang/String;
+000010: move-result-object v1
+000012: const/4 v2, 0
+000014: aget-object v3, v1, v2
+000018: invoke-static v3, Ljava/lang/Integer;->parseInt(Ljava/lang/String;)I
+00001e: move-result v3
+000020: and-int/lit16 v3, v3, 255
+000024: int-to-byte v3, v3
+000026: aput-byte v3, v0, v2
+00002a: const/4 v2, 1
+00002c: aget-object v3, v1, v2
+000030: invoke-static v3, Ljava/lang/Integer;->parseInt(Ljava/lang/String;)I
+000036: move-result v3
+000038: and-int/lit16 v3, v3, 255
+00003c: int-to-byte v3, v3
+00003e: aput-byte v3, v0, v2
+000042: const/4 v2, 2
+000044: aget-object v3, v1, v2
+000048: invoke-static v3, Ljava/lang/Integer;->parseInt(Ljava/lang/String;)I
+00004e: move-result v3
+000050: and-int/lit16 v3, v3, 255
+000054: int-to-byte v3, v3
+000056: aput-byte v3, v0, v2
+00005a: const/4 v2, 3
+00005c: aget-object v1, v1, v2
+000060: invoke-static v1, Ljava/lang/Integer;->parseInt(Ljava/lang/String;)I
+000066: move-result v1
+000068: and-int/lit16 v1, v1, 255
+00006c: int-to-byte v1, v1
+00006e: aput-byte v1, v0, v2
+000072: return-object v0
+000074: move-exception v0
+000076: sget-object v1, Lcom/vivo/connbase/wifi/utils/d;->a Ljava/lang/String;
+00007a: new-instance v2, Ljava/lang/StringBuilder;
+00007e: invoke-direct v2, Ljava/lang/StringBuilder;-><init>()V
+000084: invoke-virtual v2, v4, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+00008a: const-string v4, " is invalid IP ："
+00008e: invoke-virtual v2, v4, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+000094: invoke-virtual v0, Ljava/lang/Exception;->getMessage()Ljava/lang/String;
+00009a: move-result-object v4
+00009c: invoke-virtual v2, v4, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+0000a2: invoke-virtual v2, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
+0000a8: move-result-object v4
+0000aa: invoke-static v1, v4, Lc/c/f/a/b;->k(Ljava/lang/String; Ljava/lang/String;)V
+0000b0: const/4 v4, 0
+0000b2: return-object v4

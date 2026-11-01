@@ -1,0 +1,104 @@
+APK pcsuite/updateApk/pcsuite.apk
+DEX classes2.dex
+CLASS Lcom/vivo/connect/discovery/AdvertiseOptions$Builder;
+SUPER Ljava/lang/Object;
+FIELDS
+advertiseOptions Lcom/vivo/connect/discovery/AdvertiseOptions; = None
+
+METHOD <init>()V
+000000: invoke-direct v2, Ljava/lang/Object;-><init>()V
+000006: new-instance v0, Lcom/vivo/connect/discovery/AdvertiseOptions;
+00000a: const/4 v1, 0
+00000c: invoke-direct v0, v1, Lcom/vivo/connect/discovery/AdvertiseOptions;-><init>(Lcom/vivo/connect/discovery/AdvertiseOptions$a;)V
+000012: iput-object v0, v2, Lcom/vivo/connect/discovery/AdvertiseOptions$Builder;->advertiseOptions Lcom/vivo/connect/discovery/AdvertiseOptions;
+000016: return-void 
+
+METHOD <init>(Lcom/vivo/connect/discovery/AdvertiseOptions;)V
+000000: invoke-direct v2, Ljava/lang/Object;-><init>()V
+000006: new-instance v0, Lcom/vivo/connect/discovery/AdvertiseOptions;
+00000a: const/4 v1, 0
+00000c: invoke-direct v0, v1, Lcom/vivo/connect/discovery/AdvertiseOptions;-><init>(Lcom/vivo/connect/discovery/AdvertiseOptions$a;)V
+000012: iput-object v0, v2, Lcom/vivo/connect/discovery/AdvertiseOptions$Builder;->advertiseOptions Lcom/vivo/connect/discovery/AdvertiseOptions;
+000016: invoke-static v3, Lcom/vivo/connect/discovery/AdvertiseOptions;->a(Lcom/vivo/connect/discovery/AdvertiseOptions;)I
+00001c: move-result v1
+00001e: invoke-static v0, v1, Lcom/vivo/connect/discovery/AdvertiseOptions;->a(Lcom/vivo/connect/discovery/AdvertiseOptions; I)I
+000024: iget-object v2, v2, Lcom/vivo/connect/discovery/AdvertiseOptions$Builder;->advertiseOptions Lcom/vivo/connect/discovery/AdvertiseOptions;
+000028: invoke-static v3, Lcom/vivo/connect/discovery/AdvertiseOptions;->b(Lcom/vivo/connect/discovery/AdvertiseOptions;)I
+00002e: move-result v3
+000030: invoke-static v2, v3, Lcom/vivo/connect/discovery/AdvertiseOptions;->b(Lcom/vivo/connect/discovery/AdvertiseOptions; I)I
+000036: return-void 
+
+METHOD build()Lcom/vivo/connect/discovery/AdvertiseOptions;
+000000: iget-object v0, v0, Lcom/vivo/connect/discovery/AdvertiseOptions$Builder;->advertiseOptions Lcom/vivo/connect/discovery/AdvertiseOptions;
+000004: return-object v0
+
+METHOD setAdvertiseChannel(I)Lcom/vivo/connect/discovery/AdvertiseOptions$Builder;
+000000: iget-object v0, v1, Lcom/vivo/connect/discovery/AdvertiseOptions$Builder;->advertiseOptions Lcom/vivo/connect/discovery/AdvertiseOptions;
+000004: invoke-static v0, v2, Lcom/vivo/connect/discovery/AdvertiseOptions;->e(Lcom/vivo/connect/discovery/AdvertiseOptions; I)V
+00000a: return-object v1
+
+METHOD setAdvertiseInterval(I)Lcom/vivo/connect/discovery/AdvertiseOptions$Builder;
+000000: const v0, 16777215
+000006: const-string v1, "Advertise interval"
+00000a: const/16 v2, 160
+00000e: invoke-static v4, v2, v0, v1, Lcom/vivo/connect/utils/Preconditions;->checkArgumentInRange(I I I Ljava/lang/String;)I
+000014: iget-object v0, v3, Lcom/vivo/connect/discovery/AdvertiseOptions$Builder;->advertiseOptions Lcom/vivo/connect/discovery/AdvertiseOptions;
+000018: invoke-static v0, v4, Lcom/vivo/connect/discovery/AdvertiseOptions;->c(Lcom/vivo/connect/discovery/AdvertiseOptions; I)V
+00001e: return-object v3
+
+METHOD setAdvertiseTimeOut(J)Lcom/vivo/connect/discovery/AdvertiseOptions$Builder;
+000000: const-wide/16 v0, 0
+000004: cmp-long v0, v3, v0
+000008: if-ltz v0, +004h
+00000c: const/4 v0, 1
+00000e: goto +2h
+000010: const/4 v0, 0
+000012: const-string v1, "Time out value should not be negative."
+000016: invoke-static v0, v1, Lcom/vivo/connect/utils/Preconditions;->checkArgument(Z Ljava/lang/Object;)V
+00001c: iget-object v0, v2, Lcom/vivo/connect/discovery/AdvertiseOptions$Builder;->advertiseOptions Lcom/vivo/connect/discovery/AdvertiseOptions;
+000020: invoke-static v0, v3, v4, Lcom/vivo/connect/discovery/AdvertiseOptions;->a(Lcom/vivo/connect/discovery/AdvertiseOptions; J)J
+000026: return-object v2
+
+METHOD setCustomizedData(I [B)Lcom/vivo/connect/discovery/AdvertiseOptions$Builder;
+000000: const/4 v0, 1
+000002: if-ne v3, v0, +01dh
+000006: if-eqz v4, +013h
+00000a: array-length v0, v4
+00000c: if-eqz v0, +010h
+000010: array-length v0, v4
+000012: const/16 v1, 16
+000016: if-gt v0, v1, +003h
+00001a: goto +11h
+00001c: new-instance v2, Ljava/lang/IllegalArgumentException;
+000020: const-string v3, "Custom data cannot exceed 16 bytes"
+000024: invoke-direct v2, v3, Ljava/lang/IllegalArgumentException;-><init>(Ljava/lang/String;)V
+00002a: throw v2
+00002c: new-instance v2, Ljava/lang/IllegalArgumentException;
+000030: const-string v3, "customized data cannot be empty when advertising type is customized"
+000034: invoke-direct v2, v3, Ljava/lang/IllegalArgumentException;-><init>(Ljava/lang/String;)V
+00003a: throw v2
+00003c: iget-object v0, v2, Lcom/vivo/connect/discovery/AdvertiseOptions$Builder;->advertiseOptions Lcom/vivo/connect/discovery/AdvertiseOptions;
+000040: invoke-static v0, v3, Lcom/vivo/connect/discovery/AdvertiseOptions;->d(Lcom/vivo/connect/discovery/AdvertiseOptions; I)I
+000046: iget-object v3, v2, Lcom/vivo/connect/discovery/AdvertiseOptions$Builder;->advertiseOptions Lcom/vivo/connect/discovery/AdvertiseOptions;
+00004a: invoke-static v3, v4, Lcom/vivo/connect/discovery/AdvertiseOptions;->a(Lcom/vivo/connect/discovery/AdvertiseOptions; [B)[B
+000050: return-object v2
+
+METHOD setDeviceType(I)Lcom/vivo/connect/discovery/AdvertiseOptions$Builder;
+000000: iget-object v0, v1, Lcom/vivo/connect/discovery/AdvertiseOptions$Builder;->advertiseOptions Lcom/vivo/connect/discovery/AdvertiseOptions;
+000004: invoke-static v0, v2, Lcom/vivo/connect/discovery/AdvertiseOptions;->a(Lcom/vivo/connect/discovery/AdvertiseOptions; I)I
+00000a: return-object v1
+
+METHOD setNeedWakeUp(Z)Lcom/vivo/connect/discovery/AdvertiseOptions$Builder;
+000000: iget-object v0, v1, Lcom/vivo/connect/discovery/AdvertiseOptions$Builder;->advertiseOptions Lcom/vivo/connect/discovery/AdvertiseOptions;
+000004: invoke-static v0, v2, Lcom/vivo/connect/discovery/AdvertiseOptions;->a(Lcom/vivo/connect/discovery/AdvertiseOptions; Z)Z
+00000a: return-object v1
+
+METHOD setScreenOffEnable(Z)Lcom/vivo/connect/discovery/AdvertiseOptions$Builder;
+000000: iget-object v0, v1, Lcom/vivo/connect/discovery/AdvertiseOptions$Builder;->advertiseOptions Lcom/vivo/connect/discovery/AdvertiseOptions;
+000004: invoke-static v0, v2, Lcom/vivo/connect/discovery/AdvertiseOptions;->b(Lcom/vivo/connect/discovery/AdvertiseOptions; Z)V
+00000a: return-object v1
+
+METHOD setStrategy(I)Lcom/vivo/connect/discovery/AdvertiseOptions$Builder;
+000000: iget-object v0, v1, Lcom/vivo/connect/discovery/AdvertiseOptions$Builder;->advertiseOptions Lcom/vivo/connect/discovery/AdvertiseOptions;
+000004: invoke-static v0, v2, Lcom/vivo/connect/discovery/AdvertiseOptions;->b(Lcom/vivo/connect/discovery/AdvertiseOptions; I)I
+00000a: return-object v1

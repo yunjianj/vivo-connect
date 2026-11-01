@@ -1,0 +1,96 @@
+APK pcsuite/updateApk/connbase.apk
+DEX classes2.dex
+CLASS Lcom/vivo/pcsuite/pcconnect/wifip2p/deputy/a;
+SUPER Ljava/lang/Object;
+FIELDS
+a Ljava/lang/String; = 'Daemon'
+b Ljava/lang/String; = 'com.vivo.daemonservice.intent.action.PROCESS_OBSERVER'
+c Ljava/lang/String; = 'com.vivo.daemonService'
+d Landroid/content/Intent; = None
+e Landroid/content/ServiceConnection; = None
+f Lc/c/e/a/a; = None
+
+METHOD <clinit>()V
+000000: new-instance v0, Landroid/content/Intent;
+000004: const-string v1, "com.vivo.daemonservice.intent.action.PROCESS_OBSERVER"
+000008: invoke-direct v0, v1, Landroid/content/Intent;-><init>(Ljava/lang/String;)V
+00000e: sput-object v0, Lcom/vivo/pcsuite/pcconnect/wifip2p/deputy/a;->d Landroid/content/Intent;
+000012: const-string v1, "com.vivo.daemonService"
+000016: invoke-virtual v0, v1, Landroid/content/Intent;->setPackage(Ljava/lang/String;)Landroid/content/Intent;
+00001c: new-instance v0, Lcom/vivo/pcsuite/pcconnect/wifip2p/deputy/a$a;
+000020: invoke-direct v0, Lcom/vivo/pcsuite/pcconnect/wifip2p/deputy/a$a;-><init>()V
+000026: sput-object v0, Lcom/vivo/pcsuite/pcconnect/wifip2p/deputy/a;->e Landroid/content/ServiceConnection;
+00002a: return-void 
+
+METHOD <init>()V
+000000: invoke-direct v0, Ljava/lang/Object;-><init>()V
+000006: return-void 
+
+METHOD a()Lc/c/e/a/a;
+000000: sget-object v0, Lcom/vivo/pcsuite/pcconnect/wifip2p/deputy/a;->f Lc/c/e/a/a;
+000004: return-object v0
+
+METHOD a(Lc/c/e/a/a;)Lc/c/e/a/a;
+000000: sput-object v0, Lcom/vivo/pcsuite/pcconnect/wifip2p/deputy/a;->f Lc/c/e/a/a;
+000004: return-object v0
+
+METHOD a(Landroid/content/Context;)V
+000000: const-class v0, Lcom/vivo/pcsuite/pcconnect/wifip2p/deputy/a;
+000004: monitor-enter v0
+000006: const-string v1, "Daemon"
+00000a: const-string v2, "Registering..."
+00000e: invoke-static v1, v2, Lc/c/f/a/b;->k(Ljava/lang/String; Ljava/lang/String;)V
+000014: sget-object v1, Lcom/vivo/pcsuite/pcconnect/wifip2p/deputy/a;->f Lc/c/e/a/a;
+000018: if-nez v1, +026h
+00001c: invoke-virtual v4, Landroid/content/Context;->getApplicationContext()Landroid/content/Context;
+000022: move-result-object v4
+000024: sget-object v1, Lcom/vivo/pcsuite/pcconnect/wifip2p/deputy/a;->d Landroid/content/Intent;
+000028: sget-object v2, Lcom/vivo/pcsuite/pcconnect/wifip2p/deputy/a;->e Landroid/content/ServiceConnection;
+00002c: const/4 v3, 1
+00002e: invoke-virtual v4, v1, v2, v3, Landroid/content/Context;->bindService(Landroid/content/Intent; Landroid/content/ServiceConnection; I)Z
+000034: move-result v4
+000036: const-string v1, "Daemon"
+00003a: new-instance v2, Ljava/lang/StringBuilder;
+00003e: invoke-direct v2, Ljava/lang/StringBuilder;-><init>()V
+000044: const-string v3, "Bind DaemonService: "
+000048: invoke-virtual v2, v3, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+00004e: invoke-virtual v2, v4, Ljava/lang/StringBuilder;->append(Z)Ljava/lang/StringBuilder;
+000054: invoke-virtual v2, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
+00005a: move-result-object v4
+00005c: invoke-static v1, v4, Lc/c/f/a/b;->k(Ljava/lang/String; Ljava/lang/String;)V
+000062: goto +8h
+000064: const-string v4, "Daemon"
+000068: const-string v1, "Already bound."
+00006c: invoke-static v4, v1, Lc/c/f/a/b;->p(Ljava/lang/String; Ljava/lang/String;)V
+000072: monitor-exit v0
+000074: return-void 
+000076: move-exception v4
+000078: monitor-exit v0
+00007a: throw v4
+
+METHOD b(Landroid/content/Context;)V
+000000: const-class v0, Lcom/vivo/pcsuite/pcconnect/wifip2p/deputy/a;
+000004: monitor-enter v0
+000006: const-string v1, "Daemon"
+00000a: const-string v2, "Unregistering..."
+00000e: invoke-static v1, v2, Lc/c/f/a/b;->k(Ljava/lang/String; Ljava/lang/String;)V
+000014: sget-object v1, Lcom/vivo/pcsuite/pcconnect/wifip2p/deputy/a;->f Lc/c/e/a/a;
+000018: if-eqz v1, +019h
+00001c: sget-object v1, Lcom/vivo/pcsuite/pcconnect/wifip2p/deputy/a;->f Lc/c/e/a/a;
+000020: invoke-interface v1, Lc/c/e/a/a;->a()V
+000026: goto +9h
+000028: move-exception v1
+00002a: const-string v2, "Daemon"
+00002e: const-string v3, "unregisterProcessObserver failed."
+000032: invoke-static v2, v3, v1, Lc/c/f/a/b;->b(Ljava/lang/String; Ljava/lang/String; Ljava/lang/Throwable;)V
+000038: invoke-virtual v4, Landroid/content/Context;->getApplicationContext()Landroid/content/Context;
+00003e: move-result-object v4
+000040: sget-object v1, Lcom/vivo/pcsuite/pcconnect/wifip2p/deputy/a;->e Landroid/content/ServiceConnection;
+000044: invoke-virtual v4, v1, Landroid/content/Context;->unbindService(Landroid/content/ServiceConnection;)V
+00004a: const/4 v4, 0
+00004c: sput-object v4, Lcom/vivo/pcsuite/pcconnect/wifip2p/deputy/a;->f Lc/c/e/a/a;
+000050: monitor-exit v0
+000052: return-void 
+000054: move-exception v4
+000056: monitor-exit v0
+000058: throw v4

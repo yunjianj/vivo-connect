@@ -1,0 +1,56 @@
+APK pcsuite/updateApk/connbase.apk
+DEX classes.dex
+CLASS Lcom/vivo/connbase/t$b$a;
+SUPER Ljava/lang/Object;
+FIELDS
+f Lcom/vivo/connbase/t; = None
+e Landroid/os/IBinder; = None
+
+METHOD <init>(Landroid/os/IBinder;)V
+000000: invoke-direct v0, Ljava/lang/Object;-><init>()V
+000006: iput-object v1, v0, Lcom/vivo/connbase/t$b$a;->e Landroid/os/IBinder;
+00000a: return-void 
+
+METHOD asBinder()Landroid/os/IBinder;
+000000: iget-object v0, v1, Lcom/vivo/connbase/t$b$a;->e Landroid/os/IBinder;
+000004: return-object v0
+
+METHOD c()Ljava/lang/String;
+000000: const-string v0, "com.vivo.connbase.ICheckConnectInfoCallback"
+000004: return-object v0
+
+METHOD onResult(Z)V
+000000: invoke-static Landroid/os/Parcel;->obtain()Landroid/os/Parcel;
+000006: move-result-object v0
+000008: invoke-static Landroid/os/Parcel;->obtain()Landroid/os/Parcel;
+00000e: move-result-object v1
+000010: const-string v2, "com.vivo.connbase.ICheckConnectInfoCallback"
+000014: invoke-virtual v0, v2, Landroid/os/Parcel;->writeInterfaceToken(Ljava/lang/String;)V
+00001a: const/4 v2, 1
+00001c: const/4 v3, 0
+00001e: if-eqz v6, +004h
+000022: move v4, v2
+000024: goto +2h
+000026: move v4, v3
+000028: invoke-virtual v0, v4, Landroid/os/Parcel;->writeInt(I)V
+00002e: iget-object v4, v5, Lcom/vivo/connbase/t$b$a;->e Landroid/os/IBinder;
+000032: invoke-interface v4, v2, v0, v1, v3, Landroid/os/IBinder;->transact(I Landroid/os/Parcel; Landroid/os/Parcel; I)Z
+000038: move-result v2
+00003a: if-nez v2, +016h
+00003e: invoke-static Lcom/vivo/connbase/t$b;->c()Lcom/vivo/connbase/t;
+000044: move-result-object v2
+000046: if-eqz v2, +010h
+00004a: invoke-static Lcom/vivo/connbase/t$b;->c()Lcom/vivo/connbase/t;
+000050: move-result-object v2
+000052: invoke-interface v2, v6, Lcom/vivo/connbase/t;->onResult(Z)V
+000058: invoke-virtual v1, Landroid/os/Parcel;->recycle()V
+00005e: invoke-virtual v0, Landroid/os/Parcel;->recycle()V
+000064: return-void 
+000066: invoke-virtual v1, Landroid/os/Parcel;->readException()V
+00006c: invoke-virtual v1, Landroid/os/Parcel;->recycle()V
+000072: invoke-virtual v0, Landroid/os/Parcel;->recycle()V
+000078: return-void 
+00007a: move-exception v6
+00007c: invoke-virtual v1, Landroid/os/Parcel;->recycle()V
+000082: invoke-virtual v0, Landroid/os/Parcel;->recycle()V
+000088: throw v6

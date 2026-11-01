@@ -1,0 +1,291 @@
+APK pcsuite/updateApk/connbase.apk
+DEX classes.dex
+CLASS Lcom/vivo/finddevice/DeviceScanManager$j;
+SUPER Landroid/os/Handler;
+FIELDS
+a Lcom/vivo/finddevice/DeviceScanManager; = None
+
+METHOD handleMessage(Landroid/os/Message;)V
+000000: if-nez v7, +003h
+000004: return-void 
+000006: new-instance v0, Ljava/lang/StringBuilder;
+00000a: invoke-direct v0, Ljava/lang/StringBuilder;-><init>()V
+000010: const-string v1, "handle msg "
+000014: invoke-virtual v0, v1, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+00001a: iget v1, v7, Landroid/os/Message;->what I
+00001e: invoke-virtual v0, v1, Ljava/lang/StringBuilder;->append(I)Ljava/lang/StringBuilder;
+000024: invoke-virtual v0, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
+00002a: move-result-object v0
+00002c: const-string v1, "DeviceScanManager**"
+000030: invoke-static v1, v0, Lcom/vivo/finddevice/l/b;->a(Ljava/lang/String; Ljava/lang/String;)V
+000036: iget v0, v7, Landroid/os/Message;->what I
+00003a: const-wide/16 v2, 3000
+00003e: const/16 v4, 15
+000042: const/16 v5, 14
+000046: packed-switch v0, +0000239h
+00004c: goto/16 +234h
+000050: iget-object v7, v6, Lcom/vivo/finddevice/DeviceScanManager$j;->a Lcom/vivo/finddevice/DeviceScanManager;
+000054: invoke-static v7, Lcom/vivo/finddevice/DeviceScanManager;->access$1500(Lcom/vivo/finddevice/DeviceScanManager;)Lcom/vivo/finddevice/a;
+00005a: move-result-object v7
+00005c: goto/16 +139h
+000060: iget-object v7, v6, Lcom/vivo/finddevice/DeviceScanManager$j;->a Lcom/vivo/finddevice/DeviceScanManager;
+000064: invoke-static v7, Lcom/vivo/finddevice/DeviceScanManager;->access$2200(Lcom/vivo/finddevice/DeviceScanManager;)V
+00006a: iget-object v7, v6, Lcom/vivo/finddevice/DeviceScanManager$j;->a Lcom/vivo/finddevice/DeviceScanManager;
+00006e: invoke-static v7, Lcom/vivo/finddevice/DeviceScanManager;->access$2300(Lcom/vivo/finddevice/DeviceScanManager;)Z
+000074: move-result v7
+000076: if-eqz v7, +00fh
+00007a: iget-object v7, v6, Lcom/vivo/finddevice/DeviceScanManager$j;->a Lcom/vivo/finddevice/DeviceScanManager;
+00007e: invoke-static v7, Lcom/vivo/finddevice/DeviceScanManager;->access$2400(Lcom/vivo/finddevice/DeviceScanManager;)Z
+000084: move-result v7
+000086: if-nez v7, +007h
+00008a: iget-object v7, v6, Lcom/vivo/finddevice/DeviceScanManager$j;->a Lcom/vivo/finddevice/DeviceScanManager;
+00008e: invoke-static v7, Lcom/vivo/finddevice/DeviceScanManager;->access$2500(Lcom/vivo/finddevice/DeviceScanManager;)V
+000094: iget-object v7, v6, Lcom/vivo/finddevice/DeviceScanManager$j;->a Lcom/vivo/finddevice/DeviceScanManager;
+000098: invoke-static v7, Lcom/vivo/finddevice/DeviceScanManager;->access$2400(Lcom/vivo/finddevice/DeviceScanManager;)Z
+00009e: move-result v7
+0000a0: if-eqz v7, +20ah
+0000a4: iget-object v7, v6, Lcom/vivo/finddevice/DeviceScanManager$j;->a Lcom/vivo/finddevice/DeviceScanManager;
+0000a8: invoke-static v7, Lcom/vivo/finddevice/DeviceScanManager;->access$2600(Lcom/vivo/finddevice/DeviceScanManager;)V
+0000ae: goto/16 +203h
+0000b2: iget-object v7, v6, Lcom/vivo/finddevice/DeviceScanManager$j;->a Lcom/vivo/finddevice/DeviceScanManager;
+0000b6: invoke-static v7, Lcom/vivo/finddevice/DeviceScanManager;->access$2100(Lcom/vivo/finddevice/DeviceScanManager;)V
+0000bc: goto/16 +1fch
+0000c0: iget-object v7, v6, Lcom/vivo/finddevice/DeviceScanManager$j;->a Lcom/vivo/finddevice/DeviceScanManager;
+0000c4: invoke-static Lcom/vivo/finddevice/DeviceScanManager;->access$1800()I
+0000ca: move-result v0
+0000cc: invoke-static v7, v0, Lcom/vivo/finddevice/DeviceScanManager;->access$2000(Lcom/vivo/finddevice/DeviceScanManager; I)Z
+0000d2: goto/16 +1f1h
+0000d6: iget-object v7, v6, Lcom/vivo/finddevice/DeviceScanManager$j;->a Lcom/vivo/finddevice/DeviceScanManager;
+0000da: invoke-static v7, Lcom/vivo/finddevice/DeviceScanManager;->access$1100(Lcom/vivo/finddevice/DeviceScanManager;)V
+0000e0: goto/16 +1eah
+0000e4: invoke-static Lcom/vivo/finddevice/DeviceScanManager;->access$1800()I
+0000ea: move-result v7
+0000ec: if-eqz v7, +01dh
+0000f0: iget-object v7, v6, Lcom/vivo/finddevice/DeviceScanManager$j;->a Lcom/vivo/finddevice/DeviceScanManager;
+0000f4: invoke-static v7, Lcom/vivo/finddevice/DeviceScanManager;->access$900(Lcom/vivo/finddevice/DeviceScanManager;)Landroid/os/Handler;
+0000fa: move-result-object v7
+0000fc: invoke-virtual v7, v5, Landroid/os/Handler;->removeMessages(I)V
+000102: iget-object v7, v6, Lcom/vivo/finddevice/DeviceScanManager$j;->a Lcom/vivo/finddevice/DeviceScanManager;
+000106: invoke-static v7, Lcom/vivo/finddevice/DeviceScanManager;->access$900(Lcom/vivo/finddevice/DeviceScanManager;)Landroid/os/Handler;
+00010c: move-result-object v7
+00010e: invoke-virtual v7, v4, Landroid/os/Handler;->removeMessages(I)V
+000114: iget-object v7, v6, Lcom/vivo/finddevice/DeviceScanManager$j;->a Lcom/vivo/finddevice/DeviceScanManager;
+000118: invoke-static v7, Lcom/vivo/finddevice/DeviceScanManager;->access$900(Lcom/vivo/finddevice/DeviceScanManager;)Landroid/os/Handler;
+00011e: move-result-object v7
+000120: invoke-virtual v7, v4, v2, v3, Landroid/os/Handler;->sendEmptyMessageDelayed(I J)Z
+000126: iget-object v7, v6, Lcom/vivo/finddevice/DeviceScanManager$j;->a Lcom/vivo/finddevice/DeviceScanManager;
+00012a: invoke-static v7, Lcom/vivo/finddevice/DeviceScanManager;->access$1500(Lcom/vivo/finddevice/DeviceScanManager;)Lcom/vivo/finddevice/a;
+000130: move-result-object v7
+000132: invoke-virtual v7, Lcom/vivo/finddevice/a;->h()V
+000138: goto +59h
+00013a: iget-object v7, v6, Lcom/vivo/finddevice/DeviceScanManager$j;->a Lcom/vivo/finddevice/DeviceScanManager;
+00013e: invoke-static v7, Lcom/vivo/finddevice/DeviceScanManager;->access$1500(Lcom/vivo/finddevice/DeviceScanManager;)Lcom/vivo/finddevice/a;
+000144: move-result-object v7
+000146: invoke-virtual v7, Lcom/vivo/finddevice/a;->g()V
+00014c: iget-object v7, v6, Lcom/vivo/finddevice/DeviceScanManager$j;->a Lcom/vivo/finddevice/DeviceScanManager;
+000150: invoke-static v7, Lcom/vivo/finddevice/DeviceScanManager;->access$1500(Lcom/vivo/finddevice/DeviceScanManager;)Lcom/vivo/finddevice/a;
+000156: move-result-object v7
+000158: invoke-virtual v7, Lcom/vivo/finddevice/a;->e()Z
+00015e: move-result v7
+000160: if-eqz v7, +023h
+000164: invoke-static Lcom/vivo/finddevice/DeviceScanManager;->access$1800()I
+00016a: move-result v7
+00016c: if-eqz v7, +01dh
+000170: iget-object v7, v6, Lcom/vivo/finddevice/DeviceScanManager$j;->a Lcom/vivo/finddevice/DeviceScanManager;
+000174: invoke-static v7, Lcom/vivo/finddevice/DeviceScanManager;->access$900(Lcom/vivo/finddevice/DeviceScanManager;)Landroid/os/Handler;
+00017a: move-result-object v7
+00017c: invoke-virtual v7, v4, Landroid/os/Handler;->removeMessages(I)V
+000182: iget-object v7, v6, Lcom/vivo/finddevice/DeviceScanManager$j;->a Lcom/vivo/finddevice/DeviceScanManager;
+000186: invoke-static v7, Lcom/vivo/finddevice/DeviceScanManager;->access$900(Lcom/vivo/finddevice/DeviceScanManager;)Landroid/os/Handler;
+00018c: move-result-object v7
+00018e: invoke-virtual v7, v5, Landroid/os/Handler;->removeMessages(I)V
+000194: iget-object v7, v6, Lcom/vivo/finddevice/DeviceScanManager$j;->a Lcom/vivo/finddevice/DeviceScanManager;
+000198: invoke-static v7, Lcom/vivo/finddevice/DeviceScanManager;->access$900(Lcom/vivo/finddevice/DeviceScanManager;)Landroid/os/Handler;
+00019e: move-result-object v7
+0001a0: invoke-virtual v7, v5, v2, v3, Landroid/os/Handler;->sendEmptyMessageDelayed(I J)Z
+0001a6: iget-object v7, v6, Lcom/vivo/finddevice/DeviceScanManager$j;->a Lcom/vivo/finddevice/DeviceScanManager;
+0001aa: invoke-static v7, Lcom/vivo/finddevice/DeviceScanManager;->access$1600(Lcom/vivo/finddevice/DeviceScanManager;)Lcom/vivo/finddevice/a;
+0001b0: move-result-object v7
+0001b2: invoke-virtual v7, Lcom/vivo/finddevice/a;->d()Z
+0001b8: move-result v7
+0001ba: if-eqz v7, +008h
+0001be: const-string v7, "wifi configs allow scan under screen off"
+0001c2: invoke-static v1, v7, Lcom/vivo/finddevice/l/b;->a(Ljava/lang/String; Ljava/lang/String;)V
+0001c8: goto +54h
+0001ca: iget-object v7, v6, Lcom/vivo/finddevice/DeviceScanManager$j;->a Lcom/vivo/finddevice/DeviceScanManager;
+0001ce: invoke-static v7, Lcom/vivo/finddevice/DeviceScanManager;->access$1600(Lcom/vivo/finddevice/DeviceScanManager;)Lcom/vivo/finddevice/a;
+0001d4: move-result-object v7
+0001d6: goto +4ah
+0001d8: iget-object v7, v6, Lcom/vivo/finddevice/DeviceScanManager$j;->a Lcom/vivo/finddevice/DeviceScanManager;
+0001dc: invoke-static v7, Lcom/vivo/finddevice/DeviceScanManager;->access$1500(Lcom/vivo/finddevice/DeviceScanManager;)Lcom/vivo/finddevice/a;
+0001e2: move-result-object v7
+0001e4: invoke-virtual v7, Lcom/vivo/finddevice/a;->i()V
+0001ea: iget-object v7, v6, Lcom/vivo/finddevice/DeviceScanManager$j;->a Lcom/vivo/finddevice/DeviceScanManager;
+0001ee: invoke-static v7, Lcom/vivo/finddevice/DeviceScanManager;->access$1600(Lcom/vivo/finddevice/DeviceScanManager;)Lcom/vivo/finddevice/a;
+0001f4: move-result-object v7
+0001f6: goto +4ah
+0001f8: iget-object v0, v7, Landroid/os/Message;->obj Ljava/lang/Object;
+0001fc: instance-of v0, v0, Ljava/lang/Boolean;
+000200: if-eqz v0, +15ah
+000204: iget-object v0, v6, Lcom/vivo/finddevice/DeviceScanManager$j;->a Lcom/vivo/finddevice/DeviceScanManager;
+000208: invoke-static v0, Lcom/vivo/finddevice/DeviceScanManager;->access$1900(Lcom/vivo/finddevice/DeviceScanManager;)Ljava/util/concurrent/atomic/AtomicBoolean;
+00020e: move-result-object v0
+000210: iget-object v7, v7, Landroid/os/Message;->obj Ljava/lang/Object;
+000214: check-cast v7, Ljava/lang/Boolean;
+000218: invoke-virtual v7, Ljava/lang/Boolean;->booleanValue()Z
+00021e: move-result v7
+000220: invoke-virtual v0, v7, Ljava/util/concurrent/atomic/AtomicBoolean;->set(Z)V
+000226: iget-object v7, v6, Lcom/vivo/finddevice/DeviceScanManager$j;->a Lcom/vivo/finddevice/DeviceScanManager;
+00022a: invoke-static v7, Lcom/vivo/finddevice/DeviceScanManager;->access$1900(Lcom/vivo/finddevice/DeviceScanManager;)Ljava/util/concurrent/atomic/AtomicBoolean;
+000230: move-result-object v7
+000232: invoke-virtual v7, Ljava/util/concurrent/atomic/AtomicBoolean;->get()Z
+000238: move-result v7
+00023a: if-eqz v7, +044h
+00023e: iget-object v7, v6, Lcom/vivo/finddevice/DeviceScanManager$j;->a Lcom/vivo/finddevice/DeviceScanManager;
+000242: invoke-static v7, Lcom/vivo/finddevice/DeviceScanManager;->access$1600(Lcom/vivo/finddevice/DeviceScanManager;)Lcom/vivo/finddevice/a;
+000248: move-result-object v7
+00024a: invoke-virtual v7, Lcom/vivo/finddevice/a;->i()V
+000250: iget-object v7, v6, Lcom/vivo/finddevice/DeviceScanManager$j;->a Lcom/vivo/finddevice/DeviceScanManager;
+000254: invoke-static v7, Lcom/vivo/finddevice/DeviceScanManager;->access$1500(Lcom/vivo/finddevice/DeviceScanManager;)Lcom/vivo/finddevice/a;
+00025a: move-result-object v7
+00025c: goto +5bh
+00025e: iget-object v7, v6, Lcom/vivo/finddevice/DeviceScanManager$j;->a Lcom/vivo/finddevice/DeviceScanManager;
+000262: invoke-static v7, Lcom/vivo/finddevice/DeviceScanManager;->access$1500(Lcom/vivo/finddevice/DeviceScanManager;)Lcom/vivo/finddevice/a;
+000268: move-result-object v7
+00026a: invoke-virtual v7, Lcom/vivo/finddevice/a;->l()V
+000270: iget-object v7, v6, Lcom/vivo/finddevice/DeviceScanManager$j;->a Lcom/vivo/finddevice/DeviceScanManager;
+000274: invoke-static v7, Lcom/vivo/finddevice/DeviceScanManager;->access$1400(Lcom/vivo/finddevice/DeviceScanManager;)Lcom/vivo/finddevice/g;
+00027a: move-result-object v7
+00027c: goto +29h
+00027e: iget-object v7, v6, Lcom/vivo/finddevice/DeviceScanManager$j;->a Lcom/vivo/finddevice/DeviceScanManager;
+000282: invoke-static v7, Lcom/vivo/finddevice/DeviceScanManager;->access$1500(Lcom/vivo/finddevice/DeviceScanManager;)Lcom/vivo/finddevice/a;
+000288: move-result-object v7
+00028a: invoke-virtual v7, Lcom/vivo/finddevice/a;->i()V
+000290: iget-object v7, v6, Lcom/vivo/finddevice/DeviceScanManager$j;->a Lcom/vivo/finddevice/DeviceScanManager;
+000294: invoke-static v7, Lcom/vivo/finddevice/DeviceScanManager;->access$1400(Lcom/vivo/finddevice/DeviceScanManager;)Lcom/vivo/finddevice/g;
+00029a: move-result-object v7
+00029c: goto +3bh
+00029e: iget-object v7, v6, Lcom/vivo/finddevice/DeviceScanManager$j;->a Lcom/vivo/finddevice/DeviceScanManager;
+0002a2: invoke-static v7, Lcom/vivo/finddevice/DeviceScanManager;->access$1400(Lcom/vivo/finddevice/DeviceScanManager;)Lcom/vivo/finddevice/g;
+0002a8: move-result-object v7
+0002aa: invoke-virtual v7, Lcom/vivo/finddevice/a;->l()V
+0002b0: iget-object v7, v6, Lcom/vivo/finddevice/DeviceScanManager$j;->a Lcom/vivo/finddevice/DeviceScanManager;
+0002b4: invoke-static v7, Lcom/vivo/finddevice/DeviceScanManager;->access$1500(Lcom/vivo/finddevice/DeviceScanManager;)Lcom/vivo/finddevice/a;
+0002ba: move-result-object v7
+0002bc: invoke-virtual v7, Lcom/vivo/finddevice/a;->l()V
+0002c2: iget-object v7, v6, Lcom/vivo/finddevice/DeviceScanManager$j;->a Lcom/vivo/finddevice/DeviceScanManager;
+0002c6: invoke-static v7, Lcom/vivo/finddevice/DeviceScanManager;->access$1600(Lcom/vivo/finddevice/DeviceScanManager;)Lcom/vivo/finddevice/a;
+0002cc: move-result-object v7
+0002ce: invoke-virtual v7, Lcom/vivo/finddevice/a;->l()V
+0002d4: goto/16 +0f0h
+0002d8: const-string v7, "mBleScanner mWifiScanner startPreScan()"
+0002dc: invoke-static v1, v7, Lcom/vivo/finddevice/l/b;->a(Ljava/lang/String; Ljava/lang/String;)V
+0002e2: iget-object v7, v6, Lcom/vivo/finddevice/DeviceScanManager$j;->a Lcom/vivo/finddevice/DeviceScanManager;
+0002e6: invoke-static v7, Lcom/vivo/finddevice/DeviceScanManager;->access$1400(Lcom/vivo/finddevice/DeviceScanManager;)Lcom/vivo/finddevice/g;
+0002ec: move-result-object v7
+0002ee: invoke-virtual v7, Lcom/vivo/finddevice/a;->i()V
+0002f4: iget-object v7, v6, Lcom/vivo/finddevice/DeviceScanManager$j;->a Lcom/vivo/finddevice/DeviceScanManager;
+0002f8: invoke-static v7, Lcom/vivo/finddevice/DeviceScanManager;->access$1500(Lcom/vivo/finddevice/DeviceScanManager;)Lcom/vivo/finddevice/a;
+0002fe: move-result-object v7
+000300: invoke-virtual v7, Lcom/vivo/finddevice/a;->i()V
+000306: iget-object v7, v6, Lcom/vivo/finddevice/DeviceScanManager$j;->a Lcom/vivo/finddevice/DeviceScanManager;
+00030a: invoke-static v7, Lcom/vivo/finddevice/DeviceScanManager;->access$1600(Lcom/vivo/finddevice/DeviceScanManager;)Lcom/vivo/finddevice/a;
+000310: move-result-object v7
+000312: invoke-virtual v7, Lcom/vivo/finddevice/a;->i()V
+000318: goto/16 +0ceh
+00031c: const-string v7, "MSG_RELEASE"
+000320: invoke-static v1, v7, Lcom/vivo/finddevice/l/b;->a(Ljava/lang/String; Ljava/lang/String;)V
+000326: invoke-static Lcom/vivo/finddevice/f;->b()Lcom/vivo/finddevice/f;
+00032c: move-result-object v7
+00032e: const/4 v0, 0
+000330: invoke-virtual v7, v0, v0, Lcom/vivo/finddevice/f;->a(Lcom/vivo/finddevice/DeviceScanManager; Landroid/os/Handler;)V
+000336: iget-object v7, v6, Lcom/vivo/finddevice/DeviceScanManager$j;->a Lcom/vivo/finddevice/DeviceScanManager;
+00033a: invoke-static v7, Lcom/vivo/finddevice/DeviceScanManager;->access$1400(Lcom/vivo/finddevice/DeviceScanManager;)Lcom/vivo/finddevice/g;
+000340: move-result-object v7
+000342: invoke-virtual v7, Lcom/vivo/finddevice/a;->l()V
+000348: iget-object v7, v6, Lcom/vivo/finddevice/DeviceScanManager$j;->a Lcom/vivo/finddevice/DeviceScanManager;
+00034c: invoke-static v7, Lcom/vivo/finddevice/DeviceScanManager;->access$1500(Lcom/vivo/finddevice/DeviceScanManager;)Lcom/vivo/finddevice/a;
+000352: move-result-object v7
+000354: invoke-virtual v7, Lcom/vivo/finddevice/a;->l()V
+00035a: iget-object v7, v6, Lcom/vivo/finddevice/DeviceScanManager$j;->a Lcom/vivo/finddevice/DeviceScanManager;
+00035e: invoke-static v7, Lcom/vivo/finddevice/DeviceScanManager;->access$1600(Lcom/vivo/finddevice/DeviceScanManager;)Lcom/vivo/finddevice/a;
+000364: move-result-object v7
+000366: invoke-virtual v7, Lcom/vivo/finddevice/a;->l()V
+00036c: iget-object v7, v6, Lcom/vivo/finddevice/DeviceScanManager$j;->a Lcom/vivo/finddevice/DeviceScanManager;
+000370: invoke-static v7, Lcom/vivo/finddevice/DeviceScanManager;->access$1700(Lcom/vivo/finddevice/DeviceScanManager;)V
+000376: goto/16 +09fh
+00037a: const-string v7, "MSG_START"
+00037e: invoke-static v1, v7, Lcom/vivo/finddevice/l/b;->a(Ljava/lang/String; Ljava/lang/String;)V
+000384: iget-object v7, v6, Lcom/vivo/finddevice/DeviceScanManager$j;->a Lcom/vivo/finddevice/DeviceScanManager;
+000388: invoke-static v7, Lcom/vivo/finddevice/DeviceScanManager;->access$800(Lcom/vivo/finddevice/DeviceScanManager;)Lcom/vivo/finddevice/h;
+00038e: move-result-object v7
+000390: iget-object v0, v6, Lcom/vivo/finddevice/DeviceScanManager$j;->a Lcom/vivo/finddevice/DeviceScanManager;
+000394: invoke-static v0, Lcom/vivo/finddevice/DeviceScanManager;->access$100(Lcom/vivo/finddevice/DeviceScanManager;)Landroid/content/Context;
+00039a: move-result-object v0
+00039c: invoke-virtual v7, v0, Lcom/vivo/finddevice/h;->a(Landroid/content/Context;)V
+0003a2: invoke-static Lcom/vivo/finddevice/f;->b()Lcom/vivo/finddevice/f;
+0003a8: move-result-object v7
+0003aa: iget-object v0, v6, Lcom/vivo/finddevice/DeviceScanManager$j;->a Lcom/vivo/finddevice/DeviceScanManager;
+0003ae: invoke-static v0, Lcom/vivo/finddevice/DeviceScanManager;->access$900(Lcom/vivo/finddevice/DeviceScanManager;)Landroid/os/Handler;
+0003b4: move-result-object v2
+0003b6: invoke-virtual v7, v0, v2, Lcom/vivo/finddevice/f;->a(Lcom/vivo/finddevice/DeviceScanManager; Landroid/os/Handler;)V
+0003bc: iget-object v7, v6, Lcom/vivo/finddevice/DeviceScanManager$j;->a Lcom/vivo/finddevice/DeviceScanManager;
+0003c0: invoke-static v7, Lcom/vivo/finddevice/DeviceScanManager;->access$1000(Lcom/vivo/finddevice/DeviceScanManager;)V
+0003c6: iget-object v7, v6, Lcom/vivo/finddevice/DeviceScanManager$j;->a Lcom/vivo/finddevice/DeviceScanManager;
+0003ca: invoke-static v7, Lcom/vivo/finddevice/DeviceScanManager;->access$1100(Lcom/vivo/finddevice/DeviceScanManager;)V
+0003d0: iget-object v7, v6, Lcom/vivo/finddevice/DeviceScanManager$j;->a Lcom/vivo/finddevice/DeviceScanManager;
+0003d4: invoke-static v7, Lcom/vivo/finddevice/DeviceScanManager;->access$200(Lcom/vivo/finddevice/DeviceScanManager;)Ljava/util/concurrent/atomic/AtomicBoolean;
+0003da: move-result-object v7
+0003dc: iget-object v0, v6, Lcom/vivo/finddevice/DeviceScanManager$j;->a Lcom/vivo/finddevice/DeviceScanManager;
+0003e0: invoke-static v0, Lcom/vivo/finddevice/DeviceScanManager;->access$100(Lcom/vivo/finddevice/DeviceScanManager;)Landroid/content/Context;
+0003e6: move-result-object v0
+0003e8: invoke-virtual v0, Landroid/content/Context;->getContentResolver()Landroid/content/ContentResolver;
+0003ee: move-result-object v0
+0003f0: const-string v2, "vivo_children_mode_enable"
+0003f4: invoke-static v0, v2, Landroid/provider/Settings$System;->getString(Landroid/content/ContentResolver; Ljava/lang/String;)Ljava/lang/String;
+0003fa: move-result-object v0
+0003fc: invoke-static v0, Ljava/lang/Boolean;->parseBoolean(Ljava/lang/String;)Z
+000402: move-result v0
+000404: invoke-virtual v7, v0, Ljava/util/concurrent/atomic/AtomicBoolean;->set(Z)V
+00040a: iget-object v7, v6, Lcom/vivo/finddevice/DeviceScanManager$j;->a Lcom/vivo/finddevice/DeviceScanManager;
+00040e: invoke-static v7, Lcom/vivo/finddevice/DeviceScanManager;->access$700(Lcom/vivo/finddevice/DeviceScanManager;)Ljava/util/concurrent/atomic/AtomicBoolean;
+000414: move-result-object v7
+000416: iget-object v0, v6, Lcom/vivo/finddevice/DeviceScanManager$j;->a Lcom/vivo/finddevice/DeviceScanManager;
+00041a: invoke-static v0, Lcom/vivo/finddevice/DeviceScanManager;->access$1200(Lcom/vivo/finddevice/DeviceScanManager;)Landroid/os/PowerManager;
+000420: move-result-object v0
+000422: invoke-virtual v0, Landroid/os/PowerManager;->isInteractive()Z
+000428: move-result v0
+00042a: invoke-virtual v7, v0, Ljava/util/concurrent/atomic/AtomicBoolean;->set(Z)V
+000430: iget-object v7, v6, Lcom/vivo/finddevice/DeviceScanManager$j;->a Lcom/vivo/finddevice/DeviceScanManager;
+000434: invoke-static v7, Lcom/vivo/finddevice/DeviceScanManager;->access$400(Lcom/vivo/finddevice/DeviceScanManager;)Ljava/util/concurrent/atomic/AtomicBoolean;
+00043a: move-result-object v7
+00043c: iget-object v0, v6, Lcom/vivo/finddevice/DeviceScanManager$j;->a Lcom/vivo/finddevice/DeviceScanManager;
+000440: iget-object v2, v6, Lcom/vivo/finddevice/DeviceScanManager$j;->a Lcom/vivo/finddevice/DeviceScanManager;
+000444: invoke-static v2, Lcom/vivo/finddevice/DeviceScanManager;->access$1300(Lcom/vivo/finddevice/DeviceScanManager;)Landroid/telephony/TelephonyManager;
+00044a: move-result-object v2
+00044c: invoke-virtual v2, Landroid/telephony/TelephonyManager;->getCallState()I
+000452: move-result v2
+000454: invoke-static v0, v2, Lcom/vivo/finddevice/DeviceScanManager;->access$300(Lcom/vivo/finddevice/DeviceScanManager; I)Z
+00045a: move-result v0
+00045c: invoke-virtual v7, v0, Ljava/util/concurrent/atomic/AtomicBoolean;->set(Z)V
+000462: const-string v7, " mBleScanner.startPreScan();mWifiScanner.startPreScan()"
+000466: invoke-static v1, v7, Lcom/vivo/finddevice/l/b;->a(Ljava/lang/String; Ljava/lang/String;)V
+00046c: iget-object v7, v6, Lcom/vivo/finddevice/DeviceScanManager$j;->a Lcom/vivo/finddevice/DeviceScanManager;
+000470: invoke-static v7, Lcom/vivo/finddevice/DeviceScanManager;->access$1400(Lcom/vivo/finddevice/DeviceScanManager;)Lcom/vivo/finddevice/g;
+000476: move-result-object v7
+000478: invoke-virtual v7, Lcom/vivo/finddevice/a;->i()V
+00047e: iget-object v7, v6, Lcom/vivo/finddevice/DeviceScanManager$j;->a Lcom/vivo/finddevice/DeviceScanManager;
+000482: invoke-static v7, Lcom/vivo/finddevice/DeviceScanManager;->access$1500(Lcom/vivo/finddevice/DeviceScanManager;)Lcom/vivo/finddevice/a;
+000488: move-result-object v7
+00048a: invoke-virtual v7, Lcom/vivo/finddevice/a;->i()V
+000490: iget-object v7, v6, Lcom/vivo/finddevice/DeviceScanManager$j;->a Lcom/vivo/finddevice/DeviceScanManager;
+000494: invoke-static v7, Lcom/vivo/finddevice/DeviceScanManager;->access$1600(Lcom/vivo/finddevice/DeviceScanManager;)Lcom/vivo/finddevice/a;
+00049a: move-result-object v7
+00049c: invoke-virtual v7, Lcom/vivo/finddevice/a;->i()V
+0004a2: iget-object v7, v6, Lcom/vivo/finddevice/DeviceScanManager$j;->a Lcom/vivo/finddevice/DeviceScanManager;
+0004a6: invoke-static v7, Lcom/vivo/finddevice/DeviceScanManager;->access$100(Lcom/vivo/finddevice/DeviceScanManager;)Landroid/content/Context;
+0004ac: move-result-object v7
+0004ae: invoke-static v7, Lcom/vivo/finddevice/l/b;->b(Landroid/content/Context;)V
+0004b4: return-void 
+0004b6: nop 
+0004b8: packed-switch-payload 1 2 3 4 5 6 7 8 9 a b c d e f 10 11

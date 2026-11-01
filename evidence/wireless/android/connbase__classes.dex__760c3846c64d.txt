@@ -1,0 +1,104 @@
+APK pcsuite/updateApk/connbase.apk
+DEX classes.dex
+CLASS Lcom/vivo/connbase/e0/g/m;
+SUPER Ljava/lang/Object;
+FIELDS
+a Ljava/lang/String; = 'WakeUpAppUtilsTAG'
+
+METHOD <init>()V
+000000: invoke-direct v0, Ljava/lang/Object;-><init>()V
+000006: return-void 
+
+METHOD a(Ljava/lang/String; Lcom/vivo/connbase/h0/c/k;)Z
+000000: new-instance v0, Ljava/lang/StringBuilder;
+000004: invoke-direct v0, Ljava/lang/StringBuilder;-><init>()V
+00000a: const-string v1, "wakeupApp sd:"
+00000e: invoke-virtual v0, v1, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+000014: invoke-virtual v0, v8, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+00001a: const-string v1, ", scanInfo:"
+00001e: invoke-virtual v0, v1, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+000024: invoke-virtual v0, v9, Ljava/lang/StringBuilder;->append(Ljava/lang/Object;)Ljava/lang/StringBuilder;
+00002a: invoke-virtual v0, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
+000030: move-result-object v0
+000032: const-string v1, "WakeUpAppUtilsTAG"
+000036: invoke-static v1, v0, Lc/c/f/a/b;->k(Ljava/lang/String; Ljava/lang/String;)V
+00003c: invoke-static Lcom/vivo/finddevice/DeviceScanManager;->getInstance()Lcom/vivo/finddevice/DeviceScanManager;
+000042: move-result-object v0
+000044: invoke-virtual v0, Lcom/vivo/finddevice/DeviceScanManager;->getBleDeviceScanner()Lcom/vivo/finddevice/a;
+00004a: move-result-object v3
+00004c: new-instance v0, Ljava/lang/StringBuilder;
+000050: invoke-direct v0, Ljava/lang/StringBuilder;-><init>()V
+000056: const-string v2, "scanner:"
+00005a: invoke-virtual v0, v2, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+000060: invoke-virtual v0, v3, Ljava/lang/StringBuilder;->append(Ljava/lang/Object;)Ljava/lang/StringBuilder;
+000066: invoke-virtual v0, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
+00006c: move-result-object v0
+00006e: invoke-static v1, v0, Lc/c/f/a/b;->k(Ljava/lang/String; Ljava/lang/String;)V
+000074: const/4 v0, 0
+000076: if-eqz v3, +087h
+00007a: invoke-virtual v3, Lcom/vivo/finddevice/a;->b()Lcom/vivo/finddevice/d;
+000080: move-result-object v2
+000082: if-nez v2, +004h
+000086: goto/16 +07fh
+00008a: const-string v2, "SHA-256"
+00008e: invoke-static v2, Ljava/security/MessageDigest;->getInstance(Ljava/lang/String;)Ljava/security/MessageDigest;
+000094: move-result-object v2
+000096: sget-object v4, Ljava/nio/charset/StandardCharsets;->UTF_8 Ljava/nio/charset/Charset;
+00009a: invoke-virtual v8, v4, Ljava/lang/String;->getBytes(Ljava/nio/charset/Charset;)[B
+0000a0: move-result-object v4
+0000a2: invoke-virtual v2, v4, Ljava/security/MessageDigest;->digest([B)[B
+0000a8: move-result-object v2
+0000aa: const/4 v4, 3
+0000ac: invoke-static v2, v0, v4, Ljava/util/Arrays;->copyOfRange([B I I)[B
+0000b2: move-result-object v2
+0000b4: invoke-static Lcom/vivo/finddevice/DeviceScanManager;->getInstance()Lcom/vivo/finddevice/DeviceScanManager;
+0000ba: move-result-object v4
+0000bc: invoke-virtual v4, Lcom/vivo/finddevice/DeviceScanManager;->getServiceScanner()Lcom/vivo/finddevice/g;
+0000c2: move-result-object v4
+0000c4: invoke-static v2, Ljava/util/Arrays;->toString([B)Ljava/lang/String;
+0000ca: move-result-object v2
+0000cc: invoke-virtual v4, v2, Lcom/vivo/finddevice/g;->f(Ljava/lang/String;)Lcom/vivo/finddevice/k/e;
+0000d2: move-result-object v5
+0000d4: new-instance v2, Ljava/lang/StringBuilder;
+0000d8: invoke-direct v2, Ljava/lang/StringBuilder;-><init>()V
+0000de: const-string v4, "advertiseConfig:"
+0000e2: invoke-virtual v2, v4, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+0000e8: invoke-virtual v2, v5, Ljava/lang/StringBuilder;->append(Ljava/lang/Object;)Ljava/lang/StringBuilder;
+0000ee: invoke-virtual v2, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
+0000f4: move-result-object v2
+0000f6: invoke-static v1, v2, Lc/c/f/a/b;->k(Ljava/lang/String; Ljava/lang/String;)V
+0000fc: if-nez v5, +008h
+000100: const-string v8, "advertiseConfig is null, do nothing."
+000104: invoke-static v1, v8, Lc/c/f/a/b;->p(Ljava/lang/String; Ljava/lang/String;)V
+00010a: return v0
+00010c: new-instance v0, Ljava/lang/StringBuilder;
+000110: invoke-direct v0, Ljava/lang/StringBuilder;-><init>()V
+000116: const-string v2, "call onFoundService for "
+00011a: invoke-virtual v0, v2, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+000120: invoke-virtual v0, v8, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+000126: invoke-virtual v0, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
+00012c: move-result-object v8
+00012e: invoke-static v1, v8, Lc/c/f/a/b;->k(Ljava/lang/String; Ljava/lang/String;)V
+000134: invoke-virtual v3, Lcom/vivo/finddevice/a;->b()Lcom/vivo/finddevice/d;
+00013a: move-result-object v2
+00013c: invoke-static Ljava/lang/System;->currentTimeMillis()J
+000142: move-result-wide v6
+000144: move-object v4, v9
+000146: invoke-virtual/range v2 ... v7, Lcom/vivo/finddevice/d;->a(Lcom/vivo/finddevice/a; Lcom/vivo/connbase/h0/c/k; Lcom/vivo/finddevice/k/e; J)V
+00014c: const/4 v8, 1
+00014e: return v8
+000150: move-exception v8
+000152: new-instance v9, Ljava/lang/StringBuilder;
+000156: invoke-direct v9, Ljava/lang/StringBuilder;-><init>()V
+00015c: const-string v2, "digest error:"
+000160: invoke-virtual v9, v2, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+000166: invoke-virtual v8, Ljava/security/NoSuchAlgorithmException;->toString()Ljava/lang/String;
+00016c: move-result-object v8
+00016e: invoke-virtual v9, v8, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+000174: invoke-virtual v9, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
+00017a: move-result-object v8
+00017c: invoke-static v1, v8, Lc/c/f/a/b;->g(Ljava/lang/String; Ljava/lang/String;)V
+000182: return v0
+000184: const-string v8, "scanner or notifier is null, do nothing."
+000188: invoke-static v1, v8, Lc/c/f/a/b;->p(Ljava/lang/String; Ljava/lang/String;)V
+00018e: return v0

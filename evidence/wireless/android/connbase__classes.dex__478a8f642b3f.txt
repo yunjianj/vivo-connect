@@ -1,0 +1,26 @@
+APK pcsuite/updateApk/connbase.apk
+DEX classes.dex
+CLASS Lcom/vivo/connbase/ServiceActivity$a;
+SUPER Ljava/lang/Object;
+FIELDS
+a Lcom/vivo/connbase/ServiceActivity; = None
+
+METHOD <init>(Lcom/vivo/connbase/ServiceActivity;)V
+000000: iput-object v1, v0, Lcom/vivo/connbase/ServiceActivity$a;->a Lcom/vivo/connbase/ServiceActivity;
+000004: invoke-direct v0, Ljava/lang/Object;-><init>()V
+00000a: return-void 
+
+METHOD onClick(Landroid/view/View;)V
+000000: iget-object v4, v3, Lcom/vivo/connbase/ServiceActivity$a;->a Lcom/vivo/connbase/ServiceActivity;
+000004: iget v4, v4, Lcom/vivo/connbase/ServiceActivity;->c I
+000008: const/4 v0, 1
+00000a: if-ne v4, v0, +00fh
+00000e: invoke-static Lorg/greenrobot/eventbus/EventBus;->getDefault()Lorg/greenrobot/eventbus/EventBus;
+000014: move-result-object v4
+000016: new-instance v1, Lcom/vivo/connbase/o/g;
+00001a: const/4 v2, 0
+00001c: invoke-direct v1, v0, v2, Lcom/vivo/connbase/o/g;-><init>(I Ljava/lang/Object;)V
+000022: invoke-virtual v4, v1, Lorg/greenrobot/eventbus/EventBus;->post(Ljava/lang/Object;)V
+000028: iget-object v4, v3, Lcom/vivo/connbase/ServiceActivity$a;->a Lcom/vivo/connbase/ServiceActivity;
+00002c: invoke-virtual v4, Landroid/app/Activity;->finish()V
+000032: return-void 

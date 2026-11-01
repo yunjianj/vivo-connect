@@ -1,0 +1,86 @@
+APK pcsuite/updateApk/pcsuite.apk
+DEX classes2.dex
+CLASS Lcom/vivo/connect/tasks/d;
+SUPER Ljava/lang/Object;
+FIELDS
+d Ljava/lang/String; = 'TaskListenerHandlerTAG'
+a Ljava/lang/Object; = None
+b Ljava/util/Queue; = None
+c Z = None
+
+METHOD <init>()V
+000000: invoke-direct v1, Ljava/lang/Object;-><init>()V
+000006: new-instance v0, Ljava/lang/Object;
+00000a: invoke-direct v0, Ljava/lang/Object;-><init>()V
+000010: iput-object v0, v1, Lcom/vivo/connect/tasks/d;->a Ljava/lang/Object;
+000014: return-void 
+
+METHOD a(Lcom/vivo/connect/tasks/Task;)V
+000000: const-string/jumbo v0, taskListeners is null:
+000006: iget-object v1, v6, Lcom/vivo/connect/tasks/d;->a Ljava/lang/Object;
+00000a: monitor-enter v1
+00000c: const-string v2, "TaskListenerHandlerTAG"
+000010: new-instance v3, Ljava/lang/StringBuilder;
+000014: invoke-direct v3, v0, Ljava/lang/StringBuilder;-><init>(Ljava/lang/String;)V
+00001a: iget-object v0, v6, Lcom/vivo/connect/tasks/d;->b Ljava/util/Queue;
+00001e: const/4 v4, 0
+000020: const/4 v5, 1
+000022: if-nez v0, +004h
+000026: move v0, v5
+000028: goto +2h
+00002a: move v0, v4
+00002c: invoke-virtual v3, v0, Ljava/lang/StringBuilder;->append(Z)Ljava/lang/StringBuilder;
+000032: invoke-virtual v3, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
+000038: move-result-object v0
+00003a: invoke-static v2, v0, Lcom/vivo/connect/logger/EasyLog;->d(Ljava/lang/String; Ljava/lang/String;)V
+000040: iget-object v0, v6, Lcom/vivo/connect/tasks/d;->b Ljava/util/Queue;
+000044: if-eqz v0, +02dh
+000048: iget-boolean v0, v6, Lcom/vivo/connect/tasks/d;->c Z
+00004c: if-eqz v0, +003h
+000050: goto +27h
+000052: iput-boolean v5, v6, Lcom/vivo/connect/tasks/d;->c Z
+000056: monitor-exit v1
+000058: iget-object v0, v6, Lcom/vivo/connect/tasks/d;->a Ljava/lang/Object;
+00005c: monitor-enter v0
+00005e: iget-object v1, v6, Lcom/vivo/connect/tasks/d;->b Ljava/util/Queue;
+000062: invoke-interface v1, Ljava/util/Queue;->poll()Ljava/lang/Object;
+000068: move-result-object v1
+00006a: check-cast v1, Lcom/vivo/connect/tasks/TaskListener;
+00006e: if-nez v1, +00fh
+000072: const-string v7, "TaskListenerHandlerTAG"
+000076: const-string v1, "listener is null."
+00007a: invoke-static v7, v1, Lcom/vivo/connect/logger/EasyLog;->d(Ljava/lang/String; Ljava/lang/String;)V
+000080: iput-boolean v4, v6, Lcom/vivo/connect/tasks/d;->c Z
+000084: monitor-exit v0
+000086: return-void 
+000088: move-exception v6
+00008a: goto +6h
+00008c: invoke-interface v1, v7, Lcom/vivo/connect/tasks/TaskListener;->onComplete(Lcom/vivo/connect/tasks/Task;)V
+000092: monitor-exit v0
+000094: goto -1eh
+000096: monitor-exit v0
+000098: throw v6
+00009a: move-exception v6
+00009c: goto +3h
+00009e: monitor-exit v1
+0000a0: return-void 
+0000a2: monitor-exit v1
+0000a4: throw v6
+
+METHOD a(Lcom/vivo/connect/tasks/TaskListener;)V
+000000: iget-object v0, v2, Lcom/vivo/connect/tasks/d;->a Ljava/lang/Object;
+000004: monitor-enter v0
+000006: iget-object v1, v2, Lcom/vivo/connect/tasks/d;->b Ljava/util/Queue;
+00000a: if-nez v1, +00ch
+00000e: new-instance v1, Ljava/util/ArrayDeque;
+000012: invoke-direct v1, Ljava/util/ArrayDeque;-><init>()V
+000018: iput-object v1, v2, Lcom/vivo/connect/tasks/d;->b Ljava/util/Queue;
+00001c: goto +3h
+00001e: move-exception v2
+000020: goto +8h
+000022: iget-object v2, v2, Lcom/vivo/connect/tasks/d;->b Ljava/util/Queue;
+000026: invoke-interface v2, v3, Ljava/util/Queue;->add(Ljava/lang/Object;)Z
+00002c: monitor-exit v0
+00002e: return-void 
+000030: monitor-exit v0
+000032: throw v2

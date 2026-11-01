@@ -1,0 +1,65 @@
+APK pcsuite/updateApk/connbase.apk
+DEX classes.dex
+CLASS Lcom/vivo/connbase/z;
+SUPER Ljava/lang/Object;
+FIELDS
+a Z = None
+b Z = None
+c Lcom/vivo/connbase/VivoConnectService; = None
+
+METHOD <init>(Lcom/vivo/connbase/VivoConnectService; Z Z)V
+000000: iput-object v1, v0, Lcom/vivo/connbase/z;->c Lcom/vivo/connbase/VivoConnectService;
+000004: iput-boolean v2, v0, Lcom/vivo/connbase/z;->a Z
+000008: iput-boolean v3, v0, Lcom/vivo/connbase/z;->b Z
+00000c: invoke-direct v0, Ljava/lang/Object;-><init>()V
+000012: return-void 
+
+METHOD onClick(Landroid/view/View;)V
+000000: new-instance v4, Landroid/content/Intent;
+000004: invoke-direct v4, Landroid/content/Intent;-><init>()V
+00000a: invoke-static Lcom/vivo/connbase/App;->m()Lcom/vivo/connbase/App;
+000010: move-result-object v0
+000012: invoke-virtual v0, Landroid/app/Application;->getApplicationContext()Landroid/content/Context;
+000018: move-result-object v0
+00001a: const-class v1, Lcom/vivo/connbase/AccountLoginLaunchActivity;
+00001e: invoke-virtual v4, v0, v1, Landroid/content/Intent;->setClass(Landroid/content/Context; Ljava/lang/Class;)Landroid/content/Intent;
+000024: const/high16 v0, 268435456
+000028: invoke-virtual v4, v0, Landroid/content/Intent;->setFlags(I)Landroid/content/Intent;
+00002e: iget-boolean v0, v3, Lcom/vivo/connbase/z;->a Z
+000032: const-string v1, "startType"
+000036: if-nez v0, +00eh
+00003a: const-string v0, "VivoConnectService"
+00003e: const-string v2, "sure button clicked."
+000042: invoke-static v0, v2, Lc/c/f/a/b;->l(Ljava/lang/String; Ljava/lang/String;)V
+000048: const/4 v0, 0
+00004a: invoke-virtual v4, v1, v0, Landroid/content/Intent;->putExtra(Ljava/lang/String; I)Landroid/content/Intent;
+000050: goto +25h
+000052: iget-boolean v0, v3, Lcom/vivo/connbase/z;->b Z
+000056: if-eqz v0, +00ah
+00005a: invoke-static Lcom/vivo/connbase/c0/z;->b()Z
+000060: move-result v0
+000062: if-nez v0, +004h
+000066: const/4 v0, 1
+000068: goto -fh
+00006a: iget-boolean v0, v3, Lcom/vivo/connbase/z;->b Z
+00006e: if-nez v0, +00ah
+000072: invoke-static Lcom/vivo/connbase/c0/z;->b()Z
+000078: move-result v0
+00007a: if-eqz v0, +004h
+00007e: const/4 v0, 2
+000080: goto -1bh
+000082: iget-boolean v0, v3, Lcom/vivo/connbase/z;->b Z
+000086: if-nez v0, +00ah
+00008a: invoke-static Lcom/vivo/connbase/c0/z;->b()Z
+000090: move-result v0
+000092: if-nez v0, +004h
+000096: const/4 v0, 3
+000098: goto -27h
+00009a: invoke-static Lcom/vivo/connbase/App;->m()Lcom/vivo/connbase/App;
+0000a0: move-result-object v0
+0000a2: invoke-virtual v0, v4, Landroid/app/Application;->startActivity(Landroid/content/Intent;)V
+0000a8: iget-object v4, v3, Lcom/vivo/connbase/z;->c Lcom/vivo/connbase/VivoConnectService;
+0000ac: invoke-static v4, Lcom/vivo/connbase/VivoConnectService;->M(Lcom/vivo/connbase/VivoConnectService;)Landroid/app/AlertDialog;
+0000b2: move-result-object v4
+0000b4: invoke-virtual v4, Landroid/app/AlertDialog;->dismiss()V
+0000ba: return-void 

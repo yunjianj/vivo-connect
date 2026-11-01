@@ -1,0 +1,70 @@
+APK pcsuite/updateApk/connbase.apk
+DEX classes.dex
+CLASS Lcom/vivo/connbase/a0;
+SUPER Ljava/lang/Object;
+FIELDS
+a Lcom/vivo/connbase/VivoConnectService; = None
+
+METHOD <init>(Lcom/vivo/connbase/VivoConnectService;)V
+000000: iput-object v1, v0, Lcom/vivo/connbase/a0;->a Lcom/vivo/connbase/VivoConnectService;
+000004: invoke-direct v0, Ljava/lang/Object;-><init>()V
+00000a: return-void 
+
+METHOD onClick(Landroid/view/View;)V
+000000: const-string v5, "VivoConnectService"
+000004: const-string v0, "cancel button clicked."
+000008: invoke-static v5, v0, Lc/c/f/a/b;->l(Ljava/lang/String; Ljava/lang/String;)V
+00000e: iget-object v0, v4, Lcom/vivo/connbase/a0;->a Lcom/vivo/connbase/VivoConnectService;
+000012: invoke-static v0, Lcom/vivo/connbase/VivoConnectService;->F(Lcom/vivo/connbase/VivoConnectService;)Ljava/util/Map;
+000018: move-result-object v0
+00001a: invoke-interface v0, Ljava/util/Map;->entrySet()Ljava/util/Set;
+000020: move-result-object v0
+000022: invoke-interface v0, Ljava/util/Set;->iterator()Ljava/util/Iterator;
+000028: move-result-object v0
+00002a: invoke-interface v0, Ljava/util/Iterator;->hasNext()Z
+000030: move-result v1
+000032: if-eqz v1, +058h
+000036: invoke-interface v0, Ljava/util/Iterator;->next()Ljava/lang/Object;
+00003c: move-result-object v1
+00003e: check-cast v1, Ljava/util/Map$Entry;
+000042: new-instance v2, Ljava/lang/StringBuilder;
+000046: invoke-direct v2, Ljava/lang/StringBuilder;-><init>()V
+00004c: const-string v3, "call onAccountLogin cancel for "
+000050: invoke-virtual v2, v3, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+000056: invoke-interface v1, Ljava/util/Map$Entry;->getKey()Ljava/lang/Object;
+00005c: move-result-object v3
+00005e: check-cast v3, Ljava/lang/String;
+000062: invoke-virtual v2, v3, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+000068: const-string v3, ", callback:"
+00006c: invoke-virtual v2, v3, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+000072: invoke-interface v1, Ljava/util/Map$Entry;->getValue()Ljava/lang/Object;
+000078: move-result-object v3
+00007a: invoke-virtual v2, v3, Ljava/lang/StringBuilder;->append(Ljava/lang/Object;)Ljava/lang/StringBuilder;
+000080: invoke-virtual v2, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
+000086: move-result-object v2
+000088: invoke-static v5, v2, Lc/c/f/a/b;->l(Ljava/lang/String; Ljava/lang/String;)V
+00008e: invoke-interface v1, Ljava/util/Map$Entry;->getValue()Ljava/lang/Object;
+000094: move-result-object v1
+000096: check-cast v1, Lcom/vivo/connbase/IAccountLoginCallback;
+00009a: const/4 v2, 2
+00009c: invoke-interface v1, v2, Lcom/vivo/connbase/IAccountLoginCallback;->onAccountLogin(I)V
+0000a2: const-string v1, "call onAccountLogin end."
+0000a6: invoke-static v5, v1, Lc/c/f/a/b;->l(Ljava/lang/String; Ljava/lang/String;)V
+0000ac: goto -41h
+0000ae: move-exception v1
+0000b0: new-instance v2, Ljava/lang/StringBuilder;
+0000b4: invoke-direct v2, Ljava/lang/StringBuilder;-><init>()V
+0000ba: const-string v3, "call onAccountLogin error:"
+0000be: invoke-virtual v2, v3, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+0000c4: invoke-virtual v1, Landroid/os/RemoteException;->toString()Ljava/lang/String;
+0000ca: move-result-object v1
+0000cc: invoke-virtual v2, v1, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+0000d2: invoke-virtual v2, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
+0000d8: move-result-object v1
+0000da: invoke-static v5, v1, Lc/c/f/a/b;->l(Ljava/lang/String; Ljava/lang/String;)V
+0000e0: goto -5bh
+0000e2: iget-object v5, v4, Lcom/vivo/connbase/a0;->a Lcom/vivo/connbase/VivoConnectService;
+0000e6: invoke-static v5, Lcom/vivo/connbase/VivoConnectService;->M(Lcom/vivo/connbase/VivoConnectService;)Landroid/app/AlertDialog;
+0000ec: move-result-object v5
+0000ee: invoke-virtual v5, Landroid/app/AlertDialog;->dismiss()V
+0000f4: return-void 

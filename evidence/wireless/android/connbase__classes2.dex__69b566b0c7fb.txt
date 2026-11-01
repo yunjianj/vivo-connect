@@ -1,0 +1,76 @@
+APK pcsuite/updateApk/connbase.apk
+DEX classes2.dex
+CLASS Lcom/vivo/pcsuite/pcconnect/ShareLinkService$i;
+SUPER Lcom/vivo/pcsuite/pcconnect/p/a$c;
+FIELDS
+e Lcom/vivo/pcsuite/pcconnect/ShareLinkService; = None
+
+METHOD <init>(Lcom/vivo/pcsuite/pcconnect/ShareLinkService;)V
+000000: iput-object v1, v0, Lcom/vivo/pcsuite/pcconnect/ShareLinkService$i;->e Lcom/vivo/pcsuite/pcconnect/ShareLinkService;
+000004: invoke-direct v0, Lcom/vivo/pcsuite/pcconnect/p/a$c;-><init>()V
+00000a: return-void 
+
+METHOD b(I I Ljava/lang/String; Ljava/lang/String;)V
+000000: invoke-static Lcom/vivo/pcsuite/pcconnect/ShareLinkService;->k()Ljava/lang/String;
+000006: move-result-object v6
+000008: new-instance v0, Ljava/lang/StringBuilder;
+00000c: invoke-direct v0, Ljava/lang/StringBuilder;-><init>()V
+000012: const-string v1, "onProcessDied packages pid: "
+000016: invoke-virtual v0, v1, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+00001c: invoke-virtual v0, v3, Ljava/lang/StringBuilder;->append(I)Ljava/lang/StringBuilder;
+000022: const-string v3, ", uid : "
+000026: invoke-virtual v0, v3, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+00002c: invoke-virtual v0, v4, Ljava/lang/StringBuilder;->append(I)Ljava/lang/StringBuilder;
+000032: const-string v3, " packageName: "
+000036: invoke-virtual v0, v3, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+00003c: invoke-virtual v0, v5, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+000042: invoke-virtual v0, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
+000048: move-result-object v3
+00004a: invoke-static v6, v3, Lc/c/f/a/b;->g(Ljava/lang/String; Ljava/lang/String;)V
+000050: const-string v3, "com.vivo.pcsuite"
+000054: invoke-virtual v3, v5, Ljava/lang/String;->equals(Ljava/lang/Object;)Z
+00005a: move-result v3
+00005c: if-eqz v3, +007h
+000060: iget-object v3, v2, Lcom/vivo/pcsuite/pcconnect/ShareLinkService$i;->e Lcom/vivo/pcsuite/pcconnect/ShareLinkService;
+000064: invoke-static v3, Lcom/vivo/pcsuite/pcconnect/ShareLinkService;->b(Lcom/vivo/pcsuite/pcconnect/ShareLinkService;)V
+00006a: return-void 
+
+METHOD onProcessDied(I I)V
+000000: iget-object v3, v2, Lcom/vivo/pcsuite/pcconnect/ShareLinkService$i;->e Lcom/vivo/pcsuite/pcconnect/ShareLinkService;
+000004: invoke-virtual v3, Landroid/app/Service;->getPackageManager()Landroid/content/pm/PackageManager;
+00000a: move-result-object v3
+00000c: invoke-virtual v3, v4, Landroid/content/pm/PackageManager;->getPackagesForUid(I)[Ljava/lang/String;
+000012: move-result-object v3
+000014: if-eqz v3, +02eh
+000018: array-length v0, v3
+00001a: if-lez v0, +02bh
+00001e: const/4 v4, 0
+000020: aget-object v3, v3, v4
+000024: const-string v4, "com.vivo.pcsuite"
+000028: invoke-virtual v4, v3, Ljava/lang/String;->equals(Ljava/lang/Object;)Z
+00002e: move-result v4
+000030: if-eqz v4, +038h
+000034: invoke-static Lcom/vivo/pcsuite/pcconnect/ShareLinkService;->k()Ljava/lang/String;
+00003a: move-result-object v4
+00003c: new-instance v0, Ljava/lang/StringBuilder;
+000040: invoke-direct v0, Ljava/lang/StringBuilder;-><init>()V
+000046: const-string v1, "onProcessDied package: "
+00004a: invoke-virtual v0, v1, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+000050: invoke-virtual v0, v3, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+000056: invoke-virtual v0, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
+00005c: move-result-object v3
+00005e: invoke-static v4, v3, Lc/c/f/a/b;->k(Ljava/lang/String; Ljava/lang/String;)V
+000064: iget-object v3, v2, Lcom/vivo/pcsuite/pcconnect/ShareLinkService$i;->e Lcom/vivo/pcsuite/pcconnect/ShareLinkService;
+000068: invoke-static v3, Lcom/vivo/pcsuite/pcconnect/ShareLinkService;->b(Lcom/vivo/pcsuite/pcconnect/ShareLinkService;)V
+00006e: goto +19h
+000070: invoke-static Lcom/vivo/pcsuite/pcconnect/ShareLinkService;->k()Ljava/lang/String;
+000076: move-result-object v3
+000078: new-instance v0, Ljava/lang/StringBuilder;
+00007c: invoke-direct v0, Ljava/lang/StringBuilder;-><init>()V
+000082: const-string v1, "onProcessDied not found packages: "
+000086: invoke-virtual v0, v1, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+00008c: invoke-virtual v0, v4, Ljava/lang/StringBuilder;->append(I)Ljava/lang/StringBuilder;
+000092: invoke-virtual v0, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
+000098: move-result-object v4
+00009a: invoke-static v3, v4, Lc/c/f/a/b;->g(Ljava/lang/String; Ljava/lang/String;)V
+0000a0: return-void 

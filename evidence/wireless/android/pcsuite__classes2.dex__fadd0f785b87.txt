@@ -1,0 +1,174 @@
+APK pcsuite/updateApk/pcsuite.apk
+DEX classes2.dex
+CLASS Lcom/vivo/connbase/connectcenter/IConnCoworkObserver$Stub;
+SUPER Landroid/os/Binder;
+FIELDS
+DESCRIPTOR Ljava/lang/String; = 'com.vivo.connbase.connectcenter.IConnCoworkObserver'
+TRANSACTION_onAuthorizationChange I = 6
+TRANSACTION_onBoundDeviceChanged I = 3
+TRANSACTION_onDeviceOrderChange I = 7
+TRANSACTION_onDevicePropertyChange I = 5
+TRANSACTION_onDeviceStateChanged I = 1
+TRANSACTION_onDeviceSwitchChange I = 8
+TRANSACTION_onServiceResIdChange I = 9
+TRANSACTION_onServiceSwitchStateChanged I = 2
+TRANSACTION_onSupportServiceChanged I = 4
+
+METHOD <init>()V
+000000: invoke-direct v1, Landroid/os/Binder;-><init>()V
+000006: const-string v0, "com.vivo.connbase.connectcenter.IConnCoworkObserver"
+00000a: invoke-virtual v1, v1, v0, Landroid/os/Binder;->attachInterface(Landroid/os/IInterface; Ljava/lang/String;)V
+000010: return-void 
+
+METHOD asInterface(Landroid/os/IBinder;)Lcom/vivo/connbase/connectcenter/IConnCoworkObserver;
+000000: if-nez v2, +004h
+000004: const/4 v2, 0
+000006: return-object v2
+000008: const-string v0, "com.vivo.connbase.connectcenter.IConnCoworkObserver"
+00000c: invoke-interface v2, v0, Landroid/os/IBinder;->queryLocalInterface(Ljava/lang/String;)Landroid/os/IInterface;
+000012: move-result-object v0
+000014: if-eqz v0, +009h
+000018: instance-of v1, v0, Lcom/vivo/connbase/connectcenter/IConnCoworkObserver;
+00001c: if-eqz v1, +005h
+000020: check-cast v0, Lcom/vivo/connbase/connectcenter/IConnCoworkObserver;
+000024: return-object v0
+000026: new-instance v0, Lcom/vivo/connbase/connectcenter/IConnCoworkObserver$Stub$Proxy;
+00002a: invoke-direct v0, v2, Lcom/vivo/connbase/connectcenter/IConnCoworkObserver$Stub$Proxy;-><init>(Landroid/os/IBinder;)V
+000030: return-object v0
+
+METHOD getDefaultImpl()Lcom/vivo/connbase/connectcenter/IConnCoworkObserver;
+000000: sget-object v0, Lcom/vivo/connbase/connectcenter/IConnCoworkObserver$Stub$Proxy;->sDefaultImpl Lcom/vivo/connbase/connectcenter/IConnCoworkObserver;
+000004: return-object v0
+
+METHOD setDefaultImpl(Lcom/vivo/connbase/connectcenter/IConnCoworkObserver;)Z
+000000: sget-object v0, Lcom/vivo/connbase/connectcenter/IConnCoworkObserver$Stub$Proxy;->sDefaultImpl Lcom/vivo/connbase/connectcenter/IConnCoworkObserver;
+000004: if-nez v0, +00ah
+000008: if-eqz v1, +006h
+00000c: sput-object v1, Lcom/vivo/connbase/connectcenter/IConnCoworkObserver$Stub$Proxy;->sDefaultImpl Lcom/vivo/connbase/connectcenter/IConnCoworkObserver;
+000010: const/4 v1, 1
+000012: return v1
+000014: const/4 v1, 0
+000016: return v1
+000018: new-instance v1, Ljava/lang/IllegalStateException;
+00001c: const-string v0, "setDefaultImpl() called twice"
+000020: invoke-direct v1, v0, Ljava/lang/IllegalStateException;-><init>(Ljava/lang/String;)V
+000026: throw v1
+
+METHOD asBinder()Landroid/os/IBinder;
+000000: return-object v0
+
+METHOD onTransact(I Landroid/os/Parcel; Landroid/os/Parcel; I)Z
+000000: const v0, 1598968902
+000006: const/4 v1, 1
+000008: const-string v2, "com.vivo.connbase.connectcenter.IConnCoworkObserver"
+00000c: if-eq v5, v0, +0ech
+000010: const/4 v0, 0
+000012: const/4 v3, 0
+000014: packed-switch v5, +00000ech
+00001a: invoke-super v4, v5, v6, v7, v8, Landroid/os/Binder;->onTransact(I Landroid/os/Parcel; Landroid/os/Parcel; I)Z
+000020: move-result v4
+000022: return v4
+000024: invoke-virtual v6, v2, Landroid/os/Parcel;->enforceInterface(Ljava/lang/String;)V
+00002a: invoke-virtual v6, Landroid/os/Parcel;->readString()Ljava/lang/String;
+000030: move-result-object v5
+000032: invoke-virtual v6, Landroid/os/Parcel;->readInt()I
+000038: move-result v6
+00003a: invoke-interface v4, v5, v6, Lcom/vivo/connbase/connectcenter/IConnCoworkObserver;->onServiceResIdChange(Ljava/lang/String; I)V
+000040: invoke-virtual v7, Landroid/os/Parcel;->writeNoException()V
+000046: return v1
+000048: invoke-virtual v6, v2, Landroid/os/Parcel;->enforceInterface(Ljava/lang/String;)V
+00004e: invoke-virtual v6, Landroid/os/Parcel;->readString()Ljava/lang/String;
+000054: move-result-object v5
+000056: invoke-virtual v6, Landroid/os/Parcel;->readInt()I
+00005c: move-result v8
+00005e: if-eqz v8, +00bh
+000062: sget-object v8, Lcom/vivo/connbase/connectcenter/bean/DeviceSwitch;->CREATOR Landroid/os/Parcelable$Creator;
+000066: invoke-interface v8, v6, Landroid/os/Parcelable$Creator;->createFromParcel(Landroid/os/Parcel;)Ljava/lang/Object;
+00006c: move-result-object v6
+00006e: move-object v3, v6
+000070: check-cast v3, Lcom/vivo/connbase/connectcenter/bean/DeviceSwitch;
+000074: invoke-interface v4, v5, v3, Lcom/vivo/connbase/connectcenter/IConnCoworkObserver;->onDeviceSwitchChange(Ljava/lang/String; Lcom/vivo/connbase/connectcenter/bean/DeviceSwitch;)V
+00007a: invoke-virtual v7, Landroid/os/Parcel;->writeNoException()V
+000080: if-eqz v3, +009h
+000084: invoke-virtual v7, v1, Landroid/os/Parcel;->writeInt(I)V
+00008a: invoke-virtual v3, v7, v1, Lcom/vivo/connbase/connectcenter/bean/DeviceSwitch;->writeToParcel(Landroid/os/Parcel; I)V
+000090: goto +4h
+000092: invoke-virtual v7, v0, Landroid/os/Parcel;->writeInt(I)V
+000098: return v1
+00009a: invoke-virtual v6, v2, Landroid/os/Parcel;->enforceInterface(Ljava/lang/String;)V
+0000a0: invoke-virtual v6, Landroid/os/Parcel;->createStringArrayList()Ljava/util/ArrayList;
+0000a6: move-result-object v5
+0000a8: invoke-interface v4, v5, Lcom/vivo/connbase/connectcenter/IConnCoworkObserver;->onDeviceOrderChange(Ljava/util/List;)V
+0000ae: invoke-virtual v7, Landroid/os/Parcel;->writeNoException()V
+0000b4: invoke-virtual v7, v5, Landroid/os/Parcel;->writeStringList(Ljava/util/List;)V
+0000ba: return v1
+0000bc: invoke-virtual v6, v2, Landroid/os/Parcel;->enforceInterface(Ljava/lang/String;)V
+0000c2: invoke-virtual v6, Landroid/os/Parcel;->readString()Ljava/lang/String;
+0000c8: move-result-object v5
+0000ca: invoke-virtual v6, Landroid/os/Parcel;->readInt()I
+0000d0: move-result v6
+0000d2: invoke-interface v4, v5, v6, Lcom/vivo/connbase/connectcenter/IConnCoworkObserver;->onAuthorizationChange(Ljava/lang/String; I)V
+0000d8: invoke-virtual v7, Landroid/os/Parcel;->writeNoException()V
+0000de: return v1
+0000e0: invoke-virtual v6, v2, Landroid/os/Parcel;->enforceInterface(Ljava/lang/String;)V
+0000e6: invoke-virtual v6, Landroid/os/Parcel;->readString()Ljava/lang/String;
+0000ec: move-result-object v5
+0000ee: invoke-virtual v6, Landroid/os/Parcel;->readString()Ljava/lang/String;
+0000f4: move-result-object v6
+0000f6: invoke-interface v4, v5, v6, Lcom/vivo/connbase/connectcenter/IConnCoworkObserver;->onDevicePropertyChange(Ljava/lang/String; Ljava/lang/String;)V
+0000fc: invoke-virtual v7, Landroid/os/Parcel;->writeNoException()V
+000102: return v1
+000104: invoke-virtual v6, v2, Landroid/os/Parcel;->enforceInterface(Ljava/lang/String;)V
+00010a: invoke-virtual v6, Landroid/os/Parcel;->readString()Ljava/lang/String;
+000110: move-result-object v5
+000112: invoke-virtual v6, Landroid/os/Parcel;->readString()Ljava/lang/String;
+000118: move-result-object v8
+00011a: invoke-virtual v6, Landroid/os/Parcel;->readInt()I
+000120: move-result v6
+000122: invoke-interface v4, v5, v8, v6, Lcom/vivo/connbase/connectcenter/IConnCoworkObserver;->onSupportServiceChanged(Ljava/lang/String; Ljava/lang/String; I)V
+000128: invoke-virtual v7, Landroid/os/Parcel;->writeNoException()V
+00012e: return v1
+000130: invoke-virtual v6, v2, Landroid/os/Parcel;->enforceInterface(Ljava/lang/String;)V
+000136: invoke-virtual v6, Landroid/os/Parcel;->readInt()I
+00013c: move-result v5
+00013e: if-eqz v5, +00bh
+000142: sget-object v5, Lcom/vivo/connbase/connectcenter/bean/BoundDeviceInfo;->CREATOR Landroid/os/Parcelable$Creator;
+000146: invoke-interface v5, v6, Landroid/os/Parcelable$Creator;->createFromParcel(Landroid/os/Parcel;)Ljava/lang/Object;
+00014c: move-result-object v5
+00014e: move-object v3, v5
+000150: check-cast v3, Lcom/vivo/connbase/connectcenter/bean/BoundDeviceInfo;
+000154: invoke-interface v4, v3, Lcom/vivo/connbase/connectcenter/IConnCoworkObserver;->onBoundDeviceChanged(Lcom/vivo/connbase/connectcenter/bean/BoundDeviceInfo;)V
+00015a: invoke-virtual v7, Landroid/os/Parcel;->writeNoException()V
+000160: if-eqz v3, +009h
+000164: invoke-virtual v7, v1, Landroid/os/Parcel;->writeInt(I)V
+00016a: invoke-virtual v3, v7, v1, Lcom/vivo/connbase/connectcenter/bean/BoundDeviceInfo;->writeToParcel(Landroid/os/Parcel; I)V
+000170: goto +4h
+000172: invoke-virtual v7, v0, Landroid/os/Parcel;->writeInt(I)V
+000178: return v1
+00017a: invoke-virtual v6, v2, Landroid/os/Parcel;->enforceInterface(Ljava/lang/String;)V
+000180: sget-object v5, Lcom/vivo/connbase/connectcenter/bean/SwitchInfo;->CREATOR Landroid/os/Parcelable$Creator;
+000184: invoke-virtual v6, v5, Landroid/os/Parcel;->createTypedArrayList(Landroid/os/Parcelable$Creator;)Ljava/util/ArrayList;
+00018a: move-result-object v5
+00018c: invoke-interface v4, v5, Lcom/vivo/connbase/connectcenter/IConnCoworkObserver;->onServiceSwitchStateChanged(Ljava/util/List;)V
+000192: invoke-virtual v7, Landroid/os/Parcel;->writeNoException()V
+000198: return v1
+00019a: invoke-virtual v6, v2, Landroid/os/Parcel;->enforceInterface(Ljava/lang/String;)V
+0001a0: invoke-virtual v6, Landroid/os/Parcel;->readInt()I
+0001a6: move-result v5
+0001a8: if-eqz v5, +00bh
+0001ac: sget-object v5, Lcom/vivo/connbase/connectcenter/bean/DeviceInfo;->CREATOR Landroid/os/Parcelable$Creator;
+0001b0: invoke-interface v5, v6, Landroid/os/Parcelable$Creator;->createFromParcel(Landroid/os/Parcel;)Ljava/lang/Object;
+0001b6: move-result-object v5
+0001b8: move-object v3, v5
+0001ba: check-cast v3, Lcom/vivo/connbase/connectcenter/bean/DeviceInfo;
+0001be: invoke-interface v4, v3, Lcom/vivo/connbase/connectcenter/IConnCoworkObserver;->onDeviceStateChanged(Lcom/vivo/connbase/connectcenter/bean/DeviceInfo;)V
+0001c4: invoke-virtual v7, Landroid/os/Parcel;->writeNoException()V
+0001ca: if-eqz v3, +009h
+0001ce: invoke-virtual v7, v1, Landroid/os/Parcel;->writeInt(I)V
+0001d4: invoke-virtual v3, v7, v1, Lcom/vivo/connbase/connectcenter/bean/DeviceInfo;->writeToParcel(Landroid/os/Parcel; I)V
+0001da: goto +4h
+0001dc: invoke-virtual v7, v0, Landroid/os/Parcel;->writeInt(I)V
+0001e2: return v1
+0001e4: invoke-virtual v7, v2, Landroid/os/Parcel;->writeString(Ljava/lang/String;)V
+0001ea: return v1
+0001ec: packed-switch-payload 1 2 3 4 5 6 7 8 9

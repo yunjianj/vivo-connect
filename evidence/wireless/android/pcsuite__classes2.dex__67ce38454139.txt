@@ -1,0 +1,83 @@
+APK pcsuite/updateApk/pcsuite.apk
+DEX classes2.dex
+CLASS Lcom/vivo/connect/sdk/i/c;
+SUPER Ljava/lang/Object;
+FIELDS
+a Ljava/lang/String; = 'StringUtils'
+
+METHOD <init>()V
+000000: invoke-direct v0, Ljava/lang/Object;-><init>()V
+000006: return-void 
+
+METHOD a(Ljava/lang/String;)Ljava/lang/String;
+000000: if-eqz v4, +03fh
+000004: const-string v0, "\."
+000008: invoke-virtual v4, v0, Ljava/lang/String;->split(Ljava/lang/String;)[Ljava/lang/String;
+00000e: move-result-object v0
+000010: array-length v1, v0
+000012: const/4 v2, 4
+000014: if-ne v1, v2, +035h
+000018: new-instance v1, Ljava/lang/StringBuilder;
+00001c: invoke-direct v1, Ljava/lang/StringBuilder;-><init>()V
+000022: const/4 v2, 2
+000024: aget-object v2, v0, v2
+000028: invoke-virtual v1, v2, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+00002e: const-string v2, "."
+000032: invoke-virtual v1, v2, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+000038: const/4 v2, 3
+00003a: aget-object v0, v0, v2
+00003e: invoke-virtual v1, v0, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+000044: invoke-virtual v1, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
+00004a: move-result-object v4
+00004c: return-object v4
+00004e: move-exception v0
+000050: sget-object v1, Lcom/vivo/connect/sdk/i/c;->a Ljava/lang/String;
+000054: new-instance v2, Ljava/lang/StringBuilder;
+000058: const-string v3, "ipEncry e："
+00005c: invoke-direct v2, v3, Ljava/lang/StringBuilder;-><init>(Ljava/lang/String;)V
+000062: invoke-virtual v0, Ljava/lang/Throwable;->getMessage()Ljava/lang/String;
+000068: move-result-object v0
+00006a: invoke-virtual v2, v0, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+000070: invoke-virtual v2, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
+000076: move-result-object v0
+000078: invoke-static v1, v0, Lcom/vivo/connect/logger/EasyLog;->i(Ljava/lang/String; Ljava/lang/String;)V
+00007e: return-object v4
+
+METHOD b(Ljava/lang/String;)Ljava/lang/String;
+000000: if-eqz v4, +04ah
+000004: invoke-virtual v4, Ljava/lang/String;->length()I
+00000a: move-result v0
+00000c: const/16 v1, 17
+000010: if-ne v0, v1, +042h
+000014: const/4 v0, 0
+000016: const/4 v1, 2
+000018: invoke-virtual v4, v0, v1, Ljava/lang/String;->substring(I I)Ljava/lang/String;
+00001e: move-result-object v0
+000020: invoke-virtual v4, Ljava/lang/String;->length()I
+000026: move-result v2
+000028: sub-int/2addr v2, v1
+00002a: invoke-virtual v4, Ljava/lang/String;->length()I
+000030: move-result v1
+000032: invoke-virtual v4, v2, v1, Ljava/lang/String;->substring(I I)Ljava/lang/String;
+000038: move-result-object v1
+00003a: new-instance v2, Ljava/lang/StringBuilder;
+00003e: invoke-direct v2, Ljava/lang/StringBuilder;-><init>()V
+000044: invoke-virtual v2, v0, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+00004a: const-string v0, ":"
+00004e: invoke-virtual v2, v0, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+000054: invoke-virtual v2, v1, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+00005a: invoke-virtual v2, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
+000060: move-result-object v4
+000062: return-object v4
+000064: move-exception v0
+000066: sget-object v1, Lcom/vivo/connect/sdk/i/c;->a Ljava/lang/String;
+00006a: new-instance v2, Ljava/lang/StringBuilder;
+00006e: const-string v3, "macEncry e："
+000072: invoke-direct v2, v3, Ljava/lang/StringBuilder;-><init>(Ljava/lang/String;)V
+000078: invoke-virtual v0, Ljava/lang/Throwable;->getMessage()Ljava/lang/String;
+00007e: move-result-object v0
+000080: invoke-virtual v2, v0, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+000086: invoke-virtual v2, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
+00008c: move-result-object v0
+00008e: invoke-static v1, v0, Lcom/vivo/connect/logger/EasyLog;->i(Ljava/lang/String; Ljava/lang/String;)V
+000094: return-object v4

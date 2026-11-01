@@ -1,0 +1,196 @@
+APK pcsuite/updateApk/connbase.apk
+DEX classes2.dex
+CLASS Lcom/vivo/pcsuite/pcconnect/wifip2p/deputy/b;
+SUPER Ljava/lang/Object;
+FIELDS
+a Ljava/lang/String; = 'DeputyWifi'
+b Ljava/lang/String; = 'dualwifi_speedup_on'
+c I = 0
+d I = 1
+e I = 2
+f Ljava/lang/String; = 'vivoshare_close_dualwifi'
+g I = 0
+h I = 1
+i Ljava/lang/String; = 'preview_state_by_vivoshare'
+j I = 255
+
+METHOD <init>()V
+000000: invoke-direct v0, Ljava/lang/Object;-><init>()V
+000006: return-void 
+
+METHOD a(Landroid/content/Context; Ljava/lang/String; I)I
+000000: const-string v0, "DeputyWifi"
+000004: invoke-virtual v3, Landroid/content/Context;->getContentResolver()Landroid/content/ContentResolver;
+00000a: move-result-object v3
+00000c: invoke-static v3, v4, v5, Landroid/provider/Settings$Global;->getInt(Landroid/content/ContentResolver; Ljava/lang/String; I)I
+000012: move-result v3
+000014: new-instance v1, Ljava/lang/StringBuilder;
+000018: invoke-direct v1, Ljava/lang/StringBuilder;-><init>()V
+00001e: const-string v2, "Getting Global Int: "
+000022: invoke-virtual v1, v2, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+000028: invoke-virtual v1, v4, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+00002e: const-string v4, ":"
+000032: invoke-virtual v1, v4, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+000038: invoke-virtual v1, v3, Ljava/lang/StringBuilder;->append(I)Ljava/lang/StringBuilder;
+00003e: invoke-virtual v1, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
+000044: move-result-object v4
+000046: invoke-static v0, v4, Lc/c/f/a/b;->a(Ljava/lang/String; Ljava/lang/String;)V
+00004c: return v3
+00004e: move-exception v3
+000050: const-string v4, "Getting Global Int failed."
+000054: invoke-static v0, v4, v3, Lc/c/f/a/b;->b(Ljava/lang/String; Ljava/lang/String; Ljava/lang/Throwable;)V
+00005a: return v5
+
+METHOD a(Landroid/content/Context;)V
+000000: const-string v0, "DeputyWifi"
+000004: const-string v1, "Disabling"
+000008: invoke-static v0, v1, Lc/c/f/a/b;->a(Ljava/lang/String; Ljava/lang/String;)V
+00000e: invoke-static v4, Lcom/vivo/pcsuite/pcconnect/wifip2p/deputy/b;->c(Landroid/content/Context;)I
+000014: move-result v1
+000016: invoke-static v4, Lcom/vivo/pcsuite/pcconnect/wifip2p/deputy/a;->a(Landroid/content/Context;)V
+00001c: const/4 v2, -1
+00001e: if-eq v1, v2, +032h
+000022: const/4 v3, 1
+000024: if-eqz v1, +007h
+000028: if-eq v1, v3, +005h
+00002c: const-string v1, "Deputy Wi-Fi state wasn't any of expected values."
+000030: goto +2bh
+000032: invoke-static v4, v1, Lcom/vivo/pcsuite/pcconnect/wifip2p/deputy/b;->b(Landroid/content/Context; I)V
+000038: invoke-static v4, v3, Lcom/vivo/pcsuite/pcconnect/wifip2p/deputy/b;->a(Landroid/content/Context; Z)V
+00003e: const/4 v2, 2
+000040: invoke-static v4, v2, Lcom/vivo/pcsuite/pcconnect/wifip2p/deputy/b;->a(Landroid/content/Context; I)Z
+000046: move-result v4
+000048: new-instance v2, Ljava/lang/StringBuilder;
+00004c: invoke-direct v2, Ljava/lang/StringBuilder;-><init>()V
+000052: const-string v3, "Disable deputy Wi-Fi from "
+000056: invoke-virtual v2, v3, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+00005c: invoke-virtual v2, v1, Ljava/lang/StringBuilder;->append(I)Ljava/lang/StringBuilder;
+000062: const-string v1, " "
+000066: invoke-virtual v2, v1, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+00006c: invoke-virtual v2, v4, Ljava/lang/StringBuilder;->append(Z)Ljava/lang/StringBuilder;
+000072: invoke-virtual v2, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
+000078: move-result-object v4
+00007a: invoke-static v0, v4, Lc/c/f/a/b;->k(Ljava/lang/String; Ljava/lang/String;)V
+000080: goto +9h
+000082: const-string v1, "Get deputy Wi-Fi state failed."
+000086: invoke-static v0, v1, Lc/c/f/a/b;->p(Ljava/lang/String; Ljava/lang/String;)V
+00008c: invoke-static v4, v2, Lcom/vivo/pcsuite/pcconnect/wifip2p/deputy/b;->b(Landroid/content/Context; I)V
+000092: const-string v4, "Disable end."
+000096: invoke-static v0, v4, Lc/c/f/a/b;->a(Ljava/lang/String; Ljava/lang/String;)V
+00009c: return-void 
+
+METHOD a(Landroid/content/Context; Z)V
+000000: const-string v0, "vivoshare_close_dualwifi"
+000004: invoke-static v1, v0, v2, Lcom/vivo/pcsuite/pcconnect/wifip2p/deputy/b;->b(Landroid/content/Context; Ljava/lang/String; I)Z
+00000a: move-result v1
+00000c: new-instance v0, Ljava/lang/StringBuilder;
+000010: invoke-direct v0, Ljava/lang/StringBuilder;-><init>()V
+000016: if-eqz v2, +005h
+00001a: const-string v2, "Setting"
+00001e: goto +3h
+000020: const-string v2, "Recovering"
+000024: invoke-virtual v0, v2, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+00002a: const-string v2, " mark "
+00002e: invoke-virtual v0, v2, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+000034: invoke-virtual v0, v1, Ljava/lang/StringBuilder;->append(Z)Ljava/lang/StringBuilder;
+00003a: invoke-virtual v0, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
+000040: move-result-object v1
+000042: const-string v2, "DeputyWifi"
+000046: invoke-static v2, v1, Lc/c/f/a/b;->k(Ljava/lang/String; Ljava/lang/String;)V
+00004c: return-void 
+
+METHOD a(Landroid/content/Context; I)Z
+000000: const-string v0, "dualwifi_speedup_on"
+000004: invoke-static v1, v0, v2, Lcom/vivo/pcsuite/pcconnect/wifip2p/deputy/b;->b(Landroid/content/Context; Ljava/lang/String; I)Z
+00000a: move-result v1
+00000c: return v1
+
+METHOD b(Landroid/content/Context;)V
+000000: const-string v0, "DeputyWifi"
+000004: const-string v1, "Enabling"
+000008: invoke-static v0, v1, Lc/c/f/a/b;->a(Ljava/lang/String; Ljava/lang/String;)V
+00000e: const/4 v1, 0
+000010: invoke-static v6, v1, Lcom/vivo/pcsuite/pcconnect/wifip2p/deputy/b;->a(Landroid/content/Context; Z)V
+000016: invoke-static v6, Lcom/vivo/pcsuite/pcconnect/wifip2p/deputy/b;->d(Landroid/content/Context;)I
+00001c: move-result v1
+00001e: const/4 v2, -1
+000020: if-eq v1, v2, +040h
+000024: if-eqz v1, +01ah
+000028: const/4 v3, 1
+00002a: if-eq v1, v3, +017h
+00002e: new-instance v2, Ljava/lang/StringBuilder;
+000032: invoke-direct v2, Ljava/lang/StringBuilder;-><init>()V
+000038: const-string v3, "Shouldn't enter this case. value: "
+00003c: invoke-virtual v2, v3, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+000042: invoke-virtual v2, v1, Ljava/lang/StringBuilder;->append(I)Ljava/lang/StringBuilder;
+000048: invoke-virtual v2, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
+00004e: move-result-object v1
+000050: invoke-static v0, v1, Lc/c/f/a/b;->g(Ljava/lang/String; Ljava/lang/String;)V
+000056: goto +2ah
+000058: invoke-static v6, v1, Lcom/vivo/pcsuite/pcconnect/wifip2p/deputy/b;->a(Landroid/content/Context; I)Z
+00005e: move-result v3
+000060: new-instance v4, Ljava/lang/StringBuilder;
+000064: invoke-direct v4, Ljava/lang/StringBuilder;-><init>()V
+00006a: const-string v5, "Enable deputy Wi-Fi to "
+00006e: invoke-virtual v4, v5, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+000074: invoke-virtual v4, v1, Ljava/lang/StringBuilder;->append(I)Ljava/lang/StringBuilder;
+00007a: const-string v1, " "
+00007e: invoke-virtual v4, v1, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+000084: invoke-virtual v4, v3, Ljava/lang/StringBuilder;->append(Z)Ljava/lang/StringBuilder;
+00008a: invoke-virtual v4, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
+000090: move-result-object v1
+000092: invoke-static v0, v1, Lc/c/f/a/b;->k(Ljava/lang/String; Ljava/lang/String;)V
+000098: invoke-static v6, v2, Lcom/vivo/pcsuite/pcconnect/wifip2p/deputy/b;->b(Landroid/content/Context; I)V
+00009e: goto +6h
+0000a0: const-string v1, "Preview state illegal, do nothing."
+0000a4: invoke-static v0, v1, Lc/c/f/a/b;->p(Ljava/lang/String; Ljava/lang/String;)V
+0000aa: invoke-static v6, Lcom/vivo/pcsuite/pcconnect/wifip2p/deputy/a;->b(Landroid/content/Context;)V
+0000b0: const-string v6, "Enable end."
+0000b4: invoke-static v0, v6, Lc/c/f/a/b;->a(Ljava/lang/String; Ljava/lang/String;)V
+0000ba: return-void 
+
+METHOD b(Landroid/content/Context; I)V
+000000: const-string v0, "preview_state_by_vivoshare"
+000004: invoke-static v1, v0, v2, Lcom/vivo/pcsuite/pcconnect/wifip2p/deputy/b;->b(Landroid/content/Context; Ljava/lang/String; I)Z
+00000a: return-void 
+
+METHOD b(Landroid/content/Context; Ljava/lang/String; I)Z
+000000: const-string v0, "DeputyWifi"
+000004: invoke-virtual v3, Landroid/content/Context;->getContentResolver()Landroid/content/ContentResolver;
+00000a: move-result-object v3
+00000c: invoke-static v3, v4, v5, Landroid/provider/Settings$Global;->putInt(Landroid/content/ContentResolver; Ljava/lang/String; I)Z
+000012: move-result v3
+000014: new-instance v1, Ljava/lang/StringBuilder;
+000018: invoke-direct v1, Ljava/lang/StringBuilder;-><init>()V
+00001e: const-string v2, "Setting Global Int: "
+000022: invoke-virtual v1, v2, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+000028: invoke-virtual v1, v4, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+00002e: const-string v4, ":"
+000032: invoke-virtual v1, v4, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+000038: invoke-virtual v1, v5, Ljava/lang/StringBuilder;->append(I)Ljava/lang/StringBuilder;
+00003e: const-string v4, " "
+000042: invoke-virtual v1, v4, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+000048: invoke-virtual v1, v3, Ljava/lang/StringBuilder;->append(Z)Ljava/lang/StringBuilder;
+00004e: invoke-virtual v1, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
+000054: move-result-object v4
+000056: invoke-static v0, v4, Lc/c/f/a/b;->a(Ljava/lang/String; Ljava/lang/String;)V
+00005c: return v3
+00005e: move-exception v3
+000060: const-string v4, "Write Global Int failed."
+000064: invoke-static v0, v4, v3, Lc/c/f/a/b;->b(Ljava/lang/String; Ljava/lang/String; Ljava/lang/Throwable;)V
+00006a: const/4 v3, 0
+00006c: return v3
+
+METHOD c(Landroid/content/Context;)I
+000000: const-string v0, "dualwifi_speedup_on"
+000004: const/4 v1, -1
+000006: invoke-static v2, v0, v1, Lcom/vivo/pcsuite/pcconnect/wifip2p/deputy/b;->a(Landroid/content/Context; Ljava/lang/String; I)I
+00000c: move-result v2
+00000e: return v2
+
+METHOD d(Landroid/content/Context;)I
+000000: const-string v0, "preview_state_by_vivoshare"
+000004: const/4 v1, -1
+000006: invoke-static v2, v0, v1, Lcom/vivo/pcsuite/pcconnect/wifip2p/deputy/b;->a(Landroid/content/Context; Ljava/lang/String; I)I
+00000c: move-result v2
+00000e: return v2

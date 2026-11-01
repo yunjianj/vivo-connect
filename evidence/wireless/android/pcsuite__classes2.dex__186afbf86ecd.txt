@@ -1,0 +1,37 @@
+APK pcsuite/updateApk/pcsuite.apk
+DEX classes2.dex
+CLASS Lcom/vivo/widget/hover/view/MultiShadowView$4;
+SUPER Landroid/animation/AnimatorListenerAdapter;
+FIELDS
+this$0 Lcom/vivo/widget/hover/view/MultiShadowView; = None
+
+METHOD onAnimationEnd(Landroid/animation/Animator;)V
+000000: sget v3, Lcom/vivo/widget/hover/HoverEffect;->mCurrentPointerStyle I
+000004: const/4 v0, 1
+000006: const/4 v1, 4
+000008: if-ne v3, v0, +012h
+00000c: iget-object v3, v2, Lcom/vivo/widget/hover/view/MultiShadowView$4;->this$0 Lcom/vivo/widget/hover/view/MultiShadowView;
+000010: invoke-virtual v3, v1, Landroid/view/View;->setVisibility(I)V
+000016: iget-object v3, v2, Lcom/vivo/widget/hover/view/MultiShadowView$4;->this$0 Lcom/vivo/widget/hover/view/MultiShadowView;
+00001a: new-instance v0, Lcom/vivo/widget/hover/view/MultiShadowView$4$1;
+00001e: invoke-direct v0, v2, Lcom/vivo/widget/hover/view/MultiShadowView$4$1;-><init>(Lcom/vivo/widget/hover/view/MultiShadowView$4;)V
+000024: invoke-virtual v3, v0, Landroid/view/View;->post(Ljava/lang/Runnable;)Z
+00002a: goto +bh
+00002c: iget-object v3, v2, Lcom/vivo/widget/hover/view/MultiShadowView$4;->this$0 Lcom/vivo/widget/hover/view/MultiShadowView;
+000030: invoke-virtual v3, Lcom/vivo/widget/hover/view/MultiShadowView;->showSystemPointer()V
+000036: iget-object v3, v2, Lcom/vivo/widget/hover/view/MultiShadowView$4;->this$0 Lcom/vivo/widget/hover/view/MultiShadowView;
+00003a: invoke-virtual v3, v1, Landroid/view/View;->setVisibility(I)V
+000040: iget-object v3, v2, Lcom/vivo/widget/hover/view/MultiShadowView$4;->this$0 Lcom/vivo/widget/hover/view/MultiShadowView;
+000044: const/4 v0, 0
+000046: invoke-static v3, v0, Lcom/vivo/widget/hover/view/MultiShadowView;->access$802(Lcom/vivo/widget/hover/view/MultiShadowView; Z)Z
+00004c: iget-object v3, v2, Lcom/vivo/widget/hover/view/MultiShadowView$4;->this$0 Lcom/vivo/widget/hover/view/MultiShadowView;
+000050: invoke-static v3, v0, Lcom/vivo/widget/hover/view/MultiShadowView;->access$2002(Lcom/vivo/widget/hover/view/MultiShadowView; Z)Z
+000056: iget-object v3, v2, Lcom/vivo/widget/hover/view/MultiShadowView$4;->this$0 Lcom/vivo/widget/hover/view/MultiShadowView;
+00005a: invoke-static v3, Lcom/vivo/widget/hover/view/MultiShadowView;->access$2100(Lcom/vivo/widget/hover/view/MultiShadowView;)Lcom/vivo/widget/hover/base/AbsHoverView$a;
+000060: move-result-object v3
+000062: if-eqz v3, +00bh
+000066: iget-object v2, v2, Lcom/vivo/widget/hover/view/MultiShadowView$4;->this$0 Lcom/vivo/widget/hover/view/MultiShadowView;
+00006a: invoke-static v2, Lcom/vivo/widget/hover/view/MultiShadowView;->access$2200(Lcom/vivo/widget/hover/view/MultiShadowView;)Lcom/vivo/widget/hover/base/AbsHoverView$a;
+000070: move-result-object v2
+000072: invoke-interface v2, Lcom/vivo/widget/hover/base/AbsHoverView$a;->a()V
+000078: return-void 

@@ -1,0 +1,18 @@
+APK pcsuite/updateApk/pcsuite.apk
+DEX classes2.dex
+CLASS Lcom/vivo/connbase/connectcenter/ConnCoworkApi;
+SUPER Lcom/vivo/connbase/connectcenter/ApiBase;
+FIELDS
+TAG Ljava/lang/String; = 'ConnCoworkApi'
+
+METHOD <init>(Landroid/content/Context;)V
+000000: invoke-direct v0, v1, Lcom/vivo/connbase/connectcenter/ApiBase;-><init>(Landroid/content/Context;)V
+000006: return-void 
+
+METHOD create(Landroid/content/Context;)Lcom/vivo/connbase/connectcenter/ConnCoworkImpl;
+000000: const-string v0, "ConnCoworkApi"
+000004: const-string v1, "sdk version is 1"
+000008: invoke-static v0, v1, Lcom/vivo/aiengine/find/device/sdk/impl/util/LogUtil;->i(Ljava/lang/String; Ljava/lang/String;)V
+00000e: new-instance v0, Lcom/vivo/connbase/connectcenter/ConnCoworkImpl;
+000012: invoke-direct v0, v2, Lcom/vivo/connbase/connectcenter/ConnCoworkImpl;-><init>(Landroid/content/Context;)V
+000018: return-object v0

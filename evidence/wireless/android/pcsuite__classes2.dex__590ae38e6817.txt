@@ -1,0 +1,23 @@
+APK pcsuite/updateApk/pcsuite.apk
+DEX classes2.dex
+CLASS Lcom/vivo/pcsuite/service/PcSuiteObserver$d;
+SUPER Ljava/lang/Object;
+FIELDS
+a Lcom/vivo/pcsuite/service/PcSuiteObserver; = None
+
+METHOD <init>(Lcom/vivo/pcsuite/service/PcSuiteObserver;)V
+000000: invoke-direct v0, Ljava/lang/Object;-><init>()V
+000006: iput-object v1, v0, Lcom/vivo/pcsuite/service/PcSuiteObserver$d;->a Lcom/vivo/pcsuite/service/PcSuiteObserver;
+00000a: return-void 
+
+METHOD FileNotExitsToast()V
+000000: sget-object v0, Lcom/vivo/pcsuite/PcSuiteApplication;->I1 Lcom/vivo/pcsuite/PcSuiteApplication;
+000004: invoke-virtual v0, Landroid/content/Context;->getApplicationContext()Landroid/content/Context;
+00000a: move-result-object v0
+00000c: iget-object v2, v2, Lcom/vivo/pcsuite/service/PcSuiteObserver$d;->a Lcom/vivo/pcsuite/service/PcSuiteObserver;
+000010: const v1, 2131755683
+000016: invoke-virtual v2, v1, Landroid/content/Context;->getString(I)Ljava/lang/String;
+00001c: move-result-object v2
+00001e: const/4 v1, 0
+000020: invoke-static v0, v1, v2, Ls2/i;->c(Landroid/content/Context; I Ljava/lang/String;)V
+000026: return-void 

@@ -1,0 +1,135 @@
+APK pcsuite/updateApk/pcsuite.apk
+DEX classes2.dex
+CLASS Lcom/vivo/connect/ConnectBase;
+SUPER Ljava/lang/Object;
+FIELDS
+BUFFER_SIZE I = 20480
+a Ljava/lang/String; = 'ConnectBase'
+b Lcom/vivo/connect/sdk/f/c; = None
+c Lcom/vivo/connect/ScenceSync; = None
+d Lcom/vivo/pcsuite/pcconnect/IPcShare; = None
+
+METHOD <clinit>()V
+000000: const-string v0, "ConnSDK_"
+000004: invoke-static v0, Lcom/vivo/connect/logger/EasyLog;->setPrefix(Ljava/lang/String;)V
+00000a: const/4 v0, 4
+00000c: invoke-static v0, Lcom/vivo/connect/logger/EasyLog;->setLevel(I)V
+000012: const-string v0, "ConnectBase"
+000016: const-string v1, "SDK BUILD_TIME: 2025-02-17 15:02
+versionCode:10904
+versionName:1.0.9.4"
+00001a: invoke-static v0, v1, Lcom/vivo/connect/logger/EasyLog;->i(Ljava/lang/String; Ljava/lang/String;)V
+000020: return-void 
+
+METHOD <init>()V
+000000: invoke-direct v0, Ljava/lang/Object;-><init>()V
+000006: return-void 
+
+METHOD getConnectionClient(Landroid/content/Context;)Lcom/vivo/connect/ConnectClient;
+000000: const-string v0, "getConnectionClient:"
+000004: const-class v1, Lcom/vivo/connect/ConnectBase;
+000008: monitor-enter v1
+00000a: const-string v2, "Context must not be null"
+00000e: invoke-static v4, v2, Lcom/vivo/connect/utils/Preconditions;->checkNotNull(Ljava/lang/Object; Ljava/lang/Object;)Ljava/lang/Object;
+000014: invoke-virtual v4, Landroid/content/Context;->getApplicationContext()Landroid/content/Context;
+00001a: move-result-object v2
+00001c: new-instance v3, Ljava/lang/StringBuilder;
+000020: invoke-direct v3, v0, Ljava/lang/StringBuilder;-><init>(Ljava/lang/String;)V
+000026: invoke-virtual v3, v4, Ljava/lang/StringBuilder;->append(Ljava/lang/Object;)Ljava/lang/StringBuilder;
+00002c: const-string v4, ", appContext:"
+000030: invoke-virtual v3, v4, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+000036: invoke-virtual v3, v2, Ljava/lang/StringBuilder;->append(Ljava/lang/Object;)Ljava/lang/StringBuilder;
+00003c: invoke-virtual v3, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
+000042: move-result-object v4
+000044: const-string v0, "ConnectBase"
+000048: invoke-static v0, v4, Lcom/vivo/connect/logger/EasyLog;->i(Ljava/lang/String; Ljava/lang/String;)V
+00004e: sget-object v4, Lcom/vivo/connect/ConnectBase;->b Lcom/vivo/connect/sdk/f/c;
+000052: if-nez v4, +00ch
+000056: new-instance v4, Lcom/vivo/connect/sdk/f/c;
+00005a: invoke-direct v4, v2, Lcom/vivo/connect/sdk/f/c;-><init>(Landroid/content/Context;)V
+000060: sput-object v4, Lcom/vivo/connect/ConnectBase;->b Lcom/vivo/connect/sdk/f/c;
+000064: goto +3h
+000066: move-exception v4
+000068: goto +2ch
+00006a: sget-object v4, Lcom/vivo/connect/ConnectBase;->b Lcom/vivo/connect/sdk/f/c;
+00006e: invoke-virtual v4, Lcom/vivo/connect/sdk/f/c;->f()Landroid/content/Context;
+000074: move-result-object v4
+000076: if-eqz v4, +021h
+00007a: sget-object v4, Lcom/vivo/connect/ConnectBase;->b Lcom/vivo/connect/sdk/f/c;
+00007e: invoke-virtual v4, Lcom/vivo/connect/sdk/f/c;->f()Landroid/content/Context;
+000084: move-result-object v4
+000086: invoke-virtual v4, v2, Ljava/lang/Object;->equals(Ljava/lang/Object;)Z
+00008c: move-result v4
+00008e: if-nez v4, +015h
+000092: const-string v4, "ConnectBase"
+000096: const-string v0, "not the same ApplicationContext"
+00009a: invoke-static v4, v0, Lcom/vivo/connect/logger/EasyLog;->i(Ljava/lang/String; Ljava/lang/String;)V
+0000a0: sget-object v4, Lcom/vivo/connect/ConnectBase;->b Lcom/vivo/connect/sdk/f/c;
+0000a4: invoke-virtual v4, Lcom/vivo/connect/sdk/f/c;->release()V
+0000aa: new-instance v4, Lcom/vivo/connect/sdk/f/c;
+0000ae: invoke-direct v4, v2, Lcom/vivo/connect/sdk/f/c;-><init>(Landroid/content/Context;)V
+0000b4: sput-object v4, Lcom/vivo/connect/ConnectBase;->b Lcom/vivo/connect/sdk/f/c;
+0000b8: sget-object v4, Lcom/vivo/connect/ConnectBase;->b Lcom/vivo/connect/sdk/f/c;
+0000bc: monitor-exit v1
+0000be: return-object v4
+0000c0: monitor-exit v1
+0000c2: throw v4
+
+METHOD getPcShare(Landroid/content/Context;)Lcom/vivo/pcsuite/pcconnect/IPcShare;
+000000: const-string v0, "getPcShare:"
+000004: const-class v1, Lcom/vivo/connect/ConnectBase;
+000008: monitor-enter v1
+00000a: const-string v2, "Context must not be null"
+00000e: invoke-static v4, v2, Lcom/vivo/connect/utils/Preconditions;->checkNotNull(Ljava/lang/Object; Ljava/lang/Object;)Ljava/lang/Object;
+000014: invoke-virtual v4, Landroid/content/Context;->getApplicationContext()Landroid/content/Context;
+00001a: move-result-object v2
+00001c: new-instance v3, Ljava/lang/StringBuilder;
+000020: invoke-direct v3, v0, Ljava/lang/StringBuilder;-><init>(Ljava/lang/String;)V
+000026: invoke-virtual v3, v4, Ljava/lang/StringBuilder;->append(Ljava/lang/Object;)Ljava/lang/StringBuilder;
+00002c: const-string v0, ", appContext:"
+000030: invoke-virtual v3, v0, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+000036: invoke-virtual v3, v2, Ljava/lang/StringBuilder;->append(Ljava/lang/Object;)Ljava/lang/StringBuilder;
+00003c: invoke-virtual v3, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
+000042: move-result-object v0
+000044: const-string v2, "ConnectBase"
+000048: invoke-static v2, v0, Lcom/vivo/connect/logger/EasyLog;->i(Ljava/lang/String; Ljava/lang/String;)V
+00004e: sget-object v0, Lcom/vivo/connect/ConnectBase;->d Lcom/vivo/pcsuite/pcconnect/IPcShare;
+000052: if-nez v0, +00ch
+000056: new-instance v0, Lcom/vivo/pcsuite/pcconnect/PcOtherShare;
+00005a: invoke-direct v0, v4, Lcom/vivo/pcsuite/pcconnect/PcOtherShare;-><init>(Landroid/content/Context;)V
+000060: sput-object v0, Lcom/vivo/connect/ConnectBase;->d Lcom/vivo/pcsuite/pcconnect/IPcShare;
+000064: goto +3h
+000066: move-exception v4
+000068: goto +5h
+00006a: sget-object v4, Lcom/vivo/connect/ConnectBase;->d Lcom/vivo/pcsuite/pcconnect/IPcShare;
+00006e: monitor-exit v1
+000070: return-object v4
+000072: monitor-exit v1
+000074: throw v4
+
+METHOD getScenceSync(Landroid/content/Context;)Lcom/vivo/connect/ScenceSync;
+000000: const-string v0, "getScenceSync:"
+000004: const-class v1, Lcom/vivo/connect/ConnectBase;
+000008: monitor-enter v1
+00000a: const-string v2, "Context must not be null"
+00000e: invoke-static v3, v2, Lcom/vivo/connect/utils/Preconditions;->checkNotNull(Ljava/lang/Object; Ljava/lang/Object;)Ljava/lang/Object;
+000014: new-instance v2, Ljava/lang/StringBuilder;
+000018: invoke-direct v2, v0, Ljava/lang/StringBuilder;-><init>(Ljava/lang/String;)V
+00001e: invoke-virtual v2, v3, Ljava/lang/StringBuilder;->append(Ljava/lang/Object;)Ljava/lang/StringBuilder;
+000024: invoke-virtual v2, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
+00002a: move-result-object v0
+00002c: const-string v2, "ConnectBase"
+000030: invoke-static v2, v0, Lcom/vivo/connect/logger/EasyLog;->i(Ljava/lang/String; Ljava/lang/String;)V
+000036: sget-object v0, Lcom/vivo/connect/ConnectBase;->c Lcom/vivo/connect/ScenceSync;
+00003a: if-nez v0, +00ch
+00003e: new-instance v0, Lcom/vivo/connect/sdk/f/g;
+000042: invoke-direct v0, v3, Lcom/vivo/connect/sdk/f/g;-><init>(Landroid/content/Context;)V
+000048: sput-object v0, Lcom/vivo/connect/ConnectBase;->c Lcom/vivo/connect/ScenceSync;
+00004c: goto +3h
+00004e: move-exception v3
+000050: goto +5h
+000052: sget-object v3, Lcom/vivo/connect/ConnectBase;->c Lcom/vivo/connect/ScenceSync;
+000056: monitor-exit v1
+000058: return-object v3
+00005a: monitor-exit v1
+00005c: throw v3

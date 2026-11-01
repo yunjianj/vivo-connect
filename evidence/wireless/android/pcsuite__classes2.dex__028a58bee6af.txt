@@ -1,0 +1,104 @@
+APK pcsuite/updateApk/pcsuite.apk
+DEX classes2.dex
+CLASS Lcom/vivo/pcsuite/util/n;
+SUPER Ljava/lang/Object;
+FIELDS
+a Z = None
+b Lcom/vivo/pcsuite/extscreen/model/protocol/rece/ExtScreenStart; = None
+
+METHOD onClick(Landroid/content/DialogInterface; I)V
+000000: if-eqz v7, +005h
+000004: invoke-interface v7, Landroid/content/DialogInterface;->dismiss()V
+00000a: new-instance v7, Lorg/json/JSONObject;
+00000e: invoke-direct v7, Lorg/json/JSONObject;-><init>()V
+000014: iget-boolean v8, v6, Lcom/vivo/pcsuite/util/n;->a Z
+000018: iget-object v6, v6, Lcom/vivo/pcsuite/util/n;->b Lcom/vivo/pcsuite/extscreen/model/protocol/rece/ExtScreenStart;
+00001c: const-string v0, "showConnectCenterExtScreenMutexDialog: e "
+000020: const-string v1, "DialogUtils"
+000024: const-string v2, "remount_control_state"
+000028: const/4 v3, 0
+00002a: const-string v4, "error_code"
+00002e: const-string v5, "res_start_extscreen:"
+000032: if-eqz v8, +067h
+000036: sget-object v8, Lcom/vivo/pcsuite/PcSuiteApplication;->I1 Lcom/vivo/pcsuite/PcSuiteApplication;
+00003a: invoke-static v8, v6, LC2/a;->f(Lcom/vivo/pcsuite/PcSuiteApplication; Lcom/vivo/pcsuite/extscreen/model/protocol/rece/ExtScreenStart;)V
+000040: invoke-virtual v7, v4, v3, Lorg/json/JSONObject;->put(Ljava/lang/String; I)Lorg/json/JSONObject;
+000046: invoke-virtual v6, Lcom/vivo/pcsuite/extscreen/model/protocol/rece/ExtScreenStart;->getRemountControlState()I
+00004c: move-result v8
+00004e: invoke-virtual v7, v2, v8, Lorg/json/JSONObject;->put(Ljava/lang/String; I)Lorg/json/JSONObject;
+000054: const-string v8, "phone_ext_screen_state"
+000058: invoke-virtual v6, Lcom/vivo/pcsuite/extscreen/model/protocol/rece/ExtScreenStart;->getPhoneExtScreenState()I
+00005e: move-result v2
+000060: invoke-virtual v7, v8, v2, Lorg/json/JSONObject;->put(Ljava/lang/String; I)Lorg/json/JSONObject;
+000066: const-string v8, "phone_pcsuite_cast_state"
+00006a: invoke-virtual v6, Lcom/vivo/pcsuite/extscreen/model/protocol/rece/ExtScreenStart;->getPhoneCastState()I
+000070: move-result v2
+000072: invoke-virtual v7, v8, v2, Lorg/json/JSONObject;->put(Ljava/lang/String; I)Lorg/json/JSONObject;
+000078: const-string v8, "phone_anywhere_control_state"
+00007c: invoke-virtual v6, Lcom/vivo/pcsuite/extscreen/model/protocol/rece/ExtScreenStart;->getPhoneAnyWhereControlState()I
+000082: move-result v2
+000084: invoke-virtual v7, v8, v2, Lorg/json/JSONObject;->put(Ljava/lang/String; I)Lorg/json/JSONObject;
+00008a: const-string v8, "pad_ext_screen_state"
+00008e: invoke-virtual v6, Lcom/vivo/pcsuite/extscreen/model/protocol/rece/ExtScreenStart;->getPadExtScreenState()I
+000094: move-result v2
+000096: invoke-virtual v7, v8, v2, Lorg/json/JSONObject;->put(Ljava/lang/String; I)Lorg/json/JSONObject;
+00009c: const-string v8, "pad_anywhere_control_state"
+0000a0: invoke-virtual v6, Lcom/vivo/pcsuite/extscreen/model/protocol/rece/ExtScreenStart;->getPadAnyWhereControlState()I
+0000a6: move-result v6
+0000a8: invoke-virtual v7, v8, v6, Lorg/json/JSONObject;->put(Ljava/lang/String; I)Lorg/json/JSONObject;
+0000ae: invoke-static Lr2/g;->f()Lr2/g;
+0000b4: move-result-object v6
+0000b6: new-instance v8, Ljava/lang/StringBuilder;
+0000ba: invoke-direct v8, v5, Ljava/lang/StringBuilder;-><init>(Ljava/lang/String;)V
+0000c0: invoke-static v7, LC2/a;->a(Ljava/lang/Object;)Ljava/lang/String;
+0000c6: move-result-object v7
+0000c8: invoke-virtual v8, v7, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+0000ce: invoke-virtual v8, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
+0000d4: move-result-object v7
+0000d6: invoke-virtual v6, v7, Lr2/g;->i(Ljava/lang/String;)V
+0000dc: return-void 
+0000de: move-exception v6
+0000e0: new-instance v7, Ljava/lang/StringBuilder;
+0000e4: invoke-direct v7, v0, Ljava/lang/StringBuilder;-><init>(Ljava/lang/String;)V
+0000ea: invoke-virtual v7, v6, Ljava/lang/StringBuilder;->append(Ljava/lang/Object;)Ljava/lang/StringBuilder;
+0000f0: invoke-virtual v7, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
+0000f6: move-result-object v6
+0000f8: invoke-static v1, v6, Lcom/vivo/connect/logger/EasyLog;->e(Ljava/lang/String; Ljava/lang/String;)V
+0000fe: goto +53h
+000100: sget-object v8, Lcom/vivo/pcsuite/PcSuiteApplication;->I1 Lcom/vivo/pcsuite/PcSuiteApplication;
+000104: invoke-static v8, v6, LC2/a;->f(Lcom/vivo/pcsuite/PcSuiteApplication; Lcom/vivo/pcsuite/extscreen/model/protocol/rece/ExtScreenStart;)V
+00010a: invoke-virtual v7, v4, v3, Lorg/json/JSONObject;->put(Ljava/lang/String; I)Lorg/json/JSONObject;
+000110: invoke-virtual v6, Lcom/vivo/pcsuite/extscreen/model/protocol/rece/ExtScreenStart;->getRemountControlState()I
+000116: move-result v8
+000118: invoke-virtual v7, v2, v8, Lorg/json/JSONObject;->put(Ljava/lang/String; I)Lorg/json/JSONObject;
+00011e: const-string v8, "ext_screen_state"
+000122: invoke-virtual v6, Lcom/vivo/pcsuite/extscreen/model/protocol/rece/ExtScreenStart;->getExtScreenState()I
+000128: move-result v2
+00012a: invoke-virtual v7, v8, v2, Lorg/json/JSONObject;->put(Ljava/lang/String; I)Lorg/json/JSONObject;
+000130: const-string v8, "pcsuite_cast_state"
+000134: invoke-virtual v6, Lcom/vivo/pcsuite/extscreen/model/protocol/rece/ExtScreenStart;->getCastState()I
+00013a: move-result v2
+00013c: invoke-virtual v7, v8, v2, Lorg/json/JSONObject;->put(Ljava/lang/String; I)Lorg/json/JSONObject;
+000142: const-string v8, "anywhere_control_state"
+000146: invoke-virtual v6, Lcom/vivo/pcsuite/extscreen/model/protocol/rece/ExtScreenStart;->getAnyWhereControlState()I
+00014c: move-result v6
+00014e: invoke-virtual v7, v8, v6, Lorg/json/JSONObject;->put(Ljava/lang/String; I)Lorg/json/JSONObject;
+000154: invoke-static Lr2/g;->f()Lr2/g;
+00015a: move-result-object v6
+00015c: new-instance v8, Ljava/lang/StringBuilder;
+000160: invoke-direct v8, v5, Ljava/lang/StringBuilder;-><init>(Ljava/lang/String;)V
+000166: invoke-static v7, LC2/a;->a(Ljava/lang/Object;)Ljava/lang/String;
+00016c: move-result-object v7
+00016e: invoke-virtual v8, v7, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+000174: invoke-virtual v8, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
+00017a: move-result-object v7
+00017c: invoke-virtual v6, v7, Lr2/g;->i(Ljava/lang/String;)V
+000182: return-void 
+000184: move-exception v6
+000186: new-instance v7, Ljava/lang/StringBuilder;
+00018a: invoke-direct v7, v0, Ljava/lang/StringBuilder;-><init>(Ljava/lang/String;)V
+000190: invoke-virtual v7, v6, Ljava/lang/StringBuilder;->append(Ljava/lang/Object;)Ljava/lang/StringBuilder;
+000196: invoke-virtual v7, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
+00019c: move-result-object v6
+00019e: invoke-static v1, v6, Lcom/vivo/connect/logger/EasyLog;->e(Ljava/lang/String; Ljava/lang/String;)V
+0001a4: return-void 

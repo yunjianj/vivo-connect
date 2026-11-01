@@ -1,0 +1,75 @@
+APK pcsuite/updateApk/pcsuite.apk
+DEX classes2.dex
+CLASS Lcom/vivo/pcsuite/connect/ConnectControlModel$5$2;
+SUPER Ljava/lang/Object;
+FIELDS
+a Lcom/vivo/pcsuite/connect/ConnectControlModel$5; = None
+
+METHOD <init>(Lcom/vivo/pcsuite/connect/ConnectControlModel$5;)V
+000000: invoke-direct v0, Ljava/lang/Object;-><init>()V
+000006: iput-object v1, v0, Lcom/vivo/pcsuite/connect/ConnectControlModel$5$2;->a Lcom/vivo/pcsuite/connect/ConnectControlModel$5;
+00000a: return-void 
+
+METHOD onStatus(Z Z)V
+000000: iget-object v8, v7, Lcom/vivo/pcsuite/connect/ConnectControlModel$5$2;->a Lcom/vivo/pcsuite/connect/ConnectControlModel$5;
+000004: iget-object v0, v8, Lcom/vivo/pcsuite/connect/ConnectControlModel$5;->e Ljava/lang/String;
+000008: iget-object v1, v8, Lcom/vivo/pcsuite/connect/ConnectControlModel$5;->f Ljava/lang/String;
+00000c: iget-object v2, v8, Lcom/vivo/pcsuite/connect/ConnectControlModel$5;->g Lcom/vivo/pcsuite/connect/ConnectControlModel;
+000010: invoke-virtual v2, Lcom/vivo/pcsuite/connect/ConnectControlModel;->removeDialogRunnable()V
+000016: const-string v3, "requestWithExtra agree new connect ble"
+00001a: const-string v4, "pcsuite_ConnectControlModel"
+00001e: invoke-static v4, v3, Lcom/vivo/connect/logger/EasyLog;->i(Ljava/lang/String; Ljava/lang/String;)V
+000024: iget v3, v8, Lcom/vivo/pcsuite/connect/ConnectControlModel$5;->c I
+000028: const/4 v5, 1
+00002a: if-ne v3, v5, +016h
+00002e: iget-boolean v3, v8, Lcom/vivo/pcsuite/connect/ConnectControlModel$5;->d Z
+000032: if-eqz v3, +012h
+000036: if-eqz v0, +010h
+00003a: invoke-virtual v0, Ljava/lang/String;->isEmpty()Z
+000040: move-result v3
+000042: if-nez v3, +00ah
+000046: sget-object v3, Lcom/vivo/pcsuite/PcSuiteApplication;->I1 Lcom/vivo/pcsuite/PcSuiteApplication;
+00004a: const-string v5, "pcSuite_info"
+00004e: const/4 v6, 0
+000050: invoke-static v3, v5, v6, v0, v6, LS5/f;->e(Lcom/vivo/pcsuite/PcSuiteApplication; Ljava/lang/String; I Ljava/lang/String; Z)V
+000056: if-eqz v9, +00bh
+00005a: invoke-static v1, Landroid/text/TextUtils;->isEmpty(Ljava/lang/CharSequence;)Z
+000060: move-result v0
+000062: if-nez v0, +005h
+000066: invoke-static v1, Lcom/vivo/pcsuite/util/j0;->i(Ljava/lang/String;)V
+00006c: iget-object v0, v8, Lcom/vivo/pcsuite/connect/ConnectControlModel$5;->a Ljava/lang/String;
+000070: iget-object v8, v8, Lcom/vivo/pcsuite/connect/ConnectControlModel$5;->b Ljava/lang/String;
+000074: invoke-static v2, v0, v1, v8, v9, Lcom/vivo/pcsuite/connect/ConnectControlModel;->g(Lcom/vivo/pcsuite/connect/ConnectControlModel; Ljava/lang/String; Ljava/lang/String; Ljava/lang/String; Z)V
+00007a: sget-object v8, Lcom/vivo/pcsuite/PcSuiteApplication;->I1 Lcom/vivo/pcsuite/PcSuiteApplication;
+00007e: const-string v0, "bluetooth"
+000082: invoke-virtual v8, v0, Landroid/content/Context;->getSystemService(Ljava/lang/String;)Ljava/lang/Object;
+000088: move-result-object v8
+00008a: check-cast v8, Landroid/bluetooth/BluetoothManager;
+00008e: if-eqz v8, +007h
+000092: invoke-virtual v8, Landroid/bluetooth/BluetoothManager;->getAdapter()Landroid/bluetooth/BluetoothAdapter;
+000098: move-result-object v8
+00009a: goto +2h
+00009c: const/4 v8, 0
+00009e: if-eqz v8, +01ch
+0000a2: invoke-virtual v8, Landroid/bluetooth/BluetoothAdapter;->isEnabled()Z
+0000a8: move-result v8
+0000aa: if-nez v8, +016h
+0000ae: const-string v8, "requestWithExtra new bluetooth closed"
+0000b2: invoke-static v4, v8, Lcom/vivo/connect/logger/EasyLog;->i(Ljava/lang/String; Ljava/lang/String;)V
+0000b8: invoke-static v2, Lcom/vivo/pcsuite/connect/ConnectControlModel;->e(Lcom/vivo/pcsuite/connect/ConnectControlModel;)Landroid/os/Handler;
+0000be: move-result-object v8
+0000c0: new-instance v9, Lcom/vivo/pcsuite/connect/ConnectControlModel$5$2$1;
+0000c4: invoke-direct v9, v7, Lcom/vivo/pcsuite/connect/ConnectControlModel$5$2$1;-><init>(Lcom/vivo/pcsuite/connect/ConnectControlModel$5$2;)V
+0000ca: const-wide/16 v0, 1000
+0000ce: invoke-virtual v8, v9, v0, v1, Landroid/os/Handler;->postDelayed(Ljava/lang/Runnable; J)Z
+0000d4: return-void 
+0000d6: const-string v7, "requestWithExtra bluetooth opened"
+0000da: invoke-static v4, v7, Lcom/vivo/connect/logger/EasyLog;->i(Ljava/lang/String; Ljava/lang/String;)V
+0000e0: const-string v7, "1"
+0000e4: if-eqz v9, +004h
+0000e8: move-object v8, v7
+0000ea: goto +3h
+0000ec: const-string v8, "0"
+0000f0: invoke-static v7, v8, Lcom/vivo/pcsuite/util/o0;->U(Ljava/lang/String; Ljava/lang/String;)V
+0000f6: invoke-virtual v2, Lcom/vivo/pcsuite/connect/ConnectControlModel;->agreeBle()V
+0000fc: return-void 

@@ -1,0 +1,59 @@
+APK pcsuite/updateApk/connbase.apk
+DEX classes.dex
+CLASS Lcom/vivo/connbase/c0/l0$a;
+SUPER Ljava/lang/Object;
+FIELDS
+a Lcom/vivo/connbase/c0/l0; = None
+
+METHOD <init>(Lcom/vivo/connbase/c0/l0;)V
+000000: iput-object v1, v0, Lcom/vivo/connbase/c0/l0$a;->a Lcom/vivo/connbase/c0/l0;
+000004: invoke-direct v0, Ljava/lang/Object;-><init>()V
+00000a: return-void 
+
+METHOD a(Landroid/bluetooth/BluetoothDevice; I)V
+000000: iget-object v0, v2, Lcom/vivo/connbase/c0/l0$a;->a Lcom/vivo/connbase/c0/l0;
+000004: invoke-static v0, Lcom/vivo/connbase/c0/l0;->a(Lcom/vivo/connbase/c0/l0;)Ljava/util/concurrent/ExecutorService;
+00000a: move-result-object v0
+00000c: new-instance v1, Lcom/vivo/connbase/c0/s;
+000010: invoke-direct v1, v2, v3, v4, Lcom/vivo/connbase/c0/s;-><init>(Lcom/vivo/connbase/c0/l0$a; Landroid/bluetooth/BluetoothDevice; I)V
+000016: invoke-interface v0, v1, Ljava/util/concurrent/ExecutorService;->execute(Ljava/lang/Runnable;)V
+00001c: return-void 
+
+METHOD b(Landroid/bluetooth/BluetoothDevice; I)V
+000000: new-instance v0, Ljava/lang/StringBuilder;
+000004: invoke-direct v0, Ljava/lang/StringBuilder;-><init>()V
+00000a: const-string v1, "onNotificationSentCompleted, device="
+00000e: invoke-virtual v0, v1, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+000014: invoke-virtual v0, v3, Ljava/lang/StringBuilder;->append(Ljava/lang/Object;)Ljava/lang/StringBuilder;
+00001a: const-string v3, ", status="
+00001e: invoke-virtual v0, v3, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+000024: invoke-virtual v0, v4, Ljava/lang/StringBuilder;->append(I)Ljava/lang/StringBuilder;
+00002a: invoke-virtual v0, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
+000030: move-result-object v3
+000032: const-string v4, "RxGattServerImpl"
+000036: invoke-static v4, v3, Lc/c/f/a/b;->k(Ljava/lang/String; Ljava/lang/String;)V
+00003c: iget-object v3, v2, Lcom/vivo/connbase/c0/l0$a;->a Lcom/vivo/connbase/c0/l0;
+000040: invoke-static v3, Lcom/vivo/connbase/c0/l0;->b(Lcom/vivo/connbase/c0/l0;)Ljava/util/concurrent/atomic/AtomicBoolean;
+000046: move-result-object v3
+000048: const/4 v0, 0
+00004a: invoke-virtual v3, v0, Ljava/util/concurrent/atomic/AtomicBoolean;->getAndSet(Z)Z
+000050: move-result v3
+000052: new-instance v0, Ljava/lang/StringBuilder;
+000056: invoke-direct v0, Ljava/lang/StringBuilder;-><init>()V
+00005c: const-string v1, "oldVal="
+000060: invoke-virtual v0, v1, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+000066: invoke-virtual v0, v3, Ljava/lang/StringBuilder;->append(Z)Ljava/lang/StringBuilder;
+00006c: const-string v3, ", newVal="
+000070: invoke-virtual v0, v3, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+000076: iget-object v3, v2, Lcom/vivo/connbase/c0/l0$a;->a Lcom/vivo/connbase/c0/l0;
+00007a: invoke-static v3, Lcom/vivo/connbase/c0/l0;->b(Lcom/vivo/connbase/c0/l0;)Ljava/util/concurrent/atomic/AtomicBoolean;
+000080: move-result-object v3
+000082: invoke-virtual v3, Ljava/util/concurrent/atomic/AtomicBoolean;->get()Z
+000088: move-result v3
+00008a: invoke-virtual v0, v3, Ljava/lang/StringBuilder;->append(Z)Ljava/lang/StringBuilder;
+000090: invoke-virtual v0, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
+000096: move-result-object v3
+000098: invoke-static v4, v3, Lc/c/f/a/b;->k(Ljava/lang/String; Ljava/lang/String;)V
+00009e: iget-object v3, v2, Lcom/vivo/connbase/c0/l0$a;->a Lcom/vivo/connbase/c0/l0;
+0000a2: invoke-static v3, Lcom/vivo/connbase/c0/l0;->c(Lcom/vivo/connbase/c0/l0;)V
+0000a8: return-void 

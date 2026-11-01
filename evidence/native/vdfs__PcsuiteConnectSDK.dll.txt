@@ -1,0 +1,403 @@
+
+/home/archuser/Projects/vivo_connect/pcsuite/vdfs/PcsuiteConnectSDK.dll:     file format pei-i386
+
+Characteristics 0x2102
+	executable
+	32 bit words
+	DLL
+
+Time/Date		Thu Sep 19 17:12:18 2024
+Magic			010b	(PE32)
+MajorLinkerVersion	14
+MinorLinkerVersion	29
+SizeOfCode		00039000
+SizeOfInitializedData	00014600
+SizeOfUninitializedData	00000000
+AddressOfEntryPoint	0003564b
+BaseOfCode		00001000
+BaseOfData		0003a000
+ImageBase		10000000
+SectionAlignment	00001000
+FileAlignment		00000200
+MajorOSystemVersion	6
+MinorOSystemVersion	0
+MajorImageVersion	0
+MinorImageVersion	0
+MajorSubsystemVersion	6
+MinorSubsystemVersion	0
+Win32Version		00000000
+SizeOfImage		00051000
+SizeOfHeaders		00000400
+CheckSum		0004fc57
+Subsystem		00000002	(Windows GUI)
+DllCharacteristics	00000140
+					DYNAMIC_BASE
+					NX_COMPAT
+SizeOfStackReserve	00100000
+SizeOfStackCommit	00001000
+SizeOfHeapReserve	00100000
+SizeOfHeapCommit	00001000
+LoaderFlags		00000000
+NumberOfRvaAndSizes	00000010
+
+The Data Directory
+Entry 0 00044bf0 00000520 Export Directory [.edata (or where ever we found it)]
+Entry 1 00045110 00000168 Import Directory [parts of .idata]
+Entry 2 0004c000 00000408 Resource Directory [.rsrc]
+Entry 3 00000000 00000000 Exception Directory [.pdata]
+Entry 4 0004c400 00002940 Security Directory
+Entry 5 0004d000 000031ac Base Relocation Directory [.reloc]
+Entry 6 0003e648 00000070 Debug Directory
+Entry 7 00000000 00000000 Description Directory
+Entry 8 00000000 00000000 Special Directory
+Entry 9 0003e780 00000018 Thread Storage Directory [.tls]
+Entry a 0003e6b8 00000040 Load Configuration Directory
+Entry b 00000000 00000000 Bound Import Directory
+Entry c 0003a000 00000318 Import Address Table Directory
+Entry d 00000000 00000000 Delay Import Directory
+Entry e 00000000 00000000 CLR Runtime Header
+Entry f 00000000 00000000 Reserved
+
+There is an import table in .rdata at 0x10045110
+
+The Import Tables (interpreted .rdata section contents)
+ vma:            Hint    Time      Forward  DLL       First
+                 Table   Stamp     Chain    Name      Thunk
+ 00045110	00045280 00000000 00000000 000456b8 0003a008
+
+	DLL Name: KERNEL32.dll
+	vma:     Ordinal  Hint  Member-Name  Bound-To
+	0003a008  <none>  0205  GetConsoleScreenBufferInfo
+	0003a00c  <none>  02d5  GetStdHandle
+	0003a010  <none>  01ff  GetConsoleMode
+	0003a014  <none>  021f  GetCurrentThreadId
+	0003a018  <none>  0504  SetConsoleTextAttribute
+	0003a01c  <none>  0602  WideCharToMultiByte
+	0003a020  <none>  0581  Sleep
+	0003a024  <none>  0243  GetFileAttributesA
+	0003a028  <none>  030b  GetTickCount64
+	0003a02c  <none>  060b  WriteConsoleA
+	0003a030  <none>  0616  WriteFile
+	0003a034  <none>  0235  GetDynamicTimeZoneInformation
+	0003a038  <none>  05d5  WTSGetActiveConsoleSessionId
+	0003a03c  <none>  021b  GetCurrentProcessId
+	0003a040  <none>  00ce  CreateFileW
+	0003a044  <none>  0245  GetFileAttributesExW
+	0003a048  <none>  0023  AreFileApisANSI
+	0003a04c  <none>  0089  CloseHandle
+	0003a050  <none>  0264  GetLastError
+	0003a054  <none>  024b  GetFileInformationByHandleEx
+	0003a058  <none>  03f3  MultiByteToWideChar
+	0003a05c  <none>  03d3  LocalFree
+	0003a060  <none>  01a9  FormatMessageA
+	0003a064  <none>  0134  EnterCriticalSection
+	0003a068  <none>  03c1  LeaveCriticalSection
+	0003a06c  <none>  0362  InitializeCriticalSectionAndSpinCount
+	0003a070  <none>  0113  DeleteCriticalSection
+	0003a074  <none>  0518  SetEvent
+	0003a078  <none>  04c8  ResetEvent
+	0003a07c  <none>  05dc  WaitForSingleObjectEx
+	0003a080  <none>  00c2  CreateEventW
+	0003a084  <none>  027b  GetModuleHandleW
+	0003a088  <none>  02b1  GetProcAddress
+	0003a08c  <none>  05b1  UnhandledExceptionFilter
+	0003a090  <none>  0571  SetUnhandledExceptionFilter
+	0003a094  <none>  021a  GetCurrentProcess
+	0003a098  <none>  0590  TerminateProcess
+	0003a09c  <none>  0389  IsProcessorFeaturePresent
+	0003a0a0  <none>  0382  IsDebuggerPresent
+	0003a0a4  <none>  044f  QueryPerformanceCounter
+	0003a0a8  <none>  02ec  GetSystemTimeAsFileTime
+	0003a0ac  <none>  0366  InitializeSListHead
+
+ 00045124	00045278 00000000 00000000 000456d6 0003a000
+
+	DLL Name: ADVAPI32.dll
+	vma:     Ordinal  Hint  Member-Name  Bound-To
+	0003a000  <none>  02c1  RevertToSelf
+
+ 00045138	00045450 00000000 00000000 0004572c 0003a1d8
+
+	DLL Name: SHELL32.dll
+	vma:     Ordinal  Hint  Member-Name  Bound-To
+	0003a1d8  <none>  016d  SHGetSpecialFolderPathW
+	0003a1dc  <none>  014f  SHGetFolderPathW
+	0003a1e0  <none>  016c  SHGetSpecialFolderPathA
+
+ 0004514c	0004532c 00000000 00000000 00045b04 0003a0b4
+
+	DLL Name: MSVCP140.dll
+	vma:     Ordinal  Hint  Member-Name  Bound-To
+	0003a0b4  <none>  054d  _Cnd_destroy_in_situ
+	0003a0b8  <none>  0274  ?_Throw_C_error@std@@YAXH@Z
+	0003a0bc  <none>  0585  _Mtx_lock
+	0003a0c0  <none>  054e  _Cnd_do_broadcast_at_thread_exit
+	0003a0c4  <none>  01f2  ?_Incref@facet@locale@std@@UAEXXZ
+	0003a0c8  <none>  028e  ?_Xlength_error@std@@YAXPBD@Z
+	0003a0cc  <none>  028f  ?_Xout_of_range@std@@YAXPBD@Z
+	0003a0d0  <none>  028c  ?_Xbad_function_call@std@@YAXXZ
+	0003a0d4  <none>  028b  ?_Xbad_alloc@std@@YAXXZ
+	0003a0d8  <none>  0581  _Mtx_destroy_in_situ
+	0003a0dc  <none>  0584  _Mtx_init_in_situ
+	0003a0e0  <none>  0589  _Mtx_unlock
+	0003a0e4  <none>  01c8  ?_Getcvt@_Locinfo@std@@QBE?AU_Cvtvec@@XZ
+	0003a0e8  <none>  0273  ?_Syserror_map@std@@YAPBDH@Z
+	0003a0ec  <none>  0285  ?_Winerror_map@std@@YAHH@Z
+	0003a0f0  <none>  05cc  _Xtime_get_ticks
+	0003a0f4  <none>  019e  ?_Decref@facet@locale@std@@UAEPAV_Facet_base@3@XZ
+	0003a0f8  <none>  020f  ?_Init@locale@std@@CAPAV_Locimp@12@_N@Z
+	0003a0fc  <none>  05b4  _Thrd_id
+	0003a100  <none>  00a4  ??1_Locinfo@std@@QAE@XZ
+	0003a104  <none>  00a5  ??1_Lockit@std@@QAE@XZ
+	0003a108  <none>  006c  ??0_Locinfo@std@@QAE@PBD@Z
+	0003a10c  <none>  006d  ??0_Lockit@std@@QAE@H@Z
+	0003a110  <none>  01e1  ?_Gettrue@_Locinfo@std@@QBEPBDXZ
+	0003a114  <none>  01cb  ?_Getfalse@_Locinfo@std@@QBEPBDXZ
+	0003a118  <none>  00ab  ??1facet@locale@std@@MAE@XZ
+	0003a11c  <none>  0075  ??0facet@locale@std@@IAE@I@Z
+	0003a120  <none>  01d5  ?_Getgloballocale@locale@std@@CAPAV_Locimp@12@XZ
+	0003a124  <none>  03e7  ?id@?$numpunct@D@std@@2V0locale@2@A
+	0003a128  <none>  0131  ??Bid@locale@std@@QAEIXZ
+	0003a12c  <none>  0275  ?_Throw_Cpp_error@std@@YAXH@Z
+	0003a130  <none>  05b5  _Thrd_join
+	0003a134  <none>  0552  _Cnd_signal
+
+ 00045160	000453b4 00000000 00000000 00045cda 0003a13c
+
+	DLL Name: PocoFoundation.dll
+	vma:     Ordinal  Hint  Member-Name  Bound-To
+	0003a13c  <none>  03a1  ??1Timespan@Poco@@QAE@XZ
+	0003a140  <none>  0257  ??0Timespan@Poco@@QAE@_J@Z
+	0003a144  <none>  0920  ?displayText@Exception@Poco@@QBE?AV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@XZ
+	0003a148  <none>  0e85  ?what@Exception@Poco@@UBEPBDXZ
+	0003a14c  <none>  02ec  ??1Exception@Poco@@UAE@XZ
+	0003a150  <none>  0de3  ?toString@UUID@Poco@@QBE?AV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@XZ
+	0003a154  <none>  0284  ??0UUIDGenerator@Poco@@QAE@XZ
+	0003a158  <none>  03af  ??1UUIDGenerator@Poco@@QAE@XZ
+	0003a15c  <none>  08d1  ?createRandom@UUIDGenerator@Poco@@QAE?AVUUID@2@XZ
+	0003a160  <none>  03ae  ??1UUID@Poco@@QAE@XZ
+
+ 00045174	0004549c 00000000 00000000 00045d02 0003a224
+
+	DLL Name: WTSAPI32.dll
+	vma:     Ordinal  Hint  Member-Name  Bound-To
+	0003a224  <none>  0029  WTSQueryUserToken
+
+ 00045188	000453e0 00000000 00000000 000463a8 0003a168
+
+	DLL Name: PocoNet.dll
+	vma:     Ordinal  Hint  Member-Name  Bound-To
+	0003a168  <none>  09c3  ?write@HTTPClientSession@Net@Poco@@MAEHPBD_J@Z
+	0003a16c  <none>  09db  pocoNetworkInitializer
+	0003a170  <none>  0052  ??0HTTPClientSession@Net@Poco@@QAE@ABV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@G@Z
+	0003a174  <none>  0076  ??0HTTPRequest@Net@Poco@@QAE@ABV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@00@Z
+	0003a178  <none>  0417  ?HTTP_GET@HTTPRequest@Net@Poco@@2V?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@B
+	0003a17c  <none>  01ec  ??1HTTPRequest@Net@Poco@@UAE@XZ
+	0003a180  <none>  0081  ??0HTTPResponse@Net@Poco@@QAE@XZ
+	0003a184  <none>  01ef  ??1HTTPResponse@Net@Poco@@UAE@XZ
+	0003a188  <none>  01da  ??1HTTPClientSession@Net@Poco@@UAE@XZ
+	0003a18c  <none>  0264  ??1WebSocket@Net@Poco@@UAE@XZ
+	0003a190  <none>  094f  ?shutdown@WebSocket@Net@Poco@@QAEXXZ
+	0003a194  <none>  087f  ?sendFrame@WebSocket@Net@Poco@@QAEHPBXHH@Z
+	0003a198  <none>  07eb  ?receiveFrame@WebSocket@Net@Poco@@QAEHPAXHAAH@Z
+	0003a19c  <none>  0564  ?close@Socket@Net@Poco@@QAEXXZ
+	0003a1a0  <none>  0915  ?setReceiveTimeout@Socket@Net@Poco@@QAEXABVTimespan@3@@Z
+	0003a1a4  <none>  079e  ?proxyAuthenticate@HTTPClientSession@Net@Poco@@MAEXAAVHTTPRequest@23@@Z
+	0003a1a8  <none>  072c  ?mustReconnect@HTTPClientSession@Net@Poco@@MBE_NXZ
+	0003a1ac  <none>  07ae  ?proxyRequestPrefix@HTTPClientSession@Net@Poco@@MBE?AV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@XZ
+	0003a1b0  <none>  0859  ?secure@HTTPClientSession@Net@Poco@@UBE_NXZ
+	0003a1b4  <none>  0787  ?peekResponse@HTTPClientSession@Net@Poco@@UAE_NAAVHTTPResponse@23@@Z
+	0003a1b8  <none>  07fe  ?receiveResponse@HTTPClientSession@Net@Poco@@UAEAAV?$basic_istream@DU?$char_traits@D@std@@@std@@AAVHTTPResponse@23@@Z
+	0003a1bc  <none>  088a  ?sendRequest@HTTPClientSession@Net@Poco@@UAEAAV?$basic_ostream@DU?$char_traits@D@std@@@std@@AAVHTTPRequest@23@@Z
+	0003a1c0  <none>  056b  ?connect@HTTPSession@Net@Poco@@MAEXABVSocketAddress@23@@Z
+	0003a1c4  <none>  01b2  ??0WebSocket@Net@Poco@@QAE@AAVHTTPClientSession@12@AAVHTTPRequest@12@AAVHTTPResponse@12@@Z
+	0003a1c8  <none>  07c5  ?read@HTTPSession@Net@Poco@@MAEHPAD_J@Z
+	0003a1cc  <none>  04b3  ?abort@HTTPSession@Net@Poco@@UAEXXZ
+	0003a1d0  <none>  07ea  ?receiveFrame@WebSocket@Net@Poco@@QAEHAAV?$Buffer@D@3@AAH@Z
+
+ 0004519c	00045460 00000000 00000000 000464a8 0003a1e8
+
+	DLL Name: VCRUNTIME140.dll
+	vma:     Ordinal  Hint  Member-Name  Bound-To
+	0003a1e8  <none>  003d  _purecall
+	0003a1ec  <none>  001c  __current_exception
+	0003a1f0  <none>  001d  __current_exception_context
+	0003a1f4  <none>  0022  __std_exception_destroy
+	0003a1f8  <none>  0048  memset
+	0003a1fc  <none>  0035  _except_handler4_common
+	0003a200  <none>  0046  memcpy
+	0003a204  <none>  0047  memmove
+	0003a208  <none>  0021  __std_exception_copy
+	0003a20c  <none>  0023  __std_terminate
+	0003a210  <none>  0010  __CxxFrameHandler3
+	0003a214  <none>  0001  _CxxThrowException
+	0003a218  <none>  0025  __std_type_info_destroy_list
+	0003a21c  <none>  0044  memchr
+
+ 000451b0	0004550c 00000000 00000000 0004679e 0003a294
+
+	DLL Name: api-ms-win-crt-runtime-l1-1-0.dll
+	vma:     Ordinal  Hint  Member-Name  Bound-To
+	0003a294  <none>  0035  _initialize_narrow_environment
+	0003a298  <none>  0039  _initterm_e
+	0003a29c  <none>  0038  _initterm
+	0003a2a0  <none>  003b  _invalid_parameter_noinfo_noreturn
+	0003a2a4  <none>  0017  _cexit
+	0003a2a8  <none>  0023  _errno
+	0003a2ac  <none>  001f  _crt_atexit
+	0003a2b0  <none>  0024  _execute_onexit_table
+	0003a2b4  <none>  003e  _register_onexit_function
+	0003a2b8  <none>  0036  _initialize_onexit_table
+	0003a2bc  <none>  006a  terminate
+	0003a2c0  <none>  0015  _beginthreadex
+	0003a2c4  <none>  0041  _seh_filter_dll
+	0003a2c8  <none>  0019  _configure_narrow_argv
+
+ 000451c4	000454e0 00000000 00000000 000467c0 0003a268
+
+	DLL Name: api-ms-win-crt-locale-l1-1-0.dll
+	vma:     Ordinal  Hint  Member-Name  Bound-To
+	0003a268  <none>  0000  ___lc_codepage_func
+	0003a26c  <none>  0012  localeconv
+
+ 000451d8	00045548 00000000 00000000 000467e2 0003a2d0
+
+	DLL Name: api-ms-win-crt-stdio-l1-1-0.dll
+	vma:     Ordinal  Hint  Member-Name  Bound-To
+	0003a2d0  <none>  0010  __stdio_common_vsscanf
+	0003a2d4  <none>  0000  __acrt_iob_func
+	0003a2d8  <none>  0003  __stdio_common_vfprintf
+	0003a2dc  <none>  000b  __stdio_common_vsnprintf_s
+	0003a2e0  <none>  008a  fwrite
+	0003a2e4  <none>  0074  fclose
+	0003a2e8  <none>  0031  _fsopen
+	0003a2ec  <none>  000d  __stdio_common_vsprintf
+	0003a2f0  <none>  0077  fflush
+
+ 000451ec	000454a4 00000000 00000000 00046802 0003a22c
+
+	DLL Name: api-ms-win-crt-convert-l1-1-0.dll
+	vma:     Ordinal  Hint  Member-Name  Bound-To
+	0003a22c  <none>  005e  strtod
+	0003a230  <none>  0063  strtoll
+	0003a234  <none>  0065  strtoull
+
+ 00045200	000454cc 00000000 00000000 00046824 0003a254
+
+	DLL Name: api-ms-win-crt-heap-l1-1-0.dll
+	vma:     Ordinal  Hint  Member-Name  Bound-To
+	0003a254  <none>  0019  malloc
+	0003a258  <none>  0008  _callnewh
+	0003a25c  <none>  0017  calloc
+	0003a260  <none>  0018  free
+
+ 00045214	000454b4 00000000 00000000 00046844 0003a23c
+
+	DLL Name: api-ms-win-crt-filesystem-l1-1-0.dll
+	vma:     Ordinal  Hint  Member-Name  Bound-To
+	0003a23c  <none>  003f  remove
+	0003a240  <none>  0019  _mkdir
+	0003a244  <none>  000d  _findnext64i32
+	0003a248  <none>  0005  _findclose
+	0003a24c  <none>  0009  _findfirst64i32
+
+ 00045228	000454ec 00000000 00000000 0004686a 0003a274
+
+	DLL Name: api-ms-win-crt-math-l1-1-0.dll
+	vma:     Ordinal  Hint  Member-Name  Bound-To
+	0003a274  <none>  0035  _dclass
+	0003a278  <none>  005e  _ldsign
+	0003a27c  <none>  004a  _fdsign
+	0003a280  <none>  0042  _fdclass
+	0003a284  <none>  0058  _ldclass
+	0003a288  <none>  00a2  ceil
+	0003a28c  <none>  003c  _dsign
+
+ 0004523c	00045578 00000000 00000000 0004688a 0003a300
+
+	DLL Name: api-ms-win-crt-time-l1-1-0.dll
+	vma:     Ordinal  Hint  Member-Name  Bound-To
+	0003a300  <none>  0011  _difftime64
+	0003a304  <none>  0028  _mktime64
+	0003a308  <none>  0046  strftime
+	0003a30c  <none>  0024  _localtime64_s
+	0003a310  <none>  0020  _gmtime64_s
+
+ 00045250	00045570 00000000 00000000 000468aa 0003a2f8
+
+	DLL Name: api-ms-win-crt-string-l1-1-0.dll
+	vma:     Ordinal  Hint  Member-Name  Bound-To
+	0003a2f8  <none>  0068  isdigit
+
+ 00045264	00000000 00000000 00000000 00000000 00000000
+
+There is an export table in .rdata at 0x10044bf0
+
+The Export Tables (interpreted .rdata section contents)
+
+Export Flags 			0
+Time/Date stamp 		ffffffff
+Major/Minor 			0/0
+Name 				00044cfe PcsuiteConnectSDK.dll
+Ordinal Base 			1
+Number in:
+	Export Address Table 		00000017
+	[Name Pointer/Ordinal] Table	00000017
+Table Addresses
+	Export Address Table 		00044c18
+	Name Pointer Table 		00044c74
+	Ordinal Table 			00044cd0
+
+Export Address Table -- Ordinal Base 1
+	          Ordinal  Address  Type
+	[   0] +base[   1] 0002c480 Export RVA
+	[   1] +base[   2] 0002c470 Export RVA
+	[   2] +base[   3] 00002430 Export RVA
+	[   3] +base[   4] 00002430 Export RVA
+	[   4] +base[   5] 00002420 Export RVA
+	[   5] +base[   6] 0002c460 Export RVA
+	[   6] +base[   7] 00002440 Export RVA
+	[   7] +base[   8] 00002440 Export RVA
+	[   8] +base[   9] 00002440 Export RVA
+	[   9] +base[  10] 00002440 Export RVA
+	[  10] +base[  11] 00002440 Export RVA
+	[  11] +base[  12] 0003e30c Export RVA
+	[  12] +base[  13] 0003b5a0 Export RVA
+	[  13] +base[  14] 00033cb0 Export RVA
+	[  14] +base[  15] 000023f0 Export RVA
+	[  15] +base[  16] 000023f0 Export RVA
+	[  16] +base[  17] 00002400 Export RVA
+	[  17] +base[  18] 000023f0 Export RVA
+	[  18] +base[  19] 000023f0 Export RVA
+	[  19] +base[  20] 000023f0 Export RVA
+	[  20] +base[  21] 00002410 Export RVA
+	[  21] +base[  22] 00002410 Export RVA
+	[  22] +base[  23] 000023f0 Export RVA
+
+[Ordinal/Name Pointer] Table -- Ordinal Base 1
+	          Ordinal   Hint Name
+	[   0] +base[   1]  0000 ??0IPcsuiteConnector@@QAE@ABV0@@Z
+	[   1] +base[   2]  0001 ??0IPcsuiteConnector@@QAE@XZ
+	[   2] +base[   3]  0002 ??0PcsuiteMessageHandlerBase@@QAE@$$QAV0@@Z
+	[   3] +base[   4]  0003 ??0PcsuiteMessageHandlerBase@@QAE@ABV0@@Z
+	[   4] +base[   5]  0004 ??0PcsuiteMessageHandlerBase@@QAE@XZ
+	[   5] +base[   6]  0005 ??1IPcsuiteConnector@@UAE@XZ
+	[   6] +base[   7]  0006 ??4IPcsuiteConnector@@QAEAAV0@ABV0@@Z
+	[   7] +base[   8]  0007 ??4PcsuiteConnectorClassFactory@@QAEAAV0@$$QAV0@@Z
+	[   8] +base[   9]  0008 ??4PcsuiteConnectorClassFactory@@QAEAAV0@ABV0@@Z
+	[   9] +base[  10]  0009 ??4PcsuiteMessageHandlerBase@@QAEAAV0@$$QAV0@@Z
+	[  10] +base[  11]  000a ??4PcsuiteMessageHandlerBase@@QAEAAV0@ABV0@@Z
+	[  11] +base[  12]  000b ??_7IPcsuiteConnector@@6B@
+	[  12] +base[  13]  000c ??_7PcsuiteMessageHandlerBase@@6B@
+	[  13] +base[  14]  000d ?createPcsuiteConnector@PcsuiteConnectorClassFactory@@SAPAVIPcsuiteConnector@@XZ
+	[  14] +base[  15]  000e ?onAccountChange@PcsuiteMessageHandlerBase@@UAEXXZ
+	[  15] +base[  16]  000f ?onClose@PcsuiteMessageHandlerBase@@UAEXXZ
+	[  16] +base[  17]  0010 ?onCommand@PcsuiteMessageHandlerBase@@UAEXPBD0PAPAD@Z
+	[  17] +base[  18]  0011 ?onConnected@PcsuiteMessageHandlerBase@@UAEXXZ
+	[  18] +base[  19]  0012 ?onCustomMessage@PcsuiteMessageHandlerBase@@UAEXXZ
+	[  19] +base[  20]  0013 ?onError@PcsuiteMessageHandlerBase@@UAEXXZ
+	[  20] +base[  21]  0014 ?onForward@PcsuiteMessageHandlerBase@@UAEXPBD0@Z
+	[  21] +base[  22]  0015 ?onMessage@PcsuiteMessageHandlerBase@@UAEXPBD0@Z
+	[  22] +base[  23]  0016 ?onMin@PcsuiteMessageHandlerBase@@UAEXXZ
+
+

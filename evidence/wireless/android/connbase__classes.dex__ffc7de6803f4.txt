@@ -1,0 +1,100 @@
+APK pcsuite/updateApk/connbase.apk
+DEX classes.dex
+CLASS Lcom/vivo/connbase/nfc/e;
+SUPER Ljava/lang/Object;
+FIELDS
+f Ljava/lang/String; = 'DisconnectManager'
+g I = 3600000
+h Lcom/vivo/connbase/nfc/e; = None
+a Landroid/os/Handler; = None
+b Landroid/os/HandlerThread; = None
+c Landroid/app/AlarmManager; = None
+d Landroid/app/AlarmManager$OnAlarmListener; = None
+e Landroid/app/AlarmManager$OnAlarmListener; = None
+
+METHOD <init>()V
+000000: invoke-direct v2, Ljava/lang/Object;-><init>()V
+000006: new-instance v0, Lcom/vivo/connbase/nfc/e$a;
+00000a: invoke-direct v0, v2, Lcom/vivo/connbase/nfc/e$a;-><init>(Lcom/vivo/connbase/nfc/e;)V
+000010: iput-object v0, v2, Lcom/vivo/connbase/nfc/e;->e Landroid/app/AlarmManager$OnAlarmListener;
+000014: new-instance v0, Landroid/os/HandlerThread;
+000018: const-string v1, "DisConnectWorker"
+00001c: invoke-direct v0, v1, Landroid/os/HandlerThread;-><init>(Ljava/lang/String;)V
+000022: iput-object v0, v2, Lcom/vivo/connbase/nfc/e;->b Landroid/os/HandlerThread;
+000026: invoke-virtual v0, Landroid/os/HandlerThread;->start()V
+00002c: new-instance v0, Landroid/os/Handler;
+000030: iget-object v1, v2, Lcom/vivo/connbase/nfc/e;->b Landroid/os/HandlerThread;
+000034: invoke-virtual v1, Landroid/os/HandlerThread;->getLooper()Landroid/os/Looper;
+00003a: move-result-object v1
+00003c: invoke-direct v0, v1, Landroid/os/Handler;-><init>(Landroid/os/Looper;)V
+000042: iput-object v0, v2, Lcom/vivo/connbase/nfc/e;->a Landroid/os/Handler;
+000046: invoke-static Lcom/vivo/connbase/App;->m()Lcom/vivo/connbase/App;
+00004c: move-result-object v0
+00004e: const-string v1, "alarm"
+000052: invoke-virtual v0, v1, Landroid/app/Application;->getSystemService(Ljava/lang/String;)Ljava/lang/Object;
+000058: move-result-object v0
+00005a: check-cast v0, Landroid/app/AlarmManager;
+00005e: iput-object v0, v2, Lcom/vivo/connbase/nfc/e;->c Landroid/app/AlarmManager;
+000062: return-void 
+
+METHOD a(Lcom/vivo/connbase/nfc/e;)Landroid/app/AlarmManager$OnAlarmListener;
+000000: iget-object v0, v0, Lcom/vivo/connbase/nfc/e;->d Landroid/app/AlarmManager$OnAlarmListener;
+000004: return-object v0
+
+METHOD c()Lcom/vivo/connbase/nfc/e;
+000000: sget-object v0, Lcom/vivo/connbase/nfc/e;->h Lcom/vivo/connbase/nfc/e;
+000004: if-nez v0, +015h
+000008: const-class v0, Lcom/vivo/connbase/nfc/e;
+00000c: monitor-enter v0
+00000e: sget-object v1, Lcom/vivo/connbase/nfc/e;->h Lcom/vivo/connbase/nfc/e;
+000012: if-nez v1, +009h
+000016: new-instance v1, Lcom/vivo/connbase/nfc/e;
+00001a: invoke-direct v1, Lcom/vivo/connbase/nfc/e;-><init>()V
+000020: sput-object v1, Lcom/vivo/connbase/nfc/e;->h Lcom/vivo/connbase/nfc/e;
+000024: monitor-exit v0
+000026: goto +4h
+000028: move-exception v1
+00002a: monitor-exit v0
+00002c: throw v1
+00002e: sget-object v0, Lcom/vivo/connbase/nfc/e;->h Lcom/vivo/connbase/nfc/e;
+000032: return-object v0
+
+METHOD a()V
+000000: const-string v0, "DisconnectManager"
+000004: const-string v1, "cancel"
+000008: invoke-static v0, v1, Lc/c/f/a/b;->k(Ljava/lang/String; Ljava/lang/String;)V
+00000e: const/4 v0, 0
+000010: iput-object v0, v2, Lcom/vivo/connbase/nfc/e;->d Landroid/app/AlarmManager$OnAlarmListener;
+000014: iget-object v0, v2, Lcom/vivo/connbase/nfc/e;->c Landroid/app/AlarmManager;
+000018: iget-object v1, v2, Lcom/vivo/connbase/nfc/e;->e Landroid/app/AlarmManager$OnAlarmListener;
+00001c: invoke-virtual v0, v1, Landroid/app/AlarmManager;->cancel(Landroid/app/AlarmManager$OnAlarmListener;)V
+000022: return-void 
+
+METHOD a(Landroid/app/AlarmManager$OnAlarmListener;)V
+000000: const-string v0, "DisconnectManager"
+000004: const-string v1, "setOrUpdateExact"
+000008: invoke-static v0, v1, Lc/c/f/a/b;->k(Ljava/lang/String; Ljava/lang/String;)V
+00000e: iput-object v10, v9, Lcom/vivo/connbase/nfc/e;->d Landroid/app/AlarmManager$OnAlarmListener;
+000012: iget-object v2, v9, Lcom/vivo/connbase/nfc/e;->c Landroid/app/AlarmManager;
+000016: invoke-static Landroid/os/SystemClock;->elapsedRealtime()J
+00001c: move-result-wide v0
+00001e: const-wide/32 v3, 3600000
+000024: add-long v4, v0, v3
+000028: iget-object v7, v9, Lcom/vivo/connbase/nfc/e;->e Landroid/app/AlarmManager$OnAlarmListener;
+00002c: iget-object v8, v9, Lcom/vivo/connbase/nfc/e;->a Landroid/os/Handler;
+000030: const/4 v3, 2
+000032: const-string v6, "DisconnectManager"
+000036: invoke-virtual/range v2 ... v8, Landroid/app/AlarmManager;->setExact(I J Ljava/lang/String; Landroid/app/AlarmManager$OnAlarmListener; Landroid/os/Handler;)V
+00003c: return-void 
+
+METHOD b()V
+000000: const-string v0, "DisconnectManager"
+000004: const-string v1, "disConnect"
+000008: invoke-static v0, v1, Lc/c/f/a/b;->k(Ljava/lang/String; Ljava/lang/String;)V
+00000e: iget-object v0, v2, Lcom/vivo/connbase/nfc/e;->c Landroid/app/AlarmManager;
+000012: iget-object v1, v2, Lcom/vivo/connbase/nfc/e;->e Landroid/app/AlarmManager$OnAlarmListener;
+000016: invoke-virtual v0, v1, Landroid/app/AlarmManager;->cancel(Landroid/app/AlarmManager$OnAlarmListener;)V
+00001c: iget-object v0, v2, Lcom/vivo/connbase/nfc/e;->d Landroid/app/AlarmManager$OnAlarmListener;
+000020: if-eqz v0, +005h
+000024: invoke-interface v0, Landroid/app/AlarmManager$OnAlarmListener;->onAlarm()V
+00002a: return-void 

@@ -1,0 +1,23 @@
+APK pcsuite/updateApk/pcsuite.apk
+DEX classes2.dex
+CLASS Lcom/vivo/pcsuite/connect/ConnectControlModel$CloudConnectRunnable$1;
+SUPER Ljava/lang/Object;
+FIELDS
+a Lcom/vivo/pcsuite/connect/ConnectControlModel$CloudConnectRunnable; = None
+
+METHOD <init>(Lcom/vivo/pcsuite/connect/ConnectControlModel$CloudConnectRunnable;)V
+000000: invoke-direct v0, Ljava/lang/Object;-><init>()V
+000006: iput-object v1, v0, Lcom/vivo/pcsuite/connect/ConnectControlModel$CloudConnectRunnable$1;->a Lcom/vivo/pcsuite/connect/ConnectControlModel$CloudConnectRunnable;
+00000a: return-void 
+
+METHOD onQueryTrafficResult(J J J)V
+000000: iget-object v0, v0, Lcom/vivo/pcsuite/connect/ConnectControlModel$CloudConnectRunnable$1;->a Lcom/vivo/pcsuite/connect/ConnectControlModel$CloudConnectRunnable;
+000004: invoke-static v0, Lcom/vivo/pcsuite/connect/ConnectControlModel$CloudConnectRunnable;->a(Lcom/vivo/pcsuite/connect/ConnectControlModel$CloudConnectRunnable;)Landroid/app/Activity;
+00000a: move-result-object v0
+00000c: invoke-static Lcom/vivo/pcsuite/util/o0;->R()V
+000012: move-wide v3, v1
+000014: new-instance v1, Lcom/vivo/pcsuite/connect/ConnectControlModel$13;
+000018: move-object v2, v0
+00001a: invoke-direct/range v1 ... v6, Lcom/vivo/pcsuite/connect/ConnectControlModel$13;-><init>(Landroid/app/Activity; J J)V
+000020: invoke-static v1, Lcom/vivo/castsdk/sdk/common/utils/ThreadPoolUtils;->postOnMainThread(Ljava/lang/Runnable;)V
+000026: return-void 

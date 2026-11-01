@@ -1,0 +1,110 @@
+APK pcsuite/updateApk/pcsuite.apk
+DEX classes.dex
+CLASS Lcom/vivo/castsdk/sdk/common/gson/Session;
+SUPER Ljava/lang/Object;
+FIELDS
+bcWhiteList Ljava/lang/String; = None
+deviceInfo Lcom/vivo/castsdk/sdk/common/gson/DeviceInfo; = None
+deviceModel Ljava/lang/String; = None
+host Ljava/lang/String; = None
+isLock Z = None
+is_support_hardware Z = None
+mimeType Ljava/lang/String; = None
+mimeType2 Ljava/lang/String; = None
+port I = None
+sessionId I = None
+videoHeight I = None
+videoWidth I = None
+withAudio Z = None
+
+METHOD toString()Ljava/lang/String;
+000000: new-instance v0, Ljava/lang/StringBuilder;
+000004: const-string v1, "Session{sessionId="
+000008: invoke-direct v0, v1, Ljava/lang/StringBuilder;-><init>(Ljava/lang/String;)V
+00000e: iget v1, v3, Lcom/vivo/castsdk/sdk/common/gson/Session;->sessionId I
+000012: invoke-virtual v0, v1, Ljava/lang/StringBuilder;->append(I)Ljava/lang/StringBuilder;
+000018: const-string v1, ", deviceModel='"
+00001c: invoke-virtual v0, v1, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+000022: iget-object v1, v3, Lcom/vivo/castsdk/sdk/common/gson/Session;->deviceModel Ljava/lang/String;
+000026: invoke-virtual v0, v1, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+00002c: const-string v1, "', host='"
+000030: invoke-virtual v0, v1, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+000036: iget-object v1, v3, Lcom/vivo/castsdk/sdk/common/gson/Session;->host Ljava/lang/String;
+00003a: invoke-virtual v0, v1, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+000040: const-string v1, "', port="
+000044: invoke-virtual v0, v1, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+00004a: iget v1, v3, Lcom/vivo/castsdk/sdk/common/gson/Session;->port I
+00004e: invoke-virtual v0, v1, Ljava/lang/StringBuilder;->append(I)Ljava/lang/StringBuilder;
+000054: const-string v1, ", videoWidth="
+000058: invoke-virtual v0, v1, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+00005e: iget v1, v3, Lcom/vivo/castsdk/sdk/common/gson/Session;->videoWidth I
+000062: invoke-virtual v0, v1, Ljava/lang/StringBuilder;->append(I)Ljava/lang/StringBuilder;
+000068: const-string v1, ", videoHeight="
+00006c: invoke-virtual v0, v1, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+000072: iget v1, v3, Lcom/vivo/castsdk/sdk/common/gson/Session;->videoHeight I
+000076: invoke-virtual v0, v1, Ljava/lang/StringBuilder;->append(I)Ljava/lang/StringBuilder;
+00007c: const-string v1, ", withAudio="
+000080: invoke-virtual v0, v1, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+000086: iget-boolean v1, v3, Lcom/vivo/castsdk/sdk/common/gson/Session;->withAudio Z
+00008a: invoke-virtual v0, v1, Ljava/lang/StringBuilder;->append(Z)Ljava/lang/StringBuilder;
+000090: const-string v1, ", mimeType='"
+000094: invoke-virtual v0, v1, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+00009a: iget-object v1, v3, Lcom/vivo/castsdk/sdk/common/gson/Session;->mimeType Ljava/lang/String;
+00009e: invoke-virtual v0, v1, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+0000a4: const-string v1, "', mimeType2='"
+0000a8: invoke-virtual v0, v1, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+0000ae: iget-object v1, v3, Lcom/vivo/castsdk/sdk/common/gson/Session;->mimeType2 Ljava/lang/String;
+0000b2: invoke-virtual v0, v1, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+0000b8: const-string v1, "', deviceInfo="
+0000bc: invoke-virtual v0, v1, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+0000c2: iget-object v1, v3, Lcom/vivo/castsdk/sdk/common/gson/Session;->deviceInfo Lcom/vivo/castsdk/sdk/common/gson/DeviceInfo;
+0000c6: invoke-virtual v0, v1, Ljava/lang/StringBuilder;->append(Ljava/lang/Object;)Ljava/lang/StringBuilder;
+0000cc: const-string v1, ", bcWhiteList='"
+0000d0: invoke-virtual v0, v1, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+0000d6: iget-object v1, v3, Lcom/vivo/castsdk/sdk/common/gson/Session;->bcWhiteList Ljava/lang/String;
+0000da: invoke-virtual v0, v1, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+0000e0: const-string v1, "', is_support_hardware="
+0000e4: invoke-virtual v0, v1, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+0000ea: iget-boolean v1, v3, Lcom/vivo/castsdk/sdk/common/gson/Session;->is_support_hardware Z
+0000ee: invoke-virtual v0, v1, Ljava/lang/StringBuilder;->append(Z)Ljava/lang/StringBuilder;
+0000f4: const-string v1, ", isLock="
+0000f8: invoke-virtual v0, v1, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+0000fe: iget-boolean v1, v3, Lcom/vivo/castsdk/sdk/common/gson/Session;->isLock Z
+000102: invoke-virtual v0, v1, Ljava/lang/StringBuilder;->append(Z)Ljava/lang/StringBuilder;
+000108: const-string v1, ", isSupportBgCast="
+00010c: invoke-virtual v0, v1, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+000112: iget-object v1, v3, Lcom/vivo/castsdk/sdk/common/gson/Session;->deviceInfo Lcom/vivo/castsdk/sdk/common/gson/DeviceInfo;
+000116: const-string v2, ""
+00011a: if-eqz v1, +00bh
+00011e: invoke-virtual v1, Lcom/vivo/castsdk/sdk/common/gson/DeviceInfo;->isPhoneSupportBgCast()Z
+000124: move-result v1
+000126: invoke-static v1, Ljava/lang/Boolean;->valueOf(Z)Ljava/lang/Boolean;
+00012c: move-result-object v1
+00012e: goto +2h
+000130: move-object v1, v2
+000132: invoke-virtual v0, v1, Ljava/lang/StringBuilder;->append(Ljava/lang/Object;)Ljava/lang/StringBuilder;
+000138: const-string v1, ", isSupportPcMode="
+00013c: invoke-virtual v0, v1, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+000142: iget-object v1, v3, Lcom/vivo/castsdk/sdk/common/gson/Session;->deviceInfo Lcom/vivo/castsdk/sdk/common/gson/DeviceInfo;
+000146: if-eqz v1, +00bh
+00014a: invoke-virtual v1, Lcom/vivo/castsdk/sdk/common/gson/DeviceInfo;->isSupportPcMode()Z
+000150: move-result v1
+000152: invoke-static v1, Ljava/lang/Boolean;->valueOf(Z)Ljava/lang/Boolean;
+000158: move-result-object v1
+00015a: goto +2h
+00015c: move-object v1, v2
+00015e: invoke-virtual v0, v1, Ljava/lang/StringBuilder;->append(Ljava/lang/Object;)Ljava/lang/StringBuilder;
+000164: const-string v1, ", getSupportBgCastCount="
+000168: invoke-virtual v0, v1, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+00016e: iget-object v3, v3, Lcom/vivo/castsdk/sdk/common/gson/Session;->deviceInfo Lcom/vivo/castsdk/sdk/common/gson/DeviceInfo;
+000172: if-eqz v3, +00ah
+000176: invoke-virtual v3, Lcom/vivo/castsdk/sdk/common/gson/DeviceInfo;->getPhoneSupportBgCastCount()I
+00017c: move-result v3
+00017e: invoke-static v3, Ljava/lang/Integer;->valueOf(I)Ljava/lang/Integer;
+000184: move-result-object v2
+000186: invoke-virtual v0, v2, Ljava/lang/StringBuilder;->append(Ljava/lang/Object;)Ljava/lang/StringBuilder;
+00018c: const/16 v3, 125
+000190: invoke-virtual v0, v3, Ljava/lang/StringBuilder;->append(C)Ljava/lang/StringBuilder;
+000196: invoke-virtual v0, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
+00019c: move-result-object v3
+00019e: return-object v3

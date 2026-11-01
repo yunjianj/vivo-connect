@@ -1,0 +1,50 @@
+APK pcsuite/updateApk/connbase.apk
+DEX classes2.dex
+CLASS Lcom/vivo/pcsuite/pcconnect/ble/BluetoothLeService$e;
+SUPER Landroid/bluetooth/le/AdvertiseCallback;
+FIELDS
+a Z = None
+b Landroid/util/ArrayMap; = None
+c Lcom/vivo/pcsuite/pcconnect/ble/BluetoothLeService; = None
+
+METHOD <init>(Lcom/vivo/pcsuite/pcconnect/ble/BluetoothLeService; Z Landroid/util/ArrayMap;)V
+000000: iput-object v1, v0, Lcom/vivo/pcsuite/pcconnect/ble/BluetoothLeService$e;->c Lcom/vivo/pcsuite/pcconnect/ble/BluetoothLeService;
+000004: iput-boolean v2, v0, Lcom/vivo/pcsuite/pcconnect/ble/BluetoothLeService$e;->a Z
+000008: iput-object v3, v0, Lcom/vivo/pcsuite/pcconnect/ble/BluetoothLeService$e;->b Landroid/util/ArrayMap;
+00000c: invoke-direct v0, Landroid/bluetooth/le/AdvertiseCallback;-><init>()V
+000012: return-void 
+
+METHOD onStartFailure(I)V
+000000: new-instance v0, Ljava/lang/StringBuilder;
+000004: invoke-direct v0, Ljava/lang/StringBuilder;-><init>()V
+00000a: const-string v1, "Start vivo advertising failed with error code: "
+00000e: invoke-virtual v0, v1, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+000014: invoke-virtual v0, v3, Ljava/lang/StringBuilder;->append(I)Ljava/lang/StringBuilder;
+00001a: invoke-virtual v0, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
+000020: move-result-object v3
+000022: const-string v0, "pcsuite_BluetoothLeService"
+000026: invoke-static v0, v3, Lc/c/f/a/b;->g(Ljava/lang/String; Ljava/lang/String;)V
+00002c: iget-object v3, v2, Lcom/vivo/pcsuite/pcconnect/ble/BluetoothLeService$e;->c Lcom/vivo/pcsuite/pcconnect/ble/BluetoothLeService;
+000030: const/4 v0, 1
+000032: const/4 v1, 3
+000034: invoke-static v3, v0, v1, Lcom/vivo/pcsuite/pcconnect/ble/BluetoothLeService;->a(Lcom/vivo/pcsuite/pcconnect/ble/BluetoothLeService; I I)V
+00003a: return-void 
+
+METHOD onStartSuccess(Landroid/bluetooth/le/AdvertiseSettings;)V
+000000: new-instance v0, Ljava/lang/StringBuilder;
+000004: invoke-direct v0, Ljava/lang/StringBuilder;-><init>()V
+00000a: const-string v1, "Start vivo advertising success with setting: "
+00000e: invoke-virtual v0, v1, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+000014: invoke-virtual v0, v3, Ljava/lang/StringBuilder;->append(Ljava/lang/Object;)Ljava/lang/StringBuilder;
+00001a: invoke-virtual v0, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
+000020: move-result-object v3
+000022: const-string v0, "pcsuite_BluetoothLeService"
+000026: invoke-static v0, v3, Lc/c/f/a/b;->k(Ljava/lang/String; Ljava/lang/String;)V
+00002c: iget-boolean v3, v2, Lcom/vivo/pcsuite/pcconnect/ble/BluetoothLeService$e;->a Z
+000030: if-eqz v3, +00dh
+000034: iget-object v3, v2, Lcom/vivo/pcsuite/pcconnect/ble/BluetoothLeService$e;->c Lcom/vivo/pcsuite/pcconnect/ble/BluetoothLeService;
+000038: iget-object v0, v2, Lcom/vivo/pcsuite/pcconnect/ble/BluetoothLeService$e;->b Landroid/util/ArrayMap;
+00003c: invoke-static v3, Lcom/vivo/pcsuite/pcconnect/ble/BluetoothLeService;->c(Lcom/vivo/pcsuite/pcconnect/ble/BluetoothLeService;)Landroid/bluetooth/le/AdvertiseCallback;
+000042: move-result-object v1
+000044: invoke-static v3, v0, v1, Lcom/vivo/pcsuite/pcconnect/ble/BluetoothLeService;->a(Lcom/vivo/pcsuite/pcconnect/ble/BluetoothLeService; Landroid/util/ArrayMap; Landroid/bluetooth/le/AdvertiseCallback;)V
+00004a: return-void 

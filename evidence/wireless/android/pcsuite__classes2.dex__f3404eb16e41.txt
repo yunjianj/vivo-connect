@@ -1,0 +1,19 @@
+APK pcsuite/updateApk/pcsuite.apk
+DEX classes2.dex
+CLASS Lcom/vivo/connect/sdk/f/c$v;
+SUPER Landroid/os/Handler;
+FIELDS
+a Lcom/vivo/connect/sdk/f/c; = None
+
+METHOD <init>(Lcom/vivo/connect/sdk/f/c; Landroid/os/Looper;)V
+000000: iput-object v1, v0, Lcom/vivo/connect/sdk/f/c$v;->a Lcom/vivo/connect/sdk/f/c;
+000004: invoke-direct v0, v2, Landroid/os/Handler;-><init>(Landroid/os/Looper;)V
+00000a: return-void 
+
+METHOD handleMessage(Landroid/os/Message;)V
+000000: invoke-super v0, v1, Landroid/os/Handler;->handleMessage(Landroid/os/Message;)V
+000006: invoke-virtual v1, Landroid/os/Message;->getData()Landroid/os/Bundle;
+00000c: move-result-object v0
+00000e: const-string v1, "res"
+000012: invoke-virtual v0, v1, Landroid/os/BaseBundle;->getInt(Ljava/lang/String;)I
+000018: return-void 

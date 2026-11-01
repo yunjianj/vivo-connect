@@ -1,0 +1,27 @@
+APK pcsuite/updateApk/pcsuite.apk
+DEX classes2.dex
+CLASS Lcom/vivo/pcsuite/connect/a;
+SUPER Ljava/lang/Object;
+FIELDS
+a Lcom/vivo/pcsuite/connect/ConnectControlModel$1; = None
+
+METHOD <init>(Lcom/vivo/pcsuite/connect/ConnectControlModel$1;)V
+000000: invoke-direct v0, Ljava/lang/Object;-><init>()V
+000006: iput-object v1, v0, Lcom/vivo/pcsuite/connect/a;->a Lcom/vivo/pcsuite/connect/ConnectControlModel$1;
+00000a: return-void 
+
+METHOD onResult(Z)V
+000000: iget-object v2, v2, Lcom/vivo/pcsuite/connect/a;->a Lcom/vivo/pcsuite/connect/ConnectControlModel$1;
+000004: invoke-virtual v2, Ljava/lang/Object;->getClass()Ljava/lang/Class;
+00000a: new-instance v0, Ljava/lang/StringBuilder;
+00000e: const-string v1, "openAuthorization:"
+000012: invoke-direct v0, v1, Ljava/lang/StringBuilder;-><init>(Ljava/lang/String;)V
+000018: invoke-virtual v0, v3, Ljava/lang/StringBuilder;->append(Z)Ljava/lang/StringBuilder;
+00001e: invoke-virtual v0, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
+000024: move-result-object v0
+000026: const-string v1, "pcsuite_ConnectControlModel"
+00002a: invoke-static v1, v0, Lcom/vivo/connect/logger/EasyLog;->i(Ljava/lang/String; Ljava/lang/String;)V
+000030: if-eqz v3, +007h
+000034: iget-object v2, v2, Lcom/vivo/pcsuite/connect/ConnectControlModel$1;->a Lcom/vivo/pcsuite/connect/ConnectControlModel;
+000038: invoke-virtual v2, Lcom/vivo/pcsuite/connect/ConnectControlModel;->initPcOtherShare()V
+00003e: return-void 

@@ -1,0 +1,161 @@
+APK pcsuite/updateApk/connbase.apk
+DEX classes.dex
+CLASS Lcom/vivo/connbase/connect/f;
+SUPER Ljava/lang/Object;
+FIELDS
+h Ljava/lang/String; = 'ConnectTimeoutManagerImplTAG'
+i J = 30000
+a Landroid/app/AlarmManager; = None
+b Ljava/lang/Object; = None
+c Landroid/os/HandlerThread; = None
+d Landroid/os/Handler; = None
+e Lcom/vivo/connbase/connect/d; = None
+f Lcom/vivo/connbase/h0/a; = None
+g Lcom/vivo/connbase/connect/f$c; = None
+
+METHOD <init>()V
+000000: invoke-direct v2, Ljava/lang/Object;-><init>()V
+000006: new-instance v0, Ljava/lang/Object;
+00000a: invoke-direct v0, Ljava/lang/Object;-><init>()V
+000010: iput-object v0, v2, Lcom/vivo/connbase/connect/f;->b Ljava/lang/Object;
+000014: invoke-static Lcom/vivo/connbase/App;->m()Lcom/vivo/connbase/App;
+00001a: move-result-object v0
+00001c: invoke-virtual v0, Lcom/vivo/connbase/App;->b()Lcom/vivo/connbase/connect/d;
+000022: move-result-object v0
+000024: iput-object v0, v2, Lcom/vivo/connbase/connect/f;->e Lcom/vivo/connbase/connect/d;
+000028: invoke-static Lcom/vivo/connbase/App;->m()Lcom/vivo/connbase/App;
+00002e: move-result-object v0
+000030: invoke-virtual v0, Lcom/vivo/connbase/App;->e()Lcom/vivo/connbase/h0/a;
+000036: move-result-object v0
+000038: iput-object v0, v2, Lcom/vivo/connbase/connect/f;->f Lcom/vivo/connbase/h0/a;
+00003c: new-instance v0, Landroid/os/HandlerThread;
+000040: const-string v1, "timeoutHandlerThread"
+000044: invoke-direct v0, v1, Landroid/os/HandlerThread;-><init>(Ljava/lang/String;)V
+00004a: iput-object v0, v2, Lcom/vivo/connbase/connect/f;->c Landroid/os/HandlerThread;
+00004e: invoke-virtual v0, Landroid/os/HandlerThread;->start()V
+000054: new-instance v0, Landroid/os/Handler;
+000058: iget-object v1, v2, Lcom/vivo/connbase/connect/f;->c Landroid/os/HandlerThread;
+00005c: invoke-virtual v1, Landroid/os/HandlerThread;->getLooper()Landroid/os/Looper;
+000062: move-result-object v1
+000064: invoke-direct v0, v1, Landroid/os/Handler;-><init>(Landroid/os/Looper;)V
+00006a: iput-object v0, v2, Lcom/vivo/connbase/connect/f;->d Landroid/os/Handler;
+00006e: return-void 
+
+METHOD <init>(Lcom/vivo/connbase/connect/f$a;)V
+000000: invoke-direct v0, Lcom/vivo/connbase/connect/f;-><init>()V
+000006: return-void 
+
+METHOD a(Lcom/vivo/connbase/connect/f; Lcom/vivo/connbase/connect/f$c;)Lcom/vivo/connbase/connect/f$c;
+000000: iput-object v1, v0, Lcom/vivo/connbase/connect/f;->g Lcom/vivo/connbase/connect/f$c;
+000004: return-object v1
+
+METHOD a(Lcom/vivo/connbase/connect/f;)Ljava/lang/Object;
+000000: iget-object v0, v0, Lcom/vivo/connbase/connect/f;->b Ljava/lang/Object;
+000004: return-object v0
+
+METHOD b(Lcom/vivo/connbase/connect/f;)Lcom/vivo/connbase/connect/d;
+000000: iget-object v0, v0, Lcom/vivo/connbase/connect/f;->e Lcom/vivo/connbase/connect/d;
+000004: return-object v0
+
+METHOD b()Lcom/vivo/connbase/connect/f;
+000000: invoke-static Lcom/vivo/connbase/connect/f$d;->a()Lcom/vivo/connbase/connect/f;
+000006: move-result-object v0
+000008: return-object v0
+
+METHOD c(Lcom/vivo/connbase/connect/f;)Lcom/vivo/connbase/h0/a;
+000000: iget-object v0, v0, Lcom/vivo/connbase/connect/f;->f Lcom/vivo/connbase/h0/a;
+000004: return-object v0
+
+METHOD a()V
+000000: new-instance v0, Ljava/lang/StringBuilder;
+000004: invoke-direct v0, Ljava/lang/StringBuilder;-><init>()V
+00000a: const-string v1, "cancelConnectTimeoutObservation, mAlarmListener:"
+00000e: invoke-virtual v0, v1, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+000014: iget-object v1, v4, Lcom/vivo/connbase/connect/f;->g Lcom/vivo/connbase/connect/f$c;
+000018: invoke-virtual v0, v1, Ljava/lang/StringBuilder;->append(Ljava/lang/Object;)Ljava/lang/StringBuilder;
+00001e: invoke-virtual v0, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
+000024: move-result-object v0
+000026: const-string v1, "ConnectTimeoutManagerImplTAG"
+00002a: invoke-static v1, v0, Lc/c/f/a/b;->k(Ljava/lang/String; Ljava/lang/String;)V
+000030: iget-object v0, v4, Lcom/vivo/connbase/connect/f;->g Lcom/vivo/connbase/connect/f$c;
+000034: if-nez v0, +00ah
+000038: const-string v0, "ConnectTimeoutManagerImplTAG"
+00003c: const-string v1, "mAlarmListener is null, do nothing."
+000040: invoke-static v0, v1, Lc/c/f/a/b;->k(Ljava/lang/String; Ljava/lang/String;)V
+000046: return-void 
+000048: iget-object v0, v4, Lcom/vivo/connbase/connect/f;->b Ljava/lang/Object;
+00004c: monitor-enter v0
+00004e: iget-object v1, v4, Lcom/vivo/connbase/connect/f;->g Lcom/vivo/connbase/connect/f$c;
+000052: if-eqz v1, +040h
+000056: const-string v1, "ConnectTimeoutManagerImplTAG"
+00005a: new-instance v2, Ljava/lang/StringBuilder;
+00005e: invoke-direct v2, Ljava/lang/StringBuilder;-><init>()V
+000064: const-string v3, "cancel alarmListerner:"
+000068: invoke-virtual v2, v3, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+00006e: iget-object v3, v4, Lcom/vivo/connbase/connect/f;->a Landroid/app/AlarmManager;
+000072: invoke-virtual v2, v3, Ljava/lang/StringBuilder;->append(Ljava/lang/Object;)Ljava/lang/StringBuilder;
+000078: const-string v3, ", sd:"
+00007c: invoke-virtual v2, v3, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+000082: iget-object v3, v4, Lcom/vivo/connbase/connect/f;->g Lcom/vivo/connbase/connect/f$c;
+000086: invoke-virtual v3, Lcom/vivo/connbase/connect/f$c;->b()Ljava/lang/String;
+00008c: move-result-object v3
+00008e: invoke-virtual v2, v3, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+000094: const-string v3, ", dd:"
+000098: invoke-virtual v2, v3, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+00009e: iget-object v3, v4, Lcom/vivo/connbase/connect/f;->g Lcom/vivo/connbase/connect/f$c;
+0000a2: invoke-virtual v3, Lcom/vivo/connbase/connect/f$c;->a()Ljava/lang/String;
+0000a8: move-result-object v3
+0000aa: invoke-virtual v2, v3, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+0000b0: invoke-virtual v2, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
+0000b6: move-result-object v2
+0000b8: invoke-static v1, v2, Lc/c/f/a/b;->k(Ljava/lang/String; Ljava/lang/String;)V
+0000be: iget-object v1, v4, Lcom/vivo/connbase/connect/f;->a Landroid/app/AlarmManager;
+0000c2: iget-object v2, v4, Lcom/vivo/connbase/connect/f;->g Lcom/vivo/connbase/connect/f$c;
+0000c6: invoke-virtual v1, v2, Landroid/app/AlarmManager;->cancel(Landroid/app/AlarmManager$OnAlarmListener;)V
+0000cc: const/4 v1, 0
+0000ce: iput-object v1, v4, Lcom/vivo/connbase/connect/f;->g Lcom/vivo/connbase/connect/f$c;
+0000d2: monitor-exit v0
+0000d4: return-void 
+0000d6: move-exception v1
+0000d8: monitor-exit v0
+0000da: throw v1
+
+METHOD a(Ljava/lang/String; Ljava/lang/String; Lcom/vivo/connbase/connect/f$b;)V
+000000: new-instance v0, Ljava/lang/StringBuilder;
+000004: invoke-direct v0, Ljava/lang/StringBuilder;-><init>()V
+00000a: const-string v1, "postConnectTimeoutObservation, sd:"
+00000e: invoke-virtual v0, v1, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+000014: invoke-virtual v0, v9, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+00001a: const-string v1, ", dd:"
+00001e: invoke-virtual v0, v1, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+000024: invoke-virtual v0, v10, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+00002a: const-string v1, ", listener:"
+00002e: invoke-virtual v0, v1, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+000034: invoke-virtual v0, v11, Ljava/lang/StringBuilder;->append(Ljava/lang/Object;)Ljava/lang/StringBuilder;
+00003a: invoke-virtual v0, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
+000040: move-result-object v0
+000042: const-string v1, "ConnectTimeoutManagerImplTAG"
+000046: invoke-static v1, v0, Lc/c/f/a/b;->k(Ljava/lang/String; Ljava/lang/String;)V
+00004c: iget-object v0, v8, Lcom/vivo/connbase/connect/f;->a Landroid/app/AlarmManager;
+000050: if-nez v0, +010h
+000054: invoke-static Lcom/vivo/connbase/App;->m()Lcom/vivo/connbase/App;
+00005a: move-result-object v0
+00005c: const-string v1, "alarm"
+000060: invoke-virtual v0, v1, Landroid/app/Application;->getSystemService(Ljava/lang/String;)Ljava/lang/Object;
+000066: move-result-object v0
+000068: check-cast v0, Landroid/app/AlarmManager;
+00006c: iput-object v0, v8, Lcom/vivo/connbase/connect/f;->a Landroid/app/AlarmManager;
+000070: new-instance v0, Lcom/vivo/connbase/connect/f$c;
+000074: invoke-direct v0, v8, v9, v10, v11, Lcom/vivo/connbase/connect/f$c;-><init>(Lcom/vivo/connbase/connect/f; Ljava/lang/String; Ljava/lang/String; Lcom/vivo/connbase/connect/f$b;)V
+00007a: iput-object v0, v8, Lcom/vivo/connbase/connect/f;->g Lcom/vivo/connbase/connect/f$c;
+00007e: iget-object v1, v8, Lcom/vivo/connbase/connect/f;->a Landroid/app/AlarmManager;
+000082: const/4 v2, 2
+000084: invoke-static Landroid/os/SystemClock;->elapsedRealtime()J
+00008a: move-result-wide v9
+00008c: const-wide/16 v3, 30000
+000090: add-long/2addr v3, v9
+000092: iget-object v6, v8, Lcom/vivo/connbase/connect/f;->g Lcom/vivo/connbase/connect/f$c;
+000096: iget-object v7, v8, Lcom/vivo/connbase/connect/f;->d Landroid/os/Handler;
+00009a: const-string v5, "connectTimeout"
+00009e: invoke-virtual/range v1 ... v7, Landroid/app/AlarmManager;->setExact(I J Ljava/lang/String; Landroid/app/AlarmManager$OnAlarmListener; Landroid/os/Handler;)V
+0000a4: return-void 

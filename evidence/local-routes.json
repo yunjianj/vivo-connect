@@ -1,0 +1,582 @@
+[
+  {
+    "port": 9199,
+    "transport": "http",
+    "path": "/",
+    "name": "rootRoute",
+    "line": 64,
+    "source": "evidence/main-modules/239.js",
+    "handler": "rootRoute(e) {\n            return a.default.oldHandler(e.paramsStr);\n        }",
+    "httpMethod": "not constrained by router; choose by query/body semantics"
+  },
+  {
+    "port": 9199,
+    "transport": "http",
+    "path": "/checkServerStatus",
+    "name": "checkServerStatus",
+    "line": 67,
+    "source": "evidence/main-modules/239.js",
+    "handler": "checkServerStatus(e) {\n            return global.__log.info(\"[RequestHandlers][checkServerStatus] params: \" + JSON.stringify(e)), \n            new Promise(t => {\n                try {\n                    let n = \"\";\n                    \"/checkServerStatus?deviceType=phone\" == e.queryStr ? n = \"phone\" : \"/checkServerStatus?deviceType=pad\" == e.queryStr ? n = \"pad\" : t({\n                        code: s.RES_CODE.SUCCESS,\n                        data: n\n                    });\n                    const r = o.default.getInstance().getWebContent();\n                    if (r) {\n                        r.send(i.ConnectionRendererEvent.GET_CONNECT_STATUS, {\n                            deviceType: n\n                        });\n                        const e = setTimeout(() => {\n                            c.ipcMain.removeAllListeners(i.ConnectionRendererEvent.GET_CONNECT_STATUS), t({\n                                code: s.RES_CODE.TIME_OUT,\n                                data: \"get connect status timeout\"\n                            });\n                        }, 5e3);\n                        c.ipcMain.once(i.ConnectionRendererEvent.GET_CONNECT_STATUS, (n, r) => {\n                            clearTimeout(e);\n                            const i = \"nearby\" === r.connectType || \"cloud\" === r.connectType ? 1 : 0;\n                            t({\n                                code: s.RES_CODE.SUCCESS,\n                                data: \"ok\",\n                                connectStatus: i\n                            });\n                        });\n                    } else global.__log.info(\"[RequestHandlers][nfcConection] webContent not found\"), \n                    t({\n                        code: s.RES_CODE.WEB_CONTENT_NOT_FOUND,\n                        data: \"webContent not found\"\n                    });\n                } catch (e) {\n                    global.__log.info(\"[RequestHandlers][nfcConection] err: \" + e), t({\n                        code: s.RES_CODE.FAILED,\n                        data: e\n                    });\n                }\n            });\n        }",
+    "httpMethod": "not constrained by router; choose by query/body semantics"
+  },
+  {
+    "port": 9199,
+    "transport": "http",
+    "path": "/notifyConnection",
+    "name": "notifyConnection",
+    "line": 176,
+    "source": "evidence/main-modules/239.js",
+    "handler": "notifyConnection(e, n, a) {\n            var l;\n            return r.__awaiter(this, void 0, void 0, function*() {\n                global.__log.info(\"[RequestHandlers][notifyConnection] params: \" + JSON.stringify(e));\n                try {\n                    const n = t.parseParams(e.queryStr);\n                    let r = [];\n                    if (n.phoneIp) r = n.phoneIp.split(\";\"), r = r.filter(e => !!e); else {\n                        const e = a.socket.remoteAddress || \"\", t = (null === (l = e.match(/([\\s\\S]*)(?<!\\d)(\\d{1,3}\\.\\d{1,3}\\.\\d{1,3}\\.\\d{1,3})/)) || void 0 === l ? void 0 : l[2]) || \"\";\n                        r.push(t);\n                    }\n                    if (!/^\\d{1,3}\\.\\d{1,3}\\.\\d{1,3}\\.\\d{1,3}$/.test(r[0])) return global.__log.info(\"[RequestHandlers][notifyConnection] not found phone ip, ip = \" + r[0]), \n                    {\n                        code: s.RES_CODE.NOT_FOUND_IP,\n                        data: \"not found phone ip\"\n                    };\n                    if (\"1\" != n.isWifiP2P) try {\n                        yield p.default.getInstance().pingIp(r[0], 2900);\n                    } catch (e) {\n                        return global.__log.info(\"[RequestHandlers][notifyConnection] ping ip fail err: \" + e), \n                        {\n                            code: s.RES_CODE.PING_FAIL,\n                            data: \"ping fail\"\n                        };\n                    }\n                    const c = o.default.getInstance().getWebContent();\n                    if (!c) return global.__log.info(\"[RequestHandlers][notifyConnection] webContent not found\"), \n                    {\n                        code: s.RES_CODE.WEB_CONTENT_NOT_FOUND,\n                        data: \"webContent not found\"\n                    };\n                    null == c || c.send(i.ConnectionRendererEvent.PHONE_QRCODE_REQEUST, Object.assign(Object.assign({}, n), {\n                        phoneIp: r\n                    }));\n                } catch (e) {\n                    return global.__log.info(\"[RequestHandlers][notifyConnection] err: \" + e), {\n                        code: s.RES_CODE.FAILED,\n                        data: e\n                    };\n                }\n                return {\n                    code: s.RES_CODE.SUCCESS,\n                    data: \"ok\"\n                };\n            });\n        }",
+    "httpMethod": "not constrained by router; choose by query/body semantics"
+  },
+  {
+    "port": 9199,
+    "transport": "http",
+    "path": "/queryAll",
+    "name": "bleQueryAll",
+    "line": 325,
+    "source": "evidence/main-modules/239.js",
+    "handler": "bleQueryAll(e) {\n            try {\n                const t = JSON.parse(e.paramsStr), n = o.default.getInstance().getWebContent();\n                return n ? (null == n || n.send(i.ConnectionRendererEvent.BLE_DEVICES_UPDATE, {\n                    devices: Array.isArray(t) ? t : []\n                }), {\n                    code: s.RES_CODE.SUCCESS,\n                    data: \"ok\"\n                }) : (global.__log.info(\"[RequestHandlers][bleQueryAll] webContent not found\"), \n                {\n                    code: s.RES_CODE.WEB_CONTENT_NOT_FOUND,\n                    data: \"webContent not found\"\n                });\n            } catch (e) {\n                return global.__log.info(\"[RequestHandlers][bleQueryAll] err: \" + e), {\n                    code: s.RES_CODE.FAILED,\n                    data: e\n                };\n            }\n        }",
+    "httpMethod": "not constrained by router; choose by query/body semantics"
+  },
+  {
+    "port": 9199,
+    "transport": "http",
+    "path": "/SSDPQueryAll",
+    "name": "networkQueryAll",
+    "line": 345,
+    "source": "evidence/main-modules/239.js",
+    "handler": "networkQueryAll(e) {\n            try {\n                const t = JSON.parse(e.paramsStr), n = o.default.getInstance().getWebContent();\n                return n ? (null == n || n.send(i.ConnectionRendererEvent.WLAN_DEVICES_UPDATE, {\n                    devices: Array.isArray(t) ? t : []\n                }), {\n                    code: s.RES_CODE.SUCCESS,\n                    data: \"ok\"\n                }) : (global.__log.info(\"[RequestHandlers][networkQueryAll] webContent not found\"), \n                {\n                    code: s.RES_CODE.WEB_CONTENT_NOT_FOUND,\n                    data: \"webContent not found\"\n                });\n            } catch (e) {\n                return global.__log.info(\"[RequestHandlers][networkQueryAll] err: \" + e), {\n                    code: s.RES_CODE.FAILED,\n                    data: e\n                };\n            }\n        }",
+    "httpMethod": "not constrained by router; choose by query/body semantics"
+  },
+  {
+    "port": 9199,
+    "transport": "http",
+    "path": "/isConnectBusy",
+    "name": "isConnectBusy",
+    "line": 365,
+    "source": "evidence/main-modules/239.js",
+    "handler": "isConnectBusy(e) {\n            return global.__log.info(\"[RequestHandlers][isConnectBusy] params: \" + JSON.stringify(e)), \n            new Promise(n => {\n                try {\n                    const r = t.parseParams(e.queryStr), a = o.default.getInstance().getWebContent();\n                    if (a) {\n                        null == a || a.send(i.ConnectionRendererEvent.GET_CONNECT_STATUS, {\n                            deviceType: r.deviceType || \"phone\"\n                        });\n                        const e = setTimeout(() => {\n                            c.ipcMain.removeAllListeners(i.ConnectionRendererEvent.GET_CONNECT_STATUS), n({\n                                code: s.RES_CODE.TIME_OUT,\n                                data: \"get connect status timeout\"\n                            });\n                        }, 5e3);\n                        c.ipcMain.once(i.ConnectionRendererEvent.GET_CONNECT_STATUS, (t, r) => {\n                            global.__log.info(\"[RequestHandlers][isConnectBusy] isConnectBusy \" + JSON.stringify(r)), \n                            clearTimeout(e), n({\n                                code: s.RES_CODE.SUCCESS,\n                                data: r\n                            });\n                        });\n                    } else global.__log.info(\"[RequestHandlers][networkQueryAll] webContent not found\"), \n                    n({\n                        code: s.RES_CODE.WEB_CONTENT_NOT_FOUND,\n                        data: \"webContent not found\"\n                    });\n                } catch (e) {\n                    global.__log.info(\"[RequestHandlers][networkQueryAll] err: \" + e), n({\n                        code: s.RES_CODE.FAILED,\n                        data: e\n                    });\n                }\n            });\n        }",
+    "httpMethod": "not constrained by router; choose by query/body semantics"
+  },
+  {
+    "port": 9199,
+    "transport": "http",
+    "path": "/nfcConection",
+    "name": "nfcConection",
+    "line": 126,
+    "source": "evidence/main-modules/239.js",
+    "handler": "nfcConection(e) {\n            return global.__log.info(\"[RequestHandlers][nfcConection] params: \" + JSON.stringify(e)), \n            new Promise(t => {\n                try {\n                    const n = JSON.parse(e.paramsStr), r = o.default.getInstance().getWebContent();\n                    if (r) {\n                        r.send(i.ConnectionRendererEvent.GET_CONNECT_STATUS, {\n                            deviceType: n.deviceType || \"phone\"\n                        });\n                        const e = setTimeout(() => {\n                            c.ipcMain.removeAllListeners(i.ConnectionRendererEvent.GET_CONNECT_STATUS), t({\n                                code: s.RES_CODE.TIME_OUT,\n                                data: \"get connect status timeout\"\n                            });\n                        }, 5e3);\n                        c.ipcMain.once(i.ConnectionRendererEvent.GET_CONNECT_STATUS, (o, a) => {\n                            if (clearTimeout(e), null == a ? void 0 : a.isConnectBusy) t({\n                                code: s.RES_CODE.CONNECT_BUSY,\n                                data: \"connect busy\"\n                            }); else {\n                                const e = {\n                                    hostnameFromService: (null == n ? void 0 : n.deviceIp) || \"\",\n                                    nameFromService: (null == n ? void 0 : n.deviceName) || \"\",\n                                    isUsbFromService: !1,\n                                    connSeq: (null == n ? void 0 : n.iSeqNo) || \"\",\n                                    connectFlag: (null == n ? void 0 : n.ConnectFlag) || \"\",\n                                    deviceId: (null == n ? void 0 : n.addr) || \"\",\n                                    isAutoConnect: \"true\" === (null == n ? void 0 : n.thisPhoneAutoConnect) || !0 === (null == n ? void 0 : n.thisPhoneAutoConnect),\n                                    vivoAccount: (null == n ? void 0 : n.vivoAccount) || \"\",\n                                    deviceType: null == n ? void 0 : n.deviceType\n                                };\n                                r.send(i.ConnectionRendererEvent.ON_CONNECT_REQEUST, e), t({\n                                    code: s.RES_CODE.SUCCESS,\n                                    data: a\n                                });\n                            }\n                        });\n                    } else global.__log.info(\"[RequestHandlers][nfcConection] webContent not found\"), \n                    t({\n                        code: s.RES_CODE.WEB_CONTENT_NOT_FOUND,\n                        data: \"webContent not found\"\n                    });\n                } catch (e) {\n                    global.__log.info(\"[RequestHandlers][nfcConection] err: \" + e), t({\n                        code: s.RES_CODE.FAILED,\n                        data: e\n                    });\n                }\n            });\n        }",
+    "httpMethod": "not constrained by router; choose by query/body semantics"
+  },
+  {
+    "port": 9199,
+    "transport": "http",
+    "path": "/buryPoint",
+    "name": "buryPoint",
+    "line": 527,
+    "source": "evidence/main-modules/239.js",
+    "handler": "buryPoint(e) {\n            try {\n                let t;\n                try {\n                    t = JSON.parse(e.paramsStr);\n                } catch (e) {\n                    return {\n                        code: s.RES_CODE.FAILED,\n                        data: \"parameter parsing error\"\n                    };\n                }\n                if (!Array.isArray(t)) return {\n                    code: s.RES_CODE.FAILED,\n                    data: \"parameter type error\"\n                };\n                const n = o.default.getInstance().getWebContent();\n                return n ? (null == n || n.send(i.ConnectionRendererEvent.APP_BURY_POINT, t), {\n                    code: s.RES_CODE.SUCCESS,\n                    data: \"ok\"\n                }) : (global.__log.info(\"[RequestHandlers][buryPoint] webContent not found\"), {\n                    code: s.RES_CODE.WEB_CONTENT_NOT_FOUND,\n                    data: \"webContent not found\"\n                });\n            } catch (e) {\n                return global.__log.info(\"[RequestHandlers][buryPoint] err: \" + e), {\n                    code: s.RES_CODE.FAILED,\n                    data: \"unknown error\"\n                };\n            }\n        }",
+    "httpMethod": "not constrained by router; choose by query/body semantics"
+  },
+  {
+    "port": 9199,
+    "transport": "http",
+    "path": "/batchBuryPoint",
+    "name": "batchBuryPoint",
+    "line": 557,
+    "source": "evidence/main-modules/239.js",
+    "handler": "batchBuryPoint(e) {\n            var t, n;\n            global.__log.info(\"[RequestHandlers][batchBuryPoint] data: \" + (null === (t = null == e ? void 0 : e.paramsStr) || void 0 === t ? void 0 : t.length));\n            try {\n                let t;\n                try {\n                    t = null === (n = JSON.parse(e.paramsStr)) || void 0 === n ? void 0 : n.map(e => e.params);\n                } catch (e) {\n                    return {\n                        code: s.RES_CODE.FAILED,\n                        data: \"parameter parsing error\"\n                    };\n                }\n                if (!Array.isArray(t)) return {\n                    code: s.RES_CODE.FAILED,\n                    data: \"parameter type error\"\n                };\n                const r = e.paramsStr || \"\";\n                if (this.batchBuryPointTimers.has(r)) {\n                    global.__log.info(\"[RequestHandlers][batchBuryPoint] same data, debounced\");\n                    const e = this.batchBuryPointTimers.get(r);\n                    return clearTimeout(e), this.batchBuryPointTimers.set(r, setTimeout(() => {\n                        this.batchBuryPointTimers.delete(r);\n                    }, 1e3)), {\n                        code: s.RES_CODE.SUCCESS,\n                        data: \"ok\"\n                    };\n                }\n                this.batchBuryPointTimers.set(r, setTimeout(() => {\n                    this.batchBuryPointTimers.delete(r);\n                }, 1e3));\n                const a = o.default.getInstance().getWebContent();\n                return a ? (null == a || a.send(i.ConnectionRendererEvent.APP_BATCH_BURY_POINT, t), \n                {\n                    code: s.RES_CODE.SUCCESS,\n                    data: \"ok\"\n                }) : (global.__log.info(\"[RequestHandlers][batchBuryPoint] webContent not found\"), \n                {\n                    code: s.RES_CODE.WEB_CONTENT_NOT_FOUND,\n                    data: \"web content not found\"\n                });\n            } catch (e) {\n                return global.__log.info(\"[RequestHandlers][batchBuryPoint] err: \" + e), {\n                    code: s.RES_CODE.FAILED,\n                    data: \"unknown error\"\n                };\n            }\n        }",
+    "httpMethod": "not constrained by router; choose by query/body semantics"
+  },
+  {
+    "port": 9199,
+    "transport": "http",
+    "path": "/relayClose",
+    "name": "relayClose",
+    "line": 605,
+    "source": "evidence/main-modules/239.js",
+    "handler": "relayClose() {\n            return f.default.getInstance().onRelayClose(), {\n                code: s.RES_CODE.SUCCESS,\n                data: \"ok\"\n            };\n        }",
+    "httpMethod": "not constrained by router; choose by query/body semantics"
+  },
+  {
+    "port": 9199,
+    "transport": "http",
+    "path": "/RH2RF_PUSH_GATT_CLIENT_LIST",
+    "name": "RH2RF_PUSH_GATT_CLIENT_LIST",
+    "line": 266,
+    "source": "evidence/main-modules/239.js",
+    "handler": "RH2RF_PUSH_GATT_CLIENT_LIST(e) {\n            global.__log.info(\"[RequestHandlers][RH2RF_PUSH_GATT_CLIENT_LIST] start\");\n            try {\n                const t = JSON.parse(e.paramsStr), n = Array.isArray(t) ? t : [];\n                this.sameAccountDevices = n, global.__log.info(\"[RequestHandlers][RH2RF_PUSH_GATT_CLIENT_LIST] cached devices count: \" + n.length);\n                const r = o.default.getInstance().getWebContent();\n                return r ? (null == r || r.send(_.PRE_CONNECT_SUBSCRIBE_EVENT.RH2RF_PUSH_GATT_CLIENT_LIST, {\n                    devices: n\n                }), {\n                    code: s.RES_CODE.SUCCESS,\n                    data: \"ok\"\n                }) : (global.__log.info(\"[RequestHandlers][RH2RF_PUSH_GATT_CLIENT_LIST] webContent not found\"), \n                {\n                    code: s.RES_CODE.WEB_CONTENT_NOT_FOUND,\n                    data: \"webContent not found\"\n                });\n            } catch (e) {\n                return global.__log.info(\"[RequestHandlers][RH2RF_PUSH_GATT_CLIENT_LIST] err: \" + e), \n                {\n                    code: s.RES_CODE.FAILED,\n                    data: e\n                };\n            }\n        }",
+    "httpMethod": "not constrained by router; choose by query/body semantics"
+  },
+  {
+    "port": 9199,
+    "transport": "http",
+    "path": "/getSameAccountDevices",
+    "name": "getSameAccountDevices",
+    "line": 290,
+    "source": "evidence/main-modules/239.js",
+    "handler": "getSameAccountDevices() {\n            return r.__awaiter(this, void 0, void 0, function*() {\n                global.__log.info(\"[RequestHandlers][getSameAccountDevices] start\");\n                try {\n                    if (0 === this.sameAccountDevices.length) {\n                        global.__log.info(\"[RequestHandlers][getSameAccountDevices] Cache empty, requesting preconnect_startScan...\");\n                        const e = JSON.stringify({\n                            event: \"preconnect_startScan\",\n                            app: \"pcsuite\",\n                            args: [ !0 ]\n                        }), t = (yield u.default.post(d.default.VIVOES_SERVER_URL, `${e.length}#${e}`, {\n                            responseType: \"text\",\n                            timeout: 5e3\n                        })).data;\n                        if (\"string\" == typeof t) {\n                            const e = t.indexOf(\"#\");\n                            if (-1 !== e) {\n                                const n = t.substring(e + 1), r = JSON.parse(n);\n                                r && r.data && Array.isArray(r.data) && (this.sameAccountDevices = r.data, global.__log.info(`[RequestHandlers][getSameAccountDevices] Fetched ${this.sameAccountDevices.length} devices.`));\n                            }\n                        }\n                    }\n                    return {\n                        code: s.RES_CODE.SUCCESS,\n                        data: this.sameAccountDevices\n                    };\n                } catch (e) {\n                    return global.__log.info(\"[RequestHandlers][getSameAccountDevices] err: \" + e), \n                    {\n                        code: s.RES_CODE.FAILED,\n                        data: e\n                    };\n                }\n            });\n        }",
+    "httpMethod": "not constrained by router; choose by query/body semantics"
+  },
+  {
+    "port": 9199,
+    "transport": "http",
+    "path": "/pcDeviceInfo",
+    "name": "pcDeviceInfo",
+    "line": 611,
+    "source": "evidence/main-modules/239.js",
+    "handler": "pcDeviceInfo() {\n            let e = \"0.0.0\";\n            if (!process.env.IS_WEB) {\n                const {app: t} = n(2);\n                e = t.getVersion();\n            }\n            return {\n                code: s.RES_CODE.SUCCESS,\n                data: {\n                    deviceId: m.default.getItem(\"newDeviceId\"),\n                    version: e\n                }\n            };\n        }",
+    "httpMethod": "not constrained by router; choose by query/body semantics"
+  },
+  {
+    "port": 9199,
+    "transport": "http",
+    "path": "/connectDevice",
+    "name": "connectDevice",
+    "line": 625,
+    "source": "evidence/main-modules/239.js",
+    "handler": "connectDevice(e) {\n            return r.__awaiter(this, void 0, void 0, function*() {\n                let t, n = \"ok\";\n                try {\n                    try {\n                        if (t = JSON.parse(e.paramsStr), !(null == t ? void 0 : t.eventId) || !(null == t ? void 0 : t.deviceId)) throw \"parameter error\";\n                    } catch (e) {\n                        return {\n                            code: s.RES_CODE.FAILED,\n                            data: \"parameter parsing error\"\n                        };\n                    }\n                    const r = o.default.getInstance().getWebContent();\n                    return r ? (n = yield new Promise((e, n) => {\n                        const o = setTimeout(() => {\n                            s(), n(\"timeout\");\n                        }, 3e4);\n                        function a(n, {eventId: r, code: i, reason: o}) {\n                            t.eventId === r && (s(), e({\n                                code: i,\n                                reason: o\n                            }));\n                        }\n                        function s() {\n                            clearTimeout(o), c.ipcMain.removeListener(g.ConnectionMainEvent.CONNECT_DEVICE_REPLY, a);\n                        }\n                        c.ipcMain.on(g.ConnectionMainEvent.CONNECT_DEVICE_REPLY, a), null == r || r.send(i.ConnectionRendererEvent.CONNECT_DEVICE, t);\n                    }), {\n                        code: s.RES_CODE.SUCCESS,\n                        data: n\n                    }) : (global.__log.info(\"[RequestHandlers][connectDevice] webContent not found\"), \n                    {\n                        code: s.RES_CODE.WEB_CONTENT_NOT_FOUND,\n                        data: \"webContent not found\"\n                    });\n                } catch (e) {\n                    return global.__log.info(\"[RequestHandlers][connectDevice] err: \" + e), {\n                        code: s.RES_CODE.FAILED,\n                        data: \"unknown error\"\n                    };\n                }\n            });\n        }",
+    "httpMethod": "not constrained by router; choose by query/body semantics"
+  },
+  {
+    "port": 9199,
+    "transport": "http",
+    "path": "/vivoScreenCapture",
+    "name": "vivoScreenCapture",
+    "line": 799,
+    "source": "evidence/main-modules/239.js",
+    "handler": "vivoScreenCapture(e) {\n            return r.__awaiter(this, void 0, void 0, function*() {\n                try {\n                    const t = o.default.getInstance().getWebContent();\n                    if (!t) return global.__log.info(\"[RequestHandlers][vivoScreenCapture] webContent not found\"), \n                    {\n                        code: s.RES_CODE.WEB_CONTENT_NOT_FOUND,\n                        data: \"webContent not found\"\n                    };\n                    null == t || t.send(i.ConnectionRendererEvent.VIVO_SCREEN_CAPTURE, e.paramsStr);\n                } catch (e) {\n                    return global.__log.info(\"[RequestHandlers][vivoScreenCapture] err: \" + e), {\n                        code: s.RES_CODE.FAILED,\n                        data: \"unknown error\"\n                    };\n                }\n                return {\n                    code: s.RES_CODE.SUCCESS,\n                    data: \"ok\"\n                };\n            });\n        }",
+    "httpMethod": "not constrained by router; choose by query/body semantics"
+  },
+  {
+    "port": 9199,
+    "transport": "http",
+    "path": "/connectDeviceCloud",
+    "name": "connectDeviceCloud",
+    "line": 668,
+    "source": "evidence/main-modules/239.js",
+    "handler": "connectDeviceCloud(e) {\n            return r.__awaiter(this, void 0, void 0, function*() {\n                let t, n = \"ok\";\n                try {\n                    try {\n                        if (t = JSON.parse(e.paramsStr), !(null == t ? void 0 : t.eventId) || !(null == t ? void 0 : t.deviceId)) throw \"parameter error\";\n                    } catch (e) {\n                        return {\n                            code: s.RES_CODE.FAILED,\n                            data: \"parameter parsing error\"\n                        };\n                    }\n                    global.__log.info(\"[RequestHandlers][connectDeviceCloud] \" + e.paramsStr);\n                    const r = o.default.getInstance().getWebContent();\n                    return r ? (n = yield new Promise((e, n) => {\n                        const i = setTimeout(() => {\n                            a(), n(\"timeout\");\n                        }, 3e4);\n                        function o(n, {eventId: r, code: i, reason: o}) {\n                            t.eventId === r && (a(), e({\n                                code: i,\n                                reason: o\n                            }));\n                        }\n                        function a() {\n                            clearTimeout(i), c.ipcMain.removeListener(\"CONNECT_DEVICE_CLOUD_REPLY\", o);\n                        }\n                        c.ipcMain.on(\"CONNECT_DEVICE_CLOUD_REPLY\", o), null == r || r.send(\"CONNECT_DEVICE_CLOUD\", t);\n                    }), {\n                        code: s.RES_CODE.SUCCESS,\n                        data: n\n                    }) : (global.__log.info(\"[RequestHandlers][connectDeviceCloud] webContent not found\"), \n                    {\n                        code: s.RES_CODE.WEB_CONTENT_NOT_FOUND,\n                        data: \"webContent not found\"\n                    });\n                } catch (e) {\n                    return global.__log.info(\"[RequestHandlers][connectDevice] err: \" + e), {\n                        code: s.RES_CODE.FAILED,\n                        data: \"unknown error\"\n                    };\n                }\n            });\n        }",
+    "httpMethod": "not constrained by router; choose by query/body semantics"
+  },
+  {
+    "port": 9199,
+    "transport": "http",
+    "path": "/notifySystemEvent",
+    "name": "notifySystemEvent",
+    "line": 821,
+    "source": "evidence/main-modules/239.js",
+    "handler": "notifySystemEvent(e) {\n            return r.__awaiter(this, void 0, void 0, function*() {\n                try {\n                    const t = JSON.parse(e.paramsStr), n = o.default.getInstance().getWebContent();\n                    return n ? (null == n || n.send(i.ConnectionRendererEvent.NOTIFY_SYSTEM_EVENT, t), \n                    {\n                        code: s.RES_CODE.SUCCESS,\n                        data: \"ok\"\n                    }) : (global.__log.info(\"[RequestHandlers][notifySystemEvent] webContent not found\"), \n                    {\n                        code: s.RES_CODE.WEB_CONTENT_NOT_FOUND,\n                        data: \"webContent not found\"\n                    });\n                } catch (e) {\n                    return global.__log.info(\"[RequestHandlers][networkQueryAll] err: \" + e), {\n                        code: s.RES_CODE.FAILED,\n                        data: e\n                    };\n                }\n            });\n        }",
+    "httpMethod": "not constrained by router; choose by query/body semantics"
+  },
+  {
+    "port": 9199,
+    "transport": "http",
+    "path": "/getCurConnectedUSBInfo",
+    "name": "getCurConnectedUSBInfo",
+    "line": 842,
+    "source": "evidence/main-modules/239.js",
+    "handler": "getCurConnectedUSBInfo() {\n            return r.__awaiter(this, void 0, void 0, function*() {\n                let e = {\n                    isPCSuiteFront: 1,\n                    list: []\n                };\n                try {\n                    const t = o.default.getInstance().getWebContent();\n                    return t ? (e = yield new Promise((e, n) => {\n                        const r = setTimeout(() => {\n                            a(), n(\"timeout\");\n                        }, 5e3);\n                        function o(t, {isPCSuiteFront: n, list: r}) {\n                            a(), e({\n                                isPCSuiteFront: n,\n                                list: r\n                            });\n                        }\n                        function a() {\n                            clearTimeout(r), c.ipcMain.removeListener(g.ConnectionMainEvent.GET_CUR_CONNECTED_USB_INFO, o);\n                        }\n                        c.ipcMain.on(g.ConnectionMainEvent.GET_CUR_CONNECTED_USB_INFO, o), null == t || t.send(i.ConnectionRendererEvent.GET_CUR_CONNECTED_USB_INFO);\n                    }), {\n                        code: s.RES_CODE.SUCCESS,\n                        data: e\n                    }) : (global.__log.info(\"[RequestHandlers][getCurConnectedUSBInfo] webContent not found\"), \n                    {\n                        code: s.RES_CODE.WEB_CONTENT_NOT_FOUND,\n                        data: \"webContent not found\"\n                    });\n                } catch (e) {\n                    return global.__log.info(\"[RequestHandlers][getCurConnectedUSBInfo] err: \" + e), \n                    {\n                        code: s.RES_CODE.FAILED,\n                        data: \"unknown error\"\n                    };\n                }\n            });\n        }",
+    "httpMethod": "not constrained by router; choose by query/body semantics"
+  },
+  {
+    "port": 9199,
+    "transport": "http",
+    "path": "/connectDeviceUSB",
+    "name": "connectDeviceUSB",
+    "line": 881,
+    "source": "evidence/main-modules/239.js",
+    "handler": "connectDeviceUSB(e) {\n            return r.__awaiter(this, void 0, void 0, function*() {\n                let t = {\n                    deviceId: \"\",\n                    deviceType: \"\",\n                    isFastConnect: 0,\n                    gamecastId: \"\"\n                };\n                try {\n                    if (t = JSON.parse(e.paramsStr), global.__log.info(\"[RequestHandlers][connectDeviceUSB] \" + e.paramsStr), \n                    0 === t.isFastConnect || 2 === t.isFastConnect) {\n                        const e = global.__mainWindow;\n                        e && (e.isMinimized() && e.restore(), e.show(), e.setAlwaysOnTop(!0), setTimeout(() => {\n                            e.setAlwaysOnTop(!1), e.focus();\n                        }, 100));\n                    }\n                    const n = o.default.getInstance().getWebContent();\n                    return n ? (null == n || n.send(i.ConnectionRendererEvent.CONNECT_DEVICE_USB, t), \n                    {\n                        code: s.RES_CODE.SUCCESS,\n                        data: \"ok\"\n                    }) : (global.__log.info(\"[RequestHandlers][connectDeviceUSB] webContent not found\"), \n                    {\n                        code: s.RES_CODE.WEB_CONTENT_NOT_FOUND,\n                        data: \"webContent not found\"\n                    });\n                } catch (e) {\n                    return global.__log.info(\"[RequestHandlers][connectDeviceUSB] err: \" + e), {\n                        code: s.RES_CODE.FAILED,\n                        data: \"unknown error\"\n                    };\n                }\n            });\n        }",
+    "httpMethod": "not constrained by router; choose by query/body semantics"
+  },
+  {
+    "port": 9199,
+    "transport": "http",
+    "path": "/forwardMessage",
+    "name": "forwardMessage",
+    "line": 915,
+    "source": "evidence/main-modules/239.js",
+    "handler": "forwardMessage(e) {\n            try {\n                const {event: t, data: n} = JSON.parse(e.paramsStr);\n                return t ? (v.default.getInstance().dispatch(t, n), {\n                    code: s.RES_CODE.SUCCESS,\n                    data: \"ok\"\n                }) : {\n                    code: s.RES_CODE.FAILED,\n                    data: \"event is null\"\n                };\n            } catch (e) {\n                return global.__log.info(\"[RequestHandlers][forwardMessage] err: \" + e), {\n                    code: s.RES_CODE.FAILED,\n                    data: e\n                };\n            }\n        }",
+    "httpMethod": "not constrained by router; choose by query/body semantics"
+  },
+  {
+    "port": 9199,
+    "transport": "http",
+    "path": "/vivoshareDownload",
+    "name": "vivoshareDownload",
+    "line": 932,
+    "source": "evidence/main-modules/239.js",
+    "handler": "vivoshareDownload(e) {\n            try {\n                global.__log.info(\"[RequestHandlers][vivoshareDownload]receive msg \" + e.paramsStr);\n                const t = JSON.parse(e.paramsStr);\n                return y.startVivoshareLink({\n                    ip: t.ip,\n                    port: t.port,\n                    sameAccount: t.sameAccount,\n                    sceneType: \"vivoshareDownload\"\n                }), {\n                    code: s.RES_CODE.SUCCESS,\n                    data: \"ok\"\n                };\n            } catch (e) {\n                return global.__log.info(\"[RequestHandlers][vivoshareDownload] err: \" + e), {\n                    code: s.RES_CODE.FAILED,\n                    data: e\n                };\n            }\n        }",
+    "httpMethod": "not constrained by router; choose by query/body semantics"
+  },
+  {
+    "port": 9199,
+    "transport": "http",
+    "path": "/launchUsbFastConnect",
+    "name": "launchUsbFastConnect",
+    "line": 441,
+    "source": "evidence/main-modules/239.js",
+    "handler": "launchUsbFastConnect(e) {\n            global.__log.info(\"[RequestHandlers][launchUsbFastConnect] params: \" + JSON.stringify(e));\n            try {\n                const t = JSON.parse(e.paramsStr);\n                if (!t) return {\n                    code: s.RES_CODE.FAILED,\n                    data: \"params is null\"\n                };\n                return o.default.getInstance().getWebContent() ? (E.NotificationWindow.getInstance().receiveMessage(b.NotificationViewEnum.DISCONNECT_PROMPT, {\n                    isUSBPopup: !0,\n                    deviceId: t.deviceId,\n                    deviceType: t.deviceType,\n                    deviceName: t.deviceName || \"\",\n                    isUsbFastConnect: !0,\n                    usbFastConnectCloseTime: 3e4,\n                    force: !0\n                }), {\n                    code: s.RES_CODE.SUCCESS,\n                    data: \"ok\"\n                }) : (global.__log.info(\"[RequestHandlers][launchUsbFastConnect] webContent not found\"), \n                {\n                    code: s.RES_CODE.WEB_CONTENT_NOT_FOUND,\n                    data: \"webContent not found\"\n                });\n            } catch (e) {\n                return global.__log.info(\"[RequestHandlers][launchUsbFastConnect] err: \" + e), {\n                    code: s.RES_CODE.FAILED,\n                    data: e\n                };\n            }\n        }",
+    "httpMethod": "not constrained by router; choose by query/body semantics"
+  },
+  {
+    "port": 9199,
+    "transport": "http",
+    "path": "/receiveIPToConnect",
+    "name": "receiveIPToConnect",
+    "line": 222,
+    "source": "evidence/main-modules/239.js",
+    "handler": "receiveIPToConnect(e) {\n            return r.__awaiter(this, void 0, void 0, function*() {\n                return global.__log.info(\"[RequestHandlers][receiveIPToConnect] params: \" + JSON.stringify(e)), \n                new Promise(t => {\n                    try {\n                        const n = JSON.parse(e.paramsStr);\n                        let r = \"\";\n                        n.phoneIp ? r = n.phoneIp : (global.__log.info(\"[RequestHandlers][receiveIPToConnect] not found phone ip\"), \n                        t({\n                            code: s.RES_CODE.NOT_FOUND_IP,\n                            data: \"not found phone ip\"\n                        }));\n                        const a = o.default.getInstance().getWebContent();\n                        if (a) {\n                            null == a || a.send(i.ConnectionRendererEvent.RECEIVE_IP_TO_CONNECT, Object.assign(Object.assign({}, n), {\n                                phoneIp: r\n                            }));\n                            const e = setTimeout(() => {\n                                c.ipcMain.removeAllListeners(i.ConnectionRendererEvent.RECEIVE_IP_TO_CONNECT), t({\n                                    code: s.RES_CODE.TIME_OUT,\n                                    data: \"RECEIVE_IP_TO_CONNECT timeout\"\n                                });\n                            }, 5e3);\n                            c.ipcMain.once(i.ConnectionRendererEvent.RECEIVE_IP_TO_CONNECT, (n, r) => {\n                                global.__log.info(\"[RequestHandlers][receiveIPToConnect] resCode \" + JSON.stringify(r)), \n                                clearTimeout(e), t({\n                                    code: s.RES_CODE.SUCCESS,\n                                    data: r\n                                });\n                            });\n                        } else global.__log.info(\"[RequestHandlers][receiveIPToConnect] webContent not found\"), \n                        t({\n                            code: s.RES_CODE.WEB_CONTENT_NOT_FOUND,\n                            data: \"webContent not found\"\n                        });\n                    } catch (e) {\n                        global.__log.info(\"[RequestHandlers][receiveIPToConnect] err: \" + e), t({\n                            code: s.RES_CODE.FAILED,\n                            data: e\n                        });\n                    }\n                });\n            });\n        }",
+    "httpMethod": "not constrained by router; choose by query/body semantics"
+  },
+  {
+    "port": 9199,
+    "transport": "http",
+    "path": "/switchLang",
+    "name": "switchLang",
+    "line": 952,
+    "source": "evidence/main-modules/239.js",
+    "handler": "switchLang(e) {\n            try {\n                global.__log.info(\"[RequestHandlers][switchLang] receive msg \" + e.paramsStr);\n                const {lang: t} = JSON.parse(e.paramsStr), n = o.default.getInstance().getWebContent();\n                return n ? (null == n || n.send(w.LocaleManagerMsg.TEST_SWICTH_LANG, t), global.__log.info(\"[RequestHandlers][switchLang] lang: \" + t), \n                {\n                    code: s.RES_CODE.SUCCESS,\n                    data: \"ok\"\n                }) : {\n                    code: s.RES_CODE.WEB_CONTENT_NOT_FOUND,\n                    data: \"webContent not found\"\n                };\n            } catch (e) {\n                return global.__log.info(\"[RequestHandlers][switchLang] error: \" + JSON.stringify(e)), \n                {\n                    code: s.RES_CODE.FAILED,\n                    data: e\n                };\n            }\n        }",
+    "httpMethod": "not constrained by router; choose by query/body semantics"
+  },
+  {
+    "port": 9199,
+    "transport": "http",
+    "path": "/rightMenuTransfer",
+    "name": "rightMenuTransfer",
+    "line": 972,
+    "source": "evidence/main-modules/239.js",
+    "handler": "rightMenuTransfer(e) {\n            try {\n                global.__log.info(\"[RequestHandlers][rightMenuTransfer] receive msg \" + e.paramsStr);\n                const t = JSON.parse(e.paramsStr), n = o.default.getInstance().getWebContent(), {target: r, deviceid: a, filepath: l} = t;\n                return n ? (null == n || n.send(i.ConnectionRendererEvent.RIGHT_MENU_TRANSFER, {\n                    target: r,\n                    fileDeviceId: a,\n                    files: l\n                }), {\n                    code: s.RES_CODE.SUCCESS,\n                    data: \"ok\"\n                }) : {\n                    code: s.RES_CODE.WEB_CONTENT_NOT_FOUND,\n                    data: \"webContent not found\"\n                };\n            } catch (e) {\n                return global.__log.info(\"[RequestHandlers][rightMenuTransfer] error: \" + (e instanceof Error ? e.toString() : JSON.stringify(e))), \n                {\n                    code: s.RES_CODE.FAILED,\n                    data: e\n                };\n            }\n        }",
+    "httpMethod": "not constrained by router; choose by query/body semantics"
+  },
+  {
+    "port": 9199,
+    "transport": "http",
+    "path": "/launchUsbGuidePrompt",
+    "name": "launchUsbGuidePrompt",
+    "line": 472,
+    "source": "evidence/main-modules/239.js",
+    "handler": "launchUsbGuidePrompt(e) {\n            return r.__awaiter(this, void 0, void 0, function*() {\n                if (global.__log.info(\"[RequestHandlers][launchUsbGuidePrompt] params: \" + JSON.stringify(e)), \n                \"undefined\" != typeof __buildConfig__ && __buildConfig__.IS_EXPORT) return global.__log.info(\"[RequestHandlers][launchUsbGuidePrompt] IS_EXPORT, skip\"), \n                {\n                    code: s.RES_CODE.SUCCESS,\n                    data: \"ok\"\n                };\n                try {\n                    const t = JSON.parse(e.paramsStr), n = m.default.has(\"launchUsbGuidePromptCount\") ? m.default.getItem(\"launchUsbGuidePromptCount\") : 0;\n                    if ((yield p.default.getInstance().getDeviceInformation(t ? t.deviceType : \"\")) || n >= 2) return {\n                        code: s.RES_CODE.SUCCESS,\n                        data: \"ok\"\n                    };\n                    m.default.setItem(\"launchUsbGuidePromptCount\", n + 1);\n                    return o.default.getInstance().getWebContent() ? (E.NotificationWindow.getInstance().receiveMessage(b.NotificationViewEnum.DISCONNECT_PROMPT, {\n                        usbFastConnectCloseTime: 3e4,\n                        isUsbGuidePrompt: !0,\n                        deviceType: t.deviceType,\n                        force: !0\n                    }), {\n                        code: s.RES_CODE.SUCCESS,\n                        data: \"ok\"\n                    }) : (global.__log.info(\"[RequestHandlers][launchUsbGuidePrompt] webContent not found\"), \n                    {\n                        code: s.RES_CODE.WEB_CONTENT_NOT_FOUND,\n                        data: \"webContent not found\"\n                    });\n                } catch (e) {\n                    return global.__log.info(\"[RequestHandlers][launchUsbGuidePrompt] err: \" + e), {\n                        code: s.RES_CODE.FAILED,\n                        data: e\n                    };\n                }\n            });\n        }",
+    "httpMethod": "not constrained by router; choose by query/body semantics"
+  },
+  {
+    "port": 9199,
+    "transport": "http",
+    "path": "/closeUsbFastConnect",
+    "name": "closeUsbFastConnect",
+    "line": 508,
+    "source": "evidence/main-modules/239.js",
+    "handler": "closeUsbFastConnect() {\n            global.__log.info(\"[RequestHandlers][closeUsbFastConnect] receive closeUsbFastConnect request\");\n            try {\n                return o.default.getInstance().getWebContent() ? (E.NotificationWindow.getInstance().hide(), \n                {\n                    code: s.RES_CODE.SUCCESS,\n                    data: \"ok\"\n                }) : (global.__log.info(\"[RequestHandlers][closeUsbFastConnect] webContent not found\"), \n                {\n                    code: s.RES_CODE.WEB_CONTENT_NOT_FOUND,\n                    data: \"webContent not found\"\n                });\n            } catch (e) {\n                return global.__log.info(\"[RequestHandlers][closeUsbFastConnect] err: \" + e), {\n                    code: s.RES_CODE.FAILED,\n                    data: e\n                };\n            }\n        }",
+    "httpMethod": "not constrained by router; choose by query/body semantics"
+  },
+  {
+    "port": 9199,
+    "transport": "http",
+    "path": "/mtpDevicesUpdate",
+    "name": "mtpDevicesUpdate",
+    "line": 995,
+    "source": "evidence/main-modules/239.js",
+    "handler": "mtpDevicesUpdate(e) {\n            try {\n                const t = JSON.parse(e.paramsStr), n = o.default.getInstance().getWebContent();\n                return n ? (null == n || n.send(i.ConnectionRendererEvent.MTP_DEVICES_UPDATE, {\n                    devices: Array.isArray(t) ? t : []\n                }), {\n                    code: s.RES_CODE.SUCCESS,\n                    data: \"ok\"\n                }) : (global.__log.info(\"[RequestHandlers][mtpDevicesUpdate] webContent not found\"), \n                {\n                    code: s.RES_CODE.WEB_CONTENT_NOT_FOUND,\n                    data: \"webContent not found\"\n                });\n            } catch (e) {\n                return global.__log.info(\"[RequestHandlers][mtpDevicesUpdate] err: \" + e), {\n                    code: s.RES_CODE.FAILED,\n                    data: e\n                };\n            }\n        }",
+    "httpMethod": "not constrained by router; choose by query/body semantics"
+  },
+  {
+    "port": 9199,
+    "transport": "http",
+    "path": "/reportNetworkPermission",
+    "name": "reportNetworkPermission",
+    "line": 1015,
+    "source": "evidence/main-modules/239.js",
+    "handler": "reportNetworkPermission(e) {\n            try {\n                const t = JSON.parse(e.paramsStr), n = o.default.getInstance().getWebContent();\n                return n ? (n.send(i.ConnectionRendererEvent.REPORT_CONNECT_SERVER_NETWORK_PERMISSION, t || {}), \n                {\n                    code: s.RES_CODE.SUCCESS,\n                    data: \"ok\"\n                }) : (global.__log.info(\"[RequestHandlers][reportNetworkPermission] webContent not found\"), \n                {\n                    code: s.RES_CODE.WEB_CONTENT_NOT_FOUND,\n                    data: \"webContent not found\"\n                });\n            } catch (e) {\n                return global.__log.info(\"[RequestHandlers][reportNetworkPermission] err: \" + e), \n                {\n                    code: s.RES_CODE.FAILED,\n                    data: e\n                };\n            }\n        }",
+    "httpMethod": "not constrained by router; choose by query/body semantics"
+  },
+  {
+    "port": 9199,
+    "transport": "http",
+    "path": "/startWifiDirect",
+    "name": "startWifiDirect",
+    "line": 1035,
+    "source": "evidence/main-modules/239.js",
+    "handler": "startWifiDirect() {\n            try {\n                const e = o.default.getInstance().getWebContent();\n                return e ? (null == e || e.send(i.ConnectionRendererEvent.START_WIFI_DIRECT, !0), \n                {\n                    code: s.RES_CODE.SUCCESS,\n                    data: \"ok\"\n                }) : (global.__log.info(\"[RequestHandlers][startWifiDirect] webContent not found\"), \n                {\n                    code: s.RES_CODE.WEB_CONTENT_NOT_FOUND,\n                    data: \"webContent not found\"\n                });\n            } catch (e) {\n                return {\n                    code: s.RES_CODE.FAILED,\n                    data: \"startWifiDirect parameter parsing error\"\n                };\n            }\n        }",
+    "httpMethod": "not constrained by router; choose by query/body semantics"
+  },
+  {
+    "port": 9199,
+    "transport": "http",
+    "path": "/stopWifiDirect",
+    "name": "stopWifiDirect",
+    "line": 1054,
+    "source": "evidence/main-modules/239.js",
+    "handler": "stopWifiDirect() {\n            try {\n                const e = o.default.getInstance().getWebContent();\n                return e ? (null == e || e.send(i.ConnectionRendererEvent.STOP_WIFI_DIRECT, !1), \n                {\n                    code: s.RES_CODE.SUCCESS,\n                    data: \"ok\"\n                }) : (global.__log.info(\"[RequestHandlers][STOP_WIFI_DIRECT] webContent not found\"), \n                {\n                    code: s.RES_CODE.WEB_CONTENT_NOT_FOUND,\n                    data: \"webContent not found\"\n                });\n            } catch (e) {\n                return {\n                    code: s.RES_CODE.FAILED,\n                    data: \"stopWifiDirect parameter parsing error\"\n                };\n            }\n        }",
+    "httpMethod": "not constrained by router; choose by query/body semantics"
+  },
+  {
+    "port": 9199,
+    "transport": "http",
+    "path": "/invokeShareCamera",
+    "name": "invokeShareCamera",
+    "line": 1073,
+    "source": "evidence/main-modules/239.js",
+    "handler": "invokeShareCamera(e) {\n            return new Promise(t => {\n                try {\n                    const n = JSON.parse(e.paramsStr), r = o.default.getInstance().getWebContent();\n                    if (r) {\n                        r.send(i.ConnectionRendererEvent.INVOKE_SHARE_CAMERA, n || {});\n                        const e = setTimeout(() => {\n                            c.ipcMain.removeAllListeners(i.ConnectionRendererEvent.INVOKE_SHARE_CAMERA), t({\n                                code: s.RES_CODE.TIME_OUT,\n                                data: {\n                                    isPhoneConnected: 0,\n                                    msg: \"invoke share camera timeout\"\n                                }\n                            });\n                        }, 3e3);\n                        c.ipcMain.once(i.ConnectionRendererEvent.INVOKE_SHARE_CAMERA, (n, r) => {\n                            global.__log.info(\"[RequestHandlers][invokeShareCamera] arg: \" + JSON.stringify(r)), \n                            clearTimeout(e), t({\n                                code: s.RES_CODE.SUCCESS,\n                                data: r\n                            });\n                        });\n                    } else global.__log.info(\"[RequestHandlers][invokeShareCamera] webContent not found\"), \n                    t({\n                        code: s.RES_CODE.WEB_CONTENT_NOT_FOUND,\n                        data: {\n                            isPhoneConnected: 0,\n                            msg: \"webContent not found\"\n                        }\n                    });\n                } catch (e) {\n                    global.__log.info(\"[RequestHandlers][invokeShareCamera] err: \" + e), t({\n                        code: s.RES_CODE.FAILED,\n                        data: {\n                            isPhoneConnected: 0,\n                            msg: e + \"\"\n                        }\n                    });\n                }\n            });\n        }",
+    "httpMethod": "not constrained by router; choose by query/body semantics"
+  },
+  {
+    "port": 9199,
+    "transport": "http",
+    "path": "/updateShareCameraUsers",
+    "name": "updateShareCameraUsers",
+    "line": 1114,
+    "source": "evidence/main-modules/239.js",
+    "handler": "updateShareCameraUsers(e) {\n            try {\n                const t = e.paramsStr, n = o.default.getInstance().getWebContent();\n                return n ? (n.send(i.ConnectionRendererEvent.UPDATE_SHARE_CAMERA_USERS, t || \"\"), \n                {\n                    code: s.RES_CODE.SUCCESS,\n                    data: \"ok\"\n                }) : (global.__log.info(\"[RequestHandlers][updateShareCameraUsers] webContent not found\"), \n                {\n                    code: s.RES_CODE.WEB_CONTENT_NOT_FOUND,\n                    data: \"webContent not found\"\n                });\n            } catch (e) {\n                return global.__log.info(\"[RequestHandlers][updateShareCameraUsers] err: \" + e), \n                {\n                    code: s.RES_CODE.FAILED,\n                    data: e\n                };\n            }\n        }",
+    "httpMethod": "not constrained by router; choose by query/body semantics"
+  },
+  {
+    "port": 9199,
+    "transport": "http",
+    "path": "/notifyP2PConflict",
+    "name": "notifyP2PConflict",
+    "line": 1134,
+    "source": "evidence/main-modules/239.js",
+    "handler": "notifyP2PConflict(e) {\n            try {\n                const t = JSON.parse(e.paramsStr), n = o.default.getInstance().getWebContent();\n                return n ? (n.send(i.ConnectionRendererEvent.NOTIFY_P2P_CONFLICT, t || {}), {\n                    code: s.RES_CODE.SUCCESS,\n                    data: \"ok\"\n                }) : (global.__log.info(\"[RequestHandlers][notifyP2PConflict] webContent not found\"), \n                {\n                    code: s.RES_CODE.WEB_CONTENT_NOT_FOUND,\n                    data: \"webContent not found\"\n                });\n            } catch (e) {\n                return global.__log.info(\"[RequestHandlers][notifyP2PConflict] err: \" + e), {\n                    code: s.RES_CODE.FAILED,\n                    data: e\n                };\n            }\n        }",
+    "httpMethod": "not constrained by router; choose by query/body semantics"
+  },
+  {
+    "port": 9199,
+    "transport": "http",
+    "path": "/fmSearch",
+    "name": "fmSearch",
+    "line": 1152,
+    "source": "evidence/main-modules/239.js",
+    "handler": "fmSearch(e) {\n            const n = t.parseParams(e.queryStr);\n            return S.default.search(n);\n        }",
+    "httpMethod": "not constrained by router; choose by query/body semantics"
+  },
+  {
+    "port": 9199,
+    "transport": "http",
+    "path": "/fmThumb",
+    "name": "fmThumb",
+    "line": 1156,
+    "source": "evidence/main-modules/239.js",
+    "handler": "fmThumb(e) {\n            const n = t.parseParams(e.queryStr);\n            return S.default.getThumb(n);\n        }",
+    "httpMethod": "not constrained by router; choose by query/body semantics"
+  },
+  {
+    "port": 9199,
+    "transport": "http",
+    "path": "/fmTransferFileToPC",
+    "name": "fmTransferFileToPC",
+    "line": 1160,
+    "source": "evidence/main-modules/239.js",
+    "handler": "fmTransferFileToPC(e) {\n            const t = JSON.parse(e.paramsStr);\n            return S.default.fmTransferFileToPC(t), \"\";\n        }",
+    "httpMethod": "not constrained by router; choose by query/body semantics"
+  },
+  {
+    "port": 9199,
+    "transport": "http",
+    "path": "/reportWifip2pStatus",
+    "name": "reportWifip2pStatus",
+    "line": 116,
+    "source": "evidence/main-modules/239.js",
+    "handler": "reportWifip2pStatus(e) {\n            global.__log.info(\"[RequestHandlers][reportWifip2pStatus] params: \" + JSON.stringify(e));\n            const t = JSON.parse(e.paramsStr);\n            return 1 == t.wifiP2P ? (global.__log.info(\"[RequestHandlers][reportWifip2pStatus] params: 1\"), \n            m.default.setItem(\"wifip2pStatus\", !0)) : 0 == t.wifiP2P && (global.__log.info(\"[RequestHandlers][reportWifip2pStatus] params: 0\"), \n            m.default.removeItem(\"wifip2pStatus\")), {\n                code: s.RES_CODE.SUCCESS,\n                data: e.paramsStr\n            };\n        }",
+    "httpMethod": "not constrained by router; choose by query/body semantics"
+  },
+  {
+    "port": 9199,
+    "transport": "http",
+    "path": "/getDeviceConnectStatus",
+    "name": "getDeviceConnectStatus",
+    "line": 400,
+    "source": "evidence/main-modules/239.js",
+    "handler": "getDeviceConnectStatus(e) {\n            return global.__log.info(\"[RequestHandlers][getDeviceConnectStatus] params: \" + JSON.stringify(e)), \n            new Promise(t => {\n                try {\n                    const n = JSON.parse(e.paramsStr).deviceId;\n                    if (!n) return void t({\n                        code: s.RES_CODE.FAILED,\n                        data: \"deviceId is required\"\n                    });\n                    const r = o.default.getInstance().getWebContent();\n                    if (r) {\n                        null == r || r.send(i.ConnectionRendererEvent.GET_DEVICE_CONNECT_STATUS, {\n                            deviceId: n\n                        });\n                        const e = setTimeout(() => {\n                            c.ipcMain.removeAllListeners(i.ConnectionRendererEvent.GET_DEVICE_CONNECT_STATUS), \n                            t({\n                                code: s.RES_CODE.TIME_OUT,\n                                data: \"get device connect status timeout\"\n                            });\n                        }, 5e3);\n                        c.ipcMain.once(i.ConnectionRendererEvent.GET_DEVICE_CONNECT_STATUS, (n, r) => {\n                            global.__log.info(\"[RequestHandlers][getDeviceConnectStatus] result: \" + JSON.stringify(r)), \n                            clearTimeout(e), t({\n                                code: s.RES_CODE.SUCCESS,\n                                data: r\n                            });\n                        });\n                    } else global.__log.info(\"[RequestHandlers][getDeviceConnectStatus] webContent not found\"), \n                    t({\n                        code: s.RES_CODE.WEB_CONTENT_NOT_FOUND,\n                        data: \"webContent not found\"\n                    });\n                } catch (e) {\n                    global.__log.info(\"[RequestHandlers][getDeviceConnectStatus] err: \" + e), t({\n                        code: s.RES_CODE.FAILED,\n                        data: e\n                    });\n                }\n            });\n        }",
+    "httpMethod": "not constrained by router; choose by query/body semantics"
+  },
+  {
+    "port": 9199,
+    "transport": "http",
+    "path": "/disconnectDevice",
+    "name": "disconnectDevice",
+    "line": 712,
+    "source": "evidence/main-modules/239.js",
+    "handler": "disconnectDevice(e) {\n            return r.__awaiter(this, void 0, void 0, function*() {\n                let t;\n                if (global.__log.info(\"[RequestHandlers][disconnectDevice] receive disconnectDevice request\"), \n                !process.env.IS_WEB) {\n                    try {\n                        t = JSON.parse(e.paramsStr), global.__log.info(\"[RequestHandlers][disconnectDevice] params: \" + e.paramsStr);\n                    } catch (e) {\n                        return {\n                            code: s.RES_CODE.FAILED,\n                            data: \"parameter parsing error\"\n                        };\n                    }\n                    const n = null == t ? void 0 : t.deviceId;\n                    if (!n) return {\n                        code: s.RES_CODE.FAILED,\n                        data: \"deviceId is required\"\n                    };\n                    const r = o.default.getInstance().getDevices().some(e => e.id === n || e.connbaseId === n), a = this.sameAccountDevices.some(e => e.id === n || e.deviceId === n);\n                    if (!r && !a) return global.__log.info(\"[RequestHandlers][disconnectDevice] device not found: \" + n), \n                    {\n                        code: s.RES_CODE.DEVICE_NOT_FOUND,\n                        data: \"device not found in list\"\n                    };\n                    const l = o.default.getInstance().getWebContent();\n                    if (!l) return global.__log.info(\"[RequestHandlers][DISCONNECT_DEVICE] webContent not found\"), \n                    {\n                        code: s.RES_CODE.WEB_CONTENT_NOT_FOUND,\n                        data: \"webContent not found\"\n                    };\n                    if (!(yield new Promise(e => {\n                        l.send(i.ConnectionRendererEvent.GET_DEVICE_CONNECT_STATUS, {\n                            deviceId: n\n                        });\n                        const t = setTimeout(() => {\n                            c.ipcMain.removeAllListeners(i.ConnectionRendererEvent.GET_DEVICE_CONNECT_STATUS), \n                            e(!1);\n                        }, 3e3);\n                        c.ipcMain.once(i.ConnectionRendererEvent.GET_DEVICE_CONNECT_STATUS, (n, r) => {\n                            clearTimeout(t), e(!0 === (null == r ? void 0 : r.isConnected));\n                        });\n                    }))) return global.__log.info(\"[RequestHandlers][disconnectDevice] device not connected: \" + n), \n                    {\n                        code: s.RES_CODE.DEVICE_NOT_CONNECTED,\n                        data: \"device is not connected\"\n                    };\n                    l.send(i.ConnectionRendererEvent.DISCONNECT_DEVICE, t);\n                }\n                return {\n                    code: s.RES_CODE.SUCCESS,\n                    data: {}\n                };\n            });\n        }",
+    "httpMethod": "not constrained by router; choose by query/body semantics"
+  },
+  {
+    "port": 9199,
+    "transport": "http",
+    "path": "/getConnectedDevices",
+    "name": "getConnectedDevices",
+    "line": 766,
+    "source": "evidence/main-modules/239.js",
+    "handler": "getConnectedDevices() {\n            return r.__awaiter(this, void 0, void 0, function*() {\n                global.__log.info(\"[RequestHandlers][getConnectedDevices] start\");\n                try {\n                    const e = o.default.getInstance().getWebContent();\n                    if (!e) return global.__log.info(\"[RequestHandlers][getConnectedDevices] webContent not found\"), \n                    {\n                        code: s.RES_CODE.WEB_CONTENT_NOT_FOUND,\n                        data: \"webContent not found\"\n                    };\n                    const t = yield new Promise(t => {\n                        e.send(i.ConnectionRendererEvent.GET_CONNECTED_DEVICES);\n                        const n = setTimeout(() => {\n                            c.ipcMain.removeAllListeners(i.ConnectionRendererEvent.GET_CONNECTED_DEVICES_REPLY), \n                            t([]);\n                        }, 5e3);\n                        c.ipcMain.once(i.ConnectionRendererEvent.GET_CONNECTED_DEVICES_REPLY, (e, r) => {\n                            clearTimeout(n), t((null == r ? void 0 : r.devices) || []);\n                        });\n                    });\n                    return global.__log.info(`[RequestHandlers][getConnectedDevices] found ${t.length} connected devices`), \n                    {\n                        code: s.RES_CODE.SUCCESS,\n                        data: t\n                    };\n                } catch (e) {\n                    return global.__log.info(\"[RequestHandlers][getConnectedDevices] err: \" + e), {\n                        code: s.RES_CODE.FAILED,\n                        data: e\n                    };\n                }\n            });\n        }",
+    "httpMethod": "not constrained by router; choose by query/body semantics"
+  },
+  {
+    "port": 9199,
+    "transport": "http",
+    "path": "/checkAuthStatus",
+    "name": "checkAuthStatus",
+    "line": 109,
+    "source": "evidence/main-modules/239.js",
+    "handler": "checkAuthStatus(e) {\n            return global.__log.info(\"[RequestHandlers][checkAuthStatus] params: \" + JSON.stringify(e)), \n            {\n                code: s.RES_CODE.SUCCESS,\n                data: \"ok\"\n            };\n        }",
+    "httpMethod": "not constrained by router; choose by query/body semantics"
+  },
+  {
+    "port": 9199,
+    "transport": "websocket",
+    "path": "/",
+    "name": "wsRootRoute",
+    "line": 1164,
+    "source": "evidence/main-modules/239.js",
+    "handler": "wsRootRoute(e, n) {\n            const r = t.parseParams(e.queryStr);\n            global.__log.info(\"[RequestHandlers][wsRootRoute] queryParams: \" + JSON.stringify(r)), \n            \"vivoScreen\" === r.source && l.default.getInstance().initWs(n);\n        }",
+    "httpMethod": "not constrained by router; choose by query/body semantics"
+  },
+  {
+    "port": 9200,
+    "transport": "http",
+    "path": "/",
+    "name": "rootRoute",
+    "line": 40,
+    "source": "evidence/main-modules/1481.js",
+    "handler": "rootRoute(e) {\n            return global.__log.info(\"[RequestHandlers9200][rootRoute] \" + e.paramsStr), {\n                code: s.RES_CODE.SUCCESS,\n                data: \"9200 server is running\"\n            };\n        }",
+    "httpMethod": "not constrained by router; choose by query/body semantics"
+  },
+  {
+    "port": 9200,
+    "transport": "http",
+    "path": "/skill/fmTransferFileToPC",
+    "name": "fmTransferFileToPC",
+    "line": 109,
+    "source": "evidence/main-modules/1481.js",
+    "handler": "fmTransferFileToPC(e) {\n            return r.__awaiter(this, void 0, void 0, function*() {\n                return yield h.default.fmTransferFileToPC(e);\n            });\n        }",
+    "httpMethod": "not constrained by router; choose by query/body semantics"
+  },
+  {
+    "port": 9200,
+    "transport": "http",
+    "path": "/skill/rightMenuTransfer",
+    "name": "rightMenuTransfer",
+    "line": 114,
+    "source": "evidence/main-modules/1481.js",
+    "handler": "rightMenuTransfer(e) {\n            return r.__awaiter(this, void 0, void 0, function*() {\n                return yield h.default.rightMenuTransfer(e);\n            });\n        }",
+    "httpMethod": "not constrained by router; choose by query/body semantics"
+  },
+  {
+    "port": 9200,
+    "transport": "http",
+    "path": "/skill/connectDevice",
+    "name": "connectDevice",
+    "line": 354,
+    "source": "evidence/main-modules/1481.js",
+    "handler": "connectDevice(e) {\n            return r.__awaiter(this, void 0, void 0, function*() {\n                global.__log.info(\"[RequestHandlers9200][connectDevice] connectDevice start\");\n                let t, n = \"ok\";\n                try {\n                    try {\n                        if (t = JSON.parse(e.paramsStr), !(null == t ? void 0 : t.eventId) || !(null == t ? void 0 : t.deviceId)) throw \"parameter error\";\n                    } catch (e) {\n                        return {\n                            code: s.RES_CODE.FAILED,\n                            data: \"parameter parsing error\"\n                        };\n                    }\n                    const r = a.default.getInstance().getWebContent();\n                    return r ? (n = yield new Promise((e, n) => {\n                        const a = setTimeout(() => {\n                            c(), n(\"timeout\");\n                        }, 3e4);\n                        function s(n, {eventId: r, code: i, reason: o}) {\n                            t.eventId === r && (c(), e({\n                                code: i,\n                                reason: o\n                            }));\n                        }\n                        function c() {\n                            clearTimeout(a), l.ipcMain.removeListener(o.ConnectionMainEvent.CONNECT_DEVICE_REPLY, s);\n                        }\n                        l.ipcMain.on(o.ConnectionMainEvent.CONNECT_DEVICE_REPLY, s), null == r || r.send(i.ConnectionRendererEvent.CONNECT_DEVICE, t);\n                    }), {\n                        code: s.RES_CODE.SUCCESS,\n                        data: n\n                    }) : (global.__log.info(\"[RequestHandlers9200][connectDevice] webContent not found\"), \n                    {\n                        code: s.RES_CODE.WEB_CONTENT_NOT_FOUND,\n                        data: \"webContent not found\"\n                    });\n                } catch (e) {\n                    return global.__log.info(\"[RequestHandlers9200][connectDevice] err: \" + e), {\n                        code: s.RES_CODE.FAILED,\n                        data: \"unknown error\"\n                    };\n                }\n            });\n        }",
+    "httpMethod": "not constrained by router; choose by query/body semantics"
+  },
+  {
+    "port": 9200,
+    "transport": "http",
+    "path": "/skill/getDeviceConnectStatus",
+    "name": "getDeviceConnectStatus",
+    "line": 168,
+    "source": "evidence/main-modules/1481.js",
+    "handler": "getDeviceConnectStatus(e) {\n            return global.__log.info(\"[RequestHandlers9200][getDeviceConnectStatus] params: \" + JSON.stringify(e)), \n            new Promise(t => {\n                try {\n                    const n = JSON.parse(e.paramsStr).deviceId;\n                    if (!n) return void t({\n                        code: s.RES_CODE.FAILED,\n                        data: \"deviceId is required\"\n                    });\n                    const r = a.default.getInstance().getWebContent();\n                    if (r) {\n                        null == r || r.send(i.ConnectionRendererEvent.GET_DEVICE_CONNECT_STATUS, {\n                            deviceId: n\n                        });\n                        const e = setTimeout(() => {\n                            l.ipcMain.removeAllListeners(i.ConnectionRendererEvent.GET_DEVICE_CONNECT_STATUS), \n                            t({\n                                code: s.RES_CODE.TIME_OUT,\n                                data: \"get device connect status timeout\"\n                            });\n                        }, 5e3);\n                        l.ipcMain.once(i.ConnectionRendererEvent.GET_DEVICE_CONNECT_STATUS, (n, r) => {\n                            global.__log.info(\"[RequestHandlers9200][getDeviceConnectStatus] result: \" + JSON.stringify(r)), \n                            clearTimeout(e), t({\n                                code: s.RES_CODE.SUCCESS,\n                                data: r\n                            });\n                        });\n                    } else global.__log.info(\"[RequestHandlers9200][getDeviceConnectStatus] webContent not found\"), \n                    t({\n                        code: s.RES_CODE.WEB_CONTENT_NOT_FOUND,\n                        data: \"webContent not found\"\n                    });\n                } catch (e) {\n                    global.__log.info(\"[RequestHandlers9200][getDeviceConnectStatus] err: \" + e), t({\n                        code: s.RES_CODE.FAILED,\n                        data: e\n                    });\n                }\n            });\n        }",
+    "httpMethod": "not constrained by router; choose by query/body semantics"
+  },
+  {
+    "port": 9200,
+    "transport": "http",
+    "path": "/skill/getSameAccountDevices",
+    "name": "getSameAccountDevices",
+    "line": 125,
+    "source": "evidence/main-modules/1481.js",
+    "handler": "getSameAccountDevices() {\n            return r.__awaiter(this, void 0, void 0, function*() {\n                global.__log.info(\"[RequestHandlers9200][getSameAccountDevices] start\");\n                try {\n                    const e = c.requestHandlersInstance.getSameAccountDevicesCache();\n                    if (e && e.length > 0) return global.__log.info(`[RequestHandlers9200][getSameAccountDevices] Fetched ${e.length} devices from 9199 instance cache.`), \n                    {\n                        code: s.RES_CODE.SUCCESS,\n                        data: e\n                    };\n                    global.__log.info(\"[RequestHandlers9200][getSameAccountDevices] Cache empty, requesting preconnect_startScan...\");\n                    const t = JSON.stringify({\n                        event: \"preconnect_startScan\",\n                        app: \"pcsuite\",\n                        args: [ !0 ]\n                    }), n = (yield u.default.post(d.default.VIVOES_SERVER_URL, `${t.length}#${t}`, {\n                        responseType: \"text\",\n                        timeout: 6e3\n                    })).data;\n                    if (\"string\" == typeof n) {\n                        const e = n.indexOf(\"#\");\n                        if (-1 !== e) {\n                            const t = n.substring(e + 1), r = JSON.parse(t);\n                            if (r && r.data && Array.isArray(r.data)) return global.__log.info(`[RequestHandlers9200][getSameAccountDevices] Fetched ${r.data.length} devices from connection service.`), \n                            {\n                                code: s.RES_CODE.SUCCESS,\n                                data: r.data\n                            };\n                        }\n                    }\n                    return {\n                        code: s.RES_CODE.FAILED,\n                        data: \"failed to get same account devices\"\n                    };\n                } catch (e) {\n                    return global.__log.info(\"[RequestHandlers9200][getSameAccountDevices] err: \" + e), \n                    {\n                        code: s.RES_CODE.FAILED,\n                        data: e\n                    };\n                }\n            });\n        }",
+    "httpMethod": "not constrained by router; choose by query/body semantics"
+  },
+  {
+    "port": 9200,
+    "transport": "http",
+    "path": "/skill/disconnectDevice",
+    "name": "disconnectDevice",
+    "line": 209,
+    "source": "evidence/main-modules/1481.js",
+    "handler": "disconnectDevice(e) {\n            return r.__awaiter(this, void 0, void 0, function*() {\n                let t;\n                if (global.__log.info(\"[RequestHandlers9200][disconnectDevice] receive disconnectDevice request\"), \n                !process.env.IS_WEB) {\n                    try {\n                        t = JSON.parse(e.paramsStr), global.__log.info(\"[RequestHandlers9200][disconnectDevice] params: \" + e.paramsStr);\n                    } catch (e) {\n                        return {\n                            code: s.RES_CODE.FAILED,\n                            data: \"parameter parsing error\"\n                        };\n                    }\n                    const n = null == t ? void 0 : t.deviceId;\n                    if (!n) return global.__log.info(\"[RequestHandlers9200][disconnectDevice] deviceId is null\"), \n                    {\n                        code: s.RES_CODE.FAILED,\n                        data: \"deviceId is required\"\n                    };\n                    const r = a.default.getInstance().getWebContent();\n                    if (!r) return global.__log.info(\"[RequestHandlers9200][disconnectDevice] webContent not found\"), \n                    {\n                        code: s.RES_CODE.WEB_CONTENT_NOT_FOUND,\n                        data: \"webContent not found\"\n                    };\n                    {\n                        if (!(yield new Promise(e => {\n                            r.send(i.ConnectionRendererEvent.GET_DEVICE_CONNECT_STATUS, {\n                                deviceId: n\n                            });\n                            const t = setTimeout(() => {\n                                l.ipcMain.removeAllListeners(i.ConnectionRendererEvent.GET_DEVICE_CONNECT_STATUS), \n                                e(!1);\n                            }, 3e3);\n                            l.ipcMain.once(i.ConnectionRendererEvent.GET_DEVICE_CONNECT_STATUS, (n, r) => {\n                                clearTimeout(t), e(!0 === (null == r ? void 0 : r.isConnected));\n                            });\n                        }))) return global.__log.info(\"[RequestHandlers9200][disconnectDevice] device not connected: \" + n), \n                        {\n                            code: s.RES_CODE.DEVICE_NOT_CONNECTED,\n                            data: \"device is not connected\"\n                        };\n                        const e = yield new Promise(e => {\n                            const a = setTimeout(() => {\n                                l.ipcMain.removeAllListeners(o.ConnectionMainEvent.DISCONNECT_DEVICE_REPLY), global.__log.info(\"[RequestHandlers9200][disconnectDevice] disconnect timeout, deviceId: \" + n), \n                                e({\n                                    code: -1,\n                                    reason: \"disconnect timeout\"\n                                });\n                            }, 5e3);\n                            l.ipcMain.once(o.ConnectionMainEvent.DISCONNECT_DEVICE_REPLY, (t, n) => {\n                                clearTimeout(a), global.__log.info(\"[RequestHandlers9200][disconnectDevice] disconnect result: \" + JSON.stringify(n)), \n                                e(n);\n                            }), r.send(i.ConnectionRendererEvent.DISCONNECT_DEVICE, t);\n                        });\n                        if (0 !== e.code) return {\n                            code: s.RES_CODE.FAILED,\n                            data: e.reason || \"disconnect failed\"\n                        };\n                    }\n                }\n                return {\n                    code: s.RES_CODE.SUCCESS,\n                    data: {}\n                };\n            });\n        }",
+    "httpMethod": "not constrained by router; choose by query/body semantics"
+  },
+  {
+    "port": 9200,
+    "transport": "http",
+    "path": "/skill/getConnectedDevices",
+    "name": "getConnectedDevices",
+    "line": 276,
+    "source": "evidence/main-modules/1481.js",
+    "handler": "getConnectedDevices() {\n            return r.__awaiter(this, void 0, void 0, function*() {\n                global.__log.info(\"[RequestHandlers9200][getConnectedDevices] start\");\n                try {\n                    const e = a.default.getInstance().getWebContent();\n                    if (!e) return global.__log.info(\"[RequestHandlers9200][getConnectedDevices] webContent not found\"), \n                    {\n                        code: s.RES_CODE.WEB_CONTENT_NOT_FOUND,\n                        data: \"webContent not found\"\n                    };\n                    const t = yield new Promise(t => {\n                        e.send(i.ConnectionRendererEvent.GET_CONNECTED_DEVICES);\n                        const n = setTimeout(() => {\n                            l.ipcMain.removeAllListeners(i.ConnectionRendererEvent.GET_CONNECTED_DEVICES_REPLY), \n                            t([]);\n                        }, 5e3);\n                        l.ipcMain.once(i.ConnectionRendererEvent.GET_CONNECTED_DEVICES_REPLY, (e, r) => {\n                            clearTimeout(n), t((null == r ? void 0 : r.devices) || []);\n                        });\n                    });\n                    return global.__log.info(`[RequestHandlers9200][getConnectedDevices] found ${t.length} connected devices`), \n                    {\n                        code: s.RES_CODE.SUCCESS,\n                        data: t\n                    };\n                } catch (e) {\n                    return global.__log.info(\"[RequestHandlers9200][getConnectedDevices] err: \" + e), \n                    {\n                        code: s.RES_CODE.FAILED,\n                        data: e\n                    };\n                }\n            });\n        }",
+    "httpMethod": "not constrained by router; choose by query/body semantics"
+  },
+  {
+    "port": 9200,
+    "transport": "http",
+    "path": "/skill/getConnectedDeviceInfo",
+    "name": "getConnectedDeviceInfo",
+    "line": 310,
+    "source": "evidence/main-modules/1481.js",
+    "handler": "getConnectedDeviceInfo(e) {\n            return global.__log.info(\"[RequestHandlers9200][getConnectedDeviceInfo] params: \" + JSON.stringify(e)), \n            new Promise(t => {\n                try {\n                    const n = JSON.parse(e.paramsStr).deviceId;\n                    if (!n) return void t({\n                        code: s.RES_CODE.FAILED,\n                        data: \"deviceId is required\"\n                    });\n                    const r = a.default.getInstance().getWebContent();\n                    if (r) {\n                        null == r || r.send(i.ConnectionRendererEvent.GET_CONNECTED_DEVICE_INFO, {\n                            deviceId: n\n                        });\n                        const e = setTimeout(() => {\n                            l.ipcMain.removeAllListeners(i.ConnectionRendererEvent.GET_CONNECTED_DEVICE_INFO_REPLY), \n                            t({\n                                code: s.RES_CODE.TIME_OUT,\n                                data: \"get connected device info timeout\"\n                            });\n                        }, 5e3);\n                        l.ipcMain.once(i.ConnectionRendererEvent.GET_CONNECTED_DEVICE_INFO_REPLY, (n, r) => {\n                            global.__log.info(\"[RequestHandlers9200][getConnectedDeviceInfo] result: \" + JSON.stringify(r)), \n                            clearTimeout(e), (null == r ? void 0 : r.found) && r.device ? t({\n                                code: s.RES_CODE.SUCCESS,\n                                data: r.device\n                            }) : t({\n                                code: s.RES_CODE.DEVICE_NOT_FOUND,\n                                data: \"device not found\"\n                            });\n                        });\n                    } else global.__log.info(\"[RequestHandlers9200][getConnectedDeviceInfo] webContent not found\"), \n                    t({\n                        code: s.RES_CODE.WEB_CONTENT_NOT_FOUND,\n                        data: \"webContent not found\"\n                    });\n                } catch (e) {\n                    global.__log.info(\"[RequestHandlers9200][getConnectedDeviceInfo] err: \" + e), t({\n                        code: s.RES_CODE.FAILED,\n                        data: e\n                    });\n                }\n            });\n        }",
+    "httpMethod": "not constrained by router; choose by query/body semantics"
+  },
+  {
+    "port": 9200,
+    "transport": "http",
+    "path": "/skill/getSuiteInfo",
+    "name": "getSuiteInfo",
+    "line": 46,
+    "source": "evidence/main-modules/1481.js",
+    "handler": "getSuiteInfo(e) {\n            global.__log.info(\"[RequestHandlers9200][getSuiteInfo] \" + e.paramsStr);\n            try {\n                let e = \"0.0.0\";\n                if (!process.env.IS_WEB) {\n                    const {app: t} = n(2);\n                    e = t.getVersion();\n                }\n                const t = \"1.0.0\", r = _.default.getItem(\"serverRoomEnv\") || \"\", i = _.default.getItem(\"serverRoomLabel\") || \"\", o = \"undefined\" != typeof __buildConfig__ && __buildConfig__.IS_EXPORT ? \"br\" === (\"undefined\" != typeof __buildConfig__ ? __buildConfig__.CHANNEL_CODE : \"\") ? \"BR\" : \"EX\" : \"CN\", a = d.getSkillServerPort() || 9200, l = y.default.serverPort, c = m.default.platform(), u = m.default.arch(), h = m.default.release(), p = void 0 !== process.env.IS_WEB, f = !p, E = g.getAppName(), b = _.default.getItem(\"receiveFilesPath\") || g.getAppDownloadPath();\n                let w = \"\", S = \"\";\n                if (!process.env.IS_WEB) {\n                    const {app: e} = n(2);\n                    try {\n                        w = e.getPath(\"userData\"), S = e.getPath(\"appData\");\n                    } catch (e) {\n                        global.__log.info(\"[RequestHandlers9200][getSuiteInfo] getPath error: \" + e);\n                    }\n                }\n                const T = _.default.getItem(\"currentLanguage\") || \"\", A = _.default.getItem(\"vLang\") || \"\", O = !!_.default.getItem(\"isRtl\"), C = _.default.getItem(\"countryCode\") || \"\";\n                let N = !1;\n                try {\n                    N = v.default.getInstance().isInstalled();\n                } catch (e) {\n                    global.__log.info(\"[RequestHandlers9200][getSuiteInfo] vclawInstalled error: \" + e);\n                }\n                const I = process.versions.electron || \"\", R = process.versions.node || \"\", D = process.versions.chrome || \"\", L = !!_.default.getItem(\"isStrictComp\");\n                return {\n                    code: s.RES_CODE.SUCCESS,\n                    data: {\n                        suiteVersion: e,\n                        apiVersion: t,\n                        env: r,\n                        channel: o,\n                        serverRoom: i,\n                        skillServerPort: a,\n                        pcsuiteServerPort: l,\n                        platform: c,\n                        arch: u,\n                        osRelease: h,\n                        isWeb: p,\n                        isDesktop: f,\n                        appName: E,\n                        pcSuiteDownloadDir: b,\n                        userDataDir: w,\n                        appDataDir: S,\n                        locale: T,\n                        vLang: A,\n                        isRtl: O,\n                        countryCode: C,\n                        vclawInstalled: N,\n                        electronVersion: I,\n                        nodeVersion: R,\n                        chromeVersion: D,\n                        isStrictComp: L\n                    }\n                };\n            } catch (e) {\n                return global.__log.info(\"[RequestHandlers9200][getSuiteInfo] error: \" + e), {\n                    code: s.RES_CODE.FAILED,\n                    data: \"getSuiteInfo failed: \" + e\n                };\n            }\n        }",
+    "httpMethod": "not constrained by router; choose by query/body semantics"
+  },
+  {
+    "port": 9200,
+    "transport": "http",
+    "path": "/skill/localSearch/search",
+    "name": "searchComputerFiles",
+    "line": 398,
+    "source": "evidence/main-modules/1481.js",
+    "handler": "searchComputerFiles(e) {\n            return r.__awaiter(this, void 0, void 0, function*() {\n                if (!p.default.getInstance().isSearchServiceRunning()) return {\n                    code: s.RES_CODE.FAILED,\n                    data: \"搜索服务未开启\"\n                };\n                const n = t.parseParams(e.queryStr), r = yield f.default.getWordTokenizer(n.keyword);\n                console.log(\"test queryParams\", n);\n                const i = {\n                    keyword: n.keyword,\n                    type: n.type || \"HOME\",\n                    pageIndex: Number(n.pageIndex) || 0,\n                    pageNumber: Number(n.pageNumber) || 10,\n                    sortType: Number(n.sortType) || 1,\n                    tokenizedWords: r\n                };\n                global.__log.info(\"[RequestHandlers9200][searchComputerFiles] params: \" + JSON.stringify(i));\n                const o = yield p.default.getInstance().doSearch(i);\n                return global.__log.info(\"[RequestHandlers9200][searchComputerFiles] res: \"), {\n                    code: s.RES_CODE.SUCCESS,\n                    data: o\n                };\n            });\n        }",
+    "httpMethod": "not constrained by router; choose by query/body semantics"
+  },
+  {
+    "port": 9200,
+    "transport": "http",
+    "path": "/skill/localSearch/getThumb",
+    "name": "getComputerFileThumbnail",
+    "line": 422,
+    "source": "evidence/main-modules/1481.js",
+    "handler": "getComputerFileThumbnail(e) {\n            return r.__awaiter(this, void 0, void 0, function*() {\n                const n = t.parseParams(e.queryStr);\n                n.path = n.fullPathName, global.__log.info(\"[RequestHandlers9200][getComputerFileThumbnail] params: \" + e.paramsStr);\n                const r = yield p.default.getInstance().getThumbnail(n);\n                return global.__log.info(\"[RequestHandlers9200][getComputerFileThumbnail] res: \"), \n                {\n                    code: s.RES_CODE.SUCCESS,\n                    data: r\n                };\n            });\n        }",
+    "httpMethod": "not constrained by router; choose by query/body semantics"
+  },
+  {
+    "port": 9200,
+    "transport": "http",
+    "path": "/skill/localSearch/openFileDetails",
+    "name": "openFilePropertiesPanel",
+    "line": 434,
+    "source": "evidence/main-modules/1481.js",
+    "handler": "openFilePropertiesPanel(e) {\n            return r.__awaiter(this, void 0, void 0, function*() {\n                const t = JSON.parse(e.paramsStr);\n                return t.fullPathName = t.fullPathName, global.__log.info(\"[RequestHandlers9200][openFilePropertiesPanel] params: \" + e.paramsStr), \n                p.default.getInstance().openFileDetailsByNative(t), {\n                    code: s.RES_CODE.SUCCESS,\n                    data: null\n                };\n            });\n        }",
+    "httpMethod": "not constrained by router; choose by query/body semantics"
+  },
+  {
+    "port": 9200,
+    "transport": "http",
+    "path": "/skill/localSearch/delete",
+    "name": "moveFileToRecycleBin",
+    "line": 444,
+    "source": "evidence/main-modules/1481.js",
+    "handler": "moveFileToRecycleBin(e) {\n            return r.__awaiter(this, void 0, void 0, function*() {\n                const t = JSON.parse(e.paramsStr);\n                t.forEach(e => {\n                    e.savePath = e.fullPathName;\n                }), global.__log.info(\"[RequestHandlers9200][moveFileToRecycleBin] params: \" + e.paramsStr);\n                const n = yield p.default.getInstance().trashFile(t);\n                return global.__log.info(\"[RequestHandlers9200][moveFileToRecycleBin] res: \" + n), \n                {\n                    code: s.RES_CODE.SUCCESS,\n                    data: n\n                };\n            });\n        }",
+    "httpMethod": "not constrained by router; choose by query/body semantics"
+  },
+  {
+    "port": 9200,
+    "transport": "http",
+    "path": "/skill/fmSearch",
+    "name": "fmSearch",
+    "line": 119,
+    "source": "evidence/main-modules/1481.js",
+    "handler": "fmSearch(e) {\n            return r.__awaiter(this, void 0, void 0, function*() {\n                const n = t.parseParams(e.queryStr);\n                return yield h.default.search(n);\n            });\n        }",
+    "httpMethod": "not constrained by router; choose by query/body semantics"
+  }
+]

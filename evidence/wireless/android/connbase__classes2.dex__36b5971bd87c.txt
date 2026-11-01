@@ -1,0 +1,46 @@
+APK pcsuite/updateApk/connbase.apk
+DEX classes2.dex
+CLASS Lcom/vivo/pcsuite/pcconnect/wifip2p/WifiP2pService$f;
+SUPER Ljava/lang/Object;
+FIELDS
+a Lcom/vivo/pcsuite/pcconnect/wifip2p/WifiP2pService; = None
+
+METHOD <init>(Lcom/vivo/pcsuite/pcconnect/wifip2p/WifiP2pService;)V
+000000: iput-object v1, v0, Lcom/vivo/pcsuite/pcconnect/wifip2p/WifiP2pService$f;->a Lcom/vivo/pcsuite/pcconnect/wifip2p/WifiP2pService;
+000004: invoke-direct v0, Ljava/lang/Object;-><init>()V
+00000a: return-void 
+
+METHOD a(Landroid/net/wifi/p2p/WifiP2pInfo; Landroid/net/wifi/p2p/WifiP2pGroup; Landroid/net/NetworkInfo;)V
+000000: if-eqz v1, +046h
+000004: iget-boolean v3, v1, Landroid/net/wifi/p2p/WifiP2pInfo;->groupFormed Z
+000008: if-eqz v3, +042h
+00000c: iget-boolean v1, v1, Landroid/net/wifi/p2p/WifiP2pInfo;->isGroupOwner Z
+000010: if-eqz v1, +03eh
+000014: if-eqz v2, +03ch
+000018: iget-object v1, v0, Lcom/vivo/pcsuite/pcconnect/wifip2p/WifiP2pService$f;->a Lcom/vivo/pcsuite/pcconnect/wifip2p/WifiP2pService;
+00001c: invoke-static v1, Lcom/vivo/pcsuite/pcconnect/wifip2p/WifiP2pService;->e(Lcom/vivo/pcsuite/pcconnect/wifip2p/WifiP2pService;)Z
+000022: move-result v1
+000024: if-eqz v1, +017h
+000028: iget-object v1, v0, Lcom/vivo/pcsuite/pcconnect/wifip2p/WifiP2pService$f;->a Lcom/vivo/pcsuite/pcconnect/wifip2p/WifiP2pService;
+00002c: invoke-static v1, Lcom/vivo/pcsuite/pcconnect/wifip2p/WifiP2pService;->a(Lcom/vivo/pcsuite/pcconnect/wifip2p/WifiP2pService;)Landroid/net/wifi/p2p/WifiP2pManager;
+000032: move-result-object v1
+000034: iget-object v2, v0, Lcom/vivo/pcsuite/pcconnect/wifip2p/WifiP2pService$f;->a Lcom/vivo/pcsuite/pcconnect/wifip2p/WifiP2pService;
+000038: invoke-static v2, Lcom/vivo/pcsuite/pcconnect/wifip2p/WifiP2pService;->b(Lcom/vivo/pcsuite/pcconnect/wifip2p/WifiP2pService;)Landroid/net/wifi/p2p/WifiP2pManager$Channel;
+00003e: move-result-object v2
+000040: new-instance v3, Lcom/vivo/pcsuite/pcconnect/wifip2p/WifiP2pService$f$a;
+000044: invoke-direct v3, v0, Lcom/vivo/pcsuite/pcconnect/wifip2p/WifiP2pService$f$a;-><init>(Lcom/vivo/pcsuite/pcconnect/wifip2p/WifiP2pService$f;)V
+00004a: invoke-virtual v1, v2, v3, Landroid/net/wifi/p2p/WifiP2pManager;->requestGroupInfo(Landroid/net/wifi/p2p/WifiP2pManager$Channel; Landroid/net/wifi/p2p/WifiP2pManager$GroupInfoListener;)V
+000050: goto +bh
+000052: const-string v1, "P2p-createGroup"
+000056: invoke-static v1, Lcom/vivo/pcsuite/pcconnect/b;->a(Ljava/lang/String;)V
+00005c: iget-object v1, v0, Lcom/vivo/pcsuite/pcconnect/wifip2p/WifiP2pService$f;->a Lcom/vivo/pcsuite/pcconnect/wifip2p/WifiP2pService;
+000060: invoke-static v1, v2, Lcom/vivo/pcsuite/pcconnect/wifip2p/WifiP2pService;->a(Lcom/vivo/pcsuite/pcconnect/wifip2p/WifiP2pService; Landroid/net/wifi/p2p/WifiP2pGroup;)V
+000066: const-string v1, "P2p-clientJoin"
+00006a: invoke-static v1, Lcom/vivo/pcsuite/pcconnect/b;->b(Ljava/lang/String;)V
+000070: iget-object v1, v0, Lcom/vivo/pcsuite/pcconnect/wifip2p/WifiP2pService$f;->a Lcom/vivo/pcsuite/pcconnect/wifip2p/WifiP2pService;
+000074: invoke-static v1, Lcom/vivo/pcsuite/pcconnect/wifip2p/WifiP2pService;->c(Lcom/vivo/pcsuite/pcconnect/wifip2p/WifiP2pService;)Lcom/vivo/pcsuite/pcconnect/wifip2p/e;
+00007a: move-result-object v1
+00007c: new-instance v2, Lcom/vivo/pcsuite/pcconnect/wifip2p/WifiP2pService$f$b;
+000080: invoke-direct v2, v0, Lcom/vivo/pcsuite/pcconnect/wifip2p/WifiP2pService$f$b;-><init>(Lcom/vivo/pcsuite/pcconnect/wifip2p/WifiP2pService$f;)V
+000086: invoke-virtual v1, v2, Lcom/vivo/pcsuite/pcconnect/wifip2p/e;->a(Lcom/vivo/pcsuite/pcconnect/wifip2p/e$a;)V
+00008c: return-void 

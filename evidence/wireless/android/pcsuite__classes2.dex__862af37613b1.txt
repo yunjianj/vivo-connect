@@ -1,0 +1,40 @@
+APK pcsuite/updateApk/pcsuite.apk
+DEX classes2.dex
+CLASS Lcom/vivo/pcsuite/service/b;
+SUPER Ljava/lang/Object;
+FIELDS
+a I = None
+b Landroid/telecom/Call; = None
+c Landroid/os/Bundle; = None
+d Lcom/vivo/pcsuite/service/PcSuiteInCallService; = None
+
+METHOD <init>(Lcom/vivo/pcsuite/service/PcSuiteInCallService; I Landroid/telecom/Call; Landroid/os/Bundle;)V
+000000: invoke-direct v0, Ljava/lang/Object;-><init>()V
+000006: iput-object v1, v0, Lcom/vivo/pcsuite/service/b;->d Lcom/vivo/pcsuite/service/PcSuiteInCallService;
+00000a: iput v2, v0, Lcom/vivo/pcsuite/service/b;->a I
+00000e: iput-object v3, v0, Lcom/vivo/pcsuite/service/b;->b Landroid/telecom/Call;
+000012: iput-object v4, v0, Lcom/vivo/pcsuite/service/b;->c Landroid/os/Bundle;
+000016: return-void 
+
+METHOD onPermissionResultChecked(LG2/a;)V
+000000: iget v0, v4, Lcom/vivo/pcsuite/service/b;->a I
+000004: const-string v1, "PcSuiteInCallService"
+000008: if-nez v5, +00bh
+00000c: const-string v4, "mid way call permissionResult is null"
+000010: invoke-static v1, v4, LD1/a;->h(Ljava/lang/String; Ljava/lang/String;)V
+000016: invoke-static v0, Lcom/vivo/pcsuite/service/PcSuiteInCallService;->G(I)V
+00001c: return-void 
+00001e: new-instance v2, Ljava/lang/StringBuilder;
+000022: const-string v3, "mid way call permissionResult: "
+000026: invoke-direct v2, v3, Ljava/lang/StringBuilder;-><init>(Ljava/lang/String;)V
+00002c: iget-boolean v3, v5, LG2/a;->d Z
+000030: invoke-static v2, v3, v1, LZ1/b;->e(Ljava/lang/StringBuilder; Z Ljava/lang/String;)V
+000036: iget-boolean v5, v5, LG2/a;->d Z
+00003a: if-eqz v5, +00ch
+00003e: iget-object v5, v4, Lcom/vivo/pcsuite/service/b;->b Landroid/telecom/Call;
+000042: iget-object v0, v4, Lcom/vivo/pcsuite/service/b;->c Landroid/os/Bundle;
+000046: iget-object v4, v4, Lcom/vivo/pcsuite/service/b;->d Lcom/vivo/pcsuite/service/PcSuiteInCallService;
+00004a: invoke-static v4, v5, v0, Lcom/vivo/pcsuite/service/PcSuiteInCallService;->g(Lcom/vivo/pcsuite/service/PcSuiteInCallService; Landroid/telecom/Call; Landroid/os/Bundle;)V
+000050: return-void 
+000052: invoke-static v0, Lcom/vivo/pcsuite/service/PcSuiteInCallService;->G(I)V
+000058: return-void 

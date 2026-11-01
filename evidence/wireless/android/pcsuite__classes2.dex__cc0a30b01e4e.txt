@@ -1,0 +1,171 @@
+APK pcsuite/updateApk/pcsuite.apk
+DEX classes2.dex
+CLASS Lcom/vivo/connect/transfer/Payload;
+SUPER Ljava/lang/Object;
+FIELDS
+bytes [B = None
+extraInfo Ljava/lang/String; = None
+id J = None
+payloadFile Lcom/vivo/connect/transfer/Payload$File; = None
+payloadStream Lcom/vivo/connect/transfer/Payload$Stream; = None
+serviceId Ljava/lang/String; = None
+targetId Ljava/lang/String; = None
+type I = None
+
+METHOD <init>(J I [B Lcom/vivo/connect/transfer/Payload$File; Lcom/vivo/connect/transfer/Payload$Stream;)V
+000000: invoke-direct v0, Ljava/lang/Object;-><init>()V
+000006: iput-wide v1, v0, Lcom/vivo/connect/transfer/Payload;->id J
+00000a: iput v3, v0, Lcom/vivo/connect/transfer/Payload;->type I
+00000e: iput-object v4, v0, Lcom/vivo/connect/transfer/Payload;->bytes [B
+000012: iput-object v5, v0, Lcom/vivo/connect/transfer/Payload;->payloadFile Lcom/vivo/connect/transfer/Payload$File;
+000016: iput-object v6, v0, Lcom/vivo/connect/transfer/Payload;->payloadStream Lcom/vivo/connect/transfer/Payload$Stream;
+00001a: return-void 
+
+METHOD copyFrom(Lcom/vivo/connect/transfer/Payload;)Lcom/vivo/connect/transfer/Payload;
+000000: new-instance v0, Lcom/vivo/connect/transfer/Payload;
+000004: iget-wide v1, v7, Lcom/vivo/connect/transfer/Payload;->id J
+000008: iget v3, v7, Lcom/vivo/connect/transfer/Payload;->type I
+00000c: invoke-virtual v7, Lcom/vivo/connect/transfer/Payload;->asBytes()[B
+000012: move-result-object v4
+000014: invoke-virtual v7, Lcom/vivo/connect/transfer/Payload;->asFile()Lcom/vivo/connect/transfer/Payload$File;
+00001a: move-result-object v5
+00001c: invoke-virtual v7, Lcom/vivo/connect/transfer/Payload;->asStream()Lcom/vivo/connect/transfer/Payload$Stream;
+000022: move-result-object v6
+000024: invoke-direct/range v0 ... v6, Lcom/vivo/connect/transfer/Payload;-><init>(J I [B Lcom/vivo/connect/transfer/Payload$File; Lcom/vivo/connect/transfer/Payload$Stream;)V
+00002a: invoke-virtual v7, Lcom/vivo/connect/transfer/Payload;->getTargetId()Ljava/lang/String;
+000030: move-result-object v1
+000032: invoke-virtual v0, v1, Lcom/vivo/connect/transfer/Payload;->setTargetId(Ljava/lang/String;)V
+000038: invoke-virtual v7, Lcom/vivo/connect/transfer/Payload;->getServiceId()Ljava/lang/String;
+00003e: move-result-object v1
+000040: invoke-virtual v0, v1, Lcom/vivo/connect/transfer/Payload;->setServiceId(Ljava/lang/String;)V
+000046: invoke-virtual v7, Lcom/vivo/connect/transfer/Payload;->getExtraInfo()Ljava/lang/String;
+00004c: move-result-object v7
+00004e: invoke-virtual v0, v7, Lcom/vivo/connect/transfer/Payload;->setExtraInfo(Ljava/lang/String;)V
+000054: return-object v0
+
+METHOD fromBytes([B)Lcom/vivo/connect/transfer/Payload;
+000000: const-string v0, "Cannot create a Payload from null bytes."
+000004: invoke-static v2, v0, Lcom/vivo/connect/utils/Preconditions;->checkNotNull(Ljava/lang/Object; Ljava/lang/Object;)Ljava/lang/Object;
+00000a: invoke-static Ljava/util/UUID;->randomUUID()Ljava/util/UUID;
+000010: move-result-object v0
+000012: invoke-virtual v0, Ljava/util/UUID;->getLeastSignificantBits()J
+000018: move-result-wide v0
+00001a: invoke-static v2, v0, v1, Lcom/vivo/connect/transfer/Payload;->fromBytes([B J)Lcom/vivo/connect/transfer/Payload;
+000020: move-result-object v2
+000022: return-object v2
+
+METHOD fromBytes([B J)Lcom/vivo/connect/transfer/Payload;
+000000: new-instance v0, Lcom/vivo/connect/transfer/Payload;
+000004: const/4 v5, 0
+000006: const/4 v6, 0
+000008: const/4 v3, 1
+00000a: move-object v4, v7
+00000c: move-wide v1, v8
+00000e: invoke-direct/range v0 ... v6, Lcom/vivo/connect/transfer/Payload;-><init>(J I [B Lcom/vivo/connect/transfer/Payload$File; Lcom/vivo/connect/transfer/Payload$Stream;)V
+000014: return-object v0
+
+METHOD fromFile(Lcom/vivo/connect/transfer/Payload$File; J)Lcom/vivo/connect/transfer/Payload;
+000000: new-instance v0, Lcom/vivo/connect/transfer/Payload;
+000004: const/4 v4, 0
+000006: const/4 v6, 0
+000008: const/4 v3, 2
+00000a: move-object v5, v7
+00000c: move-wide v1, v8
+00000e: invoke-direct/range v0 ... v6, Lcom/vivo/connect/transfer/Payload;-><init>(J I [B Lcom/vivo/connect/transfer/Payload$File; Lcom/vivo/connect/transfer/Payload$Stream;)V
+000014: return-object v0
+
+METHOD fromFile(Ljava/io/File;)Lcom/vivo/connect/transfer/Payload;
+000000: invoke-virtual v4, Ljava/io/File;->length()J
+000006: move-result-wide v0
+000008: const-wide/16 v2, 0
+00000c: invoke-static v4, v0, v1, v2, v3, Lcom/vivo/connect/transfer/Payload$File;->createPayloadFile(Ljava/io/File; J J)Lcom/vivo/connect/transfer/Payload$File;
+000012: move-result-object v4
+000014: invoke-static Ljava/util/UUID;->randomUUID()Ljava/util/UUID;
+00001a: move-result-object v0
+00001c: invoke-virtual v0, Ljava/util/UUID;->getLeastSignificantBits()J
+000022: move-result-wide v0
+000024: invoke-static v4, v0, v1, Lcom/vivo/connect/transfer/Payload;->fromFile(Lcom/vivo/connect/transfer/Payload$File; J)Lcom/vivo/connect/transfer/Payload;
+00002a: move-result-object v4
+00002c: return-object v4
+
+METHOD fromFile(Ljava/io/File; J)Lcom/vivo/connect/transfer/Payload;
+000000: invoke-virtual v2, Ljava/io/File;->length()J
+000006: move-result-wide v0
+000008: invoke-static v2, v0, v1, v3, v4, Lcom/vivo/connect/transfer/Payload$File;->createPayloadFile(Ljava/io/File; J J)Lcom/vivo/connect/transfer/Payload$File;
+00000e: move-result-object v2
+000010: invoke-static Ljava/util/UUID;->randomUUID()Ljava/util/UUID;
+000016: move-result-object v3
+000018: invoke-virtual v3, Ljava/util/UUID;->getLeastSignificantBits()J
+00001e: move-result-wide v3
+000020: invoke-static v2, v3, v4, Lcom/vivo/connect/transfer/Payload;->fromFile(Lcom/vivo/connect/transfer/Payload$File; J)Lcom/vivo/connect/transfer/Payload;
+000026: move-result-object v2
+000028: return-object v2
+
+METHOD fromStream(Lcom/vivo/connect/transfer/Payload$Stream; J)Lcom/vivo/connect/transfer/Payload;
+000000: new-instance v0, Lcom/vivo/connect/transfer/Payload;
+000004: const/4 v4, 0
+000006: const/4 v5, 0
+000008: const/4 v3, 3
+00000a: move-object v6, v7
+00000c: move-wide v1, v8
+00000e: invoke-direct/range v0 ... v6, Lcom/vivo/connect/transfer/Payload;-><init>(J I [B Lcom/vivo/connect/transfer/Payload$File; Lcom/vivo/connect/transfer/Payload$Stream;)V
+000014: return-object v0
+
+METHOD fromStream(Ljava/io/InputStream; Ljava/lang/String; J)Lcom/vivo/connect/transfer/Payload;
+000000: invoke-static v0, v1, v2, v3, Lcom/vivo/connect/transfer/Payload$Stream;->createPayloadStream(Ljava/io/InputStream; Ljava/lang/String; J)Lcom/vivo/connect/transfer/Payload$Stream;
+000006: move-result-object v0
+000008: invoke-static Ljava/util/UUID;->randomUUID()Ljava/util/UUID;
+00000e: move-result-object v1
+000010: invoke-virtual v1, Ljava/util/UUID;->getLeastSignificantBits()J
+000016: move-result-wide v1
+000018: invoke-static v0, v1, v2, Lcom/vivo/connect/transfer/Payload;->fromStream(Lcom/vivo/connect/transfer/Payload$Stream; J)Lcom/vivo/connect/transfer/Payload;
+00001e: move-result-object v0
+000020: return-object v0
+
+METHOD asBytes()[B
+000000: iget-object v0, v0, Lcom/vivo/connect/transfer/Payload;->bytes [B
+000004: return-object v0
+
+METHOD asFile()Lcom/vivo/connect/transfer/Payload$File;
+000000: iget-object v0, v0, Lcom/vivo/connect/transfer/Payload;->payloadFile Lcom/vivo/connect/transfer/Payload$File;
+000004: return-object v0
+
+METHOD asStream()Lcom/vivo/connect/transfer/Payload$Stream;
+000000: iget-object v0, v0, Lcom/vivo/connect/transfer/Payload;->payloadStream Lcom/vivo/connect/transfer/Payload$Stream;
+000004: return-object v0
+
+METHOD getExtraInfo()Ljava/lang/String;
+000000: iget-object v0, v0, Lcom/vivo/connect/transfer/Payload;->extraInfo Ljava/lang/String;
+000004: return-object v0
+
+METHOD getId()J
+000000: iget-wide v0, v2, Lcom/vivo/connect/transfer/Payload;->id J
+000004: return-wide v0
+
+METHOD getServiceId()Ljava/lang/String;
+000000: iget-object v0, v0, Lcom/vivo/connect/transfer/Payload;->serviceId Ljava/lang/String;
+000004: return-object v0
+
+METHOD getTargetId()Ljava/lang/String;
+000000: iget-object v0, v0, Lcom/vivo/connect/transfer/Payload;->targetId Ljava/lang/String;
+000004: return-object v0
+
+METHOD getType()I
+000000: iget v0, v0, Lcom/vivo/connect/transfer/Payload;->type I
+000004: return v0
+
+METHOD setExtraInfo(Ljava/lang/String;)V
+000000: iput-object v1, v0, Lcom/vivo/connect/transfer/Payload;->extraInfo Ljava/lang/String;
+000004: return-void 
+
+METHOD setId(J)V
+000000: iput-wide v1, v0, Lcom/vivo/connect/transfer/Payload;->id J
+000004: return-void 
+
+METHOD setServiceId(Ljava/lang/String;)V
+000000: iput-object v1, v0, Lcom/vivo/connect/transfer/Payload;->serviceId Ljava/lang/String;
+000004: return-void 
+
+METHOD setTargetId(Ljava/lang/String;)V
+000000: iput-object v1, v0, Lcom/vivo/connect/transfer/Payload;->targetId Ljava/lang/String;
+000004: return-void 

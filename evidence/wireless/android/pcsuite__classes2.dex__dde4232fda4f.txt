@@ -1,0 +1,43 @@
+APK pcsuite/updateApk/pcsuite.apk
+DEX classes2.dex
+CLASS Lcom/vivo/pcsuite/connect/ConnectControlModel$AgreeRunnable;
+SUPER Ljava/lang/Object;
+FIELDS
+a Ljava/lang/ref/WeakReference; = None
+
+METHOD <init>(Lcom/vivo/pcsuite/PcSuiteApplication;)V
+000000: invoke-direct v1, Ljava/lang/Object;-><init>()V
+000006: new-instance v0, Ljava/lang/ref/WeakReference;
+00000a: invoke-direct v0, v2, Ljava/lang/ref/WeakReference;-><init>(Ljava/lang/Object;)V
+000010: iput-object v0, v1, Lcom/vivo/pcsuite/connect/ConnectControlModel$AgreeRunnable;->a Ljava/lang/ref/WeakReference;
+000014: return-void 
+
+METHOD run()V
+000000: iget-object v2, v2, Lcom/vivo/pcsuite/connect/ConnectControlModel$AgreeRunnable;->a Ljava/lang/ref/WeakReference;
+000004: invoke-virtual v2, Ljava/lang/ref/Reference;->get()Ljava/lang/Object;
+00000a: move-result-object v2
+00000c: check-cast v2, Lcom/vivo/pcsuite/PcSuiteApplication;
+000010: if-eqz v2, +036h
+000014: new-instance v2, Lcom/vivo/pcsuite/common/netty/bean/ChannelBean;
+000018: invoke-direct v2, Lcom/vivo/pcsuite/common/netty/bean/ChannelBean;-><init>()V
+00001e: const-string v0, "0016"
+000022: invoke-virtual v2, v0, Lcom/vivo/pcsuite/common/netty/bean/ChannelBean;->setCode(Ljava/lang/String;)V
+000028: const-string v0, "fail"
+00002c: invoke-virtual v2, v0, Lcom/vivo/pcsuite/common/netty/bean/ChannelBean;->setMessage(Ljava/lang/String;)V
+000032: new-instance v0, Ljava/lang/StringBuilder;
+000036: const-string v1, "agreeRunnable body = "
+00003a: invoke-direct v0, v1, Ljava/lang/StringBuilder;-><init>(Ljava/lang/String;)V
+000040: invoke-virtual v2, Lcom/vivo/pcsuite/common/netty/bean/ChannelBean;->toString()Ljava/lang/String;
+000046: move-result-object v1
+000048: invoke-virtual v0, v1, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+00004e: invoke-virtual v0, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
+000054: move-result-object v0
+000056: const-string v1, "pcsuite_ConnectControlModel"
+00005a: invoke-static v1, v0, Lcom/vivo/connect/logger/EasyLog;->i(Ljava/lang/String; Ljava/lang/String;)V
+000060: sget-object v0, Lr2/e;->a Lio/netty/channel/ChannelHandlerContext;
+000064: invoke-static v0, v2, Lr2/e;->a(Lio/netty/channel/ChannelHandlerContext; Ljava/lang/Object;)V
+00006a: invoke-static Lcom/vivo/pcsuite/service/PcSuiteObserver;->t()Lcom/vivo/pcsuite/service/PcSuiteObserver;
+000070: move-result-object v2
+000072: if-eqz v2, +005h
+000076: invoke-virtual v2, Lcom/vivo/pcsuite/service/PcSuiteObserver;->Q()V
+00007c: return-void 

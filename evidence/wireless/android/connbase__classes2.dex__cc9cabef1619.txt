@@ -1,0 +1,71 @@
+APK pcsuite/updateApk/connbase.apk
+DEX classes2.dex
+CLASS Lcom/vivo/pcsuite/pcconnect/wifip2p/deputy/d$a;
+SUPER Ljava/lang/Object;
+FIELDS
+a Landroid/net/wifi/WifiManager; = None
+b Landroid/content/Context; = None
+c Landroid/os/Handler; = None
+d Ljava/lang/Runnable; = None
+
+METHOD <init>(Landroid/net/wifi/WifiManager; Landroid/content/Context; Landroid/os/Handler; Ljava/lang/Runnable;)V
+000000: iput-object v1, v0, Lcom/vivo/pcsuite/pcconnect/wifip2p/deputy/d$a;->a Landroid/net/wifi/WifiManager;
+000004: iput-object v2, v0, Lcom/vivo/pcsuite/pcconnect/wifip2p/deputy/d$a;->b Landroid/content/Context;
+000008: iput-object v3, v0, Lcom/vivo/pcsuite/pcconnect/wifip2p/deputy/d$a;->c Landroid/os/Handler;
+00000c: iput-object v4, v0, Lcom/vivo/pcsuite/pcconnect/wifip2p/deputy/d$a;->d Ljava/lang/Runnable;
+000010: invoke-direct v0, Ljava/lang/Object;-><init>()V
+000016: return-void 
+
+METHOD run()V
+000000: iget-object v0, v6, Lcom/vivo/pcsuite/pcconnect/wifip2p/deputy/d$a;->a Landroid/net/wifi/WifiManager;
+000004: invoke-static v0, Lcom/vivo/pcsuite/pcconnect/wifip2p/deputy/d;->c(Landroid/net/wifi/WifiManager;)Landroid/net/NetworkInfo;
+00000a: move-result-object v0
+00000c: new-instance v1, Ljava/lang/StringBuilder;
+000010: invoke-direct v1, Ljava/lang/StringBuilder;-><init>()V
+000016: const-string v2, "Ext-wifi network info: "
+00001a: invoke-virtual v1, v2, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+000020: invoke-virtual v1, v0, Ljava/lang/StringBuilder;->append(Ljava/lang/Object;)Ljava/lang/StringBuilder;
+000026: invoke-virtual v1, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
+00002c: move-result-object v1
+00002e: const-string v2, "WifiManagerProxy"
+000032: invoke-static v2, v1, Lc/c/f/a/b;->a(Ljava/lang/String; Ljava/lang/String;)V
+000038: if-eqz v0, +04ch
+00003c: invoke-virtual v0, Landroid/net/NetworkInfo;->getDetailedState()Landroid/net/NetworkInfo$DetailedState;
+000042: move-result-object v1
+000044: sget-object v3, Landroid/net/NetworkInfo$DetailedState;->DISCONNECTED Landroid/net/NetworkInfo$DetailedState;
+000048: if-eq v1, v3, +044h
+00004c: invoke-virtual v0, Landroid/net/NetworkInfo;->getDetailedState()Landroid/net/NetworkInfo$DetailedState;
+000052: move-result-object v0
+000054: sget-object v1, Landroid/net/NetworkInfo$DetailedState;->IDLE Landroid/net/NetworkInfo$DetailedState;
+000058: if-eq v0, v1, +03ch
+00005c: new-instance v0, Ljava/util/concurrent/CountDownLatch;
+000060: const/4 v1, 1
+000062: invoke-direct v0, v1, Ljava/util/concurrent/CountDownLatch;-><init>(I)V
+000068: new-instance v3, Lcom/vivo/pcsuite/pcconnect/wifip2p/deputy/c;
+00006c: invoke-direct v3, Lcom/vivo/pcsuite/pcconnect/wifip2p/deputy/c;-><init>()V
+000072: new-instance v4, Lcom/vivo/pcsuite/pcconnect/wifip2p/deputy/d$a$a;
+000076: invoke-direct v4, v6, v3, v0, Lcom/vivo/pcsuite/pcconnect/wifip2p/deputy/d$a$a;-><init>(Lcom/vivo/pcsuite/pcconnect/wifip2p/deputy/d$a; Lcom/vivo/pcsuite/pcconnect/wifip2p/deputy/c; Ljava/util/concurrent/CountDownLatch;)V
+00007c: invoke-virtual v3, v4, Lcom/vivo/pcsuite/pcconnect/wifip2p/deputy/c;->a(Lcom/vivo/pcsuite/pcconnect/wifip2p/deputy/c$a;)V
+000082: iget-object v4, v6, Lcom/vivo/pcsuite/pcconnect/wifip2p/deputy/d$a;->b Landroid/content/Context;
+000086: invoke-virtual v3, v4, v1, Lcom/vivo/pcsuite/pcconnect/wifip2p/deputy/c;->a(Landroid/content/Context; Z)V
+00008c: iget-object v1, v6, Lcom/vivo/pcsuite/pcconnect/wifip2p/deputy/d$a;->a Landroid/net/wifi/WifiManager;
+000090: invoke-static v1, Lcom/vivo/pcsuite/pcconnect/wifip2p/deputy/d;->a(Landroid/net/wifi/WifiManager;)Z
+000096: move-result v1
+000098: if-eqz v1, +011h
+00009c: const-wide/16 v4, 1000
+0000a0: sget-object v1, Ljava/util/concurrent/TimeUnit;->MILLISECONDS Ljava/util/concurrent/TimeUnit;
+0000a4: invoke-virtual v0, v4, v5, v1, Ljava/util/concurrent/CountDownLatch;->await(J Ljava/util/concurrent/TimeUnit;)Z
+0000aa: goto +dh
+0000ac: move-exception v0
+0000ae: const-string v1, "Latch interrupted"
+0000b2: invoke-static v2, v1, v0, Lc/c/f/a/b;->e(Ljava/lang/String; Ljava/lang/String; Ljava/lang/Throwable;)V
+0000b8: goto +6h
+0000ba: const-string v0, "call disconnectExtWifi failed."
+0000be: invoke-static v2, v0, Lc/c/f/a/b;->p(Ljava/lang/String; Ljava/lang/String;)V
+0000c4: iget-object v0, v6, Lcom/vivo/pcsuite/pcconnect/wifip2p/deputy/d$a;->b Landroid/content/Context;
+0000c8: const/4 v1, 0
+0000ca: invoke-virtual v3, v0, v1, Lcom/vivo/pcsuite/pcconnect/wifip2p/deputy/c;->a(Landroid/content/Context; Z)V
+0000d0: iget-object v0, v6, Lcom/vivo/pcsuite/pcconnect/wifip2p/deputy/d$a;->c Landroid/os/Handler;
+0000d4: iget-object v1, v6, Lcom/vivo/pcsuite/pcconnect/wifip2p/deputy/d$a;->d Ljava/lang/Runnable;
+0000d8: invoke-virtual v0, v1, Landroid/os/Handler;->post(Ljava/lang/Runnable;)Z
+0000de: return-void 

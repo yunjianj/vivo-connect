@@ -1,0 +1,46 @@
+APK pcsuite/updateApk/pcsuite.apk
+DEX classes2.dex
+CLASS Lcom/vivo/connect/sdk/f/c$o0;
+SUPER Lcom/vivo/connbase/IAccountLoginCallback$b;
+FIELDS
+c Lcom/vivo/connect/AccountLoginCallback; = None
+d Lcom/vivo/connect/sdk/f/c; = None
+
+METHOD <init>(Lcom/vivo/connect/sdk/f/c; Lcom/vivo/connect/AccountLoginCallback;)V
+000000: iput-object v1, v0, Lcom/vivo/connect/sdk/f/c$o0;->d Lcom/vivo/connect/sdk/f/c;
+000004: iput-object v2, v0, Lcom/vivo/connect/sdk/f/c$o0;->c Lcom/vivo/connect/AccountLoginCallback;
+000008: invoke-direct v0, Lcom/vivo/connbase/IAccountLoginCallback$b;-><init>()V
+00000e: return-void 
+
+METHOD onAccountLogin(I)V
+000000: new-instance v0, Ljava/lang/StringBuilder;
+000004: const-string v1, "onAccountLogin, loginResult;"
+000008: invoke-direct v0, v1, Ljava/lang/StringBuilder;-><init>(Ljava/lang/String;)V
+00000e: invoke-virtual v0, v4, Ljava/lang/StringBuilder;->append(I)Ljava/lang/StringBuilder;
+000014: invoke-virtual v0, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
+00001a: move-result-object v0
+00001c: const-string v1, "ConnectClientImpl"
+000020: invoke-static v1, v0, Lcom/vivo/connect/logger/EasyLog;->i(Ljava/lang/String; Ljava/lang/String;)V
+000026: new-instance v0, Ljava/lang/StringBuilder;
+00002a: const-string v2, "callback:"
+00002e: invoke-direct v0, v2, Ljava/lang/StringBuilder;-><init>(Ljava/lang/String;)V
+000034: iget-object v2, v3, Lcom/vivo/connect/sdk/f/c$o0;->c Lcom/vivo/connect/AccountLoginCallback;
+000038: invoke-virtual v0, v2, Ljava/lang/StringBuilder;->append(Ljava/lang/Object;)Ljava/lang/StringBuilder;
+00003e: invoke-virtual v0, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
+000044: move-result-object v0
+000046: invoke-static v1, v0, Lcom/vivo/connect/logger/EasyLog;->i(Ljava/lang/String; Ljava/lang/String;)V
+00004c: iget-object v0, v3, Lcom/vivo/connect/sdk/f/c$o0;->c Lcom/vivo/connect/AccountLoginCallback;
+000050: if-eqz v0, +01dh
+000054: const-string v0, "onAccountLogin call start"
+000058: invoke-static v1, v0, Lcom/vivo/connect/logger/EasyLog;->i(Ljava/lang/String; Ljava/lang/String;)V
+00005e: iget-object v3, v3, Lcom/vivo/connect/sdk/f/c$o0;->c Lcom/vivo/connect/AccountLoginCallback;
+000062: invoke-interface v3, v4, Lcom/vivo/connect/AccountLoginCallback;->onAccountLogin(I)V
+000068: const-string v3, "onAccountLogin call end"
+00006c: invoke-static v1, v3, Lcom/vivo/connect/logger/EasyLog;->i(Ljava/lang/String; Ljava/lang/String;)V
+000072: return-void 
+000074: move-exception v3
+000076: new-instance v4, Ljava/lang/StringBuilder;
+00007a: const-string v0, "call onAccountLogin error:"
+00007e: invoke-direct v4, v0, Ljava/lang/StringBuilder;-><init>(Ljava/lang/String;)V
+000084: invoke-static v3, v4, v1, Landroidx/appcompat/widget/view/b;->c(Ljava/lang/Exception; Ljava/lang/StringBuilder; Ljava/lang/String;)V
+00008a: return-void 

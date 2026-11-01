@@ -1,0 +1,58 @@
+APK pcsuite/updateApk/pcsuite.apk
+DEX classes2.dex
+CLASS Lcom/vivo/connect/sdk/f/c$j0;
+SUPER Ljava/lang/Object;
+FIELDS
+d Ljava/lang/String; = ':openAuthorization'
+a Landroid/os/Messenger; = None
+b Lcom/vivo/connbase/ICheckAuthorizationCallback; = None
+c Lcom/vivo/connect/sdk/f/c; = None
+
+METHOD <init>(Lcom/vivo/connect/sdk/f/c; Landroid/os/Messenger; Lcom/vivo/connbase/ICheckAuthorizationCallback;)V
+000000: iput-object v1, v0, Lcom/vivo/connect/sdk/f/c$j0;->c Lcom/vivo/connect/sdk/f/c;
+000004: iput-object v2, v0, Lcom/vivo/connect/sdk/f/c$j0;->a Landroid/os/Messenger;
+000008: iput-object v3, v0, Lcom/vivo/connect/sdk/f/c$j0;->b Lcom/vivo/connbase/ICheckAuthorizationCallback;
+00000c: invoke-direct v0, Ljava/lang/Object;-><init>()V
+000012: return-void 
+
+METHOD run()V
+000000: const-string v0, "ConnectClientImpl"
+000004: const-string v1, "run openAuthorization mConnectApi "
+000008: new-instance v2, Ljava/lang/StringBuilder;
+00000c: invoke-direct v2, v1, Ljava/lang/StringBuilder;-><init>(Ljava/lang/String;)V
+000012: iget-object v1, v3, Lcom/vivo/connect/sdk/f/c$j0;->c Lcom/vivo/connect/sdk/f/c;
+000016: invoke-static v1, Lcom/vivo/connect/sdk/f/c;->a(Lcom/vivo/connect/sdk/f/c;)Lcom/vivo/connbase/IClient;
+00001c: move-result-object v1
+00001e: invoke-virtual v2, v1, Ljava/lang/StringBuilder;->append(Ljava/lang/Object;)Ljava/lang/StringBuilder;
+000024: invoke-virtual v2, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
+00002a: move-result-object v1
+00002c: invoke-static v0, v1, Lcom/vivo/connect/logger/EasyLog;->i(Ljava/lang/String; Ljava/lang/String;)V
+000032: iget-object v1, v3, Lcom/vivo/connect/sdk/f/c$j0;->c Lcom/vivo/connect/sdk/f/c;
+000036: invoke-static v1, Lcom/vivo/connect/sdk/f/c;->a(Lcom/vivo/connect/sdk/f/c;)Lcom/vivo/connbase/IClient;
+00003c: move-result-object v1
+00003e: if-eqz v1, +00fh
+000042: iget-object v1, v3, Lcom/vivo/connect/sdk/f/c$j0;->c Lcom/vivo/connect/sdk/f/c;
+000046: invoke-static v1, Lcom/vivo/connect/sdk/f/c;->a(Lcom/vivo/connect/sdk/f/c;)Lcom/vivo/connbase/IClient;
+00004c: move-result-object v1
+00004e: iget-object v2, v3, Lcom/vivo/connect/sdk/f/c$j0;->a Landroid/os/Messenger;
+000052: iget-object v3, v3, Lcom/vivo/connect/sdk/f/c$j0;->b Lcom/vivo/connbase/ICheckAuthorizationCallback;
+000056: goto +1ah
+000058: move-exception v3
+00005a: goto +1ch
+00005c: const-string v1, "run else openAuthorization"
+000060: invoke-static v0, v1, Lcom/vivo/connect/logger/EasyLog;->i(Ljava/lang/String; Ljava/lang/String;)V
+000066: iget-object v1, v3, Lcom/vivo/connect/sdk/f/c$j0;->c Lcom/vivo/connect/sdk/f/c;
+00006a: const-string v2, ":openAuthorization"
+00006e: invoke-static v1, v2, Lcom/vivo/connect/sdk/f/c;->a(Lcom/vivo/connect/sdk/f/c; Ljava/lang/String;)Z
+000074: move-result v1
+000076: if-nez v1, +003h
+00007a: return-void 
+00007c: iget-object v1, v3, Lcom/vivo/connect/sdk/f/c$j0;->c Lcom/vivo/connect/sdk/f/c;
+000080: invoke-static v1, Lcom/vivo/connect/sdk/f/c;->a(Lcom/vivo/connect/sdk/f/c;)Lcom/vivo/connbase/IClient;
+000086: move-result-object v1
+000088: goto -1dh
+00008a: invoke-interface v1, v2, v3, Lcom/vivo/connbase/IClient;->openAuthorization(Landroid/os/Messenger; Lcom/vivo/connbase/ICheckAuthorizationCallback;)V
+000090: return-void 
+000092: const-string v1, "openAuthorization  error:"
+000096: invoke-static v3, v1, v0, LV5/S;->h(Ljava/lang/Exception; Ljava/lang/String; Ljava/lang/String;)V
+00009c: return-void 

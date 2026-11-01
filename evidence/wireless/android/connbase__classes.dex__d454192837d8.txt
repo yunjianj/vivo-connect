@@ -1,0 +1,221 @@
+APK pcsuite/updateApk/connbase.apk
+DEX classes.dex
+CLASS Lcom/vivo/connbase/p;
+SUPER Ljava/lang/Object;
+FIELDS
+e Ljava/lang/String; = 'CryptorDemo'
+f I = 200
+g Ljava/lang/String; = 'android.permission.INTERNET'
+h I = 4500
+a Ljava/lang/String; = None
+b [B = None
+c Landroid/content/Context; = None
+d Lcom/vivo/connbase/p$a; = None
+
+METHOD <init>(Landroid/content/Context; Lcom/vivo/connbase/p$a; Ljava/lang/String;)V
+000000: invoke-direct v1, Ljava/lang/Object;-><init>()V
+000006: const/4 v0, 0
+000008: iput-object v0, v1, Lcom/vivo/connbase/p;->a Ljava/lang/String;
+00000c: iput-object v0, v1, Lcom/vivo/connbase/p;->b [B
+000010: iput-object v0, v1, Lcom/vivo/connbase/p;->c Landroid/content/Context;
+000014: sget-object v0, Lcom/vivo/connbase/p$a;->a Lcom/vivo/connbase/p$a;
+000018: iput-object v0, v1, Lcom/vivo/connbase/p;->d Lcom/vivo/connbase/p$a;
+00001c: iput-object v2, v1, Lcom/vivo/connbase/p;->c Landroid/content/Context;
+000020: iput-object v3, v1, Lcom/vivo/connbase/p;->d Lcom/vivo/connbase/p$a;
+000024: iput-object v4, v1, Lcom/vivo/connbase/p;->a Ljava/lang/String;
+000028: return-void 
+
+METHOD <init>(Landroid/content/Context; Lcom/vivo/connbase/p$a; Ljava/lang/String; [B)V
+000000: invoke-direct v1, Ljava/lang/Object;-><init>()V
+000006: const/4 v0, 0
+000008: iput-object v0, v1, Lcom/vivo/connbase/p;->a Ljava/lang/String;
+00000c: iput-object v0, v1, Lcom/vivo/connbase/p;->b [B
+000010: iput-object v0, v1, Lcom/vivo/connbase/p;->c Landroid/content/Context;
+000014: sget-object v0, Lcom/vivo/connbase/p$a;->a Lcom/vivo/connbase/p$a;
+000018: iput-object v0, v1, Lcom/vivo/connbase/p;->d Lcom/vivo/connbase/p$a;
+00001c: iput-object v2, v1, Lcom/vivo/connbase/p;->c Landroid/content/Context;
+000020: iput-object v3, v1, Lcom/vivo/connbase/p;->d Lcom/vivo/connbase/p$a;
+000024: iput-object v4, v1, Lcom/vivo/connbase/p;->a Ljava/lang/String;
+000028: iput-object v5, v1, Lcom/vivo/connbase/p;->b [B
+00002c: return-void 
+
+METHOD a(Ljava/io/InputStream;)Ljava/lang/String;
+000000: new-instance v0, Ljava/io/ByteArrayOutputStream;
+000004: invoke-direct v0, Ljava/io/ByteArrayOutputStream;-><init>()V
+00000a: const/16 v1, 1024
+00000e: new-array v1, v1, [B
+000012: invoke-virtual v5, v1, Ljava/io/InputStream;->read([B)I
+000018: move-result v2
+00001a: const/4 v3, -1
+00001c: if-eq v2, v3, +007h
+000020: const/4 v3, 0
+000022: invoke-virtual v0, v1, v3, v2, Ljava/io/ByteArrayOutputStream;->write([B I I)V
+000028: goto -bh
+00002a: new-instance v5, Ljava/lang/String;
+00002e: invoke-virtual v0, Ljava/io/ByteArrayOutputStream;->toByteArray()[B
+000034: move-result-object v1
+000036: invoke-direct v5, v1, Ljava/lang/String;-><init>([B)V
+00003c: invoke-virtual v0, Ljava/io/ByteArrayOutputStream;->close()V
+000042: goto +2fh
+000044: move-exception v0
+000046: invoke-virtual v0, Ljava/io/IOException;->printStackTrace()V
+00004c: goto +2ah
+00004e: move-exception v5
+000050: goto +29h
+000052: move-exception v5
+000054: const-string v1, "CryptorDemo"
+000058: new-instance v2, Ljava/lang/StringBuilder;
+00005c: invoke-direct v2, Ljava/lang/StringBuilder;-><init>()V
+000062: const-string v3, "Read response steam error:"
+000066: invoke-virtual v2, v3, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+00006c: invoke-virtual v5, Ljava/io/IOException;->getMessage()Ljava/lang/String;
+000072: move-result-object v3
+000074: invoke-virtual v2, v3, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+00007a: invoke-virtual v2, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
+000080: move-result-object v2
+000082: invoke-static v1, v2, Landroid/util/Log;->e(Ljava/lang/String; Ljava/lang/String;)I
+000088: invoke-virtual v5, Ljava/io/IOException;->printStackTrace()V
+00008e: invoke-virtual v0, Ljava/io/ByteArrayOutputStream;->close()V
+000094: goto +5h
+000096: move-exception v5
+000098: invoke-virtual v5, Ljava/io/IOException;->printStackTrace()V
+00009e: const/4 v5, 0
+0000a0: return-object v5
+0000a2: invoke-virtual v0, Ljava/io/ByteArrayOutputStream;->close()V
+0000a8: goto +5h
+0000aa: move-exception v0
+0000ac: invoke-virtual v0, Ljava/io/IOException;->printStackTrace()V
+0000b2: throw v5
+
+METHOD a(Ljava/lang/String;)Ljava/lang/String;
+000000: new-instance v0, Ljava/net/URL;
+000004: invoke-direct v0, v4, Ljava/net/URL;-><init>(Ljava/lang/String;)V
+00000a: invoke-virtual v0, Ljava/net/URL;->openConnection()Ljava/net/URLConnection;
+000010: move-result-object v0
+000012: check-cast v0, Ljava/net/HttpURLConnection;
+000016: const/16 v1, 4500
+00001a: invoke-virtual v0, v1, Ljava/net/HttpURLConnection;->setConnectTimeout(I)V
+000020: invoke-virtual v0, v1, Ljava/net/HttpURLConnection;->setReadTimeout(I)V
+000026: const/4 v1, 1
+000028: invoke-virtual v0, v1, Ljava/net/HttpURLConnection;->setDoInput(Z)V
+00002e: const/4 v1, 0
+000030: invoke-virtual v0, v1, Ljava/net/HttpURLConnection;->setUseCaches(Z)V
+000036: invoke-virtual v0, Ljava/net/HttpURLConnection;->getResponseCode()I
+00003c: move-result v1
+00003e: const/16 v2, 200
+000042: if-ne v1, v2, +00eh
+000046: invoke-virtual v0, Ljava/net/HttpURLConnection;->getInputStream()Ljava/io/InputStream;
+00004c: move-result-object v4
+00004e: invoke-direct v3, v4, Lcom/vivo/connbase/p;->a(Ljava/io/InputStream;)Ljava/lang/String;
+000054: move-result-object v0
+000056: invoke-virtual v4, Ljava/io/InputStream;->close()V
+00005c: goto +20h
+00005e: new-instance v0, Ljava/lang/StringBuilder;
+000062: invoke-direct v0, Ljava/lang/StringBuilder;-><init>()V
+000068: const-string v2, "sendGetRequest Security server conn response code: "
+00006c: invoke-virtual v0, v2, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+000072: invoke-virtual v0, v1, Ljava/lang/StringBuilder;->append(I)Ljava/lang/StringBuilder;
+000078: const-string v1, ",url="
+00007c: invoke-virtual v0, v1, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+000082: invoke-virtual v0, v4, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+000088: invoke-virtual v0, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
+00008e: move-result-object v4
+000090: const-string v0, "CryptorDemo"
+000094: invoke-static v0, v4, Landroid/util/Log;->e(Ljava/lang/String; Ljava/lang/String;)I
+00009a: const/4 v0, 0
+00009c: return-object v0
+
+METHOD a(Ljava/lang/String; [B)Ljava/lang/String;
+000000: new-instance v0, Ljava/net/URL;
+000004: invoke-direct v0, v3, Ljava/net/URL;-><init>(Ljava/lang/String;)V
+00000a: invoke-virtual v0, Ljava/net/URL;->openConnection()Ljava/net/URLConnection;
+000010: move-result-object v0
+000012: check-cast v0, Ljava/net/HttpURLConnection;
+000016: const/16 v1, 4500
+00001a: invoke-virtual v0, v1, Ljava/net/HttpURLConnection;->setConnectTimeout(I)V
+000020: invoke-virtual v0, v1, Ljava/net/HttpURLConnection;->setReadTimeout(I)V
+000026: const/4 v1, 1
+000028: invoke-virtual v0, v1, Ljava/net/HttpURLConnection;->setDoInput(Z)V
+00002e: invoke-virtual v0, v1, Ljava/net/HttpURLConnection;->setDoOutput(Z)V
+000034: const-string v1, "POST"
+000038: invoke-virtual v0, v1, Ljava/net/HttpURLConnection;->setRequestMethod(Ljava/lang/String;)V
+00003e: const/4 v1, 0
+000040: invoke-virtual v0, v1, Ljava/net/HttpURLConnection;->setUseCaches(Z)V
+000046: invoke-virtual v2, v0, Lcom/vivo/connbase/p;->a(Ljava/net/HttpURLConnection;)V
+00004c: invoke-virtual v0, Ljava/net/HttpURLConnection;->getOutputStream()Ljava/io/OutputStream;
+000052: move-result-object v1
+000054: invoke-virtual v1, v4, Ljava/io/OutputStream;->write([B)V
+00005a: invoke-virtual v1, Ljava/io/OutputStream;->close()V
+000060: invoke-virtual v0, Ljava/net/HttpURLConnection;->getResponseCode()I
+000066: move-result v4
+000068: const/16 v1, 200
+00006c: if-ne v4, v1, +00eh
+000070: invoke-virtual v0, Ljava/net/HttpURLConnection;->getInputStream()Ljava/io/InputStream;
+000076: move-result-object v3
+000078: invoke-direct v2, v3, Lcom/vivo/connbase/p;->a(Ljava/io/InputStream;)Ljava/lang/String;
+00007e: move-result-object v4
+000080: invoke-virtual v3, Ljava/io/InputStream;->close()V
+000086: goto +20h
+000088: new-instance v0, Ljava/lang/StringBuilder;
+00008c: invoke-direct v0, Ljava/lang/StringBuilder;-><init>()V
+000092: const-string v1, "sendPostRequest Security server conn response code: "
+000096: invoke-virtual v0, v1, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+00009c: invoke-virtual v0, v4, Ljava/lang/StringBuilder;->append(I)Ljava/lang/StringBuilder;
+0000a2: const-string v4, ",url="
+0000a6: invoke-virtual v0, v4, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+0000ac: invoke-virtual v0, v3, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+0000b2: invoke-virtual v0, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
+0000b8: move-result-object v3
+0000ba: const-string v4, "CryptorDemo"
+0000be: invoke-static v4, v3, Landroid/util/Log;->e(Ljava/lang/String; Ljava/lang/String;)I
+0000c4: const/4 v4, 0
+0000c6: return-object v4
+
+METHOD a(Landroid/content/Context;)Z
+000000: if-eqz v1, +014h
+000004: const-string v0, "android.permission.INTERNET"
+000008: invoke-virtual v1, v0, Landroid/content/Context;->checkCallingOrSelfPermission(Ljava/lang/String;)I
+00000e: move-result v1
+000010: if-nez v1, +003h
+000014: goto +ah
+000016: const-string v1, "CryptorDemo"
+00001a: const-string v0, "no permission of internet"
+00001e: invoke-static v1, v0, Landroid/util/Log;->e(Ljava/lang/String; Ljava/lang/String;)I
+000024: const/4 v1, 0
+000026: return v1
+000028: const/4 v1, 1
+00002a: return v1
+
+METHOD a(Ljava/net/HttpURLConnection;)V
+000000: const-string v0, "Content-Type"
+000004: const-string v1, "application/x-www-form-urlencoded;charset=UTF-8"
+000008: invoke-virtual v3, v0, v1, Ljava/net/HttpURLConnection;->setRequestProperty(Ljava/lang/String; Ljava/lang/String;)V
+00000e: return-void 
+
+METHOD call()Ljava/lang/Object;
+000000: invoke-virtual v1, Lcom/vivo/connbase/p;->call()Ljava/lang/String;
+000006: move-result-object v0
+000008: return-object v0
+
+METHOD call()Ljava/lang/String;
+000000: iget-object v0, v2, Lcom/vivo/connbase/p;->c Landroid/content/Context;
+000004: invoke-static v0, Lcom/vivo/connbase/p;->a(Landroid/content/Context;)Z
+00000a: move-result v0
+00000c: if-nez v0, +004h
+000010: const/4 v0, 0
+000012: return-object v0
+000014: iget-object v0, v2, Lcom/vivo/connbase/p;->d Lcom/vivo/connbase/p$a;
+000018: sget-object v1, Lcom/vivo/connbase/p$a;->b Lcom/vivo/connbase/p$a;
+00001c: if-ne v0, v1, +00bh
+000020: iget-object v0, v2, Lcom/vivo/connbase/p;->a Ljava/lang/String;
+000024: iget-object v1, v2, Lcom/vivo/connbase/p;->b [B
+000028: invoke-direct v2, v0, v1, Lcom/vivo/connbase/p;->a(Ljava/lang/String; [B)Ljava/lang/String;
+00002e: move-result-object v0
+000030: goto +7h
+000032: iget-object v0, v2, Lcom/vivo/connbase/p;->a Ljava/lang/String;
+000036: invoke-direct v2, v0, Lcom/vivo/connbase/p;->a(Ljava/lang/String;)Ljava/lang/String;
+00003c: move-result-object v0
+00003e: return-object v0
+000040: move-exception v0
+000042: invoke-virtual v0, Ljava/io/IOException;->printStackTrace()V
+000048: throw v0

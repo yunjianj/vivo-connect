@@ -1,0 +1,120 @@
+APK pcsuite/updateApk/pcsuite.apk
+DEX classes2.dex
+CLASS Lcom/vivo/pcsuite/util/B$j;
+SUPER Ljava/lang/Object;
+FIELDS
+a Lcom/vivo/pcsuite/extscreen/model/protocol/rece/ExtScreenStart; = None
+
+METHOD run()V
+000000: iget-object v8, v8, Lcom/vivo/pcsuite/util/B$j;->a Lcom/vivo/pcsuite/extscreen/model/protocol/rece/ExtScreenStart;
+000004: invoke-virtual v8, Lcom/vivo/pcsuite/extscreen/model/protocol/rece/ExtScreenStart;->getRemountControlState()I
+00000a: move-result v0
+00000c: invoke-virtual v8, Lcom/vivo/pcsuite/extscreen/model/protocol/rece/ExtScreenStart;->getPadExtScreenState()I
+000012: move-result v1
+000014: invoke-virtual v8, Lcom/vivo/pcsuite/extscreen/model/protocol/rece/ExtScreenStart;->getPhoneAnyWhereControlState()I
+00001a: move-result v2
+00001c: invoke-virtual v8, Lcom/vivo/pcsuite/extscreen/model/protocol/rece/ExtScreenStart;->getPadAnyWhereControlState()I
+000022: move-result v3
+000024: sget-object v4, Lcom/vivo/pcsuite/PcSuiteApplication;->I1 Lcom/vivo/pcsuite/PcSuiteApplication;
+000028: invoke-virtual v4, Landroid/content/Context;->getApplicationContext()Landroid/content/Context;
+00002e: move-result-object v4
+000030: sget-object v5, Lcom/vivo/pcsuite/PcSuiteApplication;->I1 Lcom/vivo/pcsuite/PcSuiteApplication;
+000034: invoke-virtual v5, Landroid/content/Context;->getResources()Landroid/content/res/Resources;
+00003a: move-result-object v5
+00003c: const v6, 2131756280
+000042: invoke-virtual v5, v6, Landroid/content/res/Resources;->getString(I)Ljava/lang/String;
+000048: move-result-object v5
+00004a: sget-object v6, Lcom/vivo/pcsuite/PcSuiteApplication;->I1 Lcom/vivo/pcsuite/PcSuiteApplication;
+00004e: invoke-virtual v6, Landroid/content/Context;->getResources()Landroid/content/res/Resources;
+000054: move-result-object v6
+000056: const v7, 2131756274
+00005c: invoke-virtual v6, v7, Landroid/content/res/Resources;->getString(I)Ljava/lang/String;
+000062: move-result-object v6
+000064: const/4 v7, 1
+000066: if-eq v2, v7, +021h
+00006a: if-ne v3, v7, +003h
+00006e: goto +1dh
+000070: if-ne v0, v7, +00ah
+000074: const v0, 2131755674
+00007a: invoke-virtual v4, v0, Landroid/content/Context;->getString(I)Ljava/lang/String;
+000080: move-result-object v0
+000082: goto +35h
+000084: if-ne v1, v7, +00ah
+000088: const v0, 2131755325
+00008e: invoke-virtual v4, v0, Landroid/content/Context;->getString(I)Ljava/lang/String;
+000094: move-result-object v0
+000096: goto +2bh
+000098: const v0, 2131755673
+00009e: invoke-virtual v4, v0, Landroid/content/Context;->getString(I)Ljava/lang/String;
+0000a4: move-result-object v0
+0000a6: goto +23h
+0000a8: if-ne v2, v7, +00ch
+0000ac: if-ne v3, v7, +00ah
+0000b0: const v0, 2131755672
+0000b6: invoke-virtual v4, v0, Landroid/content/Context;->getString(I)Ljava/lang/String;
+0000bc: move-result-object v0
+0000be: goto +17h
+0000c0: const v0, 2131755671
+0000c6: if-ne v2, v7, +00bh
+0000ca: filled-new-array v5, [Ljava/lang/Object;
+0000d0: move-result-object v1
+0000d2: invoke-virtual v4, v0, v1, Landroid/content/Context;->getString(I [Ljava/lang/Object;)Ljava/lang/String;
+0000d8: move-result-object v0
+0000da: goto +9h
+0000dc: filled-new-array v6, [Ljava/lang/Object;
+0000e2: move-result-object v1
+0000e4: invoke-virtual v4, v0, v1, Landroid/content/Context;->getString(I [Ljava/lang/Object;)Ljava/lang/String;
+0000ea: move-result-object v0
+0000ec: new-instance v1, Lcom/originui/widget/dialog/v;
+0000f0: sget-object v2, Lcom/vivo/pcsuite/PcSuiteApplication;->I1 Lcom/vivo/pcsuite/PcSuiteApplication;
+0000f4: invoke-virtual v2, Landroid/content/Context;->getApplicationContext()Landroid/content/Context;
+0000fa: move-result-object v2
+0000fc: const/4 v3, -2
+0000fe: invoke-direct v1, v2, v3, Lcom/originui/widget/dialog/v;-><init>(Landroid/content/Context; I)V
+000104: sget-object v2, Lcom/vivo/pcsuite/PcSuiteApplication;->I1 Lcom/vivo/pcsuite/PcSuiteApplication;
+000108: invoke-virtual v2, Landroid/content/Context;->getResources()Landroid/content/res/Resources;
+00010e: move-result-object v2
+000110: const v3, 2131755140
+000116: invoke-virtual v2, v3, Landroid/content/res/Resources;->getString(I)Ljava/lang/String;
+00011c: move-result-object v2
+00011e: invoke-virtual v1, v2, Lcom/originui/widget/dialog/v;->m(Ljava/lang/CharSequence;)V
+000124: invoke-virtual v1, v0, Lcom/originui/widget/dialog/v;->f(Ljava/lang/CharSequence;)V
+00012a: sget-object v0, Lcom/vivo/pcsuite/PcSuiteApplication;->I1 Lcom/vivo/pcsuite/PcSuiteApplication;
+00012e: invoke-virtual v0, Landroid/content/Context;->getResources()Landroid/content/res/Resources;
+000134: move-result-object v0
+000136: const v2, 2131756137
+00013c: invoke-virtual v0, v2, Landroid/content/res/Resources;->getString(I)Ljava/lang/String;
+000142: move-result-object v0
+000144: new-instance v2, LL2/c;
+000148: const/4 v3, 2
+00014a: invoke-direct v2, v8, v3, LL2/c;-><init>(Ljava/lang/Object; I)V
+000150: invoke-virtual v1, v0, v2, Lcom/originui/widget/dialog/v;->k(Ljava/lang/String; Landroid/content/DialogInterface$OnClickListener;)V
+000156: sget-object v8, Lcom/vivo/pcsuite/PcSuiteApplication;->I1 Lcom/vivo/pcsuite/PcSuiteApplication;
+00015a: invoke-virtual v8, Landroid/content/Context;->getResources()Landroid/content/res/Resources;
+000160: move-result-object v8
+000162: const v0, 2131755316
+000168: invoke-virtual v8, v0, Landroid/content/res/Resources;->getString(I)Ljava/lang/String;
+00016e: move-result-object v8
+000170: new-instance v0, Lcom/vivo/pcsuite/util/l;
+000174: const/4 v2, 1
+000176: invoke-direct v0, v2, Lcom/vivo/pcsuite/util/l;-><init>(I)V
+00017c: invoke-virtual v1, v8, v0, Lcom/originui/widget/dialog/v;->h(Ljava/lang/String; Landroid/content/DialogInterface$OnClickListener;)V
+000182: invoke-virtual v1, Lcom/originui/widget/dialog/v;->a()Landroid/app/Dialog;
+000188: move-result-object v8
+00018a: invoke-virtual v8, Landroid/app/Dialog;->getWindow()Landroid/view/Window;
+000190: move-result-object v0
+000192: if-eqz v0, +00fh
+000196: invoke-virtual v0, Landroid/view/Window;->getAttributes()Landroid/view/WindowManager$LayoutParams;
+00019c: move-result-object v1
+00019e: if-eqz v1, +006h
+0001a2: const/16 v2, 2038
+0001a6: iput v2, v1, Landroid/view/WindowManager$LayoutParams;->type I
+0001aa: invoke-virtual v0, v1, Landroid/view/Window;->setAttributes(Landroid/view/WindowManager$LayoutParams;)V
+0001b0: const/4 v0, 0
+0001b2: invoke-virtual v8, v0, Landroid/app/Dialog;->setCanceledOnTouchOutside(Z)V
+0001b8: new-instance v0, Lcom/vivo/pcsuite/util/v;
+0001bc: const/4 v1, 1
+0001be: invoke-direct v0, v1, Lcom/vivo/pcsuite/util/v;-><init>(I)V
+0001c4: invoke-virtual v8, v0, Landroid/app/Dialog;->setOnKeyListener(Landroid/content/DialogInterface$OnKeyListener;)V
+0001ca: invoke-virtual v8, Landroid/app/Dialog;->show()V
+0001d0: return-void 

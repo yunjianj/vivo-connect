@@ -1,0 +1,300 @@
+APK pcsuite/updateApk/connbase.apk
+DEX classes.dex
+CLASS Lcom/vivo/connbase/ServiceActivity;
+SUPER Landroidx/fragment/app/d;
+FIELDS
+e Ljava/lang/String; = 'privacy.html'
+f Ljava/lang/String; = 'img/icon_privacy.png'
+g Ljava/lang/String; = 'hookWebView'
+a Ljava/lang/String; = None
+b Ljava/lang/String; = None
+c I = None
+d Landroid/webkit/WebView; = None
+
+METHOD <clinit>()V
+000000: return-void 
+
+METHOD <init>()V
+000000: invoke-direct v1, Landroidx/fragment/app/d;-><init>()V
+000006: const-string v0, "ServiceActivity"
+00000a: iput-object v0, v1, Lcom/vivo/connbase/ServiceActivity;->a Ljava/lang/String;
+00000e: const-string v0, "permission_dialog_status"
+000012: iput-object v0, v1, Lcom/vivo/connbase/ServiceActivity;->b Ljava/lang/String;
+000016: return-void 
+
+METHOD a(Landroid/content/Context; F)I
+000000: invoke-virtual v0, Landroid/content/Context;->getResources()Landroid/content/res/Resources;
+000006: move-result-object v0
+000008: invoke-virtual v0, Landroid/content/res/Resources;->getDisplayMetrics()Landroid/util/DisplayMetrics;
+00000e: move-result-object v0
+000010: iget v0, v0, Landroid/util/DisplayMetrics;->density F
+000014: div-float/2addr v1, v0
+000016: const/high16 v0, 1056964608
+00001a: add-float/2addr v1, v0
+00001c: float-to-int v0, v1
+00001e: return v0
+
+METHOD a(Landroid/content/Context;)Ljava/lang/Boolean;
+000000: invoke-virtual v1, Landroid/content/Context;->getResources()Landroid/content/res/Resources;
+000006: move-result-object v1
+000008: invoke-virtual v1, Landroid/content/res/Resources;->getConfiguration()Landroid/content/res/Configuration;
+00000e: move-result-object v1
+000010: iget v1, v1, Landroid/content/res/Configuration;->uiMode I
+000014: and-int/lit8 v1, v1, 48
+000018: const/16 v0, 32
+00001c: if-ne v1, v0, +004h
+000020: const/4 v1, 1
+000022: goto +2h
+000024: const/4 v1, 0
+000026: invoke-static v1, Ljava/lang/Boolean;->valueOf(Z)Ljava/lang/Boolean;
+00002c: move-result-object v1
+00002e: return-object v1
+
+METHOD h()V
+000000: const-string v0, "sProviderInstance"
+000004: sget v1, Landroid/os/Build$VERSION;->SDK_INT I
+000008: const-string v2, "android.webkit.WebViewFactory"
+00000c: invoke-static v2, Ljava/lang/Class;->forName(Ljava/lang/String;)Ljava/lang/Class;
+000012: move-result-object v2
+000014: invoke-virtual v2, v0, Ljava/lang/Class;->getDeclaredField(Ljava/lang/String;)Ljava/lang/reflect/Field;
+00001a: move-result-object v3
+00001c: const/4 v4, 1
+00001e: invoke-virtual v3, v4, Ljava/lang/reflect/Field;->setAccessible(Z)V
+000024: const/4 v5, 0
+000026: invoke-virtual v3, v5, Ljava/lang/reflect/Field;->get(Ljava/lang/Object;)Ljava/lang/Object;
+00002c: move-result-object v6
+00002e: if-eqz v6, +00ah
+000032: sget-object v0, Lcom/vivo/connbase/ServiceActivity;->g Ljava/lang/String;
+000036: const-string v1, "sProviderInstance isn't null"
+00003a: invoke-static v0, v1, Lc/c/f/a/b;->a(Ljava/lang/String; Ljava/lang/String;)V
+000040: return-void 
+000042: const/16 v7, 22
+000046: const/4 v8, 0
+000048: if-le v1, v7, +00bh
+00004c: const-string v7, "getProviderClass"
+000050: new-array v9, v8, [Ljava/lang/Class;
+000054: invoke-virtual v2, v7, v9, Ljava/lang/Class;->getDeclaredMethod(Ljava/lang/String; [Ljava/lang/Class;)Ljava/lang/reflect/Method;
+00005a: move-result-object v7
+00005c: goto +bh
+00005e: if-ne v1, v7, +081h
+000062: const-string v7, "getFactoryClass"
+000066: new-array v9, v8, [Ljava/lang/Class;
+00006a: invoke-virtual v2, v7, v9, Ljava/lang/Class;->getDeclaredMethod(Ljava/lang/String; [Ljava/lang/Class;)Ljava/lang/reflect/Method;
+000070: move-result-object v7
+000072: invoke-virtual v7, v4, Ljava/lang/reflect/Method;->setAccessible(Z)V
+000078: new-array v9, v8, [Ljava/lang/Object;
+00007c: invoke-virtual v7, v2, v9, Ljava/lang/reflect/Method;->invoke(Ljava/lang/Object; [Ljava/lang/Object;)Ljava/lang/Object;
+000082: move-result-object v7
+000084: check-cast v7, Ljava/lang/Class;
+000088: const-string v9, "android.webkit.WebViewDelegate"
+00008c: invoke-static v9, Ljava/lang/Class;->forName(Ljava/lang/String;)Ljava/lang/Class;
+000092: move-result-object v9
+000094: new-array v10, v8, [Ljava/lang/Class;
+000098: invoke-virtual v9, v10, Ljava/lang/Class;->getDeclaredConstructor([Ljava/lang/Class;)Ljava/lang/reflect/Constructor;
+00009e: move-result-object v10
+0000a0: invoke-virtual v10, v4, Ljava/lang/reflect/Constructor;->setAccessible(Z)V
+0000a6: const/16 v11, 26
+0000aa: if-ge v1, v11, +01eh
+0000ae: new-array v1, v4, [Ljava/lang/Class;
+0000b2: aput-object v9, v1, v8
+0000b6: invoke-virtual v7, v1, Ljava/lang/Class;->getConstructor([Ljava/lang/Class;)Ljava/lang/reflect/Constructor;
+0000bc: move-result-object v1
+0000be: if-eqz v1, +03fh
+0000c2: invoke-virtual v1, v4, Ljava/lang/reflect/Constructor;->setAccessible(Z)V
+0000c8: new-array v2, v4, [Ljava/lang/Object;
+0000cc: new-array v4, v8, [Ljava/lang/Object;
+0000d0: invoke-virtual v10, v4, Ljava/lang/reflect/Constructor;->newInstance([Ljava/lang/Object;)Ljava/lang/Object;
+0000d6: move-result-object v4
+0000d8: aput-object v4, v2, v8
+0000dc: invoke-virtual v1, v2, Ljava/lang/reflect/Constructor;->newInstance([Ljava/lang/Object;)Ljava/lang/Object;
+0000e2: move-result-object v6
+0000e4: goto +2ch
+0000e6: const-string v1, "CHROMIUM_WEBVIEW_FACTORY_METHOD"
+0000ea: invoke-virtual v2, v1, Ljava/lang/Class;->getDeclaredField(Ljava/lang/String;)Ljava/lang/reflect/Field;
+0000f0: move-result-object v1
+0000f2: invoke-virtual v1, v4, Ljava/lang/reflect/Field;->setAccessible(Z)V
+0000f8: invoke-virtual v1, v5, Ljava/lang/reflect/Field;->get(Ljava/lang/Object;)Ljava/lang/Object;
+0000fe: move-result-object v1
+000100: check-cast v1, Ljava/lang/String;
+000104: if-nez v1, +004h
+000108: const-string v1, "create"
+00010c: new-array v2, v4, [Ljava/lang/Class;
+000110: aput-object v9, v2, v8
+000114: invoke-virtual v7, v1, v2, Ljava/lang/Class;->getMethod(Ljava/lang/String; [Ljava/lang/Class;)Ljava/lang/reflect/Method;
+00011a: move-result-object v1
+00011c: if-eqz v1, +010h
+000120: new-array v2, v4, [Ljava/lang/Object;
+000124: new-array v4, v8, [Ljava/lang/Object;
+000128: invoke-virtual v10, v4, Ljava/lang/reflect/Constructor;->newInstance([Ljava/lang/Object;)Ljava/lang/Object;
+00012e: move-result-object v4
+000130: aput-object v4, v2, v8
+000134: invoke-virtual v1, v5, v2, Ljava/lang/reflect/Method;->invoke(Ljava/lang/Object; [Ljava/lang/Object;)Ljava/lang/Object;
+00013a: move-result-object v6
+00013c: if-eqz v6, +00dh
+000140: invoke-virtual v3, v0, v6, Ljava/lang/reflect/Field;->set(Ljava/lang/Object; Ljava/lang/Object;)V
+000146: sget-object v0, Lcom/vivo/connbase/ServiceActivity;->g Ljava/lang/String;
+00014a: const-string v1, "Hook success!"
+00014e: invoke-static v0, v1, Lc/c/f/a/b;->a(Ljava/lang/String; Ljava/lang/String;)V
+000154: goto +14h
+000156: sget-object v0, Lcom/vivo/connbase/ServiceActivity;->g Ljava/lang/String;
+00015a: const-string v1, "Hook failed!"
+00015e: goto -8h
+000160: sget-object v0, Lcom/vivo/connbase/ServiceActivity;->g Ljava/lang/String;
+000164: const-string v1, "Don't need to Hook WebView"
+000168: invoke-static v0, v1, Lc/c/f/a/b;->a(Ljava/lang/String; Ljava/lang/String;)V
+00016e: return-void 
+000170: move-exception v0
+000172: sget-object v1, Lcom/vivo/connbase/ServiceActivity;->g Ljava/lang/String;
+000176: invoke-static v1, v0, Landroid/util/Log;->w(Ljava/lang/String; Ljava/lang/Throwable;)I
+00017c: return-void 
+
+METHOD a(Lcom/vivo/connbase/o/i;)V
+000000: return-void 
+
+METHOD onCreate(Landroid/os/Bundle;)V
+000000: invoke-super v4, v5, Landroidx/fragment/app/d;->onCreate(Landroid/os/Bundle;)V
+000006: invoke-static Lcom/vivo/connbase/ServiceActivity;->h()V
+00000c: sget v5, Landroid/os/Build$VERSION;->SDK_INT I
+000010: const/4 v0, 0
+000012: const/16 v1, 21
+000016: if-lt v5, v1, +009h
+00001a: invoke-virtual v4, Landroid/app/Activity;->getWindow()Landroid/view/Window;
+000020: move-result-object v5
+000022: invoke-virtual v5, v0, Landroid/view/Window;->setNavigationBarColor(I)V
+000028: sget v5, Landroid/os/Build$VERSION;->SDK_INT I
+00002c: const/16 v1, 23
+000030: if-lt v5, v1, +04ch
+000034: invoke-virtual v4, Landroid/app/Activity;->getWindow()Landroid/view/Window;
+00003a: move-result-object v5
+00003c: const/high16 v1, 201326592
+000040: invoke-virtual v5, v1, Landroid/view/Window;->clearFlags(I)V
+000046: invoke-static v4, Lcom/vivo/connbase/ServiceActivity;->a(Landroid/content/Context;)Ljava/lang/Boolean;
+00004c: move-result-object v1
+00004e: invoke-virtual v1, Ljava/lang/Boolean;->booleanValue()Z
+000054: move-result v1
+000056: if-eqz v1, +005h
+00005a: const/16 v1, 1792
+00005e: goto +ch
+000060: sget v1, Landroid/os/Build$VERSION;->SDK_INT I
+000064: const/16 v2, 26
+000068: if-lt v1, v2, +005h
+00006c: const/16 v1, 10000
+000070: goto +3h
+000072: const/16 v1, 9984
+000076: invoke-virtual v5, Landroid/view/Window;->getDecorView()Landroid/view/View;
+00007c: move-result-object v2
+00007e: invoke-virtual v2, v1, Landroid/view/View;->setSystemUiVisibility(I)V
+000084: const/high16 v1, -2147483648
+000088: invoke-virtual v5, v1, Landroid/view/Window;->addFlags(I)V
+00008e: invoke-virtual v4, Landroid/app/Activity;->getResources()Landroid/content/res/Resources;
+000094: move-result-object v1
+000096: const v2, 2131100054
+00009c: invoke-virtual v1, v2, Landroid/content/res/Resources;->getColor(I)I
+0000a2: move-result v1
+0000a4: invoke-virtual v5, v1, Landroid/view/Window;->setStatusBarColor(I)V
+0000aa: invoke-virtual v4, Landroid/app/Activity;->getResources()Landroid/content/res/Resources;
+0000b0: move-result-object v1
+0000b2: const v2, 2131100147
+0000b8: invoke-virtual v1, v2, Landroid/content/res/Resources;->getColor(I)I
+0000be: move-result v1
+0000c0: invoke-virtual v5, v1, Landroid/view/Window;->setNavigationBarColor(I)V
+0000c6: goto +ah
+0000c8: invoke-virtual v4, Landroid/app/Activity;->getWindow()Landroid/view/Window;
+0000ce: move-result-object v5
+0000d0: const/high16 v1, 67108864
+0000d4: invoke-virtual v5, v1, v1, Landroid/view/Window;->setFlags(I I)V
+0000da: invoke-static Lcom/vivo/connbase/wifi/utils/PhoneUtils;->isVivoPad()Z
+0000e0: move-result v5
+0000e2: const/4 v1, 1
+0000e4: if-eqz v5, +007h
+0000e8: const/4 v5, -1
+0000ea: invoke-virtual v4, v5, Landroid/app/Activity;->setRequestedOrientation(I)V
+0000f0: goto +4h
+0000f2: invoke-virtual v4, v1, Landroid/app/Activity;->setRequestedOrientation(I)V
+0000f8: const v5, 2131492897
+0000fe: invoke-virtual v4, v5, Landroid/app/Activity;->setContentView(I)V
+000104: invoke-virtual v4, Landroid/app/Activity;->getIntent()Landroid/content/Intent;
+00010a: move-result-object v5
+00010c: iget-object v2, v4, Lcom/vivo/connbase/ServiceActivity;->b Ljava/lang/String;
+000110: invoke-virtual v5, v2, v0, Landroid/content/Intent;->getIntExtra(Ljava/lang/String; I)I
+000116: move-result v5
+000118: iput v5, v4, Lcom/vivo/connbase/ServiceActivity;->c I
+00011c: iget-object v5, v4, Lcom/vivo/connbase/ServiceActivity;->a Ljava/lang/String;
+000120: new-instance v2, Ljava/lang/StringBuilder;
+000124: invoke-direct v2, Ljava/lang/StringBuilder;-><init>()V
+00012a: const-string v3, "permissionDialogStatus ="
+00012e: invoke-virtual v2, v3, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+000134: iget v3, v4, Lcom/vivo/connbase/ServiceActivity;->c I
+000138: invoke-virtual v2, v3, Ljava/lang/StringBuilder;->append(I)Ljava/lang/StringBuilder;
+00013e: invoke-virtual v2, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
+000144: move-result-object v2
+000146: invoke-static v5, v2, Lc/c/f/a/b;->k(Ljava/lang/String; Ljava/lang/String;)V
+00014c: const v5, 2131296341
+000152: invoke-virtual v4, v5, Landroid/app/Activity;->findViewById(I)Landroid/view/View;
+000158: move-result-object v5
+00015a: check-cast v5, Lcom/vivo/vivotitleview/BbkTitleView;
+00015e: const-string v2, ""
+000162: invoke-virtual v5, v2, Lcom/vivo/vivotitleview/BbkTitleView;->setCenterText(Ljava/lang/CharSequence;)V
+000168: invoke-virtual v5, Lcom/vivo/vivotitleview/BbkTitleView;->h()V
+00016e: const/4 v2, 2
+000170: invoke-virtual v5, v2, Lcom/vivo/vivotitleview/BbkTitleView;->setLeftButtonIcon(I)V
+000176: new-instance v3, Lcom/vivo/connbase/ServiceActivity$a;
+00017a: invoke-direct v3, v4, Lcom/vivo/connbase/ServiceActivity$a;-><init>(Lcom/vivo/connbase/ServiceActivity;)V
+000180: invoke-virtual v5, v3, Lcom/vivo/vivotitleview/BbkTitleView;->setLeftButtonClickListener(Landroid/view/View$OnClickListener;)V
+000186: const v5, 2131296843
+00018c: invoke-virtual v4, v5, Landroid/app/Activity;->findViewById(I)Landroid/view/View;
+000192: move-result-object v5
+000194: check-cast v5, Landroid/webkit/WebView;
+000198: iput-object v5, v4, Lcom/vivo/connbase/ServiceActivity;->d Landroid/webkit/WebView;
+00019c: invoke-virtual v5, v0, Landroid/webkit/WebView;->setBackgroundColor(I)V
+0001a2: invoke-static Lcom/vivo/utils/x;->a()I
+0001a8: move-result v5
+0001aa: if-ne v5, v1, +00bh
+0001ae: iget-object v5, v4, Lcom/vivo/connbase/ServiceActivity;->d Landroid/webkit/WebView;
+0001b2: invoke-virtual v5, Landroid/webkit/WebView;->getSettings()Landroid/webkit/WebSettings;
+0001b8: move-result-object v5
+0001ba: invoke-virtual v5, v2, Landroid/webkit/WebSettings;->setForceDark(I)V
+0001c0: const-string v5, "privacy.html"
+0001c4: invoke-static v4, v5, Lcom/vivo/utils/a;->a(Landroid/content/Context; Ljava/lang/String;)Ljava/lang/String;
+0001ca: move-result-object v5
+0001cc: iget-object v1, v4, Lcom/vivo/connbase/ServiceActivity;->d Landroid/webkit/WebView;
+0001d0: invoke-virtual v1, Landroid/webkit/WebView;->getSettings()Landroid/webkit/WebSettings;
+0001d6: move-result-object v1
+0001d8: invoke-virtual v1, v0, Landroid/webkit/WebSettings;->setAllowFileAccessFromFileURLs(Z)V
+0001de: iget-object v1, v4, Lcom/vivo/connbase/ServiceActivity;->d Landroid/webkit/WebView;
+0001e2: invoke-virtual v1, Landroid/webkit/WebView;->getSettings()Landroid/webkit/WebSettings;
+0001e8: move-result-object v1
+0001ea: invoke-virtual v1, v0, Landroid/webkit/WebSettings;->setAllowUniversalAccessFromFileURLs(Z)V
+0001f0: iget-object v1, v4, Lcom/vivo/connbase/ServiceActivity;->d Landroid/webkit/WebView;
+0001f4: invoke-virtual v1, Landroid/webkit/WebView;->getSettings()Landroid/webkit/WebSettings;
+0001fa: move-result-object v1
+0001fc: invoke-virtual v1, v0, Landroid/webkit/WebSettings;->setAllowFileAccess(Z)V
+000202: iget-object v0, v4, Lcom/vivo/connbase/ServiceActivity;->d Landroid/webkit/WebView;
+000206: invoke-virtual v0, v5, Landroid/webkit/WebView;->loadUrl(Ljava/lang/String;)V
+00020c: return-void 
+
+METHOD onDestroy()V
+000000: invoke-super v1, Landroidx/fragment/app/d;->onDestroy()V
+000006: invoke-static Lorg/greenrobot/eventbus/EventBus;->getDefault()Lorg/greenrobot/eventbus/EventBus;
+00000c: move-result-object v0
+00000e: invoke-virtual v0, v1, Lorg/greenrobot/eventbus/EventBus;->unregister(Ljava/lang/Object;)V
+000014: return-void 
+
+METHOD onKeyDown(I Landroid/view/KeyEvent;)Z
+000000: const/4 v0, 4
+000002: if-ne v3, v0, +019h
+000006: iget v3, v2, Lcom/vivo/connbase/ServiceActivity;->c I
+00000a: const/4 v4, 1
+00000c: if-ne v3, v4, +00fh
+000010: invoke-static Lorg/greenrobot/eventbus/EventBus;->getDefault()Lorg/greenrobot/eventbus/EventBus;
+000016: move-result-object v3
+000018: new-instance v0, Lcom/vivo/connbase/o/g;
+00001c: const/4 v1, 0
+00001e: invoke-direct v0, v4, v1, Lcom/vivo/connbase/o/g;-><init>(I Ljava/lang/Object;)V
+000024: invoke-virtual v3, v0, Lorg/greenrobot/eventbus/EventBus;->post(Ljava/lang/Object;)V
+00002a: invoke-virtual v2, Landroid/app/Activity;->finish()V
+000030: const/4 v3, 0
+000032: return v3
+000034: invoke-super v2, v3, v4, Landroid/app/Activity;->onKeyDown(I Landroid/view/KeyEvent;)Z
+00003a: move-result v3
+00003c: return v3

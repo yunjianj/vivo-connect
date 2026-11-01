@@ -1,0 +1,40 @@
+APK pcsuite/updateApk/pcsuite.apk
+DEX classes2.dex
+CLASS Lcom/vivo/pcsuite/connect/ConnectControlModel$9;
+SUPER Ljava/lang/Object;
+FIELDS
+
+
+METHOD onFileReceived(Ljava/lang/String; Lcom/vivo/connect/transfer/Payload; Ljava/io/InputStream;)V
+000000: const-string v0, "pcsuite_ConnectControlModel"
+000004: const-string/jumbo v2, wlan onFileReceived:
+00000a: invoke-static v2, v1, v0, Landroidx/constraintlayout/core/motion/a;->d(Ljava/lang/String; Ljava/lang/String; Ljava/lang/String;)V
+000010: return-void 
+
+METHOD onPayloadReceived(Ljava/lang/String; Lcom/vivo/connect/transfer/Payload;)V
+000000: const-string v0, "pcsuite_ConnectControlModel"
+000004: const-string/jumbo v2, wlan onPayloadReceived:
+00000a: invoke-static v2, v1, v0, Landroidx/constraintlayout/core/motion/a;->d(Ljava/lang/String; Ljava/lang/String; Ljava/lang/String;)V
+000010: return-void 
+
+METHOD onPayloadTransferUpdate(Ljava/lang/String; Lcom/vivo/connect/transfer/PayloadTransferUpdate;)V
+000000: if-eqz v3, +02ch
+000004: invoke-virtual v3, Lcom/vivo/connect/transfer/PayloadTransferUpdate;->getStatus()I
+00000a: move-result v1
+00000c: const-string/jumbo v2, wlan status:
+000012: const-string v0, " onPayloadTransferUpdate:"
+000016: invoke-static v1, v2, v0, LS5/f;->d(I Ljava/lang/String; Ljava/lang/String;)Ljava/lang/StringBuilder;
+00001c: move-result-object v1
+00001e: invoke-virtual v3, Lcom/vivo/connect/transfer/PayloadTransferUpdate;->getStatus()I
+000024: move-result v2
+000026: invoke-virtual v1, v2, Ljava/lang/StringBuilder;->append(I)Ljava/lang/StringBuilder;
+00002c: const-string/jumbo v2, total:
+000032: invoke-virtual v1, v2, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+000038: invoke-virtual v3, Lcom/vivo/connect/transfer/PayloadTransferUpdate;->getTotalBytes()J
+00003e: move-result-wide v2
+000040: invoke-virtual v1, v2, v3, Ljava/lang/StringBuilder;->append(J)Ljava/lang/StringBuilder;
+000046: invoke-virtual v1, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
+00004c: move-result-object v1
+00004e: const-string v2, "pcsuite_ConnectControlModel"
+000052: invoke-static v2, v1, Lcom/vivo/connect/logger/EasyLog;->i(Ljava/lang/String; Ljava/lang/String;)V
+000058: return-void 

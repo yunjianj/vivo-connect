@@ -1,0 +1,143 @@
+APK pcsuite/updateApk/connbase.apk
+DEX classes.dex
+CLASS Lcom/vivo/connbase/j0/a;
+SUPER Ljava/lang/Object;
+FIELDS
+a Ljava/lang/String; = None
+b Z = None
+c Z = None
+
+METHOD <init>(Ljava/lang/String; Z)V
+000000: const/4 v0, 0
+000002: invoke-direct v1, v2, v3, v0, Lcom/vivo/connbase/j0/a;-><init>(Ljava/lang/String; Z Z)V
+000008: return-void 
+
+METHOD <init>(Ljava/lang/String; Z Z)V
+000000: invoke-direct v0, Ljava/lang/Object;-><init>()V
+000006: iput-object v1, v0, Lcom/vivo/connbase/j0/a;->a Ljava/lang/String;
+00000a: iput-boolean v2, v0, Lcom/vivo/connbase/j0/a;->b Z
+00000e: iput-boolean v3, v0, Lcom/vivo/connbase/j0/a;->c Z
+000012: return-void 
+
+METHOD <init>(Ljava/util/List;)V
+000000: invoke-direct v1, Ljava/lang/Object;-><init>()V
+000006: invoke-direct v1, v2, Lcom/vivo/connbase/j0/a;->b(Ljava/util/List;)Ljava/lang/String;
+00000c: move-result-object v0
+00000e: iput-object v0, v1, Lcom/vivo/connbase/j0/a;->a Ljava/lang/String;
+000012: invoke-direct v1, v2, Lcom/vivo/connbase/j0/a;->a(Ljava/util/List;)Ljava/lang/Boolean;
+000018: move-result-object v0
+00001a: invoke-virtual v0, Ljava/lang/Boolean;->booleanValue()Z
+000020: move-result v0
+000022: iput-boolean v0, v1, Lcom/vivo/connbase/j0/a;->b Z
+000026: invoke-direct v1, v2, Lcom/vivo/connbase/j0/a;->c(Ljava/util/List;)Ljava/lang/Boolean;
+00002c: move-result-object v2
+00002e: invoke-virtual v2, Ljava/lang/Boolean;->booleanValue()Z
+000034: move-result v2
+000036: iput-boolean v2, v1, Lcom/vivo/connbase/j0/a;->c Z
+00003a: return-void 
+
+METHOD a(Ljava/util/List;)Ljava/lang/Boolean;
+000000: invoke-static v2, Ld/a/a/c/i0;->g(Ljava/lang/Iterable;)Ld/a/a/c/i0;
+000006: move-result-object v2
+000008: new-instance v0, Lcom/vivo/connbase/j0/a$c;
+00000c: invoke-direct v0, v1, Lcom/vivo/connbase/j0/a$c;-><init>(Lcom/vivo/connbase/j0/a;)V
+000012: invoke-virtual v2, v0, Ld/a/a/c/i0;->a(Ld/a/a/g/r;)Ld/a/a/c/r0;
+000018: move-result-object v2
+00001a: invoke-virtual v2, Ld/a/a/c/r0;->d()Ljava/lang/Object;
+000020: move-result-object v2
+000022: check-cast v2, Ljava/lang/Boolean;
+000026: return-object v2
+
+METHOD b(Ljava/util/List;)Ljava/lang/String;
+000000: invoke-static v3, Ld/a/a/c/i0;->g(Ljava/lang/Iterable;)Ld/a/a/c/i0;
+000006: move-result-object v3
+000008: new-instance v0, Lcom/vivo/connbase/j0/a$b;
+00000c: invoke-direct v0, v2, Lcom/vivo/connbase/j0/a$b;-><init>(Lcom/vivo/connbase/j0/a;)V
+000012: invoke-virtual v3, v0, Ld/a/a/c/i0;->x(Ld/a/a/g/o;)Ld/a/a/c/i0;
+000018: move-result-object v3
+00001a: new-instance v0, Ljava/lang/StringBuilder;
+00001e: invoke-direct v0, Ljava/lang/StringBuilder;-><init>()V
+000024: new-instance v1, Lcom/vivo/connbase/j0/a$a;
+000028: invoke-direct v1, v2, Lcom/vivo/connbase/j0/a$a;-><init>(Lcom/vivo/connbase/j0/a;)V
+00002e: invoke-virtual v3, v0, v1, Ld/a/a/c/i0;->a(Ljava/lang/Object; Ld/a/a/g/b;)Ld/a/a/c/r0;
+000034: move-result-object v3
+000036: invoke-virtual v3, Ld/a/a/c/r0;->d()Ljava/lang/Object;
+00003c: move-result-object v3
+00003e: check-cast v3, Ljava/lang/StringBuilder;
+000042: invoke-virtual v3, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
+000048: move-result-object v3
+00004a: return-object v3
+
+METHOD c(Ljava/util/List;)Ljava/lang/Boolean;
+000000: invoke-static v2, Ld/a/a/c/i0;->g(Ljava/lang/Iterable;)Ld/a/a/c/i0;
+000006: move-result-object v2
+000008: new-instance v0, Lcom/vivo/connbase/j0/a$d;
+00000c: invoke-direct v0, v1, Lcom/vivo/connbase/j0/a$d;-><init>(Lcom/vivo/connbase/j0/a;)V
+000012: invoke-virtual v2, v0, Ld/a/a/c/i0;->b(Ld/a/a/g/r;)Ld/a/a/c/r0;
+000018: move-result-object v2
+00001a: invoke-virtual v2, Ld/a/a/c/r0;->d()Ljava/lang/Object;
+000020: move-result-object v2
+000022: check-cast v2, Ljava/lang/Boolean;
+000026: return-object v2
+
+METHOD equals(Ljava/lang/Object;)Z
+000000: if-ne v3, v4, +004h
+000004: const/4 v4, 1
+000006: return v4
+000008: const/4 v0, 0
+00000a: if-eqz v4, +024h
+00000e: const-class v1, Lcom/vivo/connbase/j0/a;
+000012: invoke-virtual v4, Ljava/lang/Object;->getClass()Ljava/lang/Class;
+000018: move-result-object v2
+00001a: if-eq v1, v2, +003h
+00001e: goto +1ah
+000020: check-cast v4, Lcom/vivo/connbase/j0/a;
+000024: iget-boolean v1, v3, Lcom/vivo/connbase/j0/a;->b Z
+000028: iget-boolean v2, v4, Lcom/vivo/connbase/j0/a;->b Z
+00002c: if-eq v1, v2, +003h
+000030: return v0
+000032: iget-boolean v1, v3, Lcom/vivo/connbase/j0/a;->c Z
+000036: iget-boolean v2, v4, Lcom/vivo/connbase/j0/a;->c Z
+00003a: if-eq v1, v2, +003h
+00003e: return v0
+000040: iget-object v0, v3, Lcom/vivo/connbase/j0/a;->a Ljava/lang/String;
+000044: iget-object v4, v4, Lcom/vivo/connbase/j0/a;->a Ljava/lang/String;
+000048: invoke-virtual v0, v4, Ljava/lang/String;->equals(Ljava/lang/Object;)Z
+00004e: move-result v4
+000050: return v4
+000052: return v0
+
+METHOD hashCode()I
+000000: iget-object v0, v2, Lcom/vivo/connbase/j0/a;->a Ljava/lang/String;
+000004: invoke-virtual v0, Ljava/lang/String;->hashCode()I
+00000a: move-result v0
+00000c: mul-int/lit8 v0, v0, 31
+000010: iget-boolean v1, v2, Lcom/vivo/connbase/j0/a;->b Z
+000014: add-int/2addr v0, v1
+000016: mul-int/lit8 v0, v0, 31
+00001a: iget-boolean v1, v2, Lcom/vivo/connbase/j0/a;->c Z
+00001e: add-int/2addr v0, v1
+000020: return v0
+
+METHOD toString()Ljava/lang/String;
+000000: new-instance v0, Ljava/lang/StringBuilder;
+000004: invoke-direct v0, Ljava/lang/StringBuilder;-><init>()V
+00000a: const-string v1, "Permission{name='"
+00000e: invoke-virtual v0, v1, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+000014: iget-object v1, v2, Lcom/vivo/connbase/j0/a;->a Ljava/lang/String;
+000018: invoke-virtual v0, v1, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+00001e: const/16 v1, 39
+000022: invoke-virtual v0, v1, Ljava/lang/StringBuilder;->append(C)Ljava/lang/StringBuilder;
+000028: const-string v1, ", granted="
+00002c: invoke-virtual v0, v1, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+000032: iget-boolean v1, v2, Lcom/vivo/connbase/j0/a;->b Z
+000036: invoke-virtual v0, v1, Ljava/lang/StringBuilder;->append(Z)Ljava/lang/StringBuilder;
+00003c: const-string v1, ", shouldShowRequestPermissionRationale="
+000040: invoke-virtual v0, v1, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+000046: iget-boolean v1, v2, Lcom/vivo/connbase/j0/a;->c Z
+00004a: invoke-virtual v0, v1, Ljava/lang/StringBuilder;->append(Z)Ljava/lang/StringBuilder;
+000050: const/16 v1, 125
+000054: invoke-virtual v0, v1, Ljava/lang/StringBuilder;->append(C)Ljava/lang/StringBuilder;
+00005a: invoke-virtual v0, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
+000060: move-result-object v0
+000062: return-object v0

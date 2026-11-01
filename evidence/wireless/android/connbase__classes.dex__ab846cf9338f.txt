@@ -1,0 +1,61 @@
+APK pcsuite/updateApk/connbase.apk
+DEX classes.dex
+CLASS Lcom/vivo/connbase/nfc/l$e;
+SUPER Ljava/lang/Object;
+FIELDS
+a Lcom/vivo/connbase/ITagTouchedCallback; = None
+b Ljava/lang/String; = None
+c Lcom/vivo/connbase/nfc/l; = None
+
+METHOD <init>(Lcom/vivo/connbase/nfc/l; Ljava/lang/String; Lcom/vivo/connbase/ITagTouchedCallback;)V
+000000: iput-object v1, v0, Lcom/vivo/connbase/nfc/l$e;->c Lcom/vivo/connbase/nfc/l;
+000004: invoke-direct v0, Ljava/lang/Object;-><init>()V
+00000a: iput-object v3, v0, Lcom/vivo/connbase/nfc/l$e;->a Lcom/vivo/connbase/ITagTouchedCallback;
+00000e: iput-object v2, v0, Lcom/vivo/connbase/nfc/l$e;->b Ljava/lang/String;
+000012: return-void 
+
+METHOD a(Lcom/vivo/connbase/nfc/l$e;)V
+000000: invoke-direct v0, Lcom/vivo/connbase/nfc/l$e;->b()V
+000006: return-void 
+
+METHOD b()V
+000000: iget-object v0, v2, Lcom/vivo/connbase/nfc/l$e;->a Lcom/vivo/connbase/ITagTouchedCallback;
+000004: invoke-interface v0, Landroid/os/IInterface;->asBinder()Landroid/os/IBinder;
+00000a: move-result-object v0
+00000c: const/4 v1, 0
+00000e: invoke-interface v0, v2, v1, Landroid/os/IBinder;->linkToDeath(Landroid/os/IBinder$DeathRecipient; I)V
+000014: return-void 
+
+METHOD a()V
+000000: iget-object v0, v2, Lcom/vivo/connbase/nfc/l$e;->a Lcom/vivo/connbase/ITagTouchedCallback;
+000004: invoke-interface v0, Landroid/os/IInterface;->asBinder()Landroid/os/IBinder;
+00000a: move-result-object v0
+00000c: const/4 v1, 0
+00000e: invoke-interface v0, v2, v1, Landroid/os/IBinder;->unlinkToDeath(Landroid/os/IBinder$DeathRecipient; I)Z
+000014: return-void 
+
+METHOD binderDied()V
+000000: iget-object v0, v4, Lcom/vivo/connbase/nfc/l$e;->a Lcom/vivo/connbase/ITagTouchedCallback;
+000004: monitor-enter v0
+000006: const-string v1, "SceneSyncManager"
+00000a: new-instance v2, Ljava/lang/StringBuilder;
+00000e: invoke-direct v2, Ljava/lang/StringBuilder;-><init>()V
+000014: const-string v3, "binderDied:"
+000018: invoke-virtual v2, v3, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+00001e: iget-object v3, v4, Lcom/vivo/connbase/nfc/l$e;->b Ljava/lang/String;
+000022: invoke-virtual v2, v3, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+000028: invoke-virtual v2, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
+00002e: move-result-object v2
+000030: invoke-static v1, v2, Lc/c/f/a/b;->k(Ljava/lang/String; Ljava/lang/String;)V
+000036: iget-object v1, v4, Lcom/vivo/connbase/nfc/l$e;->c Lcom/vivo/connbase/nfc/l;
+00003a: invoke-static v1, Lcom/vivo/connbase/nfc/l;->f(Lcom/vivo/connbase/nfc/l;)Ljava/util/HashMap;
+000040: move-result-object v1
+000042: iget-object v2, v4, Lcom/vivo/connbase/nfc/l$e;->b Ljava/lang/String;
+000046: invoke-virtual v1, v2, Ljava/util/HashMap;->remove(Ljava/lang/Object;)Ljava/lang/Object;
+00004c: iget-object v1, v4, Lcom/vivo/connbase/nfc/l$e;->b Ljava/lang/String;
+000050: invoke-static v1, Lcom/vivo/connbase/nfc/m;->g(Ljava/lang/String;)V
+000056: monitor-exit v0
+000058: return-void 
+00005a: move-exception v1
+00005c: monitor-exit v0
+00005e: throw v1

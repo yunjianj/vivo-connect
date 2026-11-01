@@ -1,0 +1,34 @@
+APK pcsuite/updateApk/pcsuite.apk
+DEX classes2.dex
+CLASS Lcom/vivo/pcsuite/connect/ConnectControlModel$5$1;
+SUPER Ljava/lang/Object;
+FIELDS
+a Lcom/vivo/pcsuite/connect/ConnectControlModel$5; = None
+
+METHOD <init>(Lcom/vivo/pcsuite/connect/ConnectControlModel$5;)V
+000000: invoke-direct v0, Ljava/lang/Object;-><init>()V
+000006: iput-object v1, v0, Lcom/vivo/pcsuite/connect/ConnectControlModel$5$1;->a Lcom/vivo/pcsuite/connect/ConnectControlModel$5;
+00000a: return-void 
+
+METHOD onStatus(Z Z)V
+000000: const-string v2, "pcsuite_ConnectControlModel"
+000004: const-string v0, "requestWithExtra cancel connect ble"
+000008: invoke-static v2, v0, Lcom/vivo/connect/logger/EasyLog;->i(Ljava/lang/String; Ljava/lang/String;)V
+00000e: iget-object v1, v1, Lcom/vivo/pcsuite/connect/ConnectControlModel$5$1;->a Lcom/vivo/pcsuite/connect/ConnectControlModel$5;
+000012: iget-object v2, v1, Lcom/vivo/pcsuite/connect/ConnectControlModel$5;->g Lcom/vivo/pcsuite/connect/ConnectControlModel;
+000016: invoke-virtual v2, Lcom/vivo/pcsuite/connect/ConnectControlModel;->removeDialogRunnable()V
+00001c: const-string v2, "0"
+000020: if-eqz v3, +005h
+000024: const-string v3, "1"
+000028: goto +2h
+00002a: move-object v3, v2
+00002c: invoke-static v2, v3, Lcom/vivo/pcsuite/util/o0;->U(Ljava/lang/String; Ljava/lang/String;)V
+000032: const/4 v2, -1
+000034: invoke-static v2, Lcom/vivo/pcsuite/service/PcSuiteObserver;->G(I)V
+00003a: iget-object v1, v1, Lcom/vivo/pcsuite/connect/ConnectControlModel$5;->g Lcom/vivo/pcsuite/connect/ConnectControlModel;
+00003e: invoke-virtual v1, Lcom/vivo/pcsuite/connect/ConnectControlModel;->cancelBleByResponse()V
+000044: invoke-static Lcom/vivo/pcsuite/service/PcSuiteObserver;->t()Lcom/vivo/pcsuite/service/PcSuiteObserver;
+00004a: move-result-object v1
+00004c: if-eqz v1, +005h
+000050: invoke-virtual v1, Lcom/vivo/pcsuite/service/PcSuiteObserver;->Q()V
+000056: return-void 

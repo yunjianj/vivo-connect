@@ -1,0 +1,45 @@
+APK pcsuite/updateApk/connbase.apk
+DEX classes2.dex
+CLASS Lcom/vivo/pcsuite/pcconnect/wifip2p/WifiP2pService$t$b;
+SUPER Lcom/vivo/pcsuite/pcconnect/wifip2p/c;
+FIELDS
+c Landroid/net/wifi/p2p/WifiP2pManager$ActionListener; = None
+d Lcom/vivo/pcsuite/pcconnect/wifip2p/WifiP2pService$t; = None
+
+METHOD <init>(Lcom/vivo/pcsuite/pcconnect/wifip2p/WifiP2pService$t; Ljava/lang/String; Ljava/lang/String; Landroid/net/wifi/p2p/WifiP2pManager$ActionListener;)V
+000000: iput-object v1, v0, Lcom/vivo/pcsuite/pcconnect/wifip2p/WifiP2pService$t$b;->d Lcom/vivo/pcsuite/pcconnect/wifip2p/WifiP2pService$t;
+000004: iput-object v4, v0, Lcom/vivo/pcsuite/pcconnect/wifip2p/WifiP2pService$t$b;->c Landroid/net/wifi/p2p/WifiP2pManager$ActionListener;
+000008: invoke-direct v0, v2, v3, Lcom/vivo/pcsuite/pcconnect/wifip2p/c;-><init>(Ljava/lang/String; Ljava/lang/String;)V
+00000e: return-void 
+
+METHOD onFailure(I)V
+000000: invoke-super v2, v3, Lcom/vivo/pcsuite/pcconnect/wifip2p/c;->onFailure(I)V
+000006: iget-object v3, v2, Lcom/vivo/pcsuite/pcconnect/wifip2p/WifiP2pService$t$b;->d Lcom/vivo/pcsuite/pcconnect/wifip2p/WifiP2pService$t;
+00000a: iget-object v3, v3, Lcom/vivo/pcsuite/pcconnect/wifip2p/WifiP2pService$t;->a Lcom/vivo/pcsuite/pcconnect/wifip2p/g/b;
+00000e: const/4 v0, 0
+000010: invoke-virtual v3, v0, Lcom/vivo/pcsuite/pcconnect/wifip2p/g/b;->a(I)Lcom/vivo/pcsuite/pcconnect/wifip2p/g/b;
+000016: iget-object v3, v2, Lcom/vivo/pcsuite/pcconnect/wifip2p/WifiP2pService$t$b;->d Lcom/vivo/pcsuite/pcconnect/wifip2p/WifiP2pService$t;
+00001a: iget-object v3, v3, Lcom/vivo/pcsuite/pcconnect/wifip2p/WifiP2pService$t;->d Lcom/vivo/pcsuite/pcconnect/wifip2p/WifiP2pService;
+00001e: invoke-static v3, Lcom/vivo/pcsuite/pcconnect/wifip2p/WifiP2pService;->a(Lcom/vivo/pcsuite/pcconnect/wifip2p/WifiP2pService;)Landroid/net/wifi/p2p/WifiP2pManager;
+000024: move-result-object v3
+000026: iget-object v0, v2, Lcom/vivo/pcsuite/pcconnect/wifip2p/WifiP2pService$t$b;->d Lcom/vivo/pcsuite/pcconnect/wifip2p/WifiP2pService$t;
+00002a: iget-object v0, v0, Lcom/vivo/pcsuite/pcconnect/wifip2p/WifiP2pService$t;->d Lcom/vivo/pcsuite/pcconnect/wifip2p/WifiP2pService;
+00002e: invoke-static v0, Lcom/vivo/pcsuite/pcconnect/wifip2p/WifiP2pService;->b(Lcom/vivo/pcsuite/pcconnect/wifip2p/WifiP2pService;)Landroid/net/wifi/p2p/WifiP2pManager$Channel;
+000034: move-result-object v0
+000036: iget-object v1, v2, Lcom/vivo/pcsuite/pcconnect/wifip2p/WifiP2pService$t$b;->c Landroid/net/wifi/p2p/WifiP2pManager$ActionListener;
+00003a: invoke-virtual v3, v0, v1, Landroid/net/wifi/p2p/WifiP2pManager;->createGroup(Landroid/net/wifi/p2p/WifiP2pManager$Channel; Landroid/net/wifi/p2p/WifiP2pManager$ActionListener;)V
+000040: return-void 
+
+METHOD onSuccess()V
+000000: invoke-super v3, Lcom/vivo/pcsuite/pcconnect/wifip2p/c;->onSuccess()V
+000006: iget-object v0, v3, Lcom/vivo/pcsuite/pcconnect/wifip2p/WifiP2pService$t$b;->d Lcom/vivo/pcsuite/pcconnect/wifip2p/WifiP2pService$t;
+00000a: iget-object v0, v0, Lcom/vivo/pcsuite/pcconnect/wifip2p/WifiP2pService$t;->d Lcom/vivo/pcsuite/pcconnect/wifip2p/WifiP2pService;
+00000e: invoke-static v0, Lcom/vivo/pcsuite/pcconnect/wifip2p/WifiP2pService;->a(Lcom/vivo/pcsuite/pcconnect/wifip2p/WifiP2pService;)Landroid/net/wifi/p2p/WifiP2pManager;
+000014: move-result-object v0
+000016: iget-object v1, v3, Lcom/vivo/pcsuite/pcconnect/wifip2p/WifiP2pService$t$b;->d Lcom/vivo/pcsuite/pcconnect/wifip2p/WifiP2pService$t;
+00001a: iget-object v1, v1, Lcom/vivo/pcsuite/pcconnect/wifip2p/WifiP2pService$t;->d Lcom/vivo/pcsuite/pcconnect/wifip2p/WifiP2pService;
+00001e: invoke-static v1, Lcom/vivo/pcsuite/pcconnect/wifip2p/WifiP2pService;->b(Lcom/vivo/pcsuite/pcconnect/wifip2p/WifiP2pService;)Landroid/net/wifi/p2p/WifiP2pManager$Channel;
+000024: move-result-object v1
+000026: iget-object v2, v3, Lcom/vivo/pcsuite/pcconnect/wifip2p/WifiP2pService$t$b;->c Landroid/net/wifi/p2p/WifiP2pManager$ActionListener;
+00002a: invoke-virtual v0, v1, v2, Landroid/net/wifi/p2p/WifiP2pManager;->createGroup(Landroid/net/wifi/p2p/WifiP2pManager$Channel; Landroid/net/wifi/p2p/WifiP2pManager$ActionListener;)V
+000030: return-void 

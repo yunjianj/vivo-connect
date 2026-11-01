@@ -1,0 +1,102 @@
+APK pcsuite/updateApk/pcsuite.apk
+DEX classes2.dex
+CLASS Lcom/vivo/connect/utils/Preconditions;
+SUPER Ljava/lang/Object;
+FIELDS
+
+
+METHOD <init>()V
+000000: invoke-direct v0, Ljava/lang/Object;-><init>()V
+000006: return-void 
+
+METHOD checkArgument(Z)V
+000000: if-eqz v0, +003h
+000004: return-void 
+000006: new-instance v0, Ljava/lang/IllegalArgumentException;
+00000a: invoke-direct v0, Ljava/lang/IllegalArgumentException;-><init>()V
+000010: throw v0
+
+METHOD checkArgument(Z Ljava/lang/Object;)V
+000000: if-eqz v0, +003h
+000004: return-void 
+000006: new-instance v0, Ljava/lang/IllegalArgumentException;
+00000a: invoke-static v1, Ljava/lang/String;->valueOf(Ljava/lang/Object;)Ljava/lang/String;
+000010: move-result-object v1
+000012: invoke-direct v0, v1, Ljava/lang/IllegalArgumentException;-><init>(Ljava/lang/String;)V
+000018: throw v0
+
+METHOD checkArgumentInRange(I I I Ljava/lang/String;)I
+000000: const-string v0, ", "
+000004: const-string v1, " is out of range of ["
+000008: if-lt v3, v4, +02ah
+00000c: if-gt v3, v5, +003h
+000010: return v3
+000012: new-instance v3, Ljava/lang/IllegalArgumentException;
+000016: sget-object v2, Ljava/util/Locale;->US Ljava/util/Locale;
+00001a: new-instance v2, Ljava/lang/StringBuilder;
+00001e: invoke-direct v2, Ljava/lang/StringBuilder;-><init>()V
+000024: invoke-virtual v2, v6, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+00002a: invoke-virtual v2, v1, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+000030: invoke-virtual v2, v4, Ljava/lang/StringBuilder;->append(I)Ljava/lang/StringBuilder;
+000036: invoke-virtual v2, v0, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+00003c: invoke-virtual v2, v5, Ljava/lang/StringBuilder;->append(I)Ljava/lang/StringBuilder;
+000042: const-string v4, "] (too high)"
+000046: invoke-virtual v2, v4, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+00004c: invoke-virtual v2, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
+000052: move-result-object v4
+000054: invoke-direct v3, v4, Ljava/lang/IllegalArgumentException;-><init>(Ljava/lang/String;)V
+00005a: throw v3
+00005c: new-instance v3, Ljava/lang/IllegalArgumentException;
+000060: sget-object v2, Ljava/util/Locale;->US Ljava/util/Locale;
+000064: new-instance v2, Ljava/lang/StringBuilder;
+000068: invoke-direct v2, Ljava/lang/StringBuilder;-><init>()V
+00006e: invoke-virtual v2, v6, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+000074: invoke-virtual v2, v1, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+00007a: invoke-virtual v2, v4, Ljava/lang/StringBuilder;->append(I)Ljava/lang/StringBuilder;
+000080: invoke-virtual v2, v0, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+000086: invoke-virtual v2, v5, Ljava/lang/StringBuilder;->append(I)Ljava/lang/StringBuilder;
+00008c: const-string v4, "] (too low)"
+000090: invoke-virtual v2, v4, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+000096: invoke-virtual v2, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
+00009c: move-result-object v4
+00009e: invoke-direct v3, v4, Ljava/lang/IllegalArgumentException;-><init>(Ljava/lang/String;)V
+0000a4: throw v3
+
+METHOD checkArgumentNonnegative(I)I
+000000: if-ltz v0, +003h
+000004: return v0
+000006: new-instance v0, Ljava/lang/IllegalArgumentException;
+00000a: invoke-direct v0, Ljava/lang/IllegalArgumentException;-><init>()V
+000010: throw v0
+
+METHOD checkArgumentNonnegative(I Ljava/lang/String;)I
+000000: if-ltz v0, +003h
+000004: return v0
+000006: new-instance v0, Ljava/lang/IllegalArgumentException;
+00000a: invoke-direct v0, v1, Ljava/lang/IllegalArgumentException;-><init>(Ljava/lang/String;)V
+000010: throw v0
+
+METHOD checkNotNull(Ljava/lang/Object;)Ljava/lang/Object;
+000000: invoke-virtual v0, Ljava/lang/Object;->getClass()Ljava/lang/Class;
+000006: return-object v0
+
+METHOD checkNotNull(Ljava/lang/Object; Ljava/lang/Object;)Ljava/lang/Object;
+000000: if-eqz v0, +003h
+000004: return-object v0
+000006: new-instance v0, Ljava/lang/NullPointerException;
+00000a: invoke-static v1, Ljava/lang/String;->valueOf(Ljava/lang/Object;)Ljava/lang/String;
+000010: move-result-object v1
+000012: invoke-direct v0, v1, Ljava/lang/NullPointerException;-><init>(Ljava/lang/String;)V
+000018: throw v0
+
+METHOD checkState(Z)V
+000000: const/4 v0, 0
+000002: invoke-static v1, v0, Lcom/vivo/connect/utils/Preconditions;->checkState(Z Ljava/lang/String;)V
+000008: return-void 
+
+METHOD checkState(Z Ljava/lang/String;)V
+000000: if-eqz v0, +003h
+000004: return-void 
+000006: new-instance v0, Ljava/lang/IllegalStateException;
+00000a: invoke-direct v0, v1, Ljava/lang/IllegalStateException;-><init>(Ljava/lang/String;)V
+000010: throw v0

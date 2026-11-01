@@ -1,0 +1,117 @@
+APK pcsuite/updateApk/pcsuite.apk
+DEX classes2.dex
+CLASS Lcom/vivo/connect/ConnectOptions$Builder;
+SUPER Ljava/lang/Object;
+FIELDS
+connectOptions Lcom/vivo/connect/ConnectOptions; = None
+
+METHOD <init>()V
+000000: invoke-direct v1, Ljava/lang/Object;-><init>()V
+000006: new-instance v0, Lcom/vivo/connect/ConnectOptions;
+00000a: invoke-direct v0, Lcom/vivo/connect/ConnectOptions;-><init>()V
+000010: iput-object v0, v1, Lcom/vivo/connect/ConnectOptions$Builder;->connectOptions Lcom/vivo/connect/ConnectOptions;
+000014: return-void 
+
+METHOD <init>(Lcom/vivo/connect/ConnectOptions;)V
+000000: invoke-direct v3, Ljava/lang/Object;-><init>()V
+000006: new-instance v0, Lcom/vivo/connect/ConnectOptions;
+00000a: invoke-direct v0, Lcom/vivo/connect/ConnectOptions;-><init>()V
+000010: iput-object v0, v3, Lcom/vivo/connect/ConnectOptions$Builder;->connectOptions Lcom/vivo/connect/ConnectOptions;
+000014: invoke-static v4, Lcom/vivo/connect/ConnectOptions;->a(Lcom/vivo/connect/ConnectOptions;)I
+00001a: move-result v1
+00001c: invoke-static v0, v1, Lcom/vivo/connect/ConnectOptions;->a(Lcom/vivo/connect/ConnectOptions; I)I
+000022: iget-object v0, v3, Lcom/vivo/connect/ConnectOptions$Builder;->connectOptions Lcom/vivo/connect/ConnectOptions;
+000026: invoke-static v4, Lcom/vivo/connect/ConnectOptions;->b(Lcom/vivo/connect/ConnectOptions;)Ljava/lang/String;
+00002c: move-result-object v1
+00002e: invoke-static v0, v1, Lcom/vivo/connect/ConnectOptions;->a(Lcom/vivo/connect/ConnectOptions; Ljava/lang/String;)Ljava/lang/String;
+000034: iget-object v0, v3, Lcom/vivo/connect/ConnectOptions$Builder;->connectOptions Lcom/vivo/connect/ConnectOptions;
+000038: invoke-static v4, Lcom/vivo/connect/ConnectOptions;->c(Lcom/vivo/connect/ConnectOptions;)Z
+00003e: move-result v1
+000040: invoke-static v0, v1, Lcom/vivo/connect/ConnectOptions;->b(Lcom/vivo/connect/ConnectOptions; Z)Z
+000046: iget-object v0, v3, Lcom/vivo/connect/ConnectOptions$Builder;->connectOptions Lcom/vivo/connect/ConnectOptions;
+00004a: invoke-static v4, Lcom/vivo/connect/ConnectOptions;->d(Lcom/vivo/connect/ConnectOptions;)I
+000050: move-result v1
+000052: invoke-static v0, v1, Lcom/vivo/connect/ConnectOptions;->c(Lcom/vivo/connect/ConnectOptions; I)I
+000058: iget-object v0, v3, Lcom/vivo/connect/ConnectOptions$Builder;->connectOptions Lcom/vivo/connect/ConnectOptions;
+00005c: invoke-static v4, Lcom/vivo/connect/ConnectOptions;->e(Lcom/vivo/connect/ConnectOptions;)J
+000062: move-result-wide v1
+000064: invoke-static v0, v1, v2, Lcom/vivo/connect/ConnectOptions;->a(Lcom/vivo/connect/ConnectOptions; J)J
+00006a: iget-object v0, v3, Lcom/vivo/connect/ConnectOptions$Builder;->connectOptions Lcom/vivo/connect/ConnectOptions;
+00006e: invoke-static v4, Lcom/vivo/connect/ConnectOptions;->f(Lcom/vivo/connect/ConnectOptions;)I
+000074: move-result v1
+000076: invoke-static v0, v1, Lcom/vivo/connect/ConnectOptions;->d(Lcom/vivo/connect/ConnectOptions; I)I
+00007c: iget-object v0, v3, Lcom/vivo/connect/ConnectOptions$Builder;->connectOptions Lcom/vivo/connect/ConnectOptions;
+000080: invoke-static v4, Lcom/vivo/connect/ConnectOptions;->g(Lcom/vivo/connect/ConnectOptions;)Ljava/lang/String;
+000086: move-result-object v1
+000088: invoke-static v0, v1, Lcom/vivo/connect/ConnectOptions;->b(Lcom/vivo/connect/ConnectOptions; Ljava/lang/String;)Ljava/lang/String;
+00008e: iget-object v3, v3, Lcom/vivo/connect/ConnectOptions$Builder;->connectOptions Lcom/vivo/connect/ConnectOptions;
+000092: invoke-static v4, Lcom/vivo/connect/ConnectOptions;->h(Lcom/vivo/connect/ConnectOptions;)Ljava/lang/String;
+000098: move-result-object v4
+00009a: invoke-static v3, v4, Lcom/vivo/connect/ConnectOptions;->c(Lcom/vivo/connect/ConnectOptions; Ljava/lang/String;)Ljava/lang/String;
+0000a0: return-void 
+
+METHOD build()Lcom/vivo/connect/ConnectOptions;
+000000: iget-object v0, v0, Lcom/vivo/connect/ConnectOptions$Builder;->connectOptions Lcom/vivo/connect/ConnectOptions;
+000004: return-object v0
+
+METHOD setAcceptTimeout(J)Lcom/vivo/connect/ConnectOptions$Builder;
+000000: const-wide/16 v0, 0
+000004: cmp-long v0, v3, v0
+000008: if-lez v0, +008h
+00000c: iget-object v0, v2, Lcom/vivo/connect/ConnectOptions$Builder;->connectOptions Lcom/vivo/connect/ConnectOptions;
+000010: invoke-static v0, v3, v4, Lcom/vivo/connect/ConnectOptions;->a(Lcom/vivo/connect/ConnectOptions; J)J
+000016: return-object v2
+000018: new-instance v2, Ljava/lang/IllegalArgumentException;
+00001c: const-string v3, "Accept timeout should be positive."
+000020: invoke-direct v2, v3, Ljava/lang/IllegalArgumentException;-><init>(Ljava/lang/String;)V
+000026: throw v2
+
+METHOD setConnectChannel(I)Lcom/vivo/connect/ConnectOptions$Builder;
+000000: iget-object v0, v1, Lcom/vivo/connect/ConnectOptions$Builder;->connectOptions Lcom/vivo/connect/ConnectOptions;
+000004: invoke-static v0, v2, Lcom/vivo/connect/ConnectOptions;->e(Lcom/vivo/connect/ConnectOptions; I)V
+00000a: return-object v1
+
+METHOD setDataAmount(I)Lcom/vivo/connect/ConnectOptions$Builder;
+000000: iget-object v0, v1, Lcom/vivo/connect/ConnectOptions$Builder;->connectOptions Lcom/vivo/connect/ConnectOptions;
+000004: invoke-static v0, v2, Lcom/vivo/connect/ConnectOptions;->c(Lcom/vivo/connect/ConnectOptions; I)I
+00000a: return-object v1
+
+METHOD setExtraInfo(Ljava/lang/String;)Lcom/vivo/connect/ConnectOptions$Builder;
+000000: iget-object v0, v1, Lcom/vivo/connect/ConnectOptions$Builder;->connectOptions Lcom/vivo/connect/ConnectOptions;
+000004: invoke-static v0, v2, Lcom/vivo/connect/ConnectOptions;->d(Lcom/vivo/connect/ConnectOptions; Ljava/lang/String;)V
+00000a: return-object v1
+
+METHOD setGoCreator(I)Lcom/vivo/connect/ConnectOptions$Builder;
+000000: iget-object v0, v1, Lcom/vivo/connect/ConnectOptions$Builder;->connectOptions Lcom/vivo/connect/ConnectOptions;
+000004: invoke-static v0, v2, Lcom/vivo/connect/ConnectOptions;->b(Lcom/vivo/connect/ConnectOptions; I)I
+00000a: return-object v1
+
+METHOD setIsNeedBond(Z)Lcom/vivo/connect/ConnectOptions$Builder;
+000000: iget-object v0, v1, Lcom/vivo/connect/ConnectOptions$Builder;->connectOptions Lcom/vivo/connect/ConnectOptions;
+000004: invoke-static v0, v2, Lcom/vivo/connect/ConnectOptions;->a(Lcom/vivo/connect/ConnectOptions; Z)Z
+00000a: return-object v1
+
+METHOD setNeedWakeUp(Z)Lcom/vivo/connect/ConnectOptions$Builder;
+000000: iget-object v0, v1, Lcom/vivo/connect/ConnectOptions$Builder;->connectOptions Lcom/vivo/connect/ConnectOptions;
+000004: invoke-static v0, v2, Lcom/vivo/connect/ConnectOptions;->b(Lcom/vivo/connect/ConnectOptions; Z)Z
+00000a: return-object v1
+
+METHOD setQrCodeToken(Ljava/lang/String;)Lcom/vivo/connect/ConnectOptions$Builder;
+000000: iget-object v0, v1, Lcom/vivo/connect/ConnectOptions$Builder;->connectOptions Lcom/vivo/connect/ConnectOptions;
+000004: invoke-static v0, v2, Lcom/vivo/connect/ConnectOptions;->c(Lcom/vivo/connect/ConnectOptions; Ljava/lang/String;)Ljava/lang/String;
+00000a: return-object v1
+
+METHOD setServiceId(Ljava/lang/String;)Lcom/vivo/connect/ConnectOptions$Builder;
+000000: iget-object v0, v1, Lcom/vivo/connect/ConnectOptions$Builder;->connectOptions Lcom/vivo/connect/ConnectOptions;
+000004: invoke-static v0, v2, Lcom/vivo/connect/ConnectOptions;->a(Lcom/vivo/connect/ConnectOptions; Ljava/lang/String;)Ljava/lang/String;
+00000a: return-object v1
+
+METHOD setSpecifiedBluetoothAddress(Ljava/lang/String;)Lcom/vivo/connect/ConnectOptions$Builder;
+000000: iget-object v0, v1, Lcom/vivo/connect/ConnectOptions$Builder;->connectOptions Lcom/vivo/connect/ConnectOptions;
+000004: invoke-static v0, v2, Lcom/vivo/connect/ConnectOptions;->b(Lcom/vivo/connect/ConnectOptions; Ljava/lang/String;)Ljava/lang/String;
+00000a: return-object v1
+
+METHOD setTransferMode(I)Lcom/vivo/connect/ConnectOptions$Builder;
+000000: iget-object v0, v1, Lcom/vivo/connect/ConnectOptions$Builder;->connectOptions Lcom/vivo/connect/ConnectOptions;
+000004: invoke-static v0, v2, Lcom/vivo/connect/ConnectOptions;->a(Lcom/vivo/connect/ConnectOptions; I)I
+00000a: return-object v1

@@ -1,0 +1,402 @@
+APK pcsuite/updateApk/connbase.apk
+DEX classes.dex
+CLASS Lcom/vivo/connbase/h0/d/v4$b;
+SUPER Ljava/lang/Object;
+FIELDS
+a [B = None
+b [B = None
+c I = None
+d I = None
+e I = None
+f I = None
+g I = None
+h [B = None
+i [B = None
+j Ljava/lang/String; = None
+k [B = None
+l [B = None
+m Z = None
+n Z = None
+o Lcom/vivo/connbase/h0/c/i$a; = None
+p Lcom/vivo/connbase/h0/d/v4; = None
+
+METHOD <init>(Lcom/vivo/connbase/h0/d/v4; Lcom/vivo/connbase/h0/c/i$a;)V
+000000: iput-object v1, v0, Lcom/vivo/connbase/h0/d/v4$b;->p Lcom/vivo/connbase/h0/d/v4;
+000004: iput-object v2, v0, Lcom/vivo/connbase/h0/d/v4$b;->o Lcom/vivo/connbase/h0/c/i$a;
+000008: invoke-direct v0, Ljava/lang/Object;-><init>()V
+00000e: const/16 v1, 20
+000012: new-array v1, v1, [B
+000016: iput-object v1, v0, Lcom/vivo/connbase/h0/d/v4$b;->a [B
+00001a: const/16 v1, 27
+00001e: new-array v1, v1, [B
+000022: iput-object v1, v0, Lcom/vivo/connbase/h0/d/v4$b;->b [B
+000026: const/4 v1, 4
+000028: new-array v1, v1, [B
+00002c: iput-object v1, v0, Lcom/vivo/connbase/h0/d/v4$b;->h [B
+000030: const/16 v1, 16
+000034: new-array v1, v1, [B
+000038: iput-object v1, v0, Lcom/vivo/connbase/h0/d/v4$b;->i [B
+00003c: invoke-static Lcom/vivo/connbase/e0/g/e;->b()Ljava/lang/String;
+000042: move-result-object v1
+000044: invoke-static v1, Lcom/vivo/connbase/e0/g/e;->b(Ljava/lang/String;)[B
+00004a: move-result-object v1
+00004c: iput-object v1, v0, Lcom/vivo/connbase/h0/d/v4$b;->k [B
+000050: return-void 
+
+METHOD a(I)V
+000000: iget-object v0, v4, Lcom/vivo/connbase/h0/d/v4$b;->o Lcom/vivo/connbase/h0/c/i$a;
+000004: new-instance v1, Ljava/lang/RuntimeException;
+000008: new-instance v2, Ljava/lang/StringBuilder;
+00000c: invoke-direct v2, Ljava/lang/StringBuilder;-><init>()V
+000012: const-string v3, "Scan failed with error code: "
+000016: invoke-virtual v2, v3, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+00001c: invoke-virtual v2, v5, Ljava/lang/StringBuilder;->append(I)Ljava/lang/StringBuilder;
+000022: invoke-virtual v2, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
+000028: move-result-object v5
+00002a: invoke-direct v1, v5, Ljava/lang/RuntimeException;-><init>(Ljava/lang/String;)V
+000030: invoke-interface v0, v1, Lcom/vivo/connbase/h0/c/i$a;->a(Ljava/lang/Throwable;)V
+000036: return-void 
+
+METHOD a(I Landroid/bluetooth/le/ScanResult;)V
+000000: const/4 v0, 1
+000002: if-ne v10, v0, +2d8h
+000006: invoke-virtual v11, Landroid/bluetooth/le/ScanResult;->getScanRecord()Landroid/bluetooth/le/ScanRecord;
+00000c: move-result-object v1
+00000e: sget-object v2, Lcom/vivo/connbase/h0/d/v4;->P Ljava/util/UUID;
+000012: invoke-virtual v2, Ljava/util/UUID;->toString()Ljava/lang/String;
+000018: move-result-object v2
+00001a: invoke-static v2, Landroid/os/ParcelUuid;->fromString(Ljava/lang/String;)Landroid/os/ParcelUuid;
+000020: move-result-object v2
+000022: invoke-virtual v1, v2, Landroid/bluetooth/le/ScanRecord;->getServiceData(Landroid/os/ParcelUuid;)[B
+000028: move-result-object v1
+00002a: iput-object v1, v9, Lcom/vivo/connbase/h0/d/v4$b;->a [B
+00002e: if-eqz v1, +2c2h
+000032: array-length v1, v1
+000034: if-lez v1, +2bfh
+000038: invoke-virtual v11, Landroid/bluetooth/le/ScanResult;->getScanRecord()Landroid/bluetooth/le/ScanRecord;
+00003e: move-result-object v1
+000040: sget-object v2, Lcom/vivo/connbase/h0/d/v4;->T Ljava/util/UUID;
+000044: invoke-virtual v2, Ljava/util/UUID;->toString()Ljava/lang/String;
+00004a: move-result-object v2
+00004c: invoke-static v2, Landroid/os/ParcelUuid;->fromString(Ljava/lang/String;)Landroid/os/ParcelUuid;
+000052: move-result-object v2
+000054: invoke-virtual v1, v2, Landroid/bluetooth/le/ScanRecord;->getServiceData(Landroid/os/ParcelUuid;)[B
+00005a: move-result-object v1
+00005c: iput-object v1, v9, Lcom/vivo/connbase/h0/d/v4$b;->b [B
+000060: iget-object v2, v9, Lcom/vivo/connbase/h0/d/v4$b;->a [B
+000064: const-string v3, "LeDiscoveryUseCaseImpl"
+000068: if-eqz v2, +2a1h
+00006c: array-length v2, v2
+00006e: const/16 v4, 20
+000072: if-lt v2, v4, +29ch
+000076: if-eqz v1, +29ah
+00007a: array-length v2, v1
+00007c: const/16 v4, 27
+000080: if-ge v2, v4, +004h
+000084: goto/16 +293h
+000088: array-length v2, v1
+00008a: sub-int/2addr v2, v0
+00008c: aget-byte v1, v1, v2
+000090: and-int/2addr v1, v0
+000092: const/4 v2, 0
+000094: if-nez v1, +004h
+000098: move v1, v0
+00009a: goto +2h
+00009c: move v1, v2
+00009e: iput-boolean v1, v9, Lcom/vivo/connbase/h0/d/v4$b;->n Z
+0000a2: iget-object v1, v9, Lcom/vivo/connbase/h0/d/v4$b;->b [B
+0000a6: array-length v4, v1
+0000a8: sub-int/2addr v4, v0
+0000aa: aget-byte v1, v1, v4
+0000ae: shr-int/2addr v1, v0
+0000b0: iput v1, v9, Lcom/vivo/connbase/h0/d/v4$b;->c I
+0000b4: new-instance v1, Ljava/lang/StringBuilder;
+0000b8: invoke-direct v1, Ljava/lang/StringBuilder;-><init>()V
+0000be: const-string v4, "It is a common scan result:"
+0000c2: invoke-virtual v1, v4, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+0000c8: iget-boolean v4, v9, Lcom/vivo/connbase/h0/d/v4$b;->n Z
+0000cc: invoke-virtual v1, v4, Ljava/lang/StringBuilder;->append(Z)Ljava/lang/StringBuilder;
+0000d2: const-string v4, ", deviceNameLen="
+0000d6: invoke-virtual v1, v4, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+0000dc: iget v4, v9, Lcom/vivo/connbase/h0/d/v4$b;->c I
+0000e0: invoke-virtual v1, v4, Ljava/lang/StringBuilder;->append(I)Ljava/lang/StringBuilder;
+0000e6: invoke-virtual v1, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
+0000ec: move-result-object v1
+0000ee: invoke-static v3, v1, Lc/c/f/a/b;->b(Ljava/lang/String; Ljava/lang/String;)V
+0000f4: iget-object v1, v9, Lcom/vivo/connbase/h0/d/v4$b;->a [B
+0000f8: aget-byte v1, v1, v2
+0000fc: iput v1, v9, Lcom/vivo/connbase/h0/d/v4$b;->d I
+000100: new-instance v1, Ljava/lang/String;
+000104: iget-object v4, v9, Lcom/vivo/connbase/h0/d/v4$b;->a [B
+000108: const/4 v5, 7
+00010a: invoke-static v4, v0, v5, Ljava/util/Arrays;->copyOfRange([B I I)[B
+000110: move-result-object v4
+000112: invoke-direct v1, v4, Ljava/lang/String;-><init>([B)V
+000118: iget-object v4, v9, Lcom/vivo/connbase/h0/d/v4$b;->a [B
+00011c: aget-byte v5, v4, v5
+000120: iput v5, v9, Lcom/vivo/connbase/h0/d/v4$b;->e I
+000124: shr-int/lit8 v6, v5, 5
+000128: iput v6, v9, Lcom/vivo/connbase/h0/d/v4$b;->f I
+00012c: and-int/lit8 v5, v5, 31
+000130: iput v5, v9, Lcom/vivo/connbase/h0/d/v4$b;->g I
+000134: const/16 v5, 12
+000138: const/16 v6, 8
+00013c: invoke-static v4, v6, v5, Ljava/util/Arrays;->copyOfRange([B I I)[B
+000142: move-result-object v4
+000144: iput-object v4, v9, Lcom/vivo/connbase/h0/d/v4$b;->h [B
+000148: iget-object v4, v9, Lcom/vivo/connbase/h0/d/v4$b;->a [B
+00014c: array-length v5, v4
+00014e: sub-int/2addr v5, v6
+000150: iget-object v7, v9, Lcom/vivo/connbase/h0/d/v4$b;->i [B
+000154: invoke-static v4, v5, v7, v2, v6, Ljava/lang/System;->arraycopy(Ljava/lang/Object; I Ljava/lang/Object; I I)V
+00015a: iget-object v4, v9, Lcom/vivo/connbase/h0/d/v4$b;->b [B
+00015e: iget-object v5, v9, Lcom/vivo/connbase/h0/d/v4$b;->i [B
+000162: invoke-static v4, v2, v5, v6, v6, Ljava/lang/System;->arraycopy(Ljava/lang/Object; I Ljava/lang/Object; I I)V
+000168: new-instance v4, Ljava/lang/String;
+00016c: iget-object v5, v9, Lcom/vivo/connbase/h0/d/v4$b;->i [B
+000170: iget v7, v9, Lcom/vivo/connbase/h0/d/v4$b;->c I
+000174: invoke-static v5, v2, v7, Ljava/util/Arrays;->copyOfRange([B I I)[B
+00017a: move-result-object v5
+00017c: invoke-direct v4, v5, Ljava/lang/String;-><init>([B)V
+000182: iput-object v4, v9, Lcom/vivo/connbase/h0/d/v4$b;->j Ljava/lang/String;
+000186: invoke-static Lcom/vivo/connbase/e0/g/e;->b()Ljava/lang/String;
+00018c: move-result-object v4
+00018e: iget-object v5, v9, Lcom/vivo/connbase/h0/d/v4$b;->h [B
+000192: invoke-static v4, v5, Lcom/vivo/connbase/e0/g/e;->a(Ljava/lang/String; [B)Z
+000198: move-result v4
+00019a: iput-boolean v4, v9, Lcom/vivo/connbase/h0/d/v4$b;->m Z
+00019e: new-instance v4, Ljava/lang/StringBuilder;
+0001a2: invoke-direct v4, Ljava/lang/StringBuilder;-><init>()V
+0001a8: const-string v5, "manually scan result: advertiseVer="
+0001ac: invoke-virtual v4, v5, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+0001b2: iget v5, v9, Lcom/vivo/connbase/h0/d/v4$b;->d I
+0001b6: invoke-virtual v4, v5, Ljava/lang/StringBuilder;->append(I)Ljava/lang/StringBuilder;
+0001bc: const-string v5, ", remoteMac:"
+0001c0: invoke-virtual v4, v5, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+0001c6: invoke-virtual v11, Landroid/bluetooth/le/ScanResult;->getDevice()Landroid/bluetooth/BluetoothDevice;
+0001cc: move-result-object v5
+0001ce: invoke-virtual v5, Landroid/bluetooth/BluetoothDevice;->getAddress()Ljava/lang/String;
+0001d4: move-result-object v5
+0001d6: invoke-static v5, Lcom/vivo/connbase/e0/g/h;->b(Ljava/lang/String;)Ljava/lang/String;
+0001dc: move-result-object v5
+0001de: invoke-virtual v4, v5, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+0001e4: const-string v5, ", advertiseDeviceId="
+0001e8: invoke-virtual v4, v5, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+0001ee: invoke-virtual v4, v1, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+0001f4: const-string v5, ", deviceType="
+0001f8: invoke-virtual v4, v5, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+0001fe: iget v5, v9, Lcom/vivo/connbase/h0/d/v4$b;->f I
+000202: invoke-virtual v4, v5, Ljava/lang/StringBuilder;->append(I)Ljava/lang/StringBuilder;
+000208: const-string v5, ", advHashOrCustomizedLen="
+00020c: invoke-virtual v4, v5, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+000212: iget v5, v9, Lcom/vivo/connbase/h0/d/v4$b;->g I
+000216: invoke-virtual v4, v5, Ljava/lang/StringBuilder;->append(I)Ljava/lang/StringBuilder;
+00021c: const-string v5, ", remoteOpenIdHash="
+000220: invoke-virtual v4, v5, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+000226: iget-object v5, v9, Lcom/vivo/connbase/h0/d/v4$b;->h [B
+00022a: invoke-static v5, Ljava/util/Arrays;->toString([B)Ljava/lang/String;
+000230: move-result-object v5
+000232: invoke-virtual v4, v5, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+000238: const-string v5, ", selfOpenIdHash="
+00023c: invoke-virtual v4, v5, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+000242: iget-object v5, v9, Lcom/vivo/connbase/h0/d/v4$b;->k [B
+000246: invoke-static v5, Ljava/util/Arrays;->toString([B)Ljava/lang/String;
+00024c: move-result-object v5
+00024e: invoke-virtual v4, v5, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+000254: const-string v5, ", deviceName="
+000258: invoke-virtual v4, v5, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+00025e: iget-object v5, v9, Lcom/vivo/connbase/h0/d/v4$b;->j Ljava/lang/String;
+000262: invoke-virtual v4, v5, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+000268: const-string v5, ", isSameOpenId="
+00026c: invoke-virtual v4, v5, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+000272: iget-boolean v5, v9, Lcom/vivo/connbase/h0/d/v4$b;->m Z
+000276: invoke-virtual v4, v5, Ljava/lang/StringBuilder;->append(Z)Ljava/lang/StringBuilder;
+00027c: invoke-virtual v4, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
+000282: move-result-object v4
+000284: invoke-static v3, v4, Lc/c/f/a/b;->b(Ljava/lang/String; Ljava/lang/String;)V
+00028a: const/4 v4, 0
+00028c: iget-boolean v5, v9, Lcom/vivo/connbase/h0/d/v4$b;->n Z
+000290: const-string v7, "--"
+000294: if-eqz v5, +051h
+000298: iget-object v4, v9, Lcom/vivo/connbase/h0/d/v4$b;->b [B
+00029c: invoke-static v4, Lcom/vivo/connbase/h0/d/v4;->b([B)Ljava/util/List;
+0002a2: move-result-object v4
+0002a4: iget-object v5, v9, Lcom/vivo/connbase/h0/d/v4$b;->b [B
+0002a8: array-length v6, v5
+0002aa: add-int/lit8 v6, v6, -3
+0002ae: aget-byte v5, v5, v6
+0002b2: shr-int/2addr v5, v0
+0002b4: and-int/2addr v5, v0
+0002b6: if-ne v5, v0, +003h
+0002ba: move v2, v0
+0002bc: invoke-static Lcom/vivo/connbase/wifi/utils/PhoneUtils;->isVivoPad()Z
+0002c2: move-result v5
+0002c4: new-instance v6, Ljava/lang/StringBuilder;
+0002c8: invoke-direct v6, Ljava/lang/StringBuilder;-><init>()V
+0002ce: const-string v8, "startScan isCommonData onScanResult mdc :"
+0002d2: invoke-virtual v6, v8, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+0002d8: invoke-virtual v6, v2, Ljava/lang/StringBuilder;->append(Z)Ljava/lang/StringBuilder;
+0002de: invoke-virtual v6, v7, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+0002e4: invoke-virtual v6, v5, Ljava/lang/StringBuilder;->append(Z)Ljava/lang/StringBuilder;
+0002ea: invoke-virtual v6, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
+0002f0: move-result-object v6
+0002f2: invoke-static v3, v6, Lc/c/f/a/b;->b(Ljava/lang/String; Ljava/lang/String;)V
+0002f8: if-eqz v5, +0b1h
+0002fc: if-nez v2, +0afh
+000300: new-instance v10, Ljava/lang/StringBuilder;
+000304: invoke-direct v10, Ljava/lang/StringBuilder;-><init>()V
+00030a: const-string v11, "startScan isCommonData return "
+00030e: invoke-virtual v10, v11, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+000314: invoke-virtual v10, v2, Ljava/lang/StringBuilder;->append(Z)Ljava/lang/StringBuilder;
+00031a: invoke-virtual v10, v7, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+000320: invoke-virtual v10, v5, Ljava/lang/StringBuilder;->append(Z)Ljava/lang/StringBuilder;
+000326: invoke-virtual v10, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
+00032c: move-result-object v10
+00032e: invoke-static v3, v10, Lc/c/f/a/b;->b(Ljava/lang/String; Ljava/lang/String;)V
+000334: return-void 
+000336: iget-object v5, v9, Lcom/vivo/connbase/h0/d/v4$b;->b [B
+00033a: const/16 v8, 10
+00033e: invoke-static v5, v6, v8, Ljava/util/Arrays;->copyOfRange([B I I)[B
+000344: move-result-object v5
+000346: iput-object v5, v9, Lcom/vivo/connbase/h0/d/v4$b;->l [B
+00034a: invoke-static v5, Lcom/vivo/connbase/h0/d/v4;->a([B)Lcom/vivo/connbase/h0/c/n;
+000350: move-result-object v5
+000352: if-nez v5, +011h
+000356: const-string v11, "service record is null, skip"
+00035a: invoke-static v3, v11, Lc/c/f/a/b;->p(Ljava/lang/String; Ljava/lang/String;)V
+000360: if-ne v10, v0, +009h
+000364: invoke-static Lcom/vivo/connbase/h0/c/j;->b()Lcom/vivo/connbase/h0/c/j;
+00036a: move-result-object v10
+00036c: invoke-virtual v10, v1, v4, Lcom/vivo/connbase/h0/c/j;->a(Ljava/lang/String; Ljava/util/List;)V
+000372: return-void 
+000374: new-instance v4, Ljava/lang/StringBuilder;
+000378: invoke-direct v4, Ljava/lang/StringBuilder;-><init>()V
+00037e: const-string v6, "startScan generateServiceRecord mdc :"
+000382: invoke-virtual v4, v6, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+000388: invoke-virtual v5, Lcom/vivo/connbase/h0/c/n;->d()Ljava/lang/Boolean;
+00038e: move-result-object v6
+000390: invoke-virtual v4, v6, Ljava/lang/StringBuilder;->append(Ljava/lang/Object;)Ljava/lang/StringBuilder;
+000396: invoke-virtual v4, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
+00039c: move-result-object v4
+00039e: invoke-static v3, v4, Lc/c/f/a/b;->b(Ljava/lang/String; Ljava/lang/String;)V
+0003a4: iget-object v4, v9, Lcom/vivo/connbase/h0/d/v4$b;->b [B
+0003a8: iget v6, v9, Lcom/vivo/connbase/h0/d/v4$b;->g I
+0003ac: add-int/2addr v6, v8
+0003ae: invoke-static v4, v8, v6, Ljava/util/Arrays;->copyOfRange([B I I)[B
+0003b4: move-result-object v4
+0003b6: invoke-virtual v5, v4, Lcom/vivo/connbase/h0/c/n;->a([B)V
+0003bc: new-array v4, v0, [Lcom/vivo/connbase/h0/c/n;
+0003c0: aput-object v5, v4, v2
+0003c4: invoke-static v4, Ljava/util/Arrays;->asList([Ljava/lang/Object;)Ljava/util/List;
+0003ca: move-result-object v4
+0003cc: invoke-static Lcom/vivo/connbase/wifi/utils/PhoneUtils;->isVivoPad()Z
+0003d2: move-result v2
+0003d4: new-instance v6, Ljava/lang/StringBuilder;
+0003d8: invoke-direct v6, Ljava/lang/StringBuilder;-><init>()V
+0003de: const-string v8, "startScan not isCommonData "
+0003e2: invoke-virtual v6, v8, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+0003e8: invoke-virtual v5, Lcom/vivo/connbase/h0/c/n;->d()Ljava/lang/Boolean;
+0003ee: move-result-object v8
+0003f0: invoke-virtual v6, v8, Ljava/lang/StringBuilder;->append(Ljava/lang/Object;)Ljava/lang/StringBuilder;
+0003f6: invoke-virtual v6, v7, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+0003fc: invoke-virtual v6, v2, Ljava/lang/StringBuilder;->append(Z)Ljava/lang/StringBuilder;
+000402: invoke-virtual v6, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
+000408: move-result-object v6
+00040a: invoke-static v3, v6, Lc/c/f/a/b;->b(Ljava/lang/String; Ljava/lang/String;)V
+000410: if-eqz v2, +025h
+000414: invoke-virtual v5, Lcom/vivo/connbase/h0/c/n;->d()Ljava/lang/Boolean;
+00041a: move-result-object v6
+00041c: invoke-virtual v6, Ljava/lang/Boolean;->booleanValue()Z
+000422: move-result v6
+000424: if-nez v6, +01bh
+000428: new-instance v10, Ljava/lang/StringBuilder;
+00042c: invoke-direct v10, Ljava/lang/StringBuilder;-><init>()V
+000432: const-string v11, "startScan not isCommonData return"
+000436: invoke-virtual v10, v11, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+00043c: invoke-virtual v5, Lcom/vivo/connbase/h0/c/n;->d()Ljava/lang/Boolean;
+000442: move-result-object v11
+000444: invoke-virtual v10, v11, Ljava/lang/StringBuilder;->append(Ljava/lang/Object;)Ljava/lang/StringBuilder;
+00044a: invoke-virtual v10, v7, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+000450: invoke-virtual v10, v2, Ljava/lang/StringBuilder;->append(Z)Ljava/lang/StringBuilder;
+000456: goto/16 -098h
+00045a: invoke-interface v4, Ljava/util/List;->iterator()Ljava/util/Iterator;
+000460: move-result-object v2
+000462: invoke-interface v2, Ljava/util/Iterator;->hasNext()Z
+000468: move-result v5
+00046a: if-eqz v5, +01ah
+00046e: invoke-interface v2, Ljava/util/Iterator;->next()Ljava/lang/Object;
+000474: move-result-object v5
+000476: check-cast v5, Lcom/vivo/connbase/h0/c/n;
+00047a: iget-object v6, v9, Lcom/vivo/connbase/h0/d/v4$b;->p Lcom/vivo/connbase/h0/d/v4;
+00047e: invoke-static v6, Lcom/vivo/connbase/h0/d/v4;->k(Lcom/vivo/connbase/h0/d/v4;)Ljava/util/Map;
+000484: move-result-object v6
+000486: invoke-virtual v5, Lcom/vivo/connbase/h0/c/n;->f()Ljava/lang/String;
+00048c: move-result-object v7
+00048e: invoke-virtual v5, Lcom/vivo/connbase/h0/c/n;->e()[B
+000494: move-result-object v5
+000496: invoke-interface v6, v7, v5, Ljava/util/Map;->put(Ljava/lang/Object; Ljava/lang/Object;)Ljava/lang/Object;
+00049c: goto -1dh
+00049e: new-instance v2, Ljava/lang/StringBuilder;
+0004a2: invoke-direct v2, Ljava/lang/StringBuilder;-><init>()V
+0004a8: const-string v5, "dd:"
+0004ac: invoke-virtual v2, v5, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+0004b2: invoke-virtual v2, v1, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+0004b8: const-string v5, ", scan serviceRecords="
+0004bc: invoke-virtual v2, v5, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+0004c2: invoke-virtual v2, v4, Ljava/lang/StringBuilder;->append(Ljava/lang/Object;)Ljava/lang/StringBuilder;
+0004c8: invoke-virtual v2, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
+0004ce: move-result-object v2
+0004d0: invoke-static v3, v2, Lc/c/f/a/b;->b(Ljava/lang/String; Ljava/lang/String;)V
+0004d6: new-instance v2, Lcom/vivo/connbase/h0/c/d$a;
+0004da: invoke-direct v2, Lcom/vivo/connbase/h0/c/d$a;-><init>()V
+0004e0: invoke-virtual v2, v1, Lcom/vivo/connbase/h0/c/d$a;->f(Ljava/lang/String;)Lcom/vivo/connbase/h0/c/d$a;
+0004e6: move-result-object v2
+0004e8: iget v5, v9, Lcom/vivo/connbase/h0/d/v4$b;->f I
+0004ec: invoke-virtual v2, v5, Lcom/vivo/connbase/h0/c/d$a;->a(I)Lcom/vivo/connbase/h0/c/d$a;
+0004f2: move-result-object v2
+0004f4: iget-object v5, v9, Lcom/vivo/connbase/h0/d/v4$b;->j Ljava/lang/String;
+0004f8: invoke-virtual v2, v5, Lcom/vivo/connbase/h0/c/d$a;->d(Ljava/lang/String;)Lcom/vivo/connbase/h0/c/d$a;
+0004fe: move-result-object v2
+000500: iget v5, v9, Lcom/vivo/connbase/h0/d/v4$b;->d I
+000504: invoke-virtual v2, v5, Lcom/vivo/connbase/h0/c/d$a;->b(I)Lcom/vivo/connbase/h0/c/d$a;
+00050a: move-result-object v2
+00050c: invoke-virtual v11, Landroid/bluetooth/le/ScanResult;->getDevice()Landroid/bluetooth/BluetoothDevice;
+000512: move-result-object v11
+000514: invoke-virtual v11, Landroid/bluetooth/BluetoothDevice;->getAddress()Ljava/lang/String;
+00051a: move-result-object v11
+00051c: invoke-virtual v2, v11, Lcom/vivo/connbase/h0/c/d$a;->g(Ljava/lang/String;)Lcom/vivo/connbase/h0/c/d$a;
+000522: move-result-object v11
+000524: iget-boolean v2, v9, Lcom/vivo/connbase/h0/d/v4$b;->m Z
+000528: invoke-virtual v11, v2, Lcom/vivo/connbase/h0/c/d$a;->a(Z)Lcom/vivo/connbase/h0/c/d$a;
+00052e: move-result-object v11
+000530: iget-object v2, v9, Lcom/vivo/connbase/h0/d/v4$b;->h [B
+000534: invoke-static v2, Ljava/util/Arrays;->toString([B)Ljava/lang/String;
+00053a: move-result-object v2
+00053c: invoke-virtual v11, v2, Lcom/vivo/connbase/h0/c/d$a;->h(Ljava/lang/String;)Lcom/vivo/connbase/h0/c/d$a;
+000542: move-result-object v11
+000544: invoke-virtual v11, Lcom/vivo/connbase/h0/c/d$a;->a()Lcom/vivo/connbase/h0/c/d;
+00054a: move-result-object v11
+00054c: iget-object v2, v9, Lcom/vivo/connbase/h0/d/v4$b;->p Lcom/vivo/connbase/h0/d/v4;
+000550: invoke-static v2, Lcom/vivo/connbase/h0/d/v4;->c(Lcom/vivo/connbase/h0/d/v4;)Lcom/vivo/connbase/h0/c/e;
+000556: move-result-object v2
+000558: invoke-virtual v2, v11, Lcom/vivo/connbase/h0/c/e;->a(Lcom/vivo/connbase/h0/c/d;)Z
+00055e: if-ne v10, v0, +011h
+000562: iget-object v10, v9, Lcom/vivo/connbase/h0/d/v4$b;->p Lcom/vivo/connbase/h0/d/v4;
+000566: iget-boolean v0, v9, Lcom/vivo/connbase/h0/d/v4$b;->m Z
+00056a: invoke-virtual v10, v4, v11, v0, Lcom/vivo/connbase/h0/d/v4;->a(Ljava/util/List; Lcom/vivo/connbase/h0/c/d; Z)V
+000570: invoke-static Lcom/vivo/connbase/h0/c/j;->b()Lcom/vivo/connbase/h0/c/j;
+000576: move-result-object v10
+000578: invoke-virtual v10, v1, v4, Lcom/vivo/connbase/h0/c/j;->a(Ljava/lang/String; Ljava/util/List;)V
+00057e: goto +1ah
+000580: new-instance v10, Ljava/lang/StringBuilder;
+000584: invoke-direct v10, Ljava/lang/StringBuilder;-><init>()V
+00058a: const-string v11, "on device lost:"
+00058e: invoke-virtual v10, v11, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+000594: invoke-virtual v10, v1, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+00059a: invoke-virtual v10, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
+0005a0: move-result-object v10
+0005a2: invoke-static v3, v10, Lc/c/f/a/b;->b(Ljava/lang/String; Ljava/lang/String;)V
+0005a8: goto +5h
+0005aa: const-string v10, "not a target scanResult, skip"
+0005ae: goto/16 -140h
+0005b2: return-void 

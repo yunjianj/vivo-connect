@@ -1,0 +1,329 @@
+APK pcsuite/updateApk/connbase.apk
+DEX classes.dex
+CLASS Lcom/vivo/connbase/k0/a;
+SUPER Ljava/lang/Object;
+FIELDS
+a Ljava/lang/String; = 'a'
+b Landroid/net/Uri; = None
+c Ljava/lang/String; = 'package_name'
+d Ljava/lang/String; = 'version'
+e Ljava/lang/String; = 'timestamp'
+f Ljava/lang/String; = 'type'
+g Ljava/lang/String; = 'timezone'
+h Ljava/lang/String; = 'agree'
+i Ljava/lang/String; = 'openid'
+j Ljava/lang/String; = 'state'
+k Ljava/lang/String; = 'path'
+l I = 1
+m I = 0
+n Ljava/lang/String; = 'splash'
+o I = 23600
+p I = 1
+q I = 2
+
+METHOD <clinit>()V
+000000: const-string v0, "content://com.vivo.abe.user.conset.record.provider"
+000004: invoke-static v0, Landroid/net/Uri;->parse(Ljava/lang/String;)Landroid/net/Uri;
+00000a: move-result-object v0
+00000c: sput-object v0, Lcom/vivo/connbase/k0/a;->b Landroid/net/Uri;
+000010: return-void 
+
+METHOD <init>()V
+000000: invoke-direct v0, Ljava/lang/Object;-><init>()V
+000006: return-void 
+
+METHOD a()Ljava/lang/String;
+000000: invoke-static Ljava/util/TimeZone;->getDefault()Ljava/util/TimeZone;
+000006: move-result-object v0
+000008: const/4 v1, 0
+00000a: invoke-virtual v0, v1, v1, Ljava/util/TimeZone;->getDisplayName(Z I)Ljava/lang/String;
+000010: move-result-object v0
+000012: return-object v0
+
+METHOD a(Landroid/content/Context;)V
+000000: const-string v0, " "
+000004: const/4 v1, 0
+000006: invoke-virtual v9, Landroid/content/Context;->getContentResolver()Landroid/content/ContentResolver;
+00000c: move-result-object v2
+00000e: sget-object v3, Lcom/vivo/connbase/k0/a;->b Landroid/net/Uri;
+000012: const/4 v4, 0
+000014: const/4 v5, 0
+000016: const/4 v6, 0
+000018: const/4 v7, 0
+00001a: const/4 v8, 0
+00001c: invoke-virtual/range v2 ... v8, Landroid/content/ContentResolver;->query(Landroid/net/Uri; [Ljava/lang/String; Ljava/lang/String; [Ljava/lang/String; Ljava/lang/String; Landroid/os/CancellationSignal;)Landroid/database/Cursor;
+000022: move-result-object v1
+000024: if-eqz v1, +0c0h
+000028: invoke-interface v1, Landroid/database/Cursor;->getCount()I
+00002e: move-result v9
+000030: if-lez v9, +0bah
+000034: new-instance v9, Ljava/lang/StringBuilder;
+000038: invoke-direct v9, Ljava/lang/StringBuilder;-><init>()V
+00003e: invoke-interface v1, Landroid/database/Cursor;->moveToNext()Z
+000044: move-result v2
+000046: if-eqz v2, +095h
+00004a: const-string v2, "package_name"
+00004e: invoke-interface v1, v2, Landroid/database/Cursor;->getColumnIndex(Ljava/lang/String;)I
+000054: move-result v2
+000056: invoke-interface v1, v2, Landroid/database/Cursor;->getString(I)Ljava/lang/String;
+00005c: move-result-object v2
+00005e: new-instance v3, Ljava/lang/StringBuilder;
+000062: invoke-direct v3, Ljava/lang/StringBuilder;-><init>()V
+000068: invoke-virtual v3, v2, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+00006e: invoke-virtual v3, v0, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+000074: invoke-virtual v3, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
+00007a: move-result-object v2
+00007c: invoke-virtual v9, v2, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+000082: const-string v2, "version"
+000086: invoke-interface v1, v2, Landroid/database/Cursor;->getColumnIndex(Ljava/lang/String;)I
+00008c: move-result v2
+00008e: invoke-interface v1, v2, Landroid/database/Cursor;->getString(I)Ljava/lang/String;
+000094: move-result-object v2
+000096: new-instance v3, Ljava/lang/StringBuilder;
+00009a: invoke-direct v3, Ljava/lang/StringBuilder;-><init>()V
+0000a0: invoke-virtual v3, v2, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+0000a6: invoke-virtual v3, v0, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+0000ac: invoke-virtual v3, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
+0000b2: move-result-object v2
+0000b4: invoke-virtual v9, v2, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+0000ba: const-string v2, "timestamp"
+0000be: invoke-interface v1, v2, Landroid/database/Cursor;->getColumnIndex(Ljava/lang/String;)I
+0000c4: move-result v2
+0000c6: invoke-interface v1, v2, Landroid/database/Cursor;->getString(I)Ljava/lang/String;
+0000cc: move-result-object v2
+0000ce: new-instance v3, Ljava/lang/StringBuilder;
+0000d2: invoke-direct v3, Ljava/lang/StringBuilder;-><init>()V
+0000d8: invoke-virtual v3, v2, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+0000de: invoke-virtual v3, v0, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+0000e4: invoke-virtual v3, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
+0000ea: move-result-object v2
+0000ec: invoke-virtual v9, v2, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+0000f2: const-string v2, "timezone"
+0000f6: invoke-interface v1, v2, Landroid/database/Cursor;->getColumnIndex(Ljava/lang/String;)I
+0000fc: move-result v2
+0000fe: invoke-interface v1, v2, Landroid/database/Cursor;->getString(I)Ljava/lang/String;
+000104: move-result-object v2
+000106: new-instance v3, Ljava/lang/StringBuilder;
+00010a: invoke-direct v3, Ljava/lang/StringBuilder;-><init>()V
+000110: invoke-virtual v3, v2, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+000116: invoke-virtual v3, v0, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+00011c: invoke-virtual v3, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
+000122: move-result-object v2
+000124: invoke-virtual v9, v2, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+00012a: const-string v2, "openid"
+00012e: invoke-interface v1, v2, Landroid/database/Cursor;->getColumnIndex(Ljava/lang/String;)I
+000134: move-result v2
+000136: invoke-interface v1, v2, Landroid/database/Cursor;->getString(I)Ljava/lang/String;
+00013c: move-result-object v2
+00013e: new-instance v3, Ljava/lang/StringBuilder;
+000142: invoke-direct v3, Ljava/lang/StringBuilder;-><init>()V
+000148: invoke-virtual v3, v2, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+00014e: invoke-virtual v3, v0, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+000154: invoke-virtual v3, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
+00015a: move-result-object v2
+00015c: invoke-virtual v9, v2, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+000162: const-string v2, "
+"
+000166: invoke-virtual v9, v2, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+00016c: goto/16 -097h
+000170: sget-object v0, Lcom/vivo/connbase/k0/a;->a Ljava/lang/String;
+000174: new-instance v2, Ljava/lang/StringBuilder;
+000178: invoke-direct v2, Ljava/lang/StringBuilder;-><init>()V
+00017e: const-string v3, "packageName = "
+000182: invoke-virtual v2, v3, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+000188: invoke-virtual v9, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
+00018e: move-result-object v9
+000190: invoke-virtual v2, v9, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+000196: invoke-virtual v2, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
+00019c: move-result-object v9
+00019e: invoke-static v0, v9, Lc/c/f/a/b;->k(Ljava/lang/String; Ljava/lang/String;)V
+0001a4: if-eqz v1, +026h
+0001a8: invoke-interface v1, Landroid/database/Cursor;->close()V
+0001ae: goto +21h
+0001b0: move-exception v9
+0001b2: goto +20h
+0001b4: move-exception v9
+0001b6: sget-object v0, Lcom/vivo/connbase/k0/a;->a Ljava/lang/String;
+0001ba: new-instance v2, Ljava/lang/StringBuilder;
+0001be: invoke-direct v2, Ljava/lang/StringBuilder;-><init>()V
+0001c4: const-string v3, "queryData Exception = "
+0001c8: invoke-virtual v2, v3, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+0001ce: invoke-virtual v9, Ljava/lang/Exception;->getMessage()Ljava/lang/String;
+0001d4: move-result-object v9
+0001d6: invoke-virtual v2, v9, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+0001dc: invoke-virtual v2, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
+0001e2: move-result-object v9
+0001e4: invoke-static v0, v9, Lc/c/f/a/b;->g(Ljava/lang/String; Ljava/lang/String;)V
+0001ea: if-eqz v1, +003h
+0001ee: goto -23h
+0001f0: return-void 
+0001f2: if-eqz v1, +005h
+0001f6: invoke-interface v1, Landroid/database/Cursor;->close()V
+0001fc: throw v9
+
+METHOD a(Landroid/content/Context; I)V
+000000: const-string v0, "path"
+000004: const-string v1, "openid"
+000008: const-string v2, "state"
+00000c: sget-object v3, Lcom/vivo/connbase/k0/a;->a Ljava/lang/String;
+000010: new-instance v4, Ljava/lang/StringBuilder;
+000014: invoke-direct v4, Ljava/lang/StringBuilder;-><init>()V
+00001a: const-string v5, "upAbeData  start  isAgree : "
+00001e: invoke-virtual v4, v5, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+000024: invoke-virtual v4, v8, Ljava/lang/StringBuilder;->append(I)Ljava/lang/StringBuilder;
+00002a: invoke-virtual v4, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
+000030: move-result-object v4
+000032: invoke-static v3, v4, Lc/c/f/a/b;->k(Ljava/lang/String; Ljava/lang/String;)V
+000038: new-instance v3, Landroid/content/ContentValues;
+00003c: invoke-direct v3, Landroid/content/ContentValues;-><init>()V
+000042: const-string v4, "package_name"
+000046: invoke-virtual v7, Landroid/content/Context;->getPackageName()Ljava/lang/String;
+00004c: move-result-object v5
+00004e: invoke-virtual v3, v4, v5, Landroid/content/ContentValues;->put(Ljava/lang/String; Ljava/lang/String;)V
+000054: const-string v4, "version"
+000058: const v5, 20211203
+00005e: invoke-static v5, Ljava/lang/Integer;->valueOf(I)Ljava/lang/Integer;
+000064: move-result-object v5
+000066: invoke-virtual v3, v4, v5, Landroid/content/ContentValues;->put(Ljava/lang/String; Ljava/lang/Integer;)V
+00006c: const-string v4, "timestamp"
+000070: invoke-static Ljava/lang/System;->currentTimeMillis()J
+000076: move-result-wide v5
+000078: invoke-static v5, v6, Ljava/lang/Long;->valueOf(J)Ljava/lang/Long;
+00007e: move-result-object v5
+000080: invoke-virtual v3, v4, v5, Landroid/content/ContentValues;->put(Ljava/lang/String; Ljava/lang/Long;)V
+000086: const-string v4, "type"
+00008a: const/16 v5, 23600
+00008e: invoke-static v5, Ljava/lang/Integer;->valueOf(I)Ljava/lang/Integer;
+000094: move-result-object v5
+000096: invoke-virtual v3, v4, v5, Landroid/content/ContentValues;->put(Ljava/lang/String; Ljava/lang/Integer;)V
+00009c: const-string v4, "timezone"
+0000a0: invoke-static Lcom/vivo/connbase/k0/a;->a()Ljava/lang/String;
+0000a6: move-result-object v5
+0000a8: invoke-virtual v3, v4, v5, Landroid/content/ContentValues;->put(Ljava/lang/String; Ljava/lang/String;)V
+0000ae: const-string v4, "agree"
+0000b2: invoke-static v8, Ljava/lang/Integer;->valueOf(I)Ljava/lang/Integer;
+0000b8: move-result-object v8
+0000ba: invoke-virtual v3, v4, v8, Landroid/content/ContentValues;->put(Ljava/lang/String; Ljava/lang/Integer;)V
+0000c0: const/4 v8, 1
+0000c2: invoke-static v8, Ljava/lang/Integer;->valueOf(I)Ljava/lang/Integer;
+0000c8: move-result-object v8
+0000ca: invoke-virtual v3, v2, v8, Landroid/content/ContentValues;->put(Ljava/lang/String; Ljava/lang/Integer;)V
+0000d0: invoke-static Lcom/vivo/connbase/k0/a;->b()Ljava/lang/String;
+0000d6: move-result-object v8
+0000d8: invoke-virtual v3, v1, v8, Landroid/content/ContentValues;->put(Ljava/lang/String; Ljava/lang/String;)V
+0000de: const-string v8, "splash"
+0000e2: invoke-virtual v3, v0, v8, Landroid/content/ContentValues;->put(Ljava/lang/String; Ljava/lang/String;)V
+0000e8: sget-object v8, Lcom/vivo/connbase/k0/a;->a Ljava/lang/String;
+0000ec: new-instance v4, Ljava/lang/StringBuilder;
+0000f0: invoke-direct v4, Ljava/lang/StringBuilder;-><init>()V
+0000f6: const-string v5, "ContentValues  values : "
+0000fa: invoke-virtual v4, v5, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+000100: invoke-virtual v3, Landroid/content/ContentValues;->toString()Ljava/lang/String;
+000106: move-result-object v5
+000108: invoke-virtual v4, v5, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+00010e: invoke-virtual v4, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
+000114: move-result-object v4
+000116: invoke-static v8, v4, Lc/c/f/a/b;->k(Ljava/lang/String; Ljava/lang/String;)V
+00011c: invoke-virtual v7, Landroid/content/Context;->getContentResolver()Landroid/content/ContentResolver;
+000122: move-result-object v8
+000124: sget-object v4, Lcom/vivo/connbase/k0/a;->b Landroid/net/Uri;
+000128: invoke-virtual v8, v4, v3, Landroid/content/ContentResolver;->insert(Landroid/net/Uri; Landroid/content/ContentValues;)Landroid/net/Uri;
+00012e: move-result-object v8
+000130: if-nez v8, +037h
+000134: invoke-virtual v3, v2, Landroid/content/ContentValues;->remove(Ljava/lang/String;)V
+00013a: invoke-virtual v3, v1, Landroid/content/ContentValues;->remove(Ljava/lang/String;)V
+000140: invoke-virtual v3, v0, Landroid/content/ContentValues;->remove(Ljava/lang/String;)V
+000146: sget-object v8, Lcom/vivo/connbase/k0/a;->a Ljava/lang/String;
+00014a: const-string v0, "temUri null = "
+00014e: invoke-static v8, v0, Lc/c/f/a/b;->k(Ljava/lang/String; Ljava/lang/String;)V
+000154: invoke-virtual v7, Landroid/content/Context;->getContentResolver()Landroid/content/ContentResolver;
+00015a: move-result-object v7
+00015c: sget-object v8, Lcom/vivo/connbase/k0/a;->b Landroid/net/Uri;
+000160: invoke-virtual v7, v8, v3, Landroid/content/ContentResolver;->insert(Landroid/net/Uri; Landroid/content/ContentValues;)Landroid/net/Uri;
+000166: goto +1ch
+000168: move-exception v7
+00016a: sget-object v8, Lcom/vivo/connbase/k0/a;->a Ljava/lang/String;
+00016e: new-instance v0, Ljava/lang/StringBuilder;
+000172: invoke-direct v0, Ljava/lang/StringBuilder;-><init>()V
+000178: const-string v1, "upAbeData Exception = "
+00017c: invoke-virtual v0, v1, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+000182: invoke-virtual v7, Ljava/lang/Exception;->getMessage()Ljava/lang/String;
+000188: move-result-object v7
+00018a: invoke-virtual v0, v7, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+000190: invoke-virtual v0, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
+000196: move-result-object v7
+000198: invoke-static v8, v7, Lc/c/f/a/b;->g(Ljava/lang/String; Ljava/lang/String;)V
+00019e: return-void 
+
+METHOD b()Ljava/lang/String;
+000000: invoke-static Lcom/vivo/connbase/e0/g/e;->b()Ljava/lang/String;
+000006: move-result-object v0
+000008: return-object v0
+
+METHOD b(Landroid/content/Context;)Ljava/util/List;
+000000: new-instance v0, Ljava/util/ArrayList;
+000004: invoke-direct v0, Ljava/util/ArrayList;-><init>()V
+00000a: const/4 v1, 0
+00000c: invoke-virtual v9, Landroid/content/Context;->getContentResolver()Landroid/content/ContentResolver;
+000012: move-result-object v2
+000014: sget-object v3, Lcom/vivo/connbase/k0/a;->b Landroid/net/Uri;
+000018: const/4 v4, 0
+00001a: const/4 v5, 0
+00001c: const/4 v6, 0
+00001e: const/4 v7, 0
+000020: const/4 v8, 0
+000022: invoke-virtual/range v2 ... v8, Landroid/content/ContentResolver;->query(Landroid/net/Uri; [Ljava/lang/String; Ljava/lang/String; [Ljava/lang/String; Ljava/lang/String; Landroid/os/CancellationSignal;)Landroid/database/Cursor;
+000028: move-result-object v1
+00002a: if-eqz v1, +040h
+00002e: invoke-interface v1, Landroid/database/Cursor;->getCount()I
+000034: move-result v2
+000036: if-lez v2, +03ah
+00003a: invoke-interface v1, Landroid/database/Cursor;->moveToNext()Z
+000040: move-result v2
+000042: if-eqz v2, +01ah
+000046: const-string v2, "package_name"
+00004a: invoke-interface v1, v2, Landroid/database/Cursor;->getColumnIndex(Ljava/lang/String;)I
+000050: move-result v2
+000052: invoke-interface v1, v2, Landroid/database/Cursor;->getString(I)Ljava/lang/String;
+000058: move-result-object v2
+00005a: invoke-virtual v9, Landroid/content/Context;->getPackageName()Ljava/lang/String;
+000060: move-result-object v3
+000062: invoke-virtual v3, v2, Ljava/lang/String;->equals(Ljava/lang/Object;)Z
+000068: move-result v3
+00006a: if-eqz v3, -018h
+00006e: invoke-interface v0, v2, Ljava/util/List;->add(Ljava/lang/Object;)Z
+000074: goto -1dh
+000076: sget-object v9, Lcom/vivo/connbase/k0/a;->a Ljava/lang/String;
+00007a: new-instance v2, Ljava/lang/StringBuilder;
+00007e: invoke-direct v2, Ljava/lang/StringBuilder;-><init>()V
+000084: const-string v3, "packageName = "
+000088: invoke-virtual v2, v3, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+00008e: invoke-virtual v0, Ljava/lang/Object;->toString()Ljava/lang/String;
+000094: move-result-object v3
+000096: invoke-virtual v2, v3, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+00009c: invoke-virtual v2, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
+0000a2: move-result-object v2
+0000a4: invoke-static v9, v2, Lc/c/f/a/b;->k(Ljava/lang/String; Ljava/lang/String;)V
+0000aa: if-eqz v1, +026h
+0000ae: invoke-interface v1, Landroid/database/Cursor;->close()V
+0000b4: goto +21h
+0000b6: move-exception v9
+0000b8: goto +20h
+0000ba: move-exception v9
+0000bc: sget-object v2, Lcom/vivo/connbase/k0/a;->a Ljava/lang/String;
+0000c0: new-instance v3, Ljava/lang/StringBuilder;
+0000c4: invoke-direct v3, Ljava/lang/StringBuilder;-><init>()V
+0000ca: const-string v4, "queryData Exception = "
+0000ce: invoke-virtual v3, v4, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+0000d4: invoke-virtual v9, Ljava/lang/Exception;->getMessage()Ljava/lang/String;
+0000da: move-result-object v9
+0000dc: invoke-virtual v3, v9, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+0000e2: invoke-virtual v3, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
+0000e8: move-result-object v9
+0000ea: invoke-static v2, v9, Lc/c/f/a/b;->g(Ljava/lang/String; Ljava/lang/String;)V
+0000f0: if-eqz v1, +003h
+0000f4: goto -23h
+0000f6: return-object v0
+0000f8: if-eqz v1, +005h
+0000fc: invoke-interface v1, Landroid/database/Cursor;->close()V
+000102: throw v9

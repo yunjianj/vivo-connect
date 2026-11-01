@@ -1,0 +1,55 @@
+APK pcsuite/updateApk/connbase.apk
+DEX classes.dex
+CLASS Lcom/vivo/connbase/nfc/l$c;
+SUPER Ljava/lang/Object;
+FIELDS
+a Lcom/vivo/connbase/nfc/l; = None
+
+METHOD <init>(Lcom/vivo/connbase/nfc/l;)V
+000000: iput-object v1, v0, Lcom/vivo/connbase/nfc/l$c;->a Lcom/vivo/connbase/nfc/l;
+000004: invoke-direct v0, Ljava/lang/Object;-><init>()V
+00000a: return-void 
+
+METHOD a(I)V
+000000: new-instance v0, Ljava/lang/StringBuilder;
+000004: invoke-direct v0, Ljava/lang/StringBuilder;-><init>()V
+00000a: const-string v1, "onConnectStateChange:"
+00000e: invoke-virtual v0, v1, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+000014: invoke-virtual v0, v4, Ljava/lang/StringBuilder;->append(I)Ljava/lang/StringBuilder;
+00001a: invoke-virtual v0, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
+000020: move-result-object v0
+000022: const-string v1, "SceneSyncManager"
+000026: invoke-static v1, v0, Lc/c/f/a/b;->k(Ljava/lang/String; Ljava/lang/String;)V
+00002c: iget-object v0, v3, Lcom/vivo/connbase/nfc/l$c;->a Lcom/vivo/connbase/nfc/l;
+000030: invoke-static v0, Lcom/vivo/connbase/nfc/l;->e(Lcom/vivo/connbase/nfc/l;)Ljava/util/Map;
+000036: move-result-object v0
+000038: invoke-static v4, Ljava/lang/Integer;->valueOf(I)Ljava/lang/Integer;
+00003e: move-result-object v1
+000040: const-string v2, "TODO"
+000044: invoke-interface v0, v2, v1, Ljava/util/Map;->put(Ljava/lang/Object; Ljava/lang/Object;)Ljava/lang/Object;
+00004a: iget-object v0, v3, Lcom/vivo/connbase/nfc/l$c;->a Lcom/vivo/connbase/nfc/l;
+00004e: invoke-static v0, v4, Lcom/vivo/connbase/nfc/l;->a(Lcom/vivo/connbase/nfc/l; I)I
+000054: const/16 v0, 300
+000058: const/16 v1, 500
+00005c: if-eq v4, v1, +004h
+000060: if-ne v4, v0, +008h
+000064: iget-object v1, v3, Lcom/vivo/connbase/nfc/l$c;->a Lcom/vivo/connbase/nfc/l;
+000068: const/4 v2, 0
+00006a: invoke-static v1, v2, Lcom/vivo/connbase/nfc/l;->c(Lcom/vivo/connbase/nfc/l; Lcom/vivo/connbase/nfc/NfcTouchedInfo;)Z
+000070: invoke-static Lcom/vivo/connbase/wifi/utils/PhoneUtils;->isVivoPad()Z
+000076: move-result v1
+000078: if-eqz v1, +00eh
+00007c: const/16 v1, 400
+000080: if-ne v4, v1, +00ah
+000084: invoke-static Lcom/vivo/connbase/nfc/c;->d()Lcom/vivo/connbase/nfc/c;
+00008a: move-result-object v4
+00008c: invoke-virtual v4, Lcom/vivo/connbase/nfc/c;->c()V
+000092: goto +10h
+000094: invoke-static Lcom/vivo/connbase/wifi/utils/PhoneUtils;->isVivoPad()Z
+00009a: move-result v1
+00009c: if-eqz v1, +00bh
+0000a0: if-ne v4, v0, +009h
+0000a4: invoke-static Lcom/vivo/connbase/nfc/c;->d()Lcom/vivo/connbase/nfc/c;
+0000aa: move-result-object v4
+0000ac: invoke-virtual v4, Lcom/vivo/connbase/nfc/c;->b()V
+0000b2: return-void 

@@ -1,0 +1,36 @@
+APK pcsuite/updateApk/connbase.apk
+DEX classes.dex
+CLASS Lcom/vivo/connbase/l0/g/a$a;
+SUPER Ljava/lang/Object;
+FIELDS
+
+
+METHOD <init>()V
+000000: invoke-direct v0, Ljava/lang/Object;-><init>()V
+000006: return-void 
+
+METHOD a(Ljava/util/UUID;)Z
+000000: if-nez v1, +004h
+000004: const/4 v1, 0
+000006: goto +fh
+000008: invoke-virtual v1, Ljava/util/UUID;->toString()Ljava/lang/String;
+00000e: move-result-object v1
+000010: sget-object v0, Lcom/vivo/connbase/h0/d/v4;->W Ljava/util/UUID;
+000014: invoke-virtual v0, Ljava/util/UUID;->toString()Ljava/lang/String;
+00001a: move-result-object v0
+00001c: invoke-static v1, v0, Landroid/text/TextUtils;->equals(Ljava/lang/CharSequence; Ljava/lang/CharSequence;)Z
+000022: move-result v1
+000024: return v1
+
+METHOD b(Ljava/util/UUID;)Z
+000000: if-nez v1, +004h
+000004: const/4 v1, 0
+000006: goto +fh
+000008: invoke-virtual v1, Ljava/util/UUID;->toString()Ljava/lang/String;
+00000e: move-result-object v1
+000010: sget-object v0, Lcom/vivo/connbase/h0/d/v4;->X Ljava/util/UUID;
+000014: invoke-virtual v0, Ljava/util/UUID;->toString()Ljava/lang/String;
+00001a: move-result-object v0
+00001c: invoke-static v1, v0, Landroid/text/TextUtils;->equals(Ljava/lang/CharSequence; Ljava/lang/CharSequence;)Z
+000022: move-result v1
+000024: return v1

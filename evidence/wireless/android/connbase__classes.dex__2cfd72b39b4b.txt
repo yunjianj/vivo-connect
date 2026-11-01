@@ -1,0 +1,51 @@
+APK pcsuite/updateApk/connbase.apk
+DEX classes.dex
+CLASS Lcom/vivo/connbase/p$a;
+SUPER Ljava/lang/Enum;
+FIELDS
+a Lcom/vivo/connbase/p$a; = None
+b Lcom/vivo/connbase/p$a; = None
+c [Lcom/vivo/connbase/p$a; = None
+
+METHOD <clinit>()V
+000000: new-instance v0, Lcom/vivo/connbase/p$a;
+000004: const/4 v1, 0
+000006: const-string v2, "GET"
+00000a: invoke-direct v0, v2, v1, Lcom/vivo/connbase/p$a;-><init>(Ljava/lang/String; I)V
+000010: sput-object v0, Lcom/vivo/connbase/p$a;->a Lcom/vivo/connbase/p$a;
+000014: new-instance v0, Lcom/vivo/connbase/p$a;
+000018: const/4 v2, 1
+00001a: const-string v3, "POST"
+00001e: invoke-direct v0, v3, v2, Lcom/vivo/connbase/p$a;-><init>(Ljava/lang/String; I)V
+000024: sput-object v0, Lcom/vivo/connbase/p$a;->b Lcom/vivo/connbase/p$a;
+000028: const/4 v3, 2
+00002a: new-array v3, v3, [Lcom/vivo/connbase/p$a;
+00002e: sget-object v4, Lcom/vivo/connbase/p$a;->a Lcom/vivo/connbase/p$a;
+000032: aput-object v4, v3, v1
+000036: aput-object v0, v3, v2
+00003a: sput-object v3, Lcom/vivo/connbase/p$a;->c [Lcom/vivo/connbase/p$a;
+00003e: return-void 
+
+METHOD <init>(Ljava/lang/String; I)V
+000000: invoke-direct v0, v1, v2, Ljava/lang/Enum;-><init>(Ljava/lang/String; I)V
+000006: return-void 
+
+METHOD valueOf(Ljava/lang/String;)Lcom/vivo/connbase/p$a;
+000000: const-class v0, Lcom/vivo/connbase/p$a;
+000004: invoke-static v0, v1, Ljava/lang/Enum;->valueOf(Ljava/lang/Class; Ljava/lang/String;)Ljava/lang/Enum;
+00000a: move-result-object v1
+00000c: check-cast v1, Lcom/vivo/connbase/p$a;
+000010: return-object v1
+
+METHOD values()[Lcom/vivo/connbase/p$a;
+000000: sget-object v0, Lcom/vivo/connbase/p$a;->c [Lcom/vivo/connbase/p$a;
+000004: invoke-virtual v0, [Lcom/vivo/connbase/p$a;->clone()Ljava/lang/Object;
+00000a: move-result-object v0
+00000c: check-cast v0, [Lcom/vivo/connbase/p$a;
+000010: return-object v0
+
+METHOD compareTo(Ljava/lang/Object;)I
+000000: check-cast v1, Ljava/lang/Enum;
+000004: invoke-super v0, v1, Ljava/lang/Enum;->compareTo(Ljava/lang/Enum;)I
+00000a: move-result v1
+00000c: return v1

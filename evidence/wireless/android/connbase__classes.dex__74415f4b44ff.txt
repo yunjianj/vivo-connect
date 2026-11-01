@@ -1,0 +1,764 @@
+APK pcsuite/updateApk/connbase.apk
+DEX classes.dex
+CLASS Lcom/vivo/connbase/h0/c/g;
+SUPER Lcom/vivo/connbase/e0/d/a;
+FIELDS
+j Ljava/lang/String; = 'DiscoverySession'
+e Ljava/lang/Object; = None
+f Ljava/lang/String; = None
+g Lcom/vivo/connbase/IScanCallback; = None
+h Lcom/vivo/connbase/h0/c/l; = None
+i [B = None
+
+METHOD <init>(I Ljava/lang/String; Ljava/lang/String; Ljava/lang/String;)V
+000000: invoke-direct v0, v1, v2, v3, Lcom/vivo/connbase/e0/d/a;-><init>(I Ljava/lang/String; Ljava/lang/String;)V
+000006: new-instance v1, Ljava/lang/Object;
+00000a: invoke-direct v1, Ljava/lang/Object;-><init>()V
+000010: iput-object v1, v0, Lcom/vivo/connbase/h0/c/g;->e Ljava/lang/Object;
+000014: iput-object v4, v0, Lcom/vivo/connbase/h0/c/g;->f Ljava/lang/String;
+000018: return-void 
+
+METHOD a(Lcom/vivo/connbase/h0/c/k;)V
+000000: const-string v0, "DiscoverySession"
+000004: iget-object v1, v4, Lcom/vivo/connbase/h0/c/g;->g Lcom/vivo/connbase/IScanCallback;
+000008: if-eqz v1, +010h
+00000c: iget-object v1, v4, Lcom/vivo/connbase/h0/c/g;->g Lcom/vivo/connbase/IScanCallback;
+000010: invoke-virtual v5, Lcom/vivo/connbase/h0/c/k;->c()Ljava/lang/String;
+000016: move-result-object v2
+000018: invoke-static v5, Lcom/vivo/connbase/e0/g/d;->a(Lcom/vivo/connbase/h0/c/k;)Ljava/lang/String;
+00001e: move-result-object v3
+000020: invoke-interface v1, v2, v3, Lcom/vivo/connbase/IScanCallback;->onFound(Ljava/lang/String; Ljava/lang/String;)V
+000026: goto +20h
+000028: const-string v1, "scanCallback == null"
+00002c: invoke-static v0, v1, Lc/c/f/a/b;->b(Ljava/lang/String; Ljava/lang/String;)V
+000032: goto +1ah
+000034: move-exception v1
+000036: new-instance v2, Ljava/lang/StringBuilder;
+00003a: invoke-direct v2, Ljava/lang/StringBuilder;-><init>()V
+000040: const-string v3, "call onFound error:"
+000044: invoke-virtual v2, v3, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+00004a: invoke-virtual v1, Ljava/lang/Exception;->toString()Ljava/lang/String;
+000050: move-result-object v1
+000052: invoke-virtual v2, v1, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+000058: invoke-virtual v2, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
+00005e: move-result-object v1
+000060: invoke-static v0, v1, Lc/c/f/a/b;->g(Ljava/lang/String; Ljava/lang/String;)V
+000066: invoke-virtual v5, Lcom/vivo/connbase/h0/c/k;->l()Ljava/lang/String;
+00006c: move-result-object v0
+00006e: invoke-static v0, v5, Lcom/vivo/connbase/e0/g/m;->a(Ljava/lang/String; Lcom/vivo/connbase/h0/c/k;)Z
+000074: return-void 
+
+METHOD a(Lcom/vivo/connbase/h0/c/n; Lcom/vivo/connbase/h0/c/d; Lcom/vivo/finddevice/a; Lcom/vivo/finddevice/k/e; Z)V
+000000: const-string v0, "DiscoverySession"
+000004: const-string v1, "notifyServiceOnMatch"
+000008: invoke-static v0, v1, Lc/c/f/a/b;->k(Ljava/lang/String; Ljava/lang/String;)V
+00000e: iget-object v1, v7, Lcom/vivo/connbase/h0/c/g;->i [B
+000012: invoke-virtual v8, Lcom/vivo/connbase/h0/c/n;->e()[B
+000018: move-result-object v2
+00001a: invoke-static v1, v2, Lcom/vivo/connbase/e0/g/b;->b([B [B)Z
+000020: move-result v1
+000022: if-eqz v1, +0a5h
+000026: new-instance v1, Ljava/lang/StringBuilder;
+00002a: invoke-direct v1, Ljava/lang/StringBuilder;-><init>()V
+000030: iget-object v2, v7, Lcom/vivo/connbase/h0/c/g;->f Ljava/lang/String;
+000034: invoke-virtual v1, v2, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+00003a: const-string v2, " matched, call onFoundService: "
+00003e: invoke-virtual v1, v2, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+000044: invoke-virtual v9, Lcom/vivo/connbase/h0/c/d;->h()Ljava/lang/String;
+00004a: move-result-object v2
+00004c: invoke-virtual v1, v2, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+000052: invoke-virtual v1, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
+000058: move-result-object v1
+00005a: invoke-static v0, v1, Lc/c/f/a/b;->k(Ljava/lang/String; Ljava/lang/String;)V
+000060: new-instance v1, Lcom/vivo/connbase/h0/c/k$a;
+000064: invoke-direct v1, Lcom/vivo/connbase/h0/c/k$a;-><init>()V
+00006a: iget-object v2, v7, Lcom/vivo/connbase/h0/c/g;->f Ljava/lang/String;
+00006e: invoke-virtual v1, v2, Lcom/vivo/connbase/h0/c/k$a;->j(Ljava/lang/String;)Lcom/vivo/connbase/h0/c/k$a;
+000074: move-result-object v1
+000076: invoke-virtual v9, Lcom/vivo/connbase/h0/c/d;->l()I
+00007c: move-result v2
+00007e: invoke-virtual v1, v2, Lcom/vivo/connbase/h0/c/k$a;->a(I)Lcom/vivo/connbase/h0/c/k$a;
+000084: move-result-object v1
+000086: invoke-virtual v9, Lcom/vivo/connbase/h0/c/d;->e()Ljava/lang/String;
+00008c: move-result-object v2
+00008e: invoke-virtual v1, v2, Lcom/vivo/connbase/h0/c/k$a;->c(Ljava/lang/String;)Lcom/vivo/connbase/h0/c/k$a;
+000094: move-result-object v1
+000096: invoke-virtual v9, Lcom/vivo/connbase/h0/c/d;->i()Ljava/lang/String;
+00009c: move-result-object v2
+00009e: invoke-virtual v1, v2, Lcom/vivo/connbase/h0/c/k$a;->e(Ljava/lang/String;)Lcom/vivo/connbase/h0/c/k$a;
+0000a4: move-result-object v1
+0000a6: invoke-virtual v9, Lcom/vivo/connbase/h0/c/d;->h()Ljava/lang/String;
+0000ac: move-result-object v2
+0000ae: invoke-virtual v1, v2, Lcom/vivo/connbase/h0/c/k$a;->d(Ljava/lang/String;)Lcom/vivo/connbase/h0/c/k$a;
+0000b4: move-result-object v1
+0000b6: invoke-virtual v9, Lcom/vivo/connbase/h0/c/d;->g()Ljava/lang/String;
+0000bc: move-result-object v9
+0000be: invoke-virtual v1, v9, Lcom/vivo/connbase/h0/c/k$a;->b(Ljava/lang/String;)Lcom/vivo/connbase/h0/c/k$a;
+0000c4: move-result-object v9
+0000c6: invoke-virtual v8, Lcom/vivo/connbase/h0/c/n;->a()[B
+0000cc: move-result-object v8
+0000ce: invoke-virtual v9, v8, Lcom/vivo/connbase/h0/c/k$a;->a([B)Lcom/vivo/connbase/h0/c/k$a;
+0000d4: move-result-object v8
+0000d6: invoke-virtual v8, v12, Lcom/vivo/connbase/h0/c/k$a;->a(Z)Lcom/vivo/connbase/h0/c/k$a;
+0000dc: move-result-object v8
+0000de: invoke-virtual v8, Lcom/vivo/connbase/h0/c/k$a;->a()Lcom/vivo/connbase/h0/c/k;
+0000e4: move-result-object v3
+0000e6: invoke-virtual v10, Lcom/vivo/finddevice/a;->b()Lcom/vivo/finddevice/d;
+0000ec: move-result-object v8
+0000ee: if-eqz v8, +03fh
+0000f2: new-instance v8, Ljava/lang/StringBuilder;
+0000f6: invoke-direct v8, Ljava/lang/StringBuilder;-><init>()V
+0000fc: const-string v9, "start notifyService for "
+000100: invoke-virtual v8, v9, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+000106: iget-object v9, v7, Lcom/vivo/connbase/h0/c/g;->f Ljava/lang/String;
+00010a: invoke-virtual v8, v9, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+000110: invoke-virtual v8, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
+000116: move-result-object v8
+000118: invoke-static v0, v8, Lc/c/f/a/b;->k(Ljava/lang/String; Ljava/lang/String;)V
+00011e: invoke-virtual v10, Lcom/vivo/finddevice/a;->b()Lcom/vivo/finddevice/d;
+000124: move-result-object v1
+000126: invoke-static Ljava/lang/System;->currentTimeMillis()J
+00012c: move-result-wide v5
+00012e: move-object v2, v10
+000130: move-object v4, v11
+000132: invoke-virtual/range v1 ... v6, Lcom/vivo/finddevice/d;->a(Lcom/vivo/finddevice/a; Lcom/vivo/connbase/h0/c/k; Lcom/vivo/finddevice/k/e; J)V
+000138: goto +1ah
+00013a: move-exception v8
+00013c: new-instance v9, Ljava/lang/StringBuilder;
+000140: invoke-direct v9, Ljava/lang/StringBuilder;-><init>()V
+000146: const-string v10, "notifyServiceOnMatch error:"
+00014a: invoke-virtual v9, v10, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+000150: invoke-virtual v8, Ljava/lang/Exception;->toString()Ljava/lang/String;
+000156: move-result-object v8
+000158: invoke-virtual v9, v8, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+00015e: invoke-virtual v9, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
+000164: move-result-object v8
+000166: invoke-static v0, v8, Lc/c/f/a/b;->g(Ljava/lang/String; Ljava/lang/String;)V
+00016c: return-void 
+
+METHOD a(Lcom/vivo/connbase/h0/c/n; Lcom/vivo/connbase/h0/c/d; Z)V
+000000: new-instance v0, Ljava/lang/StringBuilder;
+000004: invoke-direct v0, Ljava/lang/StringBuilder;-><init>()V
+00000a: const-string v1, "handleOnFoundMatch sd="
+00000e: invoke-virtual v0, v1, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+000014: invoke-virtual v6, Lcom/vivo/connbase/h0/c/n;->f()Ljava/lang/String;
+00001a: move-result-object v1
+00001c: invoke-virtual v0, v1, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+000022: const-string v1, "DiscoverySession.sd:"
+000026: invoke-virtual v0, v1, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+00002c: invoke-virtual v5, Lcom/vivo/connbase/h0/c/g;->e()Ljava/lang/String;
+000032: move-result-object v1
+000034: invoke-virtual v0, v1, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+00003a: const-string v1, ", dd="
+00003e: invoke-virtual v0, v1, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+000044: invoke-virtual v7, Lcom/vivo/connbase/h0/c/d;->g()Ljava/lang/String;
+00004a: move-result-object v1
+00004c: invoke-virtual v0, v1, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+000052: const-string v1, ", isSameOpenId="
+000056: invoke-virtual v0, v1, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+00005c: invoke-virtual v0, v8, Ljava/lang/StringBuilder;->append(Z)Ljava/lang/StringBuilder;
+000062: invoke-virtual v0, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
+000068: move-result-object v0
+00006a: const-string v1, "DiscoverySession"
+00006e: invoke-static v1, v0, Lc/c/f/a/b;->a(Ljava/lang/String; Ljava/lang/String;)V
+000074: invoke-virtual v5, Lcom/vivo/connbase/h0/c/g;->e()Ljava/lang/String;
+00007a: move-result-object v0
+00007c: invoke-virtual v6, Lcom/vivo/connbase/h0/c/n;->f()Ljava/lang/String;
+000082: move-result-object v2
+000084: invoke-static v0, v2, Landroid/text/TextUtils;->equals(Ljava/lang/CharSequence; Ljava/lang/CharSequence;)Z
+00008a: move-result v0
+00008c: if-nez v0, +003h
+000090: return-void 
+000092: invoke-virtual v7, Lcom/vivo/connbase/h0/c/d;->g()Ljava/lang/String;
+000098: move-result-object v0
+00009a: invoke-static Lcom/vivo/connbase/App;->m()Lcom/vivo/connbase/App;
+0000a0: move-result-object v2
+0000a2: invoke-virtual v2, Lcom/vivo/connbase/App;->d()Ljava/lang/String;
+0000a8: move-result-object v2
+0000aa: invoke-static v0, v2, Landroid/text/TextUtils;->equals(Ljava/lang/CharSequence; Ljava/lang/CharSequence;)Z
+0000b0: move-result v0
+0000b2: if-eqz v0, +003h
+0000b6: return-void 
+0000b8: invoke-virtual v5, Lcom/vivo/connbase/h0/c/g;->e()Ljava/lang/String;
+0000be: move-result-object v0
+0000c0: invoke-virtual v5, Lcom/vivo/connbase/h0/c/g;->d()Lcom/vivo/connbase/h0/c/l;
+0000c6: move-result-object v2
+0000c8: invoke-static v0, v2, v8, Lcom/vivo/connbase/h0/c/g$a;->a(Ljava/lang/String; Lcom/vivo/connbase/h0/c/l; Z)Z
+0000ce: move-result v0
+0000d0: if-nez v0, +003h
+0000d4: return-void 
+0000d6: new-instance v0, Ljava/lang/StringBuilder;
+0000da: invoke-direct v0, Ljava/lang/StringBuilder;-><init>()V
+0000e0: invoke-virtual v6, Lcom/vivo/connbase/h0/c/n;->f()Ljava/lang/String;
+0000e6: move-result-object v2
+0000e8: invoke-virtual v0, v2, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+0000ee: const-string v2, " matched."
+0000f2: invoke-virtual v0, v2, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+0000f8: invoke-virtual v0, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
+0000fe: move-result-object v0
+000100: invoke-static v1, v0, Lc/c/f/a/b;->k(Ljava/lang/String; Ljava/lang/String;)V
+000106: invoke-virtual v7, Lcom/vivo/connbase/h0/c/d;->f()Ljava/lang/String;
+00010c: move-result-object v0
+00010e: const-string v2, "mobile"
+000112: invoke-virtual v2, v0, Ljava/lang/String;->equals(Ljava/lang/Object;)Z
+000118: move-result v0
+00011a: if-eqz v0, +004h
+00011e: const/4 v0, 0
+000120: goto +21h
+000122: invoke-virtual v7, Lcom/vivo/connbase/h0/c/d;->f()Ljava/lang/String;
+000128: move-result-object v0
+00012a: const-string v2, "pc"
+00012e: invoke-virtual v2, v0, Ljava/lang/String;->equals(Ljava/lang/Object;)Z
+000134: move-result v0
+000136: if-eqz v0, +004h
+00013a: const/4 v0, 4
+00013c: goto +13h
+00013e: invoke-virtual v7, Lcom/vivo/connbase/h0/c/d;->f()Ljava/lang/String;
+000144: move-result-object v0
+000146: const-string v2, "pad"
+00014a: invoke-virtual v2, v0, Ljava/lang/String;->equals(Ljava/lang/Object;)Z
+000150: move-result v0
+000152: if-eqz v0, +004h
+000156: const/4 v0, 1
+000158: goto +5h
+00015a: invoke-virtual v7, Lcom/vivo/connbase/h0/c/d;->l()I
+000160: move-result v0
+000162: new-instance v2, Lcom/vivo/connbase/h0/c/k$a;
+000166: invoke-direct v2, Lcom/vivo/connbase/h0/c/k$a;-><init>()V
+00016c: invoke-virtual v6, Lcom/vivo/connbase/h0/c/n;->f()Ljava/lang/String;
+000172: move-result-object v3
+000174: invoke-virtual v2, v3, Lcom/vivo/connbase/h0/c/k$a;->j(Ljava/lang/String;)Lcom/vivo/connbase/h0/c/k$a;
+00017a: move-result-object v2
+00017c: invoke-virtual v2, v0, Lcom/vivo/connbase/h0/c/k$a;->a(I)Lcom/vivo/connbase/h0/c/k$a;
+000182: move-result-object v0
+000184: invoke-virtual v7, Lcom/vivo/connbase/h0/c/d;->e()Ljava/lang/String;
+00018a: move-result-object v2
+00018c: invoke-virtual v0, v2, Lcom/vivo/connbase/h0/c/k$a;->c(Ljava/lang/String;)Lcom/vivo/connbase/h0/c/k$a;
+000192: move-result-object v0
+000194: invoke-virtual v7, Lcom/vivo/connbase/h0/c/d;->i()Ljava/lang/String;
+00019a: move-result-object v2
+00019c: invoke-virtual v0, v2, Lcom/vivo/connbase/h0/c/k$a;->e(Ljava/lang/String;)Lcom/vivo/connbase/h0/c/k$a;
+0001a2: move-result-object v0
+0001a4: invoke-virtual v7, Lcom/vivo/connbase/h0/c/d;->h()Ljava/lang/String;
+0001aa: move-result-object v2
+0001ac: invoke-virtual v0, v2, Lcom/vivo/connbase/h0/c/k$a;->d(Ljava/lang/String;)Lcom/vivo/connbase/h0/c/k$a;
+0001b2: move-result-object v0
+0001b4: invoke-virtual v7, Lcom/vivo/connbase/h0/c/d;->g()Ljava/lang/String;
+0001ba: move-result-object v2
+0001bc: invoke-virtual v0, v2, Lcom/vivo/connbase/h0/c/k$a;->b(Ljava/lang/String;)Lcom/vivo/connbase/h0/c/k$a;
+0001c2: move-result-object v0
+0001c4: invoke-virtual v7, Lcom/vivo/connbase/h0/c/d;->a()Ljava/lang/String;
+0001ca: move-result-object v2
+0001cc: invoke-virtual v0, v2, Lcom/vivo/connbase/h0/c/k$a;->a(Ljava/lang/String;)Lcom/vivo/connbase/h0/c/k$a;
+0001d2: move-result-object v0
+0001d4: invoke-virtual v6, Lcom/vivo/connbase/h0/c/n;->a()[B
+0001da: move-result-object v2
+0001dc: invoke-virtual v0, v2, Lcom/vivo/connbase/h0/c/k$a;->a([B)Lcom/vivo/connbase/h0/c/k$a;
+0001e2: move-result-object v0
+0001e4: invoke-virtual v0, v8, Lcom/vivo/connbase/h0/c/k$a;->a(Z)Lcom/vivo/connbase/h0/c/k$a;
+0001ea: move-result-object v8
+0001ec: const/4 v0, 0
+0001ee: invoke-virtual v8, v0, Lcom/vivo/connbase/h0/c/k$a;->f(Ljava/lang/String;)Lcom/vivo/connbase/h0/c/k$a;
+0001f4: move-result-object v8
+0001f6: invoke-static Lcom/vivo/connbase/e0/g/e;->a()Ljava/lang/String;
+0001fc: move-result-object v0
+0001fe: invoke-virtual v8, v0, Lcom/vivo/connbase/h0/c/k$a;->h(Ljava/lang/String;)Lcom/vivo/connbase/h0/c/k$a;
+000204: move-result-object v8
+000206: invoke-static Lcom/vivo/connbase/e0/g/e;->c()Ljava/lang/String;
+00020c: move-result-object v0
+00020e: invoke-virtual v8, v0, Lcom/vivo/connbase/h0/c/k$a;->i(Ljava/lang/String;)Lcom/vivo/connbase/h0/c/k$a;
+000214: move-result-object v8
+000216: invoke-virtual v7, Lcom/vivo/connbase/h0/c/d;->k()Ljava/lang/String;
+00021c: move-result-object v0
+00021e: invoke-virtual v8, v0, Lcom/vivo/connbase/h0/c/k$a;->g(Ljava/lang/String;)Lcom/vivo/connbase/h0/c/k$a;
+000224: move-result-object v8
+000226: invoke-virtual v8, Lcom/vivo/connbase/h0/c/k$a;->a()Lcom/vivo/connbase/h0/c/k;
+00022c: move-result-object v8
+00022e: invoke-virtual v7, Lcom/vivo/connbase/h0/c/d;->g()Ljava/lang/String;
+000234: move-result-object v0
+000236: invoke-virtual v6, v0, Lcom/vivo/connbase/h0/c/n;->a(Ljava/lang/String;)Lcom/vivo/connbase/h0/c/n;
+00023c: move-result-object v0
+00023e: invoke-static Landroid/os/SystemClock;->elapsedRealtime()J
+000244: move-result-wide v2
+000246: invoke-virtual v0, v2, v3, Lcom/vivo/connbase/h0/c/n;->a(J)Lcom/vivo/connbase/h0/c/n;
+00024c: invoke-static Lcom/vivo/connbase/h0/c/j;->b()Lcom/vivo/connbase/h0/c/j;
+000252: move-result-object v0
+000254: invoke-virtual v7, Lcom/vivo/connbase/h0/c/d;->g()Ljava/lang/String;
+00025a: move-result-object v2
+00025c: invoke-virtual v0, v2, v6, Lcom/vivo/connbase/h0/c/j;->a(Ljava/lang/String; Lcom/vivo/connbase/h0/c/n;)V
+000262: iget-object v0, v5, Lcom/vivo/connbase/h0/c/g;->g Lcom/vivo/connbase/IScanCallback;
+000266: invoke-virtual v8, Lcom/vivo/connbase/h0/c/k;->l()Ljava/lang/String;
+00026c: move-result-object v2
+00026e: const-string v3, "com.vivo.vdfs.device.discovery"
+000272: invoke-virtual v3, v2, Ljava/lang/String;->equals(Ljava/lang/Object;)Z
+000278: move-result v2
+00027a: if-eqz v2, +02ah
+00027e: invoke-virtual v8, Lcom/vivo/connbase/h0/c/k;->l()Ljava/lang/String;
+000284: move-result-object v2
+000286: invoke-static v2, v8, Lcom/vivo/connbase/e0/g/m;->a(Ljava/lang/String; Lcom/vivo/connbase/h0/c/k;)Z
+00028c: move-result v2
+00028e: new-instance v3, Ljava/lang/StringBuilder;
+000292: invoke-direct v3, Ljava/lang/StringBuilder;-><init>()V
+000298: const-string v4, "start wakeup vdfs  "
+00029c: invoke-virtual v3, v4, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+0002a2: invoke-virtual v6, Lcom/vivo/connbase/h0/c/n;->f()Ljava/lang/String;
+0002a8: move-result-object v4
+0002aa: invoke-virtual v3, v4, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+0002b0: const-string v4, "--"
+0002b4: invoke-virtual v3, v4, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+0002ba: invoke-virtual v3, v2, Ljava/lang/StringBuilder;->append(Z)Ljava/lang/StringBuilder;
+0002c0: invoke-virtual v3, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
+0002c6: move-result-object v2
+0002c8: invoke-static v1, v2, Lc/c/f/a/b;->k(Ljava/lang/String; Ljava/lang/String;)V
+0002ce: if-eqz v0, +026h
+0002d2: new-instance v2, Ljava/lang/StringBuilder;
+0002d6: invoke-direct v2, Ljava/lang/StringBuilder;-><init>()V
+0002dc: const-string v3, "manually scan, onFound called for "
+0002e0: invoke-virtual v2, v3, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+0002e6: invoke-virtual v6, Lcom/vivo/connbase/h0/c/n;->f()Ljava/lang/String;
+0002ec: move-result-object v6
+0002ee: invoke-virtual v2, v6, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+0002f4: invoke-virtual v2, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
+0002fa: move-result-object v6
+0002fc: invoke-static v1, v6, Lc/c/f/a/b;->k(Ljava/lang/String; Ljava/lang/String;)V
+000302: invoke-virtual v7, Lcom/vivo/connbase/h0/c/d;->g()Ljava/lang/String;
+000308: move-result-object v6
+00030a: invoke-static v8, Lcom/vivo/connbase/e0/g/d;->a(Lcom/vivo/connbase/h0/c/k;)Ljava/lang/String;
+000310: move-result-object v7
+000312: invoke-interface v0, v6, v7, Lcom/vivo/connbase/IScanCallback;->onFound(Ljava/lang/String; Ljava/lang/String;)V
+000318: goto +20h
+00031a: const-string v6, "permanent scan"
+00031e: invoke-static v1, v6, Lc/c/f/a/b;->k(Ljava/lang/String; Ljava/lang/String;)V
+000324: goto +1ah
+000326: move-exception v6
+000328: new-instance v7, Ljava/lang/StringBuilder;
+00032c: invoke-direct v7, Ljava/lang/StringBuilder;-><init>()V
+000332: const-string v8, "handleServiceMatch error:"
+000336: invoke-virtual v7, v8, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+00033c: invoke-virtual v6, Ljava/lang/Exception;->toString()Ljava/lang/String;
+000342: move-result-object v6
+000344: invoke-virtual v7, v6, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+00034a: invoke-virtual v7, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
+000350: move-result-object v6
+000352: invoke-static v1, v6, Lc/c/f/a/b;->g(Ljava/lang/String; Ljava/lang/String;)V
+000358: return-void 
+
+METHOD a(Lcom/vivo/connbase/h0/c/n; Ljava/lang/String;)V
+000000: const-string v0, "DiscoverySession"
+000004: iget-object v1, v2, Lcom/vivo/connbase/h0/c/g;->i [B
+000008: invoke-virtual v3, Lcom/vivo/connbase/h0/c/n;->e()[B
+00000e: move-result-object v3
+000010: invoke-static v1, v3, Lcom/vivo/connbase/e0/g/b;->b([B [B)Z
+000016: move-result v3
+000018: if-eqz v3, +03eh
+00001c: new-instance v3, Ljava/lang/StringBuilder;
+000020: invoke-direct v3, Ljava/lang/StringBuilder;-><init>()V
+000026: iget-object v1, v2, Lcom/vivo/connbase/h0/c/g;->f Ljava/lang/String;
+00002a: invoke-virtual v3, v1, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+000030: const-string v1, " lost, call onLost: "
+000034: invoke-virtual v3, v1, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+00003a: invoke-virtual v3, v4, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+000040: invoke-virtual v3, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
+000046: move-result-object v3
+000048: invoke-static v0, v3, Lc/c/f/a/b;->k(Ljava/lang/String; Ljava/lang/String;)V
+00004e: iget-object v3, v2, Lcom/vivo/connbase/h0/c/g;->g Lcom/vivo/connbase/IScanCallback;
+000052: if-eqz v3, +021h
+000056: iget-object v3, v2, Lcom/vivo/connbase/h0/c/g;->g Lcom/vivo/connbase/IScanCallback;
+00005a: invoke-interface v3, v4, Lcom/vivo/connbase/IScanCallback;->onLost(Ljava/lang/String;)V
+000060: goto +1ah
+000062: move-exception v3
+000064: new-instance v4, Ljava/lang/StringBuilder;
+000068: invoke-direct v4, Ljava/lang/StringBuilder;-><init>()V
+00006e: const-string v1, "notifyScanOnLost:"
+000072: invoke-virtual v4, v1, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+000078: invoke-virtual v3, Ljava/lang/Exception;->toString()Ljava/lang/String;
+00007e: move-result-object v3
+000080: invoke-virtual v4, v3, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+000086: invoke-virtual v4, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
+00008c: move-result-object v3
+00008e: invoke-static v0, v3, Lc/c/f/a/b;->g(Ljava/lang/String; Ljava/lang/String;)V
+000094: return-void 
+
+METHOD a(Lcom/vivo/finddevice/a; Lcom/vivo/connbase/h0/c/n; Lcom/vivo/connbase/h0/c/d; Z)V
+000000: new-instance v0, Ljava/lang/StringBuilder;
+000004: invoke-direct v0, Ljava/lang/StringBuilder;-><init>()V
+00000a: const-string v1, "handleOnFoundServuceMatch serviceId="
+00000e: invoke-virtual v0, v1, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+000014: invoke-virtual v11, Lcom/vivo/connbase/h0/c/n;->f()Ljava/lang/String;
+00001a: move-result-object v1
+00001c: invoke-virtual v0, v1, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+000022: const-string v1, ",DiscoverySession.mServiceId:"
+000026: invoke-virtual v0, v1, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+00002c: invoke-virtual v9, Lcom/vivo/connbase/h0/c/g;->e()Ljava/lang/String;
+000032: move-result-object v1
+000034: invoke-virtual v0, v1, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+00003a: const-string v1, ", deviceId="
+00003e: invoke-virtual v0, v1, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+000044: invoke-virtual v12, Lcom/vivo/connbase/h0/c/d;->g()Ljava/lang/String;
+00004a: move-result-object v1
+00004c: invoke-virtual v0, v1, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+000052: const-string v1, ", isSameOpenId="
+000056: invoke-virtual v0, v1, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+00005c: invoke-virtual v0, v13, Ljava/lang/StringBuilder;->append(Z)Ljava/lang/StringBuilder;
+000062: const-string v1, " pp "
+000066: invoke-virtual v0, v1, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+00006c: invoke-virtual v12, Lcom/vivo/connbase/h0/c/d;->k()Ljava/lang/String;
+000072: move-result-object v2
+000074: invoke-virtual v0, v2, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+00007a: invoke-virtual v0, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
+000080: move-result-object v0
+000082: const-string v2, "DiscoverySession"
+000086: invoke-static v2, v0, Lc/c/f/a/b;->e(Ljava/lang/String; Ljava/lang/String;)V
+00008c: invoke-virtual v9, Lcom/vivo/connbase/h0/c/g;->e()Ljava/lang/String;
+000092: move-result-object v0
+000094: invoke-virtual v11, Lcom/vivo/connbase/h0/c/n;->f()Ljava/lang/String;
+00009a: move-result-object v3
+00009c: invoke-static v0, v3, Landroid/text/TextUtils;->equals(Ljava/lang/CharSequence; Ljava/lang/CharSequence;)Z
+0000a2: move-result v0
+0000a4: if-nez v0, +003h
+0000a8: return-void 
+0000aa: invoke-virtual v9, Lcom/vivo/connbase/h0/c/g;->e()Ljava/lang/String;
+0000b0: move-result-object v0
+0000b2: invoke-virtual v9, Lcom/vivo/connbase/h0/c/g;->d()Lcom/vivo/connbase/h0/c/l;
+0000b8: move-result-object v3
+0000ba: invoke-static v0, v3, v13, Lcom/vivo/connbase/h0/c/g$a;->a(Ljava/lang/String; Lcom/vivo/connbase/h0/c/l; Z)Z
+0000c0: move-result v0
+0000c2: if-nez v0, +003h
+0000c6: return-void 
+0000c8: invoke-virtual v11, Lcom/vivo/connbase/h0/c/n;->f()Ljava/lang/String;
+0000ce: move-result-object v0
+0000d0: invoke-static v0, Lcom/vivo/finddevice/l/a;->a(Ljava/lang/String;)Z
+0000d6: move-result v0
+0000d8: if-eqz v0, +012h
+0000dc: invoke-static Lcom/vivo/connbase/App;->m()Lcom/vivo/connbase/App;
+0000e2: move-result-object v0
+0000e4: invoke-static v0, Lcom/vivo/finddevice/l/a;->a(Landroid/content/Context;)Z
+0000ea: move-result v0
+0000ec: if-nez v0, +008h
+0000f0: const-string v10, "It is videowidgetmix service but it does not exist"
+0000f4: invoke-static v2, v10, Lc/c/f/a/b;->k(Ljava/lang/String; Ljava/lang/String;)V
+0000fa: return-void 
+0000fc: new-instance v0, Ljava/lang/StringBuilder;
+000100: invoke-direct v0, Ljava/lang/StringBuilder;-><init>()V
+000106: invoke-virtual v11, Lcom/vivo/connbase/h0/c/n;->f()Ljava/lang/String;
+00010c: move-result-object v3
+00010e: invoke-virtual v0, v3, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+000114: const-string v3, " matched."
+000118: invoke-virtual v0, v3, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+00011e: invoke-virtual v0, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
+000124: move-result-object v0
+000126: invoke-static v2, v0, Lc/c/f/a/b;->e(Ljava/lang/String; Ljava/lang/String;)V
+00012c: new-instance v0, Lcom/vivo/connbase/h0/c/k$a;
+000130: invoke-direct v0, Lcom/vivo/connbase/h0/c/k$a;-><init>()V
+000136: invoke-virtual v11, Lcom/vivo/connbase/h0/c/n;->f()Ljava/lang/String;
+00013c: move-result-object v3
+00013e: invoke-virtual v0, v3, Lcom/vivo/connbase/h0/c/k$a;->j(Ljava/lang/String;)Lcom/vivo/connbase/h0/c/k$a;
+000144: move-result-object v0
+000146: invoke-virtual v12, Lcom/vivo/connbase/h0/c/d;->l()I
+00014c: move-result v3
+00014e: invoke-virtual v0, v3, Lcom/vivo/connbase/h0/c/k$a;->a(I)Lcom/vivo/connbase/h0/c/k$a;
+000154: move-result-object v0
+000156: invoke-virtual v12, Lcom/vivo/connbase/h0/c/d;->e()Ljava/lang/String;
+00015c: move-result-object v3
+00015e: invoke-virtual v0, v3, Lcom/vivo/connbase/h0/c/k$a;->c(Ljava/lang/String;)Lcom/vivo/connbase/h0/c/k$a;
+000164: move-result-object v0
+000166: invoke-virtual v12, Lcom/vivo/connbase/h0/c/d;->i()Ljava/lang/String;
+00016c: move-result-object v3
+00016e: invoke-virtual v0, v3, Lcom/vivo/connbase/h0/c/k$a;->e(Ljava/lang/String;)Lcom/vivo/connbase/h0/c/k$a;
+000174: move-result-object v0
+000176: invoke-virtual v12, Lcom/vivo/connbase/h0/c/d;->h()Ljava/lang/String;
+00017c: move-result-object v3
+00017e: invoke-virtual v0, v3, Lcom/vivo/connbase/h0/c/k$a;->d(Ljava/lang/String;)Lcom/vivo/connbase/h0/c/k$a;
+000184: move-result-object v0
+000186: invoke-virtual v12, Lcom/vivo/connbase/h0/c/d;->k()Ljava/lang/String;
+00018c: move-result-object v3
+00018e: invoke-virtual v0, v3, Lcom/vivo/connbase/h0/c/k$a;->g(Ljava/lang/String;)Lcom/vivo/connbase/h0/c/k$a;
+000194: move-result-object v0
+000196: invoke-virtual v12, Lcom/vivo/connbase/h0/c/d;->g()Ljava/lang/String;
+00019c: move-result-object v3
+00019e: invoke-virtual v0, v3, Lcom/vivo/connbase/h0/c/k$a;->b(Ljava/lang/String;)Lcom/vivo/connbase/h0/c/k$a;
+0001a4: move-result-object v0
+0001a6: invoke-virtual v11, Lcom/vivo/connbase/h0/c/n;->a()[B
+0001ac: move-result-object v3
+0001ae: invoke-virtual v0, v3, Lcom/vivo/connbase/h0/c/k$a;->a([B)Lcom/vivo/connbase/h0/c/k$a;
+0001b4: move-result-object v0
+0001b6: invoke-virtual v0, v13, Lcom/vivo/connbase/h0/c/k$a;->a(Z)Lcom/vivo/connbase/h0/c/k$a;
+0001bc: move-result-object v13
+0001be: const/4 v0, 0
+0001c0: invoke-virtual v13, v0, Lcom/vivo/connbase/h0/c/k$a;->f(Ljava/lang/String;)Lcom/vivo/connbase/h0/c/k$a;
+0001c6: move-result-object v13
+0001c8: invoke-static Lcom/vivo/connbase/e0/g/e;->a()Ljava/lang/String;
+0001ce: move-result-object v0
+0001d0: invoke-virtual v13, v0, Lcom/vivo/connbase/h0/c/k$a;->h(Ljava/lang/String;)Lcom/vivo/connbase/h0/c/k$a;
+0001d6: move-result-object v13
+0001d8: invoke-static Lcom/vivo/connbase/e0/g/e;->c()Ljava/lang/String;
+0001de: move-result-object v0
+0001e0: invoke-virtual v13, v0, Lcom/vivo/connbase/h0/c/k$a;->i(Ljava/lang/String;)Lcom/vivo/connbase/h0/c/k$a;
+0001e6: move-result-object v13
+0001e8: invoke-virtual v13, Lcom/vivo/connbase/h0/c/k$a;->a()Lcom/vivo/connbase/h0/c/k;
+0001ee: move-result-object v5
+0001f0: const-string v13, "auto scan"
+0001f4: invoke-static v2, v13, Lc/c/f/a/b;->e(Ljava/lang/String; Ljava/lang/String;)V
+0001fa: if-eqz v10, +07bh
+0001fe: invoke-virtual v10, Lcom/vivo/finddevice/a;->b()Lcom/vivo/finddevice/d;
+000204: move-result-object v13
+000206: if-eqz v13, +075h
+00020a: const-string v13, "scanner and notifier are both not null"
+00020e: invoke-static v2, v13, Lc/c/f/a/b;->e(Ljava/lang/String; Ljava/lang/String;)V
+000214: invoke-static Lcom/vivo/finddevice/DeviceScanManager;->getInstance()Lcom/vivo/finddevice/DeviceScanManager;
+00021a: move-result-object v13
+00021c: invoke-virtual v13, Lcom/vivo/finddevice/DeviceScanManager;->getServiceScanner()Lcom/vivo/finddevice/g;
+000222: move-result-object v13
+000224: invoke-virtual v11, Lcom/vivo/connbase/h0/c/n;->e()[B
+00022a: move-result-object v0
+00022c: invoke-static v0, Ljava/util/Arrays;->toString([B)Ljava/lang/String;
+000232: move-result-object v0
+000234: invoke-virtual v13, v0, Lcom/vivo/finddevice/g;->f(Ljava/lang/String;)Lcom/vivo/finddevice/k/e;
+00023a: move-result-object v6
+00023c: if-eqz v6, +05ah
+000240: new-instance v13, Ljava/lang/StringBuilder;
+000244: invoke-direct v13, Ljava/lang/StringBuilder;-><init>()V
+00024a: const-string v0, "onFoundService called for "
+00024e: invoke-virtual v13, v0, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+000254: invoke-virtual v11, Lcom/vivo/connbase/h0/c/n;->f()Ljava/lang/String;
+00025a: move-result-object v11
+00025c: invoke-virtual v13, v11, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+000262: invoke-virtual v13, v1, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+000268: invoke-virtual v5, Lcom/vivo/connbase/h0/c/k;->i()Ljava/lang/String;
+00026e: move-result-object v11
+000270: invoke-static v11, Lcom/vivo/connbase/e0/g/h;->a(Ljava/lang/String;)Ljava/lang/String;
+000276: move-result-object v11
+000278: invoke-virtual v13, v11, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+00027e: const-string v11, "--"
+000282: invoke-virtual v13, v11, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+000288: invoke-virtual v12, Lcom/vivo/connbase/h0/c/d;->g()Ljava/lang/String;
+00028e: move-result-object v11
+000290: invoke-virtual v13, v11, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+000296: invoke-virtual v13, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
+00029c: move-result-object v11
+00029e: invoke-static v2, v11, Lc/c/f/a/b;->k(Ljava/lang/String; Ljava/lang/String;)V
+0002a4: invoke-virtual v10, Lcom/vivo/finddevice/a;->b()Lcom/vivo/finddevice/d;
+0002aa: move-result-object v3
+0002ac: invoke-static Ljava/lang/System;->currentTimeMillis()J
+0002b2: move-result-wide v7
+0002b4: move-object v4, v10
+0002b6: invoke-virtual/range v3 ... v8, Lcom/vivo/finddevice/d;->a(Lcom/vivo/finddevice/a; Lcom/vivo/connbase/h0/c/k; Lcom/vivo/finddevice/k/e; J)V
+0002bc: goto +1ah
+0002be: move-exception v10
+0002c0: new-instance v11, Ljava/lang/StringBuilder;
+0002c4: invoke-direct v11, Ljava/lang/StringBuilder;-><init>()V
+0002ca: const-string v12, "handleOnFoundServuceMatch error:"
+0002ce: invoke-virtual v11, v12, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+0002d4: invoke-virtual v10, Ljava/lang/Exception;->toString()Ljava/lang/String;
+0002da: move-result-object v10
+0002dc: invoke-virtual v11, v10, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+0002e2: invoke-virtual v11, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
+0002e8: move-result-object v10
+0002ea: invoke-static v2, v10, Lc/c/f/a/b;->g(Ljava/lang/String; Ljava/lang/String;)V
+0002f0: return-void 
+
+METHOD a(Ljava/lang/String; Lcom/vivo/connbase/h0/c/l; Lcom/vivo/connbase/IScanCallback;)Z
+000000: iget-object v0, v5, Lcom/vivo/connbase/h0/c/g;->e Ljava/lang/Object;
+000004: monitor-enter v0
+000006: invoke-virtual v7, Lcom/vivo/connbase/h0/c/l;->b()I
+00000c: move-result v1
+00000e: const/4 v2, 1
+000010: if-ne v1, v2, +006h
+000014: if-nez v8, +004h
+000018: monitor-exit v0
+00001a: return v2
+00001c: iget-object v1, v5, Lcom/vivo/connbase/h0/c/g;->g Lcom/vivo/connbase/IScanCallback;
+000020: const/4 v3, 0
+000022: if-eqz v1, +013h
+000026: invoke-virtual v7, Lcom/vivo/connbase/h0/c/l;->b()I
+00002c: move-result v1
+00002e: if-eq v1, v2, +00dh
+000032: const-string v6, "DiscoverySession"
+000036: const-string v7, "Exist scan request with same service ID."
+00003a: invoke-static v6, v7, Lc/c/f/a/b;->p(Ljava/lang/String; Ljava/lang/String;)V
+000040: iput-object v8, v5, Lcom/vivo/connbase/h0/c/g;->g Lcom/vivo/connbase/IScanCallback;
+000044: monitor-exit v0
+000046: return v3
+000048: const-string v1, "SHA256"
+00004c: invoke-static v1, Ljava/security/MessageDigest;->getInstance(Ljava/lang/String;)Ljava/security/MessageDigest;
+000052: move-result-object v1
+000054: sget-object v4, Ljava/nio/charset/StandardCharsets;->UTF_8 Ljava/nio/charset/Charset;
+000058: invoke-virtual v6, v4, Ljava/lang/String;->getBytes(Ljava/nio/charset/Charset;)[B
+00005e: move-result-object v4
+000060: invoke-virtual v1, v4, Ljava/security/MessageDigest;->digest([B)[B
+000066: move-result-object v1
+000068: const/4 v4, 3
+00006a: invoke-static v1, v3, v4, Ljava/util/Arrays;->copyOfRange([B I I)[B
+000070: move-result-object v1
+000072: iput-object v1, v5, Lcom/vivo/connbase/h0/c/g;->i [B
+000076: iput-object v8, v5, Lcom/vivo/connbase/h0/c/g;->g Lcom/vivo/connbase/IScanCallback;
+00007a: iput-object v7, v5, Lcom/vivo/connbase/h0/c/g;->h Lcom/vivo/connbase/h0/c/l;
+00007e: const-string v1, "DiscoverySession"
+000082: new-instance v3, Ljava/lang/StringBuilder;
+000086: invoke-direct v3, Ljava/lang/StringBuilder;-><init>()V
+00008c: const-string v4, "Add scan request: "
+000090: invoke-virtual v3, v4, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+000096: invoke-virtual v3, v6, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+00009c: const-string v6, ", "
+0000a0: invoke-virtual v3, v6, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+0000a6: invoke-virtual v3, v7, Ljava/lang/StringBuilder;->append(Ljava/lang/Object;)Ljava/lang/StringBuilder;
+0000ac: const-string v6, ", "
+0000b0: invoke-virtual v3, v6, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+0000b6: invoke-virtual v3, v8, Ljava/lang/StringBuilder;->append(Ljava/lang/Object;)Ljava/lang/StringBuilder;
+0000bc: invoke-virtual v3, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
+0000c2: move-result-object v6
+0000c4: invoke-static v1, v6, Lc/c/f/a/b;->a(Ljava/lang/String; Ljava/lang/String;)V
+0000ca: monitor-exit v0
+0000cc: return v2
+0000ce: move-exception v7
+0000d0: const-string v8, "DiscoverySession"
+0000d4: new-instance v1, Ljava/lang/StringBuilder;
+0000d8: invoke-direct v1, Ljava/lang/StringBuilder;-><init>()V
+0000de: const-string v2, "Error when add scan request: "
+0000e2: invoke-virtual v1, v2, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+0000e8: invoke-virtual v1, v6, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+0000ee: invoke-virtual v1, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
+0000f4: move-result-object v6
+0000f6: invoke-static v8, v6, v7, Lc/c/f/a/b;->a(Ljava/lang/String; Ljava/lang/String; Ljava/lang/Throwable;)V
+0000fc: monitor-exit v0
+0000fe: return v3
+000100: move-exception v6
+000102: monitor-exit v0
+000104: throw v6
+
+METHOD b(Lcom/vivo/connbase/h0/c/n; Lcom/vivo/connbase/h0/c/d; Z)V
+000000: const-string v0, "DiscoverySession"
+000004: iget-object v1, v4, Lcom/vivo/connbase/h0/c/g;->i [B
+000008: invoke-virtual v5, Lcom/vivo/connbase/h0/c/n;->e()[B
+00000e: move-result-object v2
+000010: invoke-static v1, v2, Lcom/vivo/connbase/e0/g/b;->b([B [B)Z
+000016: move-result v1
+000018: if-eqz v1, +0adh
+00001c: new-instance v1, Ljava/lang/StringBuilder;
+000020: invoke-direct v1, Ljava/lang/StringBuilder;-><init>()V
+000026: iget-object v2, v4, Lcom/vivo/connbase/h0/c/g;->f Ljava/lang/String;
+00002a: invoke-virtual v1, v2, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+000030: const-string v2, "matched, call onFound: "
+000034: invoke-virtual v1, v2, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+00003a: invoke-virtual v6, Lcom/vivo/connbase/h0/c/d;->h()Ljava/lang/String;
+000040: move-result-object v2
+000042: invoke-virtual v1, v2, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+000048: invoke-virtual v1, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
+00004e: move-result-object v1
+000050: invoke-static v0, v1, Lc/c/f/a/b;->k(Ljava/lang/String; Ljava/lang/String;)V
+000056: new-instance v1, Lcom/vivo/connbase/h0/c/k$a;
+00005a: invoke-direct v1, Lcom/vivo/connbase/h0/c/k$a;-><init>()V
+000060: iget-object v2, v4, Lcom/vivo/connbase/h0/c/g;->f Ljava/lang/String;
+000064: invoke-virtual v1, v2, Lcom/vivo/connbase/h0/c/k$a;->j(Ljava/lang/String;)Lcom/vivo/connbase/h0/c/k$a;
+00006a: move-result-object v1
+00006c: invoke-virtual v6, Lcom/vivo/connbase/h0/c/d;->l()I
+000072: move-result v2
+000074: invoke-virtual v1, v2, Lcom/vivo/connbase/h0/c/k$a;->a(I)Lcom/vivo/connbase/h0/c/k$a;
+00007a: move-result-object v1
+00007c: invoke-virtual v6, Lcom/vivo/connbase/h0/c/d;->e()Ljava/lang/String;
+000082: move-result-object v2
+000084: invoke-virtual v1, v2, Lcom/vivo/connbase/h0/c/k$a;->c(Ljava/lang/String;)Lcom/vivo/connbase/h0/c/k$a;
+00008a: move-result-object v1
+00008c: invoke-virtual v6, Lcom/vivo/connbase/h0/c/d;->i()Ljava/lang/String;
+000092: move-result-object v2
+000094: invoke-virtual v1, v2, Lcom/vivo/connbase/h0/c/k$a;->e(Ljava/lang/String;)Lcom/vivo/connbase/h0/c/k$a;
+00009a: move-result-object v1
+00009c: invoke-virtual v6, Lcom/vivo/connbase/h0/c/d;->h()Ljava/lang/String;
+0000a2: move-result-object v2
+0000a4: invoke-virtual v1, v2, Lcom/vivo/connbase/h0/c/k$a;->d(Ljava/lang/String;)Lcom/vivo/connbase/h0/c/k$a;
+0000aa: move-result-object v1
+0000ac: invoke-virtual v6, Lcom/vivo/connbase/h0/c/d;->g()Ljava/lang/String;
+0000b2: move-result-object v2
+0000b4: invoke-virtual v1, v2, Lcom/vivo/connbase/h0/c/k$a;->b(Ljava/lang/String;)Lcom/vivo/connbase/h0/c/k$a;
+0000ba: move-result-object v1
+0000bc: invoke-virtual v5, Lcom/vivo/connbase/h0/c/n;->a()[B
+0000c2: move-result-object v2
+0000c4: invoke-virtual v1, v2, Lcom/vivo/connbase/h0/c/k$a;->a([B)Lcom/vivo/connbase/h0/c/k$a;
+0000ca: move-result-object v1
+0000cc: invoke-virtual v1, v7, Lcom/vivo/connbase/h0/c/k$a;->a(Z)Lcom/vivo/connbase/h0/c/k$a;
+0000d2: move-result-object v7
+0000d4: invoke-virtual v7, Lcom/vivo/connbase/h0/c/k$a;->a()Lcom/vivo/connbase/h0/c/k;
+0000da: move-result-object v7
+0000dc: invoke-virtual v6, Lcom/vivo/connbase/h0/c/d;->g()Ljava/lang/String;
+0000e2: move-result-object v1
+0000e4: invoke-virtual v5, v1, Lcom/vivo/connbase/h0/c/n;->a(Ljava/lang/String;)Lcom/vivo/connbase/h0/c/n;
+0000ea: move-result-object v1
+0000ec: invoke-static Landroid/os/SystemClock;->elapsedRealtime()J
+0000f2: move-result-wide v2
+0000f4: invoke-virtual v1, v2, v3, Lcom/vivo/connbase/h0/c/n;->a(J)Lcom/vivo/connbase/h0/c/n;
+0000fa: invoke-static Lcom/vivo/connbase/h0/c/j;->b()Lcom/vivo/connbase/h0/c/j;
+000100: move-result-object v1
+000102: invoke-virtual v6, Lcom/vivo/connbase/h0/c/d;->g()Ljava/lang/String;
+000108: move-result-object v2
+00010a: invoke-virtual v1, v2, v5, Lcom/vivo/connbase/h0/c/j;->a(Ljava/lang/String; Lcom/vivo/connbase/h0/c/n;)V
+000110: iget-object v5, v4, Lcom/vivo/connbase/h0/c/g;->g Lcom/vivo/connbase/IScanCallback;
+000114: if-eqz v5, +010h
+000118: iget-object v5, v4, Lcom/vivo/connbase/h0/c/g;->g Lcom/vivo/connbase/IScanCallback;
+00011c: invoke-virtual v6, Lcom/vivo/connbase/h0/c/d;->g()Ljava/lang/String;
+000122: move-result-object v6
+000124: invoke-static v7, Lcom/vivo/connbase/e0/g/d;->a(Lcom/vivo/connbase/h0/c/k;)Ljava/lang/String;
+00012a: move-result-object v7
+00012c: invoke-interface v5, v6, v7, Lcom/vivo/connbase/IScanCallback;->onFound(Ljava/lang/String; Ljava/lang/String;)V
+000132: goto +20h
+000134: const-string v5, "scanCallback == null"
+000138: invoke-static v0, v5, Lc/c/f/a/b;->b(Ljava/lang/String; Ljava/lang/String;)V
+00013e: goto +1ah
+000140: move-exception v5
+000142: new-instance v6, Ljava/lang/StringBuilder;
+000146: invoke-direct v6, Ljava/lang/StringBuilder;-><init>()V
+00014c: const-string v7, "notifyScanCallback:"
+000150: invoke-virtual v6, v7, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+000156: invoke-virtual v5, Ljava/lang/Exception;->toString()Ljava/lang/String;
+00015c: move-result-object v5
+00015e: invoke-virtual v6, v5, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+000164: invoke-virtual v6, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
+00016a: move-result-object v5
+00016c: invoke-static v0, v5, Lc/c/f/a/b;->g(Ljava/lang/String; Ljava/lang/String;)V
+000172: return-void 
+
+METHOD c(Ljava/lang/String;)V
+000000: const-string v0, "DiscoverySession"
+000004: new-instance v1, Ljava/lang/StringBuilder;
+000008: invoke-direct v1, Ljava/lang/StringBuilder;-><init>()V
+00000e: iget-object v2, v3, Lcom/vivo/connbase/h0/c/g;->f Ljava/lang/String;
+000012: invoke-virtual v1, v2, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+000018: const-string v2, " lost, call onLost: "
+00001c: invoke-virtual v1, v2, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+000022: invoke-virtual v1, v4, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+000028: invoke-virtual v1, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
+00002e: move-result-object v1
+000030: invoke-static v0, v1, Lc/c/f/a/b;->k(Ljava/lang/String; Ljava/lang/String;)V
+000036: iget-object v1, v3, Lcom/vivo/connbase/h0/c/g;->g Lcom/vivo/connbase/IScanCallback;
+00003a: if-eqz v1, +021h
+00003e: iget-object v1, v3, Lcom/vivo/connbase/h0/c/g;->g Lcom/vivo/connbase/IScanCallback;
+000042: invoke-interface v1, v4, Lcom/vivo/connbase/IScanCallback;->onLost(Ljava/lang/String;)V
+000048: goto +1ah
+00004a: move-exception v4
+00004c: new-instance v1, Ljava/lang/StringBuilder;
+000050: invoke-direct v1, Ljava/lang/StringBuilder;-><init>()V
+000056: const-string v2, "notifyScanOnLost:"
+00005a: invoke-virtual v1, v2, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+000060: invoke-virtual v4, Ljava/lang/Exception;->toString()Ljava/lang/String;
+000066: move-result-object v4
+000068: invoke-virtual v1, v4, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+00006e: invoke-virtual v1, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
+000074: move-result-object v4
+000076: invoke-static v0, v4, Lc/c/f/a/b;->g(Ljava/lang/String; Ljava/lang/String;)V
+00007c: return-void 
+
+METHOD d()Lcom/vivo/connbase/h0/c/l;
+000000: iget-object v0, v1, Lcom/vivo/connbase/h0/c/g;->h Lcom/vivo/connbase/h0/c/l;
+000004: return-object v0
+
+METHOD e()Ljava/lang/String;
+000000: iget-object v0, v1, Lcom/vivo/connbase/h0/c/g;->f Ljava/lang/String;
+000004: return-object v0
+
+METHOD f()Z
+000000: iget-object v0, v1, Lcom/vivo/connbase/h0/c/g;->h Lcom/vivo/connbase/h0/c/l;
+000004: if-nez v0, +004h
+000008: const/4 v0, 0
+00000a: goto +5h
+00000c: invoke-virtual v0, Lcom/vivo/connbase/h0/c/l;->h()Z
+000012: move-result v0
+000014: return v0

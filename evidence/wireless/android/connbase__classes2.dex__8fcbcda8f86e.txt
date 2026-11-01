@@ -1,0 +1,153 @@
+APK pcsuite/updateApk/connbase.apk
+DEX classes2.dex
+CLASS Lcom/vivo/upgradelibrary/moduleui/b/b$a;
+SUPER Landroid/os/Handler;
+FIELDS
+a Lcom/vivo/upgradelibrary/moduleui/b/b; = None
+
+METHOD handleMessage(Landroid/os/Message;)V
+000000: iget v0, v14, Landroid/os/Message;->what I
+000004: const/4 v1, -1
+000006: const/4 v2, -2
+000008: const/16 v3, 3000
+00000c: const/16 v4, 2200
+000010: const/16 v5, 2100
+000014: const/16 v6, 2000
+000018: const/16 v7, 1500
+00001c: const/16 v8, 1000
+000020: const/16 v9, -1000
+000024: const-string v10, "NotifyManager"
+000028: const/4 v11, 0
+00002a: if-eq v0, v9, +0afh
+00002e: if-eq v0, v8, +09ch
+000032: if-eq v0, v7, +08fh
+000036: if-eq v0, v6, +082h
+00003a: if-eq v0, v5, +075h
+00003e: if-eq v0, v4, +068h
+000042: if-eq v0, v3, +05bh
+000046: const/4 v12, -3
+000048: if-eq v0, v12, +04dh
+00004c: if-eq v0, v2, +040h
+000050: if-eq v0, v1, +033h
+000054: if-eqz v0, +004h
+000058: goto/16 +0a2h
+00005c: iget-object v0, v13, Lcom/vivo/upgradelibrary/moduleui/b/b$a;->a Lcom/vivo/upgradelibrary/moduleui/b/b;
+000060: iget v12, v14, Landroid/os/Message;->arg1 I
+000064: invoke-static v0, v12, Lcom/vivo/upgradelibrary/moduleui/b/b;->a(Lcom/vivo/upgradelibrary/moduleui/b/b; I)V
+00006a: sget-boolean v0, Lcom/vivo/upgradelibrary/common/utils/i;->a Z
+00006e: if-eqz v0, +097h
+000072: iget-object v0, v13, Lcom/vivo/upgradelibrary/moduleui/b/b$a;->a Lcom/vivo/upgradelibrary/moduleui/b/b;
+000076: invoke-virtual v0, Lcom/vivo/upgradelibrary/moduleui/b/b;->a()Z
+00007c: move-result v0
+00007e: if-eqz v0, +08fh
+000082: const-string v0, "send delay update notification message."
+000086: invoke-static v10, v0, Lcom/vivo/upgradelibrary/common/b/a;->b(Ljava/lang/String; Ljava/lang/String;)V
+00008c: invoke-virtual v13, v11, Landroid/os/Handler;->removeMessages(I)V
+000092: iget-object v0, v13, Lcom/vivo/upgradelibrary/moduleui/b/b$a;->a Lcom/vivo/upgradelibrary/moduleui/b/b;
+000096: invoke-static v0, Lcom/vivo/upgradelibrary/moduleui/b/b;->b(Lcom/vivo/upgradelibrary/moduleui/b/b;)I
+00009c: move-result v0
+00009e: invoke-virtual v13, v11, v0, v11, Landroid/os/Handler;->obtainMessage(I I I)Landroid/os/Message;
+0000a4: move-result-object v0
+0000a6: const-wide/32 v11, 60000
+0000ac: invoke-virtual v13, v0, v11, v12, Landroid/os/Handler;->sendMessageDelayed(Landroid/os/Message; J)Z
+0000b2: goto/16 +075h
+0000b6: iget-object v0, v13, Lcom/vivo/upgradelibrary/moduleui/b/b$a;->a Lcom/vivo/upgradelibrary/moduleui/b/b;
+0000ba: invoke-static v0, v11, Lcom/vivo/upgradelibrary/moduleui/b/b;->a(Lcom/vivo/upgradelibrary/moduleui/b/b; Z)Z
+0000c0: iget-object v0, v13, Lcom/vivo/upgradelibrary/moduleui/b/b$a;->a Lcom/vivo/upgradelibrary/moduleui/b/b;
+0000c4: invoke-static v0, Lcom/vivo/upgradelibrary/moduleui/b/b;->g(Lcom/vivo/upgradelibrary/moduleui/b/b;)V
+0000ca: goto +69h
+0000cc: iget-object v0, v13, Lcom/vivo/upgradelibrary/moduleui/b/b$a;->a Lcom/vivo/upgradelibrary/moduleui/b/b;
+0000d0: invoke-static v0, v11, Lcom/vivo/upgradelibrary/moduleui/b/b;->a(Lcom/vivo/upgradelibrary/moduleui/b/b; Z)Z
+0000d6: iget-object v0, v13, Lcom/vivo/upgradelibrary/moduleui/b/b$a;->a Lcom/vivo/upgradelibrary/moduleui/b/b;
+0000da: invoke-static v0, Lcom/vivo/upgradelibrary/moduleui/b/b;->h(Lcom/vivo/upgradelibrary/moduleui/b/b;)V
+0000e0: goto +5eh
+0000e2: iget-object v0, v13, Lcom/vivo/upgradelibrary/moduleui/b/b$a;->a Lcom/vivo/upgradelibrary/moduleui/b/b;
+0000e6: invoke-static v0, v11, Lcom/vivo/upgradelibrary/moduleui/b/b;->a(Lcom/vivo/upgradelibrary/moduleui/b/b; Z)Z
+0000ec: iget-object v0, v13, Lcom/vivo/upgradelibrary/moduleui/b/b$a;->a Lcom/vivo/upgradelibrary/moduleui/b/b;
+0000f0: invoke-static v0, Lcom/vivo/upgradelibrary/moduleui/b/b;->j(Lcom/vivo/upgradelibrary/moduleui/b/b;)V
+0000f6: goto +53h
+0000f8: iget-object v0, v13, Lcom/vivo/upgradelibrary/moduleui/b/b$a;->a Lcom/vivo/upgradelibrary/moduleui/b/b;
+0000fc: invoke-static v0, v11, Lcom/vivo/upgradelibrary/moduleui/b/b;->a(Lcom/vivo/upgradelibrary/moduleui/b/b; Z)Z
+000102: iget-object v0, v13, Lcom/vivo/upgradelibrary/moduleui/b/b$a;->a Lcom/vivo/upgradelibrary/moduleui/b/b;
+000106: invoke-static v0, Lcom/vivo/upgradelibrary/moduleui/b/b;->e(Lcom/vivo/upgradelibrary/moduleui/b/b;)V
+00010c: goto +48h
+00010e: iget-object v0, v13, Lcom/vivo/upgradelibrary/moduleui/b/b$a;->a Lcom/vivo/upgradelibrary/moduleui/b/b;
+000112: invoke-static v0, v11, Lcom/vivo/upgradelibrary/moduleui/b/b;->a(Lcom/vivo/upgradelibrary/moduleui/b/b; Z)Z
+000118: iget-object v0, v13, Lcom/vivo/upgradelibrary/moduleui/b/b$a;->a Lcom/vivo/upgradelibrary/moduleui/b/b;
+00011c: invoke-static v0, Lcom/vivo/upgradelibrary/moduleui/b/b;->k(Lcom/vivo/upgradelibrary/moduleui/b/b;)V
+000122: goto +3dh
+000124: iget-object v0, v13, Lcom/vivo/upgradelibrary/moduleui/b/b$a;->a Lcom/vivo/upgradelibrary/moduleui/b/b;
+000128: invoke-static v0, v11, Lcom/vivo/upgradelibrary/moduleui/b/b;->a(Lcom/vivo/upgradelibrary/moduleui/b/b; Z)Z
+00012e: iget-object v0, v13, Lcom/vivo/upgradelibrary/moduleui/b/b$a;->a Lcom/vivo/upgradelibrary/moduleui/b/b;
+000132: invoke-static v0, Lcom/vivo/upgradelibrary/moduleui/b/b;->i(Lcom/vivo/upgradelibrary/moduleui/b/b;)V
+000138: goto +32h
+00013a: iget-object v0, v13, Lcom/vivo/upgradelibrary/moduleui/b/b$a;->a Lcom/vivo/upgradelibrary/moduleui/b/b;
+00013e: invoke-static v0, v11, Lcom/vivo/upgradelibrary/moduleui/b/b;->a(Lcom/vivo/upgradelibrary/moduleui/b/b; Z)Z
+000144: iget-object v0, v13, Lcom/vivo/upgradelibrary/moduleui/b/b$a;->a Lcom/vivo/upgradelibrary/moduleui/b/b;
+000148: invoke-static v0, Lcom/vivo/upgradelibrary/moduleui/b/b;->d(Lcom/vivo/upgradelibrary/moduleui/b/b;)V
+00014e: goto +27h
+000150: iget-object v0, v13, Lcom/vivo/upgradelibrary/moduleui/b/b$a;->a Lcom/vivo/upgradelibrary/moduleui/b/b;
+000154: invoke-static v0, v11, Lcom/vivo/upgradelibrary/moduleui/b/b;->a(Lcom/vivo/upgradelibrary/moduleui/b/b; Z)Z
+00015a: iget-object v0, v13, Lcom/vivo/upgradelibrary/moduleui/b/b$a;->a Lcom/vivo/upgradelibrary/moduleui/b/b;
+00015e: invoke-static v0, Lcom/vivo/upgradelibrary/moduleui/b/b;->c(Lcom/vivo/upgradelibrary/moduleui/b/b;)V
+000164: goto +1ch
+000166: const-string v0, "NOTIFY_ENABLED "
+00016a: invoke-static v10, v0, Lcom/vivo/upgradelibrary/common/b/a;->b(Ljava/lang/String; Ljava/lang/String;)V
+000170: iget-object v0, v13, Lcom/vivo/upgradelibrary/moduleui/b/b$a;->a Lcom/vivo/upgradelibrary/moduleui/b/b;
+000174: const/4 v11, 1
+000176: invoke-static v0, v11, Lcom/vivo/upgradelibrary/moduleui/b/b;->a(Lcom/vivo/upgradelibrary/moduleui/b/b; Z)Z
+00017c: iget-object v0, v13, Lcom/vivo/upgradelibrary/moduleui/b/b$a;->a Lcom/vivo/upgradelibrary/moduleui/b/b;
+000180: invoke-static v0, Lcom/vivo/upgradelibrary/moduleui/b/b;->a(Lcom/vivo/upgradelibrary/moduleui/b/b;)V
+000186: goto +bh
+000188: iget-object v0, v13, Lcom/vivo/upgradelibrary/moduleui/b/b$a;->a Lcom/vivo/upgradelibrary/moduleui/b/b;
+00018c: invoke-static v0, v11, Lcom/vivo/upgradelibrary/moduleui/b/b;->a(Lcom/vivo/upgradelibrary/moduleui/b/b; Z)Z
+000192: iget-object v0, v13, Lcom/vivo/upgradelibrary/moduleui/b/b$a;->a Lcom/vivo/upgradelibrary/moduleui/b/b;
+000196: invoke-static v0, Lcom/vivo/upgradelibrary/moduleui/b/b;->f(Lcom/vivo/upgradelibrary/moduleui/b/b;)V
+00019c: iget v0, v14, Landroid/os/Message;->what I
+0001a0: if-eqz v0, +056h
+0001a4: new-instance v0, Ljava/lang/StringBuilder;
+0001a8: const-string v11, " handleMessage: "
+0001ac: invoke-direct v0, v11, Ljava/lang/StringBuilder;-><init>(Ljava/lang/String;)V
+0001b2: iget v14, v14, Landroid/os/Message;->what I
+0001b6: if-eq v14, v9, +031h
+0001ba: if-eq v14, v8, +02ch
+0001be: if-eq v14, v7, +027h
+0001c2: if-eq v14, v6, +022h
+0001c6: if-eq v14, v5, +01dh
+0001ca: if-eq v14, v4, +018h
+0001ce: if-eq v14, v3, +013h
+0001d2: if-eq v14, v2, +00eh
+0001d6: if-eq v14, v1, +009h
+0001da: if-eqz v14, +004h
+0001de: const/4 v14, 0
+0001e0: goto +1eh
+0001e2: const-string v14, "NOTIFY_UPDATE"
+0001e6: goto +1bh
+0001e8: const-string v14, "NOTIFY_NET_FAILED"
+0001ec: goto +18h
+0001ee: const-string v14, "NOTIFY_DISK_FAILED"
+0001f2: goto +15h
+0001f4: const-string v14, "NOTIFY_INSTALL"
+0001f8: goto +12h
+0001fa: const-string v14, "NOTIFY_CHECK_SUCCESS"
+0001fe: goto +fh
+000200: const-string v14, "NOTIFY_CHECK_FAILED"
+000204: goto +ch
+000206: const-string v14, "NOTIFY_OVER"
+00020a: goto +9h
+00020c: const-string v14, "NOTIFY_CANCELED"
+000210: goto +6h
+000212: const-string v14, "NOTIFY_ENABLED"
+000216: goto +3h
+000218: const-string v14, "NOTIFY_DISABLED"
+00021c: invoke-virtual v0, v14, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+000222: const-string v14, " Notification Enabled: "
+000226: invoke-virtual v0, v14, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+00022c: iget-object v14, v13, Lcom/vivo/upgradelibrary/moduleui/b/b$a;->a Lcom/vivo/upgradelibrary/moduleui/b/b;
+000230: invoke-static v14, Lcom/vivo/upgradelibrary/moduleui/b/b;->l(Lcom/vivo/upgradelibrary/moduleui/b/b;)Z
+000236: move-result v14
+000238: invoke-virtual v0, v14, Ljava/lang/StringBuilder;->append(Z)Ljava/lang/StringBuilder;
+00023e: invoke-virtual v0, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
+000244: move-result-object v14
+000246: invoke-static v10, v14, Lcom/vivo/upgradelibrary/common/b/a;->b(Ljava/lang/String; Ljava/lang/String;)V
+00024c: return-void 

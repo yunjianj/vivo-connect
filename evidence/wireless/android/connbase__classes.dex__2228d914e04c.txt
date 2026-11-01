@@ -1,0 +1,39 @@
+APK pcsuite/updateApk/connbase.apk
+DEX classes.dex
+CLASS Lcom/vivo/connbase/wifi/utils/h$a;
+SUPER Ljava/lang/Object;
+FIELDS
+a Ljava/lang/String; = None
+b Ljava/lang/Runnable; = None
+
+METHOD <init>(Ljava/lang/String; Ljava/lang/Runnable;)V
+000000: iput-object v1, v0, Lcom/vivo/connbase/wifi/utils/h$a;->a Ljava/lang/String;
+000004: iput-object v2, v0, Lcom/vivo/connbase/wifi/utils/h$a;->b Ljava/lang/Runnable;
+000008: invoke-direct v0, Ljava/lang/Object;-><init>()V
+00000e: return-void 
+
+METHOD run()V
+000000: new-instance v0, Ljava/lang/StringBuilder;
+000004: invoke-direct v0, Ljava/lang/StringBuilder;-><init>()V
+00000a: const-string v1, "Executing task: "
+00000e: invoke-virtual v0, v1, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+000014: iget-object v1, v3, Lcom/vivo/connbase/wifi/utils/h$a;->a Ljava/lang/String;
+000018: invoke-virtual v0, v1, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+00001e: invoke-virtual v0, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
+000024: move-result-object v0
+000026: const-string v1, "WorkThread"
+00002a: invoke-static v1, v0, Lc/c/f/a/b;->k(Ljava/lang/String; Ljava/lang/String;)V
+000030: iget-object v0, v3, Lcom/vivo/connbase/wifi/utils/h$a;->b Ljava/lang/Runnable;
+000034: invoke-interface v0, Ljava/lang/Runnable;->run()V
+00003a: new-instance v0, Ljava/lang/StringBuilder;
+00003e: invoke-direct v0, Ljava/lang/StringBuilder;-><init>()V
+000044: const-string v2, "Task: "
+000048: invoke-virtual v0, v2, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+00004e: iget-object v2, v3, Lcom/vivo/connbase/wifi/utils/h$a;->a Ljava/lang/String;
+000052: invoke-virtual v0, v2, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+000058: const-string v2, " executed."
+00005c: invoke-virtual v0, v2, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+000062: invoke-virtual v0, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
+000068: move-result-object v0
+00006a: invoke-static v1, v0, Lc/c/f/a/b;->k(Ljava/lang/String; Ljava/lang/String;)V
+000070: return-void 

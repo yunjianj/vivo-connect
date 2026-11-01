@@ -1,0 +1,198 @@
+APK pcsuite/updateApk/pcsuite.apk
+DEX classes2.dex
+CLASS Lcom/vivo/connect/sdk/e/c;
+SUPER Ljava/lang/Object;
+FIELDS
+c Lcom/vivo/connect/sdk/e/c; = None
+a Ljava/util/concurrent/ConcurrentHashMap; = None
+b Ljava/lang/String; = None
+
+METHOD <init>()V
+000000: invoke-direct v1, Ljava/lang/Object;-><init>()V
+000006: new-instance v0, Ljava/util/concurrent/ConcurrentHashMap;
+00000a: invoke-direct v0, Ljava/util/concurrent/ConcurrentHashMap;-><init>()V
+000010: iput-object v0, v1, Lcom/vivo/connect/sdk/e/c;->a Ljava/util/concurrent/ConcurrentHashMap;
+000014: return-void 
+
+METHOD a()Lcom/vivo/connect/sdk/e/c;
+000000: sget-object v0, Lcom/vivo/connect/sdk/e/c;->c Lcom/vivo/connect/sdk/e/c;
+000004: if-nez v0, +017h
+000008: const-class v0, Lcom/vivo/connect/sdk/e/c;
+00000c: monitor-enter v0
+00000e: sget-object v1, Lcom/vivo/connect/sdk/e/c;->c Lcom/vivo/connect/sdk/e/c;
+000012: if-nez v1, +00ch
+000016: new-instance v1, Lcom/vivo/connect/sdk/e/c;
+00001a: invoke-direct v1, Lcom/vivo/connect/sdk/e/c;-><init>()V
+000020: sput-object v1, Lcom/vivo/connect/sdk/e/c;->c Lcom/vivo/connect/sdk/e/c;
+000024: goto +3h
+000026: move-exception v1
+000028: goto +3h
+00002a: monitor-exit v0
+00002c: goto +3h
+00002e: monitor-exit v0
+000030: throw v1
+000032: sget-object v0, Lcom/vivo/connect/sdk/e/c;->c Lcom/vivo/connect/sdk/e/c;
+000036: return-object v0
+
+METHOD a(Ljava/lang/String;)V
+000000: iput-object v1, v0, Lcom/vivo/connect/sdk/e/c;->b Ljava/lang/String;
+000004: return-void 
+
+METHOD a(Ljava/lang/String; Ljava/lang/Class;)V
+000000: if-eqz v3, +01ah
+000004: iget-object v0, v1, Lcom/vivo/connect/sdk/e/c;->a Ljava/util/concurrent/ConcurrentHashMap;
+000008: invoke-virtual v0, v3, Ljava/util/concurrent/ConcurrentHashMap;->containsKey(Ljava/lang/Object;)Z
+00000e: move-result v0
+000010: if-nez v0, +012h
+000014: iget-object v1, v1, Lcom/vivo/connect/sdk/e/c;->a Ljava/util/concurrent/ConcurrentHashMap;
+000018: invoke-virtual v3, Ljava/lang/Class;->newInstance()Ljava/lang/Object;
+00001e: move-result-object v3
+000020: check-cast v3, Lcom/vivo/connect/sdk/e/a;
+000024: invoke-virtual v1, v2, v3, Ljava/util/concurrent/ConcurrentHashMap;->put(Ljava/lang/Object; Ljava/lang/Object;)Ljava/lang/Object;
+00002a: return-void 
+00002c: move-exception v1
+00002e: invoke-virtual v1, Ljava/lang/Throwable;->printStackTrace()V
+000034: return-void 
+
+METHOD a(Landroid/app/Application;)Z
+000000: invoke-virtual v4, v5, Lcom/vivo/connect/sdk/e/c;->c(Landroid/content/Context;)Z
+000006: move-result v0
+000008: const/4 v1, 0
+00000a: if-nez v0, +034h
+00000e: iget-object v0, v4, Lcom/vivo/connect/sdk/e/c;->a Ljava/util/concurrent/ConcurrentHashMap;
+000012: invoke-virtual v0, Ljava/util/concurrent/ConcurrentHashMap;->entrySet()Ljava/util/Set;
+000018: move-result-object v0
+00001a: invoke-interface v0, Ljava/util/Set;->iterator()Ljava/util/Iterator;
+000020: move-result-object v0
+000022: invoke-interface v0, Ljava/util/Iterator;->hasNext()Z
+000028: move-result v2
+00002a: if-eqz v2, +024h
+00002e: invoke-interface v0, Ljava/util/Iterator;->next()Ljava/lang/Object;
+000034: move-result-object v2
+000036: check-cast v2, Ljava/util/Map$Entry;
+00003a: invoke-interface v2, Ljava/util/Map$Entry;->getKey()Ljava/lang/Object;
+000040: move-result-object v3
+000042: check-cast v3, Ljava/lang/String;
+000046: invoke-virtual v4, v3, v5, Lcom/vivo/connect/sdk/e/c;->a(Ljava/lang/String; Landroid/content/Context;)Z
+00004c: move-result v3
+00004e: if-eqz v3, -016h
+000052: invoke-interface v2, Ljava/util/Map$Entry;->getValue()Ljava/lang/Object;
+000058: move-result-object v1
+00005a: check-cast v1, Lcom/vivo/connect/sdk/e/a;
+00005e: invoke-interface v1, v5, Lcom/vivo/connect/sdk/e/a;->a(Landroid/app/Application;)V
+000064: goto +5h
+000066: move-exception v1
+000068: invoke-virtual v1, Ljava/lang/Throwable;->printStackTrace()V
+00006e: const/4 v1, 1
+000070: goto -27h
+000072: return v1
+
+METHOD a(Landroid/content/Context;)Z
+000000: invoke-virtual v4, v5, Lcom/vivo/connect/sdk/e/c;->c(Landroid/content/Context;)Z
+000006: move-result v0
+000008: const/4 v1, 0
+00000a: if-nez v0, +034h
+00000e: iget-object v0, v4, Lcom/vivo/connect/sdk/e/c;->a Ljava/util/concurrent/ConcurrentHashMap;
+000012: invoke-virtual v0, Ljava/util/concurrent/ConcurrentHashMap;->entrySet()Ljava/util/Set;
+000018: move-result-object v0
+00001a: invoke-interface v0, Ljava/util/Set;->iterator()Ljava/util/Iterator;
+000020: move-result-object v0
+000022: invoke-interface v0, Ljava/util/Iterator;->hasNext()Z
+000028: move-result v2
+00002a: if-eqz v2, +024h
+00002e: invoke-interface v0, Ljava/util/Iterator;->next()Ljava/lang/Object;
+000034: move-result-object v2
+000036: check-cast v2, Ljava/util/Map$Entry;
+00003a: invoke-interface v2, Ljava/util/Map$Entry;->getKey()Ljava/lang/Object;
+000040: move-result-object v3
+000042: check-cast v3, Ljava/lang/String;
+000046: invoke-virtual v4, v3, v5, Lcom/vivo/connect/sdk/e/c;->a(Ljava/lang/String; Landroid/content/Context;)Z
+00004c: move-result v3
+00004e: if-eqz v3, -016h
+000052: invoke-interface v2, Ljava/util/Map$Entry;->getValue()Ljava/lang/Object;
+000058: move-result-object v1
+00005a: check-cast v1, Lcom/vivo/connect/sdk/e/a;
+00005e: invoke-interface v1, v5, Lcom/vivo/connect/sdk/e/a;->a(Landroid/content/Context;)V
+000064: goto +5h
+000066: move-exception v1
+000068: invoke-virtual v1, Ljava/lang/Throwable;->printStackTrace()V
+00006e: const/4 v1, 1
+000070: goto -27h
+000072: return v1
+
+METHOD a(Ljava/lang/String; Landroid/content/Context;)Z
+000000: invoke-static v2, Landroid/text/TextUtils;->isEmpty(Ljava/lang/CharSequence;)Z
+000006: move-result v0
+000008: if-nez v0, +00eh
+00000c: if-nez v3, +003h
+000010: goto +ah
+000012: invoke-virtual v1, v3, Lcom/vivo/connect/sdk/e/c;->b(Landroid/content/Context;)Ljava/lang/String;
+000018: move-result-object v1
+00001a: invoke-virtual v1, v2, Ljava/lang/String;->equals(Ljava/lang/Object;)Z
+000020: move-result v1
+000022: return v1
+000024: const/4 v1, 0
+000026: return v1
+
+METHOD b(Landroid/content/Context;)Ljava/lang/String;
+000000: invoke-static Landroid/os/Process;->myPid()I
+000006: move-result v2
+000008: const-string v0, "activity"
+00000c: invoke-virtual v3, v0, Landroid/content/Context;->getSystemService(Ljava/lang/String;)Ljava/lang/Object;
+000012: move-result-object v3
+000014: check-cast v3, Landroid/app/ActivityManager;
+000018: invoke-virtual v3, Landroid/app/ActivityManager;->getRunningAppProcesses()Ljava/util/List;
+00001e: move-result-object v3
+000020: invoke-interface v3, Ljava/util/List;->iterator()Ljava/util/Iterator;
+000026: move-result-object v3
+000028: invoke-interface v3, Ljava/util/Iterator;->hasNext()Z
+00002e: move-result v0
+000030: if-eqz v0, +00fh
+000034: invoke-interface v3, Ljava/util/Iterator;->next()Ljava/lang/Object;
+00003a: move-result-object v0
+00003c: check-cast v0, Landroid/app/ActivityManager$RunningAppProcessInfo;
+000040: iget v1, v0, Landroid/app/ActivityManager$RunningAppProcessInfo;->pid I
+000044: if-ne v1, v2, -00eh
+000048: iget-object v2, v0, Landroid/app/ActivityManager$RunningAppProcessInfo;->processName Ljava/lang/String;
+00004c: return-object v2
+00004e: const-string v2, ""
+000052: return-object v2
+
+METHOD b(Landroid/app/Application;)Z
+000000: invoke-virtual v4, v5, Lcom/vivo/connect/sdk/e/c;->c(Landroid/content/Context;)Z
+000006: move-result v0
+000008: const/4 v1, 0
+00000a: if-nez v0, +034h
+00000e: iget-object v0, v4, Lcom/vivo/connect/sdk/e/c;->a Ljava/util/concurrent/ConcurrentHashMap;
+000012: invoke-virtual v0, Ljava/util/concurrent/ConcurrentHashMap;->entrySet()Ljava/util/Set;
+000018: move-result-object v0
+00001a: invoke-interface v0, Ljava/util/Set;->iterator()Ljava/util/Iterator;
+000020: move-result-object v0
+000022: invoke-interface v0, Ljava/util/Iterator;->hasNext()Z
+000028: move-result v2
+00002a: if-eqz v2, +024h
+00002e: invoke-interface v0, Ljava/util/Iterator;->next()Ljava/lang/Object;
+000034: move-result-object v2
+000036: check-cast v2, Ljava/util/Map$Entry;
+00003a: invoke-interface v2, Ljava/util/Map$Entry;->getKey()Ljava/lang/Object;
+000040: move-result-object v3
+000042: check-cast v3, Ljava/lang/String;
+000046: invoke-virtual v4, v3, v5, Lcom/vivo/connect/sdk/e/c;->a(Ljava/lang/String; Landroid/content/Context;)Z
+00004c: move-result v3
+00004e: if-eqz v3, -016h
+000052: invoke-interface v2, Ljava/util/Map$Entry;->getValue()Ljava/lang/Object;
+000058: move-result-object v1
+00005a: check-cast v1, Lcom/vivo/connect/sdk/e/a;
+00005e: invoke-interface v1, Lcom/vivo/connect/sdk/e/a;->a()V
+000064: goto +5h
+000066: move-exception v1
+000068: invoke-virtual v1, Ljava/lang/Throwable;->printStackTrace()V
+00006e: const/4 v1, 1
+000070: goto -27h
+000072: return v1
+
+METHOD c(Landroid/content/Context;)Z
+000000: iget-object v0, v1, Lcom/vivo/connect/sdk/e/c;->b Ljava/lang/String;
+000004: invoke-virtual v1, v0, v2, Lcom/vivo/connect/sdk/e/c;->a(Ljava/lang/String; Landroid/content/Context;)Z
+00000a: move-result v1
+00000c: return v1

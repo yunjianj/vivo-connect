@@ -1,0 +1,20 @@
+APK pcsuite/updateApk/connbase.apk
+DEX classes.dex
+CLASS Lcom/vivo/connbase/e0/g/k;
+SUPER Ljava/lang/Object;
+FIELDS
+
+
+METHOD <init>()V
+000000: invoke-direct v0, Ljava/lang/Object;-><init>()V
+000006: return-void 
+
+METHOD a(J)Ljava/lang/String;
+000000: new-instance v0, Ljava/util/Date;
+000004: invoke-direct v0, v1, v2, Ljava/util/Date;-><init>(J)V
+00000a: new-instance v1, Ljava/text/SimpleDateFormat;
+00000e: const-string v2, "yyyy-MM-dd HH:mm:ss"
+000012: invoke-direct v1, v2, Ljava/text/SimpleDateFormat;-><init>(Ljava/lang/String;)V
+000018: invoke-virtual v1, v0, Ljava/text/SimpleDateFormat;->format(Ljava/util/Date;)Ljava/lang/String;
+00001e: move-result-object v1
+000020: return-object v1

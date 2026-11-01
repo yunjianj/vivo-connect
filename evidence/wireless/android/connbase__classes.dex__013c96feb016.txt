@@ -1,0 +1,59 @@
+APK pcsuite/updateApk/connbase.apk
+DEX classes.dex
+CLASS Lcom/vivo/connbase/d0/a$e;
+SUPER Ljava/lang/Enum;
+FIELDS
+a Lcom/vivo/connbase/d0/a$e; = None
+b Lcom/vivo/connbase/d0/a$e; = None
+c Lcom/vivo/connbase/d0/a$e; = None
+d [Lcom/vivo/connbase/d0/a$e; = None
+
+METHOD <clinit>()V
+000000: new-instance v0, Lcom/vivo/connbase/d0/a$e;
+000004: const/4 v1, 0
+000006: const-string v2, "DISCOVERING"
+00000a: invoke-direct v0, v2, v1, Lcom/vivo/connbase/d0/a$e;-><init>(Ljava/lang/String; I)V
+000010: sput-object v0, Lcom/vivo/connbase/d0/a$e;->a Lcom/vivo/connbase/d0/a$e;
+000014: new-instance v0, Lcom/vivo/connbase/d0/a$e;
+000018: const/4 v2, 1
+00001a: const-string v3, "CONNECTED"
+00001e: invoke-direct v0, v3, v2, Lcom/vivo/connbase/d0/a$e;-><init>(Ljava/lang/String; I)V
+000024: sput-object v0, Lcom/vivo/connbase/d0/a$e;->b Lcom/vivo/connbase/d0/a$e;
+000028: new-instance v0, Lcom/vivo/connbase/d0/a$e;
+00002c: const/4 v3, 2
+00002e: const-string v4, "FREE"
+000032: invoke-direct v0, v4, v3, Lcom/vivo/connbase/d0/a$e;-><init>(Ljava/lang/String; I)V
+000038: sput-object v0, Lcom/vivo/connbase/d0/a$e;->c Lcom/vivo/connbase/d0/a$e;
+00003c: const/4 v4, 3
+00003e: new-array v4, v4, [Lcom/vivo/connbase/d0/a$e;
+000042: sget-object v5, Lcom/vivo/connbase/d0/a$e;->a Lcom/vivo/connbase/d0/a$e;
+000046: aput-object v5, v4, v1
+00004a: sget-object v1, Lcom/vivo/connbase/d0/a$e;->b Lcom/vivo/connbase/d0/a$e;
+00004e: aput-object v1, v4, v2
+000052: aput-object v0, v4, v3
+000056: sput-object v4, Lcom/vivo/connbase/d0/a$e;->d [Lcom/vivo/connbase/d0/a$e;
+00005a: return-void 
+
+METHOD <init>(Ljava/lang/String; I)V
+000000: invoke-direct v0, v1, v2, Ljava/lang/Enum;-><init>(Ljava/lang/String; I)V
+000006: return-void 
+
+METHOD valueOf(Ljava/lang/String;)Lcom/vivo/connbase/d0/a$e;
+000000: const-class v0, Lcom/vivo/connbase/d0/a$e;
+000004: invoke-static v0, v1, Ljava/lang/Enum;->valueOf(Ljava/lang/Class; Ljava/lang/String;)Ljava/lang/Enum;
+00000a: move-result-object v1
+00000c: check-cast v1, Lcom/vivo/connbase/d0/a$e;
+000010: return-object v1
+
+METHOD values()[Lcom/vivo/connbase/d0/a$e;
+000000: sget-object v0, Lcom/vivo/connbase/d0/a$e;->d [Lcom/vivo/connbase/d0/a$e;
+000004: invoke-virtual v0, [Lcom/vivo/connbase/d0/a$e;->clone()Ljava/lang/Object;
+00000a: move-result-object v0
+00000c: check-cast v0, [Lcom/vivo/connbase/d0/a$e;
+000010: return-object v0
+
+METHOD compareTo(Ljava/lang/Object;)I
+000000: check-cast v1, Ljava/lang/Enum;
+000004: invoke-super v0, v1, Ljava/lang/Enum;->compareTo(Ljava/lang/Enum;)I
+00000a: move-result v1
+00000c: return v1

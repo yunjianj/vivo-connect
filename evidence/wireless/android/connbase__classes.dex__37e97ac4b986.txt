@@ -1,0 +1,95 @@
+APK pcsuite/updateApk/connbase.apk
+DEX classes.dex
+CLASS Lcom/vivo/connbase/e0/g/j;
+SUPER Ljava/lang/Object;
+FIELDS
+a Ljava/lang/String; = 'SwitchStateUtilsTAG'
+b I = 255
+c I = 255
+
+METHOD <clinit>()V
+000000: return-void 
+
+METHOD <init>()V
+000000: invoke-direct v0, Ljava/lang/Object;-><init>()V
+000006: return-void 
+
+METHOD a(Z)V
+000000: new-instance v0, Ljava/lang/StringBuilder;
+000004: invoke-direct v0, Ljava/lang/StringBuilder;-><init>()V
+00000a: const-string v1, "updateBluetoothEnable:"
+00000e: invoke-virtual v0, v1, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+000014: invoke-virtual v0, v2, Ljava/lang/StringBuilder;->append(Z)Ljava/lang/StringBuilder;
+00001a: invoke-virtual v0, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
+000020: move-result-object v0
+000022: const-string v1, "SwitchStateUtilsTAG"
+000026: invoke-static v1, v0, Lc/c/f/a/b;->k(Ljava/lang/String; Ljava/lang/String;)V
+00002c: sput v2, Lcom/vivo/connbase/e0/g/j;->b I
+000030: return-void 
+
+METHOD a()Z
+000000: sget v0, Lcom/vivo/connbase/e0/g/j;->b I
+000004: const/4 v1, -1
+000006: if-ne v1, v0, +013h
+00000a: invoke-static Landroid/bluetooth/BluetoothAdapter;->getDefaultAdapter()Landroid/bluetooth/BluetoothAdapter;
+000010: move-result-object v0
+000012: if-eqz v0, +011h
+000016: invoke-virtual v0, Landroid/bluetooth/BluetoothAdapter;->enable()Z
+00001c: move-result v0
+00001e: sput v0, Lcom/vivo/connbase/e0/g/j;->b I
+000022: invoke-static Lcom/vivo/connbase/e0/g/j;->a()Z
+000028: move-result v0
+00002a: return v0
+00002c: const/4 v1, 1
+00002e: if-ne v1, v0, +003h
+000032: return v1
+000034: const/4 v0, 0
+000036: return v0
+
+METHOD b(Z)V
+000000: new-instance v0, Ljava/lang/StringBuilder;
+000004: invoke-direct v0, Ljava/lang/StringBuilder;-><init>()V
+00000a: const-string v1, "updateWlanEnable:"
+00000e: invoke-virtual v0, v1, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+000014: invoke-virtual v0, v2, Ljava/lang/StringBuilder;->append(Z)Ljava/lang/StringBuilder;
+00001a: invoke-virtual v0, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
+000020: move-result-object v0
+000022: const-string v1, "SwitchStateUtilsTAG"
+000026: invoke-static v1, v0, Lc/c/f/a/b;->k(Ljava/lang/String; Ljava/lang/String;)V
+00002c: sput v2, Lcom/vivo/connbase/e0/g/j;->c I
+000030: return-void 
+
+METHOD b()Z
+000000: invoke-static Lcom/vivo/connbase/App;->m()Lcom/vivo/connbase/App;
+000006: move-result-object v0
+000008: invoke-virtual v0, Landroid/app/Application;->getApplicationContext()Landroid/content/Context;
+00000e: move-result-object v0
+000010: invoke-static v0, Lcom/vivo/connbase/e0/g/c;->h(Landroid/content/Context;)Z
+000016: move-result v0
+000018: return v0
+
+METHOD c()Z
+000000: sget v0, Lcom/vivo/connbase/e0/g/j;->c I
+000004: const/4 v1, 0
+000006: const/4 v2, -1
+000008: if-ne v2, v0, +020h
+00000c: invoke-static Lcom/vivo/connbase/App;->m()Lcom/vivo/connbase/App;
+000012: move-result-object v0
+000014: invoke-virtual v0, Landroid/app/Application;->getApplicationContext()Landroid/content/Context;
+00001a: move-result-object v0
+00001c: const-string v2, "wifi"
+000020: invoke-virtual v0, v2, Landroid/content/Context;->getSystemService(Ljava/lang/String;)Ljava/lang/Object;
+000026: move-result-object v0
+000028: check-cast v0, Landroid/net/wifi/WifiManager;
+00002c: if-nez v0, +003h
+000030: return v1
+000032: invoke-virtual v0, Landroid/net/wifi/WifiManager;->isWifiEnabled()Z
+000038: move-result v0
+00003a: sput v0, Lcom/vivo/connbase/e0/g/j;->c I
+00003e: invoke-static Lcom/vivo/connbase/e0/g/j;->c()Z
+000044: move-result v0
+000046: return v0
+000048: const/4 v2, 1
+00004a: if-ne v2, v0, +003h
+00004e: return v2
+000050: return v1

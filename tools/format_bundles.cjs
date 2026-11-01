@@ -1,0 +1,4 @@
+const fs=require('fs'),vm=require('vm'),path=require('path');
+const root=path.resolve(__dirname,'..'),ctx={};vm.createContext(ctx);
+vm.runInContext(fs.readFileSync(path.join(root,'analysis/app/node_modules/terser/dist/bundle.min.js'),'utf8'),ctx);
+(async()=>{fs.mkdirSync(path.join(root,'analysis/pretty'),{recursive:true});let count=0;for(const f of fs.readdirSync(path.join(root,'analysis/app/dist/electron')).filter(x=>x.endsWith('.js')).sort()) {const dest=path.join(root,'analysis/pretty',f);if(fs.existsSync(dest))continue;const r=await ctx.Terser.minify(fs.readFileSync(path.join(root,'analysis/app/dist/electron',f),'utf8'),{compress:false,mangle:false,format:{beautify:true}});fs.writeFileSync(dest,r.code);count++}console.log(`Formatted ${count} bundles; target code was not executed.`)})();

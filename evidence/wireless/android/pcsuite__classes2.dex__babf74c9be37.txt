@@ -1,0 +1,400 @@
+APK pcsuite/updateApk/pcsuite.apk
+DEX classes2.dex
+CLASS Lcom/vivo/pcsuite/pcconnect/PcOtherShare$2;
+SUPER Lcom/vivo/pcsuite/pcconnect/ShareLinkObserver$Stub;
+FIELDS
+this$0 Lcom/vivo/pcsuite/pcconnect/PcOtherShare; = None
+
+METHOD <init>(Lcom/vivo/pcsuite/pcconnect/PcOtherShare;)V
+000000: iput-object v1, v0, Lcom/vivo/pcsuite/pcconnect/PcOtherShare$2;->this$0 Lcom/vivo/pcsuite/pcconnect/PcOtherShare;
+000004: invoke-direct v0, Lcom/vivo/pcsuite/pcconnect/ShareLinkObserver$Stub;-><init>()V
+00000a: return-void 
+
+METHOD onConnectFailed(I)V
+000000: const-string v0, "onConnectFailed reason = "
+000004: const-string v1, "pcsuite_PcOtherShare"
+000008: invoke-static v3, v0, v1, LV5/S;->j(I Ljava/lang/String; Ljava/lang/String;)V
+00000e: iget-object v2, v2, Lcom/vivo/pcsuite/pcconnect/PcOtherShare$2;->this$0 Lcom/vivo/pcsuite/pcconnect/PcOtherShare;
+000012: invoke-static v2, Lcom/vivo/pcsuite/pcconnect/PcOtherShare;->access$600(Lcom/vivo/pcsuite/pcconnect/PcOtherShare;)Ljava/util/concurrent/CopyOnWriteArrayList;
+000018: move-result-object v2
+00001a: invoke-virtual v2, Ljava/util/concurrent/CopyOnWriteArrayList;->iterator()Ljava/util/Iterator;
+000020: move-result-object v2
+000022: invoke-interface v2, Ljava/util/Iterator;->hasNext()Z
+000028: move-result v0
+00002a: if-eqz v0, +00ch
+00002e: invoke-interface v2, Ljava/util/Iterator;->next()Ljava/lang/Object;
+000034: move-result-object v0
+000036: check-cast v0, Lcom/vivo/pcsuite/pcconnect/IPcShare$PCConnectListener;
+00003a: invoke-interface v0, v3, Lcom/vivo/pcsuite/pcconnect/IPcShare$PCConnectListener;->onConnectFailed(I)V
+000040: goto -fh
+000042: return-void 
+
+METHOD onConnectStateChanged()V
+000000: new-instance v0, Ljava/lang/StringBuilder;
+000004: const-string v1, "onConnectStateChanged: connectState:"
+000008: invoke-direct v0, v1, Ljava/lang/StringBuilder;-><init>(Ljava/lang/String;)V
+00000e: iget-object v1, v3, Lcom/vivo/pcsuite/pcconnect/PcOtherShare$2;->this$0 Lcom/vivo/pcsuite/pcconnect/PcOtherShare;
+000012: invoke-virtual v1, Lcom/vivo/pcsuite/pcconnect/PcOtherShare;->isConnected()Z
+000018: move-result v1
+00001a: if-nez v1, +00dh
+00001e: iget-object v1, v3, Lcom/vivo/pcsuite/pcconnect/PcOtherShare$2;->this$0 Lcom/vivo/pcsuite/pcconnect/PcOtherShare;
+000022: invoke-virtual v1, Lcom/vivo/pcsuite/pcconnect/PcOtherShare;->isConnecting()Z
+000028: move-result v1
+00002a: if-eqz v1, +003h
+00002e: goto +3h
+000030: const/4 v1, 0
+000032: goto +2h
+000034: const/4 v1, 1
+000036: const-string v2, "pcsuite_PcOtherShare"
+00003a: invoke-static v0, v1, v2, Landroidx/appcompat/widget/b;->i(Ljava/lang/StringBuilder; Z Ljava/lang/String;)V
+000040: iget-object v3, v3, Lcom/vivo/pcsuite/pcconnect/PcOtherShare$2;->this$0 Lcom/vivo/pcsuite/pcconnect/PcOtherShare;
+000044: invoke-static v3, Lcom/vivo/pcsuite/pcconnect/PcOtherShare;->access$700(Lcom/vivo/pcsuite/pcconnect/PcOtherShare;)V
+00004a: return-void 
+
+METHOD onConnected(Ljava/lang/String; Z Z I)V
+000000: const-string v0, "onConnected: isOwner:"
+000004: const-string v1, "pcsuite_PcOtherShare"
+000008: invoke-static v0, v1, v4, LZ1/b;->c(Ljava/lang/String; Ljava/lang/String; Z)V
+00000e: iget-object v2, v2, Lcom/vivo/pcsuite/pcconnect/PcOtherShare$2;->this$0 Lcom/vivo/pcsuite/pcconnect/PcOtherShare;
+000012: invoke-static v2, Lcom/vivo/pcsuite/pcconnect/PcOtherShare;->access$600(Lcom/vivo/pcsuite/pcconnect/PcOtherShare;)Ljava/util/concurrent/CopyOnWriteArrayList;
+000018: move-result-object v2
+00001a: invoke-virtual v2, Ljava/util/concurrent/CopyOnWriteArrayList;->iterator()Ljava/util/Iterator;
+000020: move-result-object v2
+000022: invoke-interface v2, Ljava/util/Iterator;->hasNext()Z
+000028: move-result v0
+00002a: if-eqz v0, +00ch
+00002e: invoke-interface v2, Ljava/util/Iterator;->next()Ljava/lang/Object;
+000034: move-result-object v0
+000036: check-cast v0, Lcom/vivo/pcsuite/pcconnect/IPcShare$PCConnectListener;
+00003a: invoke-interface v0, v3, v4, v5, v6, Lcom/vivo/pcsuite/pcconnect/IPcShare$PCConnectListener;->onConnected(Ljava/lang/String; Z Z I)V
+000040: goto -fh
+000042: return-void 
+
+METHOD onDeviceDiscover(Z Lcom/vivo/pcsuite/pcconnect/Device;)V
+000000: new-instance v0, Lcom/vivo/pcsuite/pcconnect/PCBean;
+000004: invoke-virtual v7, Lcom/vivo/pcsuite/pcconnect/Device;->getDeviceName()Ljava/lang/String;
+00000a: move-result-object v1
+00000c: invoke-virtual v7, Lcom/vivo/pcsuite/pcconnect/Device;->getDeviceId()Ljava/lang/String;
+000012: move-result-object v2
+000014: invoke-virtual v7, Lcom/vivo/pcsuite/pcconnect/Device;->getSignal()I
+00001a: move-result v3
+00001c: invoke-virtual v7, Lcom/vivo/pcsuite/pcconnect/Device;->getVersion()I
+000022: move-result v4
+000024: invoke-direct v0, v1, v2, v3, v4, Lcom/vivo/pcsuite/pcconnect/PCBean;-><init>(Ljava/lang/String; Ljava/lang/String; I I)V
+00002a: invoke-virtual v7, Lcom/vivo/pcsuite/pcconnect/Device;->getUserName()Ljava/lang/String;
+000030: move-result-object v1
+000032: invoke-virtual v0, v1, Lcom/vivo/pcsuite/pcconnect/PCBean;->setUserName(Ljava/lang/String;)V
+000038: invoke-virtual v7, Lcom/vivo/pcsuite/pcconnect/Device;->isOwnerId()Z
+00003e: move-result v1
+000040: invoke-virtual v0, v1, Lcom/vivo/pcsuite/pcconnect/PCBean;->setOwnerId(Z)V
+000046: invoke-virtual v7, Lcom/vivo/pcsuite/pcconnect/Device;->getAddress()Ljava/lang/String;
+00004c: move-result-object v1
+00004e: invoke-virtual v0, v1, Lcom/vivo/pcsuite/pcconnect/PCBean;->setAddress(Ljava/lang/String;)V
+000054: invoke-virtual v7, Lcom/vivo/pcsuite/pcconnect/Device;->getBand()I
+00005a: move-result v1
+00005c: invoke-virtual v0, v1, Lcom/vivo/pcsuite/pcconnect/PCBean;->setBand(I)V
+000062: invoke-static Landroid/os/SystemClock;->elapsedRealtime()J
+000068: move-result-wide v1
+00006a: invoke-virtual v0, v1, v2, Lcom/vivo/pcsuite/pcconnect/PCBean;->setTime(J)V
+000070: invoke-virtual v7, Lcom/vivo/pcsuite/pcconnect/Device;->getSignal()I
+000076: move-result v7
+000078: iget-object v1, v5, Lcom/vivo/pcsuite/pcconnect/PcOtherShare$2;->this$0 Lcom/vivo/pcsuite/pcconnect/PcOtherShare;
+00007c: invoke-static v1, Lcom/vivo/pcsuite/pcconnect/PcOtherShare;->access$400(Lcom/vivo/pcsuite/pcconnect/PcOtherShare;)Lcom/vivo/pcsuite/pcconnect/IPcShare$PcShareCallback;
+000082: move-result-object v1
+000084: if-eqz v1, +028h
+000088: iget-object v1, v5, Lcom/vivo/pcsuite/pcconnect/PcOtherShare$2;->this$0 Lcom/vivo/pcsuite/pcconnect/PcOtherShare;
+00008c: invoke-virtual v1, Lcom/vivo/pcsuite/pcconnect/PcOtherShare;->isOpened()Z
+000092: move-result v1
+000094: if-eqz v1, +020h
+000098: if-eqz v6, +015h
+00009c: invoke-static v7, Ljava/lang/Math;->abs(I)I
+0000a2: move-result v6
+0000a4: const/16 v7, 85
+0000a8: if-lt v6, v7, +003h
+0000ac: goto +bh
+0000ae: iget-object v5, v5, Lcom/vivo/pcsuite/pcconnect/PcOtherShare$2;->this$0 Lcom/vivo/pcsuite/pcconnect/PcOtherShare;
+0000b2: invoke-static v5, Lcom/vivo/pcsuite/pcconnect/PcOtherShare;->access$400(Lcom/vivo/pcsuite/pcconnect/PcOtherShare;)Lcom/vivo/pcsuite/pcconnect/IPcShare$PcShareCallback;
+0000b8: move-result-object v5
+0000ba: invoke-interface v5, v0, Lcom/vivo/pcsuite/pcconnect/IPcShare$PcShareCallback;->add(Lcom/vivo/pcsuite/pcconnect/PCBean;)V
+0000c0: return-void 
+0000c2: iget-object v5, v5, Lcom/vivo/pcsuite/pcconnect/PcOtherShare$2;->this$0 Lcom/vivo/pcsuite/pcconnect/PcOtherShare;
+0000c6: invoke-static v5, Lcom/vivo/pcsuite/pcconnect/PcOtherShare;->access$400(Lcom/vivo/pcsuite/pcconnect/PcOtherShare;)Lcom/vivo/pcsuite/pcconnect/IPcShare$PcShareCallback;
+0000cc: move-result-object v5
+0000ce: invoke-interface v5, v0, Lcom/vivo/pcsuite/pcconnect/IPcShare$PcShareCallback;->remove(Lcom/vivo/pcsuite/pcconnect/PCBean;)V
+0000d4: return-void 
+
+METHOD onDeviceDiscoverWithType(Z Lcom/vivo/pcsuite/pcconnect/Device; I)V
+000000: const-string v0, "onDeviceDiscover: isMatch:"
+000004: const-string v1, "  ,device:"
+000008: invoke-static v0, v1, v6, LP/d;->e(Ljava/lang/String; Ljava/lang/String; Z)Ljava/lang/StringBuilder;
+00000e: move-result-object v0
+000010: invoke-virtual v7, Lcom/vivo/pcsuite/pcconnect/Device;->toString()Ljava/lang/String;
+000016: move-result-object v1
+000018: invoke-virtual v0, v1, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+00001e: const-string v1, " ,DeviceType:"
+000022: invoke-virtual v0, v1, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+000028: invoke-virtual v0, v8, Ljava/lang/StringBuilder;->append(I)Ljava/lang/StringBuilder;
+00002e: invoke-virtual v0, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
+000034: move-result-object v0
+000036: const-string v1, "pcsuite_PcOtherShare"
+00003a: invoke-static v1, v0, Lcom/vivo/connect/logger/EasyLog;->i(Ljava/lang/String; Ljava/lang/String;)V
+000040: new-instance v0, Lcom/vivo/pcsuite/pcconnect/PCBean;
+000044: invoke-virtual v7, Lcom/vivo/pcsuite/pcconnect/Device;->getDeviceName()Ljava/lang/String;
+00004a: move-result-object v1
+00004c: invoke-virtual v7, Lcom/vivo/pcsuite/pcconnect/Device;->getDeviceId()Ljava/lang/String;
+000052: move-result-object v2
+000054: invoke-virtual v7, Lcom/vivo/pcsuite/pcconnect/Device;->getSignal()I
+00005a: move-result v3
+00005c: invoke-virtual v7, Lcom/vivo/pcsuite/pcconnect/Device;->getVersion()I
+000062: move-result v4
+000064: invoke-direct v0, v1, v2, v3, v4, Lcom/vivo/pcsuite/pcconnect/PCBean;-><init>(Ljava/lang/String; Ljava/lang/String; I I)V
+00006a: invoke-virtual v7, Lcom/vivo/pcsuite/pcconnect/Device;->getUserName()Ljava/lang/String;
+000070: move-result-object v1
+000072: invoke-virtual v0, v1, Lcom/vivo/pcsuite/pcconnect/PCBean;->setUserName(Ljava/lang/String;)V
+000078: invoke-virtual v7, Lcom/vivo/pcsuite/pcconnect/Device;->isOwnerId()Z
+00007e: move-result v1
+000080: invoke-virtual v0, v1, Lcom/vivo/pcsuite/pcconnect/PCBean;->setOwnerId(Z)V
+000086: invoke-virtual v7, Lcom/vivo/pcsuite/pcconnect/Device;->getAddress()Ljava/lang/String;
+00008c: move-result-object v1
+00008e: invoke-virtual v0, v1, Lcom/vivo/pcsuite/pcconnect/PCBean;->setAddress(Ljava/lang/String;)V
+000094: invoke-virtual v7, Lcom/vivo/pcsuite/pcconnect/Device;->getBand()I
+00009a: move-result v1
+00009c: invoke-virtual v0, v1, Lcom/vivo/pcsuite/pcconnect/PCBean;->setBand(I)V
+0000a2: invoke-virtual v7, Lcom/vivo/pcsuite/pcconnect/Device;->getDeviceType()I
+0000a8: move-result v1
+0000aa: invoke-virtual v0, v1, Lcom/vivo/pcsuite/pcconnect/PCBean;->setFindType(I)V
+0000b0: invoke-static Landroid/os/SystemClock;->elapsedRealtime()J
+0000b6: move-result-wide v1
+0000b8: invoke-virtual v0, v1, v2, Lcom/vivo/pcsuite/pcconnect/PCBean;->setTime(J)V
+0000be: invoke-virtual v7, Lcom/vivo/pcsuite/pcconnect/Device;->getSignal()I
+0000c4: move-result v7
+0000c6: iget-object v1, v5, Lcom/vivo/pcsuite/pcconnect/PcOtherShare$2;->this$0 Lcom/vivo/pcsuite/pcconnect/PcOtherShare;
+0000ca: invoke-static v1, Lcom/vivo/pcsuite/pcconnect/PcOtherShare;->access$800(Lcom/vivo/pcsuite/pcconnect/PcOtherShare;)Lcom/vivo/pcsuite/pcconnect/IPcShare$macPcShareCallback;
+0000d0: move-result-object v1
+0000d2: if-eqz v1, +02bh
+0000d6: iget-object v1, v5, Lcom/vivo/pcsuite/pcconnect/PcOtherShare$2;->this$0 Lcom/vivo/pcsuite/pcconnect/PcOtherShare;
+0000da: invoke-virtual v1, Lcom/vivo/pcsuite/pcconnect/PcOtherShare;->isOpened()Z
+0000e0: move-result v1
+0000e2: if-eqz v1, +023h
+0000e6: const/4 v1, 6
+0000e8: if-ne v8, v1, +020h
+0000ec: if-eqz v6, +015h
+0000f0: invoke-static v7, Ljava/lang/Math;->abs(I)I
+0000f6: move-result v6
+0000f8: const/16 v7, 85
+0000fc: if-lt v6, v7, +003h
+000100: goto +bh
+000102: iget-object v5, v5, Lcom/vivo/pcsuite/pcconnect/PcOtherShare$2;->this$0 Lcom/vivo/pcsuite/pcconnect/PcOtherShare;
+000106: invoke-static v5, Lcom/vivo/pcsuite/pcconnect/PcOtherShare;->access$800(Lcom/vivo/pcsuite/pcconnect/PcOtherShare;)Lcom/vivo/pcsuite/pcconnect/IPcShare$macPcShareCallback;
+00010c: move-result-object v5
+00010e: invoke-interface v5, v0, Lcom/vivo/pcsuite/pcconnect/IPcShare$macPcShareCallback;->add(Lcom/vivo/pcsuite/pcconnect/PCBean;)V
+000114: return-void 
+000116: iget-object v5, v5, Lcom/vivo/pcsuite/pcconnect/PcOtherShare$2;->this$0 Lcom/vivo/pcsuite/pcconnect/PcOtherShare;
+00011a: invoke-static v5, Lcom/vivo/pcsuite/pcconnect/PcOtherShare;->access$800(Lcom/vivo/pcsuite/pcconnect/PcOtherShare;)Lcom/vivo/pcsuite/pcconnect/IPcShare$macPcShareCallback;
+000120: move-result-object v5
+000122: invoke-interface v5, v0, Lcom/vivo/pcsuite/pcconnect/IPcShare$macPcShareCallback;->remove(Lcom/vivo/pcsuite/pcconnect/PCBean;)V
+000128: return-void 
+
+METHOD onDisconnected()V
+000000: const-string v0, "pcsuite_PcOtherShare"
+000004: const-string v1, "onDisconnected"
+000008: invoke-static v0, v1, Lcom/vivo/connect/logger/EasyLog;->i(Ljava/lang/String; Ljava/lang/String;)V
+00000e: iget-object v2, v2, Lcom/vivo/pcsuite/pcconnect/PcOtherShare$2;->this$0 Lcom/vivo/pcsuite/pcconnect/PcOtherShare;
+000012: invoke-static v2, Lcom/vivo/pcsuite/pcconnect/PcOtherShare;->access$600(Lcom/vivo/pcsuite/pcconnect/PcOtherShare;)Ljava/util/concurrent/CopyOnWriteArrayList;
+000018: move-result-object v2
+00001a: invoke-virtual v2, Ljava/util/concurrent/CopyOnWriteArrayList;->iterator()Ljava/util/Iterator;
+000020: move-result-object v2
+000022: invoke-interface v2, Ljava/util/Iterator;->hasNext()Z
+000028: move-result v0
+00002a: if-eqz v0, +00ch
+00002e: invoke-interface v2, Ljava/util/Iterator;->next()Ljava/lang/Object;
+000034: move-result-object v0
+000036: check-cast v0, Lcom/vivo/pcsuite/pcconnect/IPcShare$PCConnectListener;
+00003a: invoke-interface v0, Lcom/vivo/pcsuite/pcconnect/IPcShare$PCConnectListener;->onDisconnected()V
+000040: goto -fh
+000042: return-void 
+
+METHOD onExOne(Ljava/lang/String; Ljava/lang/String;)Ljava/lang/String;
+000000: const/4 v0, 0
+000002: return-object v0
+
+METHOD onExTwo(Ljava/lang/String; [B)Ljava/lang/String;
+000000: const/4 v0, 0
+000002: return-object v0
+
+METHOD onIsAutoStatus(Z Z Z Lcom/vivo/pcsuite/pcconnect/Device;)V
+000000: iget-object v0, v2, Lcom/vivo/pcsuite/pcconnect/PcOtherShare$2;->this$0 Lcom/vivo/pcsuite/pcconnect/PcOtherShare;
+000004: invoke-static v0, Lcom/vivo/pcsuite/pcconnect/PcOtherShare;->access$900(Lcom/vivo/pcsuite/pcconnect/PcOtherShare;)Lcom/vivo/pcsuite/pcconnect/IPcShare$InfoListener;
+00000a: move-result-object v0
+00000c: if-eqz v0, +025h
+000010: new-instance v0, Lcom/vivo/pcsuite/pcconnect/PCBean;
+000014: invoke-direct v0, Lcom/vivo/pcsuite/pcconnect/PCBean;-><init>()V
+00001a: invoke-virtual v6, Lcom/vivo/pcsuite/pcconnect/Device;->getDeviceId()Ljava/lang/String;
+000020: move-result-object v1
+000022: invoke-virtual v0, v1, Lcom/vivo/pcsuite/pcconnect/PCBean;->setDeviceId(Ljava/lang/String;)V
+000028: invoke-virtual v6, Lcom/vivo/pcsuite/pcconnect/Device;->getUserName()Ljava/lang/String;
+00002e: move-result-object v1
+000030: invoke-virtual v0, v1, Lcom/vivo/pcsuite/pcconnect/PCBean;->setUserName(Ljava/lang/String;)V
+000036: invoke-virtual v6, Lcom/vivo/pcsuite/pcconnect/Device;->getDeviceName()Ljava/lang/String;
+00003c: move-result-object v6
+00003e: invoke-virtual v0, v6, Lcom/vivo/pcsuite/pcconnect/PCBean;->setDeviceName(Ljava/lang/String;)V
+000044: iget-object v2, v2, Lcom/vivo/pcsuite/pcconnect/PcOtherShare$2;->this$0 Lcom/vivo/pcsuite/pcconnect/PcOtherShare;
+000048: invoke-static v2, Lcom/vivo/pcsuite/pcconnect/PcOtherShare;->access$900(Lcom/vivo/pcsuite/pcconnect/PcOtherShare;)Lcom/vivo/pcsuite/pcconnect/IPcShare$InfoListener;
+00004e: move-result-object v2
+000050: invoke-interface v2, v3, v4, v5, v0, Lcom/vivo/pcsuite/pcconnect/IPcShare$InfoListener;->onReceiverAutoStatus(Z Z Z Lcom/vivo/pcsuite/pcconnect/PCBean;)V
+000056: return-void 
+
+METHOD onOpenResult(Z)V
+000000: const-string v0, "onOpenResult: isSuccess:"
+000004: const-string v1, "pcsuite_PcOtherShare"
+000008: invoke-static v0, v1, v3, LZ1/b;->c(Ljava/lang/String; Ljava/lang/String; Z)V
+00000e: iget-object v0, v2, Lcom/vivo/pcsuite/pcconnect/PcOtherShare$2;->this$0 Lcom/vivo/pcsuite/pcconnect/PcOtherShare;
+000012: invoke-static v0, Lcom/vivo/pcsuite/pcconnect/PcOtherShare;->access$400(Lcom/vivo/pcsuite/pcconnect/PcOtherShare;)Lcom/vivo/pcsuite/pcconnect/IPcShare$PcShareCallback;
+000018: move-result-object v0
+00001a: if-eqz v0, +00bh
+00001e: iget-object v2, v2, Lcom/vivo/pcsuite/pcconnect/PcOtherShare$2;->this$0 Lcom/vivo/pcsuite/pcconnect/PcOtherShare;
+000022: invoke-static v2, Lcom/vivo/pcsuite/pcconnect/PcOtherShare;->access$400(Lcom/vivo/pcsuite/pcconnect/PcOtherShare;)Lcom/vivo/pcsuite/pcconnect/IPcShare$PcShareCallback;
+000028: move-result-object v2
+00002a: invoke-interface v2, v3, Lcom/vivo/pcsuite/pcconnect/IPcShare$PcShareCallback;->onOpenResult(Z)V
+000030: return-void 
+
+METHOD onOpenWifi()V
+000000: const-string v0, "pcsuite_PcOtherShare"
+000004: const-string v1, "onOpenWifi"
+000008: invoke-static v0, v1, Lcom/vivo/connect/logger/EasyLog;->i(Ljava/lang/String; Ljava/lang/String;)V
+00000e: iget-object v0, v2, Lcom/vivo/pcsuite/pcconnect/PcOtherShare$2;->this$0 Lcom/vivo/pcsuite/pcconnect/PcOtherShare;
+000012: invoke-static v0, Lcom/vivo/pcsuite/pcconnect/PcOtherShare;->access$400(Lcom/vivo/pcsuite/pcconnect/PcOtherShare;)Lcom/vivo/pcsuite/pcconnect/IPcShare$PcShareCallback;
+000018: move-result-object v0
+00001a: if-eqz v0, +00bh
+00001e: iget-object v0, v2, Lcom/vivo/pcsuite/pcconnect/PcOtherShare$2;->this$0 Lcom/vivo/pcsuite/pcconnect/PcOtherShare;
+000022: invoke-static v0, Lcom/vivo/pcsuite/pcconnect/PcOtherShare;->access$400(Lcom/vivo/pcsuite/pcconnect/PcOtherShare;)Lcom/vivo/pcsuite/pcconnect/IPcShare$PcShareCallback;
+000028: move-result-object v0
+00002a: invoke-interface v0, Lcom/vivo/pcsuite/pcconnect/IPcShare$PcShareCallback;->onOpenWifi()V
+000030: iget-object v2, v2, Lcom/vivo/pcsuite/pcconnect/PcOtherShare$2;->this$0 Lcom/vivo/pcsuite/pcconnect/PcOtherShare;
+000034: invoke-static v2, Lcom/vivo/pcsuite/pcconnect/PcOtherShare;->access$600(Lcom/vivo/pcsuite/pcconnect/PcOtherShare;)Ljava/util/concurrent/CopyOnWriteArrayList;
+00003a: move-result-object v2
+00003c: invoke-virtual v2, Ljava/util/concurrent/CopyOnWriteArrayList;->iterator()Ljava/util/Iterator;
+000042: move-result-object v2
+000044: invoke-interface v2, Ljava/util/Iterator;->hasNext()Z
+00004a: move-result v0
+00004c: if-eqz v0, +00ch
+000050: invoke-interface v2, Ljava/util/Iterator;->next()Ljava/lang/Object;
+000056: move-result-object v0
+000058: check-cast v0, Lcom/vivo/pcsuite/pcconnect/IPcShare$PCConnectListener;
+00005c: invoke-interface v0, Lcom/vivo/pcsuite/pcconnect/IPcShare$PCConnectListener;->onOpenWifi()V
+000062: goto -fh
+000064: return-void 
+
+METHOD onScanResult(Z)V
+000000: const-string v0, "onScanResult: isSuccess:"
+000004: const-string v1, "pcsuite_PcOtherShare"
+000008: invoke-static v0, v1, v3, LZ1/b;->c(Ljava/lang/String; Ljava/lang/String; Z)V
+00000e: iget-object v0, v2, Lcom/vivo/pcsuite/pcconnect/PcOtherShare$2;->this$0 Lcom/vivo/pcsuite/pcconnect/PcOtherShare;
+000012: invoke-static v0, Lcom/vivo/pcsuite/pcconnect/PcOtherShare;->access$400(Lcom/vivo/pcsuite/pcconnect/PcOtherShare;)Lcom/vivo/pcsuite/pcconnect/IPcShare$PcShareCallback;
+000018: move-result-object v0
+00001a: if-eqz v0, +00bh
+00001e: iget-object v2, v2, Lcom/vivo/pcsuite/pcconnect/PcOtherShare$2;->this$0 Lcom/vivo/pcsuite/pcconnect/PcOtherShare;
+000022: invoke-static v2, Lcom/vivo/pcsuite/pcconnect/PcOtherShare;->access$400(Lcom/vivo/pcsuite/pcconnect/PcOtherShare;)Lcom/vivo/pcsuite/pcconnect/IPcShare$PcShareCallback;
+000028: move-result-object v2
+00002a: invoke-interface v2, v3, Lcom/vivo/pcsuite/pcconnect/IPcShare$PcShareCallback;->onScanResult(Z)V
+000030: return-void 
+
+METHOD onShareStateChanged()V
+000000: new-instance v0, Ljava/lang/StringBuilder;
+000004: const-string v1, "onShareStateChanged: shareState:"
+000008: invoke-direct v0, v1, Ljava/lang/StringBuilder;-><init>(Ljava/lang/String;)V
+00000e: iget-object v1, v2, Lcom/vivo/pcsuite/pcconnect/PcOtherShare$2;->this$0 Lcom/vivo/pcsuite/pcconnect/PcOtherShare;
+000012: invoke-virtual v1, Lcom/vivo/pcsuite/pcconnect/PcOtherShare;->isOpened()Z
+000018: move-result v1
+00001a: invoke-virtual v0, v1, Ljava/lang/StringBuilder;->append(Z)Ljava/lang/StringBuilder;
+000020: invoke-virtual v0, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
+000026: move-result-object v0
+000028: const-string v1, "pcsuite_PcOtherShare"
+00002c: invoke-static v1, v0, Lcom/vivo/connect/logger/EasyLog;->i(Ljava/lang/String; Ljava/lang/String;)V
+000032: iget-object v0, v2, Lcom/vivo/pcsuite/pcconnect/PcOtherShare$2;->this$0 Lcom/vivo/pcsuite/pcconnect/PcOtherShare;
+000036: invoke-static v0, Lcom/vivo/pcsuite/pcconnect/PcOtherShare;->access$400(Lcom/vivo/pcsuite/pcconnect/PcOtherShare;)Lcom/vivo/pcsuite/pcconnect/IPcShare$PcShareCallback;
+00003c: move-result-object v0
+00003e: if-eqz v0, +00bh
+000042: iget-object v0, v2, Lcom/vivo/pcsuite/pcconnect/PcOtherShare$2;->this$0 Lcom/vivo/pcsuite/pcconnect/PcOtherShare;
+000046: invoke-static v0, Lcom/vivo/pcsuite/pcconnect/PcOtherShare;->access$400(Lcom/vivo/pcsuite/pcconnect/PcOtherShare;)Lcom/vivo/pcsuite/pcconnect/IPcShare$PcShareCallback;
+00004c: move-result-object v0
+00004e: invoke-interface v0, Lcom/vivo/pcsuite/pcconnect/IPcShare$PcShareCallback;->onShareStateChanged()V
+000054: iget-object v2, v2, Lcom/vivo/pcsuite/pcconnect/PcOtherShare$2;->this$0 Lcom/vivo/pcsuite/pcconnect/PcOtherShare;
+000058: invoke-virtual v2, Lcom/vivo/pcsuite/pcconnect/PcOtherShare;->updateShareState()V
+00005e: return-void 
+
+METHOD onWifiEnabled()V
+000000: const-string v0, "pcsuite_PcOtherShare"
+000004: const-string v1, "onWifiEnabled"
+000008: invoke-static v0, v1, Lcom/vivo/connect/logger/EasyLog;->i(Ljava/lang/String; Ljava/lang/String;)V
+00000e: iget-object v0, v2, Lcom/vivo/pcsuite/pcconnect/PcOtherShare$2;->this$0 Lcom/vivo/pcsuite/pcconnect/PcOtherShare;
+000012: invoke-static v0, Lcom/vivo/pcsuite/pcconnect/PcOtherShare;->access$400(Lcom/vivo/pcsuite/pcconnect/PcOtherShare;)Lcom/vivo/pcsuite/pcconnect/IPcShare$PcShareCallback;
+000018: move-result-object v0
+00001a: if-eqz v0, +00bh
+00001e: iget-object v0, v2, Lcom/vivo/pcsuite/pcconnect/PcOtherShare$2;->this$0 Lcom/vivo/pcsuite/pcconnect/PcOtherShare;
+000022: invoke-static v0, Lcom/vivo/pcsuite/pcconnect/PcOtherShare;->access$400(Lcom/vivo/pcsuite/pcconnect/PcOtherShare;)Lcom/vivo/pcsuite/pcconnect/IPcShare$PcShareCallback;
+000028: move-result-object v0
+00002a: invoke-interface v0, Lcom/vivo/pcsuite/pcconnect/IPcShare$PcShareCallback;->onWifiEnabled()V
+000030: iget-object v2, v2, Lcom/vivo/pcsuite/pcconnect/PcOtherShare$2;->this$0 Lcom/vivo/pcsuite/pcconnect/PcOtherShare;
+000034: invoke-static v2, Lcom/vivo/pcsuite/pcconnect/PcOtherShare;->access$600(Lcom/vivo/pcsuite/pcconnect/PcOtherShare;)Ljava/util/concurrent/CopyOnWriteArrayList;
+00003a: move-result-object v2
+00003c: invoke-virtual v2, Ljava/util/concurrent/CopyOnWriteArrayList;->iterator()Ljava/util/Iterator;
+000042: move-result-object v2
+000044: invoke-interface v2, Ljava/util/Iterator;->hasNext()Z
+00004a: move-result v0
+00004c: if-eqz v0, +00ch
+000050: invoke-interface v2, Ljava/util/Iterator;->next()Ljava/lang/Object;
+000056: move-result-object v0
+000058: check-cast v0, Lcom/vivo/pcsuite/pcconnect/IPcShare$PCConnectListener;
+00005c: invoke-interface v0, Lcom/vivo/pcsuite/pcconnect/IPcShare$PCConnectListener;->onWifiEnabled()V
+000062: goto -fh
+000064: return-void 
+
+METHOD receiverSendInfo(Ljava/lang/String;)V
+000000: iget-object v0, v1, Lcom/vivo/pcsuite/pcconnect/PcOtherShare$2;->this$0 Lcom/vivo/pcsuite/pcconnect/PcOtherShare;
+000004: invoke-static v0, Lcom/vivo/pcsuite/pcconnect/PcOtherShare;->access$900(Lcom/vivo/pcsuite/pcconnect/PcOtherShare;)Lcom/vivo/pcsuite/pcconnect/IPcShare$InfoListener;
+00000a: move-result-object v0
+00000c: if-eqz v0, +00bh
+000010: iget-object v1, v1, Lcom/vivo/pcsuite/pcconnect/PcOtherShare$2;->this$0 Lcom/vivo/pcsuite/pcconnect/PcOtherShare;
+000014: invoke-static v1, Lcom/vivo/pcsuite/pcconnect/PcOtherShare;->access$900(Lcom/vivo/pcsuite/pcconnect/PcOtherShare;)Lcom/vivo/pcsuite/pcconnect/IPcShare$InfoListener;
+00001a: move-result-object v1
+00001c: invoke-interface v1, v2, Lcom/vivo/pcsuite/pcconnect/IPcShare$InfoListener;->onReceiverSendInfo(Ljava/lang/String;)V
+000022: return-void 
+
+METHOD request(Ljava/lang/String; Ljava/lang/String; Ljava/lang/String;)V
+000000: iget-object v0, v1, Lcom/vivo/pcsuite/pcconnect/PcOtherShare$2;->this$0 Lcom/vivo/pcsuite/pcconnect/PcOtherShare;
+000004: invoke-static v0, Lcom/vivo/pcsuite/pcconnect/PcOtherShare;->access$900(Lcom/vivo/pcsuite/pcconnect/PcOtherShare;)Lcom/vivo/pcsuite/pcconnect/IPcShare$InfoListener;
+00000a: move-result-object v0
+00000c: if-eqz v0, +00bh
+000010: iget-object v1, v1, Lcom/vivo/pcsuite/pcconnect/PcOtherShare$2;->this$0 Lcom/vivo/pcsuite/pcconnect/PcOtherShare;
+000014: invoke-static v1, Lcom/vivo/pcsuite/pcconnect/PcOtherShare;->access$900(Lcom/vivo/pcsuite/pcconnect/PcOtherShare;)Lcom/vivo/pcsuite/pcconnect/IPcShare$InfoListener;
+00001a: move-result-object v1
+00001c: invoke-interface v1, v2, v3, v4, Lcom/vivo/pcsuite/pcconnect/IPcShare$InfoListener;->onRequest(Ljava/lang/String; Ljava/lang/String; Ljava/lang/String;)V
+000022: return-void 
+
+METHOD requestWithExtra(Ljava/lang/String; Ljava/lang/String; Ljava/lang/String; I Ljava/lang/String;)V
+000000: iget-object v0, v6, Lcom/vivo/pcsuite/pcconnect/PcOtherShare$2;->this$0 Lcom/vivo/pcsuite/pcconnect/PcOtherShare;
+000004: invoke-static v0, Lcom/vivo/pcsuite/pcconnect/PcOtherShare;->access$900(Lcom/vivo/pcsuite/pcconnect/PcOtherShare;)Lcom/vivo/pcsuite/pcconnect/IPcShare$InfoListener;
+00000a: move-result-object v0
+00000c: if-eqz v0, +010h
+000010: iget-object v6, v6, Lcom/vivo/pcsuite/pcconnect/PcOtherShare$2;->this$0 Lcom/vivo/pcsuite/pcconnect/PcOtherShare;
+000014: invoke-static v6, Lcom/vivo/pcsuite/pcconnect/PcOtherShare;->access$900(Lcom/vivo/pcsuite/pcconnect/PcOtherShare;)Lcom/vivo/pcsuite/pcconnect/IPcShare$InfoListener;
+00001a: move-result-object v0
+00001c: move-object v1, v7
+00001e: move-object v2, v8
+000020: move-object v3, v9
+000022: move v4, v10
+000024: move-object v5, v11
+000026: invoke-interface/range v0 ... v5, Lcom/vivo/pcsuite/pcconnect/IPcShare$InfoListener;->requestWithExtra(Ljava/lang/String; Ljava/lang/String; Ljava/lang/String; I Ljava/lang/String;)V
+00002c: return-void 
+
+METHOD requestWithOpenId(Ljava/lang/String; Ljava/lang/String; Ljava/lang/String; I)V
+000000: iget-object v0, v1, Lcom/vivo/pcsuite/pcconnect/PcOtherShare$2;->this$0 Lcom/vivo/pcsuite/pcconnect/PcOtherShare;
+000004: invoke-static v0, Lcom/vivo/pcsuite/pcconnect/PcOtherShare;->access$900(Lcom/vivo/pcsuite/pcconnect/PcOtherShare;)Lcom/vivo/pcsuite/pcconnect/IPcShare$InfoListener;
+00000a: move-result-object v0
+00000c: if-eqz v0, +00bh
+000010: iget-object v1, v1, Lcom/vivo/pcsuite/pcconnect/PcOtherShare$2;->this$0 Lcom/vivo/pcsuite/pcconnect/PcOtherShare;
+000014: invoke-static v1, Lcom/vivo/pcsuite/pcconnect/PcOtherShare;->access$900(Lcom/vivo/pcsuite/pcconnect/PcOtherShare;)Lcom/vivo/pcsuite/pcconnect/IPcShare$InfoListener;
+00001a: move-result-object v1
+00001c: invoke-interface v1, v2, v3, v4, v5, Lcom/vivo/pcsuite/pcconnect/IPcShare$InfoListener;->onRequest(Ljava/lang/String; Ljava/lang/String; Ljava/lang/String; I)V
+000022: return-void 

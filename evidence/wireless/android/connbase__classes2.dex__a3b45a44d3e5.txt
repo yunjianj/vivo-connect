@@ -1,0 +1,2612 @@
+APK pcsuite/updateApk/connbase.apk
+DEX classes2.dex
+CLASS Lcom/vivo/pcsuite/pcconnect/ble/BluetoothLeService;
+SUPER Landroid/app/Service;
+FIELDS
+T Ljava/lang/String; = 'pcsuite_BluetoothLeService'
+U I = 20000
+V I = 1
+W I = 15
+X I = 1
+A Ljava/util/concurrent/atomic/AtomicInteger; = None
+B Ljava/lang/String; = None
+C Z = None
+E Lcom/vivo/pcsuite/pcconnect/ble/BluetoothLeService$i; = None
+F Ljava/util/List; = None
+G Landroid/bluetooth/BluetoothSocket; = None
+H Ljava/io/DataOutputStream; = None
+K Ljava/io/DataInputStream; = None
+L Z = None
+M Z = None
+N Z = None
+O Ljava/util/concurrent/CountDownLatch; = None
+P Ljava/util/concurrent/CountDownLatch; = None
+Q Ljava/util/concurrent/atomic/AtomicBoolean; = None
+R Landroid/content/ServiceConnection; = None
+S I = None
+a Landroid/bluetooth/BluetoothManager; = None
+b Landroid/bluetooth/BluetoothAdapter; = None
+c Lcom/vivo/pcsuite/pcconnect/ble/f; = None
+d Landroid/bluetooth/le/BluetoothLeAdvertiser; = None
+e Landroid/bluetooth/BluetoothGattServer; = None
+f Lcom/vivo/pcsuite/pcconnect/ble/BluetoothLeService$j; = None
+g Lcom/vivo/pcsuite/pcconnect/ble/BluetoothLeService$h; = None
+h Landroid/os/HandlerThread; = None
+i Z = None
+j Landroid/os/Handler; = None
+k Ljava/lang/Runnable; = None
+l Landroid/bluetooth/le/AdvertiseCallback; = None
+m Lcom/vivo/pcsuite/pcconnect/ble/f$b; = None
+n Lcom/vivo/pcsuite/pcconnect/ble/h; = None
+o Landroid/content/BroadcastReceiver; = None
+p Ljava/util/concurrent/atomic/AtomicBoolean; = None
+q Ljava/lang/String; = None
+t Ljava/lang/String; = None
+w I = None
+x Ljava/lang/String; = None
+y Ljava/lang/String; = None
+z Ljava/lang/String; = None
+
+METHOD <init>()V
+000000: invoke-direct v4, Landroid/app/Service;-><init>()V
+000006: new-instance v0, Lcom/vivo/pcsuite/pcconnect/ble/BluetoothLeService$j;
+00000a: const/4 v1, 0
+00000c: invoke-direct v0, v4, v1, Lcom/vivo/pcsuite/pcconnect/ble/BluetoothLeService$j;-><init>(Lcom/vivo/pcsuite/pcconnect/ble/BluetoothLeService; Lcom/vivo/pcsuite/pcconnect/ble/BluetoothLeService$a;)V
+000012: iput-object v0, v4, Lcom/vivo/pcsuite/pcconnect/ble/BluetoothLeService;->f Lcom/vivo/pcsuite/pcconnect/ble/BluetoothLeService$j;
+000016: const/4 v0, 0
+000018: iput-boolean v0, v4, Lcom/vivo/pcsuite/pcconnect/ble/BluetoothLeService;->i Z
+00001c: new-instance v2, Landroid/os/Handler;
+000020: invoke-static Landroid/os/Looper;->getMainLooper()Landroid/os/Looper;
+000026: move-result-object v3
+000028: invoke-direct v2, v3, Landroid/os/Handler;-><init>(Landroid/os/Looper;)V
+00002e: iput-object v2, v4, Lcom/vivo/pcsuite/pcconnect/ble/BluetoothLeService;->j Landroid/os/Handler;
+000032: new-instance v2, Lcom/vivo/pcsuite/pcconnect/ble/BluetoothLeService$a;
+000036: invoke-direct v2, v4, Lcom/vivo/pcsuite/pcconnect/ble/BluetoothLeService$a;-><init>(Lcom/vivo/pcsuite/pcconnect/ble/BluetoothLeService;)V
+00003c: iput-object v2, v4, Lcom/vivo/pcsuite/pcconnect/ble/BluetoothLeService;->k Ljava/lang/Runnable;
+000040: new-instance v2, Ljava/util/concurrent/atomic/AtomicBoolean;
+000044: invoke-direct v2, v0, Ljava/util/concurrent/atomic/AtomicBoolean;-><init>(Z)V
+00004a: iput-object v2, v4, Lcom/vivo/pcsuite/pcconnect/ble/BluetoothLeService;->p Ljava/util/concurrent/atomic/AtomicBoolean;
+00004e: new-instance v2, Ljava/util/concurrent/atomic/AtomicInteger;
+000052: invoke-direct v2, v0, Ljava/util/concurrent/atomic/AtomicInteger;-><init>(I)V
+000058: iput-object v2, v4, Lcom/vivo/pcsuite/pcconnect/ble/BluetoothLeService;->A Ljava/util/concurrent/atomic/AtomicInteger;
+00005c: iput-boolean v0, v4, Lcom/vivo/pcsuite/pcconnect/ble/BluetoothLeService;->C Z
+000060: new-instance v2, Lcom/vivo/pcsuite/pcconnect/ble/BluetoothLeService$i;
+000064: invoke-direct v2, v4, v1, Lcom/vivo/pcsuite/pcconnect/ble/BluetoothLeService$i;-><init>(Lcom/vivo/pcsuite/pcconnect/ble/BluetoothLeService; Lcom/vivo/pcsuite/pcconnect/ble/BluetoothLeService$a;)V
+00006a: iput-object v2, v4, Lcom/vivo/pcsuite/pcconnect/ble/BluetoothLeService;->E Lcom/vivo/pcsuite/pcconnect/ble/BluetoothLeService$i;
+00006e: new-instance v2, Ljava/util/ArrayList;
+000072: invoke-direct v2, Ljava/util/ArrayList;-><init>()V
+000078: iput-object v2, v4, Lcom/vivo/pcsuite/pcconnect/ble/BluetoothLeService;->F Ljava/util/List;
+00007c: iput-object v1, v4, Lcom/vivo/pcsuite/pcconnect/ble/BluetoothLeService;->G Landroid/bluetooth/BluetoothSocket;
+000080: iput-object v1, v4, Lcom/vivo/pcsuite/pcconnect/ble/BluetoothLeService;->H Ljava/io/DataOutputStream;
+000084: iput-object v1, v4, Lcom/vivo/pcsuite/pcconnect/ble/BluetoothLeService;->K Ljava/io/DataInputStream;
+000088: iput-boolean v0, v4, Lcom/vivo/pcsuite/pcconnect/ble/BluetoothLeService;->N Z
+00008c: new-instance v1, Ljava/util/concurrent/atomic/AtomicBoolean;
+000090: invoke-direct v1, v0, Ljava/util/concurrent/atomic/AtomicBoolean;-><init>(Z)V
+000096: iput-object v1, v4, Lcom/vivo/pcsuite/pcconnect/ble/BluetoothLeService;->Q Ljava/util/concurrent/atomic/AtomicBoolean;
+00009a: new-instance v1, Lcom/vivo/pcsuite/pcconnect/ble/BluetoothLeService$f;
+00009e: invoke-direct v1, v4, Lcom/vivo/pcsuite/pcconnect/ble/BluetoothLeService$f;-><init>(Lcom/vivo/pcsuite/pcconnect/ble/BluetoothLeService;)V
+0000a4: iput-object v1, v4, Lcom/vivo/pcsuite/pcconnect/ble/BluetoothLeService;->R Landroid/content/ServiceConnection;
+0000a8: iput v0, v4, Lcom/vivo/pcsuite/pcconnect/ble/BluetoothLeService;->S I
+0000ac: return-void 
+
+METHOD A(Lcom/vivo/pcsuite/pcconnect/ble/BluetoothLeService;)Landroid/bluetooth/BluetoothSocket;
+000000: iget-object v0, v0, Lcom/vivo/pcsuite/pcconnect/ble/BluetoothLeService;->G Landroid/bluetooth/BluetoothSocket;
+000004: return-object v0
+
+METHOD B(Lcom/vivo/pcsuite/pcconnect/ble/BluetoothLeService;)V
+000000: invoke-direct v0, Lcom/vivo/pcsuite/pcconnect/ble/BluetoothLeService;->s()V
+000006: return-void 
+
+METHOD C(Lcom/vivo/pcsuite/pcconnect/ble/BluetoothLeService;)Ljava/io/DataOutputStream;
+000000: iget-object v0, v0, Lcom/vivo/pcsuite/pcconnect/ble/BluetoothLeService;->H Ljava/io/DataOutputStream;
+000004: return-object v0
+
+METHOD D(Lcom/vivo/pcsuite/pcconnect/ble/BluetoothLeService;)Landroid/bluetooth/BluetoothGattServer;
+000000: iget-object v0, v0, Lcom/vivo/pcsuite/pcconnect/ble/BluetoothLeService;->e Landroid/bluetooth/BluetoothGattServer;
+000004: return-object v0
+
+METHOD E(Lcom/vivo/pcsuite/pcconnect/ble/BluetoothLeService;)Ljava/io/DataInputStream;
+000000: iget-object v0, v0, Lcom/vivo/pcsuite/pcconnect/ble/BluetoothLeService;->K Ljava/io/DataInputStream;
+000004: return-object v0
+
+METHOD F(Lcom/vivo/pcsuite/pcconnect/ble/BluetoothLeService;)Z
+000000: invoke-direct v0, Lcom/vivo/pcsuite/pcconnect/ble/BluetoothLeService;->u()Z
+000006: move-result v0
+000008: return v0
+
+METHOD G(Lcom/vivo/pcsuite/pcconnect/ble/BluetoothLeService;)V
+000000: invoke-direct v0, Lcom/vivo/pcsuite/pcconnect/ble/BluetoothLeService;->k()V
+000006: return-void 
+
+METHOD H(Lcom/vivo/pcsuite/pcconnect/ble/BluetoothLeService;)V
+000000: invoke-direct v0, Lcom/vivo/pcsuite/pcconnect/ble/BluetoothLeService;->w()V
+000006: return-void 
+
+METHOD a(Lcom/vivo/pcsuite/pcconnect/ble/BluetoothLeService; I)I
+000000: iput v1, v0, Lcom/vivo/pcsuite/pcconnect/ble/BluetoothLeService;->w I
+000004: return v1
+
+METHOD a(Lcom/vivo/pcsuite/pcconnect/ble/BluetoothLeService; Landroid/bluetooth/BluetoothSocket;)Landroid/bluetooth/BluetoothSocket;
+000000: iput-object v1, v0, Lcom/vivo/pcsuite/pcconnect/ble/BluetoothLeService;->G Landroid/bluetooth/BluetoothSocket;
+000004: return-object v1
+
+METHOD a(Z Z Z)Landroid/bluetooth/le/AdvertiseData;
+000000: new-instance v8, Landroid/bluetooth/le/AdvertiseData$Builder;
+000004: invoke-direct v8, Landroid/bluetooth/le/AdvertiseData$Builder;-><init>()V
+00000a: new-instance v0, Ljava/lang/StringBuilder;
+00000e: invoke-direct v0, Ljava/lang/StringBuilder;-><init>()V
+000014: const-string v1, "buildVivoAdvertiseData : "
+000018: invoke-virtual v0, v1, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+00001e: invoke-virtual v0, v7, Ljava/lang/StringBuilder;->append(Z)Ljava/lang/StringBuilder;
+000024: invoke-virtual v0, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
+00002a: move-result-object v0
+00002c: const-string v1, "pcsuite_BluetoothLeService"
+000030: invoke-static v1, v0, Lc/c/f/a/b;->a(Ljava/lang/String; Ljava/lang/String;)V
+000036: const/16 v0, 2103
+00003a: if-eqz v7, +026h
+00003e: const/4 v7, 4
+000040: new-array v1, v7, [B
+000044: fill-array-data v1, +0000048h
+00004a: const-string v2, "1234**56789"
+00004e: invoke-static v2, Lcom/vivo/pcsuite/pcconnect/ble/c;->d(Ljava/lang/String;)[B
+000054: move-result-object v2
+000056: const/4 v3, 7
+000058: array-length v4, v2
+00005a: add-int/2addr v4, v3
+00005c: new-array v4, v4, [B
+000060: invoke-direct v6, v4, v9, Lcom/vivo/pcsuite/pcconnect/ble/BluetoothLeService;->a([B Z)V
+000066: const/4 v9, 5
+000068: const/4 v5, 3
+00006a: aput-byte v9, v4, v5
+00006e: const/4 v9, 0
+000070: invoke-static v1, v9, v4, v5, v7, Ljava/lang/System;->arraycopy(Ljava/lang/Object; I Ljava/lang/Object; I I)V
+000076: array-length v7, v2
+000078: invoke-static v2, v9, v4, v3, v7, Ljava/lang/System;->arraycopy(Ljava/lang/Object; I Ljava/lang/Object; I I)V
+00007e: invoke-virtual v8, v0, v4, Landroid/bluetooth/le/AdvertiseData$Builder;->addManufacturerData(I [B)Landroid/bluetooth/le/AdvertiseData$Builder;
+000084: goto +23h
+000086: const/16 v7, 24
+00008a: new-array v7, v7, [B
+00008e: invoke-direct v6, v7, v9, Lcom/vivo/pcsuite/pcconnect/ble/BluetoothLeService;->a([B Z)V
+000094: new-instance v9, Ljava/lang/StringBuilder;
+000098: invoke-direct v9, Ljava/lang/StringBuilder;-><init>()V
+00009e: const-string v2, "advertising data : "
+0000a2: invoke-virtual v9, v2, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+0000a8: invoke-static v7, Ljava/util/Arrays;->toString([B)Ljava/lang/String;
+0000ae: move-result-object v2
+0000b0: invoke-virtual v9, v2, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+0000b6: invoke-virtual v9, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
+0000bc: move-result-object v9
+0000be: invoke-static v1, v9, Lc/c/f/a/b;->a(Ljava/lang/String; Ljava/lang/String;)V
+0000c4: invoke-virtual v8, v0, v7, Landroid/bluetooth/le/AdvertiseData$Builder;->addManufacturerData(I [B)Landroid/bluetooth/le/AdvertiseData$Builder;
+0000ca: invoke-virtual v8, Landroid/bluetooth/le/AdvertiseData$Builder;->build()Landroid/bluetooth/le/AdvertiseData;
+0000d0: move-result-object v7
+0000d2: return-object v7
+0000d4: fill-array-data-payload b'\x01\x02\x03\x04' | \x01\x02\x03\x04
+
+METHOD a(Z)Landroid/bluetooth/le/AdvertiseSettings;
+000000: new-instance v0, Landroid/bluetooth/le/AdvertiseSettings$Builder;
+000004: invoke-direct v0, Landroid/bluetooth/le/AdvertiseSettings$Builder;-><init>()V
+00000a: const/4 v1, 0
+00000c: invoke-virtual v0, v1, Landroid/bluetooth/le/AdvertiseSettings$Builder;->setAdvertiseMode(I)Landroid/bluetooth/le/AdvertiseSettings$Builder;
+000012: invoke-virtual v0, v1, Landroid/bluetooth/le/AdvertiseSettings$Builder;->setTimeout(I)Landroid/bluetooth/le/AdvertiseSettings$Builder;
+000018: invoke-virtual v0, Landroid/bluetooth/le/AdvertiseSettings$Builder;->build()Landroid/bluetooth/le/AdvertiseSettings;
+00001e: move-result-object v3
+000020: return-object v3
+
+METHOD a(Lcom/vivo/pcsuite/pcconnect/ble/BluetoothLeService; Landroid/os/HandlerThread;)Landroid/os/HandlerThread;
+000000: iput-object v1, v0, Lcom/vivo/pcsuite/pcconnect/ble/BluetoothLeService;->h Landroid/os/HandlerThread;
+000004: return-object v1
+
+METHOD a(Lcom/vivo/pcsuite/pcconnect/ble/BluetoothLeService; Lcom/vivo/pcsuite/pcconnect/ble/BluetoothLeService$h;)Lcom/vivo/pcsuite/pcconnect/ble/BluetoothLeService$h;
+000000: iput-object v1, v0, Lcom/vivo/pcsuite/pcconnect/ble/BluetoothLeService;->g Lcom/vivo/pcsuite/pcconnect/ble/BluetoothLeService$h;
+000004: return-object v1
+
+METHOD a(Lcom/vivo/pcsuite/pcconnect/ble/BluetoothLeService;)Lcom/vivo/pcsuite/pcconnect/ble/BluetoothLeService$i;
+000000: iget-object v0, v0, Lcom/vivo/pcsuite/pcconnect/ble/BluetoothLeService;->E Lcom/vivo/pcsuite/pcconnect/ble/BluetoothLeService$i;
+000004: return-object v0
+
+METHOD a(Lcom/vivo/pcsuite/pcconnect/ble/BluetoothLeService; Ljava/io/DataInputStream;)Ljava/io/DataInputStream;
+000000: iput-object v1, v0, Lcom/vivo/pcsuite/pcconnect/ble/BluetoothLeService;->K Ljava/io/DataInputStream;
+000004: return-object v1
+
+METHOD a(Lcom/vivo/pcsuite/pcconnect/ble/BluetoothLeService; Ljava/io/DataOutputStream;)Ljava/io/DataOutputStream;
+000000: iput-object v1, v0, Lcom/vivo/pcsuite/pcconnect/ble/BluetoothLeService;->H Ljava/io/DataOutputStream;
+000004: return-object v1
+
+METHOD a(Lcom/vivo/pcsuite/pcconnect/ble/BluetoothLeService; Ljava/lang/String;)Ljava/lang/String;
+000000: iput-object v1, v0, Lcom/vivo/pcsuite/pcconnect/ble/BluetoothLeService;->x Ljava/lang/String;
+000004: return-object v1
+
+METHOD a(Lcom/vivo/pcsuite/pcconnect/ble/BluetoothLeService; Ljava/lang/String; I)Ljava/lang/String;
+000000: invoke-direct v0, v1, v2, Lcom/vivo/pcsuite/pcconnect/ble/BluetoothLeService;->a(Ljava/lang/String; I)Ljava/lang/String;
+000006: move-result-object v0
+000008: return-object v0
+
+METHOD a(Ljava/lang/String;)Ljava/lang/String;
+000000: invoke-static v6, Landroid/text/TextUtils;->isEmpty(Ljava/lang/CharSequence;)Z
+000006: move-result v0
+000008: const-string v1, ":"
+00000c: if-nez v0, +009h
+000010: invoke-virtual v6, v1, Ljava/lang/String;->contains(Ljava/lang/CharSequence;)Z
+000016: move-result v0
+000018: if-eqz v0, +003h
+00001c: return-object v6
+00001e: new-instance v0, Ljava/lang/StringBuilder;
+000022: invoke-direct v0, Ljava/lang/StringBuilder;-><init>()V
+000028: invoke-static v6, Landroid/text/TextUtils;->isEmpty(Ljava/lang/CharSequence;)Z
+00002e: move-result v2
+000030: if-nez v2, +028h
+000034: invoke-virtual v6, Ljava/lang/String;->length()I
+00003a: move-result v2
+00003c: if-lez v2, +022h
+000040: const/4 v2, 0
+000042: invoke-virtual v6, Ljava/lang/String;->length()I
+000048: move-result v3
+00004a: if-ge v2, v3, +01bh
+00004e: invoke-virtual v6, v2, Ljava/lang/String;->charAt(I)C
+000054: move-result v3
+000056: invoke-virtual v0, v3, Ljava/lang/StringBuilder;->append(C)Ljava/lang/StringBuilder;
+00005c: rem-int/lit8 v3, v2, 2
+000060: const/4 v4, 1
+000062: if-ne v3, v4, +00ch
+000066: invoke-virtual v6, Ljava/lang/String;->length()I
+00006c: move-result v3
+00006e: sub-int/2addr v3, v4
+000070: if-eq v2, v3, +005h
+000074: invoke-virtual v0, v1, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+00007a: add-int/lit8 v2, v2, 1
+00007e: goto -1eh
+000080: invoke-virtual v0, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
+000086: move-result-object v6
+000088: return-object v6
+
+METHOD a(Ljava/lang/String; I)Ljava/lang/String;
+000000: invoke-static v3, Lcom/vivo/pcsuite/pcconnect/ble/c;->d(Ljava/lang/String;)[B
+000006: move-result-object v0
+000008: array-length v0, v0
+00000a: if-le v0, v4, +00eh
+00000e: const/4 v0, 0
+000010: invoke-virtual v3, Ljava/lang/String;->length()I
+000016: move-result v1
+000018: add-int/lit8 v1, v1, -1
+00001c: invoke-virtual v3, v0, v1, Ljava/lang/String;->substring(I I)Ljava/lang/String;
+000022: move-result-object v3
+000024: goto -12h
+000026: new-instance v4, Ljava/lang/StringBuilder;
+00002a: invoke-direct v4, Ljava/lang/StringBuilder;-><init>()V
+000030: const-string v0, "Trim string: "
+000034: invoke-virtual v4, v0, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+00003a: invoke-virtual v4, v3, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+000040: invoke-virtual v4, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
+000046: move-result-object v4
+000048: const-string v0, "pcsuite_BluetoothLeService"
+00004c: invoke-static v0, v4, Lc/c/f/a/b;->a(Ljava/lang/String; Ljava/lang/String;)V
+000052: return-object v3
+
+METHOD a(I I I)Lorg/json/JSONObject;
+000000: new-instance v0, Lorg/json/JSONObject;
+000004: invoke-direct v0, Lorg/json/JSONObject;-><init>()V
+00000a: const-string v1, "min"
+00000e: invoke-virtual v0, v1, v3, Lorg/json/JSONObject;->put(Ljava/lang/String; I)Lorg/json/JSONObject;
+000014: const-string v3, "max"
+000018: invoke-virtual v0, v3, v4, Lorg/json/JSONObject;->put(Ljava/lang/String; I)Lorg/json/JSONObject;
+00001e: const-string v3, "version"
+000022: invoke-virtual v0, v3, v5, Lorg/json/JSONObject;->put(Ljava/lang/String; I)Lorg/json/JSONObject;
+000028: const-string v3, "appsource"
+00002c: iget v4, v2, Lcom/vivo/pcsuite/pcconnect/ble/BluetoothLeService;->w I
+000030: invoke-virtual v0, v3, v4, Lorg/json/JSONObject;->put(Ljava/lang/String; I)Lorg/json/JSONObject;
+000036: return-object v0
+000038: move-exception v3
+00003a: const-string v4, "pcsuite_BluetoothLeService"
+00003e: const-string v5, "Generate request info failed."
+000042: invoke-static v4, v5, v3, Lc/c/f/a/b;->b(Ljava/lang/String; Ljava/lang/String; Ljava/lang/Throwable;)V
+000048: const/4 v3, 0
+00004a: return-object v3
+
+METHOD a(I I Ljava/lang/String; Ljava/lang/String; Ljava/lang/String;)Lorg/json/JSONObject;
+000000: const-string v0, "pcsuite_BluetoothLeService"
+000004: new-instance v1, Lorg/json/JSONObject;
+000008: invoke-direct v1, Lorg/json/JSONObject;-><init>()V
+00000e: const-string v2, "state"
+000012: invoke-virtual v1, v2, v4, Lorg/json/JSONObject;->put(Ljava/lang/String; I)Lorg/json/JSONObject;
+000018: const-string v4, "response_code"
+00001c: invoke-virtual v1, v4, v5, Lorg/json/JSONObject;->put(Ljava/lang/String; I)Lorg/json/JSONObject;
+000022: const-string v4, "ssid"
+000026: invoke-virtual v1, v4, v6, Lorg/json/JSONObject;->put(Ljava/lang/String; Ljava/lang/Object;)Lorg/json/JSONObject;
+00002c: const-string v4, "psk"
+000030: invoke-virtual v1, v4, v7, Lorg/json/JSONObject;->put(Ljava/lang/String; Ljava/lang/Object;)Lorg/json/JSONObject;
+000036: const-string v4, "mac"
+00003a: invoke-virtual v1, v4, v8, Lorg/json/JSONObject;->put(Ljava/lang/String; Ljava/lang/Object;)Lorg/json/JSONObject;
+000040: new-instance v4, Ljava/lang/StringBuilder;
+000044: invoke-direct v4, Ljava/lang/StringBuilder;-><init>()V
+00004a: const-string v5, "11 Response info: "
+00004e: invoke-virtual v4, v5, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+000054: invoke-virtual v1, Lorg/json/JSONObject;->toString()Ljava/lang/String;
+00005a: move-result-object v5
+00005c: invoke-virtual v4, v5, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+000062: invoke-virtual v4, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
+000068: move-result-object v4
+00006a: invoke-static v0, v4, Lc/c/f/a/b;->a(Ljava/lang/String; Ljava/lang/String;)V
+000070: return-object v1
+000072: move-exception v4
+000074: const-string v5, "Generate response info failed."
+000078: invoke-static v0, v5, v4, Lc/c/f/a/b;->b(Ljava/lang/String; Ljava/lang/String; Ljava/lang/Throwable;)V
+00007e: const/4 v4, 0
+000080: return-object v4
+
+METHOD a(Lcom/vivo/pcsuite/pcconnect/ble/BluetoothLeService; I I I)Lorg/json/JSONObject;
+000000: invoke-direct v0, v1, v2, v3, Lcom/vivo/pcsuite/pcconnect/ble/BluetoothLeService;->a(I I I)Lorg/json/JSONObject;
+000006: move-result-object v0
+000008: return-object v0
+
+METHOD a(Lcom/vivo/pcsuite/pcconnect/ble/BluetoothLeService; Ljava/lang/String; Ljava/lang/String; Ljava/lang/String; Ljava/lang/String; Ljava/lang/String; Ljava/lang/String; Ljava/lang/String;)Lorg/json/JSONObject;
+000000: invoke-direct/range v0 ... v7, Lcom/vivo/pcsuite/pcconnect/ble/BluetoothLeService;->a(Ljava/lang/String; Ljava/lang/String; Ljava/lang/String; Ljava/lang/String; Ljava/lang/String; Ljava/lang/String; Ljava/lang/String;)Lorg/json/JSONObject;
+000006: move-result-object v0
+000008: return-object v0
+
+METHOD a(Ljava/lang/String; Ljava/lang/String; Ljava/lang/String; Ljava/lang/String; Ljava/lang/String; Ljava/lang/String; Ljava/lang/String;)Lorg/json/JSONObject;
+000000: new-instance v5, Lorg/json/JSONObject;
+000004: invoke-direct v5, Lorg/json/JSONObject;-><init>()V
+00000a: invoke-static v4, Lcom/bbk/account/base/BBKAccountManager;->getInstance(Landroid/content/Context;)Lcom/bbk/account/base/BBKAccountManager;
+000010: move-result-object v0
+000012: const/4 v1, 1
+000014: invoke-virtual v0, v1, Lcom/bbk/account/base/BBKAccountManager;->getUserName(Z)Ljava/lang/String;
+00001a: move-result-object v0
+00001c: invoke-static v4, Lcom/bbk/account/base/BBKAccountManager;->getInstance(Landroid/content/Context;)Lcom/bbk/account/base/BBKAccountManager;
+000022: move-result-object v1
+000024: invoke-virtual v1, Lcom/bbk/account/base/BBKAccountManager;->getOpenid()Ljava/lang/String;
+00002a: move-result-object v1
+00002c: invoke-static v1, Lcom/vivo/pcsuite/pcconnect/ble/c;->a(Ljava/lang/String;)[B
+000032: move-result-object v1
+000034: invoke-static v1, Lcom/vivo/pcsuite/pcconnect/ble/c;->b([B)Ljava/lang/String;
+00003a: move-result-object v1
+00003c: const-string v2, "hostname"
+000040: invoke-static Lcom/vivo/pcsuite/pcconnect/j;->a()Ljava/lang/String;
+000046: move-result-object v3
+000048: invoke-virtual v5, v2, v3, Lorg/json/JSONObject;->put(Ljava/lang/String; Ljava/lang/Object;)Lorg/json/JSONObject;
+00004e: const-string v2, "host_id"
+000052: invoke-virtual v5, v2, v6, Lorg/json/JSONObject;->put(Ljava/lang/String; Ljava/lang/Object;)Lorg/json/JSONObject;
+000058: const-string v6, "ssid"
+00005c: invoke-virtual v5, v6, v7, Lorg/json/JSONObject;->put(Ljava/lang/String; Ljava/lang/Object;)Lorg/json/JSONObject;
+000062: const-string v6, "psk"
+000066: invoke-virtual v5, v6, v8, Lorg/json/JSONObject;->put(Ljava/lang/String; Ljava/lang/Object;)Lorg/json/JSONObject;
+00006c: const-string v6, "mac"
+000070: invoke-virtual v5, v6, v9, Lorg/json/JSONObject;->put(Ljava/lang/String; Ljava/lang/Object;)Lorg/json/JSONObject;
+000076: const-string v6, "open_id"
+00007a: invoke-virtual v5, v6, v1, Lorg/json/JSONObject;->put(Ljava/lang/String; Ljava/lang/Object;)Lorg/json/JSONObject;
+000080: const-string v6, "username"
+000084: invoke-virtual v5, v6, v0, Lorg/json/JSONObject;->put(Ljava/lang/String; Ljava/lang/Object;)Lorg/json/JSONObject;
+00008a: invoke-static v10, Landroid/text/TextUtils;->isEmpty(Ljava/lang/CharSequence;)Z
+000090: move-result v6
+000092: if-nez v6, +007h
+000096: const-string v6, "phone_ip"
+00009a: invoke-virtual v5, v6, v10, Lorg/json/JSONObject;->put(Ljava/lang/String; Ljava/lang/Object;)Lorg/json/JSONObject;
+0000a0: invoke-static v11, Landroid/text/TextUtils;->isEmpty(Ljava/lang/CharSequence;)Z
+0000a6: move-result v6
+0000a8: if-nez v6, +007h
+0000ac: const-string v6, "connect_from"
+0000b0: invoke-virtual v5, v6, v11, Lorg/json/JSONObject;->put(Ljava/lang/String; Ljava/lang/Object;)Lorg/json/JSONObject;
+0000b6: return-object v5
+0000b8: move-exception v5
+0000ba: const-string v6, "pcsuite_BluetoothLeService"
+0000be: const-string v7, "Generate request info failed."
+0000c2: invoke-static v6, v7, v5, Lc/c/f/a/b;->b(Ljava/lang/String; Ljava/lang/String; Ljava/lang/Throwable;)V
+0000c8: const/4 v5, 0
+0000ca: return-object v5
+
+METHOD a(I)V
+000000: const-string v0, "pcsuite_BluetoothLeService"
+000004: const-string v1, "checkBtState called"
+000008: invoke-static v0, v1, Lc/c/f/a/b;->k(Ljava/lang/String; Ljava/lang/String;)V
+00000e: iget-object v0, v2, Lcom/vivo/pcsuite/pcconnect/ble/BluetoothLeService;->b Landroid/bluetooth/BluetoothAdapter;
+000012: if-eqz v0, +01ah
+000016: invoke-virtual v0, Landroid/bluetooth/BluetoothAdapter;->isEnabled()Z
+00001c: move-result v0
+00001e: if-eqz v0, +014h
+000022: invoke-direct v2, Lcom/vivo/pcsuite/pcconnect/ble/BluetoothLeService;->u()Z
+000028: move-result v0
+00002a: if-nez v0, +00eh
+00002e: const/4 v0, 1
+000030: if-lez v3, +007h
+000034: sub-int/2addr v3, v0
+000036: invoke-direct v2, v3, Lcom/vivo/pcsuite/pcconnect/ble/BluetoothLeService;->a(I)V
+00003c: goto +5h
+00003e: const/4 v3, 2
+000040: invoke-direct v2, v0, v3, Lcom/vivo/pcsuite/pcconnect/ble/BluetoothLeService;->b(I I)V
+000046: return-void 
+
+METHOD a(Landroid/util/ArrayMap; Landroid/bluetooth/le/AdvertiseCallback;)V
+000000: monitor-enter v3
+000002: const/4 v0, 1
+000004: invoke-static v0, Ljava/lang/Boolean;->valueOf(Z)Ljava/lang/Boolean;
+00000a: move-result-object v1
+00000c: invoke-virtual v3, v4, v1, Landroid/util/ArrayMap;->put(Ljava/lang/Object; Ljava/lang/Object;)Ljava/lang/Object;
+000012: iget-object v4, v2, Lcom/vivo/pcsuite/pcconnect/ble/BluetoothLeService;->l Landroid/bluetooth/le/AdvertiseCallback;
+000016: invoke-virtual v3, v4, Landroid/util/ArrayMap;->containsKey(Ljava/lang/Object;)Z
+00001c: move-result v4
+00001e: if-eqz v4, +013h
+000022: iget-object v4, v2, Lcom/vivo/pcsuite/pcconnect/ble/BluetoothLeService;->l Landroid/bluetooth/le/AdvertiseCallback;
+000026: invoke-virtual v3, v4, Landroid/util/ArrayMap;->get(Ljava/lang/Object;)Ljava/lang/Object;
+00002c: move-result-object v4
+00002e: check-cast v4, Ljava/lang/Boolean;
+000032: invoke-virtual v4, Ljava/lang/Boolean;->booleanValue()Z
+000038: move-result v4
+00003a: if-eqz v4, +005h
+00003e: invoke-direct v2, v0, Lcom/vivo/pcsuite/pcconnect/ble/BluetoothLeService;->c(I)V
+000044: monitor-exit v3
+000046: return-void 
+000048: move-exception v4
+00004a: monitor-exit v3
+00004c: throw v4
+
+METHOD a(Lcom/vivo/pcsuite/pcconnect/ble/BluetoothLeService; I I)V
+000000: invoke-direct v0, v1, v2, Lcom/vivo/pcsuite/pcconnect/ble/BluetoothLeService;->b(I I)V
+000006: return-void 
+
+METHOD a(Lcom/vivo/pcsuite/pcconnect/ble/BluetoothLeService; I I Ljava/lang/String; Ljava/lang/String; Ljava/lang/String;)V
+000000: invoke-direct/range v0 ... v5, Lcom/vivo/pcsuite/pcconnect/ble/BluetoothLeService;->b(I I Ljava/lang/String; Ljava/lang/String; Ljava/lang/String;)V
+000006: return-void 
+
+METHOD a(Lcom/vivo/pcsuite/pcconnect/ble/BluetoothLeService; Landroid/util/ArrayMap; Landroid/bluetooth/le/AdvertiseCallback;)V
+000000: invoke-direct v0, v1, v2, Lcom/vivo/pcsuite/pcconnect/ble/BluetoothLeService;->a(Landroid/util/ArrayMap; Landroid/bluetooth/le/AdvertiseCallback;)V
+000006: return-void 
+
+METHOD a(Lcom/vivo/pcsuite/pcconnect/ble/BluetoothLeService; Ljava/lang/String; I I)V
+000000: invoke-direct v0, v1, v2, v3, Lcom/vivo/pcsuite/pcconnect/ble/BluetoothLeService;->c(Ljava/lang/String; I I)V
+000006: return-void 
+
+METHOD a(Lcom/vivo/pcsuite/pcconnect/ble/BluetoothLeService; Ljava/lang/String; Z)V
+000000: invoke-direct v0, v1, v2, Lcom/vivo/pcsuite/pcconnect/ble/BluetoothLeService;->a(Ljava/lang/String; Z)V
+000006: return-void 
+
+METHOD a(Lcom/vivo/pcsuite/pcconnect/ble/BluetoothLeService; Z)V
+000000: invoke-direct v0, v1, Lcom/vivo/pcsuite/pcconnect/ble/BluetoothLeService;->b(Z)V
+000006: return-void 
+
+METHOD a(Lcom/vivo/pcsuite/pcconnect/ble/BluetoothLeService; Z Lcom/vivo/pcsuite/pcconnect/ble/h$b;)V
+000000: invoke-direct v0, v1, v2, Lcom/vivo/pcsuite/pcconnect/ble/BluetoothLeService;->a(Z Lcom/vivo/pcsuite/pcconnect/ble/h$b;)V
+000006: return-void 
+
+METHOD a(Lcom/vivo/pcsuite/pcconnect/ble/BluetoothLeService; Z Z)V
+000000: invoke-direct v0, v1, v2, Lcom/vivo/pcsuite/pcconnect/ble/BluetoothLeService;->a(Z Z)V
+000006: return-void 
+
+METHOD a(Ljava/lang/String; Z)V
+000000: new-instance v0, Ljava/lang/StringBuilder;
+000004: invoke-direct v0, Ljava/lang/StringBuilder;-><init>()V
+00000a: const-string v1, "deliverRfcommResponseInfo info: "
+00000e: invoke-virtual v0, v1, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+000014: invoke-static v14, Lcom/vivo/pcsuite/pcconnect/g;->a(Ljava/lang/String;)Ljava/lang/String;
+00001a: move-result-object v1
+00001c: invoke-virtual v0, v1, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+000022: const-string v1, ", state = "
+000026: invoke-virtual v0, v1, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+00002c: iget-object v1, v13, Lcom/vivo/pcsuite/pcconnect/ble/BluetoothLeService;->A Ljava/util/concurrent/atomic/AtomicInteger;
+000030: invoke-virtual v1, Ljava/util/concurrent/atomic/AtomicInteger;->get()I
+000036: move-result v1
+000038: invoke-virtual v0, v1, Ljava/lang/StringBuilder;->append(I)Ljava/lang/StringBuilder;
+00003e: invoke-virtual v0, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
+000044: move-result-object v0
+000046: const-string v1, "pcsuite_BluetoothLeService"
+00004a: invoke-static v1, v0, Lc/c/f/a/b;->k(Ljava/lang/String; Ljava/lang/String;)V
+000050: const/4 v0, 5
+000052: const/4 v1, 1
+000054: new-instance v2, Lorg/json/JSONObject;
+000058: invoke-direct v2, v14, Lorg/json/JSONObject;-><init>(Ljava/lang/String;)V
+00005e: const-string v14, "hostname"
+000062: invoke-virtual v2, v14, Lorg/json/JSONObject;->optString(Ljava/lang/String;)Ljava/lang/String;
+000068: const-string v14, "host_id"
+00006c: invoke-virtual v2, v14, Lorg/json/JSONObject;->optString(Ljava/lang/String;)Ljava/lang/String;
+000072: move-result-object v14
+000074: const-string v3, "pcsuite_BluetoothLeService"
+000078: new-instance v4, Ljava/lang/StringBuilder;
+00007c: invoke-direct v4, Ljava/lang/StringBuilder;-><init>()V
+000082: const-string v5, "deliverRfcommResponseInfo requestInfo: "
+000086: invoke-virtual v4, v5, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+00008c: invoke-virtual v4, v2, Ljava/lang/StringBuilder;->append(Ljava/lang/Object;)Ljava/lang/StringBuilder;
+000092: invoke-virtual v4, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
+000098: move-result-object v4
+00009a: invoke-static v3, v4, Lc/c/f/a/b;->k(Ljava/lang/String; Ljava/lang/String;)V
+0000a0: new-instance v3, Ljava/lang/StringBuilder;
+0000a4: invoke-direct v3, Ljava/lang/StringBuilder;-><init>()V
+0000aa: invoke-static v14, Landroid/text/TextUtils;->isEmpty(Ljava/lang/CharSequence;)Z
+0000b0: move-result v4
+0000b2: if-nez v4, +029h
+0000b6: invoke-virtual v14, Ljava/lang/String;->length()I
+0000bc: move-result v4
+0000be: if-lez v4, +023h
+0000c2: const/4 v4, 0
+0000c4: invoke-virtual v14, Ljava/lang/String;->length()I
+0000ca: move-result v5
+0000cc: if-ge v4, v5, +01ch
+0000d0: invoke-virtual v14, v4, Ljava/lang/String;->charAt(I)C
+0000d6: move-result v5
+0000d8: invoke-virtual v3, v5, Ljava/lang/StringBuilder;->append(C)Ljava/lang/StringBuilder;
+0000de: rem-int/lit8 v5, v4, 2
+0000e2: if-ne v5, v1, +00eh
+0000e6: invoke-virtual v14, Ljava/lang/String;->length()I
+0000ec: move-result v5
+0000ee: sub-int/2addr v5, v1
+0000f0: if-eq v4, v5, +007h
+0000f4: const-string v5, ":"
+0000f8: invoke-virtual v3, v5, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+0000fe: add-int/lit8 v4, v4, 1
+000102: goto -1fh
+000104: const-string v14, "ssid"
+000108: invoke-virtual v2, v14, Lorg/json/JSONObject;->optString(Ljava/lang/String;)Ljava/lang/String;
+00010e: move-result-object v14
+000110: const-string v3, "psk"
+000114: invoke-virtual v2, v3, Lorg/json/JSONObject;->optString(Ljava/lang/String;)Ljava/lang/String;
+00011a: move-result-object v10
+00011c: const-string v3, "mac"
+000120: invoke-virtual v2, v3, Lorg/json/JSONObject;->optString(Ljava/lang/String;)Ljava/lang/String;
+000126: move-result-object v2
+000128: if-eqz v2, +006h
+00012c: invoke-virtual v2, Ljava/lang/String;->toLowerCase()Ljava/lang/String;
+000132: move-result-object v2
+000134: iget-object v11, v13, Lcom/vivo/pcsuite/pcconnect/ble/BluetoothLeService;->F Ljava/util/List;
+000138: monitor-enter v11
+00013a: iget-object v3, v13, Lcom/vivo/pcsuite/pcconnect/ble/BluetoothLeService;->F Ljava/util/List;
+00013e: invoke-interface v3, Ljava/util/List;->iterator()Ljava/util/Iterator;
+000144: move-result-object v12
+000146: invoke-interface v12, Ljava/util/Iterator;->hasNext()Z
+00014c: move-result v3
+00014e: if-eqz v3, +01eh
+000152: invoke-interface v12, Ljava/util/Iterator;->next()Ljava/lang/Object;
+000158: move-result-object v3
+00015a: check-cast v3, Lcom/vivo/pcsuite/pcconnect/ble/BluetoothLeObserver;
+00015e: const/4 v4, 0
+000160: const/4 v5, 0
+000162: move-object v6, v14
+000164: move-object v7, v10
+000166: move-object v8, v2
+000168: move v9, v15
+00016a: invoke-interface/range v3 ... v9, Lcom/vivo/pcsuite/pcconnect/ble/BluetoothLeObserver;->response(I I Ljava/lang/String; Ljava/lang/String; Ljava/lang/String; Z)V
+000170: goto -15h
+000172: move-exception v3
+000174: const-string v4, "pcsuite_BluetoothLeService"
+000178: const-string v5, "Observer.deliverRequestInfo failed."
+00017c: invoke-static v4, v5, v3, Lc/c/f/a/b;->b(Ljava/lang/String; Ljava/lang/String; Ljava/lang/Throwable;)V
+000182: invoke-direct v13, v0, v1, Lcom/vivo/pcsuite/pcconnect/ble/BluetoothLeService;->b(I I)V
+000188: goto -21h
+00018a: monitor-exit v11
+00018c: goto +fh
+00018e: move-exception v14
+000190: monitor-exit v11
+000192: throw v14
+000194: move-exception v14
+000196: const-string v15, "pcsuite_BluetoothLeService"
+00019a: const-string v2, "Parse request info failed."
+00019e: invoke-static v15, v2, v14, Lc/c/f/a/b;->b(Ljava/lang/String; Ljava/lang/String; Ljava/lang/Throwable;)V
+0001a4: invoke-direct v13, v0, v1, Lcom/vivo/pcsuite/pcconnect/ble/BluetoothLeService;->b(I I)V
+0001aa: return-void 
+
+METHOD a(Z Lcom/vivo/pcsuite/pcconnect/ble/h$b;)V
+000000: iget-object v0, v6, Lcom/vivo/pcsuite/pcconnect/ble/BluetoothLeService;->F Ljava/util/List;
+000004: monitor-enter v0
+000006: iget-object v1, v6, Lcom/vivo/pcsuite/pcconnect/ble/BluetoothLeService;->F Ljava/util/List;
+00000a: if-eqz v1, +00ah
+00000e: iget-object v1, v6, Lcom/vivo/pcsuite/pcconnect/ble/BluetoothLeService;->F Ljava/util/List;
+000012: invoke-interface v1, Ljava/util/List;->size()I
+000018: move-result v1
+00001a: if-gtz v1, +025h
+00001e: const-string v1, "pcsuite_BluetoothLeService"
+000022: new-instance v2, Ljava/lang/StringBuilder;
+000026: invoke-direct v2, Ljava/lang/StringBuilder;-><init>()V
+00002c: const-string v3, "notifyDeviceChange isMatch: "
+000030: invoke-virtual v2, v3, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+000036: invoke-virtual v2, v7, Ljava/lang/StringBuilder;->append(Z)Ljava/lang/StringBuilder;
+00003c: const-string v3, ", device: "
+000040: invoke-virtual v2, v3, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+000046: invoke-virtual v2, v8, Ljava/lang/StringBuilder;->append(Ljava/lang/Object;)Ljava/lang/StringBuilder;
+00004c: const-string v3, ", observer 0"
+000050: invoke-virtual v2, v3, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+000056: invoke-virtual v2, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
+00005c: move-result-object v2
+00005e: invoke-static v1, v2, Lc/c/f/a/b;->g(Ljava/lang/String; Ljava/lang/String;)V
+000064: iget-object v1, v6, Lcom/vivo/pcsuite/pcconnect/ble/BluetoothLeService;->F Ljava/util/List;
+000068: invoke-interface v1, Ljava/util/List;->iterator()Ljava/util/Iterator;
+00006e: move-result-object v1
+000070: invoke-interface v1, Ljava/util/Iterator;->hasNext()Z
+000076: move-result v2
+000078: if-eqz v2, +036h
+00007c: invoke-interface v1, Ljava/util/Iterator;->next()Ljava/lang/Object;
+000082: move-result-object v2
+000084: check-cast v2, Lcom/vivo/pcsuite/pcconnect/ble/BluetoothLeObserver;
+000088: if-eqz v7, +006h
+00008c: invoke-interface v2, v8, Lcom/vivo/pcsuite/pcconnect/ble/BluetoothLeObserver;->onDeviceMatch(Lcom/vivo/pcsuite/pcconnect/c;)V
+000092: goto -11h
+000094: invoke-interface v2, v8, Lcom/vivo/pcsuite/pcconnect/ble/BluetoothLeObserver;->onDeviceLost(Lcom/vivo/pcsuite/pcconnect/c;)V
+00009a: goto -15h
+00009c: move-exception v2
+00009e: const-string v3, "pcsuite_BluetoothLeService"
+0000a2: new-instance v4, Ljava/lang/StringBuilder;
+0000a6: invoke-direct v4, Ljava/lang/StringBuilder;-><init>()V
+0000ac: const-string v5, "Observer."
+0000b0: invoke-virtual v4, v5, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+0000b6: if-eqz v7, +005h
+0000ba: const-string v5, "onDeviceMatch"
+0000be: goto +3h
+0000c0: const-string v5, "onDeviceLost"
+0000c4: invoke-virtual v4, v5, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+0000ca: const-string v5, " failed"
+0000ce: invoke-virtual v4, v5, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+0000d4: invoke-virtual v4, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
+0000da: move-result-object v4
+0000dc: invoke-static v3, v4, v2, Lc/c/f/a/b;->b(Ljava/lang/String; Ljava/lang/String; Ljava/lang/Throwable;)V
+0000e2: goto -39h
+0000e4: monitor-exit v0
+0000e6: return-void 
+0000e8: move-exception v7
+0000ea: monitor-exit v0
+0000ec: throw v7
+
+METHOD a(Z Z)V
+000000: new-instance v0, Ljava/lang/StringBuilder;
+000004: invoke-direct v0, Ljava/lang/StringBuilder;-><init>()V
+00000a: const-string v1, "Starting advertisers, isLowPower="
+00000e: invoke-virtual v0, v1, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+000014: invoke-virtual v0, v4, Ljava/lang/StringBuilder;->append(Z)Ljava/lang/StringBuilder;
+00001a: const-string v1, ", isNotify="
+00001e: invoke-virtual v0, v1, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+000024: invoke-virtual v0, v5, Ljava/lang/StringBuilder;->append(Z)Ljava/lang/StringBuilder;
+00002a: const-string v1, "mBluetoothGattServer is null"
+00002e: invoke-virtual v0, v1, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+000034: iget-object v1, v3, Lcom/vivo/pcsuite/pcconnect/ble/BluetoothLeService;->e Landroid/bluetooth/BluetoothGattServer;
+000038: const/4 v2, 0
+00003a: if-eqz v1, +004h
+00003e: const/4 v1, 1
+000040: goto +2h
+000042: move v1, v2
+000044: invoke-virtual v0, v1, Ljava/lang/StringBuilder;->append(Z)Ljava/lang/StringBuilder;
+00004a: invoke-virtual v0, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
+000050: move-result-object v0
+000052: const-string v1, "pcsuite_BluetoothLeService"
+000056: invoke-static v1, v0, Lc/c/f/a/b;->k(Ljava/lang/String; Ljava/lang/String;)V
+00005c: iget-object v0, v3, Lcom/vivo/pcsuite/pcconnect/ble/BluetoothLeService;->e Landroid/bluetooth/BluetoothGattServer;
+000060: if-eqz v0, +007h
+000064: iget-boolean v0, v3, Lcom/vivo/pcsuite/pcconnect/ble/BluetoothLeService;->M Z
+000068: invoke-direct v3, v4, v5, v2, v0, Lcom/vivo/pcsuite/pcconnect/ble/BluetoothLeService;->a(Z Z Z Z)V
+00006e: return-void 
+
+METHOD a(Z Z Z Z)V
+000000: new-instance v4, Landroid/util/ArrayMap;
+000004: invoke-direct v4, Landroid/util/ArrayMap;-><init>()V
+00000a: const/4 v0, 0
+00000c: invoke-direct v3, v0, Lcom/vivo/pcsuite/pcconnect/ble/BluetoothLeService;->a(Z)Landroid/bluetooth/le/AdvertiseSettings;
+000012: move-result-object v1
+000014: invoke-direct v3, v0, v6, v7, Lcom/vivo/pcsuite/pcconnect/ble/BluetoothLeService;->a(Z Z Z)Landroid/bluetooth/le/AdvertiseData;
+00001a: move-result-object v0
+00001c: if-eqz v6, +008h
+000020: const/4 v6, 1
+000022: invoke-direct v3, v6, v6, v7, Lcom/vivo/pcsuite/pcconnect/ble/BluetoothLeService;->a(Z Z Z)Landroid/bluetooth/le/AdvertiseData;
+000028: move-result-object v6
+00002a: goto +2h
+00002c: const/4 v6, 0
+00002e: iget-object v7, v3, Lcom/vivo/pcsuite/pcconnect/ble/BluetoothLeService;->d Landroid/bluetooth/le/BluetoothLeAdvertiser;
+000032: const-string v2, "pcsuite_BluetoothLeService"
+000036: if-eqz v7, +01dh
+00003a: const-string v7, "Service: Starting Advertising action"
+00003e: invoke-static v2, v7, Lc/c/f/a/b;->a(Ljava/lang/String; Ljava/lang/String;)V
+000044: invoke-direct v3, Lcom/vivo/pcsuite/pcconnect/ble/BluetoothLeService;->w()V
+00004a: iget-object v7, v3, Lcom/vivo/pcsuite/pcconnect/ble/BluetoothLeService;->l Landroid/bluetooth/le/AdvertiseCallback;
+00004e: if-nez v7, +009h
+000052: new-instance v7, Lcom/vivo/pcsuite/pcconnect/ble/BluetoothLeService$e;
+000056: invoke-direct v7, v3, v5, v4, Lcom/vivo/pcsuite/pcconnect/ble/BluetoothLeService$e;-><init>(Lcom/vivo/pcsuite/pcconnect/ble/BluetoothLeService; Z Landroid/util/ArrayMap;)V
+00005c: iput-object v7, v3, Lcom/vivo/pcsuite/pcconnect/ble/BluetoothLeService;->l Landroid/bluetooth/le/AdvertiseCallback;
+000060: iget-object v4, v3, Lcom/vivo/pcsuite/pcconnect/ble/BluetoothLeService;->d Landroid/bluetooth/le/BluetoothLeAdvertiser;
+000064: iget-object v5, v3, Lcom/vivo/pcsuite/pcconnect/ble/BluetoothLeService;->l Landroid/bluetooth/le/AdvertiseCallback;
+000068: invoke-virtual v4, v1, v0, v6, v5, Landroid/bluetooth/le/BluetoothLeAdvertiser;->startAdvertising(Landroid/bluetooth/le/AdvertiseSettings; Landroid/bluetooth/le/AdvertiseData; Landroid/bluetooth/le/AdvertiseData; Landroid/bluetooth/le/AdvertiseCallback;)V
+00006e: goto +6h
+000070: const-string v4, "startAdvWithDevName (null == mBluetoothLeAdvertiser)"
+000074: invoke-static v2, v4, Lc/c/f/a/b;->k(Ljava/lang/String; Ljava/lang/String;)V
+00007a: return-void 
+
+METHOD a([B Z)V
+000000: const/16 v0, 32
+000004: const/4 v1, 0
+000006: aput-byte v0, v13, v1
+00000a: const/4 v0, 2
+00000c: aput-byte v0, v13, v0
+000010: new-instance v2, Ljava/lang/StringBuffer;
+000014: invoke-direct v2, Ljava/lang/StringBuffer;-><init>()V
+00001a: const/16 v3, 10
+00001e: invoke-virtual v2, v3, Ljava/lang/StringBuffer;->append(I)Ljava/lang/StringBuffer;
+000024: iget-object v3, v12, Lcom/vivo/pcsuite/pcconnect/ble/BluetoothLeService;->x Ljava/lang/String;
+000028: invoke-static v3, Lcom/vivo/pcsuite/pcconnect/ble/c;->d(Ljava/lang/String;)[B
+00002e: move-result-object v3
+000030: const/4 v4, 4
+000032: const/4 v5, 3
+000034: invoke-static v3, v1, v13, v5, v4, Ljava/lang/System;->arraycopy(Ljava/lang/Object; I Ljava/lang/Object; I I)V
+00003a: invoke-static Lcom/vivo/pcsuite/pcconnect/j;->a()Ljava/lang/String;
+000040: move-result-object v3
+000042: invoke-static v3, Landroid/text/TextUtils;->isEmpty(Ljava/lang/CharSequence;)Z
+000048: move-result v6
+00004a: const/4 v7, 7
+00004c: const/4 v8, 1
+00004e: const/4 v9, 6
+000050: if-nez v6, +040h
+000054: invoke-virtual v3, Ljava/lang/String;->length()I
+00005a: move-result v6
+00005c: if-le v6, v9, +026h
+000060: invoke-virtual v3, v1, v5, Ljava/lang/String;->substring(I I)Ljava/lang/String;
+000066: move-result-object v10
+000068: add-int/lit8 v11, v6, -3
+00006c: invoke-virtual v3, v11, v6, Ljava/lang/String;->substring(I I)Ljava/lang/String;
+000072: move-result-object v3
+000074: new-instance v6, Ljava/lang/StringBuilder;
+000078: invoke-direct v6, Ljava/lang/StringBuilder;-><init>()V
+00007e: invoke-virtual v6, v10, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+000084: invoke-virtual v6, v3, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+00008a: invoke-virtual v6, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
+000090: move-result-object v3
+000092: invoke-virtual v2, v8, Ljava/lang/StringBuffer;->append(I)Ljava/lang/StringBuffer;
+000098: invoke-static v3, Lcom/vivo/pcsuite/pcconnect/ble/c;->d(Ljava/lang/String;)[B
+00009e: move-result-object v3
+0000a0: invoke-static v3, v1, v13, v7, v9, Ljava/lang/System;->arraycopy(Ljava/lang/Object; I Ljava/lang/Object; I I)V
+0000a6: goto +20h
+0000a8: invoke-virtual v2, v1, Ljava/lang/StringBuffer;->append(I)Ljava/lang/StringBuffer;
+0000ae: invoke-static v3, Lcom/vivo/pcsuite/pcconnect/ble/c;->d(Ljava/lang/String;)[B
+0000b4: move-result-object v3
+0000b6: new-array v6, v9, [B
+0000ba: fill-array-data v6, +00000bfh
+0000c0: array-length v10, v3
+0000c2: invoke-static v3, v1, v6, v1, v10, Ljava/lang/System;->arraycopy(Ljava/lang/Object; I Ljava/lang/Object; I I)V
+0000c8: invoke-static v6, v1, v13, v7, v9, Ljava/lang/System;->arraycopy(Ljava/lang/Object; I Ljava/lang/Object; I I)V
+0000ce: goto +ch
+0000d0: invoke-virtual v2, v1, Ljava/lang/StringBuffer;->append(I)Ljava/lang/StringBuffer;
+0000d6: new-array v3, v9, [B
+0000da: fill-array-data v3, +00000b7h
+0000e0: invoke-static v3, v1, v13, v7, v9, Ljava/lang/System;->arraycopy(Ljava/lang/Object; I Ljava/lang/Object; I I)V
+0000e6: invoke-static v12, Lcom/bbk/account/base/BBKAccountManager;->getInstance(Landroid/content/Context;)Lcom/bbk/account/base/BBKAccountManager;
+0000ec: move-result-object v3
+0000ee: invoke-virtual v3, Lcom/bbk/account/base/BBKAccountManager;->isLogin()Z
+0000f4: move-result v3
+0000f6: const/16 v6, 13
+0000fa: if-eqz v3, +012h
+0000fe: invoke-static v12, Lcom/bbk/account/base/BBKAccountManager;->getInstance(Landroid/content/Context;)Lcom/bbk/account/base/BBKAccountManager;
+000104: move-result-object v3
+000106: invoke-virtual v3, Lcom/bbk/account/base/BBKAccountManager;->getOpenid()Ljava/lang/String;
+00010c: move-result-object v3
+00010e: invoke-static v3, Lcom/vivo/pcsuite/pcconnect/ble/c;->a(Ljava/lang/String;)[B
+000114: move-result-object v3
+000116: invoke-static v3, v1, v13, v6, v4, Ljava/lang/System;->arraycopy(Ljava/lang/Object; I Ljava/lang/Object; I I)V
+00011c: goto +9h
+00011e: new-array v3, v4, [B
+000122: fill-array-data v3, +000009bh
+000128: invoke-static v3, v1, v13, v6, v4, Ljava/lang/System;->arraycopy(Ljava/lang/Object; I Ljava/lang/Object; I I)V
+00012e: iget-object v3, v12, Lcom/vivo/pcsuite/pcconnect/ble/BluetoothLeService;->y Ljava/lang/String;
+000132: invoke-static v3, Landroid/text/TextUtils;->isEmpty(Ljava/lang/CharSequence;)Z
+000138: move-result v3
+00013a: const/16 v6, 17
+00013e: if-nez v3, +048h
+000142: iget-object v3, v12, Lcom/vivo/pcsuite/pcconnect/ble/BluetoothLeService;->y Ljava/lang/String;
+000146: invoke-virtual v3, Ljava/lang/String;->length()I
+00014c: move-result v3
+00014e: if-le v3, v9, +02ah
+000152: iget-object v7, v12, Lcom/vivo/pcsuite/pcconnect/ble/BluetoothLeService;->y Ljava/lang/String;
+000156: invoke-virtual v7, v1, v5, Ljava/lang/String;->substring(I I)Ljava/lang/String;
+00015c: move-result-object v5
+00015e: iget-object v7, v12, Lcom/vivo/pcsuite/pcconnect/ble/BluetoothLeService;->y Ljava/lang/String;
+000162: add-int/lit8 v10, v3, -3
+000166: invoke-virtual v7, v10, v3, Ljava/lang/String;->substring(I I)Ljava/lang/String;
+00016c: move-result-object v3
+00016e: new-instance v7, Ljava/lang/StringBuilder;
+000172: invoke-direct v7, Ljava/lang/StringBuilder;-><init>()V
+000178: invoke-virtual v7, v5, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+00017e: invoke-virtual v7, v3, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+000184: invoke-virtual v7, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
+00018a: move-result-object v3
+00018c: invoke-virtual v2, v8, Ljava/lang/StringBuffer;->append(I)Ljava/lang/StringBuffer;
+000192: invoke-static v3, Lcom/vivo/pcsuite/pcconnect/ble/c;->d(Ljava/lang/String;)[B
+000198: move-result-object v3
+00019a: invoke-static v3, v1, v13, v6, v9, Ljava/lang/System;->arraycopy(Ljava/lang/Object; I Ljava/lang/Object; I I)V
+0001a0: goto +22h
+0001a2: iget-object v3, v12, Lcom/vivo/pcsuite/pcconnect/ble/BluetoothLeService;->y Ljava/lang/String;
+0001a6: invoke-static v3, Lcom/vivo/pcsuite/pcconnect/ble/c;->d(Ljava/lang/String;)[B
+0001ac: move-result-object v3
+0001ae: new-array v5, v9, [B
+0001b2: fill-array-data v5, +0000059h
+0001b8: invoke-virtual v2, v1, Ljava/lang/StringBuffer;->append(I)Ljava/lang/StringBuffer;
+0001be: array-length v7, v3
+0001c0: invoke-static v3, v1, v5, v1, v7, Ljava/lang/System;->arraycopy(Ljava/lang/Object; I Ljava/lang/Object; I I)V
+0001c6: invoke-static v5, v1, v13, v6, v9, Ljava/lang/System;->arraycopy(Ljava/lang/Object; I Ljava/lang/Object; I I)V
+0001cc: goto +ch
+0001ce: invoke-virtual v2, v1, Ljava/lang/StringBuffer;->append(I)Ljava/lang/StringBuffer;
+0001d4: new-array v3, v9, [B
+0001d8: fill-array-data v3, +000004eh
+0001de: invoke-static v3, v1, v13, v6, v9, Ljava/lang/System;->arraycopy(Ljava/lang/Object; I Ljava/lang/Object; I I)V
+0001e4: invoke-static v8, v4, Lcom/vivo/pcsuite/pcconnect/ble/c;->a(I I)Ljava/lang/String;
+0001ea: move-result-object v3
+0001ec: invoke-virtual v2, v3, Ljava/lang/StringBuffer;->append(Ljava/lang/String;)Ljava/lang/StringBuffer;
+0001f2: invoke-virtual v2, Ljava/lang/StringBuffer;->toString()Ljava/lang/String;
+0001f8: move-result-object v2
+0001fa: invoke-static v2, v0, Ljava/lang/Integer;->valueOf(Ljava/lang/String; I)Ljava/lang/Integer;
+000200: move-result-object v0
+000202: invoke-virtual v0, Ljava/lang/Integer;->intValue()I
+000208: move-result v0
+00020a: invoke-static v0, Ljava/lang/Integer;->toHexString(I)Ljava/lang/String;
+000210: move-result-object v0
+000212: invoke-static v0, Lcom/vivo/pcsuite/pcconnect/ble/c;->c(Ljava/lang/String;)[B
+000218: move-result-object v0
+00021a: aget-byte v0, v0, v1
+00021e: aput-byte v0, v13, v8
+000222: const/16 v0, 23
+000226: if-eqz v14, +005h
+00022a: aput-byte v8, v13, v0
+00022e: goto +3h
+000230: aput-byte v1, v13, v0
+000234: return-void 
+000236: nop 
+000238: fill-array-data-payload b'\x00\x00\x00\x00\x00\x00' | \x00\x00\x00\x00\x00\x00
+000246: nop 
+000248: fill-array-data-payload b'\x00\x00\x00\x00\x00\x00' | \x00\x00\x00\x00\x00\x00
+000256: nop 
+000258: fill-array-data-payload b'\x00\x00\x00\x00' | \x00\x00\x00\x00
+000264: fill-array-data-payload b'\x00\x00\x00\x00\x00\x00' | \x00\x00\x00\x00\x00\x00
+000272: nop 
+000274: fill-array-data-payload b'\x00\x00\x00\x00\x00\x00' | \x00\x00\x00\x00\x00\x00
+
+METHOD a(I I)Z
+000000: new-instance v0, Ljava/lang/StringBuilder;
+000004: invoke-direct v0, Ljava/lang/StringBuilder;-><init>()V
+00000a: const-string v1, "Change state to "
+00000e: invoke-virtual v0, v1, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+000014: invoke-virtual v0, v5, Ljava/lang/StringBuilder;->append(I)Ljava/lang/StringBuilder;
+00001a: const-string v2, " if current state is "
+00001e: invoke-virtual v0, v2, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+000024: invoke-virtual v0, v4, Ljava/lang/StringBuilder;->append(I)Ljava/lang/StringBuilder;
+00002a: invoke-virtual v0, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
+000030: move-result-object v0
+000032: const-string v2, "pcsuite_BluetoothLeService"
+000036: invoke-static v2, v0, Lc/c/f/a/b;->k(Ljava/lang/String; Ljava/lang/String;)V
+00003c: iget-object v0, v3, Lcom/vivo/pcsuite/pcconnect/ble/BluetoothLeService;->A Ljava/util/concurrent/atomic/AtomicInteger;
+000040: invoke-virtual v0, v4, v5, Ljava/util/concurrent/atomic/AtomicInteger;->compareAndSet(I I)Z
+000046: move-result v4
+000048: new-instance v0, Ljava/lang/StringBuilder;
+00004c: if-eqz v4, +018h
+000050: invoke-direct v0, Ljava/lang/StringBuilder;-><init>()V
+000056: invoke-virtual v0, v1, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+00005c: invoke-virtual v0, v5, Ljava/lang/StringBuilder;->append(I)Ljava/lang/StringBuilder;
+000062: const-string v5, " success"
+000066: invoke-virtual v0, v5, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+00006c: invoke-virtual v0, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
+000072: move-result-object v5
+000074: invoke-static v2, v5, Lc/c/f/a/b;->k(Ljava/lang/String; Ljava/lang/String;)V
+00007a: goto +16h
+00007c: invoke-direct v0, Ljava/lang/StringBuilder;-><init>()V
+000082: invoke-virtual v0, v1, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+000088: invoke-virtual v0, v5, Ljava/lang/StringBuilder;->append(I)Ljava/lang/StringBuilder;
+00008e: const-string v5, " failed"
+000092: invoke-virtual v0, v5, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+000098: invoke-virtual v0, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
+00009e: move-result-object v5
+0000a0: invoke-static v2, v5, Lc/c/f/a/b;->p(Ljava/lang/String; Ljava/lang/String;)V
+0000a6: return v4
+
+METHOD b(Lcom/vivo/pcsuite/pcconnect/ble/BluetoothLeService; I)I
+000000: iput v1, v0, Lcom/vivo/pcsuite/pcconnect/ble/BluetoothLeService;->S I
+000004: return v1
+
+METHOD b(Lcom/vivo/pcsuite/pcconnect/ble/BluetoothLeService;)Lcom/vivo/pcsuite/pcconnect/ble/h;
+000000: iget-object v0, v0, Lcom/vivo/pcsuite/pcconnect/ble/BluetoothLeService;->n Lcom/vivo/pcsuite/pcconnect/ble/h;
+000004: return-object v0
+
+METHOD b(Ljava/lang/String; I I)Ljava/lang/Runnable;
+000000: new-instance v0, Lcom/vivo/pcsuite/pcconnect/ble/BluetoothLeService$g;
+000004: invoke-direct v0, v1, v2, v3, v4, Lcom/vivo/pcsuite/pcconnect/ble/BluetoothLeService$g;-><init>(Lcom/vivo/pcsuite/pcconnect/ble/BluetoothLeService; Ljava/lang/String; I I)V
+00000a: return-object v0
+
+METHOD b(Lcom/vivo/pcsuite/pcconnect/ble/BluetoothLeService; Ljava/lang/String;)Ljava/lang/String;
+000000: iput-object v1, v0, Lcom/vivo/pcsuite/pcconnect/ble/BluetoothLeService;->y Ljava/lang/String;
+000004: return-object v1
+
+METHOD b(Lcom/vivo/pcsuite/pcconnect/ble/BluetoothLeService; I I Ljava/lang/String; Ljava/lang/String; Ljava/lang/String;)Lorg/json/JSONObject;
+000000: invoke-direct/range v0 ... v5, Lcom/vivo/pcsuite/pcconnect/ble/BluetoothLeService;->a(I I Ljava/lang/String; Ljava/lang/String; Ljava/lang/String;)Lorg/json/JSONObject;
+000006: move-result-object v0
+000008: return-object v0
+
+METHOD b(I)V
+000000: const-string v0, "pcsuite_BluetoothLeService"
+000004: const-string v1, "checkLeState called"
+000008: invoke-static v0, v1, Lc/c/f/a/b;->k(Ljava/lang/String; Ljava/lang/String;)V
+00000e: iget-object v1, v4, Lcom/vivo/pcsuite/pcconnect/ble/BluetoothLeService;->b Landroid/bluetooth/BluetoothAdapter;
+000012: if-eqz v1, +042h
+000016: invoke-static v1, Lcom/vivo/pcsuite/pcconnect/ble/d;->b(Landroid/bluetooth/BluetoothAdapter;)Z
+00001c: move-result v1
+00001e: if-eqz v1, +03ch
+000022: iget-object v1, v4, Lcom/vivo/pcsuite/pcconnect/ble/BluetoothLeService;->b Landroid/bluetooth/BluetoothAdapter;
+000026: invoke-static v4, v1, Lcom/vivo/pcsuite/pcconnect/ble/d;->a(Landroid/content/Context; Landroid/bluetooth/BluetoothAdapter;)Z
+00002c: move-result v1
+00002e: new-instance v2, Ljava/lang/StringBuilder;
+000032: invoke-direct v2, Ljava/lang/StringBuilder;-><init>()V
+000038: const-string v3, "Ble is on, Bt is "
+00003c: invoke-virtual v2, v3, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+000042: iget-object v3, v4, Lcom/vivo/pcsuite/pcconnect/ble/BluetoothLeService;->b Landroid/bluetooth/BluetoothAdapter;
+000046: invoke-virtual v3, Landroid/bluetooth/BluetoothAdapter;->isEnabled()Z
+00004c: move-result v3
+00004e: invoke-virtual v2, v3, Ljava/lang/StringBuilder;->append(Z)Ljava/lang/StringBuilder;
+000054: const-string v3, ", againOpen = "
+000058: invoke-virtual v2, v3, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+00005e: invoke-virtual v2, v1, Ljava/lang/StringBuilder;->append(Z)Ljava/lang/StringBuilder;
+000064: invoke-virtual v2, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
+00006a: move-result-object v1
+00006c: invoke-static v0, v1, Lc/c/f/a/b;->k(Ljava/lang/String; Ljava/lang/String;)V
+000072: invoke-direct v4, Lcom/vivo/pcsuite/pcconnect/ble/BluetoothLeService;->u()Z
+000078: move-result v0
+00007a: if-nez v0, +00eh
+00007e: const/4 v0, 1
+000080: if-lez v5, +007h
+000084: sub-int/2addr v5, v0
+000086: invoke-direct v4, v5, Lcom/vivo/pcsuite/pcconnect/ble/BluetoothLeService;->b(I)V
+00008c: goto +5h
+00008e: const/4 v5, 2
+000090: invoke-direct v4, v0, v5, Lcom/vivo/pcsuite/pcconnect/ble/BluetoothLeService;->b(I I)V
+000096: return-void 
+
+METHOD b(I I)V
+000000: new-instance v0, Ljava/lang/StringBuilder;
+000004: invoke-direct v0, Ljava/lang/StringBuilder;-><init>()V
+00000a: const-string v1, "notifyFailure operationCode = "
+00000e: invoke-virtual v0, v1, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+000014: invoke-virtual v0, v7, Ljava/lang/StringBuilder;->append(I)Ljava/lang/StringBuilder;
+00001a: const-string v1, ", errorCode = "
+00001e: invoke-virtual v0, v1, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+000024: invoke-virtual v0, v8, Ljava/lang/StringBuilder;->append(I)Ljava/lang/StringBuilder;
+00002a: invoke-virtual v0, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
+000030: move-result-object v0
+000032: const-string v1, "pcsuite_BluetoothLeService"
+000036: invoke-static v1, v0, Lc/c/f/a/b;->k(Ljava/lang/String; Ljava/lang/String;)V
+00003c: iget-object v0, v6, Lcom/vivo/pcsuite/pcconnect/ble/BluetoothLeService;->F Ljava/util/List;
+000040: monitor-enter v0
+000042: iget-object v1, v6, Lcom/vivo/pcsuite/pcconnect/ble/BluetoothLeService;->F Ljava/util/List;
+000046: invoke-interface v1, Ljava/util/List;->iterator()Ljava/util/Iterator;
+00004c: move-result-object v1
+00004e: invoke-interface v1, Ljava/util/Iterator;->hasNext()Z
+000054: move-result v2
+000056: if-eqz v2, +031h
+00005a: invoke-interface v1, Ljava/util/Iterator;->next()Ljava/lang/Object;
+000060: move-result-object v2
+000062: check-cast v2, Lcom/vivo/pcsuite/pcconnect/ble/BluetoothLeObserver;
+000066: invoke-interface v2, v7, v8, Lcom/vivo/pcsuite/pcconnect/ble/BluetoothLeObserver;->onFailure(I I)V
+00006c: goto -fh
+00006e: move-exception v2
+000070: const-string v3, "pcsuite_BluetoothLeService"
+000074: new-instance v4, Ljava/lang/StringBuilder;
+000078: invoke-direct v4, Ljava/lang/StringBuilder;-><init>()V
+00007e: const-string v5, "Observer.onFailure("
+000082: invoke-virtual v4, v5, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+000088: invoke-virtual v4, v7, Ljava/lang/StringBuilder;->append(I)Ljava/lang/StringBuilder;
+00008e: const-string v5, ", "
+000092: invoke-virtual v4, v5, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+000098: invoke-virtual v4, v8, Ljava/lang/StringBuilder;->append(I)Ljava/lang/StringBuilder;
+00009e: const-string v5, ") failed."
+0000a2: invoke-virtual v4, v5, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+0000a8: invoke-virtual v4, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
+0000ae: move-result-object v4
+0000b0: invoke-static v3, v4, v2, Lc/c/f/a/b;->b(Ljava/lang/String; Ljava/lang/String; Ljava/lang/Throwable;)V
+0000b6: goto -34h
+0000b8: monitor-exit v0
+0000ba: return-void 
+0000bc: move-exception v7
+0000be: monitor-exit v0
+0000c0: throw v7
+
+METHOD b(I I Ljava/lang/String; Ljava/lang/String; Ljava/lang/String;)V
+000000: new-instance v0, Ljava/lang/StringBuilder;
+000004: invoke-direct v0, Ljava/lang/StringBuilder;-><init>()V
+00000a: const-string v1, "writeResponse (mTargetGattClientMacAddress != null): "
+00000e: invoke-virtual v0, v1, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+000014: iget-object v1, v9, Lcom/vivo/pcsuite/pcconnect/ble/BluetoothLeService;->t Ljava/lang/String;
+000018: const/4 v2, 1
+00001a: if-eqz v1, +004h
+00001e: move v1, v2
+000020: goto +2h
+000022: const/4 v1, 0
+000024: invoke-virtual v0, v1, Ljava/lang/StringBuilder;->append(Z)Ljava/lang/StringBuilder;
+00002a: invoke-virtual v0, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
+000030: move-result-object v0
+000032: const-string v1, "pcsuite_BluetoothLeService"
+000036: invoke-static v1, v0, Lc/c/f/a/b;->k(Ljava/lang/String; Ljava/lang/String;)V
+00003c: const-string v0, "Ble-response"
+000040: invoke-static v0, Lcom/vivo/pcsuite/pcconnect/b;->a(Ljava/lang/String;)V
+000046: iget-object v0, v9, Lcom/vivo/pcsuite/pcconnect/ble/BluetoothLeService;->t Ljava/lang/String;
+00004a: if-eqz v0, +078h
+00004e: const/4 v0, 6
+000050: invoke-direct/range v9 ... v14, Lcom/vivo/pcsuite/pcconnect/ble/BluetoothLeService;->a(I I Ljava/lang/String; Ljava/lang/String; Ljava/lang/String;)Lorg/json/JSONObject;
+000056: move-result-object v12
+000058: new-instance v13, Ljava/lang/StringBuilder;
+00005c: invoke-direct v13, Ljava/lang/StringBuilder;-><init>()V
+000062: const-string v14, "writeResponse responseInfo: "
+000066: invoke-virtual v13, v14, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+00006c: invoke-virtual v13, v12, Ljava/lang/StringBuilder;->append(Ljava/lang/Object;)Ljava/lang/StringBuilder;
+000072: invoke-virtual v13, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
+000078: move-result-object v13
+00007a: invoke-static v1, v13, Lc/c/f/a/b;->k(Ljava/lang/String; Ljava/lang/String;)V
+000080: if-eqz v12, +051h
+000084: iget-object v13, v9, Lcom/vivo/pcsuite/pcconnect/ble/BluetoothLeService;->e Landroid/bluetooth/BluetoothGattServer;
+000088: sget-object v14, Lcom/vivo/pcsuite/pcconnect/ble/g$c;->c Landroid/os/ParcelUuid;
+00008c: invoke-virtual v14, Landroid/os/ParcelUuid;->getUuid()Ljava/util/UUID;
+000092: move-result-object v14
+000094: invoke-virtual v13, v14, Landroid/bluetooth/BluetoothGattServer;->getService(Ljava/util/UUID;)Landroid/bluetooth/BluetoothGattService;
+00009a: move-result-object v13
+00009c: if-eqz v13, +040h
+0000a0: sget-object v14, Lcom/vivo/pcsuite/pcconnect/ble/g$c;->k Landroid/os/ParcelUuid;
+0000a4: invoke-virtual v14, Landroid/os/ParcelUuid;->getUuid()Ljava/util/UUID;
+0000aa: move-result-object v14
+0000ac: invoke-virtual v13, v14, Landroid/bluetooth/BluetoothGattService;->getCharacteristic(Ljava/util/UUID;)Landroid/bluetooth/BluetoothGattCharacteristic;
+0000b2: move-result-object v5
+0000b4: if-eqz v5, +02eh
+0000b8: invoke-virtual v12, Lorg/json/JSONObject;->toString()Ljava/lang/String;
+0000be: move-result-object v12
+0000c0: invoke-static v12, Lcom/vivo/pcsuite/pcconnect/ble/c;->d(Ljava/lang/String;)[B
+0000c6: move-result-object v12
+0000c8: invoke-virtual v5, v12, Landroid/bluetooth/BluetoothGattCharacteristic;->setValue([B)Z
+0000ce: const-string v12, "writeResponse notifyCharacteristicChanged RESPONSE_CONNECT_UUID ..."
+0000d2: invoke-static v1, v12, Lc/c/f/a/b;->k(Ljava/lang/String; Ljava/lang/String;)V
+0000d8: iget-object v3, v9, Lcom/vivo/pcsuite/pcconnect/ble/BluetoothLeService;->f Lcom/vivo/pcsuite/pcconnect/ble/BluetoothLeService$j;
+0000dc: iget-object v12, v9, Lcom/vivo/pcsuite/pcconnect/ble/BluetoothLeService;->b Landroid/bluetooth/BluetoothAdapter;
+0000e0: iget-object v13, v9, Lcom/vivo/pcsuite/pcconnect/ble/BluetoothLeService;->t Ljava/lang/String;
+0000e4: invoke-virtual v12, v13, Landroid/bluetooth/BluetoothAdapter;->getRemoteDevice(Ljava/lang/String;)Landroid/bluetooth/BluetoothDevice;
+0000ea: move-result-object v4
+0000ec: const/4 v6, 1
+0000ee: move v7, v10
+0000f0: move v8, v11
+0000f2: invoke-virtual/range v3 ... v8, Lcom/vivo/pcsuite/pcconnect/ble/BluetoothLeService$j;->a(Landroid/bluetooth/BluetoothDevice; Landroid/bluetooth/BluetoothGattCharacteristic; Z I I)Z
+0000f8: move-result v10
+0000fa: if-nez v10, +020h
+0000fe: const-string v10, "writeResponse notifyCharacteristicChanged RESPONSE_CONNECT_UUID failed ."
+000102: invoke-static v1, v10, Lc/c/f/a/b;->g(Ljava/lang/String; Ljava/lang/String;)V
+000108: invoke-direct v9, v0, v2, Lcom/vivo/pcsuite/pcconnect/ble/BluetoothLeService;->b(I I)V
+00010e: goto +16h
+000110: const-string v10, "writeResponse RESPONSE_CONNECT_UUID characteristic not found"
+000114: invoke-static v1, v10, Lc/c/f/a/b;->g(Ljava/lang/String; Ljava/lang/String;)V
+00011a: goto +10h
+00011c: const-string v10, "writeResponse SHARE_SERVICE_UUID service not found"
+000120: goto -6h
+000122: const-string v10, "writeResponse responseInfo not found"
+000126: goto -9h
+000128: move-exception v10
+00012a: const-string v11, "writeResponse Response info by notify failed."
+00012e: invoke-static v1, v11, v10, Lc/c/f/a/b;->e(Ljava/lang/String; Ljava/lang/String; Ljava/lang/Throwable;)V
+000134: invoke-direct v9, v0, v2, Lcom/vivo/pcsuite/pcconnect/ble/BluetoothLeService;->b(I I)V
+00013a: return-void 
+
+METHOD b(Ljava/lang/String;)V
+000000: move-object/from16 v7, v22
+000004: move-object/from16 v0, v23
+000008: new-instance v1, Ljava/lang/StringBuilder;
+00000c: invoke-direct v1, Ljava/lang/StringBuilder;-><init>()V
+000012: const-string v2, "deliverRequestInfo: "
+000016: invoke-virtual v1, v2, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+00001c: invoke-static/range v23, Lcom/vivo/pcsuite/pcconnect/g;->a(Ljava/lang/String;)Ljava/lang/String;
+000022: move-result-object v2
+000024: invoke-virtual v1, v2, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+00002a: const-string v2, ", state = "
+00002e: invoke-virtual v1, v2, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+000034: iget-object v2, v7, Lcom/vivo/pcsuite/pcconnect/ble/BluetoothLeService;->A Ljava/util/concurrent/atomic/AtomicInteger;
+000038: invoke-virtual v2, Ljava/util/concurrent/atomic/AtomicInteger;->get()I
+00003e: move-result v2
+000040: invoke-virtual v1, v2, Ljava/lang/StringBuilder;->append(I)Ljava/lang/StringBuilder;
+000046: invoke-virtual v1, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
+00004c: move-result-object v1
+00004e: const-string v2, "pcsuite_BluetoothLeService"
+000052: invoke-static v2, v1, Lc/c/f/a/b;->k(Ljava/lang/String; Ljava/lang/String;)V
+000058: const/4 v8, 1
+00005a: const/4 v1, 0
+00005c: invoke-direct v7, v1, v8, Lcom/vivo/pcsuite/pcconnect/ble/BluetoothLeService;->a(I I)Z
+000062: move-result v1
+000064: if-nez v1, +023h
+000068: new-instance v1, Ljava/lang/StringBuilder;
+00006c: invoke-direct v1, Ljava/lang/StringBuilder;-><init>()V
+000072: const-string v2, "deliverRequestInfo busy value: "
+000076: invoke-virtual v1, v2, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+00007c: invoke-virtual v1, v0, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+000082: invoke-virtual v1, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
+000088: move-result-object v0
+00008a: const-string v1, "pcsuite_BluetoothLeService"
+00008e: invoke-static v1, v0, Lc/c/f/a/b;->k(Ljava/lang/String; Ljava/lang/String;)V
+000094: const/4 v2, 1
+000096: const/4 v3, 1
+000098: const/4 v4, 0
+00009a: const/4 v5, 0
+00009c: const/4 v6, 0
+00009e: move-object/from16 v1, v22
+0000a2: invoke-direct/range v1 ... v6, Lcom/vivo/pcsuite/pcconnect/ble/BluetoothLeService;->b(I I Ljava/lang/String; Ljava/lang/String; Ljava/lang/String;)V
+0000a8: return-void 
+0000aa: const/4 v9, 5
+0000ac: new-instance v1, Lorg/json/JSONObject;
+0000b0: invoke-direct v1, v0, Lorg/json/JSONObject;-><init>(Ljava/lang/String;)V
+0000b6: const-string v0, "pcsuite_BluetoothLeService"
+0000ba: new-instance v2, Ljava/lang/StringBuilder;
+0000be: invoke-direct v2, Ljava/lang/StringBuilder;-><init>()V
+0000c4: const-string v3, "requestInfo: "
+0000c8: invoke-virtual v2, v3, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+0000ce: invoke-virtual v2, v1, Ljava/lang/StringBuilder;->append(Ljava/lang/Object;)Ljava/lang/StringBuilder;
+0000d4: invoke-virtual v2, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
+0000da: move-result-object v2
+0000dc: invoke-static v0, v2, Lc/c/f/a/b;->p(Ljava/lang/String; Ljava/lang/String;)V
+0000e2: const-string v0, "hostname"
+0000e6: invoke-virtual v1, v0, Lorg/json/JSONObject;->optString(Ljava/lang/String;)Ljava/lang/String;
+0000ec: move-result-object v2
+0000ee: const-string v0, "username"
+0000f2: invoke-virtual v1, v0, Lorg/json/JSONObject;->optString(Ljava/lang/String;)Ljava/lang/String;
+0000f8: move-result-object v3
+0000fa: const-string v0, "host_id"
+0000fe: invoke-virtual v1, v0, Lorg/json/JSONObject;->optString(Ljava/lang/String;)Ljava/lang/String;
+000104: move-result-object v0
+000106: invoke-direct v7, v0, Lcom/vivo/pcsuite/pcconnect/ble/BluetoothLeService;->a(Ljava/lang/String;)Ljava/lang/String;
+00010c: move-result-object v4
+00010e: const-string v0, "ssid"
+000112: invoke-virtual v1, v0, Lorg/json/JSONObject;->optString(Ljava/lang/String;)Ljava/lang/String;
+000118: move-result-object v5
+00011a: const-string v0, "psk"
+00011e: invoke-virtual v1, v0, Lorg/json/JSONObject;->optString(Ljava/lang/String;)Ljava/lang/String;
+000124: move-result-object v6
+000126: const-string v0, "mac"
+00012a: invoke-virtual v1, v0, Lorg/json/JSONObject;->optString(Ljava/lang/String;)Ljava/lang/String;
+000130: move-result-object v0
+000132: const-string v10, "connect_mode"
+000136: invoke-virtual v1, v10, Lorg/json/JSONObject;->optString(Ljava/lang/String;)Ljava/lang/String;
+00013c: move-result-object v10
+00013e: const-string v11, "connect_from"
+000142: invoke-virtual v1, v11, Lorg/json/JSONObject;->optString(Ljava/lang/String;)Ljava/lang/String;
+000148: move-result-object v1
+00014a: const-string v11, "ap"
+00014e: invoke-virtual v11, v10, Ljava/lang/String;->equalsIgnoreCase(Ljava/lang/String;)Z
+000154: move-result v19
+000156: if-eqz v0, +006h
+00015a: invoke-virtual v0, Ljava/lang/String;->toLowerCase()Ljava/lang/String;
+000160: move-result-object v0
+000162: move-object v15, v0
+000164: iget-object v14, v7, Lcom/vivo/pcsuite/pcconnect/ble/BluetoothLeService;->F Ljava/util/List;
+000168: monitor-enter v14
+00016a: iget-object v0, v7, Lcom/vivo/pcsuite/pcconnect/ble/BluetoothLeService;->F Ljava/util/List;
+00016e: invoke-interface v0, Ljava/util/List;->iterator()Ljava/util/Iterator;
+000174: move-result-object v20
+000176: invoke-interface/range v20, Ljava/util/Iterator;->hasNext()Z
+00017c: move-result v0
+00017e: if-eqz v0, +02dh
+000182: invoke-interface/range v20, Ljava/util/Iterator;->next()Ljava/lang/Object;
+000188: move-result-object v0
+00018a: move-object v10, v0
+00018c: check-cast v10, Lcom/vivo/pcsuite/pcconnect/ble/BluetoothLeObserver;
+000190: move-object v11, v2
+000192: move-object v12, v3
+000194: move-object v13, v4
+000196: move-object/from16 v21, v14
+00019a: move-object v14, v5
+00019c: move-object/from16 v23, v15
+0001a0: move-object v15, v6
+0001a2: move-object/from16 v16, v23
+0001a6: move/from16 v17, v19
+0001aa: move-object/from16 v18, v1
+0001ae: invoke-interface/range v10 ... v18, Lcom/vivo/pcsuite/pcconnect/ble/BluetoothLeObserver;->request(Ljava/lang/String; Ljava/lang/String; Ljava/lang/String; Ljava/lang/String; Ljava/lang/String; Ljava/lang/String; Z Ljava/lang/String;)V
+0001b4: goto +dh
+0001b6: move-exception v0
+0001b8: move-object v10, v0
+0001ba: const-string v0, "pcsuite_BluetoothLeService"
+0001be: const-string v11, "Observer.deliverRequestInfo failed."
+0001c2: invoke-static v0, v11, v10, Lc/c/f/a/b;->b(Ljava/lang/String; Ljava/lang/String; Ljava/lang/Throwable;)V
+0001c8: invoke-direct v7, v9, v8, Lcom/vivo/pcsuite/pcconnect/ble/BluetoothLeService;->b(I I)V
+0001ce: move-object/from16 v15, v23
+0001d2: move-object/from16 v14, v21
+0001d6: goto -30h
+0001d8: move-object/from16 v21, v14
+0001dc: move-object/from16 v23, v15
+0001e0: monitor-exit v21
+0001e2: const-string v0, "pcsuite_BluetoothLeService"
+0001e6: new-instance v5, Ljava/lang/StringBuilder;
+0001ea: invoke-direct v5, Ljava/lang/StringBuilder;-><init>()V
+0001f0: const-string v6, "show dialog from: "
+0001f4: invoke-virtual v5, v6, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+0001fa: invoke-virtual v5, v1, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+000200: const-string v6, ", isBindSucess: "
+000204: invoke-virtual v5, v6, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+00020a: iget-object v6, v7, Lcom/vivo/pcsuite/pcconnect/ble/BluetoothLeService;->Q Ljava/util/concurrent/atomic/AtomicBoolean;
+00020e: invoke-virtual v6, Ljava/util/concurrent/atomic/AtomicBoolean;->get()Z
+000214: move-result v6
+000216: invoke-virtual v5, v6, Ljava/lang/StringBuilder;->append(Z)Ljava/lang/StringBuilder;
+00021c: invoke-virtual v5, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
+000222: move-result-object v5
+000224: invoke-static v0, v5, Lc/c/f/a/b;->k(Ljava/lang/String; Ljava/lang/String;)V
+00022a: const-string v0, "1"
+00022e: invoke-virtual v0, v1, Ljava/lang/String;->equals(Ljava/lang/Object;)Z
+000234: move-result v0
+000236: if-eqz v0, +18fh
+00023a: iget-object v0, v7, Lcom/vivo/pcsuite/pcconnect/ble/BluetoothLeService;->Q Ljava/util/concurrent/atomic/AtomicBoolean;
+00023e: invoke-virtual v0, Ljava/util/concurrent/atomic/AtomicBoolean;->get()Z
+000244: move-result v0
+000246: const/4 v1, 0
+000248: const-wide/16 v5, 1
+00024c: if-nez v0, +0d8h
+000250: const-string v0, "pcsuite_BluetoothLeService"
+000254: const-string v10, "bind service start"
+000258: invoke-static v0, v10, Lc/c/f/a/b;->k(Ljava/lang/String; Ljava/lang/String;)V
+00025e: new-instance v0, Ljava/util/concurrent/CountDownLatch;
+000262: invoke-direct v0, v8, Ljava/util/concurrent/CountDownLatch;-><init>(I)V
+000268: iput-object v0, v7, Lcom/vivo/pcsuite/pcconnect/ble/BluetoothLeService;->O Ljava/util/concurrent/CountDownLatch;
+00026c: new-instance v0, Lcom/vivo/pcsuite/pcconnect/c;
+000270: invoke-direct v0, Lcom/vivo/pcsuite/pcconnect/c;-><init>()V
+000276: move-object/from16 v10, v23
+00027a: invoke-virtual v0, v10, Lcom/vivo/pcsuite/pcconnect/c;->b(Ljava/lang/String;)V
+000280: invoke-virtual v0, v2, Lcom/vivo/pcsuite/pcconnect/c;->c(Ljava/lang/String;)V
+000286: invoke-virtual v0, v3, Lcom/vivo/pcsuite/pcconnect/c;->d(Ljava/lang/String;)V
+00028c: invoke-virtual v7, v0, Lcom/vivo/pcsuite/pcconnect/ble/BluetoothLeService;->a(Lcom/vivo/pcsuite/pcconnect/c;)V
+000292: const-string v0, "pcsuite_BluetoothLeService"
+000296: const-string v10, "show wait 1"
+00029a: invoke-static v0, v10, Lc/c/f/a/b;->k(Ljava/lang/String; Ljava/lang/String;)V
+0002a0: iget-object v0, v7, Lcom/vivo/pcsuite/pcconnect/ble/BluetoothLeService;->O Ljava/util/concurrent/CountDownLatch;
+0002a4: const-wide/16 v10, 2
+0002a8: sget-object v12, Ljava/util/concurrent/TimeUnit;->SECONDS Ljava/util/concurrent/TimeUnit;
+0002ac: invoke-virtual v0, v10, v11, v12, Ljava/util/concurrent/CountDownLatch;->await(J Ljava/util/concurrent/TimeUnit;)Z
+0002b2: const-string v0, "pcsuite_BluetoothLeService"
+0002b6: const-string v10, "show wait 11"
+0002ba: invoke-static v0, v10, Lc/c/f/a/b;->k(Ljava/lang/String; Ljava/lang/String;)V
+0002c0: iget-object v0, v7, Lcom/vivo/pcsuite/pcconnect/ble/BluetoothLeService;->O Ljava/util/concurrent/CountDownLatch;
+0002c4: if-eqz v0, +013h
+0002c8: iget-object v0, v7, Lcom/vivo/pcsuite/pcconnect/ble/BluetoothLeService;->O Ljava/util/concurrent/CountDownLatch;
+0002cc: invoke-virtual v0, Ljava/util/concurrent/CountDownLatch;->getCount()J
+0002d2: move-result-wide v10
+0002d4: cmp-long v0, v5, v10
+0002d8: if-nez v0, +009h
+0002dc: iget-object v0, v7, Lcom/vivo/pcsuite/pcconnect/ble/BluetoothLeService;->O Ljava/util/concurrent/CountDownLatch;
+0002e0: invoke-virtual v0, Ljava/util/concurrent/CountDownLatch;->countDown()V
+0002e6: iput-object v1, v7, Lcom/vivo/pcsuite/pcconnect/ble/BluetoothLeService;->O Ljava/util/concurrent/CountDownLatch;
+0002ea: iget-object v0, v7, Lcom/vivo/pcsuite/pcconnect/ble/BluetoothLeService;->Q Ljava/util/concurrent/atomic/AtomicBoolean;
+0002ee: invoke-virtual v0, Ljava/util/concurrent/atomic/AtomicBoolean;->get()Z
+0002f4: move-result v0
+0002f6: if-nez v0, +014h
+0002fa: const-string v0, "pcsuite_BluetoothLeService"
+0002fe: const-string v1, "show wait failed "
+000302: invoke-static v0, v1, Lc/c/f/a/b;->k(Ljava/lang/String; Ljava/lang/String;)V
+000308: const/4 v2, 0
+00030a: const/4 v3, 3
+00030c: const/4 v4, 0
+00030e: const/4 v5, 0
+000310: const/4 v6, 0
+000312: move-object/from16 v1, v22
+000316: invoke-direct/range v1 ... v6, Lcom/vivo/pcsuite/pcconnect/ble/BluetoothLeService;->b(I I Ljava/lang/String; Ljava/lang/String; Ljava/lang/String;)V
+00031c: return-void 
+00031e: invoke-virtual/range v22, Lcom/vivo/pcsuite/pcconnect/ble/BluetoothLeService;->g()V
+000324: goto +6ch
+000326: move-exception v0
+000328: goto +37h
+00032a: const-string v0, "pcsuite_BluetoothLeService"
+00032e: const-string v10, "bind timeout"
+000332: invoke-static v0, v10, Lc/c/f/a/b;->k(Ljava/lang/String; Ljava/lang/String;)V
+000338: iget-object v0, v7, Lcom/vivo/pcsuite/pcconnect/ble/BluetoothLeService;->O Ljava/util/concurrent/CountDownLatch;
+00033c: if-eqz v0, +013h
+000340: iget-object v0, v7, Lcom/vivo/pcsuite/pcconnect/ble/BluetoothLeService;->O Ljava/util/concurrent/CountDownLatch;
+000344: invoke-virtual v0, Ljava/util/concurrent/CountDownLatch;->getCount()J
+00034a: move-result-wide v10
+00034c: cmp-long v0, v5, v10
+000350: if-nez v0, +009h
+000354: iget-object v0, v7, Lcom/vivo/pcsuite/pcconnect/ble/BluetoothLeService;->O Ljava/util/concurrent/CountDownLatch;
+000358: invoke-virtual v0, Ljava/util/concurrent/CountDownLatch;->countDown()V
+00035e: iput-object v1, v7, Lcom/vivo/pcsuite/pcconnect/ble/BluetoothLeService;->O Ljava/util/concurrent/CountDownLatch;
+000362: iget-object v0, v7, Lcom/vivo/pcsuite/pcconnect/ble/BluetoothLeService;->Q Ljava/util/concurrent/atomic/AtomicBoolean;
+000366: invoke-virtual v0, Ljava/util/concurrent/atomic/AtomicBoolean;->get()Z
+00036c: move-result v0
+00036e: if-nez v0, -028h
+000372: const-string v0, "pcsuite_BluetoothLeService"
+000376: const-string v1, "show wait failed "
+00037a: invoke-static v0, v1, Lc/c/f/a/b;->k(Ljava/lang/String; Ljava/lang/String;)V
+000380: const/4 v2, 0
+000382: const/4 v3, 3
+000384: const/4 v4, 0
+000386: const/4 v5, 0
+000388: const/4 v6, 0
+00038a: move-object/from16 v1, v22
+00038e: invoke-direct/range v1 ... v6, Lcom/vivo/pcsuite/pcconnect/ble/BluetoothLeService;->b(I I Ljava/lang/String; Ljava/lang/String; Ljava/lang/String;)V
+000394: return-void 
+000396: iget-object v2, v7, Lcom/vivo/pcsuite/pcconnect/ble/BluetoothLeService;->O Ljava/util/concurrent/CountDownLatch;
+00039a: if-eqz v2, +013h
+00039e: iget-object v2, v7, Lcom/vivo/pcsuite/pcconnect/ble/BluetoothLeService;->O Ljava/util/concurrent/CountDownLatch;
+0003a2: invoke-virtual v2, Ljava/util/concurrent/CountDownLatch;->getCount()J
+0003a8: move-result-wide v2
+0003aa: cmp-long v2, v5, v2
+0003ae: if-nez v2, +009h
+0003b2: iget-object v2, v7, Lcom/vivo/pcsuite/pcconnect/ble/BluetoothLeService;->O Ljava/util/concurrent/CountDownLatch;
+0003b6: invoke-virtual v2, Ljava/util/concurrent/CountDownLatch;->countDown()V
+0003bc: iput-object v1, v7, Lcom/vivo/pcsuite/pcconnect/ble/BluetoothLeService;->O Ljava/util/concurrent/CountDownLatch;
+0003c0: iget-object v1, v7, Lcom/vivo/pcsuite/pcconnect/ble/BluetoothLeService;->Q Ljava/util/concurrent/atomic/AtomicBoolean;
+0003c4: invoke-virtual v1, Ljava/util/concurrent/atomic/AtomicBoolean;->get()Z
+0003ca: move-result v1
+0003cc: if-nez v1, +014h
+0003d0: const-string v0, "pcsuite_BluetoothLeService"
+0003d4: const-string v1, "show wait failed "
+0003d8: invoke-static v0, v1, Lc/c/f/a/b;->k(Ljava/lang/String; Ljava/lang/String;)V
+0003de: const/4 v2, 0
+0003e0: const/4 v3, 3
+0003e2: const/4 v4, 0
+0003e4: const/4 v5, 0
+0003e6: const/4 v6, 0
+0003e8: move-object/from16 v1, v22
+0003ec: invoke-direct/range v1 ... v6, Lcom/vivo/pcsuite/pcconnect/ble/BluetoothLeService;->b(I I Ljava/lang/String; Ljava/lang/String; Ljava/lang/String;)V
+0003f2: return-void 
+0003f4: invoke-virtual/range v22, Lcom/vivo/pcsuite/pcconnect/ble/BluetoothLeService;->g()V
+0003fa: throw v0
+0003fc: new-instance v0, Ljava/util/concurrent/CountDownLatch;
+000400: invoke-direct v0, v8, Ljava/util/concurrent/CountDownLatch;-><init>(I)V
+000406: iput-object v0, v7, Lcom/vivo/pcsuite/pcconnect/ble/BluetoothLeService;->P Ljava/util/concurrent/CountDownLatch;
+00040a: const-string v0, "pcsuite_BluetoothLeService"
+00040e: const-string v10, "show wait 2"
+000412: invoke-static v0, v10, Lc/c/f/a/b;->k(Ljava/lang/String; Ljava/lang/String;)V
+000418: iget-object v0, v7, Lcom/vivo/pcsuite/pcconnect/ble/BluetoothLeService;->P Ljava/util/concurrent/CountDownLatch;
+00041c: sget-object v10, Ljava/util/concurrent/TimeUnit;->SECONDS Ljava/util/concurrent/TimeUnit;
+000420: invoke-virtual v0, v5, v6, v10, Ljava/util/concurrent/CountDownLatch;->await(J Ljava/util/concurrent/TimeUnit;)Z
+000426: const-string v0, "pcsuite_BluetoothLeService"
+00042a: const-string v10, "show wait 22"
+00042e: invoke-static v0, v10, Lc/c/f/a/b;->k(Ljava/lang/String; Ljava/lang/String;)V
+000434: iget-object v0, v7, Lcom/vivo/pcsuite/pcconnect/ble/BluetoothLeService;->P Ljava/util/concurrent/CountDownLatch;
+000438: if-eqz v0, +031h
+00043c: iget-object v0, v7, Lcom/vivo/pcsuite/pcconnect/ble/BluetoothLeService;->P Ljava/util/concurrent/CountDownLatch;
+000440: invoke-virtual v0, Ljava/util/concurrent/CountDownLatch;->getCount()J
+000446: move-result-wide v10
+000448: cmp-long v0, v5, v10
+00044c: if-nez v0, +027h
+000450: iget-object v0, v7, Lcom/vivo/pcsuite/pcconnect/ble/BluetoothLeService;->P Ljava/util/concurrent/CountDownLatch;
+000454: invoke-virtual v0, Ljava/util/concurrent/CountDownLatch;->countDown()V
+00045a: iput-object v1, v7, Lcom/vivo/pcsuite/pcconnect/ble/BluetoothLeService;->P Ljava/util/concurrent/CountDownLatch;
+00045e: goto +1eh
+000460: move-exception v0
+000462: goto +51h
+000464: const-string v0, "pcsuite_BluetoothLeService"
+000468: const-string v10, "show wait 2 InterruptedException"
+00046c: invoke-static v0, v10, Lc/c/f/a/b;->k(Ljava/lang/String; Ljava/lang/String;)V
+000472: iget-object v0, v7, Lcom/vivo/pcsuite/pcconnect/ble/BluetoothLeService;->P Ljava/util/concurrent/CountDownLatch;
+000476: if-eqz v0, +012h
+00047a: iget-object v0, v7, Lcom/vivo/pcsuite/pcconnect/ble/BluetoothLeService;->P Ljava/util/concurrent/CountDownLatch;
+00047e: invoke-virtual v0, Ljava/util/concurrent/CountDownLatch;->getCount()J
+000484: move-result-wide v10
+000486: cmp-long v0, v5, v10
+00048a: if-nez v0, +008h
+00048e: iget-object v0, v7, Lcom/vivo/pcsuite/pcconnect/ble/BluetoothLeService;->P Ljava/util/concurrent/CountDownLatch;
+000492: invoke-virtual v0, Ljava/util/concurrent/CountDownLatch;->countDown()V
+000498: goto -1fh
+00049a: iget-object v1, v7, Lcom/vivo/pcsuite/pcconnect/ble/BluetoothLeService;->F Ljava/util/List;
+00049e: monitor-enter v1
+0004a0: const-string v0, "pcsuite_BluetoothLeService"
+0004a4: const-string v5, "requestResult"
+0004a8: invoke-static v0, v5, Lc/c/f/a/b;->k(Ljava/lang/String; Ljava/lang/String;)V
+0004ae: iget-object v0, v7, Lcom/vivo/pcsuite/pcconnect/ble/BluetoothLeService;->F Ljava/util/List;
+0004b2: invoke-interface v0, Ljava/util/List;->iterator()Ljava/util/Iterator;
+0004b8: move-result-object v5
+0004ba: invoke-interface v5, Ljava/util/Iterator;->hasNext()Z
+0004c0: move-result v0
+0004c2: if-eqz v0, +01ch
+0004c6: invoke-interface v5, Ljava/util/Iterator;->next()Ljava/lang/Object;
+0004cc: move-result-object v0
+0004ce: check-cast v0, Lcom/vivo/pcsuite/pcconnect/ble/BluetoothLeObserver;
+0004d2: invoke-virtual v4, Ljava/lang/String;->toString()Ljava/lang/String;
+0004d8: move-result-object v6
+0004da: invoke-interface v0, v2, v6, v3, Lcom/vivo/pcsuite/pcconnect/ble/BluetoothLeObserver;->requestResult(Ljava/lang/String; Ljava/lang/String; Ljava/lang/String;)V
+0004e0: goto -13h
+0004e2: move-exception v0
+0004e4: const-string v6, "pcsuite_BluetoothLeService"
+0004e8: const-string v10, "Observer.requestResult failed."
+0004ec: invoke-static v6, v10, v0, Lc/c/f/a/b;->b(Ljava/lang/String; Ljava/lang/String; Ljava/lang/Throwable;)V
+0004f2: invoke-direct v7, v9, v8, Lcom/vivo/pcsuite/pcconnect/ble/BluetoothLeService;->b(I I)V
+0004f8: goto -1fh
+0004fa: monitor-exit v1
+0004fc: goto +2ch
+0004fe: move-exception v0
+000500: monitor-exit v1
+000502: throw v0
+000504: iget-object v2, v7, Lcom/vivo/pcsuite/pcconnect/ble/BluetoothLeService;->P Ljava/util/concurrent/CountDownLatch;
+000508: if-eqz v2, +013h
+00050c: iget-object v2, v7, Lcom/vivo/pcsuite/pcconnect/ble/BluetoothLeService;->P Ljava/util/concurrent/CountDownLatch;
+000510: invoke-virtual v2, Ljava/util/concurrent/CountDownLatch;->getCount()J
+000516: move-result-wide v2
+000518: cmp-long v2, v5, v2
+00051c: if-nez v2, +009h
+000520: iget-object v2, v7, Lcom/vivo/pcsuite/pcconnect/ble/BluetoothLeService;->P Ljava/util/concurrent/CountDownLatch;
+000524: invoke-virtual v2, Ljava/util/concurrent/CountDownLatch;->countDown()V
+00052a: iput-object v1, v7, Lcom/vivo/pcsuite/pcconnect/ble/BluetoothLeService;->P Ljava/util/concurrent/CountDownLatch;
+00052e: throw v0
+000530: move-exception v0
+000532: move-object/from16 v21, v14
+000536: monitor-exit v21
+000538: throw v0
+00053a: move-exception v0
+00053c: goto -3h
+00053e: move-exception v0
+000540: const-string v1, "pcsuite_BluetoothLeService"
+000544: const-string v2, "Parse request info failed."
+000548: invoke-static v1, v2, v0, Lc/c/f/a/b;->b(Ljava/lang/String; Ljava/lang/String; Ljava/lang/Throwable;)V
+00054e: invoke-direct v7, v9, v8, Lcom/vivo/pcsuite/pcconnect/ble/BluetoothLeService;->b(I I)V
+000554: return-void 
+
+METHOD b(Z)V
+000000: new-instance v0, Ljava/lang/StringBuilder;
+000004: invoke-direct v0, Ljava/lang/StringBuilder;-><init>()V
+00000a: const-string v1, "setConnectTimeout: "
+00000e: invoke-virtual v0, v1, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+000014: invoke-virtual v0, v4, Ljava/lang/StringBuilder;->append(Z)Ljava/lang/StringBuilder;
+00001a: invoke-virtual v0, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
+000020: move-result-object v0
+000022: const-string v1, "pcsuite_BluetoothLeService"
+000026: invoke-static v1, v0, Lc/c/f/a/b;->k(Ljava/lang/String; Ljava/lang/String;)V
+00002c: if-eqz v4, +00ch
+000030: iget-object v4, v3, Lcom/vivo/pcsuite/pcconnect/ble/BluetoothLeService;->j Landroid/os/Handler;
+000034: iget-object v0, v3, Lcom/vivo/pcsuite/pcconnect/ble/BluetoothLeService;->k Ljava/lang/Runnable;
+000038: const-wide/16 v1, 20000
+00003c: invoke-virtual v4, v0, v1, v2, Landroid/os/Handler;->postDelayed(Ljava/lang/Runnable; J)Z
+000042: goto +8h
+000044: iget-object v4, v3, Lcom/vivo/pcsuite/pcconnect/ble/BluetoothLeService;->j Landroid/os/Handler;
+000048: iget-object v0, v3, Lcom/vivo/pcsuite/pcconnect/ble/BluetoothLeService;->k Ljava/lang/Runnable;
+00004c: invoke-virtual v4, v0, Landroid/os/Handler;->removeCallbacks(Ljava/lang/Runnable;)V
+000052: return-void 
+
+METHOD b(Lcom/vivo/pcsuite/pcconnect/ble/BluetoothLeService; Z)Z
+000000: iput-boolean v1, v0, Lcom/vivo/pcsuite/pcconnect/ble/BluetoothLeService;->i Z
+000004: return v1
+
+METHOD c(Lcom/vivo/pcsuite/pcconnect/ble/BluetoothLeService;)Landroid/bluetooth/le/AdvertiseCallback;
+000000: iget-object v0, v0, Lcom/vivo/pcsuite/pcconnect/ble/BluetoothLeService;->l Landroid/bluetooth/le/AdvertiseCallback;
+000004: return-object v0
+
+METHOD c(Lcom/vivo/pcsuite/pcconnect/ble/BluetoothLeService; Ljava/lang/String;)Ljava/lang/String;
+000000: iput-object v1, v0, Lcom/vivo/pcsuite/pcconnect/ble/BluetoothLeService;->z Ljava/lang/String;
+000004: return-object v1
+
+METHOD c(I)V
+000000: iget-object v0, v6, Lcom/vivo/pcsuite/pcconnect/ble/BluetoothLeService;->F Ljava/util/List;
+000004: monitor-enter v0
+000006: iget-object v1, v6, Lcom/vivo/pcsuite/pcconnect/ble/BluetoothLeService;->F Ljava/util/List;
+00000a: invoke-interface v1, Ljava/util/List;->iterator()Ljava/util/Iterator;
+000010: move-result-object v1
+000012: invoke-interface v1, Ljava/util/Iterator;->hasNext()Z
+000018: move-result v2
+00001a: if-eqz v2, +029h
+00001e: invoke-interface v1, Ljava/util/Iterator;->next()Ljava/lang/Object;
+000024: move-result-object v2
+000026: check-cast v2, Lcom/vivo/pcsuite/pcconnect/ble/BluetoothLeObserver;
+00002a: invoke-interface v2, v7, Lcom/vivo/pcsuite/pcconnect/ble/BluetoothLeObserver;->onSuccess(I)V
+000030: goto -fh
+000032: move-exception v2
+000034: const-string v3, "pcsuite_BluetoothLeService"
+000038: new-instance v4, Ljava/lang/StringBuilder;
+00003c: invoke-direct v4, Ljava/lang/StringBuilder;-><init>()V
+000042: const-string v5, "Observer.onSuccess("
+000046: invoke-virtual v4, v5, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+00004c: invoke-virtual v4, v7, Ljava/lang/StringBuilder;->append(I)Ljava/lang/StringBuilder;
+000052: const-string v5, ") failed."
+000056: invoke-virtual v4, v5, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+00005c: invoke-virtual v4, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
+000062: move-result-object v4
+000064: invoke-static v3, v4, v2, Lc/c/f/a/b;->b(Ljava/lang/String; Ljava/lang/String; Ljava/lang/Throwable;)V
+00006a: goto -2ch
+00006c: monitor-exit v0
+00006e: return-void 
+000070: move-exception v7
+000072: monitor-exit v0
+000074: throw v7
+
+METHOD c(Lcom/vivo/pcsuite/pcconnect/ble/BluetoothLeService; I)V
+000000: invoke-direct v0, v1, Lcom/vivo/pcsuite/pcconnect/ble/BluetoothLeService;->c(I)V
+000006: return-void 
+
+METHOD c(Ljava/lang/String;)V
+000000: iget-object v0, v5, Lcom/vivo/pcsuite/pcconnect/ble/BluetoothLeService;->F Ljava/util/List;
+000004: monitor-enter v0
+000006: iget-object v1, v5, Lcom/vivo/pcsuite/pcconnect/ble/BluetoothLeService;->F Ljava/util/List;
+00000a: invoke-interface v1, Ljava/util/List;->iterator()Ljava/util/Iterator;
+000010: move-result-object v1
+000012: invoke-interface v1, Ljava/util/Iterator;->hasNext()Z
+000018: move-result v2
+00001a: if-eqz v2, +01ah
+00001e: invoke-interface v1, Ljava/util/Iterator;->next()Ljava/lang/Object;
+000024: move-result-object v2
+000026: check-cast v2, Lcom/vivo/pcsuite/pcconnect/ble/BluetoothLeObserver;
+00002a: invoke-interface v2, v6, Lcom/vivo/pcsuite/pcconnect/ble/BluetoothLeObserver;->receiverSendInfo(Ljava/lang/String;)V
+000030: goto -fh
+000032: move-exception v2
+000034: const-string v3, "pcsuite_BluetoothLeService"
+000038: const-string v4, "Observer.deliverSendInfo failed."
+00003c: invoke-static v3, v4, v2, Lc/c/f/a/b;->b(Ljava/lang/String; Ljava/lang/String; Ljava/lang/Throwable;)V
+000042: const/4 v2, 5
+000044: const/4 v3, 1
+000046: invoke-direct v5, v2, v3, Lcom/vivo/pcsuite/pcconnect/ble/BluetoothLeService;->b(I I)V
+00004c: goto -1dh
+00004e: monitor-exit v0
+000050: return-void 
+000052: move-exception v6
+000054: monitor-exit v0
+000056: throw v6
+
+METHOD c(Ljava/lang/String; I I)V
+000000: iget-object v0, v2, Lcom/vivo/pcsuite/pcconnect/ble/BluetoothLeService;->h Landroid/os/HandlerThread;
+000004: if-eqz v0, +013h
+000008: iget-object v0, v2, Lcom/vivo/pcsuite/pcconnect/ble/BluetoothLeService;->g Lcom/vivo/pcsuite/pcconnect/ble/BluetoothLeService$h;
+00000c: if-eqz v0, +00fh
+000010: const/4 v1, 0
+000012: invoke-virtual v0, v1, Landroid/os/Handler;->removeCallbacksAndMessages(Ljava/lang/Object;)V
+000018: iget-object v0, v2, Lcom/vivo/pcsuite/pcconnect/ble/BluetoothLeService;->h Landroid/os/HandlerThread;
+00001c: invoke-virtual v0, Landroid/os/HandlerThread;->quitSafely()Z
+000022: iput-object v1, v2, Lcom/vivo/pcsuite/pcconnect/ble/BluetoothLeService;->g Lcom/vivo/pcsuite/pcconnect/ble/BluetoothLeService$h;
+000026: iput-object v1, v2, Lcom/vivo/pcsuite/pcconnect/ble/BluetoothLeService;->h Landroid/os/HandlerThread;
+00002a: new-instance v0, Landroid/os/HandlerThread;
+00002e: const-string v1, "ConnectDelayer1"
+000032: invoke-direct v0, v1, Landroid/os/HandlerThread;-><init>(Ljava/lang/String;)V
+000038: iput-object v0, v2, Lcom/vivo/pcsuite/pcconnect/ble/BluetoothLeService;->h Landroid/os/HandlerThread;
+00003c: invoke-virtual v0, Landroid/os/HandlerThread;->start()V
+000042: iget-object v0, v2, Lcom/vivo/pcsuite/pcconnect/ble/BluetoothLeService;->h Landroid/os/HandlerThread;
+000046: invoke-virtual v0, Landroid/os/HandlerThread;->getLooper()Landroid/os/Looper;
+00004c: move-result-object v0
+00004e: if-eqz v0, +010h
+000052: new-instance v0, Lcom/vivo/pcsuite/pcconnect/ble/BluetoothLeService$h;
+000056: iget-object v1, v2, Lcom/vivo/pcsuite/pcconnect/ble/BluetoothLeService;->h Landroid/os/HandlerThread;
+00005a: invoke-virtual v1, Landroid/os/HandlerThread;->getLooper()Landroid/os/Looper;
+000060: move-result-object v1
+000062: invoke-direct v0, v2, v1, Lcom/vivo/pcsuite/pcconnect/ble/BluetoothLeService$h;-><init>(Lcom/vivo/pcsuite/pcconnect/ble/BluetoothLeService; Landroid/os/Looper;)V
+000068: iput-object v0, v2, Lcom/vivo/pcsuite/pcconnect/ble/BluetoothLeService;->g Lcom/vivo/pcsuite/pcconnect/ble/BluetoothLeService$h;
+00006c: goto +34h
+00006e: const-wide/16 v0, 500
+000072: invoke-static v0, v1, Ljava/lang/Thread;->sleep(J)V
+000078: iget-object v0, v2, Lcom/vivo/pcsuite/pcconnect/ble/BluetoothLeService;->h Landroid/os/HandlerThread;
+00007c: invoke-virtual v0, Landroid/os/HandlerThread;->getLooper()Landroid/os/Looper;
+000082: move-result-object v0
+000084: if-eqz v0, +028h
+000088: new-instance v0, Lcom/vivo/pcsuite/pcconnect/ble/BluetoothLeService$h;
+00008c: iget-object v1, v2, Lcom/vivo/pcsuite/pcconnect/ble/BluetoothLeService;->h Landroid/os/HandlerThread;
+000090: invoke-virtual v1, Landroid/os/HandlerThread;->getLooper()Landroid/os/Looper;
+000096: move-result-object v1
+000098: invoke-direct v0, v2, v1, Lcom/vivo/pcsuite/pcconnect/ble/BluetoothLeService$h;-><init>(Lcom/vivo/pcsuite/pcconnect/ble/BluetoothLeService; Landroid/os/Looper;)V
+00009e: goto -1bh
+0000a0: move-exception v3
+0000a2: goto +21h
+0000a4: move-exception v0
+0000a6: invoke-virtual v0, Ljava/lang/InterruptedException;->printStackTrace()V
+0000ac: iget-object v0, v2, Lcom/vivo/pcsuite/pcconnect/ble/BluetoothLeService;->h Landroid/os/HandlerThread;
+0000b0: invoke-virtual v0, Landroid/os/HandlerThread;->getLooper()Landroid/os/Looper;
+0000b6: move-result-object v0
+0000b8: if-eqz v0, +00eh
+0000bc: new-instance v0, Lcom/vivo/pcsuite/pcconnect/ble/BluetoothLeService$h;
+0000c0: iget-object v1, v2, Lcom/vivo/pcsuite/pcconnect/ble/BluetoothLeService;->h Landroid/os/HandlerThread;
+0000c4: invoke-virtual v1, Landroid/os/HandlerThread;->getLooper()Landroid/os/Looper;
+0000ca: move-result-object v1
+0000cc: invoke-direct v0, v2, v1, Lcom/vivo/pcsuite/pcconnect/ble/BluetoothLeService$h;-><init>(Lcom/vivo/pcsuite/pcconnect/ble/BluetoothLeService; Landroid/os/Looper;)V
+0000d2: goto -35h
+0000d4: iget-object v0, v2, Lcom/vivo/pcsuite/pcconnect/ble/BluetoothLeService;->g Lcom/vivo/pcsuite/pcconnect/ble/BluetoothLeService$h;
+0000d8: if-eqz v0, +005h
+0000dc: invoke-virtual v0, v3, v4, v5, Lcom/vivo/pcsuite/pcconnect/ble/BluetoothLeService$h;->a(Ljava/lang/String; I I)V
+0000e2: return-void 
+0000e4: iget-object v4, v2, Lcom/vivo/pcsuite/pcconnect/ble/BluetoothLeService;->h Landroid/os/HandlerThread;
+0000e8: invoke-virtual v4, Landroid/os/HandlerThread;->getLooper()Landroid/os/Looper;
+0000ee: move-result-object v4
+0000f0: if-eqz v4, +00fh
+0000f4: new-instance v4, Lcom/vivo/pcsuite/pcconnect/ble/BluetoothLeService$h;
+0000f8: iget-object v5, v2, Lcom/vivo/pcsuite/pcconnect/ble/BluetoothLeService;->h Landroid/os/HandlerThread;
+0000fc: invoke-virtual v5, Landroid/os/HandlerThread;->getLooper()Landroid/os/Looper;
+000102: move-result-object v5
+000104: invoke-direct v4, v2, v5, Lcom/vivo/pcsuite/pcconnect/ble/BluetoothLeService$h;-><init>(Lcom/vivo/pcsuite/pcconnect/ble/BluetoothLeService; Landroid/os/Looper;)V
+00010a: iput-object v4, v2, Lcom/vivo/pcsuite/pcconnect/ble/BluetoothLeService;->g Lcom/vivo/pcsuite/pcconnect/ble/BluetoothLeService$h;
+00010e: throw v3
+
+METHOD c(Z)V
+000000: new-instance v0, Ljava/lang/StringBuilder;
+000004: invoke-direct v0, Ljava/lang/StringBuilder;-><init>()V
+00000a: const-string v1, "setIgnoreBleState ignore = "
+00000e: invoke-virtual v0, v1, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+000014: invoke-virtual v0, v3, Ljava/lang/StringBuilder;->append(Z)Ljava/lang/StringBuilder;
+00001a: invoke-virtual v0, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
+000020: move-result-object v0
+000022: const-string v1, "pcsuite_BluetoothLeService"
+000026: invoke-static v1, v0, Lc/c/f/a/b;->k(Ljava/lang/String; Ljava/lang/String;)V
+00002c: iput-boolean v3, v2, Lcom/vivo/pcsuite/pcconnect/ble/BluetoothLeService;->N Z
+000030: return-void 
+
+METHOD c(Lcom/vivo/pcsuite/pcconnect/ble/BluetoothLeService; Z)Z
+000000: iput-boolean v1, v0, Lcom/vivo/pcsuite/pcconnect/ble/BluetoothLeService;->M Z
+000004: return v1
+
+METHOD d(Ljava/lang/String;)Landroid/bluetooth/BluetoothDevice;
+000000: invoke-static v4, Landroid/text/TextUtils;->isEmpty(Ljava/lang/CharSequence;)Z
+000006: move-result v0
+000008: if-nez v0, +027h
+00000c: iget-object v0, v3, Lcom/vivo/pcsuite/pcconnect/ble/BluetoothLeService;->b Landroid/bluetooth/BluetoothAdapter;
+000010: invoke-virtual v4, Ljava/lang/String;->toUpperCase()Ljava/lang/String;
+000016: move-result-object v4
+000018: invoke-virtual v0, v4, Landroid/bluetooth/BluetoothAdapter;->getRemoteDevice(Ljava/lang/String;)Landroid/bluetooth/BluetoothDevice;
+00001e: move-result-object v4
+000020: invoke-virtual v4, Landroid/bluetooth/BluetoothDevice;->getBondState()I
+000026: move-result v0
+000028: new-instance v1, Ljava/lang/StringBuilder;
+00002c: invoke-direct v1, Ljava/lang/StringBuilder;-><init>()V
+000032: const-string v2, "Bond state = "
+000036: invoke-virtual v1, v2, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+00003c: invoke-virtual v1, v0, Ljava/lang/StringBuilder;->append(I)Ljava/lang/StringBuilder;
+000042: invoke-virtual v1, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
+000048: move-result-object v0
+00004a: const-string v1, "pcsuite_BluetoothLeService"
+00004e: invoke-static v1, v0, Lc/c/f/a/b;->k(Ljava/lang/String; Ljava/lang/String;)V
+000054: return-object v4
+000056: new-instance v4, Ljava/lang/Exception;
+00005a: const-string v0, "getLeDevice address isEmpty"
+00005e: invoke-direct v4, v0, Ljava/lang/Exception;-><init>(Ljava/lang/String;)V
+000064: throw v4
+
+METHOD d(Lcom/vivo/pcsuite/pcconnect/ble/BluetoothLeService;)Ljava/lang/String;
+000000: iget-object v0, v0, Lcom/vivo/pcsuite/pcconnect/ble/BluetoothLeService;->x Ljava/lang/String;
+000004: return-object v0
+
+METHOD d(Lcom/vivo/pcsuite/pcconnect/ble/BluetoothLeService; Ljava/lang/String;)Ljava/lang/String;
+000000: iput-object v1, v0, Lcom/vivo/pcsuite/pcconnect/ble/BluetoothLeService;->t Ljava/lang/String;
+000004: return-object v1
+
+METHOD d(Lcom/vivo/pcsuite/pcconnect/ble/BluetoothLeService; Z)V
+000000: invoke-direct v0, v1, Lcom/vivo/pcsuite/pcconnect/ble/BluetoothLeService;->c(Z)V
+000006: return-void 
+
+METHOD e(Lcom/vivo/pcsuite/pcconnect/ble/BluetoothLeService;)Ljava/lang/String;
+000000: iget-object v0, v0, Lcom/vivo/pcsuite/pcconnect/ble/BluetoothLeService;->y Ljava/lang/String;
+000004: return-object v0
+
+METHOD e(Lcom/vivo/pcsuite/pcconnect/ble/BluetoothLeService; Ljava/lang/String;)Ljava/lang/String;
+000000: iput-object v1, v0, Lcom/vivo/pcsuite/pcconnect/ble/BluetoothLeService;->B Ljava/lang/String;
+000004: return-object v1
+
+METHOD f(Lcom/vivo/pcsuite/pcconnect/ble/BluetoothLeService;)Landroid/os/HandlerThread;
+000000: iget-object v0, v0, Lcom/vivo/pcsuite/pcconnect/ble/BluetoothLeService;->h Landroid/os/HandlerThread;
+000004: return-object v0
+
+METHOD f(Lcom/vivo/pcsuite/pcconnect/ble/BluetoothLeService; Ljava/lang/String;)Ljava/lang/String;
+000000: iput-object v1, v0, Lcom/vivo/pcsuite/pcconnect/ble/BluetoothLeService;->q Ljava/lang/String;
+000004: return-object v1
+
+METHOD g(Lcom/vivo/pcsuite/pcconnect/ble/BluetoothLeService;)Lcom/vivo/pcsuite/pcconnect/ble/BluetoothLeService$h;
+000000: iget-object v0, v0, Lcom/vivo/pcsuite/pcconnect/ble/BluetoothLeService;->g Lcom/vivo/pcsuite/pcconnect/ble/BluetoothLeService$h;
+000004: return-object v0
+
+METHOD g(Lcom/vivo/pcsuite/pcconnect/ble/BluetoothLeService; Ljava/lang/String;)V
+000000: invoke-direct v0, v1, Lcom/vivo/pcsuite/pcconnect/ble/BluetoothLeService;->b(Ljava/lang/String;)V
+000006: return-void 
+
+METHOD h(Lcom/vivo/pcsuite/pcconnect/ble/BluetoothLeService;)Ljava/lang/String;
+000000: iget-object v0, v0, Lcom/vivo/pcsuite/pcconnect/ble/BluetoothLeService;->z Ljava/lang/String;
+000004: return-object v0
+
+METHOD h()Ljava/util/List;
+000000: new-instance v0, Ljava/util/ArrayList;
+000004: invoke-direct v0, Ljava/util/ArrayList;-><init>()V
+00000a: new-instance v1, Landroid/bluetooth/le/ScanFilter$Builder;
+00000e: invoke-direct v1, Landroid/bluetooth/le/ScanFilter$Builder;-><init>()V
+000014: const/4 v2, 1
+000016: new-array v2, v2, [B
+00001a: const/4 v3, 0
+00001c: const/16 v4, 32
+000020: aput-byte v4, v2, v3
+000024: const/16 v3, 2103
+000028: invoke-virtual v1, v3, v2, Landroid/bluetooth/le/ScanFilter$Builder;->setManufacturerData(I [B)Landroid/bluetooth/le/ScanFilter$Builder;
+00002e: invoke-virtual v1, Landroid/bluetooth/le/ScanFilter$Builder;->build()Landroid/bluetooth/le/ScanFilter;
+000034: move-result-object v1
+000036: invoke-interface v0, v1, Ljava/util/List;->add(Ljava/lang/Object;)Z
+00003c: return-object v0
+
+METHOD h(Lcom/vivo/pcsuite/pcconnect/ble/BluetoothLeService; Ljava/lang/String;)V
+000000: invoke-direct v0, v1, Lcom/vivo/pcsuite/pcconnect/ble/BluetoothLeService;->c(Ljava/lang/String;)V
+000006: return-void 
+
+METHOD i(Lcom/vivo/pcsuite/pcconnect/ble/BluetoothLeService;)I
+000000: iget v0, v0, Lcom/vivo/pcsuite/pcconnect/ble/BluetoothLeService;->S I
+000004: return v0
+
+METHOD i()Landroid/bluetooth/le/ScanSettings;
+000000: new-instance v0, Landroid/bluetooth/le/ScanSettings$Builder;
+000004: invoke-direct v0, Landroid/bluetooth/le/ScanSettings$Builder;-><init>()V
+00000a: const/4 v1, 2
+00000c: invoke-virtual v0, v1, Landroid/bluetooth/le/ScanSettings$Builder;->setScanMode(I)Landroid/bluetooth/le/ScanSettings$Builder;
+000012: invoke-virtual v0, Landroid/bluetooth/le/ScanSettings$Builder;->build()Landroid/bluetooth/le/ScanSettings;
+000018: move-result-object v0
+00001a: return-object v0
+
+METHOD i(Lcom/vivo/pcsuite/pcconnect/ble/BluetoothLeService; Ljava/lang/String;)Ljava/lang/String;
+000000: invoke-direct v0, v1, Lcom/vivo/pcsuite/pcconnect/ble/BluetoothLeService;->a(Ljava/lang/String;)Ljava/lang/String;
+000006: move-result-object v0
+000008: return-object v0
+
+METHOD j(Lcom/vivo/pcsuite/pcconnect/ble/BluetoothLeService;)I
+000000: iget v0, v1, Lcom/vivo/pcsuite/pcconnect/ble/BluetoothLeService;->S I
+000004: add-int/lit8 v0, v0, 1
+000008: iput v0, v1, Lcom/vivo/pcsuite/pcconnect/ble/BluetoothLeService;->S I
+00000c: return v0
+
+METHOD j(Lcom/vivo/pcsuite/pcconnect/ble/BluetoothLeService; Ljava/lang/String;)Landroid/bluetooth/BluetoothDevice;
+000000: invoke-direct v0, v1, Lcom/vivo/pcsuite/pcconnect/ble/BluetoothLeService;->d(Ljava/lang/String;)Landroid/bluetooth/BluetoothDevice;
+000006: move-result-object v0
+000008: return-object v0
+
+METHOD j()Landroid/bluetooth/BluetoothGattService;
+000000: new-instance v0, Landroid/bluetooth/BluetoothGattService;
+000004: sget-object v1, Lcom/vivo/pcsuite/pcconnect/ble/g$c;->c Landroid/os/ParcelUuid;
+000008: invoke-virtual v1, Landroid/os/ParcelUuid;->getUuid()Ljava/util/UUID;
+00000e: move-result-object v1
+000010: const/4 v2, 0
+000012: invoke-direct v0, v1, v2, Landroid/bluetooth/BluetoothGattService;-><init>(Ljava/util/UUID; I)V
+000018: new-instance v1, Landroid/bluetooth/BluetoothGattCharacteristic;
+00001c: sget-object v2, Lcom/vivo/pcsuite/pcconnect/ble/g$c;->k Landroid/os/ParcelUuid;
+000020: invoke-virtual v2, Landroid/os/ParcelUuid;->getUuid()Ljava/util/UUID;
+000026: move-result-object v2
+000028: const/16 v3, 26
+00002c: const/16 v4, 17
+000030: invoke-direct v1, v2, v3, v4, Landroid/bluetooth/BluetoothGattCharacteristic;-><init>(Ljava/util/UUID; I I)V
+000036: new-instance v2, Landroid/bluetooth/BluetoothGattDescriptor;
+00003a: sget-object v5, Lcom/vivo/pcsuite/pcconnect/ble/g$c;->b Landroid/os/ParcelUuid;
+00003e: invoke-virtual v5, Landroid/os/ParcelUuid;->getUuid()Ljava/util/UUID;
+000044: move-result-object v5
+000046: invoke-direct v2, v5, v4, Landroid/bluetooth/BluetoothGattDescriptor;-><init>(Ljava/util/UUID; I)V
+00004c: sget-object v5, Landroid/bluetooth/BluetoothGattDescriptor;->ENABLE_NOTIFICATION_VALUE [B
+000050: invoke-virtual v2, v5, Landroid/bluetooth/BluetoothGattDescriptor;->setValue([B)Z
+000056: invoke-virtual v1, v2, Landroid/bluetooth/BluetoothGattCharacteristic;->addDescriptor(Landroid/bluetooth/BluetoothGattDescriptor;)Z
+00005c: new-instance v2, Landroid/bluetooth/BluetoothGattCharacteristic;
+000060: sget-object v5, Lcom/vivo/pcsuite/pcconnect/ble/g$c;->j Landroid/os/ParcelUuid;
+000064: invoke-virtual v5, Landroid/os/ParcelUuid;->getUuid()Ljava/util/UUID;
+00006a: move-result-object v5
+00006c: invoke-direct v2, v5, v3, v4, Landroid/bluetooth/BluetoothGattCharacteristic;-><init>(Ljava/util/UUID; I I)V
+000072: new-instance v5, Landroid/bluetooth/BluetoothGattCharacteristic;
+000076: sget-object v6, Lcom/vivo/pcsuite/pcconnect/ble/g$c;->l Landroid/os/ParcelUuid;
+00007a: invoke-virtual v6, Landroid/os/ParcelUuid;->getUuid()Ljava/util/UUID;
+000080: move-result-object v6
+000082: invoke-direct v5, v6, v3, v4, Landroid/bluetooth/BluetoothGattCharacteristic;-><init>(Ljava/util/UUID; I I)V
+000088: invoke-virtual v0, v1, Landroid/bluetooth/BluetoothGattService;->addCharacteristic(Landroid/bluetooth/BluetoothGattCharacteristic;)Z
+00008e: invoke-virtual v0, v2, Landroid/bluetooth/BluetoothGattService;->addCharacteristic(Landroid/bluetooth/BluetoothGattCharacteristic;)Z
+000094: invoke-virtual v0, v5, Landroid/bluetooth/BluetoothGattService;->addCharacteristic(Landroid/bluetooth/BluetoothGattCharacteristic;)Z
+00009a: return-object v0
+
+METHOD k(Lcom/vivo/pcsuite/pcconnect/ble/BluetoothLeService;)Lcom/vivo/pcsuite/pcconnect/ble/BluetoothLeService$j;
+000000: iget-object v0, v0, Lcom/vivo/pcsuite/pcconnect/ble/BluetoothLeService;->f Lcom/vivo/pcsuite/pcconnect/ble/BluetoothLeService$j;
+000004: return-object v0
+
+METHOD k()V
+000000: iget-object v0, v2, Lcom/vivo/pcsuite/pcconnect/ble/BluetoothLeService;->d Landroid/bluetooth/le/BluetoothLeAdvertiser;
+000004: const/4 v1, 0
+000006: if-eqz v0, +00ch
+00000a: invoke-direct v2, Lcom/vivo/pcsuite/pcconnect/ble/BluetoothLeService;->w()V
+000010: invoke-virtual v2, Lcom/vivo/pcsuite/pcconnect/ble/BluetoothLeService;->f()V
+000016: iput-object v1, v2, Lcom/vivo/pcsuite/pcconnect/ble/BluetoothLeService;->d Landroid/bluetooth/le/BluetoothLeAdvertiser;
+00001a: iput-object v1, v2, Lcom/vivo/pcsuite/pcconnect/ble/BluetoothLeService;->c Lcom/vivo/pcsuite/pcconnect/ble/f;
+00001e: iget-object v0, v2, Lcom/vivo/pcsuite/pcconnect/ble/BluetoothLeService;->e Landroid/bluetooth/BluetoothGattServer;
+000022: if-eqz v0, +007h
+000026: invoke-virtual v0, Landroid/bluetooth/BluetoothGattServer;->close()V
+00002c: iput-object v1, v2, Lcom/vivo/pcsuite/pcconnect/ble/BluetoothLeService;->e Landroid/bluetooth/BluetoothGattServer;
+000030: iget-object v0, v2, Lcom/vivo/pcsuite/pcconnect/ble/BluetoothLeService;->n Lcom/vivo/pcsuite/pcconnect/ble/h;
+000034: if-eqz v0, +005h
+000038: invoke-virtual v0, Lcom/vivo/pcsuite/pcconnect/ble/h;->a()V
+00003e: return-void 
+
+METHOD l(Lcom/vivo/pcsuite/pcconnect/ble/BluetoothLeService;)Ljava/lang/String;
+000000: iget-object v0, v0, Lcom/vivo/pcsuite/pcconnect/ble/BluetoothLeService;->t Ljava/lang/String;
+000004: return-object v0
+
+METHOD l()[B
+000000: invoke-virtual v2, Landroid/app/Service;->getApplicationContext()Landroid/content/Context;
+000006: move-result-object v0
+000008: const-string v1, "wifi"
+00000c: invoke-virtual v0, v1, Landroid/content/Context;->getSystemService(Ljava/lang/String;)Ljava/lang/Object;
+000012: move-result-object v0
+000014: check-cast v0, Landroid/net/wifi/WifiManager;
+000018: invoke-static v0, Lcom/vivo/pcsuite/pcconnect/wifip2p/f;->e(Landroid/net/wifi/WifiManager;)Z
+00001e: move-result v0
+000020: invoke-static v0, Lcom/vivo/pcsuite/pcconnect/ble/c;->a(I)[B
+000026: move-result-object v0
+000028: return-object v0
+
+METHOD m(Lcom/vivo/pcsuite/pcconnect/ble/BluetoothLeService;)Ljava/lang/String;
+000000: iget-object v0, v0, Lcom/vivo/pcsuite/pcconnect/ble/BluetoothLeService;->B Ljava/lang/String;
+000004: return-object v0
+
+METHOD m()Z
+000000: iget-object v0, v4, Lcom/vivo/pcsuite/pcconnect/ble/BluetoothLeService;->d Landroid/bluetooth/le/BluetoothLeAdvertiser;
+000004: if-nez v0, +00ah
+000008: iget-object v0, v4, Lcom/vivo/pcsuite/pcconnect/ble/BluetoothLeService;->b Landroid/bluetooth/BluetoothAdapter;
+00000c: invoke-virtual v0, Landroid/bluetooth/BluetoothAdapter;->getBluetoothLeAdvertiser()Landroid/bluetooth/le/BluetoothLeAdvertiser;
+000012: move-result-object v0
+000014: iput-object v0, v4, Lcom/vivo/pcsuite/pcconnect/ble/BluetoothLeService;->d Landroid/bluetooth/le/BluetoothLeAdvertiser;
+000018: iget-object v0, v4, Lcom/vivo/pcsuite/pcconnect/ble/BluetoothLeService;->c Lcom/vivo/pcsuite/pcconnect/ble/f;
+00001c: if-nez v0, +00eh
+000020: iget-object v0, v4, Lcom/vivo/pcsuite/pcconnect/ble/BluetoothLeService;->b Landroid/bluetooth/BluetoothAdapter;
+000024: invoke-virtual v0, Landroid/bluetooth/BluetoothAdapter;->getBluetoothLeScanner()Landroid/bluetooth/le/BluetoothLeScanner;
+00002a: move-result-object v0
+00002c: invoke-static v0, Lcom/vivo/pcsuite/pcconnect/ble/f;->a(Landroid/bluetooth/le/BluetoothLeScanner;)Lcom/vivo/pcsuite/pcconnect/ble/f;
+000032: move-result-object v0
+000034: iput-object v0, v4, Lcom/vivo/pcsuite/pcconnect/ble/BluetoothLeService;->c Lcom/vivo/pcsuite/pcconnect/ble/f;
+000038: new-instance v0, Ljava/lang/StringBuilder;
+00003c: invoke-direct v0, Ljava/lang/StringBuilder;-><init>()V
+000042: const-string v1, "initialize: advertiser="
+000046: invoke-virtual v0, v1, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+00004c: iget-object v1, v4, Lcom/vivo/pcsuite/pcconnect/ble/BluetoothLeService;->d Landroid/bluetooth/le/BluetoothLeAdvertiser;
+000050: const/4 v2, 1
+000052: const/4 v3, 0
+000054: if-eqz v1, +004h
+000058: move v1, v2
+00005a: goto +2h
+00005c: move v1, v3
+00005e: invoke-virtual v0, v1, Ljava/lang/StringBuilder;->append(Z)Ljava/lang/StringBuilder;
+000064: const-string v1, ", scanner="
+000068: invoke-virtual v0, v1, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+00006e: iget-object v1, v4, Lcom/vivo/pcsuite/pcconnect/ble/BluetoothLeService;->c Lcom/vivo/pcsuite/pcconnect/ble/f;
+000072: if-eqz v1, +004h
+000076: move v1, v2
+000078: goto +2h
+00007a: move v1, v3
+00007c: invoke-virtual v0, v1, Ljava/lang/StringBuilder;->append(Z)Ljava/lang/StringBuilder;
+000082: invoke-virtual v0, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
+000088: move-result-object v0
+00008a: const-string v1, "pcsuite_BluetoothLeService"
+00008e: invoke-static v1, v0, Lc/c/f/a/b;->k(Ljava/lang/String; Ljava/lang/String;)V
+000094: iget-object v0, v4, Lcom/vivo/pcsuite/pcconnect/ble/BluetoothLeService;->d Landroid/bluetooth/le/BluetoothLeAdvertiser;
+000098: if-eqz v0, +007h
+00009c: iget-object v0, v4, Lcom/vivo/pcsuite/pcconnect/ble/BluetoothLeService;->c Lcom/vivo/pcsuite/pcconnect/ble/f;
+0000a0: if-eqz v0, +003h
+0000a4: goto +2h
+0000a6: move v2, v3
+0000a8: return v2
+
+METHOD n(Lcom/vivo/pcsuite/pcconnect/ble/BluetoothLeService;)V
+000000: invoke-direct v0, Lcom/vivo/pcsuite/pcconnect/ble/BluetoothLeService;->p()V
+000006: return-void 
+
+METHOD n()Z
+000000: iget-boolean v0, v1, Lcom/vivo/pcsuite/pcconnect/ble/BluetoothLeService;->N Z
+000004: return v0
+
+METHOD o()V
+000000: const-string v0, "pcsuite_BluetoothLeService"
+000004: iget-boolean v1, v3, Lcom/vivo/pcsuite/pcconnect/ble/BluetoothLeService;->i Z
+000008: if-eqz v1, +029h
+00000c: iget-object v1, v3, Lcom/vivo/pcsuite/pcconnect/ble/BluetoothLeService;->H Ljava/io/DataOutputStream;
+000010: if-eqz v1, +025h
+000014: const-string v1, "notifyRfCommApConnected phone has cancel!"
+000018: invoke-static v0, v1, Lc/c/f/a/b;->p(Ljava/lang/String; Ljava/lang/String;)V
+00001e: iget-object v1, v3, Lcom/vivo/pcsuite/pcconnect/ble/BluetoothLeService;->H Ljava/io/DataOutputStream;
+000022: const/4 v2, 5
+000024: invoke-virtual v1, v2, Ljava/io/DataOutputStream;->writeByte(I)V
+00002a: iget-object v1, v3, Lcom/vivo/pcsuite/pcconnect/ble/BluetoothLeService;->H Ljava/io/DataOutputStream;
+00002e: const/4 v2, 0
+000030: invoke-virtual v1, v2, Ljava/io/DataOutputStream;->writeInt(I)V
+000036: iget-object v1, v3, Lcom/vivo/pcsuite/pcconnect/ble/BluetoothLeService;->H Ljava/io/DataOutputStream;
+00003a: invoke-virtual v1, Ljava/io/DataOutputStream;->flush()V
+000040: const/4 v1, 3
+000042: const/16 v2, 13
+000046: invoke-direct v3, v1, v2, Lcom/vivo/pcsuite/pcconnect/ble/BluetoothLeService;->b(I I)V
+00004c: goto +7h
+00004e: move-exception v1
+000050: const-string v2, "write tag cancel error"
+000054: invoke-static v0, v2, v1, Lc/c/f/a/b;->b(Ljava/lang/String; Ljava/lang/String; Ljava/lang/Throwable;)V
+00005a: return-void 
+
+METHOD o(Lcom/vivo/pcsuite/pcconnect/ble/BluetoothLeService;)V
+000000: invoke-direct v0, Lcom/vivo/pcsuite/pcconnect/ble/BluetoothLeService;->q()V
+000006: return-void 
+
+METHOD p()V
+000000: iget-boolean v0, v10, Lcom/vivo/pcsuite/pcconnect/ble/BluetoothLeService;->i Z
+000004: const-string v1, "pcsuite_BluetoothLeService"
+000008: if-eqz v0, +00bh
+00000c: const-string v0, "notifyRfCommApConnected phone has cancel!"
+000010: invoke-static v1, v0, Lc/c/f/a/b;->p(Ljava/lang/String; Ljava/lang/String;)V
+000016: invoke-direct v10, Lcom/vivo/pcsuite/pcconnect/ble/BluetoothLeService;->o()V
+00001c: return-void 
+00001e: iget-object v3, v10, Lcom/vivo/pcsuite/pcconnect/ble/BluetoothLeService;->y Ljava/lang/String;
+000022: iget-object v4, v10, Lcom/vivo/pcsuite/pcconnect/ble/BluetoothLeService;->x Ljava/lang/String;
+000026: iget-object v6, v10, Lcom/vivo/pcsuite/pcconnect/ble/BluetoothLeService;->z Ljava/lang/String;
+00002a: invoke-virtual v10, Landroid/app/Service;->getApplicationContext()Landroid/content/Context;
+000030: move-result-object v0
+000032: invoke-static v0, Lcom/vivo/pcsuite/pcconnect/wifip2p/f;->a(Landroid/content/Context;)Ljava/lang/String;
+000038: move-result-object v8
+00003a: const-string v5, ""
+00003e: const-string v7, ""
+000042: const-string v9, "direct_ip"
+000046: move-object v2, v10
+000048: invoke-direct/range v2 ... v9, Lcom/vivo/pcsuite/pcconnect/ble/BluetoothLeService;->a(Ljava/lang/String; Ljava/lang/String; Ljava/lang/String; Ljava/lang/String; Ljava/lang/String; Ljava/lang/String; Ljava/lang/String;)Lorg/json/JSONObject;
+00004e: move-result-object v0
+000050: invoke-virtual v0, Lorg/json/JSONObject;->toString()Ljava/lang/String;
+000056: move-result-object v0
+000058: invoke-static v0, Lcom/vivo/pcsuite/pcconnect/ble/c;->d(Ljava/lang/String;)[B
+00005e: move-result-object v0
+000060: iget-object v2, v10, Lcom/vivo/pcsuite/pcconnect/ble/BluetoothLeService;->H Ljava/io/DataOutputStream;
+000064: if-eqz v2, +01fh
+000068: iget-object v2, v10, Lcom/vivo/pcsuite/pcconnect/ble/BluetoothLeService;->H Ljava/io/DataOutputStream;
+00006c: const/4 v3, 2
+00006e: invoke-virtual v2, v3, Ljava/io/DataOutputStream;->writeByte(I)V
+000074: iget-object v2, v10, Lcom/vivo/pcsuite/pcconnect/ble/BluetoothLeService;->H Ljava/io/DataOutputStream;
+000078: array-length v3, v0
+00007a: invoke-virtual v2, v3, Ljava/io/DataOutputStream;->writeInt(I)V
+000080: iget-object v2, v10, Lcom/vivo/pcsuite/pcconnect/ble/BluetoothLeService;->H Ljava/io/DataOutputStream;
+000084: invoke-virtual v2, v0, Ljava/io/DataOutputStream;->write([B)V
+00008a: iget-object v0, v10, Lcom/vivo/pcsuite/pcconnect/ble/BluetoothLeService;->H Ljava/io/DataOutputStream;
+00008e: invoke-virtual v0, Ljava/io/DataOutputStream;->flush()V
+000094: goto +7h
+000096: move-exception v0
+000098: const-string v2, "write tag2 error"
+00009c: invoke-static v1, v2, v0, Lc/c/f/a/b;->b(Ljava/lang/String; Ljava/lang/String; Ljava/lang/Throwable;)V
+0000a2: return-void 
+
+METHOD p(Lcom/vivo/pcsuite/pcconnect/ble/BluetoothLeService;)Z
+000000: iget-boolean v0, v0, Lcom/vivo/pcsuite/pcconnect/ble/BluetoothLeService;->i Z
+000004: return v0
+
+METHOD q()V
+000000: iget-object v0, v3, Lcom/vivo/pcsuite/pcconnect/ble/BluetoothLeService;->H Ljava/io/DataOutputStream;
+000004: const-string v1, "pcsuite_BluetoothLeService"
+000008: if-eqz v0, +019h
+00000c: const/4 v2, 4
+00000e: invoke-virtual v0, v2, Ljava/io/DataOutputStream;->writeByte(I)V
+000014: iget-object v0, v3, Lcom/vivo/pcsuite/pcconnect/ble/BluetoothLeService;->H Ljava/io/DataOutputStream;
+000018: const/4 v2, 0
+00001a: invoke-virtual v0, v2, Ljava/io/DataOutputStream;->writeInt(I)V
+000020: iget-object v0, v3, Lcom/vivo/pcsuite/pcconnect/ble/BluetoothLeService;->H Ljava/io/DataOutputStream;
+000024: invoke-virtual v0, Ljava/io/DataOutputStream;->flush()V
+00002a: goto +dh
+00002c: move-exception v0
+00002e: const-string v2, "write tag2 error"
+000032: invoke-static v1, v2, v0, Lc/c/f/a/b;->b(Ljava/lang/String; Ljava/lang/String; Ljava/lang/Throwable;)V
+000038: goto +6h
+00003a: const-string v0, "Notify rf ap conn failed: io is null!"
+00003e: invoke-static v1, v0, Lc/c/f/a/b;->g(Ljava/lang/String; Ljava/lang/String;)V
+000044: return-void 
+
+METHOD q(Lcom/vivo/pcsuite/pcconnect/ble/BluetoothLeService;)V
+000000: invoke-direct v0, Lcom/vivo/pcsuite/pcconnect/ble/BluetoothLeService;->o()V
+000006: return-void 
+
+METHOD r(Lcom/vivo/pcsuite/pcconnect/ble/BluetoothLeService;)Ljava/util/concurrent/CountDownLatch;
+000000: iget-object v0, v0, Lcom/vivo/pcsuite/pcconnect/ble/BluetoothLeService;->P Ljava/util/concurrent/CountDownLatch;
+000004: return-object v0
+
+METHOD r()V
+000000: iget-object v0, v2, Lcom/vivo/pcsuite/pcconnect/ble/BluetoothLeService;->o Landroid/content/BroadcastReceiver;
+000004: const-string v1, "pcsuite_BluetoothLeService"
+000008: if-nez v0, +023h
+00000c: const-string v0, "registerBleStateChangeListener "
+000010: invoke-static v1, v0, Lc/c/f/a/b;->a(Ljava/lang/String; Ljava/lang/String;)V
+000016: new-instance v0, Landroid/content/IntentFilter;
+00001a: const-string v1, "android.bluetooth.adapter.action.STATE_CHANGED"
+00001e: invoke-direct v0, v1, Landroid/content/IntentFilter;-><init>(Ljava/lang/String;)V
+000024: const-string v1, "android.intent.action.SCREEN_ON"
+000028: invoke-virtual v0, v1, Landroid/content/IntentFilter;->addAction(Ljava/lang/String;)V
+00002e: const-string v1, "android.intent.action.SCREEN_OFF"
+000032: invoke-virtual v0, v1, Landroid/content/IntentFilter;->addAction(Ljava/lang/String;)V
+000038: new-instance v1, Lcom/vivo/pcsuite/pcconnect/ble/BluetoothLeService$b;
+00003c: invoke-direct v1, v2, Lcom/vivo/pcsuite/pcconnect/ble/BluetoothLeService$b;-><init>(Lcom/vivo/pcsuite/pcconnect/ble/BluetoothLeService;)V
+000042: iput-object v1, v2, Lcom/vivo/pcsuite/pcconnect/ble/BluetoothLeService;->o Landroid/content/BroadcastReceiver;
+000046: invoke-virtual v2, v1, v0, Landroid/app/Service;->registerReceiver(Landroid/content/BroadcastReceiver; Landroid/content/IntentFilter;)Landroid/content/Intent;
+00004c: goto +6h
+00004e: const-string v0, "registerBleStateChangeListener null != mStateReceiver "
+000052: invoke-static v1, v0, Lc/c/f/a/b;->a(Ljava/lang/String; Ljava/lang/String;)V
+000058: return-void 
+
+METHOD s(Lcom/vivo/pcsuite/pcconnect/ble/BluetoothLeService;)Landroid/bluetooth/BluetoothAdapter;
+000000: iget-object v0, v0, Lcom/vivo/pcsuite/pcconnect/ble/BluetoothLeService;->b Landroid/bluetooth/BluetoothAdapter;
+000004: return-object v0
+
+METHOD s()V
+000000: iget-object v0, v4, Lcom/vivo/pcsuite/pcconnect/ble/BluetoothLeService;->K Ljava/io/DataInputStream;
+000004: const/4 v1, 0
+000006: const-string v2, "pcsuite_BluetoothLeService"
+00000a: if-eqz v0, +00eh
+00000e: const-string v0, "bluetoothSocket input stream close"
+000012: invoke-static v2, v0, Lc/c/f/a/b;->k(Ljava/lang/String; Ljava/lang/String;)V
+000018: iget-object v0, v4, Lcom/vivo/pcsuite/pcconnect/ble/BluetoothLeService;->K Ljava/io/DataInputStream;
+00001c: invoke-virtual v0, Ljava/io/DataInputStream;->close()V
+000022: iput-object v1, v4, Lcom/vivo/pcsuite/pcconnect/ble/BluetoothLeService;->K Ljava/io/DataInputStream;
+000026: iget-object v0, v4, Lcom/vivo/pcsuite/pcconnect/ble/BluetoothLeService;->H Ljava/io/DataOutputStream;
+00002a: if-eqz v0, +00eh
+00002e: const-string v0, "bluetoothSocket output stream close"
+000032: invoke-static v2, v0, Lc/c/f/a/b;->k(Ljava/lang/String; Ljava/lang/String;)V
+000038: iget-object v0, v4, Lcom/vivo/pcsuite/pcconnect/ble/BluetoothLeService;->H Ljava/io/DataOutputStream;
+00003c: invoke-virtual v0, Ljava/io/DataOutputStream;->close()V
+000042: iput-object v1, v4, Lcom/vivo/pcsuite/pcconnect/ble/BluetoothLeService;->H Ljava/io/DataOutputStream;
+000046: new-instance v0, Ljava/lang/StringBuilder;
+00004a: invoke-direct v0, Ljava/lang/StringBuilder;-><init>()V
+000050: const-string v3, "bluetoothSocket is null:"
+000054: invoke-virtual v0, v3, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+00005a: iget-object v3, v4, Lcom/vivo/pcsuite/pcconnect/ble/BluetoothLeService;->G Landroid/bluetooth/BluetoothSocket;
+00005e: if-eqz v3, +004h
+000062: const/4 v3, 1
+000064: goto +2h
+000066: const/4 v3, 0
+000068: invoke-virtual v0, v3, Ljava/lang/StringBuilder;->append(Z)Ljava/lang/StringBuilder;
+00006e: invoke-virtual v0, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
+000074: move-result-object v0
+000076: invoke-static v2, v0, Lc/c/f/a/b;->k(Ljava/lang/String; Ljava/lang/String;)V
+00007c: iget-object v0, v4, Lcom/vivo/pcsuite/pcconnect/ble/BluetoothLeService;->G Landroid/bluetooth/BluetoothSocket;
+000080: if-eqz v0, +00eh
+000084: const-string v0, "bluetoothSocket close"
+000088: invoke-static v2, v0, Lc/c/f/a/b;->k(Ljava/lang/String; Ljava/lang/String;)V
+00008e: iget-object v0, v4, Lcom/vivo/pcsuite/pcconnect/ble/BluetoothLeService;->G Landroid/bluetooth/BluetoothSocket;
+000092: invoke-virtual v0, Landroid/bluetooth/BluetoothSocket;->close()V
+000098: iput-object v1, v4, Lcom/vivo/pcsuite/pcconnect/ble/BluetoothLeService;->G Landroid/bluetooth/BluetoothSocket;
+00009c: return-void 
+
+METHOD t(Lcom/vivo/pcsuite/pcconnect/ble/BluetoothLeService;)Ljava/lang/String;
+000000: iget-object v0, v0, Lcom/vivo/pcsuite/pcconnect/ble/BluetoothLeService;->q Ljava/lang/String;
+000004: return-object v0
+
+METHOD t()V
+000000: const-string v0, "pcsuite_BluetoothLeService"
+000004: const-string v1, "Reset state AVAILABLE."
+000008: invoke-static v0, v1, Lc/c/f/a/b;->k(Ljava/lang/String; Ljava/lang/String;)V
+00000e: iget-object v0, v2, Lcom/vivo/pcsuite/pcconnect/ble/BluetoothLeService;->A Ljava/util/concurrent/atomic/AtomicInteger;
+000012: const/4 v1, 0
+000014: invoke-virtual v0, v1, Ljava/util/concurrent/atomic/AtomicInteger;->set(I)V
+00001a: return-void 
+
+METHOD u(Lcom/vivo/pcsuite/pcconnect/ble/BluetoothLeService;)Ljava/util/concurrent/atomic/AtomicBoolean;
+000000: iget-object v0, v0, Lcom/vivo/pcsuite/pcconnect/ble/BluetoothLeService;->p Ljava/util/concurrent/atomic/AtomicBoolean;
+000004: return-object v0
+
+METHOD u()Z
+000000: const/4 v0, 0
+000002: invoke-direct v4, Lcom/vivo/pcsuite/pcconnect/ble/BluetoothLeService;->m()Z
+000008: move-result v1
+00000a: if-eqz v1, +006h
+00000e: invoke-virtual v4, Lcom/vivo/pcsuite/pcconnect/ble/BluetoothLeService;->d()Z
+000014: move-result v0
+000016: return v0
+000018: move-exception v1
+00001a: const-string v2, "pcsuite_BluetoothLeService"
+00001e: const-string v3, "Setup Bt failed because of illegal state."
+000022: invoke-static v2, v3, v1, Lc/c/f/a/b;->e(Ljava/lang/String; Ljava/lang/String; Ljava/lang/Throwable;)V
+000028: return v0
+
+METHOD v()Z
+000000: const-string v0, "pcsuite_BluetoothLeService"
+000004: const-string v1, "Starting Gatt Server"
+000008: invoke-static v0, v1, Lc/c/f/a/b;->k(Ljava/lang/String; Ljava/lang/String;)V
+00000e: iget-object v1, v4, Lcom/vivo/pcsuite/pcconnect/ble/BluetoothLeService;->e Landroid/bluetooth/BluetoothGattServer;
+000012: const/4 v2, 1
+000014: if-eqz v1, +008h
+000018: const-string v1, "startGattServer while mBluetoothGattServer is not null"
+00001c: invoke-static v0, v1, Lc/c/f/a/b;->p(Ljava/lang/String; Ljava/lang/String;)V
+000022: return v2
+000024: iget-object v1, v4, Lcom/vivo/pcsuite/pcconnect/ble/BluetoothLeService;->a Landroid/bluetooth/BluetoothManager;
+000028: iget-object v3, v4, Lcom/vivo/pcsuite/pcconnect/ble/BluetoothLeService;->f Lcom/vivo/pcsuite/pcconnect/ble/BluetoothLeService$j;
+00002c: invoke-virtual v1, v4, v3, Landroid/bluetooth/BluetoothManager;->openGattServer(Landroid/content/Context; Landroid/bluetooth/BluetoothGattServerCallback;)Landroid/bluetooth/BluetoothGattServer;
+000032: move-result-object v1
+000034: iput-object v1, v4, Lcom/vivo/pcsuite/pcconnect/ble/BluetoothLeService;->e Landroid/bluetooth/BluetoothGattServer;
+000038: if-eqz v1, +00ah
+00003c: invoke-direct v4, Lcom/vivo/pcsuite/pcconnect/ble/BluetoothLeService;->j()Landroid/bluetooth/BluetoothGattService;
+000042: move-result-object v0
+000044: invoke-virtual v1, v0, Landroid/bluetooth/BluetoothGattServer;->addService(Landroid/bluetooth/BluetoothGattService;)Z
+00004a: goto +ah
+00004c: const-string v1, "Opening gatt server failed."
+000050: invoke-static v0, v1, Lc/c/f/a/b;->g(Ljava/lang/String; Ljava/lang/String;)V
+000056: const/4 v0, 3
+000058: invoke-direct v4, v2, v0, Lcom/vivo/pcsuite/pcconnect/ble/BluetoothLeService;->b(I I)V
+00005e: iget-object v0, v4, Lcom/vivo/pcsuite/pcconnect/ble/BluetoothLeService;->e Landroid/bluetooth/BluetoothGattServer;
+000062: if-eqz v0, +003h
+000066: goto +2h
+000068: const/4 v2, 0
+00006a: return v2
+
+METHOD v(Lcom/vivo/pcsuite/pcconnect/ble/BluetoothLeService;)Z
+000000: invoke-direct v0, Lcom/vivo/pcsuite/pcconnect/ble/BluetoothLeService;->n()Z
+000006: move-result v0
+000008: return v0
+
+METHOD w()V
+000000: iget-object v0, v5, Lcom/vivo/pcsuite/pcconnect/ble/BluetoothLeService;->d Landroid/bluetooth/le/BluetoothLeAdvertiser;
+000004: if-eqz v0, +037h
+000008: iget-object v0, v5, Lcom/vivo/pcsuite/pcconnect/ble/BluetoothLeService;->l Landroid/bluetooth/le/AdvertiseCallback;
+00000c: if-eqz v0, +033h
+000010: const-string v0, "pcsuite_BluetoothLeService"
+000014: const-string v1, "Stopping advertisers."
+000018: invoke-static v0, v1, Lc/c/f/a/b;->k(Ljava/lang/String; Ljava/lang/String;)V
+00001e: const/4 v1, 0
+000020: iget-object v2, v5, Lcom/vivo/pcsuite/pcconnect/ble/BluetoothLeService;->d Landroid/bluetooth/le/BluetoothLeAdvertiser;
+000024: iget-object v3, v5, Lcom/vivo/pcsuite/pcconnect/ble/BluetoothLeService;->l Landroid/bluetooth/le/AdvertiseCallback;
+000028: invoke-virtual v2, v3, Landroid/bluetooth/le/BluetoothLeAdvertiser;->stopAdvertising(Landroid/bluetooth/le/AdvertiseCallback;)V
+00002e: iput-object v1, v5, Lcom/vivo/pcsuite/pcconnect/ble/BluetoothLeService;->l Landroid/bluetooth/le/AdvertiseCallback;
+000032: goto +20h
+000034: move-exception v0
+000036: goto +1bh
+000038: move-exception v2
+00003a: new-instance v3, Ljava/lang/StringBuilder;
+00003e: invoke-direct v3, Ljava/lang/StringBuilder;-><init>()V
+000044: const-string v4, "Stopping advertisers error "
+000048: invoke-virtual v3, v4, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+00004e: invoke-virtual v2, Ljava/lang/Exception;->getMessage()Ljava/lang/String;
+000054: move-result-object v2
+000056: invoke-virtual v3, v2, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+00005c: invoke-virtual v3, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
+000062: move-result-object v2
+000064: invoke-static v0, v2, Lc/c/f/a/b;->k(Ljava/lang/String; Ljava/lang/String;)V
+00006a: goto -1eh
+00006c: iput-object v1, v5, Lcom/vivo/pcsuite/pcconnect/ble/BluetoothLeService;->l Landroid/bluetooth/le/AdvertiseCallback;
+000070: throw v0
+000072: return-void 
+
+METHOD w(Lcom/vivo/pcsuite/pcconnect/ble/BluetoothLeService;)V
+000000: invoke-direct v0, Lcom/vivo/pcsuite/pcconnect/ble/BluetoothLeService;->t()V
+000006: return-void 
+
+METHOD x(Lcom/vivo/pcsuite/pcconnect/ble/BluetoothLeService;)Landroid/bluetooth/le/BluetoothLeAdvertiser;
+000000: iget-object v0, v0, Lcom/vivo/pcsuite/pcconnect/ble/BluetoothLeService;->d Landroid/bluetooth/le/BluetoothLeAdvertiser;
+000004: return-object v0
+
+METHOD y(Lcom/vivo/pcsuite/pcconnect/ble/BluetoothLeService;)Ljava/util/concurrent/atomic/AtomicBoolean;
+000000: iget-object v0, v0, Lcom/vivo/pcsuite/pcconnect/ble/BluetoothLeService;->Q Ljava/util/concurrent/atomic/AtomicBoolean;
+000004: return-object v0
+
+METHOD z(Lcom/vivo/pcsuite/pcconnect/ble/BluetoothLeService;)Ljava/util/concurrent/CountDownLatch;
+000000: iget-object v0, v0, Lcom/vivo/pcsuite/pcconnect/ble/BluetoothLeService;->O Ljava/util/concurrent/CountDownLatch;
+000004: return-object v0
+
+METHOD a()V
+000000: const-string v0, "pcsuite_BluetoothLeService"
+000004: const-string v1, "Closing..."
+000008: invoke-static v0, v1, Lc/c/f/a/b;->k(Ljava/lang/String; Ljava/lang/String;)V
+00000e: iget-object v1, v3, Lcom/vivo/pcsuite/pcconnect/ble/BluetoothLeService;->j Landroid/os/Handler;
+000012: const/4 v2, 0
+000014: invoke-virtual v1, v2, Landroid/os/Handler;->removeCallbacksAndMessages(Ljava/lang/Object;)V
+00001a: iget-object v1, v3, Lcom/vivo/pcsuite/pcconnect/ble/BluetoothLeService;->h Landroid/os/HandlerThread;
+00001e: if-eqz v1, +012h
+000022: iget-object v1, v3, Lcom/vivo/pcsuite/pcconnect/ble/BluetoothLeService;->g Lcom/vivo/pcsuite/pcconnect/ble/BluetoothLeService$h;
+000026: if-eqz v1, +00eh
+00002a: invoke-virtual v1, v2, Landroid/os/Handler;->removeCallbacksAndMessages(Ljava/lang/Object;)V
+000030: iget-object v1, v3, Lcom/vivo/pcsuite/pcconnect/ble/BluetoothLeService;->h Landroid/os/HandlerThread;
+000034: invoke-virtual v1, Landroid/os/HandlerThread;->quitSafely()Z
+00003a: iput-object v2, v3, Lcom/vivo/pcsuite/pcconnect/ble/BluetoothLeService;->g Lcom/vivo/pcsuite/pcconnect/ble/BluetoothLeService$h;
+00003e: iput-object v2, v3, Lcom/vivo/pcsuite/pcconnect/ble/BluetoothLeService;->h Landroid/os/HandlerThread;
+000042: iget-object v1, v3, Lcom/vivo/pcsuite/pcconnect/ble/BluetoothLeService;->o Landroid/content/BroadcastReceiver;
+000046: if-eqz v1, +007h
+00004a: invoke-virtual v3, v1, Landroid/app/Service;->unregisterReceiver(Landroid/content/BroadcastReceiver;)V
+000050: iput-object v2, v3, Lcom/vivo/pcsuite/pcconnect/ble/BluetoothLeService;->o Landroid/content/BroadcastReceiver;
+000054: invoke-direct v3, Lcom/vivo/pcsuite/pcconnect/ble/BluetoothLeService;->t()V
+00005a: invoke-direct v3, Lcom/vivo/pcsuite/pcconnect/ble/BluetoothLeService;->k()V
+000060: invoke-virtual v3, Lcom/vivo/pcsuite/pcconnect/ble/BluetoothLeService;->b()V
+000066: const/4 v1, 0
+000068: iput-boolean v1, v3, Lcom/vivo/pcsuite/pcconnect/ble/BluetoothLeService;->C Z
+00006c: iput-object v2, v3, Lcom/vivo/pcsuite/pcconnect/ble/BluetoothLeService;->m Lcom/vivo/pcsuite/pcconnect/ble/f$b;
+000070: const-string v1, "Closed."
+000074: invoke-static v0, v1, Lc/c/f/a/b;->k(Ljava/lang/String; Ljava/lang/String;)V
+00007a: return-void 
+
+METHOD a(Lcom/vivo/pcsuite/pcconnect/ble/BluetoothLeObserver;)V
+000000: iget-object v0, v2, Lcom/vivo/pcsuite/pcconnect/ble/BluetoothLeService;->F Ljava/util/List;
+000004: monitor-enter v0
+000006: iget-object v1, v2, Lcom/vivo/pcsuite/pcconnect/ble/BluetoothLeService;->F Ljava/util/List;
+00000a: invoke-interface v1, v3, Ljava/util/List;->contains(Ljava/lang/Object;)Z
+000010: move-result v1
+000012: if-nez v1, +007h
+000016: iget-object v1, v2, Lcom/vivo/pcsuite/pcconnect/ble/BluetoothLeService;->F Ljava/util/List;
+00001a: invoke-interface v1, v3, Ljava/util/List;->add(Ljava/lang/Object;)Z
+000020: monitor-exit v0
+000022: return-void 
+000024: move-exception v3
+000026: monitor-exit v0
+000028: throw v3
+
+METHOD a(Lcom/vivo/pcsuite/pcconnect/c;)V
+000000: new-instance v0, Landroid/content/Intent;
+000004: const-string v1, "com.pcsuite.test.upservice"
+000008: invoke-direct v0, v1, Landroid/content/Intent;-><init>(Ljava/lang/String;)V
+00000e: const-string v1, "com.vivo.pcsuite"
+000012: invoke-virtual v0, v1, Landroid/content/Intent;->setPackage(Ljava/lang/String;)Landroid/content/Intent;
+000018: invoke-virtual v4, Lcom/vivo/pcsuite/pcconnect/c;->c()Ljava/lang/String;
+00001e: move-result-object v1
+000020: const-string v2, "deviceId"
+000024: invoke-virtual v0, v2, v1, Landroid/content/Intent;->putExtra(Ljava/lang/String; Ljava/lang/String;)Landroid/content/Intent;
+00002a: invoke-virtual v4, Lcom/vivo/pcsuite/pcconnect/c;->a()Ljava/lang/String;
+000030: move-result-object v1
+000032: const-string v2, "address"
+000036: invoke-virtual v0, v2, v1, Landroid/content/Intent;->putExtra(Ljava/lang/String; Ljava/lang/String;)Landroid/content/Intent;
+00003c: invoke-virtual v4, Lcom/vivo/pcsuite/pcconnect/c;->d()Ljava/lang/String;
+000042: move-result-object v1
+000044: const-string v2, "deviceName"
+000048: invoke-virtual v0, v2, v1, Landroid/content/Intent;->putExtra(Ljava/lang/String; Ljava/lang/String;)Landroid/content/Intent;
+00004e: invoke-virtual v4, Lcom/vivo/pcsuite/pcconnect/c;->f()Ljava/lang/String;
+000054: move-result-object v1
+000056: const-string v2, "userName"
+00005a: invoke-virtual v0, v2, v1, Landroid/content/Intent;->putExtra(Ljava/lang/String; Ljava/lang/String;)Landroid/content/Intent;
+000060: invoke-virtual v4, Lcom/vivo/pcsuite/pcconnect/c;->b()I
+000066: move-result v1
+000068: const-string v2, "band"
+00006c: invoke-virtual v0, v2, v1, Landroid/content/Intent;->putExtra(Ljava/lang/String; I)Landroid/content/Intent;
+000072: invoke-virtual v4, Lcom/vivo/pcsuite/pcconnect/c;->e()I
+000078: move-result v1
+00007a: const-string v2, "signal"
+00007e: invoke-virtual v0, v2, v1, Landroid/content/Intent;->putExtra(Ljava/lang/String; I)Landroid/content/Intent;
+000084: invoke-virtual v4, Lcom/vivo/pcsuite/pcconnect/c;->g()I
+00008a: move-result v1
+00008c: const-string v2, "version"
+000090: invoke-virtual v0, v2, v1, Landroid/content/Intent;->putExtra(Ljava/lang/String; I)Landroid/content/Intent;
+000096: invoke-virtual v4, Lcom/vivo/pcsuite/pcconnect/c;->h()Z
+00009c: move-result v4
+00009e: const-string v1, "isOwnerId"
+0000a2: invoke-virtual v0, v1, v4, Landroid/content/Intent;->putExtra(Ljava/lang/String; Z)Landroid/content/Intent;
+0000a8: const-string v4, "connect_type"
+0000ac: const/4 v1, 6
+0000ae: invoke-virtual v0, v4, v1, Landroid/content/Intent;->putExtra(Ljava/lang/String; I)Landroid/content/Intent;
+0000b4: const-string v4, "pcsuite_BluetoothLeService"
+0000b8: const-string v1, "start bind"
+0000bc: invoke-static v4, v1, Lc/c/f/a/b;->k(Ljava/lang/String; Ljava/lang/String;)V
+0000c2: iget-object v4, v3, Lcom/vivo/pcsuite/pcconnect/ble/BluetoothLeService;->R Landroid/content/ServiceConnection;
+0000c6: const/4 v1, 1
+0000c8: invoke-virtual v3, v0, v4, v1, Landroid/app/Service;->bindService(Landroid/content/Intent; Landroid/content/ServiceConnection; I)Z
+0000ce: return-void 
+
+METHOD a(Ljava/lang/String; I I)V
+000000: new-instance v0, Ljava/lang/StringBuilder;
+000004: invoke-direct v0, Ljava/lang/StringBuilder;-><init>()V
+00000a: const-string v1, "Connecting a: "
+00000e: invoke-virtual v0, v1, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+000014: invoke-static v5, Lcom/vivo/pcsuite/pcconnect/g;->a(Ljava/lang/String;)Ljava/lang/String;
+00001a: move-result-object v1
+00001c: invoke-virtual v0, v1, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+000022: invoke-virtual v0, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
+000028: move-result-object v0
+00002a: const-string v1, "pcsuite_BluetoothLeService"
+00002e: invoke-static v1, v0, Lc/c/f/a/b;->k(Ljava/lang/String; Ljava/lang/String;)V
+000034: iget-object v0, v4, Lcom/vivo/pcsuite/pcconnect/ble/BluetoothLeService;->b Landroid/bluetooth/BluetoothAdapter;
+000038: const/4 v2, 3
+00003a: if-nez v0, +00ch
+00003e: const-string v5, "BluetoothAdapter not initialized."
+000042: invoke-static v1, v5, Lc/c/f/a/b;->g(Ljava/lang/String; Ljava/lang/String;)V
+000048: const/4 v5, 2
+00004a: invoke-direct v4, v2, v5, Lcom/vivo/pcsuite/pcconnect/ble/BluetoothLeService;->b(I I)V
+000050: return-void 
+000052: if-nez v5, +00ch
+000056: const-string v5, "Invalid address."
+00005a: invoke-static v1, v5, Lc/c/f/a/b;->g(Ljava/lang/String; Ljava/lang/String;)V
+000060: const/4 v5, 4
+000062: invoke-direct v4, v2, v5, Lcom/vivo/pcsuite/pcconnect/ble/BluetoothLeService;->b(I I)V
+000068: return-void 
+00006a: invoke-virtual v0, Landroid/bluetooth/BluetoothAdapter;->isEnabled()Z
+000070: move-result v0
+000072: if-nez v0, +026h
+000076: iget-object v0, v4, Lcom/vivo/pcsuite/pcconnect/ble/BluetoothLeService;->b Landroid/bluetooth/BluetoothAdapter;
+00007a: invoke-virtual v0, Landroid/bluetooth/BluetoothAdapter;->enable()Z
+000080: move-result v0
+000082: new-instance v2, Ljava/lang/StringBuilder;
+000086: invoke-direct v2, Ljava/lang/StringBuilder;-><init>()V
+00008c: const-string v3, "mBluetoothAdapter enable success="
+000090: invoke-virtual v2, v3, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+000096: invoke-virtual v2, v0, Ljava/lang/StringBuilder;->append(Z)Ljava/lang/StringBuilder;
+00009c: invoke-virtual v2, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
+0000a2: move-result-object v0
+0000a4: invoke-static v1, v0, Lc/c/f/a/b;->k(Ljava/lang/String; Ljava/lang/String;)V
+0000aa: const-wide/16 v2, 1000
+0000ae: invoke-static v2, v3, Ljava/lang/Thread;->sleep(J)V
+0000b4: goto +5h
+0000b6: move-exception v0
+0000b8: invoke-virtual v0, Ljava/lang/InterruptedException;->printStackTrace()V
+0000be: new-instance v0, Ljava/lang/StringBuilder;
+0000c2: invoke-direct v0, Ljava/lang/StringBuilder;-><init>()V
+0000c8: const-string v2, "connectRunner..."
+0000cc: invoke-virtual v0, v2, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+0000d2: invoke-static Ljava/lang/Thread;->currentThread()Ljava/lang/Thread;
+0000d8: move-result-object v2
+0000da: invoke-virtual v2, Ljava/lang/Thread;->getName()Ljava/lang/String;
+0000e0: move-result-object v2
+0000e2: invoke-virtual v0, v2, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+0000e8: invoke-virtual v0, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
+0000ee: move-result-object v0
+0000f0: invoke-static v1, v0, Lc/c/f/a/b;->k(Ljava/lang/String; Ljava/lang/String;)V
+0000f6: invoke-direct v4, v5, v6, v7, Lcom/vivo/pcsuite/pcconnect/ble/BluetoothLeService;->b(Ljava/lang/String; I I)Ljava/lang/Runnable;
+0000fc: move-result-object v5
+0000fe: invoke-interface v5, Ljava/lang/Runnable;->run()V
+000104: return-void 
+
+METHOD b()V
+000000: const-string v0, "pcsuite_BluetoothLeService"
+000004: const-string v1, "disconnect..."
+000008: invoke-static v0, v1, Lc/c/f/a/b;->k(Ljava/lang/String; Ljava/lang/String;)V
+00000e: const/4 v1, 0
+000010: iput v1, v6, Lcom/vivo/pcsuite/pcconnect/ble/BluetoothLeService;->S I
+000014: invoke-direct v6, Lcom/vivo/pcsuite/pcconnect/ble/BluetoothLeService;->t()V
+00001a: iget-object v2, v6, Lcom/vivo/pcsuite/pcconnect/ble/BluetoothLeService;->e Landroid/bluetooth/BluetoothGattServer;
+00001e: if-eqz v2, +032h
+000022: iget-object v2, v6, Lcom/vivo/pcsuite/pcconnect/ble/BluetoothLeService;->t Ljava/lang/String;
+000026: invoke-static v2, Landroid/text/TextUtils;->isEmpty(Ljava/lang/CharSequence;)Z
+00002c: move-result v2
+00002e: if-nez v2, +02ah
+000032: iget-object v2, v6, Lcom/vivo/pcsuite/pcconnect/ble/BluetoothLeService;->b Landroid/bluetooth/BluetoothAdapter;
+000036: iget-object v3, v6, Lcom/vivo/pcsuite/pcconnect/ble/BluetoothLeService;->t Ljava/lang/String;
+00003a: invoke-virtual v2, v3, Landroid/bluetooth/BluetoothAdapter;->getRemoteDevice(Ljava/lang/String;)Landroid/bluetooth/BluetoothDevice;
+000040: new-instance v2, Ljava/lang/StringBuilder;
+000044: invoke-direct v2, Ljava/lang/StringBuilder;-><init>()V
+00004a: const-string v3, "cancelConnection 11 for "
+00004e: invoke-virtual v2, v3, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+000054: iget-object v3, v6, Lcom/vivo/pcsuite/pcconnect/ble/BluetoothLeService;->t Ljava/lang/String;
+000058: invoke-static v3, Lcom/vivo/pcsuite/pcconnect/g;->a(Ljava/lang/String;)Ljava/lang/String;
+00005e: move-result-object v3
+000060: invoke-virtual v2, v3, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+000066: invoke-virtual v2, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
+00006c: move-result-object v2
+00006e: invoke-static v0, v2, Lc/c/f/a/b;->k(Ljava/lang/String; Ljava/lang/String;)V
+000074: goto +7h
+000076: move-exception v2
+000078: const-string v3, "cancelConnection failed because of illegal argument."
+00007c: invoke-static v0, v3, v2, Lc/c/f/a/b;->b(Ljava/lang/String; Ljava/lang/String; Ljava/lang/Throwable;)V
+000082: invoke-direct v6, Lcom/vivo/pcsuite/pcconnect/ble/BluetoothLeService;->s()V
+000088: invoke-direct v6, v1, Lcom/vivo/pcsuite/pcconnect/ble/BluetoothLeService;->b(Z)V
+00008e: const/4 v0, 0
+000090: iput-object v0, v6, Lcom/vivo/pcsuite/pcconnect/ble/BluetoothLeService;->t Ljava/lang/String;
+000094: iput-object v0, v6, Lcom/vivo/pcsuite/pcconnect/ble/BluetoothLeService;->q Ljava/lang/String;
+000098: iget-object v2, v6, Lcom/vivo/pcsuite/pcconnect/ble/BluetoothLeService;->p Ljava/util/concurrent/atomic/AtomicBoolean;
+00009c: invoke-virtual v2, v1, Ljava/util/concurrent/atomic/AtomicBoolean;->set(Z)V
+0000a2: iget-object v1, v6, Lcom/vivo/pcsuite/pcconnect/ble/BluetoothLeService;->O Ljava/util/concurrent/CountDownLatch;
+0000a6: const-wide/16 v2, 1
+0000aa: if-eqz v1, +011h
+0000ae: invoke-virtual v1, Ljava/util/concurrent/CountDownLatch;->getCount()J
+0000b4: move-result-wide v4
+0000b6: cmp-long v1, v2, v4
+0000ba: if-nez v1, +009h
+0000be: iget-object v1, v6, Lcom/vivo/pcsuite/pcconnect/ble/BluetoothLeService;->O Ljava/util/concurrent/CountDownLatch;
+0000c2: invoke-virtual v1, Ljava/util/concurrent/CountDownLatch;->countDown()V
+0000c8: iput-object v0, v6, Lcom/vivo/pcsuite/pcconnect/ble/BluetoothLeService;->O Ljava/util/concurrent/CountDownLatch;
+0000cc: iget-object v1, v6, Lcom/vivo/pcsuite/pcconnect/ble/BluetoothLeService;->P Ljava/util/concurrent/CountDownLatch;
+0000d0: if-eqz v1, +011h
+0000d4: invoke-virtual v1, Ljava/util/concurrent/CountDownLatch;->getCount()J
+0000da: move-result-wide v4
+0000dc: cmp-long v1, v2, v4
+0000e0: if-nez v1, +009h
+0000e4: iget-object v1, v6, Lcom/vivo/pcsuite/pcconnect/ble/BluetoothLeService;->P Ljava/util/concurrent/CountDownLatch;
+0000e8: invoke-virtual v1, Ljava/util/concurrent/CountDownLatch;->countDown()V
+0000ee: iput-object v0, v6, Lcom/vivo/pcsuite/pcconnect/ble/BluetoothLeService;->P Ljava/util/concurrent/CountDownLatch;
+0000f2: return-void 
+
+METHOD b(Lcom/vivo/pcsuite/pcconnect/ble/BluetoothLeObserver;)V
+000000: iget-object v0, v2, Lcom/vivo/pcsuite/pcconnect/ble/BluetoothLeService;->F Ljava/util/List;
+000004: monitor-enter v0
+000006: iget-object v1, v2, Lcom/vivo/pcsuite/pcconnect/ble/BluetoothLeService;->F Ljava/util/List;
+00000a: invoke-interface v1, v3, Ljava/util/List;->remove(Ljava/lang/Object;)Z
+000010: monitor-exit v0
+000012: return-void 
+000014: move-exception v3
+000016: monitor-exit v0
+000018: throw v3
+
+METHOD c()V
+000000: const-string v0, "pcsuite_BluetoothLeService"
+000004: const-string v1, "Opening..."
+000008: invoke-static v0, v1, Lc/c/f/a/b;->k(Ljava/lang/String; Ljava/lang/String;)V
+00000e: iget-object v0, v3, Lcom/vivo/pcsuite/pcconnect/ble/BluetoothLeService;->h Landroid/os/HandlerThread;
+000012: if-eqz v0, +013h
+000016: iget-object v0, v3, Lcom/vivo/pcsuite/pcconnect/ble/BluetoothLeService;->g Lcom/vivo/pcsuite/pcconnect/ble/BluetoothLeService$h;
+00001a: if-eqz v0, +00fh
+00001e: const/4 v1, 0
+000020: invoke-virtual v0, v1, Landroid/os/Handler;->removeCallbacksAndMessages(Ljava/lang/Object;)V
+000026: iget-object v0, v3, Lcom/vivo/pcsuite/pcconnect/ble/BluetoothLeService;->h Landroid/os/HandlerThread;
+00002a: invoke-virtual v0, Landroid/os/HandlerThread;->quitSafely()Z
+000030: iput-object v1, v3, Lcom/vivo/pcsuite/pcconnect/ble/BluetoothLeService;->g Lcom/vivo/pcsuite/pcconnect/ble/BluetoothLeService$h;
+000034: iput-object v1, v3, Lcom/vivo/pcsuite/pcconnect/ble/BluetoothLeService;->h Landroid/os/HandlerThread;
+000038: new-instance v0, Landroid/os/HandlerThread;
+00003c: const-string v1, "ConnectDelayer"
+000040: invoke-direct v0, v1, Landroid/os/HandlerThread;-><init>(Ljava/lang/String;)V
+000046: iput-object v0, v3, Lcom/vivo/pcsuite/pcconnect/ble/BluetoothLeService;->h Landroid/os/HandlerThread;
+00004a: invoke-virtual v0, Landroid/os/HandlerThread;->start()V
+000050: iget-object v0, v3, Lcom/vivo/pcsuite/pcconnect/ble/BluetoothLeService;->h Landroid/os/HandlerThread;
+000054: invoke-virtual v0, Landroid/os/HandlerThread;->getLooper()Landroid/os/Looper;
+00005a: move-result-object v0
+00005c: if-eqz v0, +010h
+000060: new-instance v0, Lcom/vivo/pcsuite/pcconnect/ble/BluetoothLeService$h;
+000064: iget-object v1, v3, Lcom/vivo/pcsuite/pcconnect/ble/BluetoothLeService;->h Landroid/os/HandlerThread;
+000068: invoke-virtual v1, Landroid/os/HandlerThread;->getLooper()Landroid/os/Looper;
+00006e: move-result-object v1
+000070: invoke-direct v0, v3, v1, Lcom/vivo/pcsuite/pcconnect/ble/BluetoothLeService$h;-><init>(Lcom/vivo/pcsuite/pcconnect/ble/BluetoothLeService; Landroid/os/Looper;)V
+000076: iput-object v0, v3, Lcom/vivo/pcsuite/pcconnect/ble/BluetoothLeService;->g Lcom/vivo/pcsuite/pcconnect/ble/BluetoothLeService$h;
+00007a: goto +34h
+00007c: const-wide/16 v0, 500
+000080: invoke-static v0, v1, Ljava/lang/Thread;->sleep(J)V
+000086: iget-object v0, v3, Lcom/vivo/pcsuite/pcconnect/ble/BluetoothLeService;->h Landroid/os/HandlerThread;
+00008a: invoke-virtual v0, Landroid/os/HandlerThread;->getLooper()Landroid/os/Looper;
+000090: move-result-object v0
+000092: if-eqz v0, +028h
+000096: new-instance v0, Lcom/vivo/pcsuite/pcconnect/ble/BluetoothLeService$h;
+00009a: iget-object v1, v3, Lcom/vivo/pcsuite/pcconnect/ble/BluetoothLeService;->h Landroid/os/HandlerThread;
+00009e: invoke-virtual v1, Landroid/os/HandlerThread;->getLooper()Landroid/os/Looper;
+0000a4: move-result-object v1
+0000a6: invoke-direct v0, v3, v1, Lcom/vivo/pcsuite/pcconnect/ble/BluetoothLeService$h;-><init>(Lcom/vivo/pcsuite/pcconnect/ble/BluetoothLeService; Landroid/os/Looper;)V
+0000ac: goto -1bh
+0000ae: move-exception v0
+0000b0: goto +27h
+0000b2: move-exception v0
+0000b4: invoke-virtual v0, Ljava/lang/InterruptedException;->printStackTrace()V
+0000ba: iget-object v0, v3, Lcom/vivo/pcsuite/pcconnect/ble/BluetoothLeService;->h Landroid/os/HandlerThread;
+0000be: invoke-virtual v0, Landroid/os/HandlerThread;->getLooper()Landroid/os/Looper;
+0000c4: move-result-object v0
+0000c6: if-eqz v0, +00eh
+0000ca: new-instance v0, Lcom/vivo/pcsuite/pcconnect/ble/BluetoothLeService$h;
+0000ce: iget-object v1, v3, Lcom/vivo/pcsuite/pcconnect/ble/BluetoothLeService;->h Landroid/os/HandlerThread;
+0000d2: invoke-virtual v1, Landroid/os/HandlerThread;->getLooper()Landroid/os/Looper;
+0000d8: move-result-object v1
+0000da: invoke-direct v0, v3, v1, Lcom/vivo/pcsuite/pcconnect/ble/BluetoothLeService$h;-><init>(Lcom/vivo/pcsuite/pcconnect/ble/BluetoothLeService; Landroid/os/Looper;)V
+0000e0: goto -35h
+0000e2: iget-object v0, v3, Lcom/vivo/pcsuite/pcconnect/ble/BluetoothLeService;->g Lcom/vivo/pcsuite/pcconnect/ble/BluetoothLeService$h;
+0000e6: const/4 v1, 1
+0000e8: if-eqz v0, +006h
+0000ec: invoke-direct v3, v1, Lcom/vivo/pcsuite/pcconnect/ble/BluetoothLeService;->a(I)V
+0000f2: goto +5h
+0000f4: const/4 v0, 2
+0000f6: invoke-direct v3, v1, v0, Lcom/vivo/pcsuite/pcconnect/ble/BluetoothLeService;->b(I I)V
+0000fc: return-void 
+0000fe: iget-object v1, v3, Lcom/vivo/pcsuite/pcconnect/ble/BluetoothLeService;->h Landroid/os/HandlerThread;
+000102: invoke-virtual v1, Landroid/os/HandlerThread;->getLooper()Landroid/os/Looper;
+000108: move-result-object v1
+00010a: if-eqz v1, +00fh
+00010e: new-instance v1, Lcom/vivo/pcsuite/pcconnect/ble/BluetoothLeService$h;
+000112: iget-object v2, v3, Lcom/vivo/pcsuite/pcconnect/ble/BluetoothLeService;->h Landroid/os/HandlerThread;
+000116: invoke-virtual v2, Landroid/os/HandlerThread;->getLooper()Landroid/os/Looper;
+00011c: move-result-object v2
+00011e: invoke-direct v1, v3, v2, Lcom/vivo/pcsuite/pcconnect/ble/BluetoothLeService$h;-><init>(Lcom/vivo/pcsuite/pcconnect/ble/BluetoothLeService; Landroid/os/Looper;)V
+000124: iput-object v1, v3, Lcom/vivo/pcsuite/pcconnect/ble/BluetoothLeService;->g Lcom/vivo/pcsuite/pcconnect/ble/BluetoothLeService$h;
+000128: throw v0
+
+METHOD d()Z
+000000: invoke-direct v4, Lcom/vivo/pcsuite/pcconnect/ble/BluetoothLeService;->v()Z
+000006: move-result v0
+000008: const/4 v1, 0
+00000a: if-nez v0, +003h
+00000e: return v1
+000010: const/4 v0, 1
+000012: invoke-direct v4, v0, v0, Lcom/vivo/pcsuite/pcconnect/ble/BluetoothLeService;->a(Z Z)V
+000018: return v0
+00001a: move-exception v0
+00001c: new-instance v2, Ljava/lang/StringBuilder;
+000020: invoke-direct v2, Ljava/lang/StringBuilder;-><init>()V
+000026: const-string v3, "startAdvertising() 11 e:"
+00002a: invoke-virtual v2, v3, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+000030: invoke-virtual v2, v0, Ljava/lang/StringBuilder;->append(Ljava/lang/Object;)Ljava/lang/StringBuilder;
+000036: invoke-virtual v2, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
+00003c: move-result-object v0
+00003e: const-string v2, "pcsuite_BluetoothLeService"
+000042: invoke-static v2, v0, Lc/c/f/a/b;->k(Ljava/lang/String; Ljava/lang/String;)V
+000048: return v1
+
+METHOD e()V
+000000: const-string v0, "pcsuite_BluetoothLeService"
+000004: const-string v1, "Starting scan..."
+000008: invoke-static v0, v1, Lc/c/f/a/b;->k(Ljava/lang/String; Ljava/lang/String;)V
+00000e: invoke-static v5, Lcom/bbk/account/base/BBKAccountManager;->getInstance(Landroid/content/Context;)Lcom/bbk/account/base/BBKAccountManager;
+000014: move-result-object v1
+000016: invoke-virtual v1, Lcom/bbk/account/base/BBKAccountManager;->getOpenid()Ljava/lang/String;
+00001c: move-result-object v1
+00001e: invoke-static v1, Lcom/vivo/pcsuite/pcconnect/ble/c;->a(Ljava/lang/String;)[B
+000024: move-result-object v2
+000026: invoke-static v2, Lcom/vivo/pcsuite/pcconnect/ble/c;->b([B)Ljava/lang/String;
+00002c: move-result-object v2
+00002e: invoke-virtual v2, Ljava/lang/String;->trim()Ljava/lang/String;
+000034: move-result-object v2
+000036: new-instance v3, Ljava/lang/StringBuilder;
+00003a: invoke-direct v3, Ljava/lang/StringBuilder;-><init>()V
+000040: const-string v4, "openid : "
+000044: invoke-virtual v3, v4, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+00004a: invoke-virtual v3, v1, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+000050: const-string v1, " "
+000054: invoke-virtual v3, v1, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+00005a: invoke-virtual v3, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
+000060: move-result-object v1
+000062: invoke-static v0, v1, Lc/c/f/a/b;->k(Ljava/lang/String; Ljava/lang/String;)V
+000068: iget-object v0, v5, Lcom/vivo/pcsuite/pcconnect/ble/BluetoothLeService;->n Lcom/vivo/pcsuite/pcconnect/ble/h;
+00006c: invoke-virtual v0, v2, Lcom/vivo/pcsuite/pcconnect/ble/h;->d(Ljava/lang/String;)V
+000072: iget-object v0, v5, Lcom/vivo/pcsuite/pcconnect/ble/BluetoothLeService;->n Lcom/vivo/pcsuite/pcconnect/ble/h;
+000076: new-instance v1, Lcom/vivo/pcsuite/pcconnect/ble/BluetoothLeService$c;
+00007a: invoke-direct v1, v5, Lcom/vivo/pcsuite/pcconnect/ble/BluetoothLeService$c;-><init>(Lcom/vivo/pcsuite/pcconnect/ble/BluetoothLeService;)V
+000080: invoke-virtual v0, v1, Lcom/vivo/pcsuite/pcconnect/ble/h;->a(Lcom/vivo/pcsuite/pcconnect/ble/h$c;)V
+000086: iget-object v0, v5, Lcom/vivo/pcsuite/pcconnect/ble/BluetoothLeService;->c Lcom/vivo/pcsuite/pcconnect/ble/f;
+00008a: if-eqz v0, +01ah
+00008e: invoke-virtual v5, Lcom/vivo/pcsuite/pcconnect/ble/BluetoothLeService;->f()V
+000094: iget-object v0, v5, Lcom/vivo/pcsuite/pcconnect/ble/BluetoothLeService;->c Lcom/vivo/pcsuite/pcconnect/ble/f;
+000098: invoke-direct v5, Lcom/vivo/pcsuite/pcconnect/ble/BluetoothLeService;->h()Ljava/util/List;
+00009e: move-result-object v1
+0000a0: invoke-direct v5, Lcom/vivo/pcsuite/pcconnect/ble/BluetoothLeService;->i()Landroid/bluetooth/le/ScanSettings;
+0000a6: move-result-object v2
+0000a8: new-instance v3, Lcom/vivo/pcsuite/pcconnect/ble/BluetoothLeService$d;
+0000ac: invoke-direct v3, v5, Lcom/vivo/pcsuite/pcconnect/ble/BluetoothLeService$d;-><init>(Lcom/vivo/pcsuite/pcconnect/ble/BluetoothLeService;)V
+0000b2: iput-object v3, v5, Lcom/vivo/pcsuite/pcconnect/ble/BluetoothLeService;->m Lcom/vivo/pcsuite/pcconnect/ble/f$b;
+0000b6: invoke-virtual v0, v1, v2, v3, Lcom/vivo/pcsuite/pcconnect/ble/f;->a(Ljava/util/List; Landroid/bluetooth/le/ScanSettings; Lcom/vivo/pcsuite/pcconnect/ble/f$b;)V
+0000bc: goto +7h
+0000be: const/4 v0, 2
+0000c0: const/16 v1, 14
+0000c4: invoke-direct v5, v0, v1, Lcom/vivo/pcsuite/pcconnect/ble/BluetoothLeService;->b(I I)V
+0000ca: return-void 
+
+METHOD f()V
+000000: const-string v0, "pcsuite_BluetoothLeService"
+000004: const-string v1, "Stopping scan..."
+000008: invoke-static v0, v1, Lc/c/f/a/b;->k(Ljava/lang/String; Ljava/lang/String;)V
+00000e: iget-object v1, v3, Lcom/vivo/pcsuite/pcconnect/ble/BluetoothLeService;->c Lcom/vivo/pcsuite/pcconnect/ble/f;
+000012: if-eqz v1, +011h
+000016: iget-object v2, v3, Lcom/vivo/pcsuite/pcconnect/ble/BluetoothLeService;->m Lcom/vivo/pcsuite/pcconnect/ble/f$b;
+00001a: if-eqz v2, +00dh
+00001e: invoke-virtual v1, Lcom/vivo/pcsuite/pcconnect/ble/f;->a()V
+000024: const/4 v1, 0
+000026: iput-object v1, v3, Lcom/vivo/pcsuite/pcconnect/ble/BluetoothLeService;->m Lcom/vivo/pcsuite/pcconnect/ble/f$b;
+00002a: const-string v1, "Stop scan success"
+00002e: invoke-static v0, v1, Lc/c/f/a/b;->k(Ljava/lang/String; Ljava/lang/String;)V
+000034: return-void 
+
+METHOD g()V
+000000: iget-object v0, v5, Lcom/vivo/pcsuite/pcconnect/ble/BluetoothLeService;->Q Ljava/util/concurrent/atomic/AtomicBoolean;
+000004: invoke-virtual v0, Ljava/util/concurrent/atomic/AtomicBoolean;->get()Z
+00000a: move-result v0
+00000c: if-eqz v0, +032h
+000010: const/4 v0, 0
+000012: iget-object v1, v5, Lcom/vivo/pcsuite/pcconnect/ble/BluetoothLeService;->R Landroid/content/ServiceConnection;
+000016: invoke-virtual v5, v1, Landroid/app/Service;->unbindService(Landroid/content/ServiceConnection;)V
+00001c: iget-object v1, v5, Lcom/vivo/pcsuite/pcconnect/ble/BluetoothLeService;->Q Ljava/util/concurrent/atomic/AtomicBoolean;
+000020: invoke-virtual v1, v0, Ljava/util/concurrent/atomic/AtomicBoolean;->set(Z)V
+000026: goto +25h
+000028: move-exception v1
+00002a: goto +1dh
+00002c: move-exception v1
+00002e: const-string v2, "pcsuite_BluetoothLeService"
+000032: new-instance v3, Ljava/lang/StringBuilder;
+000036: invoke-direct v3, Ljava/lang/StringBuilder;-><init>()V
+00003c: const-string v4, "unbind link Error: "
+000040: invoke-virtual v3, v4, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+000046: invoke-virtual v1, Ljava/lang/Exception;->getMessage()Ljava/lang/String;
+00004c: move-result-object v1
+00004e: invoke-virtual v3, v1, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+000054: invoke-virtual v3, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
+00005a: move-result-object v1
+00005c: invoke-static v2, v1, Lc/c/f/a/b;->g(Ljava/lang/String; Ljava/lang/String;)V
+000062: goto -23h
+000064: iget-object v2, v5, Lcom/vivo/pcsuite/pcconnect/ble/BluetoothLeService;->Q Ljava/util/concurrent/atomic/AtomicBoolean;
+000068: invoke-virtual v2, v0, Ljava/util/concurrent/atomic/AtomicBoolean;->set(Z)V
+00006e: throw v1
+000070: return-void 
+
+METHOD onBind(Landroid/content/Intent;)Landroid/os/IBinder;
+000000: const-string v2, "pcsuite_BluetoothLeService"
+000004: const-string v0, "onBind"
+000008: invoke-static v2, v0, Lc/c/f/a/b;->k(Ljava/lang/String; Ljava/lang/String;)V
+00000e: iget-object v2, v1, Lcom/vivo/pcsuite/pcconnect/ble/BluetoothLeService;->n Lcom/vivo/pcsuite/pcconnect/ble/h;
+000012: invoke-virtual v2, Lcom/vivo/pcsuite/pcconnect/ble/h;->a()V
+000018: iget-object v2, v1, Lcom/vivo/pcsuite/pcconnect/ble/BluetoothLeService;->E Lcom/vivo/pcsuite/pcconnect/ble/BluetoothLeService$i;
+00001c: return-object v2
+
+METHOD onCreate()V
+000000: invoke-super v3, Landroid/app/Service;->onCreate()V
+000006: const-string v0, "pcsuite_BluetoothLeService"
+00000a: const-string v1, "onCreate"
+00000e: invoke-static v0, v1, Lc/c/f/a/b;->g(Ljava/lang/String; Ljava/lang/String;)V
+000014: new-instance v1, Lcom/vivo/pcsuite/pcconnect/ble/h;
+000018: invoke-direct v1, Lcom/vivo/pcsuite/pcconnect/ble/h;-><init>()V
+00001e: iput-object v1, v3, Lcom/vivo/pcsuite/pcconnect/ble/BluetoothLeService;->n Lcom/vivo/pcsuite/pcconnect/ble/h;
+000022: const-string v1, "bluetooth"
+000026: invoke-virtual v3, v1, Landroid/app/Service;->getSystemService(Ljava/lang/String;)Ljava/lang/Object;
+00002c: move-result-object v1
+00002e: check-cast v1, Landroid/bluetooth/BluetoothManager;
+000032: iput-object v1, v3, Lcom/vivo/pcsuite/pcconnect/ble/BluetoothLeService;->a Landroid/bluetooth/BluetoothManager;
+000036: if-eqz v1, +008h
+00003a: invoke-virtual v1, Landroid/bluetooth/BluetoothManager;->getAdapter()Landroid/bluetooth/BluetoothAdapter;
+000040: move-result-object v1
+000042: iput-object v1, v3, Lcom/vivo/pcsuite/pcconnect/ble/BluetoothLeService;->b Landroid/bluetooth/BluetoothAdapter;
+000046: iget-object v1, v3, Lcom/vivo/pcsuite/pcconnect/ble/BluetoothLeService;->a Landroid/bluetooth/BluetoothManager;
+00004a: if-eqz v1, +006h
+00004e: iget-object v1, v3, Lcom/vivo/pcsuite/pcconnect/ble/BluetoothLeService;->b Landroid/bluetooth/BluetoothAdapter;
+000052: if-nez v1, +022h
+000056: new-instance v1, Ljava/lang/StringBuilder;
+00005a: invoke-direct v1, Ljava/lang/StringBuilder;-><init>()V
+000060: const-string v2, "mBluetoothManager="
+000064: invoke-virtual v1, v2, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+00006a: iget-object v2, v3, Lcom/vivo/pcsuite/pcconnect/ble/BluetoothLeService;->a Landroid/bluetooth/BluetoothManager;
+00006e: invoke-virtual v1, v2, Ljava/lang/StringBuilder;->append(Ljava/lang/Object;)Ljava/lang/StringBuilder;
+000074: const-string v2, ", mBluetoothAdapter="
+000078: invoke-virtual v1, v2, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+00007e: iget-object v2, v3, Lcom/vivo/pcsuite/pcconnect/ble/BluetoothLeService;->b Landroid/bluetooth/BluetoothAdapter;
+000082: invoke-virtual v1, v2, Ljava/lang/StringBuilder;->append(Ljava/lang/Object;)Ljava/lang/StringBuilder;
+000088: invoke-virtual v1, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
+00008e: move-result-object v1
+000090: invoke-static v0, v1, Lc/c/f/a/b;->g(Ljava/lang/String; Ljava/lang/String;)V
+000096: invoke-direct v3, Lcom/vivo/pcsuite/pcconnect/ble/BluetoothLeService;->r()V
+00009c: return-void 
+
+METHOD onDestroy()V
+000000: invoke-super v2, Landroid/app/Service;->onDestroy()V
+000006: const-string v0, "pcsuite_BluetoothLeService"
+00000a: const-string v1, "onDestroy!"
+00000e: invoke-static v0, v1, Lc/c/f/a/b;->k(Ljava/lang/String; Ljava/lang/String;)V
+000014: iget-object v0, v2, Lcom/vivo/pcsuite/pcconnect/ble/BluetoothLeService;->n Lcom/vivo/pcsuite/pcconnect/ble/h;
+000018: invoke-virtual v0, Lcom/vivo/pcsuite/pcconnect/ble/h;->a()V
+00001e: const/4 v0, 0
+000020: iput-object v0, v2, Lcom/vivo/pcsuite/pcconnect/ble/BluetoothLeService;->n Lcom/vivo/pcsuite/pcconnect/ble/h;
+000024: invoke-virtual v2, Lcom/vivo/pcsuite/pcconnect/ble/BluetoothLeService;->g()V
+00002a: invoke-virtual v2, Lcom/vivo/pcsuite/pcconnect/ble/BluetoothLeService;->a()V
+000030: return-void 

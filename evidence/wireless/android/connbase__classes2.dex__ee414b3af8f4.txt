@@ -1,0 +1,89 @@
+APK pcsuite/updateApk/connbase.apk
+DEX classes2.dex
+CLASS Lcom/vivo/pcsuite/pcconnect/wifip2p/deputy/d;
+SUPER Ljava/lang/Object;
+FIELDS
+a Ljava/lang/String; = 'WifiManagerProxy'
+
+METHOD <init>()V
+000000: invoke-direct v0, Ljava/lang/Object;-><init>()V
+000006: return-void 
+
+METHOD a(Landroid/content/Context; Landroid/net/wifi/WifiManager; Ljava/lang/Runnable;)V
+000000: const-string v0, "WifiManagerProxy"
+000004: const-string v1, "Disconnecting ext-Wifi and then..."
+000008: invoke-static v0, v1, Lc/c/f/a/b;->a(Ljava/lang/String; Ljava/lang/String;)V
+00000e: invoke-virtual v2, Landroid/content/Context;->getApplicationContext()Landroid/content/Context;
+000014: move-result-object v2
+000016: new-instance v0, Landroid/os/Handler;
+00001a: invoke-static Landroid/os/Looper;->getMainLooper()Landroid/os/Looper;
+000020: move-result-object v1
+000022: invoke-direct v0, v1, Landroid/os/Handler;-><init>(Landroid/os/Looper;)V
+000028: new-instance v1, Lcom/vivo/pcsuite/pcconnect/wifip2p/deputy/d$a;
+00002c: invoke-direct v1, v3, v2, v0, v4, Lcom/vivo/pcsuite/pcconnect/wifip2p/deputy/d$a;-><init>(Landroid/net/wifi/WifiManager; Landroid/content/Context; Landroid/os/Handler; Ljava/lang/Runnable;)V
+000032: const-string v2, "disconnectExtWifiAnd"
+000036: invoke-static v1, v2, Lcom/vivo/pcsuite/pcconnect/n;->a(Ljava/lang/Runnable; Ljava/lang/String;)V
+00003c: return-void 
+
+METHOD a(Landroid/net/wifi/WifiManager;)Z
+000000: const-string v0, "WifiManagerProxy"
+000004: const-string v1, "Disconnect ext-Wifi"
+000008: invoke-static v0, v1, Lc/c/f/a/b;->a(Ljava/lang/String; Ljava/lang/String;)V
+00000e: const/4 v1, 0
+000010: const-class v2, Landroid/net/wifi/WifiManager;
+000014: const-string v3, "disconnectExtWifi"
+000018: new-array v4, v1, [Ljava/lang/Class;
+00001c: invoke-virtual v2, v3, v4, Ljava/lang/Class;->getDeclaredMethod(Ljava/lang/String; [Ljava/lang/Class;)Ljava/lang/reflect/Method;
+000022: move-result-object v2
+000024: new-array v3, v1, [Ljava/lang/Object;
+000028: invoke-virtual v2, v5, v3, Ljava/lang/reflect/Method;->invoke(Ljava/lang/Object; [Ljava/lang/Object;)Ljava/lang/Object;
+00002e: move-result-object v5
+000030: check-cast v5, Ljava/lang/Boolean;
+000034: invoke-virtual v5, Ljava/lang/Boolean;->booleanValue()Z
+00003a: move-result v5
+00003c: return v5
+00003e: move-exception v5
+000040: const-string v2, "Disconnect ext-Wifi failed"
+000044: invoke-static v0, v2, v5, Lc/c/f/a/b;->e(Ljava/lang/String; Ljava/lang/String; Ljava/lang/Throwable;)V
+00004a: return v1
+
+METHOD b(Landroid/net/wifi/WifiManager;)Landroid/net/LinkProperties;
+000000: const-string v0, "getLinkPropertiesForExtWifi"
+000004: const-string v1, "WifiManagerProxy"
+000008: invoke-static v1, v0, Lc/c/f/a/b;->a(Ljava/lang/String; Ljava/lang/String;)V
+00000e: const-class v2, Landroid/net/wifi/WifiManager;
+000012: const/4 v3, 0
+000014: new-array v4, v3, [Ljava/lang/Class;
+000018: invoke-virtual v2, v0, v4, Ljava/lang/Class;->getDeclaredMethod(Ljava/lang/String; [Ljava/lang/Class;)Ljava/lang/reflect/Method;
+00001e: move-result-object v0
+000020: new-array v2, v3, [Ljava/lang/Object;
+000024: invoke-virtual v0, v5, v2, Ljava/lang/reflect/Method;->invoke(Ljava/lang/Object; [Ljava/lang/Object;)Ljava/lang/Object;
+00002a: move-result-object v5
+00002c: check-cast v5, Landroid/net/LinkProperties;
+000030: return-object v5
+000032: move-exception v5
+000034: const-string v0, "Disconnect ext-Wifi failed"
+000038: invoke-static v1, v0, v5, Lc/c/f/a/b;->e(Ljava/lang/String; Ljava/lang/String; Ljava/lang/Throwable;)V
+00003e: const/4 v5, 0
+000040: return-object v5
+
+METHOD c(Landroid/net/wifi/WifiManager;)Landroid/net/NetworkInfo;
+000000: const-string v0, "WifiManagerProxy"
+000004: const-string v1, "Get network info for ext-Wifi"
+000008: invoke-static v0, v1, Lc/c/f/a/b;->a(Ljava/lang/String; Ljava/lang/String;)V
+00000e: const-class v1, Landroid/net/wifi/WifiManager;
+000012: const-string v2, "getNetworkInfoForExtWifi"
+000016: const/4 v3, 0
+000018: new-array v4, v3, [Ljava/lang/Class;
+00001c: invoke-virtual v1, v2, v4, Ljava/lang/Class;->getDeclaredMethod(Ljava/lang/String; [Ljava/lang/Class;)Ljava/lang/reflect/Method;
+000022: move-result-object v1
+000024: new-array v2, v3, [Ljava/lang/Object;
+000028: invoke-virtual v1, v5, v2, Ljava/lang/reflect/Method;->invoke(Ljava/lang/Object; [Ljava/lang/Object;)Ljava/lang/Object;
+00002e: move-result-object v5
+000030: check-cast v5, Landroid/net/NetworkInfo;
+000034: return-object v5
+000036: move-exception v5
+000038: const-string v1, "Get network info for ext-Wifi failed"
+00003c: invoke-static v0, v1, v5, Lc/c/f/a/b;->e(Ljava/lang/String; Ljava/lang/String; Ljava/lang/Throwable;)V
+000042: const/4 v5, 0
+000044: return-object v5

@@ -1,0 +1,40 @@
+APK pcsuite/updateApk/connbase.apk
+DEX classes2.dex
+CLASS Lcom/vivo/pcsuite/pcconnect/ble/i;
+SUPER Ljava/lang/Object;
+FIELDS
+a Ljava/lang/String; = 'EmojiUtils'
+
+METHOD <init>()V
+000000: invoke-direct v0, Ljava/lang/Object;-><init>()V
+000006: return-void 
+
+METHOD a(Ljava/lang/String;)I
+000000: const/4 v0, 0
+000002: if-nez v2, +003h
+000006: return v0
+000008: invoke-virtual v2, Ljava/lang/String;->length()I
+00000e: move-result v1
+000010: invoke-virtual v2, v0, v1, Ljava/lang/String;->codePointCount(I I)I
+000016: move-result v2
+000018: return v2
+
+METHOD a(Ljava/lang/String; I I)Ljava/lang/String;
+000000: if-nez v3, +004h
+000004: const/4 v3, 0
+000006: return-object v3
+000008: const/4 v0, 0
+00000a: invoke-virtual v3, v0, v4, Ljava/lang/String;->offsetByCodePoints(I I)I
+000010: move-result v1
+000012: invoke-virtual v3, v0, v5, Ljava/lang/String;->offsetByCodePoints(I I)I
+000018: move-result v0
+00001a: invoke-virtual v3, v1, v0, Ljava/lang/String;->substring(I I)Ljava/lang/String;
+000020: move-result-object v3
+000022: return-object v3
+000024: move-exception v0
+000026: const-string v1, "EmojiUtils"
+00002a: const-string v2, "Get substring by codePoint failed."
+00002e: invoke-static v1, v2, v0, Lc/c/f/a/b;->e(Ljava/lang/String; Ljava/lang/String; Ljava/lang/Throwable;)V
+000034: invoke-virtual v3, v4, v5, Ljava/lang/String;->substring(I I)Ljava/lang/String;
+00003a: move-result-object v3
+00003c: return-object v3

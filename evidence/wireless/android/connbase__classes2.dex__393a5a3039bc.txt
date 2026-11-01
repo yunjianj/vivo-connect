@@ -1,0 +1,592 @@
+APK pcsuite/updateApk/connbase.apk
+DEX classes2.dex
+CLASS Lcom/vivo/pcsuite/pcconnect/ble/h;
+SUPER Ljava/lang/Object;
+FIELDS
+g Ljava/lang/String; = 'pcsuite_DeviceCache'
+h J = 30000
+i I = 4
+a J = None
+b Ljava/util/concurrent/atomic/AtomicBoolean; = None
+c Landroid/os/Handler; = None
+d Ljava/lang/String; = None
+e Lcom/vivo/pcsuite/pcconnect/ble/h$c; = None
+f Ljava/util/Map; = None
+
+METHOD <init>()V
+000000: invoke-direct v2, Ljava/lang/Object;-><init>()V
+000006: const-wide/16 v0, 30000
+00000a: iput-wide v0, v2, Lcom/vivo/pcsuite/pcconnect/ble/h;->a J
+00000e: new-instance v0, Ljava/util/concurrent/atomic/AtomicBoolean;
+000012: const/4 v1, 0
+000014: invoke-direct v0, v1, Ljava/util/concurrent/atomic/AtomicBoolean;-><init>(Z)V
+00001a: iput-object v0, v2, Lcom/vivo/pcsuite/pcconnect/ble/h;->b Ljava/util/concurrent/atomic/AtomicBoolean;
+00001e: new-instance v0, Lcom/vivo/pcsuite/pcconnect/ble/h$a;
+000022: invoke-static Landroid/os/Looper;->getMainLooper()Landroid/os/Looper;
+000028: move-result-object v1
+00002a: invoke-direct v0, v2, v1, Lcom/vivo/pcsuite/pcconnect/ble/h$a;-><init>(Lcom/vivo/pcsuite/pcconnect/ble/h; Landroid/os/Looper;)V
+000030: iput-object v0, v2, Lcom/vivo/pcsuite/pcconnect/ble/h;->c Landroid/os/Handler;
+000034: new-instance v0, Ljava/util/concurrent/ConcurrentHashMap;
+000038: invoke-direct v0, Ljava/util/concurrent/ConcurrentHashMap;-><init>()V
+00003e: iput-object v0, v2, Lcom/vivo/pcsuite/pcconnect/ble/h;->f Ljava/util/Map;
+000042: return-void 
+
+METHOD a(J)J
+000000: iget-object v0, v9, Lcom/vivo/pcsuite/pcconnect/ble/h;->f Ljava/util/Map;
+000004: invoke-interface v0, Ljava/util/Map;->values()Ljava/util/Collection;
+00000a: move-result-object v0
+00000c: invoke-interface v0, Ljava/util/Collection;->iterator()Ljava/util/Iterator;
+000012: move-result-object v0
+000014: const-wide/16 v1, 0
+000018: invoke-interface v0, Ljava/util/Iterator;->hasNext()Z
+00001e: move-result v3
+000020: const-wide/16 v4, 30000
+000024: const-string v6, "pcsuite_DeviceCache"
+000028: if-eqz v3, +04ch
+00002c: invoke-interface v0, Ljava/util/Iterator;->next()Ljava/lang/Object;
+000032: move-result-object v3
+000034: check-cast v3, Lcom/vivo/pcsuite/pcconnect/ble/h$b;
+000038: invoke-virtual v3, Lcom/vivo/pcsuite/pcconnect/ble/h$b;->j()J
+00003e: move-result-wide v7
+000040: sub-long v7, v10, v7
+000044: cmp-long v4, v7, v4
+000048: if-ltz v4, +036h
+00004c: iget-object v4, v9, Lcom/vivo/pcsuite/pcconnect/ble/h;->f Ljava/util/Map;
+000050: invoke-virtual v3, Lcom/vivo/pcsuite/pcconnect/c;->c()Ljava/lang/String;
+000056: move-result-object v5
+000058: invoke-interface v4, v5, Ljava/util/Map;->remove(Ljava/lang/Object;)Ljava/lang/Object;
+00005e: new-instance v4, Ljava/lang/StringBuilder;
+000062: invoke-direct v4, Ljava/lang/StringBuilder;-><init>()V
+000068: const-string v5, "Found "
+00006c: invoke-virtual v4, v5, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+000072: invoke-virtual v3, Lcom/vivo/pcsuite/pcconnect/c;->d()Ljava/lang/String;
+000078: move-result-object v5
+00007a: invoke-virtual v4, v5, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+000080: const-string v5, " has exceeded the idle limit!"
+000084: invoke-virtual v4, v5, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+00008a: invoke-virtual v4, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
+000090: move-result-object v4
+000092: invoke-static v6, v4, Lc/c/f/a/b;->g(Ljava/lang/String; Ljava/lang/String;)V
+000098: iget-object v4, v9, Lcom/vivo/pcsuite/pcconnect/ble/h;->e Lcom/vivo/pcsuite/pcconnect/ble/h$c;
+00009c: if-eqz v4, +006h
+0000a0: invoke-interface v4, v3, Lcom/vivo/pcsuite/pcconnect/ble/h$c;->a(Lcom/vivo/pcsuite/pcconnect/ble/h$b;)V
+0000a6: goto -47h
+0000a8: const-string v3, "devices lost: Not found callback!"
+0000ac: invoke-static v6, v3, Lc/c/f/a/b;->g(Ljava/lang/String; Ljava/lang/String;)V
+0000b2: goto -4dh
+0000b4: cmp-long v3, v7, v1
+0000b8: if-lez v3, -050h
+0000bc: move-wide v1, v7
+0000be: goto -53h
+0000c0: iget-object v10, v9, Lcom/vivo/pcsuite/pcconnect/ble/h;->f Ljava/util/Map;
+0000c4: invoke-interface v10, Ljava/util/Map;->isEmpty()Z
+0000ca: move-result v10
+0000cc: if-eqz v10, +010h
+0000d0: const-string v10, "No device around here, clean up action stop!"
+0000d4: invoke-static v6, v10, Lc/c/f/a/b;->g(Ljava/lang/String; Ljava/lang/String;)V
+0000da: iget-object v10, v9, Lcom/vivo/pcsuite/pcconnect/ble/h;->b Ljava/util/concurrent/atomic/AtomicBoolean;
+0000de: const/4 v11, 0
+0000e0: invoke-virtual v10, v11, Ljava/util/concurrent/atomic/AtomicBoolean;->set(Z)V
+0000e6: const-wide/16 v10, -1
+0000ea: return-wide v10
+0000ec: sub-long/2addr v4, v1
+0000ee: return-wide v4
+
+METHOD a(Lcom/vivo/pcsuite/pcconnect/ble/h; J)J
+000000: invoke-direct v0, v1, v2, Lcom/vivo/pcsuite/pcconnect/ble/h;->a(J)J
+000006: move-result-wide v0
+000008: return-wide v0
+
+METHOD a(Lcom/vivo/pcsuite/pcconnect/ble/h$b;)V
+000000: iget-object v0, v10, Lcom/vivo/pcsuite/pcconnect/ble/h$b;->i Ljava/lang/String;
+000004: invoke-virtual v10, Lcom/vivo/pcsuite/pcconnect/c;->c()Ljava/lang/String;
+00000a: move-result-object v1
+00000c: invoke-virtual v10, Lcom/vivo/pcsuite/pcconnect/c;->d()Ljava/lang/String;
+000012: move-result-object v2
+000014: invoke-virtual v10, Lcom/vivo/pcsuite/pcconnect/c;->e()I
+00001a: invoke-virtual v9, v1, Lcom/vivo/pcsuite/pcconnect/ble/h;->a(Ljava/lang/String;)Z
+000020: move-result v3
+000022: invoke-direct v9, v0, Lcom/vivo/pcsuite/pcconnect/ble/h;->e(Ljava/lang/String;)Z
+000028: move-result v4
+00002a: iget-object v5, v9, Lcom/vivo/pcsuite/pcconnect/ble/h;->b Ljava/util/concurrent/atomic/AtomicBoolean;
+00002e: const/4 v6, 1
+000030: invoke-virtual v5, v6, Ljava/util/concurrent/atomic/AtomicBoolean;->getAndSet(Z)Z
+000036: move-result v5
+000038: if-nez v5, +00ah
+00003c: iget-object v5, v9, Lcom/vivo/pcsuite/pcconnect/ble/h;->c Landroid/os/Handler;
+000040: const/4 v6, 4
+000042: const-wide/16 v7, 30000
+000046: invoke-virtual v5, v6, v7, v8, Landroid/os/Handler;->sendEmptyMessageDelayed(I J)Z
+00004c: const-string v5, "pcsuite_DeviceCache"
+000050: if-eqz v3, +032h
+000054: iget-object v3, v9, Lcom/vivo/pcsuite/pcconnect/ble/h;->f Ljava/util/Map;
+000058: invoke-interface v3, v1, Ljava/util/Map;->get(Ljava/lang/Object;)Ljava/lang/Object;
+00005e: move-result-object v3
+000060: check-cast v3, Lcom/vivo/pcsuite/pcconnect/ble/h$b;
+000064: invoke-virtual v3, Lcom/vivo/pcsuite/pcconnect/c;->d()Ljava/lang/String;
+00006a: move-result-object v3
+00006c: invoke-static v0, Landroid/text/TextUtils;->isEmpty(Ljava/lang/CharSequence;)Z
+000072: move-result v6
+000074: if-nez v6, +044h
+000078: if-eqz v4, +00ah
+00007c: new-instance v2, Ljava/lang/StringBuilder;
+000080: invoke-direct v2, Ljava/lang/StringBuilder;-><init>()V
+000086: const-string v3, "matchInternal needUpdateSignal device mac: "
+00008a: goto +22h
+00008c: invoke-static v3, v2, Landroid/text/TextUtils;->equals(Ljava/lang/CharSequence; Ljava/lang/CharSequence;)Z
+000092: move-result v2
+000094: if-nez v2, +034h
+000098: invoke-static v0, Landroid/text/TextUtils;->isEmpty(Ljava/lang/CharSequence;)Z
+00009e: move-result v2
+0000a0: if-nez v2, +02eh
+0000a4: new-instance v2, Ljava/lang/StringBuilder;
+0000a8: invoke-direct v2, Ljava/lang/StringBuilder;-><init>()V
+0000ae: const-string v3, "matchInternal 11 device mac: "
+0000b2: goto +eh
+0000b4: invoke-static v0, Landroid/text/TextUtils;->isEmpty(Ljava/lang/CharSequence;)Z
+0000ba: move-result v2
+0000bc: if-nez v2, +020h
+0000c0: new-instance v2, Ljava/lang/StringBuilder;
+0000c4: invoke-direct v2, Ljava/lang/StringBuilder;-><init>()V
+0000ca: const-string v3, "matchInternal 22 device mac: "
+0000ce: invoke-virtual v2, v3, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+0000d4: invoke-virtual v2, v0, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+0000da: invoke-virtual v2, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
+0000e0: move-result-object v0
+0000e2: invoke-static v5, v0, Lc/c/f/a/b;->k(Ljava/lang/String; Ljava/lang/String;)V
+0000e8: iget-object v0, v9, Lcom/vivo/pcsuite/pcconnect/ble/h;->f Ljava/util/Map;
+0000ec: invoke-interface v0, v1, v10, Ljava/util/Map;->put(Ljava/lang/Object; Ljava/lang/Object;)Ljava/lang/Object;
+0000f2: iget-object v0, v9, Lcom/vivo/pcsuite/pcconnect/ble/h;->e Lcom/vivo/pcsuite/pcconnect/ble/h$c;
+0000f6: invoke-interface v0, v10, Lcom/vivo/pcsuite/pcconnect/ble/h$c;->b(Lcom/vivo/pcsuite/pcconnect/ble/h$b;)V
+0000fc: return-void 
+
+METHOD c(Landroid/bluetooth/le/ScanResult;)Lcom/vivo/pcsuite/pcconnect/ble/h$b;
+000000: move-object/from16 v0, v17
+000004: invoke-virtual/range v18, Landroid/bluetooth/le/ScanResult;->getScanRecord()Landroid/bluetooth/le/ScanRecord;
+00000a: move-result-object v1
+00000c: const/16 v2, 2103
+000010: invoke-virtual v1, v2, Landroid/bluetooth/le/ScanRecord;->getManufacturerSpecificData(I)[B
+000016: move-result-object v1
+000018: invoke-virtual/range v18, Landroid/bluetooth/le/ScanResult;->getDevice()Landroid/bluetooth/BluetoothDevice;
+00001e: move-result-object v2
+000020: invoke-virtual v2, Landroid/bluetooth/BluetoothDevice;->getAddress()Ljava/lang/String;
+000026: move-result-object v2
+000028: const/4 v3, 1
+00002a: new-array v4, v3, [B
+00002e: aget-byte v5, v1, v3
+000032: const/4 v6, 0
+000034: aput-byte v5, v4, v6
+000038: invoke-static v4, Lcom/vivo/pcsuite/pcconnect/ble/c;->c([B)Ljava/lang/String;
+00003e: move-result-object v4
+000040: invoke-static v4, Lcom/vivo/pcsuite/pcconnect/ble/c;->b(Ljava/lang/String;)Ljava/lang/String;
+000046: move-result-object v5
+000048: new-instance v7, Ljava/lang/StringBuilder;
+00004c: invoke-direct v7, Ljava/lang/StringBuilder;-><init>()V
+000052: const-string v8, "analysisData versionString: "
+000056: invoke-virtual v7, v8, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+00005c: invoke-virtual v7, v4, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+000062: const-string v4, ", version2String: "
+000066: invoke-virtual v7, v4, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+00006c: invoke-virtual v7, v5, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+000072: invoke-virtual v7, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
+000078: move-result-object v4
+00007a: const-string v7, "pcsuite_DeviceCache"
+00007e: invoke-static v7, v4, Lc/c/f/a/b;->a(Ljava/lang/String; Ljava/lang/String;)V
+000084: const-string v4, "1"
+000088: invoke-virtual v5, v4, Ljava/lang/String;->startsWith(Ljava/lang/String;)Z
+00008e: move-result v4
+000090: if-eqz v4, +12ah
+000094: invoke-virtual v5, Ljava/lang/String;->length()I
+00009a: move-result v4
+00009c: const/4 v9, 4
+00009e: invoke-virtual v5, v9, v4, Ljava/lang/String;->substring(I I)Ljava/lang/String;
+0000a4: move-result-object v4
+0000a6: const/4 v10, 2
+0000a8: invoke-static v4, v10, Ljava/lang/Integer;->parseInt(Ljava/lang/String; I)I
+0000ae: move-result v4
+0000b0: new-array v11, v3, [B
+0000b4: invoke-static v1, v6, v11, v6, v3, Ljava/lang/System;->arraycopy(Ljava/lang/Object; I Ljava/lang/Object; I I)V
+0000ba: new-array v11, v3, [B
+0000be: invoke-static v1, v10, v11, v6, v3, Ljava/lang/System;->arraycopy(Ljava/lang/Object; I Ljava/lang/Object; I I)V
+0000c4: const/4 v12, 6
+0000c6: new-array v13, v12, [B
+0000ca: const/4 v14, 3
+0000cc: invoke-static v1, v14, v13, v6, v12, Ljava/lang/System;->arraycopy(Ljava/lang/Object; I Ljava/lang/Object; I I)V
+0000d2: new-array v15, v12, [B
+0000d6: const/16 v8, 9
+0000da: invoke-static v1, v8, v15, v6, v12, Ljava/lang/System;->arraycopy(Ljava/lang/Object; I Ljava/lang/Object; I I)V
+0000e0: new-array v8, v9, [B
+0000e4: const/16 v3, 15
+0000e8: invoke-static v1, v3, v8, v6, v9, Ljava/lang/System;->arraycopy(Ljava/lang/Object; I Ljava/lang/Object; I I)V
+0000ee: new-array v3, v12, [B
+0000f2: const/16 v9, 19
+0000f6: invoke-static v1, v9, v3, v6, v12, Ljava/lang/System;->arraycopy(Ljava/lang/Object; I Ljava/lang/Object; I I)V
+0000fc: invoke-static v13, Lcom/vivo/pcsuite/pcconnect/ble/c;->a([B)Ljava/lang/String;
+000102: move-result-object v1
+000104: invoke-virtual v1, Ljava/lang/String;->trim()Ljava/lang/String;
+00010a: move-result-object v1
+00010c: invoke-static v15, Lcom/vivo/pcsuite/pcconnect/ble/c;->e([B)Ljava/lang/String;
+000112: move-result-object v9
+000114: invoke-virtual v9, Ljava/lang/String;->trim()Ljava/lang/String;
+00011a: move-result-object v9
+00011c: invoke-static v3, Lcom/vivo/pcsuite/pcconnect/ble/c;->e([B)Ljava/lang/String;
+000122: move-result-object v3
+000124: invoke-virtual v3, Ljava/lang/String;->trim()Ljava/lang/String;
+00012a: move-result-object v3
+00012c: invoke-static v8, Lcom/vivo/pcsuite/pcconnect/ble/c;->b([B)Ljava/lang/String;
+000132: move-result-object v8
+000134: invoke-virtual v8, Ljava/lang/String;->trim()Ljava/lang/String;
+00013a: move-result-object v8
+00013c: invoke-static v11, Lcom/vivo/pcsuite/pcconnect/ble/c;->c([B)Ljava/lang/String;
+000142: move-result-object v11
+000144: invoke-virtual v11, Ljava/lang/String;->trim()Ljava/lang/String;
+00014a: move-result-object v11
+00014c: invoke-virtual v5, v10, v14, Ljava/lang/String;->substring(I I)Ljava/lang/String;
+000152: move-result-object v10
+000154: const/4 v12, 4
+000156: invoke-virtual v5, v14, v12, Ljava/lang/String;->substring(I I)Ljava/lang/String;
+00015c: move-result-object v12
+00015e: invoke-static v10, v9, Lcom/vivo/pcsuite/pcconnect/ble/c;->a(Ljava/lang/String; Ljava/lang/String;)Ljava/lang/String;
+000164: move-result-object v10
+000166: invoke-static v12, v3, Lcom/vivo/pcsuite/pcconnect/ble/c;->a(Ljava/lang/String; Ljava/lang/String;)Ljava/lang/String;
+00016c: move-result-object v12
+00016e: const-string v13, "00 00 00 00"
+000172: invoke-virtual v13, v8, Ljava/lang/String;->equals(Ljava/lang/Object;)Z
+000178: move-result v14
+00017a: if-nez v14, +011h
+00017e: iget-object v14, v0, Lcom/vivo/pcsuite/pcconnect/ble/h;->d Ljava/lang/String;
+000182: invoke-virtual v13, v14, Ljava/lang/String;->equals(Ljava/lang/Object;)Z
+000188: move-result v13
+00018a: if-eqz v13, +003h
+00018e: goto +7h
+000190: iget-object v6, v0, Lcom/vivo/pcsuite/pcconnect/ble/h;->d Ljava/lang/String;
+000194: invoke-virtual v8, v6, Ljava/lang/String;->equals(Ljava/lang/Object;)Z
+00019a: move-result v6
+00019c: invoke-static v1, Landroid/text/TextUtils;->isEmpty(Ljava/lang/CharSequence;)Z
+0001a2: move-result v13
+0001a4: if-nez v13, +037h
+0001a8: invoke-static v9, Landroid/text/TextUtils;->isEmpty(Ljava/lang/CharSequence;)Z
+0001ae: move-result v13
+0001b0: if-nez v13, +031h
+0001b4: new-instance v13, Lcom/vivo/pcsuite/pcconnect/ble/h$b;
+0001b8: invoke-direct v13, Lcom/vivo/pcsuite/pcconnect/ble/h$b;-><init>()V
+0001be: invoke-virtual v13, v1, Lcom/vivo/pcsuite/pcconnect/c;->b(Ljava/lang/String;)V
+0001c4: invoke-virtual v13, v10, Lcom/vivo/pcsuite/pcconnect/c;->c(Ljava/lang/String;)V
+0001ca: invoke-virtual/range v18, Landroid/bluetooth/le/ScanResult;->getRssi()I
+0001d0: move-result v10
+0001d2: invoke-virtual v13, v10, Lcom/vivo/pcsuite/pcconnect/c;->b(I)V
+0001d8: const/4 v10, 1
+0001da: invoke-virtual v13, v10, Lcom/vivo/pcsuite/pcconnect/ble/h$b;->a(I)V
+0001e0: invoke-virtual v13, v4, Lcom/vivo/pcsuite/pcconnect/c;->c(I)V
+0001e6: invoke-virtual v13, v1, Lcom/vivo/pcsuite/pcconnect/ble/h$b;->g(Ljava/lang/String;)V
+0001ec: invoke-virtual v13, v2, Lcom/vivo/pcsuite/pcconnect/ble/h$b;->f(Ljava/lang/String;)V
+0001f2: invoke-static Landroid/os/SystemClock;->elapsedRealtime()J
+0001f8: move-result-wide v14
+0001fa: invoke-virtual v13, v14, v15, Lcom/vivo/pcsuite/pcconnect/ble/h$b;->a(J)V
+000200: invoke-virtual v13, v12, Lcom/vivo/pcsuite/pcconnect/c;->d(Ljava/lang/String;)V
+000206: invoke-virtual v13, v6, Lcom/vivo/pcsuite/pcconnect/c;->a(Z)V
+00020c: move-object/from16 v16, v13
+000210: goto +23h
+000212: new-instance v2, Ljava/lang/StringBuilder;
+000216: invoke-direct v2, Ljava/lang/StringBuilder;-><init>()V
+00021c: const-string v4, "Package data missing, illegal content:
+"
+000220: invoke-virtual v2, v4, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+000226: invoke-virtual/range v18, Landroid/bluetooth/le/ScanResult;->getScanRecord()Landroid/bluetooth/le/ScanRecord;
+00022c: move-result-object v4
+00022e: invoke-virtual v4, Landroid/bluetooth/le/ScanRecord;->getBytes()[B
+000234: move-result-object v4
+000236: invoke-static v4, Lcom/vivo/pcsuite/pcconnect/ble/c;->b([B)Ljava/lang/String;
+00023c: move-result-object v4
+00023e: invoke-virtual v2, v4, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+000244: invoke-virtual v2, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
+00024a: move-result-object v2
+00024c: invoke-static v7, v2, Lc/c/f/a/b;->p(Ljava/lang/String; Ljava/lang/String;)V
+000252: const/16 v16, 0
+000256: new-instance v2, Ljava/lang/StringBuilder;
+00025a: invoke-direct v2, Ljava/lang/StringBuilder;-><init>()V
+000260: const-string v4, " openIdString:"
+000264: invoke-virtual v2, v4, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+00026a: invoke-virtual v2, v8, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+000270: const-string v4, " userOpenId:"
+000274: invoke-virtual v2, v4, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+00027a: iget-object v4, v0, Lcom/vivo/pcsuite/pcconnect/ble/h;->d Ljava/lang/String;
+00027e: invoke-virtual v2, v4, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+000284: const-string v4, " version2String:"
+000288: invoke-virtual v2, v4, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+00028e: invoke-virtual v2, v5, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+000294: const-string v4, " ,maskString:"
+000298: invoke-virtual v2, v4, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+00029e: invoke-virtual v2, v11, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+0002a4: const-string v4, " ,bleMac: "
+0002a8: invoke-virtual v2, v4, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+0002ae: invoke-virtual v2, v1, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+0002b4: const-string v1, ", deviceName: "
+0002b8: invoke-virtual v2, v1, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+0002be: invoke-virtual v2, v9, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+0002c4: const-string v1, ", userNameString: "
+0002c8: invoke-virtual v2, v1, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+0002ce: invoke-virtual v2, v3, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+0002d4: invoke-virtual v2, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
+0002da: move-result-object v1
+0002dc: invoke-static v7, v1, Lc/c/f/a/b;->p(Ljava/lang/String; Ljava/lang/String;)V
+0002e2: return-object v16
+0002e4: const/4 v1, 0
+0002e6: return-object v1
+
+METHOD d(Landroid/bluetooth/le/ScanResult;)Z
+000000: invoke-virtual v4, Landroid/bluetooth/le/ScanResult;->getScanRecord()Landroid/bluetooth/le/ScanRecord;
+000006: move-result-object v0
+000008: const/4 v1, 0
+00000a: const-string v2, "pcsuite_DeviceCache"
+00000e: if-nez v0, +008h
+000012: const-string v4, "ScanRecord is null."
+000016: invoke-static v2, v4, Lc/c/f/a/b;->g(Ljava/lang/String; Ljava/lang/String;)V
+00001c: return v1
+00001e: invoke-virtual v4, Landroid/bluetooth/le/ScanResult;->getDevice()Landroid/bluetooth/BluetoothDevice;
+000024: move-result-object v4
+000026: if-nez v4, +005h
+00002a: const-string v4, "BluetoothDevice is null."
+00002e: goto -ch
+000030: const/16 v4, 2103
+000034: invoke-virtual v0, v4, Landroid/bluetooth/le/ScanRecord;->getManufacturerSpecificData(I)[B
+00003a: move-result-object v4
+00003c: if-nez v4, +005h
+000040: const-string v4, "data  is null , it shouldn't happen."
+000044: goto -17h
+000046: array-length v4, v4
+000048: const/4 v0, 3
+00004a: if-ge v4, v0, +005h
+00004e: const-string v4, "data  len less 3 , it shouldn't happen."
+000052: goto -1eh
+000054: const/4 v4, 1
+000056: return v4
+
+METHOD e(Landroid/bluetooth/le/ScanResult;)Lcom/vivo/pcsuite/pcconnect/ble/h$b;
+000000: invoke-virtual v4, Landroid/bluetooth/le/ScanResult;->getScanRecord()Landroid/bluetooth/le/ScanRecord;
+000006: move-result-object v0
+000008: const/16 v1, 2103
+00000c: invoke-virtual v0, v1, Landroid/bluetooth/le/ScanRecord;->getManufacturerSpecificData(I)[B
+000012: move-result-object v0
+000014: const/4 v1, 2
+000016: aget-byte v0, v0, v1
+00001a: new-instance v1, Ljava/lang/StringBuilder;
+00001e: invoke-direct v1, Ljava/lang/StringBuilder;-><init>()V
+000024: const-string v2, "parseVivoShareDevice mask: "
+000028: invoke-virtual v1, v2, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+00002e: and-int/lit16 v0, v0, 255
+000032: invoke-virtual v1, v0, Ljava/lang/StringBuilder;->append(I)Ljava/lang/StringBuilder;
+000038: invoke-virtual v1, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
+00003e: move-result-object v1
+000040: const-string v2, "pcsuite_DeviceCache"
+000044: invoke-static v2, v1, Lc/c/f/a/b;->a(Ljava/lang/String; Ljava/lang/String;)V
+00004a: const/4 v1, 1
+00004c: if-ne v0, v1, +007h
+000050: invoke-direct v3, v4, Lcom/vivo/pcsuite/pcconnect/ble/h;->c(Landroid/bluetooth/le/ScanResult;)Lcom/vivo/pcsuite/pcconnect/ble/h$b;
+000056: move-result-object v4
+000058: return-object v4
+00005a: const/4 v4, 0
+00005c: return-object v4
+
+METHOD e(Ljava/lang/String;)Z
+000000: iget-object v0, v3, Lcom/vivo/pcsuite/pcconnect/ble/h;->f Ljava/util/Map;
+000004: invoke-interface v0, Ljava/util/Map;->values()Ljava/util/Collection;
+00000a: move-result-object v0
+00000c: invoke-interface v0, Ljava/util/Collection;->iterator()Ljava/util/Iterator;
+000012: move-result-object v0
+000014: invoke-interface v0, Ljava/util/Iterator;->hasNext()Z
+00001a: move-result v1
+00001c: if-eqz v1, +018h
+000020: invoke-interface v0, Ljava/util/Iterator;->next()Ljava/lang/Object;
+000026: move-result-object v1
+000028: check-cast v1, Lcom/vivo/pcsuite/pcconnect/ble/h$b;
+00002c: invoke-static v4, Landroid/text/TextUtils;->isEmpty(Ljava/lang/CharSequence;)Z
+000032: move-result v2
+000034: if-nez v2, -010h
+000038: iget-object v1, v1, Lcom/vivo/pcsuite/pcconnect/ble/h$b;->i Ljava/lang/String;
+00003c: invoke-static v4, v1, Landroid/text/TextUtils;->equals(Ljava/lang/CharSequence; Ljava/lang/CharSequence;)Z
+000042: move-result v1
+000044: if-eqz v1, -018h
+000048: const/4 v4, 1
+00004a: return v4
+00004c: const/4 v4, 0
+00004e: return v4
+
+METHOD f(Ljava/lang/String;)Lcom/vivo/pcsuite/pcconnect/ble/h$b;
+000000: iget-object v0, v3, Lcom/vivo/pcsuite/pcconnect/ble/h;->f Ljava/util/Map;
+000004: invoke-interface v0, Ljava/util/Map;->values()Ljava/util/Collection;
+00000a: move-result-object v0
+00000c: invoke-interface v0, Ljava/util/Collection;->iterator()Ljava/util/Iterator;
+000012: move-result-object v0
+000014: invoke-interface v0, Ljava/util/Iterator;->hasNext()Z
+00001a: move-result v1
+00001c: if-eqz v1, +017h
+000020: invoke-interface v0, Ljava/util/Iterator;->next()Ljava/lang/Object;
+000026: move-result-object v1
+000028: check-cast v1, Lcom/vivo/pcsuite/pcconnect/ble/h$b;
+00002c: invoke-static v4, Landroid/text/TextUtils;->isEmpty(Ljava/lang/CharSequence;)Z
+000032: move-result v2
+000034: if-nez v2, -010h
+000038: iget-object v2, v1, Lcom/vivo/pcsuite/pcconnect/ble/h$b;->i Ljava/lang/String;
+00003c: invoke-static v4, v2, Landroid/text/TextUtils;->equals(Ljava/lang/CharSequence; Ljava/lang/CharSequence;)Z
+000042: move-result v2
+000044: if-eqz v2, -018h
+000048: return-object v1
+00004a: const/4 v4, 0
+00004c: return-object v4
+
+METHOD g(Ljava/lang/String;)V
+000000: invoke-direct v3, v4, Lcom/vivo/pcsuite/pcconnect/ble/h;->f(Ljava/lang/String;)Lcom/vivo/pcsuite/pcconnect/ble/h$b;
+000006: move-result-object v0
+000008: if-eqz v0, +010h
+00000c: iget-object v1, v3, Lcom/vivo/pcsuite/pcconnect/ble/h;->f Ljava/util/Map;
+000010: invoke-virtual v0, Lcom/vivo/pcsuite/pcconnect/c;->c()Ljava/lang/String;
+000016: move-result-object v2
+000018: invoke-interface v1, v2, Ljava/util/Map;->remove(Ljava/lang/Object;)Ljava/lang/Object;
+00001e: iget-object v1, v3, Lcom/vivo/pcsuite/pcconnect/ble/h;->e Lcom/vivo/pcsuite/pcconnect/ble/h$c;
+000022: invoke-interface v1, v0, Lcom/vivo/pcsuite/pcconnect/ble/h$c;->a(Lcom/vivo/pcsuite/pcconnect/ble/h$b;)V
+000028: invoke-direct v3, v4, Lcom/vivo/pcsuite/pcconnect/ble/h;->f(Ljava/lang/String;)Lcom/vivo/pcsuite/pcconnect/ble/h$b;
+00002e: move-result-object v0
+000030: if-nez v0, -018h
+000034: return-void 
+
+METHOD a()V
+000000: iget-object v0, v2, Lcom/vivo/pcsuite/pcconnect/ble/h;->f Ljava/util/Map;
+000004: invoke-interface v0, Ljava/util/Map;->size()I
+00000a: move-result v0
+00000c: if-lez v0, +007h
+000010: iget-object v0, v2, Lcom/vivo/pcsuite/pcconnect/ble/h;->f Ljava/util/Map;
+000014: invoke-interface v0, Ljava/util/Map;->clear()V
+00001a: iget-object v0, v2, Lcom/vivo/pcsuite/pcconnect/ble/h;->b Ljava/util/concurrent/atomic/AtomicBoolean;
+00001e: const/4 v1, 0
+000020: invoke-virtual v0, v1, Ljava/util/concurrent/atomic/AtomicBoolean;->set(Z)V
+000026: iget-object v0, v2, Lcom/vivo/pcsuite/pcconnect/ble/h;->c Landroid/os/Handler;
+00002a: const/4 v1, 0
+00002c: invoke-virtual v0, v1, Landroid/os/Handler;->removeCallbacksAndMessages(Ljava/lang/Object;)V
+000032: return-void 
+
+METHOD a(Landroid/bluetooth/le/ScanResult;)V
+000000: invoke-direct v1, v2, Lcom/vivo/pcsuite/pcconnect/ble/h;->d(Landroid/bluetooth/le/ScanResult;)Z
+000006: move-result v0
+000008: if-eqz v0, +00dh
+00000c: invoke-virtual v2, Landroid/bluetooth/le/ScanResult;->getDevice()Landroid/bluetooth/BluetoothDevice;
+000012: move-result-object v2
+000014: invoke-virtual v2, Landroid/bluetooth/BluetoothDevice;->getAddress()Ljava/lang/String;
+00001a: move-result-object v2
+00001c: invoke-direct v1, v2, Lcom/vivo/pcsuite/pcconnect/ble/h;->g(Ljava/lang/String;)V
+000022: return-void 
+
+METHOD a(Lcom/vivo/pcsuite/pcconnect/ble/h$c;)V
+000000: iput-object v1, v0, Lcom/vivo/pcsuite/pcconnect/ble/h;->e Lcom/vivo/pcsuite/pcconnect/ble/h$c;
+000004: return-void 
+
+METHOD a(Ljava/lang/String;)Z
+000000: iget-object v0, v1, Lcom/vivo/pcsuite/pcconnect/ble/h;->f Ljava/util/Map;
+000004: invoke-interface v0, v2, Ljava/util/Map;->containsKey(Ljava/lang/Object;)Z
+00000a: move-result v2
+00000c: return v2
+
+METHOD b(Ljava/lang/String;)I
+000000: iget-object v0, v1, Lcom/vivo/pcsuite/pcconnect/ble/h;->f Ljava/util/Map;
+000004: invoke-interface v0, v2, Ljava/util/Map;->get(Ljava/lang/Object;)Ljava/lang/Object;
+00000a: move-result-object v2
+00000c: check-cast v2, Lcom/vivo/pcsuite/pcconnect/ble/h$b;
+000010: if-eqz v2, +005h
+000014: iget v2, v2, Lcom/vivo/pcsuite/pcconnect/ble/h$b;->j I
+000018: return v2
+00001a: const-string v2, "pcsuite_DeviceCache"
+00001e: const-string v0, "Try to get band with an id which is not exist."
+000022: invoke-static v2, v0, Lc/c/f/a/b;->p(Ljava/lang/String; Ljava/lang/String;)V
+000028: const/4 v2, -1
+00002a: return v2
+
+METHOD b()Landroid/util/ArrayMap;
+000000: new-instance v0, Landroid/util/ArrayMap;
+000004: invoke-direct v0, Landroid/util/ArrayMap;-><init>()V
+00000a: iget-object v1, v4, Lcom/vivo/pcsuite/pcconnect/ble/h;->f Ljava/util/Map;
+00000e: invoke-interface v1, Ljava/util/Map;->values()Ljava/util/Collection;
+000014: move-result-object v1
+000016: invoke-interface v1, Ljava/util/Collection;->iterator()Ljava/util/Iterator;
+00001c: move-result-object v1
+00001e: invoke-interface v1, Ljava/util/Iterator;->hasNext()Z
+000024: move-result v2
+000026: if-eqz v2, +018h
+00002a: invoke-interface v1, Ljava/util/Iterator;->next()Ljava/lang/Object;
+000030: move-result-object v2
+000032: check-cast v2, Lcom/vivo/pcsuite/pcconnect/ble/h$b;
+000036: invoke-virtual v2, Lcom/vivo/pcsuite/pcconnect/c;->c()Ljava/lang/String;
+00003c: move-result-object v3
+00003e: invoke-virtual v2, Lcom/vivo/pcsuite/pcconnect/c;->e()I
+000044: move-result v2
+000046: invoke-static v2, Ljava/lang/Integer;->valueOf(I)Ljava/lang/Integer;
+00004c: move-result-object v2
+00004e: invoke-virtual v0, v3, v2, Landroid/util/ArrayMap;->put(Ljava/lang/Object; Ljava/lang/Object;)Ljava/lang/Object;
+000054: goto -1bh
+000056: return-object v0
+
+METHOD b(Landroid/bluetooth/le/ScanResult;)V
+000000: invoke-direct v3, v4, Lcom/vivo/pcsuite/pcconnect/ble/h;->d(Landroid/bluetooth/le/ScanResult;)Z
+000006: move-result v0
+000008: if-eqz v0, +055h
+00000c: invoke-virtual v4, Landroid/bluetooth/le/ScanResult;->getScanRecord()Landroid/bluetooth/le/ScanRecord;
+000012: move-result-object v0
+000014: const/16 v1, 2103
+000018: invoke-virtual v0, v1, Landroid/bluetooth/le/ScanRecord;->getManufacturerSpecificData(I)[B
+00001e: move-result-object v0
+000020: if-eqz v0, +049h
+000024: const/4 v1, 0
+000026: aget-byte v0, v0, v1
+00002a: const/16 v1, 32
+00002e: if-ne v0, v1, +042h
+000032: invoke-direct v3, v4, Lcom/vivo/pcsuite/pcconnect/ble/h;->e(Landroid/bluetooth/le/ScanResult;)Lcom/vivo/pcsuite/pcconnect/ble/h$b;
+000038: move-result-object v4
+00003a: if-eqz v4, +03ch
+00003e: const-string v0, "darren_match"
+000042: new-instance v1, Ljava/lang/StringBuilder;
+000046: invoke-direct v1, Ljava/lang/StringBuilder;-><init>()V
+00004c: const-string v2, "match device: "
+000050: invoke-virtual v1, v2, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+000056: invoke-virtual v1, v4, Ljava/lang/StringBuilder;->append(Ljava/lang/Object;)Ljava/lang/StringBuilder;
+00005c: invoke-virtual v1, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
+000062: move-result-object v1
+000064: invoke-static v0, v1, Lc/c/f/a/b;->k(Ljava/lang/String; Ljava/lang/String;)V
+00006a: invoke-direct v3, v4, Lcom/vivo/pcsuite/pcconnect/ble/h;->a(Lcom/vivo/pcsuite/pcconnect/ble/h$b;)V
+000070: goto +21h
+000072: move-exception v4
+000074: new-instance v0, Ljava/lang/StringBuilder;
+000078: invoke-direct v0, Ljava/lang/StringBuilder;-><init>()V
+00007e: const-string v1, "Parse data error: "
+000082: invoke-virtual v0, v1, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+000088: invoke-virtual v4, Ljava/lang/Exception;->getMessage()Ljava/lang/String;
+00008e: move-result-object v4
+000090: invoke-virtual v0, v4, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+000096: const-string v4, ", ignored."
+00009a: invoke-virtual v0, v4, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+0000a0: invoke-virtual v0, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
+0000a6: move-result-object v4
+0000a8: const-string v0, "pcsuite_DeviceCache"
+0000ac: invoke-static v0, v4, Lc/c/f/a/b;->g(Ljava/lang/String; Ljava/lang/String;)V
+0000b2: return-void 
+
+METHOD c(Ljava/lang/String;)I
+000000: iget-object v0, v2, Lcom/vivo/pcsuite/pcconnect/ble/h;->f Ljava/util/Map;
+000004: invoke-interface v0, v3, Ljava/util/Map;->get(Ljava/lang/Object;)Ljava/lang/Object;
+00000a: move-result-object v3
+00000c: check-cast v3, Lcom/vivo/pcsuite/pcconnect/ble/h$b;
+000010: const-string v0, "pcsuite_DeviceCache"
+000014: if-eqz v3, +00ch
+000018: const-string v1, "Try to get main version"
+00001c: invoke-static v0, v1, Lc/c/f/a/b;->k(Ljava/lang/String; Ljava/lang/String;)V
+000022: invoke-virtual v3, Lcom/vivo/pcsuite/pcconnect/c;->g()I
+000028: move-result v3
+00002a: return v3
+00002c: const-string v3, "Try to get main version with an id which is not exist."
+000030: invoke-static v0, v3, Lc/c/f/a/b;->k(Ljava/lang/String; Ljava/lang/String;)V
+000036: const/4 v3, 1
+000038: return v3
+
+METHOD d(Ljava/lang/String;)V
+000000: if-nez v1, +004h
+000004: const-string v1, ""
+000008: iput-object v1, v0, Lcom/vivo/pcsuite/pcconnect/ble/h;->d Ljava/lang/String;
+00000c: return-void 

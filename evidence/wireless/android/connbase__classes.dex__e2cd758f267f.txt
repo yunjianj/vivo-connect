@@ -1,0 +1,114 @@
+APK pcsuite/updateApk/connbase.apk
+DEX classes.dex
+CLASS Lcom/vivo/handoff/setting/core/tools/ConnectBasePermissionHelper;
+SUPER Ljava/lang/Object;
+FIELDS
+TAG Ljava/lang/String; = 'ConnectBasePermissionHelper'
+APP_AUTHED_STATUS I = None
+APP_AUTH_STATUS Ljava/lang/String; = None
+CONNBASE_AUTH_STATUS Ljava/lang/String; = None
+CONNBASE_PERMISSION_AGREED Ljava/lang/String; = None
+PERMISSION_AGREED_STATUS I = None
+mConnectBasePermissionTools Lcom/vivo/handoff/connectbase/tools/ConnectBasePermissionTools; = None
+mContentObserver Landroid/database/ContentObserver; = None
+mContext Landroid/content/Context; = None
+mExecutor Ljava/util/concurrent/ExecutorService; = None
+mHandler Landroid/os/Handler; = None
+mOnPermissionStatusChanged Lcom/vivo/handoff/setting/core/tools/ConnectBasePermissionHelper$OnPermissionStatusChanged; = None
+
+METHOD <init>(Landroid/content/Context; Ljava/util/concurrent/ExecutorService;)V
+000000: invoke-direct v2, Ljava/lang/Object;-><init>()V
+000006: const-string v0, "connbase_auth_status"
+00000a: iput-object v0, v2, Lcom/vivo/handoff/setting/core/tools/ConnectBasePermissionHelper;->CONNBASE_AUTH_STATUS Ljava/lang/String;
+00000e: const-string v0, "connbase_permission_agreed"
+000012: iput-object v0, v2, Lcom/vivo/handoff/setting/core/tools/ConnectBasePermissionHelper;->CONNBASE_PERMISSION_AGREED Ljava/lang/String;
+000016: const-string v0, "app_auth_status"
+00001a: iput-object v0, v2, Lcom/vivo/handoff/setting/core/tools/ConnectBasePermissionHelper;->APP_AUTH_STATUS Ljava/lang/String;
+00001e: const/4 v0, 1
+000020: iput v0, v2, Lcom/vivo/handoff/setting/core/tools/ConnectBasePermissionHelper;->PERMISSION_AGREED_STATUS I
+000024: iput v0, v2, Lcom/vivo/handoff/setting/core/tools/ConnectBasePermissionHelper;->APP_AUTHED_STATUS I
+000028: new-instance v0, Landroid/os/Handler;
+00002c: invoke-direct v0, Landroid/os/Handler;-><init>()V
+000032: iput-object v0, v2, Lcom/vivo/handoff/setting/core/tools/ConnectBasePermissionHelper;->mHandler Landroid/os/Handler;
+000036: new-instance v0, Lcom/vivo/handoff/setting/core/tools/ConnectBasePermissionHelper$1;
+00003a: iget-object v1, v2, Lcom/vivo/handoff/setting/core/tools/ConnectBasePermissionHelper;->mHandler Landroid/os/Handler;
+00003e: invoke-direct v0, v2, v1, Lcom/vivo/handoff/setting/core/tools/ConnectBasePermissionHelper$1;-><init>(Lcom/vivo/handoff/setting/core/tools/ConnectBasePermissionHelper; Landroid/os/Handler;)V
+000044: iput-object v0, v2, Lcom/vivo/handoff/setting/core/tools/ConnectBasePermissionHelper;->mContentObserver Landroid/database/ContentObserver;
+000048: invoke-virtual v3, Landroid/content/Context;->getApplicationContext()Landroid/content/Context;
+00004e: move-result-object v0
+000050: iput-object v0, v2, Lcom/vivo/handoff/setting/core/tools/ConnectBasePermissionHelper;->mContext Landroid/content/Context;
+000054: invoke-static v3, Lcom/vivo/handoff/connectbase/tools/ConnectBasePermissionTools;->init(Landroid/content/Context;)V
+00005a: invoke-static Lcom/vivo/handoff/connectbase/tools/ConnectBasePermissionTools;->getInstance()Lcom/vivo/handoff/connectbase/tools/ConnectBasePermissionTools;
+000060: move-result-object v3
+000062: iput-object v3, v2, Lcom/vivo/handoff/setting/core/tools/ConnectBasePermissionHelper;->mConnectBasePermissionTools Lcom/vivo/handoff/connectbase/tools/ConnectBasePermissionTools;
+000066: iput-object v4, v2, Lcom/vivo/handoff/setting/core/tools/ConnectBasePermissionHelper;->mExecutor Ljava/util/concurrent/ExecutorService;
+00006a: iget-object v3, v2, Lcom/vivo/handoff/setting/core/tools/ConnectBasePermissionHelper;->mContext Landroid/content/Context;
+00006e: invoke-direct v2, v3, Lcom/vivo/handoff/setting/core/tools/ConnectBasePermissionHelper;->registerConnectBasePermissionChanged(Landroid/content/Context;)V
+000074: iget-object v3, v2, Lcom/vivo/handoff/setting/core/tools/ConnectBasePermissionHelper;->mContext Landroid/content/Context;
+000078: invoke-direct v2, v3, Lcom/vivo/handoff/setting/core/tools/ConnectBasePermissionHelper;->getConnectBasePermissionStatus(Landroid/content/Context;)Z
+00007e: const/4 v3, 0
+000080: new-array v3, v3, [Ljava/lang/Object;
+000084: const-string v4, "ConnectBasePermissionHelper getConnectBasePermissionStatus"
+000088: invoke-static v4, v3, Lcom/vivo/handoff/setting/core/tools/ConnectBasePermissionHelper;->debug(Ljava/lang/String; [Ljava/lang/Object;)V
+00008e: return-void 
+
+METHOD getConnectBasePermissionStatus(Landroid/content/Context;)Z
+000000: invoke-virtual v6, Landroid/content/Context;->getContentResolver()Landroid/content/ContentResolver;
+000006: move-result-object v0
+000008: const/4 v1, 0
+00000a: const-string v2, "connbase_permission_agreed"
+00000e: invoke-static v0, v2, v1, Landroid/provider/Settings$Global;->getInt(Landroid/content/ContentResolver; Ljava/lang/String; I)I
+000014: move-result v0
+000016: const/4 v2, 1
+000018: new-array v3, v2, [Ljava/lang/Object;
+00001c: invoke-static v0, Ljava/lang/Integer;->valueOf(I)Ljava/lang/Integer;
+000022: move-result-object v4
+000024: aput-object v4, v3, v1
+000028: const-string v4, "getConnectBasePermissionStatus permissionAgreedResult:%s"
+00002c: invoke-static v4, v3, Lcom/vivo/handoff/setting/core/tools/ConnectBasePermissionHelper;->debug(Ljava/lang/String; [Ljava/lang/Object;)V
+000032: if-ne v2, v0, +004h
+000036: move v6, v2
+000038: goto +1ch
+00003a: invoke-virtual v6, Landroid/content/Context;->getContentResolver()Landroid/content/ContentResolver;
+000040: move-result-object v6
+000042: const-string v0, "app_auth_status"
+000046: invoke-static v6, v0, v1, Landroid/provider/Settings$Global;->getInt(Landroid/content/ContentResolver; Ljava/lang/String; I)I
+00004c: move-result v6
+00004e: new-array v0, v2, [Ljava/lang/Object;
+000052: invoke-static v6, Ljava/lang/Integer;->valueOf(I)Ljava/lang/Integer;
+000058: move-result-object v3
+00005a: aput-object v3, v0, v1
+00005e: const-string v3, "getConnectBasePermissionStatus firstStartApp:%s"
+000062: invoke-static v3, v0, Lcom/vivo/handoff/setting/core/tools/ConnectBasePermissionHelper;->debug(Ljava/lang/String; [Ljava/lang/Object;)V
+000068: if-ne v6, v2, +003h
+00006c: goto -1bh
+00006e: move v6, v1
+000070: new-array v0, v2, [Ljava/lang/Object;
+000074: invoke-static v6, Ljava/lang/Boolean;->valueOf(Z)Ljava/lang/Boolean;
+00007a: move-result-object v2
+00007c: aput-object v2, v0, v1
+000080: const-string v1, "getConnectBasePermissionStatus connectBasePermissionStatus:%s"
+000084: invoke-static v1, v0, Lcom/vivo/handoff/setting/core/tools/ConnectBasePermissionHelper;->debug(Ljava/lang/String; [Ljava/lang/Object;)V
+00008a: invoke-virtual v5, v6, Lcom/vivo/handoff/setting/core/tools/ConnectBasePermissionHelper;->setConnectBasePermissionStatus(Z)V
+000090: return v6
+
+METHOD registerConnectBasePermissionChanged(Landroid/content/Context;)V
+000000: const/4 v0, 0
+000002: new-array v1, v0, [Ljava/lang/Object;
+000006: const-string v2, "registerConnectBasePermissionChanged"
+00000a: invoke-static v2, v1, Lcom/vivo/handoff/setting/core/tools/ConnectBasePermissionHelper;->debug(Ljava/lang/String; [Ljava/lang/Object;)V
+000010: invoke-virtual v5, Landroid/content/Context;->getContentResolver()Landroid/content/ContentResolver;
+000016: move-result-object v1
+000018: const-string v2, "connbase_permission_agreed"
+00001c: invoke-static v2, Landroid/provider/Settings$Global;->getUriFor(Ljava/lang/String;)Landroid/net/Uri;
+000022: move-result-object v2
+000024: iget-object v3, v4, Lcom/vivo/handoff/setting/core/tools/ConnectBasePermissionHelper;->mContentObserver Landroid/database/ContentObserver;
+000028: invoke-virtual v1, v2, v0, v3, Landroid/content/ContentResolver;->registerContentObserver(Landroid/net/Uri; Z Landroid/database/ContentObserver;)V
+00002e: invoke-virtual v5, Landroid/content/Context;->getContentResolver()Landroid/content/ContentResolver;
+000034: move-result-object v5
+000036: const-string v1, "app_auth_status"
+00003a: invoke-static v1, Landroid/provider/Settings$Global;->getUriFor(Ljava/lang/String;)Landroid/net/Uri;
+000040: move-result-object v1
+000042: iget-object v2, v4, Lcom/vivo/handoff/setting/core/tools/ConnectBasePermissionHelper;->mContentObserver Landroid/database/ContentObserver;
+000046: invoke-virtual v5, v1, v0, v2, Landroid/content/ContentResolver;->registerContentObserver(Landroid/net/Uri; Z Landroid/database/ContentObserver;)V
+00004c: return-void 

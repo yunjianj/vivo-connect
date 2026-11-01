@@ -1,0 +1,70 @@
+APK pcsuite/updateApk/connbase.apk
+DEX classes.dex
+CLASS Lcom/vivo/connbase/view/MaxHeightScrollView;
+SUPER Landroid/widget/ScrollView;
+FIELDS
+a I = None
+
+METHOD <init>(Landroid/content/Context;)V
+000000: invoke-direct v0, v1, Landroid/widget/ScrollView;-><init>(Landroid/content/Context;)V
+000006: return-void 
+
+METHOD <init>(Landroid/content/Context; Landroid/util/AttributeSet;)V
+000000: invoke-direct v0, v1, v2, Landroid/widget/ScrollView;-><init>(Landroid/content/Context; Landroid/util/AttributeSet;)V
+000006: invoke-direct v0, v1, v2, Lcom/vivo/connbase/view/MaxHeightScrollView;->a(Landroid/content/Context; Landroid/util/AttributeSet;)V
+00000c: return-void 
+
+METHOD <init>(Landroid/content/Context; Landroid/util/AttributeSet; I)V
+000000: invoke-direct v0, v1, v2, v3, Landroid/widget/ScrollView;-><init>(Landroid/content/Context; Landroid/util/AttributeSet; I)V
+000006: invoke-direct v0, v1, v2, Lcom/vivo/connbase/view/MaxHeightScrollView;->a(Landroid/content/Context; Landroid/util/AttributeSet;)V
+00000c: return-void 
+
+METHOD <init>(Landroid/content/Context; Landroid/util/AttributeSet; I I)V
+000000: invoke-direct v0, v1, v2, v3, v4, Landroid/widget/ScrollView;-><init>(Landroid/content/Context; Landroid/util/AttributeSet; I I)V
+000006: invoke-direct v0, v1, v2, Lcom/vivo/connbase/view/MaxHeightScrollView;->a(Landroid/content/Context; Landroid/util/AttributeSet;)V
+00000c: return-void 
+
+METHOD a(Landroid/content/Context; Landroid/util/AttributeSet;)V
+000000: if-eqz v3, +013h
+000004: sget-object v0, Lcom/vivo/connbase/v$q;->MaxHWScrollView [I
+000008: invoke-virtual v2, v3, v0, Landroid/content/Context;->obtainStyledAttributes(Landroid/util/AttributeSet; [I)Landroid/content/res/TypedArray;
+00000e: move-result-object v2
+000010: const/4 v3, 0
+000012: const/4 v0, -1
+000014: invoke-virtual v2, v3, v0, Landroid/content/res/TypedArray;->getDimensionPixelSize(I I)I
+00001a: move-result v3
+00001c: iput v3, v1, Lcom/vivo/connbase/view/MaxHeightScrollView;->a I
+000020: invoke-virtual v2, Landroid/content/res/TypedArray;->recycle()V
+000026: return-void 
+
+METHOD generateDefaultLayoutParams()Landroid/view/ViewGroup$LayoutParams;
+000000: invoke-super v1, Landroid/widget/ScrollView;->generateDefaultLayoutParams()Landroid/widget/FrameLayout$LayoutParams;
+000006: move-result-object v0
+000008: return-object v0
+
+METHOD generateLayoutParams(Landroid/util/AttributeSet;)Landroid/view/ViewGroup$LayoutParams;
+000000: invoke-super v0, v1, Landroid/widget/ScrollView;->generateLayoutParams(Landroid/util/AttributeSet;)Landroid/widget/FrameLayout$LayoutParams;
+000006: move-result-object v1
+000008: return-object v1
+
+METHOD getMaxHeight()I
+000000: iget v0, v1, Lcom/vivo/connbase/view/MaxHeightScrollView;->a I
+000004: return v0
+
+METHOD getOverlay()Landroid/view/ViewOverlay;
+000000: invoke-super v1, Landroid/widget/ScrollView;->getOverlay()Landroid/view/ViewGroupOverlay;
+000006: move-result-object v0
+000008: return-object v0
+
+METHOD onMeasure(I I)V
+000000: iget v0, v1, Lcom/vivo/connbase/view/MaxHeightScrollView;->a I
+000004: if-lez v0, +008h
+000008: const/high16 v3, -2147483648
+00000c: invoke-static v0, v3, Landroid/view/View$MeasureSpec;->makeMeasureSpec(I I)I
+000012: move-result v3
+000014: invoke-super v1, v2, v3, Landroid/widget/ScrollView;->onMeasure(I I)V
+00001a: return-void 
+
+METHOD setMaxHeight(I)V
+000000: iput v1, v0, Lcom/vivo/connbase/view/MaxHeightScrollView;->a I
+000004: return-void 

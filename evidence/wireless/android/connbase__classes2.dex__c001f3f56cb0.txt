@@ -1,0 +1,122 @@
+APK pcsuite/updateApk/connbase.apk
+DEX classes2.dex
+CLASS Lcom/vivo/pcsuite/pcconnect/ble/f;
+SUPER Ljava/lang/Object;
+FIELDS
+e Ljava/lang/String; = 'CompatLeScanner'
+a Landroid/bluetooth/le/BluetoothLeScanner; = None
+b Lcom/vivo/pcsuite/pcconnect/ble/f$b; = None
+c Z = None
+d Landroid/bluetooth/le/ScanCallback; = None
+
+METHOD <init>()V
+000000: invoke-direct v1, Ljava/lang/Object;-><init>()V
+000006: const/4 v0, 0
+000008: iput-boolean v0, v1, Lcom/vivo/pcsuite/pcconnect/ble/f;->c Z
+00000c: new-instance v0, Lcom/vivo/pcsuite/pcconnect/ble/f$a;
+000010: invoke-direct v0, v1, Lcom/vivo/pcsuite/pcconnect/ble/f$a;-><init>(Lcom/vivo/pcsuite/pcconnect/ble/f;)V
+000016: iput-object v0, v1, Lcom/vivo/pcsuite/pcconnect/ble/f;->d Landroid/bluetooth/le/ScanCallback;
+00001a: return-void 
+
+METHOD a(Landroid/bluetooth/le/BluetoothLeScanner;)Lcom/vivo/pcsuite/pcconnect/ble/f;
+000000: if-nez v1, +004h
+000004: const/4 v1, 0
+000006: return-object v1
+000008: new-instance v0, Lcom/vivo/pcsuite/pcconnect/ble/f;
+00000c: invoke-direct v0, Lcom/vivo/pcsuite/pcconnect/ble/f;-><init>()V
+000012: iput-object v1, v0, Lcom/vivo/pcsuite/pcconnect/ble/f;->a Landroid/bluetooth/le/BluetoothLeScanner;
+000016: return-object v0
+
+METHOD a(I)V
+000000: monitor-enter v1
+000002: iget-boolean v0, v1, Lcom/vivo/pcsuite/pcconnect/ble/f;->c Z
+000006: if-nez v0, +00eh
+00000a: iget-object v0, v1, Lcom/vivo/pcsuite/pcconnect/ble/f;->b Lcom/vivo/pcsuite/pcconnect/ble/f$b;
+00000e: if-eqz v0, +007h
+000012: iget-object v0, v1, Lcom/vivo/pcsuite/pcconnect/ble/f;->b Lcom/vivo/pcsuite/pcconnect/ble/f$b;
+000016: invoke-interface v0, v2, Lcom/vivo/pcsuite/pcconnect/ble/f$b;->a(I)V
+00001c: const/4 v2, 1
+00001e: iput-boolean v2, v1, Lcom/vivo/pcsuite/pcconnect/ble/f;->c Z
+000022: monitor-exit v1
+000024: return-void 
+000026: move-exception v2
+000028: monitor-exit v1
+00002a: throw v2
+
+METHOD a(Landroid/bluetooth/le/ScanResult;)V
+000000: monitor-enter v2
+000002: iget-object v0, v2, Lcom/vivo/pcsuite/pcconnect/ble/f;->b Lcom/vivo/pcsuite/pcconnect/ble/f$b;
+000006: if-eqz v0, +008h
+00000a: iget-object v0, v2, Lcom/vivo/pcsuite/pcconnect/ble/f;->b Lcom/vivo/pcsuite/pcconnect/ble/f$b;
+00000e: const/4 v1, 0
+000010: invoke-interface v0, v1, v3, Lcom/vivo/pcsuite/pcconnect/ble/f$b;->a(I Landroid/bluetooth/le/ScanResult;)V
+000016: monitor-exit v2
+000018: return-void 
+00001a: move-exception v3
+00001c: monitor-exit v2
+00001e: throw v3
+
+METHOD a(Lcom/vivo/pcsuite/pcconnect/ble/f; I)V
+000000: invoke-direct v0, v1, Lcom/vivo/pcsuite/pcconnect/ble/f;->a(I)V
+000006: return-void 
+
+METHOD a(Lcom/vivo/pcsuite/pcconnect/ble/f; Landroid/bluetooth/le/ScanResult;)V
+000000: invoke-direct v0, v1, Lcom/vivo/pcsuite/pcconnect/ble/f;->b(Landroid/bluetooth/le/ScanResult;)V
+000006: return-void 
+
+METHOD b(Landroid/bluetooth/le/ScanResult;)V
+000000: monitor-enter v2
+000002: iget-object v0, v2, Lcom/vivo/pcsuite/pcconnect/ble/f;->b Lcom/vivo/pcsuite/pcconnect/ble/f$b;
+000006: if-eqz v0, +008h
+00000a: iget-object v0, v2, Lcom/vivo/pcsuite/pcconnect/ble/f;->b Lcom/vivo/pcsuite/pcconnect/ble/f$b;
+00000e: const/4 v1, 1
+000010: invoke-interface v0, v1, v3, Lcom/vivo/pcsuite/pcconnect/ble/f$b;->a(I Landroid/bluetooth/le/ScanResult;)V
+000016: monitor-exit v2
+000018: return-void 
+00001a: move-exception v3
+00001c: monitor-exit v2
+00001e: throw v3
+
+METHOD a()V
+000000: const-string v0, "CompatLeScanner"
+000004: const-string v1, "stopScan..."
+000008: invoke-static v0, v1, Lc/c/f/a/b;->a(Ljava/lang/String; Ljava/lang/String;)V
+00000e: iget-object v1, v3, Lcom/vivo/pcsuite/pcconnect/ble/f;->a Landroid/bluetooth/le/BluetoothLeScanner;
+000012: iget-object v2, v3, Lcom/vivo/pcsuite/pcconnect/ble/f;->d Landroid/bluetooth/le/ScanCallback;
+000016: invoke-virtual v1, v2, Landroid/bluetooth/le/BluetoothLeScanner;->stopScan(Landroid/bluetooth/le/ScanCallback;)V
+00001c: goto +7h
+00001e: move-exception v1
+000020: const-string v2, "Scan stop failed because of illegal state, not a problem."
+000024: invoke-static v0, v2, v1, Lc/c/f/a/b;->e(Ljava/lang/String; Ljava/lang/String; Ljava/lang/Throwable;)V
+00002a: const/4 v0, 0
+00002c: iput-object v0, v3, Lcom/vivo/pcsuite/pcconnect/ble/f;->b Lcom/vivo/pcsuite/pcconnect/ble/f$b;
+000030: return-void 
+
+METHOD a(Ljava/util/List; Landroid/bluetooth/le/ScanSettings; Lcom/vivo/pcsuite/pcconnect/ble/f$b;)V
+000000: const-string v0, "CompatLeScanner"
+000004: const-string v1, "startScan..."
+000008: invoke-static v0, v1, Lc/c/f/a/b;->a(Ljava/lang/String; Ljava/lang/String;)V
+00000e: iput-object v5, v2, Lcom/vivo/pcsuite/pcconnect/ble/f;->b Lcom/vivo/pcsuite/pcconnect/ble/f$b;
+000012: const/4 v5, 0
+000014: iput-boolean v5, v2, Lcom/vivo/pcsuite/pcconnect/ble/f;->c Z
+000018: new-instance v5, Landroid/bluetooth/le/ScanSettings$Builder;
+00001c: invoke-direct v5, Landroid/bluetooth/le/ScanSettings$Builder;-><init>()V
+000022: invoke-virtual v4, Landroid/bluetooth/le/ScanSettings;->getScanMode()I
+000028: move-result v4
+00002a: invoke-virtual v5, v4, Landroid/bluetooth/le/ScanSettings$Builder;->setScanMode(I)Landroid/bluetooth/le/ScanSettings$Builder;
+000030: move-result-object v4
+000032: const/4 v5, 1
+000034: invoke-virtual v4, v5, Landroid/bluetooth/le/ScanSettings$Builder;->setCallbackType(I)Landroid/bluetooth/le/ScanSettings$Builder;
+00003a: move-result-object v4
+00003c: invoke-virtual v4, Landroid/bluetooth/le/ScanSettings$Builder;->build()Landroid/bluetooth/le/ScanSettings;
+000042: move-result-object v4
+000044: const-string v5, "Start match scanner..."
+000048: invoke-static v0, v5, Lc/c/f/a/b;->a(Ljava/lang/String; Ljava/lang/String;)V
+00004e: iget-object v5, v2, Lcom/vivo/pcsuite/pcconnect/ble/f;->a Landroid/bluetooth/le/BluetoothLeScanner;
+000052: iget-object v1, v2, Lcom/vivo/pcsuite/pcconnect/ble/f;->d Landroid/bluetooth/le/ScanCallback;
+000056: invoke-virtual v5, v3, v4, v1, Landroid/bluetooth/le/BluetoothLeScanner;->startScan(Ljava/util/List; Landroid/bluetooth/le/ScanSettings; Landroid/bluetooth/le/ScanCallback;)V
+00005c: goto +7h
+00005e: move-exception v3
+000060: const-string v4, "Scan start failed because of illegal state."
+000064: invoke-static v0, v4, v3, Lc/c/f/a/b;->e(Ljava/lang/String; Ljava/lang/String; Ljava/lang/Throwable;)V
+00006a: return-void 

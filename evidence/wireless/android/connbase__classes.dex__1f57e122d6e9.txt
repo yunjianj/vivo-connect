@@ -1,0 +1,41 @@
+APK pcsuite/updateApk/connbase.apk
+DEX classes.dex
+CLASS Lcom/vivo/connbase/nfc/j$h;
+SUPER Ljava/lang/Object;
+FIELDS
+a Ljava/lang/String; = None
+b Ljava/lang/String; = None
+c Lcom/vivo/connbase/nfc/j; = None
+
+METHOD <init>(Lcom/vivo/connbase/nfc/j; Ljava/lang/String; Ljava/lang/String;)V
+000000: iput-object v1, v0, Lcom/vivo/connbase/nfc/j$h;->c Lcom/vivo/connbase/nfc/j;
+000004: invoke-direct v0, Ljava/lang/Object;-><init>()V
+00000a: iput-object v2, v0, Lcom/vivo/connbase/nfc/j$h;->a Ljava/lang/String;
+00000e: iput-object v3, v0, Lcom/vivo/connbase/nfc/j$h;->b Ljava/lang/String;
+000012: return-void 
+
+METHOD run()V
+000000: new-instance v0, Ljava/lang/StringBuilder;
+000004: invoke-direct v0, Ljava/lang/StringBuilder;-><init>()V
+00000a: const-string v1, "nfc Local auth time out: sd="
+00000e: invoke-virtual v0, v1, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+000014: iget-object v1, v5, Lcom/vivo/connbase/nfc/j$h;->b Ljava/lang/String;
+000018: invoke-virtual v0, v1, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+00001e: const-string v1, ", dd="
+000022: invoke-virtual v0, v1, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+000028: iget-object v1, v5, Lcom/vivo/connbase/nfc/j$h;->a Ljava/lang/String;
+00002c: invoke-virtual v0, v1, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+000032: const-string v1, ", this="
+000036: invoke-virtual v0, v1, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+00003c: invoke-virtual v0, v5, Ljava/lang/StringBuilder;->append(Ljava/lang/Object;)Ljava/lang/StringBuilder;
+000042: invoke-virtual v0, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
+000048: move-result-object v0
+00004a: const-string v1, "NfcDiscoveryUseCaseImpl"
+00004e: invoke-static v1, v0, Lc/c/f/a/b;->k(Ljava/lang/String; Ljava/lang/String;)V
+000054: iget-object v0, v5, Lcom/vivo/connbase/nfc/j$h;->c Lcom/vivo/connbase/nfc/j;
+000058: iget-object v1, v5, Lcom/vivo/connbase/nfc/j$h;->a Ljava/lang/String;
+00005c: iget-object v2, v5, Lcom/vivo/connbase/nfc/j$h;->b Ljava/lang/String;
+000060: const/4 v3, 2
+000062: const/4 v4, 0
+000064: invoke-static v0, v1, v2, v3, v4, Lcom/vivo/connbase/nfc/j;->a(Lcom/vivo/connbase/nfc/j; Ljava/lang/String; Ljava/lang/String; I Ljava/lang/Integer;)V
+00006a: return-void 

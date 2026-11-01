@@ -1,0 +1,80 @@
+APK pcsuite/updateApk/pcsuite.apk
+DEX classes2.dex
+CLASS Lcom/vivo/connect/parames/CommonOptions;
+SUPER Ljava/lang/Object;
+FIELDS
+deviceId Ljava/lang/String; = None
+errorCode Ljava/lang/Integer; = None
+serviceId Ljava/lang/String; = None
+
+METHOD <init>()V
+000000: invoke-direct v0, Ljava/lang/Object;-><init>()V
+000006: return-void 
+
+METHOD access$000(Lcom/vivo/connect/parames/CommonOptions;)Ljava/lang/String;
+000000: iget-object v0, v0, Lcom/vivo/connect/parames/CommonOptions;->serviceId Ljava/lang/String;
+000004: return-object v0
+
+METHOD access$002(Lcom/vivo/connect/parames/CommonOptions; Ljava/lang/String;)Ljava/lang/String;
+000000: iput-object v1, v0, Lcom/vivo/connect/parames/CommonOptions;->serviceId Ljava/lang/String;
+000004: return-object v1
+
+METHOD access$100(Lcom/vivo/connect/parames/CommonOptions;)Ljava/lang/String;
+000000: iget-object v0, v0, Lcom/vivo/connect/parames/CommonOptions;->deviceId Ljava/lang/String;
+000004: return-object v0
+
+METHOD access$102(Lcom/vivo/connect/parames/CommonOptions; Ljava/lang/String;)Ljava/lang/String;
+000000: iput-object v1, v0, Lcom/vivo/connect/parames/CommonOptions;->deviceId Ljava/lang/String;
+000004: return-object v1
+
+METHOD access$200(Lcom/vivo/connect/parames/CommonOptions;)Ljava/lang/Integer;
+000000: iget-object v0, v0, Lcom/vivo/connect/parames/CommonOptions;->errorCode Ljava/lang/Integer;
+000004: return-object v0
+
+METHOD access$202(Lcom/vivo/connect/parames/CommonOptions; Ljava/lang/Integer;)Ljava/lang/Integer;
+000000: iput-object v1, v0, Lcom/vivo/connect/parames/CommonOptions;->errorCode Ljava/lang/Integer;
+000004: return-object v1
+
+METHOD getDeviceId()Ljava/lang/String;
+000000: iget-object v0, v0, Lcom/vivo/connect/parames/CommonOptions;->deviceId Ljava/lang/String;
+000004: return-object v0
+
+METHOD getErrorCode()Ljava/lang/Integer;
+000000: iget-object v0, v0, Lcom/vivo/connect/parames/CommonOptions;->errorCode Ljava/lang/Integer;
+000004: return-object v0
+
+METHOD getServiceId()Ljava/lang/String;
+000000: iget-object v0, v0, Lcom/vivo/connect/parames/CommonOptions;->serviceId Ljava/lang/String;
+000004: return-object v0
+
+METHOD setDeviceId(Ljava/lang/String;)V
+000000: iput-object v1, v0, Lcom/vivo/connect/parames/CommonOptions;->deviceId Ljava/lang/String;
+000004: return-void 
+
+METHOD setErrorCode(Ljava/lang/Integer;)V
+000000: iput-object v1, v0, Lcom/vivo/connect/parames/CommonOptions;->errorCode Ljava/lang/Integer;
+000004: return-void 
+
+METHOD setServiceId(Ljava/lang/String;)V
+000000: iput-object v1, v0, Lcom/vivo/connect/parames/CommonOptions;->serviceId Ljava/lang/String;
+000004: return-void 
+
+METHOD toString()Ljava/lang/String;
+000000: new-instance v0, Ljava/lang/StringBuilder;
+000004: const-string v1, "CommonOptions{sd='"
+000008: invoke-direct v0, v1, Ljava/lang/StringBuilder;-><init>(Ljava/lang/String;)V
+00000e: iget-object v1, v2, Lcom/vivo/connect/parames/CommonOptions;->serviceId Ljava/lang/String;
+000012: invoke-virtual v0, v1, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+000018: const-string v1, "', dd='"
+00001c: invoke-virtual v0, v1, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+000022: iget-object v1, v2, Lcom/vivo/connect/parames/CommonOptions;->deviceId Ljava/lang/String;
+000026: invoke-virtual v0, v1, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+00002c: const-string v1, "', errorCode="
+000030: invoke-virtual v0, v1, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+000036: iget-object v2, v2, Lcom/vivo/connect/parames/CommonOptions;->errorCode Ljava/lang/Integer;
+00003a: invoke-virtual v0, v2, Ljava/lang/StringBuilder;->append(Ljava/lang/Object;)Ljava/lang/StringBuilder;
+000040: const/16 v2, 125
+000044: invoke-virtual v0, v2, Ljava/lang/StringBuilder;->append(C)Ljava/lang/StringBuilder;
+00004a: invoke-virtual v0, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
+000050: move-result-object v2
+000052: return-object v2

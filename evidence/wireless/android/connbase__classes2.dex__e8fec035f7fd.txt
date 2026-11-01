@@ -1,0 +1,67 @@
+APK pcsuite/updateApk/connbase.apk
+DEX classes2.dex
+CLASS Lcom/vivo/pcsuite/pcconnect/ShareLinkService$k;
+SUPER Ljava/lang/Object;
+FIELDS
+a Landroid/content/ContentResolver; = None
+b Lcom/vivo/pcsuite/pcconnect/ShareLinkService; = None
+
+METHOD <init>(Lcom/vivo/pcsuite/pcconnect/ShareLinkService; Landroid/content/ContentResolver;)V
+000000: iput-object v1, v0, Lcom/vivo/pcsuite/pcconnect/ShareLinkService$k;->b Lcom/vivo/pcsuite/pcconnect/ShareLinkService;
+000004: iput-object v2, v0, Lcom/vivo/pcsuite/pcconnect/ShareLinkService$k;->a Landroid/content/ContentResolver;
+000008: invoke-direct v0, Ljava/lang/Object;-><init>()V
+00000e: return-void 
+
+METHOD run()V
+000000: new-instance v0, Landroid/content/ContentValues;
+000004: invoke-direct v0, Landroid/content/ContentValues;-><init>()V
+00000a: const-string v1, "_id"
+00000e: const/4 v2, 0
+000010: invoke-static v2, Ljava/lang/Integer;->valueOf(I)Ljava/lang/Integer;
+000016: move-result-object v3
+000018: invoke-virtual v0, v1, v3, Landroid/content/ContentValues;->put(Ljava/lang/String; Ljava/lang/Integer;)V
+00001e: const-string v1, "device_name"
+000022: const-string v3, ""
+000026: invoke-virtual v0, v1, v3, Landroid/content/ContentValues;->put(Ljava/lang/String; Ljava/lang/String;)V
+00002c: const-string v1, "connected"
+000030: invoke-static v2, Ljava/lang/Integer;->valueOf(I)Ljava/lang/Integer;
+000036: move-result-object v3
+000038: invoke-virtual v0, v1, v3, Landroid/content/ContentValues;->put(Ljava/lang/String; Ljava/lang/Integer;)V
+00003e: const-string v1, "connected_type"
+000042: invoke-static v2, Ljava/lang/Integer;->valueOf(I)Ljava/lang/Integer;
+000048: move-result-object v2
+00004a: invoke-virtual v0, v1, v2, Landroid/content/ContentValues;->put(Ljava/lang/String; Ljava/lang/Integer;)V
+000050: iget-object v1, v4, Lcom/vivo/pcsuite/pcconnect/ShareLinkService$k;->a Landroid/content/ContentResolver;
+000054: const-string v2, "content://com.vivo.pcsuite"
+000058: invoke-static v2, Landroid/net/Uri;->parse(Ljava/lang/String;)Landroid/net/Uri;
+00005e: move-result-object v2
+000060: const-string v3, "connect_state"
+000064: invoke-static v2, v3, Landroid/net/Uri;->withAppendedPath(Landroid/net/Uri; Ljava/lang/String;)Landroid/net/Uri;
+00006a: move-result-object v2
+00006c: invoke-virtual v1, v2, v0, Landroid/content/ContentResolver;->insert(Landroid/net/Uri; Landroid/content/ContentValues;)Landroid/net/Uri;
+000072: move-result-object v0
+000074: invoke-static Lcom/vivo/pcsuite/pcconnect/ShareLinkService;->k()Ljava/lang/String;
+00007a: move-result-object v1
+00007c: new-instance v2, Ljava/lang/StringBuilder;
+000080: invoke-direct v2, Ljava/lang/StringBuilder;-><init>()V
+000086: const-string v3, "restoreConnectState update result2: "
+00008a: invoke-virtual v2, v3, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+000090: invoke-virtual v2, v0, Ljava/lang/StringBuilder;->append(Ljava/lang/Object;)Ljava/lang/StringBuilder;
+000096: invoke-virtual v2, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
+00009c: move-result-object v0
+00009e: invoke-static v1, v0, Lc/c/f/a/b;->k(Ljava/lang/String; Ljava/lang/String;)V
+0000a4: goto +1eh
+0000a6: move-exception v0
+0000a8: invoke-static Lcom/vivo/pcsuite/pcconnect/ShareLinkService;->k()Ljava/lang/String;
+0000ae: move-result-object v1
+0000b0: new-instance v2, Ljava/lang/StringBuilder;
+0000b4: invoke-direct v2, Ljava/lang/StringBuilder;-><init>()V
+0000ba: const-string v3, "restoreConnectState error2: "
+0000be: invoke-virtual v2, v3, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+0000c4: invoke-virtual v0, Ljava/lang/Exception;->getMessage()Ljava/lang/String;
+0000ca: move-result-object v0
+0000cc: invoke-virtual v2, v0, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+0000d2: invoke-virtual v2, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
+0000d8: move-result-object v0
+0000da: invoke-static v1, v0, Lc/c/f/a/b;->g(Ljava/lang/String; Ljava/lang/String;)V
+0000e0: return-void 

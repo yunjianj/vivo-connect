@@ -1,0 +1,505 @@
+APK pcsuite/updateApk/connbase.apk
+DEX classes.dex
+CLASS Lcom/vivo/connbase/w;
+SUPER Landroidx/fragment/app/d;
+FIELDS
+g Ljava/lang/String; = 'SecurityActivityTAG'
+h I = 4500
+a Lc/a/a/o; = None
+b Lcom/vivo/seckeysdk/SecurityKeyCipher; = None
+c Lcom/vivo/seckeysdk/a/a; = None
+d Lcom/vivo/seckeysdk/a/a; = None
+e Lcom/vivo/seckeysdk/a/b; = None
+f Lcom/vivo/seckeysdk/a/b; = None
+
+METHOD <init>()V
+000000: invoke-direct v0, Landroidx/fragment/app/d;-><init>()V
+000006: return-void 
+
+METHOD m()V
+000000: iget-object v0, v5, Lcom/vivo/connbase/w;->e Lcom/vivo/seckeysdk/a/b;
+000004: const-string v1, "secret from A"
+000008: invoke-virtual v0, v1, Lcom/vivo/seckeysdk/a/b;->c(Ljava/lang/String;)Ljava/lang/String;
+00000e: move-result-object v0
+000010: iget-object v1, v5, Lcom/vivo/connbase/w;->f Lcom/vivo/seckeysdk/a/b;
+000014: const-string v2, "secret from B"
+000018: invoke-virtual v1, v2, Lcom/vivo/seckeysdk/a/b;->c(Ljava/lang/String;)Ljava/lang/String;
+00001e: move-result-object v1
+000020: new-instance v2, Ljava/lang/StringBuilder;
+000024: invoke-direct v2, Ljava/lang/StringBuilder;-><init>()V
+00002a: const-string v3, "A cipher： "
+00002e: invoke-virtual v2, v3, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+000034: invoke-virtual v2, v0, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+00003a: const-string v3, "; B cipher： "
+00003e: invoke-virtual v2, v3, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+000044: invoke-virtual v2, v1, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+00004a: invoke-virtual v2, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
+000050: move-result-object v2
+000052: const-string v3, "SecurityActivityTAG"
+000056: invoke-static v3, v2, Lc/c/f/a/b;->k(Ljava/lang/String; Ljava/lang/String;)V
+00005c: iget-object v2, v5, Lcom/vivo/connbase/w;->e Lcom/vivo/seckeysdk/a/b;
+000060: invoke-virtual v2, v1, Lcom/vivo/seckeysdk/a/b;->a(Ljava/lang/String;)Ljava/lang/String;
+000066: move-result-object v1
+000068: iget-object v2, v5, Lcom/vivo/connbase/w;->f Lcom/vivo/seckeysdk/a/b;
+00006c: invoke-virtual v2, v0, Lcom/vivo/seckeysdk/a/b;->a(Ljava/lang/String;)Ljava/lang/String;
+000072: move-result-object v0
+000074: new-instance v2, Ljava/lang/StringBuilder;
+000078: invoke-direct v2, Ljava/lang/StringBuilder;-><init>()V
+00007e: const-string v4, "after decryption, decryptedDataFrmB:"
+000082: invoke-virtual v2, v4, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+000088: invoke-virtual v2, v1, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+00008e: const-string v1, ", decryptedDataFromA:"
+000092: invoke-virtual v2, v1, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+000098: invoke-virtual v2, v0, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+00009e: invoke-virtual v2, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
+0000a4: move-result-object v0
+0000a6: invoke-static v3, v0, Lc/c/f/a/b;->k(Ljava/lang/String; Ljava/lang/String;)V
+0000ac: return-void 
+
+METHOD n()Lorg/json/JSONObject;
+000000: const-string v0, "unknown"
+000004: new-instance v1, Lorg/json/JSONObject;
+000008: invoke-direct v1, Lorg/json/JSONObject;-><init>()V
+00000e: const-string v2, "openid"
+000012: invoke-static Lcom/vivo/connbase/e0/g/e;->b()Ljava/lang/String;
+000018: move-result-object v3
+00001a: invoke-virtual v1, v2, v3, Lorg/json/JSONObject;->put(Ljava/lang/String; Ljava/lang/Object;)Lorg/json/JSONObject;
+000020: const-string v2, "vivotoken"
+000024: invoke-static Lcom/vivo/connbase/App;->m()Lcom/vivo/connbase/App;
+00002a: move-result-object v3
+00002c: invoke-static v3, Lcom/bbk/account/base/BBKAccountManager;->getInstance(Landroid/content/Context;)Lcom/bbk/account/base/BBKAccountManager;
+000032: move-result-object v3
+000034: invoke-virtual v3, Lcom/bbk/account/base/BBKAccountManager;->getvivoToken()Ljava/lang/String;
+00003a: move-result-object v3
+00003c: invoke-virtual v1, v2, v3, Lorg/json/JSONObject;->put(Ljava/lang/String; Ljava/lang/Object;)Lorg/json/JSONObject;
+000042: const-string v2, "clientId"
+000046: invoke-virtual v1, v2, v0, Lorg/json/JSONObject;->put(Ljava/lang/String; Ljava/lang/Object;)Lorg/json/JSONObject;
+00004c: const-string v2, "clientIp"
+000050: invoke-static Lcom/vivo/connbase/App;->m()Lcom/vivo/connbase/App;
+000056: move-result-object v3
+000058: invoke-static v3, Lcom/vivo/connbase/wifi/utils/WifiUtils;->getIpAddress(Landroid/content/Context;)Ljava/lang/String;
+00005e: move-result-object v3
+000060: invoke-virtual v1, v2, v3, Lorg/json/JSONObject;->put(Ljava/lang/String; Ljava/lang/Object;)Lorg/json/JSONObject;
+000066: const-string v2, "imei"
+00006a: invoke-virtual v1, v2, v0, Lorg/json/JSONObject;->put(Ljava/lang/String; Ljava/lang/Object;)Lorg/json/JSONObject;
+000070: const-string v0, "fromDetail"
+000074: invoke-static Lcom/vivo/connbase/App;->m()Lcom/vivo/connbase/App;
+00007a: move-result-object v2
+00007c: invoke-virtual v2, Landroid/app/Application;->getPackageName()Ljava/lang/String;
+000082: move-result-object v2
+000084: invoke-virtual v1, v0, v2, Lorg/json/JSONObject;->put(Ljava/lang/String; Ljava/lang/Object;)Lorg/json/JSONObject;
+00008a: goto +9h
+00008c: move-exception v0
+00008e: const-string v2, "SecurityActivityTAG"
+000092: const-string v3, "generateCipherRequestObject error"
+000096: invoke-static v2, v3, v0, Lc/c/f/a/b;->b(Ljava/lang/String; Ljava/lang/String; Ljava/lang/Throwable;)V
+00009c: return-object v1
+
+METHOD o()V
+000000: invoke-virtual v2, Landroid/app/Activity;->getApplicationContext()Landroid/content/Context;
+000006: move-result-object v0
+000008: const-string v1, "AAAAfQAAAABBULPdAAEAAAAEDmZvckNvbnN0cnVjdG9yEWNvbS52aXZvLmNvbm5iYXNlEE52cmlQZ3loQVdaY1ZEZHkJRW5mb3JjaW5nLXsicHJvdGVjdGlvblRocmVhZE1vZGUiOjEsInNlY3VyaXR5TW9kZSI6MTMxfQA"
+00000c: invoke-static v0, v1, Lcom/vivo/seckeysdk/SecurityKeyCipher;->getInstance(Landroid/content/Context; Ljava/lang/String;)Lcom/vivo/seckeysdk/SecurityKeyCipher;
+000012: move-result-object v0
+000014: iput-object v0, v2, Lcom/vivo/connbase/w;->b Lcom/vivo/seckeysdk/SecurityKeyCipher;
+000018: return-void 
+
+METHOD p()V
+000000: const v0, 2131296368
+000006: invoke-virtual v1, v0, Landroid/app/Activity;->findViewById(I)Landroid/view/View;
+00000c: move-result-object v0
+00000e: invoke-virtual v0, v1, Landroid/view/View;->setOnClickListener(Landroid/view/View$OnClickListener;)V
+000014: const v0, 2131296369
+00001a: invoke-virtual v1, v0, Landroid/app/Activity;->findViewById(I)Landroid/view/View;
+000020: move-result-object v0
+000022: invoke-virtual v0, v1, Landroid/view/View;->setOnClickListener(Landroid/view/View$OnClickListener;)V
+000028: const v0, 2131296365
+00002e: invoke-virtual v1, v0, Landroid/app/Activity;->findViewById(I)Landroid/view/View;
+000034: move-result-object v0
+000036: invoke-virtual v0, v1, Landroid/view/View;->setOnClickListener(Landroid/view/View$OnClickListener;)V
+00003c: const v0, 2131296364
+000042: invoke-virtual v1, v0, Landroid/app/Activity;->findViewById(I)Landroid/view/View;
+000048: move-result-object v0
+00004a: invoke-virtual v0, v1, Landroid/view/View;->setOnClickListener(Landroid/view/View$OnClickListener;)V
+000050: return-void 
+
+METHOD a(Lcom/vivo/seckeysdk/a/a;)V
+000000: new-instance v0, Ljava/lang/StringBuilder;
+000004: invoke-direct v0, Ljava/lang/StringBuilder;-><init>()V
+00000a: const-string v1, "node:"
+00000e: invoke-virtual v0, v1, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+000014: invoke-virtual v0, v9, Ljava/lang/StringBuilder;->append(Ljava/lang/Object;)Ljava/lang/StringBuilder;
+00001a: invoke-virtual v0, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
+000020: move-result-object v0
+000022: const-string v1, "SecurityActivityTAG"
+000026: invoke-static v1, v0, Lc/c/f/a/b;->k(Ljava/lang/String; Ljava/lang/String;)V
+00002c: invoke-virtual v9, Lcom/vivo/seckeysdk/a/a;->d()I
+000032: move-result v0
+000034: if-eqz v0, +040h
+000038: invoke-direct v8, Lcom/vivo/connbase/w;->n()Lorg/json/JSONObject;
+00003e: move-result-object v0
+000040: invoke-virtual v0, Lorg/json/JSONObject;->toString()Ljava/lang/String;
+000046: move-result-object v0
+000048: invoke-virtual v9, v0, Lcom/vivo/seckeysdk/a/a;->a(Ljava/lang/String;)Ljava/lang/String;
+00004e: move-result-object v5
+000050: const-string v4, "http://172.25.40.193:8080/connectionBase/ota"
+000054: new-instance v0, Lc/a/a/w/n;
+000058: const/4 v3, 1
+00005a: new-instance v6, Lcom/vivo/connbase/w$a;
+00005e: invoke-direct v6, v8, v9, Lcom/vivo/connbase/w$a;-><init>(Lcom/vivo/connbase/w; Lcom/vivo/seckeysdk/a/a;)V
+000064: new-instance v7, Lcom/vivo/connbase/w$b;
+000068: invoke-direct v7, v8, Lcom/vivo/connbase/w$b;-><init>(Lcom/vivo/connbase/w;)V
+00006e: move-object v2, v0
+000070: invoke-direct/range v2 ... v7, Lc/a/a/w/n;-><init>(I Ljava/lang/String; Ljava/lang/String; Lc/a/a/p$b; Lc/a/a/p$a;)V
+000076: iget-object v9, v8, Lcom/vivo/connbase/w;->a Lc/a/a/o;
+00007a: invoke-virtual v9, v0, Lc/a/a/o;->a(Lc/a/a/n;)Lc/a/a/n;
+000080: goto +1ah
+000082: move-exception v9
+000084: new-instance v0, Ljava/lang/StringBuilder;
+000088: invoke-direct v0, Ljava/lang/StringBuilder;-><init>()V
+00008e: const-string v2, "error:"
+000092: invoke-virtual v0, v2, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+000098: invoke-virtual v9, Ljava/lang/Exception;->toString()Ljava/lang/String;
+00009e: move-result-object v2
+0000a0: invoke-virtual v0, v2, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+0000a6: invoke-virtual v0, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
+0000ac: move-result-object v0
+0000ae: invoke-static v1, v0, v9, Lc/c/f/a/b;->b(Ljava/lang/String; Ljava/lang/String; Ljava/lang/Throwable;)V
+0000b4: return-void 
+
+METHOD a(Lcom/vivo/seckeysdk/a/a; Ljava/lang/String;)V
+000000: new-instance v0, Ljava/lang/StringBuilder;
+000004: invoke-direct v0, Ljava/lang/StringBuilder;-><init>()V
+00000a: const-string v1, "node state:"
+00000e: invoke-virtual v0, v1, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+000014: invoke-virtual v7, Lcom/vivo/seckeysdk/a/a;->d()I
+00001a: move-result v2
+00001c: invoke-virtual v0, v2, Ljava/lang/StringBuilder;->append(I)Ljava/lang/StringBuilder;
+000022: invoke-virtual v0, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
+000028: move-result-object v0
+00002a: const-string v2, "SecurityActivityTAG"
+00002e: invoke-static v2, v0, Lc/c/f/a/b;->k(Ljava/lang/String; Ljava/lang/String;)V
+000034: invoke-virtual v7, Lcom/vivo/seckeysdk/a/a;->d()I
+00003a: move-result v0
+00003c: if-nez v0, +003h
+000040: return-void 
+000042: const-string v0, "{
+        "openid": "20200820085813",
+        "vivotoken": "PD1916",
+        "clientId": "SDM860",
+        "clientIp": "PD1916MA",
+        "imei": "hash_null",
+        "fromDetail": "hash_null"   
+     }
+"
+000046: invoke-virtual v7, v0, Lcom/vivo/seckeysdk/a/a;->a(Ljava/lang/String;)Ljava/lang/String;
+00004c: move-result-object v0
+00004e: const/4 v3, 0
+000050: invoke-virtual v7, Lcom/vivo/seckeysdk/a/a;->b()Ljava/lang/String;
+000056: move-result-object v4
+000058: invoke-static v2, v4, Lc/c/f/a/b;->k(Ljava/lang/String; Ljava/lang/String;)V
+00005e: new-instance v4, Lcom/vivo/connbase/q;
+000062: invoke-virtual v0, Ljava/lang/String;->getBytes()[B
+000068: move-result-object v0
+00006a: invoke-direct v4, v6, v8, v0, Lcom/vivo/connbase/q;-><init>(Landroid/content/Context; Ljava/lang/String; [B)V
+000070: new-instance v8, Ljava/util/concurrent/FutureTask;
+000074: invoke-direct v8, v4, Ljava/util/concurrent/FutureTask;-><init>(Ljava/util/concurrent/Callable;)V
+00007a: new-instance v0, Ljava/lang/Thread;
+00007e: invoke-direct v0, v8, Ljava/lang/Thread;-><init>(Ljava/lang/Runnable;)V
+000084: invoke-virtual v0, Ljava/lang/Thread;->start()V
+00008a: const-wide/16 v4, 4500
+00008e: sget-object v0, Ljava/util/concurrent/TimeUnit;->MILLISECONDS Ljava/util/concurrent/TimeUnit;
+000092: invoke-virtual v8, v4, v5, v0, Ljava/util/concurrent/FutureTask;->get(J Ljava/util/concurrent/TimeUnit;)Ljava/lang/Object;
+000098: move-result-object v8
+00009a: check-cast v8, Ljava/lang/String;
+00009e: new-instance v0, Ljava/lang/StringBuilder;
+0000a2: invoke-direct v0, Ljava/lang/StringBuilder;-><init>()V
+0000a8: const-string v3, "server response: "
+0000ac: invoke-virtual v0, v3, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+0000b2: invoke-virtual v0, v8, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+0000b8: invoke-virtual v0, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
+0000be: move-result-object v0
+0000c0: invoke-static v2, v0, Lc/c/f/a/b;->k(Ljava/lang/String; Ljava/lang/String;)V
+0000c6: goto +26h
+0000c8: move-exception v0
+0000ca: move-object v3, v8
+0000cc: goto +5h
+0000ce: move-exception v0
+0000d0: move-object v3, v8
+0000d2: goto +1ch
+0000d4: move-exception v0
+0000d6: new-instance v8, Ljava/lang/StringBuilder;
+0000da: invoke-direct v8, Ljava/lang/StringBuilder;-><init>()V
+0000e0: const-string v4, "inner error:"
+0000e4: invoke-virtual v8, v4, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+0000ea: invoke-virtual v0, Ljava/lang/Exception;->toString()Ljava/lang/String;
+0000f0: move-result-object v4
+0000f2: invoke-virtual v8, v4, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+0000f8: invoke-virtual v8, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
+0000fe: move-result-object v8
+000100: invoke-static v2, v8, v0, Lc/c/f/a/b;->c(Ljava/lang/String; Ljava/lang/String; Ljava/lang/Throwable;)V
+000106: goto +5h
+000108: move-exception v0
+00010a: invoke-virtual v0, Ljava/lang/InterruptedException;->printStackTrace()V
+000110: move-object v8, v3
+000112: new-instance v0, Ljava/lang/StringBuilder;
+000116: invoke-direct v0, Ljava/lang/StringBuilder;-><init>()V
+00011c: invoke-virtual v0, v1, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+000122: invoke-virtual v7, Lcom/vivo/seckeysdk/a/a;->d()I
+000128: move-result v1
+00012a: invoke-virtual v0, v1, Ljava/lang/StringBuilder;->append(I)Ljava/lang/StringBuilder;
+000130: const-string v1, ", node id:"
+000134: invoke-virtual v0, v1, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+00013a: invoke-virtual v7, Lcom/vivo/seckeysdk/a/a;->c()Ljava/lang/String;
+000140: move-result-object v3
+000142: invoke-virtual v0, v3, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+000148: invoke-virtual v0, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
+00014e: move-result-object v0
+000150: invoke-static v2, v0, Lc/c/f/a/b;->k(Ljava/lang/String; Ljava/lang/String;)V
+000156: invoke-static v8, Landroid/text/TextUtils;->isEmpty(Ljava/lang/CharSequence;)Z
+00015c: move-result v0
+00015e: if-nez v0, +03ch
+000162: new-instance v0, Ljava/lang/StringBuilder;
+000166: invoke-direct v0, Ljava/lang/StringBuilder;-><init>()V
+00016c: const-string v3, "importCert: "
+000170: invoke-virtual v0, v3, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+000176: invoke-virtual v7, v8, Lcom/vivo/seckeysdk/a/a;->c(Ljava/lang/String;)Z
+00017c: move-result v8
+00017e: invoke-virtual v0, v8, Ljava/lang/StringBuilder;->append(Z)Ljava/lang/StringBuilder;
+000184: invoke-virtual v0, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
+00018a: move-result-object v8
+00018c: invoke-static v2, v8, Lc/c/f/a/b;->k(Ljava/lang/String; Ljava/lang/String;)V
+000192: new-instance v8, Ljava/lang/StringBuilder;
+000196: invoke-direct v8, Ljava/lang/StringBuilder;-><init>()V
+00019c: const-string v0, "after import cert node state:"
+0001a0: invoke-virtual v8, v0, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+0001a6: invoke-virtual v7, Lcom/vivo/seckeysdk/a/a;->d()I
+0001ac: move-result v0
+0001ae: invoke-virtual v8, v0, Ljava/lang/StringBuilder;->append(I)Ljava/lang/StringBuilder;
+0001b4: invoke-virtual v8, v1, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+0001ba: invoke-virtual v7, Lcom/vivo/seckeysdk/a/a;->c()Ljava/lang/String;
+0001c0: move-result-object v7
+0001c2: invoke-virtual v8, v7, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+0001c8: invoke-virtual v8, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
+0001ce: move-result-object v7
+0001d0: invoke-static v2, v7, Lc/c/f/a/b;->k(Ljava/lang/String; Ljava/lang/String;)V
+0001d6: return-void 
+
+METHOD h()V
+000000: iget-object v0, v1, Lcom/vivo/connbase/w;->c Lcom/vivo/seckeysdk/a/a;
+000004: if-eqz v0, +007h
+000008: iget-object v0, v1, Lcom/vivo/connbase/w;->c Lcom/vivo/seckeysdk/a/a;
+00000c: invoke-virtual v0, Lcom/vivo/seckeysdk/a/a;->a()Z
+000012: iget-object v0, v1, Lcom/vivo/connbase/w;->d Lcom/vivo/seckeysdk/a/a;
+000016: if-eqz v0, +007h
+00001a: iget-object v0, v1, Lcom/vivo/connbase/w;->d Lcom/vivo/seckeysdk/a/a;
+00001e: invoke-virtual v0, Lcom/vivo/seckeysdk/a/a;->a()Z
+000024: iget-object v0, v1, Lcom/vivo/connbase/w;->e Lcom/vivo/seckeysdk/a/b;
+000028: if-eqz v0, +007h
+00002c: iget-object v0, v1, Lcom/vivo/connbase/w;->e Lcom/vivo/seckeysdk/a/b;
+000030: invoke-virtual v0, Lcom/vivo/seckeysdk/a/b;->a()V
+000036: iget-object v0, v1, Lcom/vivo/connbase/w;->f Lcom/vivo/seckeysdk/a/b;
+00003a: if-eqz v0, +00ch
+00003e: iget-object v0, v1, Lcom/vivo/connbase/w;->f Lcom/vivo/seckeysdk/a/b;
+000042: invoke-virtual v0, Lcom/vivo/seckeysdk/a/b;->a()V
+000048: goto +5h
+00004a: move-exception v0
+00004c: invoke-virtual v0, Ljava/lang/Exception;->printStackTrace()V
+000052: return-void 
+
+METHOD i()V
+000000: const-string v0, "SecurityActivityTAG"
+000004: const-string v1, "111"
+000008: invoke-static v0, v1, Lc/c/f/a/b;->k(Ljava/lang/String; Ljava/lang/String;)V
+00000e: const-wide/16 v1, 3000
+000012: invoke-static v1, v2, Ljava/lang/Thread;->sleep(J)V
+000018: goto +5h
+00001a: move-exception v1
+00001c: invoke-virtual v1, Ljava/lang/InterruptedException;->printStackTrace()V
+000022: new-instance v1, Ljava/lang/StringBuilder;
+000026: invoke-direct v1, Ljava/lang/StringBuilder;-><init>()V
+00002c: const-string v2, "after sleep, nodeA:"
+000030: invoke-virtual v1, v2, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+000036: iget-object v2, v3, Lcom/vivo/connbase/w;->c Lcom/vivo/seckeysdk/a/a;
+00003a: invoke-virtual v1, v2, Ljava/lang/StringBuilder;->append(Ljava/lang/Object;)Ljava/lang/StringBuilder;
+000040: const-string v2, ", nodeB:"
+000044: invoke-virtual v1, v2, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+00004a: iget-object v2, v3, Lcom/vivo/connbase/w;->d Lcom/vivo/seckeysdk/a/a;
+00004e: invoke-virtual v1, v2, Ljava/lang/StringBuilder;->append(Ljava/lang/Object;)Ljava/lang/StringBuilder;
+000054: invoke-virtual v1, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
+00005a: move-result-object v1
+00005c: invoke-static v0, v1, Lc/c/f/a/b;->k(Ljava/lang/String; Ljava/lang/String;)V
+000062: return-void 
+
+METHOD j()V
+000000: new-instance v0, Ljava/lang/StringBuilder;
+000004: invoke-direct v0, Ljava/lang/StringBuilder;-><init>()V
+00000a: const-string v1, "volley cipher:"
+00000e: invoke-virtual v0, v1, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+000014: iget-object v1, v2, Lcom/vivo/connbase/w;->b Lcom/vivo/seckeysdk/SecurityKeyCipher;
+000018: invoke-virtual v0, v1, Ljava/lang/StringBuilder;->append(Ljava/lang/Object;)Ljava/lang/StringBuilder;
+00001e: invoke-virtual v0, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
+000024: move-result-object v0
+000026: const-string v1, "SecurityActivityTAG"
+00002a: invoke-static v1, v0, Lc/c/f/a/b;->k(Ljava/lang/String; Ljava/lang/String;)V
+000030: iget-object v0, v2, Lcom/vivo/connbase/w;->b Lcom/vivo/seckeysdk/SecurityKeyCipher;
+000034: invoke-static Lcom/vivo/connbase/e0/g/e;->b()Ljava/lang/String;
+00003a: move-result-object v1
+00003c: invoke-virtual v0, v1, Lcom/vivo/seckeysdk/SecurityKeyCipher;->getDeviceNode(Ljava/lang/String;)Lcom/vivo/seckeysdk/a/a;
+000042: move-result-object v0
+000044: iput-object v0, v2, Lcom/vivo/connbase/w;->c Lcom/vivo/seckeysdk/a/a;
+000048: iget-object v0, v2, Lcom/vivo/connbase/w;->b Lcom/vivo/seckeysdk/SecurityKeyCipher;
+00004c: invoke-static Lcom/vivo/connbase/e0/g/e;->b()Ljava/lang/String;
+000052: move-result-object v1
+000054: invoke-virtual v0, v1, Lcom/vivo/seckeysdk/SecurityKeyCipher;->getDeviceNode(Ljava/lang/String;)Lcom/vivo/seckeysdk/a/a;
+00005a: move-result-object v0
+00005c: iput-object v0, v2, Lcom/vivo/connbase/w;->d Lcom/vivo/seckeysdk/a/a;
+000060: iget-object v0, v2, Lcom/vivo/connbase/w;->c Lcom/vivo/seckeysdk/a/a;
+000064: invoke-virtual v2, v0, Lcom/vivo/connbase/w;->a(Lcom/vivo/seckeysdk/a/a;)V
+00006a: return-void 
+
+METHOD k()V
+000000: const-string v0, "SecurityActivityTAG"
+000004: iget-object v1, v4, Lcom/vivo/connbase/w;->c Lcom/vivo/seckeysdk/a/a;
+000008: iget-object v2, v4, Lcom/vivo/connbase/w;->d Lcom/vivo/seckeysdk/a/a;
+00000c: invoke-virtual v2, Lcom/vivo/seckeysdk/a/a;->c()Ljava/lang/String;
+000012: move-result-object v2
+000014: invoke-virtual v1, v2, Lcom/vivo/seckeysdk/a/a;->b(Ljava/lang/String;)Lcom/vivo/seckeysdk/a/b;
+00001a: move-result-object v1
+00001c: iput-object v1, v4, Lcom/vivo/connbase/w;->e Lcom/vivo/seckeysdk/a/b;
+000020: iget-object v1, v4, Lcom/vivo/connbase/w;->d Lcom/vivo/seckeysdk/a/a;
+000024: iget-object v2, v4, Lcom/vivo/connbase/w;->c Lcom/vivo/seckeysdk/a/a;
+000028: invoke-virtual v2, Lcom/vivo/seckeysdk/a/a;->c()Ljava/lang/String;
+00002e: move-result-object v2
+000030: invoke-virtual v1, v2, Lcom/vivo/seckeysdk/a/a;->b(Ljava/lang/String;)Lcom/vivo/seckeysdk/a/b;
+000036: move-result-object v1
+000038: iput-object v1, v4, Lcom/vivo/connbase/w;->f Lcom/vivo/seckeysdk/a/b;
+00003c: iget-object v1, v4, Lcom/vivo/connbase/w;->e Lcom/vivo/seckeysdk/a/b;
+000040: invoke-virtual v1, Lcom/vivo/seckeysdk/a/b;->b()Ljava/lang/String;
+000046: move-result-object v1
+000048: iget-object v2, v4, Lcom/vivo/connbase/w;->f Lcom/vivo/seckeysdk/a/b;
+00004c: invoke-virtual v2, Lcom/vivo/seckeysdk/a/b;->b()Ljava/lang/String;
+000052: move-result-object v2
+000054: iget-object v3, v4, Lcom/vivo/connbase/w;->e Lcom/vivo/seckeysdk/a/b;
+000058: invoke-virtual v3, v2, Lcom/vivo/seckeysdk/a/b;->b(Ljava/lang/String;)Ljava/lang/Boolean;
+00005e: iget-object v2, v4, Lcom/vivo/connbase/w;->f Lcom/vivo/seckeysdk/a/b;
+000062: invoke-virtual v2, v1, Lcom/vivo/seckeysdk/a/b;->b(Ljava/lang/String;)Ljava/lang/Boolean;
+000068: new-instance v1, Ljava/lang/StringBuilder;
+00006c: invoke-direct v1, Ljava/lang/StringBuilder;-><init>()V
+000072: const-string v2, "after prepare session sessionA2B:"
+000076: invoke-virtual v1, v2, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+00007c: iget-object v2, v4, Lcom/vivo/connbase/w;->e Lcom/vivo/seckeysdk/a/b;
+000080: invoke-virtual v1, v2, Ljava/lang/StringBuilder;->append(Ljava/lang/Object;)Ljava/lang/StringBuilder;
+000086: const-string v2, ", sessionB2A:"
+00008a: invoke-virtual v1, v2, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+000090: iget-object v2, v4, Lcom/vivo/connbase/w;->f Lcom/vivo/seckeysdk/a/b;
+000094: invoke-virtual v1, v2, Ljava/lang/StringBuilder;->append(Ljava/lang/Object;)Ljava/lang/StringBuilder;
+00009a: invoke-virtual v1, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
+0000a0: move-result-object v1
+0000a2: invoke-static v0, v1, Lc/c/f/a/b;->k(Ljava/lang/String; Ljava/lang/String;)V
+0000a8: goto +1ah
+0000aa: move-exception v1
+0000ac: new-instance v2, Ljava/lang/StringBuilder;
+0000b0: invoke-direct v2, Ljava/lang/StringBuilder;-><init>()V
+0000b6: const-string v3, "prepareSessions error:"
+0000ba: invoke-virtual v2, v3, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+0000c0: invoke-virtual v1, Ljava/lang/Exception;->toString()Ljava/lang/String;
+0000c6: move-result-object v3
+0000c8: invoke-virtual v2, v3, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+0000ce: invoke-virtual v2, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
+0000d4: move-result-object v2
+0000d6: invoke-static v0, v2, v1, Lc/c/f/a/b;->b(Ljava/lang/String; Ljava/lang/String; Ljava/lang/Throwable;)V
+0000dc: return-void 
+
+METHOD l()V
+000000: invoke-static Lcom/vivo/connbase/App;->m()Lcom/vivo/connbase/App;
+000006: move-result-object v0
+000008: const-string v1, "AAAAfQAAAABBULPdAAEAAAAEDmZvckNvbnN0cnVjdG9yEWNvbS52aXZvLmNvbm5iYXNlEE52cmlQZ3loQVdaY1ZEZHkJRW5mb3JjaW5nLXsicHJvdGVjdGlvblRocmVhZE1vZGUiOjEsInNlY3VyaXR5TW9kZSI6MTMxfQA"
+00000c: invoke-static v0, v1, Lcom/vivo/seckeysdk/SecurityKeyCipher;->getInstance(Landroid/content/Context; Ljava/lang/String;)Lcom/vivo/seckeysdk/SecurityKeyCipher;
+000012: move-result-object v0
+000014: new-instance v1, Ljava/lang/StringBuilder;
+000018: invoke-direct v1, Ljava/lang/StringBuilder;-><init>()V
+00001e: const-string v2, "cipher:"
+000022: invoke-virtual v1, v2, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+000028: invoke-virtual v1, v0, Ljava/lang/StringBuilder;->append(Ljava/lang/Object;)Ljava/lang/StringBuilder;
+00002e: invoke-virtual v1, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
+000034: move-result-object v1
+000036: const-string v2, "SecurityActivityTAG"
+00003a: invoke-static v2, v1, Lc/c/f/a/b;->k(Ljava/lang/String; Ljava/lang/String;)V
+000040: invoke-static Lcom/vivo/connbase/e0/g/e;->b()Ljava/lang/String;
+000046: move-result-object v1
+000048: invoke-virtual v0, v1, Lcom/vivo/seckeysdk/SecurityKeyCipher;->getDeviceNode(Ljava/lang/String;)Lcom/vivo/seckeysdk/a/a;
+00004e: move-result-object v0
+000050: const-string v1, "http://172.25.40.193:8080/connectionBase/ota"
+000054: invoke-virtual v4, v0, v1, Lcom/vivo/connbase/w;->a(Lcom/vivo/seckeysdk/a/a; Ljava/lang/String;)V
+00005a: new-instance v1, Ljava/lang/StringBuilder;
+00005e: invoke-direct v1, Ljava/lang/StringBuilder;-><init>()V
+000064: const-string v3, "nodeId:"
+000068: invoke-virtual v1, v3, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+00006e: invoke-virtual v0, Lcom/vivo/seckeysdk/a/a;->c()Ljava/lang/String;
+000074: move-result-object v3
+000076: invoke-virtual v1, v3, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+00007c: invoke-virtual v1, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
+000082: move-result-object v1
+000084: invoke-static v2, v1, Lc/c/f/a/b;->k(Ljava/lang/String; Ljava/lang/String;)V
+00008a: invoke-virtual v0, Lcom/vivo/seckeysdk/a/a;->a()Z
+000090: goto +1ah
+000092: move-exception v0
+000094: new-instance v1, Ljava/lang/StringBuilder;
+000098: invoke-direct v1, Ljava/lang/StringBuilder;-><init>()V
+00009e: const-string v3, "getNodesReady error:"
+0000a2: invoke-virtual v1, v3, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+0000a8: invoke-virtual v0, Ljava/lang/Exception;->toString()Ljava/lang/String;
+0000ae: move-result-object v3
+0000b0: invoke-virtual v1, v3, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+0000b6: invoke-virtual v1, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
+0000bc: move-result-object v1
+0000be: invoke-static v2, v1, v0, Lc/c/f/a/b;->b(Ljava/lang/String; Ljava/lang/String; Ljava/lang/Throwable;)V
+0000c4: return-void 
+
+METHOD onClick(Landroid/view/View;)V
+000000: invoke-virtual v3, Landroid/view/View;->getId()I
+000006: move-result v3
+000008: const v0, 2131296368
+00000e: if-ne v3, v0, +00eh
+000012: invoke-virtual v2, Lcom/vivo/connbase/w;->j()V
+000018: new-instance v3, Lcom/vivo/connbase/a;
+00001c: invoke-direct v3, v2, Lcom/vivo/connbase/a;-><init>(Lcom/vivo/connbase/w;)V
+000022: invoke-static v3, Landroid/os/AsyncTask;->execute(Ljava/lang/Runnable;)V
+000028: goto +37h
+00002a: const v0, 2131296369
+000030: if-ne v3, v0, +006h
+000034: invoke-virtual v2, Lcom/vivo/connbase/w;->k()V
+00003a: goto +2eh
+00003c: const v0, 2131296364
+000042: if-ne v3, v0, +022h
+000046: invoke-direct v2, Lcom/vivo/connbase/w;->m()V
+00004c: goto +25h
+00004e: move-exception v3
+000050: new-instance v0, Ljava/lang/StringBuilder;
+000054: invoke-direct v0, Ljava/lang/StringBuilder;-><init>()V
+00005a: const-string v1, "doAesSession error:"
+00005e: invoke-virtual v0, v1, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+000064: invoke-virtual v3, Ljava/lang/Exception;->toString()Ljava/lang/String;
+00006a: move-result-object v1
+00006c: invoke-virtual v0, v1, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+000072: invoke-virtual v0, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
+000078: move-result-object v0
+00007a: const-string v1, "SecurityActivityTAG"
+00007e: invoke-static v1, v0, v3, Lc/c/f/a/b;->b(Ljava/lang/String; Ljava/lang/String; Ljava/lang/Throwable;)V
+000084: goto +9h
+000086: const v0, 2131296365
+00008c: if-ne v3, v0, +005h
+000090: invoke-virtual v2, Lcom/vivo/connbase/w;->h()V
+000096: return-void 
+
+METHOD onCreate(Landroid/os/Bundle;)V
+000000: invoke-super v0, v1, Landroidx/fragment/app/d;->onCreate(Landroid/os/Bundle;)V
+000006: const v1, 2131492898
+00000c: invoke-virtual v0, v1, Landroid/app/Activity;->setContentView(I)V
+000012: invoke-static v0, Lc/a/a/w/u;->a(Landroid/content/Context;)Lc/a/a/o;
+000018: move-result-object v1
+00001a: iput-object v1, v0, Lcom/vivo/connbase/w;->a Lc/a/a/o;
+00001e: invoke-direct v0, Lcom/vivo/connbase/w;->p()V
+000024: invoke-direct v0, Lcom/vivo/connbase/w;->o()V
+00002a: return-void 

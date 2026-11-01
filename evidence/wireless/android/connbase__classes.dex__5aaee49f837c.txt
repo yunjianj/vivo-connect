@@ -1,0 +1,56 @@
+APK pcsuite/updateApk/connbase.apk
+DEX classes.dex
+CLASS Lcom/vivo/connbase/c0/z;
+SUPER Ljava/lang/Object;
+FIELDS
+
+
+METHOD <init>()V
+000000: invoke-direct v0, Ljava/lang/Object;-><init>()V
+000006: return-void 
+
+METHOD a()Ljava/lang/String;
+000000: invoke-static Landroid/bluetooth/BluetoothAdapter;->getDefaultAdapter()Landroid/bluetooth/BluetoothAdapter;
+000006: move-result-object v0
+000008: const-string v1, ""
+00000c: if-nez v0, +003h
+000010: return-object v1
+000012: invoke-virtual v0, Landroid/bluetooth/BluetoothAdapter;->getName()Ljava/lang/String;
+000018: move-result-object v0
+00001a: return-object v0
+00001c: move-exception v0
+00001e: new-instance v2, Ljava/lang/StringBuilder;
+000022: invoke-direct v2, Ljava/lang/StringBuilder;-><init>()V
+000028: const-string v3, "getBleName"
+00002c: invoke-virtual v2, v3, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+000032: invoke-virtual v0, Ljava/lang/Exception;->toString()Ljava/lang/String;
+000038: move-result-object v0
+00003a: invoke-virtual v2, v0, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+000040: invoke-virtual v2, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
+000046: move-result-object v0
+000048: const-string v2, "BluetoothUtils"
+00004c: invoke-static v2, v0, Lc/c/f/a/b;->g(Ljava/lang/String; Ljava/lang/String;)V
+000052: return-object v1
+
+METHOD b()Z
+000000: invoke-static Landroid/bluetooth/BluetoothAdapter;->getDefaultAdapter()Landroid/bluetooth/BluetoothAdapter;
+000006: move-result-object v0
+000008: const/4 v1, 0
+00000a: if-nez v0, +003h
+00000e: return v1
+000010: invoke-virtual v0, Landroid/bluetooth/BluetoothAdapter;->isEnabled()Z
+000016: move-result v0
+000018: return v0
+00001a: move-exception v0
+00001c: new-instance v2, Ljava/lang/StringBuilder;
+000020: invoke-direct v2, Ljava/lang/StringBuilder;-><init>()V
+000026: const-string v3, "getBleName"
+00002a: invoke-virtual v2, v3, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+000030: invoke-virtual v0, Ljava/lang/Exception;->toString()Ljava/lang/String;
+000036: move-result-object v0
+000038: invoke-virtual v2, v0, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+00003e: invoke-virtual v2, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
+000044: move-result-object v0
+000046: const-string v2, "BluetoothUtils"
+00004a: invoke-static v2, v0, Lc/c/f/a/b;->g(Ljava/lang/String; Ljava/lang/String;)V
+000050: return v1

@@ -1,0 +1,140 @@
+APK pcsuite/updateApk/connbase.apk
+DEX classes2.dex
+CLASS Lcom/vivo/pcsuite/pcconnect/ble/j;
+SUPER Ljava/lang/Object;
+FIELDS
+a Ljava/lang/String; = 'pcsuite_app'
+b Ljava/lang/String; = 'unique_id'
+c Ljava/lang/String; = 'auto_connect'
+d Ljava/lang/String; = 'link_device_id'
+e Ljava/lang/String; = 'j'
+
+METHOD <clinit>()V
+000000: return-void 
+
+METHOD <init>()V
+000000: invoke-direct v0, Ljava/lang/Object;-><init>()V
+000006: return-void 
+
+METHOD a(I)Ljava/lang/String;
+000000: new-instance v0, Ljava/util/Random;
+000004: invoke-static Ljava/util/UUID;->randomUUID()Ljava/util/UUID;
+00000a: move-result-object v1
+00000c: invoke-virtual v1, Ljava/util/UUID;->getMostSignificantBits()J
+000012: move-result-wide v1
+000014: invoke-direct v0, v1, v2, Ljava/util/Random;-><init>(J)V
+00001a: const-string v1, "`-=~!@#$%^&*()_+,./;'[]\<>?:"{}|abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789"
+00001e: invoke-virtual v1, Ljava/lang/String;->toCharArray()[C
+000024: move-result-object v1
+000026: new-instance v2, Ljava/lang/StringBuilder;
+00002a: invoke-direct v2, Ljava/lang/StringBuilder;-><init>()V
+000030: const/4 v3, 0
+000032: if-ge v3, v5, +00fh
+000036: array-length v4, v1
+000038: invoke-virtual v0, v4, Ljava/util/Random;->nextInt(I)I
+00003e: move-result v4
+000040: aget-char v4, v1, v4
+000044: invoke-virtual v2, v4, Ljava/lang/StringBuilder;->append(C)Ljava/lang/StringBuilder;
+00004a: add-int/lit8 v3, v3, 1
+00004e: goto -eh
+000050: invoke-virtual v2, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
+000056: move-result-object v5
+000058: return-object v5
+
+METHOD a(Landroid/content/Context; Ljava/lang/String;)V
+000000: const-string v0, "pcsuite_app"
+000004: const/4 v1, 0
+000006: invoke-virtual v2, v0, v1, Landroid/content/Context;->getSharedPreferences(Ljava/lang/String; I)Landroid/content/SharedPreferences;
+00000c: move-result-object v2
+00000e: invoke-interface v2, Landroid/content/SharedPreferences;->edit()Landroid/content/SharedPreferences$Editor;
+000014: move-result-object v2
+000016: const-string v0, "link_device_id"
+00001a: invoke-interface v2, v0, v3, Landroid/content/SharedPreferences$Editor;->putString(Ljava/lang/String; Ljava/lang/String;)Landroid/content/SharedPreferences$Editor;
+000020: invoke-interface v2, Landroid/content/SharedPreferences$Editor;->commit()Z
+000026: return-void 
+
+METHOD a(Landroid/content/Context; Z)V
+000000: const-string v0, "pcsuite_app"
+000004: const/4 v1, 0
+000006: invoke-virtual v2, v0, v1, Landroid/content/Context;->getSharedPreferences(Ljava/lang/String; I)Landroid/content/SharedPreferences;
+00000c: move-result-object v2
+00000e: invoke-interface v2, Landroid/content/SharedPreferences;->edit()Landroid/content/SharedPreferences$Editor;
+000014: move-result-object v2
+000016: const-string v0, "auto_connect"
+00001a: invoke-interface v2, v0, v3, Landroid/content/SharedPreferences$Editor;->putBoolean(Ljava/lang/String; Z)Landroid/content/SharedPreferences$Editor;
+000020: invoke-interface v2, Landroid/content/SharedPreferences$Editor;->commit()Z
+000026: return-void 
+
+METHOD a(Landroid/content/Context;)Z
+000000: const-string v0, "pcsuite_app"
+000004: const/4 v1, 0
+000006: invoke-virtual v2, v0, v1, Landroid/content/Context;->getSharedPreferences(Ljava/lang/String; I)Landroid/content/SharedPreferences;
+00000c: move-result-object v2
+00000e: const-string v0, "auto_connect"
+000012: const/4 v1, 1
+000014: invoke-interface v2, v0, v1, Landroid/content/SharedPreferences;->getBoolean(Ljava/lang/String; Z)Z
+00001a: move-result v2
+00001c: return v2
+
+METHOD b(Landroid/content/Context;)Ljava/lang/String;
+000000: const-string v0, "pcsuite_app"
+000004: const/4 v1, 0
+000006: invoke-virtual v2, v0, v1, Landroid/content/Context;->getSharedPreferences(Ljava/lang/String; I)Landroid/content/SharedPreferences;
+00000c: move-result-object v2
+00000e: const-string v0, "link_device_id"
+000012: const-string v1, ""
+000016: invoke-interface v2, v0, v1, Landroid/content/SharedPreferences;->getString(Ljava/lang/String; Ljava/lang/String;)Ljava/lang/String;
+00001c: move-result-object v2
+00001e: return-object v2
+
+METHOD b(Landroid/content/Context; Ljava/lang/String;)V
+000000: const-string v0, "pcsuite_app"
+000004: const/4 v1, 0
+000006: invoke-virtual v2, v0, v1, Landroid/content/Context;->getSharedPreferences(Ljava/lang/String; I)Landroid/content/SharedPreferences;
+00000c: move-result-object v2
+00000e: invoke-interface v2, Landroid/content/SharedPreferences;->edit()Landroid/content/SharedPreferences$Editor;
+000014: move-result-object v2
+000016: const-string v0, "unique_id"
+00001a: invoke-interface v2, v0, v3, Landroid/content/SharedPreferences$Editor;->putString(Ljava/lang/String; Ljava/lang/String;)Landroid/content/SharedPreferences$Editor;
+000020: invoke-interface v2, Landroid/content/SharedPreferences$Editor;->commit()Z
+000026: return-void 
+
+METHOD c(Landroid/content/Context;)Ljava/lang/String;
+000000: invoke-static v3, Lcom/vivo/pcsuite/pcconnect/ble/j;->d(Landroid/content/Context;)Ljava/lang/String;
+000006: move-result-object v0
+000008: invoke-static v0, Landroid/text/TextUtils;->isEmpty(Ljava/lang/CharSequence;)Z
+00000e: move-result v1
+000010: if-nez v1, +00ah
+000014: invoke-virtual v0, Ljava/lang/String;->length()I
+00001a: move-result v1
+00001c: const/16 v2, 12
+000020: if-eq v1, v2, +012h
+000024: const/4 v0, 4
+000026: invoke-static v0, Lcom/vivo/pcsuite/pcconnect/ble/j;->a(I)Ljava/lang/String;
+00002c: move-result-object v1
+00002e: invoke-static v1, v0, Lcom/vivo/pcsuite/pcconnect/ble/c;->a(Ljava/lang/String; I)[B
+000034: move-result-object v0
+000036: invoke-static v0, Lcom/vivo/pcsuite/pcconnect/ble/c;->c([B)Ljava/lang/String;
+00003c: move-result-object v0
+00003e: invoke-static v3, v0, Lcom/vivo/pcsuite/pcconnect/ble/j;->b(Landroid/content/Context; Ljava/lang/String;)V
+000044: sget-object v3, Lcom/vivo/pcsuite/pcconnect/ble/j;->e Ljava/lang/String;
+000048: new-instance v1, Ljava/lang/StringBuilder;
+00004c: invoke-direct v1, Ljava/lang/StringBuilder;-><init>()V
+000052: const-string v2, "UniqueId: "
+000056: invoke-virtual v1, v2, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+00005c: invoke-virtual v1, v0, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+000062: invoke-virtual v1, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
+000068: move-result-object v1
+00006a: invoke-static v3, v1, Lc/c/f/a/b;->a(Ljava/lang/String; Ljava/lang/String;)V
+000070: return-object v0
+
+METHOD d(Landroid/content/Context;)Ljava/lang/String;
+000000: const-string v0, "pcsuite_app"
+000004: const/4 v1, 0
+000006: invoke-virtual v2, v0, v1, Landroid/content/Context;->getSharedPreferences(Ljava/lang/String; I)Landroid/content/SharedPreferences;
+00000c: move-result-object v2
+00000e: const-string v0, "unique_id"
+000012: const/4 v1, 0
+000014: invoke-interface v2, v0, v1, Landroid/content/SharedPreferences;->getString(Ljava/lang/String; Ljava/lang/String;)Ljava/lang/String;
+00001a: move-result-object v2
+00001c: return-object v2

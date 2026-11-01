@@ -1,0 +1,81 @@
+APK pcsuite/updateApk/pcsuite.apk
+DEX classes2.dex
+CLASS Lcom/vivo/connect/transfer/Payload$File;
+SUPER Ljava/lang/Object;
+FIELDS
+fileDescriptor Landroid/os/ParcelFileDescriptor; = None
+fileSize J = None
+javaFile Ljava/io/File; = None
+offset J = None
+
+METHOD <init>(Ljava/io/File; Landroid/os/ParcelFileDescriptor; J J)V
+000000: invoke-direct v0, Ljava/lang/Object;-><init>()V
+000006: iput-object v1, v0, Lcom/vivo/connect/transfer/Payload$File;->javaFile Ljava/io/File;
+00000a: iput-object v2, v0, Lcom/vivo/connect/transfer/Payload$File;->fileDescriptor Landroid/os/ParcelFileDescriptor;
+00000e: iput-wide v3, v0, Lcom/vivo/connect/transfer/Payload$File;->fileSize J
+000012: iput-wide v5, v0, Lcom/vivo/connect/transfer/Payload$File;->offset J
+000016: return-void 
+
+METHOD createPayloadFile(Landroid/os/ParcelFileDescriptor;)Lcom/vivo/connect/transfer/Payload$File;
+000000: new-instance v0, Lcom/vivo/connect/transfer/Payload$File;
+000004: const-string v1, "Cannot create Payload.File from null ParcelFileDescriptor."
+000008: invoke-static v7, v1, Lcom/vivo/connect/utils/Preconditions;->checkNotNull(Ljava/lang/Object; Ljava/lang/Object;)Ljava/lang/Object;
+00000e: move-result-object v1
+000010: move-object v2, v1
+000012: check-cast v2, Landroid/os/ParcelFileDescriptor;
+000016: invoke-virtual v7, Landroid/os/ParcelFileDescriptor;->getStatSize()J
+00001c: move-result-wide v3
+00001e: const/4 v1, 0
+000020: const-wide/16 v5, 0
+000024: invoke-direct/range v0 ... v6, Lcom/vivo/connect/transfer/Payload$File;-><init>(Ljava/io/File; Landroid/os/ParcelFileDescriptor; J J)V
+00002a: return-object v0
+
+METHOD createPayloadFile(Landroid/os/ParcelFileDescriptor; J)Lcom/vivo/connect/transfer/Payload$File;
+000000: new-instance v0, Lcom/vivo/connect/transfer/Payload$File;
+000004: const-string v1, "Cannot create Payload.File from null ParcelFileDescriptor."
+000008: invoke-static v7, v1, Lcom/vivo/connect/utils/Preconditions;->checkNotNull(Ljava/lang/Object; Ljava/lang/Object;)Ljava/lang/Object;
+00000e: move-result-object v1
+000010: move-object v2, v1
+000012: check-cast v2, Landroid/os/ParcelFileDescriptor;
+000016: invoke-virtual v7, Landroid/os/ParcelFileDescriptor;->getStatSize()J
+00001c: move-result-wide v3
+00001e: const/4 v1, 0
+000020: move-wide v5, v8
+000022: invoke-direct/range v0 ... v6, Lcom/vivo/connect/transfer/Payload$File;-><init>(Ljava/io/File; Landroid/os/ParcelFileDescriptor; J J)V
+000028: return-object v0
+
+METHOD createPayloadFile(Ljava/io/File; J J)Lcom/vivo/connect/transfer/Payload$File;
+000000: const-string v0, "Cannot create Payload.File from null java.io.File."
+000004: invoke-static v8, v0, Lcom/vivo/connect/utils/Preconditions;->checkNotNull(Ljava/lang/Object; Ljava/lang/Object;)Ljava/lang/Object;
+00000a: invoke-virtual v8, Ljava/io/File;->isDirectory()Z
+000010: move-result v0
+000012: if-nez v0, +011h
+000016: new-instance v1, Lcom/vivo/connect/transfer/Payload$File;
+00001a: const/high16 v0, 268435456
+00001e: invoke-static v8, v0, Landroid/os/ParcelFileDescriptor;->open(Ljava/io/File; I)Landroid/os/ParcelFileDescriptor;
+000024: move-result-object v3
+000026: move-object v2, v8
+000028: move-wide v4, v9
+00002a: move-wide v6, v11
+00002c: invoke-direct/range v1 ... v7, Lcom/vivo/connect/transfer/Payload$File;-><init>(Ljava/io/File; Landroid/os/ParcelFileDescriptor; J J)V
+000032: return-object v1
+000034: new-instance v8, Ljava/lang/IllegalArgumentException;
+000038: const-string v9, "Cannot create Payload.File by a  directory"
+00003c: invoke-direct v8, v9, Ljava/lang/IllegalArgumentException;-><init>(Ljava/lang/String;)V
+000042: throw v8
+
+METHOD asJavaFile()Ljava/io/File;
+000000: iget-object v0, v0, Lcom/vivo/connect/transfer/Payload$File;->javaFile Ljava/io/File;
+000004: return-object v0
+
+METHOD asParcelFileDescriptor()Landroid/os/ParcelFileDescriptor;
+000000: iget-object v0, v0, Lcom/vivo/connect/transfer/Payload$File;->fileDescriptor Landroid/os/ParcelFileDescriptor;
+000004: return-object v0
+
+METHOD getOffset()J
+000000: iget-wide v0, v2, Lcom/vivo/connect/transfer/Payload$File;->offset J
+000004: return-wide v0
+
+METHOD getSize()J
+000000: iget-wide v0, v2, Lcom/vivo/connect/transfer/Payload$File;->fileSize J
+000004: return-wide v0
