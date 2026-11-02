@@ -7,6 +7,18 @@ import p2p_helper as h
 from wifi_capabilities import attr,parse_combinations
 
 class P2pTests(unittest.TestCase):
+    def test_backend_connection_errors_explain_local_service_and_port(self):
+        helper=object.__new__(h.Helper)
+        helper.backend='http://127.0.0.1:18765';helper.config={'apiToken':'test-only'}
+        for error in (h.urllib.error.URLError(ConnectionRefusedError(111,'Connection refused')),TimeoutError()):
+            with patch.object(h.urllib.request.OpenerDirector,'open',side_effect=error):
+                with self.assertRaisesRegex(RuntimeError,'127.0.0.1:18765.*npm start.*--port'):
+                    helper.api('/api/p2p/status')
+        error=h.urllib.error.HTTPError(helper.backend,401,'Unauthorized',{},None)
+        with patch.object(h.urllib.request.OpenerDirector,'open',side_effect=error):
+            with self.assertRaisesRegex(RuntimeError,'鉴权失败.*--state-dir'):
+                helper.api('/api/p2p/status')
+
     def test_gui_owner_identity_and_stale_pid_guard(self):
         identity=h.process_identity(os.getpid())
         self.assertEqual(identity[0],os.getuid())

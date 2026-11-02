@@ -38,7 +38,7 @@ async function mockPhone(t, dir) {
   const key = path.join(dir, 'key.pem'), cert = path.join(dir, 'cert.pem');
   execFileSync('openssl', ['req', '-x509', '-newkey', 'rsa:2048', '-nodes', '-keyout', key, '-out', cert,
     '-days', '1', '-subj', '/CN=127.0.0.1'], { stdio: 'ignore' });
-  const records = { headers: [], requests: [], uploadCount: 0, rejectUpload: false, rejectVersion: false, badDownloadSize: false };
+  const records = { headers: [], requests: [], uploadCount: 0, rejectUpload: false, rejectVersion: false, badDownloadSize: false, transferResults: [] };
   const server = https.createServer({ key: await fs.readFile(key), cert: await fs.readFile(cert) }, async (req, res) => {
     try {
       records.headers.push(req.headers); records.requests.push(req.url);
@@ -74,11 +74,16 @@ async function mockPhone(t, dir) {
   const ws = new WebSocket.WebSocketServer({ server });
   ws.on('connection', (socket, req) => {
     records.protocols = req.headers['sec-websocket-protocol'];
-    socket.on('message', data => { records.heartbeat = data.toString(); socket.send('ok'); });
+    socket.on('message', data => {
+      const message = data.toString();
+      if (message.startsWith('TRANS_FILE_')) records.transferResults.push(message);
+      else records.heartbeat = message;
+      socket.send('ok');
+    });
   });
   const port = await listen(server);
   t.after(async () => { for (const socket of ws.clients) socket.terminate(); ws.close(); server.closeAllConnections(); await new Promise(resolve => server.close(resolve)); });
-  return { port, records, file };
+  return { port, records, file, ws };
 }
 
 test('pairing codec handles fragmented UTF-8 frames and discovery response', () => {
@@ -155,6 +160,8 @@ test('HTTPS/WSS connection, upload, download, hashes and failure states', async 
   const download = await api(app, 'POST', `/api/sessions/${id}/downloads`, { paths: ['/sdcard/手机.txt'] });
   const downloaded = await waitJob(app, download.data.id); assert.equal(downloaded.status, 'succeeded', JSON.stringify(downloaded.error));
   assert.equal(await sha256(phone.file), downloaded.result.files[0].sha256);
+  for (let i = 0; i < 100 && phone.records.transferResults.length < 1; i++) await delay(5);
+  assert.deepEqual(phone.records.transferResults, ['TRANS_FILE_SUCCESS:' + JSON.stringify({ successCount: 1, id: download.data.id })]);
   const binary = await fetch(`http://127.0.0.1:${app.server.address().port}/api/jobs/${download.data.id}/file?path=${encodeURIComponent('手机.txt')}`, { headers: { authorization: `Bearer ${app.state.apiToken}` } });
   assert.equal(Buffer.from(await binary.arrayBuffer()).compare(await fs.readFile(phone.file)), 0);
   phone.records.rejectUpload = true;
@@ -170,11 +177,31 @@ test('HTTPS/WSS connection, upload, download, hashes and failure states', async 
   await api(app, 'POST', `/api/jobs/${cancel.data.id}/cancel`);
   assert.equal((await waitJob(app, cancel.data.id)).status, 'cancelled');
   await assert.rejects(fs.stat(path.join(app.state.dir, 'tmp', cancel.data.id)), { code: 'ENOENT' });
+  for (let i = 0; i < 100 && phone.records.transferResults.length < 3; i++) await delay(5);
+  assert.deepEqual(phone.records.transferResults.slice(1), [
+    'TRANS_FILE_FAIL:' + JSON.stringify({ id: bad.data.id, successCount: 0, failCount: 1, failCode: 0 }),
+    'TRANS_FILE_CANCEL:' + JSON.stringify({ id: cancel.data.id, successCount: 0, failCount: 1, type: 'send' })
+  ]);
   assert(phone.records.headers.every(h => h.newtoken === token));
   await api(app, 'DELETE', `/api/sessions/${id}`); assert.equal(app.phones.list().length, 0);
   phone.records.rejectVersion = true;
   const failed = await api(app, 'POST', '/api/sessions', { mode: 'existing', ip: '127.0.0.1', port: phone.port, token });
   assert.equal((await waitJob(app, failed.data.id)).status, 'failed'); assert.equal(app.phones.list().length, 0);
+});
+
+test('download retains verified files and reports a failed completion notification', async t => {
+  const dir = await temp(t), phone = await mockPhone(t, dir);
+  const app = await createBackend({ stateDir: path.join(dir, 'state') }); t.after(() => app.close()); await listen(app.server);
+  const start = await api(app, 'POST', '/api/sessions', { mode: 'existing', ip: '127.0.0.1', port: phone.port, token: 'notification-test' });
+  const id = (await waitJob(app, start.data.id)).result.id;
+  app.phones.transferResult = async () => { throw new Error('simulated closed socket'); };
+  const download = await api(app, 'POST', `/api/sessions/${id}/downloads`, { paths: ['/sdcard/手机.txt'] });
+  const done = await waitJob(app, download.data.id);
+  assert.equal(done.status, 'failed');
+  assert.equal(done.error.code, 'TRANSFER_NOTIFY_FAILED');
+  assert.equal(await sha256(path.join(done.error.details.directory, '手机.txt')), await sha256(phone.file));
+  assert.equal(phone.records.transferResults.length, 0);
+  await assert.rejects(fs.stat(path.join(app.state.dir, 'tmp', download.data.id)), { code: 'ENOENT' });
 });
 
 test('upload accepts official HTTP-200 preflight without status but still requires final confirmation',async t=>{
@@ -262,6 +289,27 @@ test('retained device reconnects after manual and heartbeat disconnect; failed r
   const again = await api(app,'POST',`/api/sessions/${id}/reconnect`,{});
   assert.equal((await waitJob(app,again.data.id)).status,'succeeded');
   assert.equal(app.phones.list().length,1);
+});
+
+test('silent network loss times out heartbeat and permits reconnect', async t => {
+  const dir = await temp(t), phone = await mockPhone(t, dir);
+  const app = await createBackend({ stateDir: path.join(dir, 'state') });
+  t.after(() => app.close()); await listen(app.server);
+  app.phones.heartIntervalMs = 25; app.phones.heartTimeoutMs = 150;
+  const start = await api(app, 'POST', '/api/sessions', { mode: 'existing', ip: '127.0.0.1', port: phone.port, token: 'heartbeat-test-token', transport: 'wifi-direct' });
+  const result = await waitJob(app, start.data.id); assert.equal(result.status, 'succeeded');
+  const id = result.result.id;
+  await delay(250); assert.equal(app.phones.get(id).status, 'connected', 'pong keeps active session alive');
+  const socket = [...phone.ws.clients][0]; socket._socket.pause();
+  for (let i = 0; i < 100 && app.phones.get(id).status === 'connected'; i++) await delay(10);
+  assert.equal(app.phones.get(id).status, 'disconnected');
+  assert.equal(app.phones.get(id).lastError, '手机心跳超时');
+  socket._socket.resume(); socket.terminate();
+  const retry = await api(app, 'POST', `/api/sessions/${id}/reconnect`, {});
+  const done = await waitJob(app, retry.data.id);
+  assert.equal(done.status, 'succeeded', JSON.stringify(done.error));
+  assert.equal(done.result.id, id);
+  assert.equal(app.phones.list().length, 1);
 });
 
 

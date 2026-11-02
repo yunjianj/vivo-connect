@@ -4,7 +4,7 @@
 Defaults to a project-local GO-only supplicant, iproute2 and dnsmasq. The legacy
 system D-Bus route requires --driver system. Ctrl-C removes only its own group.
 """
-import argparse,fcntl,queue,threading,ipaddress,json,os,pathlib,re,signal,subprocess,tempfile,time,urllib.request,uuid
+import argparse,fcntl,queue,threading,ipaddress,json,os,pathlib,re,signal,subprocess,tempfile,time,urllib.request,urllib.error,uuid
 from wifi_capabilities import Nl80211,attributes,number
 ROOT=pathlib.Path(__file__).resolve().parent.parent
 SERVICE='fi.w1.wpa_supplicant1'; BASE='/fi/w1/wpa_supplicant1'; IFACE=SERVICE+'.Interface'; P2P=IFACE+'.P2PDevice'; GROUP=SERVICE+'.Group'
@@ -205,7 +205,13 @@ class Helper:
         request=urllib.request.Request(self.backend+route,data=data,method=method or ('POST' if data else 'GET'),headers={'Authorization':'Bearer '+self.config['apiToken'],'Content-Type':'application/json'})
         # Explicitly bypass proxy environment variables for the loopback helper channel.
         opener=urllib.request.build_opener(urllib.request.ProxyHandler({}))
-        with opener.open(request,timeout=10) as response:return json.load(response)
+        try:
+            with opener.open(request,timeout=10) as response:return json.load(response)
+        except urllib.error.HTTPError as error:
+            if error.code==401:raise RuntimeError('本机后端鉴权失败，请确认界面和无线助手使用相同的 --state-dir') from error
+            raise RuntimeError(f'本机后端接口 {route} 返回 HTTP {error.code}') from error
+        except (urllib.error.URLError,TimeoutError) as error:
+            raise RuntimeError(f'无法连接本机后端 {self.backend}，请先在项目目录运行 npm start，并确认后端 PORT 与界面 --port 一致') from error
     def recover_stale(self,name,phy):
         if name==self.args.interface:raise RuntimeError('拒绝清理校园网 station 接口')
         if not re.fullmatch(r'p2p-[A-Za-z0-9_.:-]{1,11}',name):raise RuntimeError('恢复目标必须是 P2P 接口名')

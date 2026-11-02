@@ -6,6 +6,12 @@ slint::include_modules!();
 use slint::{ComponentHandle, ModelRc, VecModel};
 use std::{fs, path::PathBuf, sync::mpsc, time::Duration};
 
+// Slint arms an in-window drag on the motion that crosses the threshold;
+// update the target once more before release even when motion was coalesced.
+fn settle_drag_target(window: &slint::Window, position: slint::LogicalPosition) {
+    window.dispatch_event(slint::platform::WindowEvent::PointerMoved { position });
+}
+
 fn demo(ui: &AppWindow) {
     ui.set_devices(ModelRc::new(VecModel::from(vec![Device {
         id: "demo".into(),
@@ -52,10 +58,19 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
     let headless = if screenshot.is_some() {
         Some(snapshot::setup())
     } else {
-        slint::BackendSelector::new()
+        let selector = slint::BackendSelector::new()
             .backend_name("winit".into())
-            .renderer_name("software".into())
-            .select()?;
+            .renderer_name("software".into());
+        #[cfg(target_os = "linux")]
+        let selector = {
+            use slint::winit_030::winit::{
+                event_loop::EventLoop, platform::wayland::EventLoopBuilderExtWayland,
+            };
+            let mut builder = EventLoop::<slint::winit_030::SlintEvent>::with_user_event();
+            builder.with_wayland();
+            selector.with_winit_event_loop_builder(builder)
+        };
+        selector.select()?;
         None
     };
     let ui = AppWindow::new()?;
@@ -92,6 +107,38 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
             on_send_path,
             path,
             worker::Action::SendPath(path.to_string(), "/sdcard/Download".into())
+        );
+        {
+            let tx = tx.clone();
+            ui.on_file_operation(move |action, path, value| {
+                let _ = tx.send(worker::Action::FileOperation(
+                    action.to_string(),
+                    path.to_string(),
+                    value.to_string(),
+                ));
+            });
+        }
+        ui.on_file_drag_data(|path| {
+            slint::DataTransfer::from(slint::SharedString::from(format!(
+                "vivo-phone-path:{}",
+                path
+            )))
+        });
+        ui.on_is_phone_drag(|data| {
+            data.plain_text()
+                .is_ok_and(|s| s.starts_with("vivo-phone-path:/"))
+        });
+        ui.on_phone_drag_path(|data| {
+            data.plain_text()
+                .ok()
+                .and_then(|s| s.strip_prefix("vivo-phone-path:").map(|p| p.to_owned()))
+                .unwrap_or_default()
+                .into()
+        });
+        bind!(
+            on_upload_here,
+            path,
+            worker::Action::ChooseFiles(path.to_string())
         );
         bind!(on_browse, path, worker::Action::Browse(path.to_string()));
         bind!(on_receive, path, worker::Action::Receive(path.to_string()));
@@ -134,6 +181,47 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
                 let _ = tx_copy.send(worker::Action::ChooseFiles(ui.get_save_path().to_string()));
             }
         });
+        {
+            use slint::winit_030::{EventResult, WinitWindowAccessor, winit};
+            let tx = tx.clone();
+            let weak = ui.as_weak();
+            let mut last_cursor = None;
+            ui.window().on_winit_window_event(move |window, event| {
+                match event {
+                    winit::event::WindowEvent::CursorMoved { position, .. } => {
+                        let logical = position.to_logical::<f32>(window.scale_factor() as f64);
+                        last_cursor = Some(slint::LogicalPosition::new(logical.x, logical.y));
+                    }
+                    winit::event::WindowEvent::CursorLeft { .. } => last_cursor = None,
+                    winit::event::WindowEvent::MouseInput {
+                        state: winit::event::ElementState::Released,
+                        button: winit::event::MouseButton::Left,
+                        ..
+                    } => {
+                        if let Some(position) = last_cursor {
+                            settle_drag_target(window, position);
+                        }
+                    }
+                    _ => {}
+                }
+                if let winit::event::WindowEvent::DroppedFile(path) = event {
+                    if let Some(ui) = weak.upgrade() {
+                        if ui.get_tab_index() == 1
+                            && ui.get_connected()
+                            && !ui.get_pair_visible()
+                            && !ui.get_file_menu_visible()
+                            && ui.get_file_dialog_action().is_empty()
+                        {
+                            let _ = tx.send(worker::Action::SendPath(
+                                path.to_string_lossy().into_owned(),
+                                ui.get_phone_path().to_string(),
+                            ));
+                        }
+                    }
+                }
+                EventResult::Propagate
+            });
+        }
         let worker_handle = match api::Api::load(&state, port) {
             Ok(api) => {
                 let dir = state.join(format!("native-ui-{}", std::process::id()));
@@ -267,6 +355,87 @@ mod ui_tests {
             &std::env::temp_dir().join("vivo-native-files-smoke.png"),
         )
         .unwrap();
+        ui.on_file_drag_data(|path| {
+            slint::DataTransfer::from(slint::SharedString::from(format!(
+                "vivo-phone-path:{}",
+                path
+            )))
+        });
+        ui.on_is_phone_drag(|data| {
+            data.plain_text()
+                .is_ok_and(|s| s.starts_with("vivo-phone-path:/"))
+        });
+        ui.on_phone_drag_path(|data| {
+            data.plain_text()
+                .ok()
+                .and_then(|s| s.strip_prefix("vivo-phone-path:").map(str::to_owned))
+                .unwrap_or_default()
+                .into()
+        });
+        let moves = Rc::new(std::cell::RefCell::new(Vec::new()));
+        let captured = moves.clone();
+        ui.on_file_operation(move |action, source, target| {
+            captured
+                .borrow_mut()
+                .push((action.to_string(), source.to_string(), target.to_string()))
+        });
+        let first = slint::LogicalPosition::new(500., 490.);
+        ui.window()
+            .dispatch_event(WindowEvent::PointerMoved { position: first });
+        ui.window().dispatch_event(WindowEvent::PointerPressed {
+            position: first,
+            button: PointerEventButton::Right,
+        });
+        ui.window().dispatch_event(WindowEvent::PointerReleased {
+            position: first,
+            button: PointerEventButton::Right,
+        });
+        assert!(
+            ui.get_file_menu_visible(),
+            "right click opens the file menu"
+        );
+        assert_eq!(ui.get_selected_name(), "DCIM");
+        ui.set_file_menu_visible(false);
+        slint::platform::update_timers_and_animations();
+        ui.window()
+            .dispatch_event(WindowEvent::PointerMoved { position: first });
+        ui.window().dispatch_event(WindowEvent::PointerPressed {
+            position: first,
+            button: PointerEventButton::Left,
+        });
+        let second = slint::LogicalPosition::new(500., 545.);
+        ui.window()
+            .dispatch_event(WindowEvent::PointerMoved { position: second });
+        ui.window().dispatch_event(WindowEvent::PointerReleased {
+            position: second,
+            button: PointerEventButton::Left,
+        });
+        assert!(
+            moves.borrow().is_empty(),
+            "a single coalesced movement exposes the missing target update"
+        );
+        ui.window()
+            .dispatch_event(WindowEvent::PointerMoved { position: first });
+        ui.window().dispatch_event(WindowEvent::PointerPressed {
+            position: first,
+            button: PointerEventButton::Left,
+        });
+        ui.window()
+            .dispatch_event(WindowEvent::PointerMoved { position: second });
+        settle_drag_target(ui.window(), second);
+        ui.window().dispatch_event(WindowEvent::PointerReleased {
+            position: second,
+            button: PointerEventButton::Left,
+        });
+        assert_eq!(
+            &*moves.borrow(),
+            &[(
+                "move".to_string(),
+                "/storage/emulated/0/DCIM".to_string(),
+                "/storage/emulated/0/Download".to_string()
+            )],
+            "dragging one item onto a folder moves it"
+        );
         fs::remove_file(path).unwrap();
     }
 }

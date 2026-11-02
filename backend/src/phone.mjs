@@ -14,6 +14,8 @@ const exec = promisify(execFile);
 
 export class PhoneManager {
   sessions = new Map();
+  heartIntervalMs = 5000;
+  heartTimeoutMs = 20000;
   constructor(state, accounts) { this.state = state; this.accounts = accounts; }
   adb() { const lib = official('@vivo/adbkit'); return { lib, client: lib.createClient({ bin: process.env.ADB || 'adb' }) }; }
   async usbDevices() { return (await this.adb().client.listDevices()).map(d => ({ serial: d.id, state: d.type })); }
@@ -79,6 +81,7 @@ export class PhoneManager {
         token: s.token, isPcOsSupportExtScreen: false, pcBleId: '', deviceAvatarUri: '' }, signal);
       s.info = checkBusiness(base, '/base-info').data;
       await this.heartbeat(s, signal);
+      if (s.ws.readyState !== s.ws.OPEN) throw new ApiError(502, 'HEARTBEAT_CLOSED', '手机心跳连接已断开');
       s.status = 'connected'; await this.adoptDevice(s, replacing); return this.public(s);
     } catch (error) {
       await this.cleanup(s); this.sessions.delete(s.id); throw error;
@@ -137,14 +140,41 @@ export class PhoneManager {
       ['v1.hc.vivo.com.cn', s.token], { rejectUnauthorized: s.rejectUnauthorized, localAddress: s.localIp, handshakeTimeout: 10000, maxPayload: 4 * 1024 * 1024 });
     ws.on('error', () => { s.status = 'disconnected'; s.lastError = '心跳连接异常'; });
     ws.on('close', () => { clearInterval(s.heartTimer); s.status = 'disconnected'; });
+    let lastResponse = Date.now();
+    ws.on('pong', () => { lastResponse = Date.now(); });
     ws.on('message', data => {
-      s.lastMessageAt = Date.now();
+      s.lastMessageAt = lastResponse = Date.now();
       if (data.toString() === 'close') { s.lastError = '手机关闭了会话'; ws.close(); }
     });
     await once(ws, 'open', { signal });
     ws.send('{"state":"normal"}');
-    s.heartTimer = setInterval(() => { if (ws.readyState === WebSocket.OPEN) ws.send('{"state":"normal"}'); }, 5000);
+    s.heartTimer = setInterval(() => {
+      if (ws.readyState !== WebSocket.OPEN) return;
+      if (Date.now() - lastResponse >= this.heartTimeoutMs) {
+        s.status = 'disconnected'; s.lastError = '手机心跳超时'; ws.terminate(); return;
+      }
+      ws.ping();
+      ws.send('{"state":"normal"}');
+    }, this.heartIntervalMs);
     s.heartTimer.unref();
+  }
+  async transferResult(s, outcome, params) {
+    const prefix = { success: 'TRANS_FILE_SUCCESS:', fail: 'TRANS_FILE_FAIL:', cancel: 'TRANS_FILE_CANCEL:' }[outcome];
+    requireThat(prefix, '传输结果类型无效');
+    if (s.status !== 'connected' || s.ws?.readyState !== 1) throw new ApiError(502, 'TRANSFER_NOTIFY_FAILED', '手机连接已断开，无法通知传输结果');
+    await new Promise((resolve, reject) => {
+      const timer = setTimeout(() => reject(new ApiError(504, 'TRANSFER_NOTIFY_FAILED', '通知手机传输结果超时')), 5000);
+      try {
+        s.ws.send(prefix + JSON.stringify(params), error => {
+          clearTimeout(timer);
+          if (error) reject(new ApiError(502, 'TRANSFER_NOTIFY_FAILED', '无法发送手机传输结果'));
+          else resolve();
+        });
+      } catch {
+        clearTimeout(timer);
+        reject(new ApiError(502, 'TRANSFER_NOTIFY_FAILED', '无法发送手机传输结果'));
+      }
+    });
   }
   async files(id, params = {}) {
     const s = this.get(id);

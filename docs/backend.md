@@ -2,7 +2,7 @@
 
 实现位于 [backend/src](../backend/src/server.mjs)，提供本机 REST API 和异步任务。账号登录使用官方 vivo 网页；手机继续运行官方 APK。后端优先加载安装包自带的 JavaScript 依赖，Linux 仅替代 Windows 原生连接服务和 Electron 进程/UI 编排。
 
-已实现的范围是：官方账号登录回调、账号本地持久化/退出；USB、官方云扫码连接和旧版同网段无线配对；`/version`、`/base-info` 与心跳；浏览手机文件、电脑上传手机、从手机下载到电脑。文件收发使用手机官方文件 API，不使用 ADB push/pull 替代业务传输。“接收文件”当前是选择手机路径后主动下载，不包括手机分享面板主动推送及后台自动接收。
+已实现的范围是：官方账号登录回调、账号本地持久化/退出；USB、官方云扫码连接和旧版同网段无线配对；`/version`、`/base-info` 与心跳；浏览手机文件、电脑上传手机、从手机下载到电脑，以及手机文件移动、重命名、删除、创建目录和查询目录大小。文件收发使用手机官方文件 API，不使用 ADB push/pull 替代业务传输。“接收文件”当前是选择手机路径后主动下载，不包括手机分享面板主动推送及后台自动接收。
 
 本地模拟手机集成测试已通过；尚无真实账号登录或真机互通记录。新版 seed/sign 挑战获取和 BLE 发现尚未实现；新增不依赖 BLE 的实验性本地扫码 P2P GO 路径（仍需管理员/真机验证）。对于常规局域网，目标手机若拒绝旧配对，可优先尝试官方扫码连接、USB，或由正常官方配对取得的已有连接 token。
 
@@ -93,7 +93,7 @@ node tools/import-account.mjs /绝对路径/保存的回调页.html
 
 ## 原生 GUI
 
-默认前端现为 Rust + Slint 原生桌面程序。后端运行后执行 `./tools/run-native.sh`；`npm run ui` / `npm run scan` 也指向原生入口。设备管理、二维码、账号登录与文件收发均在原生窗口中操作。构建、依赖与内存实测见 [原生 GUI 文档](native-gui.md)。
+默认前端为 C++ + Qt Widgets 原生桌面程序。后端运行后执行 `./tools/run-native.sh`；`npm run ui` / `npm run scan` 也指向原生入口。设备管理、二维码、账号登录与文件收发均在原生窗口中操作。构建、依赖与内存实测见 [原生 GUI 文档](native-gui.md)。
 
 下文网页相关描述仅适用于可选的旧调试入口 `npm run ui:web`。
 
@@ -148,7 +148,7 @@ npm run ui:web
 - 手机文件页使用官方 FILELIST 请求（data 为官方虚拟首页 `/` 或手机返回的实际目录路径，versionTag=1）。可进入文件夹、接收文件，也可直接输入手机文件路径接收。
 - 传输记录展示真实任务进度、失败原因与取消按钮，接收完成后可保存到浏览器的下载目录。重启后端不保留内存中的任务历史。
 
-页面使用同一后端的 `/scan`，无需单独启动前端或填写 API token。60 秒一次性票据只在浏览器 fragment 中传递，兑换后从 URL 清除；浏览器得到一小时有效的界面凭据，仅存于当前标签页 sessionStorage。它允许账号登录、设备查询/扫码、手机文件查询/下载、浏览器选中文件上传及任务查询/取消；不允许系统网络注册、签发新票据、导入账号回调或直接传入电脑任意路径上传。直接打开未授权页面时会提示先运行 `npm run ui`。
+页面使用同一后端的 `/scan`，无需单独启动前端或填写 API token。60 秒一次性票据只在浏览器 fragment 中传递，兑换后从 URL 清除；浏览器得到一小时有效的界面凭据，仅存于当前标签页 sessionStorage。它允许账号登录、设备查询/扫码、手机文件查询/下载、浏览器选中文件上传及任务查询/取消；不允许系统网络注册、签发新票据、导入账号回调或直接传入电脑任意路径上传。直接打开未授权页面时会提示先运行 `npm run ui:web`。
 
 浏览器通过 `POST /api/ui/files?sessionId=…&name=…&savePath=…` 发送文件二进制，`X-File-Size` 声明大小。后端检查名称、实际大小、空间和会话，仅在私有随机暂存目录落盘，再交给已有官方上传流程；完成、失败或取消后清理暂存文件。页面凭据不能访问原有 paths 上传接口，从而避免变成任意本地文件读取入口。更新到本版需重启后端；现有手机会话随重启失效，需要重新连接。
 
@@ -289,7 +289,29 @@ curl -X POST -H "Authorization: Bearer $TOKEN" -H 'Content-Type: application/jso
 
 下载先发送 download_info，TAR 写入临时目录，完整接收后检查条目、大小和安全路径，再解包。完成的文件位于 `.vivo-connect/downloads/<job-id>/`；每个普通文件返回 SHA256。此哈希用于本地校验，尚未与手机端哈希进行对比。目录可传 `"isDirectory":true`。不自动覆盖用户现有下载文件。
 
+接收归档并完成解包、大小检查、SHA-256 计算和落盘后，后端通过 `/ws/heart-beat` 发送 `TRANS_FILE_SUCCESS:{"successCount":…, "id":"<job-id>"}`，结束手机“正在发送”的状态。只结束 HTTP 流会让手机继续等待完成通知，可能停在 99%。失败和取消分别发送官方 `TRANS_FILE_FAIL` / `TRANS_FILE_CANCEL` 消息，不发送成功通知。计数优先使用手机预检返回的 `totalCount`，缺省时使用请求路径数量。协议依据为官方 [transFileSuccess](../analysis/pretty/app-modules.js#L539) 和 [目录传输完成处理](../analysis/pretty/app-modules.js#L17214)。
+
+发送完成通知失败时任务返回 `TRANSFER_NOTIFY_FAILED`，已校验文件仍保留，`error.details.directory/files` 指出保存位置，避免把通知故障误报为文件丢失。通知成功表示 WebSocket 发送完成，协议未提供手机界面更新的确认；当前验证使用模拟手机。
+
 `GET /api/jobs/<id>/file?path=<result.files中的相对路径>` 可以通过带鉴权 HTTP 取回已完成文件。只允许访问该任务结果清单中的文件。
+
+## 手机文件管理
+
+以下接口均为 `POST /api/sessions/<sessionId>/files/<操作>`，使用本地 API Bearer token 和 JSON 请求体；会话必须已连接。它们同步返回 HTTP 200 和结果，无需轮询任务。原有 `POST .../files` 列表接口保持不变。
+
+| 操作 | 请求体示例 | 返回内容 |
+|---|---|---|
+| `move` | `{"path":"/sdcard/Download/a.txt","destination":"/sdcard/Documents/a.txt"}` | 目标 `path`、手机原始 `response` |
+| `rename` | `{"path":"/sdcard/Download/a.txt","name":"新名字.txt"}` | 目标 `path`、`response` |
+| `delete` | `{"paths":["/sdcard/Download/a.txt","/sdcard/Download/旧目录"]}` | 请求的 `paths`、含删除统计的 `response` |
+| `mkdir` | `{"path":"/sdcard/Download","name":"新目录"}` | 新目录 `path`、`response` |
+| `size` | `{"path":"/sdcard/Download"}` | `path`、字节数 `size` |
+
+`move.destination` 是包含文件名的完整目标路径，目标父目录应已存在。移动与重命名复用手机 `/pc_file_manager/file_rename`，按 `srcPath/newPath/newName` 传参，并要求手机业务码成功且 `data` 确认成功。跨目录、跨存储卷的支持由手机实现决定，目前仅通过模拟手机验证；手机拒绝时直接返回失败，不使用复制后删除兜底。重名 `0014` 映射为 HTTP 409 `FILE_EXISTS`，源不存在 `0015` 映射为 HTTP 404 `FILE_NOT_FOUND`，空间不足 `0012` 映射为 HTTP 409 `PHONE_STORAGE_FULL`。
+
+删除调用官方 `/pc_file_manager/delete_info`（`list` 为手机路径、`bucketId=[]`），根据官方 UI 使用的 `total/successTotal/failType` 检查结果。无法确认全部完成时返回 HTTP 502 `FILE_DELETE_INCOMPLETE`，`details.response` 保留手机统计；部分文件可能已删除，应刷新文件列表后决定下一步。是否进入回收站由手机决定，不承诺可恢复。批量删除限制为 1–1000 个路径，拒绝重复路径及同时选中的父子路径。路径必须为手机绝对路径，拒绝 `.`、`..`、控制字符、反斜杠；禁止移动、重命名或删除 `/`。
+
+目录创建沿用手机 GET `/pc_file_manager/create_directory?path=…&name=…`，对本地调用方仍提供 POST；目录大小使用 `/pc_file_manager/query_directory_size`。新增接口只提供后端能力，尚未接入原生或网页 UI，网页票据也未增加这些操作权限。实现见 [files.mjs](../backend/src/files.mjs)，回归测试见 [files.test.mjs](../backend/test/files.test.mjs)。
 
 ## 任务、取消与错误
 

@@ -4,7 +4,7 @@
 
 ## 基础后端
 
-已新增账号登录、手机连接和文件收发后端，优先复用官方账号网页、手机 APK、`@vivo/adbkit`、WebSocket 和 TAR 库。原生 GUI 使用 **Rust + Slint**，采用软件渲染；运行 `./tools/run-native.sh` 打开设备界面，后端可用 `node backend/src/server.mjs` 启动。详情见 [原生 GUI](docs/native-gui.md)。
+已新增账号登录、手机连接和文件收发后端，优先复用官方账号网页、手机 APK、`@vivo/adbkit`、WebSocket 和 TAR 库。原生 GUI 使用 **C++ + Qt Widgets**，在 Wayland 下支持桌面文件双向拖放；运行 `./tools/run-native.sh` 打开设备界面，后端随界面自动启动和关闭。详情见 [原生 GUI](docs/native-gui.md)。
 
 校园网隔离场景使用项目独立 supplicant 管理 P2P GO，不修改 NetworkManager；已实测手机直连、文件上传及回读哈希一致。API、依赖和验证范围见 [后端使用文档](docs/backend.md)。
 

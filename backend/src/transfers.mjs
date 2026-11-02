@@ -111,6 +111,7 @@ export class Transfers {
     const downloads = path.join(this.state.dir, 'downloads'); const temp = path.join(this.state.dir, 'tmp', job.id);
     await fs.mkdir(downloads, { recursive: true, mode: 0o700 }); await fs.mkdir(temp, { recursive: true, mode: 0o700 });
     const archivePath = path.join(temp, 'receive.tar'); const output = path.join(temp, 'files');
+    let prepared = false, saved = false, totalCount = options.paths.length;
     try {
       job.phase = 'preflight';
       const pre = await this.phones.json(s, `/pc_file_manager/download_info?id=${job.id}`, { downloadList: options.paths,
@@ -118,6 +119,8 @@ export class Transfers {
       if (!pre || typeof pre !== 'object' || (Array.isArray(pre) && pre.length) ||
           (pre.code !== undefined && String(pre.code) !== '0000') ||
           (pre.status !== undefined && Number(pre.status) !== 0)) throw new ApiError(409, 'DOWNLOAD_PREFLIGHT_REJECTED', '手机拒绝下载预检或部分文件已不存在');
+      prepared = true;
+      if (Number.isSafeInteger(pre.totalCount) && pre.totalCount > 0) totalCount = pre.totalCount;
       if (pre.totalSize !== undefined && (!Number.isSafeInteger(pre.totalSize) || pre.totalSize < 0 || pre.totalSize > LIMIT)) throw new ApiError(413, 'TRANSFER_TOO_LARGE', '预检文件大小超过范围');
       job.totalSize = pre.totalSize;
       const disk = await fs.statfs(temp); const available = disk.bavail * disk.bsize;
@@ -144,7 +147,25 @@ export class Transfers {
       }
       abortError(signal);
       const dest = path.join(downloads, job.id); await fs.rename(output, dest);
+      saved = true;
+      // The official client ends the phone's sending UI over the heartbeat WS.
+      // Finishing the HTTP download alone leaves that UI waiting at 99%.
+      job.phase = 'notifying';
+      try { await this.phones.transferResult(s, 'success', { successCount: totalCount, id: job.id }); }
+      catch (error) {
+        throw new ApiError(502, 'TRANSFER_NOTIFY_FAILED', '文件已保存，但无法通知手机传输完成', { directory: dest, files, notificationCode: error.code });
+      }
       return { directory: dest, files, totalSize: manifest.totalSize, contentHashComparedWithPhone: false };
+    } catch (error) {
+      if (prepared && !saved) {
+        // Cancellation must still send its terminal message after signal abort.
+        // A disconnected phone cannot be notified; preserve the original error.
+        await this.phones.transferResult(s, signal.aborted ? 'cancel' : 'fail', {
+          id: job.id, successCount: 0, failCount: totalCount,
+          ...(signal.aborted ? { type: 'send' } : { failCode: error.code === 'LOCAL_STORAGE_FULL' || error.code === 'ENOSPC' ? 1 : 0 })
+        }).catch(() => {});
+      }
+      throw error;
     } finally { await fs.rm(temp, { recursive: true, force: true }); }
   }
 }

@@ -15,6 +15,7 @@ import { networkInterfaces } from './network.mjs';
 import { LocalUi } from './ui.mjs';
 import { P2pManager } from './p2p.mjs';
 import { ScanManager } from './scan.mjs';
+import { FileManager } from './files.mjs';
 
 export async function createBackend({ stateDir, accountManager, phoneManager } = {}) {
   const state = await initState(stateDir);
@@ -24,6 +25,7 @@ export async function createBackend({ stateDir, accountManager, phoneManager } =
   const jobs = new Jobs();
   phones.onReplace = id => jobs.cancelSession(id, { exceptKind: 'reconnect' });
   const transfers = new Transfers(state, phones);
+  const files = new FileManager(phones);
   const p2p = new P2pManager(state, phones, jobs);
   const scans = new ScanManager(state, accounts, phones, jobs);
   const reply = (res, status, value) => {
@@ -74,6 +76,8 @@ export async function createBackend({ stateDir, accountManager, phoneManager } =
         return reply(res, 202, jobs.create('connect', (_job, signal) => phones.connect(options, signal)));
       }
       if (route === 'GET /api/jobs') return reply(res, 200, [...jobs.items.values()].map(j => jobs.public(j)));
+      const fileAction = url.pathname.match(/^\/api\/sessions\/([\w-]+)\/files\/(move|rename|delete|mkdir|size)$/);
+      if (req.method === 'POST' && fileAction) return reply(res, 200, await files.execute(fileAction[1], fileAction[2], body));
       const connectionAction = url.pathname.match(/^\/api\/sessions\/([\w-]+)\/(disconnect|reconnect)$/);
       if (req.method === 'POST' && connectionAction) {
         const [, id, action] = connectionAction;

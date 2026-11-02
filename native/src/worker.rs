@@ -22,6 +22,7 @@ pub enum Action {
     ChooseFiles(String),
     SendPath(String, String),
     Browse(String),
+    FileOperation(String, String, String),
     ParentDirectory,
     Receive(String),
     Cancel(String),
@@ -432,6 +433,7 @@ impl Worker {
                 self.ui(|ui| {
                     ui.set_phone_path("/storage/emulated/0/".into());
                     ui.set_files(ModelRc::new(VecModel::from(Vec::<PhoneFile>::new())));
+                    ui.set_selected_file("".into());
                 });
                 self.pair = None;
                 self.ui(|ui| {
@@ -524,6 +526,7 @@ impl Worker {
             );
             ui.set_storage_root(root.into());
             ui.set_files(ModelRc::new(VecModel::from(files)));
+            ui.set_selected_file("".into());
             ui.set_file_message(format!("{count} 个项目").into());
         });
         Ok(())
@@ -541,8 +544,7 @@ impl Worker {
             &format!("/api/sessions/{id}/uploads"),
             json!({"paths":values,"savePath":save,"ifDuplicated":"rename"}),
         )?;
-        self.ui(|ui| ui.set_tab_index(2));
-        self.notice("文件已加入发送队列");
+        self.notice("文件已加入发送队列，可在传输记录中查看");
         Ok(())
     }
     fn save(&mut self, id: String) -> Result<(), String> {
@@ -598,6 +600,7 @@ impl Worker {
                     self.ui(|ui| {
                         ui.set_phone_path("/storage/emulated/0/".into());
                         ui.set_files(ModelRc::new(VecModel::from(Vec::<PhoneFile>::new())));
+                        ui.set_selected_file("".into());
                     });
                     self.last.clear();
                 }
@@ -646,12 +649,85 @@ impl Worker {
                     self.open_pair(1)?;
                 }
             }
+            Action::FileOperation(action, path, value) => {
+                let id = self.current()?.to_owned();
+                let root = self
+                    .sessions
+                    .iter()
+                    .find(|s| text(s, "id") == id)
+                    .map(storage_root)
+                    .unwrap_or("/storage/emulated/0".into());
+                let actual = |p: &str| -> Result<String, String> {
+                    let normalized = directory_path(p, &root)?;
+                    Ok(if normalized == "/" {
+                        root.clone()
+                    } else {
+                        normalized
+                    })
+                };
+                let path = actual(&path)?;
+                if path == root && matches!(action.as_str(), "rename" | "move" | "delete") {
+                    return Err("不能对手机存储根目录执行此操作".into());
+                }
+                let body = match action.as_str() {
+                    "rename" | "mkdir" => json!({"path":path,"name":value}),
+                    "move" => {
+                        let folder = actual(&value)?;
+                        let name = path.rsplit('/').next().ok_or("文件路径无效")?;
+                        json!({"path":path,"destination":format!("{}/{}",folder.trim_end_matches('/'),name)})
+                    }
+                    "delete" => json!({"paths":[path]}),
+                    "size" => json!({"path":path}),
+                    _ => return Err("不支持的文件操作".into()),
+                };
+                let result = match self
+                    .api
+                    .post(&format!("/api/sessions/{id}/files/{action}"), body)
+                {
+                    Ok(result) => result,
+                    Err(error) => {
+                        if action == "delete" {
+                            let _ = self.browse(self.directory.clone());
+                        }
+                        return Err(error);
+                    }
+                };
+                if action == "size" {
+                    self.notice(format!(
+                        "文件夹大小：{}",
+                        size(result["size"].as_u64().unwrap_or(0))
+                    ));
+                } else {
+                    self.ui(|ui| ui.set_selected_file("".into()));
+                    self.browse(self.directory.clone())?;
+                    self.notice("文件操作已完成");
+                }
+            }
             Action::ChooseFiles(save) => {
                 let files = file_dialog(false, "")?;
-                self.send(files, save)?;
+                let id = self.current()?.to_owned();
+                let root = self
+                    .sessions
+                    .iter()
+                    .find(|s| text(s, "id") == id)
+                    .map(storage_root)
+                    .unwrap_or("/storage/emulated/0".into());
+                let save = directory_path(&save, &root)?;
+                self.send(files, if save == "/" { root } else { save })?;
             }
             Action::SendPath(path, save) => {
-                self.send(vec![PathBuf::from(path)], save)?;
+                let id = self.current()?.to_owned();
+                let root = self
+                    .sessions
+                    .iter()
+                    .find(|s| text(s, "id") == id)
+                    .map(storage_root)
+                    .unwrap_or("/storage/emulated/0".into());
+                let save = directory_path(&save, &root)?;
+                self.send(
+                    vec![PathBuf::from(path)],
+                    if save == "/" { root } else { save },
+                )?;
             }
             Action::Browse(path) => {
                 if let Err(error) = self.browse(path) {
