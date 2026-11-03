@@ -1,7 +1,7 @@
 # Local build: consumes the official files already extracted in this checkout.
 pkgname=vivo-connect
 pkgver=0.1.0
-pkgrel=4
+pkgrel=5
 pkgdesc='Native Linux client for connecting and transferring files with vivo devices'
 arch=('x86_64')
 url='https://www.vivo.com.cn/'
@@ -35,6 +35,7 @@ prepare() {
   else
     install -m644 icons/icon-256.png icon.png
   fi
+  install -m644 icon.png icons/icon-256.png
   sed "s/@DESKTOP_ID@/$_desktop_id/g" "$_repo/packaging/arch/io.github.vivo_connect.VivoConnect.desktop.in" > app.desktop
   desktop-file-validate app.desktop
 }
@@ -72,6 +73,6 @@ package() {
   fi
   install -Dm755 "$repo/packaging/arch/vivo-connect" "$pkgdir/usr/bin/vivo-connect"
   install -Dm644 app.desktop "$pkgdir/usr/share/applications/$desktop_id.desktop"
-  install -Dm644 icon.png "$pkgdir/usr/share/icons/hicolor/256x256/apps/$desktop_id.png"
+  install -Dm644 icon.png "$pkgdir/usr/share/icons/hicolor/256x256/apps/$desktop_id.app.png"
   install -Dm644 build/private-p2p/bin/COPYING "$pkgdir/usr/share/licenses/$pkgname/wpa_supplicant-COPYING"
 }

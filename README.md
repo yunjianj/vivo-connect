@@ -18,7 +18,7 @@
 
 ```sh
 ./packaging/arch/build.sh
-sudo pacman -U build/packages/vivo-connect-0.1.0-4-x86_64.pkg.tar.zst
+sudo pacman -U build/packages/vivo-connect-0.1.0-5-x86_64.pkg.tar.zst
 ```
 
 从应用菜单或运行 `vivo-connect` 启动。依赖、桌面图标定制、Wi-Fi Direct 服务及卸载说明见 [Arch Linux 软件包](packaging/arch/README.md)。

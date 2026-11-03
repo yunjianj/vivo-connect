@@ -22,7 +22,7 @@ static bool setAutostart(const QString &path, bool enabled, const QString &execu
     if (!QDir().mkpath(QFileInfo(path).absolutePath())) { error="无法创建开机自启动目录"; return false; }
     QSaveFile file(path);
     if (!file.open(QIODevice::WriteOnly)) { error=file.errorString(); return false; }
-    QString content="[Desktop Entry]\nType=Application\nName=vivo Connect\nExec="+desktopArg(executable)+" --background --state-dir "+desktopArg(state)+" --port "+QString::number(port)+"\nIcon="+QString::fromUtf8(VIVO_DESKTOP_ID)+"\nTerminal=false\nX-GNOME-Autostart-enabled=true\n";
+    QString content="[Desktop Entry]\nType=Application\nName=vivo Connect\nExec="+desktopArg(executable)+" --background --state-dir "+desktopArg(state)+" --port "+QString::number(port)+"\nIcon="+QString::fromUtf8(VIVO_DESKTOP_ID)+".app\nTerminal=false\nX-GNOME-Autostart-enabled=true\n";
     if (file.write(content.toUtf8())<0 || !file.commit()) { error=file.errorString(); return false; }
     return true;
 }
@@ -823,9 +823,7 @@ public:
 int main(int argc, char **argv) {
     if (qEnvironmentVariableIsSet("WAYLAND_DISPLAY") && !qEnvironmentVariableIsSet("QT_QPA_PLATFORM")) qputenv("QT_QPA_PLATFORM", "wayland");
     QApplication app(argc,argv); app.setApplicationName("vivo Connect"); app.setDesktopFileName(QString::fromUtf8(VIVO_DESKTOP_ID));
-    QIcon appIcon=QDir(QString::fromUtf8(PROJECT_ROOT)).canonicalPath()==QStringLiteral("/usr/lib/vivo-connect") ? QIcon::fromTheme(QString::fromUtf8(VIVO_DESKTOP_ID)) : QIcon();
-    if (appIcon.isNull()) appIcon=QIcon(":/icons/app.png");
-    app.setWindowIcon(appIcon);
+    app.setWindowIcon(QIcon(":/icons/app.png"));
     auto args=app.arguments();
     if (args.contains("--self-test")) {
         QTemporaryDir autostartTest;
