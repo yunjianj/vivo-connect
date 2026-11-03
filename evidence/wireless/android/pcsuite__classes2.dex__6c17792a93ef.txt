@@ -1,0 +1,78 @@
+APK pcsuite/updateApk/pcsuite.apk
+DEX classes2.dex
+CLASS Lcom/vivo/connect/sdk/f/c$y1;
+SUPER Ljava/lang/Object;
+FIELDS
+g Ljava/lang/String; = ':startAdvertising'
+a Landroid/os/Messenger; = None
+b Ljava/lang/String; = None
+c Ljava/lang/String; = None
+d Lcom/vivo/connect/discovery/AdvertiseOptions; = None
+e Lcom/vivo/connbase/IConnectionCallback; = None
+f Lcom/vivo/connect/sdk/f/c; = None
+
+METHOD <init>(Lcom/vivo/connect/sdk/f/c; Landroid/os/Messenger; Ljava/lang/String; Ljava/lang/String; Lcom/vivo/connect/discovery/AdvertiseOptions; Lcom/vivo/connbase/IConnectionCallback;)V
+000000: iput-object v1, v0, Lcom/vivo/connect/sdk/f/c$y1;->f Lcom/vivo/connect/sdk/f/c;
+000004: iput-object v2, v0, Lcom/vivo/connect/sdk/f/c$y1;->a Landroid/os/Messenger;
+000008: iput-object v3, v0, Lcom/vivo/connect/sdk/f/c$y1;->b Ljava/lang/String;
+00000c: iput-object v4, v0, Lcom/vivo/connect/sdk/f/c$y1;->c Ljava/lang/String;
+000010: iput-object v5, v0, Lcom/vivo/connect/sdk/f/c$y1;->d Lcom/vivo/connect/discovery/AdvertiseOptions;
+000014: iput-object v6, v0, Lcom/vivo/connect/sdk/f/c$y1;->e Lcom/vivo/connbase/IConnectionCallback;
+000018: invoke-direct v0, Ljava/lang/Object;-><init>()V
+00001e: return-void 
+
+METHOD run()V
+000000: const-string v1, "ConnectClientImpl"
+000004: iget-object v0, v12, Lcom/vivo/connect/sdk/f/c$y1;->f Lcom/vivo/connect/sdk/f/c;
+000008: invoke-static v0, Lcom/vivo/connect/sdk/f/c;->a(Lcom/vivo/connect/sdk/f/c;)Lcom/vivo/connbase/IClient;
+00000e: move-result-object v0
+000010: if-nez v0, +030h
+000014: iget-object v0, v12, Lcom/vivo/connect/sdk/f/c$y1;->f Lcom/vivo/connect/sdk/f/c;
+000018: const-string v2, ":startAdvertising"
+00001c: invoke-static v0, v2, Lcom/vivo/connect/sdk/f/c;->a(Lcom/vivo/connect/sdk/f/c; Ljava/lang/String;)Z
+000022: move-result v0
+000024: if-nez v0, +003h
+000028: return-void 
+00002a: const-string v0, "ready to call startAdvertising1"
+00002e: invoke-static v1, v0, Lcom/vivo/connect/logger/EasyLog;->i(Ljava/lang/String; Ljava/lang/String;)V
+000034: iget-object v0, v12, Lcom/vivo/connect/sdk/f/c$y1;->f Lcom/vivo/connect/sdk/f/c;
+000038: invoke-static v0, Lcom/vivo/connect/sdk/f/c;->a(Lcom/vivo/connect/sdk/f/c;)Lcom/vivo/connbase/IClient;
+00003e: move-result-object v0
+000040: iget-object v2, v12, Lcom/vivo/connect/sdk/f/c$y1;->a Landroid/os/Messenger;
+000044: iget-object v3, v12, Lcom/vivo/connect/sdk/f/c$y1;->b Ljava/lang/String;
+000048: iget-object v4, v12, Lcom/vivo/connect/sdk/f/c$y1;->c Ljava/lang/String;
+00004c: iget-object v5, v12, Lcom/vivo/connect/sdk/f/c$y1;->d Lcom/vivo/connect/discovery/AdvertiseOptions;
+000050: invoke-static v5, Lcom/vivo/connect/sdk/i/b;->a(Lcom/vivo/connect/discovery/AdvertiseOptions;)Ljava/lang/String;
+000056: move-result-object v5
+000058: iget-object v12, v12, Lcom/vivo/connect/sdk/f/c$y1;->e Lcom/vivo/connbase/IConnectionCallback;
+00005c: move-object v11, v12
+00005e: move-object v6, v0
+000060: move-object v7, v2
+000062: move-object v8, v3
+000064: move-object v9, v4
+000066: move-object v10, v5
+000068: goto +1ch
+00006a: move-exception v0
+00006c: move-object v12, v0
+00006e: goto +22h
+000070: const-string v0, "ready to call startAdvertising2"
+000074: invoke-static v1, v0, Lcom/vivo/connect/logger/EasyLog;->i(Ljava/lang/String; Ljava/lang/String;)V
+00007a: iget-object v0, v12, Lcom/vivo/connect/sdk/f/c$y1;->f Lcom/vivo/connect/sdk/f/c;
+00007e: invoke-static v0, Lcom/vivo/connect/sdk/f/c;->a(Lcom/vivo/connect/sdk/f/c;)Lcom/vivo/connbase/IClient;
+000084: move-result-object v0
+000086: iget-object v2, v12, Lcom/vivo/connect/sdk/f/c$y1;->a Landroid/os/Messenger;
+00008a: iget-object v3, v12, Lcom/vivo/connect/sdk/f/c$y1;->b Ljava/lang/String;
+00008e: iget-object v4, v12, Lcom/vivo/connect/sdk/f/c$y1;->c Ljava/lang/String;
+000092: iget-object v5, v12, Lcom/vivo/connect/sdk/f/c$y1;->d Lcom/vivo/connect/discovery/AdvertiseOptions;
+000096: invoke-static v5, Lcom/vivo/connect/sdk/i/b;->a(Lcom/vivo/connect/discovery/AdvertiseOptions;)Ljava/lang/String;
+00009c: move-result-object v5
+00009e: goto -23h
+0000a0: invoke-interface/range v6 ... v11, Lcom/vivo/connbase/IClient;->startAdvertising(Landroid/os/Messenger; Ljava/lang/String; Ljava/lang/String; Ljava/lang/String; Lcom/vivo/connbase/IConnectionCallback;)V
+0000a6: const-string v12, "call startAdvertising end"
+0000aa: invoke-static v1, v12, Lcom/vivo/connect/logger/EasyLog;->i(Ljava/lang/String; Ljava/lang/String;)V
+0000b0: return-void 
+0000b2: new-instance v0, Ljava/lang/StringBuilder;
+0000b6: const-string v2, "start advertise err:"
+0000ba: invoke-direct v0, v2, Ljava/lang/StringBuilder;-><init>(Ljava/lang/String;)V
+0000c0: invoke-static v12, v0, v1, LS5/f;->g(Ljava/lang/Exception; Ljava/lang/StringBuilder; Ljava/lang/String;)V
+0000c6: return-void 

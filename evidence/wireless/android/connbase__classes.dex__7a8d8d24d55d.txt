@@ -1,0 +1,259 @@
+APK pcsuite/updateApk/connbase.apk
+DEX classes.dex
+CLASS Lcom/vivo/connbase/f0/i;
+SUPER Ljava/lang/Object;
+FIELDS
+b Ljava/lang/String; = 'CipherExceptionManagerTAG'
+c Ljava/lang/String; = 'app'
+d Ljava/lang/String; = 'gene_csr'
+e Ljava/lang/String; = 'csr_http_request'
+f Ljava/lang/String; = 'import_cert'
+g Ljava/lang/String; = 'get_dev_session'
+h Ljava/lang/String; = 'do_agreement'
+i Ljava/lang/String; = 'decrypt'
+a Landroid/os/Handler; = None
+
+METHOD <init>()V
+000000: invoke-direct v2, Ljava/lang/Object;-><init>()V
+000006: new-instance v0, Landroid/os/Handler;
+00000a: invoke-static Landroid/os/Looper;->getMainLooper()Landroid/os/Looper;
+000010: move-result-object v1
+000012: invoke-direct v0, v1, Landroid/os/Handler;-><init>(Landroid/os/Looper;)V
+000018: iput-object v0, v2, Lcom/vivo/connbase/f0/i;->a Landroid/os/Handler;
+00001c: return-void 
+
+METHOD <init>(Lcom/vivo/connbase/f0/i$a;)V
+000000: invoke-direct v0, Lcom/vivo/connbase/f0/i;-><init>()V
+000006: return-void 
+
+METHOD a(Landroid/content/Context; Ljava/lang/String; Z)V
+000000: const-string v0, "app"
+000004: const/4 v1, 0
+000006: invoke-virtual v3, v0, v1, Landroid/content/Context;->getSharedPreferences(Ljava/lang/String; I)Landroid/content/SharedPreferences;
+00000c: move-result-object v3
+00000e: invoke-interface v3, Landroid/content/SharedPreferences;->edit()Landroid/content/SharedPreferences$Editor;
+000014: move-result-object v3
+000016: invoke-interface v3, v4, v5, Landroid/content/SharedPreferences$Editor;->putBoolean(Ljava/lang/String; Z)Landroid/content/SharedPreferences$Editor;
+00001c: invoke-interface v3, Landroid/content/SharedPreferences$Editor;->apply()V
+000022: return-void 
+
+METHOD a(Ljava/lang/String;)V
+000000: new-instance v0, Ljava/lang/StringBuilder;
+000004: invoke-direct v0, Ljava/lang/StringBuilder;-><init>()V
+00000a: const-string v1, "showToast:"
+00000e: invoke-virtual v0, v1, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+000014: invoke-virtual v0, v2, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+00001a: invoke-virtual v0, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
+000020: move-result-object v2
+000022: const-string v0, "CipherExceptionManagerTAG"
+000026: invoke-static v0, v2, Lc/c/f/a/b;->l(Ljava/lang/String; Ljava/lang/String;)V
+00002c: return-void 
+
+METHOD a(Landroid/content/Context; Ljava/lang/String;)Z
+000000: const/4 v0, 0
+000002: const-string v1, "app"
+000006: invoke-virtual v3, v1, v0, Landroid/content/Context;->getSharedPreferences(Ljava/lang/String; I)Landroid/content/SharedPreferences;
+00000c: move-result-object v3
+00000e: invoke-interface v3, v4, v0, Landroid/content/SharedPreferences;->getBoolean(Ljava/lang/String; Z)Z
+000014: move-result v3
+000016: return v3
+
+METHOD b(Ljava/lang/String;)V
+000000: const-string v0, "gene_csr"
+000004: invoke-static v0, v3, Landroid/text/TextUtils;->equals(Ljava/lang/CharSequence; Ljava/lang/CharSequence;)Z
+00000a: move-result v0
+00000c: if-eqz v0, +005h
+000010: const-string v3, "生成证书请求元信息失败"
+000014: goto +39h
+000016: const-string v0, "csr_http_request"
+00001a: invoke-static v0, v3, Landroid/text/TextUtils;->equals(Ljava/lang/CharSequence; Ljava/lang/CharSequence;)Z
+000020: move-result v0
+000022: if-eqz v0, +005h
+000026: const-string v3, "网络请求获取证书失败"
+00002a: goto +2eh
+00002c: const-string v0, "import_cert"
+000030: invoke-static v0, v3, Landroid/text/TextUtils;->equals(Ljava/lang/CharSequence; Ljava/lang/CharSequence;)Z
+000036: move-result v0
+000038: if-eqz v0, +005h
+00003c: const-string v3, "签发证书失败"
+000040: goto +23h
+000042: const-string v0, "get_dev_session"
+000046: invoke-static v0, v3, Landroid/text/TextUtils;->equals(Ljava/lang/CharSequence; Ljava/lang/CharSequence;)Z
+00004c: move-result v0
+00004e: if-eqz v0, +005h
+000052: const-string v3, "生成session失败"
+000056: goto +18h
+000058: const-string v0, "do_agreement"
+00005c: invoke-static v0, v3, Landroid/text/TextUtils;->equals(Ljava/lang/CharSequence; Ljava/lang/CharSequence;)Z
+000062: move-result v0
+000064: if-eqz v0, +005h
+000068: const-string v3, "秘钥协商失败"
+00006c: goto +dh
+00006e: const-string v0, "decrypt"
+000072: invoke-static v0, v3, Landroid/text/TextUtils;->equals(Ljava/lang/CharSequence; Ljava/lang/CharSequence;)Z
+000078: move-result v3
+00007a: if-eqz v3, +005h
+00007e: const-string v3, "数据解密失败"
+000082: goto +2h
+000084: const/4 v3, 0
+000086: invoke-static v3, Landroid/text/TextUtils;->isEmpty(Ljava/lang/CharSequence;)Z
+00008c: move-result v0
+00008e: if-eqz v0, +003h
+000092: return-void 
+000094: iget-object v0, v2, Lcom/vivo/connbase/f0/i;->a Landroid/os/Handler;
+000098: new-instance v1, Lcom/vivo/connbase/f0/a;
+00009c: invoke-direct v1, v3, Lcom/vivo/connbase/f0/a;-><init>(Ljava/lang/String;)V
+0000a2: invoke-virtual v0, v1, Landroid/os/Handler;->post(Ljava/lang/Runnable;)Z
+0000a8: return-void 
+
+METHOD n()Lcom/vivo/connbase/f0/i;
+000000: sget-object v0, Lcom/vivo/connbase/f0/i$b;->a Lcom/vivo/connbase/f0/i;
+000004: return-object v0
+
+METHOD a()Ljava/lang/String;
+000000: const-string v0, "CipherExceptionManagerTAG"
+000004: new-instance v1, Lorg/json/JSONObject;
+000008: invoke-direct v1, Lorg/json/JSONObject;-><init>()V
+00000e: const-string v2, "gene_csr"
+000012: invoke-virtual v5, Lcom/vivo/connbase/f0/i;->e()Z
+000018: move-result v3
+00001a: invoke-virtual v1, v2, v3, Lorg/json/JSONObject;->put(Ljava/lang/String; Z)Lorg/json/JSONObject;
+000020: const-string v2, "csr_http_request"
+000024: invoke-virtual v5, Lcom/vivo/connbase/f0/i;->b()Z
+00002a: move-result v3
+00002c: invoke-virtual v1, v2, v3, Lorg/json/JSONObject;->put(Ljava/lang/String; Z)Lorg/json/JSONObject;
+000032: const-string v2, "import_cert"
+000036: invoke-virtual v5, Lcom/vivo/connbase/f0/i;->g()Z
+00003c: move-result v3
+00003e: invoke-virtual v1, v2, v3, Lorg/json/JSONObject;->put(Ljava/lang/String; Z)Lorg/json/JSONObject;
+000044: const-string v2, "get_dev_session"
+000048: invoke-virtual v5, Lcom/vivo/connbase/f0/i;->f()Z
+00004e: move-result v3
+000050: invoke-virtual v1, v2, v3, Lorg/json/JSONObject;->put(Ljava/lang/String; Z)Lorg/json/JSONObject;
+000056: const-string v2, "do_agreement"
+00005a: invoke-virtual v5, Lcom/vivo/connbase/f0/i;->d()Z
+000060: move-result v3
+000062: invoke-virtual v1, v2, v3, Lorg/json/JSONObject;->put(Ljava/lang/String; Z)Lorg/json/JSONObject;
+000068: const-string v2, "decrypt"
+00006c: invoke-virtual v5, Lcom/vivo/connbase/f0/i;->c()Z
+000072: move-result v3
+000074: invoke-virtual v1, v2, v3, Lorg/json/JSONObject;->put(Ljava/lang/String; Z)Lorg/json/JSONObject;
+00007a: goto +1ah
+00007c: move-exception v2
+00007e: new-instance v3, Ljava/lang/StringBuilder;
+000082: invoke-direct v3, Ljava/lang/StringBuilder;-><init>()V
+000088: const-string v4, "getAllExceptionStates error:"
+00008c: invoke-virtual v3, v4, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+000092: invoke-virtual v2, Lorg/json/JSONException;->toString()Ljava/lang/String;
+000098: move-result-object v2
+00009a: invoke-virtual v3, v2, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+0000a0: invoke-virtual v3, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
+0000a6: move-result-object v2
+0000a8: invoke-static v0, v2, Lc/c/f/a/b;->h(Ljava/lang/String; Ljava/lang/String;)V
+0000ae: new-instance v2, Ljava/lang/StringBuilder;
+0000b2: invoke-direct v2, Ljava/lang/StringBuilder;-><init>()V
+0000b8: const-string v3, "getAllExceptionStates, obj:"
+0000bc: invoke-virtual v2, v3, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+0000c2: invoke-virtual v2, v1, Ljava/lang/StringBuilder;->append(Ljava/lang/Object;)Ljava/lang/StringBuilder;
+0000c8: invoke-virtual v2, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
+0000ce: move-result-object v2
+0000d0: invoke-static v0, v2, Lc/c/f/a/b;->l(Ljava/lang/String; Ljava/lang/String;)V
+0000d6: invoke-virtual v1, Lorg/json/JSONObject;->toString()Ljava/lang/String;
+0000dc: move-result-object v0
+0000de: return-object v0
+
+METHOD a(Ljava/lang/String; Z)V
+000000: new-instance v0, Ljava/lang/StringBuilder;
+000004: invoke-direct v0, Ljava/lang/StringBuilder;-><init>()V
+00000a: const-string v1, "updateExceptionSwitch, exceptionKey:"
+00000e: invoke-virtual v0, v1, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+000014: invoke-virtual v0, v3, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+00001a: const-string v1, ", open:"
+00001e: invoke-virtual v0, v1, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+000024: invoke-virtual v0, v4, Ljava/lang/StringBuilder;->append(Z)Ljava/lang/StringBuilder;
+00002a: invoke-virtual v0, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
+000030: move-result-object v0
+000032: const-string v1, "CipherExceptionManagerTAG"
+000036: invoke-static v1, v0, Lc/c/f/a/b;->l(Ljava/lang/String; Ljava/lang/String;)V
+00003c: invoke-static Lcom/vivo/connbase/App;->m()Lcom/vivo/connbase/App;
+000042: move-result-object v0
+000044: invoke-direct v2, v0, v3, v4, Lcom/vivo/connbase/f0/i;->a(Landroid/content/Context; Ljava/lang/String; Z)V
+00004a: return-void 
+
+METHOD b()Z
+000000: invoke-static Lcom/vivo/connbase/App;->m()Lcom/vivo/connbase/App;
+000006: move-result-object v0
+000008: const-string v1, "csr_http_request"
+00000c: invoke-direct v2, v0, v1, Lcom/vivo/connbase/f0/i;->a(Landroid/content/Context; Ljava/lang/String;)Z
+000012: move-result v0
+000014: return v0
+
+METHOD c()Z
+000000: invoke-static Lcom/vivo/connbase/App;->m()Lcom/vivo/connbase/App;
+000006: move-result-object v0
+000008: const-string v1, "decrypt"
+00000c: invoke-direct v2, v0, v1, Lcom/vivo/connbase/f0/i;->a(Landroid/content/Context; Ljava/lang/String;)Z
+000012: move-result v0
+000014: return v0
+
+METHOD d()Z
+000000: invoke-static Lcom/vivo/connbase/App;->m()Lcom/vivo/connbase/App;
+000006: move-result-object v0
+000008: const-string v1, "do_agreement"
+00000c: invoke-direct v2, v0, v1, Lcom/vivo/connbase/f0/i;->a(Landroid/content/Context; Ljava/lang/String;)Z
+000012: move-result v0
+000014: return v0
+
+METHOD e()Z
+000000: invoke-static Lcom/vivo/connbase/App;->m()Lcom/vivo/connbase/App;
+000006: move-result-object v0
+000008: const-string v1, "gene_csr"
+00000c: invoke-direct v2, v0, v1, Lcom/vivo/connbase/f0/i;->a(Landroid/content/Context; Ljava/lang/String;)Z
+000012: move-result v0
+000014: return v0
+
+METHOD f()Z
+000000: invoke-static Lcom/vivo/connbase/App;->m()Lcom/vivo/connbase/App;
+000006: move-result-object v0
+000008: const-string v1, "get_dev_session"
+00000c: invoke-direct v2, v0, v1, Lcom/vivo/connbase/f0/i;->a(Landroid/content/Context; Ljava/lang/String;)Z
+000012: move-result v0
+000014: return v0
+
+METHOD g()Z
+000000: invoke-static Lcom/vivo/connbase/App;->m()Lcom/vivo/connbase/App;
+000006: move-result-object v0
+000008: const-string v1, "import_cert"
+00000c: invoke-direct v2, v0, v1, Lcom/vivo/connbase/f0/i;->a(Landroid/content/Context; Ljava/lang/String;)Z
+000012: move-result v0
+000014: return v0
+
+METHOD h()V
+000000: const-string v0, "csr_http_request"
+000004: invoke-direct v1, v0, Lcom/vivo/connbase/f0/i;->b(Ljava/lang/String;)V
+00000a: return-void 
+
+METHOD i()V
+000000: const-string v0, "decrypt"
+000004: invoke-direct v1, v0, Lcom/vivo/connbase/f0/i;->b(Ljava/lang/String;)V
+00000a: return-void 
+
+METHOD j()V
+000000: const-string v0, "do_agreement"
+000004: invoke-direct v1, v0, Lcom/vivo/connbase/f0/i;->b(Ljava/lang/String;)V
+00000a: return-void 
+
+METHOD k()V
+000000: const-string v0, "gene_csr"
+000004: invoke-direct v1, v0, Lcom/vivo/connbase/f0/i;->b(Ljava/lang/String;)V
+00000a: return-void 
+
+METHOD l()V
+000000: const-string v0, "get_dev_session"
+000004: invoke-direct v1, v0, Lcom/vivo/connbase/f0/i;->b(Ljava/lang/String;)V
+00000a: return-void 
+
+METHOD m()V
+000000: const-string v0, "import_cert"
+000004: invoke-direct v1, v0, Lcom/vivo/connbase/f0/i;->b(Ljava/lang/String;)V
+00000a: return-void 

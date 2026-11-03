@@ -1,0 +1,69 @@
+APK pcsuite/updateApk/connbase.apk
+DEX classes.dex
+CLASS Lcom/vivo/handoff/service/ScreenOnOffListenerReceiver;
+SUPER Landroid/content/BroadcastReceiver;
+FIELDS
+TAG Ljava/lang/String; = 'ScreenOnOffListenerReceiver'
+TIMEOUT_3MIN J = 220000
+alarmManager Landroid/app/AlarmManager; = None
+isScreenOn Z = True
+isWifiP2POn Z = False
+lastUpdateMill J = None
+mHandler Landroid/os/Handler; = None
+onAlarmListener Landroid/app/AlarmManager$OnAlarmListener; = None
+receiver Landroid/content/BroadcastReceiver; = None
+
+METHOD checkTimeout3min()V
+000000: const-string v0, "ScreenOnOffListenerReceiver"
+000004: const-string v1, "checkTimeout3min screenOffDisconnectRunnable start count"
+000008: invoke-static v0, v1, Lc/c/d/f/a;->a(Ljava/lang/String; Ljava/lang/String;)V
+00000e: sget-object v0, Lcom/vivo/handoff/service/ScreenOnOffListenerReceiver;->alarmManager Landroid/app/AlarmManager;
+000012: sget-object v1, Lcom/vivo/handoff/service/ScreenOnOffListenerReceiver;->onAlarmListener Landroid/app/AlarmManager$OnAlarmListener;
+000016: invoke-virtual v0, v1, Landroid/app/AlarmManager;->cancel(Landroid/app/AlarmManager$OnAlarmListener;)V
+00001c: sget-object v2, Lcom/vivo/handoff/service/ScreenOnOffListenerReceiver;->alarmManager Landroid/app/AlarmManager;
+000020: invoke-static Landroid/os/SystemClock;->elapsedRealtime()J
+000026: move-result-wide v0
+000028: const-wide/32 v3, 220000
+00002e: add-long v4, v0, v3
+000032: sget-object v7, Lcom/vivo/handoff/service/ScreenOnOffListenerReceiver;->onAlarmListener Landroid/app/AlarmManager$OnAlarmListener;
+000036: sget-object v8, Lcom/vivo/handoff/service/ScreenOnOffListenerReceiver;->mHandler Landroid/os/Handler;
+00003a: const/4 v3, 2
+00003c: const-string v6, "disconnectRunnableTimeOut"
+000040: invoke-virtual/range v2 ... v8, Landroid/app/AlarmManager;->setExact(I J Ljava/lang/String; Landroid/app/AlarmManager$OnAlarmListener; Landroid/os/Handler;)V
+000046: return-void 
+
+METHOD setIsWifiP2POn(Z)V
+000000: new-instance v0, Ljava/lang/StringBuilder;
+000004: invoke-direct v0, Ljava/lang/StringBuilder;-><init>()V
+00000a: const-string v1, "setIsWifiP2POn: "
+00000e: invoke-virtual v0, v1, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+000014: invoke-virtual v0, v6, Ljava/lang/StringBuilder;->append(Z)Ljava/lang/StringBuilder;
+00001a: invoke-virtual v0, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
+000020: move-result-object v0
+000022: const-string v1, "ScreenOnOffListenerReceiver"
+000026: invoke-static v1, v0, Lc/c/d/f/a;->a(Ljava/lang/String; Ljava/lang/String;)V
+00002c: sput-boolean v6, Lcom/vivo/handoff/service/ScreenOnOffListenerReceiver;->isWifiP2POn Z
+000030: sget-boolean v0, Lcom/vivo/handoff/service/ScreenOnOffListenerReceiver;->isScreenOn Z
+000034: if-nez v0, +02dh
+000038: if-nez v6, +02bh
+00003c: invoke-static Ljava/lang/System;->currentTimeMillis()J
+000042: move-result-wide v2
+000044: sget-wide v4, Lcom/vivo/handoff/service/ScreenOnOffListenerReceiver;->lastUpdateMill J
+000048: sub-long/2addr v2, v4
+00004a: const-wide/32 v4, 220000
+000050: cmp-long v6, v2, v4
+000054: if-ltz v6, +01dh
+000058: invoke-static Lcom/vivo/handoff/service/agreement/HandOffAgreementAdapterManager;->getInstance()Lcom/vivo/handoff/service/agreement/IHandOffAgreementManager;
+00005e: move-result-object v6
+000060: const/4 v0, 1
+000062: invoke-interface v6, v0, Lcom/vivo/handoff/service/agreement/IHandOffAgreementManager;->getAgreementAdapter(I)Lcom/vivo/handoff/service/agreement/AbsHandOffAgreementAdapter;
+000068: move-result-object v6
+00006a: check-cast v6, Lcom/vivo/handoff/service/agreement/ble/BleHandOffAgreementAdapter;
+00006e: if-eqz v6, +00bh
+000072: const-string v0, "setIsWifiP2POn BleHandOffAgreementAdapter disconnectAllConnection"
+000076: invoke-static v1, v0, Lc/c/d/f/a;->a(Ljava/lang/String; Ljava/lang/String;)V
+00007c: invoke-virtual v6, Lcom/vivo/handoff/service/agreement/ble/BleHandOffAgreementAdapter;->disconnectAllConnection()V
+000082: goto +6h
+000084: const-string v6, "setIsWifiP2POn BleHandOffAgreementAdapter is null"
+000088: invoke-static v1, v6, Lc/c/d/f/a;->a(Ljava/lang/String; Ljava/lang/String;)V
+00008e: return-void 

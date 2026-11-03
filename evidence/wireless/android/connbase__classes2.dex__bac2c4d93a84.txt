@@ -1,0 +1,28 @@
+APK pcsuite/updateApk/connbase.apk
+DEX classes2.dex
+CLASS Lcom/vivo/pcsuite/pcconnect/wifip2p/deputy/d$a$a;
+SUPER Ljava/lang/Object;
+FIELDS
+a Lcom/vivo/pcsuite/pcconnect/wifip2p/deputy/c; = None
+b Ljava/util/concurrent/CountDownLatch; = None
+c Lcom/vivo/pcsuite/pcconnect/wifip2p/deputy/d$a; = None
+
+METHOD <init>(Lcom/vivo/pcsuite/pcconnect/wifip2p/deputy/d$a; Lcom/vivo/pcsuite/pcconnect/wifip2p/deputy/c; Ljava/util/concurrent/CountDownLatch;)V
+000000: iput-object v1, v0, Lcom/vivo/pcsuite/pcconnect/wifip2p/deputy/d$a$a;->c Lcom/vivo/pcsuite/pcconnect/wifip2p/deputy/d$a;
+000004: iput-object v2, v0, Lcom/vivo/pcsuite/pcconnect/wifip2p/deputy/d$a$a;->a Lcom/vivo/pcsuite/pcconnect/wifip2p/deputy/c;
+000008: iput-object v3, v0, Lcom/vivo/pcsuite/pcconnect/wifip2p/deputy/d$a$a;->b Ljava/util/concurrent/CountDownLatch;
+00000c: invoke-direct v0, Ljava/lang/Object;-><init>()V
+000012: return-void 
+
+METHOD a(Landroid/net/NetworkInfo;)V
+000000: if-eqz v2, +015h
+000004: invoke-virtual v2, Landroid/net/NetworkInfo;->getDetailedState()Landroid/net/NetworkInfo$DetailedState;
+00000a: move-result-object v2
+00000c: sget-object v0, Landroid/net/NetworkInfo$DetailedState;->DISCONNECTED Landroid/net/NetworkInfo$DetailedState;
+000010: if-ne v2, v0, +00dh
+000014: iget-object v2, v1, Lcom/vivo/pcsuite/pcconnect/wifip2p/deputy/d$a$a;->a Lcom/vivo/pcsuite/pcconnect/wifip2p/deputy/c;
+000018: const/4 v0, 0
+00001a: invoke-virtual v2, v0, Lcom/vivo/pcsuite/pcconnect/wifip2p/deputy/c;->a(Lcom/vivo/pcsuite/pcconnect/wifip2p/deputy/c$a;)V
+000020: iget-object v2, v1, Lcom/vivo/pcsuite/pcconnect/wifip2p/deputy/d$a$a;->b Ljava/util/concurrent/CountDownLatch;
+000024: invoke-virtual v2, Ljava/util/concurrent/CountDownLatch;->countDown()V
+00002a: return-void 

@@ -1,0 +1,50 @@
+APK pcsuite/updateApk/connbase.apk
+DEX classes2.dex
+CLASS Lcom/vivo/pcsuite/pcconnect/ble/BluetoothLeService$d;
+SUPER Ljava/lang/Object;
+FIELDS
+c Lcom/vivo/pcsuite/pcconnect/ble/BluetoothLeService; = None
+
+METHOD <init>(Lcom/vivo/pcsuite/pcconnect/ble/BluetoothLeService;)V
+000000: iput-object v1, v0, Lcom/vivo/pcsuite/pcconnect/ble/BluetoothLeService$d;->c Lcom/vivo/pcsuite/pcconnect/ble/BluetoothLeService;
+000004: invoke-direct v0, Ljava/lang/Object;-><init>()V
+00000a: return-void 
+
+METHOD a(I)V
+000000: new-instance v0, Ljava/lang/StringBuilder;
+000004: invoke-direct v0, Ljava/lang/StringBuilder;-><init>()V
+00000a: const-string v1, "Start scanning failed with error code: "
+00000e: invoke-virtual v0, v1, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+000014: invoke-virtual v0, v3, Ljava/lang/StringBuilder;->append(I)Ljava/lang/StringBuilder;
+00001a: invoke-virtual v0, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
+000020: move-result-object v3
+000022: const-string v0, "pcsuite_BluetoothLeService"
+000026: invoke-static v0, v3, Lc/c/f/a/b;->g(Ljava/lang/String; Ljava/lang/String;)V
+00002c: iget-object v3, v2, Lcom/vivo/pcsuite/pcconnect/ble/BluetoothLeService$d;->c Lcom/vivo/pcsuite/pcconnect/ble/BluetoothLeService;
+000030: const/4 v0, 2
+000032: const/4 v1, 1
+000034: invoke-static v3, v0, v1, Lcom/vivo/pcsuite/pcconnect/ble/BluetoothLeService;->a(Lcom/vivo/pcsuite/pcconnect/ble/BluetoothLeService; I I)V
+00003a: return-void 
+
+METHOD a(I Landroid/bluetooth/le/ScanResult;)V
+000000: iget-object v0, v1, Lcom/vivo/pcsuite/pcconnect/ble/BluetoothLeService$d;->c Lcom/vivo/pcsuite/pcconnect/ble/BluetoothLeService;
+000004: invoke-static v0, Lcom/vivo/pcsuite/pcconnect/ble/BluetoothLeService;->b(Lcom/vivo/pcsuite/pcconnect/ble/BluetoothLeService;)Lcom/vivo/pcsuite/pcconnect/ble/h;
+00000a: move-result-object v0
+00000c: if-eqz v0, +01bh
+000010: const/4 v0, 1
+000012: if-ne v2, v0, +00ch
+000016: iget-object v2, v1, Lcom/vivo/pcsuite/pcconnect/ble/BluetoothLeService$d;->c Lcom/vivo/pcsuite/pcconnect/ble/BluetoothLeService;
+00001a: invoke-static v2, Lcom/vivo/pcsuite/pcconnect/ble/BluetoothLeService;->b(Lcom/vivo/pcsuite/pcconnect/ble/BluetoothLeService;)Lcom/vivo/pcsuite/pcconnect/ble/h;
+000020: move-result-object v2
+000022: invoke-virtual v2, v3, Lcom/vivo/pcsuite/pcconnect/ble/h;->b(Landroid/bluetooth/le/ScanResult;)V
+000028: goto +14h
+00002a: if-nez v2, +013h
+00002e: iget-object v2, v1, Lcom/vivo/pcsuite/pcconnect/ble/BluetoothLeService$d;->c Lcom/vivo/pcsuite/pcconnect/ble/BluetoothLeService;
+000032: invoke-static v2, Lcom/vivo/pcsuite/pcconnect/ble/BluetoothLeService;->b(Lcom/vivo/pcsuite/pcconnect/ble/BluetoothLeService;)Lcom/vivo/pcsuite/pcconnect/ble/h;
+000038: move-result-object v2
+00003a: invoke-virtual v2, v3, Lcom/vivo/pcsuite/pcconnect/ble/h;->a(Landroid/bluetooth/le/ScanResult;)V
+000040: goto +8h
+000042: const-string v2, "pcsuite_BluetoothLeService"
+000046: const-string v3, "onScanResult invoked when mDeviceCache is null."
+00004a: invoke-static v2, v3, Lc/c/f/a/b;->p(Ljava/lang/String; Ljava/lang/String;)V
+000050: return-void 

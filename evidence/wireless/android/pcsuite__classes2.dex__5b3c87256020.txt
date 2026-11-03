@@ -1,0 +1,27 @@
+APK pcsuite/updateApk/pcsuite.apk
+DEX classes2.dex
+CLASS Lcom/vivo/pcsuite/service/PcSuiteObserver$k;
+SUPER Ljava/lang/Object;
+FIELDS
+a Landroid/content/Intent; = None
+
+METHOD onPermissionResultChecked(LG2/a;)V
+000000: if-eqz v2, +008h
+000004: iget-boolean v2, v2, LG2/a;->d Z
+000008: if-eqz v2, +004h
+00000c: const/4 v2, 1
+00000e: goto +2h
+000010: const/4 v2, 0
+000012: sget v0, Lcom/vivo/pcsuite/service/PcSuiteObserver;->D I
+000016: if-eqz v2, +006h
+00001a: const-string/jumbo v2, success
+000020: goto +3h
+000022: const-string v2, "failed"
+000026: const-string v0, "request permission "
+00002a: invoke-virtual v0, v2, Ljava/lang/String;->concat(Ljava/lang/String;)Ljava/lang/String;
+000030: move-result-object v2
+000032: const-string v0, "pcsuite_PcSuiteObserver"
+000036: invoke-static v0, v2, Lcom/vivo/connect/logger/EasyLog;->i(Ljava/lang/String; Ljava/lang/String;)V
+00003c: iget-object v1, v1, Lcom/vivo/pcsuite/service/PcSuiteObserver$k;->a Landroid/content/Intent;
+000040: invoke-static v1, Lcom/vivo/pcsuite/service/PcSuiteObserver;->n(Landroid/content/Intent;)V
+000046: return-void 

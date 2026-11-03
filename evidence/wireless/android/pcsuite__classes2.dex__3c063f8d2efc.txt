@@ -1,0 +1,45 @@
+APK pcsuite/updateApk/pcsuite.apk
+DEX classes2.dex
+CLASS Lcom/vivo/connect/sdk/f/c$y;
+SUPER Ljava/lang/Object;
+FIELDS
+d Ljava/lang/String; = ':removeAdvertiseConfig'
+a Landroid/os/Messenger; = None
+b Ljava/lang/String; = None
+c Lcom/vivo/connect/sdk/f/c; = None
+
+METHOD <init>(Lcom/vivo/connect/sdk/f/c; Landroid/os/Messenger; Ljava/lang/String;)V
+000000: iput-object v1, v0, Lcom/vivo/connect/sdk/f/c$y;->c Lcom/vivo/connect/sdk/f/c;
+000004: iput-object v2, v0, Lcom/vivo/connect/sdk/f/c$y;->a Landroid/os/Messenger;
+000008: iput-object v3, v0, Lcom/vivo/connect/sdk/f/c$y;->b Ljava/lang/String;
+00000c: invoke-direct v0, Ljava/lang/Object;-><init>()V
+000012: return-void 
+
+METHOD run()V
+000000: iget-object v0, v2, Lcom/vivo/connect/sdk/f/c$y;->c Lcom/vivo/connect/sdk/f/c;
+000004: invoke-static v0, Lcom/vivo/connect/sdk/f/c;->a(Lcom/vivo/connect/sdk/f/c;)Lcom/vivo/connbase/IClient;
+00000a: move-result-object v0
+00000c: if-eqz v0, +00dh
+000010: iget-object v0, v2, Lcom/vivo/connect/sdk/f/c$y;->c Lcom/vivo/connect/sdk/f/c;
+000014: invoke-static v0, Lcom/vivo/connect/sdk/f/c;->a(Lcom/vivo/connect/sdk/f/c;)Lcom/vivo/connbase/IClient;
+00001a: move-result-object v0
+00001c: iget-object v1, v2, Lcom/vivo/connect/sdk/f/c$y;->a Landroid/os/Messenger;
+000020: iget-object v2, v2, Lcom/vivo/connect/sdk/f/c$y;->b Ljava/lang/String;
+000024: goto +13h
+000026: iget-object v0, v2, Lcom/vivo/connect/sdk/f/c$y;->c Lcom/vivo/connect/sdk/f/c;
+00002a: const-string v1, ":removeAdvertiseConfig"
+00002e: invoke-static v0, v1, Lcom/vivo/connect/sdk/f/c;->a(Lcom/vivo/connect/sdk/f/c; Ljava/lang/String;)Z
+000034: move-result v0
+000036: if-nez v0, +003h
+00003a: return-void 
+00003c: iget-object v0, v2, Lcom/vivo/connect/sdk/f/c$y;->c Lcom/vivo/connect/sdk/f/c;
+000040: invoke-static v0, Lcom/vivo/connect/sdk/f/c;->a(Lcom/vivo/connect/sdk/f/c;)Lcom/vivo/connbase/IClient;
+000046: move-result-object v0
+000048: goto -16h
+00004a: invoke-interface v0, v1, v2, Lcom/vivo/connbase/IClient;->removeAdvertisingConfig(Landroid/os/Messenger; Ljava/lang/String;)V
+000050: return-void 
+000052: move-exception v2
+000054: const-string v0, "removeAdvertiseConfig error:"
+000058: const-string v1, "ConnectClientImpl"
+00005c: invoke-static v2, v0, v1, LV5/S;->h(Ljava/lang/Exception; Ljava/lang/String; Ljava/lang/String;)V
+000062: return-void 

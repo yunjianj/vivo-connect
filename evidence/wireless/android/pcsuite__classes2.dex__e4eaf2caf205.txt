@@ -1,0 +1,341 @@
+APK pcsuite/updateApk/pcsuite.apk
+DEX classes2.dex
+CLASS Lcom/vivo/connbase/connectcenter/ConnectCenterConnection;
+SUPER Ljava/lang/Object;
+FIELDS
+TAG Ljava/lang/String; = 'ConnectCenterConnection'
+sBinder Landroid/os/IBinder; = None
+sClient Lcom/vivo/connbase/IClient; = None
+sConnCenterClient Lcom/vivo/connbase/connectcenter/IConnCenterClient; = None
+sInstance Lcom/vivo/connbase/connectcenter/ConnectCenterConnection; = None
+lastSetMillis J = None
+mConnectCenterObserver Lcom/vivo/connbase/connectcenter/IConnectCenterObserver; = None
+mContext Landroid/content/Context; = None
+mCoworkObserver Lcom/vivo/connbase/connectcenter/IConnCoworkObserver; = None
+mDeathRecipient Landroid/os/IBinder$DeathRecipient; = None
+mIsBinding Z = None
+mIsSystemApp Z = None
+mLatch Ljava/util/concurrent/CountDownLatch; = None
+sIsInitialized Z = None
+
+METHOD <init>(Landroid/content/Context;)V
+000000: invoke-direct v2, Ljava/lang/Object;-><init>()V
+000006: new-instance v0, Ljava/util/concurrent/CountDownLatch;
+00000a: const/4 v1, 1
+00000c: invoke-direct v0, v1, Ljava/util/concurrent/CountDownLatch;-><init>(I)V
+000012: iput-object v0, v2, Lcom/vivo/connbase/connectcenter/ConnectCenterConnection;->mLatch Ljava/util/concurrent/CountDownLatch;
+000016: new-instance v0, Lcom/vivo/connbase/connectcenter/ConnectCenterConnection$1;
+00001a: invoke-direct v0, v2, Lcom/vivo/connbase/connectcenter/ConnectCenterConnection$1;-><init>(Lcom/vivo/connbase/connectcenter/ConnectCenterConnection;)V
+000020: iput-object v0, v2, Lcom/vivo/connbase/connectcenter/ConnectCenterConnection;->mDeathRecipient Landroid/os/IBinder$DeathRecipient;
+000024: const-wide/16 v0, 0
+000028: iput-wide v0, v2, Lcom/vivo/connbase/connectcenter/ConnectCenterConnection;->lastSetMillis J
+00002c: iput-object v3, v2, Lcom/vivo/connbase/connectcenter/ConnectCenterConnection;->mContext Landroid/content/Context;
+000030: return-void 
+
+METHOD access$002(Lcom/vivo/connbase/IClient;)Lcom/vivo/connbase/IClient;
+000000: sput-object v0, Lcom/vivo/connbase/connectcenter/ConnectCenterConnection;->sClient Lcom/vivo/connbase/IClient;
+000004: return-object v0
+
+METHOD access$102(Landroid/os/IBinder;)Landroid/os/IBinder;
+000000: sput-object v0, Lcom/vivo/connbase/connectcenter/ConnectCenterConnection;->sBinder Landroid/os/IBinder;
+000004: return-object v0
+
+METHOD access$202(Lcom/vivo/connbase/connectcenter/ConnectCenterConnection; Z)Z
+000000: iput-boolean v1, v0, Lcom/vivo/connbase/connectcenter/ConnectCenterConnection;->sIsInitialized Z
+000004: return v1
+
+METHOD access$302(Lcom/vivo/connbase/connectcenter/IConnCenterClient;)Lcom/vivo/connbase/connectcenter/IConnCenterClient;
+000000: sput-object v0, Lcom/vivo/connbase/connectcenter/ConnectCenterConnection;->sConnCenterClient Lcom/vivo/connbase/connectcenter/IConnCenterClient;
+000004: return-object v0
+
+METHOD access$402(Lcom/vivo/connbase/connectcenter/ConnectCenterConnection; Z)Z
+000000: iput-boolean v1, v0, Lcom/vivo/connbase/connectcenter/ConnectCenterConnection;->mIsBinding Z
+000004: return v1
+
+METHOD getInstance(Landroid/content/Context;)Lcom/vivo/connbase/connectcenter/ConnectCenterConnection;
+000000: sget-object v0, Lcom/vivo/connbase/connectcenter/ConnectCenterConnection;->sInstance Lcom/vivo/connbase/connectcenter/ConnectCenterConnection;
+000004: if-nez v0, +017h
+000008: const-class v0, Lcom/vivo/connbase/connectcenter/ConnectCenterConnection;
+00000c: monitor-enter v0
+00000e: sget-object v1, Lcom/vivo/connbase/connectcenter/ConnectCenterConnection;->sInstance Lcom/vivo/connbase/connectcenter/ConnectCenterConnection;
+000012: if-nez v1, +00ch
+000016: new-instance v1, Lcom/vivo/connbase/connectcenter/ConnectCenterConnection;
+00001a: invoke-direct v1, v2, Lcom/vivo/connbase/connectcenter/ConnectCenterConnection;-><init>(Landroid/content/Context;)V
+000020: sput-object v1, Lcom/vivo/connbase/connectcenter/ConnectCenterConnection;->sInstance Lcom/vivo/connbase/connectcenter/ConnectCenterConnection;
+000024: goto +3h
+000026: move-exception v2
+000028: goto +3h
+00002a: monitor-exit v0
+00002c: goto +3h
+00002e: monitor-exit v0
+000030: throw v2
+000032: sget-object v2, Lcom/vivo/connbase/connectcenter/ConnectCenterConnection;->sInstance Lcom/vivo/connbase/connectcenter/ConnectCenterConnection;
+000036: return-object v2
+
+METHOD release()V
+000000: sget-object v0, Lcom/vivo/connbase/connectcenter/ConnectCenterConnection;->sInstance Lcom/vivo/connbase/connectcenter/ConnectCenterConnection;
+000004: if-eqz v0, +00ah
+000008: sget-object v0, Lcom/vivo/connbase/connectcenter/ConnectCenterConnection;->sInstance Lcom/vivo/connbase/connectcenter/ConnectCenterConnection;
+00000c: invoke-virtual v0, Lcom/vivo/connbase/connectcenter/ConnectCenterConnection;->unbind()V
+000012: const/4 v0, 0
+000014: sput-object v0, Lcom/vivo/connbase/connectcenter/ConnectCenterConnection;->sInstance Lcom/vivo/connbase/connectcenter/ConnectCenterConnection;
+000018: return-void 
+
+METHOD bind(Z)Z
+000000: iput-boolean v11, v10, Lcom/vivo/connbase/connectcenter/ConnectCenterConnection;->mIsSystemApp Z
+000004: const-string v0, "onCreate: bind await error "
+000008: const-wide/16 v1, 1000
+00000c: const-string v3, "onCreate: bind status is "
+000010: const-string v4, "com.vivo.connbase"
+000014: const/4 v5, 0
+000016: const/4 v6, 1
+000018: const-string v7, "ConnectCenterConnection"
+00001c: if-eqz v11, +069h
+000020: iget-boolean v11, v10, Lcom/vivo/connbase/connectcenter/ConnectCenterConnection;->sIsInitialized Z
+000024: if-nez v11, +0c1h
+000028: new-instance v11, Ljava/lang/StringBuilder;
+00002c: const-string v8, "[isSystemApp] bindService called:com.vivo.connbase.action.VIVO_CONNECT_SERVICE---com.vivo.connbase--com.vivo.connbase.VivoConnectService---1,mIsBinding:"
+000030: invoke-direct v11, v8, Ljava/lang/StringBuilder;-><init>(Ljava/lang/String;)V
+000036: iget-boolean v8, v10, Lcom/vivo/connbase/connectcenter/ConnectCenterConnection;->mIsBinding Z
+00003a: invoke-virtual v11, v8, Ljava/lang/StringBuilder;->append(Z)Ljava/lang/StringBuilder;
+000040: invoke-virtual v11, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
+000046: move-result-object v11
+000048: invoke-static v7, v11, Lcom/vivo/aiengine/find/device/sdk/impl/util/LogUtil;->i(Ljava/lang/String; Ljava/lang/String;)V
+00004e: iget-boolean v11, v10, Lcom/vivo/connbase/connectcenter/ConnectCenterConnection;->mIsBinding Z
+000052: if-eqz v11, +003h
+000056: return v5
+000058: iput-boolean v6, v10, Lcom/vivo/connbase/connectcenter/ConnectCenterConnection;->mIsBinding Z
+00005c: new-instance v11, Landroid/content/Intent;
+000060: const-string v8, "com.vivo.connbase.action.VIVO_CONNECT_SERVICE"
+000064: invoke-direct v11, v8, Landroid/content/Intent;-><init>(Ljava/lang/String;)V
+00006a: new-instance v8, Landroid/content/ComponentName;
+00006e: const-string v9, "com.vivo.connbase.VivoConnectService"
+000072: invoke-direct v8, v4, v9, Landroid/content/ComponentName;-><init>(Ljava/lang/String; Ljava/lang/String;)V
+000078: invoke-virtual v11, v8, Landroid/content/Intent;->setComponent(Landroid/content/ComponentName;)Landroid/content/Intent;
+00007e: iget-object v4, v10, Lcom/vivo/connbase/connectcenter/ConnectCenterConnection;->mContext Landroid/content/Context;
+000082: invoke-virtual v4, v11, v10, v6, Landroid/content/Context;->bindService(Landroid/content/Intent; Landroid/content/ServiceConnection; I)Z
+000088: move-result v6
+00008a: new-instance v11, Ljava/lang/StringBuilder;
+00008e: invoke-direct v11, v3, Ljava/lang/StringBuilder;-><init>(Ljava/lang/String;)V
+000094: invoke-virtual v11, v6, Ljava/lang/StringBuilder;->append(Z)Ljava/lang/StringBuilder;
+00009a: invoke-virtual v11, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
+0000a0: move-result-object v11
+0000a2: invoke-static v7, v11, Lcom/vivo/aiengine/find/device/sdk/impl/util/LogUtil;->i(Ljava/lang/String; Ljava/lang/String;)V
+0000a8: if-eqz v6, +07fh
+0000ac: iget-object v11, v10, Lcom/vivo/connbase/connectcenter/ConnectCenterConnection;->mLatch Ljava/util/concurrent/CountDownLatch;
+0000b0: sget-object v3, Ljava/util/concurrent/TimeUnit;->MILLISECONDS Ljava/util/concurrent/TimeUnit;
+0000b4: invoke-virtual v11, v1, v2, v3, Ljava/util/concurrent/CountDownLatch;->await(J Ljava/util/concurrent/TimeUnit;)Z
+0000ba: goto/16 +076h
+0000be: move-exception v11
+0000c0: invoke-static Ljava/lang/Thread;->currentThread()Ljava/lang/Thread;
+0000c6: move-result-object v1
+0000c8: invoke-virtual v1, Ljava/lang/Thread;->interrupt()V
+0000ce: new-instance v1, Ljava/lang/StringBuilder;
+0000d2: invoke-direct v1, v0, Ljava/lang/StringBuilder;-><init>(Ljava/lang/String;)V
+0000d8: invoke-virtual v1, v11, Ljava/lang/StringBuilder;->append(Ljava/lang/Object;)Ljava/lang/StringBuilder;
+0000de: invoke-virtual v1, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
+0000e4: move-result-object v11
+0000e6: invoke-static v7, v11, Lcom/vivo/aiengine/find/device/sdk/impl/util/LogUtil;->e(Ljava/lang/String; Ljava/lang/String;)V
+0000ec: goto +5dh
+0000ee: iget-boolean v11, v10, Lcom/vivo/connbase/connectcenter/ConnectCenterConnection;->sIsInitialized Z
+0000f2: if-nez v11, +05ah
+0000f6: new-instance v11, Ljava/lang/StringBuilder;
+0000fa: const-string v8, "[notSystemApp] bindService called:com.vivo.connbase.action.CONNECT_CENTER_SERVICE---com.vivo.connbase--com.vivo.connbase.connectcenter.ConnectCenterService---1,mIsBinding:"
+0000fe: invoke-direct v11, v8, Ljava/lang/StringBuilder;-><init>(Ljava/lang/String;)V
+000104: iget-boolean v8, v10, Lcom/vivo/connbase/connectcenter/ConnectCenterConnection;->mIsBinding Z
+000108: invoke-virtual v11, v8, Ljava/lang/StringBuilder;->append(Z)Ljava/lang/StringBuilder;
+00010e: invoke-virtual v11, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
+000114: move-result-object v11
+000116: invoke-static v7, v11, Lcom/vivo/aiengine/find/device/sdk/impl/util/LogUtil;->i(Ljava/lang/String; Ljava/lang/String;)V
+00011c: iget-boolean v11, v10, Lcom/vivo/connbase/connectcenter/ConnectCenterConnection;->mIsBinding Z
+000120: if-eqz v11, +003h
+000124: return v5
+000126: iput-boolean v6, v10, Lcom/vivo/connbase/connectcenter/ConnectCenterConnection;->mIsBinding Z
+00012a: new-instance v11, Landroid/content/Intent;
+00012e: const-string v8, "com.vivo.connbase.action.CONNECT_CENTER_SERVICE"
+000132: invoke-direct v11, v8, Landroid/content/Intent;-><init>(Ljava/lang/String;)V
+000138: new-instance v8, Landroid/content/ComponentName;
+00013c: const-string v9, "com.vivo.connbase.connectcenter.ConnectCenterService"
+000140: invoke-direct v8, v4, v9, Landroid/content/ComponentName;-><init>(Ljava/lang/String; Ljava/lang/String;)V
+000146: invoke-virtual v11, v8, Landroid/content/Intent;->setComponent(Landroid/content/ComponentName;)Landroid/content/Intent;
+00014c: iget-object v4, v10, Lcom/vivo/connbase/connectcenter/ConnectCenterConnection;->mContext Landroid/content/Context;
+000150: invoke-virtual v4, v11, v10, v6, Landroid/content/Context;->bindService(Landroid/content/Intent; Landroid/content/ServiceConnection; I)Z
+000156: move-result v6
+000158: new-instance v11, Ljava/lang/StringBuilder;
+00015c: invoke-direct v11, v3, Ljava/lang/StringBuilder;-><init>(Ljava/lang/String;)V
+000162: invoke-virtual v11, v6, Ljava/lang/StringBuilder;->append(Z)Ljava/lang/StringBuilder;
+000168: invoke-virtual v11, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
+00016e: move-result-object v11
+000170: invoke-static v7, v11, Lcom/vivo/aiengine/find/device/sdk/impl/util/LogUtil;->i(Ljava/lang/String; Ljava/lang/String;)V
+000176: if-eqz v6, +018h
+00017a: iget-object v11, v10, Lcom/vivo/connbase/connectcenter/ConnectCenterConnection;->mLatch Ljava/util/concurrent/CountDownLatch;
+00017e: sget-object v3, Ljava/util/concurrent/TimeUnit;->MILLISECONDS Ljava/util/concurrent/TimeUnit;
+000182: invoke-virtual v11, v1, v2, v3, Ljava/util/concurrent/CountDownLatch;->await(J Ljava/util/concurrent/TimeUnit;)Z
+000188: goto +fh
+00018a: move-exception v11
+00018c: invoke-static Ljava/lang/Thread;->currentThread()Ljava/lang/Thread;
+000192: move-result-object v1
+000194: invoke-virtual v1, Ljava/lang/Thread;->interrupt()V
+00019a: new-instance v1, Ljava/lang/StringBuilder;
+00019e: invoke-direct v1, v0, Ljava/lang/StringBuilder;-><init>(Ljava/lang/String;)V
+0001a4: goto -66h
+0001a6: iput-boolean v5, v10, Lcom/vivo/connbase/connectcenter/ConnectCenterConnection;->mIsBinding Z
+0001aa: return v6
+
+METHOD getConnectCenterService()Lcom/vivo/connbase/IClient;
+000000: const-string v0, "getConnectCenterService: IClient Service set callback. "
+000004: sget-object v1, Lcom/vivo/connbase/connectcenter/ConnectCenterConnection;->sClient Lcom/vivo/connbase/IClient;
+000008: const-string v2, "ConnectCenterConnection"
+00000c: if-nez v1, +00ah
+000010: const-string v1, "getConnectCenterService: IClient Service is null"
+000014: invoke-static v2, v1, Lcom/vivo/aiengine/find/device/sdk/impl/util/LogUtil;->e(Ljava/lang/String; Ljava/lang/String;)V
+00001a: const/4 v1, 0
+00001c: iput-boolean v1, v7, Lcom/vivo/connbase/connectcenter/ConnectCenterConnection;->sIsInitialized Z
+000020: iget-object v1, v7, Lcom/vivo/connbase/connectcenter/ConnectCenterConnection;->mCoworkObserver Lcom/vivo/connbase/connectcenter/IConnCoworkObserver;
+000024: if-eqz v1, +04eh
+000028: sget-object v1, Lcom/vivo/connbase/connectcenter/ConnectCenterConnection;->sClient Lcom/vivo/connbase/IClient;
+00002c: if-eqz v1, +04ah
+000030: invoke-static Ljava/lang/System;->currentTimeMillis()J
+000036: move-result-wide v3
+000038: iget-wide v5, v7, Lcom/vivo/connbase/connectcenter/ConnectCenterConnection;->lastSetMillis J
+00003c: sub-long/2addr v3, v5
+00003e: const-wide/16 v5, 3000
+000042: cmp-long v1, v3, v5
+000046: if-lez v1, +03dh
+00004a: sget-object v1, Lcom/vivo/connbase/connectcenter/ConnectCenterConnection;->sClient Lcom/vivo/connbase/IClient;
+00004e: if-eqz v1, +039h
+000052: invoke-interface v1, Lcom/vivo/connbase/IClient;->getConnCoworkService()Lcom/vivo/connbase/connectcenter/IConnCoworkService;
+000058: move-result-object v1
+00005a: const-string v3, "com.vivo.vdfs"
+00005e: invoke-interface v1, v3, Lcom/vivo/connbase/connectcenter/IConnCoworkService;->hasCallbackObserver(Ljava/lang/String;)Z
+000064: move-result v1
+000066: if-nez v1, +02dh
+00006a: invoke-static Ljava/lang/System;->currentTimeMillis()J
+000070: move-result-wide v3
+000072: iput-wide v3, v7, Lcom/vivo/connbase/connectcenter/ConnectCenterConnection;->lastSetMillis J
+000076: sget-object v1, Lcom/vivo/connbase/connectcenter/ConnectCenterConnection;->sClient Lcom/vivo/connbase/IClient;
+00007a: invoke-interface v1, Lcom/vivo/connbase/IClient;->getConnCoworkService()Lcom/vivo/connbase/connectcenter/IConnCoworkService;
+000080: move-result-object v1
+000082: iget-object v3, v7, Lcom/vivo/connbase/connectcenter/ConnectCenterConnection;->mCoworkObserver Lcom/vivo/connbase/connectcenter/IConnCoworkObserver;
+000086: invoke-interface v1, v3, Lcom/vivo/connbase/connectcenter/IConnCoworkService;->setCallbackObserver(Lcom/vivo/connbase/connectcenter/IConnCoworkObserver;)V
+00008c: new-instance v1, Ljava/lang/StringBuilder;
+000090: invoke-direct v1, v0, Ljava/lang/StringBuilder;-><init>(Ljava/lang/String;)V
+000096: iget-object v7, v7, Lcom/vivo/connbase/connectcenter/ConnectCenterConnection;->mCoworkObserver Lcom/vivo/connbase/connectcenter/IConnCoworkObserver;
+00009a: invoke-virtual v1, v7, Ljava/lang/StringBuilder;->append(Ljava/lang/Object;)Ljava/lang/StringBuilder;
+0000a0: invoke-virtual v1, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
+0000a6: move-result-object v7
+0000a8: invoke-static v2, v7, Lcom/vivo/aiengine/find/device/sdk/impl/util/LogUtil;->e(Ljava/lang/String; Ljava/lang/String;)V
+0000ae: goto +9h
+0000b0: move-exception v7
+0000b2: invoke-virtual v7, Ljava/lang/Throwable;->getMessage()Ljava/lang/String;
+0000b8: move-result-object v7
+0000ba: invoke-static v2, v7, Lcom/vivo/aiengine/find/device/sdk/impl/util/LogUtil;->e(Ljava/lang/String; Ljava/lang/String;)V
+0000c0: sget-object v7, Lcom/vivo/connbase/connectcenter/ConnectCenterConnection;->sClient Lcom/vivo/connbase/IClient;
+0000c4: return-object v7
+
+METHOD getConnectCenterServiceFromNonSystemApp()Lcom/vivo/connbase/connectcenter/IConnCenterClient;
+000000: sget-object v0, Lcom/vivo/connbase/connectcenter/ConnectCenterConnection;->sConnCenterClient Lcom/vivo/connbase/connectcenter/IConnCenterClient;
+000004: if-nez v0, +00ch
+000008: const-string v0, "ConnectCenterConnection"
+00000c: const-string v1, "getConnectCenterServiceFromNonSystemApp: IClient Service is null"
+000010: invoke-static v0, v1, Lcom/vivo/aiengine/find/device/sdk/impl/util/LogUtil;->e(Ljava/lang/String; Ljava/lang/String;)V
+000016: const/4 v0, 0
+000018: iput-boolean v0, v2, Lcom/vivo/connbase/connectcenter/ConnectCenterConnection;->sIsInitialized Z
+00001c: sget-object v2, Lcom/vivo/connbase/connectcenter/ConnectCenterConnection;->sConnCenterClient Lcom/vivo/connbase/connectcenter/IConnCenterClient;
+000020: return-object v2
+
+METHOD onServiceConnected(Landroid/content/ComponentName; Landroid/os/IBinder;)V
+000000: const-string v3, "onServiceConnected: connect to connect center"
+000004: const-string v0, "ConnectCenterConnection"
+000008: invoke-static v0, v3, Lcom/vivo/aiengine/find/device/sdk/impl/util/LogUtil;->i(Ljava/lang/String; Ljava/lang/String;)V
+00000e: iget-boolean v3, v2, Lcom/vivo/connbase/connectcenter/ConnectCenterConnection;->mIsSystemApp Z
+000012: if-eqz v3, +00bh
+000016: invoke-static v4, Lcom/vivo/connbase/IClient$Stub;->asInterface(Landroid/os/IBinder;)Lcom/vivo/connbase/IClient;
+00001c: move-result-object v3
+00001e: sput-object v3, Lcom/vivo/connbase/connectcenter/ConnectCenterConnection;->sClient Lcom/vivo/connbase/IClient;
+000022: goto +9h
+000024: move-exception v2
+000026: goto +21h
+000028: invoke-static v4, Lcom/vivo/connbase/connectcenter/IConnCenterClient$Stub;->asInterface(Landroid/os/IBinder;)Lcom/vivo/connbase/connectcenter/IConnCenterClient;
+00002e: move-result-object v3
+000030: sput-object v3, Lcom/vivo/connbase/connectcenter/ConnectCenterConnection;->sConnCenterClient Lcom/vivo/connbase/connectcenter/IConnCenterClient;
+000034: sput-object v4, Lcom/vivo/connbase/connectcenter/ConnectCenterConnection;->sBinder Landroid/os/IBinder;
+000038: iget-object v3, v2, Lcom/vivo/connbase/connectcenter/ConnectCenterConnection;->mDeathRecipient Landroid/os/IBinder$DeathRecipient;
+00003c: const/4 v1, 0
+00003e: invoke-interface v4, v3, v1, Landroid/os/IBinder;->linkToDeath(Landroid/os/IBinder$DeathRecipient; I)V
+000044: const/4 v3, 1
+000046: iput-boolean v3, v2, Lcom/vivo/connbase/connectcenter/ConnectCenterConnection;->sIsInitialized Z
+00004a: iput-boolean v1, v2, Lcom/vivo/connbase/connectcenter/ConnectCenterConnection;->mIsBinding Z
+00004e: iget-object v4, v2, Lcom/vivo/connbase/connectcenter/ConnectCenterConnection;->mLatch Ljava/util/concurrent/CountDownLatch;
+000052: invoke-virtual v4, Ljava/util/concurrent/CountDownLatch;->countDown()V
+000058: new-instance v4, Ljava/util/concurrent/CountDownLatch;
+00005c: invoke-direct v4, v3, Ljava/util/concurrent/CountDownLatch;-><init>(I)V
+000062: iput-object v4, v2, Lcom/vivo/connbase/connectcenter/ConnectCenterConnection;->mLatch Ljava/util/concurrent/CountDownLatch;
+000066: return-void 
+000068: new-instance v3, Ljava/lang/StringBuilder;
+00006c: const-string v4, "onServiceConnected, e = "
+000070: invoke-direct v3, v4, Ljava/lang/StringBuilder;-><init>(Ljava/lang/String;)V
+000076: invoke-virtual v3, v2, Ljava/lang/StringBuilder;->append(Ljava/lang/Object;)Ljava/lang/StringBuilder;
+00007c: invoke-virtual v3, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
+000082: move-result-object v2
+000084: invoke-static v0, v2, Lcom/vivo/aiengine/find/device/sdk/impl/util/LogUtil;->e(Ljava/lang/String; Ljava/lang/String;)V
+00008a: return-void 
+
+METHOD onServiceDisconnected(Landroid/content/ComponentName;)V
+000000: const-string v6, "onServiceDisconnected: disconnect"
+000004: const-string v0, "ConnectCenterConnection"
+000008: invoke-static v0, v6, Lcom/vivo/aiengine/find/device/sdk/impl/util/LogUtil;->i(Ljava/lang/String; Ljava/lang/String;)V
+00000e: const/4 v6, 0
+000010: sput-object v6, Lcom/vivo/connbase/connectcenter/ConnectCenterConnection;->sClient Lcom/vivo/connbase/IClient;
+000014: sput-object v6, Lcom/vivo/connbase/connectcenter/ConnectCenterConnection;->sConnCenterClient Lcom/vivo/connbase/connectcenter/IConnCenterClient;
+000018: sget-object v1, Lcom/vivo/connbase/connectcenter/ConnectCenterConnection;->sBinder Landroid/os/IBinder;
+00001c: const/4 v2, 0
+00001e: if-eqz v1, +020h
+000022: iget-object v3, v5, Lcom/vivo/connbase/connectcenter/ConnectCenterConnection;->mDeathRecipient Landroid/os/IBinder$DeathRecipient;
+000026: invoke-interface v1, v3, v2, Landroid/os/IBinder;->unlinkToDeath(Landroid/os/IBinder$DeathRecipient; I)Z
+00002c: goto +17h
+00002e: move-exception v1
+000030: new-instance v3, Ljava/lang/StringBuilder;
+000034: const-string v4, "onServiceDisconnected, e = "
+000038: invoke-direct v3, v4, Ljava/lang/StringBuilder;-><init>(Ljava/lang/String;)V
+00003e: invoke-virtual v1, Ljava/lang/Throwable;->getMessage()Ljava/lang/String;
+000044: move-result-object v1
+000046: invoke-virtual v3, v1, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+00004c: invoke-virtual v3, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
+000052: move-result-object v1
+000054: invoke-static v0, v1, Lcom/vivo/aiengine/find/device/sdk/impl/util/LogUtil;->e(Ljava/lang/String; Ljava/lang/String;)V
+00005a: sput-object v6, Lcom/vivo/connbase/connectcenter/ConnectCenterConnection;->sBinder Landroid/os/IBinder;
+00005e: iput-boolean v2, v5, Lcom/vivo/connbase/connectcenter/ConnectCenterConnection;->sIsInitialized Z
+000062: iput-boolean v2, v5, Lcom/vivo/connbase/connectcenter/ConnectCenterConnection;->mIsBinding Z
+000066: iget-object v6, v5, Lcom/vivo/connbase/connectcenter/ConnectCenterConnection;->mLatch Ljava/util/concurrent/CountDownLatch;
+00006a: invoke-virtual v6, Ljava/util/concurrent/CountDownLatch;->countDown()V
+000070: new-instance v6, Ljava/util/concurrent/CountDownLatch;
+000074: const/4 v0, 1
+000076: invoke-direct v6, v0, Ljava/util/concurrent/CountDownLatch;-><init>(I)V
+00007c: iput-object v6, v5, Lcom/vivo/connbase/connectcenter/ConnectCenterConnection;->mLatch Ljava/util/concurrent/CountDownLatch;
+000080: return-void 
+
+METHOD setObserver(Lcom/vivo/connbase/connectcenter/IConnCoworkObserver;)V
+000000: iput-object v2, v1, Lcom/vivo/connbase/connectcenter/ConnectCenterConnection;->mCoworkObserver Lcom/vivo/connbase/connectcenter/IConnCoworkObserver;
+000004: new-instance v1, Ljava/lang/StringBuilder;
+000008: const-string v0, "setObserver to connection : "
+00000c: invoke-direct v1, v0, Ljava/lang/StringBuilder;-><init>(Ljava/lang/String;)V
+000012: invoke-virtual v1, v2, Ljava/lang/StringBuilder;->append(Ljava/lang/Object;)Ljava/lang/StringBuilder;
+000018: invoke-virtual v1, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
+00001e: move-result-object v1
+000020: const-string v2, "ConnectCenterConnection"
+000024: invoke-static v2, v1, Lcom/vivo/aiengine/find/device/sdk/impl/util/LogUtil;->d(Ljava/lang/String; Ljava/lang/String;)V
+00002a: return-void 
+
+METHOD unbind()V
+000000: iget-boolean v0, v2, Lcom/vivo/connbase/connectcenter/ConnectCenterConnection;->sIsInitialized Z
+000004: if-eqz v0, +013h
+000008: iget-object v0, v2, Lcom/vivo/connbase/connectcenter/ConnectCenterConnection;->mContext Landroid/content/Context;
+00000c: invoke-virtual v0, v2, Landroid/content/Context;->unbindService(Landroid/content/ServiceConnection;)V
+000012: const-string v0, "ConnectCenterConnection"
+000016: const-string v1, "ConnectCenterConnection unbind !"
+00001a: invoke-static v0, v1, Lcom/vivo/aiengine/find/device/sdk/impl/util/LogUtil;->d(Ljava/lang/String; Ljava/lang/String;)V
+000020: const/4 v0, 0
+000022: iput-boolean v0, v2, Lcom/vivo/connbase/connectcenter/ConnectCenterConnection;->sIsInitialized Z
+000026: iput-boolean v0, v2, Lcom/vivo/connbase/connectcenter/ConnectCenterConnection;->mIsBinding Z
+00002a: return-void 

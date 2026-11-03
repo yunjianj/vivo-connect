@@ -1,0 +1,49 @@
+APK pcsuite/updateApk/pcsuite.apk
+DEX classes2.dex
+CLASS Lcom/vivo/connect/sdk/h/b;
+SUPER Ljava/lang/Object;
+FIELDS
+c Ljava/lang/String; = 'OnFailureRunnableTAG'
+a Lcom/vivo/connect/tasks/b; = None
+b Lcom/vivo/connect/tasks/Task; = None
+
+METHOD <init>(Lcom/vivo/connect/tasks/b; Lcom/vivo/connect/tasks/Task;)V
+000000: invoke-direct v0, Ljava/lang/Object;-><init>()V
+000006: iput-object v1, v0, Lcom/vivo/connect/sdk/h/b;->a Lcom/vivo/connect/tasks/b;
+00000a: iput-object v2, v0, Lcom/vivo/connect/sdk/h/b;->b Lcom/vivo/connect/tasks/Task;
+00000e: return-void 
+
+METHOD run()V
+000000: const-string v0, "call onFailure error:"
+000004: iget-object v1, v4, Lcom/vivo/connect/sdk/h/b;->a Lcom/vivo/connect/tasks/b;
+000008: invoke-virtual v1, Lcom/vivo/connect/tasks/b;->a()Ljava/lang/Object;
+00000e: move-result-object v1
+000010: monitor-enter v1
+000012: iget-object v2, v4, Lcom/vivo/connect/sdk/h/b;->a Lcom/vivo/connect/tasks/b;
+000016: invoke-virtual v2, Lcom/vivo/connect/tasks/b;->b()Lcom/vivo/connect/tasks/OnFailureListener;
+00001c: move-result-object v2
+00001e: if-eqz v2, +02ah
+000022: iget-object v2, v4, Lcom/vivo/connect/sdk/h/b;->a Lcom/vivo/connect/tasks/b;
+000026: invoke-virtual v2, Lcom/vivo/connect/tasks/b;->b()Lcom/vivo/connect/tasks/OnFailureListener;
+00002c: move-result-object v2
+00002e: iget-object v4, v4, Lcom/vivo/connect/sdk/h/b;->b Lcom/vivo/connect/tasks/Task;
+000032: invoke-virtual v4, Lcom/vivo/connect/tasks/Task;->getException()Ljava/lang/Exception;
+000038: move-result-object v4
+00003a: invoke-interface v2, v4, Lcom/vivo/connect/tasks/OnFailureListener;->onFailure(Ljava/lang/Exception;)V
+000040: goto +19h
+000042: move-exception v4
+000044: goto +19h
+000046: move-exception v4
+000048: const-string v2, "OnFailureRunnableTAG"
+00004c: new-instance v3, Ljava/lang/StringBuilder;
+000050: invoke-direct v3, v0, Ljava/lang/StringBuilder;-><init>(Ljava/lang/String;)V
+000056: invoke-virtual v4, Ljava/lang/Object;->toString()Ljava/lang/String;
+00005c: move-result-object v4
+00005e: invoke-virtual v3, v4, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+000064: invoke-virtual v3, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
+00006a: move-result-object v4
+00006c: invoke-static v2, v4, Lcom/vivo/connect/logger/EasyLog;->e(Ljava/lang/String; Ljava/lang/String;)V
+000072: monitor-exit v1
+000074: return-void 
+000076: monitor-exit v1
+000078: throw v4

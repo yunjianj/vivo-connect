@@ -1,0 +1,34 @@
+APK pcsuite/updateApk/pcsuite.apk
+DEX classes2.dex
+CLASS Lcom/vivo/connect/sdk/i/a;
+SUPER Ljava/lang/Object;
+FIELDS
+
+
+METHOD <init>()V
+000000: invoke-direct v0, Ljava/lang/Object;-><init>()V
+000006: return-void 
+
+METHOD a(Landroid/content/Context;)I
+000000: const/4 v0, -1
+000002: if-nez v3, +003h
+000006: return v0
+000008: invoke-virtual v3, Landroid/content/Context;->getPackageManager()Landroid/content/pm/PackageManager;
+00000e: move-result-object v3
+000010: const-string v1, "com.vivo.connbase"
+000014: const/16 v2, 128
+000018: invoke-virtual v3, v1, v2, Landroid/content/pm/PackageManager;->getApplicationInfo(Ljava/lang/String; I)Landroid/content/pm/ApplicationInfo;
+00001e: move-result-object v3
+000020: if-eqz v3, +017h
+000024: iget-object v3, v3, Landroid/content/pm/ApplicationInfo;->metaData Landroid/os/Bundle;
+000028: if-eqz v3, +013h
+00002c: const-string v1, "com.vivo.connbase.sdk.version"
+000030: invoke-virtual v3, v1, v0, Landroid/os/BaseBundle;->getInt(Ljava/lang/String; I)I
+000036: move-result v3
+000038: return v3
+00003a: move-exception v3
+00003c: invoke-virtual v3, Ljava/lang/Object;->toString()Ljava/lang/String;
+000042: move-result-object v3
+000044: const-string v1, "connectSdkInfo"
+000048: invoke-static v1, v3, Lcom/vivo/connect/logger/EasyLog;->i(Ljava/lang/String; Ljava/lang/String;)V
+00004e: return v0

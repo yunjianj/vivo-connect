@@ -1,0 +1,58 @@
+{
+  "scope": "example file transfer verification trace",
+  "sessionId": "<session-id>",
+  "transport": "wifi-direct",
+  "sourceBytes": 8,
+  "job": {
+    "id": "<upload-job-id>",
+    "kind": "upload",
+    "sessionId": "<session-id>",
+    "status": "succeeded",
+    "createdAt": "2026-11-01T11:37:57.284Z",
+    "bytes": 2048,
+    "phase": "uploading",
+    "totalSize": 8,
+    "result": {
+      "id": "<upload-job-id>",
+      "files": [
+        {
+          "fileReturn": "false",
+          "ifDuplicated": "rename",
+          "mimeType": "text/plain",
+          "date": 1793519121681,
+          "fileName": "example.txt",
+          "fileSize": 8,
+          "isDirectory": false,
+          "savePath": "/sdcard/Download/example.txt"
+        }
+      ],
+      "totalSize": 8,
+      "confirmation": "phone-response",
+      "contentHashComparedWithPhone": false
+    },
+    "finishedAt": "2026-11-01T11:37:57.500Z"
+  },
+  "readbackJob": {
+    "id": "<download-job-id>",
+    "kind": "download",
+    "sessionId": "<session-id>",
+    "status": "succeeded",
+    "createdAt": "2026-11-01T11:38:39.141Z",
+    "bytes": 2048,
+    "phase": "verifying",
+    "result": {
+      "directory": "<state-dir>/downloads/<download-job-id>",
+      "files": [
+        {
+          "path": "example.txt",
+          "size": 8,
+          "sha256": "5ea5f7c6ef65562069cc130e350ab7899fa8030a682e3184680e4fe972015c27"
+        }
+      ],
+      "totalSize": 8,
+      "contentHashComparedWithPhone": false
+    },
+    "finishedAt": "2026-11-01T11:38:39.594Z"
+  },
+  "roundTripHashMatched": true
+}

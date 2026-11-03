@@ -1,0 +1,154 @@
+APK pcsuite/updateApk/connbase.apk
+DEX classes.dex
+CLASS Lcom/vivo/connbase/e0/g/b;
+SUPER Ljava/lang/Object;
+FIELDS
+a Ljava/lang/String; = 'BytesUtils'
+
+METHOD <init>()V
+000000: invoke-direct v0, Ljava/lang/Object;-><init>()V
+000006: return-void 
+
+METHOD a([B)Ljava/lang/String;
+000000: new-instance v0, Ljava/lang/StringBuffer;
+000004: invoke-direct v0, Ljava/lang/StringBuffer;-><init>()V
+00000a: const/4 v1, 0
+00000c: array-length v2, v5
+00000e: if-ge v1, v2, +01ch
+000012: aget-byte v2, v5, v1
+000016: and-int/lit16 v2, v2, 255
+00001a: invoke-static v2, Ljava/lang/Integer;->toHexString(I)Ljava/lang/String;
+000020: move-result-object v2
+000022: invoke-virtual v2, Ljava/lang/String;->length()I
+000028: move-result v3
+00002a: const/4 v4, 1
+00002c: if-ne v3, v4, +007h
+000030: const-string v3, "0"
+000034: invoke-virtual v0, v3, Ljava/lang/StringBuffer;->append(Ljava/lang/String;)Ljava/lang/StringBuffer;
+00003a: invoke-virtual v0, v2, Ljava/lang/StringBuffer;->append(Ljava/lang/String;)Ljava/lang/StringBuffer;
+000040: add-int/lit8 v1, v1, 1
+000044: goto -1ch
+000046: invoke-virtual v0, Ljava/lang/StringBuffer;->toString()Ljava/lang/String;
+00004c: move-result-object v5
+00004e: invoke-virtual v5, Ljava/lang/String;->toUpperCase()Ljava/lang/String;
+000054: move-result-object v5
+000056: return-object v5
+
+METHOD a(I)[B
+000000: const/4 v0, 4
+000002: new-array v0, v0, [B
+000006: shr-int/lit8 v1, v3, 24
+00000a: and-int/lit16 v1, v1, 255
+00000e: int-to-byte v1, v1
+000010: const/4 v2, 0
+000012: aput-byte v1, v0, v2
+000016: shr-int/lit8 v1, v3, 16
+00001a: and-int/lit16 v1, v1, 255
+00001e: int-to-byte v1, v1
+000020: const/4 v2, 1
+000022: aput-byte v1, v0, v2
+000026: shr-int/lit8 v1, v3, 8
+00002a: and-int/lit16 v1, v1, 255
+00002e: int-to-byte v1, v1
+000030: const/4 v2, 2
+000032: aput-byte v1, v0, v2
+000036: and-int/lit16 v3, v3, 255
+00003a: int-to-byte v3, v3
+00003c: const/4 v1, 3
+00003e: aput-byte v3, v0, v1
+000042: return-object v0
+
+METHOD a([B [B)[B
+000000: if-eqz v3, +01dh
+000004: array-length v0, v3
+000006: if-nez v0, +003h
+00000a: goto +18h
+00000c: if-eqz v4, +016h
+000010: array-length v0, v4
+000012: if-nez v0, +003h
+000016: goto +11h
+000018: array-length v0, v3
+00001a: array-length v1, v4
+00001c: add-int/2addr v0, v1
+00001e: new-array v0, v0, [B
+000022: array-length v1, v3
+000024: const/4 v2, 0
+000026: invoke-static v3, v2, v0, v2, v1, Ljava/lang/System;->arraycopy(Ljava/lang/Object; I Ljava/lang/Object; I I)V
+00002c: array-length v3, v3
+00002e: array-length v1, v4
+000030: invoke-static v4, v2, v0, v3, v1, Ljava/lang/System;->arraycopy(Ljava/lang/Object; I Ljava/lang/Object; I I)V
+000036: return-object v0
+000038: return-object v3
+00003a: return-object v4
+
+METHOD b([B)I
+000000: const/4 v0, 3
+000002: aget-byte v0, v2, v0
+000006: and-int/lit16 v0, v0, 255
+00000a: const/4 v1, 2
+00000c: aget-byte v1, v2, v1
+000010: and-int/lit16 v1, v1, 255
+000014: shl-int/lit8 v1, v1, 8
+000018: or-int/2addr v0, v1
+00001a: const/4 v1, 1
+00001c: aget-byte v1, v2, v1
+000020: and-int/lit16 v1, v1, 255
+000024: shl-int/lit8 v1, v1, 16
+000028: or-int/2addr v0, v1
+00002a: const/4 v1, 0
+00002c: aget-byte v2, v2, v1
+000030: and-int/lit16 v2, v2, 255
+000034: shl-int/lit8 v2, v2, 24
+000038: or-int/2addr v2, v0
+00003a: return v2
+
+METHOD b([B [B)Z
+000000: const/4 v0, 0
+000002: if-eqz v4, +018h
+000006: if-eqz v5, +016h
+00000a: array-length v1, v4
+00000c: array-length v2, v5
+00000e: if-ne v1, v2, +012h
+000012: move v1, v0
+000014: array-length v2, v4
+000016: if-ge v1, v2, +00ch
+00001a: aget-byte v2, v4, v1
+00001e: aget-byte v3, v5, v1
+000022: if-eq v2, v3, +003h
+000026: return v0
+000028: add-int/lit8 v1, v1, 1
+00002c: goto -ch
+00002e: const/4 v4, 1
+000030: return v4
+000032: return v0
+
+METHOD c([B)Ljava/lang/String;
+000000: if-nez v2, +00ch
+000004: const-string v2, "BytesUtils"
+000008: const-string v0, "Can't convert a null byte[] to string."
+00000c: invoke-static v2, v0, Lc/c/f/a/b;->p(Ljava/lang/String; Ljava/lang/String;)V
+000012: const-string v2, ""
+000016: return-object v2
+000018: new-instance v0, Ljava/lang/String;
+00001c: sget-object v1, Ljava/nio/charset/StandardCharsets;->UTF_8 Ljava/nio/charset/Charset;
+000020: invoke-direct v0, v2, v1, Ljava/lang/String;-><init>([B Ljava/nio/charset/Charset;)V
+000026: invoke-virtual v0, Ljava/lang/String;->trim()Ljava/lang/String;
+00002c: move-result-object v2
+00002e: return-object v2
+
+METHOD d([B)Z
+000000: const/4 v0, 1
+000002: if-eqz v5, +013h
+000006: array-length v1, v5
+000008: if-nez v1, +003h
+00000c: goto +eh
+00000e: array-length v1, v5
+000010: const/4 v2, 0
+000012: move v3, v2
+000014: if-ge v3, v1, +00ah
+000018: aget-byte v4, v5, v3
+00001c: if-eqz v4, +003h
+000020: return v2
+000022: add-int/lit8 v3, v3, 1
+000026: goto -9h
+000028: return v0

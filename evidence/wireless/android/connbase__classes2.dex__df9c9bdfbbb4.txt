@@ -1,0 +1,70 @@
+APK pcsuite/updateApk/connbase.apk
+DEX classes2.dex
+CLASS Lcom/vivo/pcsuite/pcconnect/f;
+SUPER Ljava/lang/Object;
+FIELDS
+a Ljava/lang/String; = 'Locker'
+b Ljava/lang/Object; = None
+c Landroid/os/PowerManager$WakeLock; = None
+
+METHOD <clinit>()V
+000000: new-instance v0, Ljava/lang/Object;
+000004: invoke-direct v0, Ljava/lang/Object;-><init>()V
+00000a: sput-object v0, Lcom/vivo/pcsuite/pcconnect/f;->b Ljava/lang/Object;
+00000e: return-void 
+
+METHOD <init>()V
+000000: invoke-direct v0, Ljava/lang/Object;-><init>()V
+000006: return-void 
+
+METHOD a()V
+000000: sget-object v0, Lcom/vivo/pcsuite/pcconnect/f;->b Ljava/lang/Object;
+000004: monitor-enter v0
+000006: sget-object v1, Lcom/vivo/pcsuite/pcconnect/f;->c Landroid/os/PowerManager$WakeLock;
+00000a: if-eqz v1, +012h
+00000e: const-string v1, "Locker"
+000012: const-string v2, "Release wake lock."
+000016: invoke-static v1, v2, Lc/c/f/a/b;->k(Ljava/lang/String; Ljava/lang/String;)V
+00001c: sget-object v1, Lcom/vivo/pcsuite/pcconnect/f;->c Landroid/os/PowerManager$WakeLock;
+000020: invoke-virtual v1, Landroid/os/PowerManager$WakeLock;->release()V
+000026: const/4 v1, 0
+000028: sput-object v1, Lcom/vivo/pcsuite/pcconnect/f;->c Landroid/os/PowerManager$WakeLock;
+00002c: goto +8h
+00002e: const-string v1, "Locker"
+000032: const-string v2, "Lock was release already."
+000036: invoke-static v1, v2, Lc/c/f/a/b;->p(Ljava/lang/String; Ljava/lang/String;)V
+00003c: monitor-exit v0
+00003e: return-void 
+000040: move-exception v1
+000042: monitor-exit v0
+000044: throw v1
+
+METHOD a(Landroid/content/Context;)V
+000000: sget-object v0, Lcom/vivo/pcsuite/pcconnect/f;->b Ljava/lang/Object;
+000004: monitor-enter v0
+000006: const-string v1, "power"
+00000a: invoke-virtual v3, v1, Landroid/content/Context;->getSystemService(Ljava/lang/String;)Ljava/lang/Object;
+000010: move-result-object v3
+000012: check-cast v3, Landroid/os/PowerManager;
+000016: sget-object v1, Lcom/vivo/pcsuite/pcconnect/f;->c Landroid/os/PowerManager$WakeLock;
+00001a: if-nez v1, +01bh
+00001e: const/4 v1, 1
+000020: const-string v2, "vivoShare::AppWakeLock"
+000024: invoke-virtual v3, v1, v2, Landroid/os/PowerManager;->newWakeLock(I Ljava/lang/String;)Landroid/os/PowerManager$WakeLock;
+00002a: move-result-object v3
+00002c: sput-object v3, Lcom/vivo/pcsuite/pcconnect/f;->c Landroid/os/PowerManager$WakeLock;
+000030: const-string v3, "Locker"
+000034: const-string v1, "Acquire wake lock."
+000038: invoke-static v3, v1, Lc/c/f/a/b;->k(Ljava/lang/String; Ljava/lang/String;)V
+00003e: sget-object v3, Lcom/vivo/pcsuite/pcconnect/f;->c Landroid/os/PowerManager$WakeLock;
+000042: const-wide/32 v1, 3600000
+000048: invoke-virtual v3, v1, v2, Landroid/os/PowerManager$WakeLock;->acquire(J)V
+00004e: goto +8h
+000050: const-string v3, "Locker"
+000054: const-string v1, "Already on lock."
+000058: invoke-static v3, v1, Lc/c/f/a/b;->p(Ljava/lang/String; Ljava/lang/String;)V
+00005e: monitor-exit v0
+000060: return-void 
+000062: move-exception v3
+000064: monitor-exit v0
+000066: throw v3

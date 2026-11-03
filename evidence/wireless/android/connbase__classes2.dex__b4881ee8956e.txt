@@ -1,0 +1,565 @@
+APK pcsuite/updateApk/connbase.apk
+DEX classes2.dex
+CLASS Lcom/vivo/pcsuite/pcconnect/i;
+SUPER Ljava/lang/Object;
+FIELDS
+k Ljava/lang/String; = 'pcsuite_PcOtherShare'
+l Ljava/lang/String; = 'com.vivo.pcsuite.pcconnect.action.SHARE_LINK'
+a Lcom/vivo/pcsuite/pcconnect/IShareLinkManager; = None
+b Lcom/vivo/pcsuite/pcconnect/d$c; = None
+c Lcom/vivo/pcsuite/pcconnect/d$a; = None
+d Ljava/util/concurrent/CopyOnWriteArrayList; = None
+e Landroid/content/Context; = None
+f Ljava/lang/String; = None
+g Landroid/os/Handler; = None
+h Landroid/content/ServiceConnection; = None
+i Landroid/os/IBinder$DeathRecipient; = None
+j Lcom/vivo/pcsuite/pcconnect/ShareLinkObserver; = None
+
+METHOD <init>(Landroid/content/Context;)V
+000000: invoke-direct v2, Ljava/lang/Object;-><init>()V
+000006: const/4 v0, 0
+000008: iput-object v0, v2, Lcom/vivo/pcsuite/pcconnect/i;->b Lcom/vivo/pcsuite/pcconnect/d$c;
+00000c: iput-object v0, v2, Lcom/vivo/pcsuite/pcconnect/i;->c Lcom/vivo/pcsuite/pcconnect/d$a;
+000010: new-instance v0, Ljava/util/concurrent/CopyOnWriteArrayList;
+000014: invoke-direct v0, Ljava/util/concurrent/CopyOnWriteArrayList;-><init>()V
+00001a: iput-object v0, v2, Lcom/vivo/pcsuite/pcconnect/i;->d Ljava/util/concurrent/CopyOnWriteArrayList;
+00001e: new-instance v0, Landroid/os/Handler;
+000022: invoke-static Landroid/os/Looper;->getMainLooper()Landroid/os/Looper;
+000028: move-result-object v1
+00002a: invoke-direct v0, v1, Landroid/os/Handler;-><init>(Landroid/os/Looper;)V
+000030: iput-object v0, v2, Lcom/vivo/pcsuite/pcconnect/i;->g Landroid/os/Handler;
+000034: new-instance v0, Lcom/vivo/pcsuite/pcconnect/i$a;
+000038: invoke-direct v0, v2, Lcom/vivo/pcsuite/pcconnect/i$a;-><init>(Lcom/vivo/pcsuite/pcconnect/i;)V
+00003e: iput-object v0, v2, Lcom/vivo/pcsuite/pcconnect/i;->h Landroid/content/ServiceConnection;
+000042: new-instance v0, Lcom/vivo/pcsuite/pcconnect/i$b;
+000046: invoke-direct v0, v2, Lcom/vivo/pcsuite/pcconnect/i$b;-><init>(Lcom/vivo/pcsuite/pcconnect/i;)V
+00004c: iput-object v0, v2, Lcom/vivo/pcsuite/pcconnect/i;->i Landroid/os/IBinder$DeathRecipient;
+000050: new-instance v0, Lcom/vivo/pcsuite/pcconnect/i$c;
+000054: invoke-direct v0, v2, Lcom/vivo/pcsuite/pcconnect/i$c;-><init>(Lcom/vivo/pcsuite/pcconnect/i;)V
+00005a: iput-object v0, v2, Lcom/vivo/pcsuite/pcconnect/i;->j Lcom/vivo/pcsuite/pcconnect/ShareLinkObserver;
+00005e: iput-object v3, v2, Lcom/vivo/pcsuite/pcconnect/i;->e Landroid/content/Context;
+000062: return-void 
+
+METHOD a(Lcom/vivo/pcsuite/pcconnect/i;)Lcom/vivo/pcsuite/pcconnect/IShareLinkManager;
+000000: iget-object v0, v0, Lcom/vivo/pcsuite/pcconnect/i;->a Lcom/vivo/pcsuite/pcconnect/IShareLinkManager;
+000004: return-object v0
+
+METHOD a(Lcom/vivo/pcsuite/pcconnect/i; Lcom/vivo/pcsuite/pcconnect/IShareLinkManager;)Lcom/vivo/pcsuite/pcconnect/IShareLinkManager;
+000000: iput-object v1, v0, Lcom/vivo/pcsuite/pcconnect/i;->a Lcom/vivo/pcsuite/pcconnect/IShareLinkManager;
+000004: return-object v1
+
+METHOD a(Landroid/content/Context;)V
+000000: const-string v0, "pcsuite_PcOtherShare"
+000004: const-string v1, "bindOtherShareService"
+000008: invoke-static v0, v1, Lc/c/c/z/a;->a(Ljava/lang/String; Ljava/lang/String;)V
+00000e: new-instance v0, Landroid/content/Intent;
+000012: const-string v1, "com.vivo.pcsuite.pcconnect.action.SHARE_LINK"
+000016: invoke-direct v0, v1, Landroid/content/Intent;-><init>(Ljava/lang/String;)V
+00001c: const-string v1, "com.vivo.connbase"
+000020: invoke-virtual v0, v1, Landroid/content/Intent;->setPackage(Ljava/lang/String;)Landroid/content/Intent;
+000026: iget-object v1, v3, Lcom/vivo/pcsuite/pcconnect/i;->h Landroid/content/ServiceConnection;
+00002a: const/4 v2, 1
+00002c: invoke-virtual v4, v0, v1, v2, Landroid/content/Context;->bindService(Landroid/content/Intent; Landroid/content/ServiceConnection; I)Z
+000032: return-void 
+
+METHOD a(Lcom/vivo/pcsuite/pcconnect/i; Ljava/lang/String; Ljava/lang/String;)Z
+000000: invoke-direct v0, v1, v2, Lcom/vivo/pcsuite/pcconnect/i;->a(Ljava/lang/String; Ljava/lang/String;)Z
+000006: move-result v0
+000008: return v0
+
+METHOD a(Ljava/lang/String; Ljava/lang/String;)Z
+000000: const-string v0, "pcsuite_PcOtherShare"
+000004: const/4 v1, 0
+000006: iget-object v2, v3, Lcom/vivo/pcsuite/pcconnect/i;->a Lcom/vivo/pcsuite/pcconnect/IShareLinkManager;
+00000a: if-eqz v2, +009h
+00000e: iget-object v2, v3, Lcom/vivo/pcsuite/pcconnect/i;->a Lcom/vivo/pcsuite/pcconnect/IShareLinkManager;
+000012: invoke-interface v2, v4, v5, Lcom/vivo/pcsuite/pcconnect/IShareLinkManager;->open(Ljava/lang/String; Ljava/lang/String;)V
+000018: const/4 v4, 1
+00001a: return v4
+00001c: const-string v4, "Please bind shareLinkService first!"
+000020: invoke-static v0, v4, Lc/c/c/z/a;->b(Ljava/lang/String; Ljava/lang/String;)V
+000026: return v1
+000028: move-exception v4
+00002a: const-string v5, "open: "
+00002e: invoke-static v0, v5, v4, Lc/c/c/z/a;->b(Ljava/lang/String; Ljava/lang/String; Ljava/lang/Throwable;)V
+000034: return v1
+
+METHOD a(Ljava/lang/String; Z)Z
+000000: const-string v0, "pcsuite_PcOtherShare"
+000004: const/4 v1, 0
+000006: iget-object v2, v3, Lcom/vivo/pcsuite/pcconnect/i;->a Lcom/vivo/pcsuite/pcconnect/IShareLinkManager;
+00000a: if-eqz v2, +009h
+00000e: iget-object v2, v3, Lcom/vivo/pcsuite/pcconnect/i;->a Lcom/vivo/pcsuite/pcconnect/IShareLinkManager;
+000012: invoke-interface v2, v4, v5, Lcom/vivo/pcsuite/pcconnect/IShareLinkManager;->sendIsAuto(Ljava/lang/String; Z)V
+000018: const/4 v4, 1
+00001a: return v4
+00001c: const-string v4, "Please bind shareLinkService first!"
+000020: invoke-static v0, v4, Lc/c/c/z/a;->b(Ljava/lang/String; Ljava/lang/String;)V
+000026: return v1
+000028: move-exception v4
+00002a: const-string v5, "open: "
+00002e: invoke-static v0, v5, v4, Lc/c/c/z/a;->b(Ljava/lang/String; Ljava/lang/String; Ljava/lang/Throwable;)V
+000034: return v1
+
+METHOD b(Lcom/vivo/pcsuite/pcconnect/i;)Lcom/vivo/pcsuite/pcconnect/ShareLinkObserver;
+000000: iget-object v0, v0, Lcom/vivo/pcsuite/pcconnect/i;->j Lcom/vivo/pcsuite/pcconnect/ShareLinkObserver;
+000004: return-object v0
+
+METHOD b(I)V
+000000: iget-object v0, v1, Lcom/vivo/pcsuite/pcconnect/i;->a Lcom/vivo/pcsuite/pcconnect/IShareLinkManager;
+000004: if-eqz v0, +00bh
+000008: invoke-interface v0, v2, Lcom/vivo/pcsuite/pcconnect/IShareLinkManager;->appResponse(I)V
+00000e: goto +dh
+000010: move-exception v2
+000012: invoke-virtual v2, Landroid/os/RemoteException;->printStackTrace()V
+000018: goto +8h
+00001a: const-string v2, "pcsuite_PcOtherShare"
+00001e: const-string v0, "Please bind shareLinkService first!"
+000022: invoke-static v2, v0, Lc/c/c/z/a;->b(Ljava/lang/String; Ljava/lang/String;)V
+000028: return-void 
+
+METHOD b(I Ljava/lang/String; Ljava/lang/String; I)V
+000000: iget-object v0, v1, Lcom/vivo/pcsuite/pcconnect/i;->a Lcom/vivo/pcsuite/pcconnect/IShareLinkManager;
+000004: if-eqz v0, +008h
+000008: iget-object v0, v1, Lcom/vivo/pcsuite/pcconnect/i;->a Lcom/vivo/pcsuite/pcconnect/IShareLinkManager;
+00000c: invoke-interface v0, v2, v3, v4, v5, Lcom/vivo/pcsuite/pcconnect/IShareLinkManager;->connectbyrfcomm(I Ljava/lang/String; Ljava/lang/String; I)V
+000012: goto +dh
+000014: const-string v2, "pcsuite_PcOtherShare"
+000018: const-string v3, "Please bind shareLinkService first!"
+00001c: invoke-static v2, v3, Lc/c/c/z/a;->b(Ljava/lang/String; Ljava/lang/String;)V
+000022: goto +5h
+000024: move-exception v2
+000026: invoke-virtual v2, Landroid/os/RemoteException;->printStackTrace()V
+00002c: return-void 
+
+METHOD b(Ljava/lang/String;)V
+000000: iget-object v0, v1, Lcom/vivo/pcsuite/pcconnect/i;->a Lcom/vivo/pcsuite/pcconnect/IShareLinkManager;
+000004: if-eqz v0, +008h
+000008: iget-object v0, v1, Lcom/vivo/pcsuite/pcconnect/i;->a Lcom/vivo/pcsuite/pcconnect/IShareLinkManager;
+00000c: invoke-interface v0, v2, Lcom/vivo/pcsuite/pcconnect/IShareLinkManager;->connect(Ljava/lang/String;)V
+000012: goto +dh
+000014: const-string v2, "pcsuite_PcOtherShare"
+000018: const-string v0, "Please bind shareLinkService first!"
+00001c: invoke-static v2, v0, Lc/c/c/z/a;->b(Ljava/lang/String; Ljava/lang/String;)V
+000022: goto +5h
+000024: move-exception v2
+000026: invoke-virtual v2, Landroid/os/RemoteException;->printStackTrace()V
+00002c: return-void 
+
+METHOD b(Z)V
+000000: const-string v0, "pcsuite_PcOtherShare"
+000004: new-instance v1, Ljava/lang/StringBuilder;
+000008: invoke-direct v1, Ljava/lang/StringBuilder;-><init>()V
+00000e: const-string v2, "startAdvertising "
+000012: invoke-virtual v1, v2, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+000018: iget-object v2, v3, Lcom/vivo/pcsuite/pcconnect/i;->a Lcom/vivo/pcsuite/pcconnect/IShareLinkManager;
+00001c: invoke-virtual v1, v2, Ljava/lang/StringBuilder;->append(Ljava/lang/Object;)Ljava/lang/StringBuilder;
+000022: invoke-virtual v1, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
+000028: move-result-object v1
+00002a: invoke-static v0, v1, Lc/c/c/z/a;->c(Ljava/lang/String; Ljava/lang/String;)V
+000030: iget-object v1, v3, Lcom/vivo/pcsuite/pcconnect/i;->a Lcom/vivo/pcsuite/pcconnect/IShareLinkManager;
+000034: if-eqz v1, +008h
+000038: iget-object v0, v3, Lcom/vivo/pcsuite/pcconnect/i;->a Lcom/vivo/pcsuite/pcconnect/IShareLinkManager;
+00003c: invoke-interface v0, v4, Lcom/vivo/pcsuite/pcconnect/IShareLinkManager;->startAdvertising(Z)V
+000042: goto +bh
+000044: const-string v4, "Please bind shareLinkService first!"
+000048: invoke-static v0, v4, Lc/c/c/z/a;->b(Ljava/lang/String; Ljava/lang/String;)V
+00004e: goto +5h
+000050: move-exception v4
+000052: invoke-virtual v4, Landroid/os/RemoteException;->printStackTrace()V
+000058: return-void 
+
+METHOD c(Lcom/vivo/pcsuite/pcconnect/i;)Landroid/os/IBinder$DeathRecipient;
+000000: iget-object v0, v0, Lcom/vivo/pcsuite/pcconnect/i;->i Landroid/os/IBinder$DeathRecipient;
+000004: return-object v0
+
+METHOD c(Ljava/lang/String;)Z
+000000: const-string v0, "pcsuite_PcOtherShare"
+000004: const/4 v1, 0
+000006: iget-object v2, v3, Lcom/vivo/pcsuite/pcconnect/i;->a Lcom/vivo/pcsuite/pcconnect/IShareLinkManager;
+00000a: if-eqz v2, +009h
+00000e: iget-object v2, v3, Lcom/vivo/pcsuite/pcconnect/i;->a Lcom/vivo/pcsuite/pcconnect/IShareLinkManager;
+000012: invoke-interface v2, v4, Lcom/vivo/pcsuite/pcconnect/IShareLinkManager;->connectSuccess(Ljava/lang/String;)V
+000018: const/4 v4, 1
+00001a: return v4
+00001c: const-string v4, "Please bind shareLinkService first!"
+000020: invoke-static v0, v4, Lc/c/c/z/a;->b(Ljava/lang/String; Ljava/lang/String;)V
+000026: return v1
+000028: move-exception v4
+00002a: const-string v2, "open: "
+00002e: invoke-static v0, v2, v4, Lc/c/c/z/a;->b(Ljava/lang/String; Ljava/lang/String; Ljava/lang/Throwable;)V
+000034: return v1
+
+METHOD d(Lcom/vivo/pcsuite/pcconnect/i;)Landroid/content/Context;
+000000: iget-object v0, v0, Lcom/vivo/pcsuite/pcconnect/i;->e Landroid/content/Context;
+000004: return-object v0
+
+METHOD d(Ljava/lang/String;)Z
+000000: iget-object v0, v1, Lcom/vivo/pcsuite/pcconnect/i;->a Lcom/vivo/pcsuite/pcconnect/IShareLinkManager;
+000004: if-eqz v0, +00ch
+000008: invoke-interface v0, v2, Lcom/vivo/pcsuite/pcconnect/IShareLinkManager;->isDeviceInMatch(Ljava/lang/String;)Z
+00000e: move-result v2
+000010: return v2
+000012: move-exception v2
+000014: invoke-virtual v2, Landroid/os/RemoteException;->printStackTrace()V
+00001a: goto +8h
+00001c: const-string v2, "pcsuite_PcOtherShare"
+000020: const-string v0, "Please bind shareLinkService first!"
+000024: invoke-static v2, v0, Lc/c/c/z/a;->b(Ljava/lang/String; Ljava/lang/String;)V
+00002a: const/4 v2, 0
+00002c: return v2
+
+METHOD e(Lcom/vivo/pcsuite/pcconnect/i;)Lcom/vivo/pcsuite/pcconnect/d$c;
+000000: iget-object v0, v0, Lcom/vivo/pcsuite/pcconnect/i;->b Lcom/vivo/pcsuite/pcconnect/d$c;
+000004: return-object v0
+
+METHOD e(Ljava/lang/String;)V
+000000: iget-object v0, v1, Lcom/vivo/pcsuite/pcconnect/i;->a Lcom/vivo/pcsuite/pcconnect/IShareLinkManager;
+000004: if-eqz v0, +00bh
+000008: invoke-interface v0, v2, Lcom/vivo/pcsuite/pcconnect/IShareLinkManager;->sendInfo(Ljava/lang/String;)V
+00000e: goto +dh
+000010: move-exception v2
+000012: invoke-virtual v2, Landroid/os/RemoteException;->printStackTrace()V
+000018: goto +8h
+00001a: const-string v2, "pcsuite_PcOtherShare"
+00001e: const-string v0, "Please bind shareLinkService first!"
+000022: invoke-static v2, v0, Lc/c/c/z/a;->b(Ljava/lang/String; Ljava/lang/String;)V
+000028: return-void 
+
+METHOD f(Lcom/vivo/pcsuite/pcconnect/i;)Landroid/os/Handler;
+000000: iget-object v0, v0, Lcom/vivo/pcsuite/pcconnect/i;->g Landroid/os/Handler;
+000004: return-object v0
+
+METHOD g(Lcom/vivo/pcsuite/pcconnect/i;)Ljava/util/concurrent/CopyOnWriteArrayList;
+000000: iget-object v0, v0, Lcom/vivo/pcsuite/pcconnect/i;->d Ljava/util/concurrent/CopyOnWriteArrayList;
+000004: return-object v0
+
+METHOD h()V
+000000: const-string v0, "cancelConnRemote"
+000004: const-string v1, "pcsuite_PcOtherShare"
+000008: invoke-static v1, v0, Lc/c/c/z/a;->c(Ljava/lang/String; Ljava/lang/String;)V
+00000e: iget-object v2, v3, Lcom/vivo/pcsuite/pcconnect/i;->a Lcom/vivo/pcsuite/pcconnect/IShareLinkManager;
+000012: if-eqz v2, +00ah
+000016: invoke-interface v2, Lcom/vivo/pcsuite/pcconnect/IShareLinkManager;->cancelConnect()V
+00001c: goto +5h
+00001e: move-exception v2
+000020: invoke-static v1, v0, v2, Lc/c/c/z/a;->b(Ljava/lang/String; Ljava/lang/String; Ljava/lang/Throwable;)V
+000026: return-void 
+
+METHOD h(Lcom/vivo/pcsuite/pcconnect/i;)V
+000000: invoke-direct v0, Lcom/vivo/pcsuite/pcconnect/i;->r()V
+000006: return-void 
+
+METHOD i(Lcom/vivo/pcsuite/pcconnect/i;)Lcom/vivo/pcsuite/pcconnect/d$a;
+000000: iget-object v0, v0, Lcom/vivo/pcsuite/pcconnect/i;->c Lcom/vivo/pcsuite/pcconnect/d$a;
+000004: return-object v0
+
+METHOD i()V
+000000: const-string v0, "pcsuite_PcOtherShare"
+000004: iget-object v1, v3, Lcom/vivo/pcsuite/pcconnect/i;->a Lcom/vivo/pcsuite/pcconnect/IShareLinkManager;
+000008: if-eqz v1, +008h
+00000c: iget-object v1, v3, Lcom/vivo/pcsuite/pcconnect/i;->a Lcom/vivo/pcsuite/pcconnect/IShareLinkManager;
+000010: invoke-interface v1, Lcom/vivo/pcsuite/pcconnect/IShareLinkManager;->close()V
+000016: goto +10h
+000018: const-string v1, "Please bind shareLinkService first!"
+00001c: invoke-static v0, v1, Lc/c/c/z/a;->b(Ljava/lang/String; Ljava/lang/String;)V
+000022: goto +ah
+000024: move-exception v1
+000026: const-string v2, "close: "
+00002a: invoke-static v0, v2, v1, Lc/c/c/z/a;->b(Ljava/lang/String; Ljava/lang/String; Ljava/lang/Throwable;)V
+000030: invoke-virtual v1, Landroid/os/RemoteException;->printStackTrace()V
+000036: return-void 
+
+METHOD j()V
+000000: iget-object v0, v2, Lcom/vivo/pcsuite/pcconnect/i;->a Lcom/vivo/pcsuite/pcconnect/IShareLinkManager;
+000004: const-string v1, "pcsuite_PcOtherShare"
+000008: if-eqz v0, +00dh
+00000c: const-string v0, "called disconnect"
+000010: invoke-static v1, v0, Lc/c/c/z/a;->b(Ljava/lang/String; Ljava/lang/String;)V
+000016: iget-object v0, v2, Lcom/vivo/pcsuite/pcconnect/i;->a Lcom/vivo/pcsuite/pcconnect/IShareLinkManager;
+00001a: invoke-interface v0, Lcom/vivo/pcsuite/pcconnect/IShareLinkManager;->disconnect()V
+000020: goto +bh
+000022: const-string v0, "Please bind shareLinkService first!"
+000026: invoke-static v1, v0, Lc/c/c/z/a;->b(Ljava/lang/String; Ljava/lang/String;)V
+00002c: goto +5h
+00002e: move-exception v0
+000030: invoke-virtual v0, Landroid/os/RemoteException;->printStackTrace()V
+000036: return-void 
+
+METHOD k()Z
+000000: iget-object v0, v2, Lcom/vivo/pcsuite/pcconnect/i;->a Lcom/vivo/pcsuite/pcconnect/IShareLinkManager;
+000004: if-eqz v0, +00ch
+000008: invoke-interface v0, Lcom/vivo/pcsuite/pcconnect/IShareLinkManager;->isConnected()Z
+00000e: move-result v0
+000010: return v0
+000012: move-exception v0
+000014: invoke-virtual v0, Landroid/os/RemoteException;->printStackTrace()V
+00001a: goto +8h
+00001c: const-string v0, "pcsuite_PcOtherShare"
+000020: const-string v1, "Please bind shareLinkService first!"
+000024: invoke-static v0, v1, Lc/c/c/z/a;->b(Ljava/lang/String; Ljava/lang/String;)V
+00002a: const/4 v0, 0
+00002c: return v0
+
+METHOD l()Z
+000000: iget-object v0, v2, Lcom/vivo/pcsuite/pcconnect/i;->a Lcom/vivo/pcsuite/pcconnect/IShareLinkManager;
+000004: if-eqz v0, +00ch
+000008: invoke-interface v0, Lcom/vivo/pcsuite/pcconnect/IShareLinkManager;->isConnecting()Z
+00000e: move-result v0
+000010: return v0
+000012: move-exception v0
+000014: invoke-virtual v0, Landroid/os/RemoteException;->printStackTrace()V
+00001a: goto +8h
+00001c: const-string v0, "pcsuite_PcOtherShare"
+000020: const-string v1, "Please bind shareLinkService first!"
+000024: invoke-static v0, v1, Lc/c/c/z/a;->b(Ljava/lang/String; Ljava/lang/String;)V
+00002a: const/4 v0, 0
+00002c: return v0
+
+METHOD m()Z
+000000: iget-object v0, v2, Lcom/vivo/pcsuite/pcconnect/i;->a Lcom/vivo/pcsuite/pcconnect/IShareLinkManager;
+000004: if-eqz v0, +00ch
+000008: invoke-interface v0, Lcom/vivo/pcsuite/pcconnect/IShareLinkManager;->isShareOpened()Z
+00000e: move-result v0
+000010: return v0
+000012: move-exception v0
+000014: invoke-virtual v0, Landroid/os/RemoteException;->printStackTrace()V
+00001a: goto +8h
+00001c: const-string v0, "pcsuite_PcOtherShare"
+000020: const-string v1, "Please bind shareLinkService first!"
+000024: invoke-static v0, v1, Lc/c/c/z/a;->b(Ljava/lang/String; Ljava/lang/String;)V
+00002a: const/4 v0, 0
+00002c: return v0
+
+METHOD n()Z
+000000: iget-object v0, v2, Lcom/vivo/pcsuite/pcconnect/i;->a Lcom/vivo/pcsuite/pcconnect/IShareLinkManager;
+000004: if-eqz v0, +00ch
+000008: invoke-interface v0, Lcom/vivo/pcsuite/pcconnect/IShareLinkManager;->isScanning()Z
+00000e: move-result v0
+000010: return v0
+000012: move-exception v0
+000014: invoke-virtual v0, Landroid/os/RemoteException;->printStackTrace()V
+00001a: goto +8h
+00001c: const-string v0, "pcsuite_PcOtherShare"
+000020: const-string v1, "Please bind shareLinkService first!"
+000024: invoke-static v0, v1, Lc/c/c/z/a;->b(Ljava/lang/String; Ljava/lang/String;)V
+00002a: const/4 v0, 0
+00002c: return v0
+
+METHOD o()V
+000000: const-string v0, "pcsuite_PcOtherShare"
+000004: iget-object v1, v3, Lcom/vivo/pcsuite/pcconnect/i;->a Lcom/vivo/pcsuite/pcconnect/IShareLinkManager;
+000008: if-eqz v1, +008h
+00000c: iget-object v1, v3, Lcom/vivo/pcsuite/pcconnect/i;->a Lcom/vivo/pcsuite/pcconnect/IShareLinkManager;
+000010: invoke-interface v1, Lcom/vivo/pcsuite/pcconnect/IShareLinkManager;->startScan()V
+000016: goto +10h
+000018: const-string v1, "Please bind shareLinkService first!"
+00001c: invoke-static v0, v1, Lc/c/c/z/a;->b(Ljava/lang/String; Ljava/lang/String;)V
+000022: goto +ah
+000024: move-exception v1
+000026: const-string v2, "startScan: "
+00002a: invoke-static v0, v2, v1, Lc/c/c/z/a;->b(Ljava/lang/String; Ljava/lang/String; Ljava/lang/Throwable;)V
+000030: invoke-virtual v1, Landroid/os/RemoteException;->printStackTrace()V
+000036: return-void 
+
+METHOD p()V
+000000: const-string v0, "pcsuite_PcOtherShare"
+000004: new-instance v1, Ljava/lang/StringBuilder;
+000008: invoke-direct v1, Ljava/lang/StringBuilder;-><init>()V
+00000e: const-string v2, "stopAdvertising "
+000012: invoke-virtual v1, v2, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+000018: iget-object v2, v3, Lcom/vivo/pcsuite/pcconnect/i;->a Lcom/vivo/pcsuite/pcconnect/IShareLinkManager;
+00001c: invoke-virtual v1, v2, Ljava/lang/StringBuilder;->append(Ljava/lang/Object;)Ljava/lang/StringBuilder;
+000022: invoke-virtual v1, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
+000028: move-result-object v1
+00002a: invoke-static v0, v1, Lc/c/c/z/a;->c(Ljava/lang/String; Ljava/lang/String;)V
+000030: iget-object v1, v3, Lcom/vivo/pcsuite/pcconnect/i;->a Lcom/vivo/pcsuite/pcconnect/IShareLinkManager;
+000034: if-eqz v1, +008h
+000038: iget-object v0, v3, Lcom/vivo/pcsuite/pcconnect/i;->a Lcom/vivo/pcsuite/pcconnect/IShareLinkManager;
+00003c: invoke-interface v0, Lcom/vivo/pcsuite/pcconnect/IShareLinkManager;->stopAdvertising()V
+000042: goto +bh
+000044: const-string v1, "Please bind shareLinkService first!"
+000048: invoke-static v0, v1, Lc/c/c/z/a;->b(Ljava/lang/String; Ljava/lang/String;)V
+00004e: goto +5h
+000050: move-exception v0
+000052: invoke-virtual v0, Landroid/os/RemoteException;->printStackTrace()V
+000058: return-void 
+
+METHOD q()V
+000000: iget-object v0, v1, Lcom/vivo/pcsuite/pcconnect/i;->a Lcom/vivo/pcsuite/pcconnect/IShareLinkManager;
+000004: if-eqz v0, +00ch
+000008: iget-object v0, v1, Lcom/vivo/pcsuite/pcconnect/i;->a Lcom/vivo/pcsuite/pcconnect/IShareLinkManager;
+00000c: invoke-interface v0, Lcom/vivo/pcsuite/pcconnect/IShareLinkManager;->stopScan()V
+000012: goto +5h
+000014: move-exception v0
+000016: invoke-virtual v0, Landroid/os/RemoteException;->printStackTrace()V
+00001c: return-void 
+
+METHOD r()V
+000000: iget-object v0, v2, Lcom/vivo/pcsuite/pcconnect/i;->d Ljava/util/concurrent/CopyOnWriteArrayList;
+000004: invoke-virtual v0, Ljava/util/concurrent/CopyOnWriteArrayList;->iterator()Ljava/util/Iterator;
+00000a: move-result-object v0
+00000c: invoke-interface v0, Ljava/util/Iterator;->hasNext()Z
+000012: move-result v1
+000014: if-eqz v1, +00ch
+000018: invoke-interface v0, Ljava/util/Iterator;->next()Ljava/lang/Object;
+00001e: move-result-object v1
+000020: check-cast v1, Lcom/vivo/pcsuite/pcconnect/d$b;
+000024: invoke-interface v1, Lcom/vivo/pcsuite/pcconnect/d$b;->onConnectStateChanged()V
+00002a: goto -fh
+00002c: return-void 
+
+METHOD a()V
+000000: const-string v0, "pcsuite_PcOtherShare"
+000004: const-string v1, "free"
+000008: invoke-static v0, v1, Lc/c/c/z/a;->a(Ljava/lang/String; Ljava/lang/String;)V
+00000e: iget-object v0, v2, Lcom/vivo/pcsuite/pcconnect/i;->e Landroid/content/Context;
+000012: iget-object v1, v2, Lcom/vivo/pcsuite/pcconnect/i;->h Landroid/content/ServiceConnection;
+000016: invoke-virtual v0, v1, Landroid/content/Context;->unbindService(Landroid/content/ServiceConnection;)V
+00001c: return-void 
+
+METHOD a(I)V
+000000: invoke-direct v0, v1, Lcom/vivo/pcsuite/pcconnect/i;->b(I)V
+000006: return-void 
+
+METHOD a(I Lcom/vivo/pcsuite/pcconnect/h;)V
+000000: invoke-virtual v4, Lcom/vivo/pcsuite/pcconnect/h;->i()I
+000006: move-result v0
+000008: const/4 v1, 1
+00000a: if-gt v0, v1, +00eh
+00000e: invoke-virtual v4, Lcom/vivo/pcsuite/pcconnect/h;->c()Ljava/lang/String;
+000014: move-result-object v0
+000016: const/4 v1, 0
+000018: invoke-virtual v4, Lcom/vivo/pcsuite/pcconnect/h;->i()I
+00001e: move-result v4
+000020: invoke-direct v2, v3, v0, v1, v4, Lcom/vivo/pcsuite/pcconnect/i;->b(I Ljava/lang/String; Ljava/lang/String; I)V
+000026: return-void 
+
+METHOD a(I Ljava/lang/String; Ljava/lang/String; I)V
+000000: invoke-direct v0, v1, v2, v3, v4, Lcom/vivo/pcsuite/pcconnect/i;->b(I Ljava/lang/String; Ljava/lang/String; I)V
+000006: return-void 
+
+METHOD a(Lcom/vivo/pcsuite/pcconnect/d$a;)V
+000000: iput-object v1, v0, Lcom/vivo/pcsuite/pcconnect/i;->c Lcom/vivo/pcsuite/pcconnect/d$a;
+000004: return-void 
+
+METHOD a(Lcom/vivo/pcsuite/pcconnect/d$b;)V
+000000: iget-object v0, v1, Lcom/vivo/pcsuite/pcconnect/i;->d Ljava/util/concurrent/CopyOnWriteArrayList;
+000004: invoke-virtual v0, v2, Ljava/util/concurrent/CopyOnWriteArrayList;->contains(Ljava/lang/Object;)Z
+00000a: move-result v0
+00000c: if-nez v0, +007h
+000010: iget-object v0, v1, Lcom/vivo/pcsuite/pcconnect/i;->d Ljava/util/concurrent/CopyOnWriteArrayList;
+000014: invoke-virtual v0, v2, Ljava/util/concurrent/CopyOnWriteArrayList;->add(Ljava/lang/Object;)Z
+00001a: return-void 
+
+METHOD a(Lcom/vivo/pcsuite/pcconnect/d$c;)V
+000000: iput-object v1, v0, Lcom/vivo/pcsuite/pcconnect/i;->b Lcom/vivo/pcsuite/pcconnect/d$c;
+000004: return-void 
+
+METHOD a(Z)V
+000000: invoke-direct v0, v1, Lcom/vivo/pcsuite/pcconnect/i;->b(Z)V
+000006: return-void 
+
+METHOD a(Ljava/lang/String;)Z
+000000: invoke-direct v0, v1, Lcom/vivo/pcsuite/pcconnect/i;->d(Ljava/lang/String;)Z
+000006: move-result v1
+000008: return v1
+
+METHOD b(Lcom/vivo/pcsuite/pcconnect/d$b;)V
+000000: iget-object v0, v1, Lcom/vivo/pcsuite/pcconnect/i;->d Ljava/util/concurrent/CopyOnWriteArrayList;
+000004: invoke-virtual v0, v2, Ljava/util/concurrent/CopyOnWriteArrayList;->contains(Ljava/lang/Object;)Z
+00000a: move-result v0
+00000c: if-eqz v0, +007h
+000010: iget-object v0, v1, Lcom/vivo/pcsuite/pcconnect/i;->d Ljava/util/concurrent/CopyOnWriteArrayList;
+000014: invoke-virtual v0, v2, Ljava/util/concurrent/CopyOnWriteArrayList;->remove(Ljava/lang/Object;)Z
+00001a: return-void 
+
+METHOD b()Z
+000000: invoke-direct v1, Lcom/vivo/pcsuite/pcconnect/i;->m()Z
+000006: move-result v0
+000008: return v0
+
+METHOD c()V
+000000: invoke-virtual v1, Lcom/vivo/pcsuite/pcconnect/i;->b()Z
+000006: move-result v0
+000008: if-eqz v0, +005h
+00000c: invoke-direct v1, Lcom/vivo/pcsuite/pcconnect/i;->i()V
+000012: return-void 
+
+METHOD close()V
+000000: invoke-direct v0, Lcom/vivo/pcsuite/pcconnect/i;->i()V
+000006: return-void 
+
+METHOD connectSuccess(Ljava/lang/String;)V
+000000: invoke-direct v0, v1, Lcom/vivo/pcsuite/pcconnect/i;->c(Ljava/lang/String;)Z
+000006: return-void 
+
+METHOD d()V
+000000: invoke-direct v0, Lcom/vivo/pcsuite/pcconnect/i;->h()V
+000006: return-void 
+
+METHOD disconnect()V
+000000: invoke-direct v0, Lcom/vivo/pcsuite/pcconnect/i;->j()V
+000006: return-void 
+
+METHOD e()V
+000000: iget-object v0, v1, Lcom/vivo/pcsuite/pcconnect/i;->a Lcom/vivo/pcsuite/pcconnect/IShareLinkManager;
+000004: if-nez v0, +007h
+000008: iget-object v0, v1, Lcom/vivo/pcsuite/pcconnect/i;->e Landroid/content/Context;
+00000c: invoke-direct v1, v0, Lcom/vivo/pcsuite/pcconnect/i;->a(Landroid/content/Context;)V
+000012: return-void 
+
+METHOD f()V
+000000: invoke-direct v0, Lcom/vivo/pcsuite/pcconnect/i;->p()V
+000006: return-void 
+
+METHOD g()V
+000000: iget-object v0, v2, Lcom/vivo/pcsuite/pcconnect/i;->d Ljava/util/concurrent/CopyOnWriteArrayList;
+000004: invoke-virtual v0, Ljava/util/concurrent/CopyOnWriteArrayList;->iterator()Ljava/util/Iterator;
+00000a: move-result-object v0
+00000c: invoke-interface v0, Ljava/util/Iterator;->hasNext()Z
+000012: move-result v1
+000014: if-eqz v1, +00ch
+000018: invoke-interface v0, Ljava/util/Iterator;->next()Ljava/lang/Object;
+00001e: move-result-object v1
+000020: check-cast v1, Lcom/vivo/pcsuite/pcconnect/d$b;
+000024: invoke-interface v1, Lcom/vivo/pcsuite/pcconnect/d$b;->onShareStateChanged()V
+00002a: goto -fh
+00002c: return-void 
+
+METHOD init()V
+000000: iget-object v0, v1, Lcom/vivo/pcsuite/pcconnect/i;->e Landroid/content/Context;
+000004: invoke-direct v1, v0, Lcom/vivo/pcsuite/pcconnect/i;->a(Landroid/content/Context;)V
+00000a: return-void 
+
+METHOD isConnected()Z
+000000: invoke-direct v1, Lcom/vivo/pcsuite/pcconnect/i;->k()Z
+000006: move-result v0
+000008: return v0
+
+METHOD isConnecting()Z
+000000: invoke-direct v1, Lcom/vivo/pcsuite/pcconnect/i;->l()Z
+000006: move-result v0
+000008: return v0
+
+METHOD isScanning()Z
+000000: invoke-direct v1, Lcom/vivo/pcsuite/pcconnect/i;->n()Z
+000006: move-result v0
+000008: return v0
+
+METHOD sendInfo(Ljava/lang/String;)V
+000000: invoke-direct v0, v1, Lcom/vivo/pcsuite/pcconnect/i;->e(Ljava/lang/String;)V
+000006: return-void 
+
+METHOD sendIsAuto(Ljava/lang/String; Z)V
+000000: invoke-direct v0, v1, v2, Lcom/vivo/pcsuite/pcconnect/i;->a(Ljava/lang/String; Z)Z
+000006: return-void 
+
+METHOD startScan()V
+000000: invoke-direct v0, Lcom/vivo/pcsuite/pcconnect/i;->o()V
+000006: return-void 
+
+METHOD stopScan()V
+000000: invoke-direct v0, Lcom/vivo/pcsuite/pcconnect/i;->q()V
+000006: return-void 

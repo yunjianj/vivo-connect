@@ -1,0 +1,114 @@
+APK pcsuite/updateApk/connbase.apk
+DEX classes.dex
+CLASS Lcom/vivo/connbase/h0/c/a$b;
+SUPER Ljava/lang/Object;
+FIELDS
+a Lcom/vivo/connbase/h0/c/a; = None
+
+METHOD <init>()V
+000000: invoke-direct v2, Ljava/lang/Object;-><init>()V
+000006: new-instance v0, Lcom/vivo/connbase/h0/c/a;
+00000a: const/4 v1, 0
+00000c: invoke-direct v0, v1, Lcom/vivo/connbase/h0/c/a;-><init>(Lcom/vivo/connbase/h0/c/a$a;)V
+000012: iput-object v0, v2, Lcom/vivo/connbase/h0/c/a$b;->a Lcom/vivo/connbase/h0/c/a;
+000016: return-void 
+
+METHOD <init>(Lcom/vivo/connbase/h0/c/a;)V
+000000: invoke-direct v2, Ljava/lang/Object;-><init>()V
+000006: new-instance v0, Lcom/vivo/connbase/h0/c/a;
+00000a: const/4 v1, 0
+00000c: invoke-direct v0, v1, Lcom/vivo/connbase/h0/c/a;-><init>(Lcom/vivo/connbase/h0/c/a$a;)V
+000012: iput-object v0, v2, Lcom/vivo/connbase/h0/c/a$b;->a Lcom/vivo/connbase/h0/c/a;
+000016: invoke-static v3, Lcom/vivo/connbase/h0/c/a;->a(Lcom/vivo/connbase/h0/c/a;)I
+00001c: move-result v1
+00001e: invoke-static v0, v1, Lcom/vivo/connbase/h0/c/a;->a(Lcom/vivo/connbase/h0/c/a; I)I
+000024: iget-object v0, v2, Lcom/vivo/connbase/h0/c/a$b;->a Lcom/vivo/connbase/h0/c/a;
+000028: invoke-static v3, Lcom/vivo/connbase/h0/c/a;->b(Lcom/vivo/connbase/h0/c/a;)I
+00002e: move-result v3
+000030: invoke-static v0, v3, Lcom/vivo/connbase/h0/c/a;->c(Lcom/vivo/connbase/h0/c/a; I)I
+000036: return-void 
+
+METHOD a(I)Lcom/vivo/connbase/h0/c/a$b;
+000000: iget-object v0, v1, Lcom/vivo/connbase/h0/c/a$b;->a Lcom/vivo/connbase/h0/c/a;
+000004: invoke-static v0, v2, Lcom/vivo/connbase/h0/c/a;->b(Lcom/vivo/connbase/h0/c/a; I)V
+00000a: return-object v1
+
+METHOD a(I [B)Lcom/vivo/connbase/h0/c/a$b;
+000000: const/4 v0, 1
+000002: if-ne v3, v0, +01dh
+000006: if-eqz v4, +013h
+00000a: array-length v0, v4
+00000c: if-eqz v0, +010h
+000010: array-length v0, v4
+000012: const/16 v1, 16
+000016: if-gt v0, v1, +003h
+00001a: goto +11h
+00001c: new-instance v3, Ljava/lang/IllegalArgumentException;
+000020: const-string v4, "Custom data cannot exceed 16 bytes"
+000024: invoke-direct v3, v4, Ljava/lang/IllegalArgumentException;-><init>(Ljava/lang/String;)V
+00002a: throw v3
+00002c: new-instance v3, Ljava/lang/IllegalArgumentException;
+000030: const-string v4, "customized data cannot be empty when advertising type is customized"
+000034: invoke-direct v3, v4, Ljava/lang/IllegalArgumentException;-><init>(Ljava/lang/String;)V
+00003a: throw v3
+00003c: iget-object v0, v2, Lcom/vivo/connbase/h0/c/a$b;->a Lcom/vivo/connbase/h0/c/a;
+000040: invoke-static v0, v3, Lcom/vivo/connbase/h0/c/a;->e(Lcom/vivo/connbase/h0/c/a; I)I
+000046: iget-object v3, v2, Lcom/vivo/connbase/h0/c/a$b;->a Lcom/vivo/connbase/h0/c/a;
+00004a: invoke-static v3, v4, Lcom/vivo/connbase/h0/c/a;->a(Lcom/vivo/connbase/h0/c/a; [B)[B
+000050: return-object v2
+
+METHOD a(J)Lcom/vivo/connbase/h0/c/a$b;
+000000: const-wide/16 v0, 0
+000004: cmp-long v0, v3, v0
+000008: if-ltz v0, +004h
+00000c: const/4 v0, 1
+00000e: goto +2h
+000010: const/4 v0, 0
+000012: const-string v1, "Time out value should not be negative."
+000016: invoke-static v0, v1, Lcom/vivo/connbase/e0/g/g;->a(Z Ljava/lang/Object;)V
+00001c: iget-object v0, v2, Lcom/vivo/connbase/h0/c/a$b;->a Lcom/vivo/connbase/h0/c/a;
+000020: invoke-static v0, v3, v4, Lcom/vivo/connbase/h0/c/a;->a(Lcom/vivo/connbase/h0/c/a; J)J
+000026: return-object v2
+
+METHOD a(Z)Lcom/vivo/connbase/h0/c/a$b;
+000000: iget-object v0, v1, Lcom/vivo/connbase/h0/c/a$b;->a Lcom/vivo/connbase/h0/c/a;
+000004: invoke-static v0, v2, Lcom/vivo/connbase/h0/c/a;->d(Lcom/vivo/connbase/h0/c/a; Z)V
+00000a: return-object v1
+
+METHOD a()Lcom/vivo/connbase/h0/c/a;
+000000: iget-object v0, v1, Lcom/vivo/connbase/h0/c/a$b;->a Lcom/vivo/connbase/h0/c/a;
+000004: return-object v0
+
+METHOD b(I)Lcom/vivo/connbase/h0/c/a$b;
+000000: const/16 v0, 160
+000004: const v1, 16777215
+00000a: const-string v2, "Advertise interval"
+00000e: invoke-static v4, v0, v1, v2, Lcom/vivo/connbase/e0/g/g;->a(I I I Ljava/lang/String;)I
+000014: iget-object v0, v3, Lcom/vivo/connbase/h0/c/a$b;->a Lcom/vivo/connbase/h0/c/a;
+000018: invoke-static v0, v4, Lcom/vivo/connbase/h0/c/a;->d(Lcom/vivo/connbase/h0/c/a; I)V
+00001e: return-object v3
+
+METHOD b(Z)Lcom/vivo/connbase/h0/c/a$b;
+000000: iget-object v0, v1, Lcom/vivo/connbase/h0/c/a$b;->a Lcom/vivo/connbase/h0/c/a;
+000004: invoke-static v0, v2, Lcom/vivo/connbase/h0/c/a;->b(Lcom/vivo/connbase/h0/c/a; Z)Z
+00000a: return-object v1
+
+METHOD c(I)Lcom/vivo/connbase/h0/c/a$b;
+000000: iget-object v0, v1, Lcom/vivo/connbase/h0/c/a$b;->a Lcom/vivo/connbase/h0/c/a;
+000004: invoke-static v0, v2, Lcom/vivo/connbase/h0/c/a;->a(Lcom/vivo/connbase/h0/c/a; I)I
+00000a: return-object v1
+
+METHOD c(Z)Lcom/vivo/connbase/h0/c/a$b;
+000000: iget-object v0, v1, Lcom/vivo/connbase/h0/c/a$b;->a Lcom/vivo/connbase/h0/c/a;
+000004: invoke-static v0, v2, Lcom/vivo/connbase/h0/c/a;->c(Lcom/vivo/connbase/h0/c/a; Z)V
+00000a: return-object v1
+
+METHOD d(I)Lcom/vivo/connbase/h0/c/a$b;
+000000: iget-object v0, v1, Lcom/vivo/connbase/h0/c/a$b;->a Lcom/vivo/connbase/h0/c/a;
+000004: invoke-static v0, v2, Lcom/vivo/connbase/h0/c/a;->c(Lcom/vivo/connbase/h0/c/a; I)I
+00000a: return-object v1
+
+METHOD d(Z)Lcom/vivo/connbase/h0/c/a$b;
+000000: iget-object v0, v1, Lcom/vivo/connbase/h0/c/a$b;->a Lcom/vivo/connbase/h0/c/a;
+000004: invoke-static v0, v2, Lcom/vivo/connbase/h0/c/a;->a(Lcom/vivo/connbase/h0/c/a; Z)V
+00000a: return-object v1

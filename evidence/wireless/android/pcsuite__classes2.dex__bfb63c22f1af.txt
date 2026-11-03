@@ -1,0 +1,61 @@
+APK pcsuite/updateApk/pcsuite.apk
+DEX classes2.dex
+CLASS Lcom/vivo/connect/sdk/b/a;
+SUPER Ljava/lang/Object;
+FIELDS
+
+
+METHOD <init>()V
+000000: invoke-direct v0, Ljava/lang/Object;-><init>()V
+000006: return-void 
+
+METHOD a(Landroid/content/Context; Ljava/lang/String;)Ljava/lang/String;
+000000: invoke-virtual v2, Landroid/content/Context;->getClassLoader()Ljava/lang/ClassLoader;
+000006: move-result-object v2
+000008: const-string v0, "android.os.SystemProperties"
+00000c: invoke-virtual v2, v0, Ljava/lang/ClassLoader;->loadClass(Ljava/lang/String;)Ljava/lang/Class;
+000012: move-result-object v2
+000014: const-class v0, Ljava/lang/String;
+000018: filled-new-array v0, [Ljava/lang/Class;
+00001e: move-result-object v0
+000020: const-string v1, "get"
+000024: invoke-virtual v2, v1, v0, Ljava/lang/Class;->getMethod(Ljava/lang/String; [Ljava/lang/Class;)Ljava/lang/reflect/Method;
+00002a: move-result-object v0
+00002c: new-instance v1, Ljava/lang/String;
+000030: invoke-direct v1, v3, Ljava/lang/String;-><init>(Ljava/lang/String;)V
+000036: filled-new-array v1, [Ljava/lang/Object;
+00003c: move-result-object v3
+00003e: invoke-virtual v0, v2, v3, Ljava/lang/reflect/Method;->invoke(Ljava/lang/Object; [Ljava/lang/Object;)Ljava/lang/Object;
+000044: move-result-object v2
+000046: check-cast v2, Ljava/lang/String;
+00004a: return-object v2
+00004c: const-string v2, ""
+000050: return-object v2
+000052: move-exception v2
+000054: throw v2
+
+METHOD a(Landroid/content/Context; Ljava/lang/String; Ljava/lang/String;)Ljava/lang/String;
+000000: const-class v0, Ljava/lang/String;
+000004: invoke-virtual v2, Landroid/content/Context;->getClassLoader()Ljava/lang/ClassLoader;
+00000a: move-result-object v2
+00000c: const-string v1, "android.os.SystemProperties"
+000010: invoke-virtual v2, v1, Ljava/lang/ClassLoader;->loadClass(Ljava/lang/String;)Ljava/lang/Class;
+000016: move-result-object v2
+000018: filled-new-array v0, v0, [Ljava/lang/Class;
+00001e: move-result-object v0
+000020: const-string v1, "get"
+000024: invoke-virtual v2, v1, v0, Ljava/lang/Class;->getMethod(Ljava/lang/String; [Ljava/lang/Class;)Ljava/lang/reflect/Method;
+00002a: move-result-object v0
+00002c: new-instance v1, Ljava/lang/String;
+000030: invoke-direct v1, v3, Ljava/lang/String;-><init>(Ljava/lang/String;)V
+000036: new-instance v3, Ljava/lang/String;
+00003a: invoke-direct v3, v4, Ljava/lang/String;-><init>(Ljava/lang/String;)V
+000040: filled-new-array v1, v3, [Ljava/lang/Object;
+000046: move-result-object v3
+000048: invoke-virtual v0, v2, v3, Ljava/lang/reflect/Method;->invoke(Ljava/lang/Object; [Ljava/lang/Object;)Ljava/lang/Object;
+00004e: move-result-object v2
+000050: check-cast v2, Ljava/lang/String;
+000054: return-object v2
+000056: return-object v4
+000058: move-exception v2
+00005a: throw v2

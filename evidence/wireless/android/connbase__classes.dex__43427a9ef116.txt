@@ -1,0 +1,244 @@
+APK pcsuite/updateApk/connbase.apk
+DEX classes.dex
+CLASS Lcom/vivo/connbase/c0/a0;
+SUPER Ljava/lang/Object;
+FIELDS
+a Landroid/os/ParcelUuid; = None
+b I = 2
+c I = 4
+d I = 16
+
+METHOD <clinit>()V
+000000: const-string v0, "00000000-0000-1000-8000-00805F9B34FB"
+000004: invoke-static v0, Landroid/os/ParcelUuid;->fromString(Ljava/lang/String;)Landroid/os/ParcelUuid;
+00000a: move-result-object v0
+00000c: sput-object v0, Lcom/vivo/connbase/c0/a0;->a Landroid/os/ParcelUuid;
+000010: return-void 
+
+METHOD <init>()V
+000000: invoke-direct v0, Ljava/lang/Object;-><init>()V
+000006: return-void 
+
+METHOD a(Landroid/os/ParcelUuid;)I
+000000: invoke-virtual v4, Landroid/os/ParcelUuid;->getUuid()Ljava/util/UUID;
+000006: move-result-object v4
+000008: invoke-virtual v4, Ljava/util/UUID;->getMostSignificantBits()J
+00000e: move-result-wide v0
+000010: const-wide v2, -4294967296
+00001a: and-long/2addr v0, v2
+00001c: const/16 v4, 32
+000020: ushr-long/2addr v0, v4
+000022: long-to-int v4, v0
+000024: return v4
+
+METHOD a([B)Landroid/os/ParcelUuid;
+000000: if-eqz v8, +096h
+000004: array-length v0, v8
+000006: const/16 v1, 16
+00000a: const/4 v2, 2
+00000c: if-eq v0, v2, +01fh
+000010: const/4 v3, 4
+000012: if-eq v0, v3, +01ch
+000016: if-ne v0, v1, +003h
+00001a: goto +18h
+00001c: new-instance v8, Ljava/lang/IllegalArgumentException;
+000020: new-instance v1, Ljava/lang/StringBuilder;
+000024: invoke-direct v1, Ljava/lang/StringBuilder;-><init>()V
+00002a: const-string v2, "uuidBytes length invalid - "
+00002e: invoke-virtual v1, v2, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+000034: invoke-virtual v1, v0, Ljava/lang/StringBuilder;->append(I)Ljava/lang/StringBuilder;
+00003a: invoke-virtual v1, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
+000040: move-result-object v0
+000042: invoke-direct v8, v0, Ljava/lang/IllegalArgumentException;-><init>(Ljava/lang/String;)V
+000048: throw v8
+00004a: const/4 v3, 0
+00004c: const/16 v4, 8
+000050: if-ne v0, v1, +01fh
+000054: invoke-static v8, Ljava/nio/ByteBuffer;->wrap([B)Ljava/nio/ByteBuffer;
+00005a: move-result-object v8
+00005c: sget-object v0, Ljava/nio/ByteOrder;->LITTLE_ENDIAN Ljava/nio/ByteOrder;
+000060: invoke-virtual v8, v0, Ljava/nio/ByteBuffer;->order(Ljava/nio/ByteOrder;)Ljava/nio/ByteBuffer;
+000066: move-result-object v8
+000068: invoke-virtual v8, v4, Ljava/nio/ByteBuffer;->getLong(I)J
+00006e: move-result-wide v0
+000070: invoke-virtual v8, v3, Ljava/nio/ByteBuffer;->getLong(I)J
+000076: move-result-wide v2
+000078: new-instance v8, Landroid/os/ParcelUuid;
+00007c: new-instance v4, Ljava/util/UUID;
+000080: invoke-direct v4, v0, v1, v2, v3, Ljava/util/UUID;-><init>(J J)V
+000086: invoke-direct v8, v4, Landroid/os/ParcelUuid;-><init>(Ljava/util/UUID;)V
+00008c: return-object v8
+00008e: const/4 v5, 1
+000090: if-ne v0, v2, +00fh
+000094: aget-byte v0, v8, v3
+000098: and-int/lit16 v0, v0, 255
+00009c: int-to-long v0, v0
+00009e: aget-byte v8, v8, v5
+0000a2: and-int/lit16 v8, v8, 255
+0000a6: shl-int/2addr v8, v4
+0000a8: int-to-long v2, v8
+0000aa: add-long/2addr v0, v2
+0000ac: goto +1dh
+0000ae: aget-byte v0, v8, v3
+0000b2: and-int/lit16 v0, v0, 255
+0000b6: int-to-long v6, v0
+0000b8: aget-byte v0, v8, v5
+0000bc: and-int/lit16 v0, v0, 255
+0000c0: shl-int/2addr v0, v4
+0000c2: int-to-long v3, v0
+0000c4: add-long/2addr v6, v3
+0000c6: aget-byte v0, v8, v2
+0000ca: and-int/lit16 v0, v0, 255
+0000ce: shl-int/2addr v0, v1
+0000d0: int-to-long v0, v0
+0000d2: add-long/2addr v6, v0
+0000d4: const/4 v0, 3
+0000d6: aget-byte v8, v8, v0
+0000da: and-int/lit16 v8, v8, 255
+0000de: shl-int/lit8 v8, v8, 24
+0000e2: int-to-long v0, v8
+0000e4: add-long/2addr v0, v6
+0000e6: sget-object v8, Lcom/vivo/connbase/c0/a0;->a Landroid/os/ParcelUuid;
+0000ea: invoke-virtual v8, Landroid/os/ParcelUuid;->getUuid()Ljava/util/UUID;
+0000f0: move-result-object v8
+0000f2: invoke-virtual v8, Ljava/util/UUID;->getMostSignificantBits()J
+0000f8: move-result-wide v2
+0000fa: const/16 v8, 32
+0000fe: shl-long/2addr v0, v8
+000100: add-long/2addr v2, v0
+000102: sget-object v8, Lcom/vivo/connbase/c0/a0;->a Landroid/os/ParcelUuid;
+000106: invoke-virtual v8, Landroid/os/ParcelUuid;->getUuid()Ljava/util/UUID;
+00010c: move-result-object v8
+00010e: invoke-virtual v8, Ljava/util/UUID;->getLeastSignificantBits()J
+000114: move-result-wide v0
+000116: new-instance v8, Landroid/os/ParcelUuid;
+00011a: new-instance v4, Ljava/util/UUID;
+00011e: invoke-direct v4, v2, v3, v0, v1, Ljava/util/UUID;-><init>(J J)V
+000124: invoke-direct v8, v4, Landroid/os/ParcelUuid;-><init>(Ljava/util/UUID;)V
+00012a: return-object v8
+00012c: new-instance v8, Ljava/lang/IllegalArgumentException;
+000130: const-string v0, "uuidBytes cannot be null"
+000134: invoke-direct v8, v0, Ljava/lang/IllegalArgumentException;-><init>(Ljava/lang/String;)V
+00013a: throw v8
+
+METHOD b(Landroid/os/ParcelUuid;)Z
+000000: invoke-virtual v6, Landroid/os/ParcelUuid;->getUuid()Ljava/util/UUID;
+000006: move-result-object v6
+000008: invoke-virtual v6, Ljava/util/UUID;->getLeastSignificantBits()J
+00000e: move-result-wide v0
+000010: sget-object v2, Lcom/vivo/connbase/c0/a0;->a Landroid/os/ParcelUuid;
+000014: invoke-virtual v2, Landroid/os/ParcelUuid;->getUuid()Ljava/util/UUID;
+00001a: move-result-object v2
+00001c: invoke-virtual v2, Ljava/util/UUID;->getLeastSignificantBits()J
+000022: move-result-wide v2
+000024: cmp-long v0, v0, v2
+000028: const/4 v1, 0
+00002a: if-eqz v0, +003h
+00002e: return v1
+000030: invoke-virtual v6, Ljava/util/UUID;->getMostSignificantBits()J
+000036: move-result-wide v2
+000038: const-wide v4, -281470681743361
+000042: and-long/2addr v2, v4
+000044: const-wide/16 v4, 4096
+000048: cmp-long v6, v2, v4
+00004c: if-nez v6, +003h
+000050: const/4 v1, 1
+000052: return v1
+
+METHOD c(Landroid/os/ParcelUuid;)Z
+000000: invoke-virtual v5, Landroid/os/ParcelUuid;->getUuid()Ljava/util/UUID;
+000006: move-result-object v0
+000008: invoke-virtual v0, Ljava/util/UUID;->getLeastSignificantBits()J
+00000e: move-result-wide v1
+000010: sget-object v3, Lcom/vivo/connbase/c0/a0;->a Landroid/os/ParcelUuid;
+000014: invoke-virtual v3, Landroid/os/ParcelUuid;->getUuid()Ljava/util/UUID;
+00001a: move-result-object v3
+00001c: invoke-virtual v3, Ljava/util/UUID;->getLeastSignificantBits()J
+000022: move-result-wide v3
+000024: cmp-long v1, v1, v3
+000028: const/4 v2, 0
+00002a: if-eqz v1, +003h
+00002e: return v2
+000030: invoke-static v5, Lcom/vivo/connbase/c0/a0;->b(Landroid/os/ParcelUuid;)Z
+000036: move-result v5
+000038: if-eqz v5, +003h
+00003c: return v2
+00003e: invoke-virtual v0, Ljava/util/UUID;->getMostSignificantBits()J
+000044: move-result-wide v0
+000046: const-wide v3, 4294967295
+000050: and-long/2addr v0, v3
+000052: const-wide/16 v3, 4096
+000056: cmp-long v5, v0, v3
+00005a: if-nez v5, +003h
+00005e: const/4 v2, 1
+000060: return v2
+
+METHOD d(Landroid/os/ParcelUuid;)[B
+000000: if-eqz v8, +06eh
+000004: invoke-static v8, Lcom/vivo/connbase/c0/a0;->b(Landroid/os/ParcelUuid;)Z
+00000a: move-result v0
+00000c: const v1, 65280
+000012: const/4 v2, 1
+000014: const/4 v3, 2
+000016: const/16 v4, 8
+00001a: const/4 v5, 0
+00001c: if-eqz v0, +013h
+000020: new-array v0, v3, [B
+000024: invoke-static v8, Lcom/vivo/connbase/c0/a0;->a(Landroid/os/ParcelUuid;)I
+00002a: move-result v8
+00002c: and-int/lit16 v3, v8, 255
+000030: int-to-byte v3, v3
+000032: aput-byte v3, v0, v5
+000036: and-int/2addr v8, v1
+000038: shr-int/2addr v8, v4
+00003a: int-to-byte v8, v8
+00003c: aput-byte v8, v0, v2
+000040: return-object v0
+000042: invoke-static v8, Lcom/vivo/connbase/c0/a0;->c(Landroid/os/ParcelUuid;)Z
+000048: move-result v0
+00004a: const/16 v6, 16
+00004e: if-eqz v0, +024h
+000052: const/4 v0, 4
+000054: new-array v0, v0, [B
+000058: invoke-static v8, Lcom/vivo/connbase/c0/a0;->a(Landroid/os/ParcelUuid;)I
+00005e: move-result v8
+000060: and-int/lit16 v7, v8, 255
+000064: int-to-byte v7, v7
+000066: aput-byte v7, v0, v5
+00006a: and-int/2addr v1, v8
+00006c: shr-int/2addr v1, v4
+00006e: int-to-byte v1, v1
+000070: aput-byte v1, v0, v2
+000074: const/high16 v1, 16711680
+000078: and-int/2addr v1, v8
+00007a: shr-int/2addr v1, v6
+00007c: int-to-byte v1, v1
+00007e: aput-byte v1, v0, v3
+000082: const/4 v1, 3
+000084: const/high16 v2, -16777216
+000088: and-int/2addr v8, v2
+00008a: shr-int/lit8 v8, v8, 24
+00008e: int-to-byte v8, v8
+000090: aput-byte v8, v0, v1
+000094: return-object v0
+000096: invoke-virtual v8, Landroid/os/ParcelUuid;->getUuid()Ljava/util/UUID;
+00009c: move-result-object v0
+00009e: invoke-virtual v0, Ljava/util/UUID;->getMostSignificantBits()J
+0000a4: move-result-wide v0
+0000a6: invoke-virtual v8, Landroid/os/ParcelUuid;->getUuid()Ljava/util/UUID;
+0000ac: move-result-object v8
+0000ae: invoke-virtual v8, Ljava/util/UUID;->getLeastSignificantBits()J
+0000b4: move-result-wide v2
+0000b6: new-array v8, v6, [B
+0000ba: invoke-static v8, Ljava/nio/ByteBuffer;->wrap([B)Ljava/nio/ByteBuffer;
+0000c0: move-result-object v6
+0000c2: sget-object v7, Ljava/nio/ByteOrder;->LITTLE_ENDIAN Ljava/nio/ByteOrder;
+0000c6: invoke-virtual v6, v7, Ljava/nio/ByteBuffer;->order(Ljava/nio/ByteOrder;)Ljava/nio/ByteBuffer;
+0000cc: move-result-object v6
+0000ce: invoke-virtual v6, v4, v0, v1, Ljava/nio/ByteBuffer;->putLong(I J)Ljava/nio/ByteBuffer;
+0000d4: invoke-virtual v6, v5, v2, v3, Ljava/nio/ByteBuffer;->putLong(I J)Ljava/nio/ByteBuffer;
+0000da: return-object v8
+0000dc: new-instance v8, Ljava/lang/IllegalArgumentException;
+0000e0: const-string v0, "uuid cannot be null"
+0000e4: invoke-direct v8, v0, Ljava/lang/IllegalArgumentException;-><init>(Ljava/lang/String;)V
+0000ea: throw v8

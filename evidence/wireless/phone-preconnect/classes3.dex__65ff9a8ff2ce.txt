@@ -1,0 +1,153 @@
+DEX classes3.dex
+CLASS Lig/e;
+FIELDS
+
+
+METHOD <init>()V
+000000: invoke-direct v0, Ljava/lang/Object;-><init>()V
+000006: return-void 
+
+METHOD a(Ljava/lang/String;)[B
+000000: invoke-virtual v1, Ljava/lang/String;->getBytes()[B
+000006: move-result-object v1
+000008: const-string v0, "SHA-256"
+00000c: invoke-static v0, Ljava/security/MessageDigest;->getInstance(Ljava/lang/String;)Ljava/security/MessageDigest;
+000012: move-result-object v0
+000014: invoke-virtual v0, v1, Ljava/security/MessageDigest;->update([B)V
+00001a: invoke-virtual v0, Ljava/security/MessageDigest;->digest()[B
+000020: move-result-object v1
+000022: return-object v1
+
+METHOD b([B [B)[B
+000000: new-instance v0, Ljavax/crypto/spec/SecretKeySpec;
+000004: const-string v1, "AES"
+000008: invoke-direct v0, v4, v1, Ljavax/crypto/spec/SecretKeySpec;-><init>([B Ljava/lang/String;)V
+00000e: const-string v4, "AES/CBC/PKCS7Padding"
+000012: invoke-static v4, Ljavax/crypto/Cipher;->getInstance(Ljava/lang/String;)Ljavax/crypto/Cipher;
+000018: move-result-object v4
+00001a: new-instance v1, Ljavax/crypto/spec/IvParameterSpec;
+00001e: invoke-virtual v4, Ljavax/crypto/Cipher;->getBlockSize()I
+000024: move-result v2
+000026: new-array v2, v2, [B
+00002a: invoke-direct v1, v2, Ljavax/crypto/spec/IvParameterSpec;-><init>([B)V
+000030: const/4 v2, 2
+000032: invoke-virtual v4, v2, v0, v1, Ljavax/crypto/Cipher;->init(I Ljava/security/Key; Ljava/security/spec/AlgorithmParameterSpec;)V
+000038: invoke-virtual v4, v3, Ljavax/crypto/Cipher;->doFinal([B)[B
+00003e: move-result-object v3
+000040: return-object v3
+
+METHOD c(Ljava/lang/String; [B)[B
+000000: new-instance v0, Ljavax/crypto/spec/SecretKeySpec;
+000004: const-string v1, "AES"
+000008: invoke-direct v0, v4, v1, Ljavax/crypto/spec/SecretKeySpec;-><init>([B Ljava/lang/String;)V
+00000e: const-string v4, "AES/CBC/PKCS7Padding"
+000012: invoke-static v4, Ljavax/crypto/Cipher;->getInstance(Ljava/lang/String;)Ljavax/crypto/Cipher;
+000018: move-result-object v4
+00001a: new-instance v1, Ljavax/crypto/spec/IvParameterSpec;
+00001e: invoke-virtual v4, Ljavax/crypto/Cipher;->getBlockSize()I
+000024: move-result v2
+000026: new-array v2, v2, [B
+00002a: invoke-direct v1, v2, Ljavax/crypto/spec/IvParameterSpec;-><init>([B)V
+000030: const/4 v2, 1
+000032: invoke-virtual v4, v2, v0, v1, Ljavax/crypto/Cipher;->init(I Ljava/security/Key; Ljava/security/spec/AlgorithmParameterSpec;)V
+000038: const-string v0, "UTF-8"
+00003c: invoke-virtual v3, v0, Ljava/lang/String;->getBytes(Ljava/lang/String;)[B
+000042: move-result-object v3
+000044: invoke-virtual v4, v3, Ljavax/crypto/Cipher;->doFinal([B)[B
+00004a: move-result-object v3
+00004c: return-object v3
+
+METHOD d()Ljava/lang/String;
+000000: invoke-static Ljava/util/UUID;->randomUUID()Ljava/util/UUID;
+000006: move-result-object v0
+000008: invoke-virtual v0, Ljava/util/UUID;->toString()Ljava/lang/String;
+00000e: move-result-object v0
+000010: return-object v0
+
+METHOD e(Ljava/lang/String;)Ljava/lang/String;
+000000: const-string v0, "MD5"
+000004: invoke-static v0, Ljava/security/MessageDigest;->getInstance(Ljava/lang/String;)Ljava/security/MessageDigest;
+00000a: move-result-object v0
+00000c: sget-object v1, Ljava/nio/charset/StandardCharsets;->UTF_8 Ljava/nio/charset/Charset;
+000010: invoke-virtual v6, v1, Ljava/lang/String;->getBytes(Ljava/nio/charset/Charset;)[B
+000016: move-result-object v1
+000018: invoke-virtual v0, v1, Ljava/security/MessageDigest;->digest([B)[B
+00001e: move-result-object v0
+000020: new-instance v1, Ljava/lang/StringBuilder;
+000024: array-length v2, v0
+000026: mul-int/lit8 v2, v2, 2
+00002a: invoke-direct v1, v2, Ljava/lang/StringBuilder;-><init>(I)V
+000030: array-length v2, v0
+000032: const/4 v3, 0
+000034: if-ge v3, v2, +01ch
+000038: aget-byte v4, v0, v3
+00003c: and-int/lit16 v4, v4, 255
+000040: const/16 v5, 16
+000044: if-ge v4, v5, +00ah
+000048: const-string v5, "0"
+00004c: invoke-virtual v1, v5, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+000052: goto +3h
+000054: move-exception v0
+000056: goto +10h
+000058: invoke-static v4, Ljava/lang/Integer;->toHexString(I)Ljava/lang/String;
+00005e: move-result-object v4
+000060: invoke-virtual v1, v4, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+000066: add-int/lit8 v3, v3, 1
+00006a: goto -1bh
+00006c: invoke-virtual v1, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
+000072: move-result-object v6
+000074: return-object v6
+000076: new-instance v1, Ljava/lang/StringBuilder;
+00007a: invoke-direct v1, Ljava/lang/StringBuilder;-><init>()V
+000080: const-string v2, "md5:"
+000084: invoke-virtual v1, v2, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+00008a: invoke-virtual v1, v0, Ljava/lang/StringBuilder;->append(Ljava/lang/Object;)Ljava/lang/StringBuilder;
+000090: invoke-virtual v1, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
+000096: move-result-object v0
+000098: const-string v1, "CryptoUtils"
+00009c: invoke-static v1, v0, Lj7/a;->i(Ljava/lang/String; Ljava/lang/String;)V
+0000a2: return-object v6
+
+METHOD f(Ljava/lang/String;)Ljava/lang/String;
+000000: const-string v0, "SHA256"
+000004: invoke-static v0, Ljava/security/MessageDigest;->getInstance(Ljava/lang/String;)Ljava/security/MessageDigest;
+00000a: move-result-object v0
+00000c: sget-object v1, Ljava/nio/charset/StandardCharsets;->UTF_8 Ljava/nio/charset/Charset;
+000010: invoke-virtual v6, v1, Ljava/lang/String;->getBytes(Ljava/nio/charset/Charset;)[B
+000016: move-result-object v1
+000018: invoke-virtual v0, v1, Ljava/security/MessageDigest;->digest([B)[B
+00001e: move-result-object v0
+000020: new-instance v1, Ljava/lang/StringBuilder;
+000024: array-length v2, v0
+000026: mul-int/lit8 v2, v2, 2
+00002a: invoke-direct v1, v2, Ljava/lang/StringBuilder;-><init>(I)V
+000030: array-length v2, v0
+000032: const/4 v3, 0
+000034: if-ge v3, v2, +01ch
+000038: aget-byte v4, v0, v3
+00003c: and-int/lit16 v4, v4, 255
+000040: const/16 v5, 16
+000044: if-ge v4, v5, +00ah
+000048: const-string v5, "0"
+00004c: invoke-virtual v1, v5, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+000052: goto +3h
+000054: move-exception v0
+000056: goto +10h
+000058: invoke-static v4, Ljava/lang/Integer;->toHexString(I)Ljava/lang/String;
+00005e: move-result-object v4
+000060: invoke-virtual v1, v4, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+000066: add-int/lit8 v3, v3, 1
+00006a: goto -1bh
+00006c: invoke-virtual v1, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
+000072: move-result-object v6
+000074: return-object v6
+000076: new-instance v1, Ljava/lang/StringBuilder;
+00007a: invoke-direct v1, Ljava/lang/StringBuilder;-><init>()V
+000080: const-string v2, "sha256:"
+000084: invoke-virtual v1, v2, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+00008a: invoke-virtual v1, v0, Ljava/lang/StringBuilder;->append(Ljava/lang/Object;)Ljava/lang/StringBuilder;
+000090: invoke-virtual v1, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
+000096: move-result-object v0
+000098: const-string v1, "CryptoUtils"
+00009c: invoke-static v1, v0, Lj7/a;->i(Ljava/lang/String; Ljava/lang/String;)V
+0000a2: return-object v6

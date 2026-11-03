@@ -1,0 +1,43 @@
+APK pcsuite/updateApk/pcsuite.apk
+DEX classes2.dex
+CLASS Lcom/vivo/upgradelibrary/common/upgrademode/BaseNormalUpgrade;
+SUPER Lcom/vivo/upgradelibrary/common/upgrademode/a;
+FIELDS
+TAG Ljava/lang/String; = 'BaseNormalUpgrade'
+a F = None
+b Lcom/vivo/upgradelibrary/common/upgrademode/g; = None
+i J = None
+j Z = None
+k I = None
+l I = None
+
+METHOD onDownloadSuccess(Ljava/lang/String;)V
+000000: const-string v0, "onDownloadSuccess: file path is "
+000004: invoke-static v3, Ljava/lang/String;->valueOf(Ljava/lang/Object;)Ljava/lang/String;
+00000a: move-result-object v1
+00000c: invoke-virtual v0, v1, Ljava/lang/String;->concat(Ljava/lang/String;)Ljava/lang/String;
+000012: move-result-object v0
+000014: const-string v1, "BaseNormalUpgrade"
+000018: invoke-static v1, v0, Lcom/vivo/upgradelibrary/common/b/a;->a(Ljava/lang/String; Ljava/lang/String;)V
+00001e: invoke-direct v2, Lcom/vivo/upgradelibrary/common/upgrademode/BaseNormalUpgrade;->e()V
+000024: iget-object v0, v2, Lcom/vivo/upgradelibrary/common/upgrademode/BaseNormalUpgrade;->b Lcom/vivo/upgradelibrary/common/upgrademode/g;
+000028: if-eqz v0, +005h
+00002c: invoke-static Lcom/vivo/upgradelibrary/common/upgrademode/g;->i()V
+000032: invoke-static Lcom/vivo/upgradelibrary/common/modulebridge/l;->a()Z
+000038: move-result v0
+00003a: if-eqz v0, +008h
+00003e: const-string v2, "noraml upgrade has stop!"
+000042: invoke-static v1, v2, Lcom/vivo/upgradelibrary/common/b/a;->a(Ljava/lang/String; Ljava/lang/String;)V
+000048: return-void 
+00004a: iget-object v0, v2, Lcom/vivo/upgradelibrary/common/upgrademode/BaseNormalUpgrade;->b Lcom/vivo/upgradelibrary/common/upgrademode/g;
+00004e: if-eqz v0, +007h
+000052: const/16 v0, 2200
+000056: invoke-static v0, Lcom/vivo/upgradelibrary/common/upgrademode/g;->a(I)V
+00005c: invoke-static Lcom/vivo/upgradelibrary/common/modulebridge/k;->a()Lcom/vivo/upgradelibrary/common/modulebridge/k;
+000062: move-result-object v0
+000064: invoke-virtual v0, v3, Lcom/vivo/upgradelibrary/common/modulebridge/k;->c(Ljava/lang/String;)Z
+00006a: move-result v0
+00006c: if-nez v0, +003h
+000070: return-void 
+000072: invoke-virtual v2, v3, Lcom/vivo/upgradelibrary/common/upgrademode/BaseNormalUpgrade;->installAfterDownload(Ljava/lang/String;)V
+000078: return-void 

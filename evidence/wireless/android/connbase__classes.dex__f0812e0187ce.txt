@@ -1,0 +1,120 @@
+APK pcsuite/updateApk/connbase.apk
+DEX classes.dex
+CLASS Lcom/vivo/connbase/connect/f$c;
+SUPER Ljava/lang/Object;
+FIELDS
+a Ljava/lang/String; = None
+b Ljava/lang/String; = None
+c Lcom/vivo/connbase/connect/f$b; = None
+d Lcom/vivo/connbase/connect/f; = None
+
+METHOD <init>(Lcom/vivo/connbase/connect/f; Ljava/lang/String; Ljava/lang/String; Lcom/vivo/connbase/connect/f$b;)V
+000000: iput-object v1, v0, Lcom/vivo/connbase/connect/f$c;->d Lcom/vivo/connbase/connect/f;
+000004: invoke-direct v0, Ljava/lang/Object;-><init>()V
+00000a: iput-object v2, v0, Lcom/vivo/connbase/connect/f$c;->a Ljava/lang/String;
+00000e: iput-object v3, v0, Lcom/vivo/connbase/connect/f$c;->b Ljava/lang/String;
+000012: iput-object v4, v0, Lcom/vivo/connbase/connect/f$c;->c Lcom/vivo/connbase/connect/f$b;
+000016: return-void 
+
+METHOD a()Ljava/lang/String;
+000000: iget-object v0, v1, Lcom/vivo/connbase/connect/f$c;->b Ljava/lang/String;
+000004: return-object v0
+
+METHOD b()Ljava/lang/String;
+000000: iget-object v0, v1, Lcom/vivo/connbase/connect/f$c;->a Ljava/lang/String;
+000004: return-object v0
+
+METHOD onAlarm()V
+000000: new-instance v0, Ljava/lang/StringBuilder;
+000004: invoke-direct v0, Ljava/lang/StringBuilder;-><init>()V
+00000a: const-string v1, "onAlarm called for sd:"
+00000e: invoke-virtual v0, v1, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+000014: invoke-virtual v4, Lcom/vivo/connbase/connect/f$c;->b()Ljava/lang/String;
+00001a: move-result-object v1
+00001c: invoke-virtual v0, v1, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+000022: const-string v1, ", dd:"
+000026: invoke-virtual v0, v1, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+00002c: invoke-virtual v4, Lcom/vivo/connbase/connect/f$c;->a()Ljava/lang/String;
+000032: move-result-object v1
+000034: invoke-virtual v0, v1, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+00003a: const-string v1, ", this"
+00003e: invoke-virtual v0, v1, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+000044: invoke-virtual v0, v4, Ljava/lang/StringBuilder;->append(Ljava/lang/Object;)Ljava/lang/StringBuilder;
+00004a: invoke-virtual v0, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
+000050: move-result-object v0
+000052: const-string v1, "ConnectTimeoutManagerImplTAG"
+000056: invoke-static v1, v0, Lc/c/f/a/b;->k(Ljava/lang/String; Ljava/lang/String;)V
+00005c: iget-object v0, v4, Lcom/vivo/connbase/connect/f$c;->d Lcom/vivo/connbase/connect/f;
+000060: invoke-static v0, Lcom/vivo/connbase/connect/f;->a(Lcom/vivo/connbase/connect/f;)Ljava/lang/Object;
+000066: move-result-object v0
+000068: monitor-enter v0
+00006a: iget-object v1, v4, Lcom/vivo/connbase/connect/f$c;->d Lcom/vivo/connbase/connect/f;
+00006e: const/4 v2, 0
+000070: invoke-static v1, v2, Lcom/vivo/connbase/connect/f;->a(Lcom/vivo/connbase/connect/f; Lcom/vivo/connbase/connect/f$c;)Lcom/vivo/connbase/connect/f$c;
+000076: monitor-exit v0
+000078: iget-object v0, v4, Lcom/vivo/connbase/connect/f$c;->d Lcom/vivo/connbase/connect/f;
+00007c: invoke-static v0, Lcom/vivo/connbase/connect/f;->b(Lcom/vivo/connbase/connect/f;)Lcom/vivo/connbase/connect/d;
+000082: move-result-object v0
+000084: iget-object v1, v4, Lcom/vivo/connbase/connect/f$c;->b Ljava/lang/String;
+000088: iget-object v2, v4, Lcom/vivo/connbase/connect/f$c;->a Ljava/lang/String;
+00008c: invoke-interface v0, v1, v2, Lcom/vivo/connbase/connect/d;->a(Ljava/lang/String; Ljava/lang/String;)Lcom/vivo/connbase/connect/k;
+000092: move-result-object v0
+000094: if-eqz v0, +007h
+000098: invoke-virtual v0, Lcom/vivo/connbase/connect/k;->k()I
+00009e: move-result v1
+0000a0: goto +2h
+0000a2: const/4 v1, 0
+0000a4: new-instance v2, Ljava/lang/StringBuilder;
+0000a8: invoke-direct v2, Ljava/lang/StringBuilder;-><init>()V
+0000ae: const-string v3, "connect, onComplete  dd= "
+0000b2: invoke-virtual v2, v3, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+0000b8: iget-object v3, v4, Lcom/vivo/connbase/connect/f$c;->b Ljava/lang/String;
+0000bc: invoke-virtual v2, v3, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+0000c2: const-string v3, " sd"
+0000c6: invoke-virtual v2, v3, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+0000cc: iget-object v3, v4, Lcom/vivo/connbase/connect/f$c;->a Ljava/lang/String;
+0000d0: invoke-virtual v2, v3, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+0000d6: const-string v3, ", connState="
+0000da: invoke-virtual v2, v3, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+0000e0: invoke-virtual v2, v1, Ljava/lang/StringBuilder;->append(I)Ljava/lang/StringBuilder;
+0000e6: invoke-virtual v2, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
+0000ec: move-result-object v2
+0000ee: const-string v3, "ConnectTimeoutManagerImplTAG"
+0000f2: invoke-static v3, v2, Lc/c/f/a/b;->k(Ljava/lang/String; Ljava/lang/String;)V
+0000f8: const/16 v2, 8
+0000fc: if-eq v1, v2, +037h
+000100: if-eqz v0, +028h
+000104: new-instance v1, Lcom/vivo/connbase/connect/j;
+000108: const/16 v2, 208
+00010c: invoke-direct v1, v2, Lcom/vivo/connbase/connect/j;-><init>(I)V
+000112: iget-object v2, v4, Lcom/vivo/connbase/connect/f$c;->b Ljava/lang/String;
+000116: invoke-virtual v1, v2, Lcom/vivo/connbase/connect/j;->a(Ljava/lang/String;)V
+00011c: iget-object v2, v4, Lcom/vivo/connbase/connect/f$c;->a Ljava/lang/String;
+000120: invoke-virtual v1, v2, Lcom/vivo/connbase/connect/j;->g(Ljava/lang/String;)V
+000126: invoke-virtual v0, Lcom/vivo/connbase/connect/k;->i()Lcom/vivo/connbase/IConnectionCallback;
+00012c: move-result-object v0
+00012e: iget-object v2, v4, Lcom/vivo/connbase/connect/f$c;->b Ljava/lang/String;
+000132: invoke-static v1, Lcom/vivo/connbase/e0/g/d;->a(Lcom/vivo/connbase/connect/j;)Ljava/lang/String;
+000138: move-result-object v1
+00013a: invoke-interface v0, v2, v1, Lcom/vivo/connbase/IConnectionCallback;->onConnectionResult(Ljava/lang/String; Ljava/lang/String;)V
+000140: goto +8h
+000142: const-string v0, "ConnectTimeoutManagerImplTAG"
+000146: const-string v1, "onComplete time out err."
+00014a: invoke-static v0, v1, Lc/c/f/a/b;->g(Ljava/lang/String; Ljava/lang/String;)V
+000150: iget-object v0, v4, Lcom/vivo/connbase/connect/f$c;->d Lcom/vivo/connbase/connect/f;
+000154: invoke-static v0, Lcom/vivo/connbase/connect/f;->c(Lcom/vivo/connbase/connect/f;)Lcom/vivo/connbase/h0/a;
+00015a: move-result-object v0
+00015c: iget-object v1, v4, Lcom/vivo/connbase/connect/f$c;->a Ljava/lang/String;
+000160: iget-object v2, v4, Lcom/vivo/connbase/connect/f$c;->b Ljava/lang/String;
+000164: invoke-virtual v0, v1, v2, Lcom/vivo/connbase/h0/a;->b(Ljava/lang/String; Ljava/lang/String;)V
+00016a: iget-object v0, v4, Lcom/vivo/connbase/connect/f$c;->c Lcom/vivo/connbase/connect/f$b;
+00016e: if-eqz v0, +00eh
+000172: const-string v0, "ConnectTimeoutManagerImplTAG"
+000176: const-string v1, "call onConnectTimeoutFinished"
+00017a: invoke-static v0, v1, Lc/c/f/a/b;->k(Ljava/lang/String; Ljava/lang/String;)V
+000180: iget-object v0, v4, Lcom/vivo/connbase/connect/f$c;->c Lcom/vivo/connbase/connect/f$b;
+000184: invoke-interface v0, Lcom/vivo/connbase/connect/f$b;->a()V
+00018a: return-void 
+00018c: move-exception v1
+00018e: monitor-exit v0
+000190: throw v1

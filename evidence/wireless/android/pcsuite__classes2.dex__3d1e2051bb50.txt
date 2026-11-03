@@ -1,0 +1,92 @@
+APK pcsuite/updateApk/pcsuite.apk
+DEX classes2.dex
+CLASS Lkotlin/reflect/jvm/internal/calls/AnnotationConstructorCallerKt$a;
+SUPER Ljava/lang/Object;
+FIELDS
+a Ljava/lang/Class; = None
+b Lkotlin/b; = None
+c Lkotlin/b; = None
+d Lkotlin/reflect/jvm/internal/calls/AnnotationConstructorCallerKt$createAnnotationInstance$2; = None
+e Ljava/util/Map; = None
+
+METHOD invoke(Ljava/lang/Object; Ljava/lang/reflect/Method; [Ljava/lang/Object;)Ljava/lang/Object;
+000000: const-string v3, "method"
+000004: invoke-static v4, v3, Lkotlin/jvm/internal/h;->b(Ljava/lang/Object; Ljava/lang/String;)V
+00000a: invoke-virtual v4, Ljava/lang/reflect/Method;->getName()Ljava/lang/String;
+000010: move-result-object v3
+000012: if-nez v3, +003h
+000016: goto +3fh
+000018: invoke-virtual v3, Ljava/lang/String;->hashCode()I
+00001e: move-result v0
+000020: const v1, -1776922004
+000026: if-eq v0, v1, +027h
+00002a: const v1, 147696667
+000030: if-eq v0, v1, +013h
+000034: const v1, 1444986633
+00003a: if-eq v0, v1, +003h
+00003e: goto +2bh
+000040: const-string v0, "annotationType"
+000044: invoke-virtual v3, v0, Ljava/lang/String;->equals(Ljava/lang/Object;)Z
+00004a: move-result v0
+00004c: if-eqz v0, +024h
+000050: iget-object v2, v2, Lkotlin/reflect/jvm/internal/calls/AnnotationConstructorCallerKt$a;->a Ljava/lang/Class;
+000054: return-object v2
+000056: const-string v0, "hashCode"
+00005a: invoke-virtual v3, v0, Ljava/lang/String;->equals(Ljava/lang/Object;)Z
+000060: move-result v0
+000062: if-eqz v0, +019h
+000066: iget-object v2, v2, Lkotlin/reflect/jvm/internal/calls/AnnotationConstructorCallerKt$a;->c Lkotlin/b;
+00006a: invoke-interface v2, Lkotlin/b;->getValue()Ljava/lang/Object;
+000070: move-result-object v2
+000072: return-object v2
+000074: const-string/jumbo v0, toString
+00007a: invoke-virtual v3, v0, Ljava/lang/String;->equals(Ljava/lang/Object;)Z
+000080: move-result v0
+000082: if-eqz v0, +009h
+000086: iget-object v2, v2, Lkotlin/reflect/jvm/internal/calls/AnnotationConstructorCallerKt$a;->b Lkotlin/b;
+00008a: invoke-interface v2, Lkotlin/b;->getValue()Ljava/lang/Object;
+000090: move-result-object v2
+000092: return-object v2
+000094: const-string v0, "equals"
+000098: invoke-static v3, v0, Lkotlin/jvm/internal/h;->a(Ljava/lang/Object; Ljava/lang/Object;)Z
+00009e: move-result v0
+0000a0: if-eqz v0, +017h
+0000a4: if-eqz v5, +015h
+0000a8: array-length v0, v5
+0000aa: const/4 v1, 1
+0000ac: if-ne v0, v1, +011h
+0000b0: iget-object v2, v2, Lkotlin/reflect/jvm/internal/calls/AnnotationConstructorCallerKt$a;->d Lkotlin/reflect/jvm/internal/calls/AnnotationConstructorCallerKt$createAnnotationInstance$2;
+0000b4: invoke-static v5, Lkotlin/collections/j;->r([Ljava/lang/Object;)Ljava/lang/Object;
+0000ba: move-result-object v3
+0000bc: invoke-virtual v2, v3, Lkotlin/reflect/jvm/internal/calls/AnnotationConstructorCallerKt$createAnnotationInstance$2;->invoke(Ljava/lang/Object;)Z
+0000c2: move-result v2
+0000c4: invoke-static v2, Ljava/lang/Boolean;->valueOf(Z)Ljava/lang/Boolean;
+0000ca: move-result-object v2
+0000cc: return-object v2
+0000ce: iget-object v2, v2, Lkotlin/reflect/jvm/internal/calls/AnnotationConstructorCallerKt$a;->e Ljava/util/Map;
+0000d2: invoke-interface v2, v3, Ljava/util/Map;->containsKey(Ljava/lang/Object;)Z
+0000d8: move-result v0
+0000da: if-eqz v0, +007h
+0000de: invoke-interface v2, v3, Ljava/util/Map;->get(Ljava/lang/Object;)Ljava/lang/Object;
+0000e4: move-result-object v2
+0000e6: return-object v2
+0000e8: new-instance v2, Ljava/lang/StringBuilder;
+0000ec: const-string v3, "Method is not supported: "
+0000f0: invoke-direct v2, v3, Ljava/lang/StringBuilder;-><init>(Ljava/lang/String;)V
+0000f6: invoke-virtual v2, v4, Ljava/lang/StringBuilder;->append(Ljava/lang/Object;)Ljava/lang/StringBuilder;
+0000fc: const-string v3, " (args: "
+000100: invoke-virtual v2, v3, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+000106: if-eqz v5, +003h
+00010a: goto +4h
+00010c: const/4 v3, 0
+00010e: new-array v5, v3, [Ljava/lang/Object;
+000112: invoke-static v5, Lkotlin/collections/j;->s([Ljava/lang/Object;)Ljava/util/List;
+000118: move-result-object v3
+00011a: invoke-virtual v2, v3, Ljava/lang/StringBuilder;->append(Ljava/lang/Object;)Ljava/lang/StringBuilder;
+000120: const/16 v3, 41
+000124: invoke-virtual v2, v3, Ljava/lang/StringBuilder;->append(C)Ljava/lang/StringBuilder;
+00012a: invoke-virtual v2, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
+000130: move-result-object v2
+000132: new-instance v3, Lkotlin/reflect/jvm/internal/KotlinReflectionInternalError;
+000136: invoke-direct v3, v2, Lkotlin/reflect/jvm/internal/KotlinReflectionInternalError;-><init>(Ljava/lang/String;)V
+00013c: throw v3

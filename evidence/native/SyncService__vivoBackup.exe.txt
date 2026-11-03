@@ -1,0 +1,844 @@
+
+samples/windows/v7.0.6.0-cn/pcsuite/SyncService/vivoBackup.exe:     file format pei-i386
+
+Characteristics 0x102
+	executable
+	32 bit words
+
+Time/Date		Wed Sep 30 11:47:18 2026
+Magic			010b	(PE32)
+MajorLinkerVersion	14
+MinorLinkerVersion	16
+SizeOfCode		00133800
+SizeOfInitializedData	00064000
+SizeOfUninitializedData	00000000
+AddressOfEntryPoint	00004bd3
+BaseOfCode		00001000
+BaseOfData		00135000
+ImageBase		00400000
+SectionAlignment	00001000
+FileAlignment		00000200
+MajorOSystemVersion	6
+MinorOSystemVersion	0
+MajorImageVersion	0
+MinorImageVersion	0
+MajorSubsystemVersion	6
+MinorSubsystemVersion	0
+Win32Version		00000000
+SizeOfImage		0019c000
+SizeOfHeaders		00000400
+CheckSum		001a0a88
+Subsystem		00000003	(Windows CUI)
+DllCharacteristics	00008140
+					DYNAMIC_BASE
+					NX_COMPAT
+					TERMINAL_SERVICE_AWARE
+SizeOfStackReserve	00100000
+SizeOfStackCommit	00001000
+SizeOfHeapReserve	00100000
+SizeOfHeapCommit	00001000
+LoaderFlags		00000000
+NumberOfRvaAndSizes	00000010
+
+The Data Directory
+Entry 0 00000000 00000000 Export Directory [.edata (or where ever we found it)]
+Entry 1 0016d080 00000230 Import Directory [parts of .idata]
+Entry 2 00179000 00012b9c Resource Directory [.rsrc]
+Entry 3 00000000 00000000 Exception Directory [.pdata]
+Entry 4 00197200 00002940 Security Directory
+Entry 5 0018c000 0000d888 Base Relocation Directory [.reloc]
+Entry 6 00142de0 00000038 Debug Directory
+Entry 7 00000000 00000000 Description Directory
+Entry 8 00000000 00000000 Special Directory
+Entry 9 0014348c 00000018 Thread Storage Directory [.tls]
+Entry a 00142e18 00000040 Load Configuration Directory
+Entry b 00000000 00000000 Bound Import Directory
+Entry c 0016c000 00001080 Import Address Table Directory
+Entry d 00000000 00000000 Delay Import Directory
+Entry e 00000000 00000000 CLR Runtime Header
+Entry f 00000000 00000000 Reserved
+
+There is an import table in .idata at 0x56d080
+
+The Import Tables (interpreted .idata section contents)
+ vma:            Hint    Time      Forward  DLL       First
+                 Table   Stamp     Chain    Name      Thunk
+ 0016d080	0016d30c 00000000 00000000 0016e6be 0016c05c
+
+	DLL Name: KERNEL32.dll
+	vma:     Ordinal  Hint  Member-Name  Bound-To
+	0016c05c  <none>  0288  GetLocalTime
+	0016c060  <none>  01ce  FreeLibrary
+	0016c064  <none>  029a  GetModuleFileNameA
+	0016c068  <none>  029e  GetModuleHandleExW
+	0016c06c  <none>  02d6  GetProcAddress
+	0016c070  <none>  03f4  LoadLibraryW
+	0016c074  <none>  0672  lstrcpyA
+	0016c078  <none>  0553  SetFileAttributesW
+	0016c07c  <none>  05b8  Sleep
+	0016c080  <none>  02fc  GetStdHandle
+	0016c084  <none>  064f  WriteFile
+	0016c088  <none>  0256  GetDynamicTimeZoneInformation
+	0016c08c  <none>  063b  WideCharToMultiByte
+	0016c090  <none>  021f  GetConsoleMode
+	0016c094  <none>  0644  WriteConsoleA
+	0016c098  <none>  0225  GetConsoleScreenBufferInfo
+	0016c09c  <none>  0538  SetConsoleTextAttribute
+	0016c0a0  <none>  04a5  ReadFile
+	0016c0a4  <none>  0564  SetHandleInformation
+	0016c0a8  <none>  00fa  CreatePipe
+	0016c0ac  <none>  0614  WaitForSingleObject
+	0016c0b0  <none>  05c8  TerminateProcess
+	0016c0b4  <none>  0260  GetExitCodeProcess
+	0016c0b8  <none>  0102  CreateProcessW
+	0016c0bc  <none>  0335  GetTickCount
+	0016c0c0  <none>  029b  GetModuleFileNameW
+	0016c0c4  <none>  023f  GetCurrentThread
+	0016c0c8  <none>  03fa  LocalAlloc
+	0016c0cc  <none>  01ca  FormatMessageW
+	0016c0d0  <none>  060e  WTSGetActiveConsoleSessionId
+	0016c0d4  <none>  01d5  GetACP
+	0016c0d8  <none>  0341  GetUserDefaultLangID
+	0016c0dc  <none>  0342  GetUserDefaultLocaleName
+	0016c0e0  <none>  0119  CreateToolhelp32Snapshot
+	0016c0e4  <none>  045c  Process32FirstW
+	0016c0e8  <none>  045e  Process32NextW
+	0016c0ec  <none>  03ed  LeaveCriticalSection
+	0016c0f0  <none>  038d  InitializeCriticalSectionAndSpinCount
+	0016c0f4  <none>  012e  DeleteCriticalSection
+	0016c0f8  <none>  054c  SetEvent
+	0016c0fc  <none>  03ff  LocalFree
+	0016c100  <none>  0420  MultiByteToWideChar
+	0016c104  <none>  0391  InitializeSListHead
+	0016c108  <none>  0313  GetSystemTimeAsFileTime
+	0016c10c  <none>  047e  QueryPerformanceCounter
+	0016c110  <none>  03b5  IsProcessorFeaturePresent
+	0016c114  <none>  02fa  GetStartupInfoW
+	0016c118  <none>  05ea  UnhandledExceptionFilter
+	0016c11c  <none>  03ad  IsDebuggerPresent
+	0016c120  <none>  00d9  CreateEventW
+	0016c124  <none>  04fc  ResetEvent
+	0016c128  <none>  0153  EnterCriticalSection
+	0016c12c  <none>  0240  GetCurrentThreadId
+	0016c130  <none>  023c  GetCurrentProcessId
+	0016c134  <none>  023b  GetCurrentProcess
+	0016c138  <none>  0615  WaitForSingleObjectEx
+	0016c13c  <none>  00f3  CreateMutexA
+	0016c140  <none>  0188  FatalAppExitW
+	0016c144  <none>  0287  GetLastError
+	0016c148  <none>  05a8  SetUnhandledExceptionFilter
+	0016c14c  <none>  009d  CloseHandle
+	0016c150  <none>  00e6  CreateFileW
+	0016c154  <none>  029f  GetModuleHandleW
+	0016c158  <none>  01fa  GetCommandLineW
+
+ 0016d094	0016dd90 00000000 00000000 0016e6d8 0016cae0
+
+	DLL Name: USER32.dll
+	vma:     Ordinal  Hint  Member-Name  Bound-To
+	0016cae0  <none>  0407  wsprintfW
+
+ 0016d0a8	0016dd58 00000000 00000000 0016e728 0016caa8
+
+	DLL Name: SHELL32.dll
+	vma:     Ordinal  Hint  Member-Name  Bound-To
+	0016caa8  <none>  016d  SHGetSpecialFolderPathA
+	0016caac  <none>  0150  SHGetFolderPathW
+	0016cab0  <none>  0009  CommandLineToArgvW
+
+ 0016d0bc	0016e284 00000000 00000000 0016e7a8 0016cfd4
+
+	DLL Name: ole32.dll
+	vma:     Ordinal  Hint  Member-Name  Bound-To
+	0016cfd4  <none>  005d  CoInitialize
+	0016cfd8  <none>  008e  CoUninitialize
+	0016cfdc  <none>  0028  CoCreateInstance
+	0016cfe0  <none>  005e  CoInitializeEx
+	0016cfe4  <none>  005f  CoInitializeSecurity
+	0016cfe8  <none>  0084  CoSetProxyBlanket
+
+ 0016d0d0	0016d74c 00000000 00000000 0016e7b2 0016c49c
+
+	DLL Name: OLEAUT32.dll
+	vma:     Ordinal  Hint  Member-Name  Bound-To
+	0016c49c      8  <none> <none>
+	0016c4a0      6  <none> <none>
+	0016c4a4      2  <none> <none>
+	0016c4a8    200  <none> <none>
+	0016c4ac     12  <none> <none>
+	0016c4b0    201  <none> <none>
+	0016c4b4      9  <none> <none>
+	0016c4b8    435  <none> <none>
+	0016c4bc    202  <none> <none>
+
+ 0016d0e4	0016d2b0 00000000 00000000 0016e880 0016c000
+
+	DLL Name: ADVAPI32.dll
+	vma:     Ordinal  Hint  Member-Name  Bound-To
+	0016c000  <none>  0286  RegOpenKeyExW
+	0016c004  <none>  0283  RegOpenCurrentUser
+	0016c008  <none>  0255  RegCloseKey
+	0016c00c  <none>  02ee  SetTokenInformation
+	0016c010  <none>  02bb  RevertToSelf
+	0016c014  <none>  0176  ImpersonateLoggedOnUser
+	0016c018  <none>  00f1  DuplicateTokenEx
+	0016c01c  <none>  0293  RegQueryValueExW
+	0016c020  <none>  02a3  RegSetValueExW
+	0016c024  <none>  025e  RegCreateKeyExW
+
+ 0016d0f8	0016d468 00000000 00000000 00170564 0016c1b8
+
+	DLL Name: MSVCP140.dll
+	vma:     Ordinal  Hint  Member-Name  Bound-To
+	0016c1b8  <none>  010d  ??6?$basic_ostream@DU?$char_traits@D@std@@@std@@QAEAAV01@_N@Z
+	0016c1bc  <none>  02a2  ?cerr@std@@3V?$basic_ostream@DU?$char_traits@D@std@@@1@A
+	0016c1c0  <none>  028b  ?_Xbad_alloc@std@@YAXXZ
+	0016c1c4  <none>  028e  ?_Xlength_error@std@@YAXPBD@Z
+	0016c1c8  <none>  028f  ?_Xout_of_range@std@@YAXPBD@Z
+	0016c1cc  <none>  057d  _Mbrtowc
+	0016c1d0  <none>  01c8  ?_Getcvt@_Locinfo@std@@QBE?AU_Cvtvec@@XZ
+	0016c1d4  <none>  0282  ?_W_Getdays@_Locinfo@std@@QBEPBGXZ
+	0016c1d8  <none>  0283  ?_W_Getmonths@_Locinfo@std@@QBEPBGXZ
+	0016c1dc  <none>  0585  _Mtx_lock
+	0016c1e0  <none>  0589  _Mtx_unlock
+	0016c1e4  <none>  0274  ?_Throw_C_error@std@@YAXH@Z
+	0016c1e8  <none>  006d  ??0_Lockit@std@@QAE@H@Z
+	0016c1ec  <none>  00a5  ??1_Lockit@std@@QAE@XZ
+	0016c1f0  <none>  05a8  _Strcoll
+	0016c1f4  <none>  05a9  _Strxfrm
+	0016c1f8  <none>  006c  ??0_Locinfo@std@@QAE@PBD@Z
+	0016c1fc  <none>  00a4  ??1_Locinfo@std@@QAE@XZ
+	0016c200  <none>  01c6  ?_Getcoll@_Locinfo@std@@QBE?AU_Collvec@@XZ
+	0016c204  <none>  0131  ??Bid@locale@std@@QAEIXZ
+	0016c208  <none>  0075  ??0facet@locale@std@@IAE@I@Z
+	0016c20c  <none>  00ab  ??1facet@locale@std@@MAE@XZ
+	0016c210  <none>  020f  ?_Init@locale@std@@CAPAV_Locimp@12@_N@Z
+	0016c214  <none>  01d5  ?_Getgloballocale@locale@std@@CAPAV_Locimp@12@XZ
+	0016c218  <none>  050f  ?tolower@?$ctype@D@std@@QBEDD@Z
+	0016c21c  <none>  0510  ?tolower@?$ctype@D@std@@QBEPBDPADPBD@Z
+	0016c220  <none>  01b6  ?_Getcat@?$ctype@D@std@@SAIPAPBVfacet@locale@2@PBV42@@Z
+	0016c224  <none>  0291  ?_Xregex_error@std@@YAXW4error_type@regex_constants@1@@Z
+	0016c228  <none>  019e  ?_Decref@facet@locale@std@@UAEPAV_Facet_base@3@XZ
+	0016c22c  <none>  01f2  ?_Incref@facet@locale@std@@UAEXXZ
+	0016c230  <none>  03cf  ?id@?$ctype@D@std@@2V0locale@2@A
+	0016c234  <none>  03cc  ?id@?$collate@D@std@@2V0locale@2@A
+	0016c238  <none>  0584  _Mtx_init_in_situ
+	0016c23c  <none>  0581  _Mtx_destroy_in_situ
+	0016c240  <none>  01a6  ?_Execute_once@std@@YAHAAUonce_flag@1@P6GHPAX1PAPAX@Z1@Z
+	0016c244  <none>  0273  ?_Syserror_map@std@@YAPBDH@Z
+	0016c248  <none>  05b7  _Thrd_start
+	0016c24c  <none>  0583  _Mtx_init
+	0016c250  <none>  0580  _Mtx_destroy
+	0016c254  <none>  01ab  ?_Fiopen@std@@YAPAU_iobuf@@PBDHH@Z
+	0016c258  <none>  054c  _Cnd_destroy
+	0016c25c  <none>  0550  _Cnd_init_in_situ
+	0016c260  <none>  054d  _Cnd_destroy_in_situ
+	0016c264  <none>  0555  _Cnd_wait
+	0016c268  <none>  0552  _Cnd_signal
+	0016c26c  <none>  054e  _Cnd_do_broadcast_at_thread_exit
+	0016c270  <none>  028c  ?_Xbad_function_call@std@@YAXXZ
+	0016c274  <none>  05b5  _Thrd_join
+	0016c278  <none>  05b4  _Thrd_id
+	0016c27c  <none>  0275  ?_Throw_Cpp_error@std@@YAXH@Z
+	0016c280  <none>  02b4  ?cout@std@@3V?$basic_ostream@DU?$char_traits@D@std@@@1@A
+	0016c284  <none>  05cc  _Xtime_get_ticks
+	0016c288  <none>  01dc  ?_Getlconv@_Locinfo@std@@QBEPBUlconv@@XZ
+	0016c28c  <none>  01cb  ?_Getfalse@_Locinfo@std@@QBEPBDXZ
+	0016c290  <none>  01e1  ?_Gettrue@_Locinfo@std@@QBEPBDXZ
+	0016c294  <none>  029f  ?c_str@?$_Yarn@D@std@@QBEPBDXZ
+	0016c298  <none>  0076  ??0id@locale@std@@QAE@I@Z
+	0016c29c  <none>  01c5  ?_Getcat@facet@locale@std@@SAIPAPBV123@PBV23@@Z
+	0016c2a0  <none>  03e7  ?id@?$numpunct@D@std@@2V0locale@2@A
+	0016c2a4  <none>  03e9  ?id@?$numpunct@_W@std@@2V0locale@2@A
+	0016c2a8  <none>  051e  ?uncaught_exception@std@@YA_NXZ
+	0016c2ac  <none>  03c5  ?good@ios_base@std@@QBE_NXZ
+	0016c2b0  <none>  0367  ?flags@ios_base@std@@QBEHXZ
+	0016c2b4  <none>  053e  ?width@ios_base@std@@QBE_JXZ
+	0016c2b8  <none>  053d  ?width@ios_base@std@@QAE_J_J@Z
+	0016c2bc  <none>  04de  ?sputc@?$basic_streambuf@DU?$char_traits@D@std@@@std@@QAEHD@Z
+	0016c2c0  <none>  04e1  ?sputn@?$basic_streambuf@DU?$char_traits@D@std@@@std@@QAE_JPBD_J@Z
+	0016c2c4  <none>  04e0  ?sputc@?$basic_streambuf@_WU?$char_traits@_W@std@@@std@@QAEG_W@Z
+	0016c2c8  <none>  04e3  ?sputn@?$basic_streambuf@_WU?$char_traits@_W@std@@@std@@QAE_JPB_W_J@Z
+	0016c2cc  <none>  04c5  ?setstate@?$basic_ios@DU?$char_traits@D@std@@@std@@QAEXH_N@Z
+	0016c2d0  <none>  0487  ?rdbuf@?$basic_ios@DU?$char_traits@D@std@@@std@@QBEPAV?$basic_streambuf@DU?$char_traits@D@std@@@2@XZ
+	0016c2d4  <none>  0534  ?widen@?$basic_ios@DU?$char_traits@D@std@@@std@@QBEDD@Z
+	0016c2d8  <none>  04c9  ?setstate@?$basic_ios@_WU?$char_traits@_W@std@@@std@@QAEXH_N@Z
+	0016c2dc  <none>  0536  ?widen@?$basic_ios@_WU?$char_traits@_W@std@@@std@@QBE_WD@Z
+	0016c2e0  <none>  0244  ?_Osfx@?$basic_ostream@DU?$char_traits@D@std@@@std@@QAEXXZ
+	0016c2e4  <none>  0106  ??6?$basic_ostream@DU?$char_traits@D@std@@@std@@QAEAAV01@P6AAAV01@AAV01@@Z@Z
+	0016c2e8  <none>  054f  _Cnd_init
+	0016c2ec  <none>  00ff  ??6?$basic_ostream@DU?$char_traits@D@std@@@std@@QAEAAV01@H@Z
+	0016c2f0  <none>  0101  ??6?$basic_ostream@DU?$char_traits@D@std@@@std@@QAEAAV01@J@Z
+	0016c2f4  <none>  010a  ??6?$basic_ostream@DU?$char_traits@D@std@@@std@@QAEAAV01@PBX@Z
+	0016c2f8  <none>  0461  ?put@?$basic_ostream@DU?$char_traits@D@std@@@std@@QAEAAV12@D@Z
+	0016c2fc  <none>  0368  ?flush@?$basic_ostream@DU?$char_traits@D@std@@@std@@QAEAAV12@XZ
+	0016c300  <none>  0246  ?_Osfx@?$basic_ostream@_WU?$char_traits@_W@std@@@std@@QAEXXZ
+	0016c304  <none>  0128  ??6?$basic_ostream@_WU?$char_traits@_W@std@@@std@@QAEAAV01@P6AAAV01@AAV01@@Z@Z
+	0016c308  <none>  0123  ??6?$basic_ostream@_WU?$char_traits@_W@std@@@std@@QAEAAV01@J@Z
+	0016c30c  <none>  0463  ?put@?$basic_ostream@_WU?$char_traits@_W@std@@@std@@QAEAAV12@_W@Z
+	0016c310  <none>  036a  ?flush@?$basic_ostream@_WU?$char_traits@_W@std@@@std@@QAEAAV12@XZ
+	0016c314  <none>  0533  ?wcout@std@@3V?$basic_ostream@_WU?$char_traits@_W@std@@@1@A
+	0016c318  <none>  0376  ?get@?$basic_istream@DU?$char_traits@D@std@@@std@@QAEHXZ
+	0016c31c  <none>  048d  ?read@?$basic_istream@DU?$char_traits@D@std@@@std@@QAEAAV12@PAD_J@Z
+	0016c320  <none>  002f  ??0?$basic_streambuf@DU?$char_traits@D@std@@@std@@IAE@XZ
+	0016c324  <none>  0089  ??1?$basic_streambuf@DU?$char_traits@D@std@@@std@@UAE@XZ
+	0016c328  <none>  034d  ?eback@?$basic_streambuf@DU?$char_traits@D@std@@@std@@IBEPADXZ
+	0016c32c  <none>  03c6  ?gptr@?$basic_streambuf@DU?$char_traits@D@std@@@std@@IBEPADXZ
+	0016c330  <none>  043e  ?pbase@?$basic_streambuf@DU?$char_traits@D@std@@@std@@IBEPADXZ
+	0016c334  <none>  0447  ?pptr@?$basic_streambuf@DU?$char_traits@D@std@@@std@@IBEPADXZ
+	0016c338  <none>  0350  ?egptr@?$basic_streambuf@DU?$char_traits@D@std@@@std@@IBEPADXZ
+	0016c33c  <none>  036b  ?gbump@?$basic_streambuf@DU?$char_traits@D@std@@@std@@IAEXH@Z
+	0016c340  <none>  04ba  ?setg@?$basic_streambuf@DU?$char_traits@D@std@@@std@@IAEXPAD00@Z
+	0016c344  <none>  0359  ?epptr@?$basic_streambuf@DU?$char_traits@D@std@@@std@@IBEPADXZ
+	0016c348  <none>  024a  ?_Pninc@?$basic_streambuf@DU?$char_traits@D@std@@@std@@IAEPADXZ
+	0016c34c  <none>  007d  ??1?$basic_ios@DU?$char_traits@D@std@@@std@@UAE@XZ
+	0016c350  <none>  000c  ??0?$basic_ios@DU?$char_traits@D@std@@@std@@IAE@XZ
+	0016c354  <none>  0025  ??0?$basic_ostream@DU?$char_traits@D@std@@@std@@QAE@PAV?$basic_streambuf@DU?$char_traits@D@std@@@1@_N@Z
+	0016c358  <none>  0086  ??1?$basic_ostream@DU?$char_traits@D@std@@@std@@UAE@XZ
+	0016c35c  <none>  0228  ?_Lock@?$basic_streambuf@DU?$char_traits@D@std@@@std@@UAEXXZ
+	0016c360  <none>  027f  ?_Unlock@?$basic_streambuf@DU?$char_traits@D@std@@@std@@UAEXXZ
+	0016c364  <none>  03f6  ?imbue@?$basic_streambuf@DU?$char_traits@D@std@@@std@@MAEXABVlocale@2@@Z
+	0016c368  <none>  04b5  ?setbuf@?$basic_streambuf@DU?$char_traits@D@std@@@std@@MAEPAV12@PAD_J@Z
+	0016c36c  <none>  04d5  ?showmanyc@?$basic_streambuf@DU?$char_traits@D@std@@@std@@MAE_JXZ
+	0016c370  <none>  04fd  ?sync@?$basic_streambuf@DU?$char_traits@D@std@@@std@@MAEHXZ
+	0016c374  <none>  051b  ?uflow@?$basic_streambuf@DU?$char_traits@D@std@@@std@@MAEHXZ
+	0016c378  <none>  0543  ?xsgetn@?$basic_streambuf@DU?$char_traits@D@std@@@std@@MAE_JPAD_J@Z
+	0016c37c  <none>  0546  ?xsputn@?$basic_streambuf@DU?$char_traits@D@std@@@std@@MAE_JPBD_J@Z
+	0016c380  <none>  04b8  ?setf@ios_base@std@@QAEHH@Z
+	0016c384  <none>  04b9  ?setf@ios_base@std@@QAEHHH@Z
+	0016c388  <none>  0108  ??6?$basic_ostream@DU?$char_traits@D@std@@@std@@QAEAAV01@P6AAAVios_base@1@AAV21@@Z@Z
+	0016c38c  <none>  04ce  ?setw@std@@YA?AU?$_Smanip@_J@1@_J@Z
+	0016c390  <none>  0130  ??7ios_base@std@@QBE_NXZ
+	0016c394  <none>  0495  ?sbumpc@?$basic_streambuf@DU?$char_traits@D@std@@@std@@QAEHXZ
+	0016c398  <none>  04cf  ?sgetc@?$basic_streambuf@DU?$char_traits@D@std@@@std@@QAEHXZ
+	0016c39c  <none>  04d8  ?snextc@?$basic_streambuf@DU?$char_traits@D@std@@@std@@QAEHXZ
+	0016c3a0  <none>  0109  ??6?$basic_ostream@DU?$char_traits@D@std@@@std@@QAEAAV01@PAV?$basic_streambuf@DU?$char_traits@D@std@@@1@@Z
+	0016c3a4  <none>  001a  ??0?$basic_istream@DU?$char_traits@D@std@@@std@@QAE@PAV?$basic_streambuf@DU?$char_traits@D@std@@@1@_N@Z
+	0016c3a8  <none>  0083  ??1?$basic_istream@DU?$char_traits@D@std@@@std@@UAE@XZ
+	0016c3ac  <none>  0219  ?_Ipfx@?$basic_istream@DU?$char_traits@D@std@@@std@@QAE_N_N@Z
+	0016c3b0  <none>  00d1  ??5?$basic_istream@DU?$char_traits@D@std@@@std@@QAEAAV01@AAN@Z
+	0016c3b4  <none>  0102  ??6?$basic_ostream@DU?$char_traits@D@std@@@std@@QAEAAV01@K@Z
+	0016c3b8  <none>  0013  ??0?$basic_iostream@DU?$char_traits@D@std@@@std@@QAE@PAV?$basic_streambuf@DU?$char_traits@D@std@@@1@@Z
+	0016c3bc  <none>  0080  ??1?$basic_iostream@DU?$char_traits@D@std@@@std@@UAE@XZ
+	0016c3c0  <none>  029d  ?always_noconv@codecvt_base@std@@QBE_NXZ
+	0016c3c4  <none>  03fa  ?in@?$codecvt@DDU_Mbstatet@@@std@@QBEHAAU_Mbstatet@@PBD1AAPBDPAD3AAPAD@Z
+	0016c3c8  <none>  0433  ?out@?$codecvt@DDU_Mbstatet@@@std@@QBEHAAU_Mbstatet@@PBD1AAPBDPAD3AAPAD@Z
+	0016c3cc  <none>  0527  ?unshift@?$codecvt@DDU_Mbstatet@@@std@@QBEHAAU_Mbstatet@@PAD1AAPAD@Z
+	0016c3d0  <none>  01b1  ?_Getcat@?$codecvt@DDU_Mbstatet@@@std@@SAIPAPBVfacet@locale@2@PBV42@@Z
+	0016c3d4  <none>  01e8  ?_Gninc@?$basic_streambuf@DU?$char_traits@D@std@@@std@@IAEPADXZ
+	0016c3d8  <none>  01e2  ?_Gnavail@?$basic_streambuf@DU?$char_traits@D@std@@@std@@IBE_JXZ
+	0016c3dc  <none>  0441  ?pbump@?$basic_streambuf@DU?$char_traits@D@std@@@std@@IAEXH@Z
+	0016c3e0  <none>  0247  ?_Pnavail@?$basic_streambuf@DU?$char_traits@D@std@@@std@@IBE_JXZ
+	0016c3e4  <none>  01f5  ?_Init@?$basic_streambuf@DU?$char_traits@D@std@@@std@@IAEXXZ
+	0016c3e8  <none>  053f  ?write@?$basic_ostream@DU?$char_traits@D@std@@@std@@QAEAAV12@PBD_J@Z
+	0016c3ec  <none>  03c9  ?id@?$codecvt@DDU_Mbstatet@@@std@@2V0locale@2@A
+	0016c3f0  <none>  02a6  ?clear@?$basic_ios@DU?$char_traits@D@std@@@std@@QAEXH_N@Z
+	0016c3f4  <none>  03c0  ?getloc@?$basic_streambuf@DU?$char_traits@D@std@@@std@@QBE?AVlocale@2@XZ
+	0016c3f8  <none>  04a8  ?seekp@?$basic_ostream@DU?$char_traits@D@std@@@std@@QAEAAV12@_JH@Z
+
+ 0016d10c	0016d7fc 00000000 00000000 00173480 0016c54c
+
+	DLL Name: PocoFoundation.dll
+	vma:     Ordinal  Hint  Member-Name  Bound-To
+	0016c54c  <none>  0bdc  ?parent@Path@Poco@@QBE?AV12@XZ
+	0016c550  <none>  00b9  ??0File@Poco@@QAE@ABVPath@1@@Z
+	0016c554  <none>  0962  ?exists@File@Poco@@QBE_NXZ
+	0016c558  <none>  08ba  ?copyTo@File@Poco@@QBEXABV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@H@Z
+	0016c55c  <none>  00b6  ??0FastMutex@Poco@@QAE@XZ
+	0016c560  <none>  02f3  ??1FastMutex@Poco@@QAE@XZ
+	0016c564  <none>  0195  ??0Path@Poco@@QAE@ABV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@@Z
+	0016c568  <none>  09f3  ?getFileName@Path@Poco@@QBEABV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@XZ
+	0016c56c  <none>  0c75  ?release@RefCountedObject@Poco@@QBEXXZ
+	0016c570  <none>  0deb  ?toUpper@Ascii@Poco@@SAHH@Z
+	0016c574  <none>  0888  ?convert@UnicodeConverter@Poco@@SAXABV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@AAV?$basic_string@_WU?$char_traits@_W@std@@V?$allocator@_W@2@@4@@Z
+	0016c578  <none>  0b3d  ?makeParent@Path@Poco@@QAEAAV12@XZ
+	0016c57c  <none>  0b38  ?makeAbsolute@Path@Poco@@QAEAAV12@XZ
+	0016c580  <none>  086e  ?configHome@Path@Poco@@SA?AV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@XZ
+	0016c584  <none>  0b02  ?kill@Process@Poco@@SAXI@Z
+	0016c588  <none>  0ae3  ?isSpace@Ascii@Poco@@SA_NH@Z
+	0016c58c  <none>  0dd8  ?toLower@Ascii@Poco@@SAHH@Z
+	0016c590  <none>  0210  ??0StringTokenizer@Poco@@QAE@ABV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@0H@Z
+	0016c594  <none>  0383  ??1StringTokenizer@Poco@@QAE@XZ
+	0016c598  <none>  07a3  ?begin@StringTokenizer@Poco@@QBE?AV?$_Vector_const_iterator@V?$_Vector_val@U?$_Simple_types@V?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@@std@@@std@@@std@@XZ
+	0016c59c  <none>  093f  ?end@StringTokenizer@Poco@@QBE?AV?$_Vector_const_iterator@V?$_Vector_val@U?$_Simple_types@V?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@@std@@@std@@@std@@XZ
+	0016c5a0  <none>  071b  ?SORTABLE_FORMAT@DateTimeFormat@Poco@@2V?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@B
+	0016c5a4  <none>  0147  ??0MemoryInputStream@Poco@@QAE@PBD_J@Z
+	0016c5a8  <none>  068c  ??_DMemoryInputStream@Poco@@QAEXXZ
+	0016c5ac  <none>  0259  ??0Timestamp@Poco@@QAE@XZ
+	0016c5b0  <none>  03a2  ??1Timestamp@Poco@@QAE@XZ
+	0016c5b4  <none>  094f  ?epochMicroseconds@Timestamp@Poco@@QBE_JXZ
+	0016c5b8  <none>  0e54  ?update@DigestEngine@Poco@@QAEXPBXI@Z
+	0016c5bc  <none>  0e52  ?update@DigestEngine@Poco@@QAEXABV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@@Z
+	0016c5c0  <none>  091d  ?digestToHex@DigestEngine@Poco@@SA?AV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@ABV?$vector@EV?$allocator@E@std@@@4@@Z
+	0016c5c4  <none>  007e  ??0DigestOutputStream@Poco@@QAE@AAVDigestEngine@1@@Z
+	0016c5c8  <none>  0852  ?close@DigestOutputStream@Poco@@QAEXXZ
+	0016c5cc  <none>  0678  ??_DDigestOutputStream@Poco@@QAEXXZ
+	0016c5d0  <none>  00bb  ??0File@Poco@@QAE@XZ
+	0016c5d4  <none>  03f4  ??4File@Poco@@QAEAAV01@ABVPath@1@@Z
+	0016c5d8  <none>  0c0b  ?path@File@Poco@@QBEABV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@XZ
+	0016c5dc  <none>  0aad  ?isFile@File@Poco@@QBE_NXZ
+	0016c5e0  <none>  0aa4  ?isDirectory@File@Poco@@QBE_NXZ
+	0016c5e4  <none>  08d5  ?created@File@Poco@@QBE?AVTimestamp@2@XZ
+	0016c5e8  <none>  09f8  ?getLastModified@File@Poco@@QBE?AVTimestamp@2@XZ
+	0016c5ec  <none>  0a29  ?getSize@File@Poco@@QBE_KXZ
+	0016c5f0  <none>  0c80  ?renameTo@File@Poco@@QAEXABV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@H@Z
+	0016c5f4  <none>  08ca  ?createFile@File@Poco@@QAE_NXZ
+	0016c5f8  <none>  08c7  ?createDirectories@File@Poco@@QAEXXZ
+	0016c5fc  <none>  0b12  ?list@File@Poco@@QBEXAAV?$vector@V?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@V?$allocator@V?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@@2@@std@@@Z
+	0016c600  <none>  0dfa  ?totalSpace@File@Poco@@QBE_KXZ
+	0016c604  <none>  0e5c  ?usableSpace@File@Poco@@QBE_KXZ
+	0016c608  <none>  09c4  ?freeSpace@File@Poco@@QBE_KXZ
+	0016c60c  <none>  0081  ??0DirectoryIterator@Poco@@QAE@ABV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@@Z
+	0016c610  <none>  0080  ??0DirectoryIterator@Poco@@QAE@ABV01@@Z
+	0016c614  <none>  02e1  ??1DirectoryIterator@Poco@@UAE@XZ
+	0016c618  <none>  04bd  ??CDirectoryIterator@Poco@@QAEPAVFile@1@XZ
+	0016c61c  <none>  0bab  ?nodeId@Environment@Poco@@SA?AV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@XZ
+	0016c620  <none>  0856  ?close@FileIOS@Poco@@QAEXXZ
+	0016c624  <none>  00d1  ??0FileInputStream@Poco@@QAE@ABV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@H@Z
+	0016c628  <none>  067c  ??_DFileInputStream@Poco@@QAEXXZ
+	0016c62c  <none>  0143  ??0MD5Engine@Poco@@QAE@XZ
+	0016c630  <none>  0329  ??1MD5Engine@Poco@@UAE@XZ
+	0016c634  <none>  0915  ?digest@MD5Engine@Poco@@UAEABV?$vector@EV?$allocator@E@std@@@std@@XZ
+	0016c638  <none>  01a8  ??0Pipe@Poco@@QAE@XZ
+	0016c63c  <none>  034f  ??1Pipe@Poco@@QAE@XZ
+	0016c640  <none>  0357  ??1ProcessHandle@Poco@@QAE@XZ
+	0016c644  <none>  0e6d  ?wait@ProcessHandle@Poco@@QBEHXZ
+	0016c648  <none>  0b09  ?launch@Process@Poco@@SA?AVProcessHandle@2@ABV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@ABV?$vector@V?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@V?$allocator@V?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@@2@@5@@Z
+	0016c64c  <none>  0b0a  ?launch@Process@Poco@@SA?AVProcessHandle@2@ABV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@ABV?$vector@V?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@V?$allocator@V?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@@2@@5@PAVPipe@2@22@Z
+	0016c650  <none>  01c6  ??0Random@Poco@@QAE@H@Z
+	0016c654  <none>  0360  ??1Random@Poco@@QAE@XZ
+	0016c658  <none>  0cde  ?seed@Random@Poco@@QAEXXZ
+	0016c65c  <none>  0ba2  ?next@Random@Poco@@QAEIXZ
+	0016c660  <none>  0038  ??0ChildrenFirstTraverse@Poco@@QAE@V?$function@$$A6AGABV?$stack@VDirectoryIterator@Poco@@V?$deque@VDirectoryIterator@Poco@@V?$allocator@VDirectoryIterator@Poco@@@std@@@std@@@std@@@Z@std@@G@Z
+	0016c664  <none>  0b9f  ?next@ChildrenFirstTraverse@Poco@@QAE?BV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@PAV?$stack@VDirectoryIterator@Poco@@V?$deque@VDirectoryIterator@Poco@@V?$allocator@VDirectoryIterator@Poco@@@std@@@std@@@4@PA_N@Z
+	0016c668  <none>  02c6  ??1ChildrenFirstTraverse@Poco@@QAE@XZ
+	0016c66c  <none>  01e6  ??0SHA2Engine@Poco@@QAE@W4ALGORITHM@01@@Z
+	0016c670  <none>  036f  ??1SHA2Engine@Poco@@UAE@XZ
+	0016c674  <none>  0917  ?digest@SHA2Engine@Poco@@UAEABV?$vector@EV?$allocator@E@std@@@std@@XZ
+	0016c678  <none>  08b7  ?copyStream@StreamCopier@Poco@@SA_JAAV?$basic_istream@DU?$char_traits@D@std@@@std@@AAV?$basic_ostream@DU?$char_traits@D@std@@@4@I@Z
+	0016c67c  <none>  08be  ?copyToString@StreamCopier@Poco@@SA_JAAV?$basic_istream@DU?$char_traits@D@std@@@std@@AAV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@4@I@Z
+	0016c680  <none>  03ae  ??1UUID@Poco@@QAE@XZ
+	0016c684  <none>  0de8  ?toString@UUID@Poco@@QBE?AV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@XZ
+	0016c688  <none>  08d2  ?createOne@UUIDGenerator@Poco@@QAE?AVUUID@2@XZ
+	0016c68c  <none>  08ff  ?defaultGenerator@UUIDGenerator@Poco@@SAAAV12@XZ
+	0016c690  <none>  01ab  ??0PipeInputStream@Poco@@QAE@ABVPipe@1@@Z
+	0016c694  <none>  0694  ??_DPipeInputStream@Poco@@QAEXXZ
+	0016c698  <none>  04c9  ??EDirectoryIterator@Poco@@UAEAAV01@XZ
+	0016c69c  <none>  0de6  ?toString@Path@Poco@@QBE?AV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@XZ
+	0016c6a0  <none>  0950  ?epochTime@Timestamp@Poco@@QBE_JXZ
+	0016c6a4  <none>  09cc  ?fromEpochTime@Timestamp@Poco@@SA?AV12@_J@Z
+	0016c6a8  <none>  0065  ??0DateTime@Poco@@QAE@ABVTimestamp@1@@Z
+	0016c6ac  <none>  02d7  ??1DateTime@Poco@@QAE@XZ
+	0016c6b0  <none>  0b3e  ?makeTM@DateTime@Poco@@QBE?AUtm@@XZ
+	0016c6b4  <none>  0131  ??0LocalDateTime@Poco@@QAE@XZ
+	0016c6b8  <none>  0922  ?displayText@Exception@Poco@@QBE?AV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@XZ
+	0016c6bc  <none>  031e  ??1LocalDateTime@Poco@@QAE@XZ
+	0016c6c0  <none>  0994  ?format@DateTimeFormatter@Poco@@SA?AV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@ABVLocalDateTime@2@ABV34@@Z
+	0016c6c4  <none>  0bde  ?parse@DateTimeParser@Poco@@SA?AVDateTime@2@ABV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@0AAH@Z
+	0016c6c8  <none>  0c06  ?parseUnsigned64@NumberParser@Poco@@SA_KABV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@D@Z
+	0016c6cc  <none>  02ec  ??1Exception@Poco@@UAE@XZ
+	0016c6d0  <none>  0e8a  ?what@Exception@Poco@@UBEPBDXZ
+	0016c6d4  <none>  0866  ?code@Exception@Poco@@QBEHXZ
+	0016c6d8  <none>  0257  ??0Timespan@Poco@@QAE@_J@Z
+	0016c6dc  <none>  0255  ??0Timespan@Poco@@QAE@JJ@Z
+	0016c6e0  <none>  03a1  ??1Timespan@Poco@@QAE@XZ
+	0016c6e4  <none>  0269  ??0URI@Poco@@QAE@ABV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@@Z
+	0016c6e8  <none>  03a6  ??1URI@Poco@@QAE@XZ
+	0016c6ec  <none>  09f6  ?getHost@URI@Poco@@QBEABV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@XZ
+	0016c6f0  <none>  0a15  ?getPort@URI@Poco@@QBEGXZ
+	0016c6f4  <none>  0a0d  ?getPathAndQuery@URI@Poco@@QBE?AV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@XZ
+	0016c6f8  <none>  017c  ??0NullPointerException@Poco@@QAE@H@Z
+	0016c6fc  <none>  00d8  ??0FileOutputStream@Poco@@QAE@ABV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@H@Z
+	0016c700  <none>  067d  ??_DFileOutputStream@Poco@@QAEXXZ
+	0016c704  <none>  009b  ??0Exception@Poco@@QAE@ABV01@@Z
+	0016c708  <none>  013d  ??0LogicException@Poco@@QAE@ABV01@@Z
+	0016c70c  <none>  0178  ??0NullPointerException@Poco@@QAE@ABV01@@Z
+	0016c710  <none>  0344  ??1NullPointerException@Poco@@UAE@XZ
+	0016c714  <none>  0e3b  ?unexpected@Bugcheck@Poco@@SAXPBDH@Z
+	0016c718  <none>  0b1b  ?lock@FastMutex@Poco@@QAEXXZ
+	0016c71c  <none>  0e3f  ?unlock@FastMutex@Poco@@QAEXXZ
+	0016c720  <none>  09e8  ?getBaseName@Path@Poco@@QBE?AV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@XZ
+	0016c724  <none>  0930  ?duplicate@RefCountedObject@Poco@@QBEXXZ
+	0016c728  <none>  08e6  ?currentTid@Thread@Poco@@SAKXZ
+	0016c72c  <none>  00c1  ??0FileChannel@Poco@@QAE@ABV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@@Z
+	0016c730  <none>  02f6  ??1FileChannel@Poco@@MAE@XZ
+	0016c734  <none>  00e5  ??0FormattingChannel@Poco@@QAE@V?$AutoPtr@VFormatter@Poco@@@1@V?$AutoPtr@VChannel@Poco@@@1@@Z
+	0016c738  <none>  0303  ??1FormattingChannel@Poco@@MAE@XZ
+	0016c73c  <none>  09e0  ?get@Logger@Poco@@SAAAV12@ABV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@@Z
+	0016c740  <none>  08c4  ?create@Logger@Poco@@SAAAV12@ABV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@V?$AutoPtr@VChannel@Poco@@@2@H@Z
+	0016c744  <none>  0a4b  ?has@Logger@Poco@@SA?AV?$AutoPtr@VLogger@Poco@@@2@ABV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@@Z
+	0016c748  <none>  0910  ?destroy@Logger@Poco@@SAXABV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@@Z
+	0016c74c  <none>  0137  ??0LogStream@Poco@@QAE@AAVLogger@1@W4Priority@Message@1@I@Z
+	0016c750  <none>  0953  ?error@LogStream@Poco@@QAEAAV12@XZ
+	0016c754  <none>  0e83  ?warning@LogStream@Poco@@QAEAAV12@XZ
+	0016c758  <none>  0a78  ?information@LogStream@Poco@@QAEAAV12@XZ
+	0016c75c  <none>  068a  ??_DLogStream@Poco@@QAEXXZ
+	0016c760  <none>  01a5  ??0PatternFormatter@Poco@@QAE@ABV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@@Z
+	0016c764  <none>  034e  ??1PatternFormatter@Poco@@UAE@XZ
+	0016c768  <none>  0855  ?close@FileChannel@Poco@@UAEXXZ
+	0016c76c  <none>  0858  ?close@FormattingChannel@Poco@@UAEXXZ
+	0016c770  <none>  09b0  ?format@PatternFormatter@Poco@@UAEXABVMessage@2@AAV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@@Z
+	0016c774  <none>  0a1b  ?getProperty@Channel@Poco@@UBE?AV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@ABV34@@Z
+	0016c778  <none>  0a1e  ?getProperty@FileChannel@Poco@@UBE?AV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@ABV34@@Z
+	0016c77c  <none>  0a20  ?getProperty@PatternFormatter@Poco@@UBE?AV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@ABV34@@Z
+	0016c780  <none>  0b29  ?log@FileChannel@Poco@@UAEXABVMessage@2@@Z
+	0016c784  <none>  0b2a  ?log@FormattingChannel@Poco@@UAEXABVMessage@2@@Z
+	0016c788  <none>  0bc3  ?open@FileChannel@Poco@@UAEXXZ
+	0016c78c  <none>  0bc8  ?open@FormattingChannel@Poco@@UAEXXZ
+	0016c790  <none>  0d34  ?setProperty@FileChannel@Poco@@UAEXABV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@0@Z
+	0016c794  <none>  0d36  ?setProperty@FormattingChannel@Poco@@UAEXABV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@0@Z
+	0016c798  <none>  0d3a  ?setProperty@PatternFormatter@Poco@@UAEXABV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@0@Z
+	0016c79c  <none>  070b  ?PROP_ROTATION@FileChannel@Poco@@2V?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@B
+	0016c7a0  <none>  06fc  ?PROP_ARCHIVE@FileChannel@Poco@@2V?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@B
+	0016c7a4  <none>  06fd  ?PROP_COMPRESS@FileChannel@Poco@@2V?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@B
+	0016c7a8  <none>  0709  ?PROP_PURGECOUNT@FileChannel@Poco@@2V?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@B
+	0016c7ac  <none>  070f  ?PROP_TIMES@PatternFormatter@Poco@@2V?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@B
+	0016c7b0  <none>  00e3  ??0Formatter@Poco@@QAE@XZ
+	0016c7b4  <none>  0302  ??1Formatter@Poco@@UAE@XZ
+	0016c7b8  <none>  0a1f  ?getProperty@Formatter@Poco@@UBE?AV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@ABV34@@Z
+	0016c7bc  <none>  0d35  ?setProperty@Formatter@Poco@@UAEXABV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@0@Z
+	0016c7c0  <none>  0a71  ?id@Process@Poco@@SAIXZ
+	0016c7c4  <none>  09b7  ?formatHex@NumberFormatter@Poco@@SA?AV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@HH_N@Z
+	0016c7c8  <none>  08e7  ?currentTidImpl@ThreadImpl@Poco@@SAKXZ
+	0016c7cc  <none>  0bc4  ?open@FileIOS@Poco@@QAEXABV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@H@Z
+	0016c7d0  <none>  00e0  ??0FileStream@Poco@@QAE@XZ
+	0016c7d4  <none>  067e  ??_DFileStream@Poco@@QAEXXZ
+	0016c7d8  <none>  0425  ??4Path@Poco@@QAEAAV01@ABV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@@Z
+	0016c7dc  <none>  078d  ?assertion@Bugcheck@Poco@@SAXPBD0H0@Z
+	0016c7e0  <none>  0b05  ?last@Error@Poco@@SAKXZ
+	0016c7e4  <none>  09ff  ?getMessage@Error@Poco@@SA?AV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@K@Z
+	0016c7e8  <none>  00b8  ??0File@Poco@@QAE@ABV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@@Z
+	0016c7ec  <none>  02f4  ??1File@Poco@@UAE@XZ
+	0016c7f0  <none>  0c76  ?remove@File@Poco@@QAEX_N@Z
+	0016c7f4  <none>  080f  ?clear@Path@Poco@@QAEAAV12@XZ
+	0016c7f8  <none>  0423  ??4Path@Poco@@QAEAAV01@$$QAV01@@Z
+	0016c7fc  <none>  0424  ??4Path@Poco@@QAEAAV01@ABV01@@Z
+	0016c800  <none>  0199  ??0Path@Poco@@QAE@XZ
+	0016c804  <none>  034b  ??1Path@Poco@@QAE@XZ
+	0016c808  <none>  0192  ??0Path@Poco@@QAE@ABV01@@Z
+	0016c80c  <none>  0891  ?convert@UnicodeConverter@Poco@@SAXPB_WAAV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@@Z
+	0016c810  <none>  088a  ?convert@UnicodeConverter@Poco@@SAXABV?$basic_string@_WU?$char_traits@_W@std@@V?$allocator@_W@2@@std@@AAV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@4@@Z
+	0016c814  <none>  0a3c  ?glob@Glob@Poco@@SAXABV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@AAV?$set@V?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@U?$less@V?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@@2@V?$allocator@V?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@@2@@4@H@Z
+	0016c818  <none>  025a  ??0Timestamp@Poco@@QAE@_J@Z
+	0016c81c  <none>  09b3  ?format@Poco@@YAXAAV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@PBDABV?$vector@VAny@Poco@@V?$allocator@VAny@Poco@@@std@@@3@@Z
+	0016c820  <none>  012a  ??0LocalDateTime@Poco@@QAE@ABVDateTime@1@@Z
+
+ 0016d120	0016e1c0 00000000 00000000 0017350a 0016cf10
+
+	DLL Name: dbghelp.dll
+	vma:     Ordinal  Hint  Member-Name  Bound-To
+	0016cf10  <none>  002d  StackWalk64
+	0016cf14  <none>  0066  SymFunctionTableAccess64
+	0016cf18  <none>  007d  SymGetModuleBase64
+	0016cf1c  <none>  006f  SymGetLineFromAddr64
+	0016cf20  <none>  00a7  SymInitialize
+	0016cf24  <none>  005b  SymFromAddr
+
+ 0016d134	0016dc44 00000000 00000000 001747ce 0016c994
+
+	DLL Name: PocoUtil.dll
+	vma:     Ordinal  Hint  Member-Name  Bound-To
+	0016c994  <none>  0221  ?setDouble@AbstractConfiguration@Util@Poco@@UAEXABV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@N@Z
+	0016c998  <none>  0227  ?setInt64@AbstractConfiguration@Util@Poco@@UAEXABV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@_J@Z
+	0016c99c  <none>  0229  ?setInt@AbstractConfiguration@Util@Poco@@UAEXABV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@H@Z
+	0016c9a0  <none>  0230  ?setRaw@IniFileConfiguration@Util@Poco@@MAEXABV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@0@Z
+	0016c9a4  <none>  0239  ?setString@AbstractConfiguration@Util@Poco@@UAEXABV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@0@Z
+	0016c9a8  <none>  021d  ?setBool@AbstractConfiguration@Util@Poco@@UAEXABV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@_N@Z
+	0016c9ac  <none>  023e  ?setUInt@AbstractConfiguration@Util@Poco@@UAEXABV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@I@Z
+	0016c9b0  <none>  01ef  ?removeRaw@IniFileConfiguration@Util@Poco@@MAEXABV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@@Z
+	0016c9b4  <none>  01ab  ?keys@AbstractConfiguration@Util@Poco@@QBEXABV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@AAV?$vector@V?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@V?$allocator@V?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@@2@@5@@Z
+	0016c9b8  <none>  0206  ?run@ServerApplication@Util@Poco@@QAEHABV?$vector@V?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@V?$allocator@V?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@@2@@std@@@Z
+	0016c9bc  <none>  0017  ??0HelpFormatter@Util@Poco@@QAE@ABVOptionSet@12@@Z
+	0016c9c0  <none>  0075  ??1HelpFormatter@Util@Poco@@QAE@XZ
+	0016c9c4  <none>  0170  ?getRaw@IniFileConfiguration@Util@Poco@@MBE_NABV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@AAV45@@Z
+	0016c9c8  <none>  0139  ?enumerate@IniFileConfiguration@Util@Poco@@MBEXABV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@AAV?$vector@V?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@V?$allocator@V?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@@2@@5@@Z
+	0016c9cc  <none>  0077  ??1IniFileConfiguration@Util@Poco@@MAE@XZ
+	0016c9d0  <none>  001e  ??0IniFileConfiguration@Util@Poco@@QAE@ABV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@@Z
+	0016c9d4  <none>  01f6  ?repeatable@Option@Util@Poco@@QAEAAV123@_N@Z
+	0016c9d8  <none>  01aa  ?keys@AbstractConfiguration@Util@Poco@@QBEXAAV?$vector@V?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@V?$allocator@V?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@@2@@std@@@Z
+	0016c9dc  <none>  015a  ?getBool@AbstractConfiguration@Util@Poco@@QBE_NABV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@@Z
+	0016c9e0  <none>  015e  ?getDouble@AbstractConfiguration@Util@Poco@@QBENABV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@@Z
+	0016c9e4  <none>  017e  ?getUInt64@AbstractConfiguration@Util@Poco@@QBE_KABV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@@Z
+	0016c9e8  <none>  0169  ?getInt@AbstractConfiguration@Util@Poco@@QBEHABV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@@Z
+	0016c9ec  <none>  017b  ?getString@AbstractConfiguration@Util@Poco@@QBE?AV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@ABV45@@Z
+	0016c9f0  <none>  0141  ?exists@WinRegistryKey@Util@Poco@@QAE_NABV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@@Z
+	0016c9f4  <none>  0142  ?exists@WinRegistryKey@Util@Poco@@QAE_NXZ
+	0016c9f8  <none>  017c  ?getString@WinRegistryKey@Util@Poco@@QAE?AV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@ABV45@@Z
+	0016c9fc  <none>  0090  ??1WinRegistryKey@Util@Poco@@QAE@XZ
+	0016ca00  <none>  005c  ??0WinRegistryKey@Util@Poco@@QAE@ABV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@_NK@Z
+	0016ca04  <none>  0205  ?run@ServerApplication@Util@Poco@@MAEHXZ
+	0016ca08  <none>  01e7  ?reinitialize@Application@Util@Poco@@MAEXAAV123@@Z
+	0016ca0c  <none>  01c5  ?name@Application@Util@Poco@@UBEPBDXZ
+	0016ca10  <none>  012c  ?defineOptions@ServerApplication@Util@Poco@@MAEXAAVOptionSet@23@@Z
+	0016ca14  <none>  0262  ?waitForTerminationRequest@ServerApplication@Util@Poco@@IAEXXZ
+	0016ca18  <none>  0087  ??1ServerApplication@Util@Poco@@UAE@XZ
+	0016ca1c  <none>  004a  ??0ServerApplication@Util@Poco@@QAE@XZ
+	0016ca20  <none>  022c  ?setLogger@Application@Util@Poco@@IAEXAAVLogger@3@@Z
+	0016ca24  <none>  018a  ?handleOption@Application@Util@Poco@@MAEXABV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@0@Z
+	0016ca28  <none>  0257  ?uninitialize@Application@Util@Poco@@MAEXXZ
+	0016ca2c  <none>  0199  ?initialize@Application@Util@Poco@@MAEXAAV123@@Z
+	0016ca30  <none>  0119  ?commandName@Application@Util@Poco@@QBE?AV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@XZ
+	0016ca34  <none>  023d  ?setUInt64@AbstractConfiguration@Util@Poco@@UAEXABV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@_K@Z
+	0016ca38  <none>  00ee  ?addOption@OptionSet@Util@Poco@@QAEXABVOption@23@@Z
+	0016ca3c  <none>  01f8  ?required@Option@Util@Poco@@QAEAAV123@_N@Z
+	0016ca40  <none>  0081  ??1Option@Util@Poco@@QAE@XZ
+	0016ca44  <none>  003a  ??0Option@Util@Poco@@QAE@ABV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@00_N@Z
+	0016ca48  <none>  0150  ?format@HelpFormatter@Util@Poco@@QBEXAAV?$basic_ostream@DU?$char_traits@D@std@@@std@@@Z
+	0016ca4c  <none>  0225  ?setHeader@HelpFormatter@Util@Poco@@QAEXABV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@@Z
+	0016ca50  <none>  0242  ?setUsage@HelpFormatter@Util@Poco@@QAEXABV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@@Z
+	0016ca54  <none>  021f  ?setCommand@HelpFormatter@Util@Poco@@QAEXABV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@@Z
+
+ 0016d148	0016de28 00000000 00000000 0017481e 0016cb78
+
+	DLL Name: VERSION.dll
+	vma:     Ordinal  Hint  Member-Name  Bound-To
+	0016cb78  <none>  0010  VerQueryValueW
+	0016cb7c  <none>  0008  GetFileVersionInfoW
+	0016cb80  <none>  0007  GetFileVersionInfoSizeW
+
+ 0016d15c	0016db90 00000000 00000000 00174f8e 0016c8e0
+
+	DLL Name: PocoNet.dll
+	vma:     Ordinal  Hint  Member-Name  Bound-To
+	0016c8e0  <none>  041c  ?HTTP_GET@HTTPRequest@Net@Poco@@2V?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@B
+	0016c8e4  <none>  0419  ?HTTP_1_1@HTTPMessage@Net@Poco@@2V?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@B
+	0016c8e8  <none>  026a  ??1WebSocketException@Net@Poco@@UAE@XZ
+	0016c8ec  <none>  01f3  ??1HTTPResponse@Net@Poco@@UAE@XZ
+	0016c8f0  <none>  0082  ??0HTTPResponse@Net@Poco@@QAE@XZ
+	0016c8f4  <none>  01f0  ??1HTTPRequest@Net@Poco@@UAE@XZ
+	0016c8f8  <none>  0077  ??0HTTPRequest@Net@Poco@@QAE@ABV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@00@Z
+	0016c8fc  <none>  08bb  ?setContentType@HTTPMessage@Net@Poco@@QAEXABV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@@Z
+	0016c900  <none>  08ba  ?setContentLength@HTTPMessage@Net@Poco@@QAEX_J@Z
+	0016c904  <none>  0804  ?receiveResponse@HTTPClientSession@Net@Poco@@UAEAAV?$basic_istream@DU?$char_traits@D@std@@@std@@AAVHTTPResponse@23@@Z
+	0016c908  <none>  0890  ?sendRequest@HTTPClientSession@Net@Poco@@UAEAAV?$basic_ostream@DU?$char_traits@D@std@@@std@@AAVHTTPRequest@23@@Z
+	0016c90c  <none>  08dc  ?setKeepAliveTimeout@HTTPClientSession@Net@Poco@@QAEXABVTimespan@3@@Z
+	0016c910  <none>  01de  ??1HTTPClientSession@Net@Poco@@UAE@XZ
+	0016c914  <none>  0053  ??0HTTPClientSession@Net@Poco@@QAE@ABV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@G@Z
+	0016c918  <none>  093f  ?setTimeout@HTTPSession@Net@Poco@@QAEXABVTimespan@3@@Z
+	0016c91c  <none>  08d9  ?setKeepAlive@HTTPSession@Net@Poco@@QAEX_N@Z
+	0016c920  <none>  07f0  ?receiveFrame@WebSocket@Net@Poco@@QAEHAAV?$Buffer@D@3@AAH@Z
+	0016c924  <none>  0885  ?sendFrame@WebSocket@Net@Poco@@QAEHPBXHH@Z
+	0016c928  <none>  0269  ??1WebSocket@Net@Poco@@UAE@XZ
+	0016c92c  <none>  01b6  ??0WebSocket@Net@Poco@@QAE@AAVHTTPClientSession@12@AAVHTTPRequest@12@AAVHTTPResponse@12@@Z
+	0016c930  <none>  091b  ?setReceiveTimeout@Socket@Net@Poco@@QAEXABVTimespan@3@@Z
+	0016c934  <none>  056c  ?close@Socket@Net@Poco@@QAEXXZ
+	0016c938  <none>  085d  ?run@UDPClient@Net@Poco@@UAEXXZ
+	0016c93c  <none>  0693  ?handleResponse@UDPClient@Net@Poco@@UAEHPADH@Z
+	0016c940  <none>  0265  ??1UDPClient@Net@Poco@@UAE@XZ
+	0016c944  <none>  01a9  ??0UDPClient@Net@Poco@@QAE@ABV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@G_N@Z
+	0016c948  <none>  086c  ?sendBytes@DatagramSocket@Net@Poco@@QAEHPBXHH@Z
+	0016c94c  <none>  09e1  pocoNetworkInitializer
+	0016c950  <none>  0420  ?HTTP_POST@HTTPRequest@Net@Poco@@2V?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@B
+
+ 0016d170	0016d7a0 00000000 00000000 00175252 0016c4f0
+
+	DLL Name: PocoCrypto.dll
+	vma:     Ordinal  Hint  Member-Name  Bound-To
+	0016c4f0  <none>  00b7  ?digest@DigestEngine@Crypto@Poco@@UAEABV?$vector@EV?$allocator@E@std@@@std@@XZ
+	0016c4f4  <none>  00b1  ?createCipher@CipherFactory@Crypto@Poco@@QAEPAVCipher@23@ABVCipherKey@23@@Z
+	0016c4f8  <none>  00b6  ?defaultFactory@CipherFactory@Crypto@Poco@@SAAAV123@XZ
+	0016c4fc  <none>  0005  ??0CipherKey@Crypto@Poco@@QAE@ABV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@@Z
+	0016c500  <none>  004c  ??1CipherKey@Crypto@Poco@@QAE@XZ
+	0016c504  <none>  00a6  ?blockSize@CipherKey@Crypto@Poco@@QBEHXZ
+	0016c508  <none>  0102  ?setKey@CipherKey@Crypto@Poco@@QAEXABV?$vector@EV?$allocator@E@std@@@std@@@Z
+	0016c50c  <none>  0101  ?setIV@CipherKey@Crypto@Poco@@QAEXABV?$vector@EV?$allocator@E@std@@@std@@@Z
+	0016c510  <none>  0018  ??0DigestEngine@Crypto@Poco@@QAE@ABV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@@Z
+	0016c514  <none>  0055  ??1DigestEngine@Crypto@Poco@@UAE@XZ
+
+ 0016d184	0016de60 00000000 00000000 0017527e 0016cbb0
+
+	DLL Name: WININET.dll
+	vma:     Ordinal  Hint  Member-Name  Bound-To
+	0016cbb0  <none>  00af  InternetGetConnectedState
+
+ 0016d198	0016de90 00000000 00000000 0017529e 0016cbe0
+
+	DLL Name: WTSAPI32.dll
+	vma:     Ordinal  Hint  Member-Name  Bound-To
+	0016cbe0  <none>  0030  WTSQueryUserToken
+
+ 0016d1ac	0016ddc0 00000000 00000000 00175394 0016cb10
+
+	DLL Name: VCRUNTIME140.dll
+	vma:     Ordinal  Hint  Member-Name  Bound-To
+	0016cb10  <none>  0025  __std_type_info_destroy_list
+	0016cb14  <none>  0001  _CxxThrowException
+	0016cb18  <none>  0010  __CxxFrameHandler3
+	0016cb1c  <none>  0044  memchr
+	0016cb20  <none>  0046  memcpy
+	0016cb24  <none>  0047  memmove
+	0016cb28  <none>  0048  memset
+	0016cb2c  <none>  003d  _purecall
+	0016cb30  <none>  0023  __std_terminate
+	0016cb34  <none>  0021  __std_exception_copy
+	0016cb38  <none>  0035  _except_handler4_common
+	0016cb3c  <none>  004a  strchr
+	0016cb40  <none>  0022  __std_exception_destroy
+
+ 0016d1c0	0016e000 00000000 00000000 0017588c 0016cd50
+
+	DLL Name: api-ms-win-crt-runtime-l1-1-0.dll
+	vma:     Ordinal  Hint  Member-Name  Bound-To
+	0016cd50  <none>  0005  __p___argc
+	0016cd54  <none>  0058  exit
+	0016cd58  <none>  006a  terminate
+	0016cd5c  <none>  0006  __p___argv
+	0016cd60  <none>  0039  _initterm_e
+	0016cd64  <none>  0038  _initterm
+	0016cd68  <none>  002a  _get_initial_narrow_environment
+	0016cd6c  <none>  0016  _c_exit
+	0016cd70  <none>  0044  _set_app_type
+	0016cd74  <none>  0042  _seh_filter_exe
+	0016cd78  <none>  003b  _invalid_parameter_noinfo_noreturn
+	0016cd7c  <none>  0017  _cexit
+	0016cd80  <none>  001e  _crt_at_quick_exit
+	0016cd84  <none>  0023  _errno
+	0016cd88  <none>  003f  _register_thread_local_exe_atexit_callback
+	0016cd8c  <none>  001d  _controlfp_s
+	0016cd90  <none>  001f  _crt_atexit
+	0016cd94  <none>  0024  _execute_onexit_table
+	0016cd98  <none>  0025  _exit
+	0016cd9c  <none>  0041  _seh_filter_dll
+	0016cda0  <none>  0019  _configure_narrow_argv
+	0016cda4  <none>  0035  _initialize_narrow_environment
+	0016cda8  <none>  0036  _initialize_onexit_table
+	0016cdac  <none>  003e  _register_onexit_function
+
+ 0016d1d4	0016df3c 00000000 00000000 001758ae 0016cc8c
+
+	DLL Name: api-ms-win-crt-heap-l1-1-0.dll
+	vma:     Ordinal  Hint  Member-Name  Bound-To
+	0016cc8c  <none>  0008  _callnewh
+	0016cc90  <none>  0019  malloc
+	0016cc94  <none>  0018  free
+	0016cc98  <none>  0017  calloc
+	0016cc9c  <none>  001a  realloc
+	0016cca0  <none>  0016  _set_new_mode
+
+ 0016d1e8	0016dec0 00000000 00000000 001758ce 0016cc10
+
+	DLL Name: api-ms-win-crt-convert-l1-1-0.dll
+	vma:     Ordinal  Hint  Member-Name  Bound-To
+	0016cc10  <none>  0052  atoll
+	0016cc14  <none>  0050  atoi
+
+ 0016d1fc	0016e09c 00000000 00000000 001758f0 0016cdec
+
+	DLL Name: api-ms-win-crt-stdio-l1-1-0.dll
+	vma:     Ordinal  Hint  Member-Name  Bound-To
+	0016cdec  <none>  009d  ungetc
+	0016cdf0  <none>  0098  setvbuf
+	0016cdf4  <none>  002f  _fseeki64
+	0016cdf8  <none>  0088  fsetpos
+	0016cdfc  <none>  0083  fread
+	0016ce00  <none>  007f  fputc
+	0016ce04  <none>  0079  fgetpos
+	0016ce08  <none>  0078  fgetc
+	0016ce0c  <none>  0039  _get_stream_buffer_pointers
+	0016ce10  <none>  0062  _wfopen
+	0016ce14  <none>  000f  __stdio_common_vsprintf_s
+	0016ce18  <none>  000c  __stdio_common_vsnwprintf_s
+	0016ce1c  <none>  0054  _set_fmode
+	0016ce20  <none>  0013  __stdio_common_vswprintf_s
+	0016ce24  <none>  0011  __stdio_common_vswprintf
+	0016ce28  <none>  0024  _filelength
+	0016ce2c  <none>  0003  __stdio_common_vfprintf
+	0016ce30  <none>  008a  fwrite
+	0016ce34  <none>  0026  _fileno
+	0016ce38  <none>  0001  __p__commode
+	0016ce3c  <none>  0077  fflush
+	0016ce40  <none>  0010  __stdio_common_vsscanf
+	0016ce44  <none>  0074  fclose
+	0016ce48  <none>  000d  __stdio_common_vsprintf
+	0016ce4c  <none>  0066  _wfsopen
+	0016ce50  <none>  0087  fseek
+	0016ce54  <none>  0000  __acrt_iob_func
+
+ 0016d210	0016dfb4 00000000 00000000 00175910 0016cd04
+
+	DLL Name: api-ms-win-crt-math-l1-1-0.dll
+	vma:     Ordinal  Hint  Member-Name  Bound-To
+	0016cd04  <none>  0060  _ldtest
+	0016cd08  <none>  004c  _fdtest
+	0016cd0c  <none>  002e  __setusermatherr
+	0016cd10  <none>  0040  _except1
+	0016cd14  <none>  003c  _dsign
+	0016cd18  <none>  010b  modf
+	0016cd1c  <none>  003e  _dtest
+
+ 0016d224	0016def4 00000000 00000000 00175930 0016cc44
+
+	DLL Name: api-ms-win-crt-filesystem-l1-1-0.dll
+	vma:     Ordinal  Hint  Member-Name  Bound-To
+	0016cc44  <none>  0016  _lock_file
+	0016cc48  <none>  0024  _unlock_file
+	0016cc4c  <none>  003d  _wstat64i32
+	0016cc50  <none>  0035  _wremove
+	0016cc54  <none>  0034  _wmkdir
+	0016cc58  <none>  0036  _wrename
+
+ 0016d238	0016e17c 00000000 00000000 00175956 0016cecc
+
+	DLL Name: api-ms-win-crt-time-l1-1-0.dll
+	vma:     Ordinal  Hint  Member-Name  Bound-To
+	0016cecc  <none>  0024  _localtime64_s
+	0016ced0  <none>  0046  strftime
+	0016ced4  <none>  0028  _mktime64
+	0016ced8  <none>  0030  _time64
+	0016cedc  <none>  0020  _gmtime64_s
+
+ 0016d24c	0016e148 00000000 00000000 00175976 0016ce98
+
+	DLL Name: api-ms-win-crt-string-l1-1-0.dll
+	vma:     Ordinal  Hint  Member-Name  Bound-To
+	0016ce98  <none>  0068  isdigit
+	0016ce9c  <none>  0092  strpbrk
+
+ 0016d260	0016df84 00000000 00000000 00175998 0016ccd4
+
+	DLL Name: api-ms-win-crt-locale-l1-1-0.dll
+	vma:     Ordinal  Hint  Member-Name  Bound-To
+	0016ccd4  <none>  0008  _configthreadlocale
+
+ 0016d274	0016e2cc 00000000 00000000 00175aa8 0016d01c
+
+	DLL Name: sqlite3.dll
+	vma:     Ordinal  Hint  Member-Name  Bound-To
+	0016d01c  <none>  0059  sqlite3_errmsg
+	0016d020  <none>  0089  sqlite3_prepare_v2
+	0016d024  <none>  006d  sqlite3_libversion
+	0016d028  <none>  00b8  sqlite3_step
+	0016d02c  <none>  004c  sqlite3_data_count
+	0016d030  <none>  0038  sqlite3_column_text
+	0016d034  <none>  0081  sqlite3_open_v2
+	0016d038  <none>  001f  sqlite3_busy_timeout
+	0016d03c  <none>  0021  sqlite3_changes
+	0016d040  <none>  005c  sqlite3_exec
+	0016d044  <none>  0024  sqlite3_close_v2
+	0016d048  <none>  0063  sqlite3_finalize
+
+ 0016d288	0016e208 00000000 00000000 00175bf6 0016cf58
+
+	DLL Name: libcurl.dll
+	vma:     Ordinal  Hint  Member-Name  Bound-To
+	0016cf58  <none>  0053  curl_version
+	0016cf5c  <none>  0013  curl_formfree
+	0016cf60  <none>  0012  curl_formadd
+	0016cf64  <none>  0015  curl_free
+	0016cf68  <none>  0019  curl_global_init
+	0016cf6c  <none>  0049  curl_slist_append
+	0016cf70  <none>  004a  curl_slist_free_all
+	0016cf74  <none>  0046  curl_share_init
+	0016cf78  <none>  0047  curl_share_setopt
+	0016cf7c  <none>  0045  curl_share_cleanup
+	0016cf80  <none>  0002  curl_easy_escape
+	0016cf84  <none>  0004  curl_easy_init
+	0016cf88  <none>  000d  curl_easy_setopt
+	0016cf8c  <none>  0009  curl_easy_perform
+	0016cf90  <none>  0000  curl_easy_cleanup
+	0016cf94  <none>  0003  curl_easy_getinfo
+	0016cf98  <none>  000e  curl_easy_strerror
+
+ 0016d29c	00000000 00000000 00000000 00000000 00000000
+
+

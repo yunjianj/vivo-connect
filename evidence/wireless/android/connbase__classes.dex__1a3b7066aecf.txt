@@ -1,0 +1,50 @@
+APK pcsuite/updateApk/connbase.apk
+DEX classes.dex
+CLASS Lcom/vivo/connbase/nfc/BluetoothAddressReceiver;
+SUPER Landroid/content/BroadcastReceiver;
+FIELDS
+a Ljava/lang/String; = 'BluetoothAddressReceiver'
+b Ljava/lang/String; = 'com.vivo.connbase.nfc.BTMACRECEIVER'
+c Ljava/lang/String; = 'extra_bluetooth_mac'
+
+METHOD <init>()V
+000000: invoke-direct v0, Landroid/content/BroadcastReceiver;-><init>()V
+000006: return-void 
+
+METHOD onReceive(Landroid/content/Context; Landroid/content/Intent;)V
+000000: invoke-static Lcom/vivo/connbase/wifi/utils/PhoneUtils;->isVivoPad()Z
+000006: move-result v3
+000008: const-string v0, "BluetoothAddressReceiver"
+00000c: if-eqz v3, +008h
+000010: const-string v3, "onReceive: only the mobile phone needs to receive this broadcast."
+000014: invoke-static v0, v3, Lc/c/f/a/b;->g(Ljava/lang/String; Ljava/lang/String;)V
+00001a: return-void 
+00001c: invoke-virtual v4, Landroid/content/Intent;->getAction()Ljava/lang/String;
+000022: move-result-object v3
+000024: const-string v1, "com.vivo.connbase.nfc.BTMACRECEIVER"
+000028: invoke-virtual v1, v3, Ljava/lang/String;->equals(Ljava/lang/Object;)Z
+00002e: move-result v3
+000030: if-eqz v3, +035h
+000034: const-string v3, "extra_bluetooth_mac"
+000038: invoke-virtual v4, v3, Landroid/content/Intent;->getStringExtra(Ljava/lang/String;)Ljava/lang/String;
+00003e: move-result-object v3
+000040: new-instance v4, Ljava/lang/StringBuilder;
+000044: invoke-direct v4, Ljava/lang/StringBuilder;-><init>()V
+00004a: const-string v1, "onReceive: "
+00004e: invoke-virtual v4, v1, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+000054: invoke-static v3, Lcom/vivo/connbase/e0/g/h;->b(Ljava/lang/String;)Ljava/lang/String;
+00005a: move-result-object v1
+00005c: invoke-virtual v4, v1, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+000062: invoke-virtual v4, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
+000068: move-result-object v4
+00006a: invoke-static v0, v4, Lc/c/f/a/b;->g(Ljava/lang/String; Ljava/lang/String;)V
+000070: invoke-static Landroid/bluetooth/BluetoothAdapter;->getDefaultAdapter()Landroid/bluetooth/BluetoothAdapter;
+000076: invoke-static v3, Landroid/bluetooth/BluetoothAdapter;->checkBluetoothAddress(Ljava/lang/String;)Z
+00007c: move-result v4
+00007e: if-nez v4, +007h
+000082: const-string v4, "onReceive: the address is invalid"
+000086: invoke-static v0, v4, Lc/c/f/a/b;->g(Ljava/lang/String; Ljava/lang/String;)V
+00008c: invoke-static Lcom/vivo/connbase/nfc/l;->c()Lcom/vivo/connbase/nfc/l;
+000092: move-result-object v4
+000094: invoke-virtual v4, v3, Lcom/vivo/connbase/nfc/l;->a(Ljava/lang/String;)V
+00009a: return-void 

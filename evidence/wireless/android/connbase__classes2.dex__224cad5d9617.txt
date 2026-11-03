@@ -1,0 +1,161 @@
+APK pcsuite/updateApk/connbase.apk
+DEX classes2.dex
+CLASS Lcom/vivo/pcsuite/pcconnect/ShareLinkService$c;
+SUPER Ljava/lang/Object;
+FIELDS
+a Z = None
+b Lcom/vivo/pcsuite/pcconnect/ShareLinkService; = None
+
+METHOD <init>(Lcom/vivo/pcsuite/pcconnect/ShareLinkService; Z)V
+000000: iput-object v1, v0, Lcom/vivo/pcsuite/pcconnect/ShareLinkService$c;->b Lcom/vivo/pcsuite/pcconnect/ShareLinkService;
+000004: iput-boolean v2, v0, Lcom/vivo/pcsuite/pcconnect/ShareLinkService$c;->a Z
+000008: invoke-direct v0, Ljava/lang/Object;-><init>()V
+00000e: return-void 
+
+METHOD a()V
+000000: invoke-static Lcom/vivo/pcsuite/pcconnect/ShareLinkService;->k()Ljava/lang/String;
+000006: move-result-object v0
+000008: new-instance v1, Ljava/lang/StringBuilder;
+00000c: invoke-direct v1, Ljava/lang/StringBuilder;-><init>()V
+000012: const-string v2, "connectAp onConnected  byRfcomm:"
+000016: invoke-virtual v1, v2, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+00001c: iget-boolean v2, v8, Lcom/vivo/pcsuite/pcconnect/ShareLinkService$c;->a Z
+000020: invoke-virtual v1, v2, Ljava/lang/StringBuilder;->append(Z)Ljava/lang/StringBuilder;
+000026: invoke-virtual v1, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
+00002c: move-result-object v1
+00002e: invoke-static v0, v1, Lc/c/f/a/b;->k(Ljava/lang/String; Ljava/lang/String;)V
+000034: iget-object v0, v8, Lcom/vivo/pcsuite/pcconnect/ShareLinkService$c;->b Lcom/vivo/pcsuite/pcconnect/ShareLinkService;
+000038: invoke-virtual v0, Landroid/app/Service;->getApplicationContext()Landroid/content/Context;
+00003e: move-result-object v0
+000040: invoke-virtual v0, Landroid/content/Context;->getApplicationContext()Landroid/content/Context;
+000046: move-result-object v0
+000048: const-string v1, "wifi"
+00004c: invoke-virtual v0, v1, Landroid/content/Context;->getSystemService(Ljava/lang/String;)Ljava/lang/Object;
+000052: move-result-object v0
+000054: check-cast v0, Landroid/net/wifi/WifiManager;
+000058: iget-object v1, v8, Lcom/vivo/pcsuite/pcconnect/ShareLinkService$c;->b Lcom/vivo/pcsuite/pcconnect/ShareLinkService;
+00005c: invoke-static v1, Lcom/vivo/pcsuite/pcconnect/ShareLinkService;->v(Lcom/vivo/pcsuite/pcconnect/ShareLinkService;)Lcom/vivo/pcsuite/pcconnect/ble/IBluetoothLe;
+000062: move-result-object v1
+000064: if-eqz v1, +043h
+000068: iget-boolean v1, v8, Lcom/vivo/pcsuite/pcconnect/ShareLinkService$c;->a Z
+00006c: if-eqz v1, +00ch
+000070: iget-object v1, v8, Lcom/vivo/pcsuite/pcconnect/ShareLinkService$c;->b Lcom/vivo/pcsuite/pcconnect/ShareLinkService;
+000074: invoke-static v1, Lcom/vivo/pcsuite/pcconnect/ShareLinkService;->v(Lcom/vivo/pcsuite/pcconnect/ShareLinkService;)Lcom/vivo/pcsuite/pcconnect/ble/IBluetoothLe;
+00007a: move-result-object v1
+00007c: invoke-interface v1, Lcom/vivo/pcsuite/pcconnect/ble/IBluetoothLe;->notifyRfCommApConnected()V
+000082: goto +34h
+000084: iget-object v1, v8, Lcom/vivo/pcsuite/pcconnect/ShareLinkService$c;->b Lcom/vivo/pcsuite/pcconnect/ShareLinkService;
+000088: invoke-virtual v1, Landroid/app/Service;->getApplicationContext()Landroid/content/Context;
+00008e: move-result-object v1
+000090: invoke-static v1, Lcom/vivo/pcsuite/pcconnect/wifip2p/f;->a(Landroid/content/Context;)Ljava/lang/String;
+000096: move-result-object v5
+000098: invoke-static Lcom/vivo/pcsuite/pcconnect/ShareLinkService;->k()Ljava/lang/String;
+00009e: move-result-object v1
+0000a0: new-instance v2, Ljava/lang/StringBuilder;
+0000a4: invoke-direct v2, Ljava/lang/StringBuilder;-><init>()V
+0000aa: const-string v3, "send phone address to pc  p1:"
+0000ae: invoke-virtual v2, v3, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+0000b4: invoke-static v5, Lcom/vivo/pcsuite/pcconnect/g;->a(Ljava/lang/String;)Ljava/lang/String;
+0000ba: move-result-object v3
+0000bc: invoke-virtual v2, v3, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+0000c2: invoke-virtual v2, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
+0000c8: move-result-object v2
+0000ca: invoke-static v1, v2, Lc/c/f/a/b;->k(Ljava/lang/String; Ljava/lang/String;)V
+0000d0: iget-object v1, v8, Lcom/vivo/pcsuite/pcconnect/ShareLinkService$c;->b Lcom/vivo/pcsuite/pcconnect/ShareLinkService;
+0000d4: invoke-static v1, Lcom/vivo/pcsuite/pcconnect/ShareLinkService;->v(Lcom/vivo/pcsuite/pcconnect/ShareLinkService;)Lcom/vivo/pcsuite/pcconnect/ble/IBluetoothLe;
+0000da: move-result-object v2
+0000dc: const/4 v3, 0
+0000de: const/4 v4, 2
+0000e0: const/4 v6, 0
+0000e2: const/4 v7, 0
+0000e4: invoke-interface/range v2 ... v7, Lcom/vivo/pcsuite/pcconnect/ble/IBluetoothLe;->writeResponse(I I Ljava/lang/String; Ljava/lang/String; Ljava/lang/String;)V
+0000ea: iget-object v1, v8, Lcom/vivo/pcsuite/pcconnect/ShareLinkService$c;->b Lcom/vivo/pcsuite/pcconnect/ShareLinkService;
+0000ee: invoke-static v1, Lcom/vivo/pcsuite/pcconnect/ShareLinkService;->a(Lcom/vivo/pcsuite/pcconnect/ShareLinkService;)Lcom/vivo/pcsuite/pcconnect/wifip2p/WifiP2pObserver;
+0000f4: move-result-object v1
+0000f6: if-eqz v1, +023h
+0000fa: iget-object v1, v8, Lcom/vivo/pcsuite/pcconnect/ShareLinkService$c;->b Lcom/vivo/pcsuite/pcconnect/ShareLinkService;
+0000fe: invoke-static v1, Lcom/vivo/pcsuite/pcconnect/ShareLinkService;->a(Lcom/vivo/pcsuite/pcconnect/ShareLinkService;)Lcom/vivo/pcsuite/pcconnect/wifip2p/WifiP2pObserver;
+000104: move-result-object v1
+000106: invoke-static v0, Lcom/vivo/pcsuite/pcconnect/wifip2p/f;->a(Landroid/net/wifi/WifiManager;)Ljava/lang/String;
+00010c: move-result-object v0
+00010e: const/4 v2, 0
+000110: invoke-interface v1, v0, v2, Lcom/vivo/pcsuite/pcconnect/wifip2p/WifiP2pObserver;->onConnected(Ljava/lang/String; Z)V
+000116: goto +13h
+000118: move-exception v0
+00011a: invoke-static Lcom/vivo/pcsuite/pcconnect/ShareLinkService;->k()Ljava/lang/String;
+000120: move-result-object v1
+000122: const-string v2, "notify onConnected 22 error"
+000126: goto +8h
+000128: move-exception v0
+00012a: invoke-static Lcom/vivo/pcsuite/pcconnect/ShareLinkService;->k()Ljava/lang/String;
+000130: move-result-object v1
+000132: const-string v2, "notify onConnected 11 error"
+000136: invoke-static v1, v2, v0, Lc/c/f/a/b;->b(Ljava/lang/String; Ljava/lang/String; Ljava/lang/Throwable;)V
+00013c: return-void 
+
+METHOD onDisconnected()V
+000000: invoke-static Lcom/vivo/pcsuite/pcconnect/ShareLinkService;->k()Ljava/lang/String;
+000006: move-result-object v0
+000008: const-string v1, "connectAp onDisconnected"
+00000c: invoke-static v0, v1, Lc/c/f/a/b;->k(Ljava/lang/String; Ljava/lang/String;)V
+000012: iget-object v0, v3, Lcom/vivo/pcsuite/pcconnect/ShareLinkService$c;->b Lcom/vivo/pcsuite/pcconnect/ShareLinkService;
+000016: invoke-static v0, Lcom/vivo/pcsuite/pcconnect/ShareLinkService;->a(Lcom/vivo/pcsuite/pcconnect/ShareLinkService;)Lcom/vivo/pcsuite/pcconnect/wifip2p/WifiP2pObserver;
+00001c: move-result-object v0
+00001e: invoke-interface v0, Lcom/vivo/pcsuite/pcconnect/wifip2p/WifiP2pObserver;->onDisconnected()V
+000024: goto +bh
+000026: move-exception v0
+000028: invoke-static Lcom/vivo/pcsuite/pcconnect/ShareLinkService;->k()Ljava/lang/String;
+00002e: move-result-object v1
+000030: const-string v2, "notify onDisconnected error"
+000034: invoke-static v1, v2, v0, Lc/c/f/a/b;->b(Ljava/lang/String; Ljava/lang/String; Ljava/lang/Throwable;)V
+00003a: return-void 
+
+METHOD onFailed()V
+000000: invoke-static Lcom/vivo/pcsuite/pcconnect/ShareLinkService;->k()Ljava/lang/String;
+000006: move-result-object v0
+000008: new-instance v1, Ljava/lang/StringBuilder;
+00000c: invoke-direct v1, Ljava/lang/StringBuilder;-><init>()V
+000012: const-string v2, "connectAp onFailed  byRfcomm:"
+000016: invoke-virtual v1, v2, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+00001c: iget-boolean v2, v7, Lcom/vivo/pcsuite/pcconnect/ShareLinkService$c;->a Z
+000020: invoke-virtual v1, v2, Ljava/lang/StringBuilder;->append(Z)Ljava/lang/StringBuilder;
+000026: invoke-virtual v1, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
+00002c: move-result-object v1
+00002e: invoke-static v0, v1, Lc/c/f/a/b;->k(Ljava/lang/String; Ljava/lang/String;)V
+000034: iget-object v0, v7, Lcom/vivo/pcsuite/pcconnect/ShareLinkService$c;->b Lcom/vivo/pcsuite/pcconnect/ShareLinkService;
+000038: invoke-static v0, Lcom/vivo/pcsuite/pcconnect/ShareLinkService;->v(Lcom/vivo/pcsuite/pcconnect/ShareLinkService;)Lcom/vivo/pcsuite/pcconnect/ble/IBluetoothLe;
+00003e: move-result-object v0
+000040: if-eqz v0, +03eh
+000044: iget-boolean v0, v7, Lcom/vivo/pcsuite/pcconnect/ShareLinkService$c;->a Z
+000048: if-eqz v0, +00ch
+00004c: iget-object v0, v7, Lcom/vivo/pcsuite/pcconnect/ShareLinkService$c;->b Lcom/vivo/pcsuite/pcconnect/ShareLinkService;
+000050: invoke-static v0, Lcom/vivo/pcsuite/pcconnect/ShareLinkService;->v(Lcom/vivo/pcsuite/pcconnect/ShareLinkService;)Lcom/vivo/pcsuite/pcconnect/ble/IBluetoothLe;
+000056: move-result-object v0
+000058: invoke-interface v0, Lcom/vivo/pcsuite/pcconnect/ble/IBluetoothLe;->notityRfCommApConnectFailed()V
+00005e: goto +fh
+000060: iget-object v0, v7, Lcom/vivo/pcsuite/pcconnect/ShareLinkService$c;->b Lcom/vivo/pcsuite/pcconnect/ShareLinkService;
+000064: invoke-static v0, Lcom/vivo/pcsuite/pcconnect/ShareLinkService;->v(Lcom/vivo/pcsuite/pcconnect/ShareLinkService;)Lcom/vivo/pcsuite/pcconnect/ble/IBluetoothLe;
+00006a: move-result-object v1
+00006c: const/4 v2, 0
+00006e: const/4 v3, 2
+000070: const/4 v4, 0
+000072: const/4 v5, 0
+000074: const/4 v6, 0
+000076: invoke-interface/range v1 ... v6, Lcom/vivo/pcsuite/pcconnect/ble/IBluetoothLe;->writeResponse(I I Ljava/lang/String; Ljava/lang/String; Ljava/lang/String;)V
+00007c: iget-object v0, v7, Lcom/vivo/pcsuite/pcconnect/ShareLinkService$c;->b Lcom/vivo/pcsuite/pcconnect/ShareLinkService;
+000080: invoke-static v0, Lcom/vivo/pcsuite/pcconnect/ShareLinkService;->B(Lcom/vivo/pcsuite/pcconnect/ShareLinkService;)Lcom/vivo/pcsuite/pcconnect/ble/BluetoothLeObserver;
+000086: move-result-object v0
+000088: const/4 v1, 3
+00008a: const/16 v2, 11
+00008e: invoke-interface v0, v1, v2, Lcom/vivo/pcsuite/pcconnect/ble/BluetoothLeObserver;->onFailure(I I)V
+000094: iget-object v0, v7, Lcom/vivo/pcsuite/pcconnect/ShareLinkService$c;->b Lcom/vivo/pcsuite/pcconnect/ShareLinkService;
+000098: invoke-static v0, Lcom/vivo/pcsuite/pcconnect/ShareLinkService;->a(Lcom/vivo/pcsuite/pcconnect/ShareLinkService;)Lcom/vivo/pcsuite/pcconnect/wifip2p/WifiP2pObserver;
+00009e: move-result-object v0
+0000a0: invoke-interface v0, Lcom/vivo/pcsuite/pcconnect/wifip2p/WifiP2pObserver;->onConnectFailed()V
+0000a6: goto +bh
+0000a8: move-exception v0
+0000aa: invoke-static Lcom/vivo/pcsuite/pcconnect/ShareLinkService;->k()Ljava/lang/String;
+0000b0: move-result-object v1
+0000b2: const-string v2, "notify onFailed error "
+0000b6: invoke-static v1, v2, v0, Lc/c/f/a/b;->b(Ljava/lang/String; Ljava/lang/String; Ljava/lang/Throwable;)V
+0000bc: return-void 

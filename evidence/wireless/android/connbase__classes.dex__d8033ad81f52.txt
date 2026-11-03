@@ -1,0 +1,320 @@
+APK pcsuite/updateApk/connbase.apk
+DEX classes.dex
+CLASS Lcom/vivo/connbase/h0/c/e;
+SUPER Ljava/lang/Object;
+FIELDS
+b Ljava/lang/String; = 'DeviceCache'
+a Ljava/util/Map; = None
+
+METHOD <init>()V
+000000: invoke-direct v1, Ljava/lang/Object;-><init>()V
+000006: new-instance v0, Ljava/util/concurrent/ConcurrentHashMap;
+00000a: invoke-direct v0, Ljava/util/concurrent/ConcurrentHashMap;-><init>()V
+000010: iput-object v0, v1, Lcom/vivo/connbase/h0/c/e;->a Ljava/util/Map;
+000014: return-void 
+
+METHOD a()Ljava/util/Map;
+000000: iget-object v0, v1, Lcom/vivo/connbase/h0/c/e;->a Ljava/util/Map;
+000004: return-object v0
+
+METHOD a(Z)V
+000000: const-string v0, "DeviceCache"
+000004: const-string v1, "removeAllDeviceCacheAre"
+000008: invoke-static v0, v1, Lc/c/f/a/b;->a(Ljava/lang/String; Ljava/lang/String;)V
+00000e: new-instance v0, Ljava/util/concurrent/ConcurrentHashMap;
+000012: invoke-direct v0, Ljava/util/concurrent/ConcurrentHashMap;-><init>()V
+000018: iget-object v1, v3, Lcom/vivo/connbase/h0/c/e;->a Ljava/util/Map;
+00001c: invoke-interface v0, v1, Ljava/util/Map;->putAll(Ljava/util/Map;)V
+000022: invoke-interface v0, Ljava/util/Map;->values()Ljava/util/Collection;
+000028: move-result-object v0
+00002a: invoke-interface v0, Ljava/util/Collection;->iterator()Ljava/util/Iterator;
+000030: move-result-object v0
+000032: invoke-interface v0, Ljava/util/Iterator;->hasNext()Z
+000038: move-result v1
+00003a: if-eqz v1, +019h
+00003e: invoke-interface v0, Ljava/util/Iterator;->next()Ljava/lang/Object;
+000044: move-result-object v1
+000046: check-cast v1, Lcom/vivo/connbase/h0/c/d;
+00004a: if-eqz v4, -00ch
+00004e: invoke-virtual v1, Lcom/vivo/connbase/h0/c/d;->k()Ljava/lang/String;
+000054: move-result-object v2
+000056: invoke-static v2, Landroid/text/TextUtils;->isEmpty(Ljava/lang/CharSequence;)Z
+00005c: move-result v2
+00005e: if-nez v2, -016h
+000062: const/4 v2, 0
+000064: invoke-virtual v1, v2, Lcom/vivo/connbase/h0/c/d;->h(Ljava/lang/String;)V
+00006a: goto -1ch
+00006c: return-void 
+
+METHOD a(Lcom/vivo/connbase/h0/c/d;)Z
+000000: invoke-virtual v9, Lcom/vivo/connbase/h0/c/d;->g()Ljava/lang/String;
+000006: move-result-object v0
+000008: invoke-virtual v8, v0, Lcom/vivo/connbase/h0/c/e;->a(Ljava/lang/String;)Z
+00000e: move-result v0
+000010: const-string v1, "DeviceCache"
+000014: if-eqz v0, +0a2h
+000018: invoke-virtual v9, Lcom/vivo/connbase/h0/c/d;->h()Ljava/lang/String;
+00001e: move-result-object v0
+000020: invoke-virtual v9, Lcom/vivo/connbase/h0/c/d;->k()Ljava/lang/String;
+000026: move-result-object v2
+000028: invoke-static v0, Landroid/text/TextUtils;->isEmpty(Ljava/lang/CharSequence;)Z
+00002e: move-result v3
+000030: const-string v4, "device isSameOpenId()"
+000034: const-string v5, ", dd:"
+000038: if-nez v3, +045h
+00003c: iget-object v3, v8, Lcom/vivo/connbase/h0/c/e;->a Ljava/util/Map;
+000040: invoke-virtual v9, Lcom/vivo/connbase/h0/c/d;->g()Ljava/lang/String;
+000046: move-result-object v6
+000048: invoke-interface v3, v6, Ljava/util/Map;->get(Ljava/lang/Object;)Ljava/lang/Object;
+00004e: move-result-object v3
+000050: check-cast v3, Lcom/vivo/connbase/h0/c/d;
+000054: if-eqz v3, +037h
+000058: invoke-virtual v3, Lcom/vivo/connbase/h0/c/d;->h()Ljava/lang/String;
+00005e: move-result-object v6
+000060: invoke-static v6, v0, Landroid/text/TextUtils;->equals(Ljava/lang/CharSequence; Ljava/lang/CharSequence;)Z
+000066: move-result v6
+000068: if-nez v6, +02dh
+00006c: new-instance v6, Ljava/lang/StringBuilder;
+000070: invoke-direct v6, Ljava/lang/StringBuilder;-><init>()V
+000076: const-string v7, "addDevice cam changed, new cam:"
+00007a: invoke-virtual v6, v7, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+000080: invoke-virtual v6, v0, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+000086: invoke-virtual v6, v5, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+00008c: invoke-virtual v9, Lcom/vivo/connbase/h0/c/d;->g()Ljava/lang/String;
+000092: move-result-object v7
+000094: invoke-virtual v6, v7, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+00009a: invoke-virtual v6, v4, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+0000a0: invoke-virtual v9, Lcom/vivo/connbase/h0/c/d;->n()Ljava/lang/Boolean;
+0000a6: move-result-object v7
+0000a8: invoke-virtual v6, v7, Ljava/lang/StringBuilder;->append(Ljava/lang/Object;)Ljava/lang/StringBuilder;
+0000ae: invoke-virtual v6, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
+0000b4: move-result-object v6
+0000b6: invoke-static v1, v6, Lc/c/f/a/b;->a(Ljava/lang/String; Ljava/lang/String;)V
+0000bc: invoke-virtual v3, v0, Lcom/vivo/connbase/h0/c/d;->g(Ljava/lang/String;)V
+0000c2: invoke-static v2, Landroid/text/TextUtils;->isEmpty(Ljava/lang/CharSequence;)Z
+0000c8: move-result v0
+0000ca: if-nez v0, +045h
+0000ce: iget-object v0, v8, Lcom/vivo/connbase/h0/c/e;->a Ljava/util/Map;
+0000d2: invoke-virtual v9, Lcom/vivo/connbase/h0/c/d;->g()Ljava/lang/String;
+0000d8: move-result-object v3
+0000da: invoke-interface v0, v3, Ljava/util/Map;->get(Ljava/lang/Object;)Ljava/lang/Object;
+0000e0: move-result-object v0
+0000e2: check-cast v0, Lcom/vivo/connbase/h0/c/d;
+0000e6: if-eqz v0, +037h
+0000ea: invoke-virtual v0, Lcom/vivo/connbase/h0/c/d;->k()Ljava/lang/String;
+0000f0: move-result-object v3
+0000f2: invoke-static v3, v2, Landroid/text/TextUtils;->equals(Ljava/lang/CharSequence; Ljava/lang/CharSequence;)Z
+0000f8: move-result v3
+0000fa: if-nez v3, +02dh
+0000fe: new-instance v3, Ljava/lang/StringBuilder;
+000102: invoke-direct v3, Ljava/lang/StringBuilder;-><init>()V
+000108: const-string v6, "addDevice pi changed, new pi:"
+00010c: invoke-virtual v3, v6, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+000112: invoke-virtual v3, v2, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+000118: invoke-virtual v3, v5, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+00011e: invoke-virtual v9, Lcom/vivo/connbase/h0/c/d;->g()Ljava/lang/String;
+000124: move-result-object v5
+000126: invoke-virtual v3, v5, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+00012c: invoke-virtual v3, v4, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+000132: invoke-virtual v9, Lcom/vivo/connbase/h0/c/d;->n()Ljava/lang/Boolean;
+000138: move-result-object v9
+00013a: invoke-virtual v3, v9, Ljava/lang/StringBuilder;->append(Ljava/lang/Object;)Ljava/lang/StringBuilder;
+000140: invoke-virtual v3, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
+000146: move-result-object v9
+000148: invoke-static v1, v9, Lc/c/f/a/b;->a(Ljava/lang/String; Ljava/lang/String;)V
+00014e: invoke-virtual v0, v2, Lcom/vivo/connbase/h0/c/d;->h(Ljava/lang/String;)V
+000154: const/4 v9, 0
+000156: return v9
+000158: new-instance v0, Ljava/lang/StringBuilder;
+00015c: invoke-direct v0, Ljava/lang/StringBuilder;-><init>()V
+000162: const-string v2, "addDevice DeviceCache:"
+000166: invoke-virtual v0, v2, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+00016c: invoke-virtual v0, v9, Ljava/lang/StringBuilder;->append(Ljava/lang/Object;)Ljava/lang/StringBuilder;
+000172: invoke-virtual v0, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
+000178: move-result-object v0
+00017a: invoke-static v1, v0, Lc/c/f/a/b;->a(Ljava/lang/String; Ljava/lang/String;)V
+000180: iget-object v0, v8, Lcom/vivo/connbase/h0/c/e;->a Ljava/util/Map;
+000184: invoke-virtual v9, Lcom/vivo/connbase/h0/c/d;->g()Ljava/lang/String;
+00018a: move-result-object v1
+00018c: invoke-interface v0, v1, v9, Ljava/util/Map;->put(Ljava/lang/Object; Ljava/lang/Object;)Ljava/lang/Object;
+000192: const/4 v9, 1
+000194: return v9
+
+METHOD a(Ljava/lang/String;)Z
+000000: new-instance v0, Ljava/lang/StringBuilder;
+000004: invoke-direct v0, Ljava/lang/StringBuilder;-><init>()V
+00000a: const-string v1, "containsId = "
+00000e: invoke-virtual v0, v1, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+000014: invoke-virtual v0, v3, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+00001a: invoke-virtual v0, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
+000020: move-result-object v0
+000022: const-string v1, "DeviceCache"
+000026: invoke-static v1, v0, Lc/c/f/a/b;->a(Ljava/lang/String; Ljava/lang/String;)V
+00002c: iget-object v0, v2, Lcom/vivo/connbase/h0/c/e;->a Ljava/util/Map;
+000030: invoke-interface v0, v3, Ljava/util/Map;->containsKey(Ljava/lang/Object;)Z
+000036: move-result v3
+000038: return v3
+
+METHOD b()V
+000000: const-string v0, "DeviceCache"
+000004: const-string v1, "setDeviceCacheClear"
+000008: invoke-static v0, v1, Lc/c/f/a/b;->a(Ljava/lang/String; Ljava/lang/String;)V
+00000e: iget-object v0, v2, Lcom/vivo/connbase/h0/c/e;->a Ljava/util/Map;
+000012: invoke-interface v0, Ljava/util/Map;->clear()V
+000018: return-void 
+
+METHOD b(Lcom/vivo/connbase/h0/c/d;)Z
+000000: invoke-virtual v7, Lcom/vivo/connbase/h0/c/d;->g()Ljava/lang/String;
+000006: move-result-object v0
+000008: invoke-virtual v6, v0, Lcom/vivo/connbase/h0/c/e;->a(Ljava/lang/String;)Z
+00000e: move-result v0
+000010: const-string v1, "DeviceCache"
+000014: if-eqz v0, +067h
+000018: invoke-virtual v7, Lcom/vivo/connbase/h0/c/d;->h()Ljava/lang/String;
+00001e: move-result-object v0
+000020: invoke-virtual v7, Lcom/vivo/connbase/h0/c/d;->k()Ljava/lang/String;
+000026: move-result-object v2
+000028: iget-object v3, v6, Lcom/vivo/connbase/h0/c/e;->a Ljava/util/Map;
+00002c: invoke-virtual v7, Lcom/vivo/connbase/h0/c/d;->g()Ljava/lang/String;
+000032: move-result-object v4
+000034: invoke-interface v3, v4, Ljava/util/Map;->get(Ljava/lang/Object;)Ljava/lang/Object;
+00003a: move-result-object v3
+00003c: check-cast v3, Lcom/vivo/connbase/h0/c/d;
+000040: invoke-static v0, Landroid/text/TextUtils;->isEmpty(Ljava/lang/CharSequence;)Z
+000046: move-result v4
+000048: if-nez v4, +03dh
+00004c: if-eqz v3, +03bh
+000050: invoke-virtual v3, Lcom/vivo/connbase/h0/c/d;->h()Ljava/lang/String;
+000056: move-result-object v4
+000058: invoke-static v4, v0, Landroid/text/TextUtils;->equals(Ljava/lang/CharSequence; Ljava/lang/CharSequence;)Z
+00005e: move-result v4
+000060: if-nez v4, +031h
+000064: new-instance v4, Ljava/lang/StringBuilder;
+000068: invoke-direct v4, Ljava/lang/StringBuilder;-><init>()V
+00006e: const-string v5, "addDevice mac changed, new mac:"
+000072: invoke-virtual v4, v5, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+000078: invoke-virtual v4, v0, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+00007e: const-string v5, ", deviceId:"
+000082: invoke-virtual v4, v5, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+000088: invoke-virtual v7, Lcom/vivo/connbase/h0/c/d;->g()Ljava/lang/String;
+00008e: move-result-object v5
+000090: invoke-virtual v4, v5, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+000096: const-string v5, "device isSameOpenId()"
+00009a: invoke-virtual v4, v5, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+0000a0: invoke-virtual v7, Lcom/vivo/connbase/h0/c/d;->n()Ljava/lang/Boolean;
+0000a6: move-result-object v7
+0000a8: invoke-virtual v4, v7, Ljava/lang/StringBuilder;->append(Ljava/lang/Object;)Ljava/lang/StringBuilder;
+0000ae: invoke-virtual v4, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
+0000b4: move-result-object v7
+0000b6: invoke-static v1, v7, Lc/c/f/a/b;->a(Ljava/lang/String; Ljava/lang/String;)V
+0000bc: invoke-virtual v3, v0, Lcom/vivo/connbase/h0/c/d;->g(Ljava/lang/String;)V
+0000c2: invoke-static v2, Landroid/text/TextUtils;->isEmpty(Ljava/lang/CharSequence;)Z
+0000c8: move-result v7
+0000ca: if-eqz v7, +007h
+0000ce: const-string v7, "newIp is empty."
+0000d2: invoke-static v1, v7, Lc/c/f/a/b;->p(Ljava/lang/String; Ljava/lang/String;)V
+0000d8: invoke-virtual v3, v2, Lcom/vivo/connbase/h0/c/d;->h(Ljava/lang/String;)V
+0000de: const/4 v7, 0
+0000e0: return v7
+0000e2: new-instance v0, Ljava/lang/StringBuilder;
+0000e6: invoke-direct v0, Ljava/lang/StringBuilder;-><init>()V
+0000ec: const-string v2, "addDevice DeviceCache:"
+0000f0: invoke-virtual v0, v2, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+0000f6: invoke-virtual v0, v7, Ljava/lang/StringBuilder;->append(Ljava/lang/Object;)Ljava/lang/StringBuilder;
+0000fc: invoke-virtual v0, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
+000102: move-result-object v0
+000104: invoke-static v1, v0, Lc/c/f/a/b;->a(Ljava/lang/String; Ljava/lang/String;)V
+00010a: iget-object v0, v6, Lcom/vivo/connbase/h0/c/e;->a Ljava/util/Map;
+00010e: invoke-virtual v7, Lcom/vivo/connbase/h0/c/d;->g()Ljava/lang/String;
+000114: move-result-object v1
+000116: invoke-interface v0, v1, v7, Ljava/util/Map;->put(Ljava/lang/Object; Ljava/lang/Object;)Ljava/lang/Object;
+00011c: const/4 v7, 1
+00011e: return v7
+
+METHOD b(Ljava/lang/String;)Z
+000000: iget-object v0, v2, Lcom/vivo/connbase/h0/c/e;->a Ljava/util/Map;
+000004: invoke-interface v0, Ljava/util/Map;->values()Ljava/util/Collection;
+00000a: move-result-object v0
+00000c: invoke-interface v0, Ljava/util/Collection;->iterator()Ljava/util/Iterator;
+000012: move-result-object v0
+000014: invoke-interface v0, Ljava/util/Iterator;->hasNext()Z
+00001a: move-result v1
+00001c: if-eqz v1, +014h
+000020: invoke-interface v0, Ljava/util/Iterator;->next()Ljava/lang/Object;
+000026: move-result-object v1
+000028: check-cast v1, Lcom/vivo/connbase/h0/c/d;
+00002c: invoke-virtual v1, Lcom/vivo/connbase/h0/c/d;->h()Ljava/lang/String;
+000032: move-result-object v1
+000034: invoke-static v3, v1, Landroid/text/TextUtils;->equals(Ljava/lang/CharSequence; Ljava/lang/CharSequence;)Z
+00003a: move-result v1
+00003c: if-eqz v1, -014h
+000040: const/4 v3, 1
+000042: return v3
+000044: const/4 v3, 0
+000046: return v3
+
+METHOD c(Ljava/lang/String;)Lcom/vivo/connbase/h0/c/d;
+000000: iget-object v0, v1, Lcom/vivo/connbase/h0/c/e;->a Ljava/util/Map;
+000004: invoke-interface v0, v2, Ljava/util/Map;->get(Ljava/lang/Object;)Ljava/lang/Object;
+00000a: move-result-object v2
+00000c: check-cast v2, Lcom/vivo/connbase/h0/c/d;
+000010: return-object v2
+
+METHOD d(Ljava/lang/String;)Lcom/vivo/connbase/h0/c/d;
+000000: iget-object v0, v3, Lcom/vivo/connbase/h0/c/e;->a Ljava/util/Map;
+000004: invoke-interface v0, Ljava/util/Map;->values()Ljava/util/Collection;
+00000a: move-result-object v0
+00000c: invoke-interface v0, Ljava/util/Collection;->iterator()Ljava/util/Iterator;
+000012: move-result-object v0
+000014: invoke-interface v0, Ljava/util/Iterator;->hasNext()Z
+00001a: move-result v1
+00001c: if-eqz v1, +013h
+000020: invoke-interface v0, Ljava/util/Iterator;->next()Ljava/lang/Object;
+000026: move-result-object v1
+000028: check-cast v1, Lcom/vivo/connbase/h0/c/d;
+00002c: invoke-virtual v1, Lcom/vivo/connbase/h0/c/d;->h()Ljava/lang/String;
+000032: move-result-object v2
+000034: invoke-static v4, v2, Landroid/text/TextUtils;->equals(Ljava/lang/CharSequence; Ljava/lang/CharSequence;)Z
+00003a: move-result v2
+00003c: if-eqz v2, -014h
+000040: return-object v1
+000042: const/4 v4, 0
+000044: return-object v4
+
+METHOD e(Ljava/lang/String;)Ljava/lang/String;
+000000: iget-object v0, v1, Lcom/vivo/connbase/h0/c/e;->a Ljava/util/Map;
+000004: invoke-interface v0, v2, Ljava/util/Map;->get(Ljava/lang/Object;)Ljava/lang/Object;
+00000a: move-result-object v2
+00000c: check-cast v2, Lcom/vivo/connbase/h0/c/d;
+000010: if-eqz v2, +007h
+000014: invoke-virtual v2, Lcom/vivo/connbase/h0/c/d;->h()Ljava/lang/String;
+00001a: move-result-object v2
+00001c: return-object v2
+00001e: const-string v2, "DeviceCache"
+000022: const-string v0, "Try to get mac with an id which is not exist."
+000026: invoke-static v2, v0, Lc/c/f/a/b;->p(Ljava/lang/String; Ljava/lang/String;)V
+00002c: const-string v2, ""
+000030: return-object v2
+
+METHOD f(Ljava/lang/String;)Ljava/lang/String;
+000000: iget-object v0, v2, Lcom/vivo/connbase/h0/c/e;->a Ljava/util/Map;
+000004: invoke-interface v0, v3, Ljava/util/Map;->get(Ljava/lang/Object;)Ljava/lang/Object;
+00000a: move-result-object v3
+00000c: check-cast v3, Lcom/vivo/connbase/h0/c/d;
+000010: new-instance v0, Ljava/lang/StringBuilder;
+000014: invoke-direct v0, Ljava/lang/StringBuilder;-><init>()V
+00001a: const-string v1, "getRemote:"
+00001e: invoke-virtual v0, v1, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+000024: invoke-virtual v0, v3, Ljava/lang/StringBuilder;->append(Ljava/lang/Object;)Ljava/lang/StringBuilder;
+00002a: invoke-virtual v0, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
+000030: move-result-object v0
+000032: const-string v1, "DeviceCache"
+000036: invoke-static v1, v0, Lc/c/f/a/b;->k(Ljava/lang/String; Ljava/lang/String;)V
+00003c: if-eqz v3, +007h
+000040: invoke-virtual v3, Lcom/vivo/connbase/h0/c/d;->k()Ljava/lang/String;
+000046: move-result-object v3
+000048: return-object v3
+00004a: const-string v3, "Try to get remote ip with an id which is not exist."
+00004e: invoke-static v1, v3, Lc/c/f/a/b;->p(Ljava/lang/String; Ljava/lang/String;)V
+000054: const-string v3, ""
+000058: return-object v3

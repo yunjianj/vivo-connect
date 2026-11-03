@@ -1,0 +1,148 @@
+APK pcsuite/updateApk/connbase.apk
+DEX classes2.dex
+CLASS Lcom/vivo/pcsuite/pcconnect/wifip2p/g/a;
+SUPER Ljava/lang/Object;
+FIELDS
+a Ljava/lang/String; = 'ConfigBuilderProxy'
+b Ljava/lang/Class; = None
+c Ljava/lang/reflect/Field; = None
+d Ljava/lang/reflect/Method; = None
+e Ljava/lang/reflect/Method; = None
+f Ljava/lang/reflect/Method; = None
+g Ljava/lang/reflect/Method; = None
+h Ljava/lang/reflect/Method; = None
+
+METHOD <clinit>()V
+000000: const-class v0, Ljava/lang/String;
+000004: const-string v1, "ConfigBuilderProxy"
+000008: const-string v2, "android.net.wifi.p2p.WifiP2pConfig$Builder"
+00000c: invoke-static v2, Ljava/lang/Class;->forName(Ljava/lang/String;)Ljava/lang/Class;
+000012: move-result-object v2
+000014: sput-object v2, Lcom/vivo/pcsuite/pcconnect/wifip2p/g/a;->b Ljava/lang/Class;
+000018: const-string v3, "setNetworkName"
+00001c: const/4 v4, 1
+00001e: new-array v5, v4, [Ljava/lang/Class;
+000022: const/4 v6, 0
+000024: aput-object v0, v5, v6
+000028: invoke-virtual v2, v3, v5, Ljava/lang/Class;->getDeclaredMethod(Ljava/lang/String; [Ljava/lang/Class;)Ljava/lang/reflect/Method;
+00002e: move-result-object v2
+000030: sput-object v2, Lcom/vivo/pcsuite/pcconnect/wifip2p/g/a;->d Ljava/lang/reflect/Method;
+000034: sget-object v2, Lcom/vivo/pcsuite/pcconnect/wifip2p/g/a;->b Ljava/lang/Class;
+000038: const-string v3, "setPassphrase"
+00003c: new-array v5, v4, [Ljava/lang/Class;
+000040: aput-object v0, v5, v6
+000044: invoke-virtual v2, v3, v5, Ljava/lang/Class;->getDeclaredMethod(Ljava/lang/String; [Ljava/lang/Class;)Ljava/lang/reflect/Method;
+00004a: move-result-object v0
+00004c: sput-object v0, Lcom/vivo/pcsuite/pcconnect/wifip2p/g/a;->e Ljava/lang/reflect/Method;
+000050: sget-object v0, Lcom/vivo/pcsuite/pcconnect/wifip2p/g/a;->b Ljava/lang/Class;
+000054: const-string v2, "setGroupOperatingFrequency"
+000058: new-array v3, v4, [Ljava/lang/Class;
+00005c: sget-object v5, Ljava/lang/Integer;->TYPE Ljava/lang/Class;
+000060: aput-object v5, v3, v6
+000064: invoke-virtual v0, v2, v3, Ljava/lang/Class;->getDeclaredMethod(Ljava/lang/String; [Ljava/lang/Class;)Ljava/lang/reflect/Method;
+00006a: move-result-object v0
+00006c: sput-object v0, Lcom/vivo/pcsuite/pcconnect/wifip2p/g/a;->f Ljava/lang/reflect/Method;
+000070: sget-object v0, Lcom/vivo/pcsuite/pcconnect/wifip2p/g/a;->b Ljava/lang/Class;
+000074: const-string v2, "setDeviceAddress"
+000078: new-array v3, v4, [Ljava/lang/Class;
+00007c: const-class v5, Landroid/net/MacAddress;
+000080: aput-object v5, v3, v6
+000084: invoke-virtual v0, v2, v3, Ljava/lang/Class;->getDeclaredMethod(Ljava/lang/String; [Ljava/lang/Class;)Ljava/lang/reflect/Method;
+00008a: move-result-object v0
+00008c: sput-object v0, Lcom/vivo/pcsuite/pcconnect/wifip2p/g/a;->g Ljava/lang/reflect/Method;
+000090: sget-object v0, Lcom/vivo/pcsuite/pcconnect/wifip2p/g/a;->b Ljava/lang/Class;
+000094: const-string v2, "build"
+000098: new-array v3, v6, [Ljava/lang/Class;
+00009c: invoke-virtual v0, v2, v3, Ljava/lang/Class;->getDeclaredMethod(Ljava/lang/String; [Ljava/lang/Class;)Ljava/lang/reflect/Method;
+0000a2: move-result-object v0
+0000a4: sput-object v0, Lcom/vivo/pcsuite/pcconnect/wifip2p/g/a;->h Ljava/lang/reflect/Method;
+0000a8: sget-object v0, Lcom/vivo/pcsuite/pcconnect/wifip2p/g/a;->b Ljava/lang/Class;
+0000ac: const-string v2, "mNetworkName"
+0000b0: invoke-virtual v0, v2, Ljava/lang/Class;->getDeclaredField(Ljava/lang/String;)Ljava/lang/reflect/Field;
+0000b6: move-result-object v0
+0000b8: sput-object v0, Lcom/vivo/pcsuite/pcconnect/wifip2p/g/a;->c Ljava/lang/reflect/Field;
+0000bc: invoke-virtual v0, v4, Ljava/lang/reflect/Field;->setAccessible(Z)V
+0000c2: goto +21h
+0000c4: move-exception v0
+0000c6: new-instance v2, Ljava/lang/StringBuilder;
+0000ca: invoke-direct v2, Ljava/lang/StringBuilder;-><init>()V
+0000d0: const-string v3, "Reflect private field failed, reasonable. "
+0000d4: invoke-virtual v2, v3, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+0000da: invoke-virtual v0, Ljava/lang/Exception;->getMessage()Ljava/lang/String;
+0000e0: move-result-object v0
+0000e2: invoke-virtual v2, v0, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+0000e8: invoke-virtual v2, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
+0000ee: move-result-object v0
+0000f0: invoke-static v1, v0, Lc/c/f/a/b;->p(Ljava/lang/String; Ljava/lang/String;)V
+0000f6: goto +7h
+0000f8: move-exception v0
+0000fa: const-string v2, "Reflect initialize failed."
+0000fe: invoke-static v1, v2, v0, Lc/c/f/a/b;->b(Ljava/lang/String; Ljava/lang/String; Ljava/lang/Throwable;)V
+000104: return-void 
+
+METHOD <init>()V
+000000: invoke-direct v0, Ljava/lang/Object;-><init>()V
+000006: return-void 
+
+METHOD a(Lcom/vivo/pcsuite/pcconnect/wifip2p/g/b;)Landroid/net/wifi/p2p/WifiP2pConfig;
+000000: const-string v0, "ConfigBuilderProxy"
+000004: sget-object v1, Lcom/vivo/pcsuite/pcconnect/wifip2p/g/a;->b Ljava/lang/Class;
+000008: invoke-virtual v1, Ljava/lang/Class;->newInstance()Ljava/lang/Object;
+00000e: move-result-object v1
+000010: const/4 v2, 1
+000012: const/4 v3, 0
+000014: sget-object v4, Lcom/vivo/pcsuite/pcconnect/wifip2p/g/a;->c Ljava/lang/reflect/Field;
+000018: invoke-virtual v7, Lcom/vivo/pcsuite/pcconnect/wifip2p/g/b;->c()Ljava/lang/String;
+00001e: move-result-object v5
+000020: invoke-virtual v4, v1, v5, Ljava/lang/reflect/Field;->set(Ljava/lang/Object; Ljava/lang/Object;)V
+000026: goto +27h
+000028: move-exception v4
+00002a: new-instance v5, Ljava/lang/StringBuilder;
+00002e: invoke-direct v5, Ljava/lang/StringBuilder;-><init>()V
+000034: const-string v6, "Set network name by field failed. "
+000038: invoke-virtual v5, v6, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+00003e: invoke-virtual v4, Ljava/lang/Exception;->getMessage()Ljava/lang/String;
+000044: move-result-object v4
+000046: invoke-virtual v5, v4, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+00004c: invoke-virtual v5, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
+000052: move-result-object v4
+000054: invoke-static v0, v4, Lc/c/f/a/b;->p(Ljava/lang/String; Ljava/lang/String;)V
+00005a: sget-object v4, Lcom/vivo/pcsuite/pcconnect/wifip2p/g/a;->d Ljava/lang/reflect/Method;
+00005e: new-array v5, v2, [Ljava/lang/Object;
+000062: invoke-virtual v7, Lcom/vivo/pcsuite/pcconnect/wifip2p/g/b;->c()Ljava/lang/String;
+000068: move-result-object v6
+00006a: aput-object v6, v5, v3
+00006e: invoke-virtual v4, v1, v5, Ljava/lang/reflect/Method;->invoke(Ljava/lang/Object; [Ljava/lang/Object;)Ljava/lang/Object;
+000074: sget-object v4, Lcom/vivo/pcsuite/pcconnect/wifip2p/g/a;->e Ljava/lang/reflect/Method;
+000078: new-array v5, v2, [Ljava/lang/Object;
+00007c: invoke-virtual v7, Lcom/vivo/pcsuite/pcconnect/wifip2p/g/b;->e()Ljava/lang/String;
+000082: move-result-object v6
+000084: aput-object v6, v5, v3
+000088: invoke-virtual v4, v1, v5, Ljava/lang/reflect/Method;->invoke(Ljava/lang/Object; [Ljava/lang/Object;)Ljava/lang/Object;
+00008e: sget-object v4, Lcom/vivo/pcsuite/pcconnect/wifip2p/g/a;->f Ljava/lang/reflect/Method;
+000092: new-array v2, v2, [Ljava/lang/Object;
+000096: invoke-virtual v7, Lcom/vivo/pcsuite/pcconnect/wifip2p/g/b;->b()I
+00009c: move-result v7
+00009e: invoke-static v7, Ljava/lang/Integer;->valueOf(I)Ljava/lang/Integer;
+0000a4: move-result-object v7
+0000a6: aput-object v7, v2, v3
+0000aa: invoke-virtual v4, v1, v2, Ljava/lang/reflect/Method;->invoke(Ljava/lang/Object; [Ljava/lang/Object;)Ljava/lang/Object;
+0000b0: sget-object v7, Lcom/vivo/pcsuite/pcconnect/wifip2p/g/a;->h Ljava/lang/reflect/Method;
+0000b4: new-array v2, v3, [Ljava/lang/Object;
+0000b8: invoke-virtual v7, v1, v2, Ljava/lang/reflect/Method;->invoke(Ljava/lang/Object; [Ljava/lang/Object;)Ljava/lang/Object;
+0000be: move-result-object v7
+0000c0: check-cast v7, Landroid/net/wifi/p2p/WifiP2pConfig;
+0000c4: return-object v7
+0000c6: move-exception v7
+0000c8: new-instance v1, Ljava/lang/StringBuilder;
+0000cc: invoke-direct v1, Ljava/lang/StringBuilder;-><init>()V
+0000d2: const-string v2, "Get WifiP2pConfig failed. "
+0000d6: invoke-virtual v1, v2, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+0000dc: invoke-virtual v7, Ljava/lang/Exception;->getMessage()Ljava/lang/String;
+0000e2: move-result-object v7
+0000e4: invoke-virtual v1, v7, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+0000ea: invoke-virtual v1, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
+0000f0: move-result-object v7
+0000f2: invoke-static v0, v7, Lc/c/f/a/b;->g(Ljava/lang/String; Ljava/lang/String;)V
+0000f8: const/4 v7, 0
+0000fa: return-object v7

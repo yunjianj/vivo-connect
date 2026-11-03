@@ -1,0 +1,606 @@
+APK pcsuite/updateApk/connbase.apk
+DEX classes2.dex
+CLASS Lcom/vivo/pcsuite/pcconnect/ble/c;
+SUPER Ljava/lang/Object;
+FIELDS
+a Ljava/lang/String; = 'BleAssist'
+b Ljava/lang/String; = '247347227728'
+c Ljava/lang/String; = 'darrenTest2'
+
+METHOD <init>()V
+000000: invoke-direct v0, Ljava/lang/Object;-><init>()V
+000006: return-void 
+
+METHOD a(B)I
+000000: and-int/lit16 v0, v0, 255
+000004: return v0
+
+METHOD a(B B)I
+000000: invoke-static v0, Lcom/vivo/pcsuite/pcconnect/ble/c;->a(B)I
+000006: move-result v0
+000008: invoke-static v1, Lcom/vivo/pcsuite/pcconnect/ble/c;->a(B)I
+00000e: move-result v1
+000010: shl-int/lit8 v1, v1, 8
+000014: add-int/2addr v0, v1
+000016: return v0
+
+METHOD a(I I)Ljava/lang/String;
+000000: add-int/lit8 v3, v3, -1
+000004: const-string v0, ""
+000008: if-ltz v3, +018h
+00000c: new-instance v1, Ljava/lang/StringBuilder;
+000010: invoke-direct v1, Ljava/lang/StringBuilder;-><init>()V
+000016: invoke-virtual v1, v0, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+00001c: shr-int v0, v2, v3
+000020: and-int/lit8 v0, v0, 1
+000024: invoke-virtual v1, v0, Ljava/lang/StringBuilder;->append(I)Ljava/lang/StringBuilder;
+00002a: invoke-virtual v1, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
+000030: move-result-object v0
+000032: add-int/lit8 v3, v3, -1
+000036: goto -17h
+000038: return-object v0
+
+METHOD a(Ljava/lang/String; Ljava/lang/String;)Ljava/lang/String;
+000000: const-string v0, "1"
+000004: invoke-virtual v0, v1, Ljava/lang/String;->equals(Ljava/lang/Object;)Z
+00000a: move-result v1
+00000c: if-eqz v1, +01eh
+000010: new-instance v1, Ljava/lang/StringBuffer;
+000014: invoke-direct v1, v2, Ljava/lang/StringBuffer;-><init>(Ljava/lang/String;)V
+00001a: const/4 v2, 3
+00001c: const-string v0, "*"
+000020: invoke-virtual v1, v2, v0, Ljava/lang/StringBuffer;->insert(I Ljava/lang/String;)Ljava/lang/StringBuffer;
+000026: const/4 v2, 4
+000028: invoke-virtual v1, v2, v0, Ljava/lang/StringBuffer;->insert(I Ljava/lang/String;)Ljava/lang/StringBuffer;
+00002e: const/4 v2, 5
+000030: invoke-virtual v1, v2, v0, Ljava/lang/StringBuffer;->insert(I Ljava/lang/String;)Ljava/lang/StringBuffer;
+000036: const/4 v2, 6
+000038: invoke-virtual v1, v2, v0, Ljava/lang/StringBuffer;->insert(I Ljava/lang/String;)Ljava/lang/StringBuffer;
+00003e: invoke-virtual v1, Ljava/lang/StringBuffer;->toString()Ljava/lang/String;
+000044: move-result-object v1
+000046: return-object v1
+000048: return-object v2
+
+METHOD a([B)Ljava/lang/String;
+000000: const-string v0, ""
+000004: const/4 v1, 0
+000006: array-length v2, v6
+000008: if-ge v1, v2, +049h
+00000c: aget-byte v2, v6, v1
+000010: and-int/lit16 v2, v2, 255
+000014: invoke-static v2, Ljava/lang/Integer;->toHexString(I)Ljava/lang/String;
+00001a: move-result-object v2
+00001c: invoke-virtual v2, Ljava/lang/String;->length()I
+000022: move-result v3
+000024: const/4 v4, 1
+000026: if-ne v3, v4, +013h
+00002a: new-instance v3, Ljava/lang/StringBuilder;
+00002e: invoke-direct v3, Ljava/lang/StringBuilder;-><init>()V
+000034: const-string v5, "0"
+000038: invoke-virtual v3, v5, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+00003e: invoke-virtual v3, v2, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+000044: invoke-virtual v3, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
+00004a: move-result-object v2
+00004c: new-instance v3, Ljava/lang/StringBuilder;
+000050: invoke-direct v3, Ljava/lang/StringBuilder;-><init>()V
+000056: invoke-virtual v3, v0, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+00005c: invoke-virtual v3, v2, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+000062: invoke-virtual v3, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
+000068: move-result-object v0
+00006a: array-length v2, v6
+00006c: sub-int/2addr v2, v4
+00006e: if-ge v1, v2, +013h
+000072: new-instance v2, Ljava/lang/StringBuilder;
+000076: invoke-direct v2, Ljava/lang/StringBuilder;-><init>()V
+00007c: invoke-virtual v2, v0, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+000082: const-string v0, ":"
+000086: invoke-virtual v2, v0, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+00008c: invoke-virtual v2, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
+000092: move-result-object v0
+000094: add-int/lit8 v1, v1, 1
+000098: goto -49h
+00009a: return-object v0
+
+METHOD a(Landroid/bluetooth/BluetoothGatt; Ljava/lang/String;)V
+000000: if-eqz v1, +025h
+000004: invoke-virtual v1, Landroid/bluetooth/BluetoothGatt;->getDevice()Landroid/bluetooth/BluetoothDevice;
+00000a: move-result-object v1
+00000c: if-eqz v1, +01fh
+000010: new-instance v0, Ljava/lang/StringBuilder;
+000014: invoke-direct v0, Ljava/lang/StringBuilder;-><init>()V
+00001a: invoke-virtual v0, v2, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+000020: const-string v2, ": Connected to GATT server. name : "
+000024: invoke-virtual v0, v2, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+00002a: invoke-virtual v1, Landroid/bluetooth/BluetoothDevice;->getName()Ljava/lang/String;
+000030: move-result-object v1
+000032: invoke-virtual v0, v1, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+000038: invoke-virtual v0, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
+00003e: move-result-object v1
+000040: const-string v2, "BleAssist"
+000044: invoke-static v2, v1, Lc/c/f/a/b;->k(Ljava/lang/String; Ljava/lang/String;)V
+00004a: return-void 
+
+METHOD a(Landroid/bluetooth/BluetoothGattCharacteristic; Ljava/lang/String;)V
+000000: new-instance v0, Ljava/lang/StringBuilder;
+000004: invoke-direct v0, Ljava/lang/StringBuilder;-><init>()V
+00000a: invoke-virtual v0, v9, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+000010: const-string v1, " BluetoothGattCharacteristic begin"
+000014: invoke-virtual v0, v1, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+00001a: invoke-virtual v0, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
+000020: move-result-object v0
+000022: const-string v1, "BleAssist"
+000026: invoke-static v1, v0, Lc/c/f/a/b;->k(Ljava/lang/String; Ljava/lang/String;)V
+00002c: if-eqz v8, +0d1h
+000030: new-instance v0, Ljava/lang/StringBuilder;
+000034: invoke-direct v0, Ljava/lang/StringBuilder;-><init>()V
+00003a: invoke-virtual v0, v9, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+000040: const-string v2, ": uuid "
+000044: invoke-virtual v0, v2, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+00004a: invoke-virtual v8, Landroid/bluetooth/BluetoothGattCharacteristic;->getUuid()Ljava/util/UUID;
+000050: move-result-object v2
+000052: invoke-virtual v2, Ljava/util/UUID;->toString()Ljava/lang/String;
+000058: move-result-object v2
+00005a: invoke-static v2, Lcom/vivo/pcsuite/pcconnect/ble/g;->a(Ljava/lang/String;)Ljava/lang/String;
+000060: move-result-object v2
+000062: invoke-virtual v0, v2, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+000068: invoke-virtual v0, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
+00006e: move-result-object v0
+000070: invoke-static v1, v0, Lc/c/f/a/b;->k(Ljava/lang/String; Ljava/lang/String;)V
+000076: new-instance v0, Ljava/lang/StringBuilder;
+00007a: invoke-direct v0, Ljava/lang/StringBuilder;-><init>()V
+000080: invoke-virtual v0, v9, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+000086: const-string v2, ": properties "
+00008a: invoke-virtual v0, v2, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+000090: invoke-virtual v8, Landroid/bluetooth/BluetoothGattCharacteristic;->getProperties()I
+000096: move-result v2
+000098: invoke-virtual v0, v2, Ljava/lang/StringBuilder;->append(I)Ljava/lang/StringBuilder;
+00009e: invoke-virtual v0, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
+0000a4: move-result-object v0
+0000a6: invoke-static v1, v0, Lc/c/f/a/b;->k(Ljava/lang/String; Ljava/lang/String;)V
+0000ac: new-instance v0, Ljava/lang/StringBuilder;
+0000b0: invoke-direct v0, Ljava/lang/StringBuilder;-><init>()V
+0000b6: invoke-virtual v0, v9, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+0000bc: const-string v2, ": permissions "
+0000c0: invoke-virtual v0, v2, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+0000c6: invoke-virtual v8, Landroid/bluetooth/BluetoothGattCharacteristic;->getPermissions()I
+0000cc: move-result v2
+0000ce: invoke-virtual v0, v2, Ljava/lang/StringBuilder;->append(I)Ljava/lang/StringBuilder;
+0000d4: invoke-virtual v0, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
+0000da: move-result-object v0
+0000dc: invoke-static v1, v0, Lc/c/f/a/b;->k(Ljava/lang/String; Ljava/lang/String;)V
+0000e2: invoke-virtual v8, Landroid/bluetooth/BluetoothGattCharacteristic;->getValue()[B
+0000e8: move-result-object v0
+0000ea: if-eqz v0, +053h
+0000ee: array-length v2, v0
+0000f0: if-lez v2, +050h
+0000f4: new-instance v2, Ljava/lang/StringBuilder;
+0000f8: array-length v3, v0
+0000fa: invoke-direct v2, v3, Ljava/lang/StringBuilder;-><init>(I)V
+000100: array-length v3, v0
+000102: const/4 v4, 0
+000104: move v5, v4
+000106: if-ge v5, v3, +019h
+00010a: aget-byte v6, v0, v5
+00010e: const/4 v7, 1
+000110: new-array v7, v7, [Ljava/lang/Object;
+000114: invoke-static v6, Ljava/lang/Byte;->valueOf(B)Ljava/lang/Byte;
+00011a: move-result-object v6
+00011c: aput-object v6, v7, v4
+000120: const-string v6, "%02X "
+000124: invoke-static v6, v7, Ljava/lang/String;->format(Ljava/lang/String; [Ljava/lang/Object;)Ljava/lang/String;
+00012a: move-result-object v6
+00012c: invoke-virtual v2, v6, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+000132: add-int/lit8 v5, v5, 1
+000136: goto -18h
+000138: new-instance v3, Ljava/lang/StringBuilder;
+00013c: invoke-direct v3, Ljava/lang/StringBuilder;-><init>()V
+000142: invoke-virtual v3, v9, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+000148: const-string v4, ": value "
+00014c: invoke-virtual v3, v4, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+000152: new-instance v4, Ljava/lang/String;
+000156: invoke-static Ljava/nio/charset/Charset;->defaultCharset()Ljava/nio/charset/Charset;
+00015c: move-result-object v5
+00015e: invoke-direct v4, v0, v5, Ljava/lang/String;-><init>([B Ljava/nio/charset/Charset;)V
+000164: invoke-virtual v3, v4, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+00016a: const-string v0, "
+"
+00016e: invoke-virtual v3, v0, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+000174: invoke-virtual v2, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
+00017a: move-result-object v0
+00017c: invoke-virtual v3, v0, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+000182: invoke-virtual v3, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
+000188: move-result-object v0
+00018a: invoke-static v1, v0, Lc/c/f/a/b;->k(Ljava/lang/String; Ljava/lang/String;)V
+000190: invoke-virtual v8, Landroid/bluetooth/BluetoothGattCharacteristic;->getDescriptors()Ljava/util/List;
+000196: move-result-object v8
+000198: new-instance v0, Ljava/lang/StringBuilder;
+00019c: invoke-direct v0, Ljava/lang/StringBuilder;-><init>()V
+0001a2: invoke-virtual v0, v9, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+0001a8: const-string v2, ": descriptors size "
+0001ac: invoke-virtual v0, v2, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+0001b2: invoke-interface v8, Ljava/util/List;->size()I
+0001b8: move-result v8
+0001ba: invoke-virtual v0, v8, Ljava/lang/StringBuilder;->append(I)Ljava/lang/StringBuilder;
+0001c0: invoke-virtual v0, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
+0001c6: move-result-object v8
+0001c8: invoke-static v1, v8, Lc/c/f/a/b;->k(Ljava/lang/String; Ljava/lang/String;)V
+0001ce: new-instance v8, Ljava/lang/StringBuilder;
+0001d2: invoke-direct v8, Ljava/lang/StringBuilder;-><init>()V
+0001d8: invoke-virtual v8, v9, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+0001de: const-string v9, " BluetoothGattCharacteristic end"
+0001e2: invoke-virtual v8, v9, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+0001e8: invoke-virtual v8, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
+0001ee: move-result-object v8
+0001f0: invoke-static v1, v8, Lc/c/f/a/b;->k(Ljava/lang/String; Ljava/lang/String;)V
+0001f6: return-void 
+
+METHOD a(Landroid/bluetooth/BluetoothGattService; Ljava/lang/String;)V
+000000: new-instance v0, Ljava/lang/StringBuilder;
+000004: invoke-direct v0, Ljava/lang/StringBuilder;-><init>()V
+00000a: invoke-virtual v0, v4, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+000010: const-string v1, " BluetoothGattService begin"
+000014: invoke-virtual v0, v1, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+00001a: invoke-virtual v0, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
+000020: move-result-object v0
+000022: const-string v1, "BleAssist"
+000026: invoke-static v1, v0, Lc/c/f/a/b;->k(Ljava/lang/String; Ljava/lang/String;)V
+00002c: new-instance v0, Ljava/lang/StringBuilder;
+000030: invoke-direct v0, Ljava/lang/StringBuilder;-><init>()V
+000036: invoke-virtual v0, v4, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+00003c: const-string v2, " Service uuid "
+000040: invoke-virtual v0, v2, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+000046: invoke-virtual v3, Landroid/bluetooth/BluetoothGattService;->getUuid()Ljava/util/UUID;
+00004c: move-result-object v2
+00004e: invoke-virtual v2, Ljava/util/UUID;->toString()Ljava/lang/String;
+000054: move-result-object v2
+000056: invoke-static v2, Lcom/vivo/pcsuite/pcconnect/ble/g;->b(Ljava/lang/String;)Ljava/lang/String;
+00005c: move-result-object v2
+00005e: invoke-virtual v0, v2, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+000064: invoke-virtual v0, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
+00006a: move-result-object v0
+00006c: invoke-static v1, v0, Lc/c/f/a/b;->k(Ljava/lang/String; Ljava/lang/String;)V
+000072: invoke-virtual v3, Landroid/bluetooth/BluetoothGattService;->getCharacteristics()Ljava/util/List;
+000078: move-result-object v3
+00007a: if-eqz v3, +01ch
+00007e: invoke-interface v3, Ljava/util/List;->size()I
+000084: move-result v0
+000086: if-lez v0, +016h
+00008a: invoke-interface v3, Ljava/util/List;->iterator()Ljava/util/Iterator;
+000090: move-result-object v3
+000092: invoke-interface v3, Ljava/util/Iterator;->hasNext()Z
+000098: move-result v0
+00009a: if-eqz v0, +00ch
+00009e: invoke-interface v3, Ljava/util/Iterator;->next()Ljava/lang/Object;
+0000a4: move-result-object v0
+0000a6: check-cast v0, Landroid/bluetooth/BluetoothGattCharacteristic;
+0000aa: invoke-static v0, v4, Lcom/vivo/pcsuite/pcconnect/ble/c;->a(Landroid/bluetooth/BluetoothGattCharacteristic; Ljava/lang/String;)V
+0000b0: goto -fh
+0000b2: new-instance v3, Ljava/lang/StringBuilder;
+0000b6: invoke-direct v3, Ljava/lang/StringBuilder;-><init>()V
+0000bc: invoke-virtual v3, v4, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+0000c2: const-string v4, " BluetoothGattService end"
+0000c6: invoke-virtual v3, v4, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+0000cc: invoke-virtual v3, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
+0000d2: move-result-object v3
+0000d4: invoke-static v1, v3, Lc/c/f/a/b;->k(Ljava/lang/String; Ljava/lang/String;)V
+0000da: return-void 
+
+METHOD a(Ljava/util/List; Ljava/lang/String;)V
+000000: new-instance v0, Ljava/lang/StringBuilder;
+000004: invoke-direct v0, Ljava/lang/StringBuilder;-><init>()V
+00000a: invoke-virtual v0, v3, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+000010: const-string v1, " BluetoothGatt begin"
+000014: invoke-virtual v0, v1, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+00001a: invoke-virtual v0, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
+000020: move-result-object v0
+000022: const-string v1, "BleAssist"
+000026: invoke-static v1, v0, Lc/c/f/a/b;->k(Ljava/lang/String; Ljava/lang/String;)V
+00002c: if-eqz v2, +01ch
+000030: invoke-interface v2, Ljava/util/List;->size()I
+000036: move-result v0
+000038: if-lez v0, +016h
+00003c: invoke-interface v2, Ljava/util/List;->iterator()Ljava/util/Iterator;
+000042: move-result-object v2
+000044: invoke-interface v2, Ljava/util/Iterator;->hasNext()Z
+00004a: move-result v0
+00004c: if-eqz v0, +00ch
+000050: invoke-interface v2, Ljava/util/Iterator;->next()Ljava/lang/Object;
+000056: move-result-object v0
+000058: check-cast v0, Landroid/bluetooth/BluetoothGattService;
+00005c: invoke-static v0, v3, Lcom/vivo/pcsuite/pcconnect/ble/c;->a(Landroid/bluetooth/BluetoothGattService; Ljava/lang/String;)V
+000062: goto -fh
+000064: new-instance v2, Ljava/lang/StringBuilder;
+000068: invoke-direct v2, Ljava/lang/StringBuilder;-><init>()V
+00006e: invoke-virtual v2, v3, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+000074: const-string v3, " BluetoothGatt end"
+000078: invoke-virtual v2, v3, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+00007e: invoke-virtual v2, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
+000084: move-result-object v2
+000086: invoke-static v1, v2, Lc/c/f/a/b;->k(Ljava/lang/String; Ljava/lang/String;)V
+00008c: return-void 
+
+METHOD a(Landroid/os/ParcelUuid;)Z
+000000: invoke-static v3, Lcom/vivo/pcsuite/pcconnect/ble/e;->d(Landroid/os/ParcelUuid;)[B
+000006: move-result-object v3
+000008: array-length v0, v3
+00000a: const/4 v1, 0
+00000c: const/4 v2, 2
+00000e: if-ne v0, v2, +00ah
+000012: const/4 v0, 1
+000014: aget-byte v3, v3, v0
+000018: and-int/2addr v3, v0
+00001a: if-ne v3, v0, +003h
+00001e: move v1, v0
+000020: return v1
+000022: new-instance v0, Ljava/lang/StringBuilder;
+000026: invoke-direct v0, Ljava/lang/StringBuilder;-><init>()V
+00002c: const-string v2, "get5GSupported error, byte array length: "
+000030: invoke-virtual v0, v2, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+000036: array-length v3, v3
+000038: invoke-virtual v0, v3, Ljava/lang/StringBuilder;->append(I)Ljava/lang/StringBuilder;
+00003e: invoke-virtual v0, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
+000044: move-result-object v3
+000046: const-string v0, "BleAssist"
+00004a: invoke-static v0, v3, Lc/c/f/a/b;->g(Ljava/lang/String; Ljava/lang/String;)V
+000050: return v1
+
+METHOD a(I)[B
+000000: const/4 v0, 2
+000002: new-array v0, v0, [B
+000006: if-gez v3, +008h
+00000a: const v1, 32768
+000010: and-int/lit16 v3, v3, 32767
+000014: add-int/2addr v3, v1
+000016: const/4 v1, 0
+000018: and-int/lit16 v2, v3, 255
+00001c: int-to-byte v2, v2
+00001e: aput-byte v2, v0, v1
+000022: const/4 v1, 1
+000024: shr-int/lit8 v3, v3, 8
+000028: and-int/lit16 v3, v3, 255
+00002c: int-to-byte v3, v3
+00002e: aput-byte v3, v0, v1
+000032: return-object v0
+
+METHOD a(Ljava/lang/String;)[B
+000000: const/4 v0, 4
+000002: new-array v1, v0, [B
+000006: fill-array-data v1, +000003dh
+00000c: invoke-static v4, Landroid/text/TextUtils;->isEmpty(Ljava/lang/CharSequence;)Z
+000012: move-result v2
+000014: if-eqz v2, +003h
+000018: return-object v1
+00001a: const-string v2, "SHA-256"
+00001e: invoke-static v2, Ljava/security/MessageDigest;->getInstance(Ljava/lang/String;)Ljava/security/MessageDigest;
+000024: move-result-object v2
+000026: sget-object v3, Ljava/nio/charset/StandardCharsets;->UTF_8 Ljava/nio/charset/Charset;
+00002a: invoke-virtual v4, v3, Ljava/lang/String;->getBytes(Ljava/nio/charset/Charset;)[B
+000030: move-result-object v4
+000032: invoke-virtual v2, v4, Ljava/security/MessageDigest;->digest([B)[B
+000038: move-result-object v4
+00003a: const/4 v2, 0
+00003c: invoke-static v4, v2, v0, Ljava/util/Arrays;->copyOfRange([B I I)[B
+000042: move-result-object v4
+000044: return-object v4
+000046: move-exception v4
+000048: new-instance v0, Ljava/lang/StringBuilder;
+00004c: invoke-direct v0, Ljava/lang/StringBuilder;-><init>()V
+000052: const-string v2, "MessageDigest error:"
+000056: invoke-virtual v0, v2, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+00005c: invoke-virtual v4, Ljava/security/NoSuchAlgorithmException;->toString()Ljava/lang/String;
+000062: move-result-object v4
+000064: invoke-virtual v0, v4, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+00006a: invoke-virtual v0, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
+000070: move-result-object v4
+000072: const-string v0, "BleAssist"
+000076: invoke-static v0, v4, Lc/c/f/a/b;->g(Ljava/lang/String; Ljava/lang/String;)V
+00007c: return-object v1
+00007e: nop 
+000080: fill-array-data-payload b'\x00\x00\x00\x00' | \x00\x00\x00\x00
+
+METHOD a(Ljava/lang/String; I)[B
+000000: const-string v0, "UTF-8"
+000004: invoke-static v0, Ljava/nio/charset/Charset;->forName(Ljava/lang/String;)Ljava/nio/charset/Charset;
+00000a: move-result-object v1
+00000c: invoke-virtual v4, v1, Ljava/lang/String;->getBytes(Ljava/nio/charset/Charset;)[B
+000012: move-result-object v1
+000014: array-length v2, v1
+000016: const/4 v3, 0
+000018: if-le v2, v5, +00dh
+00001c: invoke-virtual v4, Ljava/lang/String;->length()I
+000022: move-result v1
+000024: add-int/lit8 v1, v1, -1
+000028: invoke-virtual v4, v3, v1, Ljava/lang/String;->substring(I I)Ljava/lang/String;
+00002e: move-result-object v4
+000030: goto -16h
+000032: new-array v4, v5, [B
+000036: move v0, v3
+000038: if-ge v0, v5, +00fh
+00003c: array-length v2, v1
+00003e: if-ge v0, v2, +007h
+000042: aget-byte v2, v1, v0
+000046: aput-byte v2, v4, v0
+00004a: goto +3h
+00004c: aput-byte v3, v4, v0
+000050: add-int/lit8 v0, v0, 1
+000054: goto -eh
+000056: return-object v4
+
+METHOD b(I I)I
+000000: const/4 v0, 1
+000002: sub-int/2addr v2, v0
+000004: shl-int v2, v0, v2
+000008: and-int v0, v1, v2
+00000c: if-eqz v0, +008h
+000010: add-int/lit8 v0, v2, -1
+000014: and-int/2addr v1, v0
+000016: sub-int/2addr v2, v1
+000018: mul-int/lit8 v1, v2, -1
+00001c: return v1
+
+METHOD b(Ljava/lang/String;)Ljava/lang/String;
+000000: new-instance v0, Ljava/lang/StringBuffer;
+000004: invoke-direct v0, Ljava/lang/StringBuffer;-><init>()V
+00000a: const/4 v1, 0
+00000c: move v2, v1
+00000e: invoke-virtual v6, Ljava/lang/String;->length()I
+000014: move-result v3
+000016: if-ge v2, v3, +03dh
+00001a: new-instance v3, Ljava/lang/StringBuilder;
+00001e: invoke-direct v3, Ljava/lang/StringBuilder;-><init>()V
+000024: invoke-virtual v6, v2, Ljava/lang/String;->charAt(I)C
+00002a: move-result v4
+00002c: invoke-virtual v3, v4, Ljava/lang/StringBuilder;->append(C)Ljava/lang/StringBuilder;
+000032: const-string v4, ""
+000036: invoke-virtual v3, v4, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+00003c: invoke-virtual v3, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
+000042: move-result-object v3
+000044: const/16 v4, 16
+000048: invoke-static v3, v4, Ljava/lang/Integer;->valueOf(Ljava/lang/String; I)Ljava/lang/Integer;
+00004e: move-result-object v3
+000050: invoke-virtual v3, Ljava/lang/Integer;->intValue()I
+000056: move-result v3
+000058: new-instance v4, Ljava/lang/StringBuffer;
+00005c: invoke-static v3, Ljava/lang/Integer;->toBinaryString(I)Ljava/lang/String;
+000062: move-result-object v3
+000064: invoke-direct v4, v3, Ljava/lang/StringBuffer;-><init>(Ljava/lang/String;)V
+00006a: invoke-virtual v4, Ljava/lang/StringBuffer;->length()I
+000070: move-result v3
+000072: const/4 v5, 4
+000074: if-ge v3, v5, +008h
+000078: const-string v3, "0"
+00007c: invoke-virtual v4, v1, v3, Ljava/lang/StringBuffer;->insert(I Ljava/lang/String;)Ljava/lang/StringBuffer;
+000082: goto -ch
+000084: invoke-virtual v0, v4, Ljava/lang/StringBuffer;->append(Ljava/lang/StringBuffer;)Ljava/lang/StringBuffer;
+00008a: add-int/lit8 v2, v2, 1
+00008e: goto -40h
+000090: invoke-virtual v0, Ljava/lang/StringBuffer;->toString()Ljava/lang/String;
+000096: move-result-object v6
+000098: return-object v6
+
+METHOD b([B)Ljava/lang/String;
+000000: new-instance v0, Ljava/lang/StringBuilder;
+000004: invoke-direct v0, Ljava/lang/StringBuilder;-><init>()V
+00000a: if-eqz v6, +01eh
+00000e: array-length v1, v6
+000010: const/4 v2, 0
+000012: move v3, v2
+000014: if-ge v3, v1, +019h
+000018: aget-byte v4, v6, v3
+00001c: const/4 v5, 1
+00001e: new-array v5, v5, [Ljava/lang/Object;
+000022: invoke-static v4, Ljava/lang/Byte;->valueOf(B)Ljava/lang/Byte;
+000028: move-result-object v4
+00002a: aput-object v4, v5, v2
+00002e: const-string v4, "%02X "
+000032: invoke-static v4, v5, Ljava/lang/String;->format(Ljava/lang/String; [Ljava/lang/Object;)Ljava/lang/String;
+000038: move-result-object v4
+00003a: invoke-virtual v0, v4, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+000040: add-int/lit8 v3, v3, 1
+000044: goto -18h
+000046: invoke-virtual v0, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
+00004c: move-result-object v6
+00004e: return-object v6
+
+METHOD c([B)Ljava/lang/String;
+000000: new-instance v0, Ljava/lang/StringBuilder;
+000004: invoke-direct v0, Ljava/lang/StringBuilder;-><init>()V
+00000a: if-eqz v6, +01eh
+00000e: array-length v1, v6
+000010: const/4 v2, 0
+000012: move v3, v2
+000014: if-ge v3, v1, +019h
+000018: aget-byte v4, v6, v3
+00001c: const/4 v5, 1
+00001e: new-array v5, v5, [Ljava/lang/Object;
+000022: invoke-static v4, Ljava/lang/Byte;->valueOf(B)Ljava/lang/Byte;
+000028: move-result-object v4
+00002a: aput-object v4, v5, v2
+00002e: const-string v4, "%02x"
+000032: invoke-static v4, v5, Ljava/lang/String;->format(Ljava/lang/String; [Ljava/lang/Object;)Ljava/lang/String;
+000038: move-result-object v4
+00003a: invoke-virtual v0, v4, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+000040: add-int/lit8 v3, v3, 1
+000044: goto -18h
+000046: invoke-virtual v0, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
+00004c: move-result-object v6
+00004e: return-object v6
+
+METHOD c(Ljava/lang/String;)[B
+000000: invoke-virtual v7, Ljava/lang/String;->length()I
+000006: move-result v0
+000008: div-int/lit8 v1, v0, 2
+00000c: new-array v1, v1, [B
+000010: const/4 v2, 0
+000012: if-ge v2, v0, +021h
+000016: div-int/lit8 v3, v2, 2
+00001a: invoke-virtual v7, v2, Ljava/lang/String;->charAt(I)C
+000020: move-result v4
+000022: const/16 v5, 16
+000026: invoke-static v4, v5, Ljava/lang/Character;->digit(C I)I
+00002c: move-result v4
+00002e: shl-int/lit8 v4, v4, 4
+000032: add-int/lit8 v6, v2, 1
+000036: invoke-virtual v7, v6, Ljava/lang/String;->charAt(I)C
+00003c: move-result v6
+00003e: invoke-static v6, v5, Ljava/lang/Character;->digit(C I)I
+000044: move-result v5
+000046: add-int/2addr v4, v5
+000048: int-to-byte v4, v4
+00004a: aput-byte v4, v1, v3
+00004e: add-int/lit8 v2, v2, 2
+000052: goto -20h
+000054: return-object v1
+
+METHOD d([B)I
+000000: const/4 v0, 0
+000002: aget-byte v0, v2, v0
+000006: const/4 v1, 1
+000008: aget-byte v2, v2, v1
+00000c: invoke-static v0, v2, Lcom/vivo/pcsuite/pcconnect/ble/c;->a(B B)I
+000012: move-result v2
+000014: const/16 v0, 16
+000018: invoke-static v2, v0, Lcom/vivo/pcsuite/pcconnect/ble/c;->b(I I)I
+00001e: move-result v2
+000020: return v2
+
+METHOD d(Ljava/lang/String;)[B
+000000: if-nez v1, +006h
+000004: const/4 v1, 0
+000006: new-array v1, v1, [B
+00000a: return-object v1
+00000c: const-string v0, "UTF-8"
+000010: invoke-static v0, Ljava/nio/charset/Charset;->forName(Ljava/lang/String;)Ljava/nio/charset/Charset;
+000016: move-result-object v0
+000018: invoke-virtual v1, v0, Ljava/lang/String;->getBytes(Ljava/nio/charset/Charset;)[B
+00001e: move-result-object v1
+000020: return-object v1
+
+METHOD e([B)Ljava/lang/String;
+000000: if-nez v2, +00ch
+000004: const-string v2, "BleAssist"
+000008: const-string v0, "Can't convert a null byte[] to string."
+00000c: invoke-static v2, v0, Lc/c/f/a/b;->p(Ljava/lang/String; Ljava/lang/String;)V
+000012: const-string v2, ""
+000016: return-object v2
+000018: new-instance v0, Ljava/lang/String;
+00001c: const-string v1, "UTF-8"
+000020: invoke-static v1, Ljava/nio/charset/Charset;->forName(Ljava/lang/String;)Ljava/nio/charset/Charset;
+000026: move-result-object v1
+000028: invoke-direct v0, v2, v1, Ljava/lang/String;-><init>([B Ljava/nio/charset/Charset;)V
+00002e: return-object v0
+
+METHOD f([B)[B
+000000: array-length v0, v3
+000002: add-int/lit8 v0, v0, -1
+000006: if-ltz v0, +00ah
+00000a: aget-byte v1, v3, v0
+00000e: if-eqz v1, +003h
+000012: goto +4h
+000014: add-int/lit8 v0, v0, -1
+000018: goto -9h
+00001a: add-int/lit8 v0, v0, 1
+00001e: new-array v1, v0, [B
+000022: const/4 v2, 0
+000024: invoke-static v3, v2, v1, v2, v0, Ljava/lang/System;->arraycopy(Ljava/lang/Object; I Ljava/lang/Object; I I)V
+00002a: return-object v1

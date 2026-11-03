@@ -1,0 +1,209 @@
+APK pcsuite/updateApk/connbase.apk
+DEX classes.dex
+CLASS Lcom/vivo/connbase/m0/a/g/c;
+SUPER Ljava/lang/Object;
+FIELDS
+a Ljava/lang/String; = 'WifiP2pManagerProxy'
+
+METHOD <init>()V
+000000: invoke-direct v0, Ljava/lang/Object;-><init>()V
+000006: return-void 
+
+METHOD a(Landroid/net/wifi/p2p/WifiP2pManager; Landroid/net/wifi/p2p/WifiP2pManager$Channel;)V
+000000: const-string v0, "WifiP2pManagerProxy"
+000004: const-string v1, "Delete all persistent groups."
+000008: invoke-static v0, v1, Lc/c/f/a/b;->a(Ljava/lang/String; Ljava/lang/String;)V
+00000e: const-class v1, Landroid/net/wifi/p2p/WifiP2pGroup;
+000012: const-string v2, "getNetworkId"
+000016: const/4 v3, 0
+000018: new-array v3, v3, [Ljava/lang/Class;
+00001c: invoke-virtual v1, v2, v3, Ljava/lang/Class;->getDeclaredMethod(Ljava/lang/String; [Ljava/lang/Class;)Ljava/lang/reflect/Method;
+000022: move-result-object v1
+000024: new-instance v2, Lcom/vivo/connbase/m0/a/g/c$b;
+000028: invoke-direct v2, v1, v4, v5, Lcom/vivo/connbase/m0/a/g/c$b;-><init>(Ljava/lang/reflect/Method; Landroid/net/wifi/p2p/WifiP2pManager; Landroid/net/wifi/p2p/WifiP2pManager$Channel;)V
+00002e: invoke-static v4, v5, v2, Lcom/vivo/connbase/m0/a/g/c;->a(Landroid/net/wifi/p2p/WifiP2pManager; Landroid/net/wifi/p2p/WifiP2pManager$Channel; Lcom/vivo/connbase/m0/a/g/c$c;)Z
+000034: goto +7h
+000036: move-exception v4
+000038: const-string v5, "Delete all persistent group failed."
+00003c: invoke-static v0, v5, v4, Lc/c/f/a/b;->e(Ljava/lang/String; Ljava/lang/String; Ljava/lang/Throwable;)V
+000042: return-void 
+
+METHOD a(Landroid/net/wifi/p2p/WifiP2pManager; Landroid/net/wifi/p2p/WifiP2pManager$Channel; I Landroid/net/wifi/p2p/WifiP2pManager$ActionListener;)V
+000000: const-string v0, "WifiP2pManagerProxy"
+000004: const-string v1, "Delete persistent group."
+000008: invoke-static v0, v1, Lc/c/f/a/b;->a(Ljava/lang/String; Ljava/lang/String;)V
+00000e: const-class v1, Landroid/net/wifi/p2p/WifiP2pManager;
+000012: const-string v2, "deletePersistentGroup"
+000016: const/4 v3, 3
+000018: new-array v4, v3, [Ljava/lang/Class;
+00001c: const-class v5, Landroid/net/wifi/p2p/WifiP2pManager$Channel;
+000020: const/4 v6, 0
+000022: aput-object v5, v4, v6
+000026: sget-object v5, Ljava/lang/Integer;->TYPE Ljava/lang/Class;
+00002a: const/4 v7, 1
+00002c: aput-object v5, v4, v7
+000030: const-class v5, Landroid/net/wifi/p2p/WifiP2pManager$ActionListener;
+000034: const/4 v8, 2
+000036: aput-object v5, v4, v8
+00003a: invoke-virtual v1, v2, v4, Ljava/lang/Class;->getDeclaredMethod(Ljava/lang/String; [Ljava/lang/Class;)Ljava/lang/reflect/Method;
+000040: move-result-object v1
+000042: new-array v2, v3, [Ljava/lang/Object;
+000046: aput-object v10, v2, v6
+00004a: invoke-static v11, Ljava/lang/Integer;->valueOf(I)Ljava/lang/Integer;
+000050: move-result-object v10
+000052: aput-object v10, v2, v7
+000056: aput-object v12, v2, v8
+00005a: invoke-virtual v1, v9, v2, Ljava/lang/reflect/Method;->invoke(Ljava/lang/Object; [Ljava/lang/Object;)Ljava/lang/Object;
+000060: goto +7h
+000062: move-exception v9
+000064: const-string v10, "Delete persistent group failed."
+000068: invoke-static v0, v10, v9, Lc/c/f/a/b;->a(Ljava/lang/String; Ljava/lang/String; Ljava/lang/Throwable;)V
+00006e: return-void 
+
+METHOD a(Landroid/net/wifi/p2p/WifiP2pManager; Landroid/net/wifi/p2p/WifiP2pManager$Channel; Landroid/net/wifi/p2p/WifiP2pGroup; Landroid/net/wifi/p2p/WifiP2pManager$ActionListener;)V
+000000: new-instance v0, Ljava/lang/StringBuilder;
+000004: invoke-direct v0, Ljava/lang/StringBuilder;-><init>()V
+00000a: const-string v1, "Group info: "
+00000e: invoke-virtual v0, v1, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+000014: invoke-virtual v0, v11, Ljava/lang/StringBuilder;->append(Ljava/lang/Object;)Ljava/lang/StringBuilder;
+00001a: invoke-virtual v0, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
+000020: move-result-object v0
+000022: const-string v1, "WifiP2pManagerProxy"
+000026: invoke-static v1, v0, Lc/c/f/a/b;->a(Ljava/lang/String; Ljava/lang/String;)V
+00002c: const-class v0, Landroid/net/wifi/p2p/WifiP2pManager;
+000030: const-string v2, "createGroupExt"
+000034: const/4 v3, 3
+000036: new-array v4, v3, [Ljava/lang/Class;
+00003a: const-class v5, Landroid/net/wifi/p2p/WifiP2pManager$Channel;
+00003e: const/4 v6, 0
+000040: aput-object v5, v4, v6
+000044: const-class v5, Landroid/net/wifi/p2p/WifiP2pGroup;
+000048: const/4 v7, 1
+00004a: aput-object v5, v4, v7
+00004e: const-class v5, Landroid/net/wifi/p2p/WifiP2pManager$ActionListener;
+000052: const/4 v8, 2
+000054: aput-object v5, v4, v8
+000058: invoke-virtual v0, v2, v4, Ljava/lang/Class;->getDeclaredMethod(Ljava/lang/String; [Ljava/lang/Class;)Ljava/lang/reflect/Method;
+00005e: move-result-object v0
+000060: new-array v2, v3, [Ljava/lang/Object;
+000064: aput-object v10, v2, v6
+000068: aput-object v11, v2, v7
+00006c: aput-object v12, v2, v8
+000070: invoke-virtual v0, v9, v2, Ljava/lang/reflect/Method;->invoke(Ljava/lang/Object; [Ljava/lang/Object;)Ljava/lang/Object;
+000076: goto +7h
+000078: move-exception v9
+00007a: const-string v10, "createGroupExt invoke failed"
+00007e: invoke-static v1, v10, v9, Lc/c/f/a/b;->b(Ljava/lang/String; Ljava/lang/String; Ljava/lang/Throwable;)V
+000084: return-void 
+
+METHOD a()Z
+000000: const/4 v0, 0
+000002: const-class v1, Landroid/net/wifi/p2p/WifiP2pManager;
+000006: const-string v2, "createGroupExt"
+00000a: const/4 v3, 3
+00000c: new-array v3, v3, [Ljava/lang/Class;
+000010: const-class v4, Landroid/net/wifi/p2p/WifiP2pManager$Channel;
+000014: aput-object v4, v3, v0
+000018: const-class v4, Landroid/net/wifi/p2p/WifiP2pGroup;
+00001c: const/4 v5, 1
+00001e: aput-object v4, v3, v5
+000022: const/4 v4, 2
+000024: const-class v6, Landroid/net/wifi/p2p/WifiP2pManager$ActionListener;
+000028: aput-object v6, v3, v4
+00002c: invoke-virtual v1, v2, v3, Ljava/lang/Class;->getDeclaredMethod(Ljava/lang/String; [Ljava/lang/Class;)Ljava/lang/reflect/Method;
+000032: return v5
+000034: const-string v1, "WifiP2pManagerProxy"
+000038: const-string v2, "There is no createGroupExt."
+00003c: invoke-static v1, v2, Lc/c/f/a/b;->g(Ljava/lang/String; Ljava/lang/String;)V
+000042: return v0
+
+METHOD a(Landroid/net/wifi/p2p/WifiP2pManager; Landroid/net/wifi/p2p/WifiP2pManager$Channel; Lcom/vivo/connbase/m0/a/g/c$c;)Z
+000000: const-string v0, "WifiP2pManagerProxy"
+000004: const/4 v1, 0
+000006: const-string v2, "android.net.wifi.p2p.WifiP2pGroupList"
+00000a: invoke-static v2, Ljava/lang/Class;->forName(Ljava/lang/String;)Ljava/lang/Class;
+000010: move-result-object v2
+000012: const-string v3, "getGroupList"
+000016: new-array v4, v1, [Ljava/lang/Class;
+00001a: invoke-virtual v2, v3, v4, Ljava/lang/Class;->getDeclaredMethod(Ljava/lang/String; [Ljava/lang/Class;)Ljava/lang/reflect/Method;
+000020: move-result-object v2
+000022: new-instance v3, Lcom/vivo/connbase/m0/a/g/c$a;
+000026: invoke-direct v3, v2, v10, Lcom/vivo/connbase/m0/a/g/c$a;-><init>(Ljava/lang/reflect/Method; Lcom/vivo/connbase/m0/a/g/c$c;)V
+00002c: const-string v10, "android.net.wifi.p2p.WifiP2pManager$PersistentGroupInfoListener"
+000030: invoke-static v10, Ljava/lang/Class;->forName(Ljava/lang/String;)Ljava/lang/Class;
+000036: move-result-object v10
+000038: const-class v2, Landroid/net/wifi/p2p/WifiP2pManager;
+00003c: const-string v4, "requestPersistentGroupInfo"
+000040: const/4 v5, 2
+000042: new-array v6, v5, [Ljava/lang/Class;
+000046: const-class v7, Landroid/net/wifi/p2p/WifiP2pManager$Channel;
+00004a: aput-object v7, v6, v1
+00004e: const/4 v7, 1
+000050: aput-object v10, v6, v7
+000054: invoke-virtual v2, v4, v6, Ljava/lang/Class;->getDeclaredMethod(Ljava/lang/String; [Ljava/lang/Class;)Ljava/lang/reflect/Method;
+00005a: move-result-object v2
+00005c: invoke-virtual v10, Ljava/lang/Class;->getClassLoader()Ljava/lang/ClassLoader;
+000062: move-result-object v4
+000064: if-nez v4, +008h
+000068: const-string v8, "ClassLoader is null"
+00006c: invoke-static v0, v8, Lc/c/f/a/b;->p(Ljava/lang/String; Ljava/lang/String;)V
+000072: return v1
+000074: new-array v4, v5, [Ljava/lang/Object;
+000078: aput-object v9, v4, v1
+00007c: invoke-virtual v10, Ljava/lang/Class;->getClassLoader()Ljava/lang/ClassLoader;
+000082: move-result-object v9
+000084: new-array v5, v7, [Ljava/lang/Class;
+000088: aput-object v10, v5, v1
+00008c: invoke-static v9, v5, v3, Ljava/lang/reflect/Proxy;->newProxyInstance(Ljava/lang/ClassLoader; [Ljava/lang/Class; Ljava/lang/reflect/InvocationHandler;)Ljava/lang/Object;
+000092: move-result-object v9
+000094: aput-object v9, v4, v7
+000098: invoke-virtual v2, v8, v4, Ljava/lang/reflect/Method;->invoke(Ljava/lang/Object; [Ljava/lang/Object;)Ljava/lang/Object;
+00009e: return v7
+0000a0: move-exception v8
+0000a2: const-string v9, "Request persistent group info failed."
+0000a6: invoke-static v0, v9, v8, Lc/c/f/a/b;->e(Ljava/lang/String; Ljava/lang/String; Ljava/lang/Throwable;)V
+0000ac: return v1
+
+METHOD b(Landroid/net/wifi/p2p/WifiP2pManager; Landroid/net/wifi/p2p/WifiP2pManager$Channel; I Landroid/net/wifi/p2p/WifiP2pManager$ActionListener;)Z
+000000: new-instance v0, Ljava/lang/StringBuilder;
+000004: invoke-direct v0, Ljava/lang/StringBuilder;-><init>()V
+00000a: const-string v1, "Try to set channel to "
+00000e: invoke-virtual v0, v1, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+000014: invoke-virtual v0, v12, Ljava/lang/StringBuilder;->append(I)Ljava/lang/StringBuilder;
+00001a: invoke-virtual v0, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
+000020: move-result-object v0
+000022: const-string v1, "WifiP2pManagerProxy"
+000026: invoke-static v1, v0, Lc/c/f/a/b;->a(Ljava/lang/String; Ljava/lang/String;)V
+00002c: const/4 v0, 0
+00002e: const-class v2, Landroid/net/wifi/p2p/WifiP2pManager;
+000032: const-string v3, "setWifiP2pChannels"
+000036: const/4 v4, 4
+000038: new-array v5, v4, [Ljava/lang/Class;
+00003c: const-class v6, Landroid/net/wifi/p2p/WifiP2pManager$Channel;
+000040: aput-object v6, v5, v0
+000044: sget-object v6, Ljava/lang/Integer;->TYPE Ljava/lang/Class;
+000048: const/4 v7, 1
+00004a: aput-object v6, v5, v7
+00004e: sget-object v6, Ljava/lang/Integer;->TYPE Ljava/lang/Class;
+000052: const/4 v8, 2
+000054: aput-object v6, v5, v8
+000058: const-class v6, Landroid/net/wifi/p2p/WifiP2pManager$ActionListener;
+00005c: const/4 v9, 3
+00005e: aput-object v6, v5, v9
+000062: invoke-virtual v2, v3, v5, Ljava/lang/Class;->getDeclaredMethod(Ljava/lang/String; [Ljava/lang/Class;)Ljava/lang/reflect/Method;
+000068: move-result-object v2
+00006a: new-array v3, v4, [Ljava/lang/Object;
+00006e: aput-object v11, v3, v0
+000072: invoke-static v0, Ljava/lang/Integer;->valueOf(I)Ljava/lang/Integer;
+000078: move-result-object v11
+00007a: aput-object v11, v3, v7
+00007e: invoke-static v12, Ljava/lang/Integer;->valueOf(I)Ljava/lang/Integer;
+000084: move-result-object v11
+000086: aput-object v11, v3, v8
+00008a: aput-object v13, v3, v9
+00008e: invoke-virtual v2, v10, v3, Ljava/lang/reflect/Method;->invoke(Ljava/lang/Object; [Ljava/lang/Object;)Ljava/lang/Object;
+000094: return v7
+000096: move-exception v10
+000098: const-string v11, "setWifiP2pChannels invoke failed"
+00009c: invoke-static v1, v11, v10, Lc/c/f/a/b;->b(Ljava/lang/String; Ljava/lang/String; Ljava/lang/Throwable;)V
+0000a2: return v0

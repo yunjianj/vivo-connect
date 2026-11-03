@@ -1,0 +1,205 @@
+APK pcsuite/updateApk/connbase.apk
+DEX classes.dex
+CLASS Lcom/vivo/connbase/f0/j;
+SUPER Ljava/lang/Object;
+FIELDS
+f Ljava/lang/String; = 'ConnBaseCipherTAG'
+g Ljava/lang/String; = 'AAAAfQAAAABBULPdAAEAAAAEDmZvckNvbnN0cnVjdG9yEWNvbS52aXZvLmNvbm5iYXNlEE52cmlQZ3loQVdaY1ZEZHkJRW5mb3JjaW5nLXsicHJvdGVjdGlvblRocmVhZE1vZGUiOjEsInNlY3VyaXR5TW9kZSI6MTMxfQA'
+a Landroid/content/Context; = None
+b Ljava/lang/String; = None
+c Ljava/lang/String; = None
+d Lcom/vivo/seckeysdk/SecurityKeyCipher; = None
+e Lcom/vivo/connbase/f0/k; = None
+
+METHOD <init>()V
+000000: invoke-direct v2, Ljava/lang/Object;-><init>()V
+000006: invoke-static Lcom/vivo/connbase/App;->m()Lcom/vivo/connbase/App;
+00000c: move-result-object v0
+00000e: iput-object v0, v2, Lcom/vivo/connbase/f0/j;->a Landroid/content/Context;
+000012: const-string v1, "AAAAfQAAAABBULPdAAEAAAAEDmZvckNvbnN0cnVjdG9yEWNvbS52aXZvLmNvbm5iYXNlEE52cmlQZ3loQVdaY1ZEZHkJRW5mb3JjaW5nLXsicHJvdGVjdGlvblRocmVhZE1vZGUiOjEsInNlY3VyaXR5TW9kZSI6MTMxfQA"
+000016: invoke-static v0, v1, Lcom/vivo/seckeysdk/SecurityKeyCipher;->getInstance(Landroid/content/Context; Ljava/lang/String;)Lcom/vivo/seckeysdk/SecurityKeyCipher;
+00001c: move-result-object v0
+00001e: iput-object v0, v2, Lcom/vivo/connbase/f0/j;->d Lcom/vivo/seckeysdk/SecurityKeyCipher;
+000022: return-void 
+
+METHOD <init>(Lcom/vivo/connbase/f0/j$a;)V
+000000: invoke-direct v0, Lcom/vivo/connbase/f0/j;-><init>()V
+000006: return-void 
+
+METHOD a(Lcom/vivo/seckeysdk/a/a;)V
+000000: new-instance v0, Ljava/lang/StringBuilder;
+000004: invoke-direct v0, Ljava/lang/StringBuilder;-><init>()V
+00000a: const-string v1, "getNodeReady completed. deviceNode:"
+00000e: invoke-virtual v0, v1, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+000014: invoke-virtual v0, v2, Ljava/lang/StringBuilder;->append(Ljava/lang/Object;)Ljava/lang/StringBuilder;
+00001a: invoke-virtual v0, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
+000020: move-result-object v2
+000022: const-string v0, "ConnBaseCipherTAG"
+000026: invoke-static v0, v2, Lc/c/f/a/b;->l(Ljava/lang/String; Ljava/lang/String;)V
+00002c: return-void 
+
+METHOD a(Ljava/lang/Throwable;)V
+000000: new-instance v0, Ljava/lang/StringBuilder;
+000004: invoke-direct v0, Ljava/lang/StringBuilder;-><init>()V
+00000a: const-string v1, "getNodeReady error:"
+00000e: invoke-virtual v0, v1, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+000014: invoke-virtual v2, Ljava/lang/Throwable;->toString()Ljava/lang/String;
+00001a: move-result-object v2
+00001c: invoke-virtual v0, v2, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+000022: invoke-virtual v0, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
+000028: move-result-object v2
+00002a: const-string v0, "ConnBaseCipherTAG"
+00002e: invoke-static v0, v2, Lc/c/f/a/b;->h(Ljava/lang/String; Ljava/lang/String;)V
+000034: return-void 
+
+METHOD f()Lcom/vivo/connbase/f0/j;
+000000: sget-object v0, Lcom/vivo/connbase/f0/j$b;->a Lcom/vivo/connbase/f0/j;
+000004: return-object v0
+
+METHOD a()V
+000000: iget-object v0, v2, Lcom/vivo/connbase/f0/j;->e Lcom/vivo/connbase/f0/k;
+000004: if-eqz v0, +00eh
+000008: const-string v0, "ConnBaseCipherTAG"
+00000c: const-string v1, "clear deviceNode start"
+000010: invoke-static v0, v1, Lc/c/f/a/b;->l(Ljava/lang/String; Ljava/lang/String;)V
+000016: iget-object v0, v2, Lcom/vivo/connbase/f0/j;->e Lcom/vivo/connbase/f0/k;
+00001a: invoke-virtual v0, Lcom/vivo/connbase/f0/k;->a()V
+000020: return-void 
+
+METHOD b()Lcom/vivo/connbase/f0/k;
+000000: iget-object v0, v3, Lcom/vivo/connbase/f0/j;->e Lcom/vivo/connbase/f0/k;
+000004: if-nez v0, +035h
+000008: invoke-static Lcom/vivo/connbase/e0/g/e;->b()Ljava/lang/String;
+00000e: move-result-object v0
+000010: iput-object v0, v3, Lcom/vivo/connbase/f0/j;->c Ljava/lang/String;
+000014: invoke-static v0, Landroid/text/TextUtils;->isEmpty(Ljava/lang/CharSequence;)Z
+00001a: move-result v0
+00001c: if-nez v0, +029h
+000020: iget-object v0, v3, Lcom/vivo/connbase/f0/j;->d Lcom/vivo/seckeysdk/SecurityKeyCipher;
+000024: iget-object v1, v3, Lcom/vivo/connbase/f0/j;->c Ljava/lang/String;
+000028: invoke-virtual v0, v1, Lcom/vivo/seckeysdk/SecurityKeyCipher;->getDeviceNode(Ljava/lang/String;)Lcom/vivo/seckeysdk/a/a;
+00002e: move-result-object v0
+000030: new-instance v1, Ljava/lang/StringBuilder;
+000034: invoke-direct v1, Ljava/lang/StringBuilder;-><init>()V
+00003a: const-string v2, "deviceNode:"
+00003e: invoke-virtual v1, v2, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+000044: invoke-virtual v1, v0, Ljava/lang/StringBuilder;->append(Ljava/lang/Object;)Ljava/lang/StringBuilder;
+00004a: invoke-virtual v1, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
+000050: move-result-object v1
+000052: const-string v2, "ConnBaseCipherTAG"
+000056: invoke-static v2, v1, Lc/c/f/a/b;->l(Ljava/lang/String; Ljava/lang/String;)V
+00005c: new-instance v1, Lcom/vivo/connbase/f0/k;
+000060: iget-object v2, v3, Lcom/vivo/connbase/f0/j;->c Ljava/lang/String;
+000064: invoke-direct v1, v2, v0, Lcom/vivo/connbase/f0/k;-><init>(Ljava/lang/String; Lcom/vivo/seckeysdk/a/a;)V
+00006a: iput-object v1, v3, Lcom/vivo/connbase/f0/j;->e Lcom/vivo/connbase/f0/k;
+00006e: iget-object v0, v3, Lcom/vivo/connbase/f0/j;->e Lcom/vivo/connbase/f0/k;
+000072: return-object v0
+
+METHOD c()I
+000000: iget-object v0, v1, Lcom/vivo/connbase/f0/j;->e Lcom/vivo/connbase/f0/k;
+000004: if-nez v0, +004h
+000008: const/4 v0, 1
+00000a: return v0
+00000c: invoke-virtual v0, Lcom/vivo/connbase/f0/k;->e()Z
+000012: move-result v0
+000014: if-eqz v0, +004h
+000018: const/4 v0, 0
+00001a: goto +2h
+00001c: const/4 v0, 2
+00001e: return v0
+
+METHOD d()Z
+000000: invoke-virtual v1, Lcom/vivo/connbase/f0/j;->c()I
+000006: move-result v0
+000008: if-nez v0, +004h
+00000c: const/4 v0, 1
+00000e: goto +2h
+000010: const/4 v0, 0
+000012: return v0
+
+METHOD e()V
+000000: monitor-enter v5
+000002: const-string v0, "ConnBaseCipherTAG"
+000006: const-string v1, "updateDeviceNode"
+00000a: invoke-static v0, v1, Lc/c/f/a/b;->l(Ljava/lang/String; Ljava/lang/String;)V
+000010: iget-object v0, v5, Lcom/vivo/connbase/f0/j;->b Ljava/lang/String;
+000014: iget-object v1, v5, Lcom/vivo/connbase/f0/j;->c Ljava/lang/String;
+000018: iget-object v2, v5, Lcom/vivo/connbase/f0/j;->a Landroid/content/Context;
+00001c: invoke-static v2, Lcom/bbk/account/base/BBKAccountManager;->getInstance(Landroid/content/Context;)Lcom/bbk/account/base/BBKAccountManager;
+000022: move-result-object v2
+000024: invoke-virtual v2, Lcom/bbk/account/base/BBKAccountManager;->getUserName()Ljava/lang/String;
+00002a: move-result-object v2
+00002c: iput-object v2, v5, Lcom/vivo/connbase/f0/j;->b Ljava/lang/String;
+000030: invoke-static Lcom/vivo/connbase/e0/g/e;->b()Ljava/lang/String;
+000036: move-result-object v2
+000038: iput-object v2, v5, Lcom/vivo/connbase/f0/j;->c Ljava/lang/String;
+00003c: const-string v2, "ConnBaseCipherTAG"
+000040: new-instance v3, Ljava/lang/StringBuilder;
+000044: invoke-direct v3, Ljava/lang/StringBuilder;-><init>()V
+00004a: const-string v4, "old name:"
+00004e: invoke-virtual v3, v4, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+000054: invoke-virtual v3, v0, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+00005a: const-string v0, ", old iD:"
+00005e: invoke-virtual v3, v0, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+000064: invoke-virtual v3, v1, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+00006a: const-string v0, ", new name:"
+00006e: invoke-virtual v3, v0, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+000074: iget-object v0, v5, Lcom/vivo/connbase/f0/j;->b Ljava/lang/String;
+000078: invoke-virtual v3, v0, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+00007e: const-string v0, "， new id:"
+000082: invoke-virtual v3, v0, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+000088: iget-object v0, v5, Lcom/vivo/connbase/f0/j;->c Ljava/lang/String;
+00008c: invoke-virtual v3, v0, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+000092: invoke-virtual v3, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
+000098: move-result-object v0
+00009a: invoke-static v2, v0, Lc/c/f/a/b;->l(Ljava/lang/String; Ljava/lang/String;)V
+0000a0: iget-object v0, v5, Lcom/vivo/connbase/f0/j;->e Lcom/vivo/connbase/f0/k;
+0000a4: if-eqz v0, +00eh
+0000a8: const-string v0, "ConnBaseCipherTAG"
+0000ac: const-string v1, "mCipherNode is not null"
+0000b0: invoke-static v0, v1, Lc/c/f/a/b;->l(Ljava/lang/String; Ljava/lang/String;)V
+0000b6: iget-object v0, v5, Lcom/vivo/connbase/f0/j;->e Lcom/vivo/connbase/f0/k;
+0000ba: invoke-virtual v0, Lcom/vivo/connbase/f0/k;->a()V
+0000c0: iget-object v0, v5, Lcom/vivo/connbase/f0/j;->c Ljava/lang/String;
+0000c4: invoke-static v0, Landroid/text/TextUtils;->isEmpty(Ljava/lang/CharSequence;)Z
+0000ca: move-result v0
+0000cc: if-nez v0, +048h
+0000d0: iget-object v0, v5, Lcom/vivo/connbase/f0/j;->d Lcom/vivo/seckeysdk/SecurityKeyCipher;
+0000d4: iget-object v1, v5, Lcom/vivo/connbase/f0/j;->c Ljava/lang/String;
+0000d8: invoke-virtual v0, v1, Lcom/vivo/seckeysdk/SecurityKeyCipher;->getDeviceNode(Ljava/lang/String;)Lcom/vivo/seckeysdk/a/a;
+0000de: move-result-object v0
+0000e0: const-string v1, "ConnBaseCipherTAG"
+0000e4: new-instance v2, Ljava/lang/StringBuilder;
+0000e8: invoke-direct v2, Ljava/lang/StringBuilder;-><init>()V
+0000ee: const-string v3, "deviceNode:"
+0000f2: invoke-virtual v2, v3, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+0000f8: invoke-virtual v2, v0, Ljava/lang/StringBuilder;->append(Ljava/lang/Object;)Ljava/lang/StringBuilder;
+0000fe: invoke-virtual v2, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
+000104: move-result-object v2
+000106: invoke-static v1, v2, Lc/c/f/a/b;->l(Ljava/lang/String; Ljava/lang/String;)V
+00010c: new-instance v1, Lcom/vivo/connbase/f0/k;
+000110: iget-object v2, v5, Lcom/vivo/connbase/f0/j;->c Ljava/lang/String;
+000114: invoke-direct v1, v2, v0, Lcom/vivo/connbase/f0/k;-><init>(Ljava/lang/String; Lcom/vivo/seckeysdk/a/a;)V
+00011a: iput-object v1, v5, Lcom/vivo/connbase/f0/j;->e Lcom/vivo/connbase/f0/k;
+00011e: invoke-virtual v1, Lcom/vivo/connbase/f0/k;->c()Ld/a/a/c/j;
+000124: move-result-object v1
+000126: invoke-static Ld/a/a/n/b;->b()Ld/a/a/c/q0;
+00012c: move-result-object v2
+00012e: invoke-virtual v1, v2, Ld/a/a/c/j;->b(Ld/a/a/c/q0;)Ld/a/a/c/j;
+000134: move-result-object v1
+000136: invoke-static Ld/a/a/a/e/b;->b()Ld/a/a/c/q0;
+00013c: move-result-object v2
+00013e: invoke-virtual v1, v2, Ld/a/a/c/j;->a(Ld/a/a/c/q0;)Ld/a/a/c/j;
+000144: move-result-object v1
+000146: new-instance v2, Lcom/vivo/connbase/f0/b;
+00014a: invoke-direct v2, v0, Lcom/vivo/connbase/f0/b;-><init>(Lcom/vivo/seckeysdk/a/a;)V
+000150: sget-object v0, Lcom/vivo/connbase/f0/c;->a Lcom/vivo/connbase/f0/c;
+000154: invoke-virtual v1, v2, v0, Ld/a/a/c/j;->b(Ld/a/a/g/a; Ld/a/a/g/g;)Ld/a/a/d/e;
+00015a: goto +4h
+00015c: const/4 v0, 0
+00015e: iput-object v0, v5, Lcom/vivo/connbase/f0/j;->e Lcom/vivo/connbase/f0/k;
+000162: monitor-exit v5
+000164: return-void 
+000166: move-exception v0
+000168: monitor-exit v5
+00016a: throw v0

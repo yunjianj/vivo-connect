@@ -1,0 +1,764 @@
+
+samples/windows/v7.0.6.0-cn/pcsuite/vdfs/vdfs.exe:     file format pei-i386
+
+Characteristics 0x102
+	executable
+	32 bit words
+
+Time/Date		Wed Aug 19 10:23:04 2026
+Magic			010b	(PE32)
+MajorLinkerVersion	14
+MinorLinkerVersion	29
+SizeOfCode		000d5c00
+SizeOfInitializedData	00046c00
+SizeOfUninitializedData	00000000
+AddressOfEntryPoint	000c004e
+BaseOfCode		00001000
+BaseOfData		000d7000
+ImageBase		00400000
+SectionAlignment	00001000
+FileAlignment		00000200
+MajorOSystemVersion	6
+MinorOSystemVersion	0
+MajorImageVersion	0
+MinorImageVersion	0
+MajorSubsystemVersion	6
+MinorSubsystemVersion	0
+Win32Version		00000000
+SizeOfImage		0011f000
+SizeOfHeaders		00000400
+CheckSum		00124ee4
+Subsystem		00000002	(Windows GUI)
+DllCharacteristics	00008140
+					DYNAMIC_BASE
+					NX_COMPAT
+					TERMINAL_SERVICE_AWARE
+SizeOfStackReserve	00100000
+SizeOfStackCommit	00001000
+SizeOfHeapReserve	00100000
+SizeOfHeapCommit	00001000
+LoaderFlags		00000000
+NumberOfRvaAndSizes	00000010
+
+The Data Directory
+Entry 0 00000000 00000000 Export Directory [.edata (or where ever we found it)]
+Entry 1 000fe76c 000001b8 Import Directory [parts of .idata]
+Entry 2 0010e000 00000558 Resource Directory [.rsrc]
+Entry 3 00000000 00000000 Exception Directory [.pdata]
+Entry 4 0011a800 00002940 Security Directory
+Entry 5 0010f000 0000fbd0 Base Relocation Directory [.reloc]
+Entry 6 000e8b10 0000001c Debug Directory
+Entry 7 00000000 00000000 Description Directory
+Entry 8 00000000 00000000 Special Directory
+Entry 9 000e8c00 00000018 Thread Storage Directory [.tls]
+Entry a 000e8b30 00000040 Load Configuration Directory
+Entry b 00000000 00000000 Bound Import Directory
+Entry c 000d7000 00000990 Import Address Table Directory
+Entry d 00000000 00000000 Delay Import Directory
+Entry e 00000000 00000000 CLR Runtime Header
+Entry f 00000000 00000000 Reserved
+
+There is an import table in .rdata at 0x4fe76c
+
+The Import Tables (interpreted .rdata section contents)
+ vma:            Hint    Time      Forward  DLL       First
+                 Table   Stamp     Chain    Name      Thunk
+ 000fe76c	000feff8 00000000 00000000 000ffc56 000d76d4
+
+	DLL Name: Qt5Network.dll
+	vma:     Ordinal  Hint  Member-Name  Bound-To
+	000d76d4  <none>  0520  ?staticMetaObject@QAbstractSocket@@2UQMetaObject@@B
+	000d76d8  <none>  03de  ?qt_metacast@QTcpSocket@@UAEPAXPBD@Z
+	000d76dc  <none>  03c8  ?qt_metacall@QTcpSocket@@UAEHW4Call@QMetaObject@@HPAPAX@Z
+	000d76e0  <none>  032e  ?metaObject@QTcpSocket@@UBEPBUQMetaObject@@XZ
+	000d76e4  <none>  0575  ?toString@QHostAddress@@QBE?AVQString@@XZ
+	000d76e8  <none>  00c9  ??4QHostAddress@@QAEAAV0@ABV0@@Z
+	000d76ec  <none>  00b8  ??1QTcpSocket@@UAE@XZ
+	000d76f0  <none>  007e  ??0QTcpSocket@@QAE@PAVQObject@@@Z
+	000d76f4  <none>  0251  ?errorOccurred@QAbstractSocket@@QAEXW4SocketError@1@@Z
+	000d76f8  <none>  01e6  ?connected@QAbstractSocket@@QAEXXZ
+	000d76fc  <none>  0268  ?flush@QAbstractSocket@@QAE_NXZ
+	000d7700  <none>  0517  ?state@QAbstractSocket@@QBE?AW4SocketState@1@XZ
+	000d7704  <none>  0169  ?abort@QAbstractSocket@@QAEXXZ
+	000d7708  <none>  04f5  ?setUseSystemConfiguration@QNetworkProxyFactory@@SAX_N@Z
+	000d770c  <none>  043c  ?setAddress@QHostAddress@@QAE_NABVQString@@@Z
+	000d7710  <none>  001b  ??0QHostAddress@@QAE@ABV0@@Z
+	000d7714  <none>  05d9  ?writeData@QAbstractSocket@@MAE_JPBD_J@Z
+	000d7718  <none>  0023  ??0QHostAddress@@QAE@XZ
+	000d771c  <none>  05ce  ?waitForDisconnected@QAbstractSocket@@UAE_NH@Z
+	000d7720  <none>  05cb  ?waitForConnected@QAbstractSocket@@UAE_NH@Z
+	000d7724  <none>  05c8  ?waitForBytesWritten@QAbstractSocket@@UAE_NH@Z
+	000d7728  <none>  0501  ?socketOption@QAbstractSocket@@UAE?AVQVariant@@W4SocketOption@1@@Z
+	000d772c  <none>  04fd  ?socketDescriptor@QAbstractSocket@@UBEHXZ
+	000d7730  <none>  04e0  ?setSocketOption@QAbstractSocket@@UAEXW4SocketOption@1@ABVQVariant@@@Z
+	000d7734  <none>  04db  ?setSocketDescriptor@QAbstractSocket@@UAE_NHW4SocketState@1@V?$QFlags@W4OpenModeFlag@QIODevice@@@@@Z
+	000d7738  <none>  04c9  ?setReadBufferSize@QAbstractSocket@@UAEX_J@Z
+	000d773c  <none>  0416  ?resume@QAbstractSocket@@UAEXXZ
+	000d7740  <none>  0408  ?readLineData@QAbstractSocket@@MAE_JPAD_J@Z
+	000d7744  <none>  0404  ?readData@QAbstractSocket@@MAE_JPAD_J@Z
+	000d7748  <none>  03df  ?qt_metacast@QUdpSocket@@UAEPAXPBD@Z
+	000d774c  <none>  03c9  ?qt_metacall@QUdpSocket@@UAEHW4Call@QMetaObject@@HPAPAX@Z
+	000d7750  <none>  032f  ?metaObject@QUdpSocket@@UBEPBUQMetaObject@@XZ
+	000d7754  <none>  02d4  ?isSequential@QAbstractSocket@@UBE_NXZ
+	000d7758  <none>  0226  ?disconnectFromHost@QAbstractSocket@@UAEXXZ
+	000d775c  <none>  01dd  ?connectToHost@QAbstractSocket@@UAEXABVQString@@GV?$QFlags@W4OpenModeFlag@QIODevice@@@@W4NetworkLayerProtocol@1@@Z
+	000d7760  <none>  01dc  ?connectToHost@QAbstractSocket@@UAEXABVQHostAddress@@GV?$QFlags@W4OpenModeFlag@QIODevice@@@@@Z
+	000d7764  <none>  01bd  ?close@QAbstractSocket@@UAEXXZ
+	000d7768  <none>  01a8  ?canReadLine@QAbstractSocket@@UBE_NXZ
+	000d776c  <none>  019f  ?bytesToWrite@QAbstractSocket@@UBE_JXZ
+	000d7770  <none>  019b  ?bytesAvailable@QAbstractSocket@@UBE_JXZ
+	000d7774  <none>  018b  ?atEnd@QAbstractSocket@@UBE_NXZ
+	000d7778  <none>  05dd  ?writeDatagram@QUdpSocket@@QAE_JABVQByteArray@@ABVQHostAddress@@G@Z
+	000d777c  <none>  0407  ?readDatagram@QUdpSocket@@QAE_JPAD_JPAVQHostAddress@@PAG@Z
+	000d7780  <none>  037c  ?pendingDatagramSize@QUdpSocket@@QBE_JXZ
+	000d7784  <none>  00b9  ??1QUdpSocket@@UAE@XZ
+	000d7788  <none>  007f  ??0QUdpSocket@@QAE@PAVQObject@@@Z
+	000d778c  <none>  0022  ??0QHostAddress@@QAE@W4SpecialAddress@0@@Z
+	000d7790  <none>  0197  ?bind@QAbstractSocket@@QAE_NABVQHostAddress@@GV?$QFlags@W4BindFlag@QAbstractSocket@@@@@Z
+	000d7794  <none>  0092  ??1QHostAddress@@QAE@XZ
+	000d7798  <none>  05d5  ?waitForReadyRead@QAbstractSocket@@UAE_NH@Z
+
+ 000fe780	000ff248 00000000 00000000 000ffd12 000d7924
+
+	DLL Name: dokan2.dll
+	vma:     Ordinal  Hint  Member-Name  Bound-To
+	000d7924  <none>  0011  DokanNtStatusFromWin32
+	000d7928  <none>  0009  DokanMapKernelToUserCreateFileFlags
+	000d792c  <none>  0014  DokanRemoveMountPoint
+	000d7930  <none>  001d  DokanWaitForFileSystemClosed
+	000d7934  <none>  0001  DokanCreateFileSystem
+	000d7938  <none>  0005  DokanInit
+	000d793c  <none>  0019  DokanShutdown
+
+ 000fe794	000feb30 00000000 00000000 000ffd9a 000d720c
+
+	DLL Name: PcsuiteConnectSDK.dll
+	vma:     Ordinal  Hint  Member-Name  Bound-To
+	000d720c  <none>  0004  ??0PcsuiteMessageHandlerBase@@QAE@XZ
+	000d7210  <none>  000d  ?createPcsuiteConnector@PcsuiteConnectorClassFactory@@SAPAVIPcsuiteConnector@@XZ
+
+ 000fe7a8	000ff290 00000000 00000000 000ffe46 000d796c
+
+	DLL Name: sqlite3.dll
+	vma:     Ordinal  Hint  Member-Name  Bound-To
+	000d796c  <none>  0068  sqlite3_get_table
+	000d7970  <none>  005c  sqlite3_exec
+	000d7974  <none>  0064  sqlite3_free
+	000d7978  <none>  0081  sqlite3_open_v2
+	000d797c  <none>  0059  sqlite3_errmsg
+	000d7980  <none>  0065  sqlite3_free_table
+	000d7984  <none>  001f  sqlite3_busy_timeout
+	000d7988  <none>  0023  sqlite3_close
+
+ 000fe7bc	000ff268 00000000 00000000 000fff08 000d7944
+
+	DLL Name: libcurl.dll
+	vma:     Ordinal  Hint  Member-Name  Bound-To
+	000d7944  <none>  0019  curl_global_init
+	000d7948  <none>  0018  curl_global_cleanup
+	000d794c  <none>  000d  curl_easy_setopt
+	000d7950  <none>  0000  curl_easy_cleanup
+	000d7954  <none>  0004  curl_easy_init
+	000d7958  <none>  000e  curl_easy_strerror
+	000d795c  <none>  0049  curl_slist_append
+	000d7960  <none>  0003  curl_easy_getinfo
+	000d7964  <none>  0009  curl_easy_perform
+
+ 000fe7d0	000feb3c 00000000 00000000 001030ac 000d7218
+
+	DLL Name: Qt5Core.dll
+	vma:     Ordinal  Hint  Member-Name  Bound-To
+	000d7218  <none>  1920  ?separator@QDir@@SA?AVQChar@@XZ
+	000d721c  <none>  2016  ?writableLocation@QStandardPaths@@SA?AVQString@@W4StandardLocation@1@@Z
+	000d7220  <none>  09be  ?childEvent@QObject@@MAEXPAVQChildEvent@@@Z
+	000d7224  <none>  0a7b  ?connectNotify@QObject@@MAEXABVQMetaMethod@@@Z
+	000d7228  <none>  0b7a  ?customEvent@QObject@@MAEXPAVQEvent@@@Z
+	000d722c  <none>  0cb4  ?disconnectNotify@QObject@@MAEXABVQMetaMethod@@@Z
+	000d7230  <none>  0da7  ?event@QObject@@UAE_NPAVQEvent@@@Z
+	000d7234  <none>  0db1  ?event@QThread@@UAE_NPAVQEvent@@@Z
+	000d7238  <none>  0db9  ?eventFilter@QObject@@UAE_NPAV1@PAVQEvent@@@Z
+	000d723c  <none>  1373  ?metaObject@QThread@@UBEPBUQMetaObject@@XZ
+	000d7240  <none>  1374  ?metaObject@QThreadPool@@UBEPBUQMetaObject@@XZ
+	000d7244  <none>  165c  ?qt_metacall@QThreadPool@@UAEHW4Call@QMetaObject@@HPAPAX@Z
+	000d7248  <none>  1699  ?qt_metacast@QThreadPool@@UAEPAXPBD@Z
+	000d724c  <none>  18c2  ?run@QThread@@MAEXXZ
+	000d7250  <none>  1cd6  ?timerEvent@QObject@@MAEXPAVQTimerEvent@@@Z
+	000d7254  <none>  1af2  ?shared_null@QListData@@2UData@1@B
+	000d7258  <none>  1af0  ?shared_null@QHashData@@2U1@B
+	000d725c  <none>  1271  ?lastIndexOf@QString@@QBEHABV1@HW4CaseSensitivity@Qt@@@Z
+	000d7260  <none>  1393  ?mid@QString@@QBE?AV1@HH@Z
+	000d7264  <none>  1462  ?number@QString@@SA?AV1@_KH@Z
+	000d7268  <none>  1dc6  ?toStdString@QString@@QBE?AV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@XZ
+	000d726c  <none>  01da  ??0QRunnable@@QAE@XZ
+	000d7270  <none>  0352  ??1QRunnable@@UAE@XZ
+	000d7274  <none>  00c7  ??0QDateTime@@QAE@ABV0@@Z
+	000d7278  <none>  0b66  ?currentMSecsSinceEpoch@QDateTime@@SA_JXZ
+	000d727c  <none>  0d8b  ?errorString@QIODevice@@QBE?AVQString@@XZ
+	000d7280  <none>  0a01  ?close@QFileDevice@@UAEXXZ
+	000d7284  <none>  0101  ??0QFile@@QAE@ABVQString@@@Z
+	000d7288  <none>  0313  ??1QFile@@UAE@XZ
+	000d728c  <none>  0dcd  ?exists@QFile@@QBE_NXZ
+	000d7290  <none>  0dce  ?exists@QFile@@SA_NABVQString@@@Z
+	000d7294  <none>  17ae  ?remove@QFile@@QAE_NXZ
+	000d7298  <none>  180d  ?rename@QFile@@QAE_NABVQString@@@Z
+	000d729c  <none>  1488  ?open@QFile@@UAE_NV?$QFlags@W4OpenModeFlag@QIODevice@@@@@Z
+	000d72a0  <none>  0e92  ?freeTree@QMapDataBase@@QAEXPAUQMapNodeBase@@H@Z
+	000d72a4  <none>  0e8f  ?freeData@QMapDataBase@@SAXPAU1@@Z
+	000d72a8  <none>  03db  ??4QDateTime@@QAEAAV0@ABV0@@Z
+	000d72ac  <none>  10c9  ?isEmpty@QDir@@QBE_NV?$QFlags@W4Filter@QDir@@@@@Z
+	000d72b0  <none>  17fc  ?removeRecursively@QDir@@QAE_NXZ
+	000d72b4  <none>  0dcc  ?exists@QDir@@QBE_NXZ
+	000d72b8  <none>  0f31  ?globalInstance@QThreadPool@@SAPAV1@XZ
+	000d72bc  <none>  1b9f  ?start@QThreadPool@@QAEXPAVQRunnable@@H@Z
+	000d72c0  <none>  045f  ??4QString@@QAEAAV0@$$QAV0@@Z
+	000d72c4  <none>  0ece  ?fromStdString@QString@@SA?AV1@ABV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@@Z
+	000d72c8  <none>  0065  ??0QByteArray@@QAE@XZ
+	000d72cc  <none>  0063  ??0QByteArray@@QAE@PBDH@Z
+	000d72d0  <none>  02eb  ??1QByteArray@@QAE@XZ
+	000d72d4  <none>  1869  ?resize@QByteArray@@QAEXH@Z
+	000d72d8  <none>  0bfd  ?data@QByteArray@@QAEPADXZ
+	000d72dc  <none>  0647  ??M@YA_NABVQString@@0@Z
+	000d72e0  <none>  1745  ?readyRead@QIODevice@@QAEXXZ
+	000d72e4  <none>  142a  ?nextNode@QMapNodeBase@@QBEPBU1@XZ
+	000d72e8  <none>  0e91  ?freeNodeAndRebalance@QMapDataBase@@QAEXPAUQMapNodeBase@@@Z
+	000d72ec  <none>  175b  ?recalcMostLeftNode@QMapDataBase@@QAEXXZ
+	000d72f0  <none>  0b36  ?createNode@QMapDataBase@@QAEPAUQMapNodeBase@@HHPAU2@_N@Z
+	000d72f4  <none>  0b29  ?createData@QMapDataBase@@SAPAU1@XZ
+	000d72f8  <none>  1489  ?open@QIODevice@@UAE_NV?$QFlags@W4OpenModeFlag@QIODevice@@@@@Z
+	000d72fc  <none>  14fa  ?pos@QIODevice@@UBE_JXZ
+	000d7300  <none>  1857  ?reset@QIODevice@@UAE_NXZ
+	000d7304  <none>  18fc  ?seek@QIODevice@@UAE_N_J@Z
+	000d7308  <none>  1b39  ?size@QIODevice@@UBE_JXZ
+	000d730c  <none>  1c09  ?staticMetaObject@QIODevice@@2UQMetaObject@@B
+	000d7310  <none>  1af3  ?shared_null@QMapDataBase@@2U1@B
+	000d7314  <none>  0c86  ?detach@QListData@@QAEPAUData@1@H@Z
+	000d7318  <none>  0c8f  ?detach_grow@QListData@@QAEPAUData@1@PAHH@Z
+	000d731c  <none>  0cbe  ?dispose@QListData@@QAEXXZ
+	000d7320  <none>  0d7d  ?erase@QListData@@QAEPAPAXPAPAX@Z
+	000d7324  <none>  086b  ?append@QListData@@QAEPAPAXXZ
+	000d7328  <none>  1522  ?prepend@QListData@@QAEPAPAXXZ
+	000d732c  <none>  0d63  ?entryList@QDir@@QBE?AVQStringList@@V?$QFlags@W4Filter@QDir@@@@V?$QFlags@W4SortFlag@QDir@@@@@Z
+	000d7330  <none>  1329  ?maxThreadCount@QThreadPool@@QBEHXZ
+	000d7334  <none>  07d1  ?activeThreadCount@QThreadPool@@QBEHXZ
+	000d7338  <none>  1428  ?nextNode@QHashData@@SAPAUNode@1@PAU21@@Z
+	000d733c  <none>  00cc  ??0QDateTime@@QAE@XZ
+	000d7340  <none>  03da  ??4QDateTime@@QAEAAV0@$$QAV0@@Z
+	000d7344  <none>  13f3  ?msecsTo@QDateTime@@QBE_JABV1@@Z
+	000d7348  <none>  09ea  ?clear@QThreadPool@@QAEXXZ
+	000d734c  <none>  0622  ??BQByteArray@@QBEPBDXZ
+	000d7350  <none>  1e49  ?toUtf8@QString@@QGBE?AVQByteArray@@XZ
+	000d7354  <none>  06a6  ??YQString@@QAEAAV0@PBD@Z
+	000d7358  <none>  0a8d  ?constData@QByteArray@@QBEPBDXZ
+	000d735c  <none>  1bcc  ?startsWith@QString@@QBE_NABV1@W4CaseSensitivity@Qt@@@Z
+	000d7360  <none>  1d71  ?toLocal8Bit@QString@@QGBE?AVQByteArray@@XZ
+	000d7364  <none>  1d72  ?toLocal8Bit@QString@@QHAE?AVQByteArray@@XZ
+	000d7368  <none>  0eaf  ?fromLatin1@QString@@SA?AV1@PBDH@Z
+	000d736c  <none>  1e2a  ?toUShort@QString@@QBEGPA_NH@Z
+	000d7370  <none>  174f  ?realloc@QListData@@QAEXH@Z
+	000d7374  <none>  00ba  ??0QCoreApplication@@QAE@AAHPAPADH@Z
+	000d7378  <none>  02f9  ??1QCoreApplication@@UAE@XZ
+	000d737c  <none>  08a2  ?arguments@QCoreApplication@@SA?AVQStringList@@XZ
+	000d7380  <none>  192a  ?setApplicationName@QCoreApplication@@SAXABVQString@@@Z
+	000d7384  <none>  0882  ?applicationName@QCoreApplication@@SA?AVQString@@XZ
+	000d7388  <none>  192b  ?setApplicationVersion@QCoreApplication@@SAXABVQString@@@Z
+	000d738c  <none>  0886  ?applicationVersion@QCoreApplication@@SA?AVQString@@XZ
+	000d7390  <none>  0dd1  ?exit@QCoreApplication@@SAXH@Z
+	000d7394  <none>  00b2  ??0QCommandLineOption@@QAE@ABVQString@@000@Z
+	000d7398  <none>  00b1  ??0QCommandLineOption@@QAE@ABV0@@Z
+	000d739c  <none>  02f6  ??1QCommandLineOption@@QAE@XZ
+	000d73a0  <none>  00b6  ??0QCommandLineParser@@QAE@XZ
+	000d73a4  <none>  02f7  ??1QCommandLineParser@@QAE@XZ
+	000d73a8  <none>  0800  ?addOptions@QCommandLineParser@@QAE_NABV?$QList@VQCommandLineOption@@@@@Z
+	000d73ac  <none>  081b  ?addVersionOption@QCommandLineParser@@QAE?AVQCommandLineOption@@XZ
+	000d73b0  <none>  07f2  ?addHelpOption@QCommandLineParser@@QAE?AVQCommandLineOption@@XZ
+	000d73b4  <none>  1928  ?setApplicationDescription@QCommandLineParser@@QAEXABVQString@@@Z
+	000d73b8  <none>  14b7  ?parse@QCommandLineParser@@QAE_NABVQStringList@@@Z
+	000d73bc  <none>  0d98  ?errorText@QCommandLineParser@@QBE?AVQString@@XZ
+	000d73c0  <none>  11a7  ?isSet@QCommandLineParser@@QBE_NABVQString@@@Z
+	000d73c4  <none>  1fb3  ?value@QCommandLineParser@@QBE?AVQString@@ABV2@@Z
+	000d73c8  <none>  11a6  ?isSet@QCommandLineParser@@QBE_NABVQCommandLineOption@@@Z
+	000d73cc  <none>  1af9  ?showHelp@QCommandLineParser@@QAEXH@Z
+	000d73d0  <none>  0f8b  ?helpText@QCommandLineParser@@QBE?AVQString@@XZ
+	000d73d4  <none>  0d5f  ?entryInfoList@QDir@@QBE?AV?$QList@VQFileInfo@@@@ABVQStringList@@V?$QFlags@W4Filter@QDir@@@@V?$QFlags@W4SortFlag@QDir@@@@@Z
+	000d73d8  <none>  145c  ?number@QString@@SA?AV1@HH@Z
+	000d73dc  <none>  201b  ?write@QIODevice@@QAE_JPBD_J@Z
+	000d73e0  <none>  0e75  ?flush@QFileDevice@@QAE_NXZ
+	000d73e4  <none>  0dd0  ?exists@QFileInfo@@SA_NABVQString@@@Z
+	000d73e8  <none>  1835  ?replace@QString@@QAEAAV1@ABV1@0W4CaseSensitivity@Qt@@@Z
+	000d73ec  <none>  0ed4  ?fromStdWString@QString@@SA?AV1@ABV?$basic_string@_WU?$char_traits@_W@std@@V?$allocator@_W@2@@std@@@Z
+	000d73f0  <none>  1dcc  ?toStdWString@QString@@QBE?AV?$basic_string@_WU?$char_traits@_W@std@@V?$allocator@_W@2@@std@@XZ
+	000d73f4  <none>  1224  ?isWritable@QFileInfo@@QBE_NXZ
+	000d73f8  <none>  10b8  ?isDir@QFileInfo@@QBE_NXZ
+	000d73fc  <none>  0915  ?birthTime@QFileInfo@@QBE?AVQDateTime@@XZ
+	000d7400  <none>  0dcb  ?exists@QDir@@QBE_NABVQString@@@Z
+	000d7404  <none>  0c38  ?daysTo@QDateTime@@QBE_JABV1@@Z
+	000d7408  <none>  0a8f  ?constData@QString@@QBEPBVQChar@@XZ
+	000d740c  <none>  1d8d  ?toLower@QString@@QGBE?AV1@XZ
+	000d7410  <none>  0a61  ?compare_helper@QString@@CAHPBVQChar@@HPBDHW4CaseSensitivity@Qt@@@Z
+	000d7414  <none>  00ef  ??0QEventLoop@@QAE@PAVQObject@@@Z
+	000d7418  <none>  030b  ??1QEventLoop@@UAE@XZ
+	000d741c  <none>  0dc4  ?exec@QEventLoop@@QAEHV?$QFlags@W4ProcessEventsFlag@QEventLoop@@@@@Z
+	000d7420  <none>  16f8  ?quit@QEventLoop@@QAEXXZ
+	000d7424  <none>  0810  ?addSecs@QDateTime@@QBE?AV1@_J@Z
+	000d7428  <none>  0650  ??MQDateTime@@QBE_NABV0@@Z
+	000d742c  <none>  1717  ?read@QIODevice@@QAE?AVQByteArray@@_J@Z
+	000d7430  <none>  13f6  ?msleep@QThread@@SAXK@Z
+	000d7434  <none>  18fb  ?seek@QFileDevice@@UAE_N_J@Z
+	000d7438  <none>  08ba  ?atEnd@QFileDevice@@UBE_NXZ
+	000d743c  <none>  19bd  ?setFileTime@QFileDevice@@QAE_NABVQDateTime@@W4FileTime@1@@Z
+	000d7440  <none>  17af  ?remove@QFile@@SA_NABVQString@@@Z
+	000d7444  <none>  0aef  ?copy@QFile@@SA_NABVQString@@0@Z
+	000d7448  <none>  1b36  ?size@QFile@@UBE_JXZ
+	000d744c  <none>  10eb  ?isFile@QFileInfo@@QBE_NXZ
+	000d7450  <none>  1282  ?lastModified@QFileInfo@@QBE?AVQDateTime@@XZ
+	000d7454  <none>  14c1  ?path@QDir@@QBE?AVQString@@XZ
+	000d7458  <none>  07b9  ?absoluteFilePath@QDir@@QBE?AVQString@@ABV2@@Z
+	000d745c  <none>  180b  ?rename@QDir@@QAE_NABVQString@@0@Z
+	000d7460  <none>  0244  ??0QTimer@@QAE@PAVQObject@@@Z
+	000d7464  <none>  13b4  ?mkpath@QDir@@QBE_NABVQString@@@Z
+	000d7468  <none>  1ba3  ?start@QTimer@@QAEXH@Z
+	000d746c  <none>  1c3e  ?stop@QTimer@@QAEXXZ
+	000d7470  <none>  1cd5  ?timeout@QTimer@@QAEXUQPrivateSignal@1@@Z
+	000d7474  <none>  0da2  ?event@QEventLoop@@UAE_NPAVQEvent@@@Z
+	000d7478  <none>  134f  ?metaObject@QEventLoop@@UBEPBUQMetaObject@@XZ
+	000d747c  <none>  1376  ?metaObject@QTimer@@UBEPBUQMetaObject@@XZ
+	000d7480  <none>  1638  ?qt_metacall@QEventLoop@@UAEHW4Call@QMetaObject@@HPAPAX@Z
+	000d7484  <none>  165e  ?qt_metacall@QTimer@@UAEHW4Call@QMetaObject@@HPAPAX@Z
+	000d7488  <none>  1675  ?qt_metacast@QEventLoop@@UAEPAXPBD@Z
+	000d748c  <none>  169b  ?qt_metacast@QTimer@@UAEPAXPBD@Z
+	000d7490  <none>  1cd8  ?timerEvent@QTimer@@MAEXPAVQTimerEvent@@@Z
+	000d7494  <none>  1c28  ?staticMetaObject@QTimer@@2UQMetaObject@@B
+	000d7498  <none>  0fa0  ?idealThreadCount@QThread@@SAHXZ
+	000d749c  <none>  03b3  ??4QByteArray@@QAEAAV0@$$QAV0@@Z
+	000d74a0  <none>  1b32  ?size@QByteArray@@QBEHXZ
+	000d74a4  <none>  096c  ?capacity@QByteArray@@QBEHXZ
+	000d74a8  <none>  084f  ?append@QByteArray@@QAEAAV1@ABV1@@Z
+	000d74ac  <none>  0ec3  ?fromRawData@QByteArray@@SA?AV1@PBDH@Z
+	000d74b0  <none>  0fbf  ?indexOf@QString@@QBEHABV1@HW4CaseSensitivity@Qt@@@Z
+	000d74b4  <none>  128e  ?left@QString@@QBE?AV1@H@Z
+	000d74b8  <none>  1d8e  ?toLower@QString@@QHAE?AV1@XZ
+	000d74bc  <none>  06a2  ??YQString@@QAEAAV0@ABV0@@Z
+	000d74c0  <none>  0ef4  ?fromUtf16@QString@@SA?AV1@PBGH@Z
+	000d74c4  <none>  1461  ?number@QString@@SA?AV1@_JH@Z
+	000d74c8  <none>  0208  ??0QString@@QAE@PBD@Z
+	000d74cc  <none>  059f  ??8QString@@QBE_NPBD@Z
+	000d74d0  <none>  1a95  ?setSorting@QDir@@QAEXV?$QFlags@W4SortFlag@QDir@@@@@Z
+	000d74d4  <none>  16f9  ?quit@QThread@@QAEXXZ
+	000d74d8  <none>  1d93  ?toMSecsSinceEpoch@QDateTime@@QBE_JXZ
+	000d74dc  <none>  1db4  ?toSecsSinceEpoch@QDateTime@@QBE_JXZ
+	000d74e0  <none>  0669  ??OQDateTime@@QBE_NABV0@@Z
+	000d74e4  <none>  0ee7  ?fromTime_t@QDateTime@@SA?AV1@I@Z
+	000d74e8  <none>  0b6c  ?currentSecsSinceEpoch@QDateTime@@SA_JXZ
+	000d74ec  <none>  180e  ?rename@QFile@@SA_NABVQString@@0@Z
+	000d74f0  <none>  0dcf  ?exists@QFileInfo@@QBE_NXZ
+	000d74f4  <none>  0ebe  ?fromNativeSeparators@QDir@@SA?AVQString@@ABV2@@Z
+	000d74f8  <none>  0935  ?bytesAvailable@QIODevice@@UBE_JXZ
+	000d74fc  <none>  093a  ?bytesToWrite@QIODevice@@UBE_JXZ
+	000d7500  <none>  0957  ?canReadLine@QIODevice@@UBE_NXZ
+	000d7504  <none>  0dff  ?fileName@QFile@@UBE?AVQString@@XZ
+	000d7508  <none>  11a2  ?isSequential@QFileDevice@@UBE_NXZ
+	000d750c  <none>  1352  ?metaObject@QFile@@UBEPBUQMetaObject@@XZ
+	000d7510  <none>  14dc  ?permissions@QFile@@UBE?AV?$QFlags@W4Permission@QFileDevice@@@@XZ
+	000d7514  <none>  14f9  ?pos@QFileDevice@@UBE_JXZ
+	000d7518  <none>  163b  ?qt_metacall@QFile@@UAEHW4Call@QMetaObject@@HPAPAX@Z
+	000d751c  <none>  1678  ?qt_metacast@QFile@@UAEPAXPBD@Z
+	000d7520  <none>  172b  ?readData@QFileDevice@@MAE_JPAD_J@Z
+	000d7524  <none>  1735  ?readLineData@QFileDevice@@MAE_JPAD_J@Z
+	000d7528  <none>  186b  ?resize@QFile@@UAE_N_J@Z
+	000d752c  <none>  1a4e  ?setPermissions@QFile@@UAE_NV?$QFlags@W4Permission@QFileDevice@@@@@Z
+	000d7530  <none>  1fe0  ?waitForBytesWritten@QIODevice@@UAE_NH@Z
+	000d7534  <none>  1fec  ?waitForReadyRead@QIODevice@@UAE_NH@Z
+	000d7538  <none>  202b  ?writeData@QFileDevice@@MAE_JPBD_J@Z
+	000d753c  <none>  17b8  ?remove@QString@@QAEAAV1@ABV1@W4CaseSensitivity@Qt@@@Z
+	000d7540  <none>  1e00  ?toString@QUuid@@QBE?AVQString@@XZ
+	000d7544  <none>  0b3e  ?createUuid@QUuid@@SA?AV1@XZ
+	000d7548  <none>  0ecd  ?fromStdString@QByteArray@@SA?AV1@ABV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@@Z
+	000d754c  <none>  0c09  ?data@QString@@QBEPBVQChar@@XZ
+	000d7550  <none>  09e8  ?clear@QString@@QAEXXZ
+	000d7554  <none>  0ef6  ?fromUtf8@QString@@SA?AV1@ABVQByteArray@@@Z
+	000d7558  <none>  0205  ??0QString@@QAE@ABVQByteArray@@@Z
+	000d755c  <none>  089f  ?argToQString@QtPrivate@@YA?AVQString@@VQStringView@@IPAPBUArgBase@1@@Z
+	000d7560  <none>  1da3  ?toPercentEncoding@QUrl@@SA?AVQByteArray@@ABVQString@@ABV2@1@Z
+	000d7564  <none>  1440  ?normalizedType@QMetaObject@@SA?AVQByteArray@@PBD@Z
+	000d7568  <none>  0060  ??0QByteArray@@QAE@ABV0@@Z
+	000d756c  <none>  09dd  ?clear@QByteArray@@QAEXXZ
+	000d7570  <none>  1391  ?mid@QByteArray@@QBE?AV1@HH@Z
+	000d7574  <none>  0854  ?append@QByteArray@@QAEAAV1@PBDH@Z
+	000d7578  <none>  1dc5  ?toStdString@QByteArray@@QBE?AV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@XZ
+	000d757c  <none>  1773  ?registerNormalizedType@QMetaType@@SAHABVQByteArray@@P6AXPAX@ZP6APAX1PBX@ZHV?$QFlags@W4TypeFlag@QMetaType@@@@PBUQMetaObject@@@Z
+	000d7580  <none>  1775  ?registerNormalizedTypedef@QMetaType@@SAHABVQByteArray@@H@Z
+	000d7584  <none>  171f  ?readAll@QIODevice@@QAE?AVQByteArray@@XZ
+	000d7588  <none>  2019  ?write@QIODevice@@QAE_JABVQByteArray@@@Z
+	000d758c  <none>  00c0  ??0QDataStream@@QAE@PAVQIODevice@@@Z
+	000d7590  <none>  00bf  ??0QDataStream@@QAE@PAVQByteArray@@V?$QFlags@W4OpenModeFlag@QIODevice@@@@@Z
+	000d7594  <none>  02fd  ??1QDataStream@@QAE@XZ
+	000d7598  <none>  08b9  ?atEnd@QDataStream@@QBE_NXZ
+	000d759c  <none>  04c0  ??5QDataStream@@QAEAAV0@AAC@Z
+	000d75a0  <none>  04c2  ??5QDataStream@@QAEAAV0@AAF@Z
+	000d75a4  <none>  04c4  ??5QDataStream@@QAEAAV0@AAH@Z
+	000d75a8  <none>  04ca  ??5QDataStream@@QAEAAV0@AA_J@Z
+	000d75ac  <none>  053b  ??6QDataStream@@QAEAAV0@C@Z
+	000d75b0  <none>  053f  ??6QDataStream@@QAEAAV0@H@Z
+	000d75b4  <none>  0545  ??6QDataStream@@QAEAAV0@_J@Z
+	000d75b8  <none>  1740  ?readRawData@QDataStream@@QAEHPADH@Z
+	000d75bc  <none>  2038  ?writeRawData@QDataStream@@QAEHPBDH@Z
+	000d75c0  <none>  1bba  ?startTransaction@QDataStream@@QAEXXZ
+	000d75c4  <none>  0a37  ?commitTransaction@QDataStream@@QAE_NXZ
+	000d75c8  <none>  19be  ?setFilter@QDir@@QAEXV?$QFlags@W4Filter@QDir@@@@@Z
+	000d75cc  <none>  0303  ??1QDir@@QAE@XZ
+	000d75d0  <none>  00dd  ??0QDir@@QAE@ABVQString@@@Z
+	000d75d4  <none>  0b5d  ?currentDateTime@QDateTime@@SA?AV1@XZ
+	000d75d8  <none>  18e7  ?secsTo@QDateTime@@QBE_JABV1@@Z
+	000d75dc  <none>  02fe  ??1QDateTime@@QAE@XZ
+	000d75e0  <none>  1a0b  ?setMaxThreadCount@QThreadPool@@QAEXH@Z
+	000d75e4  <none>  036f  ??1QThreadPool@@UAE@XZ
+	000d75e8  <none>  0237  ??0QThreadPool@@QAE@PAVQObject@@@Z
+	000d75ec  <none>  1284  ?lastRead@QFileInfo@@QBE?AVQDateTime@@XZ
+	000d75f0  <none>  1381  ?metadataChangeTime@QFileInfo@@QBE?AVQDateTime@@XZ
+	000d75f4  <none>  1b38  ?size@QFileInfo@@QBE_JXZ
+	000d75f8  <none>  0c9e  ?dir@QFileInfo@@QBE?AVQDir@@XZ
+	000d75fc  <none>  0e01  ?fileName@QFileInfo@@QBE?AVQString@@XZ
+	000d7600  <none>  07ba  ?absoluteFilePath@QFileInfo@@QBE?AVQString@@XZ
+	000d7604  <none>  0315  ??1QFileInfo@@QAE@XZ
+	000d7608  <none>  0108  ??0QFileInfo@@QAE@ABV0@@Z
+	000d760c  <none>  010b  ??0QFileInfo@@QAE@ABVQString@@@Z
+	000d7610  <none>  0e93  ?free_helper@QHashData@@QAEXP6AXPAUNode@1@@Z@Z
+	000d7614  <none>  178e  ?rehash@QHashData@@QAEXH@Z
+	000d7618  <none>  0f73  ?hasShrunk@QHashData@@QAEXXZ
+	000d761c  <none>  0c92  ?detach_helper@QHashData@@QAEPAU1@P6AXPAUNode@1@PAX@ZP6AX0@ZHH@Z
+	000d7620  <none>  0e90  ?freeNode@QHashData@@QAEXPAX@Z
+	000d7624  <none>  0834  ?allocateNode@QHashData@@QAEPAXH@Z
+	000d7628  <none>  1a4d  ?setPermissions@QFile@@SA_NABVQString@@V?$QFlags@W4Permission@QFileDevice@@@@@Z
+	000d762c  <none>  0e50  ?finished@QThread@@QAEXUQPrivateSignal@1@@Z
+	000d7630  <none>  1bc1  ?started@QThread@@QAEXUQPrivateSignal@1@@Z
+	000d7634  <none>  1b50  ?sleep@QThread@@SAXK@Z
+	000d7638  <none>  1b9e  ?start@QThread@@QAEXW4Priority@1@@Z
+	000d763c  <none>  036e  ??1QThread@@UAE@XZ
+	000d7640  <none>  0236  ??0QThread@@QAE@PAVQObject@@@Z
+	000d7644  <none>  0a77  ?connectImpl@QObject@@CA?AVConnection@QMetaObject@@PBV1@PAPAX01PAVQSlotObjectBase@QtPrivate@@W4ConnectionType@Qt@@PBHPBU3@@Z
+	000d7648  <none>  0c64  ?deleteLater@QObject@@QAEXXZ
+	000d764c  <none>  13e6  ?moveToThread@QObject@@QAEXPAVQThread@@@Z
+	000d7650  <none>  033d  ??1QObject@@UAE@XZ
+	000d7654  <none>  019f  ??0QObject@@QAE@PAV0@@Z
+	000d7658  <none>  0d21  ?end@QListData@@QBEPAPAXXZ
+	000d765c  <none>  08fb  ?begin@QListData@@QBEPAPAXXZ
+	000d7660  <none>  08b3  ?at@QListData@@QBEPAPAXH@Z
+	000d7664  <none>  1b3c  ?size@QListData@@QBEHXZ
+	000d7668  <none>  0cbf  ?dispose@QListData@@SAXPAUData@1@@Z
+	000d766c  <none>  15b1  ?qHash@@YAIABVQString@@I@Z
+	000d7670  <none>  057c  ??8@YA_NABVQString@@0@Z
+	000d7674  <none>  0ef7  ?fromUtf8@QString@@SA?AV1@PBDH@Z
+	000d7678  <none>  1fa3  ?utf16@QString@@QBEPBGXZ
+	000d767c  <none>  06a7  ??YQString@@QAEAAV0@VQChar@@@Z
+	000d7680  <none>  086e  ?append@QString@@QAEAAV1@ABV1@@Z
+	000d7684  <none>  18ea  ?section@QString@@QBE?AV1@ABV1@HHV?$QFlags@W4SectionFlag@QString@@@@@Z
+	000d7688  <none>  0461  ??4QString@@QAEAAV0@ABV0@@Z
+	000d768c  <none>  0204  ??0QString@@QAE@ABV0@@Z
+	000d7690  <none>  020d  ??0QString@@QAE@XZ
+	000d7694  <none>  02cd  ??1Connection@QMetaObject@@QAE@XZ
+	000d7698  <none>  1c25  ?staticMetaObject@QThread@@2UQMetaObject@@B
+	000d769c  <none>  1c11  ?staticMetaObject@QObject@@2UQMetaObject@@B
+	000d76a0  <none>  165b  ?qt_metacall@QThread@@UAEHW4Call@QMetaObject@@HPAPAX@Z
+	000d76a4  <none>  1698  ?qt_metacast@QThread@@UAEPAXPBD@Z
+	000d76a8  <none>  1648  ?qt_metacall@QObject@@UAEHW4Call@QMetaObject@@HPAPAX@Z
+	000d76ac  <none>  1685  ?qt_metacast@QObject@@UAEPAXPBD@Z
+	000d76b0  <none>  0ce6  ?dynamicMetaObject@QObjectData@@QBEPAUQMetaObject@@XZ
+	000d76b4  <none>  0e98  ?fromAscii_helper@QString@@CAPAU?$QTypedArrayData@G@@PBDH@Z
+	000d76b8  <none>  0361  ??1QString@@QAE@XZ
+	000d76bc  <none>  18a0  ?rmdir@QDir@@QBE_NABVQString@@@Z
+	000d76c0  <none>  17ac  ?remove@QDir@@QAE_NABVQString@@@Z
+	000d76c4  <none>  0374  ??1QTimer@@UAE@XZ
+	000d76c8  <none>  0d60  ?entryInfoList@QDir@@QBE?AV?$QList@VQFileInfo@@@@V?$QFlags@W4Filter@QDir@@@@V?$QFlags@W4SortFlag@QDir@@@@@Z
+	000d76cc  <none>  0c6f  ?destroyed@QObject@@QAEXPAV1@@Z
+
+ 000fe7e4	000fe944 00000000 00000000 00103318 000d7020
+
+	DLL Name: KERNEL32.dll
+	vma:     Ordinal  Hint  Member-Name  Bound-To
+	000d7020  <none>  021f  GetConsoleMode
+	000d7024  <none>  0644  WriteConsoleA
+	000d7028  <none>  0225  GetConsoleScreenBufferInfo
+	000d702c  <none>  0538  SetConsoleTextAttribute
+	000d7030  <none>  00e6  CreateFileW
+	000d7034  <none>  03ad  IsDebuggerPresent
+	000d7038  <none>  009d  CloseHandle
+	000d703c  <none>  023b  GetCurrentProcess
+	000d7040  <none>  0288  GetLocalTime
+	000d7044  <none>  01ce  FreeLibrary
+	000d7048  <none>  02d6  GetProcAddress
+	000d704c  <none>  0256  GetDynamicTimeZoneInformation
+	000d7050  <none>  0269  GetFileAttributesW
+	000d7054  <none>  05b8  Sleep
+	000d7058  <none>  0313  GetSystemTimeAsFileTime
+	000d705c  <none>  03ff  LocalFree
+	000d7060  <none>  0373  HeapAlloc
+	000d7064  <none>  0377  HeapFree
+	000d7068  <none>  02dd  GetProcessHeap
+	000d706c  <none>  05c8  TerminateProcess
+	000d7070  <none>  047e  QueryPerformanceCounter
+	000d7074  <none>  0544  SetDllDirectoryW
+	000d7078  <none>  023c  GetCurrentProcessId
+	000d707c  <none>  05a8  SetUnhandledExceptionFilter
+	000d7080  <none>  064f  WriteFile
+	000d7084  <none>  02fc  GetStdHandle
+	000d7088  <none>  063b  WideCharToMultiByte
+	000d708c  <none>  0240  GetCurrentThreadId
+	000d7090  <none>  0287  GetLastError
+	000d7094  <none>  0253  GetDriveTypeW
+	000d7098  <none>  03f4  LoadLibraryW
+	000d709c  <none>  012e  DeleteCriticalSection
+	000d70a0  <none>  04e6  ReleaseSRWLockExclusive
+	000d70a4  <none>  04e7  ReleaseSRWLockShared
+	000d70a8  <none>  0000  AcquireSRWLockExclusive
+	000d70ac  <none>  0001  AcquireSRWLockShared
+	000d70b0  <none>  0153  EnterCriticalSection
+	000d70b4  <none>  03ed  LeaveCriticalSection
+	000d70b8  <none>  038d  InitializeCriticalSectionAndSpinCount
+	000d70bc  <none>  024c  GetDiskFreeSpaceExW
+	000d70c0  <none>  054c  SetEvent
+	000d70c4  <none>  04fc  ResetEvent
+	000d70c8  <none>  0615  WaitForSingleObjectEx
+	000d70cc  <none>  00d9  CreateEventW
+	000d70d0  <none>  029f  GetModuleHandleW
+	000d70d4  <none>  0391  InitializeSListHead
+	000d70d8  <none>  01fa  GetCommandLineW
+	000d70dc  <none>  02fa  GetStartupInfoW
+	000d70e0  <none>  05ea  UnhandledExceptionFilter
+	000d70e4  <none>  03b5  IsProcessorFeaturePresent
+
+ 000fe7f8	000ff0cc 00000000 00000000 00103332 000d77a8
+
+	DLL Name: USER32.dll
+	vma:     Ordinal  Hint  Member-Name  Bound-To
+	000d77a8  <none>  0406  wsprintfW
+
+ 000fe80c	000fe924 00000000 00000000 0010342c 000d7000
+
+	DLL Name: ADVAPI32.dll
+	vma:     Ordinal  Hint  Member-Name  Bound-To
+	000d7000  <none>  0079  ConvertSecurityDescriptorToStringSecurityDescriptorW
+	000d7004  <none>  02de  SetPrivateObjectSecurity
+	000d7008  <none>  0081  ConvertStringSecurityDescriptorToSecurityDescriptorW
+	000d700c  <none>  007b  ConvertSidToStringSidW
+	000d7010  <none>  015b  GetTokenInformation
+	000d7014  <none>  020f  OpenProcessToken
+	000d7018  <none>  014a  GetSecurityDescriptorLength
+
+ 000fe820	000fea10 00000000 00000000 00104002 000d70ec
+
+	DLL Name: MSVCP140.dll
+	vma:     Ordinal  Hint  Member-Name  Bound-To
+	000d70ec  <none>  00a4  ??1_Locinfo@std@@QAE@XZ
+	000d70f0  <none>  01cb  ?_Getfalse@_Locinfo@std@@QBEPBDXZ
+	000d70f4  <none>  01e1  ?_Gettrue@_Locinfo@std@@QBEPBDXZ
+	000d70f8  <none>  029f  ?c_str@?$_Yarn@D@std@@QBEPBDXZ
+	000d70fc  <none>  0589  _Mtx_unlock
+	000d7100  <none>  0585  _Mtx_lock
+	000d7104  <none>  0581  _Mtx_destroy_in_situ
+	000d7108  <none>  0131  ??Bid@locale@std@@QAEIXZ
+	000d710c  <none>  0075  ??0facet@locale@std@@IAE@I@Z
+	000d7110  <none>  00ab  ??1facet@locale@std@@MAE@XZ
+	000d7114  <none>  020f  ?_Init@locale@std@@CAPAV_Locimp@12@_N@Z
+	000d7118  <none>  01d5  ?_Getgloballocale@locale@std@@CAPAV_Locimp@12@XZ
+	000d711c  <none>  019e  ?_Decref@facet@locale@std@@UAEPAV_Facet_base@3@XZ
+	000d7120  <none>  01f2  ?_Incref@facet@locale@std@@UAEXXZ
+	000d7124  <none>  03e7  ?id@?$numpunct@D@std@@2V0locale@2@A
+	000d7128  <none>  03e9  ?id@?$numpunct@_W@std@@2V0locale@2@A
+	000d712c  <none>  051e  ?uncaught_exception@std@@YA_NXZ
+	000d7130  <none>  002f  ??0?$basic_streambuf@DU?$char_traits@D@std@@@std@@IAE@XZ
+	000d7134  <none>  0584  _Mtx_init_in_situ
+	000d7138  <none>  05cc  _Xtime_get_ticks
+	000d713c  <none>  00a5  ??1_Lockit@std@@QAE@XZ
+	000d7140  <none>  006d  ??0_Lockit@std@@QAE@H@Z
+	000d7144  <none>  01c8  ?_Getcvt@_Locinfo@std@@QBE?AU_Cvtvec@@XZ
+	000d7148  <none>  057d  _Mbrtowc
+	000d714c  <none>  028e  ?_Xlength_error@std@@YAXPBD@Z
+	000d7150  <none>  028b  ?_Xbad_alloc@std@@YAXXZ
+	000d7154  <none>  0089  ??1?$basic_streambuf@DU?$char_traits@D@std@@@std@@UAE@XZ
+	000d7158  <none>  04de  ?sputc@?$basic_streambuf@DU?$char_traits@D@std@@@std@@QAEHD@Z
+	000d715c  <none>  04e1  ?sputn@?$basic_streambuf@DU?$char_traits@D@std@@@std@@QAE_JPBD_J@Z
+	000d7160  <none>  024a  ?_Pninc@?$basic_streambuf@DU?$char_traits@D@std@@@std@@IAEPADXZ
+	000d7164  <none>  007d  ??1?$basic_ios@DU?$char_traits@D@std@@@std@@UAE@XZ
+	000d7168  <none>  04c5  ?setstate@?$basic_ios@DU?$char_traits@D@std@@@std@@QAEXH_N@Z
+	000d716c  <none>  000c  ??0?$basic_ios@DU?$char_traits@D@std@@@std@@IAE@XZ
+	000d7170  <none>  0025  ??0?$basic_ostream@DU?$char_traits@D@std@@@std@@QAE@PAV?$basic_streambuf@DU?$char_traits@D@std@@@1@_N@Z
+	000d7174  <none>  0086  ??1?$basic_ostream@DU?$char_traits@D@std@@@std@@UAE@XZ
+	000d7178  <none>  0244  ?_Osfx@?$basic_ostream@DU?$char_traits@D@std@@@std@@QAEXXZ
+	000d717c  <none>  00ff  ??6?$basic_ostream@DU?$char_traits@D@std@@@std@@QAEAAV01@H@Z
+	000d7180  <none>  006c  ??0_Locinfo@std@@QAE@PBD@Z
+	000d7184  <none>  0368  ?flush@?$basic_ostream@DU?$char_traits@D@std@@@std@@QAEAAV12@XZ
+	000d7188  <none>  0228  ?_Lock@?$basic_streambuf@DU?$char_traits@D@std@@@std@@UAEXXZ
+	000d718c  <none>  027f  ?_Unlock@?$basic_streambuf@DU?$char_traits@D@std@@@std@@UAEXXZ
+	000d7190  <none>  03f6  ?imbue@?$basic_streambuf@DU?$char_traits@D@std@@@std@@MAEXABVlocale@2@@Z
+	000d7194  <none>  04b5  ?setbuf@?$basic_streambuf@DU?$char_traits@D@std@@@std@@MAEPAV12@PAD_J@Z
+	000d7198  <none>  04d5  ?showmanyc@?$basic_streambuf@DU?$char_traits@D@std@@@std@@MAE_JXZ
+	000d719c  <none>  04fd  ?sync@?$basic_streambuf@DU?$char_traits@D@std@@@std@@MAEHXZ
+	000d71a0  <none>  051b  ?uflow@?$basic_streambuf@DU?$char_traits@D@std@@@std@@MAEHXZ
+	000d71a4  <none>  0543  ?xsgetn@?$basic_streambuf@DU?$char_traits@D@std@@@std@@MAE_JPAD_J@Z
+	000d71a8  <none>  0546  ?xsputn@?$basic_streambuf@DU?$char_traits@D@std@@@std@@MAE_JPBD_J@Z
+	000d71ac  <none>  028f  ?_Xout_of_range@std@@YAXPBD@Z
+	000d71b0  <none>  028d  ?_Xinvalid_argument@std@@YAXPBD@Z
+	000d71b4  <none>  05b5  _Thrd_join
+	000d71b8  <none>  05b4  _Thrd_id
+	000d71bc  <none>  054d  _Cnd_destroy_in_situ
+	000d71c0  <none>  0552  _Cnd_signal
+	000d71c4  <none>  0275  ?_Throw_Cpp_error@std@@YAXH@Z
+	000d71c8  <none>  0590  _Query_perf_counter
+	000d71cc  <none>  0591  _Query_perf_frequency
+	000d71d0  <none>  057f  _Mtx_current_owns
+	000d71d4  <none>  0550  _Cnd_init_in_situ
+	000d71d8  <none>  0555  _Cnd_wait
+	000d71dc  <none>  0553  _Cnd_timedwait
+	000d71e0  <none>  054e  _Cnd_do_broadcast_at_thread_exit
+	000d71e4  <none>  051f  ?uncaught_exceptions@std@@YAHXZ
+	000d71e8  <none>  0534  ?widen@?$basic_ios@DU?$char_traits@D@std@@@std@@QBEDD@Z
+	000d71ec  <none>  0106  ??6?$basic_ostream@DU?$char_traits@D@std@@@std@@QAEAAV01@P6AAAV01@AAV01@@Z@Z
+	000d71f0  <none>  0461  ?put@?$basic_ostream@DU?$char_traits@D@std@@@std@@QAEAAV12@D@Z
+	000d71f4  <none>  02a2  ?cerr@std@@3V?$basic_ostream@DU?$char_traits@D@std@@@1@A
+	000d71f8  <none>  04b0  ?set_new_handler@std@@YAP6AXXZP6AXXZ@Z
+	000d71fc  <none>  028c  ?_Xbad_function_call@std@@YAXXZ
+	000d7200  <none>  0273  ?_Syserror_map@std@@YAPBDH@Z
+	000d7204  <none>  0274  ?_Throw_C_error@std@@YAXH@Z
+
+ 000fe834	000ff0d4 00000000 00000000 00104146 000d77b0
+
+	DLL Name: VCRUNTIME140.dll
+	vma:     Ordinal  Hint  Member-Name  Bound-To
+	000d77b0  <none>  001c  __current_exception
+	000d77b4  <none>  0035  _except_handler4_common
+	000d77b8  <none>  001d  __current_exception_context
+	000d77bc  <none>  0019  __RTDynamicCast
+	000d77c0  <none>  0021  __std_exception_copy
+	000d77c4  <none>  0022  __std_exception_destroy
+	000d77c8  <none>  0001  _CxxThrowException
+	000d77cc  <none>  0046  memcpy
+	000d77d0  <none>  0047  memmove
+	000d77d4  <none>  003d  _purecall
+	000d77d8  <none>  0023  __std_terminate
+	000d77dc  <none>  0010  __CxxFrameHandler3
+	000d77e0  <none>  0044  memchr
+	000d77e4  <none>  0048  memset
+	000d77e8  <none>  0024  __std_type_info_compare
+	000d77ec  <none>  0027  __std_type_info_name
+
+ 000fe848	000ff190 00000000 00000000 0010457a 000d786c
+
+	DLL Name: api-ms-win-crt-runtime-l1-1-0.dll
+	vma:     Ordinal  Hint  Member-Name  Bound-To
+	000d786c  <none>  0042  _seh_filter_exe
+	000d7870  <none>  006a  terminate
+	000d7874  <none>  0017  _cexit
+	000d7878  <none>  001f  _crt_atexit
+	000d787c  <none>  0015  _beginthreadex
+	000d7880  <none>  003e  _register_onexit_function
+	000d7884  <none>  003f  _register_thread_local_exe_atexit_callback
+	000d7888  <none>  001d  _controlfp_s
+	000d788c  <none>  003a  _invalid_parameter_noinfo
+	000d7890  <none>  0036  _initialize_onexit_table
+	000d7894  <none>  0016  _c_exit
+	000d7898  <none>  0035  _initialize_narrow_environment
+	000d789c  <none>  0019  _configure_narrow_argv
+	000d78a0  <none>  0023  _errno
+	000d78a4  <none>  003b  _invalid_parameter_noinfo_noreturn
+	000d78a8  <none>  002d  _get_narrow_winmain_command_line
+	000d78ac  <none>  0038  _initterm
+	000d78b0  <none>  0044  _set_app_type
+	000d78b4  <none>  0039  _initterm_e
+	000d78b8  <none>  0058  exit
+	000d78bc  <none>  0025  _exit
+
+ 000fe85c	000ff140 00000000 00000000 0010459c 000d781c
+
+	DLL Name: api-ms-win-crt-heap-l1-1-0.dll
+	vma:     Ordinal  Hint  Member-Name  Bound-To
+	000d781c  <none>  0017  calloc
+	000d7820  <none>  0018  free
+	000d7824  <none>  0000  _aligned_free
+	000d7828  <none>  0016  _set_new_mode
+	000d782c  <none>  0008  _callnewh
+	000d7830  <none>  0019  malloc
+	000d7834  <none>  0001  _aligned_malloc
+
+ 000fe870	000ff16c 00000000 00000000 001045bc 000d7848
+
+	DLL Name: api-ms-win-crt-math-l1-1-0.dll
+	vma:     Ordinal  Hint  Member-Name  Bound-To
+	000d7848  <none>  0042  _fdclass
+	000d784c  <none>  00a2  ceil
+	000d7850  <none>  004a  _fdsign
+	000d7854  <none>  002e  __setusermatherr
+	000d7858  <none>  003c  _dsign
+	000d785c  <none>  0035  _dclass
+	000d7860  <none>  0058  _ldclass
+	000d7864  <none>  005e  _ldsign
+
+ 000fe884	000ff1e8 00000000 00000000 001045dc 000d78c4
+
+	DLL Name: api-ms-win-crt-stdio-l1-1-0.dll
+	vma:     Ordinal  Hint  Member-Name  Bound-To
+	000d78c4  <none>  0003  __stdio_common_vfprintf
+	000d78c8  <none>  0000  __acrt_iob_func
+	000d78cc  <none>  0054  _set_fmode
+	000d78d0  <none>  000d  __stdio_common_vsprintf
+	000d78d4  <none>  0080  fputs
+	000d78d8  <none>  0001  __p__commode
+	000d78dc  <none>  0013  __stdio_common_vswprintf_s
+	000d78e0  <none>  0037  _get_osfhandle
+	000d78e4  <none>  0066  _wfsopen
+	000d78e8  <none>  008a  fwrite
+	000d78ec  <none>  0026  _fileno
+	000d78f0  <none>  0077  fflush
+	000d78f4  <none>  000b  __stdio_common_vsnprintf_s
+	000d78f8  <none>  0074  fclose
+
+ 000fe898	000ff234 00000000 00000000 001045fc 000d7910
+
+	DLL Name: api-ms-win-crt-time-l1-1-0.dll
+	vma:     Ordinal  Hint  Member-Name  Bound-To
+	000d7910  <none>  0020  _gmtime64_s
+	000d7914  <none>  0046  strftime
+	000d7918  <none>  0024  _localtime64_s
+	000d791c  <none>  0028  _mktime64
+
+ 000fe8ac	000ff160 00000000 00000000 0010461c 000d783c
+
+	DLL Name: api-ms-win-crt-locale-l1-1-0.dll
+	vma:     Ordinal  Hint  Member-Name  Bound-To
+	000d783c  <none>  0012  localeconv
+	000d7840  <none>  0008  _configthreadlocale
+
+ 000fe8c0	000ff118 00000000 00000000 0010463e 000d77f4
+
+	DLL Name: api-ms-win-crt-convert-l1-1-0.dll
+	vma:     Ordinal  Hint  Member-Name  Bound-To
+	000d77f4  <none>  005e  strtod
+	000d77f8  <none>  0063  strtoll
+	000d77fc  <none>  0050  atoi
+	000d7800  <none>  0061  strtol
+	000d7804  <none>  0065  strtoull
+	000d7808  <none>  0064  strtoul
+
+ 000fe8d4	000ff224 00000000 00000000 00104660 000d7900
+
+	DLL Name: api-ms-win-crt-string-l1-1-0.dll
+	vma:     Ordinal  Hint  Member-Name  Bound-To
+	000d7900  <none>  0068  isdigit
+	000d7904  <none>  00a1  wcscpy_s
+	000d7908  <none>  0070  iswalnum
+
+ 000fe8e8	000ff134 00000000 00000000 00104682 000d7810
+
+	DLL Name: api-ms-win-crt-filesystem-l1-1-0.dll
+	vma:     Ordinal  Hint  Member-Name  Bound-To
+	000d7810  <none>  0034  _wmkdir
+	000d7814  <none>  0035  _wremove
+
+ 000fe8fc	000ff0c4 00000000 00000000 0010485a 000d77a0
+
+	DLL Name: SHELL32.dll
+	vma:     Ordinal  Hint  Member-Name  Bound-To
+	000d77a0  <none>  0009  CommandLineToArgvW
+
+ 000fe910	00000000 00000000 00000000 00000000 00000000
+
+

@@ -1,0 +1,50 @@
+APK pcsuite/updateApk/pcsuite.apk
+DEX classes2.dex
+CLASS Lcom/vivo/pcsuite/connect/ConnectControlModel$12;
+SUPER Ljava/lang/Object;
+FIELDS
+
+
+METHOD run()V
+000000: const-string v4, "pcsuite_ConnectControlModel"
+000004: const-string v0, "show PcConnectDialog"
+000008: invoke-static v4, v0, Lcom/vivo/connect/logger/EasyLog;->i(Ljava/lang/String; Ljava/lang/String;)V
+00000e: invoke-static Lk2/g;->Q()Z
+000014: move-result v4
+000016: if-nez v4, +044h
+00001a: sget-object v4, Lcom/vivo/pcsuite/PcSuiteApplication;->I1 Lcom/vivo/pcsuite/PcSuiteApplication;
+00001e: const-class v0, Lcom/vivo/pcsuite/activity/DeviceListActivity;
+000022: invoke-virtual v0, Ljava/lang/Class;->getName()Ljava/lang/String;
+000028: move-result-object v0
+00002a: invoke-static v4, v0, LD2/e;->c(Lcom/vivo/pcsuite/PcSuiteApplication; Ljava/lang/String;)Ljava/lang/Boolean;
+000030: move-result-object v4
+000032: invoke-virtual v4, Ljava/lang/Boolean;->booleanValue()Z
+000038: move-result v4
+00003a: if-nez v4, +032h
+00003e: invoke-static LL2/i;->q()LL2/i;
+000044: move-result-object v4
+000046: invoke-virtual v4, LL2/i;->v()Z
+00004c: move-result v4
+00004e: if-nez v4, +028h
+000052: sget-object v4, Lcom/vivo/pcsuite/connect/ConnectControlModel;->currentConnectBean Lcom/vivo/pcsuite/pcconnect/PCBean;
+000056: if-eqz v4, +024h
+00005a: monitor-enter v4
+00005c: invoke-static Lcom/vivo/pcsuite/common/j;->l()Lcom/vivo/pcsuite/common/j;
+000062: move-result-object v0
+000064: sget-object v1, Lcom/vivo/pcsuite/PcSuiteApplication;->I1 Lcom/vivo/pcsuite/PcSuiteApplication;
+000068: sget-object v2, Lcom/vivo/pcsuite/connect/ConnectControlModel;->currentConnectBean Lcom/vivo/pcsuite/pcconnect/PCBean;
+00006c: invoke-virtual v2, Lcom/vivo/pcsuite/pcconnect/PCBean;->getDeviceName()Ljava/lang/String;
+000072: move-result-object v2
+000074: filled-new-array v2, [Ljava/lang/Object;
+00007a: move-result-object v2
+00007c: const v3, 2131756115
+000082: invoke-virtual v1, v3, v2, Landroid/content/Context;->getString(I [Ljava/lang/Object;)Ljava/lang/String;
+000088: move-result-object v1
+00008a: sget-object v2, Lcom/vivo/pcsuite/PcSuiteApplication;->I1 Lcom/vivo/pcsuite/PcSuiteApplication;
+00008e: invoke-virtual v0, v2, v1, Lcom/vivo/pcsuite/common/j;->p(Lcom/vivo/pcsuite/PcSuiteApplication; Ljava/lang/String;)V
+000094: monitor-exit v4
+000096: return-void 
+000098: move-exception v0
+00009a: monitor-exit v4
+00009c: throw v0
+00009e: return-void 

@@ -1,0 +1,50 @@
+<!doctype html>
+<html lang="zh-CN"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="color-scheme" content="light"><title>vivo Connect · 手机扫码连接与文件互传</title><link rel="stylesheet" href="/scan/style.css"><script src="/scan/app.js" defer></script></head>
+<body>
+<svg class="symbols" xmlns="http://www.w3.org/2000/svg"><defs>
+<symbol id="i-phone" viewBox="0 0 24 24"><rect x="6" y="2" width="12" height="20" rx="2"/><path d="M10 5h4M11 19h2"/></symbol>
+<symbol id="i-send" viewBox="0 0 24 24"><path d="m21 3-7 18-4-7-7-4 18-7ZM10 14l6-6"/></symbol>
+<symbol id="i-folder" viewBox="0 0 24 24"><path d="M3 7V4h6l2 3h10v13H3V7Z"/></symbol>
+<symbol id="i-file" viewBox="0 0 24 24"><path d="M6 2h8l5 5v15H6V2Zm8 0v6h5M9 13h7M9 17h5"/></symbol>
+<symbol id="i-down" viewBox="0 0 24 24"><path d="M12 3v12m-5-5 5 5 5-5M4 16v5h16v-5"/></symbol>
+<symbol id="i-plus" viewBox="0 0 24 24"><path d="M12 4v16M4 12h16"/></symbol>
+<symbol id="i-refresh" viewBox="0 0 24 24"><path d="M20 10a8 8 0 1 0-1 7M20 3v7h-7"/></symbol>
+<symbol id="i-history" viewBox="0 0 24 24"><path d="M3 11a9 9 0 1 1 1 6M3 4v7h7M12 7v6l4 2"/></symbol>
+<symbol id="i-link" viewBox="0 0 24 24"><path d="m9 15 6-6M8 17l-1 1a4 4 0 0 1-6-6l5-5a4 4 0 0 1 6 0m0 10a4 4 0 0 0 6 0l5-5a4 4 0 0 0-6-6l-1 1" transform="translate(1 0) scale(.92)"/></symbol>
+<symbol id="i-check" viewBox="0 0 24 24"><path d="m5 12 4 4L19 6"/></symbol>
+<symbol id="i-user" viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"/><path d="M4 22v-3a8 8 0 0 1 16 0v3"/></symbol>
+</defs></svg>
+<div class="app-shell">
+<aside class="sidebar">
+ <div class="brand"><div class="brand-mark"><svg><use href="#i-link"/></svg></div><div><strong>vivo Connect</strong><small>让设备，近一点</small></div></div>
+ <div class="sidebar-label">我的设备 <span id="device-count">0</span></div>
+ <div id="devices" class="device-list"><p class="sidebar-empty">还没有连接的设备</p></div>
+ <button id="add-device" class="sidebar-action"><svg><use href="#i-plus"/></svg>添加新设备</button>
+ <div class="sidebar-divider"></div>
+ <button id="history-nav" class="nav-item"><svg><use href="#i-history"/></svg>传输记录<span id="transfer-count" class="nav-count">0</span></button>
+ <div class="sidebar-bottom"><div class="local-device"><span class="computer-icon">▰</span><div><strong>这台电脑</strong><small>Linux · 本地连接</small></div><span class="online-dot"></span></div>
+ <button id="login" class="account-button"><svg><use href="#i-user"/></svg><span id="account">正在读取账号…</span><span>›</span></button></div>
+</aside>
+<div class="workspace">
+ <header class="toolbar"><span>设备互联 <span class="breadcrumb">/ <span id="breadcrumb-name">我的设备</span></span></span><button id="reload" class="icon-button" aria-label="刷新设备" title="刷新设备"><svg><use href="#i-refresh"/></svg></button></header>
+ <div id="locked" class="auth-banner"><strong>欢迎使用 vivo Connect</strong><p>从项目终端运行 <code>npm run scan</code>，即可安全打开你的设备界面。</p></div>
+ <main id="dashboard" hidden>
+  <section class="device-hero"><div class="hero-device"><svg><use href="#i-phone"/></svg></div><div class="hero-copy"><div class="eyebrow">我的设备</div><h1 id="device-name">连接你的手机</h1><p id="device-subtitle">文件与设备，随时相连。</p><div id="connection-badge" class="badge neutral">尚未连接</div></div><button id="disconnect" class="quiet-button" hidden>断开连接</button></section>
+  <nav class="tabs" aria-label="设备功能"><button data-tab="overview" class="active">设备概览</button><button data-tab="files">手机文件</button><button data-tab="history">传输记录</button></nav>
+  <section id="overview-view" class="view">
+   <div class="overview-grid"><section class="panel transfer-panel"><div class="panel-heading"><div><h2>文件互传</h2><p>从电脑到手机，轻松传递。</p></div><svg class="heading-icon"><use href="#i-send"/></svg></div>
+    <div id="dropzone" class="dropzone" tabindex="0" role="button" aria-label="选择或拖放文件发送到手机"><div class="drop-icon"><svg><use href="#i-file"/></svg><span>↑</span></div><strong>拖放文件到这里</strong><span>或选择电脑中的文件发送到手机</span><button id="choose-file" class="primary-button"><svg><use href="#i-plus"/></svg>选择文件</button></div>
+    <input id="file-input" type="file" multiple hidden><div class="save-location"><svg><use href="#i-folder"/></svg><span>保存到手机</span><input id="save-path" aria-label="手机保存目录" value="/sdcard/Download"></div>
+    <div class="panel-footer"><span>支持多文件 · 单文件最大 512 MiB</span><button id="receive-shortcut" class="text-button">从手机接收 <span>→</span></button></div>
+   </section>
+   <section class="panel info-panel"><div class="panel-heading"><div><h2>连接信息</h2><p>设备之间的专属连接。</p></div><svg class="heading-icon"><use href="#i-link"/></svg></div><dl><div><dt>连接状态</dt><dd id="info-status">尚未连接</dd></div><div><dt>连接方式</dt><dd id="info-transport">—</dd></div><div><dt>手机地址</dt><dd id="info-ip">—</dd></div><div><dt>电脑地址</dt><dd id="info-pc-ip">—</dd></div></dl><div class="connection-note"><span class="note-dot"></span><p id="connection-note">连接手机后，即可发送和接收文件。</p></div><button id="pair-shortcut" class="secondary-button">连接另一台设备</button></section></div>
+   <section class="panel recent-panel"><div class="section-title"><h2>最近传输</h2><button id="all-transfers" class="text-button">查看全部 →</button></div><div id="recent-list" class="transfer-list"></div></section>
+  </section>
+  <section id="files-view" class="view" hidden><section class="panel"><div class="panel-heading"><div><h2>手机文件</h2><p>浏览手机目录，或输入文件位置接收到电脑。</p></div><svg class="heading-icon"><use href="#i-folder"/></svg></div><form id="browse-form" class="path-bar"><svg><use href="#i-folder"/></svg><input id="phone-path" aria-label="手机文件位置" value="/sdcard/Download"><button class="secondary-button">打开目录</button><button id="receive-path" type="button" class="primary-button">接收此文件</button></form><p id="files-message" class="muted"></p><div id="file-list" class="file-list"></div></section></section>
+  <section id="history-view" class="view" hidden><section class="panel"><div class="panel-heading"><div><h2>传输记录</h2><p>查看传输进度，保存已接收的文件。</p></div><svg class="heading-icon"><use href="#i-history"/></svg></div><div id="history-list" class="transfer-list"></div></section></section>
+  <footer class="workspace-footer"><span><span class="online-dot"></span> 本机服务已连接</span><span>vivo Connect for Linux</span></footer>
+ </main>
+</div></div>
+<dialog id="pair-dialog"><div class="dialog-heading"><div><h2>连接新设备</h2><p>用手机官方互传的“连接电脑 / 扫一扫”扫描二维码。</p></div><button id="close-pair" class="icon-button" aria-label="关闭连接窗口">×</button></div><section id="controls" hidden><div class="pair-options"><label>连接方式<select id="transport"><option value="lan">局域网扫码</option><option value="p2p">Wi-Fi Direct · 保留校园网</option></select></label><label>电脑网络<select id="network"><option value="">自动选择</option></select></label></div></section><div class="qr-section"><div id="image"><span>等待生成二维码</span></div><h3 id="status" role="status">尚未开始</h3><p id="message"></p><p id="expiry"></p><details><summary>连接详情</summary><pre id="diagnostic"></pre></details></div><div class="dialog-footer"><button id="stop" class="quiet-button">停止等待</button><button id="refresh" class="primary-button"><svg><use href="#i-refresh"/></svg>刷新二维码</button></div><p id="pair-help" class="pair-help" hidden>Wi-Fi Direct 尚未准备好。请先在终端启动无线助手，再刷新。</p></dialog>
+<div id="toast" class="toast" role="status" hidden></div>
+</body></html>

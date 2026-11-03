@@ -1,0 +1,30 @@
+APK pcsuite/updateApk/connbase.apk
+DEX classes2.dex
+CLASS Lcom/vivo/pcsuite/pcconnect/ble/f$a;
+SUPER Landroid/bluetooth/le/ScanCallback;
+FIELDS
+a Lcom/vivo/pcsuite/pcconnect/ble/f; = None
+
+METHOD <init>(Lcom/vivo/pcsuite/pcconnect/ble/f;)V
+000000: iput-object v1, v0, Lcom/vivo/pcsuite/pcconnect/ble/f$a;->a Lcom/vivo/pcsuite/pcconnect/ble/f;
+000004: invoke-direct v0, Landroid/bluetooth/le/ScanCallback;-><init>()V
+00000a: return-void 
+
+METHOD onScanFailed(I)V
+000000: new-instance v0, Ljava/lang/StringBuilder;
+000004: invoke-direct v0, Ljava/lang/StringBuilder;-><init>()V
+00000a: const-string v1, "MatchCallback: onScanFailed with reason: "
+00000e: invoke-virtual v0, v1, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+000014: invoke-virtual v0, v3, Ljava/lang/StringBuilder;->append(I)Ljava/lang/StringBuilder;
+00001a: invoke-virtual v0, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
+000020: move-result-object v0
+000022: const-string v1, "CompatLeScanner"
+000026: invoke-static v1, v0, Lc/c/f/a/b;->g(Ljava/lang/String; Ljava/lang/String;)V
+00002c: iget-object v0, v2, Lcom/vivo/pcsuite/pcconnect/ble/f$a;->a Lcom/vivo/pcsuite/pcconnect/ble/f;
+000030: invoke-static v0, v3, Lcom/vivo/pcsuite/pcconnect/ble/f;->a(Lcom/vivo/pcsuite/pcconnect/ble/f; I)V
+000036: return-void 
+
+METHOD onScanResult(I Landroid/bluetooth/le/ScanResult;)V
+000000: iget-object v1, v0, Lcom/vivo/pcsuite/pcconnect/ble/f$a;->a Lcom/vivo/pcsuite/pcconnect/ble/f;
+000004: invoke-static v1, v2, Lcom/vivo/pcsuite/pcconnect/ble/f;->a(Lcom/vivo/pcsuite/pcconnect/ble/f; Landroid/bluetooth/le/ScanResult;)V
+00000a: return-void 

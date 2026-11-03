@@ -1,0 +1,612 @@
+APK pcsuite/updateApk/pcsuite.apk
+DEX classes2.dex
+CLASS Lcom/vivo/connbase/connectcenter/ConnectCenterImpl;
+SUPER Lcom/vivo/connbase/connectcenter/ConnectCenterApi;
+FIELDS
+retry Ljava/util/concurrent/atomic/AtomicInteger; = None
+TAG Ljava/lang/String; = None
+mContext Landroid/content/Context; = None
+mIsSystemApp Z = None
+mObserver Lcom/vivo/connbase/connectcenter/IConnectCenterObserver; = None
+
+METHOD <clinit>()V
+000000: new-instance v0, Ljava/util/concurrent/atomic/AtomicInteger;
+000004: const/4 v1, 0
+000006: invoke-direct v0, v1, Ljava/util/concurrent/atomic/AtomicInteger;-><init>(I)V
+00000c: sput-object v0, Lcom/vivo/connbase/connectcenter/ConnectCenterImpl;->retry Ljava/util/concurrent/atomic/AtomicInteger;
+000010: return-void 
+
+METHOD <init>(Landroid/content/Context;)V
+000000: invoke-direct v1, v2, Lcom/vivo/connbase/connectcenter/ConnectCenterApi;-><init>(Landroid/content/Context;)V
+000006: const-string v0, "ConnectCenterImpl"
+00000a: iput-object v0, v1, Lcom/vivo/connbase/connectcenter/ConnectCenterImpl;->TAG Ljava/lang/String;
+00000e: iput-object v2, v1, Lcom/vivo/connbase/connectcenter/ConnectCenterImpl;->mContext Landroid/content/Context;
+000012: invoke-static v2, Lcom/vivo/connbase/connectcenter/ConnectCenterUtils;->isSystemApp(Landroid/content/Context;)Z
+000018: move-result v2
+00001a: iput-boolean v2, v1, Lcom/vivo/connbase/connectcenter/ConnectCenterImpl;->mIsSystemApp Z
+00001e: invoke-direct v1, Lcom/vivo/connbase/connectcenter/ConnectCenterImpl;->setConnetCenterEvent()V
+000024: return-void 
+
+METHOD access$000(Lcom/vivo/connbase/connectcenter/ConnectCenterImpl; Landroid/os/Bundle; Ljava/lang/String;)V
+000000: invoke-direct v0, v1, v2, Lcom/vivo/connbase/connectcenter/ConnectCenterImpl;->handleAppCallback(Landroid/os/Bundle; Ljava/lang/String;)V
+000006: return-void 
+
+METHOD access$100(Lcom/vivo/connbase/connectcenter/ConnectCenterImpl; Landroid/os/IBinder;)V
+000000: invoke-direct v0, v1, Lcom/vivo/connbase/connectcenter/ConnectCenterImpl;->obtainBindDied(Landroid/os/IBinder;)V
+000006: return-void 
+
+METHOD access$200(Lcom/vivo/connbase/connectcenter/ConnectCenterImpl;)V
+000000: invoke-direct v0, Lcom/vivo/connbase/connectcenter/ConnectCenterImpl;->retrySetCallbackObserver()V
+000006: return-void 
+
+METHOD access$300()Ljava/util/concurrent/atomic/AtomicInteger;
+000000: sget-object v0, Lcom/vivo/connbase/connectcenter/ConnectCenterImpl;->retry Ljava/util/concurrent/atomic/AtomicInteger;
+000004: return-object v0
+
+METHOD access$400(Lcom/vivo/connbase/connectcenter/ConnectCenterImpl;)Z
+000000: iget-boolean v0, v0, Lcom/vivo/connbase/connectcenter/ConnectCenterImpl;->mIsSystemApp Z
+000004: return v0
+
+METHOD access$500(Lcom/vivo/connbase/connectcenter/ConnectCenterImpl;)Landroid/content/Context;
+000000: iget-object v0, v0, Lcom/vivo/connbase/connectcenter/ConnectCenterImpl;->mContext Landroid/content/Context;
+000004: return-object v0
+
+METHOD access$600(Lcom/vivo/connbase/connectcenter/ConnectCenterImpl;)Lcom/vivo/connbase/connectcenter/IConnectCenterObserver;
+000000: iget-object v0, v0, Lcom/vivo/connbase/connectcenter/ConnectCenterImpl;->mObserver Lcom/vivo/connbase/connectcenter/IConnectCenterObserver;
+000004: return-object v0
+
+METHOD handleAppCallback(Landroid/os/Bundle; Ljava/lang/String;)V
+000000: const-string v0, "ConnectCenterImpl"
+000004: if-eqz v12, +201h
+000008: invoke-static v13, Landroid/text/TextUtils;->isEmpty(Ljava/lang/CharSequence;)Z
+00000e: move-result v1
+000010: if-eqz v1, +004h
+000014: goto/16 +1f9h
+000018: new-instance v1, Landroid/os/Bundle;
+00001c: invoke-direct v1, Landroid/os/Bundle;-><init>()V
+000022: const-string/jumbo v2, success
+000028: const/4 v3, 1
+00002a: invoke-virtual v1, v2, v3, Landroid/os/BaseBundle;->putBoolean(Ljava/lang/String; Z)V
+000030: const-string v4, "MessageCallback"
+000034: invoke-virtual v12, v4, Landroid/os/Bundle;->getBinder(Ljava/lang/String;)Landroid/os/IBinder;
+00003a: move-result-object v4
+00003c: invoke-static v4, Ls1/d$a;->K(Landroid/os/IBinder;)Ls1/d;
+000042: move-result-object v4
+000044: goto +7h
+000046: const-string v4, "callback from connbase is null"
+00004a: invoke-static v0, v4, Lcom/vivo/aiengine/find/device/sdk/impl/util/LogUtil;->e(Ljava/lang/String; Ljava/lang/String;)V
+000050: const/4 v4, 0
+000052: iget-object v5, v11, Lcom/vivo/connbase/connectcenter/ConnectCenterImpl;->mObserver Lcom/vivo/connbase/connectcenter/IConnectCenterObserver;
+000056: const-string v6, "reason"
+00005a: const/4 v7, 0
+00005c: if-nez v5, +014h
+000060: const-string v11, "connect center mObserver is null, handleAppCallback fail"
+000064: invoke-static v0, v11, Lcom/vivo/aiengine/find/device/sdk/impl/util/LogUtil;->e(Ljava/lang/String; Ljava/lang/String;)V
+00006a: invoke-virtual v1, v2, v7, Landroid/os/BaseBundle;->putBoolean(Ljava/lang/String; Z)V
+000070: invoke-virtual v1, v6, v11, Landroid/os/BaseBundle;->putString(Ljava/lang/String; Ljava/lang/String;)V
+000076: if-eqz v4, +1c8h
+00007a: invoke-interface v4, v1, Ls1/d;->b(Landroid/os/Bundle;)V
+000080: goto/16 +1c3h
+000084: invoke-virtual v13, Ljava/lang/Object;->getClass()Ljava/lang/Class;
+00008a: invoke-virtual v13, Ljava/lang/String;->hashCode()I
+000090: move-result v5
+000092: const/4 v8, -1
+000094: sparse-switch v5, +00001bah
+00009a: move v3, v8
+00009c: goto/16 +08ch
+0000a0: const-string v3, "onGetDeviceConnection"
+0000a4: invoke-virtual v13, v3, Ljava/lang/String;->equals(Ljava/lang/Object;)Z
+0000aa: move-result v3
+0000ac: if-nez v3, +003h
+0000b0: goto -bh
+0000b2: const/16 v3, 11
+0000b6: goto/16 +07fh
+0000ba: const-string v3, "onCheckSupportServiceList"
+0000be: invoke-virtual v13, v3, Ljava/lang/String;->equals(Ljava/lang/Object;)Z
+0000c4: move-result v3
+0000c6: if-nez v3, +003h
+0000ca: goto -18h
+0000cc: const/16 v3, 10
+0000d0: goto/16 +072h
+0000d4: const-string v3, "onGetCommonBleConfigs"
+0000d8: invoke-virtual v13, v3, Ljava/lang/String;->equals(Ljava/lang/Object;)Z
+0000de: move-result v3
+0000e0: if-nez v3, +003h
+0000e4: goto -25h
+0000e6: const/16 v3, 9
+0000ea: goto/16 +065h
+0000ee: const-string v3, "onGetServiceSwitchState"
+0000f2: invoke-virtual v13, v3, Ljava/lang/String;->equals(Ljava/lang/Object;)Z
+0000f8: move-result v3
+0000fa: if-nez v3, +003h
+0000fe: goto -32h
+000100: const/16 v3, 8
+000104: goto +58h
+000106: const-string v3, "onCheckBoundDeviceExist"
+00010a: invoke-virtual v13, v3, Ljava/lang/String;->equals(Ljava/lang/Object;)Z
+000110: move-result v3
+000112: if-nez v3, +003h
+000116: goto -3eh
+000118: const/4 v3, 7
+00011a: goto +4dh
+00011c: const-string v3, "onServiceDispatch"
+000120: invoke-virtual v13, v3, Ljava/lang/String;->equals(Ljava/lang/Object;)Z
+000126: move-result v3
+000128: if-nez v3, +003h
+00012c: goto -49h
+00012e: const/4 v3, 6
+000130: goto +42h
+000132: const-string v3, "onCheckServiceIfInUsing"
+000136: invoke-virtual v13, v3, Ljava/lang/String;->equals(Ljava/lang/Object;)Z
+00013c: move-result v3
+00013e: if-nez v3, +003h
+000142: goto -54h
+000144: const/4 v3, 5
+000146: goto +37h
+000148: const-string v3, "onResquestStopScan"
+00014c: invoke-virtual v13, v3, Ljava/lang/String;->equals(Ljava/lang/Object;)Z
+000152: move-result v3
+000154: if-nez v3, +003h
+000158: goto -5fh
+00015a: const/4 v3, 4
+00015c: goto +2ch
+00015e: const-string v3, "onRequestStartScan"
+000162: invoke-virtual v13, v3, Ljava/lang/String;->equals(Ljava/lang/Object;)Z
+000168: move-result v3
+00016a: if-nez v3, +003h
+00016e: goto -6ah
+000170: const/4 v3, 3
+000172: goto +21h
+000174: const-string v3, "onGetPropertyInfo"
+000178: invoke-virtual v13, v3, Ljava/lang/String;->equals(Ljava/lang/Object;)Z
+00017e: move-result v3
+000180: if-nez v3, +003h
+000184: goto -75h
+000186: const/4 v3, 2
+000188: goto +16h
+00018a: const-string v5, "onSupportServiceRequestByDevice"
+00018e: invoke-virtual v13, v5, Ljava/lang/String;->equals(Ljava/lang/Object;)Z
+000194: move-result v5
+000196: if-nez v5, +00fh
+00019a: goto/16 -080h
+00019e: const-string v3, "onDynamicNameRequest"
+0001a2: invoke-virtual v13, v3, Ljava/lang/String;->equals(Ljava/lang/Object;)Z
+0001a8: move-result v3
+0001aa: if-nez v3, +004h
+0001ae: goto/16 -08ah
+0001b2: move v3, v7
+0001b4: const-string v5, "serviceIds"
+0001b8: const-string v8, "callback"
+0001bc: const-string v9, "deviceId"
+0001c0: const-string v10, "outString"
+0001c4: packed-switch v3, +0000154h
+0001ca: invoke-virtual v1, v2, v7, Landroid/os/BaseBundle;->putBoolean(Ljava/lang/String; Z)V
+0001d0: const-string/jumbo v11, without handle
+0001d6: invoke-virtual v1, v6, v11, Landroid/os/BaseBundle;->putString(Ljava/lang/String; Ljava/lang/String;)V
+0001dc: goto/16 +107h
+0001e0: invoke-virtual v12, v9, Landroid/os/BaseBundle;->getString(Ljava/lang/String;)Ljava/lang/String;
+0001e6: move-result-object v12
+0001e8: iget-object v11, v11, Lcom/vivo/connbase/connectcenter/ConnectCenterImpl;->mObserver Lcom/vivo/connbase/connectcenter/IConnectCenterObserver;
+0001ec: invoke-interface v11, v12, Lcom/vivo/connbase/connectcenter/IConnectCenterObserver;->onGetDeviceConnection(Ljava/lang/String;)Ljava/lang/String;
+0001f2: move-result-object v11
+0001f4: invoke-virtual v1, v10, v11, Landroid/os/BaseBundle;->putString(Ljava/lang/String; Ljava/lang/String;)V
+0001fa: goto/16 +0f8h
+0001fe: iget-object v11, v11, Lcom/vivo/connbase/connectcenter/ConnectCenterImpl;->mObserver Lcom/vivo/connbase/connectcenter/IConnectCenterObserver;
+000202: invoke-interface v11, Lcom/vivo/connbase/connectcenter/IConnectCenterObserver;->onCheckSupportServiceList()Ljava/util/List;
+000208: move-result-object v11
+00020a: if-eqz v11, +0ddh
+00020e: invoke-interface v11, Ljava/util/List;->size()I
+000214: move-result v12
+000216: if-nez v12, +004h
+00021a: goto/16 +0d5h
+00021e: new-instance v12, Ljava/util/ArrayList;
+000222: invoke-direct v12, Ljava/util/ArrayList;-><init>()V
+000228: invoke-interface v11, Ljava/util/List;->iterator()Ljava/util/Iterator;
+00022e: move-result-object v11
+000230: invoke-interface v11, Ljava/util/Iterator;->hasNext()Z
+000236: move-result v2
+000238: if-eqz v2, +0c0h
+00023c: invoke-interface v11, Ljava/util/Iterator;->next()Ljava/lang/Object;
+000242: move-result-object v2
+000244: check-cast v2, Ljava/lang/String;
+000248: invoke-virtual v12, v2, Ljava/util/ArrayList;->add(Ljava/lang/Object;)Z
+00024e: goto -fh
+000250: iget-object v11, v11, Lcom/vivo/connbase/connectcenter/ConnectCenterImpl;->mObserver Lcom/vivo/connbase/connectcenter/IConnectCenterObserver;
+000254: invoke-interface v11, Lcom/vivo/connbase/connectcenter/IConnectCenterObserver;->onGetCommonBleConfigs()Ljava/lang/String;
+00025a: move-result-object v11
+00025c: goto -34h
+00025e: invoke-virtual v12, v5, Landroid/os/Bundle;->getStringArrayList(Ljava/lang/String;)Ljava/util/ArrayList;
+000264: move-result-object v12
+000266: iget-object v11, v11, Lcom/vivo/connbase/connectcenter/ConnectCenterImpl;->mObserver Lcom/vivo/connbase/connectcenter/IConnectCenterObserver;
+00026a: invoke-interface v11, v12, Lcom/vivo/connbase/connectcenter/IConnectCenterObserver;->onGetServiceSwitchState(Ljava/util/List;)Ljava/lang/String;
+000270: move-result-object v11
+000272: goto -3fh
+000274: const-string v2, "deviceIds"
+000278: invoke-virtual v12, v2, Landroid/os/Bundle;->getStringArrayList(Ljava/lang/String;)Ljava/util/ArrayList;
+00027e: move-result-object v12
+000280: iget-object v11, v11, Lcom/vivo/connbase/connectcenter/ConnectCenterImpl;->mObserver Lcom/vivo/connbase/connectcenter/IConnectCenterObserver;
+000284: invoke-interface v11, v12, Lcom/vivo/connbase/connectcenter/IConnectCenterObserver;->onCheckBoundDeviceExist(Ljava/util/List;)Ljava/lang/String;
+00028a: move-result-object v11
+00028c: goto -4ch
+00028e: const-string v2, "json"
+000292: invoke-virtual v12, v2, Landroid/os/BaseBundle;->getString(Ljava/lang/String;)Ljava/lang/String;
+000298: move-result-object v2
+00029a: new-instance v3, Ljava/lang/StringBuilder;
+00029e: const-string v5, "onServiceDispatch json = "
+0002a2: invoke-direct v3, v5, Ljava/lang/StringBuilder;-><init>(Ljava/lang/String;)V
+0002a8: invoke-virtual v3, v2, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+0002ae: invoke-virtual v3, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
+0002b4: move-result-object v3
+0002b6: invoke-static v0, v3, Lcom/vivo/aiengine/find/device/sdk/impl/util/LogUtil;->d(Ljava/lang/String; Ljava/lang/String;)V
+0002bc: invoke-virtual v12, v8, Landroid/os/Bundle;->getBinder(Ljava/lang/String;)Landroid/os/IBinder;
+0002c2: move-result-object v12
+0002c4: invoke-static v12, Lcom/vivo/connbase/connectcenter/IServiceCallback$Stub;->asInterface(Landroid/os/IBinder;)Lcom/vivo/connbase/connectcenter/IServiceCallback;
+0002ca: move-result-object v12
+0002cc: iget-object v11, v11, Lcom/vivo/connbase/connectcenter/ConnectCenterImpl;->mObserver Lcom/vivo/connbase/connectcenter/IConnectCenterObserver;
+0002d0: invoke-interface v11, v2, v12, Lcom/vivo/connbase/connectcenter/IConnectCenterObserver;->onServiceDispatch(Ljava/lang/String; Lcom/vivo/connbase/connectcenter/IServiceCallback;)V
+0002d6: goto/16 +08ah
+0002da: invoke-virtual v12, v9, Landroid/os/BaseBundle;->getString(Ljava/lang/String;)Ljava/lang/String;
+0002e0: move-result-object v2
+0002e2: const-string v3, "serviceId"
+0002e6: invoke-virtual v12, v3, Landroid/os/BaseBundle;->getString(Ljava/lang/String;)Ljava/lang/String;
+0002ec: move-result-object v12
+0002ee: iget-object v11, v11, Lcom/vivo/connbase/connectcenter/ConnectCenterImpl;->mObserver Lcom/vivo/connbase/connectcenter/IConnectCenterObserver;
+0002f2: invoke-interface v11, v2, v12, Lcom/vivo/connbase/connectcenter/IConnectCenterObserver;->onCheckServiceIfInUsing(Ljava/lang/String; Ljava/lang/String;)I
+0002f8: move-result v11
+0002fa: const-string v12, "outInt"
+0002fe: invoke-virtual v1, v12, v11, Landroid/os/BaseBundle;->putInt(Ljava/lang/String; I)V
+000304: goto/16 +073h
+000308: invoke-virtual v12, v8, Landroid/os/Bundle;->getBinder(Ljava/lang/String;)Landroid/os/IBinder;
+00030e: move-result-object v12
+000310: invoke-static v12, Lcom/vivo/connbase/connectcenter/ICallbackResult$Stub;->asInterface(Landroid/os/IBinder;)Lcom/vivo/connbase/connectcenter/ICallbackResult;
+000316: move-result-object v12
+000318: iget-object v11, v11, Lcom/vivo/connbase/connectcenter/ConnectCenterImpl;->mObserver Lcom/vivo/connbase/connectcenter/IConnectCenterObserver;
+00031c: invoke-interface v11, v12, Lcom/vivo/connbase/connectcenter/IConnectCenterObserver;->onResquestStopScan(Lcom/vivo/connbase/connectcenter/ICallbackResult;)V
+000322: goto +64h
+000324: invoke-virtual v12, v8, Landroid/os/Bundle;->getBinder(Ljava/lang/String;)Landroid/os/IBinder;
+00032a: move-result-object v12
+00032c: invoke-static v12, Lcom/vivo/connbase/connectcenter/IScanResult$Stub;->asInterface(Landroid/os/IBinder;)Lcom/vivo/connbase/connectcenter/IScanResult;
+000332: move-result-object v12
+000334: iget-object v11, v11, Lcom/vivo/connbase/connectcenter/ConnectCenterImpl;->mObserver Lcom/vivo/connbase/connectcenter/IConnectCenterObserver;
+000338: invoke-interface v11, v12, Lcom/vivo/connbase/connectcenter/IConnectCenterObserver;->onRequestStartScan(Lcom/vivo/connbase/connectcenter/IScanResult;)V
+00033e: goto +56h
+000340: invoke-virtual v12, v9, Landroid/os/BaseBundle;->getString(Ljava/lang/String;)Ljava/lang/String;
+000346: move-result-object v12
+000348: iget-object v11, v11, Lcom/vivo/connbase/connectcenter/ConnectCenterImpl;->mObserver Lcom/vivo/connbase/connectcenter/IConnectCenterObserver;
+00034c: invoke-interface v11, v12, Lcom/vivo/connbase/connectcenter/IConnectCenterObserver;->onGetPropertyInfo(Ljava/lang/String;)Ljava/lang/String;
+000352: move-result-object v11
+000354: const-string v12, "property"
+000358: invoke-virtual v1, v12, v11, Landroid/os/BaseBundle;->putString(Ljava/lang/String; Ljava/lang/String;)V
+00035e: goto +46h
+000360: invoke-virtual v12, v9, Landroid/os/BaseBundle;->getString(Ljava/lang/String;)Ljava/lang/String;
+000366: move-result-object v12
+000368: iget-object v11, v11, Lcom/vivo/connbase/connectcenter/ConnectCenterImpl;->mObserver Lcom/vivo/connbase/connectcenter/IConnectCenterObserver;
+00036c: invoke-interface v11, v12, Lcom/vivo/connbase/connectcenter/IConnectCenterObserver;->onSupportServiceRequestByDevice(Ljava/lang/String;)Ljava/util/List;
+000372: move-result-object v11
+000374: if-eqz v11, +028h
+000378: invoke-interface v11, Ljava/util/List;->size()I
+00037e: move-result v12
+000380: if-nez v12, +003h
+000384: goto +20h
+000386: new-instance v12, Ljava/util/ArrayList;
+00038a: invoke-direct v12, Ljava/util/ArrayList;-><init>()V
+000390: invoke-interface v11, Ljava/util/List;->iterator()Ljava/util/Iterator;
+000396: move-result-object v11
+000398: invoke-interface v11, Ljava/util/Iterator;->hasNext()Z
+00039e: move-result v2
+0003a0: if-eqz v2, +00ch
+0003a4: invoke-interface v11, Ljava/util/Iterator;->next()Ljava/lang/Object;
+0003aa: move-result-object v2
+0003ac: check-cast v2, Ljava/lang/String;
+0003b0: invoke-virtual v12, v2, Ljava/util/ArrayList;->add(Ljava/lang/Object;)Z
+0003b6: goto -fh
+0003b8: const-string v11, "SupportServices"
+0003bc: invoke-virtual v1, v11, v12, Landroid/os/Bundle;->putStringArrayList(Ljava/lang/String; Ljava/util/ArrayList;)V
+0003c2: goto +14h
+0003c4: invoke-virtual v1, v2, v7, Landroid/os/BaseBundle;->putBoolean(Ljava/lang/String; Z)V
+0003ca: const-string v11, "app does not return anything"
+0003ce: goto/16 -0fch
+0003d2: invoke-virtual v12, v5, Landroid/os/Bundle;->getStringArrayList(Ljava/lang/String;)Ljava/util/ArrayList;
+0003d8: move-result-object v12
+0003da: iget-object v11, v11, Lcom/vivo/connbase/connectcenter/ConnectCenterImpl;->mObserver Lcom/vivo/connbase/connectcenter/IConnectCenterObserver;
+0003de: invoke-interface v11, v12, Lcom/vivo/connbase/connectcenter/IConnectCenterObserver;->onDynamicNameRequest(Ljava/util/List;)Ljava/lang/String;
+0003e4: move-result-object v11
+0003e6: goto/16 -0f9h
+0003ea: if-eqz v4, +005h
+0003ee: invoke-interface v4, v1, Ls1/d;->b(Landroid/os/Bundle;)V
+0003f4: const-string v11, " done"
+0003f8: invoke-virtual v13, v11, Ljava/lang/String;->concat(Ljava/lang/String;)Ljava/lang/String;
+0003fe: move-result-object v11
+000400: invoke-static v0, v11, Lcom/vivo/aiengine/find/device/sdk/impl/util/LogUtil;->i(Ljava/lang/String; Ljava/lang/String;)V
+000406: return-void 
+000408: sparse-switch-payload -39e027fc -2fac8529 -27b25946 -1d0eafd1 -10851400 -7d6d02a 53b3a70 1a35226c 433fe11f 4b06eef8 584717ed 7170c4eb
+00046c: packed-switch-payload 0 1 2 3 4 5 6 7 8 9 a b
+
+METHOD obtainBindDied(Landroid/os/IBinder;)V
+000000: const-string v0, "ConnectCenterImpl"
+000004: if-nez v3, +00ah
+000008: const-string v2, "callError: IConnectCenterObserver binder is null "
+00000c: invoke-static v0, v2, Lcom/vivo/aiengine/find/device/sdk/impl/util/LogUtil;->e(Ljava/lang/String; Ljava/lang/String;)V
+000012: return-void 
+000014: move-exception v2
+000016: goto +10h
+000018: const-string v1, "IConnectCenterObserver obtainBindDied"
+00001c: invoke-static v0, v1, Lcom/vivo/aiengine/find/device/sdk/impl/util/LogUtil;->d(Ljava/lang/String; Ljava/lang/String;)V
+000022: new-instance v1, Lcom/vivo/connbase/connectcenter/ConnectCenterImpl$12;
+000026: invoke-direct v1, v2, v3, Lcom/vivo/connbase/connectcenter/ConnectCenterImpl$12;-><init>(Lcom/vivo/connbase/connectcenter/ConnectCenterImpl; Landroid/os/IBinder;)V
+00002c: const/4 v2, 0
+00002e: invoke-interface v3, v1, v2, Landroid/os/IBinder;->linkToDeath(Landroid/os/IBinder$DeathRecipient; I)V
+000034: return-void 
+000036: new-instance v3, Ljava/lang/StringBuilder;
+00003a: const-string v1, "obtainBindDied: "
+00003e: invoke-direct v3, v1, Ljava/lang/StringBuilder;-><init>(Ljava/lang/String;)V
+000044: invoke-virtual v2, Ljava/lang/Throwable;->getMessage()Ljava/lang/String;
+00004a: move-result-object v2
+00004c: invoke-virtual v3, v2, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+000052: invoke-virtual v3, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
+000058: move-result-object v2
+00005a: invoke-static v0, v2, Lcom/vivo/aiengine/find/device/sdk/impl/util/LogUtil;->e(Ljava/lang/String; Ljava/lang/String;)V
+000060: return-void 
+
+METHOD retrySetCallbackObserver()V
+000000: sget-object v0, Lcom/vivo/connbase/connectcenter/ConnectCenterImpl;->retry Ljava/util/concurrent/atomic/AtomicInteger;
+000004: invoke-virtual v0, Ljava/util/concurrent/atomic/AtomicInteger;->get()I
+00000a: move-result v1
+00000c: if-eqz v1, +00ah
+000010: const-string v3, "ConnectCenterImpl"
+000014: const-string v0, "retrySetCallbackObserver IConnectCenterObserver trying."
+000018: invoke-static v3, v0, Lcom/vivo/aiengine/find/device/sdk/impl/util/LogUtil;->e(Ljava/lang/String; Ljava/lang/String;)V
+00001e: return-void 
+000020: new-instance v1, Ljava/lang/Thread;
+000024: new-instance v2, Lcom/vivo/connbase/connectcenter/ConnectCenterImpl$13;
+000028: invoke-direct v2, v3, Lcom/vivo/connbase/connectcenter/ConnectCenterImpl$13;-><init>(Lcom/vivo/connbase/connectcenter/ConnectCenterImpl;)V
+00002e: invoke-direct v1, v2, Ljava/lang/Thread;-><init>(Ljava/lang/Runnable;)V
+000034: const/4 v3, 5
+000036: invoke-virtual v0, v3, Ljava/util/concurrent/atomic/AtomicInteger;->set(I)V
+00003c: invoke-virtual v1, Ljava/lang/Thread;->start()V
+000042: return-void 
+
+METHOD setConnetCenterEvent()V
+000000: new-instance v0, Lu1/a;
+000004: invoke-direct v0, Ljava/lang/Object;-><init>()V
+00000a: new-instance v1, Lcom/vivo/connbase/connectcenter/ConnectCenterImpl$1;
+00000e: invoke-direct v1, v2, Lcom/vivo/connbase/connectcenter/ConnectCenterImpl$1;-><init>(Lcom/vivo/connbase/connectcenter/ConnectCenterImpl;)V
+000014: invoke-virtual v0, v1, Lu1/a;->a(Ls1/a$a;)V
+00001a: return-void 
+
+METHOD asBinder()Landroid/os/IBinder;
+000000: invoke-virtual v0, Lcom/vivo/connbase/connectcenter/ConnectCenterImpl;->asBinder()Landroid/os/IBinder;
+000006: move-result-object v0
+000008: return-object v0
+
+METHOD checkAndBindDevice(Ljava/lang/String; Lcom/vivo/connbase/connectcenter/ICallbackResult;)V
+000000: const-string v0, "ConnectCenterImpl"
+000004: const-string v1, "checkAndBindDevice"
+000008: invoke-static v0, v1, Lcom/vivo/aiengine/find/device/sdk/impl/util/LogUtil;->e(Ljava/lang/String; Ljava/lang/String;)V
+00000e: iget-boolean v0, v3, Lcom/vivo/connbase/connectcenter/ConnectCenterImpl;->mIsSystemApp Z
+000012: if-eqz v0, +00fh
+000016: iget-object v0, v3, Lcom/vivo/connbase/connectcenter/ApiBase;->mExecutorService Ljava/util/concurrent/ExecutorService;
+00001a: new-instance v1, Lcom/vivo/connbase/connectcenter/ConnectCenterImpl$4;
+00001e: iget-object v2, v3, Lcom/vivo/connbase/connectcenter/ConnectCenterImpl;->mContext Landroid/content/Context;
+000022: invoke-direct v1, v3, v2, v5, v4, Lcom/vivo/connbase/connectcenter/ConnectCenterImpl$4;-><init>(Lcom/vivo/connbase/connectcenter/ConnectCenterImpl; Landroid/content/Context; Lcom/vivo/connbase/connectcenter/ICallbackResult; Ljava/lang/String;)V
+000028: invoke-interface v0, v1, Ljava/util/concurrent/ExecutorService;->submit(Ljava/lang/Runnable;)Ljava/util/concurrent/Future;
+00002e: return-void 
+000030: iget-object v0, v3, Lcom/vivo/connbase/connectcenter/ApiBase;->mExecutorService Ljava/util/concurrent/ExecutorService;
+000034: new-instance v1, Lcom/vivo/connbase/connectcenter/ConnectCenterImpl$5;
+000038: iget-object v2, v3, Lcom/vivo/connbase/connectcenter/ConnectCenterImpl;->mContext Landroid/content/Context;
+00003c: invoke-direct v1, v3, v2, v5, v4, Lcom/vivo/connbase/connectcenter/ConnectCenterImpl$5;-><init>(Lcom/vivo/connbase/connectcenter/ConnectCenterImpl; Landroid/content/Context; Lcom/vivo/connbase/connectcenter/ICallbackResult; Ljava/lang/String;)V
+000042: goto -dh
+
+METHOD checkDeviceBound(Ljava/util/List;)Ljava/lang/String;
+000000: const/4 v0, 1
+000002: new-array v0, v0, [Ljava/lang/String;
+000006: iget-boolean v1, v3, Lcom/vivo/connbase/connectcenter/ConnectCenterImpl;->mIsSystemApp Z
+00000a: if-eqz v1, +00dh
+00000e: new-instance v1, Lcom/vivo/connbase/connectcenter/ConnectCenterImpl$2;
+000012: iget-object v2, v3, Lcom/vivo/connbase/connectcenter/ConnectCenterImpl;->mContext Landroid/content/Context;
+000016: invoke-direct v1, v3, v2, v0, v4, Lcom/vivo/connbase/connectcenter/ConnectCenterImpl$2;-><init>(Lcom/vivo/connbase/connectcenter/ConnectCenterImpl; Landroid/content/Context; [Ljava/lang/String; Ljava/util/List;)V
+00001c: invoke-virtual v1, Lcom/vivo/connbase/connectcenter/ConnectCenterTask;->run()V
+000022: goto +bh
+000024: new-instance v1, Lcom/vivo/connbase/connectcenter/ConnectCenterImpl$3;
+000028: iget-object v2, v3, Lcom/vivo/connbase/connectcenter/ConnectCenterImpl;->mContext Landroid/content/Context;
+00002c: invoke-direct v1, v3, v2, v0, v4, Lcom/vivo/connbase/connectcenter/ConnectCenterImpl$3;-><init>(Lcom/vivo/connbase/connectcenter/ConnectCenterImpl; Landroid/content/Context; [Ljava/lang/String; Ljava/util/List;)V
+000032: invoke-virtual v1, Lcom/vivo/connbase/connectcenter/NoSysConnectCenterTask;->run()V
+000038: const/4 v3, 0
+00003a: aget-object v3, v0, v3
+00003e: return-object v3
+
+METHOD getBoundDeviceByType(Ljava/lang/String;)Ljava/lang/String;
+000000: const/4 v0, 1
+000002: new-array v0, v0, [Ljava/lang/String;
+000006: iget-boolean v1, v3, Lcom/vivo/connbase/connectcenter/ConnectCenterImpl;->mIsSystemApp Z
+00000a: if-eqz v1, +00dh
+00000e: new-instance v1, Lcom/vivo/connbase/connectcenter/ConnectCenterImpl$14;
+000012: iget-object v2, v3, Lcom/vivo/connbase/connectcenter/ConnectCenterImpl;->mContext Landroid/content/Context;
+000016: invoke-direct v1, v3, v2, v0, v4, Lcom/vivo/connbase/connectcenter/ConnectCenterImpl$14;-><init>(Lcom/vivo/connbase/connectcenter/ConnectCenterImpl; Landroid/content/Context; [Ljava/lang/String; Ljava/lang/String;)V
+00001c: invoke-virtual v1, Lcom/vivo/connbase/connectcenter/ConnectCenterTask;->run()V
+000022: goto +bh
+000024: new-instance v1, Lcom/vivo/connbase/connectcenter/ConnectCenterImpl$15;
+000028: iget-object v2, v3, Lcom/vivo/connbase/connectcenter/ConnectCenterImpl;->mContext Landroid/content/Context;
+00002c: invoke-direct v1, v3, v2, v0, v4, Lcom/vivo/connbase/connectcenter/ConnectCenterImpl$15;-><init>(Lcom/vivo/connbase/connectcenter/ConnectCenterImpl; Landroid/content/Context; [Ljava/lang/String; Ljava/lang/String;)V
+000032: invoke-virtual v1, Lcom/vivo/connbase/connectcenter/NoSysConnectCenterTask;->run()V
+000038: const/4 v3, 0
+00003a: aget-object v3, v0, v3
+00003e: return-object v3
+
+METHOD getBoundDevices(Ljava/lang/String;)Ljava/lang/String;
+000000: const/4 v0, 1
+000002: new-array v0, v0, [Ljava/lang/String;
+000006: iget-boolean v1, v3, Lcom/vivo/connbase/connectcenter/ConnectCenterImpl;->mIsSystemApp Z
+00000a: if-eqz v1, +00dh
+00000e: new-instance v1, Lcom/vivo/connbase/connectcenter/ConnectCenterImpl$22;
+000012: iget-object v2, v3, Lcom/vivo/connbase/connectcenter/ConnectCenterImpl;->mContext Landroid/content/Context;
+000016: invoke-direct v1, v3, v2, v0, v4, Lcom/vivo/connbase/connectcenter/ConnectCenterImpl$22;-><init>(Lcom/vivo/connbase/connectcenter/ConnectCenterImpl; Landroid/content/Context; [Ljava/lang/String; Ljava/lang/String;)V
+00001c: invoke-virtual v1, Lcom/vivo/connbase/connectcenter/ConnectCenterTask;->run()V
+000022: goto +bh
+000024: new-instance v1, Lcom/vivo/connbase/connectcenter/ConnectCenterImpl$23;
+000028: iget-object v2, v3, Lcom/vivo/connbase/connectcenter/ConnectCenterImpl;->mContext Landroid/content/Context;
+00002c: invoke-direct v1, v3, v2, v0, v4, Lcom/vivo/connbase/connectcenter/ConnectCenterImpl$23;-><init>(Lcom/vivo/connbase/connectcenter/ConnectCenterImpl; Landroid/content/Context; [Ljava/lang/String; Ljava/lang/String;)V
+000032: invoke-virtual v1, Lcom/vivo/connbase/connectcenter/NoSysConnectCenterTask;->run()V
+000038: const/4 v3, 0
+00003a: aget-object v3, v0, v3
+00003e: return-object v3
+
+METHOD getIfSupportConnectCenter()I
+000000: const-string v0, "ConnectCenterImpl"
+000004: const-string v1, "getIfSupportConnectCenter"
+000008: invoke-static v0, v1, Lcom/vivo/aiengine/find/device/sdk/impl/util/LogUtil;->d(Ljava/lang/String; Ljava/lang/String;)V
+00000e: iget-object v2, v2, Lcom/vivo/connbase/connectcenter/ConnectCenterImpl;->mContext Landroid/content/Context;
+000012: invoke-static v2, Lcom/vivo/connbase/connectcenter/ConnectCenterUtils;->isSupportConnectCenter(Landroid/content/Context;)I
+000018: move-result v2
+00001a: return v2
+
+METHOD notifyDeviceEvent(Ljava/lang/String; Lcom/vivo/connbase/connectcenter/ICallbackResult;)V
+000000: iget-boolean v0, v3, Lcom/vivo/connbase/connectcenter/ConnectCenterImpl;->mIsSystemApp Z
+000004: if-eqz v0, +00fh
+000008: iget-object v0, v3, Lcom/vivo/connbase/connectcenter/ApiBase;->mExecutorService Ljava/util/concurrent/ExecutorService;
+00000c: new-instance v1, Lcom/vivo/connbase/connectcenter/ConnectCenterImpl$16;
+000010: iget-object v2, v3, Lcom/vivo/connbase/connectcenter/ConnectCenterImpl;->mContext Landroid/content/Context;
+000014: invoke-direct v1, v3, v2, v5, v4, Lcom/vivo/connbase/connectcenter/ConnectCenterImpl$16;-><init>(Lcom/vivo/connbase/connectcenter/ConnectCenterImpl; Landroid/content/Context; Lcom/vivo/connbase/connectcenter/ICallbackResult; Ljava/lang/String;)V
+00001a: invoke-interface v0, v1, Ljava/util/concurrent/ExecutorService;->submit(Ljava/lang/Runnable;)Ljava/util/concurrent/Future;
+000020: return-void 
+000022: iget-object v0, v3, Lcom/vivo/connbase/connectcenter/ApiBase;->mExecutorService Ljava/util/concurrent/ExecutorService;
+000026: new-instance v1, Lcom/vivo/connbase/connectcenter/ConnectCenterImpl$17;
+00002a: iget-object v2, v3, Lcom/vivo/connbase/connectcenter/ConnectCenterImpl;->mContext Landroid/content/Context;
+00002e: invoke-direct v1, v3, v2, v5, v4, Lcom/vivo/connbase/connectcenter/ConnectCenterImpl$17;-><init>(Lcom/vivo/connbase/connectcenter/ConnectCenterImpl; Landroid/content/Context; Lcom/vivo/connbase/connectcenter/ICallbackResult; Ljava/lang/String;)V
+000034: goto -dh
+
+METHOD reportBusinessInfo(Ljava/lang/String; Ljava/lang/String; Lcom/vivo/connbase/connectcenter/ICallbackResult;)V
+000000: iget-boolean v0, v8, Lcom/vivo/connbase/connectcenter/ConnectCenterImpl;->mIsSystemApp Z
+000004: if-eqz v0, +013h
+000008: iget-object v0, v8, Lcom/vivo/connbase/connectcenter/ApiBase;->mExecutorService Ljava/util/concurrent/ExecutorService;
+00000c: new-instance v1, Lcom/vivo/connbase/connectcenter/ConnectCenterImpl$8;
+000010: iget-object v3, v8, Lcom/vivo/connbase/connectcenter/ConnectCenterImpl;->mContext Landroid/content/Context;
+000014: move-object v2, v8
+000016: move-object v5, v9
+000018: move-object v6, v10
+00001a: move-object v4, v11
+00001c: invoke-direct/range v1 ... v6, Lcom/vivo/connbase/connectcenter/ConnectCenterImpl$8;-><init>(Lcom/vivo/connbase/connectcenter/ConnectCenterImpl; Landroid/content/Context; Lcom/vivo/connbase/connectcenter/ICallbackResult; Ljava/lang/String; Ljava/lang/String;)V
+000022: invoke-interface v0, v1, Ljava/util/concurrent/ExecutorService;->submit(Ljava/lang/Runnable;)Ljava/util/concurrent/Future;
+000028: return-void 
+00002a: move-object v2, v8
+00002c: move-object v5, v9
+00002e: move-object v6, v10
+000030: move-object v4, v11
+000032: iget-object v8, v2, Lcom/vivo/connbase/connectcenter/ApiBase;->mExecutorService Ljava/util/concurrent/ExecutorService;
+000036: move-object v3, v2
+000038: new-instance v2, Lcom/vivo/connbase/connectcenter/ConnectCenterImpl$9;
+00003c: move-object v7, v6
+00003e: move-object v6, v5
+000040: move-object v5, v4
+000042: iget-object v4, v3, Lcom/vivo/connbase/connectcenter/ConnectCenterImpl;->mContext Landroid/content/Context;
+000046: invoke-direct/range v2 ... v7, Lcom/vivo/connbase/connectcenter/ConnectCenterImpl$9;-><init>(Lcom/vivo/connbase/connectcenter/ConnectCenterImpl; Landroid/content/Context; Lcom/vivo/connbase/connectcenter/ICallbackResult; Ljava/lang/String; Ljava/lang/String;)V
+00004c: invoke-interface v8, v2, Ljava/util/concurrent/ExecutorService;->submit(Ljava/lang/Runnable;)Ljava/util/concurrent/Future;
+000052: return-void 
+
+METHOD setCallbackObserver(Lcom/vivo/connbase/connectcenter/IConnectCenterObserver;)V
+000000: new-instance v0, Ljava/lang/StringBuilder;
+000004: const-string v1, "app setCallbackObserver, observer = "
+000008: invoke-direct v0, v1, Ljava/lang/StringBuilder;-><init>(Ljava/lang/String;)V
+00000e: invoke-virtual v0, v4, Ljava/lang/StringBuilder;->append(Ljava/lang/Object;)Ljava/lang/StringBuilder;
+000014: invoke-virtual v0, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
+00001a: move-result-object v0
+00001c: const-string v1, "ConnectCenterImpl"
+000020: invoke-static v1, v0, Lcom/vivo/aiengine/find/device/sdk/impl/util/LogUtil;->i(Ljava/lang/String; Ljava/lang/String;)V
+000026: if-nez v4, +003h
+00002a: return-void 
+00002c: iget-object v0, v3, Lcom/vivo/connbase/connectcenter/ConnectCenterImpl;->mObserver Lcom/vivo/connbase/connectcenter/IConnectCenterObserver;
+000030: if-eq v0, v4, +022h
+000034: const-string v0, "setCallbackObserver IConnectCenterObserver : true"
+000038: invoke-static v1, v0, Lcom/vivo/aiengine/find/device/sdk/impl/util/LogUtil;->e(Ljava/lang/String; Ljava/lang/String;)V
+00003e: iget-boolean v0, v3, Lcom/vivo/connbase/connectcenter/ConnectCenterImpl;->mIsSystemApp Z
+000042: if-eqz v0, +00fh
+000046: iget-object v0, v3, Lcom/vivo/connbase/connectcenter/ApiBase;->mExecutorService Ljava/util/concurrent/ExecutorService;
+00004a: new-instance v1, Lcom/vivo/connbase/connectcenter/ConnectCenterImpl$10;
+00004e: iget-object v2, v3, Lcom/vivo/connbase/connectcenter/ConnectCenterImpl;->mContext Landroid/content/Context;
+000052: invoke-direct v1, v3, v2, v4, Lcom/vivo/connbase/connectcenter/ConnectCenterImpl$10;-><init>(Lcom/vivo/connbase/connectcenter/ConnectCenterImpl; Landroid/content/Context; Lcom/vivo/connbase/connectcenter/IConnectCenterObserver;)V
+000058: invoke-interface v0, v1, Ljava/util/concurrent/ExecutorService;->submit(Ljava/lang/Runnable;)Ljava/util/concurrent/Future;
+00005e: goto +bh
+000060: iget-object v0, v3, Lcom/vivo/connbase/connectcenter/ApiBase;->mExecutorService Ljava/util/concurrent/ExecutorService;
+000064: new-instance v1, Lcom/vivo/connbase/connectcenter/ConnectCenterImpl$11;
+000068: iget-object v2, v3, Lcom/vivo/connbase/connectcenter/ConnectCenterImpl;->mContext Landroid/content/Context;
+00006c: invoke-direct v1, v3, v2, v4, Lcom/vivo/connbase/connectcenter/ConnectCenterImpl$11;-><init>(Lcom/vivo/connbase/connectcenter/ConnectCenterImpl; Landroid/content/Context; Lcom/vivo/connbase/connectcenter/IConnectCenterObserver;)V
+000072: goto -dh
+000074: iput-object v4, v3, Lcom/vivo/connbase/connectcenter/ConnectCenterImpl;->mObserver Lcom/vivo/connbase/connectcenter/IConnectCenterObserver;
+000078: return-void 
+
+METHOD unbindDevice(Ljava/lang/String; Lcom/vivo/connbase/connectcenter/ICallbackResult;)V
+000000: iget-boolean v0, v3, Lcom/vivo/connbase/connectcenter/ConnectCenterImpl;->mIsSystemApp Z
+000004: if-eqz v0, +00fh
+000008: iget-object v0, v3, Lcom/vivo/connbase/connectcenter/ApiBase;->mExecutorService Ljava/util/concurrent/ExecutorService;
+00000c: new-instance v1, Lcom/vivo/connbase/connectcenter/ConnectCenterImpl$6;
+000010: iget-object v2, v3, Lcom/vivo/connbase/connectcenter/ConnectCenterImpl;->mContext Landroid/content/Context;
+000014: invoke-direct v1, v3, v2, v5, v4, Lcom/vivo/connbase/connectcenter/ConnectCenterImpl$6;-><init>(Lcom/vivo/connbase/connectcenter/ConnectCenterImpl; Landroid/content/Context; Lcom/vivo/connbase/connectcenter/ICallbackResult; Ljava/lang/String;)V
+00001a: invoke-interface v0, v1, Ljava/util/concurrent/ExecutorService;->submit(Ljava/lang/Runnable;)Ljava/util/concurrent/Future;
+000020: return-void 
+000022: iget-object v0, v3, Lcom/vivo/connbase/connectcenter/ApiBase;->mExecutorService Ljava/util/concurrent/ExecutorService;
+000026: new-instance v1, Lcom/vivo/connbase/connectcenter/ConnectCenterImpl$7;
+00002a: iget-object v2, v3, Lcom/vivo/connbase/connectcenter/ConnectCenterImpl;->mContext Landroid/content/Context;
+00002e: invoke-direct v1, v3, v2, v5, v4, Lcom/vivo/connbase/connectcenter/ConnectCenterImpl$7;-><init>(Lcom/vivo/connbase/connectcenter/ConnectCenterImpl; Landroid/content/Context; Lcom/vivo/connbase/connectcenter/ICallbackResult; Ljava/lang/String;)V
+000034: goto -dh
+
+METHOD updateDeviceExt(Ljava/lang/String; Ljava/util/Map; Lcom/vivo/connbase/connectcenter/ICallbackResult;)V
+000000: iget-boolean v0, v8, Lcom/vivo/connbase/connectcenter/ConnectCenterImpl;->mIsSystemApp Z
+000004: if-eqz v0, +013h
+000008: iget-object v0, v8, Lcom/vivo/connbase/connectcenter/ApiBase;->mExecutorService Ljava/util/concurrent/ExecutorService;
+00000c: new-instance v1, Lcom/vivo/connbase/connectcenter/ConnectCenterImpl$18;
+000010: iget-object v3, v8, Lcom/vivo/connbase/connectcenter/ConnectCenterImpl;->mContext Landroid/content/Context;
+000014: move-object v2, v8
+000016: move-object v5, v9
+000018: move-object v6, v10
+00001a: move-object v4, v11
+00001c: invoke-direct/range v1 ... v6, Lcom/vivo/connbase/connectcenter/ConnectCenterImpl$18;-><init>(Lcom/vivo/connbase/connectcenter/ConnectCenterImpl; Landroid/content/Context; Lcom/vivo/connbase/connectcenter/ICallbackResult; Ljava/lang/String; Ljava/util/Map;)V
+000022: invoke-interface v0, v1, Ljava/util/concurrent/ExecutorService;->submit(Ljava/lang/Runnable;)Ljava/util/concurrent/Future;
+000028: return-void 
+00002a: move-object v2, v8
+00002c: move-object v5, v9
+00002e: move-object v6, v10
+000030: move-object v4, v11
+000032: iget-object v8, v2, Lcom/vivo/connbase/connectcenter/ApiBase;->mExecutorService Ljava/util/concurrent/ExecutorService;
+000036: move-object v3, v2
+000038: new-instance v2, Lcom/vivo/connbase/connectcenter/ConnectCenterImpl$19;
+00003c: move-object v7, v6
+00003e: move-object v6, v5
+000040: move-object v5, v4
+000042: iget-object v4, v3, Lcom/vivo/connbase/connectcenter/ConnectCenterImpl;->mContext Landroid/content/Context;
+000046: invoke-direct/range v2 ... v7, Lcom/vivo/connbase/connectcenter/ConnectCenterImpl$19;-><init>(Lcom/vivo/connbase/connectcenter/ConnectCenterImpl; Landroid/content/Context; Lcom/vivo/connbase/connectcenter/ICallbackResult; Ljava/lang/String; Ljava/util/Map;)V
+00004c: invoke-interface v8, v2, Ljava/util/concurrent/ExecutorService;->submit(Ljava/lang/Runnable;)Ljava/util/concurrent/Future;
+000052: return-void 
+
+METHOD updateDeviceInfo(Ljava/lang/String; Ljava/util/Map; Ljava/util/Map; Lcom/vivo/connbase/connectcenter/ICallbackResult;)V
+000000: const-string v0, "ConnectCenterImpl"
+000004: const-string v1, "sdk updateDeviceExt "
+000008: invoke-static v0, v1, Lcom/vivo/aiengine/find/device/sdk/impl/util/LogUtil;->d(Ljava/lang/String; Ljava/lang/String;)V
+00000e: iget-boolean v0, v9, Lcom/vivo/connbase/connectcenter/ConnectCenterImpl;->mIsSystemApp Z
+000012: if-eqz v0, +014h
+000016: iget-object v0, v9, Lcom/vivo/connbase/connectcenter/ApiBase;->mExecutorService Ljava/util/concurrent/ExecutorService;
+00001a: new-instance v1, Lcom/vivo/connbase/connectcenter/ConnectCenterImpl$20;
+00001e: iget-object v3, v9, Lcom/vivo/connbase/connectcenter/ConnectCenterImpl;->mContext Landroid/content/Context;
+000022: move-object v2, v9
+000024: move-object v5, v10
+000026: move-object v6, v11
+000028: move-object v7, v12
+00002a: move-object v4, v13
+00002c: invoke-direct/range v1 ... v7, Lcom/vivo/connbase/connectcenter/ConnectCenterImpl$20;-><init>(Lcom/vivo/connbase/connectcenter/ConnectCenterImpl; Landroid/content/Context; Lcom/vivo/connbase/connectcenter/ICallbackResult; Ljava/lang/String; Ljava/util/Map; Ljava/util/Map;)V
+000032: invoke-interface v0, v1, Ljava/util/concurrent/ExecutorService;->submit(Ljava/lang/Runnable;)Ljava/util/concurrent/Future;
+000038: return-void 
+00003a: move-object v2, v9
+00003c: move-object v5, v10
+00003e: move-object v6, v11
+000040: move-object v7, v12
+000042: move-object v4, v13
+000044: iget-object v9, v2, Lcom/vivo/connbase/connectcenter/ApiBase;->mExecutorService Ljava/util/concurrent/ExecutorService;
+000048: move-object v3, v2
+00004a: new-instance v2, Lcom/vivo/connbase/connectcenter/ConnectCenterImpl$21;
+00004e: move-object v8, v7
+000050: move-object v7, v6
+000052: move-object v6, v5
+000054: move-object v5, v4
+000056: iget-object v4, v3, Lcom/vivo/connbase/connectcenter/ConnectCenterImpl;->mContext Landroid/content/Context;
+00005a: invoke-direct/range v2 ... v8, Lcom/vivo/connbase/connectcenter/ConnectCenterImpl$21;-><init>(Lcom/vivo/connbase/connectcenter/ConnectCenterImpl; Landroid/content/Context; Lcom/vivo/connbase/connectcenter/ICallbackResult; Ljava/lang/String; Ljava/util/Map; Ljava/util/Map;)V
+000060: invoke-interface v9, v2, Ljava/util/concurrent/ExecutorService;->submit(Ljava/lang/Runnable;)Ljava/util/concurrent/Future;
+000066: return-void 

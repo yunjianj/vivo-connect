@@ -1,0 +1,61 @@
+APK pcsuite/updateApk/connbase.apk
+DEX classes.dex
+CLASS Lcom/vivo/connbase/m0/a/g/a;
+SUPER Ljava/lang/Object;
+FIELDS
+a Ljava/lang/String; = 'ConfigBuilderProxy'
+b Ljava/lang/reflect/Field; = None
+
+METHOD <clinit>()V
+000000: const-string v0, "android.net.wifi.p2p.WifiP2pConfig$Builder"
+000004: invoke-static v0, Ljava/lang/Class;->forName(Ljava/lang/String;)Ljava/lang/Class;
+00000a: move-result-object v0
+00000c: const-string v1, "mNetworkName"
+000010: invoke-virtual v0, v1, Ljava/lang/Class;->getDeclaredField(Ljava/lang/String;)Ljava/lang/reflect/Field;
+000016: move-result-object v0
+000018: sput-object v0, Lcom/vivo/connbase/m0/a/g/a;->b Ljava/lang/reflect/Field;
+00001c: const/4 v1, 1
+00001e: invoke-virtual v0, v1, Ljava/lang/reflect/Field;->setAccessible(Z)V
+000024: goto +9h
+000026: move-exception v0
+000028: const-string v1, "ConfigBuilderProxy"
+00002c: const-string v2, "Reflect mNetworkName failed."
+000030: invoke-static v1, v2, v0, Lc/c/f/a/b;->b(Ljava/lang/String; Ljava/lang/String; Ljava/lang/Throwable;)V
+000036: return-void 
+
+METHOD <init>()V
+000000: invoke-direct v0, Ljava/lang/Object;-><init>()V
+000006: return-void 
+
+METHOD a(Lcom/vivo/connbase/m0/a/g/b;)Landroid/net/wifi/p2p/WifiP2pConfig;
+000000: new-instance v0, Landroid/net/wifi/p2p/WifiP2pConfig$Builder;
+000004: invoke-direct v0, Landroid/net/wifi/p2p/WifiP2pConfig$Builder;-><init>()V
+00000a: sget-object v1, Lcom/vivo/connbase/m0/a/g/a;->b Ljava/lang/reflect/Field;
+00000e: invoke-virtual v4, Lcom/vivo/connbase/m0/a/g/b;->c()Ljava/lang/String;
+000014: move-result-object v2
+000016: invoke-virtual v1, v0, v2, Ljava/lang/reflect/Field;->set(Ljava/lang/Object; Ljava/lang/Object;)V
+00001c: goto +23h
+00001e: move-exception v1
+000020: new-instance v2, Ljava/lang/StringBuilder;
+000024: invoke-direct v2, Ljava/lang/StringBuilder;-><init>()V
+00002a: const-string v3, "Set network name by field failed. "
+00002e: invoke-virtual v2, v3, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+000034: invoke-virtual v1, Ljava/lang/Exception;->getMessage()Ljava/lang/String;
+00003a: move-result-object v1
+00003c: invoke-virtual v2, v1, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+000042: invoke-virtual v2, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
+000048: move-result-object v1
+00004a: const-string v2, "ConfigBuilderProxy"
+00004e: invoke-static v2, v1, Lc/c/f/a/b;->p(Ljava/lang/String; Ljava/lang/String;)V
+000054: invoke-virtual v4, Lcom/vivo/connbase/m0/a/g/b;->c()Ljava/lang/String;
+00005a: move-result-object v1
+00005c: invoke-virtual v0, v1, Landroid/net/wifi/p2p/WifiP2pConfig$Builder;->setNetworkName(Ljava/lang/String;)Landroid/net/wifi/p2p/WifiP2pConfig$Builder;
+000062: invoke-virtual v4, Lcom/vivo/connbase/m0/a/g/b;->e()Ljava/lang/String;
+000068: move-result-object v1
+00006a: invoke-virtual v0, v1, Landroid/net/wifi/p2p/WifiP2pConfig$Builder;->setPassphrase(Ljava/lang/String;)Landroid/net/wifi/p2p/WifiP2pConfig$Builder;
+000070: invoke-virtual v4, Lcom/vivo/connbase/m0/a/g/b;->b()I
+000076: move-result v4
+000078: invoke-virtual v0, v4, Landroid/net/wifi/p2p/WifiP2pConfig$Builder;->setGroupOperatingFrequency(I)Landroid/net/wifi/p2p/WifiP2pConfig$Builder;
+00007e: invoke-virtual v0, Landroid/net/wifi/p2p/WifiP2pConfig$Builder;->build()Landroid/net/wifi/p2p/WifiP2pConfig;
+000084: move-result-object v4
+000086: return-object v4

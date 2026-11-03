@@ -1,0 +1,84 @@
+APK pcsuite/updateApk/connbase.apk
+DEX classes.dex
+CLASS Lcom/vivo/connbase/l0/d/b$a;
+SUPER Ljava/lang/Object;
+FIELDS
+a Ljava/io/File; = None
+b Landroid/os/ParcelFileDescriptor; = None
+c J = None
+d J = None
+
+METHOD <init>(Ljava/io/File; Landroid/os/ParcelFileDescriptor; J J)V
+000000: invoke-direct v0, Ljava/lang/Object;-><init>()V
+000006: iput-object v1, v0, Lcom/vivo/connbase/l0/d/b$a;->a Ljava/io/File;
+00000a: iput-object v2, v0, Lcom/vivo/connbase/l0/d/b$a;->b Landroid/os/ParcelFileDescriptor;
+00000e: iput-wide v3, v0, Lcom/vivo/connbase/l0/d/b$a;->c J
+000012: iput-wide v5, v0, Lcom/vivo/connbase/l0/d/b$a;->d J
+000016: return-void 
+
+METHOD a(Landroid/os/ParcelFileDescriptor;)Lcom/vivo/connbase/l0/d/b$a;
+000000: new-instance v7, Lcom/vivo/connbase/l0/d/b$a;
+000004: const-string v0, "Cannot create Payload.File from null ParcelFileDescriptor."
+000008: invoke-static v8, v0, Lcom/vivo/connbase/e0/g/g;->a(Ljava/lang/Object; Ljava/lang/Object;)Ljava/lang/Object;
+00000e: move-result-object v0
+000010: move-object v2, v0
+000012: check-cast v2, Landroid/os/ParcelFileDescriptor;
+000016: invoke-virtual v8, Landroid/os/ParcelFileDescriptor;->getStatSize()J
+00001c: move-result-wide v3
+00001e: const/4 v1, 0
+000020: const-wide/16 v5, 0
+000024: move-object v0, v7
+000026: invoke-direct/range v0 ... v6, Lcom/vivo/connbase/l0/d/b$a;-><init>(Ljava/io/File; Landroid/os/ParcelFileDescriptor; J J)V
+00002c: return-object v7
+
+METHOD a(Landroid/os/ParcelFileDescriptor; J)Lcom/vivo/connbase/l0/d/b$a;
+000000: new-instance v7, Lcom/vivo/connbase/l0/d/b$a;
+000004: const-string v0, "Cannot create Payload.File from null ParcelFileDescriptor."
+000008: invoke-static v8, v0, Lcom/vivo/connbase/e0/g/g;->a(Ljava/lang/Object; Ljava/lang/Object;)Ljava/lang/Object;
+00000e: move-result-object v0
+000010: move-object v2, v0
+000012: check-cast v2, Landroid/os/ParcelFileDescriptor;
+000016: invoke-virtual v8, Landroid/os/ParcelFileDescriptor;->getStatSize()J
+00001c: move-result-wide v3
+00001e: const/4 v1, 0
+000020: move-object v0, v7
+000022: move-wide v5, v9
+000024: invoke-direct/range v0 ... v6, Lcom/vivo/connbase/l0/d/b$a;-><init>(Ljava/io/File; Landroid/os/ParcelFileDescriptor; J J)V
+00002a: return-object v7
+
+METHOD a(Ljava/io/File; J J)Lcom/vivo/connbase/l0/d/b$a;
+000000: const-string v0, "Cannot create Payload.File from null java.io.File."
+000004: invoke-static v8, v0, Lcom/vivo/connbase/e0/g/g;->a(Ljava/lang/Object; Ljava/lang/Object;)Ljava/lang/Object;
+00000a: invoke-virtual v8, Ljava/io/File;->isDirectory()Z
+000010: move-result v0
+000012: if-nez v0, +012h
+000016: new-instance v0, Lcom/vivo/connbase/l0/d/b$a;
+00001a: const/high16 v1, 268435456
+00001e: invoke-static v8, v1, Landroid/os/ParcelFileDescriptor;->open(Ljava/io/File; I)Landroid/os/ParcelFileDescriptor;
+000024: move-result-object v3
+000026: move-object v1, v0
+000028: move-object v2, v8
+00002a: move-wide v4, v9
+00002c: move-wide v6, v11
+00002e: invoke-direct/range v1 ... v7, Lcom/vivo/connbase/l0/d/b$a;-><init>(Ljava/io/File; Landroid/os/ParcelFileDescriptor; J J)V
+000034: return-object v0
+000036: new-instance v8, Ljava/lang/IllegalArgumentException;
+00003a: const-string v9, "Cannot create Payload.File by a  directory"
+00003e: invoke-direct v8, v9, Ljava/lang/IllegalArgumentException;-><init>(Ljava/lang/String;)V
+000044: throw v8
+
+METHOD a()Ljava/io/File;
+000000: iget-object v0, v1, Lcom/vivo/connbase/l0/d/b$a;->a Ljava/io/File;
+000004: return-object v0
+
+METHOD b()Landroid/os/ParcelFileDescriptor;
+000000: iget-object v0, v1, Lcom/vivo/connbase/l0/d/b$a;->b Landroid/os/ParcelFileDescriptor;
+000004: return-object v0
+
+METHOD c()J
+000000: iget-wide v0, v2, Lcom/vivo/connbase/l0/d/b$a;->d J
+000004: return-wide v0
+
+METHOD d()J
+000000: iget-wide v0, v2, Lcom/vivo/connbase/l0/d/b$a;->c J
+000004: return-wide v0

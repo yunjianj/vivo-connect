@@ -1,0 +1,273 @@
+APK pcsuite/updateApk/connbase.apk
+DEX classes.dex
+CLASS Lcom/vivo/finddevice/g;
+SUPER Lcom/vivo/finddevice/a;
+FIELDS
+o Ljava/lang/String; = 'ServiceScanner'
+j Landroid/os/Handler; = None
+k Ljava/util/Map; = None
+l Ljava/util/Map; = None
+m Z = None
+n Lcom/vivo/connbase/IConnectionCallback; = None
+
+METHOD a(I Lcom/vivo/finddevice/k/e;)Z
+000000: const/4 v0, 1
+000002: if-eq v0, v2, +010h
+000006: invoke-virtual v3, Lcom/vivo/finddevice/k/e;->E()Ljava/lang/String;
+00000c: move-result-object v2
+00000e: const-string v3, "com.vivo.pcsuite.SERVICE"
+000012: invoke-static v3, v2, Landroid/text/TextUtils;->equals(Ljava/lang/CharSequence; Ljava/lang/CharSequence;)Z
+000018: move-result v2
+00001a: if-eqz v2, +003h
+00001e: goto +2h
+000020: const/4 v0, 0
+000022: return v0
+
+METHOD p()V
+000000: new-instance v0, Ljava/lang/StringBuilder;
+000004: invoke-direct v0, Ljava/lang/StringBuilder;-><init>()V
+00000a: const-string v1, "set configs size"
+00000e: invoke-virtual v0, v1, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+000014: iget-object v1, v7, Lcom/vivo/finddevice/g;->l Ljava/util/Map;
+000018: invoke-interface v1, Ljava/util/Map;->size()I
+00001e: move-result v1
+000020: invoke-virtual v0, v1, Ljava/lang/StringBuilder;->append(I)Ljava/lang/StringBuilder;
+000026: invoke-virtual v0, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
+00002c: move-result-object v0
+00002e: const-string v1, "ServiceScanner"
+000032: invoke-static v1, v0, Lc/c/f/a/b;->k(Ljava/lang/String; Ljava/lang/String;)V
+000038: invoke-static Lcom/vivo/connbase/App;->m()Lcom/vivo/connbase/App;
+00003e: move-result-object v0
+000040: invoke-virtual v0, Landroid/app/Application;->getContentResolver()Landroid/content/ContentResolver;
+000046: move-result-object v0
+000048: const/4 v1, 0
+00004a: const-string v2, "app_auth_status"
+00004e: invoke-static v0, v2, v1, Landroid/provider/Settings$Global;->getInt(Landroid/content/ContentResolver; Ljava/lang/String; I)I
+000054: move-result v0
+000056: const/4 v2, 1
+000058: if-ne v0, v2, +003h
+00005c: move v1, v2
+00005e: const/4 v0, -1
+000060: const-string v3, "ro.vivo.support.mdc"
+000064: invoke-static v3, v0, Lcom/vivo/utils/r;->a(Ljava/lang/String; I)I
+00006a: move-result v0
+00006c: new-instance v3, Ljava/lang/StringBuilder;
+000070: invoke-direct v3, Ljava/lang/StringBuilder;-><init>()V
+000076: const-string v4, "isAuthorization:"
+00007a: invoke-virtual v3, v4, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+000080: invoke-virtual v3, v1, Ljava/lang/StringBuilder;->append(Z)Ljava/lang/StringBuilder;
+000086: const-string v4, ", mdc:"
+00008a: invoke-virtual v3, v4, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+000090: invoke-virtual v3, v0, Ljava/lang/StringBuilder;->append(I)Ljava/lang/StringBuilder;
+000096: invoke-virtual v3, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
+00009c: move-result-object v3
+00009e: const-string v4, "ServiceScanner"
+0000a2: invoke-static v4, v3, Lc/c/f/a/b;->k(Ljava/lang/String; Ljava/lang/String;)V
+0000a8: if-nez v1, +00ah
+0000ac: const-string v0, "ServiceScanner"
+0000b0: const-string v1, "setupAdvertiseConfigs: without authorization"
+0000b4: invoke-static v0, v1, Lcom/vivo/finddevice/l/b;->e(Ljava/lang/String; Ljava/lang/String;)V
+0000ba: return-void 
+0000bc: iget-object v1, v7, Lcom/vivo/finddevice/a;->d Lcom/vivo/finddevice/k/d;
+0000c0: invoke-virtual v1, Lcom/vivo/finddevice/k/d;->c()Ljava/util/List;
+0000c6: move-result-object v1
+0000c8: if-eqz v1, +195h
+0000cc: invoke-interface v1, Ljava/util/List;->size()I
+0000d2: move-result v3
+0000d4: if-ge v3, v2, +004h
+0000d8: goto/16 +18dh
+0000dc: iget-object v2, v7, Lcom/vivo/finddevice/a;->d Lcom/vivo/finddevice/k/d;
+0000e0: invoke-virtual v2, Lcom/vivo/finddevice/k/d;->b()Lcom/vivo/finddevice/k/c;
+0000e6: move-result-object v2
+0000e8: invoke-interface v1, Ljava/util/List;->iterator()Ljava/util/Iterator;
+0000ee: move-result-object v1
+0000f0: invoke-interface v1, Ljava/util/Iterator;->hasNext()Z
+0000f6: move-result v3
+0000f8: if-eqz v3, +05fh
+0000fc: invoke-interface v1, Ljava/util/Iterator;->next()Ljava/lang/Object;
+000102: move-result-object v3
+000104: check-cast v3, Lcom/vivo/finddevice/k/e;
+000108: invoke-virtual v3, Lcom/vivo/finddevice/k/b;->i()Z
+00010e: move-result v4
+000110: if-eqz v4, +02ch
+000114: invoke-virtual v3, Lcom/vivo/finddevice/k/a;->f()Ljava/lang/String;
+00011a: move-result-object v4
+00011c: invoke-virtual v3, Lcom/vivo/finddevice/k/e;->E()Ljava/lang/String;
+000122: move-result-object v5
+000124: iget-object v6, v7, Lcom/vivo/finddevice/a;->b Landroid/content/Context;
+000128: invoke-virtual v2, v4, v5, v6, Lcom/vivo/finddevice/k/c;->b(Ljava/lang/String; Ljava/lang/String; Landroid/content/Context;)Z
+00012e: move-result v4
+000130: if-nez v4, +003h
+000134: goto +1ah
+000136: invoke-direct v7, v0, v3, Lcom/vivo/finddevice/g;->a(I Lcom/vivo/finddevice/k/e;)Z
+00013c: move-result v4
+00013e: if-nez v4, +011h
+000142: new-instance v4, Ljava/lang/StringBuilder;
+000146: invoke-direct v4, Ljava/lang/StringBuilder;-><init>()V
+00014c: const-string v5, "mdc check failed:"
+000150: invoke-virtual v4, v5, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+000156: invoke-virtual v3, Lcom/vivo/finddevice/k/e;->E()Ljava/lang/String;
+00015c: move-result-object v3
+00015e: goto +1fh
+000160: invoke-direct v7, v3, Lcom/vivo/finddevice/g;->a(Lcom/vivo/finddevice/k/e;)V
+000166: goto -3bh
+000168: new-instance v4, Ljava/lang/StringBuilder;
+00016c: invoke-direct v4, Ljava/lang/StringBuilder;-><init>()V
+000172: invoke-virtual v3, Lcom/vivo/finddevice/k/e;->C()Ljava/lang/String;
+000178: move-result-object v5
+00017a: invoke-virtual v4, v5, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+000180: const-string v5, ","
+000184: invoke-virtual v4, v5, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+00018a: invoke-virtual v3, Lcom/vivo/finddevice/k/e;->E()Ljava/lang/String;
+000190: move-result-object v3
+000192: invoke-virtual v4, v3, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+000198: const-string v3, " is disable"
+00019c: invoke-virtual v4, v3, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+0001a2: invoke-virtual v4, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
+0001a8: move-result-object v3
+0001aa: const-string v4, "ServiceScanner"
+0001ae: invoke-static v4, v3, Lc/c/f/a/b;->p(Ljava/lang/String; Ljava/lang/String;)V
+0001b4: goto -62h
+0001b6: invoke-static Lcom/vivo/connbase/App;->m()Lcom/vivo/connbase/App;
+0001bc: move-result-object v0
+0001be: invoke-virtual v0, Lcom/vivo/connbase/App;->a()Lcom/vivo/connbase/h0/c/c;
+0001c4: move-result-object v0
+0001c6: monitor-enter v7
+0001c8: iget-object v1, v7, Lcom/vivo/finddevice/g;->l Ljava/util/Map;
+0001cc: invoke-interface v1, Ljava/util/Map;->values()Ljava/util/Collection;
+0001d2: move-result-object v1
+0001d4: invoke-interface v1, Ljava/util/Collection;->iterator()Ljava/util/Iterator;
+0001da: move-result-object v1
+0001dc: invoke-interface v1, Ljava/util/Iterator;->hasNext()Z
+0001e2: move-result v2
+0001e4: if-eqz v2, +044h
+0001e8: invoke-interface v1, Ljava/util/Iterator;->next()Ljava/lang/Object;
+0001ee: move-result-object v2
+0001f0: check-cast v2, Lcom/vivo/finddevice/k/e;
+0001f4: invoke-virtual v2, Lcom/vivo/finddevice/k/e;->D()Lcom/vivo/connbase/h0/c/a;
+0001fa: move-result-object v3
+0001fc: invoke-virtual v3, Lcom/vivo/connbase/h0/c/a;->j()Z
+000202: move-result v3
+000204: if-nez v3, +003h
+000208: goto -16h
+00020a: iget-object v3, v7, Lcom/vivo/finddevice/a;->c Lcom/vivo/finddevice/DeviceScanManager;
+00020e: invoke-virtual v3, Lcom/vivo/finddevice/DeviceScanManager;->isScreenOn()Z
+000214: move-result v3
+000216: if-nez v3, +027h
+00021a: invoke-virtual v2, Lcom/vivo/finddevice/k/e;->D()Lcom/vivo/connbase/h0/c/a;
+000220: move-result-object v3
+000222: invoke-virtual v3, Lcom/vivo/connbase/h0/c/a;->m()Z
+000228: move-result v3
+00022a: if-nez v3, +01dh
+00022e: const-string v3, "ServiceScanner"
+000232: new-instance v4, Ljava/lang/StringBuilder;
+000236: invoke-direct v4, Ljava/lang/StringBuilder;-><init>()V
+00023c: const-string v5, "screen off and screenOffEnable == false, ServiceID:"
+000240: invoke-virtual v4, v5, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+000246: invoke-virtual v2, Lcom/vivo/finddevice/k/e;->E()Ljava/lang/String;
+00024c: move-result-object v2
+00024e: invoke-virtual v4, v2, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+000254: invoke-virtual v4, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
+00025a: move-result-object v2
+00025c: invoke-static v3, v2, Lc/c/f/a/b;->k(Ljava/lang/String; Ljava/lang/String;)V
+000262: goto -43h
+000264: invoke-direct v7, v2, v0, Lcom/vivo/finddevice/g;->a(Lcom/vivo/finddevice/k/e; Lcom/vivo/connbase/h0/c/c;)V
+00026a: goto -47h
+00026c: monitor-exit v7
+00026e: invoke-interface v0, Lcom/vivo/connbase/h0/c/c;->b()Ljava/util/List;
+000274: move-result-object v0
+000276: new-instance v1, Ljava/util/ArrayList;
+00027a: invoke-direct v1, Ljava/util/ArrayList;-><init>()V
+000280: iget-object v2, v7, Lcom/vivo/finddevice/a;->c Lcom/vivo/finddevice/DeviceScanManager;
+000284: invoke-virtual v2, Lcom/vivo/finddevice/DeviceScanManager;->isScreenOn()Z
+00028a: move-result v2
+00028c: if-nez v2, +062h
+000290: invoke-interface v0, Ljava/util/List;->iterator()Ljava/util/Iterator;
+000296: move-result-object v0
+000298: invoke-interface v0, Ljava/util/Iterator;->hasNext()Z
+00029e: move-result v2
+0002a0: if-eqz v2, +05bh
+0002a4: invoke-interface v0, Ljava/util/Iterator;->next()Ljava/lang/Object;
+0002aa: move-result-object v2
+0002ac: check-cast v2, Lcom/vivo/connbase/h0/c/b;
+0002b0: iget-object v3, v7, Lcom/vivo/finddevice/g;->l Ljava/util/Map;
+0002b4: invoke-virtual v2, Lcom/vivo/connbase/h0/c/b;->j()Ljava/lang/String;
+0002ba: move-result-object v4
+0002bc: invoke-interface v3, v4, Ljava/util/Map;->get(Ljava/lang/Object;)Ljava/lang/Object;
+0002c2: move-result-object v3
+0002c4: check-cast v3, Lcom/vivo/finddevice/k/e;
+0002c8: invoke-virtual v3, Lcom/vivo/finddevice/k/e;->D()Lcom/vivo/connbase/h0/c/a;
+0002ce: move-result-object v3
+0002d0: invoke-virtual v3, Lcom/vivo/connbase/h0/c/a;->m()Z
+0002d6: move-result v3
+0002d8: if-eqz v3, -020h
+0002dc: invoke-interface v1, v2, Ljava/util/List;->add(Ljava/lang/Object;)Z
+0002e2: const-string v3, "ServiceScanner"
+0002e6: new-instance v4, Ljava/lang/StringBuilder;
+0002ea: invoke-direct v4, Ljava/lang/StringBuilder;-><init>()V
+0002f0: const-string v5, "screen off and screenOffEnable == true, ServiceID:"
+0002f4: invoke-virtual v4, v5, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+0002fa: invoke-virtual v2, Lcom/vivo/connbase/h0/c/b;->j()Ljava/lang/String;
+000300: move-result-object v2
+000302: invoke-virtual v4, v2, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+000308: invoke-virtual v4, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
+00030e: move-result-object v2
+000310: invoke-static v3, v2, Lc/c/f/a/b;->k(Ljava/lang/String; Ljava/lang/String;)V
+000316: goto -3fh
+000318: move-exception v0
+00031a: new-instance v2, Ljava/lang/StringBuilder;
+00031e: invoke-direct v2, Ljava/lang/StringBuilder;-><init>()V
+000324: const-string v3, "setupAdvertiseConfigs:"
+000328: invoke-virtual v2, v3, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+00032e: invoke-virtual v0, Ljava/lang/Exception;->toString()Ljava/lang/String;
+000334: move-result-object v0
+000336: invoke-virtual v2, v0, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+00033c: invoke-virtual v2, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
+000342: move-result-object v0
+000344: const-string v2, "ServiceScanner"
+000348: invoke-static v2, v0, Lc/c/f/a/b;->k(Ljava/lang/String; Ljava/lang/String;)V
+00034e: goto +4h
+000350: invoke-interface v1, v0, Ljava/util/List;->addAll(Ljava/util/Collection;)Z
+000356: invoke-interface v1, Ljava/util/List;->isEmpty()Z
+00035c: move-result v0
+00035e: if-eqz v0, +00ah
+000362: const-string v0, "ServiceScanner"
+000366: const-string v1, "needAdvertiseSessions is empty."
+00036a: invoke-static v0, v1, Lc/c/f/a/b;->p(Ljava/lang/String; Ljava/lang/String;)V
+000370: return-void 
+000372: invoke-interface v1, Ljava/util/List;->iterator()Ljava/util/Iterator;
+000378: move-result-object v0
+00037a: invoke-interface v0, Ljava/util/Iterator;->hasNext()Z
+000380: move-result v2
+000382: if-eqz v2, +023h
+000386: invoke-interface v0, Ljava/util/Iterator;->next()Ljava/lang/Object;
+00038c: move-result-object v2
+00038e: check-cast v2, Lcom/vivo/connbase/h0/c/b;
+000392: new-instance v3, Ljava/lang/StringBuilder;
+000396: invoke-direct v3, Ljava/lang/StringBuilder;-><init>()V
+00039c: const-string v4, "before auto advertise, sd:"
+0003a0: invoke-virtual v3, v4, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+0003a6: invoke-virtual v2, Lcom/vivo/connbase/h0/c/b;->j()Ljava/lang/String;
+0003ac: move-result-object v2
+0003ae: invoke-virtual v3, v2, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+0003b4: invoke-virtual v3, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
+0003ba: move-result-object v2
+0003bc: const-string v3, "ServiceScanner"
+0003c0: invoke-static v3, v2, Lc/c/f/a/b;->k(Ljava/lang/String; Ljava/lang/String;)V
+0003c6: goto -26h
+0003c8: invoke-static Lcom/vivo/connbase/App;->m()Lcom/vivo/connbase/App;
+0003ce: move-result-object v0
+0003d0: invoke-virtual v0, Lcom/vivo/connbase/App;->e()Lcom/vivo/connbase/h0/a;
+0003d6: move-result-object v0
+0003d8: new-instance v2, Lcom/vivo/finddevice/g$b;
+0003dc: invoke-direct v2, v7, v1, Lcom/vivo/finddevice/g$b;-><init>(Lcom/vivo/finddevice/g; Ljava/util/List;)V
+0003e2: const/4 v3, 2
+0003e4: invoke-virtual v0, v1, v3, v2, v3, Lcom/vivo/connbase/h0/a;->a(Ljava/util/List; I Lcom/vivo/connbase/h0/c/i$a; I)V
+0003ea: return-void 
+0003ec: move-exception v0
+0003ee: monitor-exit v7
+0003f0: throw v0
+0003f2: const-string v0, "ServiceScanner"
+0003f6: const-string v1, "setup fail, no cfg"
+0003fa: invoke-static v0, v1, Lc/c/f/a/b;->g(Ljava/lang/String; Ljava/lang/String;)V
+000400: return-void 

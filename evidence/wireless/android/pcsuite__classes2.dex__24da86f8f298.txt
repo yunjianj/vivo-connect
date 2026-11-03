@@ -1,0 +1,59 @@
+APK pcsuite/updateApk/pcsuite.apk
+DEX classes2.dex
+CLASS Lcom/vivo/connbase/ICloudDeviceObserver$Stub$Proxy;
+SUPER Ljava/lang/Object;
+FIELDS
+sDefaultImpl Lcom/vivo/connbase/ICloudDeviceObserver; = None
+mRemote Landroid/os/IBinder; = None
+
+METHOD <init>(Landroid/os/IBinder;)V
+000000: invoke-direct v0, Ljava/lang/Object;-><init>()V
+000006: iput-object v1, v0, Lcom/vivo/connbase/ICloudDeviceObserver$Stub$Proxy;->mRemote Landroid/os/IBinder;
+00000a: return-void 
+
+METHOD asBinder()Landroid/os/IBinder;
+000000: iget-object v0, v0, Lcom/vivo/connbase/ICloudDeviceObserver$Stub$Proxy;->mRemote Landroid/os/IBinder;
+000004: return-object v0
+
+METHOD getInterfaceDescriptor()Ljava/lang/String;
+000000: const-string v0, "com.vivo.connbase.ICloudDeviceObserver"
+000004: return-object v0
+
+METHOD onCloudDeviceChanged(Lcom/vivo/connbase/connectcenter/bean/CloudDeviceInfo;)V
+000000: invoke-static Landroid/os/Parcel;->obtain()Landroid/os/Parcel;
+000006: move-result-object v0
+000008: invoke-static Landroid/os/Parcel;->obtain()Landroid/os/Parcel;
+00000e: move-result-object v1
+000010: const-string v2, "com.vivo.connbase.ICloudDeviceObserver"
+000014: invoke-virtual v0, v2, Landroid/os/Parcel;->writeInterfaceToken(Ljava/lang/String;)V
+00001a: const/4 v2, 1
+00001c: const/4 v3, 0
+00001e: if-eqz v5, +00bh
+000022: invoke-virtual v0, v2, Landroid/os/Parcel;->writeInt(I)V
+000028: invoke-virtual v5, v0, v3, Lcom/vivo/connbase/connectcenter/bean/CloudDeviceInfo;->writeToParcel(Landroid/os/Parcel; I)V
+00002e: goto +6h
+000030: move-exception v4
+000032: goto +2dh
+000034: invoke-virtual v0, v3, Landroid/os/Parcel;->writeInt(I)V
+00003a: iget-object v4, v4, Lcom/vivo/connbase/ICloudDeviceObserver$Stub$Proxy;->mRemote Landroid/os/IBinder;
+00003e: invoke-interface v4, v2, v0, v1, v3, Landroid/os/IBinder;->transact(I Landroid/os/Parcel; Landroid/os/Parcel; I)Z
+000044: move-result v4
+000046: if-nez v4, +016h
+00004a: invoke-static Lcom/vivo/connbase/ICloudDeviceObserver$Stub;->getDefaultImpl()Lcom/vivo/connbase/ICloudDeviceObserver;
+000050: move-result-object v4
+000052: if-eqz v4, +010h
+000056: invoke-static Lcom/vivo/connbase/ICloudDeviceObserver$Stub;->getDefaultImpl()Lcom/vivo/connbase/ICloudDeviceObserver;
+00005c: move-result-object v4
+00005e: invoke-interface v4, v5, Lcom/vivo/connbase/ICloudDeviceObserver;->onCloudDeviceChanged(Lcom/vivo/connbase/connectcenter/bean/CloudDeviceInfo;)V
+000064: invoke-virtual v1, Landroid/os/Parcel;->recycle()V
+00006a: invoke-virtual v0, Landroid/os/Parcel;->recycle()V
+000070: return-void 
+000072: invoke-virtual v1, Landroid/os/Parcel;->readException()V
+000078: invoke-virtual v1, Landroid/os/Parcel;->readInt()I
+00007e: move-result v4
+000080: if-eqz v4, -00eh
+000084: invoke-virtual v5, v1, Lcom/vivo/connbase/connectcenter/bean/CloudDeviceInfo;->readFromParcel(Landroid/os/Parcel;)V
+00008a: goto -13h
+00008c: invoke-virtual v1, Landroid/os/Parcel;->recycle()V
+000092: invoke-virtual v0, Landroid/os/Parcel;->recycle()V
+000098: throw v4

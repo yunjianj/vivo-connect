@@ -1,0 +1,73 @@
+APK pcsuite/updateApk/connbase.apk
+DEX classes.dex
+CLASS Lc/c/c/y/a;
+SUPER Ljava/lang/Object;
+FIELDS
+l Ljava/lang/String; = 'AdvertiseOptionsTAG'
+m J = 900000
+n I = 16
+a I = None
+b I = None
+c I = None
+d Z = None
+e I = None
+f [B = None
+g Ljava/lang/String; = None
+h Z = None
+i J = None
+j Z = None
+k I = None
+
+METHOD toString()Ljava/lang/String;
+000000: new-instance v0, Ljava/lang/StringBuilder;
+000004: invoke-direct v0, Ljava/lang/StringBuilder;-><init>()V
+00000a: const-string v1, "AdvertiseOptions{strategy="
+00000e: invoke-virtual v0, v1, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+000014: iget v1, v3, Lc/c/c/y/a;->a I
+000018: invoke-virtual v0, v1, Ljava/lang/StringBuilder;->append(I)Ljava/lang/StringBuilder;
+00001e: const-string v1, ", deviceType="
+000022: invoke-virtual v0, v1, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+000028: iget v1, v3, Lc/c/c/y/a;->b I
+00002c: invoke-virtual v0, v1, Ljava/lang/StringBuilder;->append(I)Ljava/lang/StringBuilder;
+000032: const-string v1, ", advertiseInterval="
+000036: invoke-virtual v0, v1, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+00003c: iget v1, v3, Lc/c/c/y/a;->c I
+000040: invoke-virtual v0, v1, Ljava/lang/StringBuilder;->append(I)Ljava/lang/StringBuilder;
+000046: const-string v1, ", needWakeUp="
+00004a: invoke-virtual v0, v1, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+000050: iget-boolean v1, v3, Lc/c/c/y/a;->d Z
+000054: invoke-virtual v0, v1, Ljava/lang/StringBuilder;->append(Z)Ljava/lang/StringBuilder;
+00005a: const-string v1, ", advertiseType="
+00005e: invoke-virtual v0, v1, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+000064: iget v1, v3, Lc/c/c/y/a;->e I
+000068: invoke-virtual v0, v1, Ljava/lang/StringBuilder;->append(I)Ljava/lang/StringBuilder;
+00006e: const-string v1, ", customizedData="
+000072: invoke-virtual v0, v1, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+000078: iget-object v1, v3, Lc/c/c/y/a;->f [B
+00007c: invoke-static v1, Ljava/util/Arrays;->toString([B)Ljava/lang/String;
+000082: move-result-object v1
+000084: invoke-virtual v0, v1, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+00008a: const-string v1, ", advertiseTimeOut="
+00008e: invoke-virtual v0, v1, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+000094: iget-wide v1, v3, Lc/c/c/y/a;->i J
+000098: invoke-virtual v0, v1, v2, Ljava/lang/StringBuilder;->append(J)Ljava/lang/StringBuilder;
+00009e: const-string v1, ", screenOffEnable="
+0000a2: invoke-virtual v0, v1, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+0000a8: iget-boolean v1, v3, Lc/c/c/y/a;->j Z
+0000ac: invoke-virtual v0, v1, Ljava/lang/StringBuilder;->append(Z)Ljava/lang/StringBuilder;
+0000b2: const-string v1, ", advertiseChannel="
+0000b6: invoke-virtual v0, v1, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+0000bc: iget v1, v3, Lc/c/c/y/a;->k I
+0000c0: invoke-virtual v0, v1, Ljava/lang/StringBuilder;->append(I)Ljava/lang/StringBuilder;
+0000c6: const-string v1, ", pcCustomizedData="
+0000ca: invoke-virtual v0, v1, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+0000d0: iget-object v2, v3, Lc/c/c/y/a;->g Ljava/lang/String;
+0000d4: invoke-virtual v0, v2, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+0000da: invoke-virtual v0, v1, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+0000e0: iget-boolean v1, v3, Lc/c/c/y/a;->h Z
+0000e4: invoke-virtual v0, v1, Ljava/lang/StringBuilder;->append(Z)Ljava/lang/StringBuilder;
+0000ea: const/16 v1, 125
+0000ee: invoke-virtual v0, v1, Ljava/lang/StringBuilder;->append(C)Ljava/lang/StringBuilder;
+0000f4: invoke-virtual v0, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
+0000fa: move-result-object v0
+0000fc: return-object v0

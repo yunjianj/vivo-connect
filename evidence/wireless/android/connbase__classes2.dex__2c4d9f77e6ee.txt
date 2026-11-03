@@ -1,0 +1,255 @@
+APK pcsuite/updateApk/connbase.apk
+DEX classes2.dex
+CLASS Lcom/vivo/pcsuite/pcconnect/j;
+SUPER Ljava/lang/Object;
+FIELDS
+a Ljava/lang/String; = 'pcsuite_PhoneUtils'
+b Z = False
+c Ljava/lang/String; = 'QCOM'
+d Ljava/lang/String; = 'SAMSUNG'
+e Ljava/lang/String; = 'MTK'
+
+METHOD <clinit>()V
+000000: sget-object v0, Landroid/os/Build;->MANUFACTURER Ljava/lang/String;
+000004: const-string v1, "bbk"
+000008: invoke-virtual v0, v1, Ljava/lang/String;->compareToIgnoreCase(Ljava/lang/String;)I
+00000e: move-result v0
+000010: if-eqz v0, +00fh
+000014: sget-object v0, Landroid/os/Build;->MANUFACTURER Ljava/lang/String;
+000018: const-string v1, "vivo"
+00001c: invoke-virtual v0, v1, Ljava/lang/String;->compareToIgnoreCase(Ljava/lang/String;)I
+000022: move-result v0
+000024: if-nez v0, +003h
+000028: goto +3h
+00002a: const/4 v0, 0
+00002c: goto +2h
+00002e: const/4 v0, 1
+000030: sput-boolean v0, Lcom/vivo/pcsuite/pcconnect/j;->b Z
+000034: return-void 
+
+METHOD <init>()V
+000000: invoke-direct v0, Ljava/lang/Object;-><init>()V
+000006: return-void 
+
+METHOD a()Ljava/lang/String;
+000000: const-string v0, "ro.vivo.market.name"
+000004: invoke-static v0, Lcom/vivo/pcsuite/pcconnect/j;->b(Ljava/lang/String;)Ljava/lang/String;
+00000a: move-result-object v0
+00000c: new-instance v1, Ljava/lang/StringBuilder;
+000010: invoke-direct v1, Ljava/lang/StringBuilder;-><init>()V
+000016: const-string v2, "getModel deviceName:"
+00001a: invoke-virtual v1, v2, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+000020: invoke-virtual v1, v0, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+000026: invoke-virtual v1, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
+00002c: move-result-object v1
+00002e: const-string v2, "pcsuite_PhoneUtils"
+000032: invoke-static v2, v1, Lc/c/f/a/b;->g(Ljava/lang/String; Ljava/lang/String;)V
+000038: invoke-static v0, Landroid/text/TextUtils;->isEmpty(Ljava/lang/CharSequence;)Z
+00003e: move-result v1
+000040: if-eqz v1, +004h
+000044: sget-object v0, Landroid/os/Build;->MODEL Ljava/lang/String;
+000048: const-string v1, " "
+00004c: const-string v2, ""
+000050: invoke-virtual v0, v1, v2, Ljava/lang/String;->replace(Ljava/lang/CharSequence; Ljava/lang/CharSequence;)Ljava/lang/String;
+000056: move-result-object v0
+000058: return-object v0
+
+METHOD a(Ljava/lang/String;)Ljava/lang/String;
+000000: invoke-static v4, Lcom/vivo/pcsuite/pcconnect/ble/c;->d(Ljava/lang/String;)[B
+000006: move-result-object v0
+000008: array-length v1, v0
+00000a: const/16 v2, 11
+00000e: if-le v1, v2, +022h
+000012: array-length v0, v0
+000014: const-string v1, "…"
+000018: invoke-static v1, Lcom/vivo/pcsuite/pcconnect/ble/c;->d(Ljava/lang/String;)[B
+00001e: move-result-object v3
+000020: array-length v3, v3
+000022: rsub-int/lit8 v3, v3, 11
+000026: if-le v0, v3, +012h
+00002a: invoke-static v4, Lcom/vivo/pcsuite/pcconnect/ble/i;->a(Ljava/lang/String;)I
+000030: move-result v0
+000032: const/4 v1, 0
+000034: add-int/lit8 v0, v0, -1
+000038: invoke-static v4, v1, v0, Lcom/vivo/pcsuite/pcconnect/ble/i;->a(Ljava/lang/String; I I)Ljava/lang/String;
+00003e: move-result-object v4
+000040: invoke-static v4, Lcom/vivo/pcsuite/pcconnect/ble/c;->d(Ljava/lang/String;)[B
+000046: move-result-object v0
+000048: goto -1bh
+00004a: invoke-virtual v4, v1, Ljava/lang/String;->concat(Ljava/lang/String;)Ljava/lang/String;
+000050: move-result-object v4
+000052: return-object v4
+
+METHOD a(Ljava/lang/String; I I)Ljava/lang/String;
+000000: invoke-virtual v3, Ljava/lang/String;->length()I
+000006: move-result v0
+000008: if-ge v4, v0, +049h
+00000c: if-gez v4, +003h
+000010: goto +45h
+000012: invoke-virtual v3, Ljava/lang/String;->length()I
+000018: move-result v0
+00001a: if-ge v5, v0, +040h
+00001e: if-gez v5, +003h
+000022: goto +3ch
+000024: if-lt v4, v5, +003h
+000028: return-object v3
+00002a: const-string v0, ""
+00002e: move v1, v4
+000030: if-ge v1, v5, +016h
+000034: new-instance v2, Ljava/lang/StringBuilder;
+000038: invoke-direct v2, Ljava/lang/StringBuilder;-><init>()V
+00003e: invoke-virtual v2, v0, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+000044: const-string v0, "*"
+000048: invoke-virtual v2, v0, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+00004e: invoke-virtual v2, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
+000054: move-result-object v0
+000056: add-int/lit8 v1, v1, 1
+00005a: goto -15h
+00005c: new-instance v1, Ljava/lang/StringBuilder;
+000060: invoke-direct v1, Ljava/lang/StringBuilder;-><init>()V
+000066: const/4 v2, 0
+000068: invoke-virtual v3, v2, v4, Ljava/lang/String;->substring(I I)Ljava/lang/String;
+00006e: move-result-object v4
+000070: invoke-virtual v1, v4, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+000076: invoke-virtual v1, v0, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+00007c: invoke-virtual v3, Ljava/lang/String;->length()I
+000082: move-result v4
+000084: invoke-virtual v3, v5, v4, Ljava/lang/String;->substring(I I)Ljava/lang/String;
+00008a: move-result-object v3
+00008c: invoke-virtual v1, v3, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+000092: invoke-virtual v1, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
+000098: move-result-object v3
+00009a: return-object v3
+
+METHOD b()Ljava/lang/String;
+000000: const-string v0, "ro.vivo.product.solution"
+000004: invoke-static v0, Lcom/vivo/pcsuite/pcconnect/j;->b(Ljava/lang/String;)Ljava/lang/String;
+00000a: move-result-object v0
+00000c: return-object v0
+
+METHOD b(Ljava/lang/String;)Ljava/lang/String;
+000000: const-class v0, Ljava/lang/String;
+000004: const-string v1, "android.os.SystemProperties"
+000008: invoke-static v1, Ljava/lang/Class;->forName(Ljava/lang/String;)Ljava/lang/Class;
+00000e: move-result-object v1
+000010: const-string v2, "get"
+000014: const/4 v3, 2
+000016: new-array v4, v3, [Ljava/lang/Class;
+00001a: const/4 v5, 0
+00001c: aput-object v0, v4, v5
+000020: const/4 v6, 1
+000022: aput-object v0, v4, v6
+000026: invoke-virtual v1, v2, v4, Ljava/lang/Class;->getMethod(Ljava/lang/String; [Ljava/lang/Class;)Ljava/lang/reflect/Method;
+00002c: move-result-object v0
+00002e: new-array v2, v3, [Ljava/lang/Object;
+000032: aput-object v7, v2, v5
+000036: const-string v7, ""
+00003a: aput-object v7, v2, v6
+00003e: invoke-virtual v0, v1, v2, Ljava/lang/reflect/Method;->invoke(Ljava/lang/Object; [Ljava/lang/Object;)Ljava/lang/Object;
+000044: move-result-object v7
+000046: check-cast v7, Ljava/lang/String;
+00004a: goto +ah
+00004c: move-exception v7
+00004e: const-string v0, "pcsuite_PhoneUtils"
+000052: const-string v1, "Reflect get(String, String) failed."
+000056: invoke-static v0, v1, v7, Lc/c/f/a/b;->b(Ljava/lang/String; Ljava/lang/String; Ljava/lang/Throwable;)V
+00005c: const/4 v7, 0
+00005e: return-object v7
+
+METHOD c()Z
+000000: invoke-static Lcom/vivo/pcsuite/pcconnect/j;->b()Ljava/lang/String;
+000006: move-result-object v0
+000008: const-string v1, "MTK"
+00000c: invoke-virtual v1, v0, Ljava/lang/String;->equals(Ljava/lang/Object;)Z
+000012: move-result v0
+000014: return v0
+
+METHOD c(Ljava/lang/String;)Z
+000000: invoke-static v1, Landroid/text/TextUtils;->isEmpty(Ljava/lang/CharSequence;)Z
+000006: move-result v0
+000008: if-eqz v0, +004h
+00000c: const/4 v1, 0
+00000e: return v1
+000010: sget-object v0, Landroid/util/Patterns;->EMAIL_ADDRESS Ljava/util/regex/Pattern;
+000014: invoke-virtual v0, v1, Ljava/util/regex/Pattern;->matcher(Ljava/lang/CharSequence;)Ljava/util/regex/Matcher;
+00001a: move-result-object v1
+00001c: invoke-virtual v1, Ljava/util/regex/Matcher;->matches()Z
+000022: move-result v1
+000024: return v1
+
+METHOD d()Z
+000000: invoke-static Lcom/vivo/pcsuite/pcconnect/j;->b()Ljava/lang/String;
+000006: move-result-object v0
+000008: const-string v1, "QCOM"
+00000c: invoke-virtual v1, v0, Ljava/lang/String;->equals(Ljava/lang/Object;)Z
+000012: move-result v0
+000014: return v0
+
+METHOD d(Ljava/lang/String;)Z
+000000: invoke-static v1, Landroid/text/TextUtils;->isEmpty(Ljava/lang/CharSequence;)Z
+000006: move-result v0
+000008: if-eqz v0, +004h
+00000c: const/4 v1, 0
+00000e: return v1
+000010: const-string v0, "^1([3456789])\d{9}"
+000014: invoke-static v0, Ljava/util/regex/Pattern;->compile(Ljava/lang/String;)Ljava/util/regex/Pattern;
+00001a: move-result-object v0
+00001c: invoke-virtual v0, v1, Ljava/util/regex/Pattern;->matcher(Ljava/lang/CharSequence;)Ljava/util/regex/Matcher;
+000022: move-result-object v1
+000024: invoke-virtual v1, Ljava/util/regex/Matcher;->matches()Z
+00002a: move-result v1
+00002c: return v1
+
+METHOD e(Ljava/lang/String;)Ljava/lang/String;
+000000: invoke-static v2, Landroid/text/TextUtils;->isEmpty(Ljava/lang/CharSequence;)Z
+000006: move-result v0
+000008: if-nez v0, +03eh
+00000c: invoke-static v2, Lcom/vivo/pcsuite/pcconnect/j;->c(Ljava/lang/String;)Z
+000012: move-result v0
+000014: if-eqz v0, +022h
+000018: const-string v0, "@"
+00001c: invoke-virtual v2, v0, Ljava/lang/String;->indexOf(Ljava/lang/String;)I
+000022: move-result v1
+000024: div-int/lit8 v1, v1, 2
+000028: invoke-virtual v2, v0, Ljava/lang/String;->indexOf(Ljava/lang/String;)I
+00002e: move-result v0
+000030: invoke-static v2, v1, v0, Lcom/vivo/pcsuite/pcconnect/j;->a(Ljava/lang/String; I I)Ljava/lang/String;
+000036: move-result-object v2
+000038: if-eqz v2, +00fh
+00003c: invoke-virtual v2, Ljava/lang/String;->length()I
+000042: move-result v0
+000044: const/16 v1, 16
+000048: if-le v0, v1, +007h
+00004c: const/4 v0, 0
+00004e: invoke-virtual v2, v0, v1, Ljava/lang/String;->substring(I I)Ljava/lang/String;
+000054: move-result-object v2
+000056: return-object v2
+000058: invoke-static v2, Lcom/vivo/pcsuite/pcconnect/j;->d(Ljava/lang/String;)Z
+00005e: move-result v0
+000060: if-eqz v0, +012h
+000064: invoke-virtual v2, Ljava/lang/String;->length()I
+00006a: move-result v0
+00006c: add-int/lit8 v0, v0, -8
+000070: invoke-virtual v2, Ljava/lang/String;->length()I
+000076: move-result v1
+000078: add-int/lit8 v1, v1, -4
+00007c: invoke-static v2, v0, v1, Lcom/vivo/pcsuite/pcconnect/j;->a(Ljava/lang/String; I I)Ljava/lang/String;
+000082: move-result-object v2
+000084: return-object v2
+
+METHOD e()Z
+000000: invoke-static Lcom/vivo/pcsuite/pcconnect/j;->b()Ljava/lang/String;
+000006: move-result-object v0
+000008: const-string v1, "SAMSUNG"
+00000c: invoke-virtual v1, v0, Ljava/lang/String;->equals(Ljava/lang/Object;)Z
+000012: move-result v0
+000014: return v0
+
+METHOD f()Z
+000000: sget v0, Landroid/os/Build$VERSION;->SDK_INT I
+000004: const/16 v1, 26
+000008: if-lt v0, v1, +004h
+00000c: const/4 v0, 1
+00000e: goto +2h
+000010: const/4 v0, 0
+000012: return v0

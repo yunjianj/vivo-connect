@@ -1,0 +1,129 @@
+APK pcsuite/updateApk/connbase.apk
+DEX classes2.dex
+CLASS Lcom/vivo/pcsuite/pcconnect/wifip2p/WifiP2pObserver$Stub;
+SUPER Landroid/os/Binder;
+FIELDS
+DESCRIPTOR Ljava/lang/String; = 'com.vivo.pcsuite.pcconnect.wifip2p.WifiP2pObserver'
+TRANSACTION_onAcceptFailed I = 7
+TRANSACTION_onConnectFailed I = 8
+TRANSACTION_onConnectTimeout I = 9
+TRANSACTION_onConnected I = 5
+TRANSACTION_onDeviceChanged I = 3
+TRANSACTION_onDisconnected I = 6
+TRANSACTION_onGroupCreated I = 4
+TRANSACTION_onOpenFailed I = 2
+TRANSACTION_onOpenSuccess I = 1
+TRANSACTION_onOpenWifi I = 10
+TRANSACTION_onWifiEnabled I = 11
+
+METHOD <init>()V
+000000: invoke-direct v1, Landroid/os/Binder;-><init>()V
+000006: const-string v0, "com.vivo.pcsuite.pcconnect.wifip2p.WifiP2pObserver"
+00000a: invoke-virtual v1, v1, v0, Landroid/os/Binder;->attachInterface(Landroid/os/IInterface; Ljava/lang/String;)V
+000010: return-void 
+
+METHOD asInterface(Landroid/os/IBinder;)Lcom/vivo/pcsuite/pcconnect/wifip2p/WifiP2pObserver;
+000000: if-nez v2, +004h
+000004: const/4 v2, 0
+000006: return-object v2
+000008: const-string v0, "com.vivo.pcsuite.pcconnect.wifip2p.WifiP2pObserver"
+00000c: invoke-interface v2, v0, Landroid/os/IBinder;->queryLocalInterface(Ljava/lang/String;)Landroid/os/IInterface;
+000012: move-result-object v0
+000014: if-eqz v0, +009h
+000018: instance-of v1, v0, Lcom/vivo/pcsuite/pcconnect/wifip2p/WifiP2pObserver;
+00001c: if-eqz v1, +005h
+000020: check-cast v0, Lcom/vivo/pcsuite/pcconnect/wifip2p/WifiP2pObserver;
+000024: return-object v0
+000026: new-instance v0, Lcom/vivo/pcsuite/pcconnect/wifip2p/WifiP2pObserver$Stub$Proxy;
+00002a: invoke-direct v0, v2, Lcom/vivo/pcsuite/pcconnect/wifip2p/WifiP2pObserver$Stub$Proxy;-><init>(Landroid/os/IBinder;)V
+000030: return-object v0
+
+METHOD getDefaultImpl()Lcom/vivo/pcsuite/pcconnect/wifip2p/WifiP2pObserver;
+000000: sget-object v0, Lcom/vivo/pcsuite/pcconnect/wifip2p/WifiP2pObserver$Stub$Proxy;->sDefaultImpl Lcom/vivo/pcsuite/pcconnect/wifip2p/WifiP2pObserver;
+000004: return-object v0
+
+METHOD setDefaultImpl(Lcom/vivo/pcsuite/pcconnect/wifip2p/WifiP2pObserver;)Z
+000000: sget-object v0, Lcom/vivo/pcsuite/pcconnect/wifip2p/WifiP2pObserver$Stub$Proxy;->sDefaultImpl Lcom/vivo/pcsuite/pcconnect/wifip2p/WifiP2pObserver;
+000004: if-nez v0, +00ah
+000008: if-eqz v1, +006h
+00000c: sput-object v1, Lcom/vivo/pcsuite/pcconnect/wifip2p/WifiP2pObserver$Stub$Proxy;->sDefaultImpl Lcom/vivo/pcsuite/pcconnect/wifip2p/WifiP2pObserver;
+000010: const/4 v1, 1
+000012: return v1
+000014: const/4 v1, 0
+000016: return v1
+000018: new-instance v1, Ljava/lang/IllegalStateException;
+00001c: const-string v0, "setDefaultImpl() called twice"
+000020: invoke-direct v1, v0, Ljava/lang/IllegalStateException;-><init>(Ljava/lang/String;)V
+000026: throw v1
+
+METHOD asBinder()Landroid/os/IBinder;
+000000: return-object v0
+
+METHOD onTransact(I Landroid/os/Parcel; Landroid/os/Parcel; I)Z
+000000: const v0, 1598968902
+000006: const/4 v1, 1
+000008: const-string v2, "com.vivo.pcsuite.pcconnect.wifip2p.WifiP2pObserver"
+00000c: if-eq v4, v0, +07fh
+000010: packed-switch v4, +0000082h
+000016: invoke-super v3, v4, v5, v6, v7, Landroid/os/Binder;->onTransact(I Landroid/os/Parcel; Landroid/os/Parcel; I)Z
+00001c: move-result v4
+00001e: return v4
+000020: invoke-virtual v5, v2, Landroid/os/Parcel;->enforceInterface(Ljava/lang/String;)V
+000026: invoke-interface v3, Lcom/vivo/pcsuite/pcconnect/wifip2p/WifiP2pObserver;->onWifiEnabled()V
+00002c: invoke-virtual v6, Landroid/os/Parcel;->writeNoException()V
+000032: return v1
+000034: invoke-virtual v5, v2, Landroid/os/Parcel;->enforceInterface(Ljava/lang/String;)V
+00003a: invoke-interface v3, Lcom/vivo/pcsuite/pcconnect/wifip2p/WifiP2pObserver;->onOpenWifi()V
+000040: goto -ah
+000042: invoke-virtual v5, v2, Landroid/os/Parcel;->enforceInterface(Ljava/lang/String;)V
+000048: invoke-interface v3, Lcom/vivo/pcsuite/pcconnect/wifip2p/WifiP2pObserver;->onConnectTimeout()V
+00004e: goto -11h
+000050: invoke-virtual v5, v2, Landroid/os/Parcel;->enforceInterface(Ljava/lang/String;)V
+000056: invoke-interface v3, Lcom/vivo/pcsuite/pcconnect/wifip2p/WifiP2pObserver;->onConnectFailed()V
+00005c: goto -18h
+00005e: invoke-virtual v5, v2, Landroid/os/Parcel;->enforceInterface(Ljava/lang/String;)V
+000064: invoke-interface v3, Lcom/vivo/pcsuite/pcconnect/wifip2p/WifiP2pObserver;->onAcceptFailed()V
+00006a: goto -1fh
+00006c: invoke-virtual v5, v2, Landroid/os/Parcel;->enforceInterface(Ljava/lang/String;)V
+000072: invoke-interface v3, Lcom/vivo/pcsuite/pcconnect/wifip2p/WifiP2pObserver;->onDisconnected()V
+000078: goto -26h
+00007a: invoke-virtual v5, v2, Landroid/os/Parcel;->enforceInterface(Ljava/lang/String;)V
+000080: invoke-virtual v5, Landroid/os/Parcel;->readString()Ljava/lang/String;
+000086: move-result-object v4
+000088: invoke-virtual v5, Landroid/os/Parcel;->readInt()I
+00008e: move-result v5
+000090: if-eqz v5, +004h
+000094: move v5, v1
+000096: goto +2h
+000098: const/4 v5, 0
+00009a: invoke-interface v3, v4, v5, Lcom/vivo/pcsuite/pcconnect/wifip2p/WifiP2pObserver;->onConnected(Ljava/lang/String; Z)V
+0000a0: goto -3ah
+0000a2: invoke-virtual v5, v2, Landroid/os/Parcel;->enforceInterface(Ljava/lang/String;)V
+0000a8: invoke-virtual v5, Landroid/os/Parcel;->readInt()I
+0000ae: move-result v4
+0000b0: if-eqz v4, +00bh
+0000b4: sget-object v4, Landroid/net/wifi/p2p/WifiP2pGroup;->CREATOR Landroid/os/Parcelable$Creator;
+0000b8: invoke-interface v4, v5, Landroid/os/Parcelable$Creator;->createFromParcel(Landroid/os/Parcel;)Ljava/lang/Object;
+0000be: move-result-object v4
+0000c0: check-cast v4, Landroid/net/wifi/p2p/WifiP2pGroup;
+0000c4: goto +2h
+0000c6: const/4 v4, 0
+0000c8: invoke-interface v3, v4, Lcom/vivo/pcsuite/pcconnect/wifip2p/WifiP2pObserver;->onGroupCreated(Landroid/net/wifi/p2p/WifiP2pGroup;)V
+0000ce: goto -51h
+0000d0: invoke-virtual v5, v2, Landroid/os/Parcel;->enforceInterface(Ljava/lang/String;)V
+0000d6: invoke-virtual v5, Landroid/os/Parcel;->readString()Ljava/lang/String;
+0000dc: move-result-object v4
+0000de: invoke-interface v3, v4, Lcom/vivo/pcsuite/pcconnect/wifip2p/WifiP2pObserver;->onDeviceChanged(Ljava/lang/String;)V
+0000e4: goto -5ch
+0000e6: invoke-virtual v5, v2, Landroid/os/Parcel;->enforceInterface(Ljava/lang/String;)V
+0000ec: invoke-interface v3, Lcom/vivo/pcsuite/pcconnect/wifip2p/WifiP2pObserver;->onOpenFailed()V
+0000f2: goto -63h
+0000f4: invoke-virtual v5, v2, Landroid/os/Parcel;->enforceInterface(Ljava/lang/String;)V
+0000fa: invoke-virtual v5, Landroid/os/Parcel;->readString()Ljava/lang/String;
+000100: move-result-object v4
+000102: invoke-interface v3, v4, Lcom/vivo/pcsuite/pcconnect/wifip2p/WifiP2pObserver;->onOpenSuccess(Ljava/lang/String;)V
+000108: goto -6eh
+00010a: invoke-virtual v6, v2, Landroid/os/Parcel;->writeString(Ljava/lang/String;)V
+000110: return v1
+000112: nop 
+000114: packed-switch-payload 1 2 3 4 5 6 7 8 9 a b

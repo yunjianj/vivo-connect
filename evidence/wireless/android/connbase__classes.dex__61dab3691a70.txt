@@ -1,0 +1,72 @@
+APK pcsuite/updateApk/connbase.apk
+DEX classes.dex
+CLASS Lcom/vivo/connbase/nfc/j$b;
+SUPER Ljava/lang/Object;
+FIELDS
+a Lcom/vivo/connbase/nfc/j; = None
+
+METHOD <init>(Lcom/vivo/connbase/nfc/j;)V
+000000: iput-object v1, v0, Lcom/vivo/connbase/nfc/j$b;->a Lcom/vivo/connbase/nfc/j;
+000004: invoke-direct v0, Ljava/lang/Object;-><init>()V
+00000a: return-void 
+
+METHOD a()V
+000000: iget-object v0, v2, Lcom/vivo/connbase/nfc/j$b;->a Lcom/vivo/connbase/nfc/j;
+000004: invoke-static v0, Lcom/vivo/connbase/nfc/j;->b(Lcom/vivo/connbase/nfc/j;)Lcom/vivo/connbase/nfc/f;
+00000a: move-result-object v0
+00000c: const/16 v1, 100
+000010: invoke-interface v0, v1, Lcom/vivo/connbase/nfc/f;->a(I)V
+000016: const-string v0, "NfcDiscoveryUseCaseImpl"
+00001a: const-string v1, "blueConnect onConnectStart"
+00001e: invoke-static v0, v1, Lc/c/f/a/b;->k(Ljava/lang/String; Ljava/lang/String;)V
+000024: return-void 
+
+METHOD a(Ljava/lang/Exception;)V
+000000: const-string v0, "NfcDiscoveryUseCaseImpl"
+000004: const-string v1, "blueConnect onConnectFailed"
+000008: invoke-static v0, v1, v3, Lc/c/f/a/b;->c(Ljava/lang/String; Ljava/lang/String; Ljava/lang/Throwable;)V
+00000e: iget-object v3, v2, Lcom/vivo/connbase/nfc/j$b;->a Lcom/vivo/connbase/nfc/j;
+000012: invoke-static v3, Lcom/vivo/connbase/nfc/j;->b(Lcom/vivo/connbase/nfc/j;)Lcom/vivo/connbase/nfc/f;
+000018: move-result-object v3
+00001a: const/16 v0, 300
+00001e: invoke-interface v3, v0, Lcom/vivo/connbase/nfc/f;->a(I)V
+000024: invoke-static Lcom/vivo/connbase/wifi/utils/PhoneUtils;->isVivoPad()Z
+00002a: move-result v3
+00002c: if-nez v3, +007h
+000030: iget-object v3, v2, Lcom/vivo/connbase/nfc/j$b;->a Lcom/vivo/connbase/nfc/j;
+000034: invoke-static v3, Lcom/vivo/connbase/nfc/j;->f(Lcom/vivo/connbase/nfc/j;)V
+00003a: iget-object v3, v2, Lcom/vivo/connbase/nfc/j$b;->a Lcom/vivo/connbase/nfc/j;
+00003e: invoke-static v3, Lcom/vivo/connbase/nfc/j;->g(Lcom/vivo/connbase/nfc/j;)Lcom/vivo/connbase/d0/a;
+000044: move-result-object v3
+000046: invoke-virtual v3, Lcom/vivo/connbase/d0/a;->c()V
+00004c: return-void 
+
+METHOD a(Ljava/lang/String;)V
+000000: new-instance v0, Ljava/lang/StringBuilder;
+000004: invoke-direct v0, Ljava/lang/StringBuilder;-><init>()V
+00000a: const-string v1, "blueConnect onConectSuccess and Mac = "
+00000e: invoke-virtual v0, v1, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+000014: invoke-static v3, Lcom/vivo/connbase/e0/g/h;->b(Ljava/lang/String;)Ljava/lang/String;
+00001a: move-result-object v3
+00001c: invoke-virtual v0, v3, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+000022: invoke-virtual v0, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
+000028: move-result-object v3
+00002a: const-string v0, "NfcDiscoveryUseCaseImpl"
+00002e: invoke-static v0, v3, Lc/c/f/a/b;->k(Ljava/lang/String; Ljava/lang/String;)V
+000034: iget-object v3, v2, Lcom/vivo/connbase/nfc/j$b;->a Lcom/vivo/connbase/nfc/j;
+000038: invoke-static v3, Lcom/vivo/connbase/nfc/j;->b(Lcom/vivo/connbase/nfc/j;)Lcom/vivo/connbase/nfc/f;
+00003e: move-result-object v3
+000040: const/16 v0, 400
+000044: invoke-interface v3, v0, Lcom/vivo/connbase/nfc/f;->a(I)V
+00004a: return-void 
+
+METHOD b()V
+000000: iget-object v0, v2, Lcom/vivo/connbase/nfc/j$b;->a Lcom/vivo/connbase/nfc/j;
+000004: invoke-static v0, Lcom/vivo/connbase/nfc/j;->b(Lcom/vivo/connbase/nfc/j;)Lcom/vivo/connbase/nfc/f;
+00000a: move-result-object v0
+00000c: const/16 v1, 200
+000010: invoke-interface v0, v1, Lcom/vivo/connbase/nfc/f;->a(I)V
+000016: const-string v0, "NfcDiscoveryUseCaseImpl"
+00001a: const-string v1, "blueConnect onConnectting"
+00001e: invoke-static v0, v1, Lc/c/f/a/b;->k(Ljava/lang/String; Ljava/lang/String;)V
+000024: return-void 

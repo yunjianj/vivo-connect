@@ -1,0 +1,69 @@
+APK pcsuite/updateApk/pcsuite.apk
+DEX classes2.dex
+CLASS Lcom/vivo/pcsuite/service/g;
+SUPER Ljava/lang/Object;
+FIELDS
+
+
+METHOD onComplete(Lcom/vivo/connect/tasks/Task;)V
+000000: const-string v5, "deviceId"
+000004: const-string v0, "pcsuite_PcSuiteObserver"
+000008: const-string v1, "connBaseDeviceName = "
+00000c: const-string v2, "result = "
+000010: new-instance v3, Lorg/json/JSONObject;
+000014: invoke-virtual v6, Lcom/vivo/connect/tasks/Task;->getResult()Ljava/lang/Object;
+00001a: move-result-object v4
+00001c: check-cast v4, Ljava/lang/String;
+000020: invoke-direct v3, v4, Lorg/json/JSONObject;-><init>(Ljava/lang/String;)V
+000026: sget v4, Lcom/vivo/pcsuite/service/PcSuiteObserver;->D I
+00002a: new-instance v4, Ljava/lang/StringBuilder;
+00002e: invoke-direct v4, v2, Ljava/lang/StringBuilder;-><init>(Ljava/lang/String;)V
+000034: invoke-virtual v6, Lcom/vivo/connect/tasks/Task;->getResult()Ljava/lang/Object;
+00003a: move-result-object v6
+00003c: check-cast v6, Ljava/lang/String;
+000040: invoke-virtual v4, v6, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+000046: invoke-virtual v4, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
+00004c: move-result-object v6
+00004e: invoke-static v0, v6, Lcom/vivo/connect/logger/EasyLog;->i(Ljava/lang/String; Ljava/lang/String;)V
+000054: sget-object v6, Lcom/vivo/pcsuite/PcSuiteApplication;->I1 Lcom/vivo/pcsuite/PcSuiteApplication;
+000058: const-string v2, "deviceName"
+00005c: invoke-virtual v3, v2, Lorg/json/JSONObject;->get(Ljava/lang/String;)Ljava/lang/Object;
+000062: move-result-object v2
+000064: check-cast v2, Ljava/lang/String;
+000068: iput-object v2, v6, Lcom/vivo/pcsuite/PcSuiteApplication;->G Ljava/lang/String;
+00006c: sget-object v6, Lcom/vivo/pcsuite/PcSuiteApplication;->I1 Lcom/vivo/pcsuite/PcSuiteApplication;
+000070: invoke-virtual v3, v5, Lorg/json/JSONObject;->get(Ljava/lang/String;)Ljava/lang/Object;
+000076: move-result-object v2
+000078: check-cast v2, Ljava/lang/String;
+00007c: iput-object v2, v6, Lcom/vivo/pcsuite/PcSuiteApplication;->H Ljava/lang/String;
+000080: sget-object v6, Lcom/vivo/pcsuite/PcSuiteApplication;->I1 Lcom/vivo/pcsuite/PcSuiteApplication;
+000084: invoke-virtual v3, v5, Lorg/json/JSONObject;->get(Ljava/lang/String;)Ljava/lang/Object;
+00008a: move-result-object v5
+00008c: check-cast v5, Ljava/lang/String;
+000090: invoke-virtual v6, v5, Lcom/vivo/pcsuite/PcSuiteApplication;->B0(Ljava/lang/String;)V
+000096: new-instance v5, Ljava/lang/StringBuilder;
+00009a: invoke-direct v5, v1, Ljava/lang/StringBuilder;-><init>(Ljava/lang/String;)V
+0000a0: sget-object v6, Lcom/vivo/pcsuite/PcSuiteApplication;->I1 Lcom/vivo/pcsuite/PcSuiteApplication;
+0000a4: iget-object v6, v6, Lcom/vivo/pcsuite/PcSuiteApplication;->G Ljava/lang/String;
+0000a8: invoke-virtual v5, v6, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+0000ae: const-string v6, " --- zkzkzk = "
+0000b2: invoke-virtual v5, v6, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+0000b8: sget-object v6, Lcom/vivo/pcsuite/PcSuiteApplication;->I1 Lcom/vivo/pcsuite/PcSuiteApplication;
+0000bc: iget-object v6, v6, Lcom/vivo/pcsuite/PcSuiteApplication;->H Ljava/lang/String;
+0000c0: invoke-virtual v5, v6, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+0000c6: invoke-virtual v5, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
+0000cc: move-result-object v5
+0000ce: invoke-static v0, v5, Lcom/vivo/connect/logger/EasyLog;->i(Ljava/lang/String; Ljava/lang/String;)V
+0000d4: return-void 
+0000d6: move-exception v5
+0000d8: sget v6, Lcom/vivo/pcsuite/service/PcSuiteObserver;->D I
+0000dc: new-instance v6, Ljava/lang/StringBuilder;
+0000e0: const-string v1, "getDeviceName err : "
+0000e4: invoke-direct v6, v1, Ljava/lang/StringBuilder;-><init>(Ljava/lang/String;)V
+0000ea: invoke-virtual v5, Ljava/lang/Throwable;->getMessage()Ljava/lang/String;
+0000f0: move-result-object v5
+0000f2: invoke-virtual v6, v5, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+0000f8: invoke-virtual v6, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
+0000fe: move-result-object v5
+000100: invoke-static v0, v5, Lcom/vivo/connect/logger/EasyLog;->i(Ljava/lang/String; Ljava/lang/String;)V
+000106: return-void 

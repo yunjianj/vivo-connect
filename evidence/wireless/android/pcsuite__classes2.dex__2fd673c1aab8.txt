@@ -1,0 +1,57 @@
+APK pcsuite/updateApk/pcsuite.apk
+DEX classes2.dex
+CLASS Lcom/vivo/connect/tasks/c;
+SUPER Ljava/lang/Object;
+FIELDS
+a Ljava/util/concurrent/Executor; = None
+b Ljava/lang/Object; = None
+c Lcom/vivo/connect/tasks/OnSuccessListener; = None
+
+METHOD <init>(Ljava/util/concurrent/Executor; Lcom/vivo/connect/tasks/OnSuccessListener;)V
+000000: invoke-direct v1, Ljava/lang/Object;-><init>()V
+000006: new-instance v0, Ljava/lang/Object;
+00000a: invoke-direct v0, Ljava/lang/Object;-><init>()V
+000010: iput-object v0, v1, Lcom/vivo/connect/tasks/c;->b Ljava/lang/Object;
+000014: iput-object v2, v1, Lcom/vivo/connect/tasks/c;->a Ljava/util/concurrent/Executor;
+000018: iput-object v3, v1, Lcom/vivo/connect/tasks/c;->c Lcom/vivo/connect/tasks/OnSuccessListener;
+00001c: return-void 
+
+METHOD a()Ljava/lang/Object;
+000000: iget-object v0, v0, Lcom/vivo/connect/tasks/c;->b Ljava/lang/Object;
+000004: return-object v0
+
+METHOD b()Lcom/vivo/connect/tasks/OnSuccessListener;
+000000: iget-object v0, v0, Lcom/vivo/connect/tasks/c;->c Lcom/vivo/connect/tasks/OnSuccessListener;
+000004: return-object v0
+
+METHOD cancel()V
+000000: iget-object v0, v2, Lcom/vivo/connect/tasks/c;->b Ljava/lang/Object;
+000004: monitor-enter v0
+000006: const/4 v1, 0
+000008: iput-object v1, v2, Lcom/vivo/connect/tasks/c;->c Lcom/vivo/connect/tasks/OnSuccessListener;
+00000c: monitor-exit v0
+00000e: return-void 
+000010: move-exception v2
+000012: monitor-exit v0
+000014: throw v2
+
+METHOD onComplete(Lcom/vivo/connect/tasks/Task;)V
+000000: invoke-virtual v4, Lcom/vivo/connect/tasks/Task;->isSuccessful()Z
+000006: move-result v0
+000008: if-eqz v0, +01ah
+00000c: iget-object v0, v3, Lcom/vivo/connect/tasks/c;->b Ljava/lang/Object;
+000010: monitor-enter v0
+000012: iget-object v1, v3, Lcom/vivo/connect/tasks/c;->c Lcom/vivo/connect/tasks/OnSuccessListener;
+000016: if-nez v1, +006h
+00001a: monitor-exit v0
+00001c: return-void 
+00001e: move-exception v3
+000020: goto +ch
+000022: iget-object v1, v3, Lcom/vivo/connect/tasks/c;->a Ljava/util/concurrent/Executor;
+000026: new-instance v2, Lcom/vivo/connect/sdk/h/c;
+00002a: invoke-direct v2, v3, v4, Lcom/vivo/connect/sdk/h/c;-><init>(Lcom/vivo/connect/tasks/c; Lcom/vivo/connect/tasks/Task;)V
+000030: invoke-interface v1, v2, Ljava/util/concurrent/Executor;->execute(Ljava/lang/Runnable;)V
+000036: goto -eh
+000038: monitor-exit v0
+00003a: throw v3
+00003c: return-void 

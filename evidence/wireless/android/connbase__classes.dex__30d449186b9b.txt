@@ -1,0 +1,168 @@
+APK pcsuite/updateApk/connbase.apk
+DEX classes.dex
+CLASS Lcom/vivo/connbase/n0/d/b;
+SUPER Ljava/lang/Object;
+FIELDS
+i I = 0
+j I = 1
+a Ljava/lang/String; = None
+b Ljava/lang/String; = None
+c Ljava/lang/String; = None
+d Ljava/lang/String; = None
+e Ljava/lang/String; = None
+f Ljava/lang/String; = None
+g Ljava/lang/String; = None
+h I = None
+
+METHOD <init>()V
+000000: invoke-direct v0, Ljava/lang/Object;-><init>()V
+000006: return-void 
+
+METHOD a()Ljava/lang/String;
+000000: new-instance v0, Ljava/lang/StringBuilder;
+000004: invoke-direct v0, Ljava/lang/StringBuilder;-><init>()V
+00000a: const-string v1, "NOTIFY * HTTP/1.1
+Host:239.255.255.250:2200
+Cache-Control:3600
+Location:www.vivo.com
+NT:vivo_connect
+"
+00000e: invoke-virtual v0, v1, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+000014: iget v1, v3, Lcom/vivo/connbase/n0/d/b;->h I
+000018: if-nez v1, +005h
+00001c: const-string v1, "NTS:"ssdp:alive""
+000020: goto +3h
+000022: const-string v1, "NTS:"ssdp:byebye""
+000026: invoke-virtual v0, v1, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+00002c: const-string v1, "
+"
+000030: invoke-virtual v0, v1, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+000036: const-string v2, "USN:00000837-0000-1000-8000-00805F9B34FB"
+00003a: invoke-virtual v0, v2, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+000040: invoke-virtual v0, v1, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+000046: const-string v2, "deviceId:"
+00004a: invoke-virtual v0, v2, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+000050: iget-object v2, v3, Lcom/vivo/connbase/n0/d/b;->f Ljava/lang/String;
+000054: invoke-virtual v0, v2, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+00005a: invoke-virtual v0, v1, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+000060: const-string v2, "Service:"
+000064: invoke-virtual v0, v2, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+00006a: iget-object v2, v3, Lcom/vivo/connbase/n0/d/b;->g Ljava/lang/String;
+00006e: invoke-virtual v0, v2, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+000074: invoke-virtual v0, v1, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+00007a: invoke-virtual v0, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
+000080: move-result-object v0
+000082: return-object v0
+
+METHOD a(I)V
+000000: iput v1, v0, Lcom/vivo/connbase/n0/d/b;->h I
+000004: return-void 
+
+METHOD a(Ljava/lang/String;)V
+000000: iput-object v1, v0, Lcom/vivo/connbase/n0/d/b;->a Ljava/lang/String;
+000004: return-void 
+
+METHOD b()Ljava/lang/String;
+000000: iget-object v0, v1, Lcom/vivo/connbase/n0/d/b;->a Ljava/lang/String;
+000004: return-object v0
+
+METHOD b(Ljava/lang/String;)V
+000000: iput-object v1, v0, Lcom/vivo/connbase/n0/d/b;->f Ljava/lang/String;
+000004: return-void 
+
+METHOD c()Ljava/lang/String;
+000000: iget-object v0, v1, Lcom/vivo/connbase/n0/d/b;->f Ljava/lang/String;
+000004: return-object v0
+
+METHOD c(Ljava/lang/String;)V
+000000: iput-object v1, v0, Lcom/vivo/connbase/n0/d/b;->b Ljava/lang/String;
+000004: return-void 
+
+METHOD d()Ljava/lang/String;
+000000: iget-object v0, v1, Lcom/vivo/connbase/n0/d/b;->b Ljava/lang/String;
+000004: return-object v0
+
+METHOD d(Ljava/lang/String;)V
+000000: iput-object v1, v0, Lcom/vivo/connbase/n0/d/b;->c Ljava/lang/String;
+000004: return-void 
+
+METHOD e()Ljava/lang/String;
+000000: iget-object v0, v1, Lcom/vivo/connbase/n0/d/b;->c Ljava/lang/String;
+000004: return-object v0
+
+METHOD e(Ljava/lang/String;)V
+000000: iput-object v1, v0, Lcom/vivo/connbase/n0/d/b;->d Ljava/lang/String;
+000004: return-void 
+
+METHOD f()Ljava/lang/String;
+000000: iget-object v0, v1, Lcom/vivo/connbase/n0/d/b;->d Ljava/lang/String;
+000004: return-object v0
+
+METHOD f(Ljava/lang/String;)V
+000000: iput-object v1, v0, Lcom/vivo/connbase/n0/d/b;->g Ljava/lang/String;
+000004: return-void 
+
+METHOD g()Ljava/lang/String;
+000000: iget-object v0, v1, Lcom/vivo/connbase/n0/d/b;->g Ljava/lang/String;
+000004: return-object v0
+
+METHOD g(Ljava/lang/String;)V
+000000: iput-object v1, v0, Lcom/vivo/connbase/n0/d/b;->e Ljava/lang/String;
+000004: return-void 
+
+METHOD h()I
+000000: iget v0, v1, Lcom/vivo/connbase/n0/d/b;->h I
+000004: return v0
+
+METHOD i()Ljava/lang/String;
+000000: iget-object v0, v1, Lcom/vivo/connbase/n0/d/b;->e Ljava/lang/String;
+000004: return-object v0
+
+METHOD toString()Ljava/lang/String;
+000000: new-instance v0, Ljava/lang/StringBuilder;
+000004: invoke-direct v0, Ljava/lang/StringBuilder;-><init>()V
+00000a: const-string v1, "SSDPNotifyMsg{cacheControl='"
+00000e: invoke-virtual v0, v1, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+000014: iget-object v1, v3, Lcom/vivo/connbase/n0/d/b;->a Ljava/lang/String;
+000018: invoke-virtual v0, v1, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+00001e: const/16 v1, 39
+000022: invoke-virtual v0, v1, Ljava/lang/StringBuilder;->append(C)Ljava/lang/StringBuilder;
+000028: const-string v2, ", location='"
+00002c: invoke-virtual v0, v2, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+000032: iget-object v2, v3, Lcom/vivo/connbase/n0/d/b;->b Ljava/lang/String;
+000036: invoke-virtual v0, v2, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+00003c: invoke-virtual v0, v1, Ljava/lang/StringBuilder;->append(C)Ljava/lang/StringBuilder;
+000042: const-string v2, ", nt='"
+000046: invoke-virtual v0, v2, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+00004c: iget-object v2, v3, Lcom/vivo/connbase/n0/d/b;->c Ljava/lang/String;
+000050: invoke-virtual v0, v2, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+000056: invoke-virtual v0, v1, Ljava/lang/StringBuilder;->append(C)Ljava/lang/StringBuilder;
+00005c: const-string v2, ", nts='"
+000060: invoke-virtual v0, v2, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+000066: iget-object v2, v3, Lcom/vivo/connbase/n0/d/b;->d Ljava/lang/String;
+00006a: invoke-virtual v0, v2, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+000070: invoke-virtual v0, v1, Ljava/lang/StringBuilder;->append(C)Ljava/lang/StringBuilder;
+000076: const-string v2, ", usn='"
+00007a: invoke-virtual v0, v2, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+000080: iget-object v2, v3, Lcom/vivo/connbase/n0/d/b;->e Ljava/lang/String;
+000084: invoke-virtual v0, v2, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+00008a: invoke-virtual v0, v1, Ljava/lang/StringBuilder;->append(C)Ljava/lang/StringBuilder;
+000090: const-string v2, ", dd='"
+000094: invoke-virtual v0, v2, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+00009a: iget-object v2, v3, Lcom/vivo/connbase/n0/d/b;->f Ljava/lang/String;
+00009e: invoke-virtual v0, v2, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+0000a4: invoke-virtual v0, v1, Ljava/lang/StringBuilder;->append(C)Ljava/lang/StringBuilder;
+0000aa: const-string v2, ", service='"
+0000ae: invoke-virtual v0, v2, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+0000b4: iget-object v2, v3, Lcom/vivo/connbase/n0/d/b;->g Ljava/lang/String;
+0000b8: invoke-virtual v0, v2, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+0000be: invoke-virtual v0, v1, Ljava/lang/StringBuilder;->append(C)Ljava/lang/StringBuilder;
+0000c4: const-string v1, ", type="
+0000c8: invoke-virtual v0, v1, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+0000ce: iget v1, v3, Lcom/vivo/connbase/n0/d/b;->h I
+0000d2: invoke-virtual v0, v1, Ljava/lang/StringBuilder;->append(I)Ljava/lang/StringBuilder;
+0000d8: const/16 v1, 125
+0000dc: invoke-virtual v0, v1, Ljava/lang/StringBuilder;->append(C)Ljava/lang/StringBuilder;
+0000e2: invoke-virtual v0, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
+0000e8: move-result-object v0
+0000ea: return-object v0

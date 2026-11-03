@@ -1,0 +1,51 @@
+APK pcsuite/updateApk/connbase.apk
+DEX classes.dex
+CLASS Lcom/vivo/connbase/h0/a$a;
+SUPER Ljava/lang/Object;
+FIELDS
+a [I = None
+b [Z = None
+c Lcom/vivo/connbase/h0/c/i$a; = None
+d Lcom/vivo/connbase/h0/a; = None
+
+METHOD <init>(Lcom/vivo/connbase/h0/a; [I [Z Lcom/vivo/connbase/h0/c/i$a;)V
+000000: iput-object v1, v0, Lcom/vivo/connbase/h0/a$a;->d Lcom/vivo/connbase/h0/a;
+000004: iput-object v2, v0, Lcom/vivo/connbase/h0/a$a;->a [I
+000008: iput-object v3, v0, Lcom/vivo/connbase/h0/a$a;->b [Z
+00000c: iput-object v4, v0, Lcom/vivo/connbase/h0/a$a;->c Lcom/vivo/connbase/h0/c/i$a;
+000010: invoke-direct v0, Ljava/lang/Object;-><init>()V
+000016: return-void 
+
+METHOD a(Ljava/lang/Throwable;)V
+000000: new-instance v0, Ljava/lang/StringBuilder;
+000004: invoke-direct v0, Ljava/lang/StringBuilder;-><init>()V
+00000a: const-string v1, "ble advertising failed:"
+00000e: invoke-virtual v0, v1, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+000014: invoke-virtual v8, Ljava/lang/Throwable;->toString()Ljava/lang/String;
+00001a: move-result-object v8
+00001c: invoke-virtual v0, v8, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+000022: invoke-virtual v0, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
+000028: move-result-object v8
+00002a: const-string v0, "DiscoveryUseCaseWrapper"
+00002e: invoke-static v0, v8, Lc/c/f/a/b;->g(Ljava/lang/String; Ljava/lang/String;)V
+000034: iget-object v1, v7, Lcom/vivo/connbase/h0/a$a;->d Lcom/vivo/connbase/h0/a;
+000038: iget-object v4, v7, Lcom/vivo/connbase/h0/a$a;->a [I
+00003c: iget-object v5, v7, Lcom/vivo/connbase/h0/a$a;->b [Z
+000040: iget-object v6, v7, Lcom/vivo/connbase/h0/a$a;->c Lcom/vivo/connbase/h0/c/i$a;
+000044: const/4 v2, 0
+000046: const/4 v3, 0
+000048: invoke-static/range v1 ... v6, Lcom/vivo/connbase/h0/a;->a(Lcom/vivo/connbase/h0/a; I Z [I [Z Lcom/vivo/connbase/h0/c/i$a;)V
+00004e: return-void 
+
+METHOD onSuccess()V
+000000: const-string v0, "DiscoveryUseCaseWrapper"
+000004: const-string v1, "ble advertising successfully."
+000008: invoke-static v0, v1, Lc/c/f/a/b;->k(Ljava/lang/String; Ljava/lang/String;)V
+00000e: iget-object v2, v8, Lcom/vivo/connbase/h0/a$a;->d Lcom/vivo/connbase/h0/a;
+000012: iget-object v5, v8, Lcom/vivo/connbase/h0/a$a;->a [I
+000016: iget-object v6, v8, Lcom/vivo/connbase/h0/a$a;->b [Z
+00001a: iget-object v7, v8, Lcom/vivo/connbase/h0/a$a;->c Lcom/vivo/connbase/h0/c/i$a;
+00001e: const/4 v3, 0
+000020: const/4 v4, 1
+000022: invoke-static/range v2 ... v7, Lcom/vivo/connbase/h0/a;->a(Lcom/vivo/connbase/h0/a; I Z [I [Z Lcom/vivo/connbase/h0/c/i$a;)V
+000028: return-void 

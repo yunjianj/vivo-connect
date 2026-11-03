@@ -1,0 +1,86 @@
+APK pcsuite/updateApk/connbase.apk
+DEX classes.dex
+CLASS Lcom/vivo/connbase/connect/l;
+SUPER Ljava/lang/Object;
+FIELDS
+a Ljava/lang/String; = None
+b Ljava/lang/String; = None
+
+METHOD <init>(Ljava/lang/String; Ljava/lang/String;)V
+000000: invoke-direct v0, Ljava/lang/Object;-><init>()V
+000006: iput-object v1, v0, Lcom/vivo/connbase/connect/l;->a Ljava/lang/String;
+00000a: iput-object v2, v0, Lcom/vivo/connbase/connect/l;->b Ljava/lang/String;
+00000e: return-void 
+
+METHOD a(Ljava/lang/String; Ljava/lang/String;)Lcom/vivo/connbase/connect/l;
+000000: new-instance v0, Lcom/vivo/connbase/connect/l;
+000004: invoke-direct v0, v1, v2, Lcom/vivo/connbase/connect/l;-><init>(Ljava/lang/String; Ljava/lang/String;)V
+00000a: return-object v0
+
+METHOD a()Ljava/lang/String;
+000000: iget-object v0, v1, Lcom/vivo/connbase/connect/l;->a Ljava/lang/String;
+000004: return-object v0
+
+METHOD b()Ljava/lang/String;
+000000: iget-object v0, v1, Lcom/vivo/connbase/connect/l;->b Ljava/lang/String;
+000004: return-object v0
+
+METHOD equals(Ljava/lang/Object;)Z
+000000: const/4 v0, 1
+000002: if-ne v4, v5, +003h
+000006: return v0
+000008: const/4 v1, 0
+00000a: if-eqz v5, +024h
+00000e: const-class v2, Lcom/vivo/connbase/connect/l;
+000012: invoke-virtual v5, Ljava/lang/Object;->getClass()Ljava/lang/Class;
+000018: move-result-object v3
+00001a: if-eq v2, v3, +003h
+00001e: goto +1ah
+000020: check-cast v5, Lcom/vivo/connbase/connect/l;
+000024: iget-object v2, v4, Lcom/vivo/connbase/connect/l;->a Ljava/lang/String;
+000028: iget-object v3, v5, Lcom/vivo/connbase/connect/l;->a Ljava/lang/String;
+00002c: invoke-static v2, v3, Ljava/util/Objects;->equals(Ljava/lang/Object; Ljava/lang/Object;)Z
+000032: move-result v2
+000034: if-eqz v2, +00dh
+000038: iget-object v2, v4, Lcom/vivo/connbase/connect/l;->b Ljava/lang/String;
+00003c: iget-object v5, v5, Lcom/vivo/connbase/connect/l;->b Ljava/lang/String;
+000040: invoke-static v2, v5, Ljava/util/Objects;->equals(Ljava/lang/Object; Ljava/lang/Object;)Z
+000046: move-result v5
+000048: if-eqz v5, +003h
+00004c: goto +2h
+00004e: move v0, v1
+000050: return v0
+000052: return v1
+
+METHOD hashCode()I
+000000: const/4 v0, 2
+000002: new-array v0, v0, [Ljava/lang/Object;
+000006: iget-object v1, v3, Lcom/vivo/connbase/connect/l;->a Ljava/lang/String;
+00000a: const/4 v2, 0
+00000c: aput-object v1, v0, v2
+000010: iget-object v1, v3, Lcom/vivo/connbase/connect/l;->b Ljava/lang/String;
+000014: const/4 v2, 1
+000016: aput-object v1, v0, v2
+00001a: invoke-static v0, Ljava/util/Objects;->hash([Ljava/lang/Object;)I
+000020: move-result v0
+000022: return v0
+
+METHOD toString()Ljava/lang/String;
+000000: new-instance v0, Ljava/lang/StringBuilder;
+000004: invoke-direct v0, Ljava/lang/StringBuilder;-><init>()V
+00000a: const-string v1, "DeviceServiceWrapper{dd='"
+00000e: invoke-virtual v0, v1, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+000014: iget-object v1, v3, Lcom/vivo/connbase/connect/l;->a Ljava/lang/String;
+000018: invoke-virtual v0, v1, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+00001e: const/16 v1, 39
+000022: invoke-virtual v0, v1, Ljava/lang/StringBuilder;->append(C)Ljava/lang/StringBuilder;
+000028: const-string v2, ", sd='"
+00002c: invoke-virtual v0, v2, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+000032: iget-object v2, v3, Lcom/vivo/connbase/connect/l;->b Ljava/lang/String;
+000036: invoke-virtual v0, v2, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+00003c: invoke-virtual v0, v1, Ljava/lang/StringBuilder;->append(C)Ljava/lang/StringBuilder;
+000042: const/16 v1, 125
+000046: invoke-virtual v0, v1, Ljava/lang/StringBuilder;->append(C)Ljava/lang/StringBuilder;
+00004c: invoke-virtual v0, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
+000052: move-result-object v0
+000054: return-object v0

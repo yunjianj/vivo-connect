@@ -1,0 +1,41 @@
+APK pcsuite/updateApk/connbase.apk
+DEX classes.dex
+CLASS Lcom/vivo/connbase/VivoConnectService$h;
+SUPER Landroid/database/ContentObserver;
+FIELDS
+a Lcom/vivo/connbase/VivoConnectService; = None
+
+METHOD <init>(Lcom/vivo/connbase/VivoConnectService; Landroid/os/Handler;)V
+000000: iput-object v1, v0, Lcom/vivo/connbase/VivoConnectService$h;->a Lcom/vivo/connbase/VivoConnectService;
+000004: invoke-direct v0, v2, Landroid/database/ContentObserver;-><init>(Landroid/os/Handler;)V
+00000a: return-void 
+
+METHOD onChange(Z)V
+000000: invoke-super v3, v4, Landroid/database/ContentObserver;->onChange(Z)V
+000006: new-instance v0, Ljava/lang/StringBuilder;
+00000a: invoke-direct v0, Ljava/lang/StringBuilder;-><init>()V
+000010: const-string v1, "observerViewAcrossDevicesEnable selfChange="
+000014: invoke-virtual v0, v1, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+00001a: invoke-virtual v0, v4, Ljava/lang/StringBuilder;->append(Z)Ljava/lang/StringBuilder;
+000020: invoke-virtual v0, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
+000026: move-result-object v4
+000028: const-string v0, "VivoConnectService"
+00002c: invoke-static v0, v4, Lc/c/f/a/b;->k(Ljava/lang/String; Ljava/lang/String;)V
+000032: invoke-static Lcom/vivo/connbase/App;->m()Lcom/vivo/connbase/App;
+000038: move-result-object v4
+00003a: invoke-static v4, Lcom/vivo/connbase/e0/g/c;->k(Landroid/content/Context;)V
+000040: invoke-static Lcom/vivo/connbase/App;->m()Lcom/vivo/connbase/App;
+000046: move-result-object v4
+000048: invoke-virtual v4, Landroid/app/Application;->getApplicationContext()Landroid/content/Context;
+00004e: move-result-object v4
+000050: invoke-static v4, Lcom/vivo/connbase/e0/g/c;->h(Landroid/content/Context;)Z
+000056: move-result v4
+000058: new-instance v1, Ljava/lang/StringBuilder;
+00005c: invoke-direct v1, Ljava/lang/StringBuilder;-><init>()V
+000062: const-string v2, "cross device enable:"
+000066: invoke-virtual v1, v2, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+00006c: invoke-virtual v1, v4, Ljava/lang/StringBuilder;->append(Z)Ljava/lang/StringBuilder;
+000072: invoke-virtual v1, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
+000078: move-result-object v4
+00007a: invoke-static v0, v4, Lc/c/f/a/b;->k(Ljava/lang/String; Ljava/lang/String;)V
+000080: return-void 

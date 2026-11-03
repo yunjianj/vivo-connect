@@ -1,0 +1,50 @@
+APK pcsuite/updateApk/connbase.apk
+DEX classes.dex
+CLASS Lcom/vivo/finddevice/b;
+SUPER Lcom/vivo/finddevice/a;
+FIELDS
+A I = 5120
+B Ljava/lang/String; = 'ble_scan_timestamp_aiengine'
+C Ljava/lang/String; = 'ble_scan_low_power_interval_ms'
+D Ljava/lang/String; = 'ble_scan_low_power_window_ms'
+E Ljava/lang/String; = 'aie_ble_scan_low_power_interval_ms'
+F Ljava/lang/String; = 'aie_ble_scan_low_power_window_ms'
+G Ljava/lang/String; = 'persist.vivo.bluetooth.support.aie'
+H Ljava/lang/String; = 'android.bluetooth.gatt.profile.action.CONNECTION_STATE_CHANGED'
+I Ljava/lang/String; = 'com.vivo.health'
+J Ljava/lang/String; = 'com.vivo.car.networking'
+s Ljava/lang/String; = 'BleDeviceScanner'
+t I = 1
+u I = 2
+v I = 3
+w I = 30
+x I = 110
+y I = 1100
+z I = 512
+j Landroid/os/Handler; = None
+k Ljava/util/HashMap; = None
+l Lcom/vivo/connbase/h0/c/i; = None
+m Lcom/vivo/finddevice/b$b; = None
+n Ljava/util/Set; = None
+o Lcom/vivo/finddevice/i; = None
+p Ljava/lang/reflect/Method; = None
+q Ljava/util/Map; = None
+r Landroid/content/BroadcastReceiver; = None
+
+METHOD n()Z
+000000: invoke-static Lcom/vivo/connbase/App;->m()Lcom/vivo/connbase/App;
+000006: move-result-object v0
+000008: invoke-virtual v0, Landroid/app/Application;->getContentResolver()Landroid/content/ContentResolver;
+00000e: move-result-object v0
+000010: const/4 v1, 0
+000012: const-string v2, "app_auth_status"
+000016: invoke-static v0, v2, v1, Landroid/provider/Settings$Global;->getInt(Landroid/content/ContentResolver; Ljava/lang/String; I)I
+00001c: move-result v0
+00001e: const/4 v2, 1
+000020: if-ne v0, v2, +003h
+000024: move v1, v2
+000026: if-nez v1, +009h
+00002a: const-string v0, "BleDeviceScanner"
+00002e: const-string v2, "handleServiceParse: without authorization"
+000032: invoke-static v0, v2, Lcom/vivo/finddevice/l/b;->e(Ljava/lang/String; Ljava/lang/String;)V
+000038: return v1

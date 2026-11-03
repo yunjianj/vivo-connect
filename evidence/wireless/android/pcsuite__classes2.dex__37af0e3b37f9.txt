@@ -1,0 +1,37 @@
+APK pcsuite/updateApk/pcsuite.apk
+DEX classes2.dex
+CLASS Lcom/vivo/pcsuite/connect/ConnectControlModel$DialogRunnable;
+SUPER Ljava/lang/Object;
+FIELDS
+a Ljava/lang/ref/WeakReference; = None
+
+METHOD <init>(Lcom/vivo/pcsuite/PcSuiteApplication;)V
+000000: invoke-direct v1, Ljava/lang/Object;-><init>()V
+000006: new-instance v0, Ljava/lang/ref/WeakReference;
+00000a: invoke-direct v0, v2, Ljava/lang/ref/WeakReference;-><init>(Ljava/lang/Object;)V
+000010: iput-object v0, v1, Lcom/vivo/pcsuite/connect/ConnectControlModel$DialogRunnable;->a Ljava/lang/ref/WeakReference;
+000014: return-void 
+
+METHOD run()V
+000000: iget-object v3, v3, Lcom/vivo/pcsuite/connect/ConnectControlModel$DialogRunnable;->a Ljava/lang/ref/WeakReference;
+000004: invoke-virtual v3, Ljava/lang/ref/Reference;->get()Ljava/lang/Object;
+00000a: move-result-object v3
+00000c: check-cast v3, Lcom/vivo/pcsuite/PcSuiteApplication;
+000010: if-eqz v3, +023h
+000014: invoke-static Lcom/vivo/pcsuite/service/PcSuiteObserver;->t()Lcom/vivo/pcsuite/service/PcSuiteObserver;
+00001a: move-result-object v3
+00001c: new-instance v0, Ljava/lang/StringBuilder;
+000020: const-string v1, "DialogRunnable instance is null = "
+000024: invoke-direct v0, v1, Ljava/lang/StringBuilder;-><init>(Ljava/lang/String;)V
+00002a: if-nez v3, +004h
+00002e: const/4 v1, 1
+000030: goto +2h
+000032: const/4 v1, 0
+000034: const-string v2, "pcsuite_ConnectControlModel"
+000038: invoke-static v0, v1, v2, Landroidx/appcompat/widget/b;->i(Ljava/lang/StringBuilder; Z Ljava/lang/String;)V
+00003e: if-eqz v3, +005h
+000042: invoke-virtual v3, Lcom/vivo/pcsuite/service/PcSuiteObserver;->Q()V
+000048: invoke-static LL2/i;->q()LL2/i;
+00004e: move-result-object v3
+000050: invoke-virtual v3, LL2/i;->o()V
+000056: return-void 

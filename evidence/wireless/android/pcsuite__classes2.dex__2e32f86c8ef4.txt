@@ -1,0 +1,40 @@
+APK pcsuite/updateApk/pcsuite.apk
+DEX classes2.dex
+CLASS Lcom/vivo/connect/sdk/f/c$g0;
+SUPER Landroid/os/Handler;
+FIELDS
+a Lcom/vivo/connect/sdk/h/e; = None
+b Lcom/vivo/connect/sdk/f/c; = None
+
+METHOD <init>(Lcom/vivo/connect/sdk/f/c; Landroid/os/Looper; Lcom/vivo/connect/sdk/h/e;)V
+000000: iput-object v1, v0, Lcom/vivo/connect/sdk/f/c$g0;->b Lcom/vivo/connect/sdk/f/c;
+000004: iput-object v3, v0, Lcom/vivo/connect/sdk/f/c$g0;->a Lcom/vivo/connect/sdk/h/e;
+000008: invoke-direct v0, v2, Landroid/os/Handler;-><init>(Landroid/os/Looper;)V
+00000e: return-void 
+
+METHOD handleMessage(Landroid/os/Message;)V
+000000: invoke-super v2, v3, Landroid/os/Handler;->handleMessage(Landroid/os/Message;)V
+000006: invoke-virtual v3, Landroid/os/Message;->getData()Landroid/os/Bundle;
+00000c: move-result-object v0
+00000e: const-string v1, "res"
+000012: invoke-virtual v0, v1, Landroid/os/BaseBundle;->getInt(Ljava/lang/String;)I
+000018: move-result v0
+00001a: if-nez v0, +009h
+00001e: iget-object v2, v2, Lcom/vivo/connect/sdk/f/c$g0;->a Lcom/vivo/connect/sdk/h/e;
+000022: const/4 v3, 1
+000024: invoke-virtual v2, v3, Lcom/vivo/connect/sdk/h/e;->a(Z)V
+00002a: return-void 
+00002c: invoke-virtual v3, Landroid/os/Message;->getData()Landroid/os/Bundle;
+000032: move-result-object v3
+000034: const-string v1, "exc"
+000038: invoke-virtual v3, v1, Landroid/os/Bundle;->getSerializable(Ljava/lang/String;)Ljava/io/Serializable;
+00003e: move-result-object v3
+000040: check-cast v3, Ljava/lang/Throwable;
+000044: if-nez v3, +009h
+000048: new-instance v3, Ljava/lang/RuntimeException;
+00004c: const-string v1, "Unknown error."
+000050: invoke-direct v3, v1, Ljava/lang/RuntimeException;-><init>(Ljava/lang/String;)V
+000056: iget-object v2, v2, Lcom/vivo/connect/sdk/f/c$g0;->a Lcom/vivo/connect/sdk/h/e;
+00005a: check-cast v3, Ljava/lang/Exception;
+00005e: invoke-virtual v2, v3, v0, Lcom/vivo/connect/sdk/h/e;->a(Ljava/lang/Exception; I)V
+000064: return-void 

@@ -1,0 +1,292 @@
+APK pcsuite/updateApk/connbase.apk
+DEX classes.dex
+CLASS Lcom/vivo/connbase/h0/b;
+SUPER Ljava/lang/Object;
+FIELDS
+g Ljava/lang/String; = 'UseCaseSwitcher'
+a Lcom/vivo/connbase/h0/c/i; = None
+b Lcom/vivo/connbase/nfc/j; = None
+c Lcom/vivo/connbase/h0/d/z4; = None
+d Ljava/util/HashSet; = None
+e Ljava/util/HashSet; = None
+f Ljava/util/HashSet; = None
+
+METHOD <init>(Landroid/content/Context;)V
+000000: invoke-direct v1, Ljava/lang/Object;-><init>()V
+000006: new-instance v0, Ljava/util/HashSet;
+00000a: invoke-direct v0, Ljava/util/HashSet;-><init>()V
+000010: iput-object v0, v1, Lcom/vivo/connbase/h0/b;->d Ljava/util/HashSet;
+000014: new-instance v0, Ljava/util/HashSet;
+000018: invoke-direct v0, Ljava/util/HashSet;-><init>()V
+00001e: iput-object v0, v1, Lcom/vivo/connbase/h0/b;->e Ljava/util/HashSet;
+000022: new-instance v0, Ljava/util/HashSet;
+000026: invoke-direct v0, Ljava/util/HashSet;-><init>()V
+00002c: iput-object v0, v1, Lcom/vivo/connbase/h0/b;->f Ljava/util/HashSet;
+000030: new-instance v0, Lcom/vivo/connbase/nfc/j;
+000034: invoke-direct v0, v2, Lcom/vivo/connbase/nfc/j;-><init>(Landroid/content/Context;)V
+00003a: iput-object v0, v1, Lcom/vivo/connbase/h0/b;->b Lcom/vivo/connbase/nfc/j;
+00003e: new-instance v0, Lcom/vivo/connbase/h0/d/v4;
+000042: invoke-direct v0, v2, Lcom/vivo/connbase/h0/d/v4;-><init>(Landroid/content/Context;)V
+000048: iput-object v0, v1, Lcom/vivo/connbase/h0/b;->a Lcom/vivo/connbase/h0/c/i;
+00004c: new-instance v0, Lcom/vivo/connbase/h0/d/z4;
+000050: invoke-direct v0, v2, Lcom/vivo/connbase/h0/d/z4;-><init>(Landroid/content/Context;)V
+000056: iput-object v0, v1, Lcom/vivo/connbase/h0/b;->c Lcom/vivo/connbase/h0/d/z4;
+00005a: return-void 
+
+METHOD <init>(Landroid/content/Context; Lcom/vivo/connbase/h0/b$a;)V
+000000: invoke-direct v0, v1, Lcom/vivo/connbase/h0/b;-><init>(Landroid/content/Context;)V
+000006: return-void 
+
+METHOD d()Lcom/vivo/connbase/h0/b;
+000000: invoke-static Lcom/vivo/connbase/h0/b$b;->a()Lcom/vivo/connbase/h0/b;
+000006: move-result-object v0
+000008: return-object v0
+
+METHOD a()Lcom/vivo/connbase/h0/c/i;
+000000: iget-object v0, v1, Lcom/vivo/connbase/h0/b;->a Lcom/vivo/connbase/h0/c/i;
+000004: return-object v0
+
+METHOD a(I Ljava/lang/String; Ljava/lang/String;)Lcom/vivo/connbase/h0/c/i;
+000000: new-instance v0, Ljava/lang/StringBuilder;
+000004: invoke-direct v0, Ljava/lang/StringBuilder;-><init>()V
+00000a: const-string v1, "chooseDiscoveryUsercase channel:"
+00000e: invoke-virtual v0, v1, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+000014: invoke-virtual v0, v6, Ljava/lang/StringBuilder;->append(I)Ljava/lang/StringBuilder;
+00001a: const-string v1, ", sd:"
+00001e: invoke-virtual v0, v1, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+000024: invoke-virtual v0, v7, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+00002a: const-string v1, ", dd:"
+00002e: invoke-virtual v0, v1, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+000034: invoke-virtual v0, v8, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+00003a: invoke-virtual v0, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
+000040: move-result-object v0
+000042: const-string v1, "UseCaseSwitcher"
+000046: invoke-static v1, v0, Lc/c/f/a/b;->k(Ljava/lang/String; Ljava/lang/String;)V
+00004c: invoke-static Lcom/vivo/connbase/App;->m()Lcom/vivo/connbase/App;
+000052: move-result-object v0
+000054: invoke-virtual v0, Lcom/vivo/connbase/App;->b()Lcom/vivo/connbase/connect/d;
+00005a: move-result-object v0
+00005c: invoke-interface v0, v8, v7, Lcom/vivo/connbase/connect/d;->a(Ljava/lang/String; Ljava/lang/String;)Lcom/vivo/connbase/connect/k;
+000062: move-result-object v7
+000064: if-eqz v6, +08dh
+000068: const/4 v0, 1
+00006a: if-eq v6, v0, +080h
+00006e: const/4 v2, 2
+000070: const/4 v3, 0
+000072: if-eq v6, v2, +015h
+000076: const/4 v7, 4
+000078: if-eq v6, v7, +008h
+00007c: const-string v6, "not a valid channel, return null"
+000080: invoke-static v1, v6, Lc/c/f/a/b;->p(Ljava/lang/String; Ljava/lang/String;)V
+000086: return-object v3
+000088: const-string v6, "getDiscoveryUseCase, nfc"
+00008c: invoke-static v1, v6, Lc/c/f/a/b;->k(Ljava/lang/String; Ljava/lang/String;)V
+000092: invoke-virtual v5, Lcom/vivo/connbase/h0/b;->b()Lcom/vivo/connbase/nfc/j;
+000098: move-result-object v6
+00009a: return-object v6
+00009c: invoke-static Lcom/vivo/connbase/App;->m()Lcom/vivo/connbase/App;
+0000a2: move-result-object v6
+0000a4: invoke-virtual v6, Lcom/vivo/connbase/App;->c()Lcom/vivo/connbase/h0/c/e;
+0000aa: move-result-object v6
+0000ac: invoke-virtual v6, v8, Lcom/vivo/connbase/h0/c/e;->c(Ljava/lang/String;)Lcom/vivo/connbase/h0/c/d;
+0000b2: move-result-object v6
+0000b4: if-nez v6, +005h
+0000b8: const-string v6, "device is null."
+0000bc: goto -1eh
+0000be: invoke-virtual v6, Lcom/vivo/connbase/h0/c/d;->h()Ljava/lang/String;
+0000c4: move-result-object v8
+0000c6: invoke-virtual v6, Lcom/vivo/connbase/h0/c/d;->k()Ljava/lang/String;
+0000cc: move-result-object v6
+0000ce: new-instance v2, Ljava/lang/StringBuilder;
+0000d2: invoke-direct v2, Ljava/lang/StringBuilder;-><init>()V
+0000d8: const-string v4, "mac:"
+0000dc: invoke-virtual v2, v4, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+0000e2: invoke-static v8, Lcom/vivo/connbase/e0/g/h;->b(Ljava/lang/String;)Ljava/lang/String;
+0000e8: move-result-object v4
+0000ea: invoke-virtual v2, v4, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+0000f0: const-string v4, ", ip:"
+0000f4: invoke-virtual v2, v4, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+0000fa: invoke-static v6, Lcom/vivo/connbase/e0/g/h;->a(Ljava/lang/String;)Ljava/lang/String;
+000100: move-result-object v4
+000102: invoke-virtual v2, v4, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+000108: invoke-virtual v2, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
+00010e: move-result-object v2
+000110: invoke-static v1, v2, Lc/c/f/a/b;->k(Ljava/lang/String; Ljava/lang/String;)V
+000116: invoke-static v6, Landroid/text/TextUtils;->isEmpty(Ljava/lang/CharSequence;)Z
+00011c: move-result v6
+00011e: if-nez v6, +00fh
+000122: const-string v6, "choose wlanDiscoveryUseCase"
+000126: invoke-static v1, v6, Lc/c/f/a/b;->k(Ljava/lang/String; Ljava/lang/String;)V
+00012c: invoke-virtual v7, v0, Lcom/vivo/connbase/connect/k;->b(I)V
+000132: invoke-virtual v5, Lcom/vivo/connbase/h0/b;->c()Lcom/vivo/connbase/h0/d/z4;
+000138: move-result-object v6
+00013a: return-object v6
+00013c: invoke-static v8, Landroid/text/TextUtils;->isEmpty(Ljava/lang/CharSequence;)Z
+000142: move-result v6
+000144: if-nez v6, +010h
+000148: const/4 v6, 0
+00014a: invoke-virtual v7, v6, Lcom/vivo/connbase/connect/k;->b(I)V
+000150: const-string v6, "choose leDiscoveryUseCase"
+000154: invoke-static v1, v6, Lc/c/f/a/b;->k(Ljava/lang/String; Ljava/lang/String;)V
+00015a: invoke-virtual v5, Lcom/vivo/connbase/h0/b;->a()Lcom/vivo/connbase/h0/c/i;
+000160: move-result-object v6
+000162: return-object v6
+000164: const-string v6, "ip and mac are both null."
+000168: goto -74h
+00016a: const-string v6, "getDiscoveryUseCase, wlan"
+00016e: invoke-static v1, v6, Lc/c/f/a/b;->k(Ljava/lang/String; Ljava/lang/String;)V
+000174: invoke-virtual v5, Lcom/vivo/connbase/h0/b;->c()Lcom/vivo/connbase/h0/d/z4;
+00017a: move-result-object v6
+00017c: return-object v6
+00017e: const-string v6, "getDiscoveryUseCase, ble"
+000182: invoke-static v1, v6, Lc/c/f/a/b;->k(Ljava/lang/String; Ljava/lang/String;)V
+000188: invoke-virtual v5, Lcom/vivo/connbase/h0/b;->a()Lcom/vivo/connbase/h0/c/i;
+00018e: move-result-object v6
+000190: return-object v6
+
+METHOD a(I Ljava/lang/String;)V
+000000: if-nez v2, +006h
+000004: invoke-virtual v1, v3, Lcom/vivo/connbase/h0/b;->a(Ljava/lang/String;)V
+00000a: goto +16h
+00000c: const/4 v0, 4
+00000e: if-ne v2, v0, +006h
+000012: invoke-virtual v1, v3, Lcom/vivo/connbase/h0/b;->b(Ljava/lang/String;)V
+000018: goto +fh
+00001a: const/4 v0, 1
+00001c: if-ne v2, v0, +006h
+000020: invoke-virtual v1, v3, Lcom/vivo/connbase/h0/b;->c(Ljava/lang/String;)V
+000026: goto +8h
+000028: const/4 v0, 2
+00002a: if-ne v2, v0, +006h
+00002e: invoke-virtual v1, v3, Lcom/vivo/connbase/h0/b;->c(Ljava/lang/String;)V
+000034: goto -18h
+000036: return-void 
+
+METHOD a(Ljava/lang/String;)V
+000000: new-instance v0, Ljava/lang/StringBuilder;
+000004: invoke-direct v0, Ljava/lang/StringBuilder;-><init>()V
+00000a: const-string v1, "addLeService:"
+00000e: invoke-virtual v0, v1, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+000014: invoke-virtual v0, v3, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+00001a: invoke-virtual v0, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
+000020: move-result-object v0
+000022: const-string v1, "UseCaseSwitcher"
+000026: invoke-static v1, v0, Lc/c/f/a/b;->k(Ljava/lang/String; Ljava/lang/String;)V
+00002c: iget-object v0, v2, Lcom/vivo/connbase/h0/b;->e Ljava/util/HashSet;
+000030: invoke-virtual v0, v3, Ljava/util/HashSet;->add(Ljava/lang/Object;)Z
+000036: return-void 
+
+METHOD b()Lcom/vivo/connbase/nfc/j;
+000000: iget-object v0, v1, Lcom/vivo/connbase/h0/b;->b Lcom/vivo/connbase/nfc/j;
+000004: return-object v0
+
+METHOD b(Ljava/lang/String;)V
+000000: new-instance v0, Ljava/lang/StringBuilder;
+000004: invoke-direct v0, Ljava/lang/StringBuilder;-><init>()V
+00000a: const-string v1, "addNfcService:"
+00000e: invoke-virtual v0, v1, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+000014: invoke-virtual v0, v3, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+00001a: invoke-virtual v0, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
+000020: move-result-object v0
+000022: const-string v1, "UseCaseSwitcher"
+000026: invoke-static v1, v0, Lc/c/f/a/b;->k(Ljava/lang/String; Ljava/lang/String;)V
+00002c: iget-object v0, v2, Lcom/vivo/connbase/h0/b;->d Ljava/util/HashSet;
+000030: invoke-virtual v0, v3, Ljava/util/HashSet;->add(Ljava/lang/Object;)Z
+000036: return-void 
+
+METHOD c()Lcom/vivo/connbase/h0/d/z4;
+000000: iget-object v0, v1, Lcom/vivo/connbase/h0/b;->c Lcom/vivo/connbase/h0/d/z4;
+000004: return-object v0
+
+METHOD c(Ljava/lang/String;)V
+000000: new-instance v0, Ljava/lang/StringBuilder;
+000004: invoke-direct v0, Ljava/lang/StringBuilder;-><init>()V
+00000a: const-string v1, "addWlanService:"
+00000e: invoke-virtual v0, v1, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+000014: invoke-virtual v0, v3, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+00001a: invoke-virtual v0, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
+000020: move-result-object v0
+000022: const-string v1, "UseCaseSwitcher"
+000026: invoke-static v1, v0, Lc/c/f/a/b;->k(Ljava/lang/String; Ljava/lang/String;)V
+00002c: iget-object v0, v2, Lcom/vivo/connbase/h0/b;->f Ljava/util/HashSet;
+000030: invoke-virtual v0, v3, Ljava/util/HashSet;->add(Ljava/lang/Object;)Z
+000036: return-void 
+
+METHOD d(Ljava/lang/String;)Lcom/vivo/connbase/h0/c/i;
+000000: new-instance v0, Ljava/lang/StringBuilder;
+000004: invoke-direct v0, Ljava/lang/StringBuilder;-><init>()V
+00000a: const-string v1, "getDiscoveryUseCase:"
+00000e: invoke-virtual v0, v1, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+000014: invoke-virtual v0, v3, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+00001a: invoke-virtual v0, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
+000020: move-result-object v0
+000022: const-string v1, "UseCaseSwitcher"
+000026: invoke-static v1, v0, Lc/c/f/a/b;->k(Ljava/lang/String; Ljava/lang/String;)V
+00002c: iget-object v0, v2, Lcom/vivo/connbase/h0/b;->d Ljava/util/HashSet;
+000030: invoke-virtual v0, v3, Ljava/util/HashSet;->contains(Ljava/lang/Object;)Z
+000036: move-result v0
+000038: if-eqz v0, +00ah
+00003c: const-string v3, "getDiscoveryUseCase, nfc"
+000040: invoke-static v1, v3, Lc/c/f/a/b;->k(Ljava/lang/String; Ljava/lang/String;)V
+000046: iget-object v3, v2, Lcom/vivo/connbase/h0/b;->b Lcom/vivo/connbase/nfc/j;
+00004a: return-object v3
+00004c: iget-object v0, v2, Lcom/vivo/connbase/h0/b;->f Ljava/util/HashSet;
+000050: invoke-virtual v0, v3, Ljava/util/HashSet;->contains(Ljava/lang/Object;)Z
+000056: move-result v0
+000058: if-eqz v0, +00ah
+00005c: const-string v3, "getDiscoveryUseCase, wlan"
+000060: invoke-static v1, v3, Lc/c/f/a/b;->k(Ljava/lang/String; Ljava/lang/String;)V
+000066: iget-object v3, v2, Lcom/vivo/connbase/h0/b;->c Lcom/vivo/connbase/h0/d/z4;
+00006a: return-object v3
+00006c: iget-object v0, v2, Lcom/vivo/connbase/h0/b;->e Ljava/util/HashSet;
+000070: invoke-virtual v0, v3, Ljava/util/HashSet;->contains(Ljava/lang/Object;)Z
+000076: move-result v3
+000078: if-eqz v3, +00ah
+00007c: const-string v3, "getDiscoveryUseCase, ble"
+000080: invoke-static v1, v3, Lc/c/f/a/b;->k(Ljava/lang/String; Ljava/lang/String;)V
+000086: iget-object v3, v2, Lcom/vivo/connbase/h0/b;->a Lcom/vivo/connbase/h0/c/i;
+00008a: return-object v3
+00008c: iget-object v3, v2, Lcom/vivo/connbase/h0/b;->a Lcom/vivo/connbase/h0/c/i;
+000090: return-object v3
+
+METHOD e(Ljava/lang/String;)V
+000000: new-instance v0, Ljava/lang/StringBuilder;
+000004: invoke-direct v0, Ljava/lang/StringBuilder;-><init>()V
+00000a: const-string v1, "removeLeService:"
+00000e: invoke-virtual v0, v1, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+000014: invoke-virtual v0, v3, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+00001a: invoke-virtual v0, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
+000020: move-result-object v0
+000022: const-string v1, "UseCaseSwitcher"
+000026: invoke-static v1, v0, Lc/c/f/a/b;->k(Ljava/lang/String; Ljava/lang/String;)V
+00002c: iget-object v0, v2, Lcom/vivo/connbase/h0/b;->e Ljava/util/HashSet;
+000030: invoke-virtual v0, v3, Ljava/util/HashSet;->remove(Ljava/lang/Object;)Z
+000036: return-void 
+
+METHOD f(Ljava/lang/String;)V
+000000: new-instance v0, Ljava/lang/StringBuilder;
+000004: invoke-direct v0, Ljava/lang/StringBuilder;-><init>()V
+00000a: const-string v1, "removeNfcService:"
+00000e: invoke-virtual v0, v1, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+000014: invoke-virtual v0, v3, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+00001a: invoke-virtual v0, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
+000020: move-result-object v0
+000022: const-string v1, "UseCaseSwitcher"
+000026: invoke-static v1, v0, Lc/c/f/a/b;->k(Ljava/lang/String; Ljava/lang/String;)V
+00002c: iget-object v0, v2, Lcom/vivo/connbase/h0/b;->d Ljava/util/HashSet;
+000030: invoke-virtual v0, v3, Ljava/util/HashSet;->remove(Ljava/lang/Object;)Z
+000036: return-void 
+
+METHOD g(Ljava/lang/String;)V
+000000: new-instance v0, Ljava/lang/StringBuilder;
+000004: invoke-direct v0, Ljava/lang/StringBuilder;-><init>()V
+00000a: const-string v1, "removeWlanService:"
+00000e: invoke-virtual v0, v1, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+000014: invoke-virtual v0, v3, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+00001a: invoke-virtual v0, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
+000020: move-result-object v0
+000022: const-string v1, "UseCaseSwitcher"
+000026: invoke-static v1, v0, Lc/c/f/a/b;->k(Ljava/lang/String; Ljava/lang/String;)V
+00002c: iget-object v0, v2, Lcom/vivo/connbase/h0/b;->f Ljava/util/HashSet;
+000030: invoke-virtual v0, v3, Ljava/util/HashSet;->remove(Ljava/lang/Object;)Z
+000036: return-void 

@@ -1,0 +1,57 @@
+APK pcsuite/updateApk/pcsuite.apk
+DEX classes2.dex
+CLASS Lcom/vivo/connect/sdk/f/c$p0;
+SUPER Ljava/lang/Object;
+FIELDS
+e Ljava/lang/String; = ':loginRunnable'
+a Landroid/os/Messenger; = None
+b Ljava/lang/String; = None
+c Lcom/vivo/connbase/IAccountLoginCallback; = None
+d Lcom/vivo/connect/sdk/f/c; = None
+
+METHOD <init>(Lcom/vivo/connect/sdk/f/c; Landroid/os/Messenger; Ljava/lang/String; Lcom/vivo/connbase/IAccountLoginCallback;)V
+000000: iput-object v1, v0, Lcom/vivo/connect/sdk/f/c$p0;->d Lcom/vivo/connect/sdk/f/c;
+000004: iput-object v2, v0, Lcom/vivo/connect/sdk/f/c$p0;->a Landroid/os/Messenger;
+000008: iput-object v3, v0, Lcom/vivo/connect/sdk/f/c$p0;->b Ljava/lang/String;
+00000c: iput-object v4, v0, Lcom/vivo/connect/sdk/f/c$p0;->c Lcom/vivo/connbase/IAccountLoginCallback;
+000010: invoke-direct v0, Ljava/lang/Object;-><init>()V
+000016: return-void 
+
+METHOD run()V
+000000: const-string v0, "showAccountLoginPrompt call end."
+000004: const-string v1, "ConnectClientImpl"
+000008: iget-object v2, v5, Lcom/vivo/connect/sdk/f/c$p0;->d Lcom/vivo/connect/sdk/f/c;
+00000c: invoke-static v2, Lcom/vivo/connect/sdk/f/c;->a(Lcom/vivo/connect/sdk/f/c;)Lcom/vivo/connbase/IClient;
+000012: move-result-object v2
+000014: if-eqz v2, +019h
+000018: const-string v2, "mConnectApi is not null"
+00001c: invoke-static v1, v2, Lcom/vivo/connect/logger/EasyLog;->i(Ljava/lang/String; Ljava/lang/String;)V
+000022: iget-object v2, v5, Lcom/vivo/connect/sdk/f/c$p0;->d Lcom/vivo/connect/sdk/f/c;
+000026: invoke-static v2, Lcom/vivo/connect/sdk/f/c;->a(Lcom/vivo/connect/sdk/f/c;)Lcom/vivo/connbase/IClient;
+00002c: move-result-object v2
+00002e: iget-object v3, v5, Lcom/vivo/connect/sdk/f/c$p0;->a Landroid/os/Messenger;
+000032: iget-object v4, v5, Lcom/vivo/connect/sdk/f/c$p0;->b Ljava/lang/String;
+000036: iget-object v5, v5, Lcom/vivo/connect/sdk/f/c$p0;->c Lcom/vivo/connbase/IAccountLoginCallback;
+00003a: invoke-interface v2, v3, v4, v5, Lcom/vivo/connbase/IClient;->showAccountLoginPrompt(Landroid/os/Messenger; Ljava/lang/String; Lcom/vivo/connbase/IAccountLoginCallback;)V
+000040: goto +1eh
+000042: move-exception v5
+000044: goto +20h
+000046: iget-object v2, v5, Lcom/vivo/connect/sdk/f/c$p0;->d Lcom/vivo/connect/sdk/f/c;
+00004a: const-string v3, ":loginRunnable"
+00004e: invoke-static v2, v3, Lcom/vivo/connect/sdk/f/c;->a(Lcom/vivo/connect/sdk/f/c; Ljava/lang/String;)Z
+000054: move-result v2
+000056: if-nez v2, +003h
+00005a: return-void 
+00005c: const-string v2, "showAccountLoginPrompt await end"
+000060: invoke-static v1, v2, Lcom/vivo/connect/logger/EasyLog;->i(Ljava/lang/String; Ljava/lang/String;)V
+000066: iget-object v2, v5, Lcom/vivo/connect/sdk/f/c$p0;->d Lcom/vivo/connect/sdk/f/c;
+00006a: invoke-static v2, Lcom/vivo/connect/sdk/f/c;->a(Lcom/vivo/connect/sdk/f/c;)Lcom/vivo/connbase/IClient;
+000070: move-result-object v2
+000072: iget-object v3, v5, Lcom/vivo/connect/sdk/f/c$p0;->a Landroid/os/Messenger;
+000076: iget-object v4, v5, Lcom/vivo/connect/sdk/f/c$p0;->b Ljava/lang/String;
+00007a: goto -22h
+00007c: invoke-static v1, v0, Lcom/vivo/connect/logger/EasyLog;->i(Ljava/lang/String; Ljava/lang/String;)V
+000082: return-void 
+000084: const-string v0, "showAccountLoginPromptr:"
+000088: invoke-static v5, v0, v1, LV5/S;->h(Ljava/lang/Exception; Ljava/lang/String; Ljava/lang/String;)V
+00008e: return-void 

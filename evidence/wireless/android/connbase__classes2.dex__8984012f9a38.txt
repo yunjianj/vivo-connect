@@ -1,0 +1,31 @@
+APK pcsuite/updateApk/connbase.apk
+DEX classes2.dex
+CLASS Lcom/vivo/pcsuite/pcconnect/ShareLinkService$p;
+SUPER Ljava/lang/Object;
+FIELDS
+a Ljava/lang/ref/WeakReference; = None
+b Lcom/vivo/pcsuite/pcconnect/ShareLinkService; = None
+
+METHOD <init>(Lcom/vivo/pcsuite/pcconnect/ShareLinkService; Lcom/vivo/pcsuite/pcconnect/ShareLinkService;)V
+000000: iput-object v1, v0, Lcom/vivo/pcsuite/pcconnect/ShareLinkService$p;->b Lcom/vivo/pcsuite/pcconnect/ShareLinkService;
+000004: invoke-direct v0, Ljava/lang/Object;-><init>()V
+00000a: new-instance v1, Ljava/lang/ref/WeakReference;
+00000e: invoke-direct v1, v2, Ljava/lang/ref/WeakReference;-><init>(Ljava/lang/Object;)V
+000014: iput-object v1, v0, Lcom/vivo/pcsuite/pcconnect/ShareLinkService$p;->a Ljava/lang/ref/WeakReference;
+000018: return-void 
+
+METHOD run()V
+000000: iget-object v0, v2, Lcom/vivo/pcsuite/pcconnect/ShareLinkService$p;->a Ljava/lang/ref/WeakReference;
+000004: invoke-virtual v0, Ljava/lang/ref/WeakReference;->get()Ljava/lang/Object;
+00000a: move-result-object v0
+00000c: check-cast v0, Lcom/vivo/pcsuite/pcconnect/ShareLinkService;
+000010: if-eqz v0, +015h
+000014: invoke-static Lcom/vivo/pcsuite/pcconnect/ShareLinkService;->k()Ljava/lang/String;
+00001a: move-result-object v0
+00001c: const-string v1, "scan time out "
+000020: invoke-static v0, v1, Lc/c/f/a/b;->k(Ljava/lang/String; Ljava/lang/String;)V
+000026: iget-object v0, v2, Lcom/vivo/pcsuite/pcconnect/ShareLinkService$p;->b Lcom/vivo/pcsuite/pcconnect/ShareLinkService;
+00002a: invoke-virtual v0, Lcom/vivo/pcsuite/pcconnect/ShareLinkService;->j()V
+000030: iget-object v0, v2, Lcom/vivo/pcsuite/pcconnect/ShareLinkService$p;->b Lcom/vivo/pcsuite/pcconnect/ShareLinkService;
+000034: invoke-virtual v0, Lcom/vivo/pcsuite/pcconnect/ShareLinkService;->h()V
+00003a: return-void 

@@ -1,0 +1,57 @@
+APK pcsuite/updateApk/connbase.apk
+DEX classes.dex
+CLASS Lcom/vivo/connbase/VivoConnectService$g;
+SUPER Landroid/app/UserSwitchObserver;
+FIELDS
+e Lcom/vivo/connbase/VivoConnectService; = None
+
+METHOD <init>(Lcom/vivo/connbase/VivoConnectService;)V
+000000: iput-object v1, v0, Lcom/vivo/connbase/VivoConnectService$g;->e Lcom/vivo/connbase/VivoConnectService;
+000004: invoke-direct v0, Landroid/app/UserSwitchObserver;-><init>()V
+00000a: return-void 
+
+METHOD onUserSwitchComplete(I)V
+000000: invoke-super v3, v4, Landroid/app/UserSwitchObserver;->onUserSwitchComplete(I)V
+000006: new-instance v0, Ljava/lang/StringBuilder;
+00000a: invoke-direct v0, Ljava/lang/StringBuilder;-><init>()V
+000010: const-string v1, "onUserSwitchComplete:"
+000014: invoke-virtual v0, v1, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+00001a: invoke-virtual v0, v4, Ljava/lang/StringBuilder;->append(I)Ljava/lang/StringBuilder;
+000020: invoke-virtual v0, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
+000026: move-result-object v0
+000028: const-string v1, "VivoConnectService"
+00002c: invoke-static v1, v0, Lc/c/f/a/b;->n(Ljava/lang/String; Ljava/lang/String;)V
+000032: iget-object v0, v3, Lcom/vivo/connbase/VivoConnectService$g;->e Lcom/vivo/connbase/VivoConnectService;
+000036: invoke-static v0, Lcom/vivo/connbase/VivoConnectService;->P(Lcom/vivo/connbase/VivoConnectService;)Ljava/util/Queue;
+00003c: move-result-object v0
+00003e: invoke-interface v0, Ljava/util/Queue;->clear()V
+000044: invoke-static Lorg/greenrobot/eventbus/EventBus;->getDefault()Lorg/greenrobot/eventbus/EventBus;
+00004a: move-result-object v0
+00004c: new-instance v1, Lcom/vivo/connbase/o/m;
+000050: const/4 v2, 1
+000052: invoke-direct v1, v2, v4, Lcom/vivo/connbase/o/m;-><init>(I I)V
+000058: invoke-virtual v0, v1, Lorg/greenrobot/eventbus/EventBus;->post(Ljava/lang/Object;)V
+00005e: return-void 
+
+METHOD onUserSwitching(I Landroid/os/IRemoteCallback;)V
+000000: invoke-super v2, v3, v4, Landroid/app/UserSwitchObserver;->onUserSwitching(I Landroid/os/IRemoteCallback;)V
+000006: new-instance v4, Ljava/lang/StringBuilder;
+00000a: invoke-direct v4, Ljava/lang/StringBuilder;-><init>()V
+000010: const-string v0, "onUserSwitching:"
+000014: invoke-virtual v4, v0, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+00001a: invoke-virtual v4, v3, Ljava/lang/StringBuilder;->append(I)Ljava/lang/StringBuilder;
+000020: invoke-virtual v4, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
+000026: move-result-object v4
+000028: const-string v0, "VivoConnectService"
+00002c: invoke-static v0, v4, Lc/c/f/a/b;->n(Ljava/lang/String; Ljava/lang/String;)V
+000032: iget-object v4, v2, Lcom/vivo/connbase/VivoConnectService$g;->e Lcom/vivo/connbase/VivoConnectService;
+000036: invoke-static v4, Lcom/vivo/connbase/VivoConnectService;->P(Lcom/vivo/connbase/VivoConnectService;)Ljava/util/Queue;
+00003c: move-result-object v4
+00003e: invoke-interface v4, Ljava/util/Queue;->clear()V
+000044: invoke-static Lorg/greenrobot/eventbus/EventBus;->getDefault()Lorg/greenrobot/eventbus/EventBus;
+00004a: move-result-object v4
+00004c: new-instance v0, Lcom/vivo/connbase/o/m;
+000050: const/4 v1, 0
+000052: invoke-direct v0, v1, v3, Lcom/vivo/connbase/o/m;-><init>(I I)V
+000058: invoke-virtual v4, v0, Lorg/greenrobot/eventbus/EventBus;->post(Ljava/lang/Object;)V
+00005e: return-void 

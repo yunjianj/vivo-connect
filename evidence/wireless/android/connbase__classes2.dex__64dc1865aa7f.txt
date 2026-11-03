@@ -1,0 +1,29 @@
+APK pcsuite/updateApk/connbase.apk
+DEX classes2.dex
+CLASS Lcom/vivo/pcsuite/pcconnect/wifip2p/WifiP2pService$h;
+SUPER Ljava/lang/Object;
+FIELDS
+a Lcom/vivo/pcsuite/pcconnect/wifip2p/WifiP2pService; = None
+
+METHOD <init>(Lcom/vivo/pcsuite/pcconnect/wifip2p/WifiP2pService;)V
+000000: iput-object v1, v0, Lcom/vivo/pcsuite/pcconnect/wifip2p/WifiP2pService$h;->a Lcom/vivo/pcsuite/pcconnect/wifip2p/WifiP2pService;
+000004: invoke-direct v0, Ljava/lang/Object;-><init>()V
+00000a: return-void 
+
+METHOD onFailure(I)V
+000000: new-instance v0, Ljava/lang/StringBuilder;
+000004: invoke-direct v0, Ljava/lang/StringBuilder;-><init>()V
+00000a: const-string v1, "setDeviceName failed reason = "
+00000e: invoke-virtual v0, v1, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+000014: invoke-virtual v0, v3, Ljava/lang/StringBuilder;->append(I)Ljava/lang/StringBuilder;
+00001a: invoke-virtual v0, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
+000020: move-result-object v3
+000022: const-string v0, "pcsuite_WifiP2pService"
+000026: invoke-static v0, v3, Lc/c/f/a/b;->g(Ljava/lang/String; Ljava/lang/String;)V
+00002c: return-void 
+
+METHOD onSuccess()V
+000000: const-string v0, "pcsuite_WifiP2pService"
+000004: const-string v1, "setDeviceName success"
+000008: invoke-static v0, v1, Lc/c/f/a/b;->p(Ljava/lang/String; Ljava/lang/String;)V
+00000e: return-void 

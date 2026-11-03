@@ -1,0 +1,222 @@
+syntax = "proto3";
+package pb;
+
+option go_package = "vivo.com/wsrouter/pb";
+
+// 消息类型
+enum MessageType {
+    UNKNOWN_TYPE = 0;
+
+    PING = 1;
+    PONG = 2;
+
+    TRAFFIC_NOTIFICATION = 9; // 流量通知
+    NOTIFICATION = 10; // 通知
+
+    // 注册
+    REGISTER_REQUEST = 11;
+    REGISTER_RESPONSE = 12;
+
+    // 设备连接
+    DEVCONNECT_REQUEST = 13;
+    DEVCONNECT_RESPONSE = 14;
+
+    // 断开设备连接
+    DEVDISCONNECT_REQUEST = 15;
+    DEVDISCONNECT_RESPONSE = 16;
+
+    // 获取已连接设备列表
+    QCDEVICES_REQUEST = 17;
+    QCDEVICES_RESPONSE = 18;
+
+    // 查询剩余流量
+    QUERY_TRAFFIC_REQUEST = 19;
+    QUERY_TRAFFIC_RESPONSE = 20;
+
+    // 转发数据
+    FORWARD_MESSAGE = 100;
+}
+
+// 操作结果代码
+enum ResultCode {
+    UnknownCode = 0;
+    Ok = 200;
+    BadRequest = 400;               // 请求参数错误
+    ServerInternalError = 500;      // 服务器内部错误
+    WaitPeerOnline = 1001;          // 等待对端上线
+    WaitPeerOnlineTimeout = 1002;   // 等待对端上线超时
+    WaitPeerResponeTimeout = 1003;  // 等待对端回复消息超时
+    VPushSendError = 1004;          // VPush发送错误
+    VPushNotArrived = 1005;         // VPush未到达
+    ConnectionPreempted = 1008;     // 连接被抢占
+    ConnectionTimeout = 1009;       // 连接超时
+    PeerDisconnected = 1011;        // 对端异常连接断开
+    PeerUnregister = 1012;          // 对端注销（正常连接断开）
+    PeerUserLogout = 1013;          // 对端用户账号注销（正常连接断开）
+    PeerRefused = 1014;             // 对端拒绝
+    PeerAlreadyConnected = 1015;    // 对端已连接其他设备
+    PeerNotSupportVPush = 1016;     // 对端不支持VPush唤醒
+    PeerOffline = 1020;             // 对端不在线
+    DataUsageExhausted = 1030;      // 数据流量耗尽
+    DataTrafficLess10 = 1031;       // 剩余流量少于10%
+    DataTrafficRefresh = 1039;      // 数据流量刷新
+    InvalidAccount = 1040;          // 账号无效
+    InvalidDevice = 1041;           // 设备无效
+    DeviceAlreadyExists = 1042;     // 设备已存在
+    DeviceNotExists = 1043;         // 设备不存在
+    UnknownDeviceType = 1044;       // 未知的设备类型
+}
+
+// 传输类型
+enum TransferType {
+    WebSocket = 0;
+    DataChannel = 1;
+}
+
+// 设备类型
+enum DeviceType {
+    UnknownDevice = 0;
+    Phone = 1;
+    Pad = 2;
+    PC = 3;
+    Watch = 4;
+    Headphone = 5;
+    TV = 6;
+    CarPlay = 7;
+}
+
+// 消息结构体
+message MessageBase {
+    MessageType type = 1;
+    bytes data = 2; // ForwardMessage、Notification、RegisterRequest...
+}
+
+// 通知
+// Code: PeerDisconnected 对端异常连接断开
+// Code: PeerUnregister 对端注销（正常连接断开）
+// Code: PeerOffline 对端不在线
+// Code: ConnectionPreempted 连接被抢占
+message Notification {
+    ResultCode code = 1;
+    string message = 2;
+    string fromDeviceID = 3;    // 本设备ID
+    string toDeviceID = 4;      // 目标设备ID
+    int32 disconnectCode = 5;   // 断开原因（code=1012时有效）
+}
+
+// Code: DataUsageExhausted 数据流量耗尽
+// Code: DataTrafficLess10 剩余流量少于10%
+// Code: DataTrafficRefresh 数据流量刷新
+message TrafficNotification {
+    ResultCode code = 1;
+    string message = 2;
+    string module = 3;      // 模块
+    uint64 used = 4;        // 已使用流量
+    uint64 total = 5;       // 总流量
+    uint64 fileTotal = 6;   // 单个文件最大可传输大小
+}
+
+// 注册
+message RegisterRequest {
+    string token = 1;
+    string userID = 2;
+    string deviceID = 3;
+}
+
+// Code: 200 Ok
+// Code: 400 Bad Request
+// Code: 1042 设备已存在
+message RegisterResponse {
+    ResultCode code = 1;
+    string message = 2;
+}
+
+// 连接设备
+message DevConnectRequest {
+    string fromDeviceID = 1;        // 本设备ID
+    string toDeviceID = 2;          // 目标设备ID
+    int32 timeout = 3;              // 等待时间（默认10秒）
+    string sessionID = 4;
+    TransferType transtype = 5;
+    DeviceType fromDeviceType = 6;  // 本设备类型 
+}
+
+// Code: 200 Ok
+// Code: 400 Bad Request
+// Code: 500 Server Internal Error
+// Code: WaitPeerOnline 等待对端上线
+// Code: WaitPeerOnlineTimeout 等待对端上线超时
+// Code: WaitPeerResponeTimeout 等待对端回复消息超时
+// Code: PeerOffline 对端不在线
+// Code: VPushSendError VPush发送错误
+// Code: VPushNotArrived VPush未到达
+// Code: ConnectionTimeout 连接超时
+message DevConnectResponse {
+    ResultCode code = 1;
+    string message = 2;
+    string fromDeviceID = 3; // 本设备ID
+    string toDeviceID = 4; // 目标设备ID
+    string sessionID = 5;
+    repeated TransferType supportTranstypes = 6;
+}
+
+// 断开连接
+message DevDisconnectRequest {
+    int32 code = 1;
+    string fromDeviceID = 2; // 本设备ID
+    string toDeviceID = 3; // 目标设备ID
+}
+
+// Code: 200 Ok
+// Code: 400 Bad Request
+message DevDisconnectResponse {
+    ResultCode code = 1;
+    string message = 2;
+    string fromDeviceID = 3; // 本设备ID
+    string toDeviceID = 4; // 目标设备ID
+}
+
+// 查询已连接的设备列表
+message QueryCDeviceRequest {
+    string deviceID = 1; // 本设备ID
+}
+
+// 返回已连接的设备列表
+message QueryCDeviceResponse {
+    ResultCode code = 1;
+    string deviceID = 2; // 本设备ID
+    repeated string deviceIDs = 3;
+}
+
+// 查询流量
+message QueryTrafficRequest {
+    string userID = 1; // 用户ID
+    string module = 2; // 模块
+}
+
+// 返回流量
+message QueryTrafficResponse {
+    ResultCode code = 1;
+    string module = 2;      // 模块
+    uint64 used = 3;        // 已使用流量
+    uint64 total = 4;       // 总流量
+    uint64 fileTotal = 5;   // 单个文件最大可传输大小
+}
+
+// 透传消息体
+message ForwardMessage {
+    string version = 1;
+    string id = 2;              // 这一次的message包的id，用于调试或校验
+    string sourceDeviceID = 3;  // 本设备ID
+    string targetDeviceID = 4;  // 目标设备ID
+    int32 trafficControl = 5;   // 消息类型; 0代表不受流量管控，1代表受流量管控；
+    string msgName = 6;         // 消息名称
+    string msgType = 7;         // 消息类型 byte、stream、file等（不一定存在）
+    string sessionID = 8;       // 每次业务请求过程的唯一id（比如：业务调用downloadFile时生成一个sessionId）
+    string sourceModule = 9;    // 来源模块
+    string targetModule = 10;   // 目标模块
+    int32 priorityLevel = 11;   // 消息优先级，值越大优先级越高，是session之间的优先级，不是包之间的优先级
+    string injectData = 12;     // 额外扩展数据
+    string params = 13;         // 参数
+    bytes body = 14;            // 负载--字节数组
+}

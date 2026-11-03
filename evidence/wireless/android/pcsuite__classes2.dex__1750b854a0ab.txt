@@ -1,0 +1,78 @@
+APK pcsuite/updateApk/pcsuite.apk
+DEX classes2.dex
+CLASS Lcom/vivo/pcsuite/service/PcSuiteInCallService$d;
+SUPER Ljava/lang/Object;
+FIELDS
+a Lcom/vivo/pcsuite/service/PcSuiteInCallService; = None
+
+METHOD <init>(Lcom/vivo/pcsuite/service/PcSuiteInCallService;)V
+000000: invoke-direct v0, Ljava/lang/Object;-><init>()V
+000006: iput-object v1, v0, Lcom/vivo/pcsuite/service/PcSuiteInCallService$d;->a Lcom/vivo/pcsuite/service/PcSuiteInCallService;
+00000a: return-void 
+
+METHOD onCallAction(Lcom/vivo/castsdk/sdk/common/gson/CommandEvent;)V
+000000: new-instance v0, Ljava/lang/StringBuilder;
+000004: const-string v1, "receive pc action："
+000008: invoke-direct v0, v1, Ljava/lang/StringBuilder;-><init>(Ljava/lang/String;)V
+00000e: invoke-virtual v5, Lcom/vivo/castsdk/sdk/common/gson/CommandEvent;->toString()Ljava/lang/String;
+000014: move-result-object v1
+000016: invoke-virtual v0, v1, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+00001c: invoke-virtual v0, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
+000022: move-result-object v0
+000024: const-string v1, "PcSuiteInCallService"
+000028: invoke-static v1, v0, LD1/a;->h(Ljava/lang/String; Ljava/lang/String;)V
+00002e: invoke-virtual v5, Lcom/vivo/castsdk/sdk/common/gson/CommandEvent;->getId()I
+000034: move-result v0
+000036: const/4 v2, 1
+000038: if-eq v0, v2, +062h
+00003c: const/4 v3, 2
+00003e: if-eq v0, v3, +056h
+000042: const/4 v4, 3
+000044: if-eq v0, v4, +04bh
+000048: const/4 v4, 4
+00004a: if-eq v0, v4, +01eh
+00004e: const/4 v4, 7
+000050: if-eq v0, v4, +003h
+000054: goto +18h
+000056: invoke-static Lcom/vivo/pcsuite/service/PcSuiteInCallService;->k()Landroid/telecom/Call;
+00005c: move-result-object v4
+00005e: if-eqz v4, +013h
+000062: invoke-static Lcom/vivo/pcsuite/service/PcSuiteInCallService;->k()Landroid/telecom/Call;
+000068: move-result-object v4
+00006a: invoke-virtual v4, Landroid/telecom/Call;->getState()I
+000070: move-result v4
+000072: invoke-static v4, Ljava/lang/String;->valueOf(I)Ljava/lang/String;
+000078: move-result-object v4
+00007a: const/16 v5, 27
+00007e: invoke-static v5, v4, Lcom/vivo/pcsuite/service/PcSuiteInCallService;->n(I Ljava/lang/String;)V
+000084: return-void 
+000086: invoke-virtual v5, Lcom/vivo/castsdk/sdk/common/gson/CommandEvent;->getText()Ljava/lang/String;
+00008c: move-result-object v4
+00008e: invoke-static v4, Ljava/lang/Boolean;->parseBoolean(Ljava/lang/String;)Z
+000094: move-result v4
+000096: invoke-static v4, Lcom/vivo/pcsuite/service/PcSuiteInCallService;->u(Z)V
+00009c: invoke-static v4, Ljava/lang/String;->valueOf(Z)Ljava/lang/String;
+0000a2: move-result-object v4
+0000a4: invoke-static v2, v4, Lcom/vivo/pcsuite/service/PcSuiteInCallService;->n(I Ljava/lang/String;)V
+0000aa: return-void 
+0000ac: move-exception v4
+0000ae: new-instance v5, Ljava/lang/StringBuilder;
+0000b2: const-string v0, "get mute state error:"
+0000b6: invoke-direct v5, v0, Ljava/lang/StringBuilder;-><init>(Ljava/lang/String;)V
+0000bc: invoke-virtual v4, Ljava/lang/Throwable;->getMessage()Ljava/lang/String;
+0000c2: move-result-object v4
+0000c4: invoke-virtual v5, v4, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+0000ca: invoke-virtual v5, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
+0000d0: move-result-object v4
+0000d2: invoke-static v1, v4, LD1/a;->h(Ljava/lang/String; Ljava/lang/String;)V
+0000d8: return-void 
+0000da: const/4 v4, 0
+0000dc: invoke-static v4, Lcom/vivo/pcsuite/service/PcSuiteInCallService;->l(Z)V
+0000e2: invoke-static Lcom/vivo/pcsuite/service/PcSuiteInCallService;->q()V
+0000e8: return-void 
+0000ea: invoke-static v2, Lcom/vivo/pcsuite/service/PcSuiteInCallService;->l(Z)V
+0000f0: iget-object v4, v4, Lcom/vivo/pcsuite/service/PcSuiteInCallService$d;->a Lcom/vivo/pcsuite/service/PcSuiteInCallService;
+0000f4: invoke-virtual v4, Lcom/vivo/pcsuite/service/PcSuiteInCallService;->o()V
+0000fa: return-void 
+0000fc: invoke-static Lcom/vivo/pcsuite/service/PcSuiteInCallService;->w()V
+000102: return-void 

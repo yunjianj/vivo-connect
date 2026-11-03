@@ -1,0 +1,112 @@
+APK pcsuite/updateApk/pcsuite.apk
+DEX classes2.dex
+CLASS Lcom/vivo/pcsuite/connect/ConnectedState;
+SUPER Ljava/lang/Object;
+FIELDS
+CONNECT_DEVICE_TYPE_IPAD I = 2
+CONNECT_DEVICE_TYPE_NONE I = 0
+CONNECT_DEVICE_TYPE_OTHER I = 99999
+CONNECT_DEVICE_TYPE_PC I = 1
+c Lcom/vivo/pcsuite/connect/ConnectedState; = None
+a I = None
+b Ljava/lang/String; = None
+
+METHOD <clinit>()V
+000000: new-instance v0, Lcom/vivo/pcsuite/connect/ConnectedState;
+000004: invoke-direct v0, Lcom/vivo/pcsuite/connect/ConnectedState;-><init>()V
+00000a: sput-object v0, Lcom/vivo/pcsuite/connect/ConnectedState;->c Lcom/vivo/pcsuite/connect/ConnectedState;
+00000e: return-void 
+
+METHOD <init>()V
+000000: invoke-direct v1, Ljava/lang/Object;-><init>()V
+000006: const/4 v0, 0
+000008: iput v0, v1, Lcom/vivo/pcsuite/connect/ConnectedState;->a I
+00000c: return-void 
+
+METHOD getInstance()Lcom/vivo/pcsuite/connect/ConnectedState;
+000000: sget-object v0, Lcom/vivo/pcsuite/connect/ConnectedState;->c Lcom/vivo/pcsuite/connect/ConnectedState;
+000004: return-object v0
+
+METHOD getDeviceType()Ljava/lang/String;
+000000: const/4 v0, 2
+000002: invoke-virtual v2, Lcom/vivo/pcsuite/connect/ConnectedState;->getDeviceTypeI()I
+000008: move-result v1
+00000a: if-ne v0, v1, +00ch
+00000e: sget-object v2, Lcom/vivo/pcsuite/PcSuiteApplication;->I1 Lcom/vivo/pcsuite/PcSuiteApplication;
+000012: const v0, 2131755654
+000018: invoke-virtual v2, v0, Landroid/content/Context;->getString(I)Ljava/lang/String;
+00001e: move-result-object v2
+000020: return-object v2
+000022: const/4 v0, 1
+000024: invoke-virtual v2, Lcom/vivo/pcsuite/connect/ConnectedState;->getDeviceTypeI()I
+00002a: move-result v2
+00002c: const v1, 2131755655
+000032: if-ne v0, v2, +009h
+000036: sget-object v2, Lcom/vivo/pcsuite/PcSuiteApplication;->I1 Lcom/vivo/pcsuite/PcSuiteApplication;
+00003a: invoke-virtual v2, v1, Landroid/content/Context;->getString(I)Ljava/lang/String;
+000040: move-result-object v2
+000042: return-object v2
+000044: sget-object v2, Lcom/vivo/pcsuite/PcSuiteApplication;->I1 Lcom/vivo/pcsuite/PcSuiteApplication;
+000048: invoke-virtual v2, v1, Landroid/content/Context;->getString(I)Ljava/lang/String;
+00004e: move-result-object v2
+000050: return-object v2
+
+METHOD getDeviceTypeI()I
+000000: iget v0, v0, Lcom/vivo/pcsuite/connect/ConnectedState;->a I
+000004: return v0
+
+METHOD getIpad_model()Ljava/lang/String;
+000000: iget-object v0, v0, Lcom/vivo/pcsuite/connect/ConnectedState;->b Ljava/lang/String;
+000004: return-object v0
+
+METHOD isConnectedIpad()Z
+000000: iget v1, v1, Lcom/vivo/pcsuite/connect/ConnectedState;->a I
+000004: const/4 v0, 2
+000006: if-ne v1, v0, +004h
+00000a: const/4 v1, 1
+00000c: return v1
+00000e: const/4 v1, 0
+000010: return v1
+
+METHOD onConnected(Ljava/lang/String;)V
+000000: new-instance v0, Ljava/lang/StringBuilder;
+000004: const-string v1, "onConnected, deviceType: "
+000008: invoke-direct v0, v1, Ljava/lang/StringBuilder;-><init>(Ljava/lang/String;)V
+00000e: invoke-virtual v0, v3, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+000014: invoke-virtual v0, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
+00001a: move-result-object v0
+00001c: const-string v1, "ConnectedState"
+000020: invoke-static v1, v0, LD1/a;->b(Ljava/lang/String; Ljava/lang/String;)V
+000026: const-string v0, "pc"
+00002a: invoke-virtual v0, v3, Ljava/lang/String;->equalsIgnoreCase(Ljava/lang/String;)Z
+000030: move-result v0
+000032: const/4 v1, 1
+000034: if-eqz v0, +005h
+000038: iput v1, v2, Lcom/vivo/pcsuite/connect/ConnectedState;->a I
+00003c: return-void 
+00003e: const-string v0, "ipad"
+000042: invoke-virtual v0, v3, Ljava/lang/String;->equalsIgnoreCase(Ljava/lang/String;)Z
+000048: move-result v3
+00004a: if-eqz v3, +006h
+00004e: const/4 v3, 2
+000050: iput v3, v2, Lcom/vivo/pcsuite/connect/ConnectedState;->a I
+000054: return-void 
+000056: iput v1, v2, Lcom/vivo/pcsuite/connect/ConnectedState;->a I
+00005a: return-void 
+
+METHOD onDisconnect()V
+000000: new-instance v0, Ljava/lang/StringBuilder;
+000004: const-string v1, "onDisconnect, deviceType: "
+000008: invoke-direct v0, v1, Ljava/lang/StringBuilder;-><init>(Ljava/lang/String;)V
+00000e: iget v1, v3, Lcom/vivo/pcsuite/connect/ConnectedState;->a I
+000012: const-string v2, "ConnectedState"
+000016: invoke-static v0, v2, v1, Landroidx/appcompat/widget/a;->f(Ljava/lang/StringBuilder; Ljava/lang/String; I)V
+00001c: const/4 v0, 0
+00001e: iput v0, v3, Lcom/vivo/pcsuite/connect/ConnectedState;->a I
+000022: const/4 v0, 0
+000024: iput-object v0, v3, Lcom/vivo/pcsuite/connect/ConnectedState;->b Ljava/lang/String;
+000028: return-void 
+
+METHOD setIpad_model(Ljava/lang/String;)V
+000000: iput-object v1, v0, Lcom/vivo/pcsuite/connect/ConnectedState;->b Ljava/lang/String;
+000004: return-void 

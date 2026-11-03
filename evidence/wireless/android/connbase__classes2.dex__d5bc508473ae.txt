@@ -1,0 +1,81 @@
+APK pcsuite/updateApk/connbase.apk
+DEX classes2.dex
+CLASS Lcom/vivo/upgradelibrary/moduleui/b/b;
+SUPER Ljava/lang/Object;
+FIELDS
+a Landroid/os/Handler; = None
+b Lcom/vivo/upgradelibrary/upmode/notifymode/NotifyDealer; = None
+c Lcom/vivo/upgradelibrary/common/modulebridge/bridge/INotification$NOTIFICATIONSTATE; = None
+d I = None
+e I = None
+f Z = None
+g Z = None
+h Landroid/app/NotificationManager; = None
+i J = None
+j J = None
+
+METHOD a(I)V
+000000: iget-object v0, v6, Lcom/vivo/upgradelibrary/moduleui/b/b;->a Landroid/os/Handler;
+000004: if-nez v0, +003h
+000008: return-void 
+00000a: const/16 v1, -1000
+00000e: if-eq v7, v1, +02eh
+000012: const/16 v1, 1000
+000016: if-eq v7, v1, +02ch
+00001a: const/16 v1, 1500
+00001e: if-eq v7, v1, +026h
+000022: const/16 v1, 2000
+000026: if-eq v7, v1, +018h
+00002a: const/16 v0, 2100
+00002e: if-eq v7, v0, +01eh
+000032: const/16 v0, 2200
+000036: if-eq v7, v0, +01ah
+00003a: const/16 v0, 3000
+00003e: if-eq v7, v0, +016h
+000042: const/4 v0, -3
+000044: if-eq v7, v0, +013h
+000048: const/4 v0, -2
+00004a: if-eq v7, v0, +010h
+00004e: const/4 v0, -1
+000050: if-eq v7, v0, +00dh
+000054: goto +14h
+000056: invoke-virtual v0, v1, Landroid/os/Handler;->obtainMessage(I)Landroid/os/Message;
+00005c: move-result-object v0
+00005e: iget-object v1, v6, Lcom/vivo/upgradelibrary/moduleui/b/b;->a Landroid/os/Handler;
+000062: invoke-virtual v1, v0, Landroid/os/Handler;->sendMessageAtFrontOfQueue(Landroid/os/Message;)Z
+000068: goto +ah
+00006a: iget-object v0, v6, Lcom/vivo/upgradelibrary/moduleui/b/b;->a Landroid/os/Handler;
+00006e: invoke-virtual v0, v7, Landroid/os/Handler;->obtainMessage(I)Landroid/os/Message;
+000074: move-result-object v0
+000076: invoke-virtual v0, Landroid/os/Message;->sendToTarget()V
+00007c: if-ltz v7, +038h
+000080: const/16 v0, 100
+000084: if-gt v7, v0, +034h
+000088: iput v7, v6, Lcom/vivo/upgradelibrary/moduleui/b/b;->e I
+00008c: iget-boolean v0, v6, Lcom/vivo/upgradelibrary/moduleui/b/b;->f Z
+000090: const/4 v1, 0
+000092: if-eqz v0, +021h
+000096: iget v0, v6, Lcom/vivo/upgradelibrary/moduleui/b/b;->d I
+00009a: iget-object v2, v6, Lcom/vivo/upgradelibrary/moduleui/b/b;->b Lcom/vivo/upgradelibrary/upmode/notifymode/NotifyDealer;
+00009e: invoke-interface v2, Lcom/vivo/upgradelibrary/upmode/notifymode/NotifyDealer;->getNotifyProgressGap()I
+0000a4: move-result v2
+0000a6: add-int/2addr v0, v2
+0000a8: if-ge v7, v0, +016h
+0000ac: sget-boolean v0, Lcom/vivo/upgradelibrary/common/utils/i;->a Z
+0000b0: if-eqz v0, +010h
+0000b4: invoke-static Landroid/os/SystemClock;->elapsedRealtime()J
+0000ba: move-result-wide v2
+0000bc: iget-wide v4, v6, Lcom/vivo/upgradelibrary/moduleui/b/b;->i J
+0000c0: sub-long/2addr v2, v4
+0000c2: const-wide/32 v4, 60000
+0000c8: cmp-long v0, v2, v4
+0000cc: if-gez v0, +004h
+0000d0: move v0, v1
+0000d2: goto +2h
+0000d4: const/4 v0, 1
+0000d6: if-eqz v0, +00bh
+0000da: iget-object v0, v6, Lcom/vivo/upgradelibrary/moduleui/b/b;->a Landroid/os/Handler;
+0000de: invoke-virtual v0, v1, v7, v1, Landroid/os/Handler;->obtainMessage(I I I)Landroid/os/Message;
+0000e4: move-result-object v7
+0000e6: invoke-virtual v7, Landroid/os/Message;->sendToTarget()V
+0000ec: return-void 

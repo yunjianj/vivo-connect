@@ -1,0 +1,54 @@
+APK pcsuite/updateApk/pcsuite.apk
+DEX classes2.dex
+CLASS Lcom/vivo/connect/sdk/f/c$f2;
+SUPER Ljava/lang/Object;
+FIELDS
+e Ljava/lang/String; = ':openPrivacy'
+a I = None
+b Landroid/os/Messenger; = None
+c Lcom/vivo/connbase/e; = None
+d Lcom/vivo/connect/sdk/f/c; = None
+
+METHOD <init>(Lcom/vivo/connect/sdk/f/c; I Landroid/os/Messenger; Lcom/vivo/connbase/e;)V
+000000: iput-object v1, v0, Lcom/vivo/connect/sdk/f/c$f2;->d Lcom/vivo/connect/sdk/f/c;
+000004: iput v2, v0, Lcom/vivo/connect/sdk/f/c$f2;->a I
+000008: iput-object v3, v0, Lcom/vivo/connect/sdk/f/c$f2;->b Landroid/os/Messenger;
+00000c: iput-object v4, v0, Lcom/vivo/connect/sdk/f/c$f2;->c Lcom/vivo/connbase/e;
+000010: invoke-direct v0, Ljava/lang/Object;-><init>()V
+000016: return-void 
+
+METHOD run()V
+000000: const-string v0, "ConnectClientImpl"
+000004: const-string v1, "run openPrivacy "
+000008: invoke-static v0, v1, Lcom/vivo/connect/logger/EasyLog;->i(Ljava/lang/String; Ljava/lang/String;)V
+00000e: iget-object v1, v4, Lcom/vivo/connect/sdk/f/c$f2;->d Lcom/vivo/connect/sdk/f/c;
+000012: invoke-static v1, Lcom/vivo/connect/sdk/f/c;->a(Lcom/vivo/connect/sdk/f/c;)Lcom/vivo/connbase/IClient;
+000018: move-result-object v1
+00001a: if-eqz v1, +011h
+00001e: iget-object v1, v4, Lcom/vivo/connect/sdk/f/c$f2;->d Lcom/vivo/connect/sdk/f/c;
+000022: invoke-static v1, Lcom/vivo/connect/sdk/f/c;->a(Lcom/vivo/connect/sdk/f/c;)Lcom/vivo/connbase/IClient;
+000028: move-result-object v1
+00002a: iget v2, v4, Lcom/vivo/connect/sdk/f/c$f2;->a I
+00002e: iget-object v3, v4, Lcom/vivo/connect/sdk/f/c$f2;->b Landroid/os/Messenger;
+000032: iget-object v4, v4, Lcom/vivo/connect/sdk/f/c$f2;->c Lcom/vivo/connbase/e;
+000036: goto +1ch
+000038: move-exception v4
+00003a: goto +1eh
+00003c: const-string v1, "run else openPrivacy"
+000040: invoke-static v0, v1, Lcom/vivo/connect/logger/EasyLog;->i(Ljava/lang/String; Ljava/lang/String;)V
+000046: iget-object v1, v4, Lcom/vivo/connect/sdk/f/c$f2;->d Lcom/vivo/connect/sdk/f/c;
+00004a: const-string v2, ":openPrivacy"
+00004e: invoke-static v1, v2, Lcom/vivo/connect/sdk/f/c;->a(Lcom/vivo/connect/sdk/f/c; Ljava/lang/String;)Z
+000054: move-result v1
+000056: if-nez v1, +003h
+00005a: return-void 
+00005c: iget-object v1, v4, Lcom/vivo/connect/sdk/f/c$f2;->d Lcom/vivo/connect/sdk/f/c;
+000060: invoke-static v1, Lcom/vivo/connect/sdk/f/c;->a(Lcom/vivo/connect/sdk/f/c;)Lcom/vivo/connbase/IClient;
+000066: move-result-object v1
+000068: iget v2, v4, Lcom/vivo/connect/sdk/f/c$f2;->a I
+00006c: goto -1fh
+00006e: invoke-interface v1, v2, v3, v4, Lcom/vivo/connbase/IClient;->openPrivacy(I Landroid/os/Messenger; Lcom/vivo/connbase/e;)V
+000074: return-void 
+000076: const-string v1, "openPrivacy  error:"
+00007a: invoke-static v4, v1, v0, LV5/S;->h(Ljava/lang/Exception; Ljava/lang/String; Ljava/lang/String;)V
+000080: return-void 

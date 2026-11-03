@@ -1,0 +1,1415 @@
+APK pcsuite/updateApk/pcsuite.apk
+DEX classes2.dex
+CLASS Lcom/vivo/pcsuite/common/netty/controller/WebSocketController;
+SUPER Lio/netty/channel/SimpleChannelInboundHandler;
+FIELDS
+PC_CLICK_NOTIFICATION Ljava/lang/String; = 'PC_CLICK_NOTIFICATION:'
+g Ljava/util/concurrent/atomic/AtomicInteger; = None
+a Z = None
+b Z = None
+c Z = None
+d Ljava/lang/Runnable; = None
+e Lokhttp3/internal/connection/e; = None
+f Landroid/app/Dialog; = None
+
+METHOD h(Lcom/vivo/pcsuite/common/netty/controller/WebSocketController; Ljava/lang/String;)V
+000000: move-object/from16 v0, v19
+000004: move-object/from16 v1, v20
+000008: const-string v2, "PC_UPDATE_CAMERA_PARA: mode switch detected, oldMode="
+00000c: const-string v3, "IPAD_TRANS_FILE_FAIL = "
+000010: const-string v4, "TRANS_FILE fail= "
+000014: const-string v5, "TRANS_FILE cancel= "
+000018: const-string v6, "CONNECT_CENTER_RESULT, objectData:"
+00001c: const-string v7, "close"
+000020: invoke-virtual v1, v7, Ljava/lang/String;->startsWith(Ljava/lang/String;)Z
+000026: move-result v8
+000028: const/4 v9, 1
+00002a: const-string v10, "pcsuite_WebSocketController"
+00002e: if-eqz v8, +01dh
+000032: invoke-static Lk2/g;->w0()V
+000038: invoke-static Lt2/b;->w()Lt2/b;
+00003e: move-result-object v0
+000040: const/4 v1, 3
+000042: invoke-virtual v0, v1, v9, Lt2/b;->Q(I Z)V
+000048: invoke-static Lcom/vivo/pcsuite/service/PcSuiteObserver;->H()V
+00004e: const-string v0, "Eventbus form channelRead0"
+000052: invoke-static v10, v0, Lcom/vivo/connect/logger/EasyLog;->i(Ljava/lang/String; Ljava/lang/String;)V
+000058: invoke-static Lde/greenrobot/event/EventBus;->getDefault()Lde/greenrobot/event/EventBus;
+00005e: move-result-object v0
+000060: invoke-static v1, v10, v0, Landroidx/constraintlayout/core/motion/a;->b(I Ljava/lang/String; Lde/greenrobot/event/EventBus;)V
+000066: return-void 
+000068: const-string/jumbo v8, takePhoto
+00006e: invoke-virtual v1, v8, Ljava/lang/String;->startsWith(Ljava/lang/String;)Z
+000074: move-result v8
+000076: const/16 v11, 9
+00007a: if-eqz v8, +00ah
+00007e: invoke-virtual v1, v11, Ljava/lang/String;->substring(I)Ljava/lang/String;
+000084: move-result-object v0
+000086: invoke-static v0, Lcom/vivo/pcsuite/common/filemanager/b;->K(Ljava/lang/String;)V
+00008c: return-void 
+00008e: const-string/jumbo v8, takeDoc
+000094: invoke-virtual v1, v8, Ljava/lang/String;->startsWith(Ljava/lang/String;)Z
+00009a: move-result v8
+00009c: const/4 v12, 7
+00009e: if-eqz v8, +00ah
+0000a2: invoke-virtual v1, v12, Ljava/lang/String;->substring(I)Ljava/lang/String;
+0000a8: move-result-object v0
+0000aa: invoke-static v0, Lcom/vivo/pcsuite/common/filemanager/b;->I(Ljava/lang/String;)V
+0000b0: return-void 
+0000b2: const-string/jumbo v8, takeAlbum
+0000b8: invoke-virtual v1, v8, Ljava/lang/String;->startsWith(Ljava/lang/String;)Z
+0000be: move-result v8
+0000c0: if-eqz v8, +00ah
+0000c4: invoke-virtual v1, v11, Ljava/lang/String;->substring(I)Ljava/lang/String;
+0000ca: move-result-object v0
+0000cc: invoke-static v0, Lcom/vivo/pcsuite/common/filemanager/b;->G(Ljava/lang/String;)V
+0000d2: return-void 
+0000d4: const-string/jumbo v8, takeGraffiti
+0000da: invoke-virtual v1, v8, Ljava/lang/String;->startsWith(Ljava/lang/String;)Z
+0000e0: move-result v8
+0000e2: const/16 v11, 12
+0000e6: if-eqz v8, +00ah
+0000ea: invoke-virtual v1, v11, Ljava/lang/String;->substring(I)Ljava/lang/String;
+0000f0: move-result-object v0
+0000f2: invoke-static v0, Lcom/vivo/pcsuite/common/filemanager/b;->J(Ljava/lang/String;)V
+0000f8: return-void 
+0000fa: const-string v8, "isSupport"
+0000fe: invoke-virtual v1, v8, Ljava/lang/String;->startsWith(Ljava/lang/String;)Z
+000104: move-result v8
+000106: if-eqz v8, +006h
+00010a: invoke-static Lcom/vivo/pcsuite/common/filemanager/b;->H()V
+000110: return-void 
+000112: const-string v8, "connectCenterResult:"
+000116: invoke-virtual v1, v8, Ljava/lang/String;->startsWith(Ljava/lang/String;)Z
+00011c: move-result v8
+00011e: const/16 v13, 20
+000122: const/4 v14, 0
+000124: if-eqz v8, +05bh
+000128: const-string v2, "openVivoScreen"
+00012c: invoke-virtual v1, v2, Ljava/lang/String;->contains(Ljava/lang/CharSequence;)Z
+000132: move-result v2
+000134: if-eqz v2, +af8h
+000138: invoke-virtual v1, v13, Ljava/lang/String;->substring(I)Ljava/lang/String;
+00013e: move-result-object v1
+000140: new-instance v2, Lorg/json/JSONObject;
+000144: invoke-direct v2, v1, Lorg/json/JSONObject;-><init>(Ljava/lang/String;)V
+00014a: const-string v1, "data"
+00014e: invoke-virtual v2, v1, Lorg/json/JSONObject;->optJSONObject(Ljava/lang/String;)Lorg/json/JSONObject;
+000154: move-result-object v1
+000156: if-eqz v1, +ae7h
+00015a: new-instance v2, Ljava/lang/StringBuilder;
+00015e: invoke-direct v2, v6, Ljava/lang/StringBuilder;-><init>(Ljava/lang/String;)V
+000164: invoke-virtual v2, v1, Ljava/lang/StringBuilder;->append(Ljava/lang/Object;)Ljava/lang/StringBuilder;
+00016a: invoke-virtual v2, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
+000170: move-result-object v2
+000172: invoke-static v10, v2, Lcom/vivo/connect/logger/EasyLog;->i(Ljava/lang/String; Ljava/lang/String;)V
+000178: const-string v2, "code"
+00017c: invoke-virtual v1, v2, Lorg/json/JSONObject;->optInt(Ljava/lang/String;)I
+000182: move-result v1
+000184: const/4 v2, -2
+000186: if-ne v1, v2, +015h
+00018a: invoke-static Lt2/b;->w()Lt2/b;
+000190: move-result-object v1
+000192: invoke-virtual v1, v14, Lt2/b;->M(I)V
+000198: new-instance v1, Lcom/vivo/pcsuite/common/netty/controller/WebSocketController$4;
+00019c: invoke-direct v1, v0, Lcom/vivo/pcsuite/common/netty/controller/WebSocketController$4;-><init>(Lcom/vivo/pcsuite/common/netty/controller/WebSocketController;)V
+0001a2: invoke-static v1, Lcom/vivo/castsdk/sdk/common/utils/ThreadPoolUtils;->postOnMainThread(Ljava/lang/Runnable;)V
+0001a8: goto/16 +abeh
+0001ac: move-exception v0
+0001ae: goto +dh
+0001b0: const/4 v0, -1
+0001b2: if-ne v1, v0, +ab9h
+0001b6: invoke-static Lt2/b;->w()Lt2/b;
+0001bc: move-result-object v0
+0001be: invoke-virtual v0, v14, Lt2/b;->M(I)V
+0001c4: goto/16 +ab0h
+0001c8: invoke-virtual v0, Ljava/lang/Throwable;->getMessage()Ljava/lang/String;
+0001ce: move-result-object v0
+0001d0: invoke-static v10, v0, Lcom/vivo/connect/logger/EasyLog;->e(Ljava/lang/String; Ljava/lang/String;)V
+0001d6: goto/16 +aa7h
+0001da: const-string v6, "req_authrity"
+0001de: invoke-virtual v1, v6, Ljava/lang/String;->startsWith(Ljava/lang/String;)Z
+0001e4: move-result v8
+0001e6: const-string v15, "PC_REQUEST_CAMERA_AUTH:"
+0001ea: move/from16 v16, v12
+0001ee: const-string v12, "pc_mode_authrity:"
+0001f2: const/4 v13, 2
+0001f4: if-nez v8, +00eh
+0001f8: invoke-virtual v1, v12, Ljava/lang/String;->startsWith(Ljava/lang/String;)Z
+0001fe: move-result v8
+000200: if-nez v8, +008h
+000204: invoke-virtual v1, v15, Ljava/lang/String;->startsWith(Ljava/lang/String;)Z
+00020a: move-result v8
+00020c: if-eqz v8, +005h
+000210: move v2, v13
+000212: goto/16 +a44h
+000216: const-string v6, "screen_close:"
+00021a: invoke-virtual v1, v6, Ljava/lang/String;->startsWith(Ljava/lang/String;)Z
+000220: move-result v6
+000222: if-eqz v6, +036h
+000226: const-string v0, " CLOSE_SCREEN "
+00022a: invoke-virtual v0, v1, Ljava/lang/String;->concat(Ljava/lang/String;)Ljava/lang/String;
+000230: move-result-object v0
+000232: invoke-static v10, v0, Lcom/vivo/connect/logger/EasyLog;->i(Ljava/lang/String; Ljava/lang/String;)V
+000238: invoke-static Ls2/a;->a()Z
+00023e: move-result v0
+000240: if-nez v0, +a72h
+000244: invoke-static Lt2/b;->w()Lt2/b;
+00024a: move-result-object v0
+00024c: invoke-virtual v0, Lt2/b;->q()I
+000252: move-result v0
+000254: if-ne v0, v13, +00ch
+000258: invoke-static Lr2/g;->f()Lr2/g;
+00025e: move-result-object v0
+000260: const-string v1, "screen_close:{"status":2,"type":"LOADING"}"
+000264: invoke-virtual v0, v1, Lr2/g;->i(Ljava/lang/String;)V
+00026a: return-void 
+00026c: invoke-static Lt2/b;->w()Lt2/b;
+000272: move-result-object v0
+000274: invoke-virtual v0, v14, Lt2/b;->M(I)V
+00027a: invoke-static Lr2/g;->f()Lr2/g;
+000280: move-result-object v0
+000282: const-string v1, "screen_close:{"status":1,"type":"CLOSE"}"
+000286: invoke-virtual v0, v1, Lr2/g;->i(Ljava/lang/String;)V
+00028c: return-void 
+00028e: const-string/jumbo v6, update_auto_connect_flag
+000294: invoke-virtual v1, v6, Ljava/lang/String;->startsWith(Ljava/lang/String;)Z
+00029a: move-result v8
+00029c: const-string v12, ""
+0002a0: if-eqz v8, +040h
+0002a4: invoke-virtual v1, v6, v12, Ljava/lang/String;->replace(Ljava/lang/CharSequence; Ljava/lang/CharSequence;)Ljava/lang/String;
+0002aa: move-result-object v0
+0002ac: new-instance v2, Lorg/json/JSONObject;
+0002b0: invoke-direct v2, v0, Lorg/json/JSONObject;-><init>(Ljava/lang/String;)V
+0002b6: const-string v0, "autoConnectFlag"
+0002ba: invoke-virtual v2, v0, Lorg/json/JSONObject;->getBoolean(Ljava/lang/String;)Z
+0002c0: move-result v0
+0002c2: invoke-static Lcom/vivo/pcsuite/connect/ConnectControlModel;->getCurrentConnectBean()Lcom/vivo/pcsuite/pcconnect/PCBean;
+0002c8: move-result-object v2
+0002ca: invoke-static Lcom/vivo/pcsuite/util/j0;->b()Ljava/lang/String;
+0002d0: move-result-object v3
+0002d2: if-eqz v2, +a29h
+0002d6: if-eqz v0, +00bh
+0002da: invoke-virtual v2, Lcom/vivo/pcsuite/pcconnect/PCBean;->getDeviceId()Ljava/lang/String;
+0002e0: move-result-object v0
+0002e2: invoke-static v0, Lcom/vivo/pcsuite/util/j0;->i(Ljava/lang/String;)V
+0002e8: goto/16 +a1eh
+0002ec: invoke-virtual v2, Lcom/vivo/pcsuite/pcconnect/PCBean;->getDeviceId()Ljava/lang/String;
+0002f2: move-result-object v0
+0002f4: invoke-virtual v0, v3, Ljava/lang/String;->equals(Ljava/lang/Object;)Z
+0002fa: move-result v0
+0002fc: if-eqz v0, +a14h
+000300: invoke-static v12, Lcom/vivo/pcsuite/util/j0;->i(Ljava/lang/String;)V
+000306: goto/16 +a0fh
+00030a: const-string v0, "getAutoConnect fail = "
+00030e: invoke-virtual v0, v1, Ljava/lang/String;->concat(Ljava/lang/String;)Ljava/lang/String;
+000314: move-result-object v0
+000316: invoke-static v10, v0, Lcom/vivo/connect/logger/EasyLog;->e(Ljava/lang/String; Ljava/lang/String;)V
+00031c: goto/16 +a04h
+000320: const-string v6, "file_delete:"
+000324: invoke-virtual v1, v6, Ljava/lang/String;->startsWith(Ljava/lang/String;)Z
+00032a: move-result v6
+00032c: const-string v8, "failCount"
+000330: if-eqz v6, +042h
+000334: const-string v0, "file_delete ---- "
+000338: invoke-virtual v0, v1, Ljava/lang/String;->concat(Ljava/lang/String;)Ljava/lang/String;
+00033e: move-result-object v0
+000340: const-string v2, "Clarence"
+000344: invoke-static v2, v0, Lcom/vivo/connect/logger/EasyLog;->i(Ljava/lang/String; Ljava/lang/String;)V
+00034a: invoke-virtual v1, v11, Ljava/lang/String;->substring(I)Ljava/lang/String;
+000350: move-result-object v0
+000352: new-instance v1, Lorg/json/JSONObject;
+000356: invoke-direct v1, v0, Lorg/json/JSONObject;-><init>(Ljava/lang/String;)V
+00035c: const-string/jumbo v0, totalCount
+000362: invoke-virtual v1, v0, Lorg/json/JSONObject;->getInt(Ljava/lang/String;)I
+000368: move-result v0
+00036a: invoke-virtual v1, v8, Lorg/json/JSONObject;->getInt(Ljava/lang/String;)I
+000370: move-result v1
+000372: invoke-static Lcom/vivo/pcsuite/common/j;->l()Lcom/vivo/pcsuite/common/j;
+000378: move-result-object v3
+00037a: invoke-virtual v3, v0, v1, Lcom/vivo/pcsuite/common/j;->t(I I)V
+000380: goto/16 +9d2h
+000384: move-exception v0
+000386: new-instance v1, Ljava/lang/StringBuilder;
+00038a: const-string v3, "get file count fail = "
+00038e: invoke-direct v1, v3, Ljava/lang/StringBuilder;-><init>(Ljava/lang/String;)V
+000394: invoke-virtual v0, Ljava/lang/Throwable;->getMessage()Ljava/lang/String;
+00039a: move-result-object v0
+00039c: invoke-virtual v1, v0, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+0003a2: invoke-virtual v1, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
+0003a8: move-result-object v0
+0003aa: invoke-static v2, v0, Lcom/vivo/connect/logger/EasyLog;->e(Ljava/lang/String; Ljava/lang/String;)V
+0003b0: goto/16 +9bah
+0003b4: const-string v6, "PC_CONFIG:"
+0003b8: invoke-virtual v1, v6, Ljava/lang/String;->startsWith(Ljava/lang/String;)Z
+0003be: move-result v6
+0003c0: if-eqz v6, +00ch
+0003c4: const/16 v0, 10
+0003c8: invoke-virtual v1, v0, Ljava/lang/String;->substring(I)Ljava/lang/String;
+0003ce: move-result-object v0
+0003d0: invoke-static v0, Lcom/vivo/pcsuite/common/filemanager/b;->L(Ljava/lang/String;)V
+0003d6: return-void 
+0003d8: const-string v6, "BACKUP_CONFIG:"
+0003dc: invoke-virtual v1, v6, Ljava/lang/String;->startsWith(Ljava/lang/String;)Z
+0003e2: move-result v6
+0003e4: const/16 v11, 14
+0003e8: if-eqz v6, +02ch
+0003ec: invoke-virtual v1, v11, Ljava/lang/String;->substring(I)Ljava/lang/String;
+0003f2: move-result-object v0
+0003f4: new-instance v1, Lorg/json/JSONObject;
+0003f8: invoke-direct v1, v0, Lorg/json/JSONObject;-><init>(Ljava/lang/String;)V
+0003fe: const-string v0, "autoBackup"
+000402: invoke-virtual v1, v0, Lorg/json/JSONObject;->getBoolean(Ljava/lang/String;)Z
+000408: move-result v0
+00040a: invoke-static Lcom/vivo/pcsuite/util/f;->b()Lcom/vivo/pcsuite/util/f;
+000410: move-result-object v1
+000412: invoke-virtual v1, v0, Lcom/vivo/pcsuite/util/f;->w(Z)V
+000418: invoke-static Lt2/b;->w()Lt2/b;
+00041e: move-result-object v0
+000420: const-string v1, "pcsuite_auto_backup"
+000424: invoke-virtual v0, Ljava/lang/Object;->getClass()Ljava/lang/Class;
+00042a: invoke-static v1, Lt2/b;->K(Ljava/lang/String;)V
+000430: goto/16 +97ah
+000434: move-exception v0
+000436: invoke-virtual v0, Ljava/lang/Throwable;->printStackTrace()V
+00043c: goto/16 +974h
+000440: const-string v6, "PC_CLICK_NOTIFICATION:"
+000444: invoke-virtual v1, v6, Ljava/lang/String;->startsWith(Ljava/lang/String;)Z
+00044a: move-result v6
+00044c: const/16 v15, 22
+000450: if-eqz v6, +01dh
+000454: invoke-virtual v1, v15, Ljava/lang/String;->substring(I)Ljava/lang/String;
+00045a: move-result-object v0
+00045c: invoke-virtual v0, v12, Ljava/lang/String;->equals(Ljava/lang/Object;)Z
+000462: move-result v1
+000464: if-nez v1, +00dh
+000468: new-instance v1, Lcom/vivo/castsdk/source/httpServer/controller/c;
+00046c: invoke-direct v1, v0, v9, Lcom/vivo/castsdk/source/httpServer/controller/c;-><init>(Ljava/lang/String; I)V
+000472: const-wide/16 v2, 300
+000476: invoke-static v1, v2, v3, Lcom/vivo/castsdk/sdk/common/utils/ThreadPoolUtils;->postOnBackgroundThread(Ljava/lang/Runnable; J)Ljava/util/concurrent/Future;
+00047c: return-void 
+00047e: const-string v0, "strId is null"
+000482: invoke-static v10, v0, Lcom/vivo/connect/logger/EasyLog;->e(Ljava/lang/String; Ljava/lang/String;)V
+000488: return-void 
+00048a: const-string v6, "SHADOW_LIKE:"
+00048e: invoke-virtual v1, v6, Ljava/lang/String;->startsWith(Ljava/lang/String;)Z
+000494: move-result v17
+000496: if-eqz v17, +04eh
+00049a: sget-object v0, Lcom/vivo/pcsuite/PcSuiteApplication;->I1 Lcom/vivo/pcsuite/PcSuiteApplication;
+00049e: invoke-virtual v0, Landroid/content/Context;->getApplicationContext()Landroid/content/Context;
+0004a4: move-result-object v0
+0004a6: const-string v2, "com.vivo.vdfs"
+0004aa: const-string v3, "com.vivo.pcsuiteSdk"
+0004ae: invoke-static v0, v2, v3, LD2/e;->b(Landroid/content/Context; Ljava/lang/String; Ljava/lang/String;)Ljava/lang/String;
+0004b4: move-result-object v0
+0004b6: new-instance v2, Ljava/lang/StringBuilder;
+0004ba: const-string v3, "VDFS metadate value"
+0004be: invoke-direct v2, v3, Ljava/lang/StringBuilder;-><init>(Ljava/lang/String;)V
+0004c4: invoke-virtual v2, v0, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+0004ca: invoke-virtual v2, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
+0004d0: move-result-object v2
+0004d2: invoke-static v10, v2, Lcom/vivo/connect/logger/EasyLog;->i(Ljava/lang/String; Ljava/lang/String;)V
+0004d8: const-string v2, "1_0"
+0004dc: invoke-static v0, v2, Landroid/text/TextUtils;->equals(Ljava/lang/CharSequence; Ljava/lang/CharSequence;)Z
+0004e2: move-result v0
+0004e4: if-nez v0, +023h
+0004e8: const-string v0, "VDFS version unsupport"
+0004ec: invoke-static v10, v0, Lcom/vivo/connect/logger/EasyLog;->i(Ljava/lang/String; Ljava/lang/String;)V
+0004f2: invoke-static Lr2/g;->f()Lr2/g;
+0004f8: move-result-object v0
+0004fa: new-instance v1, Ljava/lang/StringBuilder;
+0004fe: invoke-direct v1, v6, Ljava/lang/StringBuilder;-><init>(Ljava/lang/String;)V
+000504: invoke-static Lcom/vivo/pcsuite/sdk/RequestManager;->getInstance()Lcom/vivo/pcsuite/sdk/RequestManager;
+00050a: move-result-object v2
+00050c: invoke-virtual v2, Lcom/vivo/pcsuite/sdk/RequestManager;->getUnsupportText()Ljava/lang/String;
+000512: move-result-object v2
+000514: invoke-virtual v1, v2, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+00051a: invoke-virtual v1, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
+000520: move-result-object v1
+000522: invoke-virtual v0, v1, Lr2/g;->i(Ljava/lang/String;)V
+000528: return-void 
+00052a: invoke-static v1, Lcom/vivo/pcsuite/common/filemanager/b;->d(Ljava/lang/String;)V
+000530: return-void 
+000532: const-string v6, "FILE_MANAGER:"
+000536: invoke-virtual v1, v6, Ljava/lang/String;->startsWith(Ljava/lang/String;)Z
+00053c: move-result v17
+00053e: if-eqz v17, +06eh
+000542: invoke-static Lcom/vivo/pcsuite/common/filemanager/b;->x()Z
+000548: move-result v0
+00054a: sget-object v1, Lcom/vivo/pcsuite/PcSuiteApplication;->I1 Lcom/vivo/pcsuite/PcSuiteApplication;
+00054e: invoke-virtual v1, Lcom/vivo/pcsuite/PcSuiteApplication;->p()Lcom/google/gson/Gson;
+000554: move-result-object v1
+000556: if-eqz v0, +01fh
+00055a: invoke-static Lr2/g;->f()Lr2/g;
+000560: move-result-object v0
+000562: new-instance v2, Ljava/lang/StringBuilder;
+000566: invoke-direct v2, v6, Ljava/lang/StringBuilder;-><init>(Ljava/lang/String;)V
+00056c: new-instance v3, Lcom/vivo/pcsuite/common/gson/AuthorizationStatus;
+000570: invoke-direct v3, v9, Lcom/vivo/pcsuite/common/gson/AuthorizationStatus;-><init>(I)V
+000576: invoke-virtual v1, v3, Lcom/google/gson/Gson;->toJson(Ljava/lang/Object;)Ljava/lang/String;
+00057c: move-result-object v1
+00057e: invoke-virtual v2, v1, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+000584: invoke-virtual v2, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
+00058a: move-result-object v1
+00058c: invoke-virtual v0, v1, Lr2/g;->i(Ljava/lang/String;)V
+000592: return-void 
+000594: invoke-static Lr2/g;->f()Lr2/g;
+00059a: move-result-object v0
+00059c: new-instance v2, Ljava/lang/StringBuilder;
+0005a0: invoke-direct v2, v6, Ljava/lang/StringBuilder;-><init>(Ljava/lang/String;)V
+0005a6: new-instance v3, Lcom/vivo/pcsuite/common/gson/AuthorizationStatus;
+0005aa: invoke-direct v3, v13, Lcom/vivo/pcsuite/common/gson/AuthorizationStatus;-><init>(I)V
+0005b0: invoke-virtual v1, v3, Lcom/google/gson/Gson;->toJson(Ljava/lang/Object;)Ljava/lang/String;
+0005b6: move-result-object v3
+0005b8: invoke-virtual v2, v3, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+0005be: invoke-virtual v2, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
+0005c4: move-result-object v2
+0005c6: invoke-virtual v0, v2, Lr2/g;->i(Ljava/lang/String;)V
+0005cc: sget v0, Landroid/os/Build$VERSION;->SDK_INT I
+0005d0: const/16 v2, 32
+0005d4: if-lt v0, v2, +006h
+0005d8: invoke-static Lcom/vivo/pcsuite/util/X;->d()V
+0005de: return-void 
+0005e0: sget-object v0, Lcom/vivo/pcsuite/PcSuiteApplication;->I1 Lcom/vivo/pcsuite/PcSuiteApplication;
+0005e4: invoke-static v0, Lcom/vivo/pcsuite/permission/Permission;->b(Landroid/content/Context;)Lcom/vivo/pcsuite/permission/Permission;
+0005ea: move-result-object v0
+0005ec: const-string v2, "android.permission.READ_EXTERNAL_STORAGE"
+0005f0: const-string v3, "android.permission.WRITE_EXTERNAL_STORAGE"
+0005f4: filled-new-array v2, v3, [Ljava/lang/String;
+0005fa: move-result-object v2
+0005fc: invoke-virtual v0, v2, Lcom/vivo/pcsuite/permission/Permission;->d([Ljava/lang/String;)V
+000602: new-instance v2, Lcom/vivo/pcsuite/common/netty/controller/WebSocketController$6;
+000606: invoke-direct v2, v1, Lcom/vivo/pcsuite/common/netty/controller/WebSocketController$6;-><init>(Lcom/google/gson/Gson;)V
+00060c: invoke-virtual v0, v2, Lcom/vivo/pcsuite/permission/Permission;->c(Lcom/vivo/pcsuite/permission/Permission$PermissionResultCallback;)V
+000612: invoke-virtual v0, Lcom/vivo/pcsuite/permission/Permission;->e()V
+000618: return-void 
+00061a: const-string v6, "CONTINUE_OPEN_SCREEN:"
+00061e: invoke-virtual v1, v6, Ljava/lang/String;->startsWith(Ljava/lang/String;)Z
+000624: move-result v17
+000626: move/from16 v18, v11
+00062a: const-string v11, "PC_CONTINUE_OPEN_CAMERA:"
+00062e: const-string v15, "CONTINUE_OPEN_PC_MODE:"
+000632: const/16 v13, 21
+000636: if-nez v17, +72eh
+00063a: invoke-virtual v1, v15, Ljava/lang/String;->startsWith(Ljava/lang/String;)Z
+000640: move-result v17
+000642: if-nez v17, +728h
+000646: invoke-virtual v1, v11, Ljava/lang/String;->startsWith(Ljava/lang/String;)Z
+00064c: move-result v17
+00064e: if-eqz v17, +004h
+000652: goto/16 +720h
+000656: const-string v6, "UPDATE_STORAGE:"
+00065a: invoke-virtual v1, v6, Ljava/lang/String;->startsWith(Ljava/lang/String;)Z
+000660: move-result v11
+000662: if-eqz v11, +040h
+000666: sget-object v0, Lcom/vivo/pcsuite/PcSuiteApplication;->I1 Lcom/vivo/pcsuite/PcSuiteApplication;
+00066a: invoke-static Lcom/vivo/pcsuite/util/k0;->a()Lcom/vivo/pcsuite/util/k0$a;
+000670: move-result-object v0
+000672: new-instance v1, Lcom/vivo/pcsuite/common/netty/bean/BaseInfoBean;
+000676: invoke-direct v1, Lcom/vivo/pcsuite/common/netty/bean/BaseInfoBean;-><init>()V
+00067c: invoke-virtual v0, Lcom/vivo/pcsuite/util/k0$a;->b()Ljava/lang/String;
+000682: move-result-object v2
+000684: invoke-virtual v1, v2, Lcom/vivo/pcsuite/common/netty/bean/BaseInfoBean;->setTotalStorage(Ljava/lang/String;)V
+00068a: invoke-virtual v0, Lcom/vivo/pcsuite/util/k0$a;->a()Ljava/lang/String;
+000690: move-result-object v0
+000692: invoke-virtual v1, v0, Lcom/vivo/pcsuite/common/netty/bean/BaseInfoBean;->setAvailableStorage(Ljava/lang/String;)V
+000698: invoke-static Lcom/vivo/pcsuite/common/filemanager/utils/StorageManagerUtil;->d()J
+00069e: move-result-wide v2
+0006a0: invoke-virtual v1, v2, v3, Lcom/vivo/pcsuite/common/netty/bean/BaseInfoBean;->setAvailableByte(J)V
+0006a6: sget-object v0, Lcom/vivo/pcsuite/PcSuiteApplication;->I1 Lcom/vivo/pcsuite/PcSuiteApplication;
+0006aa: invoke-virtual v0, Lcom/vivo/pcsuite/PcSuiteApplication;->p()Lcom/google/gson/Gson;
+0006b0: move-result-object v0
+0006b2: invoke-static Lr2/g;->f()Lr2/g;
+0006b8: move-result-object v2
+0006ba: new-instance v3, Ljava/lang/StringBuilder;
+0006be: invoke-direct v3, v6, Ljava/lang/StringBuilder;-><init>(Ljava/lang/String;)V
+0006c4: invoke-virtual v0, v1, Lcom/google/gson/Gson;->toJson(Ljava/lang/Object;)Ljava/lang/String;
+0006ca: move-result-object v0
+0006cc: invoke-virtual v3, v0, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+0006d2: invoke-virtual v3, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
+0006d8: move-result-object v0
+0006da: invoke-virtual v2, v0, Lr2/g;->i(Ljava/lang/String;)V
+0006e0: return-void 
+0006e2: const-string v6, "NOTE_SYNC_COMPLETE:"
+0006e6: invoke-virtual v1, v6, Ljava/lang/String;->startsWith(Ljava/lang/String;)Z
+0006ec: move-result v6
+0006ee: const/16 v11, 19
+0006f2: if-eqz v6, +059h
+0006f6: invoke-static Lcom/vivo/pcsuite/util/f;->b()Lcom/vivo/pcsuite/util/f;
+0006fc: move-result-object v0
+0006fe: invoke-virtual v0, Lcom/vivo/pcsuite/util/f;->i()Z
+000704: move-result v0
+000706: const-string v2, "isNoteRelay : "
+00070a: invoke-static v2, v10, v0, LZ1/b;->c(Ljava/lang/String; Ljava/lang/String; Z)V
+000710: sget-object v2, Lcom/vivo/pcsuite/PcSuiteApplication;->I1 Lcom/vivo/pcsuite/PcSuiteApplication;
+000714: invoke-virtual v2, Lcom/vivo/pcsuite/PcSuiteApplication;->x()Ljava/lang/String;
+00071a: move-result-object v2
+00071c: sget-object v3, Lcom/vivo/pcsuite/PcSuiteApplication;->I1 Lcom/vivo/pcsuite/PcSuiteApplication;
+000720: invoke-virtual v3, Lcom/vivo/pcsuite/PcSuiteApplication;->C()Ljava/lang/String;
+000726: move-result-object v3
+000728: if-eqz v2, +017h
+00072c: if-eqz v3, +015h
+000730: invoke-virtual v2, Ljava/lang/String;->isEmpty()Z
+000736: move-result v4
+000738: if-nez v4, +00fh
+00073c: invoke-virtual v3, Ljava/lang/String;->isEmpty()Z
+000742: move-result v4
+000744: if-nez v4, +009h
+000748: invoke-virtual v2, v3, Ljava/lang/String;->equals(Ljava/lang/Object;)Z
+00074e: move-result v2
+000750: if-eqz v2, +003h
+000754: goto +2h
+000756: move v9, v14
+000758: if-eqz v0, +7e6h
+00075c: if-eqz v9, +7e4h
+000760: invoke-virtual v1, v11, Ljava/lang/String;->substring(I)Ljava/lang/String;
+000766: move-result-object v0
+000768: new-instance v1, Ljava/lang/StringBuilder;
+00076c: const-string v2, "note handoff message : "
+000770: invoke-direct v1, v2, Ljava/lang/StringBuilder;-><init>(Ljava/lang/String;)V
+000776: invoke-virtual v1, v0, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+00077c: invoke-virtual v1, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
+000782: move-result-object v1
+000784: invoke-static v10, v1, Lcom/vivo/connect/logger/EasyLog;->i(Ljava/lang/String; Ljava/lang/String;)V
+00078a: invoke-static Lcom/vivo/pcsuite/sdk/PcSuiteSdkManagerService;->getInstance()Lcom/vivo/pcsuite/sdk/PcSuiteSdkManagerService;
+000790: move-result-object v1
+000792: const/16 v2, 1002
+000796: invoke-virtual v1, v0, v2, Lcom/vivo/pcsuite/sdk/PcSuiteSdkManagerService;->dispatchInfo(Ljava/lang/String; I)V
+00079c: invoke-static v0, Lcom/vivo/pcsuite/util/o0;->u0(Ljava/lang/String;)V
+0007a2: return-void 
+0007a4: const-string v6, "FILE_MANAGER_SWITCH:"
+0007a8: invoke-virtual v1, v6, Ljava/lang/String;->startsWith(Ljava/lang/String;)Z
+0007ae: move-result v15
+0007b0: if-eqz v15, +02dh
+0007b4: invoke-static Lcom/vivo/pcsuite/common/filemanager/utils/h;->n()Z
+0007ba: move-result v0
+0007bc: invoke-static Lcom/vivo/pcsuite/common/filemanager/utils/h;->i()Z
+0007c2: move-result v1
+0007c4: sget-object v2, Lcom/vivo/pcsuite/PcSuiteApplication;->I1 Lcom/vivo/pcsuite/PcSuiteApplication;
+0007c8: invoke-virtual v2, Lcom/vivo/pcsuite/PcSuiteApplication;->p()Lcom/google/gson/Gson;
+0007ce: move-result-object v2
+0007d0: invoke-static Lr2/g;->f()Lr2/g;
+0007d6: move-result-object v3
+0007d8: new-instance v4, Ljava/lang/StringBuilder;
+0007dc: invoke-direct v4, v6, Ljava/lang/StringBuilder;-><init>(Ljava/lang/String;)V
+0007e2: new-instance v5, Lcom/vivo/pcsuite/common/gson/AuthorizationStatus;
+0007e6: invoke-direct v5, v1, v0, v14, Lcom/vivo/pcsuite/common/gson/AuthorizationStatus;-><init>(I I I)V
+0007ec: invoke-virtual v2, v5, Lcom/google/gson/Gson;->toJson(Ljava/lang/Object;)Ljava/lang/String;
+0007f2: move-result-object v0
+0007f4: invoke-virtual v4, v0, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+0007fa: invoke-virtual v4, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
+000800: move-result-object v0
+000802: invoke-virtual v3, v0, Lr2/g;->i(Ljava/lang/String;)V
+000808: return-void 
+00080a: const-string v6, "PC_ACCOUNT_CHANGE:"
+00080e: invoke-virtual v1, v6, Ljava/lang/String;->startsWith(Ljava/lang/String;)Z
+000814: move-result v6
+000816: const/16 v15, 18
+00081a: if-eqz v6, +040h
+00081e: invoke-virtual v1, v15, Ljava/lang/String;->substring(I)Ljava/lang/String;
+000824: move-result-object v0
+000826: new-instance v1, Lorg/json/JSONObject;
+00082a: invoke-direct v1, v0, Lorg/json/JSONObject;-><init>(Ljava/lang/String;)V
+000830: const-string v0, "isLogin"
+000834: invoke-virtual v1, v0, Lorg/json/JSONObject;->optBoolean(Ljava/lang/String;)Z
+00083a: move-result v0
+00083c: if-eqz v0, +011h
+000840: const-string v0, "openid"
+000844: invoke-virtual v1, v0, Lorg/json/JSONObject;->optString(Ljava/lang/String;)Ljava/lang/String;
+00084a: move-result-object v0
+00084c: sget-object v1, Lcom/vivo/pcsuite/PcSuiteApplication;->I1 Lcom/vivo/pcsuite/PcSuiteApplication;
+000850: invoke-virtual v1, v0, Lcom/vivo/pcsuite/PcSuiteApplication;->N0(Ljava/lang/String;)V
+000856: goto/16 +767h
+00085a: move-exception v0
+00085c: goto +8h
+00085e: sget-object v0, Lcom/vivo/pcsuite/PcSuiteApplication;->I1 Lcom/vivo/pcsuite/PcSuiteApplication;
+000862: invoke-virtual v0, v12, Lcom/vivo/pcsuite/PcSuiteApplication;->N0(Ljava/lang/String;)V
+000868: goto/16 +75eh
+00086c: new-instance v1, Ljava/lang/StringBuilder;
+000870: const-string v2, "PC_ACCOUNT_CHANGE err ："
+000874: invoke-direct v1, v2, Ljava/lang/StringBuilder;-><init>(Ljava/lang/String;)V
+00087a: invoke-virtual v0, Ljava/lang/Throwable;->getMessage()Ljava/lang/String;
+000880: move-result-object v0
+000882: invoke-virtual v1, v0, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+000888: invoke-virtual v1, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
+00088e: move-result-object v0
+000890: invoke-static v10, v0, Lcom/vivo/connect/logger/EasyLog;->e(Ljava/lang/String; Ljava/lang/String;)V
+000896: goto/16 +747h
+00089a: const-string v6, "RE_CONNECT_ALBUM:"
+00089e: invoke-virtual v1, v6, Ljava/lang/String;->startsWith(Ljava/lang/String;)Z
+0008a4: move-result v6
+0008a6: if-eqz v6, +010h
+0008aa: invoke-static Lcom/vivo/pcsuite/common/filemanager/backup/g;->h()Lcom/vivo/pcsuite/common/filemanager/backup/g;
+0008b0: move-result-object v0
+0008b2: sget-object v1, Lcom/vivo/pcsuite/PcSuiteApplication;->I1 Lcom/vivo/pcsuite/PcSuiteApplication;
+0008b6: invoke-virtual v1, Landroid/content/Context;->getApplicationContext()Landroid/content/Context;
+0008bc: move-result-object v1
+0008be: invoke-virtual v0, v1, Lcom/vivo/pcsuite/common/filemanager/backup/g;->f(Landroid/content/Context;)V
+0008c4: return-void 
+0008c6: const-string v6, "FILE_OPEN_NEAR_DEL:"
+0008ca: invoke-virtual v1, v6, Ljava/lang/String;->startsWith(Ljava/lang/String;)Z
+0008d0: move-result v6
+0008d2: if-eqz v6, +006h
+0008d6: invoke-static Lcom/vivo/pcsuite/common/filemanager/utils/h;->p()V
+0008dc: return-void 
+0008de: const-string v6, "TRANS_FILE_CANCEL:"
+0008e2: invoke-virtual v1, v6, Ljava/lang/String;->startsWith(Ljava/lang/String;)Z
+0008e8: move-result v6
+0008ea: const-string/jumbo v12, successCount
+0008f0: if-eqz v6, +072h
+0008f4: invoke-virtual v1, v15, Ljava/lang/String;->substring(I)Ljava/lang/String;
+0008fa: move-result-object v0
+0008fc: new-instance v1, Ljava/lang/StringBuilder;
+000900: invoke-direct v1, v5, Ljava/lang/StringBuilder;-><init>(Ljava/lang/String;)V
+000906: invoke-virtual v1, v0, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+00090c: invoke-virtual v1, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
+000912: move-result-object v1
+000914: invoke-static v10, v1, Lcom/vivo/connect/logger/EasyLog;->e(Ljava/lang/String; Ljava/lang/String;)V
+00091a: new-instance v1, Lorg/json/JSONObject;
+00091e: invoke-direct v1, v0, Lorg/json/JSONObject;-><init>(Ljava/lang/String;)V
+000924: const-string/jumbo v0, type
+00092a: invoke-virtual v1, v0, Lorg/json/JSONObject;->getString(Ljava/lang/String;)Ljava/lang/String;
+000930: move-result-object v0
+000932: invoke-virtual v1, v8, Lorg/json/JSONObject;->getInt(Ljava/lang/String;)I
+000938: move-result v2
+00093a: invoke-virtual v1, v12, Lorg/json/JSONObject;->getInt(Ljava/lang/String;)I
+000940: move-result v1
+000942: const-string v3, "send"
+000946: invoke-virtual v3, v0, Ljava/lang/String;->equalsIgnoreCase(Ljava/lang/String;)Z
+00094c: move-result v0
+00094e: if-eqz v0, +017h
+000952: invoke-static Lk2/y;->H()Lk2/y;
+000958: move-result-object v0
+00095a: invoke-virtual v0, v14, Lk2/y;->a0(Z)V
+000960: invoke-static v9, Lcom/vivo/pcsuite/common/netty/controller/DownloadController;->setFileManagerTransCancelOrFail(Z)V
+000966: invoke-static Lcom/vivo/pcsuite/common/AtomNotificationFactory;->s0()Lcom/vivo/pcsuite/common/AtomNotificationFactory;
+00096c: move-result-object v0
+00096e: invoke-virtual v0, v1, v2, Lcom/vivo/pcsuite/common/AtomNotificationFactory;->B1(I I)V
+000974: goto/16 +6d8h
+000978: move-exception v0
+00097a: goto +16h
+00097c: invoke-static Lcom/vivo/pcsuite/common/AtomNotificationFactory;->s0()Lcom/vivo/pcsuite/common/AtomNotificationFactory;
+000982: move-result-object v0
+000984: invoke-virtual v0, v1, v2, Lcom/vivo/pcsuite/common/AtomNotificationFactory;->r1(I I)V
+00098a: invoke-static v9, Lcom/vivo/pcsuite/common/netty/controller/DropUploadController;->setFileManagerTransCancelOrFail(Z)V
+000990: invoke-static v9, Lcom/vivo/pcsuite/common/netty/controller/IpadDropUploadController;->setFileManagerTransCancelOrFail(Z)V
+000996: invoke-static Lcom/vivo/pcsuite/common/netty/controller/IpadDropUploadController;->PcCancelUpload()V
+00099c: invoke-static Lcom/vivo/pcsuite/common/netty/controller/DropUploadController;->PcCancelUpload()V
+0009a2: goto/16 +6c1h
+0009a6: new-instance v1, Ljava/lang/StringBuilder;
+0009aa: const-string v2, "cancel trans get file count fail = "
+0009ae: invoke-direct v1, v2, Ljava/lang/StringBuilder;-><init>(Ljava/lang/String;)V
+0009b4: invoke-virtual v0, Ljava/lang/Throwable;->getMessage()Ljava/lang/String;
+0009ba: move-result-object v0
+0009bc: invoke-virtual v1, v0, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+0009c2: invoke-virtual v1, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
+0009c8: move-result-object v0
+0009ca: invoke-static v10, v0, Lcom/vivo/connect/logger/EasyLog;->e(Ljava/lang/String; Ljava/lang/String;)V
+0009d0: goto/16 +6aah
+0009d4: const-string v5, "TRANS_FILE_FAIL:"
+0009d8: invoke-virtual v1, v5, Ljava/lang/String;->startsWith(Ljava/lang/String;)Z
+0009de: move-result v5
+0009e0: const-string v6, "failCode"
+0009e4: const-string v15, "fail trans get file count fail = "
+0009e8: if-eqz v5, +096h
+0009ec: const/16 v0, 16
+0009f0: invoke-virtual v1, v0, Ljava/lang/String;->substring(I)Ljava/lang/String;
+0009f6: move-result-object v0
+0009f8: invoke-static v9, Lcom/vivo/pcsuite/common/netty/controller/DownloadController;->setFileManagerTransCancelOrFail(Z)V
+0009fe: new-instance v1, Lorg/json/JSONObject;
+000a02: invoke-direct v1, v0, Lorg/json/JSONObject;-><init>(Ljava/lang/String;)V
+000a08: invoke-virtual v1, v8, Lorg/json/JSONObject;->getInt(Ljava/lang/String;)I
+000a0e: move-result v2
+000a10: invoke-virtual v1, v12, Lorg/json/JSONObject;->getInt(Ljava/lang/String;)I
+000a16: move-result v3
+000a18: invoke-virtual v1, v6, Lorg/json/JSONObject;->getInt(Ljava/lang/String;)I
+000a1e: move-result v5
+000a20: const-string v6, "id"
+000a24: invoke-virtual v1, v6, Lorg/json/JSONObject;->optString(Ljava/lang/String;)Ljava/lang/String;
+000a2a: move-result-object v1
+000a2c: invoke-static Lcom/vivo/castsdk/source/httpServer/controller/drag/DownloadInfoManager;->getInstance()Lcom/vivo/castsdk/source/httpServer/controller/drag/DownloadInfoManager;
+000a32: move-result-object v6
+000a34: invoke-virtual v6, v1, Lcom/vivo/castsdk/source/httpServer/controller/drag/DownloadInfoManager;->getTask(Ljava/lang/String;)Lcom/vivo/castsdk/sdk/common/gson/DownloadInfo;
+000a3a: move-result-object v6
+000a3c: invoke-static v1, v3, v14, v6, v14, Lcom/vivo/pcsuite/util/o0;->r0(Ljava/lang/String; I Z Lcom/vivo/castsdk/sdk/common/gson/DownloadInfo; Z)V
+000a42: invoke-static Lcom/vivo/castsdk/source/httpServer/controller/drag/DownloadInfoManager;->getInstance()Lcom/vivo/castsdk/source/httpServer/controller/drag/DownloadInfoManager;
+000a48: move-result-object v6
+000a4a: invoke-virtual v6, v1, Lcom/vivo/castsdk/source/httpServer/controller/drag/DownloadInfoManager;->removeTask(Ljava/lang/String;)Z
+000a50: move-result v1
+000a52: new-instance v6, Ljava/lang/StringBuilder;
+000a56: invoke-direct v6, v4, Ljava/lang/StringBuilder;-><init>(Ljava/lang/String;)V
+000a5c: invoke-virtual v6, v0, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+000a62: const-string v0, " remove result:"
+000a66: invoke-virtual v6, v0, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+000a6c: invoke-virtual v6, v1, Ljava/lang/StringBuilder;->append(Z)Ljava/lang/StringBuilder;
+000a72: invoke-virtual v6, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
+000a78: move-result-object v0
+000a7a: invoke-static v10, v0, Lcom/vivo/connect/logger/EasyLog;->e(Ljava/lang/String; Ljava/lang/String;)V
+000a80: if-ne v9, v5, +01eh
+000a84: invoke-static Lcom/vivo/pcsuite/common/AtomNotificationFactory;->s0()Lcom/vivo/pcsuite/common/AtomNotificationFactory;
+000a8a: move-result-object v0
+000a8c: const/16 v1, 777
+000a90: invoke-virtual v0, v1, Lcom/vivo/pcsuite/common/AtomNotificationFactory;->D(I)V
+000a96: invoke-static Lcom/vivo/pcsuite/common/AtomNotificationFactory;->s0()Lcom/vivo/pcsuite/common/AtomNotificationFactory;
+000a9c: move-result-object v0
+000a9e: sget-object v1, Lcom/vivo/pcsuite/common/AtomNotificationFactory$FailType;->TYPE_STORAGE_FAIL Lcom/vivo/pcsuite/common/AtomNotificationFactory$FailType;
+000aa2: sget-object v3, Lcom/vivo/pcsuite/common/AtomNotificationFactory$NotificationType;->CREATE_TAG Lcom/vivo/pcsuite/common/AtomNotificationFactory$NotificationType;
+000aa6: invoke-virtual v3, Ljava/lang/Enum;->ordinal()I
+000aac: move-result v3
+000aae: invoke-virtual v0, v2, v3, v1, Lcom/vivo/pcsuite/common/AtomNotificationFactory;->D1(I I Lcom/vivo/pcsuite/common/AtomNotificationFactory$FailType;)V
+000ab4: goto/16 +638h
+000ab8: move-exception v0
+000aba: goto +18h
+000abc: if-nez v3, +00ch
+000ac0: invoke-static Lcom/vivo/pcsuite/common/AtomNotificationFactory;->s0()Lcom/vivo/pcsuite/common/AtomNotificationFactory;
+000ac6: move-result-object v0
+000ac8: sget-object v1, Lcom/vivo/pcsuite/common/AtomNotificationFactory$FailType;->TYPE_OTHER_FAIL Lcom/vivo/pcsuite/common/AtomNotificationFactory$FailType;
+000acc: invoke-virtual v0, v2, v1, Lcom/vivo/pcsuite/common/AtomNotificationFactory;->C1(I Lcom/vivo/pcsuite/common/AtomNotificationFactory$FailType;)V
+000ad2: return-void 
+000ad4: if-eq v5, v3, +628h
+000ad8: invoke-static Lcom/vivo/pcsuite/common/AtomNotificationFactory;->s0()Lcom/vivo/pcsuite/common/AtomNotificationFactory;
+000ade: move-result-object v0
+000ae0: invoke-virtual v0, v2, v3, Lcom/vivo/pcsuite/common/AtomNotificationFactory;->H1(I I)V
+000ae6: goto/16 +61fh
+000aea: new-instance v1, Ljava/lang/StringBuilder;
+000aee: invoke-direct v1, v15, Ljava/lang/StringBuilder;-><init>(Ljava/lang/String;)V
+000af4: invoke-virtual v0, Ljava/lang/Throwable;->getMessage()Ljava/lang/String;
+000afa: move-result-object v0
+000afc: invoke-virtual v1, v0, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+000b02: invoke-virtual v1, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
+000b08: move-result-object v0
+000b0a: invoke-static v10, v0, Lcom/vivo/connect/logger/EasyLog;->e(Ljava/lang/String; Ljava/lang/String;)V
+000b10: goto/16 +60ah
+000b14: const-string v4, "IPAD_TRANS_FILE_FAIL:"
+000b18: invoke-virtual v1, v4, Ljava/lang/String;->startsWith(Ljava/lang/String;)Z
+000b1e: move-result v4
+000b20: if-eqz v4, +057h
+000b24: invoke-virtual v1, v13, Ljava/lang/String;->substring(I)Ljava/lang/String;
+000b2a: move-result-object v0
+000b2c: invoke-static v9, Lcom/vivo/pcsuite/common/netty/controller/IpadDropUploadController;->setFileManagerTransCancelOrFail(Z)V
+000b32: new-instance v1, Ljava/lang/StringBuilder;
+000b36: invoke-direct v1, v3, Ljava/lang/StringBuilder;-><init>(Ljava/lang/String;)V
+000b3c: invoke-virtual v1, v0, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+000b42: invoke-virtual v1, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
+000b48: move-result-object v1
+000b4a: invoke-static v10, v1, Lcom/vivo/connect/logger/EasyLog;->e(Ljava/lang/String; Ljava/lang/String;)V
+000b50: new-instance v1, Lorg/json/JSONObject;
+000b54: invoke-direct v1, v0, Lorg/json/JSONObject;-><init>(Ljava/lang/String;)V
+000b5a: invoke-virtual v1, v8, Lorg/json/JSONObject;->getInt(Ljava/lang/String;)I
+000b60: move-result v0
+000b62: invoke-virtual v1, v12, Lorg/json/JSONObject;->getInt(Ljava/lang/String;)I
+000b68: move-result v2
+000b6a: invoke-virtual v1, v6, Lorg/json/JSONObject;->getInt(Ljava/lang/String;)I
+000b70: if-nez v2, +00eh
+000b74: invoke-static Lcom/vivo/pcsuite/common/AtomNotificationFactory;->s0()Lcom/vivo/pcsuite/common/AtomNotificationFactory;
+000b7a: move-result-object v1
+000b7c: sget-object v2, Lcom/vivo/pcsuite/common/AtomNotificationFactory$FailType;->TYPE_OTHER_FAIL Lcom/vivo/pcsuite/common/AtomNotificationFactory$FailType;
+000b80: invoke-virtual v1, v0, v2, Lcom/vivo/pcsuite/common/AtomNotificationFactory;->s1(I Lcom/vivo/pcsuite/common/AtomNotificationFactory$FailType;)V
+000b86: return-void 
+000b88: move-exception v0
+000b8a: goto +dh
+000b8c: invoke-static Lcom/vivo/pcsuite/common/AtomNotificationFactory;->s0()Lcom/vivo/pcsuite/common/AtomNotificationFactory;
+000b92: move-result-object v1
+000b94: invoke-virtual v1, v0, v2, Lcom/vivo/pcsuite/common/AtomNotificationFactory;->x1(I I)V
+000b9a: invoke-static Lcom/vivo/pcsuite/common/netty/controller/IpadDropUploadController;->uploadStop()V
+000ba0: goto/16 +5c2h
+000ba4: new-instance v1, Ljava/lang/StringBuilder;
+000ba8: invoke-direct v1, v15, Ljava/lang/StringBuilder;-><init>(Ljava/lang/String;)V
+000bae: invoke-virtual v0, Ljava/lang/Throwable;->getMessage()Ljava/lang/String;
+000bb4: move-result-object v0
+000bb6: invoke-virtual v1, v0, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+000bbc: invoke-virtual v1, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
+000bc2: move-result-object v0
+000bc4: invoke-static v10, v0, Lcom/vivo/connect/logger/EasyLog;->e(Ljava/lang/String; Ljava/lang/String;)V
+000bca: goto/16 +5adh
+000bce: const-string v3, "TRANS_FILE_SUCCESS:"
+000bd2: invoke-virtual v1, v3, Ljava/lang/String;->startsWith(Ljava/lang/String;)Z
+000bd8: move-result v3
+000bda: if-eqz v3, +03fh
+000bde: invoke-virtual v1, v11, Ljava/lang/String;->substring(I)Ljava/lang/String;
+000be4: move-result-object v0
+000be6: invoke-static v14, Lcom/vivo/pcsuite/common/netty/controller/DownloadController;->setFileManagerTransCancelOrFail(Z)V
+000bec: new-instance v1, Lorg/json/JSONObject;
+000bf0: invoke-direct v1, v0, Lorg/json/JSONObject;-><init>(Ljava/lang/String;)V
+000bf6: invoke-virtual v1, v12, Lorg/json/JSONObject;->getInt(Ljava/lang/String;)I
+000bfc: move-result v0
+000bfe: invoke-static Lcom/vivo/pcsuite/common/AtomNotificationFactory;->s0()Lcom/vivo/pcsuite/common/AtomNotificationFactory;
+000c04: move-result-object v1
+000c06: invoke-virtual v1, v0, Lcom/vivo/pcsuite/common/AtomNotificationFactory;->K1(I)V
+000c0c: goto +15h
+000c0e: move-exception v0
+000c10: new-instance v1, Ljava/lang/StringBuilder;
+000c14: invoke-direct v1, v15, Ljava/lang/StringBuilder;-><init>(Ljava/lang/String;)V
+000c1a: invoke-virtual v0, Ljava/lang/Throwable;->getMessage()Ljava/lang/String;
+000c20: move-result-object v0
+000c22: invoke-virtual v1, v0, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+000c28: invoke-virtual v1, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
+000c2e: move-result-object v0
+000c30: invoke-static v10, v0, Lcom/vivo/connect/logger/EasyLog;->e(Ljava/lang/String; Ljava/lang/String;)V
+000c36: sget-object v0, Lcom/vivo/pcsuite/PcSuiteApplication;->I1 Lcom/vivo/pcsuite/PcSuiteApplication;
+000c3a: invoke-virtual v0, Lcom/vivo/pcsuite/PcSuiteApplication;->M()Z
+000c40: move-result v0
+000c42: if-eqz v0, +571h
+000c46: invoke-static Lr2/g;->f()Lr2/g;
+000c4c: move-result-object v0
+000c4e: invoke-virtual v0, v7, Lr2/g;->i(Ljava/lang/String;)V
+000c54: goto/16 +568h
+000c58: const-string v3, "GET_APP_SUPPORTED:"
+000c5c: invoke-virtual v1, v3, Ljava/lang/String;->startsWith(Ljava/lang/String;)Z
+000c62: move-result v3
+000c64: if-eqz v3, +048h
+000c68: const/16 v3, 18
+000c6c: invoke-virtual v1, v3, Ljava/lang/String;->substring(I)Ljava/lang/String;
+000c72: move-result-object v0
+000c74: new-instance v1, Ljava/util/ArrayList;
+000c78: invoke-direct v1, Ljava/util/ArrayList;-><init>()V
+000c7e: new-instance v2, Lorg/json/JSONArray;
+000c82: invoke-direct v2, v0, Lorg/json/JSONArray;-><init>(Ljava/lang/String;)V
+000c88: invoke-virtual v2, Lorg/json/JSONArray;->length()I
+000c8e: move-result v0
+000c90: if-ge v14, v0, +017h
+000c94: invoke-virtual v2, v14, Lorg/json/JSONArray;->getString(I)Ljava/lang/String;
+000c9a: move-result-object v0
+000c9c: invoke-virtual v1, v0, Ljava/util/ArrayList;->add(Ljava/lang/Object;)Z
+000ca2: add-int/lit8 v14, v14, 1
+000ca6: goto -fh
+000ca8: move-exception v0
+000caa: new-instance v2, Ljava/lang/StringBuilder;
+000cae: const-string v3, "get supportData error = "
+000cb2: invoke-direct v2, v3, Ljava/lang/StringBuilder;-><init>(Ljava/lang/String;)V
+000cb8: invoke-static v0, v2, v10, LS5/f;->g(Ljava/lang/Exception; Ljava/lang/StringBuilder; Ljava/lang/String;)V
+000cbe: invoke-static v1, Lcom/vivo/pcsuite/common/filemanager/b;->C(Ljava/util/ArrayList;)Ljava/lang/String;
+000cc4: move-result-object v0
+000cc6: invoke-static Lr2/g;->f()Lr2/g;
+000ccc: move-result-object v1
+000cce: new-instance v2, Ljava/lang/StringBuilder;
+000cd2: const-string v3, "FunctionSupported:"
+000cd6: invoke-direct v2, v3, Ljava/lang/StringBuilder;-><init>(Ljava/lang/String;)V
+000cdc: invoke-virtual v2, v0, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+000ce2: invoke-virtual v2, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
+000ce8: move-result-object v0
+000cea: invoke-virtual v1, v0, Lr2/g;->i(Ljava/lang/String;)V
+000cf0: goto/16 +51ah
+000cf4: const-string v3, "PHONE_CALL_FORCE_EXIT"
+000cf8: invoke-virtual v1, v3, Ljava/lang/String;->startsWith(Ljava/lang/String;)Z
+000cfe: move-result v3
+000d00: if-eqz v3, +009h
+000d04: invoke-static/range v18, Lcom/vivo/pcsuite/service/PcSuiteInCallService;->G(I)V
+000d0a: invoke-static v14, Lcom/vivo/pcsuite/service/PcSuiteInCallService;->D(Z)V
+000d10: return-void 
+000d12: const-string v3, "req_start_extscreen:"
+000d16: invoke-virtual v1, v3, Ljava/lang/String;->startsWith(Ljava/lang/String;)Z
+000d1c: move-result v3
+000d1e: const/4 v4, 0
+000d20: if-eqz v3, +106h
+000d24: const/16 v3, 20
+000d28: invoke-virtual v1, v3, Ljava/lang/String;->substring(I)Ljava/lang/String;
+000d2e: move-result-object v1
+000d30: sget v2, LC2/a;->b I
+000d34: new-instance v2, Lcom/google/gson/Gson;
+000d38: invoke-direct v2, Lcom/google/gson/Gson;-><init>()V
+000d3e: const-class v3, Lcom/vivo/pcsuite/extscreen/model/protocol/rece/ExtScreenStart;
+000d42: invoke-virtual v2, v1, v3, Lcom/google/gson/Gson;->fromJson(Ljava/lang/String; Ljava/lang/Class;)Ljava/lang/Object;
+000d48: move-result-object v1
+000d4a: check-cast v1, Lcom/vivo/pcsuite/extscreen/model/protocol/rece/ExtScreenStart;
+000d4e: invoke-static Lw2/a;->m()Lw2/a;
+000d54: move-result-object v2
+000d56: invoke-virtual v2, Lw2/a;->x()V
+000d5c: invoke-virtual v2, v1, Lw2/a;->L(Lcom/vivo/pcsuite/extscreen/model/protocol/rece/ExtScreenStart;)V
+000d62: new-instance v2, Ljava/lang/StringBuilder;
+000d66: const-string v3, "startExtScreenService :"
+000d6a: invoke-direct v2, v3, Ljava/lang/StringBuilder;-><init>(Ljava/lang/String;)V
+000d70: invoke-virtual v2, v1, Ljava/lang/StringBuilder;->append(Ljava/lang/Object;)Ljava/lang/StringBuilder;
+000d76: invoke-virtual v2, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
+000d7c: move-result-object v2
+000d7e: invoke-static v10, v2, Lcom/vivo/connect/logger/EasyLog;->i(Ljava/lang/String; Ljava/lang/String;)V
+000d84: invoke-virtual v1, Lcom/vivo/pcsuite/extscreen/model/protocol/rece/ExtScreenStart;->getConnectCenter()I
+000d8a: move-result v2
+000d8c: if-ne v2, v9, +09ah
+000d90: invoke-static Lcom/vivo/pcsuite/PcSuiteApplication;->r()Lcom/vivo/pcsuite/PcSuiteApplication;
+000d96: move-result-object v0
+000d98: invoke-virtual v0, Lcom/vivo/pcsuite/PcSuiteApplication;->z()Ljava/lang/String;
+000d9e: move-result-object v0
+000da0: invoke-static Lcom/vivo/castsdk/sdk/source/CastSource;->getInstance()Lcom/vivo/castsdk/sdk/source/CastSource;
+000da6: move-result-object v2
+000da8: const-string v3, "5.6.9"
+000dac: invoke-virtual v2, v0, v3, Lcom/vivo/castsdk/sdk/source/CastSource;->isNewVersion(Ljava/lang/String; Ljava/lang/String;)Z
+000db2: move-result v2
+000db4: invoke-static Lcom/vivo/pcsuite/util/f;->b()Lcom/vivo/pcsuite/util/f;
+000dba: const-string v3, "6.4.9"
+000dbe: invoke-static v3, Lcom/vivo/pcsuite/util/f;->q(Ljava/lang/String;)Z
+000dc4: move-result v3
+000dc6: invoke-virtual v1, Lcom/vivo/pcsuite/extscreen/model/protocol/rece/ExtScreenStart;->getPhonePcModeState()I
+000dcc: move-result v4
+000dce: new-instance v5, Ljava/lang/StringBuilder;
+000dd2: const-string v6, "isNewVersion: "
+000dd6: invoke-direct v5, v6, Ljava/lang/StringBuilder;-><init>(Ljava/lang/String;)V
+000ddc: invoke-virtual v5, v2, Ljava/lang/StringBuilder;->append(Z)Ljava/lang/StringBuilder;
+000de2: const-string v6, " pcVersion "
+000de6: invoke-virtual v5, v6, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+000dec: invoke-virtual v5, v0, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+000df2: const-string v0, " phonePcModeState: "
+000df6: invoke-virtual v5, v0, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+000dfc: invoke-static v5, v10, v4, LZ1/g;->f(Ljava/lang/StringBuilder; Ljava/lang/String; I)V
+000e02: if-eqz v3, +008h
+000e06: if-ne v4, v9, +006h
+000e0a: invoke-static v1, Lcom/vivo/pcsuite/util/B;->A(Lcom/vivo/pcsuite/extscreen/model/protocol/rece/ExtScreenStart;)V
+000e10: return-void 
+000e12: if-eqz v2, +027h
+000e16: invoke-virtual v1, Lcom/vivo/pcsuite/extscreen/model/protocol/rece/ExtScreenStart;->getRemountControlState()I
+000e1c: move-result v0
+000e1e: if-nez v0, +03bh
+000e22: invoke-virtual v1, Lcom/vivo/pcsuite/extscreen/model/protocol/rece/ExtScreenStart;->getPhoneExtScreenState()I
+000e28: move-result v0
+000e2a: if-nez v0, +035h
+000e2e: invoke-virtual v1, Lcom/vivo/pcsuite/extscreen/model/protocol/rece/ExtScreenStart;->getPhoneCastState()I
+000e34: move-result v0
+000e36: if-nez v0, +02fh
+000e3a: invoke-virtual v1, Lcom/vivo/pcsuite/extscreen/model/protocol/rece/ExtScreenStart;->getPhoneAnyWhereControlState()I
+000e40: move-result v0
+000e42: if-nez v0, +029h
+000e46: invoke-virtual v1, Lcom/vivo/pcsuite/extscreen/model/protocol/rece/ExtScreenStart;->getPadExtScreenState()I
+000e4c: move-result v0
+000e4e: if-nez v0, +023h
+000e52: invoke-virtual v1, Lcom/vivo/pcsuite/extscreen/model/protocol/rece/ExtScreenStart;->getPadAnyWhereControlState()I
+000e58: move-result v0
+000e5a: if-eqz v0, +01ch
+000e5e: goto +1bh
+000e60: invoke-virtual v1, Lcom/vivo/pcsuite/extscreen/model/protocol/rece/ExtScreenStart;->getRemountControlState()I
+000e66: move-result v0
+000e68: if-nez v0, +016h
+000e6c: invoke-virtual v1, Lcom/vivo/pcsuite/extscreen/model/protocol/rece/ExtScreenStart;->getExtScreenState()I
+000e72: move-result v0
+000e74: if-nez v0, +010h
+000e78: invoke-virtual v1, Lcom/vivo/pcsuite/extscreen/model/protocol/rece/ExtScreenStart;->getCastState()I
+000e7e: move-result v0
+000e80: if-nez v0, +00ah
+000e84: invoke-virtual v1, Lcom/vivo/pcsuite/extscreen/model/protocol/rece/ExtScreenStart;->getAnyWhereControlState()I
+000e8a: move-result v0
+000e8c: if-eqz v0, +003h
+000e90: goto +2h
+000e92: move v9, v14
+000e94: if-eqz v9, +00bh
+000e98: new-instance v0, Lcom/vivo/pcsuite/common/netty/controller/h;
+000e9c: invoke-direct v0, v1, v2, Lcom/vivo/pcsuite/common/netty/controller/h;-><init>(Lcom/vivo/pcsuite/extscreen/model/protocol/rece/ExtScreenStart; Z)V
+000ea2: invoke-static v0, Lcom/vivo/castsdk/sdk/common/utils/ThreadPoolUtils;->postOnMainThread(Ljava/lang/Runnable;)V
+000ea8: return-void 
+000eaa: invoke-static Lcom/vivo/pcsuite/common/netty/controller/WebSocketController;->l()V
+000eb0: invoke-static Lcom/vivo/pcsuite/PcSuiteApplication;->r()Lcom/vivo/pcsuite/PcSuiteApplication;
+000eb6: move-result-object v0
+000eb8: invoke-static v0, v1, LC2/a;->f(Lcom/vivo/pcsuite/PcSuiteApplication; Lcom/vivo/pcsuite/extscreen/model/protocol/rece/ExtScreenStart;)V
+000ebe: return-void 
+000ec0: invoke-static Lt2/b;->w()Lt2/b;
+000ec6: move-result-object v2
+000ec8: invoke-virtual v2, Lt2/b;->q()I
+000ece: move-result v2
+000ed0: const/4 v3, 2
+000ed2: if-ne v2, v3, +00bh
+000ed6: const-string v0, "startExtScreenActivity cancel "
+000eda: invoke-static v10, v0, Lcom/vivo/connect/logger/EasyLog;->i(Ljava/lang/String; Ljava/lang/String;)V
+000ee0: invoke-static Lcom/vivo/pcsuite/common/netty/controller/WebSocketController;->l()V
+000ee6: return-void 
+000ee8: const-string v2, "startExtScreenActivity begin "
+000eec: invoke-static v10, v2, Lcom/vivo/connect/logger/EasyLog;->i(Ljava/lang/String; Ljava/lang/String;)V
+000ef2: invoke-static Lcom/vivo/pcsuite/common/netty/controller/WebSocketController;->l()V
+000ef8: iput-boolean v14, v0, Lcom/vivo/pcsuite/common/netty/controller/WebSocketController;->c Z
+000efc: iput-boolean v9, v0, Lcom/vivo/pcsuite/common/netty/controller/WebSocketController;->b Z
+000f00: iget-object v2, v0, Lcom/vivo/pcsuite/common/netty/controller/WebSocketController;->d Ljava/lang/Runnable;
+000f04: if-eqz v2, +007h
+000f08: invoke-static v2, Lcom/vivo/castsdk/sdk/common/utils/ThreadPoolUtils;->removeBackgroundThread(Ljava/lang/Runnable;)Z
+000f0e: iput-object v4, v0, Lcom/vivo/pcsuite/common/netty/controller/WebSocketController;->d Ljava/lang/Runnable;
+000f12: new-instance v2, Lcom/vivo/pcsuite/common/netty/controller/WebSocketController$8;
+000f16: invoke-direct v2, v0, v1, Lcom/vivo/pcsuite/common/netty/controller/WebSocketController$8;-><init>(Lcom/vivo/pcsuite/common/netty/controller/WebSocketController; Lcom/vivo/pcsuite/extscreen/model/protocol/rece/ExtScreenStart;)V
+000f1c: iput-object v2, v0, Lcom/vivo/pcsuite/common/netty/controller/WebSocketController;->d Ljava/lang/Runnable;
+000f20: const-wide/16 v0, 200
+000f24: invoke-static v2, v0, v1, Lcom/vivo/castsdk/sdk/common/utils/ThreadPoolUtils;->postOnBackgroundThread(Ljava/lang/Runnable; J)Ljava/util/concurrent/Future;
+000f2a: return-void 
+000f2c: const-string v3, "req_close_extscreen"
+000f30: invoke-virtual v1, v3, Ljava/lang/String;->startsWith(Ljava/lang/String;)Z
+000f36: move-result v3
+000f38: if-eqz v3, +01ah
+000f3c: iget-boolean v1, v0, Lcom/vivo/pcsuite/common/netty/controller/WebSocketController;->b Z
+000f40: if-eqz v1, +012h
+000f44: iput-boolean v9, v0, Lcom/vivo/pcsuite/common/netty/controller/WebSocketController;->c Z
+000f48: iget-object v1, v0, Lcom/vivo/pcsuite/common/netty/controller/WebSocketController;->d Ljava/lang/Runnable;
+000f4c: if-eqz v1, +007h
+000f50: invoke-static v1, Lcom/vivo/castsdk/sdk/common/utils/ThreadPoolUtils;->removeBackgroundThread(Ljava/lang/Runnable;)Z
+000f56: iput-object v4, v0, Lcom/vivo/pcsuite/common/netty/controller/WebSocketController;->d Ljava/lang/Runnable;
+000f5a: const-string v0, "REQ_CLOSE_EXTSCREEN received during pending window: cancel start"
+000f5e: invoke-static v10, v0, Lcom/vivo/connect/logger/EasyLog;->i(Ljava/lang/String; Ljava/lang/String;)V
+000f64: invoke-static/range v16, Lw2/b;->a(I)V
+000f6a: return-void 
+000f6c: const-string v0, "mac_unauthorized_dialog_extscreen"
+000f70: invoke-virtual v1, v0, Ljava/lang/String;->startsWith(Ljava/lang/String;)Z
+000f76: move-result v0
+000f78: if-eqz v0, +00ah
+000f7c: invoke-static Lw2/a;->m()Lw2/a;
+000f82: move-result-object v0
+000f84: invoke-virtual v0, Lw2/a;->Y()V
+000f8a: return-void 
+000f8c: const-string v0, "TRANSFER_SWITCH_CONNECTED:"
+000f90: invoke-virtual v1, v0, Ljava/lang/String;->startsWith(Ljava/lang/String;)Z
+000f96: move-result v0
+000f98: if-eqz v0, +00ah
+000f9c: invoke-static Lde/greenrobot/event/EventBus;->getDefault()Lde/greenrobot/event/EventBus;
+000fa2: move-result-object v0
+000fa4: invoke-static v9, v10, v0, Landroidx/constraintlayout/core/motion/a;->b(I Ljava/lang/String; Lde/greenrobot/event/EventBus;)V
+000faa: return-void 
+000fac: const-string v0, "BLE_STATE_CHANGED:"
+000fb0: invoke-virtual v1, v0, Ljava/lang/String;->startsWith(Ljava/lang/String;)Z
+000fb6: move-result v0
+000fb8: if-eqz v0, +072h
+000fbc: const/16 v3, 18
+000fc0: invoke-virtual v1, v3, Ljava/lang/String;->substring(I)Ljava/lang/String;
+000fc6: move-result-object v0
+000fc8: invoke-static Lcom/vivo/pcsuite/PcSuiteApplication;->r()Lcom/vivo/pcsuite/PcSuiteApplication;
+000fce: move-result-object v1
+000fd0: invoke-virtual v1, Lcom/vivo/pcsuite/PcSuiteApplication;->p()Lcom/google/gson/Gson;
+000fd6: move-result-object v1
+000fd8: const-class v2, Lcom/vivo/pcsuite/common/gson/BlueToothState;
+000fdc: invoke-virtual v1, v0, v2, Lcom/google/gson/Gson;->fromJson(Ljava/lang/String; Ljava/lang/Class;)Ljava/lang/Object;
+000fe2: move-result-object v0
+000fe4: check-cast v0, Lcom/vivo/pcsuite/common/gson/BlueToothState;
+000fe8: if-eqz v0, +39eh
+000fec: const-string v1, "on"
+000ff0: invoke-virtual v0, Lcom/vivo/pcsuite/common/gson/BlueToothState;->getState()Ljava/lang/String;
+000ff6: move-result-object v2
+000ff8: invoke-virtual v1, v2, Ljava/lang/String;->equalsIgnoreCase(Ljava/lang/String;)Z
+000ffe: move-result v1
+001000: if-eqz v1, +022h
+001004: invoke-static Lcom/vivo/pcsuite/PcSuiteApplication;->r()Lcom/vivo/pcsuite/PcSuiteApplication;
+00100a: move-result-object v0
+00100c: invoke-static v0, Lcom/vivo/connect/utils/Preconditions;->checkNotNull(Ljava/lang/Object;)Ljava/lang/Object;
+001012: invoke-static Landroid/bluetooth/BluetoothAdapter;->getDefaultAdapter()Landroid/bluetooth/BluetoothAdapter;
+001018: move-result-object v0
+00101a: if-eqz v0, +009h
+00101e: invoke-virtual v0, Landroid/bluetooth/BluetoothAdapter;->enable()Z
+001024: move-result v0
+001026: if-eqz v0, +003h
+00102a: goto +2h
+00102c: move v9, v14
+00102e: const-string v0, "PermissionUtils"
+001032: const-string v1, "openBluetooth,success= "
+001036: invoke-static v1, v0, v9, LV5/S;->i(Ljava/lang/String; Ljava/lang/String; Z)V
+00103c: goto/16 +374h
+001040: move-exception v0
+001042: goto +16h
+001044: const-string v1, "off"
+001048: invoke-virtual v0, Lcom/vivo/pcsuite/common/gson/BlueToothState;->getState()Ljava/lang/String;
+00104e: move-result-object v0
+001050: invoke-virtual v1, v0, Ljava/lang/String;->equalsIgnoreCase(Ljava/lang/String;)Z
+001056: move-result v0
+001058: if-eqz v0, +366h
+00105c: invoke-static Lcom/vivo/pcsuite/PcSuiteApplication;->r()Lcom/vivo/pcsuite/PcSuiteApplication;
+001062: move-result-object v0
+001064: invoke-static v0, Lcom/vivo/pcsuite/util/e0;->a(Lcom/vivo/pcsuite/PcSuiteApplication;)V
+00106a: goto/16 +35dh
+00106e: new-instance v1, Ljava/lang/StringBuilder;
+001072: const-string v2, "BLE_STATE_CHANGED JsonSyntaxException "
+001076: invoke-direct v1, v2, Ljava/lang/StringBuilder;-><init>(Ljava/lang/String;)V
+00107c: invoke-virtual v0, Ljava/lang/Throwable;->getMessage()Ljava/lang/String;
+001082: move-result-object v0
+001084: invoke-virtual v1, v0, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+00108a: invoke-virtual v1, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
+001090: move-result-object v0
+001092: invoke-static v10, v0, Lcom/vivo/connect/logger/EasyLog;->e(Ljava/lang/String; Ljava/lang/String;)V
+001098: goto/16 +346h
+00109c: const-string v0, "PC_GET_CAMERA_CONFIG:"
+0010a0: invoke-virtual v1, v0, Ljava/lang/String;->startsWith(Ljava/lang/String;)Z
+0010a6: move-result v3
+0010a8: if-eqz v3, +04eh
+0010ac: const-string v1, "PC_GET_CAMERA_CONFIG: "
+0010b0: invoke-static v10, v1, Lcom/vivo/connect/logger/EasyLog;->i(Ljava/lang/String; Ljava/lang/String;)V
+0010b6: invoke-static Lr2/g;->f()Lr2/g;
+0010bc: move-result-object v1
+0010be: new-instance v2, Ljava/lang/StringBuilder;
+0010c2: const-string v3, "PC_GET_CAMERA_CAPABILITY:"
+0010c6: invoke-direct v2, v3, Ljava/lang/StringBuilder;-><init>(Ljava/lang/String;)V
+0010cc: invoke-static Lcom/vivo/castsdk/source/mediasource/CameraServiceManager;->getInstance()Lcom/vivo/castsdk/source/mediasource/CameraServiceManager;
+0010d2: move-result-object v3
+0010d4: invoke-virtual v3, Lcom/vivo/castsdk/source/mediasource/CameraServiceManager;->getCameraCapabilitySummary()Lcom/vivo/vcamera/service/CameraCapabilitySummary;
+0010da: move-result-object v3
+0010dc: invoke-virtual v3, Ljava/lang/Object;->getClass()Ljava/lang/Class;
+0010e2: invoke-static v3, Lcom/vivo/castsdk/source/utils/GsonUtils;->toJson(Ljava/lang/Object;)Ljava/lang/String;
+0010e8: move-result-object v3
+0010ea: invoke-virtual v2, v3, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+0010f0: invoke-virtual v2, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
+0010f6: move-result-object v2
+0010f8: invoke-virtual v1, v2, Lr2/g;->i(Ljava/lang/String;)V
+0010fe: invoke-static Lr2/g;->f()Lr2/g;
+001104: move-result-object v1
+001106: new-instance v2, Ljava/lang/StringBuilder;
+00110a: invoke-direct v2, v0, Ljava/lang/StringBuilder;-><init>(Ljava/lang/String;)V
+001110: invoke-static Lcom/vivo/castsdk/source/mediasource/CameraServiceManager;->getInstance()Lcom/vivo/castsdk/source/mediasource/CameraServiceManager;
+001116: move-result-object v0
+001118: invoke-virtual v0, Lcom/vivo/castsdk/source/mediasource/CameraServiceManager;->getCameraConfigSummary()Lcom/vivo/vcamera/service/CameraConfigSummary;
+00111e: move-result-object v0
+001120: invoke-virtual v0, Ljava/lang/Object;->getClass()Ljava/lang/Class;
+001126: invoke-static v0, Lcom/vivo/castsdk/source/utils/GsonUtils;->toJson(Ljava/lang/Object;)Ljava/lang/String;
+00112c: move-result-object v0
+00112e: invoke-virtual v2, v0, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+001134: invoke-virtual v2, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
+00113a: move-result-object v0
+00113c: invoke-virtual v1, v0, Lr2/g;->i(Ljava/lang/String;)V
+001142: return-void 
+001144: const-string v0, "PC_UPDATE_CAMERA_PARA:"
+001148: invoke-virtual v1, v0, Ljava/lang/String;->startsWith(Ljava/lang/String;)Z
+00114e: move-result v0
+001150: if-eqz v0, +0abh
+001154: const/16 v0, 22
+001158: invoke-virtual v1, v0, Ljava/lang/String;->substring(I)Ljava/lang/String;
+00115e: move-result-object v0
+001160: const-string v1, "PC_UPDATE_CAMERA_PARA: "
+001164: invoke-static v1, v0, v10, Landroidx/constraintlayout/core/motion/a;->d(Ljava/lang/String; Ljava/lang/String; Ljava/lang/String;)V
+00116a: const-class v1, Lcom/vivo/vcamera/service/CameraConfigSummary;
+00116e: invoke-static v0, v1, Lcom/vivo/castsdk/source/utils/GsonUtils;->fromJson(Ljava/lang/String; Ljava/lang/Class;)Ljava/lang/Object;
+001174: move-result-object v0
+001176: check-cast v0, Lcom/vivo/vcamera/service/CameraConfigSummary;
+00117a: invoke-static Lcom/vivo/castsdk/source/mediasource/CameraServiceManager;->getInstance()Lcom/vivo/castsdk/source/mediasource/CameraServiceManager;
+001180: move-result-object v1
+001182: invoke-virtual v1, Lcom/vivo/castsdk/source/mediasource/CameraServiceManager;->getCameraShareMode()I
+001188: move-result v1
+00118a: invoke-virtual v0, Lcom/vivo/vcamera/service/CameraConfigSummary;->b()I
+001190: move-result v3
+001192: if-eq v1, v3, +058h
+001196: invoke-static Lcom/vivo/castsdk/source/mediasource/CameraServiceManager;->getInstance()Lcom/vivo/castsdk/source/mediasource/CameraServiceManager;
+00119c: move-result-object v4
+00119e: invoke-virtual v4, Lcom/vivo/castsdk/source/mediasource/CameraServiceManager;->isCameraShareUsing()Z
+0011a4: move-result v4
+0011a6: if-nez v4, +00fh
+0011aa: invoke-static Lcom/vivo/castsdk/source/mediasource/CameraServiceManager;->getInstance()Lcom/vivo/castsdk/source/mediasource/CameraServiceManager;
+0011b0: move-result-object v4
+0011b2: invoke-virtual v4, Lcom/vivo/castsdk/source/mediasource/CameraServiceManager;->isCameraShareStarting()Z
+0011b8: move-result v4
+0011ba: if-eqz v4, +044h
+0011be: goto +3h
+0011c0: move-exception v0
+0011c2: goto +52h
+0011c4: new-instance v4, Ljava/lang/StringBuilder;
+0011c8: invoke-direct v4, v2, Ljava/lang/StringBuilder;-><init>(Ljava/lang/String;)V
+0011ce: invoke-virtual v4, v1, Ljava/lang/StringBuilder;->append(I)Ljava/lang/StringBuilder;
+0011d4: const-string v1, " newMode="
+0011d8: invoke-virtual v4, v1, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+0011de: invoke-virtual v4, v3, Ljava/lang/StringBuilder;->append(I)Ljava/lang/StringBuilder;
+0011e4: const-string v1, " using="
+0011e8: invoke-virtual v4, v1, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+0011ee: invoke-static Lcom/vivo/castsdk/source/mediasource/CameraServiceManager;->getInstance()Lcom/vivo/castsdk/source/mediasource/CameraServiceManager;
+0011f4: move-result-object v1
+0011f6: invoke-virtual v1, Lcom/vivo/castsdk/source/mediasource/CameraServiceManager;->isCameraShareUsing()Z
+0011fc: move-result v1
+0011fe: invoke-virtual v4, v1, Ljava/lang/StringBuilder;->append(Z)Ljava/lang/StringBuilder;
+001204: const-string v1, " starting="
+001208: invoke-virtual v4, v1, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+00120e: invoke-static Lcom/vivo/castsdk/source/mediasource/CameraServiceManager;->getInstance()Lcom/vivo/castsdk/source/mediasource/CameraServiceManager;
+001214: move-result-object v1
+001216: invoke-virtual v1, Lcom/vivo/castsdk/source/mediasource/CameraServiceManager;->isCameraShareStarting()Z
+00121c: move-result v1
+00121e: invoke-virtual v4, v1, Ljava/lang/StringBuilder;->append(Z)Ljava/lang/StringBuilder;
+001224: invoke-virtual v4, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
+00122a: move-result-object v1
+00122c: invoke-static v10, v1, Lcom/vivo/connect/logger/EasyLog;->i(Ljava/lang/String; Ljava/lang/String;)V
+001232: invoke-static Lcom/vivo/castsdk/source/mediasource/CameraServiceManager;->getInstance()Lcom/vivo/castsdk/source/mediasource/CameraServiceManager;
+001238: move-result-object v1
+00123a: invoke-virtual v1, v3, v0, Lcom/vivo/castsdk/source/mediasource/CameraServiceManager;->handleCameraShareModeSwitch(I Lcom/vivo/vcamera/service/CameraConfigSummary;)V
+001240: goto +8h
+001242: invoke-static Lcom/vivo/castsdk/source/mediasource/CameraServiceManager;->getInstance()Lcom/vivo/castsdk/source/mediasource/CameraServiceManager;
+001248: move-result-object v1
+00124a: invoke-virtual v1, v0, Lcom/vivo/castsdk/source/mediasource/CameraServiceManager;->updateCameraConfigSummary(Lcom/vivo/vcamera/service/CameraConfigSummary;)V
+001250: invoke-static Lr2/g;->f()Lr2/g;
+001256: move-result-object v0
+001258: const-string v1, "PC_UPDATE_CAMERA_PARA:{"state":1}"
+00125c: invoke-virtual v0, v1, Lr2/g;->i(Ljava/lang/String;)V
+001262: goto/16 +261h
+001266: new-instance v1, Ljava/lang/StringBuilder;
+00126a: const-string v2, "PC_UPDATE_CAMERA_PARA JsonSyntaxException "
+00126e: invoke-direct v1, v2, Ljava/lang/StringBuilder;-><init>(Ljava/lang/String;)V
+001274: invoke-virtual v0, Ljava/lang/Throwable;->getMessage()Ljava/lang/String;
+00127a: move-result-object v2
+00127c: invoke-virtual v1, v2, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+001282: invoke-virtual v1, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
+001288: move-result-object v1
+00128a: invoke-static v10, v1, v0, Lcom/vivo/connect/logger/EasyLog;->e(Ljava/lang/String; Ljava/lang/String; Ljava/lang/Throwable;)V
+001290: invoke-static Lr2/g;->f()Lr2/g;
+001296: move-result-object v0
+001298: const-string v1, "PC_UPDATE_CAMERA_PARA:{"state":-1,"result":"JsonSyntaxException"}"
+00129c: invoke-virtual v0, v1, Lr2/g;->i(Ljava/lang/String;)V
+0012a2: goto/16 +241h
+0012a6: const-string v0, "PC_ENABLE_CAMERA_AUTH:"
+0012aa: invoke-virtual v1, v0, Ljava/lang/String;->startsWith(Ljava/lang/String;)Z
+0012b0: move-result v0
+0012b2: if-eqz v0, +039h
+0012b6: const-string v0, "PC_ENABLE_CAMERA_AUTH: "
+0012ba: invoke-static v10, v0, Lcom/vivo/connect/logger/EasyLog;->i(Ljava/lang/String; Ljava/lang/String;)V
+0012c0: invoke-static Lcom/vivo/pcsuite/util/e;->a()Z
+0012c6: move-result v0
+0012c8: if-eqz v0, +028h
+0012cc: sget v0, Landroid/os/Build$VERSION;->SDK_INT I
+0012d0: const/16 v1, 31
+0012d4: if-lt v0, v1, +228h
+0012d8: invoke-static Lcom/vivo/pcsuite/PcSuiteApplication;->r()Lcom/vivo/pcsuite/PcSuiteApplication;
+0012de: move-result-object v0
+0012e0: invoke-virtual v0, Ljava/lang/Object;->getClass()Ljava/lang/Class;
+0012e6: invoke-static Lcom/vivo/pcsuite/PcSuiteApplication;->S()Z
+0012ec: move-result v0
+0012ee: if-eqz v0, +00dh
+0012f2: invoke-static Lcom/vivo/castsdk/source/ForceBrightnessOffManager;->getInstance()Lcom/vivo/castsdk/source/ForceBrightnessOffManager;
+0012f8: move-result-object v0
+0012fa: invoke-static Landroid/os/SystemClock;->uptimeMillis()J
+001300: move-result-wide v1
+001302: invoke-virtual v0, v1, v2, Lcom/vivo/castsdk/source/ForceBrightnessOffManager;->wakeUp(J)V
+001308: invoke-static Lcom/vivo/pcsuite/PcSuiteApplication;->r()Lcom/vivo/pcsuite/PcSuiteApplication;
+00130e: move-result-object v0
+001310: invoke-static v0, Lcom/vivo/pcsuite/util/e;->c(Lcom/vivo/pcsuite/PcSuiteApplication;)V
+001316: return-void 
+001318: const-string v0, "PC_ENABLE_CAMERA_AUTH: false"
+00131c: invoke-static v10, v0, Lcom/vivo/connect/logger/EasyLog;->i(Ljava/lang/String; Ljava/lang/String;)V
+001322: return-void 
+001324: const-string v0, "PC_THIRD_PARTY_APP:"
+001328: invoke-virtual v1, v0, Ljava/lang/String;->startsWith(Ljava/lang/String;)Z
+00132e: move-result v0
+001330: if-eqz v0, +054h
+001334: invoke-virtual v1, v11, Ljava/lang/String;->substring(I)Ljava/lang/String;
+00133a: move-result-object v0
+00133c: const-string v1, "PC_THIRD_PARTY_APP: "
+001340: invoke-static v1, v0, v10, Landroidx/constraintlayout/core/motion/a;->d(Ljava/lang/String; Ljava/lang/String; Ljava/lang/String;)V
+001346: new-instance v1, Lorg/json/JSONObject;
+00134a: invoke-direct v1, v0, Lorg/json/JSONObject;-><init>(Ljava/lang/String;)V
+001350: const-string v0, "app_list"
+001354: invoke-virtual v1, v0, Lorg/json/JSONObject;->optJSONArray(Ljava/lang/String;)Lorg/json/JSONArray;
+00135a: move-result-object v0
+00135c: if-eqz v0, +00bh
+001360: invoke-virtual v0, Lorg/json/JSONArray;->length()I
+001366: move-result v1
+001368: if-nez v1, +018h
+00136c: goto +3h
+00136e: move-exception v0
+001370: goto +1dh
+001372: const-string v1, "PC_THIRD_PARTY_APP: app_list is empty, close permission dialog"
+001376: invoke-static v10, v1, Lcom/vivo/connect/logger/EasyLog;->i(Ljava/lang/String; Ljava/lang/String;)V
+00137c: invoke-static Lde/greenrobot/event/EventBus;->getDefault()Lde/greenrobot/event/EventBus;
+001382: move-result-object v1
+001384: new-instance v2, Lcom/vivo/pcsuite/entity/EventBean;
+001388: const/16 v3, 48
+00138c: invoke-direct v2, v3, v10, Lcom/vivo/pcsuite/entity/EventBean;-><init>(I Ljava/lang/String;)V
+001392: invoke-virtual v1, v2, Lde/greenrobot/event/EventBus;->post(Ljava/lang/Object;)V
+001398: invoke-static Lcom/vivo/castsdk/source/mediasource/CameraServiceManager;->getInstance()Lcom/vivo/castsdk/source/mediasource/CameraServiceManager;
+00139e: move-result-object v1
+0013a0: invoke-virtual v1, v0, Lcom/vivo/castsdk/source/mediasource/CameraServiceManager;->updatePcAppList(Lorg/json/JSONArray;)V
+0013a6: goto/16 +1bfh
+0013aa: new-instance v1, Ljava/lang/StringBuilder;
+0013ae: const-string v2, "PC_THIRD_PARTY_APP JsonSyntaxException "
+0013b2: invoke-direct v1, v2, Ljava/lang/StringBuilder;-><init>(Ljava/lang/String;)V
+0013b8: invoke-virtual v0, Ljava/lang/Throwable;->getMessage()Ljava/lang/String;
+0013be: move-result-object v2
+0013c0: invoke-virtual v1, v2, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+0013c6: invoke-virtual v1, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
+0013cc: move-result-object v1
+0013ce: invoke-static v10, v1, v0, Lcom/vivo/connect/logger/EasyLog;->e(Ljava/lang/String; Ljava/lang/String; Ljava/lang/Throwable;)V
+0013d4: goto/16 +1a8h
+0013d8: const-string v0, "PC_TO_PHONE_RESET_EFFECT_PARAM:"
+0013dc: invoke-virtual v1, v0, Ljava/lang/String;->startsWith(Ljava/lang/String;)Z
+0013e2: move-result v0
+0013e4: if-eqz v0, +00fh
+0013e8: const-string v0, "PC_TO_PHONE_RESET_EFFECT_PARAM: "
+0013ec: invoke-static v10, v0, Lcom/vivo/connect/logger/EasyLog;->i(Ljava/lang/String; Ljava/lang/String;)V
+0013f2: invoke-static Lcom/vivo/castsdk/source/mediasource/CameraServiceManager;->getInstance()Lcom/vivo/castsdk/source/mediasource/CameraServiceManager;
+0013f8: move-result-object v0
+0013fa: invoke-virtual v0, Lcom/vivo/castsdk/source/mediasource/CameraServiceManager;->resetEffectParameters()V
+001400: return-void 
+001402: const-string v0, "RELAY_CONNECT_STATUS:"
+001406: invoke-virtual v1, v0, Ljava/lang/String;->startsWith(Ljava/lang/String;)Z
+00140c: move-result v0
+00140e: if-eqz v0, +026h
+001412: invoke-virtual v1, v13, Ljava/lang/String;->substring(I)Ljava/lang/String;
+001418: move-result-object v0
+00141a: const-string v1, "0"
+00141e: invoke-virtual v1, v0, Ljava/lang/String;->equals(Ljava/lang/Object;)Z
+001424: move-result v1
+001426: if-eqz v1, +00ah
+00142a: invoke-static Lcom/vivo/pcsuite/service/PcSuiteObserver;->t()Lcom/vivo/pcsuite/service/PcSuiteObserver;
+001430: move-result-object v0
+001432: invoke-virtual v0, Lcom/vivo/pcsuite/service/PcSuiteObserver;->z()V
+001438: return-void 
+00143a: const-string v1, "1"
+00143e: invoke-virtual v1, v0, Ljava/lang/String;->equals(Ljava/lang/Object;)Z
+001444: move-result v0
+001446: if-eqz v0, +16fh
+00144a: invoke-static Lcom/vivo/pcsuite/service/PcSuiteObserver;->t()Lcom/vivo/pcsuite/service/PcSuiteObserver;
+001450: move-result-object v0
+001452: invoke-virtual v0, Lcom/vivo/pcsuite/service/PcSuiteObserver;->R()V
+001458: return-void 
+00145a: const-string v0, "CLIPBOARD_TEXT:"
+00145e: invoke-virtual v1, v0, Ljava/lang/String;->startsWith(Ljava/lang/String;)Z
+001464: move-result v0
+001466: if-eqz v0, +15fh
+00146a: const/16 v0, 15
+00146e: invoke-virtual v1, v0, Ljava/lang/String;->substring(I)Ljava/lang/String;
+001474: move-result-object v0
+001476: invoke-static v0, Landroid/text/TextUtils;->isEmpty(Ljava/lang/CharSequence;)Z
+00147c: move-result v1
+00147e: if-nez v1, +153h
+001482: invoke-static Lcom/vivo/pcsuite/service/PcSuiteObserver;->t()Lcom/vivo/pcsuite/service/PcSuiteObserver;
+001488: move-result-object v1
+00148a: invoke-virtual v1, v0, Lcom/vivo/pcsuite/service/PcSuiteObserver;->F(Ljava/lang/String;)V
+001490: return-void 
+001492: invoke-virtual v1, v6, Ljava/lang/String;->startsWith(Ljava/lang/String;)Z
+001498: move-result v0
+00149a: if-eqz v0, +004h
+00149e: move v3, v14
+0014a0: goto +10h
+0014a2: invoke-virtual v1, v15, Ljava/lang/String;->startsWith(Ljava/lang/String;)Z
+0014a8: move-result v0
+0014aa: if-eqz v0, +004h
+0014ae: move v3, v9
+0014b0: goto +8h
+0014b2: invoke-virtual v1, v11, Ljava/lang/String;->startsWith(Ljava/lang/String;)Z
+0014b8: move-result v0
+0014ba: if-eqz v0, -00eh
+0014be: const/4 v3, 2
+0014c0: if-nez v3, +007h
+0014c4: invoke-virtual v1, v13, Ljava/lang/String;->substring(I)Ljava/lang/String;
+0014ca: move-result-object v0
+0014cc: goto +1ch
+0014ce: if-ne v3, v9, +010h
+0014d2: invoke-static Lt2/b;->w()Lt2/b;
+0014d8: move-result-object v0
+0014da: invoke-virtual v0, Lt2/b;->R()V
+0014e0: const/16 v0, 22
+0014e4: invoke-virtual v1, v0, Ljava/lang/String;->substring(I)Ljava/lang/String;
+0014ea: move-result-object v0
+0014ec: goto +ch
+0014ee: const/4 v2, 2
+0014f0: if-ne v3, v2, +009h
+0014f4: const/16 v0, 24
+0014f8: invoke-virtual v1, v0, Ljava/lang/String;->substring(I)Ljava/lang/String;
+0014fe: move-result-object v0
+001500: goto +2h
+001502: move-object v0, v12
+001504: invoke-static v0, Landroid/text/TextUtils;->isEmpty(Ljava/lang/CharSequence;)Z
+00150a: move-result v1
+00150c: if-nez v1, +012h
+001510: const-string v1, "cancel"
+001514: invoke-virtual v0, v1, Ljava/lang/String;->equals(Ljava/lang/Object;)Z
+00151a: move-result v0
+00151c: if-eqz v0, +104h
+001520: invoke-static Lt2/b;->w()Lt2/b;
+001526: move-result-object v0
+001528: invoke-virtual v0, v14, Lt2/b;->M(I)V
+00152e: return-void 
+001530: invoke-static Lcom/vivo/pcsuite/PcSuiteApplication;->r()Lcom/vivo/pcsuite/PcSuiteApplication;
+001536: move-result-object v0
+001538: invoke-static v0, v14, Ls2/e;->c(Landroid/content/ContextWrapper; Z)V
+00153e: invoke-static Lcom/vivo/pcsuite/PcSuiteApplication;->r()Lcom/vivo/pcsuite/PcSuiteApplication;
+001544: move-result-object v0
+001546: invoke-static v0, v14, Ls2/e;->d(Landroid/content/ContextWrapper; Z)V
+00154c: const-string v0, " PC_CONTINUE_OPEN_SCREEN : sendPadScreenBroadcast"
+001550: invoke-static v10, v0, Lcom/vivo/connect/logger/EasyLog;->i(Ljava/lang/String; Ljava/lang/String;)V
+001556: invoke-static Lcom/vivo/castsdk/common/SupportVersionCheck;->getInstance()Lcom/vivo/castsdk/common/SupportVersionCheck;
+00155c: move-result-object v0
+00155e: invoke-virtual v0, Lcom/vivo/castsdk/common/SupportVersionCheck;->isSupportScreenCapture()Z
+001564: move-result v0
+001566: if-nez v0, +008h
+00156a: const-string v0, " Pc not support ScreenCapture"
+00156e: invoke-static v10, v0, Lcom/vivo/connect/logger/EasyLog;->i(Ljava/lang/String; Ljava/lang/String;)V
+001574: return-void 
+001576: invoke-static Lcom/vivo/pcsuite/service/PcSuiteObserver;->t()Lcom/vivo/pcsuite/service/PcSuiteObserver;
+00157c: move-result-object v0
+00157e: if-eqz v0, +006h
+001582: invoke-static Lcom/vivo/pcsuite/service/PcSuiteObserver;->s()Ljava/lang/String;
+001588: move-result-object v12
+00158a: invoke-static Lcom/vivo/pcsuite/PcSuiteApplication;->r()Lcom/vivo/pcsuite/PcSuiteApplication;
+001590: move-result-object v0
+001592: invoke-static v0, v12, Lcom/vivo/pcsuite/util/StringUtils;->j(Landroid/content/Context; Ljava/lang/String;)Ljava/lang/String;
+001598: move-result-object v0
+00159a: new-instance v1, Landroid/content/Intent;
+00159e: invoke-static Lcom/vivo/pcsuite/PcSuiteApplication;->r()Lcom/vivo/pcsuite/PcSuiteApplication;
+0015a4: move-result-object v2
+0015a6: const-class v4, Lcom/vivo/pcsuite/cast/MediaProjectionActivity;
+0015aa: invoke-direct v1, v2, v4, Landroid/content/Intent;-><init>(Landroid/content/Context; Ljava/lang/Class;)V
+0015b0: const-string v2, "notification_content"
+0015b4: invoke-virtual v1, v2, v0, Landroid/content/Intent;->putExtra(Ljava/lang/String; Ljava/lang/String;)Landroid/content/Intent;
+0015ba: const/high16 v0, 268500992
+0015be: invoke-virtual v1, v0, Landroid/content/Intent;->setFlags(I)Landroid/content/Intent;
+0015c4: const-string v0, "auth_type"
+0015c8: invoke-virtual v1, v0, v3, Landroid/content/Intent;->putExtra(Ljava/lang/String; I)Landroid/content/Intent;
+0015ce: const-string v0, "isPcMutex"
+0015d2: invoke-virtual v1, v0, v9, Landroid/content/Intent;->putExtra(Ljava/lang/String; Z)Landroid/content/Intent;
+0015d8: new-instance v0, Ljava/lang/StringBuilder;
+0015dc: const-string v2, "mCountDownLatch = "
+0015e0: invoke-direct v0, v2, Ljava/lang/StringBuilder;-><init>(Ljava/lang/String;)V
+0015e6: sget-object v3, Lcom/vivo/pcsuite/cast/MediaProjectionActivity;->u Ljava/util/concurrent/CountDownLatch;
+0015ea: invoke-virtual v0, v3, Ljava/lang/StringBuilder;->append(Ljava/lang/Object;)Ljava/lang/StringBuilder;
+0015f0: invoke-virtual v0, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
+0015f6: move-result-object v0
+0015f8: invoke-static v10, v0, Lcom/vivo/connect/logger/EasyLog;->i(Ljava/lang/String; Ljava/lang/String;)V
+0015fe: new-instance v0, Ljava/lang/StringBuilder;
+001602: invoke-direct v0, v2, Ljava/lang/StringBuilder;-><init>(Ljava/lang/String;)V
+001608: sget-object v2, Lcom/vivo/pcsuite/cast/MediaProjectionActivity;->u Ljava/util/concurrent/CountDownLatch;
+00160c: const-wide/16 v3, 0
+001610: if-eqz v2, +009h
+001614: sget-object v2, Lcom/vivo/pcsuite/cast/MediaProjectionActivity;->u Ljava/util/concurrent/CountDownLatch;
+001618: invoke-virtual v2, Ljava/util/concurrent/CountDownLatch;->getCount()J
+00161e: move-result-wide v5
+001620: goto +2h
+001622: move-wide v5, v3
+001624: invoke-virtual v0, v5, v6, Ljava/lang/StringBuilder;->append(J)Ljava/lang/StringBuilder;
+00162a: invoke-virtual v0, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
+001630: move-result-object v0
+001632: invoke-static v10, v0, Lcom/vivo/connect/logger/EasyLog;->i(Ljava/lang/String; Ljava/lang/String;)V
+001638: sget-object v0, Lcom/vivo/pcsuite/cast/MediaProjectionActivity;->u Ljava/util/concurrent/CountDownLatch;
+00163c: if-eqz v0, +017h
+001640: sget-object v0, Lcom/vivo/pcsuite/cast/MediaProjectionActivity;->u Ljava/util/concurrent/CountDownLatch;
+001644: invoke-virtual v0, Ljava/util/concurrent/CountDownLatch;->getCount()J
+00164a: move-result-wide v5
+00164c: cmp-long v0, v5, v3
+001650: if-lez v0, +00dh
+001654: new-instance v0, Lcom/vivo/pcsuite/common/netty/controller/WebSocketController$7;
+001658: invoke-direct v0, v1, Lcom/vivo/pcsuite/common/netty/controller/WebSocketController$7;-><init>(Landroid/content/Intent;)V
+00165e: const-wide/16 v1, 500
+001662: invoke-static v0, v1, v2, Lcom/vivo/castsdk/sdk/common/utils/ThreadPoolUtils;->postOnBackgroundThread(Ljava/lang/Runnable; J)Ljava/util/concurrent/Future;
+001668: return-void 
+00166a: invoke-static Landroid/app/ActivityOptions;->makeBasic()Landroid/app/ActivityOptions;
+001670: move-result-object v0
+001672: invoke-virtual v0, v14, Landroid/app/ActivityOptions;->setLaunchDisplayId(I)Landroid/app/ActivityOptions;
+001678: invoke-static Lcom/vivo/pcsuite/PcSuiteApplication;->r()Lcom/vivo/pcsuite/PcSuiteApplication;
+00167e: move-result-object v2
+001680: invoke-virtual v0, Landroid/app/ActivityOptions;->toBundle()Landroid/os/Bundle;
+001686: move-result-object v0
+001688: invoke-virtual v2, v1, v0, Landroid/content/Context;->startActivity(Landroid/content/Intent; Landroid/os/Bundle;)V
+00168e: const-string v0, "startActivity"
+001692: invoke-static v10, v0, Lcom/vivo/connect/logger/EasyLog;->i(Ljava/lang/String; Ljava/lang/String;)V
+001698: return-void 
+00169a: invoke-virtual v1, v6, Ljava/lang/String;->startsWith(Ljava/lang/String;)Z
+0016a0: move-result v3
+0016a2: if-eqz v3, +004h
+0016a6: move v9, v14
+0016a8: goto +fh
+0016aa: invoke-virtual v1, v12, Ljava/lang/String;->startsWith(Ljava/lang/String;)Z
+0016b0: move-result v3
+0016b2: if-eqz v3, +003h
+0016b6: goto +8h
+0016b8: invoke-virtual v1, v15, Ljava/lang/String;->startsWith(Ljava/lang/String;)Z
+0016be: move-result v3
+0016c0: if-eqz v3, -00dh
+0016c4: move v9, v2
+0016c6: filled-new-array v14, [I
+0016cc: move-result-object v2
+0016ce: new-instance v3, Ljava/lang/StringBuilder;
+0016d2: const-string v4, " isVivoPad = "
+0016d6: invoke-direct v3, v4, Ljava/lang/StringBuilder;-><init>(Ljava/lang/String;)V
+0016dc: invoke-static Ls2/a;->a()Z
+0016e2: move-result v4
+0016e4: invoke-virtual v3, v4, Ljava/lang/StringBuilder;->append(Z)Ljava/lang/StringBuilder;
+0016ea: const-string v4, ",REQ_AUTH = "
+0016ee: invoke-virtual v3, v4, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+0016f4: invoke-virtual v3, v1, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+0016fa: invoke-virtual v3, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
+001700: move-result-object v3
+001702: invoke-static v10, v3, Lcom/vivo/connect/logger/EasyLog;->i(Ljava/lang/String; Ljava/lang/String;)V
+001708: invoke-static Ls2/a;->a()Z
+00170e: move-result v3
+001710: if-nez v3, +00ah
+001714: new-instance v3, Lcom/vivo/pcsuite/common/netty/controller/WebSocketController$5;
+001718: invoke-direct v3, v0, v1, v9, v2, Lcom/vivo/pcsuite/common/netty/controller/WebSocketController$5;-><init>(Lcom/vivo/pcsuite/common/netty/controller/WebSocketController; Ljava/lang/String; I [I)V
+00171e: invoke-static v3, Lcom/vivo/castsdk/sdk/common/utils/ThreadPoolUtils;->postOnBackgroundThread(Ljava/lang/Runnable;)Ljava/util/concurrent/Future;
+001724: return-void 

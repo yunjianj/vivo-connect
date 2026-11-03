@@ -1,0 +1,33 @@
+APK pcsuite/updateApk/connbase.apk
+DEX classes.dex
+CLASS Lcom/vivo/connbase/m0/a/e$a;
+SUPER Ljava/lang/Object;
+FIELDS
+a Lcom/vivo/connbase/m0/a/e; = None
+
+METHOD <init>(Lcom/vivo/connbase/m0/a/e;)V
+000000: iput-object v1, v0, Lcom/vivo/connbase/m0/a/e$a;->a Lcom/vivo/connbase/m0/a/e;
+000004: invoke-direct v0, Ljava/lang/Object;-><init>()V
+00000a: return-void 
+
+METHOD run()V
+000000: iget-object v0, v5, Lcom/vivo/connbase/m0/a/e$a;->a Lcom/vivo/connbase/m0/a/e;
+000004: invoke-static v0, Lcom/vivo/connbase/m0/a/e;->b(Lcom/vivo/connbase/m0/a/e;)Lcom/vivo/connbase/m0/a/f;
+00000a: move-result-object v0
+00000c: new-instance v1, Lcom/vivo/connbase/m0/a/e$a$a;
+000010: invoke-direct v1, v5, Lcom/vivo/connbase/m0/a/e$a$a;-><init>(Lcom/vivo/connbase/m0/a/e$a;)V
+000016: invoke-virtual v0, v1, Lcom/vivo/connbase/m0/a/f;->a(Lcom/vivo/connbase/m0/a/f$b;)V
+00001c: iget-object v0, v5, Lcom/vivo/connbase/m0/a/e$a;->a Lcom/vivo/connbase/m0/a/e;
+000020: invoke-static v0, Lcom/vivo/connbase/m0/a/e;->i(Lcom/vivo/connbase/m0/a/e;)V
+000026: iget-object v0, v5, Lcom/vivo/connbase/m0/a/e$a;->a Lcom/vivo/connbase/m0/a/e;
+00002a: invoke-static v0, Lcom/vivo/connbase/m0/a/e;->r(Lcom/vivo/connbase/m0/a/e;)Landroid/net/wifi/p2p/WifiP2pManager;
+000030: move-result-object v0
+000032: iget-object v1, v5, Lcom/vivo/connbase/m0/a/e$a;->a Lcom/vivo/connbase/m0/a/e;
+000036: invoke-static v1, Lcom/vivo/connbase/m0/a/e;->q(Lcom/vivo/connbase/m0/a/e;)Landroid/net/wifi/p2p/WifiP2pManager$Channel;
+00003c: move-result-object v1
+00003e: new-instance v2, Lcom/vivo/connbase/m0/a/e$a$b;
+000042: const-string v3, "WifiP2pServerImpl"
+000046: const-string v4, "Discover peers"
+00004a: invoke-direct v2, v5, v3, v4, Lcom/vivo/connbase/m0/a/e$a$b;-><init>(Lcom/vivo/connbase/m0/a/e$a; Ljava/lang/String; Ljava/lang/String;)V
+000050: invoke-virtual v0, v1, v2, Landroid/net/wifi/p2p/WifiP2pManager;->discoverPeers(Landroid/net/wifi/p2p/WifiP2pManager$Channel; Landroid/net/wifi/p2p/WifiP2pManager$ActionListener;)V
+000056: return-void 

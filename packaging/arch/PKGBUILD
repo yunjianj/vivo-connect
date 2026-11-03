@@ -1,0 +1,75 @@
+# Local build: consumes the official files already extracted in this checkout.
+pkgname=vivo-connect
+pkgver=0.1.0
+pkgrel=3
+pkgdesc='Native Linux client for connecting and transferring files with vivo devices'
+arch=('x86_64')
+url='https://www.vivo.com.cn/'
+license=('LicenseRef-Project-Unspecified' 'LicenseRef-vivo-proprietary' 'BSD-3-Clause')
+depends=('nodejs>=22' 'qt6-base' 'qt6-wayland' 'fuse3' 'qrencode' 'python' 'python-dbus' 'python-gobject' 'bluez' 'polkit' 'dnsmasq' 'iproute2' 'libnl' 'openssl')
+makedepends=('base-devel' 'cmake' 'pkgconf' 'desktop-file-utils')
+optdepends=('chromium: automated vivo account login' 'chromedriver: WebDriver account login' 'android-tools: USB connections' 'networkmanager: Wi-Fi Direct network monitoring')
+install=vivo-connect.install
+# Both stripping and debugedit can change the verified private supplicant.
+options=('!strip' '!debug')
+source=()
+sha256sums=()
+
+prepare() {
+  _repo="$(cd "$startdir/../.." && pwd)"
+  _official="${VIVO_OFFICIAL_APP:-$_repo/analysis/app}"
+  _apk="${VIVO_PHONE_APK:-$_repo/samples/windows/v7.0.6.0-cn/pcsuite/updateApk/pcsuite.apk}"
+  _desktop_id="${VIVO_DESKTOP_ID:-io.github.vivo_connect.VivoConnect}"
+  [[ "$_desktop_id" =~ ^[A-Za-z_][A-Za-z0-9_-]*(\.[A-Za-z_][A-Za-z0-9_-]*)+$ ]] || { error 'Invalid VIVO_DESKTOP_ID'; return 1; }
+  [[ -f "$_official/package.json" && -d "$_official/node_modules" && -f "$_apk" ]] || { error 'Official extracted application or phone APK missing; see packaging/arch/README.md'; return 1; }
+  rm -rf "$srcdir/vivo-connect"
+  mkdir -p "$srcdir/vivo-connect" "$srcdir/vivo-connect/analysis/app" "$srcdir/vivo-connect/samples/windows/v7.0.6.0-cn/pcsuite/updateApk"
+  cd "$srcdir/vivo-connect"
+  cp -a "$_repo/backend" "$_repo/native-qt" "$_repo/tools" "$_repo/patches" .
+  install -Dm644 "$_repo/packaging/systemd/vivo-connect-p2p.service" packaging/systemd/vivo-connect-p2p.service
+  node "$_repo/packaging/arch/collect-official.cjs" "$_official" analysis/app
+  install -m644 "$_apk" samples/windows/v7.0.6.0-cn/pcsuite/updateApk/pcsuite.apk
+  if [[ -n "${VIVO_ICON:-}" ]]; then
+    install -m644 "$VIVO_ICON" icon.png
+    python -c 'import pathlib,sys; assert pathlib.Path(sys.argv[1]).read_bytes().startswith(b"\x89PNG\r\n\x1a\n"), "VIVO_ICON must be PNG"' icon.png
+  else
+    python "$_repo/packaging/arch/extract-icon.py" "$_official/dist/electron/static/logo.ico" icon.png
+  fi
+  sed "s/@DESKTOP_ID@/$_desktop_id/g" "$_repo/packaging/arch/io.github.vivo_connect.VivoConnect.desktop.in" > app.desktop
+  desktop-file-validate app.desktop
+}
+
+build() {
+  cd "$srcdir/vivo-connect"
+  _archive="$_repo/build/private-p2p/wpa_supplicant-2.12.tar.gz"
+  if [[ -f "$_archive" ]]; then
+    python tools/build_p2p_supplicant.py --archive "$_archive" --jobs "${VIVO_BUILD_JOBS:-2}"
+  else
+    python tools/build_p2p_supplicant.py --jobs "${VIVO_BUILD_JOBS:-2}"
+  fi
+  cmake -S native-qt -B qt-build -DCMAKE_BUILD_TYPE=MinSizeRel -DVIVO_PROJECT_ROOT=/usr/lib/vivo-connect -DVIVO_DESKTOP_ID="$_desktop_id"
+  cmake --build qt-build -j "${VIVO_BUILD_JOBS:-2}"
+}
+
+check() {
+  cd "$srcdir/vivo-connect"
+  QT_QPA_PLATFORM=offscreen qt-build/vivo-connect-qt --self-test
+}
+
+package() {
+  cd "$srcdir/vivo-connect"
+  local repo="$(cd "$startdir/../.." && pwd)"
+  local desktop_id="${VIVO_DESKTOP_ID:-io.github.vivo_connect.VivoConnect}"
+  local root="$pkgdir/usr/lib/vivo-connect"
+  install -d "$root" "$root/bin" "$root/build/private-p2p/bin" "$root/samples/windows/v7.0.6.0-cn/pcsuite/updateApk"
+  cp -a backend analysis tools patches "$root/"
+  install -Dm644 packaging/systemd/vivo-connect-p2p.service "$root/packaging/systemd/vivo-connect-p2p.service"
+  install -m755 qt-build/vivo-connect-qt qt-build/vivo-drag-fuse "$root/bin/"
+  install -m755 build/private-p2p/bin/wpa_supplicant build/private-p2p/bin/wpa_cli "$root/build/private-p2p/bin/"
+  install -m644 build/private-p2p/bin/build.json build/private-p2p/bin/COPYING "$root/build/private-p2p/bin/"
+  install -m644 samples/windows/v7.0.6.0-cn/pcsuite/updateApk/pcsuite.apk "$root/samples/windows/v7.0.6.0-cn/pcsuite/updateApk/"
+  install -Dm755 "$repo/packaging/arch/vivo-connect" "$pkgdir/usr/bin/vivo-connect"
+  install -Dm644 app.desktop "$pkgdir/usr/share/applications/$desktop_id.desktop"
+  install -Dm644 icon.png "$pkgdir/usr/share/icons/hicolor/256x256/apps/$desktop_id.png"
+  install -Dm644 build/private-p2p/bin/COPYING "$pkgdir/usr/share/licenses/$pkgname/wpa_supplicant-COPYING"
+}

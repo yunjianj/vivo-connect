@@ -1,0 +1,874 @@
+APK pcsuite/updateApk/connbase.apk
+DEX classes2.dex
+CLASS Lcom/vivo/pcsuite/pcconnect/IShareLinkManager$Stub$Proxy;
+SUPER Ljava/lang/Object;
+FIELDS
+sDefaultImpl Lcom/vivo/pcsuite/pcconnect/IShareLinkManager; = None
+mRemote Landroid/os/IBinder; = None
+
+METHOD <init>(Landroid/os/IBinder;)V
+000000: invoke-direct v0, Ljava/lang/Object;-><init>()V
+000006: iput-object v1, v0, Lcom/vivo/pcsuite/pcconnect/IShareLinkManager$Stub$Proxy;->mRemote Landroid/os/IBinder;
+00000a: return-void 
+
+METHOD appResponse(I)V
+000000: invoke-static Landroid/os/Parcel;->obtain()Landroid/os/Parcel;
+000006: move-result-object v0
+000008: invoke-static Landroid/os/Parcel;->obtain()Landroid/os/Parcel;
+00000e: move-result-object v1
+000010: const-string v2, "com.vivo.pcsuite.pcconnect.IShareLinkManager"
+000014: invoke-virtual v0, v2, Landroid/os/Parcel;->writeInterfaceToken(Ljava/lang/String;)V
+00001a: invoke-virtual v0, v6, Landroid/os/Parcel;->writeInt(I)V
+000020: iget-object v2, v5, Lcom/vivo/pcsuite/pcconnect/IShareLinkManager$Stub$Proxy;->mRemote Landroid/os/IBinder;
+000024: const/16 v3, 17
+000028: const/4 v4, 0
+00002a: invoke-interface v2, v3, v0, v1, v4, Landroid/os/IBinder;->transact(I Landroid/os/Parcel; Landroid/os/Parcel; I)Z
+000030: move-result v2
+000032: if-nez v2, +016h
+000036: invoke-static Lcom/vivo/pcsuite/pcconnect/IShareLinkManager$Stub;->getDefaultImpl()Lcom/vivo/pcsuite/pcconnect/IShareLinkManager;
+00003c: move-result-object v2
+00003e: if-eqz v2, +010h
+000042: invoke-static Lcom/vivo/pcsuite/pcconnect/IShareLinkManager$Stub;->getDefaultImpl()Lcom/vivo/pcsuite/pcconnect/IShareLinkManager;
+000048: move-result-object v2
+00004a: invoke-interface v2, v6, Lcom/vivo/pcsuite/pcconnect/IShareLinkManager;->appResponse(I)V
+000050: invoke-virtual v1, Landroid/os/Parcel;->recycle()V
+000056: invoke-virtual v0, Landroid/os/Parcel;->recycle()V
+00005c: return-void 
+00005e: invoke-virtual v1, Landroid/os/Parcel;->readException()V
+000064: invoke-virtual v1, Landroid/os/Parcel;->recycle()V
+00006a: invoke-virtual v0, Landroid/os/Parcel;->recycle()V
+000070: return-void 
+000072: move-exception v6
+000074: invoke-virtual v1, Landroid/os/Parcel;->recycle()V
+00007a: invoke-virtual v0, Landroid/os/Parcel;->recycle()V
+000080: throw v6
+
+METHOD asBinder()Landroid/os/IBinder;
+000000: iget-object v0, v1, Lcom/vivo/pcsuite/pcconnect/IShareLinkManager$Stub$Proxy;->mRemote Landroid/os/IBinder;
+000004: return-object v0
+
+METHOD cancelConnect()V
+000000: invoke-static Landroid/os/Parcel;->obtain()Landroid/os/Parcel;
+000006: move-result-object v0
+000008: invoke-static Landroid/os/Parcel;->obtain()Landroid/os/Parcel;
+00000e: move-result-object v1
+000010: const-string v2, "com.vivo.pcsuite.pcconnect.IShareLinkManager"
+000014: invoke-virtual v0, v2, Landroid/os/Parcel;->writeInterfaceToken(Ljava/lang/String;)V
+00001a: iget-object v2, v5, Lcom/vivo/pcsuite/pcconnect/IShareLinkManager$Stub$Proxy;->mRemote Landroid/os/IBinder;
+00001e: const/16 v3, 19
+000022: const/4 v4, 0
+000024: invoke-interface v2, v3, v0, v1, v4, Landroid/os/IBinder;->transact(I Landroid/os/Parcel; Landroid/os/Parcel; I)Z
+00002a: move-result v2
+00002c: if-nez v2, +016h
+000030: invoke-static Lcom/vivo/pcsuite/pcconnect/IShareLinkManager$Stub;->getDefaultImpl()Lcom/vivo/pcsuite/pcconnect/IShareLinkManager;
+000036: move-result-object v2
+000038: if-eqz v2, +010h
+00003c: invoke-static Lcom/vivo/pcsuite/pcconnect/IShareLinkManager$Stub;->getDefaultImpl()Lcom/vivo/pcsuite/pcconnect/IShareLinkManager;
+000042: move-result-object v2
+000044: invoke-interface v2, Lcom/vivo/pcsuite/pcconnect/IShareLinkManager;->cancelConnect()V
+00004a: invoke-virtual v1, Landroid/os/Parcel;->recycle()V
+000050: invoke-virtual v0, Landroid/os/Parcel;->recycle()V
+000056: return-void 
+000058: invoke-virtual v1, Landroid/os/Parcel;->readException()V
+00005e: invoke-virtual v1, Landroid/os/Parcel;->recycle()V
+000064: invoke-virtual v0, Landroid/os/Parcel;->recycle()V
+00006a: return-void 
+00006c: move-exception v2
+00006e: invoke-virtual v1, Landroid/os/Parcel;->recycle()V
+000074: invoke-virtual v0, Landroid/os/Parcel;->recycle()V
+00007a: throw v2
+
+METHOD close()V
+000000: invoke-static Landroid/os/Parcel;->obtain()Landroid/os/Parcel;
+000006: move-result-object v0
+000008: invoke-static Landroid/os/Parcel;->obtain()Landroid/os/Parcel;
+00000e: move-result-object v1
+000010: const-string v2, "com.vivo.pcsuite.pcconnect.IShareLinkManager"
+000014: invoke-virtual v0, v2, Landroid/os/Parcel;->writeInterfaceToken(Ljava/lang/String;)V
+00001a: iget-object v2, v5, Lcom/vivo/pcsuite/pcconnect/IShareLinkManager$Stub$Proxy;->mRemote Landroid/os/IBinder;
+00001e: const/4 v3, 2
+000020: const/4 v4, 0
+000022: invoke-interface v2, v3, v0, v1, v4, Landroid/os/IBinder;->transact(I Landroid/os/Parcel; Landroid/os/Parcel; I)Z
+000028: move-result v2
+00002a: if-nez v2, +016h
+00002e: invoke-static Lcom/vivo/pcsuite/pcconnect/IShareLinkManager$Stub;->getDefaultImpl()Lcom/vivo/pcsuite/pcconnect/IShareLinkManager;
+000034: move-result-object v2
+000036: if-eqz v2, +010h
+00003a: invoke-static Lcom/vivo/pcsuite/pcconnect/IShareLinkManager$Stub;->getDefaultImpl()Lcom/vivo/pcsuite/pcconnect/IShareLinkManager;
+000040: move-result-object v2
+000042: invoke-interface v2, Lcom/vivo/pcsuite/pcconnect/IShareLinkManager;->close()V
+000048: invoke-virtual v1, Landroid/os/Parcel;->recycle()V
+00004e: invoke-virtual v0, Landroid/os/Parcel;->recycle()V
+000054: return-void 
+000056: invoke-virtual v1, Landroid/os/Parcel;->readException()V
+00005c: invoke-virtual v1, Landroid/os/Parcel;->recycle()V
+000062: invoke-virtual v0, Landroid/os/Parcel;->recycle()V
+000068: return-void 
+00006a: move-exception v2
+00006c: invoke-virtual v1, Landroid/os/Parcel;->recycle()V
+000072: invoke-virtual v0, Landroid/os/Parcel;->recycle()V
+000078: throw v2
+
+METHOD connect(Ljava/lang/String;)V
+000000: invoke-static Landroid/os/Parcel;->obtain()Landroid/os/Parcel;
+000006: move-result-object v0
+000008: invoke-static Landroid/os/Parcel;->obtain()Landroid/os/Parcel;
+00000e: move-result-object v1
+000010: const-string v2, "com.vivo.pcsuite.pcconnect.IShareLinkManager"
+000014: invoke-virtual v0, v2, Landroid/os/Parcel;->writeInterfaceToken(Ljava/lang/String;)V
+00001a: invoke-virtual v0, v6, Landroid/os/Parcel;->writeString(Ljava/lang/String;)V
+000020: iget-object v2, v5, Lcom/vivo/pcsuite/pcconnect/IShareLinkManager$Stub$Proxy;->mRemote Landroid/os/IBinder;
+000024: const/4 v3, 7
+000026: const/4 v4, 0
+000028: invoke-interface v2, v3, v0, v1, v4, Landroid/os/IBinder;->transact(I Landroid/os/Parcel; Landroid/os/Parcel; I)Z
+00002e: move-result v2
+000030: if-nez v2, +016h
+000034: invoke-static Lcom/vivo/pcsuite/pcconnect/IShareLinkManager$Stub;->getDefaultImpl()Lcom/vivo/pcsuite/pcconnect/IShareLinkManager;
+00003a: move-result-object v2
+00003c: if-eqz v2, +010h
+000040: invoke-static Lcom/vivo/pcsuite/pcconnect/IShareLinkManager$Stub;->getDefaultImpl()Lcom/vivo/pcsuite/pcconnect/IShareLinkManager;
+000046: move-result-object v2
+000048: invoke-interface v2, v6, Lcom/vivo/pcsuite/pcconnect/IShareLinkManager;->connect(Ljava/lang/String;)V
+00004e: invoke-virtual v1, Landroid/os/Parcel;->recycle()V
+000054: invoke-virtual v0, Landroid/os/Parcel;->recycle()V
+00005a: return-void 
+00005c: invoke-virtual v1, Landroid/os/Parcel;->readException()V
+000062: invoke-virtual v1, Landroid/os/Parcel;->recycle()V
+000068: invoke-virtual v0, Landroid/os/Parcel;->recycle()V
+00006e: return-void 
+000070: move-exception v6
+000072: invoke-virtual v1, Landroid/os/Parcel;->recycle()V
+000078: invoke-virtual v0, Landroid/os/Parcel;->recycle()V
+00007e: throw v6
+
+METHOD connectSuccess(Ljava/lang/String;)V
+000000: invoke-static Landroid/os/Parcel;->obtain()Landroid/os/Parcel;
+000006: move-result-object v0
+000008: invoke-static Landroid/os/Parcel;->obtain()Landroid/os/Parcel;
+00000e: move-result-object v1
+000010: const-string v2, "com.vivo.pcsuite.pcconnect.IShareLinkManager"
+000014: invoke-virtual v0, v2, Landroid/os/Parcel;->writeInterfaceToken(Ljava/lang/String;)V
+00001a: invoke-virtual v0, v6, Landroid/os/Parcel;->writeString(Ljava/lang/String;)V
+000020: iget-object v2, v5, Lcom/vivo/pcsuite/pcconnect/IShareLinkManager$Stub$Proxy;->mRemote Landroid/os/IBinder;
+000024: const/16 v3, 21
+000028: const/4 v4, 0
+00002a: invoke-interface v2, v3, v0, v1, v4, Landroid/os/IBinder;->transact(I Landroid/os/Parcel; Landroid/os/Parcel; I)Z
+000030: move-result v2
+000032: if-nez v2, +016h
+000036: invoke-static Lcom/vivo/pcsuite/pcconnect/IShareLinkManager$Stub;->getDefaultImpl()Lcom/vivo/pcsuite/pcconnect/IShareLinkManager;
+00003c: move-result-object v2
+00003e: if-eqz v2, +010h
+000042: invoke-static Lcom/vivo/pcsuite/pcconnect/IShareLinkManager$Stub;->getDefaultImpl()Lcom/vivo/pcsuite/pcconnect/IShareLinkManager;
+000048: move-result-object v2
+00004a: invoke-interface v2, v6, Lcom/vivo/pcsuite/pcconnect/IShareLinkManager;->connectSuccess(Ljava/lang/String;)V
+000050: invoke-virtual v1, Landroid/os/Parcel;->recycle()V
+000056: invoke-virtual v0, Landroid/os/Parcel;->recycle()V
+00005c: return-void 
+00005e: invoke-virtual v1, Landroid/os/Parcel;->readException()V
+000064: invoke-virtual v1, Landroid/os/Parcel;->recycle()V
+00006a: invoke-virtual v0, Landroid/os/Parcel;->recycle()V
+000070: return-void 
+000072: move-exception v6
+000074: invoke-virtual v1, Landroid/os/Parcel;->recycle()V
+00007a: invoke-virtual v0, Landroid/os/Parcel;->recycle()V
+000080: throw v6
+
+METHOD connectbyrfcomm(I Ljava/lang/String; Ljava/lang/String; I)V
+000000: invoke-static Landroid/os/Parcel;->obtain()Landroid/os/Parcel;
+000006: move-result-object v0
+000008: invoke-static Landroid/os/Parcel;->obtain()Landroid/os/Parcel;
+00000e: move-result-object v1
+000010: const-string v2, "com.vivo.pcsuite.pcconnect.IShareLinkManager"
+000014: invoke-virtual v0, v2, Landroid/os/Parcel;->writeInterfaceToken(Ljava/lang/String;)V
+00001a: invoke-virtual v0, v6, Landroid/os/Parcel;->writeInt(I)V
+000020: invoke-virtual v0, v7, Landroid/os/Parcel;->writeString(Ljava/lang/String;)V
+000026: invoke-virtual v0, v8, Landroid/os/Parcel;->writeString(Ljava/lang/String;)V
+00002c: invoke-virtual v0, v9, Landroid/os/Parcel;->writeInt(I)V
+000032: iget-object v2, v5, Lcom/vivo/pcsuite/pcconnect/IShareLinkManager$Stub$Proxy;->mRemote Landroid/os/IBinder;
+000036: const/16 v3, 8
+00003a: const/4 v4, 0
+00003c: invoke-interface v2, v3, v0, v1, v4, Landroid/os/IBinder;->transact(I Landroid/os/Parcel; Landroid/os/Parcel; I)Z
+000042: move-result v2
+000044: if-nez v2, +016h
+000048: invoke-static Lcom/vivo/pcsuite/pcconnect/IShareLinkManager$Stub;->getDefaultImpl()Lcom/vivo/pcsuite/pcconnect/IShareLinkManager;
+00004e: move-result-object v2
+000050: if-eqz v2, +010h
+000054: invoke-static Lcom/vivo/pcsuite/pcconnect/IShareLinkManager$Stub;->getDefaultImpl()Lcom/vivo/pcsuite/pcconnect/IShareLinkManager;
+00005a: move-result-object v2
+00005c: invoke-interface v2, v6, v7, v8, v9, Lcom/vivo/pcsuite/pcconnect/IShareLinkManager;->connectbyrfcomm(I Ljava/lang/String; Ljava/lang/String; I)V
+000062: invoke-virtual v1, Landroid/os/Parcel;->recycle()V
+000068: invoke-virtual v0, Landroid/os/Parcel;->recycle()V
+00006e: return-void 
+000070: invoke-virtual v1, Landroid/os/Parcel;->readException()V
+000076: invoke-virtual v1, Landroid/os/Parcel;->recycle()V
+00007c: invoke-virtual v0, Landroid/os/Parcel;->recycle()V
+000082: return-void 
+000084: move-exception v6
+000086: invoke-virtual v1, Landroid/os/Parcel;->recycle()V
+00008c: invoke-virtual v0, Landroid/os/Parcel;->recycle()V
+000092: throw v6
+
+METHOD disconnect()V
+000000: invoke-static Landroid/os/Parcel;->obtain()Landroid/os/Parcel;
+000006: move-result-object v0
+000008: invoke-static Landroid/os/Parcel;->obtain()Landroid/os/Parcel;
+00000e: move-result-object v1
+000010: const-string v2, "com.vivo.pcsuite.pcconnect.IShareLinkManager"
+000014: invoke-virtual v0, v2, Landroid/os/Parcel;->writeInterfaceToken(Ljava/lang/String;)V
+00001a: iget-object v2, v5, Lcom/vivo/pcsuite/pcconnect/IShareLinkManager$Stub$Proxy;->mRemote Landroid/os/IBinder;
+00001e: const/16 v3, 9
+000022: const/4 v4, 0
+000024: invoke-interface v2, v3, v0, v1, v4, Landroid/os/IBinder;->transact(I Landroid/os/Parcel; Landroid/os/Parcel; I)Z
+00002a: move-result v2
+00002c: if-nez v2, +016h
+000030: invoke-static Lcom/vivo/pcsuite/pcconnect/IShareLinkManager$Stub;->getDefaultImpl()Lcom/vivo/pcsuite/pcconnect/IShareLinkManager;
+000036: move-result-object v2
+000038: if-eqz v2, +010h
+00003c: invoke-static Lcom/vivo/pcsuite/pcconnect/IShareLinkManager$Stub;->getDefaultImpl()Lcom/vivo/pcsuite/pcconnect/IShareLinkManager;
+000042: move-result-object v2
+000044: invoke-interface v2, Lcom/vivo/pcsuite/pcconnect/IShareLinkManager;->disconnect()V
+00004a: invoke-virtual v1, Landroid/os/Parcel;->recycle()V
+000050: invoke-virtual v0, Landroid/os/Parcel;->recycle()V
+000056: return-void 
+000058: invoke-virtual v1, Landroid/os/Parcel;->readException()V
+00005e: invoke-virtual v1, Landroid/os/Parcel;->recycle()V
+000064: invoke-virtual v0, Landroid/os/Parcel;->recycle()V
+00006a: return-void 
+00006c: move-exception v2
+00006e: invoke-virtual v1, Landroid/os/Parcel;->recycle()V
+000074: invoke-virtual v0, Landroid/os/Parcel;->recycle()V
+00007a: throw v2
+
+METHOD disconnectBle()V
+000000: invoke-static Landroid/os/Parcel;->obtain()Landroid/os/Parcel;
+000006: move-result-object v0
+000008: invoke-static Landroid/os/Parcel;->obtain()Landroid/os/Parcel;
+00000e: move-result-object v1
+000010: const-string v2, "com.vivo.pcsuite.pcconnect.IShareLinkManager"
+000014: invoke-virtual v0, v2, Landroid/os/Parcel;->writeInterfaceToken(Ljava/lang/String;)V
+00001a: iget-object v2, v5, Lcom/vivo/pcsuite/pcconnect/IShareLinkManager$Stub$Proxy;->mRemote Landroid/os/IBinder;
+00001e: const/16 v3, 10
+000022: const/4 v4, 0
+000024: invoke-interface v2, v3, v0, v1, v4, Landroid/os/IBinder;->transact(I Landroid/os/Parcel; Landroid/os/Parcel; I)Z
+00002a: move-result v2
+00002c: if-nez v2, +016h
+000030: invoke-static Lcom/vivo/pcsuite/pcconnect/IShareLinkManager$Stub;->getDefaultImpl()Lcom/vivo/pcsuite/pcconnect/IShareLinkManager;
+000036: move-result-object v2
+000038: if-eqz v2, +010h
+00003c: invoke-static Lcom/vivo/pcsuite/pcconnect/IShareLinkManager$Stub;->getDefaultImpl()Lcom/vivo/pcsuite/pcconnect/IShareLinkManager;
+000042: move-result-object v2
+000044: invoke-interface v2, Lcom/vivo/pcsuite/pcconnect/IShareLinkManager;->disconnectBle()V
+00004a: invoke-virtual v1, Landroid/os/Parcel;->recycle()V
+000050: invoke-virtual v0, Landroid/os/Parcel;->recycle()V
+000056: return-void 
+000058: invoke-virtual v1, Landroid/os/Parcel;->readException()V
+00005e: invoke-virtual v1, Landroid/os/Parcel;->recycle()V
+000064: invoke-virtual v0, Landroid/os/Parcel;->recycle()V
+00006a: return-void 
+00006c: move-exception v2
+00006e: invoke-virtual v1, Landroid/os/Parcel;->recycle()V
+000074: invoke-virtual v0, Landroid/os/Parcel;->recycle()V
+00007a: throw v2
+
+METHOD getDevicesSignal(I I)Ljava/util/Map;
+000000: invoke-static Landroid/os/Parcel;->obtain()Landroid/os/Parcel;
+000006: move-result-object v0
+000008: invoke-static Landroid/os/Parcel;->obtain()Landroid/os/Parcel;
+00000e: move-result-object v1
+000010: const-string v2, "com.vivo.pcsuite.pcconnect.IShareLinkManager"
+000014: invoke-virtual v0, v2, Landroid/os/Parcel;->writeInterfaceToken(Ljava/lang/String;)V
+00001a: invoke-virtual v0, v6, Landroid/os/Parcel;->writeInt(I)V
+000020: invoke-virtual v0, v7, Landroid/os/Parcel;->writeInt(I)V
+000026: iget-object v2, v5, Lcom/vivo/pcsuite/pcconnect/IShareLinkManager$Stub$Proxy;->mRemote Landroid/os/IBinder;
+00002a: const/4 v3, 6
+00002c: const/4 v4, 0
+00002e: invoke-interface v2, v3, v0, v1, v4, Landroid/os/IBinder;->transact(I Landroid/os/Parcel; Landroid/os/Parcel; I)Z
+000034: move-result v2
+000036: if-nez v2, +017h
+00003a: invoke-static Lcom/vivo/pcsuite/pcconnect/IShareLinkManager$Stub;->getDefaultImpl()Lcom/vivo/pcsuite/pcconnect/IShareLinkManager;
+000040: move-result-object v2
+000042: if-eqz v2, +011h
+000046: invoke-static Lcom/vivo/pcsuite/pcconnect/IShareLinkManager$Stub;->getDefaultImpl()Lcom/vivo/pcsuite/pcconnect/IShareLinkManager;
+00004c: move-result-object v2
+00004e: invoke-interface v2, v6, v7, Lcom/vivo/pcsuite/pcconnect/IShareLinkManager;->getDevicesSignal(I I)Ljava/util/Map;
+000054: move-result-object v6
+000056: invoke-virtual v1, Landroid/os/Parcel;->recycle()V
+00005c: invoke-virtual v0, Landroid/os/Parcel;->recycle()V
+000062: return-object v6
+000064: invoke-virtual v1, Landroid/os/Parcel;->readException()V
+00006a: invoke-virtual v5, Ljava/lang/Object;->getClass()Ljava/lang/Class;
+000070: move-result-object v6
+000072: invoke-virtual v6, Ljava/lang/Class;->getClassLoader()Ljava/lang/ClassLoader;
+000078: move-result-object v6
+00007a: invoke-virtual v1, v6, Landroid/os/Parcel;->readHashMap(Ljava/lang/ClassLoader;)Ljava/util/HashMap;
+000080: move-result-object v6
+000082: invoke-virtual v1, Landroid/os/Parcel;->recycle()V
+000088: invoke-virtual v0, Landroid/os/Parcel;->recycle()V
+00008e: return-object v6
+000090: move-exception v6
+000092: invoke-virtual v1, Landroid/os/Parcel;->recycle()V
+000098: invoke-virtual v0, Landroid/os/Parcel;->recycle()V
+00009e: throw v6
+
+METHOD getInterfaceDescriptor()Ljava/lang/String;
+000000: const-string v0, "com.vivo.pcsuite.pcconnect.IShareLinkManager"
+000004: return-object v0
+
+METHOD isConnected()Z
+000000: invoke-static Landroid/os/Parcel;->obtain()Landroid/os/Parcel;
+000006: move-result-object v0
+000008: invoke-static Landroid/os/Parcel;->obtain()Landroid/os/Parcel;
+00000e: move-result-object v1
+000010: const-string v2, "com.vivo.pcsuite.pcconnect.IShareLinkManager"
+000014: invoke-virtual v0, v2, Landroid/os/Parcel;->writeInterfaceToken(Ljava/lang/String;)V
+00001a: iget-object v2, v5, Lcom/vivo/pcsuite/pcconnect/IShareLinkManager$Stub$Proxy;->mRemote Landroid/os/IBinder;
+00001e: const/16 v3, 14
+000022: const/4 v4, 0
+000024: invoke-interface v2, v3, v0, v1, v4, Landroid/os/IBinder;->transact(I Landroid/os/Parcel; Landroid/os/Parcel; I)Z
+00002a: move-result v2
+00002c: if-nez v2, +017h
+000030: invoke-static Lcom/vivo/pcsuite/pcconnect/IShareLinkManager$Stub;->getDefaultImpl()Lcom/vivo/pcsuite/pcconnect/IShareLinkManager;
+000036: move-result-object v2
+000038: if-eqz v2, +011h
+00003c: invoke-static Lcom/vivo/pcsuite/pcconnect/IShareLinkManager$Stub;->getDefaultImpl()Lcom/vivo/pcsuite/pcconnect/IShareLinkManager;
+000042: move-result-object v2
+000044: invoke-interface v2, Lcom/vivo/pcsuite/pcconnect/IShareLinkManager;->isConnected()Z
+00004a: move-result v2
+00004c: invoke-virtual v1, Landroid/os/Parcel;->recycle()V
+000052: invoke-virtual v0, Landroid/os/Parcel;->recycle()V
+000058: return v2
+00005a: invoke-virtual v1, Landroid/os/Parcel;->readException()V
+000060: invoke-virtual v1, Landroid/os/Parcel;->readInt()I
+000066: move-result v2
+000068: if-eqz v2, +003h
+00006c: const/4 v4, 1
+00006e: invoke-virtual v1, Landroid/os/Parcel;->recycle()V
+000074: invoke-virtual v0, Landroid/os/Parcel;->recycle()V
+00007a: return v4
+00007c: move-exception v2
+00007e: invoke-virtual v1, Landroid/os/Parcel;->recycle()V
+000084: invoke-virtual v0, Landroid/os/Parcel;->recycle()V
+00008a: throw v2
+
+METHOD isConnecting()Z
+000000: invoke-static Landroid/os/Parcel;->obtain()Landroid/os/Parcel;
+000006: move-result-object v0
+000008: invoke-static Landroid/os/Parcel;->obtain()Landroid/os/Parcel;
+00000e: move-result-object v1
+000010: const-string v2, "com.vivo.pcsuite.pcconnect.IShareLinkManager"
+000014: invoke-virtual v0, v2, Landroid/os/Parcel;->writeInterfaceToken(Ljava/lang/String;)V
+00001a: iget-object v2, v5, Lcom/vivo/pcsuite/pcconnect/IShareLinkManager$Stub$Proxy;->mRemote Landroid/os/IBinder;
+00001e: const/16 v3, 15
+000022: const/4 v4, 0
+000024: invoke-interface v2, v3, v0, v1, v4, Landroid/os/IBinder;->transact(I Landroid/os/Parcel; Landroid/os/Parcel; I)Z
+00002a: move-result v2
+00002c: if-nez v2, +017h
+000030: invoke-static Lcom/vivo/pcsuite/pcconnect/IShareLinkManager$Stub;->getDefaultImpl()Lcom/vivo/pcsuite/pcconnect/IShareLinkManager;
+000036: move-result-object v2
+000038: if-eqz v2, +011h
+00003c: invoke-static Lcom/vivo/pcsuite/pcconnect/IShareLinkManager$Stub;->getDefaultImpl()Lcom/vivo/pcsuite/pcconnect/IShareLinkManager;
+000042: move-result-object v2
+000044: invoke-interface v2, Lcom/vivo/pcsuite/pcconnect/IShareLinkManager;->isConnecting()Z
+00004a: move-result v2
+00004c: invoke-virtual v1, Landroid/os/Parcel;->recycle()V
+000052: invoke-virtual v0, Landroid/os/Parcel;->recycle()V
+000058: return v2
+00005a: invoke-virtual v1, Landroid/os/Parcel;->readException()V
+000060: invoke-virtual v1, Landroid/os/Parcel;->readInt()I
+000066: move-result v2
+000068: if-eqz v2, +003h
+00006c: const/4 v4, 1
+00006e: invoke-virtual v1, Landroid/os/Parcel;->recycle()V
+000074: invoke-virtual v0, Landroid/os/Parcel;->recycle()V
+00007a: return v4
+00007c: move-exception v2
+00007e: invoke-virtual v1, Landroid/os/Parcel;->recycle()V
+000084: invoke-virtual v0, Landroid/os/Parcel;->recycle()V
+00008a: throw v2
+
+METHOD isDeviceInMatch(Ljava/lang/String;)Z
+000000: invoke-static Landroid/os/Parcel;->obtain()Landroid/os/Parcel;
+000006: move-result-object v0
+000008: invoke-static Landroid/os/Parcel;->obtain()Landroid/os/Parcel;
+00000e: move-result-object v1
+000010: const-string v2, "com.vivo.pcsuite.pcconnect.IShareLinkManager"
+000014: invoke-virtual v0, v2, Landroid/os/Parcel;->writeInterfaceToken(Ljava/lang/String;)V
+00001a: invoke-virtual v0, v6, Landroid/os/Parcel;->writeString(Ljava/lang/String;)V
+000020: iget-object v2, v5, Lcom/vivo/pcsuite/pcconnect/IShareLinkManager$Stub$Proxy;->mRemote Landroid/os/IBinder;
+000024: const/4 v3, 5
+000026: const/4 v4, 0
+000028: invoke-interface v2, v3, v0, v1, v4, Landroid/os/IBinder;->transact(I Landroid/os/Parcel; Landroid/os/Parcel; I)Z
+00002e: move-result v2
+000030: if-nez v2, +017h
+000034: invoke-static Lcom/vivo/pcsuite/pcconnect/IShareLinkManager$Stub;->getDefaultImpl()Lcom/vivo/pcsuite/pcconnect/IShareLinkManager;
+00003a: move-result-object v2
+00003c: if-eqz v2, +011h
+000040: invoke-static Lcom/vivo/pcsuite/pcconnect/IShareLinkManager$Stub;->getDefaultImpl()Lcom/vivo/pcsuite/pcconnect/IShareLinkManager;
+000046: move-result-object v2
+000048: invoke-interface v2, v6, Lcom/vivo/pcsuite/pcconnect/IShareLinkManager;->isDeviceInMatch(Ljava/lang/String;)Z
+00004e: move-result v6
+000050: invoke-virtual v1, Landroid/os/Parcel;->recycle()V
+000056: invoke-virtual v0, Landroid/os/Parcel;->recycle()V
+00005c: return v6
+00005e: invoke-virtual v1, Landroid/os/Parcel;->readException()V
+000064: invoke-virtual v1, Landroid/os/Parcel;->readInt()I
+00006a: move-result v6
+00006c: if-eqz v6, +003h
+000070: const/4 v4, 1
+000072: invoke-virtual v1, Landroid/os/Parcel;->recycle()V
+000078: invoke-virtual v0, Landroid/os/Parcel;->recycle()V
+00007e: return v4
+000080: move-exception v6
+000082: invoke-virtual v1, Landroid/os/Parcel;->recycle()V
+000088: invoke-virtual v0, Landroid/os/Parcel;->recycle()V
+00008e: throw v6
+
+METHOD isScanning()Z
+000000: invoke-static Landroid/os/Parcel;->obtain()Landroid/os/Parcel;
+000006: move-result-object v0
+000008: invoke-static Landroid/os/Parcel;->obtain()Landroid/os/Parcel;
+00000e: move-result-object v1
+000010: const-string v2, "com.vivo.pcsuite.pcconnect.IShareLinkManager"
+000014: invoke-virtual v0, v2, Landroid/os/Parcel;->writeInterfaceToken(Ljava/lang/String;)V
+00001a: iget-object v2, v5, Lcom/vivo/pcsuite/pcconnect/IShareLinkManager$Stub$Proxy;->mRemote Landroid/os/IBinder;
+00001e: const/16 v3, 16
+000022: const/4 v4, 0
+000024: invoke-interface v2, v3, v0, v1, v4, Landroid/os/IBinder;->transact(I Landroid/os/Parcel; Landroid/os/Parcel; I)Z
+00002a: move-result v2
+00002c: if-nez v2, +017h
+000030: invoke-static Lcom/vivo/pcsuite/pcconnect/IShareLinkManager$Stub;->getDefaultImpl()Lcom/vivo/pcsuite/pcconnect/IShareLinkManager;
+000036: move-result-object v2
+000038: if-eqz v2, +011h
+00003c: invoke-static Lcom/vivo/pcsuite/pcconnect/IShareLinkManager$Stub;->getDefaultImpl()Lcom/vivo/pcsuite/pcconnect/IShareLinkManager;
+000042: move-result-object v2
+000044: invoke-interface v2, Lcom/vivo/pcsuite/pcconnect/IShareLinkManager;->isScanning()Z
+00004a: move-result v2
+00004c: invoke-virtual v1, Landroid/os/Parcel;->recycle()V
+000052: invoke-virtual v0, Landroid/os/Parcel;->recycle()V
+000058: return v2
+00005a: invoke-virtual v1, Landroid/os/Parcel;->readException()V
+000060: invoke-virtual v1, Landroid/os/Parcel;->readInt()I
+000066: move-result v2
+000068: if-eqz v2, +003h
+00006c: const/4 v4, 1
+00006e: invoke-virtual v1, Landroid/os/Parcel;->recycle()V
+000074: invoke-virtual v0, Landroid/os/Parcel;->recycle()V
+00007a: return v4
+00007c: move-exception v2
+00007e: invoke-virtual v1, Landroid/os/Parcel;->recycle()V
+000084: invoke-virtual v0, Landroid/os/Parcel;->recycle()V
+00008a: throw v2
+
+METHOD isShareOpened()Z
+000000: invoke-static Landroid/os/Parcel;->obtain()Landroid/os/Parcel;
+000006: move-result-object v0
+000008: invoke-static Landroid/os/Parcel;->obtain()Landroid/os/Parcel;
+00000e: move-result-object v1
+000010: const-string v2, "com.vivo.pcsuite.pcconnect.IShareLinkManager"
+000014: invoke-virtual v0, v2, Landroid/os/Parcel;->writeInterfaceToken(Ljava/lang/String;)V
+00001a: iget-object v2, v5, Lcom/vivo/pcsuite/pcconnect/IShareLinkManager$Stub$Proxy;->mRemote Landroid/os/IBinder;
+00001e: const/16 v3, 13
+000022: const/4 v4, 0
+000024: invoke-interface v2, v3, v0, v1, v4, Landroid/os/IBinder;->transact(I Landroid/os/Parcel; Landroid/os/Parcel; I)Z
+00002a: move-result v2
+00002c: if-nez v2, +017h
+000030: invoke-static Lcom/vivo/pcsuite/pcconnect/IShareLinkManager$Stub;->getDefaultImpl()Lcom/vivo/pcsuite/pcconnect/IShareLinkManager;
+000036: move-result-object v2
+000038: if-eqz v2, +011h
+00003c: invoke-static Lcom/vivo/pcsuite/pcconnect/IShareLinkManager$Stub;->getDefaultImpl()Lcom/vivo/pcsuite/pcconnect/IShareLinkManager;
+000042: move-result-object v2
+000044: invoke-interface v2, Lcom/vivo/pcsuite/pcconnect/IShareLinkManager;->isShareOpened()Z
+00004a: move-result v2
+00004c: invoke-virtual v1, Landroid/os/Parcel;->recycle()V
+000052: invoke-virtual v0, Landroid/os/Parcel;->recycle()V
+000058: return v2
+00005a: invoke-virtual v1, Landroid/os/Parcel;->readException()V
+000060: invoke-virtual v1, Landroid/os/Parcel;->readInt()I
+000066: move-result v2
+000068: if-eqz v2, +003h
+00006c: const/4 v4, 1
+00006e: invoke-virtual v1, Landroid/os/Parcel;->recycle()V
+000074: invoke-virtual v0, Landroid/os/Parcel;->recycle()V
+00007a: return v4
+00007c: move-exception v2
+00007e: invoke-virtual v1, Landroid/os/Parcel;->recycle()V
+000084: invoke-virtual v0, Landroid/os/Parcel;->recycle()V
+00008a: throw v2
+
+METHOD onExOne(Ljava/lang/String; Ljava/lang/String;)Ljava/lang/String;
+000000: invoke-static Landroid/os/Parcel;->obtain()Landroid/os/Parcel;
+000006: move-result-object v0
+000008: invoke-static Landroid/os/Parcel;->obtain()Landroid/os/Parcel;
+00000e: move-result-object v1
+000010: const-string v2, "com.vivo.pcsuite.pcconnect.IShareLinkManager"
+000014: invoke-virtual v0, v2, Landroid/os/Parcel;->writeInterfaceToken(Ljava/lang/String;)V
+00001a: invoke-virtual v0, v6, Landroid/os/Parcel;->writeString(Ljava/lang/String;)V
+000020: invoke-virtual v0, v7, Landroid/os/Parcel;->writeString(Ljava/lang/String;)V
+000026: iget-object v2, v5, Lcom/vivo/pcsuite/pcconnect/IShareLinkManager$Stub$Proxy;->mRemote Landroid/os/IBinder;
+00002a: const/16 v3, 24
+00002e: const/4 v4, 0
+000030: invoke-interface v2, v3, v0, v1, v4, Landroid/os/IBinder;->transact(I Landroid/os/Parcel; Landroid/os/Parcel; I)Z
+000036: move-result v2
+000038: if-nez v2, +017h
+00003c: invoke-static Lcom/vivo/pcsuite/pcconnect/IShareLinkManager$Stub;->getDefaultImpl()Lcom/vivo/pcsuite/pcconnect/IShareLinkManager;
+000042: move-result-object v2
+000044: if-eqz v2, +011h
+000048: invoke-static Lcom/vivo/pcsuite/pcconnect/IShareLinkManager$Stub;->getDefaultImpl()Lcom/vivo/pcsuite/pcconnect/IShareLinkManager;
+00004e: move-result-object v2
+000050: invoke-interface v2, v6, v7, Lcom/vivo/pcsuite/pcconnect/IShareLinkManager;->onExOne(Ljava/lang/String; Ljava/lang/String;)Ljava/lang/String;
+000056: move-result-object v6
+000058: invoke-virtual v1, Landroid/os/Parcel;->recycle()V
+00005e: invoke-virtual v0, Landroid/os/Parcel;->recycle()V
+000064: return-object v6
+000066: invoke-virtual v1, Landroid/os/Parcel;->readException()V
+00006c: invoke-virtual v1, Landroid/os/Parcel;->readString()Ljava/lang/String;
+000072: move-result-object v6
+000074: invoke-virtual v1, Landroid/os/Parcel;->recycle()V
+00007a: invoke-virtual v0, Landroid/os/Parcel;->recycle()V
+000080: return-object v6
+000082: move-exception v6
+000084: invoke-virtual v1, Landroid/os/Parcel;->recycle()V
+00008a: invoke-virtual v0, Landroid/os/Parcel;->recycle()V
+000090: throw v6
+
+METHOD onExTwo(Ljava/lang/String; [B)Ljava/lang/String;
+000000: invoke-static Landroid/os/Parcel;->obtain()Landroid/os/Parcel;
+000006: move-result-object v0
+000008: invoke-static Landroid/os/Parcel;->obtain()Landroid/os/Parcel;
+00000e: move-result-object v1
+000010: const-string v2, "com.vivo.pcsuite.pcconnect.IShareLinkManager"
+000014: invoke-virtual v0, v2, Landroid/os/Parcel;->writeInterfaceToken(Ljava/lang/String;)V
+00001a: invoke-virtual v0, v6, Landroid/os/Parcel;->writeString(Ljava/lang/String;)V
+000020: invoke-virtual v0, v7, Landroid/os/Parcel;->writeByteArray([B)V
+000026: iget-object v2, v5, Lcom/vivo/pcsuite/pcconnect/IShareLinkManager$Stub$Proxy;->mRemote Landroid/os/IBinder;
+00002a: const/16 v3, 25
+00002e: const/4 v4, 0
+000030: invoke-interface v2, v3, v0, v1, v4, Landroid/os/IBinder;->transact(I Landroid/os/Parcel; Landroid/os/Parcel; I)Z
+000036: move-result v2
+000038: if-nez v2, +017h
+00003c: invoke-static Lcom/vivo/pcsuite/pcconnect/IShareLinkManager$Stub;->getDefaultImpl()Lcom/vivo/pcsuite/pcconnect/IShareLinkManager;
+000042: move-result-object v2
+000044: if-eqz v2, +011h
+000048: invoke-static Lcom/vivo/pcsuite/pcconnect/IShareLinkManager$Stub;->getDefaultImpl()Lcom/vivo/pcsuite/pcconnect/IShareLinkManager;
+00004e: move-result-object v2
+000050: invoke-interface v2, v6, v7, Lcom/vivo/pcsuite/pcconnect/IShareLinkManager;->onExTwo(Ljava/lang/String; [B)Ljava/lang/String;
+000056: move-result-object v6
+000058: invoke-virtual v1, Landroid/os/Parcel;->recycle()V
+00005e: invoke-virtual v0, Landroid/os/Parcel;->recycle()V
+000064: return-object v6
+000066: invoke-virtual v1, Landroid/os/Parcel;->readException()V
+00006c: invoke-virtual v1, Landroid/os/Parcel;->readString()Ljava/lang/String;
+000072: move-result-object v6
+000074: invoke-virtual v1, v7, Landroid/os/Parcel;->readByteArray([B)V
+00007a: invoke-virtual v1, Landroid/os/Parcel;->recycle()V
+000080: invoke-virtual v0, Landroid/os/Parcel;->recycle()V
+000086: return-object v6
+000088: move-exception v6
+00008a: invoke-virtual v1, Landroid/os/Parcel;->recycle()V
+000090: invoke-virtual v0, Landroid/os/Parcel;->recycle()V
+000096: throw v6
+
+METHOD open(Ljava/lang/String; Ljava/lang/String;)V
+000000: invoke-static Landroid/os/Parcel;->obtain()Landroid/os/Parcel;
+000006: move-result-object v0
+000008: invoke-static Landroid/os/Parcel;->obtain()Landroid/os/Parcel;
+00000e: move-result-object v1
+000010: const-string v2, "com.vivo.pcsuite.pcconnect.IShareLinkManager"
+000014: invoke-virtual v0, v2, Landroid/os/Parcel;->writeInterfaceToken(Ljava/lang/String;)V
+00001a: invoke-virtual v0, v6, Landroid/os/Parcel;->writeString(Ljava/lang/String;)V
+000020: invoke-virtual v0, v7, Landroid/os/Parcel;->writeString(Ljava/lang/String;)V
+000026: iget-object v2, v5, Lcom/vivo/pcsuite/pcconnect/IShareLinkManager$Stub$Proxy;->mRemote Landroid/os/IBinder;
+00002a: const/4 v3, 1
+00002c: const/4 v4, 0
+00002e: invoke-interface v2, v3, v0, v1, v4, Landroid/os/IBinder;->transact(I Landroid/os/Parcel; Landroid/os/Parcel; I)Z
+000034: move-result v2
+000036: if-nez v2, +016h
+00003a: invoke-static Lcom/vivo/pcsuite/pcconnect/IShareLinkManager$Stub;->getDefaultImpl()Lcom/vivo/pcsuite/pcconnect/IShareLinkManager;
+000040: move-result-object v2
+000042: if-eqz v2, +010h
+000046: invoke-static Lcom/vivo/pcsuite/pcconnect/IShareLinkManager$Stub;->getDefaultImpl()Lcom/vivo/pcsuite/pcconnect/IShareLinkManager;
+00004c: move-result-object v2
+00004e: invoke-interface v2, v6, v7, Lcom/vivo/pcsuite/pcconnect/IShareLinkManager;->open(Ljava/lang/String; Ljava/lang/String;)V
+000054: invoke-virtual v1, Landroid/os/Parcel;->recycle()V
+00005a: invoke-virtual v0, Landroid/os/Parcel;->recycle()V
+000060: return-void 
+000062: invoke-virtual v1, Landroid/os/Parcel;->readException()V
+000068: invoke-virtual v1, Landroid/os/Parcel;->recycle()V
+00006e: invoke-virtual v0, Landroid/os/Parcel;->recycle()V
+000074: return-void 
+000076: move-exception v6
+000078: invoke-virtual v1, Landroid/os/Parcel;->recycle()V
+00007e: invoke-virtual v0, Landroid/os/Parcel;->recycle()V
+000084: throw v6
+
+METHOD registerLinkObserver(Lcom/vivo/pcsuite/pcconnect/ShareLinkObserver;)V
+000000: invoke-static Landroid/os/Parcel;->obtain()Landroid/os/Parcel;
+000006: move-result-object v0
+000008: invoke-static Landroid/os/Parcel;->obtain()Landroid/os/Parcel;
+00000e: move-result-object v1
+000010: const-string v2, "com.vivo.pcsuite.pcconnect.IShareLinkManager"
+000014: invoke-virtual v0, v2, Landroid/os/Parcel;->writeInterfaceToken(Ljava/lang/String;)V
+00001a: if-eqz v6, +007h
+00001e: invoke-interface v6, Landroid/os/IInterface;->asBinder()Landroid/os/IBinder;
+000024: move-result-object v2
+000026: goto +2h
+000028: const/4 v2, 0
+00002a: invoke-virtual v0, v2, Landroid/os/Parcel;->writeStrongBinder(Landroid/os/IBinder;)V
+000030: iget-object v2, v5, Lcom/vivo/pcsuite/pcconnect/IShareLinkManager$Stub$Proxy;->mRemote Landroid/os/IBinder;
+000034: const/16 v3, 11
+000038: const/4 v4, 0
+00003a: invoke-interface v2, v3, v0, v1, v4, Landroid/os/IBinder;->transact(I Landroid/os/Parcel; Landroid/os/Parcel; I)Z
+000040: move-result v2
+000042: if-nez v2, +016h
+000046: invoke-static Lcom/vivo/pcsuite/pcconnect/IShareLinkManager$Stub;->getDefaultImpl()Lcom/vivo/pcsuite/pcconnect/IShareLinkManager;
+00004c: move-result-object v2
+00004e: if-eqz v2, +010h
+000052: invoke-static Lcom/vivo/pcsuite/pcconnect/IShareLinkManager$Stub;->getDefaultImpl()Lcom/vivo/pcsuite/pcconnect/IShareLinkManager;
+000058: move-result-object v2
+00005a: invoke-interface v2, v6, Lcom/vivo/pcsuite/pcconnect/IShareLinkManager;->registerLinkObserver(Lcom/vivo/pcsuite/pcconnect/ShareLinkObserver;)V
+000060: invoke-virtual v1, Landroid/os/Parcel;->recycle()V
+000066: invoke-virtual v0, Landroid/os/Parcel;->recycle()V
+00006c: return-void 
+00006e: invoke-virtual v1, Landroid/os/Parcel;->readException()V
+000074: invoke-virtual v1, Landroid/os/Parcel;->recycle()V
+00007a: invoke-virtual v0, Landroid/os/Parcel;->recycle()V
+000080: return-void 
+000082: move-exception v6
+000084: invoke-virtual v1, Landroid/os/Parcel;->recycle()V
+00008a: invoke-virtual v0, Landroid/os/Parcel;->recycle()V
+000090: throw v6
+
+METHOD sendInfo(Ljava/lang/String;)V
+000000: invoke-static Landroid/os/Parcel;->obtain()Landroid/os/Parcel;
+000006: move-result-object v0
+000008: invoke-static Landroid/os/Parcel;->obtain()Landroid/os/Parcel;
+00000e: move-result-object v1
+000010: const-string v2, "com.vivo.pcsuite.pcconnect.IShareLinkManager"
+000014: invoke-virtual v0, v2, Landroid/os/Parcel;->writeInterfaceToken(Ljava/lang/String;)V
+00001a: invoke-virtual v0, v6, Landroid/os/Parcel;->writeString(Ljava/lang/String;)V
+000020: iget-object v2, v5, Lcom/vivo/pcsuite/pcconnect/IShareLinkManager$Stub$Proxy;->mRemote Landroid/os/IBinder;
+000024: const/16 v3, 18
+000028: const/4 v4, 0
+00002a: invoke-interface v2, v3, v0, v1, v4, Landroid/os/IBinder;->transact(I Landroid/os/Parcel; Landroid/os/Parcel; I)Z
+000030: move-result v2
+000032: if-nez v2, +016h
+000036: invoke-static Lcom/vivo/pcsuite/pcconnect/IShareLinkManager$Stub;->getDefaultImpl()Lcom/vivo/pcsuite/pcconnect/IShareLinkManager;
+00003c: move-result-object v2
+00003e: if-eqz v2, +010h
+000042: invoke-static Lcom/vivo/pcsuite/pcconnect/IShareLinkManager$Stub;->getDefaultImpl()Lcom/vivo/pcsuite/pcconnect/IShareLinkManager;
+000048: move-result-object v2
+00004a: invoke-interface v2, v6, Lcom/vivo/pcsuite/pcconnect/IShareLinkManager;->sendInfo(Ljava/lang/String;)V
+000050: invoke-virtual v1, Landroid/os/Parcel;->recycle()V
+000056: invoke-virtual v0, Landroid/os/Parcel;->recycle()V
+00005c: return-void 
+00005e: invoke-virtual v1, Landroid/os/Parcel;->readException()V
+000064: invoke-virtual v1, Landroid/os/Parcel;->recycle()V
+00006a: invoke-virtual v0, Landroid/os/Parcel;->recycle()V
+000070: return-void 
+000072: move-exception v6
+000074: invoke-virtual v1, Landroid/os/Parcel;->recycle()V
+00007a: invoke-virtual v0, Landroid/os/Parcel;->recycle()V
+000080: throw v6
+
+METHOD sendIsAuto(Ljava/lang/String; Z)V
+000000: invoke-static Landroid/os/Parcel;->obtain()Landroid/os/Parcel;
+000006: move-result-object v0
+000008: invoke-static Landroid/os/Parcel;->obtain()Landroid/os/Parcel;
+00000e: move-result-object v1
+000010: const-string v2, "com.vivo.pcsuite.pcconnect.IShareLinkManager"
+000014: invoke-virtual v0, v2, Landroid/os/Parcel;->writeInterfaceToken(Ljava/lang/String;)V
+00001a: invoke-virtual v0, v6, Landroid/os/Parcel;->writeString(Ljava/lang/String;)V
+000020: const/4 v2, 0
+000022: if-eqz v7, +004h
+000026: const/4 v3, 1
+000028: goto +2h
+00002a: move v3, v2
+00002c: invoke-virtual v0, v3, Landroid/os/Parcel;->writeInt(I)V
+000032: iget-object v3, v5, Lcom/vivo/pcsuite/pcconnect/IShareLinkManager$Stub$Proxy;->mRemote Landroid/os/IBinder;
+000036: const/16 v4, 20
+00003a: invoke-interface v3, v4, v0, v1, v2, Landroid/os/IBinder;->transact(I Landroid/os/Parcel; Landroid/os/Parcel; I)Z
+000040: move-result v2
+000042: if-nez v2, +016h
+000046: invoke-static Lcom/vivo/pcsuite/pcconnect/IShareLinkManager$Stub;->getDefaultImpl()Lcom/vivo/pcsuite/pcconnect/IShareLinkManager;
+00004c: move-result-object v2
+00004e: if-eqz v2, +010h
+000052: invoke-static Lcom/vivo/pcsuite/pcconnect/IShareLinkManager$Stub;->getDefaultImpl()Lcom/vivo/pcsuite/pcconnect/IShareLinkManager;
+000058: move-result-object v2
+00005a: invoke-interface v2, v6, v7, Lcom/vivo/pcsuite/pcconnect/IShareLinkManager;->sendIsAuto(Ljava/lang/String; Z)V
+000060: invoke-virtual v1, Landroid/os/Parcel;->recycle()V
+000066: invoke-virtual v0, Landroid/os/Parcel;->recycle()V
+00006c: return-void 
+00006e: invoke-virtual v1, Landroid/os/Parcel;->readException()V
+000074: invoke-virtual v1, Landroid/os/Parcel;->recycle()V
+00007a: invoke-virtual v0, Landroid/os/Parcel;->recycle()V
+000080: return-void 
+000082: move-exception v6
+000084: invoke-virtual v1, Landroid/os/Parcel;->recycle()V
+00008a: invoke-virtual v0, Landroid/os/Parcel;->recycle()V
+000090: throw v6
+
+METHOD startAdvertising(Z)V
+000000: invoke-static Landroid/os/Parcel;->obtain()Landroid/os/Parcel;
+000006: move-result-object v0
+000008: invoke-static Landroid/os/Parcel;->obtain()Landroid/os/Parcel;
+00000e: move-result-object v1
+000010: const-string v2, "com.vivo.pcsuite.pcconnect.IShareLinkManager"
+000014: invoke-virtual v0, v2, Landroid/os/Parcel;->writeInterfaceToken(Ljava/lang/String;)V
+00001a: const/4 v2, 0
+00001c: if-eqz v6, +004h
+000020: const/4 v3, 1
+000022: goto +2h
+000024: move v3, v2
+000026: invoke-virtual v0, v3, Landroid/os/Parcel;->writeInt(I)V
+00002c: iget-object v3, v5, Lcom/vivo/pcsuite/pcconnect/IShareLinkManager$Stub$Proxy;->mRemote Landroid/os/IBinder;
+000030: const/16 v4, 23
+000034: invoke-interface v3, v4, v0, v1, v2, Landroid/os/IBinder;->transact(I Landroid/os/Parcel; Landroid/os/Parcel; I)Z
+00003a: move-result v2
+00003c: if-nez v2, +016h
+000040: invoke-static Lcom/vivo/pcsuite/pcconnect/IShareLinkManager$Stub;->getDefaultImpl()Lcom/vivo/pcsuite/pcconnect/IShareLinkManager;
+000046: move-result-object v2
+000048: if-eqz v2, +010h
+00004c: invoke-static Lcom/vivo/pcsuite/pcconnect/IShareLinkManager$Stub;->getDefaultImpl()Lcom/vivo/pcsuite/pcconnect/IShareLinkManager;
+000052: move-result-object v2
+000054: invoke-interface v2, v6, Lcom/vivo/pcsuite/pcconnect/IShareLinkManager;->startAdvertising(Z)V
+00005a: invoke-virtual v1, Landroid/os/Parcel;->recycle()V
+000060: invoke-virtual v0, Landroid/os/Parcel;->recycle()V
+000066: return-void 
+000068: invoke-virtual v1, Landroid/os/Parcel;->readException()V
+00006e: invoke-virtual v1, Landroid/os/Parcel;->recycle()V
+000074: invoke-virtual v0, Landroid/os/Parcel;->recycle()V
+00007a: return-void 
+00007c: move-exception v6
+00007e: invoke-virtual v1, Landroid/os/Parcel;->recycle()V
+000084: invoke-virtual v0, Landroid/os/Parcel;->recycle()V
+00008a: throw v6
+
+METHOD startScan()V
+000000: invoke-static Landroid/os/Parcel;->obtain()Landroid/os/Parcel;
+000006: move-result-object v0
+000008: invoke-static Landroid/os/Parcel;->obtain()Landroid/os/Parcel;
+00000e: move-result-object v1
+000010: const-string v2, "com.vivo.pcsuite.pcconnect.IShareLinkManager"
+000014: invoke-virtual v0, v2, Landroid/os/Parcel;->writeInterfaceToken(Ljava/lang/String;)V
+00001a: iget-object v2, v5, Lcom/vivo/pcsuite/pcconnect/IShareLinkManager$Stub$Proxy;->mRemote Landroid/os/IBinder;
+00001e: const/4 v3, 3
+000020: const/4 v4, 0
+000022: invoke-interface v2, v3, v0, v1, v4, Landroid/os/IBinder;->transact(I Landroid/os/Parcel; Landroid/os/Parcel; I)Z
+000028: move-result v2
+00002a: if-nez v2, +016h
+00002e: invoke-static Lcom/vivo/pcsuite/pcconnect/IShareLinkManager$Stub;->getDefaultImpl()Lcom/vivo/pcsuite/pcconnect/IShareLinkManager;
+000034: move-result-object v2
+000036: if-eqz v2, +010h
+00003a: invoke-static Lcom/vivo/pcsuite/pcconnect/IShareLinkManager$Stub;->getDefaultImpl()Lcom/vivo/pcsuite/pcconnect/IShareLinkManager;
+000040: move-result-object v2
+000042: invoke-interface v2, Lcom/vivo/pcsuite/pcconnect/IShareLinkManager;->startScan()V
+000048: invoke-virtual v1, Landroid/os/Parcel;->recycle()V
+00004e: invoke-virtual v0, Landroid/os/Parcel;->recycle()V
+000054: return-void 
+000056: invoke-virtual v1, Landroid/os/Parcel;->readException()V
+00005c: invoke-virtual v1, Landroid/os/Parcel;->recycle()V
+000062: invoke-virtual v0, Landroid/os/Parcel;->recycle()V
+000068: return-void 
+00006a: move-exception v2
+00006c: invoke-virtual v1, Landroid/os/Parcel;->recycle()V
+000072: invoke-virtual v0, Landroid/os/Parcel;->recycle()V
+000078: throw v2
+
+METHOD stopAdvertising()V
+000000: invoke-static Landroid/os/Parcel;->obtain()Landroid/os/Parcel;
+000006: move-result-object v0
+000008: invoke-static Landroid/os/Parcel;->obtain()Landroid/os/Parcel;
+00000e: move-result-object v1
+000010: const-string v2, "com.vivo.pcsuite.pcconnect.IShareLinkManager"
+000014: invoke-virtual v0, v2, Landroid/os/Parcel;->writeInterfaceToken(Ljava/lang/String;)V
+00001a: iget-object v2, v5, Lcom/vivo/pcsuite/pcconnect/IShareLinkManager$Stub$Proxy;->mRemote Landroid/os/IBinder;
+00001e: const/16 v3, 22
+000022: const/4 v4, 0
+000024: invoke-interface v2, v3, v0, v1, v4, Landroid/os/IBinder;->transact(I Landroid/os/Parcel; Landroid/os/Parcel; I)Z
+00002a: move-result v2
+00002c: if-nez v2, +016h
+000030: invoke-static Lcom/vivo/pcsuite/pcconnect/IShareLinkManager$Stub;->getDefaultImpl()Lcom/vivo/pcsuite/pcconnect/IShareLinkManager;
+000036: move-result-object v2
+000038: if-eqz v2, +010h
+00003c: invoke-static Lcom/vivo/pcsuite/pcconnect/IShareLinkManager$Stub;->getDefaultImpl()Lcom/vivo/pcsuite/pcconnect/IShareLinkManager;
+000042: move-result-object v2
+000044: invoke-interface v2, Lcom/vivo/pcsuite/pcconnect/IShareLinkManager;->stopAdvertising()V
+00004a: invoke-virtual v1, Landroid/os/Parcel;->recycle()V
+000050: invoke-virtual v0, Landroid/os/Parcel;->recycle()V
+000056: return-void 
+000058: invoke-virtual v1, Landroid/os/Parcel;->readException()V
+00005e: invoke-virtual v1, Landroid/os/Parcel;->recycle()V
+000064: invoke-virtual v0, Landroid/os/Parcel;->recycle()V
+00006a: return-void 
+00006c: move-exception v2
+00006e: invoke-virtual v1, Landroid/os/Parcel;->recycle()V
+000074: invoke-virtual v0, Landroid/os/Parcel;->recycle()V
+00007a: throw v2
+
+METHOD stopScan()V
+000000: invoke-static Landroid/os/Parcel;->obtain()Landroid/os/Parcel;
+000006: move-result-object v0
+000008: invoke-static Landroid/os/Parcel;->obtain()Landroid/os/Parcel;
+00000e: move-result-object v1
+000010: const-string v2, "com.vivo.pcsuite.pcconnect.IShareLinkManager"
+000014: invoke-virtual v0, v2, Landroid/os/Parcel;->writeInterfaceToken(Ljava/lang/String;)V
+00001a: iget-object v2, v5, Lcom/vivo/pcsuite/pcconnect/IShareLinkManager$Stub$Proxy;->mRemote Landroid/os/IBinder;
+00001e: const/4 v3, 4
+000020: const/4 v4, 0
+000022: invoke-interface v2, v3, v0, v1, v4, Landroid/os/IBinder;->transact(I Landroid/os/Parcel; Landroid/os/Parcel; I)Z
+000028: move-result v2
+00002a: if-nez v2, +016h
+00002e: invoke-static Lcom/vivo/pcsuite/pcconnect/IShareLinkManager$Stub;->getDefaultImpl()Lcom/vivo/pcsuite/pcconnect/IShareLinkManager;
+000034: move-result-object v2
+000036: if-eqz v2, +010h
+00003a: invoke-static Lcom/vivo/pcsuite/pcconnect/IShareLinkManager$Stub;->getDefaultImpl()Lcom/vivo/pcsuite/pcconnect/IShareLinkManager;
+000040: move-result-object v2
+000042: invoke-interface v2, Lcom/vivo/pcsuite/pcconnect/IShareLinkManager;->stopScan()V
+000048: invoke-virtual v1, Landroid/os/Parcel;->recycle()V
+00004e: invoke-virtual v0, Landroid/os/Parcel;->recycle()V
+000054: return-void 
+000056: invoke-virtual v1, Landroid/os/Parcel;->readException()V
+00005c: invoke-virtual v1, Landroid/os/Parcel;->recycle()V
+000062: invoke-virtual v0, Landroid/os/Parcel;->recycle()V
+000068: return-void 
+00006a: move-exception v2
+00006c: invoke-virtual v1, Landroid/os/Parcel;->recycle()V
+000072: invoke-virtual v0, Landroid/os/Parcel;->recycle()V
+000078: throw v2
+
+METHOD unregisterLinkObserver(Lcom/vivo/pcsuite/pcconnect/ShareLinkObserver;)V
+000000: invoke-static Landroid/os/Parcel;->obtain()Landroid/os/Parcel;
+000006: move-result-object v0
+000008: invoke-static Landroid/os/Parcel;->obtain()Landroid/os/Parcel;
+00000e: move-result-object v1
+000010: const-string v2, "com.vivo.pcsuite.pcconnect.IShareLinkManager"
+000014: invoke-virtual v0, v2, Landroid/os/Parcel;->writeInterfaceToken(Ljava/lang/String;)V
+00001a: if-eqz v6, +007h
+00001e: invoke-interface v6, Landroid/os/IInterface;->asBinder()Landroid/os/IBinder;
+000024: move-result-object v2
+000026: goto +2h
+000028: const/4 v2, 0
+00002a: invoke-virtual v0, v2, Landroid/os/Parcel;->writeStrongBinder(Landroid/os/IBinder;)V
+000030: iget-object v2, v5, Lcom/vivo/pcsuite/pcconnect/IShareLinkManager$Stub$Proxy;->mRemote Landroid/os/IBinder;
+000034: const/16 v3, 12
+000038: const/4 v4, 0
+00003a: invoke-interface v2, v3, v0, v1, v4, Landroid/os/IBinder;->transact(I Landroid/os/Parcel; Landroid/os/Parcel; I)Z
+000040: move-result v2
+000042: if-nez v2, +016h
+000046: invoke-static Lcom/vivo/pcsuite/pcconnect/IShareLinkManager$Stub;->getDefaultImpl()Lcom/vivo/pcsuite/pcconnect/IShareLinkManager;
+00004c: move-result-object v2
+00004e: if-eqz v2, +010h
+000052: invoke-static Lcom/vivo/pcsuite/pcconnect/IShareLinkManager$Stub;->getDefaultImpl()Lcom/vivo/pcsuite/pcconnect/IShareLinkManager;
+000058: move-result-object v2
+00005a: invoke-interface v2, v6, Lcom/vivo/pcsuite/pcconnect/IShareLinkManager;->unregisterLinkObserver(Lcom/vivo/pcsuite/pcconnect/ShareLinkObserver;)V
+000060: invoke-virtual v1, Landroid/os/Parcel;->recycle()V
+000066: invoke-virtual v0, Landroid/os/Parcel;->recycle()V
+00006c: return-void 
+00006e: invoke-virtual v1, Landroid/os/Parcel;->readException()V
+000074: invoke-virtual v1, Landroid/os/Parcel;->recycle()V
+00007a: invoke-virtual v0, Landroid/os/Parcel;->recycle()V
+000080: return-void 
+000082: move-exception v6
+000084: invoke-virtual v1, Landroid/os/Parcel;->recycle()V
+00008a: invoke-virtual v0, Landroid/os/Parcel;->recycle()V
+000090: throw v6

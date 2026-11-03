@@ -1,0 +1,111 @@
+APK pcsuite/updateApk/pcsuite.apk
+DEX classes2.dex
+CLASS Lcom/vivo/connect/sdk/f/c$k;
+SUPER Ljava/lang/Object;
+FIELDS
+a Lcom/vivo/connect/sdk/f/c; = None
+
+METHOD <init>(Lcom/vivo/connect/sdk/f/c;)V
+000000: iput-object v1, v0, Lcom/vivo/connect/sdk/f/c$k;->a Lcom/vivo/connect/sdk/f/c;
+000004: invoke-direct v0, Ljava/lang/Object;-><init>()V
+00000a: return-void 
+
+METHOD onServiceConnected(Landroid/content/ComponentName; Landroid/os/IBinder;)V
+000000: new-instance v3, Ljava/lang/StringBuilder;
+000004: const-string v0, "onServiceConnected, service="
+000008: invoke-direct v3, v0, Ljava/lang/StringBuilder;-><init>(Ljava/lang/String;)V
+00000e: invoke-virtual v3, v4, Ljava/lang/StringBuilder;->append(Ljava/lang/Object;)Ljava/lang/StringBuilder;
+000014: invoke-virtual v3, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
+00001a: move-result-object v3
+00001c: const-string v0, "ConnectClientImpl"
+000020: invoke-static v0, v3, Lcom/vivo/connect/logger/EasyLog;->i(Ljava/lang/String; Ljava/lang/String;)V
+000026: iget-object v3, v2, Lcom/vivo/connect/sdk/f/c$k;->a Lcom/vivo/connect/sdk/f/c;
+00002a: invoke-static v4, Lcom/vivo/connbase/IClient$Stub;->asInterface(Landroid/os/IBinder;)Lcom/vivo/connbase/IClient;
+000030: move-result-object v4
+000032: invoke-static v3, v4, Lcom/vivo/connect/sdk/f/c;->a(Lcom/vivo/connect/sdk/f/c; Lcom/vivo/connbase/IClient;)Lcom/vivo/connbase/IClient;
+000038: iget-object v3, v2, Lcom/vivo/connect/sdk/f/c$k;->a Lcom/vivo/connect/sdk/f/c;
+00003c: invoke-static v3, Lcom/vivo/connect/sdk/f/c;->a(Lcom/vivo/connect/sdk/f/c;)Lcom/vivo/connbase/IClient;
+000042: move-result-object v3
+000044: invoke-interface v3, Landroid/os/IInterface;->asBinder()Landroid/os/IBinder;
+00004a: move-result-object v3
+00004c: iget-object v4, v2, Lcom/vivo/connect/sdk/f/c$k;->a Lcom/vivo/connect/sdk/f/c;
+000050: const/4 v1, 0
+000052: invoke-interface v3, v4, v1, Landroid/os/IBinder;->linkToDeath(Landroid/os/IBinder$DeathRecipient; I)V
+000058: goto +17h
+00005a: move-exception v3
+00005c: new-instance v4, Ljava/lang/StringBuilder;
+000060: const-string v1, "onServiceConnected："
+000064: invoke-direct v4, v1, Ljava/lang/StringBuilder;-><init>(Ljava/lang/String;)V
+00006a: invoke-virtual v3, Ljava/lang/Object;->toString()Ljava/lang/String;
+000070: move-result-object v3
+000072: invoke-virtual v4, v3, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+000078: invoke-virtual v4, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
+00007e: move-result-object v3
+000080: invoke-static v0, v3, Lcom/vivo/connect/logger/EasyLog;->i(Ljava/lang/String; Ljava/lang/String;)V
+000086: iget-object v2, v2, Lcom/vivo/connect/sdk/f/c$k;->a Lcom/vivo/connect/sdk/f/c;
+00008a: invoke-static v2, Lcom/vivo/connect/sdk/f/c;->b(Lcom/vivo/connect/sdk/f/c;)V
+000090: return-void 
+
+METHOD onServiceDisconnected(Landroid/content/ComponentName;)V
+000000: const-string v5, "onServiceDisconnected"
+000004: const-string v0, "ConnectClientImpl"
+000008: invoke-static v0, v5, Lcom/vivo/connect/logger/EasyLog;->i(Ljava/lang/String; Ljava/lang/String;)V
+00000e: iget-object v5, v4, Lcom/vivo/connect/sdk/f/c$k;->a Lcom/vivo/connect/sdk/f/c;
+000012: invoke-static v5, Lcom/vivo/connect/sdk/f/c;->d(Lcom/vivo/connect/sdk/f/c;)Landroid/os/HandlerThread;
+000018: move-result-object v5
+00001a: const/4 v1, 0
+00001c: if-eqz v5, +010h
+000020: iget-object v5, v4, Lcom/vivo/connect/sdk/f/c$k;->a Lcom/vivo/connect/sdk/f/c;
+000024: invoke-static v5, Lcom/vivo/connect/sdk/f/c;->d(Lcom/vivo/connect/sdk/f/c;)Landroid/os/HandlerThread;
+00002a: move-result-object v5
+00002c: invoke-virtual v5, Landroid/os/HandlerThread;->quit()Z
+000032: iget-object v5, v4, Lcom/vivo/connect/sdk/f/c$k;->a Lcom/vivo/connect/sdk/f/c;
+000036: invoke-static v5, v1, Lcom/vivo/connect/sdk/f/c;->a(Lcom/vivo/connect/sdk/f/c; Landroid/os/HandlerThread;)Landroid/os/HandlerThread;
+00003c: iget-object v5, v4, Lcom/vivo/connect/sdk/f/c$k;->a Lcom/vivo/connect/sdk/f/c;
+000040: const/4 v2, 0
+000042: invoke-static v5, v2, Lcom/vivo/connect/sdk/f/c;->a(Lcom/vivo/connect/sdk/f/c; Z)Z
+000048: iget-object v5, v4, Lcom/vivo/connect/sdk/f/c$k;->a Lcom/vivo/connect/sdk/f/c;
+00004c: invoke-static v5, Lcom/vivo/connect/sdk/f/c;->a(Lcom/vivo/connect/sdk/f/c;)Lcom/vivo/connbase/IClient;
+000052: move-result-object v5
+000054: if-eqz v5, +028h
+000058: iget-object v5, v4, Lcom/vivo/connect/sdk/f/c$k;->a Lcom/vivo/connect/sdk/f/c;
+00005c: invoke-static v5, Lcom/vivo/connect/sdk/f/c;->a(Lcom/vivo/connect/sdk/f/c;)Lcom/vivo/connbase/IClient;
+000062: move-result-object v5
+000064: invoke-interface v5, Landroid/os/IInterface;->asBinder()Landroid/os/IBinder;
+00006a: move-result-object v5
+00006c: iget-object v3, v4, Lcom/vivo/connect/sdk/f/c$k;->a Lcom/vivo/connect/sdk/f/c;
+000070: invoke-interface v5, v3, v2, Landroid/os/IBinder;->unlinkToDeath(Landroid/os/IBinder$DeathRecipient; I)Z
+000076: goto +17h
+000078: move-exception v5
+00007a: new-instance v2, Ljava/lang/StringBuilder;
+00007e: const-string v3, "onServiceDisconnected unlinkToDeath err:"
+000082: invoke-direct v2, v3, Ljava/lang/StringBuilder;-><init>(Ljava/lang/String;)V
+000088: invoke-virtual v5, Ljava/lang/Throwable;->getMessage()Ljava/lang/String;
+00008e: move-result-object v5
+000090: invoke-virtual v2, v5, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+000096: invoke-virtual v2, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
+00009c: move-result-object v5
+00009e: invoke-static v0, v5, Lcom/vivo/connect/logger/EasyLog;->i(Ljava/lang/String; Ljava/lang/String;)V
+0000a4: iget-object v5, v4, Lcom/vivo/connect/sdk/f/c$k;->a Lcom/vivo/connect/sdk/f/c;
+0000a8: invoke-static v5, v1, Lcom/vivo/connect/sdk/f/c;->a(Lcom/vivo/connect/sdk/f/c; Lcom/vivo/connbase/IClient;)Lcom/vivo/connbase/IClient;
+0000ae: iget-object v5, v4, Lcom/vivo/connect/sdk/f/c$k;->a Lcom/vivo/connect/sdk/f/c;
+0000b2: invoke-static v5, v1, Lcom/vivo/connect/sdk/f/c;->a(Lcom/vivo/connect/sdk/f/c; Lcom/vivo/connbase/ICloudConnectService;)Lcom/vivo/connbase/ICloudConnectService;
+0000b8: iget-object v5, v4, Lcom/vivo/connect/sdk/f/c$k;->a Lcom/vivo/connect/sdk/f/c;
+0000bc: invoke-static v5, Lcom/vivo/connect/sdk/f/c;->f(Lcom/vivo/connect/sdk/f/c;)Lcom/vivo/connect/ConnectServiceListener;
+0000c2: move-result-object v5
+0000c4: if-eqz v5, +00bh
+0000c8: iget-object v5, v4, Lcom/vivo/connect/sdk/f/c$k;->a Lcom/vivo/connect/sdk/f/c;
+0000cc: invoke-static v5, Lcom/vivo/connect/sdk/f/c;->f(Lcom/vivo/connect/sdk/f/c;)Lcom/vivo/connect/ConnectServiceListener;
+0000d2: move-result-object v5
+0000d4: invoke-interface v5, Lcom/vivo/connect/ConnectServiceListener;->onServiceDisconnect()V
+0000da: iget-object v5, v4, Lcom/vivo/connect/sdk/f/c$k;->a Lcom/vivo/connect/sdk/f/c;
+0000de: invoke-static v5, Lcom/vivo/connect/sdk/f/c;->g(Lcom/vivo/connect/sdk/f/c;)Landroid/os/HandlerThread;
+0000e4: move-result-object v5
+0000e6: if-eqz v5, +010h
+0000ea: iget-object v5, v4, Lcom/vivo/connect/sdk/f/c$k;->a Lcom/vivo/connect/sdk/f/c;
+0000ee: invoke-static v5, Lcom/vivo/connect/sdk/f/c;->g(Lcom/vivo/connect/sdk/f/c;)Landroid/os/HandlerThread;
+0000f4: move-result-object v5
+0000f6: invoke-virtual v5, Landroid/os/HandlerThread;->quit()Z
+0000fc: iget-object v4, v4, Lcom/vivo/connect/sdk/f/c$k;->a Lcom/vivo/connect/sdk/f/c;
+000100: invoke-static v4, v1, Lcom/vivo/connect/sdk/f/c;->b(Lcom/vivo/connect/sdk/f/c; Landroid/os/HandlerThread;)Landroid/os/HandlerThread;
+000106: return-void 

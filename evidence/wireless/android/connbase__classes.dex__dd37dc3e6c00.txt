@@ -1,0 +1,86 @@
+APK pcsuite/updateApk/connbase.apk
+DEX classes.dex
+CLASS Lcom/vivo/connbase/connect/o;
+SUPER Ljava/lang/Object;
+FIELDS
+a Ljava/util/concurrent/CopyOnWriteArraySet; = None
+b Ljava/util/Map; = None
+c Ljava/util/Map; = None
+
+METHOD <init>()V
+000000: invoke-direct v1, Ljava/lang/Object;-><init>()V
+000006: new-instance v0, Ljava/util/concurrent/CopyOnWriteArraySet;
+00000a: invoke-direct v0, Ljava/util/concurrent/CopyOnWriteArraySet;-><init>()V
+000010: iput-object v0, v1, Lcom/vivo/connbase/connect/o;->a Ljava/util/concurrent/CopyOnWriteArraySet;
+000014: new-instance v0, Ljava/util/concurrent/ConcurrentHashMap;
+000018: invoke-direct v0, Ljava/util/concurrent/ConcurrentHashMap;-><init>()V
+00001e: iput-object v0, v1, Lcom/vivo/connbase/connect/o;->b Ljava/util/Map;
+000022: new-instance v0, Ljava/util/concurrent/ConcurrentHashMap;
+000026: invoke-direct v0, Ljava/util/concurrent/ConcurrentHashMap;-><init>()V
+00002c: iput-object v0, v1, Lcom/vivo/connbase/connect/o;->c Ljava/util/Map;
+000030: return-void 
+
+METHOD a(Ljava/lang/String;)Landroid/bluetooth/BluetoothDevice;
+000000: iget-object v0, v1, Lcom/vivo/connbase/connect/o;->b Ljava/util/Map;
+000004: invoke-interface v0, v2, Ljava/util/Map;->remove(Ljava/lang/Object;)Ljava/lang/Object;
+00000a: move-result-object v2
+00000c: check-cast v2, Landroid/bluetooth/BluetoothDevice;
+000010: return-object v2
+
+METHOD a(Ljava/lang/String; Landroid/bluetooth/BluetoothDevice;)Landroid/bluetooth/BluetoothDevice;
+000000: iget-object v0, v1, Lcom/vivo/connbase/connect/o;->b Ljava/util/Map;
+000004: invoke-interface v0, v2, v3, Ljava/util/Map;->put(Ljava/lang/Object; Ljava/lang/Object;)Ljava/lang/Object;
+00000a: move-result-object v2
+00000c: check-cast v2, Landroid/bluetooth/BluetoothDevice;
+000010: return-object v2
+
+METHOD a(Ljava/lang/String; Landroid/bluetooth/BluetoothGatt;)Landroid/bluetooth/BluetoothGatt;
+000000: iget-object v0, v1, Lcom/vivo/connbase/connect/o;->c Ljava/util/Map;
+000004: invoke-interface v0, v2, v3, Ljava/util/Map;->put(Ljava/lang/Object; Ljava/lang/Object;)Ljava/lang/Object;
+00000a: move-result-object v2
+00000c: check-cast v2, Landroid/bluetooth/BluetoothGatt;
+000010: return-object v2
+
+METHOD b(Ljava/lang/String;)Landroid/bluetooth/BluetoothGatt;
+000000: iget-object v0, v1, Lcom/vivo/connbase/connect/o;->c Ljava/util/Map;
+000004: invoke-interface v0, v2, Ljava/util/Map;->get(Ljava/lang/Object;)Ljava/lang/Object;
+00000a: move-result-object v2
+00000c: check-cast v2, Landroid/bluetooth/BluetoothGatt;
+000010: return-object v2
+
+METHOD c(Ljava/lang/String;)Z
+000000: iget-object v0, v1, Lcom/vivo/connbase/connect/o;->a Ljava/util/concurrent/CopyOnWriteArraySet;
+000004: invoke-virtual v0, v2, Ljava/util/concurrent/CopyOnWriteArraySet;->contains(Ljava/lang/Object;)Z
+00000a: move-result v2
+00000c: return v2
+
+METHOD d(Ljava/lang/String;)Landroid/bluetooth/BluetoothDevice;
+000000: iget-object v0, v1, Lcom/vivo/connbase/connect/o;->b Ljava/util/Map;
+000004: invoke-interface v0, v2, Ljava/util/Map;->get(Ljava/lang/Object;)Ljava/lang/Object;
+00000a: move-result-object v2
+00000c: check-cast v2, Landroid/bluetooth/BluetoothDevice;
+000010: return-object v2
+
+METHOD e(Ljava/lang/String;)Landroid/bluetooth/BluetoothGatt;
+000000: iget-object v0, v1, Lcom/vivo/connbase/connect/o;->c Ljava/util/Map;
+000004: invoke-interface v0, v2, Ljava/util/Map;->remove(Ljava/lang/Object;)Ljava/lang/Object;
+00000a: move-result-object v2
+00000c: check-cast v2, Landroid/bluetooth/BluetoothGatt;
+000010: return-object v2
+
+METHOD f(Ljava/lang/String;)Z
+000000: iget-object v0, v1, Lcom/vivo/connbase/connect/o;->a Ljava/util/concurrent/CopyOnWriteArraySet;
+000004: invoke-virtual v0, v2, Ljava/util/concurrent/CopyOnWriteArraySet;->remove(Ljava/lang/Object;)Z
+00000a: move-result v2
+00000c: return v2
+
+METHOD g(Ljava/lang/String;)Z
+000000: invoke-static v2, Landroid/text/TextUtils;->isEmpty(Ljava/lang/CharSequence;)Z
+000006: move-result v0
+000008: if-eqz v0, +004h
+00000c: const/4 v2, 0
+00000e: return v2
+000010: iget-object v0, v1, Lcom/vivo/connbase/connect/o;->a Ljava/util/concurrent/CopyOnWriteArraySet;
+000014: invoke-virtual v0, v2, Ljava/util/concurrent/CopyOnWriteArraySet;->add(Ljava/lang/Object;)Z
+00001a: move-result v2
+00001c: return v2

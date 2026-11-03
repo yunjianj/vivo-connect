@@ -1,0 +1,81 @@
+APK pcsuite/updateApk/connbase.apk
+DEX classes.dex
+CLASS Lcom/vivo/connbase/m0/a/e$c;
+SUPER Ljava/lang/Object;
+FIELDS
+a Z = None
+b Lcom/vivo/connbase/m0/a/e; = None
+
+METHOD <init>(Lcom/vivo/connbase/m0/a/e;)V
+000000: iput-object v1, v0, Lcom/vivo/connbase/m0/a/e$c;->b Lcom/vivo/connbase/m0/a/e;
+000004: invoke-direct v0, Ljava/lang/Object;-><init>()V
+00000a: const/4 v1, 0
+00000c: iput-boolean v1, v0, Lcom/vivo/connbase/m0/a/e$c;->a Z
+000010: return-void 
+
+METHOD a(Landroid/net/wifi/p2p/WifiP2pInfo; Landroid/net/wifi/p2p/WifiP2pGroup; Landroid/net/NetworkInfo;)V
+000000: iget-object v0, v3, Lcom/vivo/connbase/m0/a/e$c;->b Lcom/vivo/connbase/m0/a/e;
+000004: invoke-static v0, v4, Lcom/vivo/connbase/m0/a/e;->a(Lcom/vivo/connbase/m0/a/e; Landroid/net/wifi/p2p/WifiP2pInfo;)V
+00000a: iget-boolean v0, v3, Lcom/vivo/connbase/m0/a/e$c;->a Z
+00000e: const/4 v1, 0
+000010: if-nez v0, +024h
+000014: if-eqz v4, +022h
+000018: iget-boolean v0, v4, Landroid/net/wifi/p2p/WifiP2pInfo;->groupFormed Z
+00001c: if-eqz v0, +01eh
+000020: iget-boolean v0, v4, Landroid/net/wifi/p2p/WifiP2pInfo;->isGroupOwner Z
+000024: if-nez v0, +01ah
+000028: if-eqz v5, +018h
+00002c: const/4 v5, 1
+00002e: iput-boolean v5, v3, Lcom/vivo/connbase/m0/a/e$c;->a Z
+000032: iget-object v5, v3, Lcom/vivo/connbase/m0/a/e$c;->b Lcom/vivo/connbase/m0/a/e;
+000036: invoke-static v5, Lcom/vivo/connbase/m0/a/e;->a(Lcom/vivo/connbase/m0/a/e;)V
+00003c: iget-object v5, v3, Lcom/vivo/connbase/m0/a/e$c;->b Lcom/vivo/connbase/m0/a/e;
+000040: invoke-static v5, v1, Lcom/vivo/connbase/m0/a/e;->d(Lcom/vivo/connbase/m0/a/e; Z)V
+000046: iget-object v5, v3, Lcom/vivo/connbase/m0/a/e$c;->b Lcom/vivo/connbase/m0/a/e;
+00004a: iget-object v0, v4, Landroid/net/wifi/p2p/WifiP2pInfo;->groupOwnerAddress Ljava/net/InetAddress;
+00004e: iget-boolean v2, v4, Landroid/net/wifi/p2p/WifiP2pInfo;->isGroupOwner Z
+000052: invoke-static v5, v0, v2, Lcom/vivo/connbase/m0/a/e;->a(Lcom/vivo/connbase/m0/a/e; Ljava/net/InetAddress; Z)V
+000058: iget-boolean v5, v3, Lcom/vivo/connbase/m0/a/e$c;->a Z
+00005c: if-eqz v5, +012h
+000060: iget-boolean v4, v4, Landroid/net/wifi/p2p/WifiP2pInfo;->groupFormed Z
+000064: if-nez v4, +00eh
+000068: iput-boolean v1, v3, Lcom/vivo/connbase/m0/a/e$c;->a Z
+00006c: iget-object v4, v3, Lcom/vivo/connbase/m0/a/e$c;->b Lcom/vivo/connbase/m0/a/e;
+000070: invoke-static v4, Lcom/vivo/connbase/m0/a/e;->d(Lcom/vivo/connbase/m0/a/e;)V
+000076: iget-object v4, v3, Lcom/vivo/connbase/m0/a/e$c;->b Lcom/vivo/connbase/m0/a/e;
+00007a: invoke-static v4, Lcom/vivo/connbase/m0/a/e;->l(Lcom/vivo/connbase/m0/a/e;)V
+000080: invoke-virtual v6, Landroid/net/NetworkInfo;->getTypeName()Ljava/lang/String;
+000086: move-result-object v4
+000088: invoke-static v4, Landroid/text/TextUtils;->isEmpty(Ljava/lang/CharSequence;)Z
+00008e: move-result v5
+000090: if-nez v5, +040h
+000094: invoke-virtual v4, Ljava/lang/String;->toUpperCase()Ljava/lang/String;
+00009a: move-result-object v4
+00009c: const-string v5, "P2P"
+0000a0: invoke-virtual v4, v5, Ljava/lang/String;->contains(Ljava/lang/CharSequence;)Z
+0000a6: move-result v4
+0000a8: if-eqz v4, +034h
+0000ac: invoke-virtual v6, Landroid/net/NetworkInfo;->getState()Landroid/net/NetworkInfo$State;
+0000b2: move-result-object v4
+0000b4: sget-object v5, Landroid/net/NetworkInfo$State;->DISCONNECTED Landroid/net/NetworkInfo$State;
+0000b8: if-ne v4, v5, +02ch
+0000bc: invoke-virtual v6, Landroid/net/NetworkInfo;->getDetailedState()Landroid/net/NetworkInfo$DetailedState;
+0000c2: move-result-object v4
+0000c4: sget-object v5, Landroid/net/NetworkInfo$DetailedState;->FAILED Landroid/net/NetworkInfo$DetailedState;
+0000c8: if-ne v4, v5, +024h
+0000cc: iget-boolean v4, v3, Lcom/vivo/connbase/m0/a/e$c;->a Z
+0000d0: if-eqz v4, +00fh
+0000d4: iput-boolean v1, v3, Lcom/vivo/connbase/m0/a/e$c;->a Z
+0000d8: iget-object v4, v3, Lcom/vivo/connbase/m0/a/e$c;->b Lcom/vivo/connbase/m0/a/e;
+0000dc: invoke-static v4, Lcom/vivo/connbase/m0/a/e;->d(Lcom/vivo/connbase/m0/a/e;)V
+0000e2: iget-object v4, v3, Lcom/vivo/connbase/m0/a/e$c;->b Lcom/vivo/connbase/m0/a/e;
+0000e6: invoke-static v4, Lcom/vivo/connbase/m0/a/e;->l(Lcom/vivo/connbase/m0/a/e;)V
+0000ec: goto +12h
+0000ee: const-string v4, "WifiP2pServerImpl"
+0000f2: const-string v5, "NetworkInfo.getDetailedState(): FAILED"
+0000f6: invoke-static v4, v5, Lc/c/f/a/b;->p(Ljava/lang/String; Ljava/lang/String;)V
+0000fc: iget-object v4, v3, Lcom/vivo/connbase/m0/a/e$c;->b Lcom/vivo/connbase/m0/a/e;
+000100: invoke-static v4, Lcom/vivo/connbase/m0/a/e;->d(Lcom/vivo/connbase/m0/a/e;)V
+000106: iget-object v4, v3, Lcom/vivo/connbase/m0/a/e$c;->b Lcom/vivo/connbase/m0/a/e;
+00010a: invoke-static v4, Lcom/vivo/connbase/m0/a/e;->h(Lcom/vivo/connbase/m0/a/e;)V
+000110: return-void 

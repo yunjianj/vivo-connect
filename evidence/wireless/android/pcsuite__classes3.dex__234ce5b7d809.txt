@@ -1,0 +1,63 @@
+APK pcsuite/updateApk/pcsuite.apk
+DEX classes3.dex
+CLASS Lorg/apache/commons/collections4/bidimap/TreeBidiMap$k;
+SUPER Ljava/lang/Object;
+FIELDS
+a Lorg/apache/commons/collections4/bidimap/TreeBidiMap$DataElement; = None
+b Lorg/apache/commons/collections4/bidimap/TreeBidiMap$h; = None
+c Lorg/apache/commons/collections4/bidimap/TreeBidiMap$h; = None
+d I = None
+e Lorg/apache/commons/collections4/bidimap/TreeBidiMap; = None
+
+METHOD <init>(Lorg/apache/commons/collections4/bidimap/TreeBidiMap; Lorg/apache/commons/collections4/bidimap/TreeBidiMap$DataElement;)V
+000000: invoke-direct v2, Ljava/lang/Object;-><init>()V
+000006: iput-object v3, v2, Lorg/apache/commons/collections4/bidimap/TreeBidiMap$k;->e Lorg/apache/commons/collections4/bidimap/TreeBidiMap;
+00000a: iput-object v4, v2, Lorg/apache/commons/collections4/bidimap/TreeBidiMap$k;->a Lorg/apache/commons/collections4/bidimap/TreeBidiMap$DataElement;
+00000e: invoke-static v3, Lorg/apache/commons/collections4/bidimap/TreeBidiMap;->access$2100(Lorg/apache/commons/collections4/bidimap/TreeBidiMap;)I
+000014: move-result v0
+000016: iput v0, v2, Lorg/apache/commons/collections4/bidimap/TreeBidiMap$k;->d I
+00001a: invoke-static v3, Lorg/apache/commons/collections4/bidimap/TreeBidiMap;->access$2200(Lorg/apache/commons/collections4/bidimap/TreeBidiMap;)[Lorg/apache/commons/collections4/bidimap/TreeBidiMap$h;
+000020: move-result-object v0
+000022: invoke-virtual v4, Ljava/lang/Enum;->ordinal()I
+000028: move-result v1
+00002a: aget-object v0, v0, v1
+00002e: invoke-static v3, v0, v4, Lorg/apache/commons/collections4/bidimap/TreeBidiMap;->access$2300(Lorg/apache/commons/collections4/bidimap/TreeBidiMap; Lorg/apache/commons/collections4/bidimap/TreeBidiMap$h; Lorg/apache/commons/collections4/bidimap/TreeBidiMap$DataElement;)Lorg/apache/commons/collections4/bidimap/TreeBidiMap$h;
+000034: move-result-object v3
+000036: iput-object v3, v2, Lorg/apache/commons/collections4/bidimap/TreeBidiMap$k;->c Lorg/apache/commons/collections4/bidimap/TreeBidiMap$h;
+00003a: const/4 v3, 0
+00003c: iput-object v3, v2, Lorg/apache/commons/collections4/bidimap/TreeBidiMap$k;->b Lorg/apache/commons/collections4/bidimap/TreeBidiMap$h;
+000040: return-void 
+
+METHOD remove()V
+000000: iget-object v0, v3, Lorg/apache/commons/collections4/bidimap/TreeBidiMap$k;->b Lorg/apache/commons/collections4/bidimap/TreeBidiMap$h;
+000004: if-eqz v0, +038h
+000008: iget-object v0, v3, Lorg/apache/commons/collections4/bidimap/TreeBidiMap$k;->e Lorg/apache/commons/collections4/bidimap/TreeBidiMap;
+00000c: invoke-static v0, Lorg/apache/commons/collections4/bidimap/TreeBidiMap;->access$2100(Lorg/apache/commons/collections4/bidimap/TreeBidiMap;)I
+000012: move-result v1
+000014: iget v2, v3, Lorg/apache/commons/collections4/bidimap/TreeBidiMap$k;->d I
+000018: if-ne v1, v2, +028h
+00001c: iget-object v1, v3, Lorg/apache/commons/collections4/bidimap/TreeBidiMap$k;->b Lorg/apache/commons/collections4/bidimap/TreeBidiMap$h;
+000020: invoke-static v0, v1, Lorg/apache/commons/collections4/bidimap/TreeBidiMap;->access$2000(Lorg/apache/commons/collections4/bidimap/TreeBidiMap; Lorg/apache/commons/collections4/bidimap/TreeBidiMap$h;)V
+000026: iget v1, v3, Lorg/apache/commons/collections4/bidimap/TreeBidiMap$k;->d I
+00002a: add-int/lit8 v1, v1, 1
+00002e: iput v1, v3, Lorg/apache/commons/collections4/bidimap/TreeBidiMap$k;->d I
+000032: const/4 v1, 0
+000034: iput-object v1, v3, Lorg/apache/commons/collections4/bidimap/TreeBidiMap$k;->b Lorg/apache/commons/collections4/bidimap/TreeBidiMap$h;
+000038: iget-object v1, v3, Lorg/apache/commons/collections4/bidimap/TreeBidiMap$k;->c Lorg/apache/commons/collections4/bidimap/TreeBidiMap$h;
+00003c: iget-object v3, v3, Lorg/apache/commons/collections4/bidimap/TreeBidiMap$k;->a Lorg/apache/commons/collections4/bidimap/TreeBidiMap$DataElement;
+000040: if-nez v1, +010h
+000044: invoke-static v0, Lorg/apache/commons/collections4/bidimap/TreeBidiMap;->access$2200(Lorg/apache/commons/collections4/bidimap/TreeBidiMap;)[Lorg/apache/commons/collections4/bidimap/TreeBidiMap$h;
+00004a: move-result-object v1
+00004c: invoke-virtual v3, Ljava/lang/Enum;->ordinal()I
+000052: move-result v2
+000054: aget-object v1, v1, v2
+000058: invoke-static v0, v1, v3, Lorg/apache/commons/collections4/bidimap/TreeBidiMap;->access$2600(Lorg/apache/commons/collections4/bidimap/TreeBidiMap; Lorg/apache/commons/collections4/bidimap/TreeBidiMap$h; Lorg/apache/commons/collections4/bidimap/TreeBidiMap$DataElement;)Lorg/apache/commons/collections4/bidimap/TreeBidiMap$h;
+00005e: return-void 
+000060: invoke-static v0, v1, v3, Lorg/apache/commons/collections4/bidimap/TreeBidiMap;->access$2500(Lorg/apache/commons/collections4/bidimap/TreeBidiMap; Lorg/apache/commons/collections4/bidimap/TreeBidiMap$h; Lorg/apache/commons/collections4/bidimap/TreeBidiMap$DataElement;)Lorg/apache/commons/collections4/bidimap/TreeBidiMap$h;
+000066: return-void 
+000068: new-instance v3, Ljava/util/ConcurrentModificationException;
+00006c: invoke-direct v3, Ljava/util/ConcurrentModificationException;-><init>()V
+000072: throw v3
+000074: new-instance v3, Ljava/lang/IllegalStateException;
+000078: invoke-direct v3, Ljava/lang/IllegalStateException;-><init>()V
+00007e: throw v3

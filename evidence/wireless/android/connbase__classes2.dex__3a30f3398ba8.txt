@@ -1,0 +1,74 @@
+APK pcsuite/updateApk/connbase.apk
+DEX classes2.dex
+CLASS Lcom/vivo/pcsuite/pcconnect/wifip2p/WifiP2pService$w;
+SUPER Lcom/vivo/pcsuite/pcconnect/wifip2p/IWifiP2p$Stub;
+FIELDS
+e Lcom/vivo/pcsuite/pcconnect/wifip2p/WifiP2pService; = None
+
+METHOD <init>(Lcom/vivo/pcsuite/pcconnect/wifip2p/WifiP2pService;)V
+000000: iput-object v1, v0, Lcom/vivo/pcsuite/pcconnect/wifip2p/WifiP2pService$w;->e Lcom/vivo/pcsuite/pcconnect/wifip2p/WifiP2pService;
+000004: invoke-direct v0, Lcom/vivo/pcsuite/pcconnect/wifip2p/IWifiP2p$Stub;-><init>()V
+00000a: return-void 
+
+METHOD <init>(Lcom/vivo/pcsuite/pcconnect/wifip2p/WifiP2pService; Lcom/vivo/pcsuite/pcconnect/wifip2p/WifiP2pService$k;)V
+000000: invoke-direct v0, v1, Lcom/vivo/pcsuite/pcconnect/wifip2p/WifiP2pService$w;-><init>(Lcom/vivo/pcsuite/pcconnect/wifip2p/WifiP2pService;)V
+000006: return-void 
+
+METHOD cancelConnect()V
+000000: iget-object v0, v2, Lcom/vivo/pcsuite/pcconnect/wifip2p/WifiP2pService$w;->e Lcom/vivo/pcsuite/pcconnect/wifip2p/WifiP2pService;
+000004: const/4 v1, 0
+000006: invoke-static v0, v1, Lcom/vivo/pcsuite/pcconnect/wifip2p/WifiP2pService;->c(Lcom/vivo/pcsuite/pcconnect/wifip2p/WifiP2pService; Z)V
+00000c: iget-object v0, v2, Lcom/vivo/pcsuite/pcconnect/wifip2p/WifiP2pService$w;->e Lcom/vivo/pcsuite/pcconnect/wifip2p/WifiP2pService;
+000010: invoke-static v0, v1, Lcom/vivo/pcsuite/pcconnect/wifip2p/WifiP2pService;->d(Lcom/vivo/pcsuite/pcconnect/wifip2p/WifiP2pService; Z)V
+000016: iget-object v0, v2, Lcom/vivo/pcsuite/pcconnect/wifip2p/WifiP2pService$w;->e Lcom/vivo/pcsuite/pcconnect/wifip2p/WifiP2pService;
+00001a: invoke-static v0, v1, Lcom/vivo/pcsuite/pcconnect/wifip2p/WifiP2pService;->e(Lcom/vivo/pcsuite/pcconnect/wifip2p/WifiP2pService; Z)V
+000020: iget-object v0, v2, Lcom/vivo/pcsuite/pcconnect/wifip2p/WifiP2pService$w;->e Lcom/vivo/pcsuite/pcconnect/wifip2p/WifiP2pService;
+000024: invoke-virtual v0, Lcom/vivo/pcsuite/pcconnect/wifip2p/WifiP2pService;->c()V
+00002a: return-void 
+
+METHOD close()V
+000000: iget-object v0, v1, Lcom/vivo/pcsuite/pcconnect/wifip2p/WifiP2pService$w;->e Lcom/vivo/pcsuite/pcconnect/wifip2p/WifiP2pService;
+000004: invoke-virtual v0, Lcom/vivo/pcsuite/pcconnect/wifip2p/WifiP2pService;->a()V
+00000a: return-void 
+
+METHOD connectGroupOwner(Ljava/lang/String; Ljava/lang/String; Ljava/lang/String; Ljava/lang/String;)V
+000000: iget-object v0, v1, Lcom/vivo/pcsuite/pcconnect/wifip2p/WifiP2pService$w;->e Lcom/vivo/pcsuite/pcconnect/wifip2p/WifiP2pService;
+000004: invoke-virtual v0, v2, v3, v4, v5, Lcom/vivo/pcsuite/pcconnect/wifip2p/WifiP2pService;->a(Ljava/lang/String; Ljava/lang/String; Ljava/lang/String; Ljava/lang/String;)V
+00000a: return-void 
+
+METHOD createGroupForClient(I I)V
+000000: new-instance v0, Ljava/lang/StringBuilder;
+000004: invoke-direct v0, Ljava/lang/StringBuilder;-><init>()V
+00000a: const-string v1, "Creating group for client: "
+00000e: invoke-virtual v0, v1, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+000014: invoke-virtual v0, v3, Ljava/lang/StringBuilder;->append(I)Ljava/lang/StringBuilder;
+00001a: const-string v1, ", "
+00001e: invoke-virtual v0, v1, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+000024: invoke-virtual v0, v4, Ljava/lang/StringBuilder;->append(I)Ljava/lang/StringBuilder;
+00002a: invoke-virtual v0, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
+000030: move-result-object v0
+000032: const-string v1, "pcsuite_WifiP2pService"
+000036: invoke-static v1, v0, Lc/c/f/a/b;->k(Ljava/lang/String; Ljava/lang/String;)V
+00003c: iget-object v0, v2, Lcom/vivo/pcsuite/pcconnect/wifip2p/WifiP2pService$w;->e Lcom/vivo/pcsuite/pcconnect/wifip2p/WifiP2pService;
+000040: invoke-virtual v0, v3, v4, Lcom/vivo/pcsuite/pcconnect/wifip2p/WifiP2pService;->a(I I)V
+000046: return-void 
+
+METHOD initP2P()V
+000000: iget-object v0, v1, Lcom/vivo/pcsuite/pcconnect/wifip2p/WifiP2pService$w;->e Lcom/vivo/pcsuite/pcconnect/wifip2p/WifiP2pService;
+000004: invoke-static v0, Lcom/vivo/pcsuite/pcconnect/wifip2p/WifiP2pService;->m(Lcom/vivo/pcsuite/pcconnect/wifip2p/WifiP2pService;)V
+00000a: return-void 
+
+METHOD open()V
+000000: iget-object v0, v1, Lcom/vivo/pcsuite/pcconnect/wifip2p/WifiP2pService$w;->e Lcom/vivo/pcsuite/pcconnect/wifip2p/WifiP2pService;
+000004: invoke-virtual v0, Lcom/vivo/pcsuite/pcconnect/wifip2p/WifiP2pService;->b()V
+00000a: return-void 
+
+METHOD registerWifiP2pObserver(Lcom/vivo/pcsuite/pcconnect/wifip2p/WifiP2pObserver;)V
+000000: iget-object v0, v1, Lcom/vivo/pcsuite/pcconnect/wifip2p/WifiP2pService$w;->e Lcom/vivo/pcsuite/pcconnect/wifip2p/WifiP2pService;
+000004: invoke-virtual v0, v2, Lcom/vivo/pcsuite/pcconnect/wifip2p/WifiP2pService;->a(Lcom/vivo/pcsuite/pcconnect/wifip2p/WifiP2pObserver;)V
+00000a: return-void 
+
+METHOD unregisterWifiP2pObserver(Lcom/vivo/pcsuite/pcconnect/wifip2p/WifiP2pObserver;)V
+000000: iget-object v0, v1, Lcom/vivo/pcsuite/pcconnect/wifip2p/WifiP2pService$w;->e Lcom/vivo/pcsuite/pcconnect/wifip2p/WifiP2pService;
+000004: invoke-virtual v0, v2, Lcom/vivo/pcsuite/pcconnect/wifip2p/WifiP2pService;->b(Lcom/vivo/pcsuite/pcconnect/wifip2p/WifiP2pObserver;)V
+00000a: return-void 

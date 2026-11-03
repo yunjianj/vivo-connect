@@ -1,0 +1,78 @@
+APK pcsuite/updateApk/connbase.apk
+DEX classes.dex
+CLASS Lcom/vivo/connbase/crypto/utils/AESUtils;
+SUPER Ljava/lang/Object;
+FIELDS
+ALGORITHM Ljava/lang/String; = 'AES'
+TAG Ljava/lang/String; = 'AESUtilsTAG'
+TRANSFORMATION Ljava/lang/String; = 'AES/ECB/PKCS5Padding'
+
+METHOD <init>()V
+000000: invoke-direct v0, Ljava/lang/Object;-><init>()V
+000006: return-void 
+
+METHOD decrypt([B [B)[B
+000000: invoke-static Landroid/os/SystemClock;->elapsedRealtime()J
+000006: move-result-wide v0
+000008: new-instance v2, Ljavax/crypto/spec/SecretKeySpec;
+00000c: const-string v3, "AES"
+000010: invoke-direct v2, v5, v3, Ljavax/crypto/spec/SecretKeySpec;-><init>([B Ljava/lang/String;)V
+000016: const-string v5, "AES/ECB/PKCS5Padding"
+00001a: invoke-static v5, Ljavax/crypto/Cipher;->getInstance(Ljava/lang/String;)Ljavax/crypto/Cipher;
+000020: move-result-object v5
+000022: const/4 v3, 2
+000024: invoke-virtual v5, v3, v2, Ljavax/crypto/Cipher;->init(I Ljava/security/Key;)V
+00002a: const/4 v2, 0
+00002c: invoke-static v4, v2, Landroid/util/Base64;->decode([B I)[B
+000032: move-result-object v4
+000034: invoke-virtual v5, v4, Ljavax/crypto/Cipher;->doFinal([B)[B
+00003a: move-result-object v4
+00003c: invoke-static Landroid/os/SystemClock;->elapsedRealtime()J
+000042: move-result-wide v2
+000044: sub-long/2addr v2, v0
+000046: new-instance v5, Ljava/lang/StringBuilder;
+00004a: invoke-direct v5, Ljava/lang/StringBuilder;-><init>()V
+000050: const-string v0, "decrypt cost time="
+000054: invoke-virtual v5, v0, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+00005a: invoke-virtual v5, v2, v3, Ljava/lang/StringBuilder;->append(J)Ljava/lang/StringBuilder;
+000060: const-string v0, "ms"
+000064: invoke-virtual v5, v0, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+00006a: invoke-virtual v5, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
+000070: move-result-object v5
+000072: const-string v0, "AESUtilsTAG"
+000076: invoke-static v0, v5, Lc/c/f/a/b;->a(Ljava/lang/String; Ljava/lang/String;)V
+00007c: return-object v4
+
+METHOD encrypt([B [B)[B
+000000: invoke-static Landroid/os/SystemClock;->elapsedRealtime()J
+000006: move-result-wide v0
+000008: new-instance v2, Ljavax/crypto/spec/SecretKeySpec;
+00000c: const-string v3, "AES"
+000010: invoke-direct v2, v5, v3, Ljavax/crypto/spec/SecretKeySpec;-><init>([B Ljava/lang/String;)V
+000016: const-string v5, "AES/ECB/PKCS5Padding"
+00001a: invoke-static v5, Ljavax/crypto/Cipher;->getInstance(Ljava/lang/String;)Ljavax/crypto/Cipher;
+000020: move-result-object v5
+000022: const/4 v3, 1
+000024: invoke-virtual v5, v3, v2, Ljavax/crypto/Cipher;->init(I Ljava/security/Key;)V
+00002a: invoke-virtual v5, v4, Ljavax/crypto/Cipher;->doFinal([B)[B
+000030: move-result-object v4
+000032: const/4 v5, 0
+000034: invoke-static v4, v5, Landroid/util/Base64;->encodeToString([B I)Ljava/lang/String;
+00003a: move-result-object v4
+00003c: invoke-virtual v4, Ljava/lang/String;->getBytes()[B
+000042: move-result-object v4
+000044: invoke-static Landroid/os/SystemClock;->elapsedRealtime()J
+00004a: move-result-wide v2
+00004c: sub-long/2addr v2, v0
+00004e: new-instance v5, Ljava/lang/StringBuilder;
+000052: invoke-direct v5, Ljava/lang/StringBuilder;-><init>()V
+000058: const-string v0, "encrypt cost time="
+00005c: invoke-virtual v5, v0, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+000062: invoke-virtual v5, v2, v3, Ljava/lang/StringBuilder;->append(J)Ljava/lang/StringBuilder;
+000068: const-string v0, "ms"
+00006c: invoke-virtual v5, v0, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+000072: invoke-virtual v5, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
+000078: move-result-object v5
+00007a: const-string v0, "AESUtilsTAG"
+00007e: invoke-static v0, v5, Lc/c/f/a/b;->a(Ljava/lang/String; Ljava/lang/String;)V
+000084: return-object v4

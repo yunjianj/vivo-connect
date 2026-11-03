@@ -1,0 +1,191 @@
+APK pcsuite/updateApk/connbase.apk
+DEX classes.dex
+CLASS Lcom/vivo/connbase/wifi/utils/PhoneUtils;
+SUPER Ljava/lang/Object;
+FIELDS
+MARKET_NAME Ljava/lang/String; = None
+SOLUTION_MTK Ljava/lang/String; = 'MTK'
+SOLUTION_QCOM Ljava/lang/String; = 'QCOM'
+SOLUTION_SAMSUNG Ljava/lang/String; = 'SAMSUNG'
+TAG Ljava/lang/String; = 'PhoneUtils'
+UNKNOWN Ljava/lang/String; = 'unknown'
+isVivo Z = None
+
+METHOD <clinit>()V
+000000: sget-object v0, Landroid/os/Build;->MANUFACTURER Ljava/lang/String;
+000004: const-string v1, "bbk"
+000008: invoke-virtual v0, v1, Ljava/lang/String;->compareToIgnoreCase(Ljava/lang/String;)I
+00000e: move-result v0
+000010: if-eqz v0, +00fh
+000014: sget-object v0, Landroid/os/Build;->MANUFACTURER Ljava/lang/String;
+000018: const-string v1, "vivo"
+00001c: invoke-virtual v0, v1, Ljava/lang/String;->compareToIgnoreCase(Ljava/lang/String;)I
+000022: move-result v0
+000024: if-nez v0, +003h
+000028: goto +3h
+00002a: const/4 v0, 0
+00002c: goto +2h
+00002e: const/4 v0, 1
+000030: sput-boolean v0, Lcom/vivo/connbase/wifi/utils/PhoneUtils;->isVivo Z
+000034: if-eqz v0, +00ah
+000038: const-string v0, "ro.vivo.market.name"
+00003c: invoke-static v0, Lcom/vivo/connbase/wifi/utils/PhoneUtils;->getString(Ljava/lang/String;)Ljava/lang/String;
+000042: move-result-object v0
+000044: sput-object v0, Lcom/vivo/connbase/wifi/utils/PhoneUtils;->MARKET_NAME Ljava/lang/String;
+000048: sget-object v0, Lcom/vivo/connbase/wifi/utils/PhoneUtils;->MARKET_NAME Ljava/lang/String;
+00004c: const-string v1, "unknown"
+000050: invoke-virtual v1, v0, Ljava/lang/String;->equals(Ljava/lang/Object;)Z
+000056: move-result v0
+000058: if-nez v0, +00ah
+00005c: sget-object v0, Lcom/vivo/connbase/wifi/utils/PhoneUtils;->MARKET_NAME Ljava/lang/String;
+000060: invoke-static v0, Landroid/text/TextUtils;->isEmpty(Ljava/lang/CharSequence;)Z
+000066: move-result v0
+000068: if-eqz v0, +006h
+00006c: sget-object v0, Landroid/os/Build;->MODEL Ljava/lang/String;
+000070: sput-object v0, Lcom/vivo/connbase/wifi/utils/PhoneUtils;->MARKET_NAME Ljava/lang/String;
+000074: return-void 
+
+METHOD <init>()V
+000000: invoke-direct v0, Ljava/lang/Object;-><init>()V
+000006: return-void 
+
+METHOD getMyDeviceName()Ljava/lang/String;
+000000: sget-object v0, Lcom/vivo/connbase/wifi/utils/PhoneUtils;->MARKET_NAME Ljava/lang/String;
+000004: return-object v0
+
+METHOD getString(Ljava/lang/String;)Ljava/lang/String;
+000000: const-class v0, Ljava/lang/String;
+000004: const-string v1, "android.os.SystemProperties"
+000008: invoke-static v1, Ljava/lang/Class;->forName(Ljava/lang/String;)Ljava/lang/Class;
+00000e: move-result-object v1
+000010: const-string v2, "get"
+000014: const/4 v3, 2
+000016: new-array v4, v3, [Ljava/lang/Class;
+00001a: const/4 v5, 0
+00001c: aput-object v0, v4, v5
+000020: const/4 v6, 1
+000022: aput-object v0, v4, v6
+000026: invoke-virtual v1, v2, v4, Ljava/lang/Class;->getMethod(Ljava/lang/String; [Ljava/lang/Class;)Ljava/lang/reflect/Method;
+00002c: move-result-object v0
+00002e: new-array v2, v3, [Ljava/lang/Object;
+000032: aput-object v7, v2, v5
+000036: const-string v7, ""
+00003a: aput-object v7, v2, v6
+00003e: invoke-virtual v0, v1, v2, Ljava/lang/reflect/Method;->invoke(Ljava/lang/Object; [Ljava/lang/Object;)Ljava/lang/Object;
+000044: move-result-object v7
+000046: check-cast v7, Ljava/lang/String;
+00004a: goto +ah
+00004c: move-exception v7
+00004e: const-string v0, "PhoneUtils"
+000052: const-string v1, "Reflect get(String, String) failed."
+000056: invoke-static v0, v1, v7, Lc/c/f/a/b;->b(Ljava/lang/String; Ljava/lang/String; Ljava/lang/Throwable;)V
+00005c: const/4 v7, 0
+00005e: return-object v7
+
+METHOD getVivoSolution()Ljava/lang/String;
+000000: const-string v0, "ro.vivo.product.solution"
+000004: invoke-static v0, Lcom/vivo/connbase/wifi/utils/PhoneUtils;->getString(Ljava/lang/String;)Ljava/lang/String;
+00000a: move-result-object v0
+00000c: return-object v0
+
+METHOD isMTK()Z
+000000: invoke-static Lcom/vivo/connbase/wifi/utils/PhoneUtils;->getVivoSolution()Ljava/lang/String;
+000006: move-result-object v0
+000008: const-string v1, "MTK"
+00000c: invoke-virtual v1, v0, Ljava/lang/String;->equals(Ljava/lang/Object;)Z
+000012: move-result v0
+000014: return v0
+
+METHOD isPad(Landroid/content/Context;)Z
+000000: const-string v0, "window"
+000004: invoke-virtual v7, v0, Landroid/content/Context;->getSystemService(Ljava/lang/String;)Ljava/lang/Object;
+00000a: move-result-object v7
+00000c: check-cast v7, Landroid/view/WindowManager;
+000010: invoke-interface v7, Landroid/view/WindowManager;->getDefaultDisplay()Landroid/view/Display;
+000016: move-result-object v7
+000018: new-instance v0, Landroid/util/DisplayMetrics;
+00001c: invoke-direct v0, Landroid/util/DisplayMetrics;-><init>()V
+000022: invoke-virtual v7, v0, Landroid/view/Display;->getMetrics(Landroid/util/DisplayMetrics;)V
+000028: iget v7, v0, Landroid/util/DisplayMetrics;->widthPixels I
+00002c: int-to-float v7, v7
+00002e: iget v1, v0, Landroid/util/DisplayMetrics;->xdpi F
+000032: div-float/2addr v7, v1
+000034: float-to-double v1, v7
+000036: const-wide/high16 v3, 4611686018427387904
+00003a: invoke-static v1, v2, v3, v4, Ljava/lang/Math;->pow(D D)D
+000040: move-result-wide v1
+000042: iget v7, v0, Landroid/util/DisplayMetrics;->heightPixels I
+000046: int-to-float v7, v7
+000048: iget v0, v0, Landroid/util/DisplayMetrics;->ydpi F
+00004c: div-float/2addr v7, v0
+00004e: float-to-double v5, v7
+000050: invoke-static v5, v6, v3, v4, Ljava/lang/Math;->pow(D D)D
+000056: move-result-wide v3
+000058: add-double/2addr v1, v3
+00005a: invoke-static v1, v2, Ljava/lang/Math;->sqrt(D)D
+000060: move-result-wide v0
+000062: const-wide/high16 v2, 4619567317775286272
+000066: cmpl-double v7, v0, v2
+00006a: if-ltz v7, +004h
+00006e: const/4 v7, 1
+000070: goto +2h
+000072: const/4 v7, 0
+000074: return v7
+
+METHOD isQcom()Z
+000000: invoke-static Lcom/vivo/connbase/wifi/utils/PhoneUtils;->getVivoSolution()Ljava/lang/String;
+000006: move-result-object v0
+000008: const-string v1, "QCOM"
+00000c: invoke-virtual v1, v0, Ljava/lang/String;->equals(Ljava/lang/Object;)Z
+000012: move-result v0
+000014: return v0
+
+METHOD isSamsung()Z
+000000: invoke-static Lcom/vivo/connbase/wifi/utils/PhoneUtils;->getVivoSolution()Ljava/lang/String;
+000006: move-result-object v0
+000008: const-string v1, "SAMSUNG"
+00000c: invoke-virtual v1, v0, Ljava/lang/String;->equals(Ljava/lang/Object;)Z
+000012: move-result v0
+000014: return v0
+
+METHOD isVivoPad()Z
+000000: const-string v0, "PhoneUtils"
+000004: const/4 v1, 0
+000006: const-string v2, "android.util.FtDeviceInfo"
+00000a: invoke-static v2, Ljava/lang/Class;->forName(Ljava/lang/String;)Ljava/lang/Class;
+000010: move-result-object v2
+000012: const-string v3, "getDeviceType"
+000016: new-array v4, v1, [Ljava/lang/Class;
+00001a: invoke-virtual v2, v3, v4, Ljava/lang/Class;->getDeclaredMethod(Ljava/lang/String; [Ljava/lang/Class;)Ljava/lang/reflect/Method;
+000020: move-result-object v2
+000022: const/4 v3, 0
+000024: new-array v4, v1, [Ljava/lang/Object;
+000028: invoke-virtual v2, v3, v4, Ljava/lang/reflect/Method;->invoke(Ljava/lang/Object; [Ljava/lang/Object;)Ljava/lang/Object;
+00002e: move-result-object v2
+000030: new-instance v3, Ljava/lang/StringBuilder;
+000034: invoke-direct v3, Ljava/lang/StringBuilder;-><init>()V
+00003a: const-string v4, "DeviceType:"
+00003e: invoke-virtual v3, v4, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+000044: invoke-virtual v3, v2, Ljava/lang/StringBuilder;->append(Ljava/lang/Object;)Ljava/lang/StringBuilder;
+00004a: invoke-virtual v3, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
+000050: move-result-object v3
+000052: invoke-static v0, v3, Lc/c/f/a/b;->b(Ljava/lang/String; Ljava/lang/String;)V
+000058: instance-of v3, v2, Ljava/lang/String;
+00005c: if-eqz v3, +01dh
+000060: const-string v3, "tablet"
+000064: check-cast v2, Ljava/lang/String;
+000068: invoke-static v3, v2, Landroid/text/TextUtils;->equals(Ljava/lang/CharSequence; Ljava/lang/CharSequence;)Z
+00006e: move-result v0
+000070: if-eqz v0, +013h
+000074: const/4 v0, 1
+000076: move v1, v0
+000078: goto +fh
+00007a: const-string v2, "getDeviceType InvocationTargetException"
+00007e: goto +9h
+000080: const-string v2, "getDeviceType IllegalAccessException"
+000084: goto +6h
+000086: const-string v2, "getDeviceType NoSuchMethodException"
+00008a: goto +3h
+00008c: const-string v2, "FtDeviceInfo ClassNotFoundException"
+000090: invoke-static v0, v2, Lc/c/f/a/b;->g(Ljava/lang/String; Ljava/lang/String;)V
+000096: return v1

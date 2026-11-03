@@ -1,0 +1,214 @@
+APK pcsuite/updateApk/pcsuite.apk
+DEX classes2.dex
+CLASS Lcom/vivo/castsdk/source/utils/EventController;
+SUPER Ljava/lang/Object;
+FIELDS
+FLAG_IS_PC_SHARE_EVENT I = 0
+FLAG_OPEN_FILE_IN_PC_EVENT I = 0
+FLAG_SPECIFIC_FROM_PAD I = 0
+TAG Ljava/lang/String; = 'EventController'
+charMap Landroid/view/KeyCharacterMap; = None
+device Lcom/vivo/castsdk/common/bean/Device; = None
+eventQueue Ljava/util/concurrent/LinkedBlockingQueue; = None
+inputProxyManager Lcom/vivo/castsdk/source/input/InputProxyManager; = None
+isCallAnswerByPC Z = None
+lastMouseDown J = None
+lastTouchDownTime J = None
+mAudioManager Landroid/media/AudioManager; = None
+mEventAction I = None
+mHandler Landroid/os/Handler; = None
+mInputMethodManager Lcom/vivo/castsdk/common/wrappers/InputMethodManagerEx; = None
+mTelecomManager Landroid/telecom/TelecomManager; = None
+mTelephonyManager Lcom/vivo/castsdk/common/wrappers/TelephonyManagerEx; = None
+pointerCoords [Landroid/view/MotionEvent$PointerCoords; = None
+pointerProperties [Landroid/view/MotionEvent$PointerProperties; = None
+stop Z = None
+trackingEvents Ljava/util/Map; = None
+
+METHOD executeCommand(Lcom/vivo/castsdk/common/ControlEvent; I)Z
+000000: invoke-virtual v7, Lcom/vivo/castsdk/common/ControlEvent;->getAction()I
+000006: move-result v0
+000008: const/4 v1, 0
+00000a: const-string v2, "EventController"
+00000e: packed-switch v0, +000018bh
+000014: new-instance v6, Ljava/lang/StringBuilder;
+000018: const-string v8, "Unsupported command: "
+00001c: invoke-direct v6, v8, Ljava/lang/StringBuilder;-><init>(Ljava/lang/String;)V
+000022: invoke-virtual v7, Lcom/vivo/castsdk/common/ControlEvent;->getAction()I
+000028: move-result v7
+00002a: invoke-virtual v6, v7, Ljava/lang/StringBuilder;->append(I)Ljava/lang/StringBuilder;
+000030: invoke-virtual v6, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
+000036: move-result-object v6
+000038: invoke-static v2, v6, LD1/a;->n(Ljava/lang/String; Ljava/lang/String;)V
+00003e: goto/16 +16ch
+000042: invoke-static v8, Lcom/vivo/castsdk/common/VideoUtil;->requireKeyFrame(I)V
+000048: goto/16 +167h
+00004c: iget-object v0, v6, Lcom/vivo/castsdk/source/utils/EventController;->device Lcom/vivo/castsdk/common/bean/Device;
+000050: invoke-virtual v0, Lcom/vivo/castsdk/common/bean/Device;->isSupportDrag()Z
+000056: move-result v0
+000058: if-nez v0, +008h
+00005c: const-string v6, "device do not support drag,return"
+000060: invoke-static v2, v6, LD1/a;->d(Ljava/lang/String; Ljava/lang/String;)V
+000066: return v1
+000068: invoke-static Lcom/vivo/castsdk/source/drag/DragManager;->getInstance()Lcom/vivo/castsdk/source/drag/DragManager;
+00006e: move-result-object v0
+000070: invoke-virtual v0, Lcom/vivo/castsdk/source/drag/DragManager;->isScreenOff()Z
+000076: move-result v0
+000078: invoke-static Lcom/vivo/castsdk/source/drag/DragManager;->getInstance()Lcom/vivo/castsdk/source/drag/DragManager;
+00007e: move-result-object v3
+000080: invoke-virtual v3, Lcom/vivo/castsdk/source/drag/DragManager;->isScreenLocked()Z
+000086: move-result v3
+000088: invoke-static Lcom/vivo/castsdk/source/drag/DropTaskManager;->getInstance()Lcom/vivo/castsdk/source/drag/DropTaskManager;
+00008e: move-result-object v4
+000090: invoke-virtual v4, Lcom/vivo/castsdk/source/drag/DropTaskManager;->dropTaskIsNull()Z
+000096: move-result v4
+000098: xor-int/lit8 v5, v4, 1
+00009c: if-nez v0, +0d5h
+0000a0: if-nez v3, +0d3h
+0000a4: if-nez v4, +004h
+0000a8: goto/16 +0cfh
+0000ac: invoke-virtual v7, Lcom/vivo/castsdk/common/ControlEvent;->getText()Ljava/lang/String;
+0000b2: move-result-object v7
+0000b4: if-eqz v7, +131h
+0000b8: const-string v0, ""
+0000bc: invoke-virtual v7, v0, Ljava/lang/String;->equals(Ljava/lang/Object;)Z
+0000c2: move-result v0
+0000c4: if-nez v0, +129h
+0000c8: new-instance v0, Lcom/google/gson/Gson;
+0000cc: invoke-direct v0, Lcom/google/gson/Gson;-><init>()V
+0000d2: const-class v3, Lcom/vivo/castsdk/sdk/common/gson/EsDragEvent;
+0000d6: invoke-virtual v0, v7, v3, Lcom/google/gson/Gson;->fromJson(Ljava/lang/String; Ljava/lang/Class;)Ljava/lang/Object;
+0000dc: move-result-object v0
+0000de: check-cast v0, Lcom/vivo/castsdk/sdk/common/gson/EsDragEvent;
+0000e2: if-eqz v0, +058h
+0000e6: new-instance v7, Ljava/lang/StringBuilder;
+0000ea: const-string v3, "before mouse drag: "
+0000ee: invoke-direct v7, v3, Ljava/lang/StringBuilder;-><init>(Ljava/lang/String;)V
+0000f4: invoke-virtual v7, v0, Ljava/lang/StringBuilder;->append(Ljava/lang/Object;)Ljava/lang/StringBuilder;
+0000fa: invoke-virtual v7, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
+000100: move-result-object v7
+000102: invoke-static v2, v7, LD1/a;->h(Ljava/lang/String; Ljava/lang/String;)V
+000108: invoke-direct v6, v0, v8, Lcom/vivo/castsdk/source/utils/EventController;->correctDragEvent(Lcom/vivo/castsdk/sdk/common/gson/EsDragEvent; I)V
+00010e: new-instance v6, Ljava/lang/StringBuilder;
+000112: const-string v7, "after mouse drag: "
+000116: invoke-direct v6, v7, Ljava/lang/StringBuilder;-><init>(Ljava/lang/String;)V
+00011c: invoke-virtual v6, v0, Ljava/lang/StringBuilder;->append(Ljava/lang/Object;)Ljava/lang/StringBuilder;
+000122: invoke-virtual v6, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
+000128: move-result-object v6
+00012a: invoke-static v2, v6, LD1/a;->h(Ljava/lang/String; Ljava/lang/String;)V
+000130: invoke-static Lcom/vivo/castsdk/source/drag/DragManager;->getInstance()Lcom/vivo/castsdk/source/drag/DragManager;
+000136: move-result-object v6
+000138: invoke-virtual v6, v0, v8, Lcom/vivo/castsdk/source/drag/DragManager;->injectDragEvent(Lcom/vivo/castsdk/sdk/common/gson/EsDragEvent; I)V
+00013e: invoke-virtual v0, Lcom/vivo/castsdk/sdk/common/gson/EsDragEvent;->getPhoneDragItems()Ljava/util/List;
+000144: move-result-object v6
+000146: if-eqz v6, +0e8h
+00014a: invoke-interface v6, Ljava/util/List;->isEmpty()Z
+000150: move-result v7
+000152: if-nez v7, +0e2h
+000156: new-instance v7, Ljava/lang/StringBuilder;
+00015a: const-string v0, " drag items size:"
+00015e: invoke-direct v7, v0, Ljava/lang/StringBuilder;-><init>(Ljava/lang/String;)V
+000164: invoke-interface v6, Ljava/util/List;->size()I
+00016a: move-result v0
+00016c: invoke-virtual v7, v0, Ljava/lang/StringBuilder;->append(I)Ljava/lang/StringBuilder;
+000172: invoke-virtual v7, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
+000178: move-result-object v7
+00017a: invoke-static v2, v7, LD1/a;->h(Ljava/lang/String; Ljava/lang/String;)V
+000180: invoke-static Lcom/vivo/castsdk/source/drag/DragManager;->getInstance()Lcom/vivo/castsdk/source/drag/DragManager;
+000186: move-result-object v7
+000188: invoke-virtual v7, v6, v8, Lcom/vivo/castsdk/source/drag/DragManager;->notifyStartDrop(Ljava/util/List; I)V
+00018e: goto/16 +0c4h
+000192: const-string v6, "EsDragEvent is null!"
+000196: invoke-static v2, v6, LD1/a;->d(Ljava/lang/String; Ljava/lang/String;)V
+00019c: goto/16 +0bdh
+0001a0: move-exception v6
+0001a2: new-instance v0, Ljava/lang/StringBuilder;
+0001a6: const-string v3, "Failed to parse drag event JSON: "
+0001aa: invoke-direct v0, v3, Ljava/lang/StringBuilder;-><init>(Ljava/lang/String;)V
+0001b0: invoke-virtual v6, Ljava/lang/Throwable;->getMessage()Ljava/lang/String;
+0001b6: move-result-object v6
+0001b8: invoke-virtual v0, v6, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+0001be: const-string v6, ", text length="
+0001c2: invoke-virtual v0, v6, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+0001c8: invoke-virtual v7, Ljava/lang/String;->length()I
+0001ce: move-result v6
+0001d0: invoke-virtual v0, v6, Ljava/lang/StringBuilder;->append(I)Ljava/lang/StringBuilder;
+0001d6: const-string v6, ", text="
+0001da: invoke-virtual v0, v6, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+0001e0: invoke-virtual v0, v7, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+0001e6: invoke-virtual v0, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
+0001ec: move-result-object v6
+0001ee: invoke-static v2, v6, LD1/a;->d(Ljava/lang/String; Ljava/lang/String;)V
+0001f4: const-string v6, "dragEnd"
+0001f8: invoke-virtual v7, v6, Ljava/lang/String;->contains(Ljava/lang/CharSequence;)Z
+0001fe: move-result v6
+000200: if-nez v6, +00ah
+000204: const-string v6, "phone_drag"
+000208: invoke-virtual v7, v6, Ljava/lang/String;->contains(Ljava/lang/CharSequence;)Z
+00020e: move-result v6
+000210: if-eqz v6, +01ah
+000214: new-instance v6, Ljava/lang/StringBuilder;
+000218: const-string v7, "Drag end event parsing failed, sending MSG_DRAG_END to recover isInDragging state for displayId="
+00021c: invoke-direct v6, v7, Ljava/lang/StringBuilder;-><init>(Ljava/lang/String;)V
+000222: invoke-virtual v6, v8, Ljava/lang/StringBuilder;->append(I)Ljava/lang/StringBuilder;
+000228: invoke-virtual v6, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
+00022e: move-result-object v6
+000230: invoke-static v2, v6, LD1/a;->d(Ljava/lang/String; Ljava/lang/String;)V
+000236: invoke-static Lcom/vivo/castsdk/source/drag/DragManager;->getInstance()Lcom/vivo/castsdk/source/drag/DragManager;
+00023c: move-result-object v6
+00023e: invoke-virtual v6, v8, Lcom/vivo/castsdk/source/drag/DragManager;->sendDragEndRecovery(I)V
+000244: return v1
+000246: new-instance v6, Ljava/lang/StringBuilder;
+00024a: const-string v7, "drag event rejected: screenOff="
+00024e: invoke-direct v6, v7, Ljava/lang/StringBuilder;-><init>(Ljava/lang/String;)V
+000254: invoke-virtual v6, v0, Ljava/lang/StringBuilder;->append(Z)Ljava/lang/StringBuilder;
+00025a: const-string v7, " screenLocked="
+00025e: invoke-virtual v6, v7, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+000264: invoke-virtual v6, v3, Ljava/lang/StringBuilder;->append(Z)Ljava/lang/StringBuilder;
+00026a: const-string v7, " hasDropTask="
+00026e: invoke-virtual v6, v7, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+000274: invoke-virtual v6, v5, Ljava/lang/StringBuilder;->append(Z)Ljava/lang/StringBuilder;
+00027a: invoke-virtual v6, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
+000280: move-result-object v6
+000282: invoke-static v2, v6, LD1/a;->d(Ljava/lang/String; Ljava/lang/String;)V
+000288: return v1
+00028a: new-instance v6, Ljava/lang/StringBuilder;
+00028e: const-string v8, "audio stata:"
+000292: invoke-direct v6, v8, Ljava/lang/StringBuilder;-><init>(Ljava/lang/String;)V
+000298: invoke-virtual v7, Lcom/vivo/castsdk/common/ControlEvent;->getId()I
+00029e: move-result v8
+0002a0: invoke-virtual v6, v8, Ljava/lang/StringBuilder;->append(I)Ljava/lang/StringBuilder;
+0002a6: invoke-virtual v6, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
+0002ac: move-result-object v6
+0002ae: invoke-static v2, v6, LD1/a;->d(Ljava/lang/String; Ljava/lang/String;)V
+0002b4: invoke-virtual v7, Lcom/vivo/castsdk/common/ControlEvent;->getId()I
+0002ba: move-result v6
+0002bc: invoke-static Lcom/vivo/castsdk/source/encode/AudioRecordManager;->getInstance()Lcom/vivo/castsdk/source/encode/AudioRecordManager;
+0002c2: move-result-object v7
+0002c4: if-nez v6, +004h
+0002c8: const/4 v8, 1
+0002ca: goto +2h
+0002cc: move v8, v1
+0002ce: invoke-virtual v7, v8, Lcom/vivo/castsdk/source/encode/AudioRecordManager;->setOutputToPc(Z)V
+0002d4: if-nez v6, +00ah
+0002d8: invoke-static Lcom/vivo/castsdk/source/encode/AudioThread;->getInstance()Lcom/vivo/castsdk/source/encode/AudioThread;
+0002de: move-result-object v6
+0002e0: invoke-virtual v6, Lcom/vivo/castsdk/source/encode/AudioThread;->startRecord()V
+0002e6: goto +18h
+0002e8: invoke-static Lcom/vivo/castsdk/source/encode/AudioThread;->getInstance()Lcom/vivo/castsdk/source/encode/AudioThread;
+0002ee: move-result-object v6
+0002f0: invoke-virtual v6, Lcom/vivo/castsdk/source/encode/AudioThread;->stopRecord()V
+0002f6: goto +10h
+0002f8: invoke-virtual v7, Lcom/vivo/castsdk/common/ControlEvent;->getId()I
+0002fe: move-result v6
+000300: invoke-static v6, Ljava/lang/String;->valueOf(I)Ljava/lang/String;
+000306: move-result-object v6
+000308: invoke-static Lcom/vivo/castsdk/source/encode/ScreenCaptureManager;->getInstance()Lcom/vivo/castsdk/source/encode/ScreenCaptureManager;
+00030e: move-result-object v7
+000310: invoke-virtual v7, v6, Lcom/vivo/castsdk/source/encode/ScreenCaptureManager;->onConfigChange(Ljava/lang/String;)V
+000316: return v1
+000318: invoke-direct v6, v8, Lcom/vivo/castsdk/source/utils/EventController;->pressBackOrTurnScreenOn(I)Z
+00031e: move-result v6
+000320: return v6
+000322: nop 
+000324: packed-switch-payload 0 1 2 3 4 5 6

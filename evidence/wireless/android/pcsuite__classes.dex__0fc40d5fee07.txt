@@ -1,0 +1,179 @@
+APK pcsuite/updateApk/pcsuite.apk
+DEX classes.dex
+CLASS Landroidx/constraintlayout/motion/widget/MotionLayout$Model;
+SUPER Ljava/lang/Object;
+FIELDS
+mEnd Landroidx/constraintlayout/widget/ConstraintSet; = None
+mEndId I = None
+mLayoutEnd Landroidx/constraintlayout/core/widgets/ConstraintWidgetContainer; = None
+mLayoutStart Landroidx/constraintlayout/core/widgets/ConstraintWidgetContainer; = None
+mStart Landroidx/constraintlayout/widget/ConstraintSet; = None
+mStartId I = None
+this$0 Landroidx/constraintlayout/motion/widget/MotionLayout; = None
+
+METHOD build()V
+000000: move-object/from16 v0, v17
+000004: iget-object v1, v0, Landroidx/constraintlayout/motion/widget/MotionLayout$Model;->this$0 Landroidx/constraintlayout/motion/widget/MotionLayout;
+000008: invoke-virtual v1, Landroid/view/ViewGroup;->getChildCount()I
+00000e: move-result v1
+000010: iget-object v2, v0, Landroidx/constraintlayout/motion/widget/MotionLayout$Model;->this$0 Landroidx/constraintlayout/motion/widget/MotionLayout;
+000014: iget-object v2, v2, Landroidx/constraintlayout/motion/widget/MotionLayout;->mFrameArrayList Ljava/util/HashMap;
+000018: invoke-virtual v2, Ljava/util/HashMap;->clear()V
+00001e: new-instance v2, Landroid/util/SparseArray;
+000022: invoke-direct v2, Landroid/util/SparseArray;-><init>()V
+000028: new-array v3, v1, [I
+00002c: const/4 v4, 0
+00002e: move v5, v4
+000030: if-ge v5, v1, +020h
+000034: iget-object v6, v0, Landroidx/constraintlayout/motion/widget/MotionLayout$Model;->this$0 Landroidx/constraintlayout/motion/widget/MotionLayout;
+000038: invoke-virtual v6, v5, Landroid/view/ViewGroup;->getChildAt(I)Landroid/view/View;
+00003e: move-result-object v6
+000040: new-instance v7, Landroidx/constraintlayout/motion/widget/MotionController;
+000044: invoke-direct v7, v6, Landroidx/constraintlayout/motion/widget/MotionController;-><init>(Landroid/view/View;)V
+00004a: invoke-virtual v6, Landroid/view/View;->getId()I
+000050: move-result v8
+000052: aput v8, v3, v5
+000056: invoke-virtual v2, v8, v7, Landroid/util/SparseArray;->put(I Ljava/lang/Object;)V
+00005c: iget-object v8, v0, Landroidx/constraintlayout/motion/widget/MotionLayout$Model;->this$0 Landroidx/constraintlayout/motion/widget/MotionLayout;
+000060: iget-object v8, v8, Landroidx/constraintlayout/motion/widget/MotionLayout;->mFrameArrayList Ljava/util/HashMap;
+000064: invoke-virtual v8, v6, v7, Ljava/util/HashMap;->put(Ljava/lang/Object; Ljava/lang/Object;)Ljava/lang/Object;
+00006a: add-int/lit8 v5, v5, 1
+00006e: goto -1fh
+000070: move v5, v4
+000072: if-ge v5, v1, +0feh
+000076: iget-object v6, v0, Landroidx/constraintlayout/motion/widget/MotionLayout$Model;->this$0 Landroidx/constraintlayout/motion/widget/MotionLayout;
+00007a: invoke-virtual v6, v5, Landroid/view/ViewGroup;->getChildAt(I)Landroid/view/View;
+000080: move-result-object v9
+000082: iget-object v6, v0, Landroidx/constraintlayout/motion/widget/MotionLayout$Model;->this$0 Landroidx/constraintlayout/motion/widget/MotionLayout;
+000086: iget-object v6, v6, Landroidx/constraintlayout/motion/widget/MotionLayout;->mFrameArrayList Ljava/util/HashMap;
+00008a: invoke-virtual v6, v9, Ljava/util/HashMap;->get(Ljava/lang/Object;)Ljava/lang/Object;
+000090: move-result-object v6
+000092: move-object v7, v6
+000094: check-cast v7, Landroidx/constraintlayout/motion/widget/MotionController;
+000098: if-nez v7, +004h
+00009c: goto/16 +0e5h
+0000a0: iget-object v6, v0, Landroidx/constraintlayout/motion/widget/MotionLayout$Model;->mStart Landroidx/constraintlayout/widget/ConstraintSet;
+0000a4: const-string v13, ")"
+0000a8: const-string v14, " ("
+0000ac: const-string v15, "no widget for  "
+0000b0: const-string v8, "MotionLayout"
+0000b4: if-eqz v6, +058h
+0000b8: iget-object v6, v0, Landroidx/constraintlayout/motion/widget/MotionLayout$Model;->mLayoutStart Landroidx/constraintlayout/core/widgets/ConstraintWidgetContainer;
+0000bc: invoke-virtual v0, v6, v9, Landroidx/constraintlayout/motion/widget/MotionLayout$Model;->getWidget(Landroidx/constraintlayout/core/widgets/ConstraintWidgetContainer; Landroid/view/View;)Landroidx/constraintlayout/core/widgets/ConstraintWidget;
+0000c2: move-result-object v6
+0000c4: if-eqz v6, +01ah
+0000c8: iget-object v10, v0, Landroidx/constraintlayout/motion/widget/MotionLayout$Model;->this$0 Landroidx/constraintlayout/motion/widget/MotionLayout;
+0000cc: invoke-static v10, v6, Landroidx/constraintlayout/motion/widget/MotionLayout;->access$2000(Landroidx/constraintlayout/motion/widget/MotionLayout; Landroidx/constraintlayout/core/widgets/ConstraintWidget;)Landroid/graphics/Rect;
+0000d2: move-result-object v6
+0000d4: iget-object v10, v0, Landroidx/constraintlayout/motion/widget/MotionLayout$Model;->mStart Landroidx/constraintlayout/widget/ConstraintSet;
+0000d8: iget-object v11, v0, Landroidx/constraintlayout/motion/widget/MotionLayout$Model;->this$0 Landroidx/constraintlayout/motion/widget/MotionLayout;
+0000dc: invoke-virtual v11, Landroid/view/View;->getWidth()I
+0000e2: move-result v11
+0000e4: iget-object v12, v0, Landroidx/constraintlayout/motion/widget/MotionLayout$Model;->this$0 Landroidx/constraintlayout/motion/widget/MotionLayout;
+0000e8: invoke-virtual v12, Landroid/view/View;->getHeight()I
+0000ee: move-result v12
+0000f0: invoke-virtual v7, v6, v10, v11, v12, Landroidx/constraintlayout/motion/widget/MotionController;->setStartState(Landroid/graphics/Rect; Landroidx/constraintlayout/widget/ConstraintSet; I I)V
+0000f6: goto +35h
+0000f8: iget-object v6, v0, Landroidx/constraintlayout/motion/widget/MotionLayout$Model;->this$0 Landroidx/constraintlayout/motion/widget/MotionLayout;
+0000fc: iget v6, v6, Landroidx/constraintlayout/motion/widget/MotionLayout;->mDebugPath I
+000100: if-eqz v6, +030h
+000104: new-instance v6, Ljava/lang/StringBuilder;
+000108: invoke-direct v6, Ljava/lang/StringBuilder;-><init>()V
+00010e: invoke-static Landroidx/constraintlayout/motion/widget/Debug;->getLocation()Ljava/lang/String;
+000114: move-result-object v10
+000116: invoke-virtual v6, v10, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+00011c: invoke-virtual v6, v15, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+000122: invoke-static v9, Landroidx/constraintlayout/motion/widget/Debug;->getName(Landroid/view/View;)Ljava/lang/String;
+000128: move-result-object v10
+00012a: invoke-virtual v6, v10, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+000130: invoke-virtual v6, v14, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+000136: invoke-virtual v9, Ljava/lang/Object;->getClass()Ljava/lang/Class;
+00013c: move-result-object v10
+00013e: invoke-virtual v10, Ljava/lang/Class;->getName()Ljava/lang/String;
+000144: move-result-object v10
+000146: invoke-virtual v6, v10, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+00014c: invoke-virtual v6, v13, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+000152: invoke-virtual v6, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
+000158: move-result-object v6
+00015a: invoke-static v8, v6, Landroid/util/Log;->e(Ljava/lang/String; Ljava/lang/String;)I
+000160: move-object v6, v8
+000162: goto +2ah
+000164: iget-object v6, v0, Landroidx/constraintlayout/motion/widget/MotionLayout$Model;->this$0 Landroidx/constraintlayout/motion/widget/MotionLayout;
+000168: invoke-static v6, Landroidx/constraintlayout/motion/widget/MotionLayout;->access$300(Landroidx/constraintlayout/motion/widget/MotionLayout;)Z
+00016e: move-result v6
+000170: if-eqz v6, -008h
+000174: iget-object v6, v0, Landroidx/constraintlayout/motion/widget/MotionLayout$Model;->this$0 Landroidx/constraintlayout/motion/widget/MotionLayout;
+000178: iget-object v6, v6, Landroidx/constraintlayout/motion/widget/MotionLayout;->mPreRotate Ljava/util/HashMap;
+00017c: invoke-virtual v6, v9, Ljava/util/HashMap;->get(Ljava/lang/Object;)Ljava/lang/Object;
+000182: move-result-object v6
+000184: check-cast v6, Landroidx/constraintlayout/motion/utils/ViewState;
+000188: iget-object v10, v0, Landroidx/constraintlayout/motion/widget/MotionLayout$Model;->this$0 Landroidx/constraintlayout/motion/widget/MotionLayout;
+00018c: move-object v11, v10
+00018e: iget v10, v11, Landroidx/constraintlayout/motion/widget/MotionLayout;->mRotatMode I
+000192: invoke-static v11, Landroidx/constraintlayout/motion/widget/MotionLayout;->access$2100(Landroidx/constraintlayout/motion/widget/MotionLayout;)I
+000198: move-result v11
+00019a: iget-object v12, v0, Landroidx/constraintlayout/motion/widget/MotionLayout$Model;->this$0 Landroidx/constraintlayout/motion/widget/MotionLayout;
+00019e: invoke-static v12, Landroidx/constraintlayout/motion/widget/MotionLayout;->access$2200(Landroidx/constraintlayout/motion/widget/MotionLayout;)I
+0001a4: move-result v12
+0001a6: move-object/from16 v16, v8
+0001aa: move-object v8, v6
+0001ac: move-object/from16 v6, v16
+0001b0: invoke-virtual/range v7 ... v12, Landroidx/constraintlayout/motion/widget/MotionController;->setStartState(Landroidx/constraintlayout/motion/utils/ViewState; Landroid/view/View; I I I)V
+0001b6: iget-object v8, v0, Landroidx/constraintlayout/motion/widget/MotionLayout$Model;->mEnd Landroidx/constraintlayout/widget/ConstraintSet;
+0001ba: if-eqz v8, +056h
+0001be: iget-object v8, v0, Landroidx/constraintlayout/motion/widget/MotionLayout$Model;->mLayoutEnd Landroidx/constraintlayout/core/widgets/ConstraintWidgetContainer;
+0001c2: invoke-virtual v0, v8, v9, Landroidx/constraintlayout/motion/widget/MotionLayout$Model;->getWidget(Landroidx/constraintlayout/core/widgets/ConstraintWidgetContainer; Landroid/view/View;)Landroidx/constraintlayout/core/widgets/ConstraintWidget;
+0001c8: move-result-object v8
+0001ca: if-eqz v8, +01ah
+0001ce: iget-object v6, v0, Landroidx/constraintlayout/motion/widget/MotionLayout$Model;->this$0 Landroidx/constraintlayout/motion/widget/MotionLayout;
+0001d2: invoke-static v6, v8, Landroidx/constraintlayout/motion/widget/MotionLayout;->access$2000(Landroidx/constraintlayout/motion/widget/MotionLayout; Landroidx/constraintlayout/core/widgets/ConstraintWidget;)Landroid/graphics/Rect;
+0001d8: move-result-object v6
+0001da: iget-object v8, v0, Landroidx/constraintlayout/motion/widget/MotionLayout$Model;->mEnd Landroidx/constraintlayout/widget/ConstraintSet;
+0001de: iget-object v9, v0, Landroidx/constraintlayout/motion/widget/MotionLayout$Model;->this$0 Landroidx/constraintlayout/motion/widget/MotionLayout;
+0001e2: invoke-virtual v9, Landroid/view/View;->getWidth()I
+0001e8: move-result v9
+0001ea: iget-object v10, v0, Landroidx/constraintlayout/motion/widget/MotionLayout$Model;->this$0 Landroidx/constraintlayout/motion/widget/MotionLayout;
+0001ee: invoke-virtual v10, Landroid/view/View;->getHeight()I
+0001f4: move-result v10
+0001f6: invoke-virtual v7, v6, v8, v9, v10, Landroidx/constraintlayout/motion/widget/MotionController;->setEndState(Landroid/graphics/Rect; Landroidx/constraintlayout/widget/ConstraintSet; I I)V
+0001fc: goto +35h
+0001fe: iget-object v7, v0, Landroidx/constraintlayout/motion/widget/MotionLayout$Model;->this$0 Landroidx/constraintlayout/motion/widget/MotionLayout;
+000202: iget v7, v7, Landroidx/constraintlayout/motion/widget/MotionLayout;->mDebugPath I
+000206: if-eqz v7, +030h
+00020a: new-instance v7, Ljava/lang/StringBuilder;
+00020e: invoke-direct v7, Ljava/lang/StringBuilder;-><init>()V
+000214: invoke-static Landroidx/constraintlayout/motion/widget/Debug;->getLocation()Ljava/lang/String;
+00021a: move-result-object v8
+00021c: invoke-virtual v7, v8, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+000222: invoke-virtual v7, v15, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+000228: invoke-static v9, Landroidx/constraintlayout/motion/widget/Debug;->getName(Landroid/view/View;)Ljava/lang/String;
+00022e: move-result-object v8
+000230: invoke-virtual v7, v8, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+000236: invoke-virtual v7, v14, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+00023c: invoke-virtual v9, Ljava/lang/Object;->getClass()Ljava/lang/Class;
+000242: move-result-object v8
+000244: invoke-virtual v8, Ljava/lang/Class;->getName()Ljava/lang/String;
+00024a: move-result-object v8
+00024c: invoke-virtual v7, v8, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+000252: invoke-virtual v7, v13, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+000258: invoke-virtual v7, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
+00025e: move-result-object v7
+000260: invoke-static v6, v7, Landroid/util/Log;->e(Ljava/lang/String; Ljava/lang/String;)I
+000266: add-int/lit8 v5, v5, 1
+00026a: goto/16 -0fch
+00026e: if-ge v4, v1, +01dh
+000272: aget v0, v3, v4
+000276: invoke-virtual v2, v0, Landroid/util/SparseArray;->get(I)Ljava/lang/Object;
+00027c: move-result-object v0
+00027e: check-cast v0, Landroidx/constraintlayout/motion/widget/MotionController;
+000282: invoke-virtual v0, Landroidx/constraintlayout/motion/widget/MotionController;->getAnimateRelativeTo()I
+000288: move-result v5
+00028a: const/4 v6, -1
+00028c: if-eq v5, v6, +00bh
+000290: invoke-virtual v2, v5, Landroid/util/SparseArray;->get(I)Ljava/lang/Object;
+000296: move-result-object v5
+000298: check-cast v5, Landroidx/constraintlayout/motion/widget/MotionController;
+00029c: invoke-virtual v0, v5, Landroidx/constraintlayout/motion/widget/MotionController;->setupRelative(Landroidx/constraintlayout/motion/widget/MotionController;)V
+0002a2: add-int/lit8 v4, v4, 1
+0002a6: goto -1ch
+0002a8: return-void 

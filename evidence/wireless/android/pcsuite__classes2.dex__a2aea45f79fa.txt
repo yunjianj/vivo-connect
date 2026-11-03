@@ -1,0 +1,28 @@
+APK pcsuite/updateApk/pcsuite.apk
+DEX classes2.dex
+CLASS Lcom/vivo/pcsuite/connect/ConnectControlModel$2$1;
+SUPER Ljava/lang/Object;
+FIELDS
+a Lcom/vivo/pcsuite/connect/ConnectControlModel$2; = None
+
+METHOD <init>(Lcom/vivo/pcsuite/connect/ConnectControlModel$2;)V
+000000: invoke-direct v0, Ljava/lang/Object;-><init>()V
+000006: iput-object v1, v0, Lcom/vivo/pcsuite/connect/ConnectControlModel$2$1;->a Lcom/vivo/pcsuite/connect/ConnectControlModel$2;
+00000a: return-void 
+
+METHOD onStatus(Z Z)V
+000000: const-string v2, "pcsuite_ConnectControlModel"
+000004: const-string v0, "cancel connect ble"
+000008: invoke-static v2, v0, Lcom/vivo/connect/logger/EasyLog;->i(Ljava/lang/String; Ljava/lang/String;)V
+00000e: const-string v2, "0"
+000012: if-eqz v3, +005h
+000016: const-string v3, "1"
+00001a: goto +2h
+00001c: move-object v3, v2
+00001e: invoke-static v2, v3, Lcom/vivo/pcsuite/util/o0;->U(Ljava/lang/String; Ljava/lang/String;)V
+000024: const/4 v2, -1
+000026: invoke-static v2, Lcom/vivo/pcsuite/service/PcSuiteObserver;->G(I)V
+00002c: iget-object v1, v1, Lcom/vivo/pcsuite/connect/ConnectControlModel$2$1;->a Lcom/vivo/pcsuite/connect/ConnectControlModel$2;
+000030: iget-object v1, v1, Lcom/vivo/pcsuite/connect/ConnectControlModel$2;->d Lcom/vivo/pcsuite/connect/ConnectControlModel;
+000034: invoke-virtual v1, Lcom/vivo/pcsuite/connect/ConnectControlModel;->cancelBleByResponse()V
+00003a: return-void 

@@ -1,0 +1,31 @@
+{
+  "styleReference": "https://apps.kde.org/kdeconnect/",
+  "theme": "Breeze light, device sidebar, device details and action panels",
+  "frontend": "backend/ui",
+  "unitTests": {
+    "passed": 26,
+    "failed": 0
+  },
+  "realBrowserRegression": {
+    "desktop": true,
+    "qrDialog": true,
+    "browserFileDropToBackend": true,
+    "phoneDirectoryAndReceive": true,
+    "mobileWidth": 390,
+    "horizontalOverflow": false,
+    "deviceAndAccountMocked": true,
+    "realPhoneAccessed": false
+  },
+  "screenshot": "/tmp/vivo-desktop-ui.png",
+  "authorization": {
+    "oneUseTicket": true,
+    "scopedTokenOnly": true,
+    "arbitraryLocalPathsUploadDenied": true,
+    "browserUploadSizeAndFilenameChecked": true,
+    "temporaryUploadCleanupTested": true
+  },
+  "runtimeNotes": [
+    "Updated backend must be restarted to load the new UI capabilities and binary upload endpoint.",
+    "Existing live phone connection was not disrupted for frontend development or browser QA."
+  ]
+}

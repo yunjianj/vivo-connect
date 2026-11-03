@@ -1,0 +1,68 @@
+APK pcsuite/updateApk/connbase.apk
+DEX classes.dex
+CLASS Lcom/vivo/connbase/VivoConnectService$t;
+SUPER Ljava/lang/Object;
+FIELDS
+a Ljava/lang/String; = None
+b Ljava/lang/String; = None
+c Lcom/vivo/connbase/VivoConnectService; = None
+
+METHOD <init>(Lcom/vivo/connbase/VivoConnectService; Ljava/lang/String; Ljava/lang/String;)V
+000000: iput-object v1, v0, Lcom/vivo/connbase/VivoConnectService$t;->c Lcom/vivo/connbase/VivoConnectService;
+000004: invoke-direct v0, Ljava/lang/Object;-><init>()V
+00000a: iput-object v2, v0, Lcom/vivo/connbase/VivoConnectService$t;->a Ljava/lang/String;
+00000e: iput-object v3, v0, Lcom/vivo/connbase/VivoConnectService$t;->b Ljava/lang/String;
+000012: return-void 
+
+METHOD a()Ljava/lang/String;
+000000: iget-object v0, v1, Lcom/vivo/connbase/VivoConnectService$t;->b Ljava/lang/String;
+000004: return-object v0
+
+METHOD b()Ljava/lang/String;
+000000: iget-object v0, v1, Lcom/vivo/connbase/VivoConnectService$t;->a Ljava/lang/String;
+000004: return-object v0
+
+METHOD onAlarm()V
+000000: new-instance v0, Ljava/lang/StringBuilder;
+000004: invoke-direct v0, Ljava/lang/StringBuilder;-><init>()V
+00000a: const-string v1, "p2p idle time out:"
+00000e: invoke-virtual v0, v1, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+000014: iget-object v1, v2, Lcom/vivo/connbase/VivoConnectService$t;->c Lcom/vivo/connbase/VivoConnectService;
+000018: invoke-static v1, Lcom/vivo/connbase/VivoConnectService;->a(Lcom/vivo/connbase/VivoConnectService;)Z
+00001e: move-result v1
+000020: invoke-virtual v0, v1, Ljava/lang/StringBuilder;->append(Z)Ljava/lang/StringBuilder;
+000026: invoke-virtual v0, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
+00002c: move-result-object v0
+00002e: const-string v1, "VivoConnectService"
+000032: invoke-static v1, v0, Lc/c/f/a/b;->k(Ljava/lang/String; Ljava/lang/String;)V
+000038: iget-object v0, v2, Lcom/vivo/connbase/VivoConnectService$t;->c Lcom/vivo/connbase/VivoConnectService;
+00003c: invoke-static v0, Lcom/vivo/connbase/VivoConnectService;->a(Lcom/vivo/connbase/VivoConnectService;)Z
+000042: move-result v0
+000044: if-eqz v0, +03bh
+000048: iget-object v0, v2, Lcom/vivo/connbase/VivoConnectService$t;->c Lcom/vivo/connbase/VivoConnectService;
+00004c: invoke-static v0, Lcom/vivo/connbase/VivoConnectService;->b(Lcom/vivo/connbase/VivoConnectService;)Lcom/vivo/connbase/l0/d/f;
+000052: move-result-object v0
+000054: invoke-interface v0, Lcom/vivo/connbase/l0/d/f;->b()Z
+00005a: move-result v0
+00005c: if-eqz v0, +012h
+000060: const-string v0, "reset idle timeout listener on socket busy."
+000064: invoke-static v1, v0, Lc/c/f/a/b;->k(Ljava/lang/String; Ljava/lang/String;)V
+00006a: iget-object v0, v2, Lcom/vivo/connbase/VivoConnectService$t;->c Lcom/vivo/connbase/VivoConnectService;
+00006e: invoke-static v0, Lcom/vivo/connbase/VivoConnectService;->k(Lcom/vivo/connbase/VivoConnectService;)V
+000074: iget-object v0, v2, Lcom/vivo/connbase/VivoConnectService$t;->c Lcom/vivo/connbase/VivoConnectService;
+000078: invoke-static v0, Lcom/vivo/connbase/VivoConnectService;->s(Lcom/vivo/connbase/VivoConnectService;)V
+00007e: goto +1eh
+000080: const-string v0, "disconnect p2p cause p2p idle."
+000084: invoke-static v1, v0, Lc/c/f/a/b;->k(Ljava/lang/String; Ljava/lang/String;)V
+00008a: iget-object v0, v2, Lcom/vivo/connbase/VivoConnectService$t;->c Lcom/vivo/connbase/VivoConnectService;
+00008e: invoke-static v0, Lcom/vivo/connbase/VivoConnectService;->v(Lcom/vivo/connbase/VivoConnectService;)Z
+000094: move-result v0
+000096: if-eqz v0, +00dh
+00009a: const-string v0, "P2P is working and set isP2pIdle true"
+00009e: invoke-static v1, v0, Lc/c/f/a/b;->k(Ljava/lang/String; Ljava/lang/String;)V
+0000a4: iget-object v0, v2, Lcom/vivo/connbase/VivoConnectService$t;->c Lcom/vivo/connbase/VivoConnectService;
+0000a8: const/4 v1, 1
+0000aa: invoke-static v0, v1, Lcom/vivo/connbase/VivoConnectService;->f(Lcom/vivo/connbase/VivoConnectService; Z)Z
+0000b0: iget-object v0, v2, Lcom/vivo/connbase/VivoConnectService$t;->c Lcom/vivo/connbase/VivoConnectService;
+0000b4: invoke-static v0, Lcom/vivo/connbase/VivoConnectService;->G(Lcom/vivo/connbase/VivoConnectService;)V
+0000ba: return-void 

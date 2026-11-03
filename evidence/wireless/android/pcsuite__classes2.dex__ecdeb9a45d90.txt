@@ -1,0 +1,58 @@
+APK pcsuite/updateApk/pcsuite.apk
+DEX classes2.dex
+CLASS Lcom/vivo/connect/sdk/f/c$p;
+SUPER Ljava/lang/Object;
+FIELDS
+f Ljava/lang/String; = ':switchLayerRunnable'
+a Landroid/os/Messenger; = None
+b Ljava/lang/String; = None
+c Ljava/lang/String; = None
+d I = None
+e Lcom/vivo/connect/sdk/f/c; = None
+
+METHOD <init>(Lcom/vivo/connect/sdk/f/c; Landroid/os/Messenger; Ljava/lang/String; Ljava/lang/String; I)V
+000000: iput-object v1, v0, Lcom/vivo/connect/sdk/f/c$p;->e Lcom/vivo/connect/sdk/f/c;
+000004: iput-object v2, v0, Lcom/vivo/connect/sdk/f/c$p;->a Landroid/os/Messenger;
+000008: iput-object v3, v0, Lcom/vivo/connect/sdk/f/c$p;->b Ljava/lang/String;
+00000c: iput-object v4, v0, Lcom/vivo/connect/sdk/f/c$p;->c Ljava/lang/String;
+000010: iput v5, v0, Lcom/vivo/connect/sdk/f/c$p;->d I
+000014: invoke-direct v0, Ljava/lang/Object;-><init>()V
+00001a: return-void 
+
+METHOD run()V
+000000: const-string v0, "ConnectClientImpl"
+000004: iget-object v1, v5, Lcom/vivo/connect/sdk/f/c$p;->e Lcom/vivo/connect/sdk/f/c;
+000008: invoke-static v1, Lcom/vivo/connect/sdk/f/c;->a(Lcom/vivo/connect/sdk/f/c;)Lcom/vivo/connbase/IClient;
+00000e: move-result-object v1
+000010: if-eqz v1, +013h
+000014: iget-object v1, v5, Lcom/vivo/connect/sdk/f/c$p;->e Lcom/vivo/connect/sdk/f/c;
+000018: invoke-static v1, Lcom/vivo/connect/sdk/f/c;->a(Lcom/vivo/connect/sdk/f/c;)Lcom/vivo/connbase/IClient;
+00001e: move-result-object v1
+000020: iget-object v2, v5, Lcom/vivo/connect/sdk/f/c$p;->a Landroid/os/Messenger;
+000024: iget-object v3, v5, Lcom/vivo/connect/sdk/f/c$p;->b Ljava/lang/String;
+000028: iget-object v4, v5, Lcom/vivo/connect/sdk/f/c$p;->c Ljava/lang/String;
+00002c: iget v5, v5, Lcom/vivo/connect/sdk/f/c$p;->d I
+000030: goto +1fh
+000032: move-exception v5
+000034: goto +21h
+000036: iget-object v1, v5, Lcom/vivo/connect/sdk/f/c$p;->e Lcom/vivo/connect/sdk/f/c;
+00003a: const-string v2, ":switchLayerRunnable"
+00003e: invoke-static v1, v2, Lcom/vivo/connect/sdk/f/c;->a(Lcom/vivo/connect/sdk/f/c; Ljava/lang/String;)Z
+000044: move-result v1
+000046: if-nez v1, +003h
+00004a: return-void 
+00004c: const-string/jumbo v1, switchTransferLayer await end.
+000052: invoke-static v0, v1, Lcom/vivo/connect/logger/EasyLog;->i(Ljava/lang/String; Ljava/lang/String;)V
+000058: iget-object v1, v5, Lcom/vivo/connect/sdk/f/c$p;->e Lcom/vivo/connect/sdk/f/c;
+00005c: invoke-static v1, Lcom/vivo/connect/sdk/f/c;->a(Lcom/vivo/connect/sdk/f/c;)Lcom/vivo/connbase/IClient;
+000062: move-result-object v1
+000064: iget-object v2, v5, Lcom/vivo/connect/sdk/f/c$p;->a Landroid/os/Messenger;
+000068: iget-object v3, v5, Lcom/vivo/connect/sdk/f/c$p;->b Ljava/lang/String;
+00006c: goto -22h
+00006e: invoke-interface v1, v2, v3, v4, v5, Lcom/vivo/connbase/IClient;->switchTransferLayer(Landroid/os/Messenger; Ljava/lang/String; Ljava/lang/String; I)V
+000074: return-void 
+000076: new-instance v1, Ljava/lang/StringBuilder;
+00007a: const-string/jumbo v2, switchTransferLayer error:
+000080: invoke-direct v1, v2, Ljava/lang/StringBuilder;-><init>(Ljava/lang/String;)V
+000086: invoke-static v5, v1, v0, Landroidx/appcompat/widget/view/b;->c(Ljava/lang/Exception; Ljava/lang/StringBuilder; Ljava/lang/String;)V
+00008c: return-void 

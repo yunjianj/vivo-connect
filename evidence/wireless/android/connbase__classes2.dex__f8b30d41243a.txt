@@ -1,0 +1,84 @@
+APK pcsuite/updateApk/connbase.apk
+DEX classes2.dex
+CLASS Lcom/vivo/pcsuite/pcconnect/ble/BluetoothLeService$b;
+SUPER Landroid/content/BroadcastReceiver;
+FIELDS
+a Lcom/vivo/pcsuite/pcconnect/ble/BluetoothLeService; = None
+
+METHOD <init>(Lcom/vivo/pcsuite/pcconnect/ble/BluetoothLeService;)V
+000000: iput-object v1, v0, Lcom/vivo/pcsuite/pcconnect/ble/BluetoothLeService$b;->a Lcom/vivo/pcsuite/pcconnect/ble/BluetoothLeService;
+000004: invoke-direct v0, Landroid/content/BroadcastReceiver;-><init>()V
+00000a: return-void 
+
+METHOD onReceive(Landroid/content/Context; Landroid/content/Intent;)V
+000000: invoke-virtual v4, Landroid/content/Intent;->getAction()Ljava/lang/String;
+000006: move-result-object v3
+000008: const-string v0, "android.bluetooth.adapter.action.STATE_CHANGED"
+00000c: invoke-virtual v0, v3, Ljava/lang/String;->equals(Ljava/lang/Object;)Z
+000012: move-result v0
+000014: const-string v1, "pcsuite_BluetoothLeService"
+000018: if-eqz v0, +059h
+00001c: const/4 v3, 0
+00001e: const-string v0, "android.bluetooth.adapter.extra.STATE"
+000022: invoke-virtual v4, v0, v3, Landroid/content/Intent;->getIntExtra(Ljava/lang/String; I)I
+000028: move-result v3
+00002a: new-instance v4, Ljava/lang/StringBuilder;
+00002e: invoke-direct v4, Ljava/lang/StringBuilder;-><init>()V
+000034: const-string v0, "Received bluetooth LE state: "
+000038: invoke-virtual v4, v0, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+00003e: invoke-virtual v4, v3, Ljava/lang/StringBuilder;->append(I)Ljava/lang/StringBuilder;
+000044: invoke-virtual v4, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
+00004a: move-result-object v4
+00004c: invoke-static v1, v4, Lc/c/f/a/b;->k(Ljava/lang/String; Ljava/lang/String;)V
+000052: const/16 v4, 12
+000056: if-ne v3, v4, +030h
+00005a: iget-object v3, v2, Lcom/vivo/pcsuite/pcconnect/ble/BluetoothLeService$b;->a Lcom/vivo/pcsuite/pcconnect/ble/BluetoothLeService;
+00005e: invoke-static v3, Lcom/vivo/pcsuite/pcconnect/ble/BluetoothLeService;->x(Lcom/vivo/pcsuite/pcconnect/ble/BluetoothLeService;)Landroid/bluetooth/le/BluetoothLeAdvertiser;
+000064: move-result-object v3
+000066: if-eqz v3, +044h
+00006a: iget-object v3, v2, Lcom/vivo/pcsuite/pcconnect/ble/BluetoothLeService$b;->a Lcom/vivo/pcsuite/pcconnect/ble/BluetoothLeService;
+00006e: invoke-static v3, Lcom/vivo/pcsuite/pcconnect/ble/BluetoothLeService;->D(Lcom/vivo/pcsuite/pcconnect/ble/BluetoothLeService;)Landroid/bluetooth/BluetoothGattServer;
+000074: move-result-object v3
+000076: if-nez v3, +003h
+00007a: goto +3ah
+00007c: iget-object v3, v2, Lcom/vivo/pcsuite/pcconnect/ble/BluetoothLeService$b;->a Lcom/vivo/pcsuite/pcconnect/ble/BluetoothLeService;
+000080: const/4 v4, 1
+000082: invoke-static v3, v4, v4, Lcom/vivo/pcsuite/pcconnect/ble/BluetoothLeService;->a(Lcom/vivo/pcsuite/pcconnect/ble/BluetoothLeService; Z Z)V
+000088: goto +50h
+00008a: move-exception v3
+00008c: new-instance v4, Ljava/lang/StringBuilder;
+000090: invoke-direct v4, Ljava/lang/StringBuilder;-><init>()V
+000096: const-string v0, "startAdvertising() 33 e:"
+00009a: invoke-virtual v4, v0, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+0000a0: invoke-virtual v4, v3, Ljava/lang/StringBuilder;->append(Ljava/lang/Object;)Ljava/lang/StringBuilder;
+0000a6: invoke-virtual v4, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
+0000ac: move-result-object v3
+0000ae: invoke-static v1, v3, Lc/c/f/a/b;->k(Ljava/lang/String; Ljava/lang/String;)V
+0000b4: goto +3ah
+0000b6: const/16 v4, 10
+0000ba: if-ne v3, v4, +037h
+0000be: iget-object v3, v2, Lcom/vivo/pcsuite/pcconnect/ble/BluetoothLeService$b;->a Lcom/vivo/pcsuite/pcconnect/ble/BluetoothLeService;
+0000c2: invoke-static v3, Lcom/vivo/pcsuite/pcconnect/ble/BluetoothLeService;->G(Lcom/vivo/pcsuite/pcconnect/ble/BluetoothLeService;)V
+0000c8: goto +30h
+0000ca: const-string v4, "android.intent.action.SCREEN_ON"
+0000ce: invoke-virtual v4, v3, Ljava/lang/String;->equals(Ljava/lang/Object;)Z
+0000d4: move-result v4
+0000d6: if-eqz v4, +012h
+0000da: const-string v3, "ACTION_SCREEN_ON"
+0000de: invoke-static v1, v3, Lc/c/f/a/b;->k(Ljava/lang/String; Ljava/lang/String;)V
+0000e4: iget-object v3, v2, Lcom/vivo/pcsuite/pcconnect/ble/BluetoothLeService$b;->a Lcom/vivo/pcsuite/pcconnect/ble/BluetoothLeService;
+0000e8: invoke-static v3, Lcom/vivo/pcsuite/pcconnect/ble/BluetoothLeService;->G(Lcom/vivo/pcsuite/pcconnect/ble/BluetoothLeService;)V
+0000ee: iget-object v3, v2, Lcom/vivo/pcsuite/pcconnect/ble/BluetoothLeService$b;->a Lcom/vivo/pcsuite/pcconnect/ble/BluetoothLeService;
+0000f2: invoke-static v3, Lcom/vivo/pcsuite/pcconnect/ble/BluetoothLeService;->F(Lcom/vivo/pcsuite/pcconnect/ble/BluetoothLeService;)Z
+0000f8: goto +18h
+0000fa: const-string v4, "android.intent.action.SCREEN_OFF"
+0000fe: invoke-virtual v4, v3, Ljava/lang/String;->equals(Ljava/lang/Object;)Z
+000104: move-result v3
+000106: if-eqz v3, +011h
+00010a: const-string v3, "ACTION_SCREEN_OFF"
+00010e: invoke-static v1, v3, Lc/c/f/a/b;->k(Ljava/lang/String; Ljava/lang/String;)V
+000114: iget-object v3, v2, Lcom/vivo/pcsuite/pcconnect/ble/BluetoothLeService$b;->a Lcom/vivo/pcsuite/pcconnect/ble/BluetoothLeService;
+000118: invoke-static v3, Lcom/vivo/pcsuite/pcconnect/ble/BluetoothLeService;->H(Lcom/vivo/pcsuite/pcconnect/ble/BluetoothLeService;)V
+00011e: iget-object v3, v2, Lcom/vivo/pcsuite/pcconnect/ble/BluetoothLeService$b;->a Lcom/vivo/pcsuite/pcconnect/ble/BluetoothLeService;
+000122: invoke-virtual v3, Lcom/vivo/pcsuite/pcconnect/ble/BluetoothLeService;->f()V
+000128: return-void 

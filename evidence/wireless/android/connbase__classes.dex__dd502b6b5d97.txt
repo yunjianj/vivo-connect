@@ -1,0 +1,438 @@
+APK pcsuite/updateApk/connbase.apk
+DEX classes.dex
+CLASS Lcom/vivo/connbase/e0/g/c;
+SUPER Ljava/lang/Object;
+FIELDS
+a Ljava/lang/String; = 'vivo.intent.action.ACTION_HANDOFF_SETTING'
+b Ljava/lang/String; = 'com.vivo.handoff.settings'
+c Ljava/lang/String; = None
+d Ljava/lang/String; = None
+e Ljava/lang/String; = 'hoffsetting_app'
+f Ljava/lang/String; = 'hoffsetting_content_syn'
+g Ljava/lang/String; = 'hoffsetting_wlan_content_syn'
+h Ljava/lang/String; = 'hoffsetting_verification_code_content_syn'
+i Ljava/lang/String; = 'hoffsetting_view_across_devices'
+j Ljava/lang/String; = 'handoff_movie'
+k I = 1
+l Ljava/lang/String; = 'enable'
+m Ljava/lang/String; = 'key_connect_base_permission'
+n I = 0
+o I = 0
+p I = 0
+q I = 80001
+r I = 70001
+
+METHOD <clinit>()V
+000000: const/4 v0, 1
+000002: new-array v1, v0, [Ljava/lang/Object;
+000006: const-string v2, "com.vivo.handoff.settings"
+00000a: const/4 v3, 0
+00000c: aput-object v2, v1, v3
+000010: const-string v4, "content://%s/handoff_app_setting"
+000014: invoke-static v4, v1, Ljava/lang/String;->format(Ljava/lang/String; [Ljava/lang/Object;)Ljava/lang/String;
+00001a: move-result-object v1
+00001c: sput-object v1, Lcom/vivo/connbase/e0/g/c;->c Ljava/lang/String;
+000020: new-array v0, v0, [Ljava/lang/Object;
+000024: aput-object v2, v0, v3
+000028: const-string v1, "content://%s/handoff_setting"
+00002c: invoke-static v1, v0, Ljava/lang/String;->format(Ljava/lang/String; [Ljava/lang/Object;)Ljava/lang/String;
+000032: move-result-object v0
+000034: sput-object v0, Lcom/vivo/connbase/e0/g/c;->d Ljava/lang/String;
+000038: const/4 v0, -1
+00003a: sput v0, Lcom/vivo/connbase/e0/g/c;->n I
+00003e: sput v0, Lcom/vivo/connbase/e0/g/c;->o I
+000042: sput v0, Lcom/vivo/connbase/e0/g/c;->p I
+000046: return-void 
+
+METHOD <init>()V
+000000: invoke-direct v0, Ljava/lang/Object;-><init>()V
+000006: return-void 
+
+METHOD a(Landroid/content/Context; Landroid/database/ContentObserver;)Lcom/vivo/connbase/e0/g/c$c;
+000000: const-string v0, "hoffsetting_app"
+000004: invoke-static v2, v0, v3, Lcom/vivo/connbase/e0/g/c;->b(Landroid/content/Context; Ljava/lang/String; Landroid/database/ContentObserver;)Lcom/vivo/connbase/e0/g/c$c;
+00000a: move-result-object v0
+00000c: const-string v1, "hoffsetting_wlan_content_syn"
+000010: invoke-static v2, v1, v3, Lcom/vivo/connbase/e0/g/c;->a(Landroid/content/Context; Ljava/lang/String; Landroid/database/ContentObserver;)Lcom/vivo/connbase/e0/g/c$c;
+000016: move-result-object v2
+000018: invoke-static v2, v0, Lcom/vivo/connbase/e0/g/c$c;->a(Lcom/vivo/connbase/e0/g/c$c; Lcom/vivo/connbase/e0/g/c$c;)V
+00001e: return-object v2
+
+METHOD a(Landroid/content/Context; Ljava/lang/String; Landroid/database/ContentObserver;)Lcom/vivo/connbase/e0/g/c$c;
+000000: const/4 v0, 2
+000002: new-array v0, v0, [Ljava/lang/Object;
+000006: sget-object v1, Lcom/vivo/connbase/e0/g/c;->d Ljava/lang/String;
+00000a: const/4 v2, 0
+00000c: aput-object v1, v0, v2
+000010: const/4 v1, 1
+000012: aput-object v4, v0, v1
+000016: const-string v4, "%s/%s"
+00001a: invoke-static v4, v0, Ljava/lang/String;->format(Ljava/lang/String; [Ljava/lang/Object;)Ljava/lang/String;
+000020: move-result-object v4
+000022: invoke-static v4, Landroid/net/Uri;->parse(Ljava/lang/String;)Landroid/net/Uri;
+000028: move-result-object v4
+00002a: invoke-virtual v3, Landroid/content/Context;->getApplicationContext()Landroid/content/Context;
+000030: move-result-object v3
+000032: invoke-virtual v3, Landroid/content/Context;->getContentResolver()Landroid/content/ContentResolver;
+000038: move-result-object v3
+00003a: invoke-virtual v3, v4, v1, v5, Landroid/content/ContentResolver;->registerContentObserver(Landroid/net/Uri; Z Landroid/database/ContentObserver;)V
+000040: new-instance v3, Lcom/vivo/connbase/e0/g/c$c;
+000044: const/4 v4, 0
+000046: invoke-direct v3, v5, v4, Lcom/vivo/connbase/e0/g/c$c;-><init>(Landroid/database/ContentObserver; Lcom/vivo/connbase/e0/g/c$a;)V
+00004c: return-object v3
+
+METHOD a(Ljava/lang/String; Landroid/content/Context; Landroid/database/ContentObserver;)Lcom/vivo/connbase/e0/g/c$c;
+000000: const/4 v0, 2
+000002: new-array v0, v0, [Ljava/lang/Object;
+000006: sget-object v1, Lcom/vivo/connbase/e0/g/c;->c Ljava/lang/String;
+00000a: const/4 v2, 0
+00000c: aput-object v1, v0, v2
+000010: const/4 v1, 1
+000012: aput-object v3, v0, v1
+000016: const-string v3, "%s/%s"
+00001a: invoke-static v3, v0, Ljava/lang/String;->format(Ljava/lang/String; [Ljava/lang/Object;)Ljava/lang/String;
+000020: move-result-object v3
+000022: invoke-static v3, Landroid/net/Uri;->parse(Ljava/lang/String;)Landroid/net/Uri;
+000028: move-result-object v3
+00002a: invoke-virtual v4, Landroid/content/Context;->getContentResolver()Landroid/content/ContentResolver;
+000030: move-result-object v0
+000032: invoke-virtual v0, v3, v1, v5, Landroid/content/ContentResolver;->registerContentObserver(Landroid/net/Uri; Z Landroid/database/ContentObserver;)V
+000038: new-instance v3, Lcom/vivo/connbase/e0/g/c$c;
+00003c: const/4 v0, 0
+00003e: invoke-direct v3, v5, v0, Lcom/vivo/connbase/e0/g/c$c;-><init>(Landroid/database/ContentObserver; Lcom/vivo/connbase/e0/g/c$a;)V
+000044: const-string v0, "hoffsetting_view_across_devices"
+000048: invoke-static v4, v0, v5, Lcom/vivo/connbase/e0/g/c;->a(Landroid/content/Context; Ljava/lang/String; Landroid/database/ContentObserver;)Lcom/vivo/connbase/e0/g/c$c;
+00004e: move-result-object v4
+000050: invoke-static v4, v3, Lcom/vivo/connbase/e0/g/c$c;->a(Lcom/vivo/connbase/e0/g/c$c; Lcom/vivo/connbase/e0/g/c$c;)V
+000056: return-object v4
+
+METHOD a(Landroid/content/Context;)Z
+000000: sget v1, Lcom/vivo/connbase/e0/g/c;->p I
+000004: const/4 v0, -1
+000006: if-ne v1, v0, +010h
+00000a: invoke-static Lcom/vivo/connbase/App;->m()Lcom/vivo/connbase/App;
+000010: move-result-object v1
+000012: const v0, 80001
+000018: invoke-static v1, v0, Lcom/vivo/connbase/e0/g/c;->a(Landroid/content/Context; I)Z
+00001e: move-result v1
+000020: sput v1, Lcom/vivo/connbase/e0/g/c;->p I
+000024: return v1
+000026: const/4 v0, 1
+000028: if-ne v1, v0, +003h
+00002c: return v0
+00002e: const/4 v1, 0
+000030: return v1
+
+METHOD a(Landroid/content/Context; I)Z
+000000: const/4 v0, 2
+000002: new-array v0, v0, [Ljava/lang/Object;
+000006: sget-object v1, Lcom/vivo/connbase/e0/g/c;->c Ljava/lang/String;
+00000a: const/4 v2, 0
+00000c: aput-object v1, v0, v2
+000010: invoke-static v10, Ljava/lang/Integer;->valueOf(I)Ljava/lang/Integer;
+000016: move-result-object v10
+000018: const/4 v1, 1
+00001a: aput-object v10, v0, v1
+00001e: const-string v10, "%s/%s"
+000022: invoke-static v10, v0, Ljava/lang/String;->format(Ljava/lang/String; [Ljava/lang/Object;)Ljava/lang/String;
+000028: move-result-object v10
+00002a: invoke-static v10, Landroid/net/Uri;->parse(Ljava/lang/String;)Landroid/net/Uri;
+000030: move-result-object v4
+000032: invoke-virtual v9, Landroid/content/Context;->getApplicationContext()Landroid/content/Context;
+000038: move-result-object v10
+00003a: invoke-virtual v10, Landroid/content/Context;->getContentResolver()Landroid/content/ContentResolver;
+000040: move-result-object v3
+000042: const/4 v5, 0
+000044: const/4 v6, 0
+000046: const/4 v7, 0
+000048: const/4 v8, 0
+00004a: invoke-virtual/range v3 ... v8, Landroid/content/ContentResolver;->query(Landroid/net/Uri; [Ljava/lang/String; Ljava/lang/String; [Ljava/lang/String; Ljava/lang/String;)Landroid/database/Cursor;
+000050: move-result-object v10
+000052: if-eqz v10, +033h
+000056: invoke-interface v10, Landroid/database/Cursor;->moveToNext()Z
+00005c: move-result v0
+00005e: if-eqz v0, +02dh
+000062: invoke-interface v10, Landroid/database/Cursor;->getExtras()Landroid/os/Bundle;
+000068: move-result-object v0
+00006a: const-string v3, "key_connect_base_permission"
+00006e: invoke-virtual v0, v3, v2, Landroid/os/Bundle;->getBoolean(Ljava/lang/String; Z)Z
+000074: move-result v0
+000076: const-string v3, "enable"
+00007a: invoke-interface v10, v3, Landroid/database/Cursor;->getColumnIndex(Ljava/lang/String;)I
+000080: move-result v3
+000082: invoke-interface v10, v3, Landroid/database/Cursor;->getInt(I)I
+000088: move-result v3
+00008a: if-ne v3, v1, +004h
+00008e: move v3, v1
+000090: goto +2h
+000092: move v3, v2
+000094: if-eqz v3, +012h
+000098: if-eqz v0, +010h
+00009c: move v0, v1
+00009e: goto +eh
+0000a0: move-exception v0
+0000a2: if-eqz v10, +00ah
+0000a6: invoke-interface v10, Landroid/database/Cursor;->close()V
+0000ac: goto +5h
+0000ae: move-exception v10
+0000b0: invoke-virtual v0, v10, Ljava/lang/Throwable;->addSuppressed(Ljava/lang/Throwable;)V
+0000b6: throw v0
+0000b8: move v0, v2
+0000ba: if-eqz v10, +00dh
+0000be: invoke-interface v10, Landroid/database/Cursor;->close()V
+0000c4: goto +8h
+0000c6: move-exception v10
+0000c8: goto +3h
+0000ca: move-exception v10
+0000cc: move v0, v2
+0000ce: invoke-virtual v10, Ljava/lang/Exception;->printStackTrace()V
+0000d4: if-eqz v0, +009h
+0000d8: invoke-static v9, Lcom/vivo/connbase/e0/g/c;->h(Landroid/content/Context;)Z
+0000de: move-result v9
+0000e0: if-eqz v9, +003h
+0000e4: move v2, v1
+0000e6: return v2
+
+METHOD a(Landroid/content/Context; Ljava/lang/String;)Z
+000000: const/4 v0, 2
+000002: new-array v0, v0, [Ljava/lang/Object;
+000006: sget-object v1, Lcom/vivo/connbase/e0/g/c;->d Ljava/lang/String;
+00000a: const/4 v2, 0
+00000c: aput-object v1, v0, v2
+000010: const/4 v1, 1
+000012: aput-object v10, v0, v1
+000016: const-string v10, "%s/%s"
+00001a: invoke-static v10, v0, Ljava/lang/String;->format(Ljava/lang/String; [Ljava/lang/Object;)Ljava/lang/String;
+000020: move-result-object v10
+000022: invoke-static v10, Landroid/net/Uri;->parse(Ljava/lang/String;)Landroid/net/Uri;
+000028: move-result-object v4
+00002a: invoke-virtual v9, Landroid/content/Context;->getApplicationContext()Landroid/content/Context;
+000030: move-result-object v9
+000032: invoke-virtual v9, Landroid/content/Context;->getContentResolver()Landroid/content/ContentResolver;
+000038: move-result-object v3
+00003a: const/4 v5, 0
+00003c: const/4 v6, 0
+00003e: const/4 v7, 0
+000040: const/4 v8, 0
+000042: invoke-virtual/range v3 ... v8, Landroid/content/ContentResolver;->query(Landroid/net/Uri; [Ljava/lang/String; Ljava/lang/String; [Ljava/lang/String; Ljava/lang/String;)Landroid/database/Cursor;
+000048: move-result-object v9
+00004a: if-eqz v9, +033h
+00004e: invoke-interface v9, Landroid/database/Cursor;->moveToNext()Z
+000054: move-result v10
+000056: if-eqz v10, +02dh
+00005a: invoke-interface v9, Landroid/database/Cursor;->getExtras()Landroid/os/Bundle;
+000060: move-result-object v10
+000062: const-string v0, "key_connect_base_permission"
+000066: invoke-virtual v10, v0, v2, Landroid/os/Bundle;->getBoolean(Ljava/lang/String; Z)Z
+00006c: move-result v10
+00006e: const-string v0, "enable"
+000072: invoke-interface v9, v0, Landroid/database/Cursor;->getColumnIndex(Ljava/lang/String;)I
+000078: move-result v0
+00007a: invoke-interface v9, v0, Landroid/database/Cursor;->getInt(I)I
+000080: move-result v0
+000082: if-ne v0, v1, +004h
+000086: move v0, v1
+000088: goto +2h
+00008a: move v0, v2
+00008c: if-eqz v0, +012h
+000090: if-eqz v10, +010h
+000094: move v2, v1
+000096: goto +dh
+000098: move-exception v10
+00009a: if-eqz v9, +00ah
+00009e: invoke-interface v9, Landroid/database/Cursor;->close()V
+0000a4: goto +5h
+0000a6: move-exception v9
+0000a8: invoke-virtual v10, v9, Ljava/lang/Throwable;->addSuppressed(Ljava/lang/Throwable;)V
+0000ae: throw v10
+0000b0: if-eqz v9, +00ah
+0000b4: invoke-interface v9, Landroid/database/Cursor;->close()V
+0000ba: goto +5h
+0000bc: move-exception v9
+0000be: invoke-virtual v9, Ljava/lang/Exception;->printStackTrace()V
+0000c4: return v2
+
+METHOD b(Landroid/content/Context; Landroid/database/ContentObserver;)Lcom/vivo/connbase/e0/g/c$c;
+000000: const-string v0, "hoffsetting_app"
+000004: invoke-static v1, v0, v2, Lcom/vivo/connbase/e0/g/c;->a(Landroid/content/Context; Ljava/lang/String; Landroid/database/ContentObserver;)Lcom/vivo/connbase/e0/g/c$c;
+00000a: move-result-object v1
+00000c: return-object v1
+
+METHOD b(Landroid/content/Context; Ljava/lang/String; Landroid/database/ContentObserver;)Lcom/vivo/connbase/e0/g/c$c;
+000000: const/4 v0, 2
+000002: new-array v0, v0, [Ljava/lang/Object;
+000006: sget-object v1, Lcom/vivo/connbase/e0/g/c;->c Ljava/lang/String;
+00000a: const/4 v2, 0
+00000c: aput-object v1, v0, v2
+000010: const/4 v1, 1
+000012: aput-object v4, v0, v1
+000016: const-string v4, "%s/%s"
+00001a: invoke-static v4, v0, Ljava/lang/String;->format(Ljava/lang/String; [Ljava/lang/Object;)Ljava/lang/String;
+000020: move-result-object v4
+000022: invoke-static v4, Landroid/net/Uri;->parse(Ljava/lang/String;)Landroid/net/Uri;
+000028: move-result-object v4
+00002a: invoke-virtual v3, Landroid/content/Context;->getContentResolver()Landroid/content/ContentResolver;
+000030: move-result-object v0
+000032: invoke-virtual v0, v4, v1, v5, Landroid/content/ContentResolver;->registerContentObserver(Landroid/net/Uri; Z Landroid/database/ContentObserver;)V
+000038: new-instance v4, Lcom/vivo/connbase/e0/g/c$c;
+00003c: const/4 v0, 0
+00003e: invoke-direct v4, v5, v0, Lcom/vivo/connbase/e0/g/c$c;-><init>(Landroid/database/ContentObserver; Lcom/vivo/connbase/e0/g/c$a;)V
+000044: invoke-static v3, v5, Lcom/vivo/connbase/e0/g/c;->b(Landroid/content/Context; Landroid/database/ContentObserver;)Lcom/vivo/connbase/e0/g/c$c;
+00004a: move-result-object v3
+00004c: invoke-static v4, v3, Lcom/vivo/connbase/e0/g/c$c;->a(Lcom/vivo/connbase/e0/g/c$c; Lcom/vivo/connbase/e0/g/c$c;)V
+000052: return-object v4
+
+METHOD b(Landroid/content/Context;)Z
+000000: sget v1, Lcom/vivo/connbase/e0/g/c;->o I
+000004: const/4 v0, -1
+000006: if-ne v1, v0, +010h
+00000a: invoke-static Lcom/vivo/connbase/App;->m()Lcom/vivo/connbase/App;
+000010: move-result-object v1
+000012: const v0, 70001
+000018: invoke-static v1, v0, Lcom/vivo/connbase/e0/g/c;->a(Landroid/content/Context; I)Z
+00001e: move-result v1
+000020: sput v1, Lcom/vivo/connbase/e0/g/c;->o I
+000024: return v1
+000026: const/4 v0, 1
+000028: if-ne v1, v0, +003h
+00002c: return v0
+00002e: const/4 v1, 0
+000030: return v1
+
+METHOD c(Landroid/content/Context; Landroid/database/ContentObserver;)Lcom/vivo/connbase/e0/g/c$c;
+000000: const-string v0, "hoffsetting_app"
+000004: invoke-static v2, v0, v3, Lcom/vivo/connbase/e0/g/c;->a(Landroid/content/Context; Ljava/lang/String; Landroid/database/ContentObserver;)Lcom/vivo/connbase/e0/g/c$c;
+00000a: move-result-object v0
+00000c: const-string v1, "hoffsetting_verification_code_content_syn"
+000010: invoke-static v2, v1, v3, Lcom/vivo/connbase/e0/g/c;->a(Landroid/content/Context; Ljava/lang/String; Landroid/database/ContentObserver;)Lcom/vivo/connbase/e0/g/c$c;
+000016: move-result-object v2
+000018: invoke-static v2, v0, Lcom/vivo/connbase/e0/g/c$c;->a(Lcom/vivo/connbase/e0/g/c$c; Lcom/vivo/connbase/e0/g/c$c;)V
+00001e: return-object v2
+
+METHOD c(Landroid/content/Context;)Z
+000000: const-string v0, "hoffsetting_app"
+000004: invoke-static v1, v0, Lcom/vivo/connbase/e0/g/c;->a(Landroid/content/Context; Ljava/lang/String;)Z
+00000a: move-result v1
+00000c: return v1
+
+METHOD d(Landroid/content/Context; Landroid/database/ContentObserver;)Lcom/vivo/connbase/e0/g/c$c;
+000000: const-string v0, "hoffsetting_app"
+000004: invoke-static v2, v0, v3, Lcom/vivo/connbase/e0/g/c;->a(Landroid/content/Context; Ljava/lang/String; Landroid/database/ContentObserver;)Lcom/vivo/connbase/e0/g/c$c;
+00000a: move-result-object v0
+00000c: const-string v1, "hoffsetting_wlan_content_syn"
+000010: invoke-static v2, v1, v3, Lcom/vivo/connbase/e0/g/c;->a(Landroid/content/Context; Ljava/lang/String; Landroid/database/ContentObserver;)Lcom/vivo/connbase/e0/g/c$c;
+000016: move-result-object v2
+000018: invoke-static v2, v0, Lcom/vivo/connbase/e0/g/c$c;->a(Lcom/vivo/connbase/e0/g/c$c; Lcom/vivo/connbase/e0/g/c$c;)V
+00001e: return-object v2
+
+METHOD d(Landroid/content/Context;)Z
+000000: const-string v0, "hoffsetting_content_syn"
+000004: invoke-static v1, v0, Lcom/vivo/connbase/e0/g/c;->a(Landroid/content/Context; Ljava/lang/String;)Z
+00000a: move-result v1
+00000c: return v1
+
+METHOD e(Landroid/content/Context; Landroid/database/ContentObserver;)Lcom/vivo/connbase/e0/g/c$c;
+000000: invoke-static v2, v3, Lcom/vivo/connbase/e0/g/c;->b(Landroid/content/Context; Landroid/database/ContentObserver;)Lcom/vivo/connbase/e0/g/c$c;
+000006: move-result-object v0
+000008: const-string v1, "handoff_movie"
+00000c: invoke-static v2, v1, v3, Lcom/vivo/connbase/e0/g/c;->a(Landroid/content/Context; Ljava/lang/String; Landroid/database/ContentObserver;)Lcom/vivo/connbase/e0/g/c$c;
+000012: move-result-object v2
+000014: invoke-static v2, v0, Lcom/vivo/connbase/e0/g/c$c;->a(Lcom/vivo/connbase/e0/g/c$c; Lcom/vivo/connbase/e0/g/c$c;)V
+00001a: return-object v2
+
+METHOD e(Landroid/content/Context;)Z
+000000: const-string v0, "hoffsetting_verification_code_content_syn"
+000004: invoke-static v1, v0, Lcom/vivo/connbase/e0/g/c;->a(Landroid/content/Context; Ljava/lang/String;)Z
+00000a: move-result v0
+00000c: if-eqz v0, +00ah
+000010: invoke-static v1, Lcom/vivo/connbase/e0/g/c;->d(Landroid/content/Context;)Z
+000016: move-result v1
+000018: if-eqz v1, +004h
+00001c: const/4 v1, 1
+00001e: goto +2h
+000020: const/4 v1, 0
+000022: return v1
+
+METHOD f(Landroid/content/Context; Landroid/database/ContentObserver;)Lcom/vivo/connbase/e0/g/c$c;
+000000: const-string v0, "hoffsetting_view_across_devices"
+000004: invoke-static v1, v0, v2, Lcom/vivo/connbase/e0/g/c;->a(Landroid/content/Context; Ljava/lang/String; Landroid/database/ContentObserver;)Lcom/vivo/connbase/e0/g/c$c;
+00000a: move-result-object v1
+00000c: return-object v1
+
+METHOD f(Landroid/content/Context;)Z
+000000: const-string v0, "hoffsetting_wlan_content_syn"
+000004: invoke-static v1, v0, Lcom/vivo/connbase/e0/g/c;->a(Landroid/content/Context; Ljava/lang/String;)Z
+00000a: move-result v0
+00000c: if-eqz v0, +00ah
+000010: invoke-static v1, Lcom/vivo/connbase/e0/g/c;->d(Landroid/content/Context;)Z
+000016: move-result v1
+000018: if-eqz v1, +004h
+00001c: const/4 v1, 1
+00001e: goto +2h
+000020: const/4 v1, 0
+000022: return v1
+
+METHOD g(Landroid/content/Context;)Z
+000000: const-string v0, "handoff_movie"
+000004: invoke-static v1, v0, Lcom/vivo/connbase/e0/g/c;->a(Landroid/content/Context; Ljava/lang/String;)Z
+00000a: move-result v0
+00000c: if-eqz v0, +00ah
+000010: invoke-static v1, Lcom/vivo/connbase/e0/g/c;->c(Landroid/content/Context;)Z
+000016: move-result v1
+000018: if-eqz v1, +004h
+00001c: const/4 v1, 1
+00001e: goto +2h
+000020: const/4 v1, 0
+000022: return v1
+
+METHOD h(Landroid/content/Context;)Z
+000000: sget v0, Lcom/vivo/connbase/e0/g/c;->n I
+000004: const/4 v1, -1
+000006: if-ne v0, v1, +00bh
+00000a: const-string v0, "hoffsetting_view_across_devices"
+00000e: invoke-static v2, v0, Lcom/vivo/connbase/e0/g/c;->a(Landroid/content/Context; Ljava/lang/String;)Z
+000014: move-result v2
+000016: sput v2, Lcom/vivo/connbase/e0/g/c;->n I
+00001a: return v2
+00001c: const/4 v2, 1
+00001e: if-ne v0, v2, +003h
+000022: return v2
+000024: const/4 v2, 0
+000026: return v2
+
+METHOD i(Landroid/content/Context;)V
+000000: invoke-static Lcom/vivo/connbase/App;->m()Lcom/vivo/connbase/App;
+000006: move-result-object v1
+000008: const v0, 80001
+00000e: invoke-static v1, v0, Lcom/vivo/connbase/e0/g/c;->a(Landroid/content/Context; I)Z
+000014: move-result v1
+000016: if-eqz v1, +004h
+00001a: const/4 v1, 1
+00001c: goto +2h
+00001e: const/4 v1, 0
+000020: sput v1, Lcom/vivo/connbase/e0/g/c;->p I
+000024: return-void 
+
+METHOD j(Landroid/content/Context;)V
+000000: invoke-static Lcom/vivo/connbase/App;->m()Lcom/vivo/connbase/App;
+000006: move-result-object v1
+000008: const v0, 70001
+00000e: invoke-static v1, v0, Lcom/vivo/connbase/e0/g/c;->a(Landroid/content/Context; I)Z
+000014: move-result v1
+000016: if-eqz v1, +004h
+00001a: const/4 v1, 1
+00001c: goto +2h
+00001e: const/4 v1, 0
+000020: sput v1, Lcom/vivo/connbase/e0/g/c;->o I
+000024: return-void 
+
+METHOD k(Landroid/content/Context;)V
+000000: const-string v0, "hoffsetting_view_across_devices"
+000004: invoke-static v1, v0, Lcom/vivo/connbase/e0/g/c;->a(Landroid/content/Context; Ljava/lang/String;)Z
+00000a: move-result v1
+00000c: if-eqz v1, +004h
+000010: const/4 v1, 1
+000012: goto +2h
+000014: const/4 v1, 0
+000016: sput v1, Lcom/vivo/connbase/e0/g/c;->n I
+00001a: return-void 

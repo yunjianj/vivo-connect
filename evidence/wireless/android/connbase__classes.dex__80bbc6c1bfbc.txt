@@ -1,0 +1,87 @@
+APK pcsuite/updateApk/connbase.apk
+DEX classes.dex
+CLASS Lcom/vivo/connbase/VivoConnectService$p$i;
+SUPER Ljava/lang/Object;
+FIELDS
+a I = None
+b Ljava/lang/String; = None
+c Lcom/vivo/connbase/VivoConnectService$p; = None
+
+METHOD <init>(Lcom/vivo/connbase/VivoConnectService$p; I Ljava/lang/String;)V
+000000: iput-object v1, v0, Lcom/vivo/connbase/VivoConnectService$p$i;->c Lcom/vivo/connbase/VivoConnectService$p;
+000004: iput v2, v0, Lcom/vivo/connbase/VivoConnectService$p$i;->a I
+000008: iput-object v3, v0, Lcom/vivo/connbase/VivoConnectService$p$i;->b Ljava/lang/String;
+00000c: invoke-direct v0, Ljava/lang/Object;-><init>()V
+000012: return-void 
+
+METHOD run()V
+000000: iget-object v0, v3, Lcom/vivo/connbase/VivoConnectService$p$i;->c Lcom/vivo/connbase/VivoConnectService$p;
+000004: iget-object v0, v0, Lcom/vivo/connbase/VivoConnectService$p;->e Lcom/vivo/connbase/VivoConnectService;
+000008: invoke-static v0, Lcom/vivo/connbase/VivoConnectService;->y(Lcom/vivo/connbase/VivoConnectService;)Lcom/vivo/connbase/h0/c/h;
+00000e: move-result-object v0
+000010: iget v1, v3, Lcom/vivo/connbase/VivoConnectService$p$i;->a I
+000014: iget-object v2, v3, Lcom/vivo/connbase/VivoConnectService$p$i;->b Ljava/lang/String;
+000018: invoke-interface v0, v1, v2, Lcom/vivo/connbase/h0/c/h;->a(I Ljava/lang/String;)Lcom/vivo/connbase/h0/c/g;
+00001e: move-result-object v0
+000020: if-eqz v0, +086h
+000024: iget-object v0, v3, Lcom/vivo/connbase/VivoConnectService$p$i;->c Lcom/vivo/connbase/VivoConnectService$p;
+000028: iget-object v0, v0, Lcom/vivo/connbase/VivoConnectService$p;->e Lcom/vivo/connbase/VivoConnectService;
+00002c: invoke-static v0, Lcom/vivo/connbase/VivoConnectService;->y(Lcom/vivo/connbase/VivoConnectService;)Lcom/vivo/connbase/h0/c/h;
+000032: move-result-object v0
+000034: iget-object v1, v3, Lcom/vivo/connbase/VivoConnectService$p$i;->b Ljava/lang/String;
+000038: invoke-interface v0, v1, Lcom/vivo/connbase/h0/c/h;->b(Ljava/lang/String;)Landroid/app/AlarmManager$OnAlarmListener;
+00003e: move-result-object v0
+000040: new-instance v1, Ljava/lang/StringBuilder;
+000044: invoke-direct v1, Ljava/lang/StringBuilder;-><init>()V
+00004a: const-string v2, "removed scan timeout listener:"
+00004e: invoke-virtual v1, v2, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+000054: invoke-virtual v1, v0, Ljava/lang/StringBuilder;->append(Ljava/lang/Object;)Ljava/lang/StringBuilder;
+00005a: invoke-virtual v1, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
+000060: move-result-object v1
+000062: const-string v2, "VivoConnectService"
+000066: invoke-static v2, v1, Lc/c/f/a/b;->k(Ljava/lang/String; Ljava/lang/String;)V
+00006c: if-eqz v0, +00dh
+000070: iget-object v1, v3, Lcom/vivo/connbase/VivoConnectService$p$i;->c Lcom/vivo/connbase/VivoConnectService$p;
+000074: iget-object v1, v1, Lcom/vivo/connbase/VivoConnectService$p;->e Lcom/vivo/connbase/VivoConnectService;
+000078: invoke-static v1, Lcom/vivo/connbase/VivoConnectService;->x(Lcom/vivo/connbase/VivoConnectService;)Landroid/app/AlarmManager;
+00007e: move-result-object v1
+000080: invoke-virtual v1, v0, Landroid/app/AlarmManager;->cancel(Landroid/app/AlarmManager$OnAlarmListener;)V
+000086: iget-object v0, v3, Lcom/vivo/connbase/VivoConnectService$p$i;->c Lcom/vivo/connbase/VivoConnectService$p;
+00008a: iget-object v0, v0, Lcom/vivo/connbase/VivoConnectService$p;->e Lcom/vivo/connbase/VivoConnectService;
+00008e: invoke-static v0, Lcom/vivo/connbase/VivoConnectService;->y(Lcom/vivo/connbase/VivoConnectService;)Lcom/vivo/connbase/h0/c/h;
+000094: move-result-object v0
+000096: iget-object v1, v3, Lcom/vivo/connbase/VivoConnectService$p$i;->b Ljava/lang/String;
+00009a: invoke-interface v0, v1, Lcom/vivo/connbase/h0/c/h;->a(Ljava/lang/String;)Lcom/vivo/connbase/h0/c/g;
+0000a0: new-instance v0, Ljava/lang/StringBuilder;
+0000a4: invoke-direct v0, Ljava/lang/StringBuilder;-><init>()V
+0000aa: const-string v1, "stopScan, size:"
+0000ae: invoke-virtual v0, v1, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+0000b4: iget-object v1, v3, Lcom/vivo/connbase/VivoConnectService$p$i;->c Lcom/vivo/connbase/VivoConnectService$p;
+0000b8: iget-object v1, v1, Lcom/vivo/connbase/VivoConnectService$p;->e Lcom/vivo/connbase/VivoConnectService;
+0000bc: invoke-static v1, Lcom/vivo/connbase/VivoConnectService;->y(Lcom/vivo/connbase/VivoConnectService;)Lcom/vivo/connbase/h0/c/h;
+0000c2: move-result-object v1
+0000c4: invoke-interface v1, Lcom/vivo/connbase/h0/c/h;->b()Ljava/util/List;
+0000ca: move-result-object v1
+0000cc: invoke-interface v1, Ljava/util/List;->size()I
+0000d2: move-result v1
+0000d4: invoke-virtual v0, v1, Ljava/lang/StringBuilder;->append(I)Ljava/lang/StringBuilder;
+0000da: invoke-virtual v0, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
+0000e0: move-result-object v0
+0000e2: invoke-static v2, v0, Lc/c/f/a/b;->k(Ljava/lang/String; Ljava/lang/String;)V
+0000e8: iget-object v0, v3, Lcom/vivo/connbase/VivoConnectService$p$i;->c Lcom/vivo/connbase/VivoConnectService$p;
+0000ec: iget-object v0, v0, Lcom/vivo/connbase/VivoConnectService$p;->e Lcom/vivo/connbase/VivoConnectService;
+0000f0: invoke-static v0, Lcom/vivo/connbase/VivoConnectService;->d(Lcom/vivo/connbase/VivoConnectService;)Lcom/vivo/connbase/h0/a;
+0000f6: move-result-object v0
+0000f8: iget-object v1, v3, Lcom/vivo/connbase/VivoConnectService$p$i;->c Lcom/vivo/connbase/VivoConnectService$p;
+0000fc: iget-object v1, v1, Lcom/vivo/connbase/VivoConnectService$p;->e Lcom/vivo/connbase/VivoConnectService;
+000100: invoke-static v1, Lcom/vivo/connbase/VivoConnectService;->y(Lcom/vivo/connbase/VivoConnectService;)Lcom/vivo/connbase/h0/c/h;
+000106: move-result-object v1
+000108: invoke-interface v1, Lcom/vivo/connbase/h0/c/h;->b()Ljava/util/List;
+00010e: move-result-object v1
+000110: invoke-virtual v0, v1, Lcom/vivo/connbase/h0/a;->a(Ljava/util/List;)V
+000116: iget-object v0, v3, Lcom/vivo/connbase/VivoConnectService$p$i;->c Lcom/vivo/connbase/VivoConnectService$p;
+00011a: iget-object v0, v0, Lcom/vivo/connbase/VivoConnectService$p;->e Lcom/vivo/connbase/VivoConnectService;
+00011e: invoke-static v0, Lcom/vivo/connbase/VivoConnectService;->d(Lcom/vivo/connbase/VivoConnectService;)Lcom/vivo/connbase/h0/a;
+000124: move-result-object v0
+000126: invoke-virtual v0, Lcom/vivo/connbase/h0/a;->stopScan()V
+00012c: return-void 

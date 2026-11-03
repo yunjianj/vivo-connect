@@ -1,0 +1,56 @@
+APK pcsuite/updateApk/connbase.apk
+DEX classes2.dex
+CLASS Lcom/vivo/pcsuite/pcconnect/m$m;
+SUPER Ljava/lang/Object;
+FIELDS
+a Lcom/vivo/pcsuite/pcconnect/c; = None
+b Lcom/vivo/pcsuite/pcconnect/m; = None
+
+METHOD <init>(Lcom/vivo/pcsuite/pcconnect/m; Lcom/vivo/pcsuite/pcconnect/c;)V
+000000: iput-object v1, v0, Lcom/vivo/pcsuite/pcconnect/m$m;->b Lcom/vivo/pcsuite/pcconnect/m;
+000004: iput-object v2, v0, Lcom/vivo/pcsuite/pcconnect/m$m;->a Lcom/vivo/pcsuite/pcconnect/c;
+000008: invoke-direct v0, Ljava/lang/Object;-><init>()V
+00000e: return-void 
+
+METHOD run()V
+000000: iget-object v0, v7, Lcom/vivo/pcsuite/pcconnect/m$m;->b Lcom/vivo/pcsuite/pcconnect/m;
+000004: invoke-static v0, Lcom/vivo/pcsuite/pcconnect/m;->b(Lcom/vivo/pcsuite/pcconnect/m;)Landroid/os/RemoteCallbackList;
+00000a: move-result-object v0
+00000c: invoke-virtual v0, Landroid/os/RemoteCallbackList;->beginBroadcast()I
+000012: move-result v0
+000014: if-lez v0, +03fh
+000018: add-int/lit8 v0, v0, -1
+00001c: iget-object v1, v7, Lcom/vivo/pcsuite/pcconnect/m$m;->b Lcom/vivo/pcsuite/pcconnect/m;
+000020: invoke-static v1, Lcom/vivo/pcsuite/pcconnect/m;->b(Lcom/vivo/pcsuite/pcconnect/m;)Landroid/os/RemoteCallbackList;
+000026: move-result-object v1
+000028: invoke-virtual v1, v0, Landroid/os/RemoteCallbackList;->getBroadcastItem(I)Landroid/os/IInterface;
+00002e: move-result-object v1
+000030: check-cast v1, Lcom/vivo/pcsuite/pcconnect/ShareLinkObserver;
+000034: new-instance v2, Lcom/vivo/pcsuite/pcconnect/c;
+000038: iget-object v3, v7, Lcom/vivo/pcsuite/pcconnect/m$m;->a Lcom/vivo/pcsuite/pcconnect/c;
+00003c: invoke-virtual v3, Lcom/vivo/pcsuite/pcconnect/c;->c()Ljava/lang/String;
+000042: move-result-object v3
+000044: const/4 v4, 0
+000046: const/16 v5, -127
+00004a: const/4 v6, 0
+00004c: invoke-direct v2, v3, v4, v5, v6, Lcom/vivo/pcsuite/pcconnect/c;-><init>(Ljava/lang/String; Ljava/lang/String; I I)V
+000052: invoke-interface v1, v6, v2, Lcom/vivo/pcsuite/pcconnect/ShareLinkObserver;->onDeviceDiscover(Z Lcom/vivo/pcsuite/pcconnect/c;)V
+000058: goto -22h
+00005a: move-exception v1
+00005c: new-instance v2, Ljava/lang/StringBuilder;
+000060: invoke-direct v2, Ljava/lang/StringBuilder;-><init>()V
+000066: const-string v3, "notifyDeviceLost Error: "
+00006a: invoke-virtual v2, v3, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+000070: invoke-virtual v1, Landroid/os/RemoteException;->getCause()Ljava/lang/Throwable;
+000076: move-result-object v1
+000078: invoke-virtual v2, v1, Ljava/lang/StringBuilder;->append(Ljava/lang/Object;)Ljava/lang/StringBuilder;
+00007e: invoke-virtual v2, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
+000084: move-result-object v1
+000086: const-string v2, "pcsuite_ShareObservers"
+00008a: invoke-static v2, v1, Lc/c/f/a/b;->g(Ljava/lang/String; Ljava/lang/String;)V
+000090: goto -3eh
+000092: iget-object v0, v7, Lcom/vivo/pcsuite/pcconnect/m$m;->b Lcom/vivo/pcsuite/pcconnect/m;
+000096: invoke-static v0, Lcom/vivo/pcsuite/pcconnect/m;->b(Lcom/vivo/pcsuite/pcconnect/m;)Landroid/os/RemoteCallbackList;
+00009c: move-result-object v0
+00009e: invoke-virtual v0, Landroid/os/RemoteCallbackList;->finishBroadcast()V
+0000a4: return-void 

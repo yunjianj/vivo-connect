@@ -1,0 +1,289 @@
+APK pcsuite/updateApk/pcsuite.apk
+DEX classes2.dex
+CLASS Lcom/vivo/pcsuite/common/netty/controller/h;
+SUPER Ljava/lang/Object;
+FIELDS
+a Lcom/vivo/pcsuite/extscreen/model/protocol/rece/ExtScreenStart; = None
+b Z = None
+
+METHOD run()V
+000000: move-object/from16 v0, v18
+000004: sget-object v1, Lcom/vivo/pcsuite/common/netty/controller/WebSocketController;->PC_CLICK_NOTIFICATION Ljava/lang/String;
+000008: iget-object v1, v0, Lcom/vivo/pcsuite/common/netty/controller/h;->a Lcom/vivo/pcsuite/extscreen/model/protocol/rece/ExtScreenStart;
+00000c: iget-boolean v0, v0, Lcom/vivo/pcsuite/common/netty/controller/h;->b Z
+000010: const v5, 2131755119
+000016: const/4 v6, 1
+000018: const v7, 2131756276
+00001e: const v8, 2131756280
+000024: const-string v9, ""
+000028: const v10, 2131755111
+00002e: const v11, 2131755121
+000034: if-eqz v0, +110h
+000038: invoke-virtual v1, Lcom/vivo/pcsuite/extscreen/model/protocol/rece/ExtScreenStart;->getRemountControlState()I
+00003e: move-result v12
+000040: invoke-virtual v1, Lcom/vivo/pcsuite/extscreen/model/protocol/rece/ExtScreenStart;->getPhoneExtScreenState()I
+000046: move-result v13
+000048: invoke-virtual v1, Lcom/vivo/pcsuite/extscreen/model/protocol/rece/ExtScreenStart;->getPhoneCastState()I
+00004e: move-result v14
+000050: invoke-virtual v1, Lcom/vivo/pcsuite/extscreen/model/protocol/rece/ExtScreenStart;->getPhoneAnyWhereControlState()I
+000056: move-result v15
+000058: invoke-virtual v1, Lcom/vivo/pcsuite/extscreen/model/protocol/rece/ExtScreenStart;->getPadExtScreenState()I
+00005e: move-result v2
+000060: invoke-virtual v1, Lcom/vivo/pcsuite/extscreen/model/protocol/rece/ExtScreenStart;->getPadAnyWhereControlState()I
+000066: move-result v3
+000068: invoke-static Lcom/vivo/castsdk/sdk/common/utils/FtDeviceInfo;->isPad()Z
+00006e: move-result v16
+000070: sget-object v17, Lcom/vivo/pcsuite/PcSuiteApplication;->I1 Lcom/vivo/pcsuite/PcSuiteApplication;
+000074: invoke-virtual/range v17, Landroid/content/Context;->getResources()Landroid/content/res/Resources;
+00007a: move-result-object v4
+00007c: invoke-virtual v4, v8, Landroid/content/res/Resources;->getString(I)Ljava/lang/String;
+000082: move-result-object v4
+000084: sget-object v8, Lcom/vivo/pcsuite/PcSuiteApplication;->I1 Lcom/vivo/pcsuite/PcSuiteApplication;
+000088: invoke-virtual v8, Landroid/content/Context;->getResources()Landroid/content/res/Resources;
+00008e: move-result-object v8
+000090: invoke-virtual v8, v7, Landroid/content/res/Resources;->getString(I)Ljava/lang/String;
+000096: move-result-object v7
+000098: if-ne v15, v6, +029h
+00009c: if-ne v3, v6, +027h
+0000a0: const v2, 2131755109
+0000a6: if-nez v16, +012h
+0000aa: sget-object v3, Lcom/vivo/pcsuite/PcSuiteApplication;->I1 Lcom/vivo/pcsuite/PcSuiteApplication;
+0000ae: invoke-virtual v3, Landroid/content/Context;->getResources()Landroid/content/res/Resources;
+0000b4: move-result-object v3
+0000b6: filled-new-array v4, v7, [Ljava/lang/Object;
+0000bc: move-result-object v4
+0000be: invoke-virtual v3, v2, v4, Landroid/content/res/Resources;->getString(I [Ljava/lang/Object;)Ljava/lang/String;
+0000c4: move-result-object v9
+0000c6: goto/16 +176h
+0000ca: sget-object v3, Lcom/vivo/pcsuite/PcSuiteApplication;->I1 Lcom/vivo/pcsuite/PcSuiteApplication;
+0000ce: invoke-virtual v3, Landroid/content/Context;->getResources()Landroid/content/res/Resources;
+0000d4: move-result-object v3
+0000d6: filled-new-array v7, v4, [Ljava/lang/Object;
+0000dc: move-result-object v4
+0000de: invoke-virtual v3, v2, v4, Landroid/content/res/Resources;->getString(I [Ljava/lang/Object;)Ljava/lang/String;
+0000e4: move-result-object v9
+0000e6: goto/16 +166h
+0000ea: if-ne v14, v6, +029h
+0000ee: if-ne v3, v6, +027h
+0000f2: if-nez v16, +015h
+0000f6: sget-object v2, Lcom/vivo/pcsuite/PcSuiteApplication;->I1 Lcom/vivo/pcsuite/PcSuiteApplication;
+0000fa: invoke-virtual v2, Landroid/content/Context;->getResources()Landroid/content/res/Resources;
+000100: move-result-object v2
+000102: const v3, 2131755117
+000108: filled-new-array v7, [Ljava/lang/Object;
+00010e: move-result-object v4
+000110: invoke-virtual v2, v3, v4, Landroid/content/res/Resources;->getString(I [Ljava/lang/Object;)Ljava/lang/String;
+000116: move-result-object v9
+000118: goto/16 +14dh
+00011c: sget-object v2, Lcom/vivo/pcsuite/PcSuiteApplication;->I1 Lcom/vivo/pcsuite/PcSuiteApplication;
+000120: invoke-virtual v2, Landroid/content/Context;->getResources()Landroid/content/res/Resources;
+000126: move-result-object v2
+000128: filled-new-array v7, [Ljava/lang/Object;
+00012e: move-result-object v3
+000130: invoke-virtual v2, v10, v3, Landroid/content/res/Resources;->getString(I [Ljava/lang/Object;)Ljava/lang/String;
+000136: move-result-object v9
+000138: goto/16 +13dh
+00013c: if-ne v14, v6, +01eh
+000140: if-ne v12, v6, +01ch
+000144: if-nez v16, +00eh
+000148: sget-object v2, Lcom/vivo/pcsuite/PcSuiteApplication;->I1 Lcom/vivo/pcsuite/PcSuiteApplication;
+00014c: invoke-virtual v2, Landroid/content/Context;->getResources()Landroid/content/res/Resources;
+000152: move-result-object v2
+000154: invoke-virtual v2, v5, Landroid/content/res/Resources;->getString(I)Ljava/lang/String;
+00015a: move-result-object v9
+00015c: goto/16 +12bh
+000160: sget-object v2, Lcom/vivo/pcsuite/PcSuiteApplication;->I1 Lcom/vivo/pcsuite/PcSuiteApplication;
+000164: invoke-virtual v2, Landroid/content/Context;->getResources()Landroid/content/res/Resources;
+00016a: move-result-object v2
+00016c: invoke-virtual v2, v11, Landroid/content/res/Resources;->getString(I)Ljava/lang/String;
+000172: move-result-object v9
+000174: goto/16 +11fh
+000178: if-ne v14, v6, +015h
+00017c: if-ne v2, v6, +013h
+000180: if-nez v16, +119h
+000184: sget-object v2, Lcom/vivo/pcsuite/PcSuiteApplication;->I1 Lcom/vivo/pcsuite/PcSuiteApplication;
+000188: invoke-virtual v2, Landroid/content/Context;->getResources()Landroid/content/res/Resources;
+00018e: move-result-object v2
+000190: const v3, 2131755118
+000196: invoke-virtual v2, v3, Landroid/content/res/Resources;->getString(I)Ljava/lang/String;
+00019c: move-result-object v9
+00019e: goto/16 +10ah
+0001a2: if-ne v12, v6, +00eh
+0001a6: sget-object v2, Lcom/vivo/pcsuite/PcSuiteApplication;->I1 Lcom/vivo/pcsuite/PcSuiteApplication;
+0001aa: invoke-virtual v2, Landroid/content/Context;->getResources()Landroid/content/res/Resources;
+0001b0: move-result-object v2
+0001b2: invoke-virtual v2, v11, Landroid/content/res/Resources;->getString(I)Ljava/lang/String;
+0001b8: move-result-object v9
+0001ba: goto/16 +0fch
+0001be: if-ne v15, v6, +012h
+0001c2: sget-object v2, Lcom/vivo/pcsuite/PcSuiteApplication;->I1 Lcom/vivo/pcsuite/PcSuiteApplication;
+0001c6: invoke-virtual v2, Landroid/content/Context;->getResources()Landroid/content/res/Resources;
+0001cc: move-result-object v2
+0001ce: filled-new-array v4, [Ljava/lang/Object;
+0001d4: move-result-object v3
+0001d6: invoke-virtual v2, v10, v3, Landroid/content/res/Resources;->getString(I [Ljava/lang/Object;)Ljava/lang/String;
+0001dc: move-result-object v9
+0001de: goto/16 +0eah
+0001e2: if-ne v14, v6, +013h
+0001e6: if-nez v16, +0e6h
+0001ea: sget-object v2, Lcom/vivo/pcsuite/PcSuiteApplication;->I1 Lcom/vivo/pcsuite/PcSuiteApplication;
+0001ee: invoke-virtual v2, Landroid/content/Context;->getResources()Landroid/content/res/Resources;
+0001f4: move-result-object v2
+0001f6: const v3, 2131755116
+0001fc: invoke-virtual v2, v3, Landroid/content/res/Resources;->getString(I)Ljava/lang/String;
+000202: move-result-object v9
+000204: goto/16 +0d7h
+000208: if-eq v13, v6, +017h
+00020c: if-ne v2, v6, +003h
+000210: goto +13h
+000212: if-ne v3, v6, +0d0h
+000216: sget-object v2, Lcom/vivo/pcsuite/PcSuiteApplication;->I1 Lcom/vivo/pcsuite/PcSuiteApplication;
+00021a: invoke-virtual v2, Landroid/content/Context;->getResources()Landroid/content/res/Resources;
+000220: move-result-object v2
+000222: filled-new-array v7, [Ljava/lang/Object;
+000228: move-result-object v3
+00022a: invoke-virtual v2, v10, v3, Landroid/content/res/Resources;->getString(I [Ljava/lang/Object;)Ljava/lang/String;
+000230: move-result-object v9
+000232: goto/16 +0c0h
+000236: sget-object v2, Lcom/vivo/pcsuite/PcSuiteApplication;->I1 Lcom/vivo/pcsuite/PcSuiteApplication;
+00023a: invoke-virtual v2, Landroid/content/Context;->getResources()Landroid/content/res/Resources;
+000240: move-result-object v2
+000242: const v3, 2131755120
+000248: invoke-virtual v2, v3, Landroid/content/res/Resources;->getString(I)Ljava/lang/String;
+00024e: move-result-object v9
+000250: goto/16 +0b1h
+000254: invoke-virtual v1, Lcom/vivo/pcsuite/extscreen/model/protocol/rece/ExtScreenStart;->getRemountControlState()I
+00025a: move-result v2
+00025c: invoke-virtual v1, Lcom/vivo/pcsuite/extscreen/model/protocol/rece/ExtScreenStart;->getExtScreenState()I
+000262: move-result v3
+000264: invoke-virtual v1, Lcom/vivo/pcsuite/extscreen/model/protocol/rece/ExtScreenStart;->getCastState()I
+00026a: move-result v4
+00026c: invoke-virtual v1, Lcom/vivo/pcsuite/extscreen/model/protocol/rece/ExtScreenStart;->getAnyWhereControlState()I
+000272: move-result v12
+000274: sget-object v13, Lcom/vivo/pcsuite/PcSuiteApplication;->I1 Lcom/vivo/pcsuite/PcSuiteApplication;
+000278: invoke-virtual v13, Landroid/content/Context;->getResources()Landroid/content/res/Resources;
+00027e: move-result-object v13
+000280: invoke-static Lcom/vivo/castsdk/sdk/common/utils/FtDeviceInfo;->isPad()Z
+000286: move-result v14
+000288: if-eqz v14, +003h
+00028c: goto +2h
+00028e: move v7, v8
+000290: invoke-virtual v13, v7, Landroid/content/res/Resources;->getString(I)Ljava/lang/String;
+000296: move-result-object v7
+000298: if-ne v4, v6, +02dh
+00029c: sget-object v4, Lcom/vivo/pcsuite/PcSuiteApplication;->I1 Lcom/vivo/pcsuite/PcSuiteApplication;
+0002a0: invoke-virtual v4, Landroid/content/Context;->getResources()Landroid/content/res/Resources;
+0002a6: move-result-object v4
+0002a8: const v7, 2131755116
+0002ae: invoke-virtual v4, v7, Landroid/content/res/Resources;->getString(I)Ljava/lang/String;
+0002b4: move-result-object v9
+0002b6: if-ne v2, v6, +00eh
+0002ba: sget-object v2, Lcom/vivo/pcsuite/PcSuiteApplication;->I1 Lcom/vivo/pcsuite/PcSuiteApplication;
+0002be: invoke-virtual v2, Landroid/content/Context;->getResources()Landroid/content/res/Resources;
+0002c4: move-result-object v2
+0002c6: invoke-virtual v2, v5, Landroid/content/res/Resources;->getString(I)Ljava/lang/String;
+0002cc: move-result-object v9
+0002ce: goto/16 +072h
+0002d2: if-ne v3, v6, +070h
+0002d6: sget-object v2, Lcom/vivo/pcsuite/PcSuiteApplication;->I1 Lcom/vivo/pcsuite/PcSuiteApplication;
+0002da: invoke-virtual v2, Landroid/content/Context;->getResources()Landroid/content/res/Resources;
+0002e0: move-result-object v2
+0002e2: const v3, 2131755118
+0002e8: invoke-virtual v2, v3, Landroid/content/res/Resources;->getString(I)Ljava/lang/String;
+0002ee: move-result-object v9
+0002f0: goto +61h
+0002f2: if-ne v12, v6, +044h
+0002f6: sget-object v4, Lcom/vivo/pcsuite/PcSuiteApplication;->I1 Lcom/vivo/pcsuite/PcSuiteApplication;
+0002fa: invoke-virtual v4, Landroid/content/Context;->getResources()Landroid/content/res/Resources;
+000300: move-result-object v4
+000302: invoke-virtual v4, v10, Landroid/content/res/Resources;->getString(I)Ljava/lang/String;
+000308: move-result-object v4
+00030a: filled-new-array v7, [Ljava/lang/Object;
+000310: move-result-object v5
+000312: invoke-static v4, v5, Ljava/lang/String;->format(Ljava/lang/String; [Ljava/lang/Object;)Ljava/lang/String;
+000318: move-result-object v9
+00031a: if-ne v2, v6, +018h
+00031e: sget-object v2, Lcom/vivo/pcsuite/PcSuiteApplication;->I1 Lcom/vivo/pcsuite/PcSuiteApplication;
+000322: invoke-virtual v2, Landroid/content/Context;->getResources()Landroid/content/res/Resources;
+000328: move-result-object v2
+00032a: const v3, 2131755115
+000330: invoke-virtual v2, v3, Landroid/content/res/Resources;->getString(I)Ljava/lang/String;
+000336: move-result-object v2
+000338: filled-new-array v7, [Ljava/lang/Object;
+00033e: move-result-object v3
+000340: invoke-static v2, v3, Ljava/lang/String;->format(Ljava/lang/String; [Ljava/lang/Object;)Ljava/lang/String;
+000346: move-result-object v9
+000348: goto +35h
+00034a: if-ne v3, v6, +034h
+00034e: sget-object v2, Lcom/vivo/pcsuite/PcSuiteApplication;->I1 Lcom/vivo/pcsuite/PcSuiteApplication;
+000352: invoke-virtual v2, Landroid/content/Context;->getResources()Landroid/content/res/Resources;
+000358: move-result-object v2
+00035a: const v3, 2131755113
+000360: invoke-virtual v2, v3, Landroid/content/res/Resources;->getString(I)Ljava/lang/String;
+000366: move-result-object v2
+000368: filled-new-array v7, [Ljava/lang/Object;
+00036e: move-result-object v3
+000370: invoke-static v2, v3, Ljava/lang/String;->format(Ljava/lang/String; [Ljava/lang/Object;)Ljava/lang/String;
+000376: move-result-object v9
+000378: goto +1dh
+00037a: if-ne v2, v6, +00dh
+00037e: sget-object v2, Lcom/vivo/pcsuite/PcSuiteApplication;->I1 Lcom/vivo/pcsuite/PcSuiteApplication;
+000382: invoke-virtual v2, Landroid/content/Context;->getResources()Landroid/content/res/Resources;
+000388: move-result-object v2
+00038a: invoke-virtual v2, v11, Landroid/content/res/Resources;->getString(I)Ljava/lang/String;
+000390: move-result-object v9
+000392: goto +10h
+000394: if-ne v3, v6, +00fh
+000398: sget-object v2, Lcom/vivo/pcsuite/PcSuiteApplication;->I1 Lcom/vivo/pcsuite/PcSuiteApplication;
+00039c: invoke-virtual v2, Landroid/content/Context;->getResources()Landroid/content/res/Resources;
+0003a2: move-result-object v2
+0003a4: const v3, 2131755120
+0003aa: invoke-virtual v2, v3, Landroid/content/res/Resources;->getString(I)Ljava/lang/String;
+0003b0: move-result-object v9
+0003b2: new-instance v2, Lcom/originui/widget/dialog/v;
+0003b6: sget-object v3, Lcom/vivo/pcsuite/PcSuiteApplication;->I1 Lcom/vivo/pcsuite/PcSuiteApplication;
+0003ba: invoke-virtual v3, Landroid/content/Context;->getApplicationContext()Landroid/content/Context;
+0003c0: move-result-object v3
+0003c2: const/4 v4, -2
+0003c4: invoke-direct v2, v3, v4, Lcom/originui/widget/dialog/v;-><init>(Landroid/content/Context; I)V
+0003ca: sget-object v3, Lcom/vivo/pcsuite/PcSuiteApplication;->I1 Lcom/vivo/pcsuite/PcSuiteApplication;
+0003ce: invoke-virtual v3, Landroid/content/Context;->getResources()Landroid/content/res/Resources;
+0003d4: move-result-object v3
+0003d6: const v4, 2131755140
+0003dc: invoke-virtual v3, v4, Landroid/content/res/Resources;->getString(I)Ljava/lang/String;
+0003e2: move-result-object v3
+0003e4: invoke-virtual v2, v3, Lcom/originui/widget/dialog/v;->m(Ljava/lang/CharSequence;)V
+0003ea: invoke-virtual v2, v9, Lcom/originui/widget/dialog/v;->f(Ljava/lang/CharSequence;)V
+0003f0: sget-object v3, Lcom/vivo/pcsuite/PcSuiteApplication;->I1 Lcom/vivo/pcsuite/PcSuiteApplication;
+0003f4: invoke-virtual v3, Landroid/content/Context;->getResources()Landroid/content/res/Resources;
+0003fa: move-result-object v3
+0003fc: const v4, 2131756102
+000402: invoke-virtual v3, v4, Landroid/content/res/Resources;->getString(I)Ljava/lang/String;
+000408: move-result-object v3
+00040a: new-instance v4, Lcom/vivo/pcsuite/util/n;
+00040e: invoke-direct v4, v1, v0, Lcom/vivo/pcsuite/util/n;-><init>(Lcom/vivo/pcsuite/extscreen/model/protocol/rece/ExtScreenStart; Z)V
+000414: invoke-virtual v2, v3, v4, Lcom/originui/widget/dialog/v;->k(Ljava/lang/String; Landroid/content/DialogInterface$OnClickListener;)V
+00041a: sget-object v0, Lcom/vivo/pcsuite/PcSuiteApplication;->I1 Lcom/vivo/pcsuite/PcSuiteApplication;
+00041e: invoke-virtual v0, Landroid/content/Context;->getResources()Landroid/content/res/Resources;
+000424: move-result-object v0
+000426: const v1, 2131755316
+00042c: invoke-virtual v0, v1, Landroid/content/res/Resources;->getString(I)Ljava/lang/String;
+000432: move-result-object v0
+000434: new-instance v1, Lcom/vivo/pcsuite/util/y;
+000438: invoke-direct v1, v6, Lcom/vivo/pcsuite/util/y;-><init>(I)V
+00043e: invoke-virtual v2, v0, v1, Lcom/originui/widget/dialog/v;->h(Ljava/lang/String; Landroid/content/DialogInterface$OnClickListener;)V
+000444: invoke-virtual v2, Lcom/originui/widget/dialog/v;->a()Landroid/app/Dialog;
+00044a: move-result-object v0
+00044c: invoke-virtual v0, Landroid/app/Dialog;->getWindow()Landroid/view/Window;
+000452: move-result-object v1
+000454: if-eqz v1, +00fh
+000458: invoke-virtual v1, Landroid/view/Window;->getAttributes()Landroid/view/WindowManager$LayoutParams;
+00045e: move-result-object v2
+000460: if-eqz v2, +006h
+000464: const/16 v3, 2038
+000468: iput v3, v2, Landroid/view/WindowManager$LayoutParams;->type I
+00046c: invoke-virtual v1, v2, Landroid/view/Window;->setAttributes(Landroid/view/WindowManager$LayoutParams;)V
+000472: const/4 v1, 0
+000474: invoke-virtual v0, v1, Landroid/app/Dialog;->setCanceledOnTouchOutside(Z)V
+00047a: invoke-virtual v0, Landroid/app/Dialog;->show()V
+000480: return-void 

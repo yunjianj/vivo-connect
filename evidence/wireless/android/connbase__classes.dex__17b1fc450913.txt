@@ -1,0 +1,23 @@
+APK pcsuite/updateApk/connbase.apk
+DEX classes.dex
+CLASS Lcom/vivo/connbase/u$a;
+SUPER Ljava/lang/Object;
+FIELDS
+a Lcom/vivo/connbase/u; = None
+
+METHOD <init>(Lcom/vivo/connbase/u;)V
+000000: iput-object v1, v0, Lcom/vivo/connbase/u$a;->a Lcom/vivo/connbase/u;
+000004: invoke-direct v0, Ljava/lang/Object;-><init>()V
+00000a: return-void 
+
+METHOD onClick(Landroid/view/View;)V
+000000: invoke-static Ljava/lang/Runtime;->getRuntime()Ljava/lang/Runtime;
+000006: move-result-object v2
+000008: const-string v0, "pm clear com.vivo.test.example"
+00000c: invoke-virtual v2, v0, Ljava/lang/Runtime;->exec(Ljava/lang/String;)Ljava/lang/Process;
+000012: new-instance v2, Ljava/lang/Thread;
+000016: new-instance v0, Lcom/vivo/connbase/u$a$a;
+00001a: invoke-direct v0, v1, Lcom/vivo/connbase/u$a$a;-><init>(Lcom/vivo/connbase/u$a;)V
+000020: invoke-direct v2, v0, Ljava/lang/Thread;-><init>(Ljava/lang/Runnable;)V
+000026: invoke-virtual v2, Ljava/lang/Thread;->start()V
+00002c: return-void 

@@ -1,0 +1,46 @@
+APK pcsuite/updateApk/connbase.apk
+DEX classes2.dex
+CLASS Lcom/vivo/pcsuite/pcconnect/m$i;
+SUPER Ljava/lang/Object;
+FIELDS
+a Lcom/vivo/pcsuite/pcconnect/m; = None
+
+METHOD <init>(Lcom/vivo/pcsuite/pcconnect/m;)V
+000000: iput-object v1, v0, Lcom/vivo/pcsuite/pcconnect/m$i;->a Lcom/vivo/pcsuite/pcconnect/m;
+000004: invoke-direct v0, Ljava/lang/Object;-><init>()V
+00000a: return-void 
+
+METHOD run()V
+000000: iget-object v0, v4, Lcom/vivo/pcsuite/pcconnect/m$i;->a Lcom/vivo/pcsuite/pcconnect/m;
+000004: invoke-static v0, Lcom/vivo/pcsuite/pcconnect/m;->b(Lcom/vivo/pcsuite/pcconnect/m;)Landroid/os/RemoteCallbackList;
+00000a: move-result-object v0
+00000c: invoke-virtual v0, Landroid/os/RemoteCallbackList;->beginBroadcast()I
+000012: move-result v0
+000014: if-lez v0, +030h
+000018: add-int/lit8 v0, v0, -1
+00001c: iget-object v1, v4, Lcom/vivo/pcsuite/pcconnect/m$i;->a Lcom/vivo/pcsuite/pcconnect/m;
+000020: invoke-static v1, Lcom/vivo/pcsuite/pcconnect/m;->b(Lcom/vivo/pcsuite/pcconnect/m;)Landroid/os/RemoteCallbackList;
+000026: move-result-object v1
+000028: invoke-virtual v1, v0, Landroid/os/RemoteCallbackList;->getBroadcastItem(I)Landroid/os/IInterface;
+00002e: move-result-object v1
+000030: check-cast v1, Lcom/vivo/pcsuite/pcconnect/ShareLinkObserver;
+000034: invoke-interface v1, Lcom/vivo/pcsuite/pcconnect/ShareLinkObserver;->onWifiEnabled()V
+00003a: goto -13h
+00003c: move-exception v1
+00003e: new-instance v2, Ljava/lang/StringBuilder;
+000042: invoke-direct v2, Ljava/lang/StringBuilder;-><init>()V
+000048: const-string v3, "notifyWifiEnabled Error: "
+00004c: invoke-virtual v2, v3, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+000052: invoke-virtual v1, Landroid/os/RemoteException;->getCause()Ljava/lang/Throwable;
+000058: move-result-object v1
+00005a: invoke-virtual v2, v1, Ljava/lang/StringBuilder;->append(Ljava/lang/Object;)Ljava/lang/StringBuilder;
+000060: invoke-virtual v2, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
+000066: move-result-object v1
+000068: const-string v2, "pcsuite_ShareObservers"
+00006c: invoke-static v2, v1, Lc/c/f/a/b;->g(Ljava/lang/String; Ljava/lang/String;)V
+000072: goto -2fh
+000074: iget-object v0, v4, Lcom/vivo/pcsuite/pcconnect/m$i;->a Lcom/vivo/pcsuite/pcconnect/m;
+000078: invoke-static v0, Lcom/vivo/pcsuite/pcconnect/m;->b(Lcom/vivo/pcsuite/pcconnect/m;)Landroid/os/RemoteCallbackList;
+00007e: move-result-object v0
+000080: invoke-virtual v0, Landroid/os/RemoteCallbackList;->finishBroadcast()V
+000086: return-void 

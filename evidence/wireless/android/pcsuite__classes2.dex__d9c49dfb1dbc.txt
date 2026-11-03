@@ -1,0 +1,59 @@
+APK pcsuite/updateApk/pcsuite.apk
+DEX classes2.dex
+CLASS Lcom/vivo/connect/sdk/f/c$c1;
+SUPER Landroid/os/Handler;
+FIELDS
+a Lcom/vivo/connect/sdk/h/e; = None
+b Lcom/vivo/connect/sdk/f/c; = None
+
+METHOD <init>(Lcom/vivo/connect/sdk/f/c; Landroid/os/Looper; Lcom/vivo/connect/sdk/h/e;)V
+000000: iput-object v1, v0, Lcom/vivo/connect/sdk/f/c$c1;->b Lcom/vivo/connect/sdk/f/c;
+000004: iput-object v3, v0, Lcom/vivo/connect/sdk/f/c$c1;->a Lcom/vivo/connect/sdk/h/e;
+000008: invoke-direct v0, v2, Landroid/os/Handler;-><init>(Landroid/os/Looper;)V
+00000e: return-void 
+
+METHOD handleMessage(Landroid/os/Message;)V
+000000: invoke-super v3, v4, Landroid/os/Handler;->handleMessage(Landroid/os/Message;)V
+000006: invoke-virtual v4, Landroid/os/Message;->getData()Landroid/os/Bundle;
+00000c: move-result-object v0
+00000e: const-string v1, "res"
+000012: invoke-virtual v0, v1, Landroid/os/BaseBundle;->getInt(Ljava/lang/String;)I
+000018: move-result v0
+00001a: new-instance v1, Ljava/lang/StringBuilder;
+00001e: const-string v2, "status:"
+000022: invoke-direct v1, v2, Ljava/lang/StringBuilder;-><init>(Ljava/lang/String;)V
+000028: invoke-virtual v1, v0, Ljava/lang/StringBuilder;->append(I)Ljava/lang/StringBuilder;
+00002e: invoke-virtual v1, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
+000034: move-result-object v1
+000036: const-string v2, "ConnectClientImpl"
+00003a: invoke-static v2, v1, Lcom/vivo/connect/logger/EasyLog;->d(Ljava/lang/String; Ljava/lang/String;)V
+000040: invoke-virtual v4, Landroid/os/Message;->getData()Landroid/os/Bundle;
+000046: move-result-object v4
+000048: if-nez v0, +020h
+00004c: const-string v0, "extra"
+000050: invoke-virtual v4, v0, Landroid/os/Bundle;->getBundle(Ljava/lang/String;)Landroid/os/Bundle;
+000056: move-result-object v4
+000058: if-eqz v4, +011h
+00005c: iget-object v0, v3, Lcom/vivo/connect/sdk/f/c$c1;->a Lcom/vivo/connect/sdk/h/e;
+000060: const-string v1, "extra_1"
+000064: invoke-virtual v4, v1, Landroid/os/BaseBundle;->getBoolean(Ljava/lang/String;)Z
+00006a: move-result v4
+00006c: invoke-static v4, Ljava/lang/Boolean;->valueOf(Z)Ljava/lang/Boolean;
+000072: move-result-object v4
+000074: invoke-virtual v0, v4, Lcom/vivo/connect/sdk/h/e;->a(Ljava/lang/Object;)V
+00007a: iget-object v3, v3, Lcom/vivo/connect/sdk/f/c$c1;->a Lcom/vivo/connect/sdk/h/e;
+00007e: const/4 v4, 1
+000080: invoke-virtual v3, v4, Lcom/vivo/connect/sdk/h/e;->a(Z)V
+000086: return-void 
+000088: const-string v1, "exc"
+00008c: invoke-virtual v4, v1, Landroid/os/Bundle;->getSerializable(Ljava/lang/String;)Ljava/io/Serializable;
+000092: move-result-object v4
+000094: check-cast v4, Ljava/lang/Throwable;
+000098: if-nez v4, +009h
+00009c: new-instance v4, Ljava/lang/RuntimeException;
+0000a0: const-string v1, "Unknown error."
+0000a4: invoke-direct v4, v1, Ljava/lang/RuntimeException;-><init>(Ljava/lang/String;)V
+0000aa: iget-object v3, v3, Lcom/vivo/connect/sdk/f/c$c1;->a Lcom/vivo/connect/sdk/h/e;
+0000ae: check-cast v4, Ljava/lang/Exception;
+0000b2: invoke-virtual v3, v4, v0, Lcom/vivo/connect/sdk/h/e;->a(Ljava/lang/Exception; I)V
+0000b8: return-void 

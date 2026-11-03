@@ -1,0 +1,53 @@
+APK pcsuite/updateApk/connbase.apk
+DEX classes.dex
+CLASS Lcom/vivo/connbase/h0/d/z4$a;
+SUPER Ljava/lang/Object;
+FIELDS
+a Lcom/vivo/connbase/h0/d/z4; = None
+
+METHOD <init>(Lcom/vivo/connbase/h0/d/z4;)V
+000000: iput-object v1, v0, Lcom/vivo/connbase/h0/d/z4$a;->a Lcom/vivo/connbase/h0/d/z4;
+000004: invoke-direct v0, Ljava/lang/Object;-><init>()V
+00000a: return-void 
+
+METHOD a(Ljava/lang/String;)V
+000000: new-instance v0, Ljava/lang/StringBuilder;
+000004: invoke-direct v0, Ljava/lang/StringBuilder;-><init>()V
+00000a: const-string v1, "SocketStatus is connected:"
+00000e: invoke-virtual v0, v1, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+000014: invoke-virtual v0, v3, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+00001a: invoke-virtual v0, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
+000020: move-result-object v3
+000022: const-string v0, "WlanDiscoveryUseCase"
+000026: invoke-static v0, v3, Lc/c/f/a/b;->k(Ljava/lang/String; Ljava/lang/String;)V
+00002c: return-void 
+
+METHOD a(Ljava/lang/String; Ljava/lang/String;)V
+000000: new-instance v0, Ljava/lang/StringBuilder;
+000004: invoke-direct v0, Ljava/lang/StringBuilder;-><init>()V
+00000a: const-string v1, "Heart onClose dd:"
+00000e: invoke-virtual v0, v1, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+000014: invoke-virtual v0, v3, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+00001a: const-string v1, "  sd:"
+00001e: invoke-virtual v0, v1, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+000024: invoke-virtual v0, v4, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+00002a: invoke-virtual v0, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
+000030: move-result-object v0
+000032: const-string v1, "WlanDiscoveryUseCase"
+000036: invoke-static v1, v0, Lc/c/f/a/b;->k(Ljava/lang/String; Ljava/lang/String;)V
+00003c: iget-object v0, v2, Lcom/vivo/connbase/h0/d/z4$a;->a Lcom/vivo/connbase/h0/d/z4;
+000040: const/4 v1, 0
+000042: invoke-static v0, v3, v4, v1, Lcom/vivo/connbase/h0/d/z4;->a(Lcom/vivo/connbase/h0/d/z4; Ljava/lang/String; Ljava/lang/String; Z)V
+000048: iget-object v3, v2, Lcom/vivo/connbase/h0/d/z4$a;->a Lcom/vivo/connbase/h0/d/z4;
+00004c: invoke-static v3, Lcom/vivo/connbase/h0/d/z4;->a(Lcom/vivo/connbase/h0/d/z4;)Z
+000052: move-result v3
+000054: if-eqz v3, +012h
+000058: invoke-static Lcom/vivo/connbase/wifi/utils/WifiUtils;->isWifiNetworkEnable()Z
+00005e: move-result v3
+000060: if-eqz v3, +00ch
+000064: iget-object v3, v2, Lcom/vivo/connbase/h0/d/z4$a;->a Lcom/vivo/connbase/h0/d/z4;
+000068: invoke-static v3, Lcom/vivo/connbase/h0/d/z4;->d(Lcom/vivo/connbase/h0/d/z4;)Lcom/vivo/connbase/n0/b;
+00006e: move-result-object v3
+000070: const/4 v4, 1
+000072: invoke-virtual v3, v4, Lcom/vivo/connbase/n0/b;->a(Z)V
+000078: return-void 

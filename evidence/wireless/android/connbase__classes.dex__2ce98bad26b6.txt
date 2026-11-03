@@ -1,0 +1,663 @@
+APK pcsuite/updateApk/connbase.apk
+DEX classes.dex
+CLASS Lcom/vivo/connbase/IClient$Stub;
+SUPER Landroid/os/Binder;
+FIELDS
+DESCRIPTOR Ljava/lang/String; = 'com.vivo.connbase.IClient'
+TRANSACTION_acceptConnection I = 7
+TRANSACTION_acceptConnectionParames I = 25
+TRANSACTION_addAdvertisingConfig I = 13
+TRANSACTION_cancelTransmit I = 11
+TRANSACTION_checkAppAuthorization I = 21
+TRANSACTION_checkConnectInfo I = 33
+TRANSACTION_checkSession I = 12
+TRANSACTION_connect I = 5
+TRANSACTION_disableAdvertisingConfigByServiceID I = 17
+TRANSACTION_disconnect I = 6
+TRANSACTION_disconnectP2P I = 19
+TRANSACTION_disconnectP2pParames I = 27
+TRANSACTION_disconnectParames I = 26
+TRANSACTION_enableAdvertisingConfigByServiceID I = 16
+TRANSACTION_getAdvertisingConfigByServiceID I = 14
+TRANSACTION_getDeviceId I = 18
+TRANSACTION_isAccountLogin I = 31
+TRANSACTION_notifyUseBleConnect I = 34
+TRANSACTION_openAuthorization I = 22
+TRANSACTION_rejectConnection I = 8
+TRANSACTION_rejectConnectionParamError I = 24
+TRANSACTION_removeAdvertisingConfig I = 15
+TRANSACTION_sendPayload I = 10
+TRANSACTION_setAccountsUpdateCallback I = 23
+TRANSACTION_setConnectionCallback I = 20
+TRANSACTION_setConnectionCallbackParames I = 28
+TRANSACTION_showAccountLoginPrompt I = 32
+TRANSACTION_startAdvertising I = 1
+TRANSACTION_startOriginalAdvertising I = 29
+TRANSACTION_startScan I = 3
+TRANSACTION_stopAdvertising I = 2
+TRANSACTION_stopOriginalAdvertising I = 30
+TRANSACTION_stopScan I = 4
+TRANSACTION_switchTransferLayer I = 9
+
+METHOD <init>()V
+000000: invoke-direct v1, Landroid/os/Binder;-><init>()V
+000006: const-string v0, "com.vivo.connbase.IClient"
+00000a: invoke-virtual v1, v1, v0, Landroid/os/Binder;->attachInterface(Landroid/os/IInterface; Ljava/lang/String;)V
+000010: return-void 
+
+METHOD asInterface(Landroid/os/IBinder;)Lcom/vivo/connbase/IClient;
+000000: if-nez v2, +004h
+000004: const/4 v2, 0
+000006: return-object v2
+000008: const-string v0, "com.vivo.connbase.IClient"
+00000c: invoke-interface v2, v0, Landroid/os/IBinder;->queryLocalInterface(Ljava/lang/String;)Landroid/os/IInterface;
+000012: move-result-object v0
+000014: if-eqz v0, +009h
+000018: instance-of v1, v0, Lcom/vivo/connbase/IClient;
+00001c: if-eqz v1, +005h
+000020: check-cast v0, Lcom/vivo/connbase/IClient;
+000024: return-object v0
+000026: new-instance v0, Lcom/vivo/connbase/IClient$Stub$Proxy;
+00002a: invoke-direct v0, v2, Lcom/vivo/connbase/IClient$Stub$Proxy;-><init>(Landroid/os/IBinder;)V
+000030: return-object v0
+
+METHOD getDefaultImpl()Lcom/vivo/connbase/IClient;
+000000: sget-object v0, Lcom/vivo/connbase/IClient$Stub$Proxy;->sDefaultImpl Lcom/vivo/connbase/IClient;
+000004: return-object v0
+
+METHOD setDefaultImpl(Lcom/vivo/connbase/IClient;)Z
+000000: sget-object v0, Lcom/vivo/connbase/IClient$Stub$Proxy;->sDefaultImpl Lcom/vivo/connbase/IClient;
+000004: if-nez v0, +00ah
+000008: if-eqz v1, +006h
+00000c: sput-object v1, Lcom/vivo/connbase/IClient$Stub$Proxy;->sDefaultImpl Lcom/vivo/connbase/IClient;
+000010: const/4 v1, 1
+000012: return v1
+000014: const/4 v1, 0
+000016: return v1
+000018: new-instance v1, Ljava/lang/IllegalStateException;
+00001c: const-string v0, "setDefaultImpl() called twice"
+000020: invoke-direct v1, v0, Ljava/lang/IllegalStateException;-><init>(Ljava/lang/String;)V
+000026: throw v1
+
+METHOD asBinder()Landroid/os/IBinder;
+000000: return-object v0
+
+METHOD onTransact(I Landroid/os/Parcel; Landroid/os/Parcel; I)Z
+000000: const v0, 1598968902
+000006: const/4 v1, 1
+000008: const-string v2, "com.vivo.connbase.IClient"
+00000c: if-eq v10, v0, +47eh
+000010: const/4 v0, 0
+000012: packed-switch v10, +000047fh
+000018: invoke-super v9, v10, v11, v12, v13, Landroid/os/Binder;->onTransact(I Landroid/os/Parcel; Landroid/os/Parcel; I)Z
+00001e: move-result v10
+000020: return v10
+000022: invoke-virtual v11, v2, Landroid/os/Parcel;->enforceInterface(Ljava/lang/String;)V
+000028: invoke-virtual v11, Landroid/os/Parcel;->readInt()I
+00002e: move-result v10
+000030: if-eqz v10, +00bh
+000034: sget-object v10, Landroid/os/Messenger;->CREATOR Landroid/os/Parcelable$Creator;
+000038: invoke-interface v10, v11, Landroid/os/Parcelable$Creator;->createFromParcel(Landroid/os/Parcel;)Ljava/lang/Object;
+00003e: move-result-object v10
+000040: move-object v0, v10
+000042: check-cast v0, Landroid/os/Messenger;
+000046: invoke-virtual v11, Landroid/os/Parcel;->readInt()I
+00004c: move-result v10
+00004e: if-eqz v10, +004h
+000052: move v10, v1
+000054: goto +2h
+000056: const/4 v10, 0
+000058: invoke-interface v9, v0, v10, Lcom/vivo/connbase/IClient;->notifyUseBleConnect(Landroid/os/Messenger; Z)V
+00005e: invoke-virtual v12, Landroid/os/Parcel;->writeNoException()V
+000064: return v1
+000066: invoke-virtual v11, v2, Landroid/os/Parcel;->enforceInterface(Ljava/lang/String;)V
+00006c: invoke-virtual v11, Landroid/os/Parcel;->readInt()I
+000072: move-result v10
+000074: if-eqz v10, +00bh
+000078: sget-object v10, Landroid/os/Messenger;->CREATOR Landroid/os/Parcelable$Creator;
+00007c: invoke-interface v10, v11, Landroid/os/Parcelable$Creator;->createFromParcel(Landroid/os/Parcel;)Ljava/lang/Object;
+000082: move-result-object v10
+000084: move-object v0, v10
+000086: check-cast v0, Landroid/os/Messenger;
+00008a: invoke-virtual v11, Landroid/os/Parcel;->readStrongBinder()Landroid/os/IBinder;
+000090: move-result-object v10
+000092: invoke-static v10, Lcom/vivo/connbase/t$b;->a(Landroid/os/IBinder;)Lcom/vivo/connbase/t;
+000098: move-result-object v10
+00009a: invoke-interface v9, v0, v10, Lcom/vivo/connbase/IClient;->checkConnectInfo(Landroid/os/Messenger; Lcom/vivo/connbase/t;)V
+0000a0: goto -21h
+0000a2: invoke-virtual v11, v2, Landroid/os/Parcel;->enforceInterface(Ljava/lang/String;)V
+0000a8: invoke-virtual v11, Landroid/os/Parcel;->readInt()I
+0000ae: move-result v10
+0000b0: if-eqz v10, +00bh
+0000b4: sget-object v10, Landroid/os/Messenger;->CREATOR Landroid/os/Parcelable$Creator;
+0000b8: invoke-interface v10, v11, Landroid/os/Parcelable$Creator;->createFromParcel(Landroid/os/Parcel;)Ljava/lang/Object;
+0000be: move-result-object v10
+0000c0: move-object v0, v10
+0000c2: check-cast v0, Landroid/os/Messenger;
+0000c6: invoke-virtual v11, Landroid/os/Parcel;->readString()Ljava/lang/String;
+0000cc: move-result-object v10
+0000ce: invoke-virtual v11, Landroid/os/Parcel;->readStrongBinder()Landroid/os/IBinder;
+0000d4: move-result-object v11
+0000d6: invoke-static v11, Lcom/vivo/connbase/IAccountLoginCallback$b;->a(Landroid/os/IBinder;)Lcom/vivo/connbase/IAccountLoginCallback;
+0000dc: move-result-object v11
+0000de: invoke-interface v9, v0, v10, v11, Lcom/vivo/connbase/IClient;->showAccountLoginPrompt(Landroid/os/Messenger; Ljava/lang/String; Lcom/vivo/connbase/IAccountLoginCallback;)V
+0000e4: goto -43h
+0000e6: invoke-virtual v11, v2, Landroid/os/Parcel;->enforceInterface(Ljava/lang/String;)V
+0000ec: invoke-virtual v11, Landroid/os/Parcel;->readInt()I
+0000f2: move-result v10
+0000f4: if-eqz v10, +00bh
+0000f8: sget-object v10, Landroid/os/Messenger;->CREATOR Landroid/os/Parcelable$Creator;
+0000fc: invoke-interface v10, v11, Landroid/os/Parcelable$Creator;->createFromParcel(Landroid/os/Parcel;)Ljava/lang/Object;
+000102: move-result-object v10
+000104: move-object v0, v10
+000106: check-cast v0, Landroid/os/Messenger;
+00010a: invoke-interface v9, v0, Lcom/vivo/connbase/IClient;->isAccountLogin(Landroid/os/Messenger;)V
+000110: goto -59h
+000112: invoke-virtual v11, v2, Landroid/os/Parcel;->enforceInterface(Ljava/lang/String;)V
+000118: invoke-virtual v11, Landroid/os/Parcel;->readInt()I
+00011e: move-result v10
+000120: if-eqz v10, +00bh
+000124: sget-object v10, Landroid/os/Messenger;->CREATOR Landroid/os/Parcelable$Creator;
+000128: invoke-interface v10, v11, Landroid/os/Parcelable$Creator;->createFromParcel(Landroid/os/Parcel;)Ljava/lang/Object;
+00012e: move-result-object v10
+000130: move-object v0, v10
+000132: check-cast v0, Landroid/os/Messenger;
+000136: invoke-virtual v11, Landroid/os/Parcel;->readString()Ljava/lang/String;
+00013c: move-result-object v10
+00013e: invoke-interface v9, v0, v10, Lcom/vivo/connbase/IClient;->stopOriginalAdvertising(Landroid/os/Messenger; Ljava/lang/String;)V
+000144: goto -73h
+000146: invoke-virtual v11, v2, Landroid/os/Parcel;->enforceInterface(Ljava/lang/String;)V
+00014c: invoke-virtual v11, Landroid/os/Parcel;->readInt()I
+000152: move-result v10
+000154: if-eqz v10, +00ch
+000158: sget-object v10, Landroid/os/Messenger;->CREATOR Landroid/os/Parcelable$Creator;
+00015c: invoke-interface v10, v11, Landroid/os/Parcelable$Creator;->createFromParcel(Landroid/os/Parcel;)Ljava/lang/Object;
+000162: move-result-object v10
+000164: check-cast v10, Landroid/os/Messenger;
+000168: move-object v3, v10
+00016a: goto +2h
+00016c: move-object v3, v0
+00016e: invoke-virtual v11, Landroid/os/Parcel;->readString()Ljava/lang/String;
+000174: move-result-object v4
+000176: invoke-virtual v11, Landroid/os/Parcel;->readInt()I
+00017c: move-result v10
+00017e: if-eqz v10, +00ch
+000182: sget-object v10, Landroid/bluetooth/le/AdvertiseSettings;->CREATOR Landroid/os/Parcelable$Creator;
+000186: invoke-interface v10, v11, Landroid/os/Parcelable$Creator;->createFromParcel(Landroid/os/Parcel;)Ljava/lang/Object;
+00018c: move-result-object v10
+00018e: check-cast v10, Landroid/bluetooth/le/AdvertiseSettings;
+000192: move-object v5, v10
+000194: goto +2h
+000196: move-object v5, v0
+000198: invoke-virtual v11, Landroid/os/Parcel;->readInt()I
+00019e: move-result v10
+0001a0: if-eqz v10, +00ch
+0001a4: sget-object v10, Landroid/bluetooth/le/AdvertiseData;->CREATOR Landroid/os/Parcelable$Creator;
+0001a8: invoke-interface v10, v11, Landroid/os/Parcelable$Creator;->createFromParcel(Landroid/os/Parcel;)Ljava/lang/Object;
+0001ae: move-result-object v10
+0001b0: check-cast v10, Landroid/bluetooth/le/AdvertiseData;
+0001b4: move-object v6, v10
+0001b6: goto +2h
+0001b8: move-object v6, v0
+0001ba: invoke-virtual v11, Landroid/os/Parcel;->readInt()I
+0001c0: move-result v10
+0001c2: if-eqz v10, +00bh
+0001c6: sget-object v10, Landroid/bluetooth/le/AdvertiseData;->CREATOR Landroid/os/Parcelable$Creator;
+0001ca: invoke-interface v10, v11, Landroid/os/Parcelable$Creator;->createFromParcel(Landroid/os/Parcel;)Ljava/lang/Object;
+0001d0: move-result-object v10
+0001d2: move-object v0, v10
+0001d4: check-cast v0, Landroid/bluetooth/le/AdvertiseData;
+0001d8: move-object v7, v0
+0001da: invoke-virtual v11, Landroid/os/Parcel;->readStrongBinder()Landroid/os/IBinder;
+0001e0: move-result-object v10
+0001e2: invoke-static v10, Lcom/vivo/connbase/r$b;->a(Landroid/os/IBinder;)Lcom/vivo/connbase/r;
+0001e8: move-result-object v8
+0001ea: move-object v2, v9
+0001ec: invoke-interface/range v2 ... v8, Lcom/vivo/connbase/IClient;->startOriginalAdvertising(Landroid/os/Messenger; Ljava/lang/String; Landroid/bluetooth/le/AdvertiseSettings; Landroid/bluetooth/le/AdvertiseData; Landroid/bluetooth/le/AdvertiseData; Lcom/vivo/connbase/r;)V
+0001f2: goto/16 -0cah
+0001f6: invoke-virtual v11, v2, Landroid/os/Parcel;->enforceInterface(Ljava/lang/String;)V
+0001fc: invoke-virtual v11, Landroid/os/Parcel;->readInt()I
+000202: move-result v10
+000204: if-eqz v10, +00bh
+000208: sget-object v10, Landroid/os/Messenger;->CREATOR Landroid/os/Parcelable$Creator;
+00020c: invoke-interface v10, v11, Landroid/os/Parcelable$Creator;->createFromParcel(Landroid/os/Parcel;)Ljava/lang/Object;
+000212: move-result-object v10
+000214: move-object v0, v10
+000216: check-cast v0, Landroid/os/Messenger;
+00021a: invoke-virtual v11, Landroid/os/Parcel;->readString()Ljava/lang/String;
+000220: move-result-object v10
+000222: invoke-virtual v11, Landroid/os/Parcel;->readStrongBinder()Landroid/os/IBinder;
+000228: move-result-object v11
+00022a: invoke-static v11, Lcom/vivo/connbase/IConnectionCallback$b;->a(Landroid/os/IBinder;)Lcom/vivo/connbase/IConnectionCallback;
+000230: move-result-object v11
+000232: invoke-interface v9, v0, v10, v11, Lcom/vivo/connbase/IClient;->setConnectionCallbackParames(Landroid/os/Messenger; Ljava/lang/String; Lcom/vivo/connbase/IConnectionCallback;)V
+000238: goto/16 -0edh
+00023c: invoke-virtual v11, v2, Landroid/os/Parcel;->enforceInterface(Ljava/lang/String;)V
+000242: invoke-virtual v11, Landroid/os/Parcel;->readInt()I
+000248: move-result v10
+00024a: if-eqz v10, +00bh
+00024e: sget-object v10, Landroid/os/Messenger;->CREATOR Landroid/os/Parcelable$Creator;
+000252: invoke-interface v10, v11, Landroid/os/Parcelable$Creator;->createFromParcel(Landroid/os/Parcel;)Ljava/lang/Object;
+000258: move-result-object v10
+00025a: move-object v0, v10
+00025c: check-cast v0, Landroid/os/Messenger;
+000260: invoke-virtual v11, Landroid/os/Parcel;->readString()Ljava/lang/String;
+000266: move-result-object v10
+000268: invoke-interface v9, v0, v10, Lcom/vivo/connbase/IClient;->disconnectP2pParames(Landroid/os/Messenger; Ljava/lang/String;)V
+00026e: goto/16 -108h
+000272: invoke-virtual v11, v2, Landroid/os/Parcel;->enforceInterface(Ljava/lang/String;)V
+000278: invoke-virtual v11, Landroid/os/Parcel;->readInt()I
+00027e: move-result v10
+000280: if-eqz v10, +00bh
+000284: sget-object v10, Landroid/os/Messenger;->CREATOR Landroid/os/Parcelable$Creator;
+000288: invoke-interface v10, v11, Landroid/os/Parcelable$Creator;->createFromParcel(Landroid/os/Parcel;)Ljava/lang/Object;
+00028e: move-result-object v10
+000290: move-object v0, v10
+000292: check-cast v0, Landroid/os/Messenger;
+000296: invoke-virtual v11, Landroid/os/Parcel;->readString()Ljava/lang/String;
+00029c: move-result-object v10
+00029e: invoke-interface v9, v0, v10, Lcom/vivo/connbase/IClient;->disconnectParames(Landroid/os/Messenger; Ljava/lang/String;)V
+0002a4: goto/16 -123h
+0002a8: invoke-virtual v11, v2, Landroid/os/Parcel;->enforceInterface(Ljava/lang/String;)V
+0002ae: invoke-virtual v11, Landroid/os/Parcel;->readInt()I
+0002b4: move-result v10
+0002b6: if-eqz v10, +00bh
+0002ba: sget-object v10, Landroid/os/Messenger;->CREATOR Landroid/os/Parcelable$Creator;
+0002be: invoke-interface v10, v11, Landroid/os/Parcelable$Creator;->createFromParcel(Landroid/os/Parcel;)Ljava/lang/Object;
+0002c4: move-result-object v10
+0002c6: move-object v0, v10
+0002c8: check-cast v0, Landroid/os/Messenger;
+0002cc: invoke-virtual v11, Landroid/os/Parcel;->readString()Ljava/lang/String;
+0002d2: move-result-object v10
+0002d4: invoke-virtual v11, Landroid/os/Parcel;->readStrongBinder()Landroid/os/IBinder;
+0002da: move-result-object v11
+0002dc: invoke-static v11, Lcom/vivo/connbase/IPayloadCallback$b;->a(Landroid/os/IBinder;)Lcom/vivo/connbase/IPayloadCallback;
+0002e2: move-result-object v11
+0002e4: invoke-interface v9, v0, v10, v11, Lcom/vivo/connbase/IClient;->acceptConnectionParames(Landroid/os/Messenger; Ljava/lang/String; Lcom/vivo/connbase/IPayloadCallback;)V
+0002ea: goto/16 -146h
+0002ee: invoke-virtual v11, v2, Landroid/os/Parcel;->enforceInterface(Ljava/lang/String;)V
+0002f4: invoke-virtual v11, Landroid/os/Parcel;->readInt()I
+0002fa: move-result v10
+0002fc: if-eqz v10, +00bh
+000300: sget-object v10, Landroid/os/Messenger;->CREATOR Landroid/os/Parcelable$Creator;
+000304: invoke-interface v10, v11, Landroid/os/Parcelable$Creator;->createFromParcel(Landroid/os/Parcel;)Ljava/lang/Object;
+00030a: move-result-object v10
+00030c: move-object v0, v10
+00030e: check-cast v0, Landroid/os/Messenger;
+000312: invoke-virtual v11, Landroid/os/Parcel;->readString()Ljava/lang/String;
+000318: move-result-object v10
+00031a: invoke-interface v9, v0, v10, Lcom/vivo/connbase/IClient;->rejectConnectionParamError(Landroid/os/Messenger; Ljava/lang/String;)V
+000320: goto/16 -161h
+000324: invoke-virtual v11, v2, Landroid/os/Parcel;->enforceInterface(Ljava/lang/String;)V
+00032a: invoke-virtual v11, Landroid/os/Parcel;->readInt()I
+000330: move-result v10
+000332: if-eqz v10, +00bh
+000336: sget-object v10, Landroid/os/Messenger;->CREATOR Landroid/os/Parcelable$Creator;
+00033a: invoke-interface v10, v11, Landroid/os/Parcelable$Creator;->createFromParcel(Landroid/os/Parcel;)Ljava/lang/Object;
+000340: move-result-object v10
+000342: move-object v0, v10
+000344: check-cast v0, Landroid/os/Messenger;
+000348: invoke-virtual v11, Landroid/os/Parcel;->readStrongBinder()Landroid/os/IBinder;
+00034e: move-result-object v10
+000350: invoke-static v10, Lcom/vivo/connbase/IAccountsUpdateCallback$b;->a(Landroid/os/IBinder;)Lcom/vivo/connbase/IAccountsUpdateCallback;
+000356: move-result-object v10
+000358: invoke-interface v9, v0, v10, Lcom/vivo/connbase/IClient;->setAccountsUpdateCallback(Landroid/os/Messenger; Lcom/vivo/connbase/IAccountsUpdateCallback;)V
+00035e: goto/16 -180h
+000362: invoke-virtual v11, v2, Landroid/os/Parcel;->enforceInterface(Ljava/lang/String;)V
+000368: invoke-virtual v11, Landroid/os/Parcel;->readInt()I
+00036e: move-result v10
+000370: if-eqz v10, +00bh
+000374: sget-object v10, Landroid/os/Messenger;->CREATOR Landroid/os/Parcelable$Creator;
+000378: invoke-interface v10, v11, Landroid/os/Parcelable$Creator;->createFromParcel(Landroid/os/Parcel;)Ljava/lang/Object;
+00037e: move-result-object v10
+000380: move-object v0, v10
+000382: check-cast v0, Landroid/os/Messenger;
+000386: invoke-virtual v11, Landroid/os/Parcel;->readStrongBinder()Landroid/os/IBinder;
+00038c: move-result-object v10
+00038e: invoke-static v10, Lcom/vivo/connbase/s$b;->a(Landroid/os/IBinder;)Lcom/vivo/connbase/s;
+000394: move-result-object v10
+000396: invoke-interface v9, v0, v10, Lcom/vivo/connbase/IClient;->openAuthorization(Landroid/os/Messenger; Lcom/vivo/connbase/s;)V
+00039c: goto/16 -19fh
+0003a0: invoke-virtual v11, v2, Landroid/os/Parcel;->enforceInterface(Ljava/lang/String;)V
+0003a6: invoke-virtual v11, Landroid/os/Parcel;->readInt()I
+0003ac: move-result v10
+0003ae: if-eqz v10, +00bh
+0003b2: sget-object v10, Landroid/os/Messenger;->CREATOR Landroid/os/Parcelable$Creator;
+0003b6: invoke-interface v10, v11, Landroid/os/Parcelable$Creator;->createFromParcel(Landroid/os/Parcel;)Ljava/lang/Object;
+0003bc: move-result-object v10
+0003be: move-object v0, v10
+0003c0: check-cast v0, Landroid/os/Messenger;
+0003c4: invoke-interface v9, v0, Lcom/vivo/connbase/IClient;->checkAppAuthorization(Landroid/os/Messenger;)V
+0003ca: goto/16 -1b6h
+0003ce: invoke-virtual v11, v2, Landroid/os/Parcel;->enforceInterface(Ljava/lang/String;)V
+0003d4: invoke-virtual v11, Landroid/os/Parcel;->readInt()I
+0003da: move-result v10
+0003dc: if-eqz v10, +00bh
+0003e0: sget-object v10, Landroid/os/Messenger;->CREATOR Landroid/os/Parcelable$Creator;
+0003e4: invoke-interface v10, v11, Landroid/os/Parcelable$Creator;->createFromParcel(Landroid/os/Parcel;)Ljava/lang/Object;
+0003ea: move-result-object v10
+0003ec: move-object v0, v10
+0003ee: check-cast v0, Landroid/os/Messenger;
+0003f2: invoke-virtual v11, Landroid/os/Parcel;->readString()Ljava/lang/String;
+0003f8: move-result-object v10
+0003fa: invoke-virtual v11, Landroid/os/Parcel;->readStrongBinder()Landroid/os/IBinder;
+000400: move-result-object v11
+000402: invoke-static v11, Lcom/vivo/connbase/IConnectionCallback$b;->a(Landroid/os/IBinder;)Lcom/vivo/connbase/IConnectionCallback;
+000408: move-result-object v11
+00040a: invoke-interface v9, v0, v10, v11, Lcom/vivo/connbase/IClient;->setConnectionCallback(Landroid/os/Messenger; Ljava/lang/String; Lcom/vivo/connbase/IConnectionCallback;)V
+000410: goto/16 -1d9h
+000414: invoke-virtual v11, v2, Landroid/os/Parcel;->enforceInterface(Ljava/lang/String;)V
+00041a: invoke-virtual v11, Landroid/os/Parcel;->readInt()I
+000420: move-result v10
+000422: if-eqz v10, +00bh
+000426: sget-object v10, Landroid/os/Messenger;->CREATOR Landroid/os/Parcelable$Creator;
+00042a: invoke-interface v10, v11, Landroid/os/Parcelable$Creator;->createFromParcel(Landroid/os/Parcel;)Ljava/lang/Object;
+000430: move-result-object v10
+000432: move-object v0, v10
+000434: check-cast v0, Landroid/os/Messenger;
+000438: invoke-virtual v11, Landroid/os/Parcel;->readString()Ljava/lang/String;
+00043e: move-result-object v10
+000440: invoke-virtual v11, Landroid/os/Parcel;->readString()Ljava/lang/String;
+000446: move-result-object v11
+000448: invoke-interface v9, v0, v10, v11, Lcom/vivo/connbase/IClient;->disconnectP2P(Landroid/os/Messenger; Ljava/lang/String; Ljava/lang/String;)V
+00044e: goto/16 -1f8h
+000452: invoke-virtual v11, v2, Landroid/os/Parcel;->enforceInterface(Ljava/lang/String;)V
+000458: invoke-virtual v11, Landroid/os/Parcel;->readInt()I
+00045e: move-result v10
+000460: if-eqz v10, +00bh
+000464: sget-object v10, Landroid/os/Messenger;->CREATOR Landroid/os/Parcelable$Creator;
+000468: invoke-interface v10, v11, Landroid/os/Parcelable$Creator;->createFromParcel(Landroid/os/Parcel;)Ljava/lang/Object;
+00046e: move-result-object v10
+000470: move-object v0, v10
+000472: check-cast v0, Landroid/os/Messenger;
+000476: invoke-interface v9, v0, Lcom/vivo/connbase/IClient;->getDeviceId(Landroid/os/Messenger;)V
+00047c: goto/16 -20fh
+000480: invoke-virtual v11, v2, Landroid/os/Parcel;->enforceInterface(Ljava/lang/String;)V
+000486: invoke-virtual v11, Landroid/os/Parcel;->readInt()I
+00048c: move-result v10
+00048e: if-eqz v10, +00bh
+000492: sget-object v10, Landroid/os/Messenger;->CREATOR Landroid/os/Parcelable$Creator;
+000496: invoke-interface v10, v11, Landroid/os/Parcelable$Creator;->createFromParcel(Landroid/os/Parcel;)Ljava/lang/Object;
+00049c: move-result-object v10
+00049e: move-object v0, v10
+0004a0: check-cast v0, Landroid/os/Messenger;
+0004a4: invoke-virtual v11, Landroid/os/Parcel;->readString()Ljava/lang/String;
+0004aa: move-result-object v10
+0004ac: invoke-interface v9, v0, v10, Lcom/vivo/connbase/IClient;->disableAdvertisingConfigByServiceID(Landroid/os/Messenger; Ljava/lang/String;)V
+0004b2: goto/16 -22ah
+0004b6: invoke-virtual v11, v2, Landroid/os/Parcel;->enforceInterface(Ljava/lang/String;)V
+0004bc: invoke-virtual v11, Landroid/os/Parcel;->readInt()I
+0004c2: move-result v10
+0004c4: if-eqz v10, +00bh
+0004c8: sget-object v10, Landroid/os/Messenger;->CREATOR Landroid/os/Parcelable$Creator;
+0004cc: invoke-interface v10, v11, Landroid/os/Parcelable$Creator;->createFromParcel(Landroid/os/Parcel;)Ljava/lang/Object;
+0004d2: move-result-object v10
+0004d4: move-object v0, v10
+0004d6: check-cast v0, Landroid/os/Messenger;
+0004da: invoke-virtual v11, Landroid/os/Parcel;->readString()Ljava/lang/String;
+0004e0: move-result-object v10
+0004e2: invoke-interface v9, v0, v10, Lcom/vivo/connbase/IClient;->enableAdvertisingConfigByServiceID(Landroid/os/Messenger; Ljava/lang/String;)V
+0004e8: goto/16 -245h
+0004ec: invoke-virtual v11, v2, Landroid/os/Parcel;->enforceInterface(Ljava/lang/String;)V
+0004f2: invoke-virtual v11, Landroid/os/Parcel;->readInt()I
+0004f8: move-result v10
+0004fa: if-eqz v10, +00bh
+0004fe: sget-object v10, Landroid/os/Messenger;->CREATOR Landroid/os/Parcelable$Creator;
+000502: invoke-interface v10, v11, Landroid/os/Parcelable$Creator;->createFromParcel(Landroid/os/Parcel;)Ljava/lang/Object;
+000508: move-result-object v10
+00050a: move-object v0, v10
+00050c: check-cast v0, Landroid/os/Messenger;
+000510: invoke-virtual v11, Landroid/os/Parcel;->readString()Ljava/lang/String;
+000516: move-result-object v10
+000518: invoke-interface v9, v0, v10, Lcom/vivo/connbase/IClient;->removeAdvertisingConfig(Landroid/os/Messenger; Ljava/lang/String;)V
+00051e: goto/16 -260h
+000522: invoke-virtual v11, v2, Landroid/os/Parcel;->enforceInterface(Ljava/lang/String;)V
+000528: invoke-virtual v11, Landroid/os/Parcel;->readInt()I
+00052e: move-result v10
+000530: if-eqz v10, +00bh
+000534: sget-object v10, Landroid/os/Messenger;->CREATOR Landroid/os/Parcelable$Creator;
+000538: invoke-interface v10, v11, Landroid/os/Parcelable$Creator;->createFromParcel(Landroid/os/Parcel;)Ljava/lang/Object;
+00053e: move-result-object v10
+000540: move-object v0, v10
+000542: check-cast v0, Landroid/os/Messenger;
+000546: invoke-virtual v11, Landroid/os/Parcel;->readString()Ljava/lang/String;
+00054c: move-result-object v10
+00054e: invoke-interface v9, v0, v10, Lcom/vivo/connbase/IClient;->getAdvertisingConfigByServiceID(Landroid/os/Messenger; Ljava/lang/String;)V
+000554: goto/16 -27bh
+000558: invoke-virtual v11, v2, Landroid/os/Parcel;->enforceInterface(Ljava/lang/String;)V
+00055e: invoke-virtual v11, Landroid/os/Parcel;->readInt()I
+000564: move-result v10
+000566: if-eqz v10, +00bh
+00056a: sget-object v10, Landroid/os/Messenger;->CREATOR Landroid/os/Parcelable$Creator;
+00056e: invoke-interface v10, v11, Landroid/os/Parcelable$Creator;->createFromParcel(Landroid/os/Parcel;)Ljava/lang/Object;
+000574: move-result-object v10
+000576: move-object v0, v10
+000578: check-cast v0, Landroid/os/Messenger;
+00057c: invoke-virtual v11, Landroid/os/Parcel;->readString()Ljava/lang/String;
+000582: move-result-object v10
+000584: invoke-interface v9, v0, v10, Lcom/vivo/connbase/IClient;->addAdvertisingConfig(Landroid/os/Messenger; Ljava/lang/String;)V
+00058a: goto/16 -296h
+00058e: invoke-virtual v11, v2, Landroid/os/Parcel;->enforceInterface(Ljava/lang/String;)V
+000594: invoke-virtual v11, Landroid/os/Parcel;->readInt()I
+00059a: move-result v10
+00059c: if-eqz v10, +00bh
+0005a0: sget-object v10, Landroid/os/Messenger;->CREATOR Landroid/os/Parcelable$Creator;
+0005a4: invoke-interface v10, v11, Landroid/os/Parcelable$Creator;->createFromParcel(Landroid/os/Parcel;)Ljava/lang/Object;
+0005aa: move-result-object v10
+0005ac: move-object v0, v10
+0005ae: check-cast v0, Landroid/os/Messenger;
+0005b2: invoke-virtual v11, Landroid/os/Parcel;->readString()Ljava/lang/String;
+0005b8: move-result-object v10
+0005ba: invoke-virtual v11, Landroid/os/Parcel;->readString()Ljava/lang/String;
+0005c0: move-result-object v13
+0005c2: invoke-virtual v11, Landroid/os/Parcel;->readStrongBinder()Landroid/os/IBinder;
+0005c8: move-result-object v11
+0005ca: invoke-static v11, Lcom/vivo/connbase/ICheckSessionCallback$b;->a(Landroid/os/IBinder;)Lcom/vivo/connbase/ICheckSessionCallback;
+0005d0: move-result-object v11
+0005d2: invoke-interface v9, v0, v10, v13, v11, Lcom/vivo/connbase/IClient;->checkSession(Landroid/os/Messenger; Ljava/lang/String; Ljava/lang/String; Lcom/vivo/connbase/ICheckSessionCallback;)V
+0005d8: goto/16 -2bdh
+0005dc: invoke-virtual v11, v2, Landroid/os/Parcel;->enforceInterface(Ljava/lang/String;)V
+0005e2: invoke-virtual v11, Landroid/os/Parcel;->readInt()I
+0005e8: move-result v10
+0005ea: if-eqz v10, +00bh
+0005ee: sget-object v10, Landroid/os/Messenger;->CREATOR Landroid/os/Parcelable$Creator;
+0005f2: invoke-interface v10, v11, Landroid/os/Parcelable$Creator;->createFromParcel(Landroid/os/Parcel;)Ljava/lang/Object;
+0005f8: move-result-object v10
+0005fa: move-object v0, v10
+0005fc: check-cast v0, Landroid/os/Messenger;
+000600: move-object v3, v0
+000602: invoke-virtual v11, Landroid/os/Parcel;->readString()Ljava/lang/String;
+000608: move-result-object v4
+00060a: invoke-virtual v11, Landroid/os/Parcel;->readLong()J
+000610: move-result-wide v5
+000612: invoke-virtual v11, Landroid/os/Parcel;->readString()Ljava/lang/String;
+000618: move-result-object v7
+00061a: move-object v2, v9
+00061c: invoke-interface/range v2 ... v7, Lcom/vivo/connbase/IClient;->cancelTransmit(Landroid/os/Messenger; Ljava/lang/String; J Ljava/lang/String;)V
+000622: goto/16 -2e2h
+000626: invoke-virtual v11, v2, Landroid/os/Parcel;->enforceInterface(Ljava/lang/String;)V
+00062c: invoke-virtual v11, Landroid/os/Parcel;->readInt()I
+000632: move-result v10
+000634: if-eqz v10, +00bh
+000638: sget-object v10, Landroid/os/Messenger;->CREATOR Landroid/os/Parcelable$Creator;
+00063c: invoke-interface v10, v11, Landroid/os/Parcelable$Creator;->createFromParcel(Landroid/os/Parcel;)Ljava/lang/Object;
+000642: move-result-object v10
+000644: move-object v0, v10
+000646: check-cast v0, Landroid/os/Messenger;
+00064a: move-object v3, v0
+00064c: invoke-virtual v11, Landroid/os/Parcel;->readString()Ljava/lang/String;
+000652: move-result-object v4
+000654: invoke-virtual v11, Landroid/os/Parcel;->readString()Ljava/lang/String;
+00065a: move-result-object v5
+00065c: invoke-virtual v11, Landroid/os/Parcel;->readString()Ljava/lang/String;
+000662: move-result-object v6
+000664: invoke-virtual v11, Landroid/os/Parcel;->readInt()I
+00066a: move-result v7
+00066c: sget-object v10, Landroid/os/ParcelFileDescriptor;->CREATOR Landroid/os/Parcelable$Creator;
+000670: invoke-virtual v11, v10, Landroid/os/Parcel;->createTypedArray(Landroid/os/Parcelable$Creator;)[Ljava/lang/Object;
+000676: move-result-object v10
+000678: move-object v8, v10
+00067a: check-cast v8, [Landroid/os/ParcelFileDescriptor;
+00067e: move-object v2, v9
+000680: invoke-interface/range v2 ... v8, Lcom/vivo/connbase/IClient;->sendPayload(Landroid/os/Messenger; Ljava/lang/String; Ljava/lang/String; Ljava/lang/String; I [Landroid/os/ParcelFileDescriptor;)V
+000686: goto/16 -314h
+00068a: invoke-virtual v11, v2, Landroid/os/Parcel;->enforceInterface(Ljava/lang/String;)V
+000690: invoke-virtual v11, Landroid/os/Parcel;->readInt()I
+000696: move-result v10
+000698: if-eqz v10, +00bh
+00069c: sget-object v10, Landroid/os/Messenger;->CREATOR Landroid/os/Parcelable$Creator;
+0006a0: invoke-interface v10, v11, Landroid/os/Parcelable$Creator;->createFromParcel(Landroid/os/Parcel;)Ljava/lang/Object;
+0006a6: move-result-object v10
+0006a8: move-object v0, v10
+0006aa: check-cast v0, Landroid/os/Messenger;
+0006ae: invoke-virtual v11, Landroid/os/Parcel;->readString()Ljava/lang/String;
+0006b4: move-result-object v10
+0006b6: invoke-virtual v11, Landroid/os/Parcel;->readString()Ljava/lang/String;
+0006bc: move-result-object v13
+0006be: invoke-virtual v11, Landroid/os/Parcel;->readInt()I
+0006c4: move-result v11
+0006c6: invoke-interface v9, v0, v10, v13, v11, Lcom/vivo/connbase/IClient;->switchTransferLayer(Landroid/os/Messenger; Ljava/lang/String; Ljava/lang/String; I)V
+0006cc: goto/16 -337h
+0006d0: invoke-virtual v11, v2, Landroid/os/Parcel;->enforceInterface(Ljava/lang/String;)V
+0006d6: invoke-virtual v11, Landroid/os/Parcel;->readInt()I
+0006dc: move-result v10
+0006de: if-eqz v10, +00bh
+0006e2: sget-object v10, Landroid/os/Messenger;->CREATOR Landroid/os/Parcelable$Creator;
+0006e6: invoke-interface v10, v11, Landroid/os/Parcelable$Creator;->createFromParcel(Landroid/os/Parcel;)Ljava/lang/Object;
+0006ec: move-result-object v10
+0006ee: move-object v0, v10
+0006f0: check-cast v0, Landroid/os/Messenger;
+0006f4: invoke-virtual v11, Landroid/os/Parcel;->readString()Ljava/lang/String;
+0006fa: move-result-object v10
+0006fc: invoke-virtual v11, Landroid/os/Parcel;->readString()Ljava/lang/String;
+000702: move-result-object v11
+000704: invoke-interface v9, v0, v10, v11, Lcom/vivo/connbase/IClient;->rejectConnection(Landroid/os/Messenger; Ljava/lang/String; Ljava/lang/String;)V
+00070a: goto/16 -356h
+00070e: invoke-virtual v11, v2, Landroid/os/Parcel;->enforceInterface(Ljava/lang/String;)V
+000714: invoke-virtual v11, Landroid/os/Parcel;->readInt()I
+00071a: move-result v10
+00071c: if-eqz v10, +00bh
+000720: sget-object v10, Landroid/os/Messenger;->CREATOR Landroid/os/Parcelable$Creator;
+000724: invoke-interface v10, v11, Landroid/os/Parcelable$Creator;->createFromParcel(Landroid/os/Parcel;)Ljava/lang/Object;
+00072a: move-result-object v10
+00072c: move-object v0, v10
+00072e: check-cast v0, Landroid/os/Messenger;
+000732: invoke-virtual v11, Landroid/os/Parcel;->readString()Ljava/lang/String;
+000738: move-result-object v10
+00073a: invoke-virtual v11, Landroid/os/Parcel;->readString()Ljava/lang/String;
+000740: move-result-object v13
+000742: invoke-virtual v11, Landroid/os/Parcel;->readStrongBinder()Landroid/os/IBinder;
+000748: move-result-object v11
+00074a: invoke-static v11, Lcom/vivo/connbase/IPayloadCallback$b;->a(Landroid/os/IBinder;)Lcom/vivo/connbase/IPayloadCallback;
+000750: move-result-object v11
+000752: invoke-interface v9, v0, v10, v13, v11, Lcom/vivo/connbase/IClient;->acceptConnection(Landroid/os/Messenger; Ljava/lang/String; Ljava/lang/String; Lcom/vivo/connbase/IPayloadCallback;)V
+000758: goto/16 -37dh
+00075c: invoke-virtual v11, v2, Landroid/os/Parcel;->enforceInterface(Ljava/lang/String;)V
+000762: invoke-virtual v11, Landroid/os/Parcel;->readInt()I
+000768: move-result v10
+00076a: if-eqz v10, +00bh
+00076e: sget-object v10, Landroid/os/Messenger;->CREATOR Landroid/os/Parcelable$Creator;
+000772: invoke-interface v10, v11, Landroid/os/Parcelable$Creator;->createFromParcel(Landroid/os/Parcel;)Ljava/lang/Object;
+000778: move-result-object v10
+00077a: move-object v0, v10
+00077c: check-cast v0, Landroid/os/Messenger;
+000780: invoke-virtual v11, Landroid/os/Parcel;->readString()Ljava/lang/String;
+000786: move-result-object v10
+000788: invoke-virtual v11, Landroid/os/Parcel;->readString()Ljava/lang/String;
+00078e: move-result-object v11
+000790: invoke-interface v9, v0, v10, v11, Lcom/vivo/connbase/IClient;->disconnect(Landroid/os/Messenger; Ljava/lang/String; Ljava/lang/String;)V
+000796: goto/16 -39ch
+00079a: invoke-virtual v11, v2, Landroid/os/Parcel;->enforceInterface(Ljava/lang/String;)V
+0007a0: invoke-virtual v11, Landroid/os/Parcel;->readInt()I
+0007a6: move-result v10
+0007a8: if-eqz v10, +00bh
+0007ac: sget-object v10, Landroid/os/Messenger;->CREATOR Landroid/os/Parcelable$Creator;
+0007b0: invoke-interface v10, v11, Landroid/os/Parcelable$Creator;->createFromParcel(Landroid/os/Parcel;)Ljava/lang/Object;
+0007b6: move-result-object v10
+0007b8: move-object v0, v10
+0007ba: check-cast v0, Landroid/os/Messenger;
+0007be: move-object v3, v0
+0007c0: invoke-virtual v11, Landroid/os/Parcel;->readString()Ljava/lang/String;
+0007c6: move-result-object v4
+0007c8: invoke-virtual v11, Landroid/os/Parcel;->readString()Ljava/lang/String;
+0007ce: move-result-object v5
+0007d0: invoke-virtual v11, Landroid/os/Parcel;->readString()Ljava/lang/String;
+0007d6: move-result-object v6
+0007d8: invoke-virtual v11, Landroid/os/Parcel;->readStrongBinder()Landroid/os/IBinder;
+0007de: move-result-object v10
+0007e0: invoke-static v10, Lcom/vivo/connbase/IConnectionCallback$b;->a(Landroid/os/IBinder;)Lcom/vivo/connbase/IConnectionCallback;
+0007e6: move-result-object v7
+0007e8: move-object v2, v9
+0007ea: invoke-interface/range v2 ... v7, Lcom/vivo/connbase/IClient;->connect(Landroid/os/Messenger; Ljava/lang/String; Ljava/lang/String; Ljava/lang/String; Lcom/vivo/connbase/IConnectionCallback;)V
+0007f0: goto/16 -3c9h
+0007f4: invoke-virtual v11, v2, Landroid/os/Parcel;->enforceInterface(Ljava/lang/String;)V
+0007fa: invoke-virtual v11, Landroid/os/Parcel;->readInt()I
+000800: move-result v10
+000802: if-eqz v10, +00bh
+000806: sget-object v10, Landroid/os/Messenger;->CREATOR Landroid/os/Parcelable$Creator;
+00080a: invoke-interface v10, v11, Landroid/os/Parcelable$Creator;->createFromParcel(Landroid/os/Parcel;)Ljava/lang/Object;
+000810: move-result-object v10
+000812: move-object v0, v10
+000814: check-cast v0, Landroid/os/Messenger;
+000818: invoke-virtual v11, Landroid/os/Parcel;->readString()Ljava/lang/String;
+00081e: move-result-object v10
+000820: invoke-interface v9, v0, v10, Lcom/vivo/connbase/IClient;->stopScan(Landroid/os/Messenger; Ljava/lang/String;)V
+000826: goto/16 -3e4h
+00082a: invoke-virtual v11, v2, Landroid/os/Parcel;->enforceInterface(Ljava/lang/String;)V
+000830: invoke-virtual v11, Landroid/os/Parcel;->readInt()I
+000836: move-result v10
+000838: if-eqz v10, +00bh
+00083c: sget-object v10, Landroid/os/Messenger;->CREATOR Landroid/os/Parcelable$Creator;
+000840: invoke-interface v10, v11, Landroid/os/Parcelable$Creator;->createFromParcel(Landroid/os/Parcel;)Ljava/lang/Object;
+000846: move-result-object v10
+000848: move-object v0, v10
+00084a: check-cast v0, Landroid/os/Messenger;
+00084e: invoke-virtual v11, Landroid/os/Parcel;->readString()Ljava/lang/String;
+000854: move-result-object v10
+000856: invoke-virtual v11, Landroid/os/Parcel;->readString()Ljava/lang/String;
+00085c: move-result-object v13
+00085e: invoke-virtual v11, Landroid/os/Parcel;->readStrongBinder()Landroid/os/IBinder;
+000864: move-result-object v11
+000866: invoke-static v11, Lcom/vivo/connbase/IScanCallback$b;->a(Landroid/os/IBinder;)Lcom/vivo/connbase/IScanCallback;
+00086c: move-result-object v11
+00086e: invoke-interface v9, v0, v10, v13, v11, Lcom/vivo/connbase/IClient;->startScan(Landroid/os/Messenger; Ljava/lang/String; Ljava/lang/String; Lcom/vivo/connbase/IScanCallback;)V
+000874: goto/16 -40bh
+000878: invoke-virtual v11, v2, Landroid/os/Parcel;->enforceInterface(Ljava/lang/String;)V
+00087e: invoke-virtual v11, Landroid/os/Parcel;->readInt()I
+000884: move-result v10
+000886: if-eqz v10, +00bh
+00088a: sget-object v10, Landroid/os/Messenger;->CREATOR Landroid/os/Parcelable$Creator;
+00088e: invoke-interface v10, v11, Landroid/os/Parcelable$Creator;->createFromParcel(Landroid/os/Parcel;)Ljava/lang/Object;
+000894: move-result-object v10
+000896: move-object v0, v10
+000898: check-cast v0, Landroid/os/Messenger;
+00089c: invoke-virtual v11, Landroid/os/Parcel;->readString()Ljava/lang/String;
+0008a2: move-result-object v10
+0008a4: invoke-interface v9, v0, v10, Lcom/vivo/connbase/IClient;->stopAdvertising(Landroid/os/Messenger; Ljava/lang/String;)V
+0008aa: goto/16 -426h
+0008ae: invoke-virtual v11, v2, Landroid/os/Parcel;->enforceInterface(Ljava/lang/String;)V
+0008b4: invoke-virtual v11, Landroid/os/Parcel;->readInt()I
+0008ba: move-result v10
+0008bc: if-eqz v10, +00bh
+0008c0: sget-object v10, Landroid/os/Messenger;->CREATOR Landroid/os/Parcelable$Creator;
+0008c4: invoke-interface v10, v11, Landroid/os/Parcelable$Creator;->createFromParcel(Landroid/os/Parcel;)Ljava/lang/Object;
+0008ca: move-result-object v10
+0008cc: move-object v0, v10
+0008ce: check-cast v0, Landroid/os/Messenger;
+0008d2: move-object v3, v0
+0008d4: invoke-virtual v11, Landroid/os/Parcel;->readString()Ljava/lang/String;
+0008da: move-result-object v4
+0008dc: invoke-virtual v11, Landroid/os/Parcel;->readString()Ljava/lang/String;
+0008e2: move-result-object v5
+0008e4: invoke-virtual v11, Landroid/os/Parcel;->readString()Ljava/lang/String;
+0008ea: move-result-object v6
+0008ec: invoke-virtual v11, Landroid/os/Parcel;->readStrongBinder()Landroid/os/IBinder;
+0008f2: move-result-object v10
+0008f4: invoke-static v10, Lcom/vivo/connbase/IConnectionCallback$b;->a(Landroid/os/IBinder;)Lcom/vivo/connbase/IConnectionCallback;
+0008fa: move-result-object v7
+0008fc: move-object v2, v9
+0008fe: invoke-interface/range v2 ... v7, Lcom/vivo/connbase/IClient;->startAdvertising(Landroid/os/Messenger; Ljava/lang/String; Ljava/lang/String; Ljava/lang/String; Lcom/vivo/connbase/IConnectionCallback;)V
+000904: goto/16 -453h
+000908: invoke-virtual v12, v2, Landroid/os/Parcel;->writeString(Ljava/lang/String;)V
+00090e: return v1
+000910: packed-switch-payload 1 2 3 4 5 6 7 8 9 a b c d e f 10 11 12 13 14 15 16 17 18 19 1a 1b 1c 1d 1e 1f 20 21 22

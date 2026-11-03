@@ -1,0 +1,345 @@
+APK pcsuite/updateApk/pcsuite.apk
+DEX classes2.dex
+CLASS Lcom/vivo/pcsuite/service/AdbPortalService;
+SUPER Landroid/app/Service;
+FIELDS
+d Z = False
+a Lcom/vivo/pcsuite/common/gson/ConnDetail$ConnectStep; = None
+b Lcom/vivo/pcsuite/common/gson/ConnDetail; = None
+c Ljava/lang/ref/WeakReference; = None
+
+METHOD <init>()V
+000000: invoke-direct v1, Landroid/app/Service;-><init>()V
+000006: new-instance v0, Ljava/lang/ref/WeakReference;
+00000a: invoke-direct v0, v1, Ljava/lang/ref/WeakReference;-><init>(Ljava/lang/Object;)V
+000010: iput-object v0, v1, Lcom/vivo/pcsuite/service/AdbPortalService;->c Ljava/lang/ref/WeakReference;
+000014: return-void 
+
+METHOD a(Lcom/vivo/pcsuite/service/AdbPortalService;)Ljava/lang/ref/WeakReference;
+000000: iget-object v0, v0, Lcom/vivo/pcsuite/service/AdbPortalService;->c Ljava/lang/ref/WeakReference;
+000004: return-object v0
+
+METHOD b(Lcom/vivo/pcsuite/service/AdbPortalService; Landroid/content/Intent;)V
+000000: invoke-direct v0, v1, Lcom/vivo/pcsuite/service/AdbPortalService;->d(Landroid/content/Intent;)V
+000006: return-void 
+
+METHOD c()V
+000000: sget-boolean v0, Lcom/vivo/pcsuite/service/AdbPortalService;->d Z
+000004: if-nez v0, +0aah
+000008: sget-object v0, Lcom/vivo/pcsuite/PcSuiteApplication;->I1 Lcom/vivo/pcsuite/PcSuiteApplication;
+00000c: const-string v1, "android.permission.FOREGROUND_SERVICE"
+000010: filled-new-array v1, [Ljava/lang/String;
+000016: move-result-object v1
+000018: invoke-static v0, v1, Lcom/vivo/pcsuite/permission/f;->f(Landroid/content/Context; [Ljava/lang/String;)Z
+00001e: move-result v0
+000020: if-eqz v0, +09ch
+000024: invoke-static Lcom/vivo/pcsuite/util/c0;->a()Lcom/vivo/pcsuite/util/c0;
+00002a: move-result-object v0
+00002c: invoke-virtual v0, Ljava/lang/Object;->getClass()Ljava/lang/Class;
+000032: const-string v0, "NotificationBuilder"
+000036: const-string v1, "channelId=vivo mutechannel"
+00003a: invoke-static v0, v1, Lcom/vivo/connect/logger/EasyLog;->d(Ljava/lang/String; Ljava/lang/String;)V
+000040: new-instance v0, Landroidx/core/app/NotificationCompat$Builder;
+000044: const-string/jumbo v1, vivo mutechannel
+00004a: invoke-direct v0, v6, v1, Landroidx/core/app/NotificationCompat$Builder;-><init>(Landroid/content/Context; Ljava/lang/String;)V
+000050: sget-object v1, Lcom/vivo/pcsuite/PcSuiteApplication;->I1 Lcom/vivo/pcsuite/PcSuiteApplication;
+000054: invoke-virtual v1, Landroid/content/Context;->getResources()Landroid/content/res/Resources;
+00005a: move-result-object v1
+00005c: const v2, 2131755036
+000062: invoke-virtual v1, v2, Landroid/content/res/Resources;->getString(I)Ljava/lang/String;
+000068: move-result-object v1
+00006a: invoke-virtual v0, v1, Landroidx/core/app/NotificationCompat$Builder;->setContentTitle(Ljava/lang/CharSequence;)Landroidx/core/app/NotificationCompat$Builder;
+000070: move-result-object v1
+000072: new-instance v3, Landroid/content/Intent;
+000076: invoke-direct v3, Landroid/content/Intent;-><init>()V
+00007c: sget-object v4, Lcom/vivo/pcsuite/PcSuiteApplication;->I1 Lcom/vivo/pcsuite/PcSuiteApplication;
+000080: invoke-virtual v4, Landroid/content/Context;->getPackageName()Ljava/lang/String;
+000086: move-result-object v4
+000088: invoke-virtual v3, v4, Landroid/content/Intent;->setPackage(Ljava/lang/String;)Landroid/content/Intent;
+00008e: const-string v4, "com.vivo.easyshare.PENDING_INTENT"
+000092: invoke-virtual v3, v4, Landroid/content/Intent;->setAction(Ljava/lang/String;)Landroid/content/Intent;
+000098: const/4 v4, 0
+00009a: const/high16 v5, 67108864
+00009e: invoke-static v6, v4, v3, v5, Landroid/app/PendingIntent;->getBroadcast(Landroid/content/Context; I Landroid/content/Intent; I)Landroid/app/PendingIntent;
+0000a4: move-result-object v3
+0000a6: invoke-virtual v1, v3, Landroidx/core/app/NotificationCompat$Builder;->setContentIntent(Landroid/app/PendingIntent;)Landroidx/core/app/NotificationCompat$Builder;
+0000ac: move-result-object v1
+0000ae: invoke-static Ljava/lang/System;->currentTimeMillis()J
+0000b4: move-result-wide v3
+0000b6: invoke-virtual v1, v3, v4, Landroidx/core/app/NotificationCompat$Builder;->setWhen(J)Landroidx/core/app/NotificationCompat$Builder;
+0000bc: const/4 v1, 1
+0000be: invoke-virtual v0, v1, Landroidx/core/app/NotificationCompat$Builder;->setPriority(I)Landroidx/core/app/NotificationCompat$Builder;
+0000c4: const v3, 2131231256
+0000ca: invoke-virtual v0, v3, Landroidx/core/app/NotificationCompat$Builder;->setSmallIcon(I)Landroidx/core/app/NotificationCompat$Builder;
+0000d0: sget-object v3, Lcom/vivo/pcsuite/PcSuiteApplication;->I1 Lcom/vivo/pcsuite/PcSuiteApplication;
+0000d4: invoke-virtual v3, Landroid/content/Context;->getResources()Landroid/content/res/Resources;
+0000da: move-result-object v3
+0000dc: const v4, 2131099706
+0000e2: invoke-virtual v3, v4, Landroid/content/res/Resources;->getColor(I)I
+0000e8: move-result v3
+0000ea: invoke-virtual v0, v3, Landroidx/core/app/NotificationCompat$Builder;->setColor(I)Landroidx/core/app/NotificationCompat$Builder;
+0000f0: new-instance v3, Ljava/lang/StringBuilder;
+0000f4: invoke-direct v3, Ljava/lang/StringBuilder;-><init>()V
+0000fa: sget-object v4, Lcom/vivo/pcsuite/PcSuiteApplication;->I1 Lcom/vivo/pcsuite/PcSuiteApplication;
+0000fe: invoke-virtual v4, Landroid/content/Context;->getResources()Landroid/content/res/Resources;
+000104: move-result-object v4
+000106: invoke-virtual v4, v2, Landroid/content/res/Resources;->getString(I)Ljava/lang/String;
+00010c: move-result-object v2
+00010e: invoke-virtual v3, v2, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+000114: sget-object v2, Lcom/vivo/pcsuite/PcSuiteApplication;->I1 Lcom/vivo/pcsuite/PcSuiteApplication;
+000118: invoke-virtual v2, Landroid/content/Context;->getResources()Landroid/content/res/Resources;
+00011e: move-result-object v2
+000120: const v4, 2131756131
+000126: invoke-virtual v2, v4, Landroid/content/res/Resources;->getString(I)Ljava/lang/String;
+00012c: move-result-object v2
+00012e: invoke-virtual v3, v2, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+000134: invoke-virtual v3, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
+00013a: move-result-object v2
+00013c: invoke-virtual v0, v2, Landroidx/core/app/NotificationCompat$Builder;->setContentTitle(Ljava/lang/CharSequence;)Landroidx/core/app/NotificationCompat$Builder;
+000142: invoke-virtual v0, Landroidx/core/app/NotificationCompat$Builder;->build()Landroid/app/Notification;
+000148: move-result-object v0
+00014a: const/16 v2, 112
+00014e: invoke-virtual v6, v2, v0, Landroid/app/Service;->startForeground(I Landroid/app/Notification;)V
+000154: sput-boolean v1, Lcom/vivo/pcsuite/service/AdbPortalService;->d Z
+000158: return-void 
+
+METHOD d(Landroid/content/Intent;)V
+000000: invoke-direct v6, Lcom/vivo/pcsuite/service/AdbPortalService;->c()V
+000006: const-string v0, ""
+00000a: invoke-static v0, Lcom/vivo/castsdk/common/GlobalSettings;->setRemoteIp(Ljava/lang/String;)V
+000010: const-string v1, "pc_name"
+000014: invoke-virtual v7, v1, Landroid/content/Intent;->hasExtra(Ljava/lang/String;)Z
+00001a: move-result v2
+00001c: const-string v3, "AdbPortalService"
+000020: if-eqz v2, +00dh
+000024: invoke-virtual v7, v1, Landroid/content/Intent;->getStringExtra(Ljava/lang/String;)Ljava/lang/String;
+00002a: move-result-object v2
+00002c: goto +8h
+00002e: move-exception v2
+000030: const-string v4, "getRemoteDeviceName error = "
+000034: invoke-static v2, v4, v3, LV5/S;->h(Ljava/lang/Exception; Ljava/lang/String; Ljava/lang/String;)V
+00003a: move-object v2, v0
+00003c: const-string/jumbo v4, user_name
+000042: invoke-virtual v7, v4, Landroid/content/Intent;->hasExtra(Ljava/lang/String;)Z
+000048: move-result v5
+00004a: if-eqz v5, +00dh
+00004e: invoke-virtual v7, v4, Landroid/content/Intent;->getStringExtra(Ljava/lang/String;)Ljava/lang/String;
+000054: move-result-object v0
+000056: goto +7h
+000058: move-exception v7
+00005a: const-string v5, "getRemoteUserName error = "
+00005e: invoke-static v7, v5, v3, LV5/S;->h(Ljava/lang/Exception; Ljava/lang/String; Ljava/lang/String;)V
+000064: new-instance v7, Ljava/lang/StringBuilder;
+000068: const-string v5, " deviceName:"
+00006c: invoke-direct v7, v5, Ljava/lang/StringBuilder;-><init>(Ljava/lang/String;)V
+000072: invoke-virtual v7, v2, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+000078: const-string v5, " userName:"
+00007c: invoke-virtual v7, v5, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+000082: invoke-virtual v7, v0, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+000088: invoke-virtual v7, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
+00008e: move-result-object v7
+000090: invoke-static v3, v7, Lcom/vivo/connect/logger/EasyLog;->i(Ljava/lang/String; Ljava/lang/String;)V
+000096: sget-object v7, Lcom/vivo/pcsuite/PcSuiteApplication;->I1 Lcom/vivo/pcsuite/PcSuiteApplication;
+00009a: invoke-virtual v7, Lcom/vivo/pcsuite/PcSuiteApplication;->d0()V
+0000a0: sget v7, Lcom/vivo/pcsuite/service/PcSuiteObserver;->D I
+0000a4: sget-object v7, Lcom/vivo/pcsuite/PcSuiteApplication;->I1 Lcom/vivo/pcsuite/PcSuiteApplication;
+0000a8: invoke-virtual v7, Lcom/vivo/pcsuite/PcSuiteApplication;->K()Ljava/lang/StringBuffer;
+0000ae: move-result-object v7
+0000b0: const-string v3, "51"
+0000b4: invoke-virtual v7, v3, Ljava/lang/StringBuffer;->append(Ljava/lang/String;)Ljava/lang/StringBuffer;
+0000ba: sget-object v7, Lcom/vivo/pcsuite/PcSuiteApplication;->I1 Lcom/vivo/pcsuite/PcSuiteApplication;
+0000be: const/4 v3, 0
+0000c0: invoke-virtual v7, v3, Lcom/vivo/pcsuite/PcSuiteApplication;->y0(I)V
+0000c6: new-instance v7, Landroid/content/Intent;
+0000ca: invoke-direct v7, Landroid/content/Intent;-><init>()V
+0000d0: const-class v5, Lcom/vivo/pcsuite/service/PcSuiteObserver;
+0000d4: invoke-virtual v7, v6, v5, Landroid/content/Intent;->setClass(Landroid/content/Context; Ljava/lang/Class;)Landroid/content/Intent;
+0000da: const-string v5, "connect_type"
+0000de: invoke-virtual v7, v5, v3, Landroid/content/Intent;->putExtra(Ljava/lang/String; I)Landroid/content/Intent;
+0000e4: invoke-virtual v7, v1, v2, Landroid/content/Intent;->putExtra(Ljava/lang/String; Ljava/lang/String;)Landroid/content/Intent;
+0000ea: invoke-virtual v7, v4, v0, Landroid/content/Intent;->putExtra(Ljava/lang/String; Ljava/lang/String;)Landroid/content/Intent;
+0000f0: invoke-static v6, v7, Lcom/vivo/pcsuite/service/PcSuiteObserver;->O(Landroid/content/Context; Landroid/content/Intent;)V
+0000f6: return-void 
+
+METHOD onBind(Landroid/content/Intent;)Landroid/os/IBinder;
+000000: new-instance v0, Landroid/os/Binder;
+000004: invoke-direct v0, Landroid/os/Binder;-><init>()V
+00000a: return-object v0
+
+METHOD onCreate()V
+000000: invoke-super v2, Landroid/app/Service;->onCreate()V
+000006: const-string v0, "AdbPortalService"
+00000a: const-string v1, "onCreate "
+00000e: invoke-static v0, v1, Lcom/vivo/connect/logger/EasyLog;->i(Ljava/lang/String; Ljava/lang/String;)V
+000014: invoke-direct v2, Lcom/vivo/pcsuite/service/AdbPortalService;->c()V
+00001a: return-void 
+
+METHOD onDestroy()V
+000000: sget-boolean v0, Lcom/vivo/pcsuite/service/AdbPortalService;->d Z
+000004: if-eqz v0, +009h
+000008: const/4 v0, 1
+00000a: invoke-virtual v1, v0, Landroid/app/Service;->stopForeground(Z)V
+000010: const/4 v0, 0
+000012: sput-boolean v0, Lcom/vivo/pcsuite/service/AdbPortalService;->d Z
+000016: invoke-super v1, Landroid/app/Service;->onDestroy()V
+00001c: const-string v1, "AdbPortalService"
+000020: const-string v0, "onDestroy "
+000024: invoke-static v1, v0, Lcom/vivo/connect/logger/EasyLog;->i(Ljava/lang/String; Ljava/lang/String;)V
+00002a: return-void 
+
+METHOD onStartCommand(Landroid/content/Intent; I I)I
+000000: const-string v9, "AdbPortalService onStartCommand"
+000004: const-string v0, "AdbPortalService"
+000008: invoke-static v0, v9, Lcom/vivo/connect/logger/EasyLog;->i(Ljava/lang/String; Ljava/lang/String;)V
+00000e: const/4 v9, 2
+000010: if-eqz v8, +13ch
+000014: const-string v1, "cancelConnect"
+000018: invoke-virtual v8, v1, Landroid/content/Intent;->hasExtra(Ljava/lang/String;)Z
+00001e: move-result v2
+000020: const/4 v3, 0
+000022: if-eqz v2, +024h
+000026: invoke-virtual v8, v1, v3, Landroid/content/Intent;->getBooleanExtra(Ljava/lang/String; Z)Z
+00002c: move-result v1
+00002e: if-eqz v1, +01eh
+000032: invoke-static Lcom/vivo/pcsuite/service/PcSuiteObserver;->t()Lcom/vivo/pcsuite/service/PcSuiteObserver;
+000038: move-result-object v8
+00003a: if-eqz v8, +014h
+00003e: invoke-static LL2/i;->q()LL2/i;
+000044: move-result-object v8
+000046: invoke-virtual v8, LL2/i;->o()V
+00004c: invoke-static Lcom/vivo/pcsuite/service/PcSuiteObserver;->t()Lcom/vivo/pcsuite/service/PcSuiteObserver;
+000052: move-result-object v8
+000054: invoke-virtual v8, Lcom/vivo/pcsuite/service/PcSuiteObserver;->Q()V
+00005a: invoke-virtual v7, v10, Landroid/app/Service;->stopSelf(I)V
+000060: return v9
+000062: invoke-virtual v7, v10, Landroid/app/Service;->stopSelf(I)V
+000068: return v9
+00006a: invoke-static Lcom/vivo/pcsuite/util/o0;->b()V
+000070: iget-object v1, v7, Lcom/vivo/pcsuite/service/AdbPortalService;->b Lcom/vivo/pcsuite/common/gson/ConnDetail;
+000074: if-nez v1, +008h
+000078: invoke-static Lcom/vivo/pcsuite/common/filemanager/utils/e;->e()Lcom/vivo/pcsuite/common/gson/ConnDetail;
+00007e: move-result-object v1
+000080: iput-object v1, v7, Lcom/vivo/pcsuite/service/AdbPortalService;->b Lcom/vivo/pcsuite/common/gson/ConnDetail;
+000084: new-instance v1, Lcom/vivo/pcsuite/common/gson/ConnDetail$ConnectStep;
+000088: invoke-direct v1, Lcom/vivo/pcsuite/common/gson/ConnDetail$ConnectStep;-><init>()V
+00008e: iput-object v1, v7, Lcom/vivo/pcsuite/service/AdbPortalService;->a Lcom/vivo/pcsuite/common/gson/ConnDetail$ConnectStep;
+000092: const-string v2, "start adbPortalService"
+000096: invoke-virtual v1, v2, Lcom/vivo/pcsuite/common/gson/ConnDetail$ConnectStep;->setStepName(Ljava/lang/String;)V
+00009c: iget-object v1, v7, Lcom/vivo/pcsuite/service/AdbPortalService;->a Lcom/vivo/pcsuite/common/gson/ConnDetail$ConnectStep;
+0000a0: const/4 v2, 1
+0000a2: invoke-virtual v1, v2, Lcom/vivo/pcsuite/common/gson/ConnDetail$ConnectStep;->setResultCode(I)V
+0000a8: iget-object v1, v7, Lcom/vivo/pcsuite/service/AdbPortalService;->b Lcom/vivo/pcsuite/common/gson/ConnDetail;
+0000ac: invoke-virtual v1, Lcom/vivo/pcsuite/common/gson/ConnDetail;->getConnectStepList()Ljava/util/List;
+0000b2: move-result-object v1
+0000b4: iget-object v4, v7, Lcom/vivo/pcsuite/service/AdbPortalService;->a Lcom/vivo/pcsuite/common/gson/ConnDetail$ConnectStep;
+0000b8: invoke-interface v1, v4, Ljava/util/List;->add(Ljava/lang/Object;)Z
+0000be: const-string v1, "connectionId"
+0000c2: invoke-virtual v8, v1, Landroid/content/Intent;->hasExtra(Ljava/lang/String;)Z
+0000c8: move-result v4
+0000ca: const-string v5, ""
+0000ce: if-eqz v4, +014h
+0000d2: invoke-virtual v8, v1, Landroid/content/Intent;->getStringExtra(Ljava/lang/String;)Ljava/lang/String;
+0000d8: move-result-object v1
+0000da: goto +8h
+0000dc: move-exception v1
+0000de: const-string v4, "get connectionId error "
+0000e2: invoke-static v1, v4, v0, LV5/S;->h(Ljava/lang/Exception; Ljava/lang/String; Ljava/lang/String;)V
+0000e8: move-object v1, v5
+0000ea: iget-object v4, v7, Lcom/vivo/pcsuite/service/AdbPortalService;->b Lcom/vivo/pcsuite/common/gson/ConnDetail;
+0000ee: invoke-virtual v4, v1, Lcom/vivo/pcsuite/common/gson/ConnDetail;->setConnectionId(Ljava/lang/String;)V
+0000f4: goto +ah
+0000f6: iget-object v1, v7, Lcom/vivo/pcsuite/service/AdbPortalService;->b Lcom/vivo/pcsuite/common/gson/ConnDetail;
+0000fa: invoke-static Lcom/vivo/pcsuite/common/filemanager/utils/e;->f()Ljava/lang/String;
+000100: move-result-object v4
+000102: invoke-virtual v1, v4, Lcom/vivo/pcsuite/common/gson/ConnDetail;->setConnectionId(Ljava/lang/String;)V
+000108: const-string/jumbo v1, token
+00010e: invoke-virtual v8, v1, Landroid/content/Intent;->hasExtra(Ljava/lang/String;)Z
+000114: move-result v4
+000116: if-eqz v4, +02bh
+00011a: invoke-virtual v8, v1, Landroid/content/Intent;->getStringExtra(Ljava/lang/String;)Ljava/lang/String;
+000120: move-result-object v5
+000122: goto +ch
+000124: move-exception v1
+000126: new-instance v4, Ljava/lang/StringBuilder;
+00012a: const-string v6, "get usb token error = "
+00012e: invoke-direct v4, v6, Ljava/lang/StringBuilder;-><init>(Ljava/lang/String;)V
+000134: invoke-static v1, v4, v0, LS5/f;->g(Ljava/lang/Exception; Ljava/lang/StringBuilder; Ljava/lang/String;)V
+00013a: new-instance v1, Ljava/lang/StringBuilder;
+00013e: const-string/jumbo v4, usb token is null= 
+000144: invoke-direct v1, v4, Ljava/lang/StringBuilder;-><init>(Ljava/lang/String;)V
+00014a: invoke-static v5, Landroid/text/TextUtils;->isEmpty(Ljava/lang/CharSequence;)Z
+000150: move-result v4
+000152: invoke-virtual v1, v4, Ljava/lang/StringBuilder;->append(Z)Ljava/lang/StringBuilder;
+000158: invoke-virtual v1, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
+00015e: move-result-object v1
+000160: invoke-static v0, v1, Lcom/vivo/connect/logger/EasyLog;->i(Ljava/lang/String; Ljava/lang/String;)V
+000166: invoke-static v5, Lcom/vivo/castsdk/common/GlobalSettings;->setRemoteToken(Ljava/lang/String;)V
+00016c: const-string v1, "isTransferConnect"
+000170: invoke-virtual v8, v1, Landroid/content/Intent;->hasExtra(Ljava/lang/String;)Z
+000176: move-result v4
+000178: if-eqz v4, +034h
+00017c: invoke-virtual v8, v1, v3, Landroid/content/Intent;->getIntExtra(Ljava/lang/String; I)I
+000182: move-result v1
+000184: goto +dh
+000186: move-exception v1
+000188: new-instance v4, Ljava/lang/StringBuilder;
+00018c: const-string v5, "get transConnect error = "
+000190: invoke-direct v4, v5, Ljava/lang/StringBuilder;-><init>(Ljava/lang/String;)V
+000196: invoke-static v1, v4, v0, LS5/f;->g(Ljava/lang/Exception; Ljava/lang/StringBuilder; Ljava/lang/String;)V
+00019c: move v1, v3
+00019e: const-string/jumbo v4, transConnect result = 
+0001a4: invoke-static v1, v4, v0, LV5/S;->j(I Ljava/lang/String; Ljava/lang/String;)V
+0001aa: if-ne v1, v2, +00fh
+0001ae: invoke-static Lk2/y;->H()Lk2/y;
+0001b4: move-result-object v1
+0001b6: invoke-virtual v1, v2, Lk2/y;->W(Z)V
+0001bc: sget-object v1, Lcom/vivo/pcsuite/PcSuiteApplication;->I1 Lcom/vivo/pcsuite/PcSuiteApplication;
+0001c0: invoke-virtual v1, v2, Lcom/vivo/pcsuite/PcSuiteApplication;->O0(Z)V
+0001c6: goto +dh
+0001c8: invoke-static Lk2/y;->H()Lk2/y;
+0001ce: move-result-object v1
+0001d0: invoke-virtual v1, v3, Lk2/y;->W(Z)V
+0001d6: sget-object v1, Lcom/vivo/pcsuite/PcSuiteApplication;->I1 Lcom/vivo/pcsuite/PcSuiteApplication;
+0001da: invoke-virtual v1, v3, Lcom/vivo/pcsuite/PcSuiteApplication;->O0(Z)V
+0001e0: invoke-static LL2/i;->q()LL2/i;
+0001e6: move-result-object v1
+0001e8: invoke-virtual v1, LL2/i;->v()Z
+0001ee: move-result v1
+0001f0: if-eqz v1, +009h
+0001f4: invoke-static LL2/i;->q()LL2/i;
+0001fa: move-result-object v1
+0001fc: invoke-virtual v1, LL2/i;->o()V
+000202: invoke-static Lcom/vivo/pcsuite/service/PcSuiteObserver;->q()I
+000208: move-result v1
+00020a: if-eq v1, v2, +00fh
+00020e: invoke-static Lcom/vivo/pcsuite/service/PcSuiteObserver;->q()I
+000214: move-result v1
+000216: const/16 v4, 50
+00021a: if-ne v1, v4, +003h
+00021e: goto +5h
+000220: invoke-direct v7, v8, Lcom/vivo/pcsuite/service/AdbPortalService;->d(Landroid/content/Intent;)V
+000226: goto +31h
+000228: invoke-static Lk2/g;->Q()Z
+00022e: move-result v1
+000230: invoke-static Lcom/vivo/pcsuite/service/PcSuiteObserver;->t()Lcom/vivo/pcsuite/service/PcSuiteObserver;
+000236: move-result-object v4
+000238: const-string v5, "connectCloud :"
+00023c: const-string v6, " instance is null:"
+000240: invoke-static v5, v6, v1, LP/d;->e(Ljava/lang/String; Ljava/lang/String; Z)Ljava/lang/StringBuilder;
+000246: move-result-object v5
+000248: if-nez v4, +003h
+00024c: move v3, v2
+00024e: invoke-static v5, v3, v0, Landroidx/appcompat/widget/b;->i(Ljava/lang/StringBuilder; Z Ljava/lang/String;)V
+000254: if-eqz v4, +007h
+000258: if-nez v1, +005h
+00025c: invoke-virtual v4, Lcom/vivo/pcsuite/service/PcSuiteObserver;->Q()V
+000262: sget-object v0, Lcom/vivo/pcsuite/PcSuiteApplication;->I1 Lcom/vivo/pcsuite/PcSuiteApplication;
+000266: invoke-virtual v0, Ljava/lang/Object;->getClass()Ljava/lang/Class;
+00026c: invoke-static Lcom/vivo/pcsuite/PcSuiteApplication;->q()Landroid/os/Handler;
+000272: move-result-object v0
+000274: new-instance v1, Lcom/vivo/pcsuite/service/AdbPortalService$a;
+000278: invoke-direct v1, v7, v8, Lcom/vivo/pcsuite/service/AdbPortalService$a;-><init>(Lcom/vivo/pcsuite/service/AdbPortalService; Landroid/content/Intent;)V
+00027e: const-wide/16 v2, 1000
+000282: invoke-virtual v0, v1, v2, v3, Landroid/os/Handler;->postDelayed(Ljava/lang/Runnable; J)Z
+000288: invoke-virtual v7, v10, Landroid/app/Service;->stopSelf(I)V
+00028e: return v9

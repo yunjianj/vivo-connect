@@ -1,0 +1,105 @@
+APK pcsuite/updateApk/pcsuite.apk
+DEX classes2.dex
+CLASS Lcom/vivo/connect/CheckSessionResult;
+SUPER Ljava/lang/Object;
+FIELDS
+connectChannel Ljava/lang/Integer; = None
+p2pChannelState I = None
+queryDeviceId Ljava/lang/String; = None
+remoteIpAddress Ljava/lang/String; = None
+selfDeviceId Ljava/lang/String; = None
+serviceId Ljava/lang/String; = None
+
+METHOD <init>()V
+000000: invoke-direct v0, Ljava/lang/Object;-><init>()V
+000006: return-void 
+
+METHOD <init>(Lcom/vivo/connect/CheckSessionResult$a;)V
+000000: invoke-direct v0, Lcom/vivo/connect/CheckSessionResult;-><init>()V
+000006: return-void 
+
+METHOD access$100(Lcom/vivo/connect/CheckSessionResult; Ljava/lang/String;)V
+000000: invoke-direct v0, v1, Lcom/vivo/connect/CheckSessionResult;->setQueryDeviceId(Ljava/lang/String;)V
+000006: return-void 
+
+METHOD access$200(Lcom/vivo/connect/CheckSessionResult; Ljava/lang/String;)V
+000000: invoke-direct v0, v1, Lcom/vivo/connect/CheckSessionResult;->setSelfDeviceId(Ljava/lang/String;)V
+000006: return-void 
+
+METHOD access$300(Lcom/vivo/connect/CheckSessionResult; Ljava/lang/String;)V
+000000: invoke-direct v0, v1, Lcom/vivo/connect/CheckSessionResult;->setServiceId(Ljava/lang/String;)V
+000006: return-void 
+
+METHOD access$400(Lcom/vivo/connect/CheckSessionResult; I)V
+000000: invoke-direct v0, v1, Lcom/vivo/connect/CheckSessionResult;->setP2pChannelState(I)V
+000006: return-void 
+
+METHOD setP2pChannelState(I)V
+000000: iput v1, v0, Lcom/vivo/connect/CheckSessionResult;->p2pChannelState I
+000004: return-void 
+
+METHOD setQueryDeviceId(Ljava/lang/String;)V
+000000: iput-object v1, v0, Lcom/vivo/connect/CheckSessionResult;->queryDeviceId Ljava/lang/String;
+000004: return-void 
+
+METHOD setSelfDeviceId(Ljava/lang/String;)V
+000000: iput-object v1, v0, Lcom/vivo/connect/CheckSessionResult;->selfDeviceId Ljava/lang/String;
+000004: return-void 
+
+METHOD setServiceId(Ljava/lang/String;)V
+000000: iput-object v1, v0, Lcom/vivo/connect/CheckSessionResult;->serviceId Ljava/lang/String;
+000004: return-void 
+
+METHOD getConnectChannel()Ljava/lang/Integer;
+000000: iget-object v0, v0, Lcom/vivo/connect/CheckSessionResult;->connectChannel Ljava/lang/Integer;
+000004: return-object v0
+
+METHOD getP2pChannelState()I
+000000: iget v0, v0, Lcom/vivo/connect/CheckSessionResult;->p2pChannelState I
+000004: return v0
+
+METHOD getQueryDeviceId()Ljava/lang/String;
+000000: iget-object v0, v0, Lcom/vivo/connect/CheckSessionResult;->queryDeviceId Ljava/lang/String;
+000004: return-object v0
+
+METHOD getRemoteIpAddress()Ljava/lang/String;
+000000: iget-object v0, v0, Lcom/vivo/connect/CheckSessionResult;->remoteIpAddress Ljava/lang/String;
+000004: return-object v0
+
+METHOD getSelfDeviceId()Ljava/lang/String;
+000000: iget-object v0, v0, Lcom/vivo/connect/CheckSessionResult;->selfDeviceId Ljava/lang/String;
+000004: return-object v0
+
+METHOD getServiceId()Ljava/lang/String;
+000000: iget-object v0, v0, Lcom/vivo/connect/CheckSessionResult;->serviceId Ljava/lang/String;
+000004: return-object v0
+
+METHOD setConnectChannel(Ljava/lang/Integer;)V
+000000: iput-object v1, v0, Lcom/vivo/connect/CheckSessionResult;->connectChannel Ljava/lang/Integer;
+000004: return-void 
+
+METHOD setRemoteIpAddress(Ljava/lang/String;)V
+000000: iput-object v1, v0, Lcom/vivo/connect/CheckSessionResult;->remoteIpAddress Ljava/lang/String;
+000004: return-void 
+
+METHOD toString()Ljava/lang/String;
+000000: new-instance v0, Ljava/lang/StringBuilder;
+000004: const-string v1, "CheckSessionResult{sdd='"
+000008: invoke-direct v0, v1, Ljava/lang/StringBuilder;-><init>(Ljava/lang/String;)V
+00000e: iget-object v1, v2, Lcom/vivo/connect/CheckSessionResult;->selfDeviceId Ljava/lang/String;
+000012: invoke-virtual v0, v1, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+000018: const-string v1, "', qd='"
+00001c: invoke-virtual v0, v1, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+000022: iget-object v1, v2, Lcom/vivo/connect/CheckSessionResult;->queryDeviceId Ljava/lang/String;
+000026: invoke-virtual v0, v1, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+00002c: const-string v1, "', sd='"
+000030: invoke-virtual v0, v1, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+000036: iget-object v1, v2, Lcom/vivo/connect/CheckSessionResult;->serviceId Ljava/lang/String;
+00003a: invoke-virtual v0, v1, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+000040: const-string v1, "', p2pChannelState="
+000044: invoke-virtual v0, v1, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+00004a: iget v2, v2, Lcom/vivo/connect/CheckSessionResult;->p2pChannelState I
+00004e: const/16 v1, 125
+000052: invoke-static v0, v2, v1, Landroidx/activity/result/a;->b(Ljava/lang/StringBuilder; I C)Ljava/lang/String;
+000058: move-result-object v2
+00005a: return-object v2

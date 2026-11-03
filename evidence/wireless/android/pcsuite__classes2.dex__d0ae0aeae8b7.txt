@@ -1,0 +1,172 @@
+APK pcsuite/updateApk/pcsuite.apk
+DEX classes2.dex
+CLASS Lcom/vivo/connbase/connectcenter/ConnectCenterUtils;
+SUPER Ljava/lang/Object;
+FIELDS
+CC_SUPPORT I = 1
+CONNBASE_PKG_NAME Ljava/lang/String; = 'com.vivo.connbase'
+CONNBASE_SUPPORT Ljava/lang/String; = 'com.vivo.connbase.sdk.version'
+CONNECT_CENTER_PKG_NAME Ljava/lang/String; = 'com.vivo.connbase.connectcenter'
+CONNECT_CENTER_SUPPORT Ljava/lang/String; = 'vivo.connbase.connectcenter.version'
+CONNECT_CENTER_SUPPORT_VERSION I = 1
+CONNECT_VDFS_SUPPORT Ljava/lang/String; = 'vivo.vdfs.service.version'
+CONNECT_VDFS_SUPPORT_VERSION I = 7
+CONN_SUPPORT I = 4
+PAD_SUPPORT_COMM_SHARE_VERSION I = 11
+TAG Ljava/lang/String; = 'ConnectCenterUtils'
+VAL_SUPPORT_ALL I = 2
+VAL_SUPPORT_CONNBASE I = 1
+VAL_SUPPORT_NONE I = 0
+VDFS_PKG_NAME Ljava/lang/String; = 'com.vivo.vdfs'
+
+METHOD <init>()V
+000000: invoke-direct v0, Ljava/lang/Object;-><init>()V
+000006: return-void 
+
+METHOD getConnectCenterVersion(Landroid/content/Context;)I
+000000: invoke-virtual v2, Landroid/content/Context;->getPackageManager()Landroid/content/pm/PackageManager;
+000006: move-result-object v2
+000008: const-string v0, "com.vivo.connbase.connectcenter"
+00000c: const/16 v1, 128
+000010: invoke-virtual v2, v0, v1, Landroid/content/pm/PackageManager;->getApplicationInfo(Ljava/lang/String; I)Landroid/content/pm/ApplicationInfo;
+000016: move-result-object v2
+000018: iget-object v2, v2, Landroid/content/pm/ApplicationInfo;->metaData Landroid/os/Bundle;
+00001c: const-string/jumbo v0, vivo.connbase.connectcenter.version
+000022: invoke-virtual v2, v0, Landroid/os/BaseBundle;->getInt(Ljava/lang/String;)I
+000028: move-result v2
+00002a: return v2
+00002c: move-exception v2
+00002e: new-instance v0, Ljava/lang/StringBuilder;
+000032: const-string v1, "getConnectCenterVersion -- CC, ex = "
+000036: invoke-direct v0, v1, Ljava/lang/StringBuilder;-><init>(Ljava/lang/String;)V
+00003c: invoke-virtual v0, v2, Ljava/lang/StringBuilder;->append(Ljava/lang/Object;)Ljava/lang/StringBuilder;
+000042: invoke-virtual v0, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
+000048: move-result-object v2
+00004a: const-string v0, "ConnectCenterUtils"
+00004e: invoke-static v0, v2, Lcom/vivo/aiengine/find/device/sdk/impl/util/LogUtil;->e(Ljava/lang/String; Ljava/lang/String;)V
+000054: const/4 v2, 0
+000056: return v2
+
+METHOD getVdfsVersion(Landroid/content/Context;)I
+000000: invoke-virtual v2, Landroid/content/Context;->getPackageManager()Landroid/content/pm/PackageManager;
+000006: move-result-object v2
+000008: const-string v0, "com.vivo.vdfs"
+00000c: const/16 v1, 128
+000010: invoke-virtual v2, v0, v1, Landroid/content/pm/PackageManager;->getApplicationInfo(Ljava/lang/String; I)Landroid/content/pm/ApplicationInfo;
+000016: move-result-object v2
+000018: iget-object v2, v2, Landroid/content/pm/ApplicationInfo;->metaData Landroid/os/Bundle;
+00001c: const-string/jumbo v0, vivo.vdfs.service.version
+000022: invoke-virtual v2, v0, Landroid/os/BaseBundle;->getInt(Ljava/lang/String;)I
+000028: move-result v2
+00002a: return v2
+00002c: move-exception v2
+00002e: new-instance v0, Ljava/lang/StringBuilder;
+000032: const-string v1, "getVdfsVersion -- CC, ex = "
+000036: invoke-direct v0, v1, Ljava/lang/StringBuilder;-><init>(Ljava/lang/String;)V
+00003c: invoke-virtual v0, v2, Ljava/lang/StringBuilder;->append(Ljava/lang/Object;)Ljava/lang/StringBuilder;
+000042: invoke-virtual v0, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
+000048: move-result-object v2
+00004a: const-string v0, "ConnectCenterUtils"
+00004e: invoke-static v0, v2, Lcom/vivo/aiengine/find/device/sdk/impl/util/LogUtil;->e(Ljava/lang/String; Ljava/lang/String;)V
+000054: const/4 v2, 0
+000056: return v2
+
+METHOD isSupportConnectCenter(Landroid/content/Context;)I
+000000: const-string v0, "ConnectCenterUtils"
+000004: invoke-virtual v7, Landroid/content/Context;->getPackageManager()Landroid/content/pm/PackageManager;
+00000a: move-result-object v7
+00000c: const/16 v1, 128
+000010: const/4 v2, 1
+000012: const/4 v3, 0
+000014: const-string v4, "com.vivo.connbase.connectcenter"
+000018: invoke-virtual v7, v4, v1, Landroid/content/pm/PackageManager;->getApplicationInfo(Ljava/lang/String; I)Landroid/content/pm/ApplicationInfo;
+00001e: move-result-object v4
+000020: iget-object v4, v4, Landroid/content/pm/ApplicationInfo;->metaData Landroid/os/Bundle;
+000024: const-string/jumbo v5, vivo.connbase.connectcenter.version
+00002a: invoke-virtual v4, v5, Landroid/os/BaseBundle;->getInt(Ljava/lang/String;)I
+000030: move-result v4
+000032: if-ne v4, v2, +016h
+000036: move v4, v2
+000038: goto +14h
+00003a: move-exception v4
+00003c: new-instance v5, Ljava/lang/StringBuilder;
+000040: const-string v6, "isSupportConnectCenter -- CC, ex = "
+000044: invoke-direct v5, v6, Ljava/lang/StringBuilder;-><init>(Ljava/lang/String;)V
+00004a: invoke-virtual v5, v4, Ljava/lang/StringBuilder;->append(Ljava/lang/Object;)Ljava/lang/StringBuilder;
+000050: invoke-virtual v5, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
+000056: move-result-object v4
+000058: invoke-static v0, v4, Lcom/vivo/aiengine/find/device/sdk/impl/util/LogUtil;->e(Ljava/lang/String; Ljava/lang/String;)V
+00005e: move v4, v3
+000060: const-string v5, "com.vivo.connbase"
+000064: invoke-virtual v7, v5, v1, Landroid/content/pm/PackageManager;->getApplicationInfo(Ljava/lang/String; I)Landroid/content/pm/ApplicationInfo;
+00006a: move-result-object v7
+00006c: iget-object v7, v7, Landroid/content/pm/ApplicationInfo;->metaData Landroid/os/Bundle;
+000070: const-string v1, "com.vivo.connbase.sdk.version"
+000074: invoke-virtual v7, v1, Landroid/os/BaseBundle;->getInt(Ljava/lang/String;)I
+00007a: move-result v7
+00007c: const/4 v0, 4
+00007e: if-lt v7, v0, +018h
+000082: if-eqz v4, +017h
+000086: const/4 v2, 2
+000088: goto +14h
+00008a: move-exception v7
+00008c: new-instance v1, Ljava/lang/StringBuilder;
+000090: const-string v2, "isSupportConnectCenter -- connbase, ex = "
+000094: invoke-direct v1, v2, Ljava/lang/StringBuilder;-><init>(Ljava/lang/String;)V
+00009a: invoke-virtual v1, v7, Ljava/lang/StringBuilder;->append(Ljava/lang/Object;)Ljava/lang/StringBuilder;
+0000a0: invoke-virtual v1, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
+0000a6: move-result-object v7
+0000a8: invoke-static v0, v7, Lcom/vivo/aiengine/find/device/sdk/impl/util/LogUtil;->e(Ljava/lang/String; Ljava/lang/String;)V
+0000ae: move v2, v3
+0000b0: return v2
+
+METHOD isSystemApp(Landroid/content/Context;)Z
+000000: invoke-virtual v3, Landroid/content/Context;->getApplicationInfo()Landroid/content/pm/ApplicationInfo;
+000006: move-result-object v0
+000008: iget v1, v0, Landroid/content/pm/ApplicationInfo;->flags I
+00000c: and-int/lit8 v2, v1, 1
+000010: if-nez v2, +00eh
+000014: and-int/lit16 v1, v1, 128
+000018: if-nez v1, +00ah
+00001c: iget-object v0, v0, Landroid/content/pm/ApplicationInfo;->packageName Ljava/lang/String;
+000020: invoke-static v3, v0, Lcom/vivo/connbase/connectcenter/ConnectCenterUtils;->isVivoApk(Landroid/content/Context; Ljava/lang/String;)Z
+000026: move-result v3
+000028: if-eqz v3, +018h
+00002c: const/4 v3, 1
+00002e: return v3
+000030: move-exception v3
+000032: new-instance v0, Ljava/lang/StringBuilder;
+000036: const-string v1, "[isSystemApp] e: "
+00003a: invoke-direct v0, v1, Ljava/lang/StringBuilder;-><init>(Ljava/lang/String;)V
+000040: invoke-virtual v0, v3, Ljava/lang/StringBuilder;->append(Ljava/lang/Object;)Ljava/lang/StringBuilder;
+000046: invoke-virtual v0, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
+00004c: move-result-object v3
+00004e: const-string v0, "ConnectCenterUtils"
+000052: invoke-static v0, v3, Lcom/vivo/aiengine/find/device/sdk/impl/util/LogUtil;->e(Ljava/lang/String; Ljava/lang/String;)V
+000058: const/4 v3, 0
+00005a: return v3
+
+METHOD isVivoApk(Landroid/content/Context; Ljava/lang/String;)Z
+000000: invoke-virtual v1, Landroid/content/Context;->getPackageManager()Landroid/content/pm/PackageManager;
+000006: move-result-object v1
+000008: const-string v0, "android"
+00000c: invoke-virtual v1, v0, v2, Landroid/content/pm/PackageManager;->checkSignatures(Ljava/lang/String; Ljava/lang/String;)I
+000012: move-result v0
+000014: if-eqz v0, +01dh
+000018: const-string v0, "com.android.providers.contacts"
+00001c: invoke-virtual v1, v0, v2, Landroid/content/pm/PackageManager;->checkSignatures(Ljava/lang/String; Ljava/lang/String;)I
+000022: move-result v0
+000024: if-eqz v0, +015h
+000028: const-string v0, "com.android.providers.media"
+00002c: invoke-virtual v1, v0, v2, Landroid/content/pm/PackageManager;->checkSignatures(Ljava/lang/String; Ljava/lang/String;)I
+000032: move-result v0
+000034: if-eqz v0, +00dh
+000038: const-string v0, "com.android.mms"
+00003c: invoke-virtual v1, v0, v2, Landroid/content/pm/PackageManager;->checkSignatures(Ljava/lang/String; Ljava/lang/String;)I
+000042: move-result v1
+000044: if-nez v1, +003h
+000048: goto +3h
+00004a: const/4 v1, 0
+00004c: return v1
+00004e: const/4 v1, 1
+000050: return v1

@@ -1,0 +1,257 @@
+APK pcsuite/updateApk/pcsuite.apk
+DEX classes2.dex
+CLASS Lcom/vivo/connbase/connectcenter/bean/ScanDevice;
+SUPER Ljava/lang/Object;
+FIELDS
+CREATOR Landroid/os/Parcelable$Creator; = None
+bluetoothMac Ljava/lang/String; = None
+deviceId Ljava/lang/String; = None
+deviceModel Ljava/lang/String; = None
+deviceName Ljava/lang/String; = None
+deviceType Ljava/lang/String; = None
+manufacture Ljava/lang/String; = None
+protocol Ljava/lang/String; = None
+recentConn I = None
+using Ljava/lang/String; = None
+
+METHOD <clinit>()V
+000000: new-instance v0, Lcom/vivo/connbase/connectcenter/bean/ScanDevice$1;
+000004: invoke-direct v0, Lcom/vivo/connbase/connectcenter/bean/ScanDevice$1;-><init>()V
+00000a: sput-object v0, Lcom/vivo/connbase/connectcenter/bean/ScanDevice;->CREATOR Landroid/os/Parcelable$Creator;
+00000e: return-void 
+
+METHOD <init>()V
+000000: invoke-direct v0, Ljava/lang/Object;-><init>()V
+000006: return-void 
+
+METHOD <init>(Landroid/os/Parcel;)V
+000000: invoke-direct v1, Ljava/lang/Object;-><init>()V
+000006: invoke-virtual v2, Landroid/os/Parcel;->readString()Ljava/lang/String;
+00000c: move-result-object v0
+00000e: iput-object v0, v1, Lcom/vivo/connbase/connectcenter/bean/ScanDevice;->deviceId Ljava/lang/String;
+000012: invoke-virtual v2, Landroid/os/Parcel;->readString()Ljava/lang/String;
+000018: move-result-object v0
+00001a: iput-object v0, v1, Lcom/vivo/connbase/connectcenter/bean/ScanDevice;->deviceName Ljava/lang/String;
+00001e: invoke-virtual v2, Landroid/os/Parcel;->readString()Ljava/lang/String;
+000024: move-result-object v0
+000026: iput-object v0, v1, Lcom/vivo/connbase/connectcenter/bean/ScanDevice;->deviceType Ljava/lang/String;
+00002a: invoke-virtual v2, Landroid/os/Parcel;->readString()Ljava/lang/String;
+000030: move-result-object v0
+000032: iput-object v0, v1, Lcom/vivo/connbase/connectcenter/bean/ScanDevice;->manufacture Ljava/lang/String;
+000036: invoke-virtual v2, Landroid/os/Parcel;->readString()Ljava/lang/String;
+00003c: move-result-object v0
+00003e: iput-object v0, v1, Lcom/vivo/connbase/connectcenter/bean/ScanDevice;->deviceModel Ljava/lang/String;
+000042: invoke-virtual v2, Landroid/os/Parcel;->readString()Ljava/lang/String;
+000048: move-result-object v0
+00004a: iput-object v0, v1, Lcom/vivo/connbase/connectcenter/bean/ScanDevice;->bluetoothMac Ljava/lang/String;
+00004e: invoke-virtual v2, Landroid/os/Parcel;->readString()Ljava/lang/String;
+000054: move-result-object v0
+000056: iput-object v0, v1, Lcom/vivo/connbase/connectcenter/bean/ScanDevice;->protocol Ljava/lang/String;
+00005a: invoke-virtual v2, Landroid/os/Parcel;->readString()Ljava/lang/String;
+000060: move-result-object v0
+000062: iput-object v0, v1, Lcom/vivo/connbase/connectcenter/bean/ScanDevice;->using Ljava/lang/String;
+000066: invoke-virtual v2, Landroid/os/Parcel;->readInt()I
+00006c: move-result v2
+00006e: iput v2, v1, Lcom/vivo/connbase/connectcenter/bean/ScanDevice;->recentConn I
+000072: return-void 
+
+METHOD depthClone()Lcom/vivo/connbase/connectcenter/bean/ScanDevice;
+000000: new-instance v0, Lcom/vivo/connbase/connectcenter/bean/ScanDevice;
+000004: invoke-direct v0, Lcom/vivo/connbase/connectcenter/bean/ScanDevice;-><init>()V
+00000a: iget-object v1, v2, Lcom/vivo/connbase/connectcenter/bean/ScanDevice;->deviceId Ljava/lang/String;
+00000e: invoke-virtual v0, v1, Lcom/vivo/connbase/connectcenter/bean/ScanDevice;->setDeviceId(Ljava/lang/String;)V
+000014: iget-object v1, v2, Lcom/vivo/connbase/connectcenter/bean/ScanDevice;->deviceName Ljava/lang/String;
+000018: invoke-virtual v0, v1, Lcom/vivo/connbase/connectcenter/bean/ScanDevice;->setDeviceName(Ljava/lang/String;)V
+00001e: iget-object v1, v2, Lcom/vivo/connbase/connectcenter/bean/ScanDevice;->deviceType Ljava/lang/String;
+000022: invoke-virtual v0, v1, Lcom/vivo/connbase/connectcenter/bean/ScanDevice;->setDeviceType(Ljava/lang/String;)V
+000028: iget-object v1, v2, Lcom/vivo/connbase/connectcenter/bean/ScanDevice;->manufacture Ljava/lang/String;
+00002c: invoke-virtual v0, v1, Lcom/vivo/connbase/connectcenter/bean/ScanDevice;->setManufacture(Ljava/lang/String;)V
+000032: iget-object v1, v2, Lcom/vivo/connbase/connectcenter/bean/ScanDevice;->bluetoothMac Ljava/lang/String;
+000036: invoke-virtual v0, v1, Lcom/vivo/connbase/connectcenter/bean/ScanDevice;->setBluetoothMac(Ljava/lang/String;)V
+00003c: iget-object v1, v2, Lcom/vivo/connbase/connectcenter/bean/ScanDevice;->protocol Ljava/lang/String;
+000040: invoke-virtual v0, v1, Lcom/vivo/connbase/connectcenter/bean/ScanDevice;->setProtocol(Ljava/lang/String;)V
+000046: iget-object v1, v2, Lcom/vivo/connbase/connectcenter/bean/ScanDevice;->using Ljava/lang/String;
+00004a: invoke-virtual v0, v1, Lcom/vivo/connbase/connectcenter/bean/ScanDevice;->setUsing(Ljava/lang/String;)V
+000050: iget v2, v2, Lcom/vivo/connbase/connectcenter/bean/ScanDevice;->recentConn I
+000054: invoke-virtual v0, v2, Lcom/vivo/connbase/connectcenter/bean/ScanDevice;->setRecentConn(I)V
+00005a: return-object v0
+
+METHOD describeContents()I
+000000: const/4 v0, 0
+000002: return v0
+
+METHOD equals(Ljava/lang/Object;)Z
+000000: const/4 v0, 1
+000002: if-ne v4, v5, +003h
+000006: return v0
+000008: const/4 v1, 0
+00000a: if-eqz v5, +02eh
+00000e: invoke-virtual v4, Ljava/lang/Object;->getClass()Ljava/lang/Class;
+000014: move-result-object v2
+000016: invoke-virtual v5, Ljava/lang/Object;->getClass()Ljava/lang/Class;
+00001c: move-result-object v3
+00001e: if-eq v2, v3, +003h
+000022: goto +22h
+000024: check-cast v5, Lcom/vivo/connbase/connectcenter/bean/ScanDevice;
+000028: iget-object v2, v4, Lcom/vivo/connbase/connectcenter/bean/ScanDevice;->deviceId Ljava/lang/String;
+00002c: iget-object v3, v5, Lcom/vivo/connbase/connectcenter/bean/ScanDevice;->deviceId Ljava/lang/String;
+000030: invoke-virtual v2, v3, Ljava/lang/String;->equals(Ljava/lang/Object;)Z
+000036: move-result v2
+000038: if-eqz v2, +017h
+00003c: iget-object v2, v4, Lcom/vivo/connbase/connectcenter/bean/ScanDevice;->protocol Ljava/lang/String;
+000040: iget-object v3, v5, Lcom/vivo/connbase/connectcenter/bean/ScanDevice;->protocol Ljava/lang/String;
+000044: invoke-virtual v2, v3, Ljava/lang/String;->equals(Ljava/lang/Object;)Z
+00004a: move-result v2
+00004c: if-eqz v2, +00dh
+000050: iget-object v4, v4, Lcom/vivo/connbase/connectcenter/bean/ScanDevice;->using Ljava/lang/String;
+000054: iget-object v5, v5, Lcom/vivo/connbase/connectcenter/bean/ScanDevice;->using Ljava/lang/String;
+000058: invoke-virtual v4, v5, Ljava/lang/String;->equals(Ljava/lang/Object;)Z
+00005e: move-result v4
+000060: if-eqz v4, +003h
+000064: return v0
+000066: return v1
+
+METHOD getBluetoothMac()Ljava/lang/String;
+000000: iget-object v0, v0, Lcom/vivo/connbase/connectcenter/bean/ScanDevice;->bluetoothMac Ljava/lang/String;
+000004: return-object v0
+
+METHOD getDeviceId()Ljava/lang/String;
+000000: iget-object v0, v0, Lcom/vivo/connbase/connectcenter/bean/ScanDevice;->deviceId Ljava/lang/String;
+000004: return-object v0
+
+METHOD getDeviceModel()Ljava/lang/String;
+000000: iget-object v0, v0, Lcom/vivo/connbase/connectcenter/bean/ScanDevice;->deviceModel Ljava/lang/String;
+000004: return-object v0
+
+METHOD getDeviceName()Ljava/lang/String;
+000000: iget-object v0, v0, Lcom/vivo/connbase/connectcenter/bean/ScanDevice;->deviceName Ljava/lang/String;
+000004: return-object v0
+
+METHOD getDeviceType()Ljava/lang/String;
+000000: iget-object v0, v0, Lcom/vivo/connbase/connectcenter/bean/ScanDevice;->deviceType Ljava/lang/String;
+000004: return-object v0
+
+METHOD getManufacture()Ljava/lang/String;
+000000: iget-object v0, v0, Lcom/vivo/connbase/connectcenter/bean/ScanDevice;->manufacture Ljava/lang/String;
+000004: return-object v0
+
+METHOD getProtocol()Ljava/lang/String;
+000000: iget-object v0, v0, Lcom/vivo/connbase/connectcenter/bean/ScanDevice;->protocol Ljava/lang/String;
+000004: return-object v0
+
+METHOD getRecentConn()I
+000000: iget v0, v0, Lcom/vivo/connbase/connectcenter/bean/ScanDevice;->recentConn I
+000004: return v0
+
+METHOD getUsing()Ljava/lang/String;
+000000: iget-object v0, v0, Lcom/vivo/connbase/connectcenter/bean/ScanDevice;->using Ljava/lang/String;
+000004: return-object v0
+
+METHOD hashCode()I
+000000: iget-object v0, v2, Lcom/vivo/connbase/connectcenter/bean/ScanDevice;->deviceId Ljava/lang/String;
+000004: iget-object v1, v2, Lcom/vivo/connbase/connectcenter/bean/ScanDevice;->protocol Ljava/lang/String;
+000008: iget-object v2, v2, Lcom/vivo/connbase/connectcenter/bean/ScanDevice;->using Ljava/lang/String;
+00000c: filled-new-array v0, v1, v2, [Ljava/lang/Object;
+000012: move-result-object v2
+000014: invoke-static v2, Ljava/util/Objects;->hash([Ljava/lang/Object;)I
+00001a: move-result v2
+00001c: return v2
+
+METHOD setBluetoothMac(Ljava/lang/String;)V
+000000: iput-object v1, v0, Lcom/vivo/connbase/connectcenter/bean/ScanDevice;->bluetoothMac Ljava/lang/String;
+000004: return-void 
+
+METHOD setDeviceId(Ljava/lang/String;)V
+000000: iput-object v1, v0, Lcom/vivo/connbase/connectcenter/bean/ScanDevice;->deviceId Ljava/lang/String;
+000004: return-void 
+
+METHOD setDeviceModel(Ljava/lang/String;)V
+000000: iput-object v1, v0, Lcom/vivo/connbase/connectcenter/bean/ScanDevice;->deviceModel Ljava/lang/String;
+000004: return-void 
+
+METHOD setDeviceName(Ljava/lang/String;)V
+000000: iput-object v1, v0, Lcom/vivo/connbase/connectcenter/bean/ScanDevice;->deviceName Ljava/lang/String;
+000004: return-void 
+
+METHOD setDeviceType(Ljava/lang/String;)V
+000000: iput-object v1, v0, Lcom/vivo/connbase/connectcenter/bean/ScanDevice;->deviceType Ljava/lang/String;
+000004: return-void 
+
+METHOD setManufacture(Ljava/lang/String;)V
+000000: iput-object v1, v0, Lcom/vivo/connbase/connectcenter/bean/ScanDevice;->manufacture Ljava/lang/String;
+000004: return-void 
+
+METHOD setProtocol(Ljava/lang/String;)V
+000000: iput-object v1, v0, Lcom/vivo/connbase/connectcenter/bean/ScanDevice;->protocol Ljava/lang/String;
+000004: return-void 
+
+METHOD setRecentConn(I)V
+000000: iput v1, v0, Lcom/vivo/connbase/connectcenter/bean/ScanDevice;->recentConn I
+000004: return-void 
+
+METHOD setUsing(Ljava/lang/String;)V
+000000: iput-object v1, v0, Lcom/vivo/connbase/connectcenter/bean/ScanDevice;->using Ljava/lang/String;
+000004: return-void 
+
+METHOD toString()Ljava/lang/String;
+000000: new-instance v0, Ljava/lang/StringBuilder;
+000004: const-string v1, "ScanDevice{dd='"
+000008: invoke-direct v0, v1, Ljava/lang/StringBuilder;-><init>(Ljava/lang/String;)V
+00000e: iget-object v1, v2, Lcom/vivo/connbase/connectcenter/bean/ScanDevice;->deviceId Ljava/lang/String;
+000012: invoke-virtual v0, v1, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+000018: const-string v1, "', deviceName='"
+00001c: invoke-virtual v0, v1, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+000022: iget-object v1, v2, Lcom/vivo/connbase/connectcenter/bean/ScanDevice;->deviceName Ljava/lang/String;
+000026: invoke-virtual v0, v1, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+00002c: const-string v1, "', deviceType='"
+000030: invoke-virtual v0, v1, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+000036: iget-object v1, v2, Lcom/vivo/connbase/connectcenter/bean/ScanDevice;->deviceType Ljava/lang/String;
+00003a: invoke-virtual v0, v1, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+000040: const-string v1, "', manufacture='"
+000044: invoke-virtual v0, v1, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+00004a: iget-object v1, v2, Lcom/vivo/connbase/connectcenter/bean/ScanDevice;->manufacture Ljava/lang/String;
+00004e: invoke-virtual v0, v1, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+000054: const-string v1, "', deviceModel='"
+000058: invoke-virtual v0, v1, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+00005e: iget-object v1, v2, Lcom/vivo/connbase/connectcenter/bean/ScanDevice;->deviceModel Ljava/lang/String;
+000062: invoke-virtual v0, v1, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+000068: const-string v1, "', bluetoothMac='"
+00006c: invoke-virtual v0, v1, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+000072: iget-object v1, v2, Lcom/vivo/connbase/connectcenter/bean/ScanDevice;->bluetoothMac Ljava/lang/String;
+000076: invoke-virtual v0, v1, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+00007c: const-string v1, "', protocol='"
+000080: invoke-virtual v0, v1, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+000086: iget-object v1, v2, Lcom/vivo/connbase/connectcenter/bean/ScanDevice;->protocol Ljava/lang/String;
+00008a: invoke-virtual v0, v1, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+000090: const-string v1, "', using='"
+000094: invoke-virtual v0, v1, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+00009a: iget-object v1, v2, Lcom/vivo/connbase/connectcenter/bean/ScanDevice;->using Ljava/lang/String;
+00009e: invoke-virtual v0, v1, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+0000a4: const-string v1, "', recentConn="
+0000a8: invoke-virtual v0, v1, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+0000ae: iget v2, v2, Lcom/vivo/connbase/connectcenter/bean/ScanDevice;->recentConn I
+0000b2: const/16 v1, 125
+0000b6: invoke-static v0, v2, v1, Landroidx/activity/result/a;->b(Ljava/lang/StringBuilder; I C)Ljava/lang/String;
+0000bc: move-result-object v2
+0000be: return-object v2
+
+METHOD writeToParcel(Landroid/os/Parcel; I)V
+000000: iget-object v2, v0, Lcom/vivo/connbase/connectcenter/bean/ScanDevice;->deviceId Ljava/lang/String;
+000004: invoke-virtual v1, v2, Landroid/os/Parcel;->writeString(Ljava/lang/String;)V
+00000a: iget-object v2, v0, Lcom/vivo/connbase/connectcenter/bean/ScanDevice;->deviceName Ljava/lang/String;
+00000e: invoke-virtual v1, v2, Landroid/os/Parcel;->writeString(Ljava/lang/String;)V
+000014: iget-object v2, v0, Lcom/vivo/connbase/connectcenter/bean/ScanDevice;->deviceType Ljava/lang/String;
+000018: invoke-virtual v1, v2, Landroid/os/Parcel;->writeString(Ljava/lang/String;)V
+00001e: iget-object v2, v0, Lcom/vivo/connbase/connectcenter/bean/ScanDevice;->manufacture Ljava/lang/String;
+000022: invoke-virtual v1, v2, Landroid/os/Parcel;->writeString(Ljava/lang/String;)V
+000028: iget-object v2, v0, Lcom/vivo/connbase/connectcenter/bean/ScanDevice;->deviceModel Ljava/lang/String;
+00002c: invoke-virtual v1, v2, Landroid/os/Parcel;->writeString(Ljava/lang/String;)V
+000032: iget-object v2, v0, Lcom/vivo/connbase/connectcenter/bean/ScanDevice;->bluetoothMac Ljava/lang/String;
+000036: invoke-virtual v1, v2, Landroid/os/Parcel;->writeString(Ljava/lang/String;)V
+00003c: iget-object v2, v0, Lcom/vivo/connbase/connectcenter/bean/ScanDevice;->protocol Ljava/lang/String;
+000040: invoke-virtual v1, v2, Landroid/os/Parcel;->writeString(Ljava/lang/String;)V
+000046: iget-object v2, v0, Lcom/vivo/connbase/connectcenter/bean/ScanDevice;->using Ljava/lang/String;
+00004a: invoke-virtual v1, v2, Landroid/os/Parcel;->writeString(Ljava/lang/String;)V
+000050: iget v0, v0, Lcom/vivo/connbase/connectcenter/bean/ScanDevice;->recentConn I
+000054: invoke-virtual v1, v0, Landroid/os/Parcel;->writeInt(I)V
+00005a: return-void 

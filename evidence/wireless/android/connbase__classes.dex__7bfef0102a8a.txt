@@ -1,0 +1,73 @@
+APK pcsuite/updateApk/connbase.apk
+DEX classes.dex
+CLASS Lcom/vivo/connbase/e0/g/c$c;
+SUPER Ljava/lang/Object;
+FIELDS
+a Ljava/util/List; = None
+b Z = None
+
+METHOD <init>(Landroid/database/ContentObserver;)V
+000000: invoke-direct v1, Ljava/lang/Object;-><init>()V
+000006: new-instance v0, Ljava/util/ArrayList;
+00000a: invoke-direct v0, Ljava/util/ArrayList;-><init>()V
+000010: iput-object v0, v1, Lcom/vivo/connbase/e0/g/c$c;->a Ljava/util/List;
+000014: invoke-interface v0, v2, Ljava/util/List;->add(Ljava/lang/Object;)Z
+00001a: return-void 
+
+METHOD <init>(Landroid/database/ContentObserver; Lcom/vivo/connbase/e0/g/c$a;)V
+000000: invoke-direct v0, v1, Lcom/vivo/connbase/e0/g/c$c;-><init>(Landroid/database/ContentObserver;)V
+000006: return-void 
+
+METHOD a(Lcom/vivo/connbase/e0/g/c$c;)V
+000000: iget-object v3, v3, Lcom/vivo/connbase/e0/g/c$c;->a Ljava/util/List;
+000004: invoke-interface v3, Ljava/util/List;->iterator()Ljava/util/Iterator;
+00000a: move-result-object v3
+00000c: invoke-interface v3, Ljava/util/Iterator;->hasNext()Z
+000012: move-result v0
+000014: if-eqz v0, +016h
+000018: invoke-interface v3, Ljava/util/Iterator;->next()Ljava/lang/Object;
+00001e: move-result-object v0
+000020: check-cast v0, Landroid/database/ContentObserver;
+000024: iget-object v1, v2, Lcom/vivo/connbase/e0/g/c$c;->a Ljava/util/List;
+000028: invoke-interface v1, v0, Ljava/util/List;->contains(Ljava/lang/Object;)Z
+00002e: move-result v1
+000030: if-nez v1, -012h
+000034: iget-object v1, v2, Lcom/vivo/connbase/e0/g/c$c;->a Ljava/util/List;
+000038: invoke-interface v1, v0, Ljava/util/List;->add(Ljava/lang/Object;)Z
+00003e: goto -19h
+000040: return-void 
+
+METHOD a(Lcom/vivo/connbase/e0/g/c$c; Lcom/vivo/connbase/e0/g/c$c;)V
+000000: invoke-direct v0, v1, Lcom/vivo/connbase/e0/g/c$c;->a(Lcom/vivo/connbase/e0/g/c$c;)V
+000006: return-void 
+
+METHOD a(Landroid/content/Context;)V
+000000: if-eqz v4, +02fh
+000004: iget-object v0, v3, Lcom/vivo/connbase/e0/g/c$c;->a Ljava/util/List;
+000008: invoke-interface v0, Ljava/util/List;->isEmpty()Z
+00000e: move-result v0
+000010: if-nez v0, +027h
+000014: iget-boolean v0, v3, Lcom/vivo/connbase/e0/g/c$c;->b Z
+000018: if-nez v0, +023h
+00001c: iget-object v0, v3, Lcom/vivo/connbase/e0/g/c$c;->a Ljava/util/List;
+000020: invoke-interface v0, Ljava/util/List;->iterator()Ljava/util/Iterator;
+000026: move-result-object v0
+000028: invoke-interface v0, Ljava/util/Iterator;->hasNext()Z
+00002e: move-result v1
+000030: if-eqz v1, +014h
+000034: invoke-interface v0, Ljava/util/Iterator;->next()Ljava/lang/Object;
+00003a: move-result-object v1
+00003c: check-cast v1, Landroid/database/ContentObserver;
+000040: invoke-virtual v4, Landroid/content/Context;->getApplicationContext()Landroid/content/Context;
+000046: move-result-object v2
+000048: invoke-virtual v2, Landroid/content/Context;->getContentResolver()Landroid/content/ContentResolver;
+00004e: move-result-object v2
+000050: invoke-virtual v2, v1, Landroid/content/ContentResolver;->unregisterContentObserver(Landroid/database/ContentObserver;)V
+000056: goto -17h
+000058: const/4 v4, 1
+00005a: iput-boolean v4, v3, Lcom/vivo/connbase/e0/g/c$c;->b Z
+00005e: return-void 
+
+METHOD a()Z
+000000: iget-boolean v0, v1, Lcom/vivo/connbase/e0/g/c$c;->b Z
+000004: return v0

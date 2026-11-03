@@ -1,0 +1,62 @@
+APK pcsuite/updateApk/pcsuite.apk
+DEX classes2.dex
+CLASS Lcom/vivo/pcsuite/service/d;
+SUPER Ljava/lang/Object;
+FIELDS
+a Ljava/lang/String; = None
+b Ljava/lang/String; = None
+c Lcom/vivo/pcsuite/service/PcSuiteObserver; = None
+
+METHOD <init>(Lcom/vivo/pcsuite/service/PcSuiteObserver; Ljava/lang/String; Ljava/lang/String;)V
+000000: invoke-direct v0, Ljava/lang/Object;-><init>()V
+000006: iput-object v1, v0, Lcom/vivo/pcsuite/service/d;->c Lcom/vivo/pcsuite/service/PcSuiteObserver;
+00000a: iput-object v2, v0, Lcom/vivo/pcsuite/service/d;->a Ljava/lang/String;
+00000e: iput-object v3, v0, Lcom/vivo/pcsuite/service/d;->b Ljava/lang/String;
+000012: return-void 
+
+METHOD run()V
+000000: iget-object v0, v8, Lcom/vivo/pcsuite/service/d;->a Ljava/lang/String;
+000004: const-string v1, "NetWorkUtils"
+000008: const-string v2, "ping result = "
+00000c: const-string v3, "ping -c 1 "
+000010: const/4 v4, 1
+000012: const/4 v5, 0
+000014: invoke-static Ljava/lang/Runtime;->getRuntime()Ljava/lang/Runtime;
+00001a: move-result-object v6
+00001c: new-instance v7, Ljava/lang/StringBuilder;
+000020: invoke-direct v7, v3, Ljava/lang/StringBuilder;-><init>(Ljava/lang/String;)V
+000026: invoke-virtual v7, v0, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+00002c: invoke-virtual v7, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
+000032: move-result-object v0
+000034: invoke-virtual v6, v0, Ljava/lang/Runtime;->exec(Ljava/lang/String;)Ljava/lang/Process;
+00003a: move-result-object v0
+00003c: invoke-virtual v0, Ljava/lang/Process;->waitFor()I
+000042: move-result v0
+000044: new-instance v3, Ljava/lang/StringBuilder;
+000048: invoke-direct v3, v2, Ljava/lang/StringBuilder;-><init>(Ljava/lang/String;)V
+00004e: invoke-virtual v3, v0, Ljava/lang/StringBuilder;->append(I)Ljava/lang/StringBuilder;
+000054: invoke-virtual v3, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
+00005a: move-result-object v2
+00005c: invoke-static v1, v2, Lcom/vivo/connect/logger/EasyLog;->i(Ljava/lang/String; Ljava/lang/String;)V
+000062: if-nez v0, +01ah
+000066: move v5, v4
+000068: goto +17h
+00006a: move-exception v0
+00006c: new-instance v2, Ljava/lang/StringBuilder;
+000070: const-string v3, "pingPc error = "
+000074: invoke-direct v2, v3, Ljava/lang/StringBuilder;-><init>(Ljava/lang/String;)V
+00007a: invoke-virtual v0, Ljava/lang/Throwable;->getMessage()Ljava/lang/String;
+000080: move-result-object v0
+000082: invoke-virtual v2, v0, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+000088: invoke-virtual v2, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
+00008e: move-result-object v0
+000090: invoke-static v1, v0, Lcom/vivo/connect/logger/EasyLog;->i(Ljava/lang/String; Ljava/lang/String;)V
+000096: if-eqz v5, +005h
+00009a: const-string v0, "1"
+00009e: goto +3h
+0000a0: const-string v0, "0"
+0000a4: iget-object v1, v8, Lcom/vivo/pcsuite/service/d;->b Ljava/lang/String;
+0000a8: iget-object v8, v8, Lcom/vivo/pcsuite/service/d;->c Lcom/vivo/pcsuite/service/PcSuiteObserver;
+0000ac: const/4 v2, 0
+0000ae: invoke-static v8, v2, v4, v0, v1, Lcom/vivo/pcsuite/service/PcSuiteObserver;->i(Lcom/vivo/pcsuite/service/PcSuiteObserver; Ljava/lang/String; Z Ljava/lang/String; Ljava/lang/String;)V
+0000b4: return-void 

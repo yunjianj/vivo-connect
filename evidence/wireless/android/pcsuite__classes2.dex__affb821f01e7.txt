@@ -1,0 +1,646 @@
+APK pcsuite/updateApk/pcsuite.apk
+DEX classes2.dex
+CLASS Lcom/vivo/pcsuite/connect/ConnectModel;
+SUPER Ljava/lang/Object;
+FIELDS
+STATE_CONNECTED I = 2
+STATE_CONNECTING I = 1
+STATE_CONNECT_FAILED I = 3
+STATE_DISCONNECT I = None
+a Z = None
+b Ljava/lang/String; = None
+c Ljava/lang/String; = None
+d Ljava/lang/String; = None
+e Lcom/vivo/pcsuite/common/gson/ConnDetail; = None
+
+METHOD <init>()V
+000000: invoke-direct v0, Ljava/lang/Object;-><init>()V
+000006: return-void 
+
+METHOD a(Lcom/vivo/pcsuite/connect/ConnectModel;)Ljava/lang/String;
+000000: iget-object v0, v0, Lcom/vivo/pcsuite/connect/ConnectModel;->d Ljava/lang/String;
+000004: return-object v0
+
+METHOD b(Lcom/vivo/pcsuite/connect/ConnectModel; Ljava/lang/String;)V
+000000: iput-object v1, v0, Lcom/vivo/pcsuite/connect/ConnectModel;->d Ljava/lang/String;
+000004: return-void 
+
+METHOD c(I Lcom/vivo/pcsuite/connect/ConnectModel; Ljava/lang/String; Z [Ljava/lang/String;)V
+000000: invoke-direct v1, v2, v0, v3, v4, Lcom/vivo/pcsuite/connect/ConnectModel;->e(Ljava/lang/String; I Z [Ljava/lang/String;)V
+000006: return-void 
+
+METHOD d(Lcom/vivo/pcsuite/connect/ConnectModel; Ljava/lang/String;)V
+000000: const-string v0, "a"
+000004: const-string v1, ""
+000008: invoke-static v14, Landroid/text/TextUtils;->isEmpty(Ljava/lang/CharSequence;)Z
+00000e: move-result v2
+000010: if-eqz v2, +003h
+000014: return-void 
+000016: invoke-static v14, Landroid/net/Uri;->parse(Ljava/lang/String;)Landroid/net/Uri;
+00001c: move-result-object v14
+00001e: const-string v2, "s"
+000022: invoke-virtual v14, v2, Landroid/net/Uri;->getQueryParameter(Ljava/lang/String;)Ljava/lang/String;
+000028: move-result-object v2
+00002a: invoke-static Lcom/vivo/pcsuite/common/filemanager/utils/e;->f()Ljava/lang/String;
+000030: move-result-object v3
+000032: sget-object v4, Lcom/vivo/pcsuite/PcSuiteApplication;->I1 Lcom/vivo/pcsuite/PcSuiteApplication;
+000036: invoke-virtual v4, v3, Lcom/vivo/pcsuite/PcSuiteApplication;->x0(Ljava/lang/String;)V
+00003c: invoke-static Lcom/vivo/pcsuite/util/a0;->e()Ljava/lang/String;
+000042: move-result-object v4
+000044: const-string v5, "NetWorkUtils"
+000048: const/4 v6, 1
+00004a: sget-object v7, Lcom/vivo/pcsuite/PcSuiteApplication;->I1 Lcom/vivo/pcsuite/PcSuiteApplication;
+00004e: invoke-virtual v7, Landroid/content/Context;->getApplicationContext()Landroid/content/Context;
+000054: move-result-object v7
+000056: const-string/jumbo v8, wifi
+00005c: invoke-virtual v7, v8, Landroid/content/Context;->getSystemService(Ljava/lang/String;)Ljava/lang/Object;
+000062: move-result-object v7
+000064: check-cast v7, Landroid/net/wifi/WifiManager;
+000068: const-string v8, "getLinkPropertiesForExtWifi"
+00006c: invoke-static v0, v8, Lcom/vivo/connect/logger/EasyLog;->d(Ljava/lang/String; Ljava/lang/String;)V
+000072: const/4 v9, 0
+000074: const-class v10, Landroid/net/wifi/WifiManager;
+000078: invoke-virtual v10, v8, v9, Ljava/lang/Class;->getDeclaredMethod(Ljava/lang/String; [Ljava/lang/Class;)Ljava/lang/reflect/Method;
+00007e: move-result-object v8
+000080: invoke-virtual v8, v7, v9, Ljava/lang/reflect/Method;->invoke(Ljava/lang/Object; [Ljava/lang/Object;)Ljava/lang/Object;
+000086: move-result-object v7
+000088: check-cast v7, Landroid/net/LinkProperties;
+00008c: move-object v9, v7
+00008e: goto +7h
+000090: move-exception v7
+000092: const-string v8, "Disconnect ext-Wifi failed"
+000096: invoke-static v0, v8, v7, Lcom/vivo/connect/logger/EasyLog;->w(Ljava/lang/String; Ljava/lang/String; Ljava/lang/Throwable;)V
+00009c: if-eqz v9, +029h
+0000a0: invoke-virtual v9, Landroid/net/LinkProperties;->getLinkAddresses()Ljava/util/List;
+0000a6: move-result-object v7
+0000a8: if-eqz v7, +023h
+0000ac: invoke-interface v7, Ljava/util/List;->size()I
+0000b2: move-result v7
+0000b4: const/4 v8, 2
+0000b6: if-lt v7, v8, +01ch
+0000ba: invoke-virtual v9, Landroid/net/LinkProperties;->getLinkAddresses()Ljava/util/List;
+0000c0: move-result-object v7
+0000c2: invoke-interface v7, v6, Ljava/util/List;->get(I)Ljava/lang/Object;
+0000c8: move-result-object v7
+0000ca: check-cast v7, Landroid/net/LinkAddress;
+0000ce: if-eqz v7, +010h
+0000d2: invoke-virtual v7, Landroid/net/LinkAddress;->getAddress()Ljava/net/InetAddress;
+0000d8: move-result-object v7
+0000da: if-eqz v7, +00ah
+0000de: invoke-virtual v7, Ljava/net/InetAddress;->getHostName()Ljava/lang/String;
+0000e4: move-result-object v7
+0000e6: goto +5h
+0000e8: move-exception v7
+0000ea: move-object v8, v1
+0000ec: goto +ch
+0000ee: move-object v7, v1
+0000f0: const-string v8, "getLinkPropertiesForExtWifiIP:"
+0000f4: invoke-static v5, v8, Lcom/vivo/connect/logger/EasyLog;->d(Ljava/lang/String; Ljava/lang/String;)V
+0000fa: goto +bh
+0000fc: move-exception v8
+0000fe: move-object v12, v8
+000100: move-object v8, v7
+000102: move-object v7, v12
+000104: const-string v9, "Get getLinkPropertiesForExtWifi IP error."
+000108: invoke-static v5, v9, v7, Lcom/vivo/connect/logger/EasyLog;->e(Ljava/lang/String; Ljava/lang/String; Ljava/lang/Throwable;)V
+00010e: move-object v7, v8
+000110: new-instance v5, Ljava/util/ArrayList;
+000114: invoke-direct v5, Ljava/util/ArrayList;-><init>()V
+00011a: invoke-virtual v5, v4, Ljava/util/ArrayList;->add(Ljava/lang/Object;)Z
+000120: invoke-virtual v5, v7, Ljava/util/ArrayList;->add(Ljava/lang/Object;)Z
+000126: new-instance v4, Ljava/util/HashMap;
+00012a: invoke-direct v4, Ljava/util/HashMap;-><init>()V
+000130: invoke-virtual v5, Ljava/util/ArrayList;->iterator()Ljava/util/Iterator;
+000136: move-result-object v7
+000138: invoke-interface v7, Ljava/util/Iterator;->hasNext()Z
+00013e: move-result v8
+000140: if-eqz v8, +010h
+000144: invoke-interface v7, Ljava/util/Iterator;->next()Ljava/lang/Object;
+00014a: move-result-object v8
+00014c: check-cast v8, Ljava/lang/String;
+000150: invoke-static v6, Ljava/lang/Integer;->valueOf(I)Ljava/lang/Integer;
+000156: move-result-object v9
+000158: invoke-virtual v4, v8, v9, Ljava/util/HashMap;->put(Ljava/lang/Object; Ljava/lang/Object;)Ljava/lang/Object;
+00015e: goto -13h
+000160: invoke-static Ljava/net/NetworkInterface;->getNetworkInterfaces()Ljava/util/Enumeration;
+000166: move-result-object v7
+000168: invoke-interface v7, Ljava/util/Enumeration;->hasMoreElements()Z
+00016e: move-result v8
+000170: if-eqz v8, +04ah
+000174: invoke-interface v7, Ljava/util/Enumeration;->nextElement()Ljava/lang/Object;
+00017a: move-result-object v8
+00017c: check-cast v8, Ljava/net/NetworkInterface;
+000180: invoke-virtual v8, Ljava/net/NetworkInterface;->getInetAddresses()Ljava/util/Enumeration;
+000186: move-result-object v8
+000188: invoke-interface v8, Ljava/util/Enumeration;->hasMoreElements()Z
+00018e: move-result v9
+000190: if-eqz v9, -014h
+000194: invoke-interface v8, Ljava/util/Enumeration;->nextElement()Ljava/lang/Object;
+00019a: move-result-object v9
+00019c: check-cast v9, Ljava/net/InetAddress;
+0001a0: invoke-virtual v9, Ljava/net/InetAddress;->isLoopbackAddress()Z
+0001a6: move-result v10
+0001a8: if-nez v10, -010h
+0001ac: instance-of v10, v9, Ljava/net/Inet4Address;
+0001b0: if-eqz v10, -014h
+0001b4: invoke-virtual v9, Ljava/net/InetAddress;->getHostAddress()Ljava/lang/String;
+0001ba: move-result-object v9
+0001bc: invoke-virtual v4, v9, Ljava/util/HashMap;->containsKey(Ljava/lang/Object;)Z
+0001c2: move-result v10
+0001c4: if-nez v10, +008h
+0001c8: invoke-virtual v5, v9, Ljava/util/ArrayList;->add(Ljava/lang/Object;)Z
+0001ce: goto +3h
+0001d0: move-exception v0
+0001d2: goto +16h
+0001d4: new-instance v10, Ljava/lang/StringBuilder;
+0001d8: invoke-direct v10, Ljava/lang/StringBuilder;-><init>()V
+0001de: const-string v11, "netWork ip : "
+0001e2: invoke-virtual v10, v11, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+0001e8: invoke-virtual v10, v9, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+0001ee: invoke-virtual v10, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
+0001f4: move-result-object v9
+0001f6: invoke-static v0, v9, Lcom/vivo/connect/logger/EasyLog;->i(Ljava/lang/String; Ljava/lang/String;)V
+0001fc: goto -3ah
+0001fe: invoke-virtual v0, Ljava/lang/Throwable;->printStackTrace()V
+000204: invoke-virtual v14, Landroid/net/Uri;->buildUpon()Landroid/net/Uri$Builder;
+00020a: move-result-object v14
+00020c: invoke-virtual v14, Landroid/net/Uri$Builder;->clearQuery()Landroid/net/Uri$Builder;
+000212: move-result-object v14
+000214: const-string v0, "/vbusiness/scan/reportPhone"
+000218: invoke-virtual v14, v0, Landroid/net/Uri$Builder;->path(Ljava/lang/String;)Landroid/net/Uri$Builder;
+00021e: move-result-object v14
+000220: invoke-virtual v14, Landroid/net/Uri$Builder;->build()Landroid/net/Uri;
+000226: move-result-object v14
+000228: invoke-virtual v14, Landroid/net/Uri;->toString()Ljava/lang/String;
+00022e: move-result-object v14
+000230: invoke-static Lcom/bbk/account/base/BBKAccountManager;->getInstance()Lcom/bbk/account/base/BBKAccountManager;
+000236: move-result-object v0
+000238: sget-object v4, Lcom/vivo/pcsuite/PcSuiteApplication;->I1 Lcom/vivo/pcsuite/PcSuiteApplication;
+00023c: invoke-virtual v0, v4, Lcom/bbk/account/base/BBKAccountManager;->init(Landroid/content/Context;)V
+000242: invoke-static Lcom/bbk/account/base/BBKAccountManager;->getInstance()Lcom/bbk/account/base/BBKAccountManager;
+000248: move-result-object v0
+00024a: invoke-virtual v0, v6, Lcom/bbk/account/base/BBKAccountManager;->getUserName(Z)Ljava/lang/String;
+000250: move-result-object v4
+000252: invoke-virtual v0, Lcom/bbk/account/base/BBKAccountManager;->getOpenid()Ljava/lang/String;
+000258: move-result-object v0
+00025a: invoke-static v4, Landroid/text/TextUtils;->isEmpty(Ljava/lang/CharSequence;)Z
+000260: move-result v7
+000262: if-nez v7, +006h
+000266: invoke-static v4, Lcom/vivo/pcsuite/util/StringUtils;->t(Ljava/lang/String;)Ljava/lang/String;
+00026c: move-result-object v4
+00026e: new-instance v7, Ljava/util/HashMap;
+000272: invoke-direct v7, Ljava/util/HashMap;-><init>()V
+000278: const-string v8, "deviceName"
+00027c: invoke-static Lcom/vivo/pcsuite/util/StringUtils;->h()Ljava/lang/String;
+000282: move-result-object v9
+000284: invoke-virtual v7, v8, v9, Ljava/util/HashMap;->put(Ljava/lang/Object; Ljava/lang/Object;)Ljava/lang/Object;
+00028a: const-string/jumbo v8, userName
+000290: invoke-virtual v7, v8, v4, Ljava/util/HashMap;->put(Ljava/lang/Object; Ljava/lang/Object;)Ljava/lang/Object;
+000296: const-string v4, "ip"
+00029a: invoke-virtual v7, v4, v5, Ljava/util/HashMap;->put(Ljava/lang/Object; Ljava/lang/Object;)Ljava/lang/Object;
+0002a0: invoke-static Ls2/a;->a()Z
+0002a6: move-result v4
+0002a8: if-eqz v4, +005h
+0002ac: const-string v4, "pad"
+0002b0: goto +3h
+0002b2: const-string v4, "phone"
+0002b6: iget-object v5, v13, Lcom/vivo/pcsuite/connect/ConnectModel;->e Lcom/vivo/pcsuite/common/gson/ConnDetail;
+0002ba: if-nez v5, +008h
+0002be: invoke-static Lcom/vivo/pcsuite/common/filemanager/utils/e;->e()Lcom/vivo/pcsuite/common/gson/ConnDetail;
+0002c4: move-result-object v5
+0002c6: iput-object v5, v13, Lcom/vivo/pcsuite/connect/ConnectModel;->e Lcom/vivo/pcsuite/common/gson/ConnDetail;
+0002ca: iget-object v13, v13, Lcom/vivo/pcsuite/connect/ConnectModel;->e Lcom/vivo/pcsuite/common/gson/ConnDetail;
+0002ce: invoke-virtual v13, v3, Lcom/vivo/pcsuite/common/gson/ConnDetail;->setConnectionId(Ljava/lang/String;)V
+0002d4: const-string v13, "deviceType"
+0002d8: invoke-virtual v7, v13, v4, Ljava/util/HashMap;->put(Ljava/lang/Object; Ljava/lang/Object;)Ljava/lang/Object;
+0002de: const-string v13, "connectionId"
+0002e2: invoke-virtual v7, v13, v3, Ljava/util/HashMap;->put(Ljava/lang/Object; Ljava/lang/Object;)Ljava/lang/Object;
+0002e8: sget-object v13, Lcom/vivo/pcsuite/PcSuiteApplication;->I1 Lcom/vivo/pcsuite/PcSuiteApplication;
+0002ec: iget-object v13, v13, Lcom/vivo/pcsuite/PcSuiteApplication;->H Ljava/lang/String;
+0002f0: const-string v3, "bleId"
+0002f4: invoke-virtual v7, v3, v13, Ljava/util/HashMap;->put(Ljava/lang/Object; Ljava/lang/Object;)Ljava/lang/Object;
+0002fa: invoke-static v0, Landroid/text/TextUtils;->isEmpty(Ljava/lang/CharSequence;)Z
+000300: move-result v13
+000302: const-string v3, "openId"
+000306: const-string v4, "ConnectModel"
+00030a: if-nez v13, +04fh
+00030e: const-string v13, "SHA-256"
+000312: invoke-static v13, Ljava/security/MessageDigest;->getInstance(Ljava/lang/String;)Ljava/security/MessageDigest;
+000318: move-result-object v13
+00031a: invoke-virtual v0, Ljava/lang/String;->getBytes()[B
+000320: move-result-object v0
+000322: invoke-virtual v13, v0, Ljava/security/MessageDigest;->digest([B)[B
+000328: move-result-object v13
+00032a: new-instance v0, Ljava/lang/StringBuilder;
+00032e: invoke-direct v0, Ljava/lang/StringBuilder;-><init>()V
+000334: array-length v5, v13
+000336: const/4 v8, 0
+000338: if-ge v8, v5, +01eh
+00033c: aget-byte v9, v13, v8
+000340: and-int/lit16 v9, v9, 255
+000344: invoke-static v9, Ljava/lang/Integer;->toHexString(I)Ljava/lang/String;
+00034a: move-result-object v9
+00034c: invoke-virtual v9, Ljava/lang/String;->length()I
+000352: move-result v10
+000354: if-ne v10, v6, +00ah
+000358: const/16 v10, 48
+00035c: invoke-virtual v0, v10, Ljava/lang/StringBuilder;->append(C)Ljava/lang/StringBuilder;
+000362: goto +3h
+000364: move-exception v13
+000366: goto +ch
+000368: invoke-virtual v0, v9, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+00036e: add-int/lit8 v8, v8, 1
+000372: goto -1dh
+000374: invoke-virtual v0, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
+00037a: move-result-object v1
+00037c: goto +dh
+00037e: new-instance v0, Ljava/lang/StringBuilder;
+000382: const-string v5, "get256String error = "
+000386: invoke-direct v0, v5, Ljava/lang/StringBuilder;-><init>(Ljava/lang/String;)V
+00038c: const-string v5, "StringUtils"
+000390: invoke-static v13, v0, v5, LP/d;->f(Ljava/lang/Exception; Ljava/lang/StringBuilder; Ljava/lang/String;)V
+000396: const-string v13, "report sha256Data = "
+00039a: invoke-static v13, v1, v4, Landroidx/constraintlayout/core/motion/a;->d(Ljava/lang/String; Ljava/lang/String; Ljava/lang/String;)V
+0003a0: invoke-virtual v7, v3, v1, Ljava/util/HashMap;->put(Ljava/lang/Object; Ljava/lang/Object;)Ljava/lang/Object;
+0003a6: goto +4h
+0003a8: invoke-virtual v7, v3, v1, Ljava/util/HashMap;->put(Ljava/lang/Object; Ljava/lang/Object;)Ljava/lang/Object;
+0003ae: new-instance v13, Ljava/util/HashMap;
+0003b2: invoke-direct v13, Ljava/util/HashMap;-><init>()V
+0003b8: const-string v0, "sid"
+0003bc: invoke-virtual v13, v0, v2, Ljava/util/HashMap;->put(Ljava/lang/Object; Ljava/lang/Object;)Ljava/lang/Object;
+0003c2: sget-object v0, Lcom/vivo/pcsuite/PcSuiteApplication;->I1 Lcom/vivo/pcsuite/PcSuiteApplication;
+0003c6: invoke-virtual v0, Lcom/vivo/pcsuite/PcSuiteApplication;->p()Lcom/google/gson/Gson;
+0003cc: move-result-object v0
+0003ce: invoke-virtual v0, v7, Lcom/google/gson/Gson;->toJson(Ljava/lang/Object;)Ljava/lang/String;
+0003d4: move-result-object v0
+0003d6: const-string v1, "device"
+0003da: invoke-virtual v13, v1, v0, Ljava/util/HashMap;->put(Ljava/lang/Object; Ljava/lang/Object;)Ljava/lang/Object;
+0003e0: sget-object v0, Lcom/vivo/pcsuite/PcSuiteApplication;->I1 Lcom/vivo/pcsuite/PcSuiteApplication;
+0003e4: invoke-virtual v0, Lcom/vivo/pcsuite/PcSuiteApplication;->p()Lcom/google/gson/Gson;
+0003ea: move-result-object v0
+0003ec: invoke-virtual v0, v13, Lcom/google/gson/Gson;->toJson(Ljava/lang/Object;)Ljava/lang/String;
+0003f2: move-result-object v13
+0003f4: new-instance v0, Ljava/lang/StringBuilder;
+0003f8: const-string/jumbo v1, url:
+0003fe: invoke-direct v0, v1, Ljava/lang/StringBuilder;-><init>(Ljava/lang/String;)V
+000404: invoke-virtual v0, v14, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+00040a: const-string v1, "   parameters:"
+00040e: invoke-virtual v0, v1, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+000414: invoke-virtual v0, v13, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+00041a: invoke-virtual v0, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
+000420: move-result-object v0
+000422: invoke-static v4, v0, Lcom/vivo/connect/logger/EasyLog;->i(Ljava/lang/String; Ljava/lang/String;)V
+000428: new-instance v0, Lcom/vivo/pcsuite/common/http/HttpProxyRequest;
+00042c: sget-object v1, Lcom/vivo/pcsuite/common/http/HttpEnum;->OKHTTP Lcom/vivo/pcsuite/common/http/HttpEnum;
+000430: invoke-direct v0, v1, Lcom/vivo/pcsuite/common/http/HttpProxyRequest;-><init>(Lcom/vivo/pcsuite/common/http/HttpEnum;)V
+000436: new-instance v1, Lcom/vivo/pcsuite/connect/ConnectModel$4;
+00043a: invoke-direct v1, Ljava/lang/Object;-><init>()V
+000440: invoke-virtual v0, v14, v13, v1, Lcom/vivo/pcsuite/common/http/HttpProxyRequest;->postRequest(Ljava/lang/String; Ljava/lang/String; Lcom/vivo/pcsuite/common/http/OnResultCall;)V
+000446: return-void 
+
+METHOD e(Ljava/lang/String; I Z [Ljava/lang/String;)V
+000000: new-instance v0, Ljava/lang/StringBuilder;
+000004: const-string v1, "ConnectModel 1 "
+000008: invoke-direct v0, v1, Ljava/lang/StringBuilder;-><init>(Ljava/lang/String;)V
+00000e: invoke-virtual v11, Ljava/lang/Object;->hashCode()I
+000014: move-result v1
+000016: invoke-virtual v0, v1, Ljava/lang/StringBuilder;->append(I)Ljava/lang/StringBuilder;
+00001c: invoke-virtual v0, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
+000022: move-result-object v0
+000024: const-string v1, "Clarence"
+000028: invoke-static v1, v0, Lcom/vivo/connect/logger/EasyLog;->i(Ljava/lang/String; Ljava/lang/String;)V
+00002e: invoke-static Lcom/vivo/pcsuite/util/a0;->e()Ljava/lang/String;
+000034: move-result-object v0
+000036: invoke-static Lcom/vivo/pcsuite/util/StringUtils;->h()Ljava/lang/String;
+00003c: move-result-object v2
+00003e: invoke-static Lcom/bbk/account/base/BBKAccountManager;->getInstance()Lcom/bbk/account/base/BBKAccountManager;
+000044: move-result-object v3
+000046: invoke-virtual v3, Lcom/bbk/account/base/BBKAccountManager;->getUserName()Ljava/lang/String;
+00004c: move-result-object v3
+00004e: sget-object v4, Lcom/vivo/pcsuite/PcSuiteApplication;->I1 Lcom/vivo/pcsuite/PcSuiteApplication;
+000052: iget-object v4, v4, Lcom/vivo/pcsuite/PcSuiteApplication;->H Ljava/lang/String;
+000056: invoke-static Ls2/a;->a()Z
+00005c: move-result v5
+00005e: if-eqz v5, +005h
+000062: const-string v5, "pad"
+000066: goto +3h
+000068: const-string v5, "phone"
+00006c: aget-object v6, v15, v13
+000070: if-eqz v6, +072h
+000074: const-string v7, ""
+000078: invoke-virtual v6, v7, Ljava/lang/String;->equals(Ljava/lang/Object;)Z
+00007e: move-result v6
+000080: if-eqz v6, +003h
+000084: goto +68h
+000086: const-string v1, "&bleId="
+00008a: const-string v6, "&deviceType="
+00008e: const-string v7, "&deviceName="
+000092: const-string v8, ":9199/notifyConnection?phoneIp="
+000096: const-string v9, "http://"
+00009a: if-eqz v3, +01fh
+00009e: new-instance v10, Ljava/lang/StringBuilder;
+0000a2: invoke-direct v10, v9, Ljava/lang/StringBuilder;-><init>(Ljava/lang/String;)V
+0000a8: aget-object v9, v15, v13
+0000ac: invoke-static v10, v9, v8, v0, v7, Landroidx/appcompat/widget/view/b;->d(Ljava/lang/StringBuilder; Ljava/lang/String; Ljava/lang/String; Ljava/lang/String; Ljava/lang/String;)V
+0000b2: const-string v0, "&vivoAccount="
+0000b6: invoke-static v10, v2, v0, v3, v6, Landroidx/appcompat/widget/view/b;->d(Ljava/lang/StringBuilder; Ljava/lang/String; Ljava/lang/String; Ljava/lang/String; Ljava/lang/String;)V
+0000bc: invoke-virtual v10, v5, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+0000c2: invoke-virtual v10, v1, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+0000c8: invoke-virtual v10, v4, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+0000ce: invoke-virtual v10, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
+0000d4: move-result-object v0
+0000d6: goto +15h
+0000d8: new-instance v3, Ljava/lang/StringBuilder;
+0000dc: invoke-direct v3, v9, Ljava/lang/StringBuilder;-><init>(Ljava/lang/String;)V
+0000e2: aget-object v9, v15, v13
+0000e6: invoke-static v3, v9, v8, v0, v7, Landroidx/appcompat/widget/view/b;->d(Ljava/lang/StringBuilder; Ljava/lang/String; Ljava/lang/String; Ljava/lang/String; Ljava/lang/String;)V
+0000ec: invoke-static v3, v2, v6, v5, v1, Landroidx/appcompat/widget/view/b;->d(Ljava/lang/StringBuilder; Ljava/lang/String; Ljava/lang/String; Ljava/lang/String; Ljava/lang/String;)V
+0000f2: invoke-virtual v3, v4, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+0000f8: invoke-virtual v3, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
+0000fe: move-result-object v0
+000100: invoke-static Lcom/vivo/pcsuite/common/http/ok/OkClient;->getInstance()Lokhttp3/t;
+000106: move-result-object v1
+000108: new-instance v2, Lokhttp3/u$a;
+00010c: invoke-direct v2, Lokhttp3/u$a;-><init>()V
+000112: invoke-virtual v2, v0, Lokhttp3/u$a;->h(Ljava/lang/String;)V
+000118: invoke-virtual v2, Lokhttp3/u$a;->c()V
+00011e: invoke-virtual v2, Lokhttp3/u$a;->b()Lokhttp3/u;
+000124: move-result-object v0
+000126: invoke-virtual v1, Ljava/lang/Object;->getClass()Ljava/lang/Class;
+00012c: new-instance v2, Lokhttp3/internal/connection/e;
+000130: const/4 v3, 0
+000132: invoke-direct v2, v1, v0, v3, Lokhttp3/internal/connection/e;-><init>(Lokhttp3/t; Lokhttp3/u; Z)V
+000138: new-instance v4, Lcom/vivo/pcsuite/connect/ConnectModel$2;
+00013c: move-object v6, v11
+00013e: move-object v7, v12
+000140: move v5, v13
+000142: move v8, v14
+000144: move-object v9, v15
+000146: invoke-direct/range v4 ... v9, Lcom/vivo/pcsuite/connect/ConnectModel$2;-><init>(I Lcom/vivo/pcsuite/connect/ConnectModel; Ljava/lang/String; Z [Ljava/lang/String;)V
+00014c: invoke-virtual v2, v4, Lokhttp3/internal/connection/e;->f(Lokhttp3/f;)V
+000152: return-void 
+000154: const-string v11, "pcAdd is empty , return "
+000158: invoke-static v1, v11, Lcom/vivo/connect/logger/EasyLog;->e(Ljava/lang/String; Ljava/lang/String;)V
+00015e: return-void 
+
+METHOD getInstance()Lcom/vivo/pcsuite/connect/ConnectModel;
+000000: invoke-static Lcom/vivo/pcsuite/connect/ConnectModel$model;->a()Lcom/vivo/pcsuite/connect/ConnectModel;
+000006: move-result-object v0
+000008: return-object v0
+
+METHOD accessPcDirectIp()V
+000000: const-string v0, "accessPcDirectIp"
+000004: const-string v1, "Clarence"
+000008: invoke-static v1, v0, Lcom/vivo/connect/logger/EasyLog;->i(Ljava/lang/String; Ljava/lang/String;)V
+00000e: invoke-static Lcom/vivo/pcsuite/util/StringUtils;->h()Ljava/lang/String;
+000014: move-result-object v0
+000016: invoke-static Lcom/bbk/account/base/BBKAccountManager;->getInstance()Lcom/bbk/account/base/BBKAccountManager;
+00001c: move-result-object v2
+00001e: invoke-virtual v2, Lcom/bbk/account/base/BBKAccountManager;->getUserName()Ljava/lang/String;
+000024: move-result-object v2
+000026: sget-object v3, Lcom/vivo/pcsuite/PcSuiteApplication;->I1 Lcom/vivo/pcsuite/PcSuiteApplication;
+00002a: iget-object v3, v3, Lcom/vivo/pcsuite/PcSuiteApplication;->H Ljava/lang/String;
+00002e: invoke-static Ls2/a;->a()Z
+000034: move-result v4
+000036: if-eqz v4, +005h
+00003a: const-string v4, "pad"
+00003e: goto +3h
+000040: const-string v4, "phone"
+000044: new-instance v5, Ljava/lang/StringBuilder;
+000048: const-string v6, "ConnectModel 2 "
+00004c: invoke-direct v5, v6, Ljava/lang/StringBuilder;-><init>(Ljava/lang/String;)V
+000052: invoke-virtual v10, Ljava/lang/Object;->hashCode()I
+000058: move-result v6
+00005a: invoke-virtual v5, v6, Ljava/lang/StringBuilder;->append(I)Ljava/lang/StringBuilder;
+000060: invoke-virtual v5, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
+000066: move-result-object v5
+000068: invoke-static v1, v5, Lcom/vivo/connect/logger/EasyLog;->i(Ljava/lang/String; Ljava/lang/String;)V
+00006e: new-instance v5, Ljava/lang/StringBuilder;
+000072: const-string v6, "pcDirectAdd gw "
+000076: invoke-direct v5, v6, Ljava/lang/StringBuilder;-><init>(Ljava/lang/String;)V
+00007c: iget-object v6, v10, Lcom/vivo/pcsuite/connect/ConnectModel;->d Ljava/lang/String;
+000080: invoke-virtual v5, v6, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+000086: invoke-virtual v5, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
+00008c: move-result-object v5
+00008e: invoke-static v1, v5, Lcom/vivo/connect/logger/EasyLog;->e(Ljava/lang/String; Ljava/lang/String;)V
+000094: iget-object v5, v10, Lcom/vivo/pcsuite/connect/ConnectModel;->d Ljava/lang/String;
+000098: if-eqz v5, +079h
+00009c: const-string v6, ""
+0000a0: invoke-virtual v5, v6, Ljava/lang/String;->equals(Ljava/lang/Object;)Z
+0000a6: move-result v5
+0000a8: if-eqz v5, +003h
+0000ac: goto +6fh
+0000ae: const-string v5, "&isWifiP2P=1&bleId="
+0000b2: const-string v6, "&deviceType="
+0000b6: const-string v7, ":9199/notifyConnection?deviceName="
+0000ba: const-string v8, "http://"
+0000be: if-eqz v2, +019h
+0000c2: new-instance v9, Ljava/lang/StringBuilder;
+0000c6: invoke-direct v9, v8, Ljava/lang/StringBuilder;-><init>(Ljava/lang/String;)V
+0000cc: iget-object v10, v10, Lcom/vivo/pcsuite/connect/ConnectModel;->d Ljava/lang/String;
+0000d0: const-string v8, "&vivoAccount="
+0000d4: invoke-static v9, v10, v7, v0, v8, Landroidx/appcompat/widget/view/b;->d(Ljava/lang/StringBuilder; Ljava/lang/String; Ljava/lang/String; Ljava/lang/String; Ljava/lang/String;)V
+0000da: invoke-static v9, v2, v6, v4, v5, Landroidx/appcompat/widget/view/b;->d(Ljava/lang/StringBuilder; Ljava/lang/String; Ljava/lang/String; Ljava/lang/String; Ljava/lang/String;)V
+0000e0: invoke-virtual v9, v3, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+0000e6: invoke-virtual v9, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
+0000ec: move-result-object v10
+0000ee: goto +18h
+0000f0: new-instance v2, Ljava/lang/StringBuilder;
+0000f4: invoke-direct v2, v8, Ljava/lang/StringBuilder;-><init>(Ljava/lang/String;)V
+0000fa: iget-object v10, v10, Lcom/vivo/pcsuite/connect/ConnectModel;->d Ljava/lang/String;
+0000fe: invoke-static v2, v10, v7, v0, v6, Landroidx/appcompat/widget/view/b;->d(Ljava/lang/StringBuilder; Ljava/lang/String; Ljava/lang/String; Ljava/lang/String; Ljava/lang/String;)V
+000104: invoke-virtual v2, v4, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+00010a: invoke-virtual v2, v5, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+000110: invoke-virtual v2, v3, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+000116: invoke-virtual v2, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
+00011c: move-result-object v10
+00011e: new-instance v0, Ljava/lang/StringBuilder;
+000122: const-string v2, "pcDirectAdd is "
+000126: invoke-direct v0, v2, Ljava/lang/StringBuilder;-><init>(Ljava/lang/String;)V
+00012c: invoke-virtual v0, v10, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+000132: invoke-virtual v0, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
+000138: move-result-object v0
+00013a: invoke-static v1, v0, Lcom/vivo/connect/logger/EasyLog;->e(Ljava/lang/String; Ljava/lang/String;)V
+000140: invoke-static Lcom/vivo/pcsuite/common/http/ok/OkClient;->getInstance()Lokhttp3/t;
+000146: move-result-object v0
+000148: new-instance v1, Lokhttp3/u$a;
+00014c: invoke-direct v1, Lokhttp3/u$a;-><init>()V
+000152: invoke-virtual v1, v10, Lokhttp3/u$a;->h(Ljava/lang/String;)V
+000158: invoke-virtual v1, Lokhttp3/u$a;->c()V
+00015e: invoke-virtual v1, Lokhttp3/u$a;->b()Lokhttp3/u;
+000164: move-result-object v10
+000166: invoke-virtual v0, Ljava/lang/Object;->getClass()Ljava/lang/Class;
+00016c: new-instance v1, Lokhttp3/internal/connection/e;
+000170: const/4 v2, 0
+000172: invoke-direct v1, v0, v10, v2, Lokhttp3/internal/connection/e;-><init>(Lokhttp3/t; Lokhttp3/u; Z)V
+000178: new-instance v10, Lcom/vivo/pcsuite/connect/ConnectModel$3;
+00017c: invoke-direct v10, Ljava/lang/Object;-><init>()V
+000182: invoke-virtual v1, v10, Lokhttp3/internal/connection/e;->f(Lokhttp3/f;)V
+000188: return-void 
+00018a: const-string v10, "pcDirectAdd is empty , return "
+00018e: invoke-static v1, v10, Lcom/vivo/connect/logger/EasyLog;->e(Ljava/lang/String; Ljava/lang/String;)V
+000194: return-void 
+
+METHOD showBusyDialog()V
+000000: sget-object v4, Lcom/vivo/pcsuite/PcSuiteApplication;->I1 Lcom/vivo/pcsuite/PcSuiteApplication;
+000004: invoke-virtual v4, Landroid/content/Context;->getApplicationContext()Landroid/content/Context;
+00000a: move-result-object v4
+00000c: if-nez v4, +003h
+000010: goto +58h
+000012: const v0, 2131756204
+000018: invoke-virtual v4, v0, Landroid/content/Context;->getString(I)Ljava/lang/String;
+00001e: move-result-object v0
+000020: const v1, 2131756203
+000026: invoke-virtual v4, v1, Landroid/content/Context;->getString(I)Ljava/lang/String;
+00002c: move-result-object v1
+00002e: new-instance v2, Lcom/originui/widget/dialog/v;
+000032: const/4 v3, -2
+000034: invoke-direct v2, v4, v3, Lcom/originui/widget/dialog/v;-><init>(Landroid/content/Context; I)V
+00003a: invoke-virtual v2, v0, Lcom/originui/widget/dialog/v;->m(Ljava/lang/CharSequence;)V
+000040: invoke-virtual v2, v1, Lcom/originui/widget/dialog/v;->f(Ljava/lang/CharSequence;)V
+000046: const v0, 2131756454
+00004c: invoke-virtual v4, v0, Landroid/content/Context;->getString(I)Ljava/lang/String;
+000052: move-result-object v4
+000054: new-instance v0, Lcom/vivo/pcsuite/connect/ConnectModel$5;
+000058: invoke-direct v0, Ljava/lang/Object;-><init>()V
+00005e: invoke-virtual v2, v4, v0, Lcom/originui/widget/dialog/v;->h(Ljava/lang/String; Landroid/content/DialogInterface$OnClickListener;)V
+000064: invoke-virtual v2, Lcom/originui/widget/dialog/v;->a()Landroid/app/Dialog;
+00006a: move-result-object v4
+00006c: invoke-virtual v4, Landroid/app/Dialog;->getWindow()Landroid/view/Window;
+000072: move-result-object v0
+000074: if-eqz v0, +00fh
+000078: invoke-virtual v0, Landroid/view/Window;->getAttributes()Landroid/view/WindowManager$LayoutParams;
+00007e: move-result-object v1
+000080: if-eqz v1, +006h
+000084: const/16 v2, 2008
+000088: iput v2, v1, Landroid/view/WindowManager$LayoutParams;->type I
+00008c: invoke-virtual v0, v1, Landroid/view/Window;->setAttributes(Landroid/view/WindowManager$LayoutParams;)V
+000092: invoke-static LG0/l;->s()V
+000098: const/4 v0, 0
+00009a: invoke-virtual v4, v0, Landroid/app/Dialog;->setCanceledOnTouchOutside(Z)V
+0000a0: invoke-virtual v4, Landroid/app/Dialog;->show()V
+0000a6: instance-of v1, v4, Lcom/originui/widget/dialog/s;
+0000aa: if-eqz v1, +00bh
+0000ae: check-cast v4, Lcom/originui/widget/dialog/s;
+0000b2: invoke-virtual v4, Lcom/originui/widget/dialog/s;->d()Lcom/originui/widget/dialog/VCustomRoundRectLayout;
+0000b8: move-result-object v4
+0000ba: invoke-static v0, v4, Lcom/originui/core/utils/s;->n(I Landroid/view/View;)V
+0000c0: return-void 
+
+METHOD startConnect(Ljava/lang/String;)V
+000000: invoke-static v8, Landroid/text/TextUtils;->isEmpty(Ljava/lang/CharSequence;)Z
+000006: move-result v0
+000008: if-nez v0, +007h
+00000c: sget-object v0, Lcom/vivo/pcsuite/PcSuiteApplication;->I1 Lcom/vivo/pcsuite/PcSuiteApplication;
+000010: invoke-virtual v0, Lcom/vivo/pcsuite/PcSuiteApplication;->d0()V
+000016: invoke-static v8, Landroid/text/TextUtils;->isEmpty(Ljava/lang/CharSequence;)Z
+00001c: move-result v0
+00001e: if-eqz v0, +004h
+000022: goto/16 +0abh
+000026: invoke-static v8, Landroid/net/Uri;->parse(Ljava/lang/String;)Landroid/net/Uri;
+00002c: move-result-object v0
+00002e: new-instance v1, Ljava/lang/StringBuilder;
+000032: const-string v2, "qrString : "
+000036: invoke-direct v1, v2, Ljava/lang/StringBuilder;-><init>(Ljava/lang/String;)V
+00003c: invoke-virtual v1, v8, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+000042: invoke-virtual v1, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
+000048: move-result-object v1
+00004a: const-string v2, "Clarence"
+00004e: invoke-static v2, v1, Lcom/vivo/connect/logger/EasyLog;->i(Ljava/lang/String; Ljava/lang/String;)V
+000054: const-string v1, "s"
+000058: invoke-virtual v0, v1, Landroid/net/Uri;->getQueryParameter(Ljava/lang/String;)Ljava/lang/String;
+00005e: const-string v1, "ls"
+000062: invoke-virtual v0, v1, Landroid/net/Uri;->getQueryParameter(Ljava/lang/String;)Ljava/lang/String;
+000068: move-result-object v1
+00006a: const-string v3, "lip"
+00006e: invoke-virtual v0, v3, Landroid/net/Uri;->getQueryParameter(Ljava/lang/String;)Ljava/lang/String;
+000074: move-result-object v3
+000076: const-string/jumbo v4, we
+00007c: const/4 v5, 0
+00007e: invoke-virtual v0, v4, v5, Landroid/net/Uri;->getBooleanQueryParameter(Ljava/lang/String; Z)Z
+000084: move-result v4
+000086: iput-boolean v4, v7, Lcom/vivo/pcsuite/connect/ConnectModel;->a Z
+00008a: const-string/jumbo v4, wid
+000090: invoke-virtual v0, v4, Landroid/net/Uri;->getQueryParameter(Ljava/lang/String;)Ljava/lang/String;
+000096: move-result-object v4
+000098: iput-object v4, v7, Lcom/vivo/pcsuite/connect/ConnectModel;->b Ljava/lang/String;
+00009c: const-string/jumbo v4, wpw
+0000a2: invoke-virtual v0, v4, Landroid/net/Uri;->getQueryParameter(Ljava/lang/String;)Ljava/lang/String;
+0000a8: move-result-object v4
+0000aa: iput-object v4, v7, Lcom/vivo/pcsuite/connect/ConnectModel;->c Ljava/lang/String;
+0000ae: const-string v4, "gw"
+0000b2: invoke-virtual v0, v4, Landroid/net/Uri;->getQueryParameter(Ljava/lang/String;)Ljava/lang/String;
+0000b8: move-result-object v4
+0000ba: iput-object v4, v7, Lcom/vivo/pcsuite/connect/ConnectModel;->d Ljava/lang/String;
+0000be: new-instance v4, Ljava/lang/StringBuilder;
+0000c2: const-string v6, "gw 1 = "
+0000c6: invoke-direct v4, v6, Ljava/lang/StringBuilder;-><init>(Ljava/lang/String;)V
+0000cc: iget-object v6, v7, Lcom/vivo/pcsuite/connect/ConnectModel;->d Ljava/lang/String;
+0000d0: invoke-virtual v4, v6, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+0000d6: invoke-virtual v4, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
+0000dc: move-result-object v4
+0000de: invoke-static v2, v4, Lcom/vivo/connect/logger/EasyLog;->i(Ljava/lang/String; Ljava/lang/String;)V
+0000e4: const-string v4, "dt"
+0000e8: invoke-virtual v0, v4, Landroid/net/Uri;->getQueryParameter(Ljava/lang/String;)Ljava/lang/String;
+0000ee: const-string/jumbo v4, wm
+0000f4: invoke-virtual v0, v4, Landroid/net/Uri;->getQueryParameter(Ljava/lang/String;)Ljava/lang/String;
+0000fa: move-result-object v4
+0000fc: const-string/jumbo v6, t
+000102: invoke-virtual v0, v6, Landroid/net/Uri;->getQueryParameter(Ljava/lang/String;)Ljava/lang/String;
+000108: move-result-object v0
+00010a: invoke-static v0, Lcom/vivo/castsdk/common/GlobalSettings;->setRemoteToken(Ljava/lang/String;)V
+000110: new-instance v0, Ljava/lang/StringBuilder;
+000114: const-string v6, "ls = "
+000118: invoke-direct v0, v6, Ljava/lang/StringBuilder;-><init>(Ljava/lang/String;)V
+00011e: invoke-virtual v0, v1, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+000124: invoke-virtual v0, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
+00012a: move-result-object v0
+00012c: const-string v6, "ConnectModel"
+000130: invoke-static v6, v0, Lcom/vivo/connect/logger/EasyLog;->i(Ljava/lang/String; Ljava/lang/String;)V
+000136: const-string/jumbo v0, true
+00013c: invoke-virtual v0, v1, Ljava/lang/String;->equals(Ljava/lang/Object;)Z
+000142: move-result v0
+000144: if-eqz v0, +056h
+000148: if-eqz v3, +019h
+00014c: invoke-virtual v3, Ljava/lang/String;->isEmpty()Z
+000152: move-result v0
+000154: if-nez v0, +013h
+000158: const-string v0, ";"
+00015c: invoke-virtual v3, v0, Ljava/lang/String;->split(Ljava/lang/String;)[Ljava/lang/String;
+000162: move-result-object v0
+000164: if-eqz v0, +00ah
+000168: array-length v1, v0
+00016a: if-lez v1, +007h
+00016e: iget-boolean v1, v7, Lcom/vivo/pcsuite/connect/ConnectModel;->a Z
+000172: invoke-direct v7, v8, v5, v1, v0, Lcom/vivo/pcsuite/connect/ConnectModel;->e(Ljava/lang/String; I Z [Ljava/lang/String;)V
+000178: return-void 
+00017a: iget-boolean v8, v7, Lcom/vivo/pcsuite/connect/ConnectModel;->a Z
+00017e: if-eqz v8, +033h
+000182: new-instance v8, Ljava/lang/StringBuilder;
+000186: const-string v0, "lip is null ,jump to p2p wid: "
+00018a: invoke-direct v8, v0, Ljava/lang/StringBuilder;-><init>(Ljava/lang/String;)V
+000190: iget-object v0, v7, Lcom/vivo/pcsuite/connect/ConnectModel;->b Ljava/lang/String;
+000194: invoke-virtual v8, v0, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+00019a: const-string v0, " wpw :"
+00019e: invoke-virtual v8, v0, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+0001a4: iget-object v0, v7, Lcom/vivo/pcsuite/connect/ConnectModel;->c Ljava/lang/String;
+0001a8: invoke-virtual v8, v0, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+0001ae: const-string v0, " wm : "
+0001b2: invoke-virtual v8, v0, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+0001b8: invoke-virtual v8, v4, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+0001be: invoke-virtual v8, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
+0001c4: move-result-object v8
+0001c6: invoke-static v2, v8, Lcom/vivo/connect/logger/EasyLog;->i(Ljava/lang/String; Ljava/lang/String;)V
+0001cc: invoke-static Lcom/vivo/pcsuite/connect/ConnectControlModel;->getInstance()Lcom/vivo/pcsuite/connect/ConnectControlModel;
+0001d2: move-result-object v8
+0001d4: iget-object v0, v7, Lcom/vivo/pcsuite/connect/ConnectModel;->b Ljava/lang/String;
+0001d8: iget-object v7, v7, Lcom/vivo/pcsuite/connect/ConnectModel;->c Ljava/lang/String;
+0001dc: invoke-virtual v8, v0, v7, v4, Lcom/vivo/pcsuite/connect/ConnectControlModel;->qrConnectP2P(Ljava/lang/String; Ljava/lang/String; Ljava/lang/String;)V
+0001e2: return-void 
+0001e4: const-string v7, "lip is empty,and we is false"
+0001e8: invoke-static v6, v7, Lcom/vivo/connect/logger/EasyLog;->i(Ljava/lang/String; Ljava/lang/String;)V
+0001ee: return-void 
+0001f0: new-instance v0, Lcom/vivo/pcsuite/connect/ConnectModel$1;
+0001f4: invoke-direct v0, v7, v8, Lcom/vivo/pcsuite/connect/ConnectModel$1;-><init>(Lcom/vivo/pcsuite/connect/ConnectModel; Ljava/lang/String;)V
+0001fa: invoke-static v0, Lcom/vivo/castsdk/sdk/common/utils/ThreadPoolUtils;->postOnBackgroundThread(Ljava/lang/Runnable;)Ljava/util/concurrent/Future;
+000200: return-void 

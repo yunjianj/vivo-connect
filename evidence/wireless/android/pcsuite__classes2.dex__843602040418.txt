@@ -1,0 +1,75 @@
+APK pcsuite/updateApk/pcsuite.apk
+DEX classes2.dex
+CLASS Lcom/vivo/connect/sdk/h/c;
+SUPER Ljava/lang/Object;
+FIELDS
+c Ljava/lang/String; = 'OnSuccessRunnableTAG'
+a Lcom/vivo/connect/tasks/c; = None
+b Lcom/vivo/connect/tasks/Task; = None
+
+METHOD <init>(Lcom/vivo/connect/tasks/c; Lcom/vivo/connect/tasks/Task;)V
+000000: invoke-direct v0, Ljava/lang/Object;-><init>()V
+000006: iput-object v1, v0, Lcom/vivo/connect/sdk/h/c;->a Lcom/vivo/connect/tasks/c;
+00000a: iput-object v2, v0, Lcom/vivo/connect/sdk/h/c;->b Lcom/vivo/connect/tasks/Task;
+00000e: return-void 
+
+METHOD run()V
+000000: const-string v0, "call onSuccess error:"
+000004: const-string v1, "onSuccess called, result="
+000008: const-string v2, "OnSuccessListener is null:"
+00000c: iget-object v3, v6, Lcom/vivo/connect/sdk/h/c;->a Lcom/vivo/connect/tasks/c;
+000010: invoke-virtual v3, Lcom/vivo/connect/tasks/c;->a()Ljava/lang/Object;
+000016: move-result-object v3
+000018: monitor-enter v3
+00001a: const-string v4, "OnSuccessRunnableTAG"
+00001e: new-instance v5, Ljava/lang/StringBuilder;
+000022: invoke-direct v5, v2, Ljava/lang/StringBuilder;-><init>(Ljava/lang/String;)V
+000028: iget-object v2, v6, Lcom/vivo/connect/sdk/h/c;->a Lcom/vivo/connect/tasks/c;
+00002c: invoke-virtual v2, Lcom/vivo/connect/tasks/c;->b()Lcom/vivo/connect/tasks/OnSuccessListener;
+000032: move-result-object v2
+000034: if-nez v2, +004h
+000038: const/4 v2, 1
+00003a: goto +2h
+00003c: const/4 v2, 0
+00003e: invoke-virtual v5, v2, Ljava/lang/StringBuilder;->append(Z)Ljava/lang/StringBuilder;
+000044: invoke-virtual v5, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
+00004a: move-result-object v2
+00004c: invoke-static v4, v2, Lcom/vivo/connect/logger/EasyLog;->d(Ljava/lang/String; Ljava/lang/String;)V
+000052: iget-object v2, v6, Lcom/vivo/connect/sdk/h/c;->a Lcom/vivo/connect/tasks/c;
+000056: invoke-virtual v2, Lcom/vivo/connect/tasks/c;->b()Lcom/vivo/connect/tasks/OnSuccessListener;
+00005c: move-result-object v2
+00005e: if-eqz v2, +041h
+000062: iget-object v2, v6, Lcom/vivo/connect/sdk/h/c;->a Lcom/vivo/connect/tasks/c;
+000066: invoke-virtual v2, Lcom/vivo/connect/tasks/c;->b()Lcom/vivo/connect/tasks/OnSuccessListener;
+00006c: move-result-object v2
+00006e: iget-object v4, v6, Lcom/vivo/connect/sdk/h/c;->b Lcom/vivo/connect/tasks/Task;
+000072: invoke-virtual v4, Lcom/vivo/connect/tasks/Task;->getResult()Ljava/lang/Object;
+000078: move-result-object v4
+00007a: invoke-interface v2, v4, Lcom/vivo/connect/tasks/OnSuccessListener;->onSuccess(Ljava/lang/Object;)V
+000080: const-string v2, "OnSuccessRunnableTAG"
+000084: new-instance v4, Ljava/lang/StringBuilder;
+000088: invoke-direct v4, v1, Ljava/lang/StringBuilder;-><init>(Ljava/lang/String;)V
+00008e: iget-object v6, v6, Lcom/vivo/connect/sdk/h/c;->b Lcom/vivo/connect/tasks/Task;
+000092: invoke-virtual v6, Lcom/vivo/connect/tasks/Task;->getResult()Ljava/lang/Object;
+000098: move-result-object v6
+00009a: invoke-virtual v4, v6, Ljava/lang/StringBuilder;->append(Ljava/lang/Object;)Ljava/lang/StringBuilder;
+0000a0: invoke-virtual v4, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
+0000a6: move-result-object v6
+0000a8: invoke-static v2, v6, Lcom/vivo/connect/logger/EasyLog;->d(Ljava/lang/String; Ljava/lang/String;)V
+0000ae: goto +19h
+0000b0: move-exception v6
+0000b2: goto +19h
+0000b4: move-exception v6
+0000b6: const-string v1, "OnSuccessRunnableTAG"
+0000ba: new-instance v2, Ljava/lang/StringBuilder;
+0000be: invoke-direct v2, v0, Ljava/lang/StringBuilder;-><init>(Ljava/lang/String;)V
+0000c4: invoke-virtual v6, Ljava/lang/Object;->toString()Ljava/lang/String;
+0000ca: move-result-object v6
+0000cc: invoke-virtual v2, v6, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+0000d2: invoke-virtual v2, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
+0000d8: move-result-object v6
+0000da: invoke-static v1, v6, Lcom/vivo/connect/logger/EasyLog;->e(Ljava/lang/String; Ljava/lang/String;)V
+0000e0: monitor-exit v3
+0000e2: return-void 
+0000e4: monitor-exit v3
+0000e6: throw v6

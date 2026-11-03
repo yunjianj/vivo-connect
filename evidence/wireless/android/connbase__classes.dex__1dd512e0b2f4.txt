@@ -1,0 +1,58 @@
+APK pcsuite/updateApk/connbase.apk
+DEX classes.dex
+CLASS Lcom/vivo/connbase/VivoConnectService$p$m;
+SUPER Ljava/lang/Object;
+FIELDS
+a Ljava/lang/String; = None
+b Ljava/lang/String; = None
+c Lcom/vivo/connbase/connect/k; = None
+d Lcom/vivo/connbase/VivoConnectService$p; = None
+
+METHOD <init>(Lcom/vivo/connbase/VivoConnectService$p; Ljava/lang/String; Ljava/lang/String; Lcom/vivo/connbase/connect/k;)V
+000000: iput-object v1, v0, Lcom/vivo/connbase/VivoConnectService$p$m;->d Lcom/vivo/connbase/VivoConnectService$p;
+000004: iput-object v2, v0, Lcom/vivo/connbase/VivoConnectService$p$m;->a Ljava/lang/String;
+000008: iput-object v3, v0, Lcom/vivo/connbase/VivoConnectService$p$m;->b Ljava/lang/String;
+00000c: iput-object v4, v0, Lcom/vivo/connbase/VivoConnectService$p$m;->c Lcom/vivo/connbase/connect/k;
+000010: invoke-direct v0, Ljava/lang/Object;-><init>()V
+000016: return-void 
+
+METHOD run()V
+000000: const-string v0, "VivoConnectService"
+000004: const-string v1, "switch transfer timeout!"
+000008: invoke-static v0, v1, Lc/c/f/a/b;->p(Ljava/lang/String; Ljava/lang/String;)V
+00000e: new-instance v1, Lcom/vivo/connbase/connect/q;
+000012: invoke-direct v1, Lcom/vivo/connbase/connect/q;-><init>()V
+000018: const/4 v2, 1
+00001a: invoke-virtual v1, v2, Lcom/vivo/connbase/connect/q;->a(I)V
+000020: iget-object v2, v4, Lcom/vivo/connbase/VivoConnectService$p$m;->a Ljava/lang/String;
+000024: invoke-virtual v1, v2, Lcom/vivo/connbase/connect/q;->b(Ljava/lang/String;)V
+00002a: iget-object v2, v4, Lcom/vivo/connbase/VivoConnectService$p$m;->b Ljava/lang/String;
+00002e: invoke-virtual v1, v2, Lcom/vivo/connbase/connect/q;->a(Ljava/lang/String;)V
+000034: const/16 v2, 221
+000038: invoke-virtual v1, v2, Lcom/vivo/connbase/connect/q;->b(I)V
+00003e: iget-object v2, v4, Lcom/vivo/connbase/VivoConnectService$p$m;->c Lcom/vivo/connbase/connect/k;
+000042: invoke-virtual v2, Lcom/vivo/connbase/connect/k;->i()Lcom/vivo/connbase/IConnectionCallback;
+000048: move-result-object v2
+00004a: if-eqz v2, +030h
+00004e: const-string v2, "switch layer timeout, call onTransferLayerSwitched"
+000052: invoke-static v0, v2, Lc/c/f/a/b;->k(Ljava/lang/String; Ljava/lang/String;)V
+000058: iget-object v2, v4, Lcom/vivo/connbase/VivoConnectService$p$m;->c Lcom/vivo/connbase/connect/k;
+00005c: invoke-virtual v2, Lcom/vivo/connbase/connect/k;->i()Lcom/vivo/connbase/IConnectionCallback;
+000062: move-result-object v2
+000064: iget-object v3, v4, Lcom/vivo/connbase/VivoConnectService$p$m;->b Ljava/lang/String;
+000068: invoke-static v1, Lcom/vivo/connbase/e0/g/d;->a(Lcom/vivo/connbase/connect/q;)Ljava/lang/String;
+00006e: move-result-object v1
+000070: invoke-interface v2, v3, v1, Lcom/vivo/connbase/IConnectionCallback;->onTransferLayerSwitched(Ljava/lang/String; Ljava/lang/String;)V
+000076: goto +1ah
+000078: move-exception v1
+00007a: new-instance v2, Ljava/lang/StringBuilder;
+00007e: invoke-direct v2, Ljava/lang/StringBuilder;-><init>()V
+000084: const-string v3, "onTransferLayerSwitched error:"
+000088: invoke-virtual v2, v3, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+00008e: invoke-virtual v1, Landroid/os/RemoteException;->toString()Ljava/lang/String;
+000094: move-result-object v1
+000096: invoke-virtual v2, v1, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+00009c: invoke-virtual v2, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
+0000a2: move-result-object v1
+0000a4: invoke-static v0, v1, Lc/c/f/a/b;->g(Ljava/lang/String; Ljava/lang/String;)V
+0000aa: return-void 

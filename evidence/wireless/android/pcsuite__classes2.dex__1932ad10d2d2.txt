@@ -1,0 +1,190 @@
+APK pcsuite/updateApk/pcsuite.apk
+DEX classes2.dex
+CLASS Lcom/vivo/connect/ConnectionInfo;
+SUPER Ljava/lang/Object;
+FIELDS
+a Ljava/lang/String; = None
+b Ljava/lang/String; = None
+c Z = None
+d Ljava/lang/String; = None
+e Ljava/lang/String; = None
+f Ljava/lang/String; = None
+g Ljava/lang/String; = None
+h Ljava/lang/String; = None
+i Ljava/lang/String; = None
+j Z = None
+k Z = None
+l Ljava/lang/String; = None
+m Ljava/lang/String; = None
+
+METHOD <init>()V
+000000: invoke-direct v0, Ljava/lang/Object;-><init>()V
+000006: return-void 
+
+METHOD a(Ljava/lang/String;)V
+000000: iput-object v1, v0, Lcom/vivo/connect/ConnectionInfo;->a Ljava/lang/String;
+000004: return-void 
+
+METHOD a(Z)V
+000000: iput-boolean v1, v0, Lcom/vivo/connect/ConnectionInfo;->c Z
+000004: return-void 
+
+METHOD b(Ljava/lang/String;)V
+000000: iput-object v1, v0, Lcom/vivo/connect/ConnectionInfo;->d Ljava/lang/String;
+000004: return-void 
+
+METHOD c(Ljava/lang/String;)V
+000000: iput-object v1, v0, Lcom/vivo/connect/ConnectionInfo;->b Ljava/lang/String;
+000004: return-void 
+
+METHOD getAuthToken()Ljava/lang/String;
+000000: iget-object v0, v0, Lcom/vivo/connect/ConnectionInfo;->a Ljava/lang/String;
+000004: return-object v0
+
+METHOD getDeviceId()Ljava/lang/String;
+000000: iget-object v0, v0, Lcom/vivo/connect/ConnectionInfo;->d Ljava/lang/String;
+000004: return-object v0
+
+METHOD getEndPointName()Ljava/lang/String;
+000000: iget-object v0, v0, Lcom/vivo/connect/ConnectionInfo;->b Ljava/lang/String;
+000004: return-object v0
+
+METHOD getExtraInfo()Ljava/lang/String;
+000000: iget-object v0, v0, Lcom/vivo/connect/ConnectionInfo;->i Ljava/lang/String;
+000004: return-object v0
+
+METHOD getQrCodeToken()Ljava/lang/String;
+000000: iget-object v0, v0, Lcom/vivo/connect/ConnectionInfo;->l Ljava/lang/String;
+000004: return-object v0
+
+METHOD getRemoteAvatarUrl()Ljava/lang/String;
+000000: iget-object v0, v0, Lcom/vivo/connect/ConnectionInfo;->h Ljava/lang/String;
+000004: return-object v0
+
+METHOD getRemoteIp()Ljava/lang/String;
+000000: iget-object v0, v0, Lcom/vivo/connect/ConnectionInfo;->m Ljava/lang/String;
+000004: return-object v0
+
+METHOD getSelfAvatarUrl()Ljava/lang/String;
+000000: iget-object v0, v0, Lcom/vivo/connect/ConnectionInfo;->g Ljava/lang/String;
+000004: return-object v0
+
+METHOD getSelfOpenId()Ljava/lang/String;
+000000: iget-object v0, v0, Lcom/vivo/connect/ConnectionInfo;->f Ljava/lang/String;
+000004: return-object v0
+
+METHOD getSelfVivoNickName()Ljava/lang/String;
+000000: iget-object v0, v0, Lcom/vivo/connect/ConnectionInfo;->e Ljava/lang/String;
+000004: return-object v0
+
+METHOD isIncomingConnection()Z
+000000: iget-boolean v0, v0, Lcom/vivo/connect/ConnectionInfo;->c Z
+000004: return v0
+
+METHOD isP2pGroupOwner()Z
+000000: iget-boolean v0, v0, Lcom/vivo/connect/ConnectionInfo;->k Z
+000004: return v0
+
+METHOD isSameOpenId()Z
+000000: iget-boolean v0, v0, Lcom/vivo/connect/ConnectionInfo;->j Z
+000004: return v0
+
+METHOD setExtraInfo(Ljava/lang/String;)V
+000000: iput-object v1, v0, Lcom/vivo/connect/ConnectionInfo;->i Ljava/lang/String;
+000004: return-void 
+
+METHOD setQrCodeToken(Ljava/lang/String;)V
+000000: iput-object v1, v0, Lcom/vivo/connect/ConnectionInfo;->l Ljava/lang/String;
+000004: return-void 
+
+METHOD setRemoteAvatarUrl(Ljava/lang/String;)V
+000000: iput-object v1, v0, Lcom/vivo/connect/ConnectionInfo;->h Ljava/lang/String;
+000004: return-void 
+
+METHOD setRemoteIp(Ljava/lang/String;)V
+000000: iput-object v1, v0, Lcom/vivo/connect/ConnectionInfo;->m Ljava/lang/String;
+000004: return-void 
+
+METHOD setSameOpenId(Z)V
+000000: iput-boolean v1, v0, Lcom/vivo/connect/ConnectionInfo;->j Z
+000004: return-void 
+
+METHOD setSelfAvatarUrl(Ljava/lang/String;)V
+000000: iput-object v1, v0, Lcom/vivo/connect/ConnectionInfo;->g Ljava/lang/String;
+000004: return-void 
+
+METHOD setSelfOpenId(Ljava/lang/String;)V
+000000: iput-object v1, v0, Lcom/vivo/connect/ConnectionInfo;->f Ljava/lang/String;
+000004: return-void 
+
+METHOD setSelfVivoNickName(Ljava/lang/String;)V
+000000: iput-object v1, v0, Lcom/vivo/connect/ConnectionInfo;->e Ljava/lang/String;
+000004: return-void 
+
+METHOD toString()Ljava/lang/String;
+000000: new-instance v0, Ljava/lang/StringBuilder;
+000004: const-string v1, "ConnectionInfo{authToken='"
+000008: invoke-direct v0, v1, Ljava/lang/StringBuilder;-><init>(Ljava/lang/String;)V
+00000e: iget-object v1, v2, Lcom/vivo/connect/ConnectionInfo;->a Ljava/lang/String;
+000012: invoke-virtual v0, v1, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+000018: const-string v1, "', endPointName='"
+00001c: invoke-virtual v0, v1, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+000022: iget-object v1, v2, Lcom/vivo/connect/ConnectionInfo;->b Ljava/lang/String;
+000026: invoke-virtual v0, v1, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+00002c: const-string v1, "', isIncomingConnection="
+000030: invoke-virtual v0, v1, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+000036: iget-boolean v1, v2, Lcom/vivo/connect/ConnectionInfo;->c Z
+00003a: invoke-virtual v0, v1, Ljava/lang/StringBuilder;->append(Z)Ljava/lang/StringBuilder;
+000040: const-string v1, ", dd='"
+000044: invoke-virtual v0, v1, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+00004a: iget-object v1, v2, Lcom/vivo/connect/ConnectionInfo;->d Ljava/lang/String;
+00004e: invoke-virtual v0, v1, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+000054: const-string v1, "', od='"
+000058: invoke-virtual v0, v1, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+00005e: iget-object v1, v2, Lcom/vivo/connect/ConnectionInfo;->f Ljava/lang/String;
+000062: invoke-static v1, Landroid/text/TextUtils;->isEmpty(Ljava/lang/CharSequence;)Z
+000068: move-result v1
+00006a: if-eqz v1, +005h
+00006e: const-string v1, ""
+000072: goto +bh
+000074: iget-object v1, v2, Lcom/vivo/connect/ConnectionInfo;->f Ljava/lang/String;
+000078: invoke-virtual v1, Ljava/lang/String;->hashCode()I
+00007e: move-result v1
+000080: invoke-static v1, Ljava/lang/Integer;->valueOf(I)Ljava/lang/Integer;
+000086: move-result-object v1
+000088: invoke-virtual v0, v1, Ljava/lang/StringBuilder;->append(Ljava/lang/Object;)Ljava/lang/StringBuilder;
+00008e: const-string v1, "', selfAvatar='"
+000092: invoke-virtual v0, v1, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+000098: iget-object v1, v2, Lcom/vivo/connect/ConnectionInfo;->g Ljava/lang/String;
+00009c: invoke-virtual v0, v1, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+0000a2: const-string v1, "', remoteAvatar='"
+0000a6: invoke-virtual v0, v1, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+0000ac: iget-object v1, v2, Lcom/vivo/connect/ConnectionInfo;->h Ljava/lang/String;
+0000b0: invoke-virtual v0, v1, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+0000b6: const-string v1, "', extraInfo='"
+0000ba: invoke-virtual v0, v1, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+0000c0: iget-object v1, v2, Lcom/vivo/connect/ConnectionInfo;->i Ljava/lang/String;
+0000c4: invoke-virtual v0, v1, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+0000ca: const-string v1, "', isOd="
+0000ce: invoke-virtual v0, v1, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+0000d4: iget-boolean v1, v2, Lcom/vivo/connect/ConnectionInfo;->j Z
+0000d8: invoke-virtual v0, v1, Ljava/lang/StringBuilder;->append(Z)Ljava/lang/StringBuilder;
+0000de: const-string v1, ", p2pGroupOwner="
+0000e2: invoke-virtual v0, v1, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+0000e8: iget-boolean v1, v2, Lcom/vivo/connect/ConnectionInfo;->k Z
+0000ec: invoke-virtual v0, v1, Ljava/lang/StringBuilder;->append(Z)Ljava/lang/StringBuilder;
+0000f2: const-string v1, ", qrCodeToken="
+0000f6: invoke-virtual v0, v1, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+0000fc: iget-object v1, v2, Lcom/vivo/connect/ConnectionInfo;->l Ljava/lang/String;
+000100: invoke-virtual v0, v1, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+000106: const-string v1, ", remoteIp="
+00010a: invoke-virtual v0, v1, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+000110: iget-object v2, v2, Lcom/vivo/connect/ConnectionInfo;->m Ljava/lang/String;
+000114: invoke-static v2, Lcom/vivo/connect/sdk/i/c;->a(Ljava/lang/String;)Ljava/lang/String;
+00011a: move-result-object v2
+00011c: invoke-virtual v0, v2, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+000122: const/16 v2, 125
+000126: invoke-virtual v0, v2, Ljava/lang/StringBuilder;->append(C)Ljava/lang/StringBuilder;
+00012c: invoke-virtual v0, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
+000132: move-result-object v2
+000134: return-object v2

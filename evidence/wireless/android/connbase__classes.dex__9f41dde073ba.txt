@@ -1,0 +1,25 @@
+APK pcsuite/updateApk/connbase.apk
+DEX classes.dex
+CLASS Lcom/vivo/connbase/nfc/l$a;
+SUPER Ljava/lang/Object;
+FIELDS
+a Lcom/vivo/connbase/nfc/l; = None
+
+METHOD <init>(Lcom/vivo/connbase/nfc/l;)V
+000000: iput-object v1, v0, Lcom/vivo/connbase/nfc/l$a;->a Lcom/vivo/connbase/nfc/l;
+000004: invoke-direct v0, Ljava/lang/Object;-><init>()V
+00000a: return-void 
+
+METHOD a(Lcom/vivo/connbase/nfc/NfcTouchedInfo;)V
+000000: new-instance v0, Ljava/lang/StringBuilder;
+000004: invoke-direct v0, Ljava/lang/StringBuilder;-><init>()V
+00000a: const-string v1, "onReceive:"
+00000e: invoke-virtual v0, v1, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+000014: invoke-virtual v0, v3, Ljava/lang/StringBuilder;->append(Ljava/lang/Object;)Ljava/lang/StringBuilder;
+00001a: invoke-virtual v0, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
+000020: move-result-object v0
+000022: const-string v1, "SceneSyncManager"
+000026: invoke-static v1, v0, Lc/c/f/a/b;->k(Ljava/lang/String; Ljava/lang/String;)V
+00002c: iget-object v0, v2, Lcom/vivo/connbase/nfc/l$a;->a Lcom/vivo/connbase/nfc/l;
+000030: invoke-static v0, v3, Lcom/vivo/connbase/nfc/l;->a(Lcom/vivo/connbase/nfc/l; Lcom/vivo/connbase/nfc/NfcTouchedInfo;)V
+000036: return-void 

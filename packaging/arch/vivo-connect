@@ -1,0 +1,5 @@
+#!/bin/sh
+set -eu
+: "${VIVO_STATE_DIR:=${XDG_DATA_HOME:-$HOME/.local/share}/vivo-connect}"
+export VIVO_STATE_DIR
+exec /usr/lib/vivo-connect/bin/vivo-connect-qt "$@"

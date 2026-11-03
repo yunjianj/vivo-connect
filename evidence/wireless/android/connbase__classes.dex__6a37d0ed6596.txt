@@ -1,0 +1,106 @@
+APK pcsuite/updateApk/connbase.apk
+DEX classes.dex
+CLASS Lcom/vivo/connbase/e0/g/g;
+SUPER Ljava/lang/Object;
+FIELDS
+
+
+METHOD <init>()V
+000000: invoke-direct v0, Ljava/lang/Object;-><init>()V
+000006: return-void 
+
+METHOD a(I)I
+000000: if-ltz v0, +003h
+000004: return v0
+000006: new-instance v0, Ljava/lang/IllegalArgumentException;
+00000a: invoke-direct v0, Ljava/lang/IllegalArgumentException;-><init>()V
+000010: throw v0
+
+METHOD a(I I I Ljava/lang/String;)I
+000000: const/4 v0, 2
+000002: const/4 v1, 1
+000004: const/4 v2, 0
+000006: const/4 v3, 3
+000008: if-lt v5, v6, +023h
+00000c: if-gt v5, v7, +003h
+000010: return v5
+000012: new-instance v5, Ljava/lang/IllegalArgumentException;
+000016: sget-object v4, Ljava/util/Locale;->US Ljava/util/Locale;
+00001a: new-array v3, v3, [Ljava/lang/Object;
+00001e: aput-object v8, v3, v2
+000022: invoke-static v6, Ljava/lang/Integer;->valueOf(I)Ljava/lang/Integer;
+000028: move-result-object v6
+00002a: aput-object v6, v3, v1
+00002e: invoke-static v7, Ljava/lang/Integer;->valueOf(I)Ljava/lang/Integer;
+000034: move-result-object v6
+000036: aput-object v6, v3, v0
+00003a: const-string v6, "%s is out of range of [%d, %d] (too high)"
+00003e: invoke-static v4, v6, v3, Ljava/lang/String;->format(Ljava/util/Locale; Ljava/lang/String; [Ljava/lang/Object;)Ljava/lang/String;
+000044: move-result-object v6
+000046: invoke-direct v5, v6, Ljava/lang/IllegalArgumentException;-><init>(Ljava/lang/String;)V
+00004c: throw v5
+00004e: new-instance v5, Ljava/lang/IllegalArgumentException;
+000052: sget-object v4, Ljava/util/Locale;->US Ljava/util/Locale;
+000056: new-array v3, v3, [Ljava/lang/Object;
+00005a: aput-object v8, v3, v2
+00005e: invoke-static v6, Ljava/lang/Integer;->valueOf(I)Ljava/lang/Integer;
+000064: move-result-object v6
+000066: aput-object v6, v3, v1
+00006a: invoke-static v7, Ljava/lang/Integer;->valueOf(I)Ljava/lang/Integer;
+000070: move-result-object v6
+000072: aput-object v6, v3, v0
+000076: const-string v6, "%s is out of range of [%d, %d] (too low)"
+00007a: invoke-static v4, v6, v3, Ljava/lang/String;->format(Ljava/util/Locale; Ljava/lang/String; [Ljava/lang/Object;)Ljava/lang/String;
+000080: move-result-object v6
+000082: invoke-direct v5, v6, Ljava/lang/IllegalArgumentException;-><init>(Ljava/lang/String;)V
+000088: throw v5
+
+METHOD a(I Ljava/lang/String;)I
+000000: if-ltz v0, +003h
+000004: return v0
+000006: new-instance v0, Ljava/lang/IllegalArgumentException;
+00000a: invoke-direct v0, v1, Ljava/lang/IllegalArgumentException;-><init>(Ljava/lang/String;)V
+000010: throw v0
+
+METHOD a(Ljava/lang/Object;)Ljava/lang/Object;
+000000: if-eqz v0, +003h
+000004: return-object v0
+000006: const/4 v0, 0
+000008: throw v0
+
+METHOD a(Ljava/lang/Object; Ljava/lang/Object;)Ljava/lang/Object;
+000000: if-eqz v0, +003h
+000004: return-object v0
+000006: new-instance v0, Ljava/lang/NullPointerException;
+00000a: invoke-static v1, Ljava/lang/String;->valueOf(Ljava/lang/Object;)Ljava/lang/String;
+000010: move-result-object v1
+000012: invoke-direct v0, v1, Ljava/lang/NullPointerException;-><init>(Ljava/lang/String;)V
+000018: throw v0
+
+METHOD a(Z)V
+000000: if-eqz v0, +003h
+000004: return-void 
+000006: new-instance v0, Ljava/lang/IllegalArgumentException;
+00000a: invoke-direct v0, Ljava/lang/IllegalArgumentException;-><init>()V
+000010: throw v0
+
+METHOD a(Z Ljava/lang/Object;)V
+000000: if-eqz v0, +003h
+000004: return-void 
+000006: new-instance v0, Ljava/lang/IllegalArgumentException;
+00000a: invoke-static v1, Ljava/lang/String;->valueOf(Ljava/lang/Object;)Ljava/lang/String;
+000010: move-result-object v1
+000012: invoke-direct v0, v1, Ljava/lang/IllegalArgumentException;-><init>(Ljava/lang/String;)V
+000018: throw v0
+
+METHOD a(Z Ljava/lang/String;)V
+000000: if-eqz v0, +003h
+000004: return-void 
+000006: new-instance v0, Ljava/lang/IllegalStateException;
+00000a: invoke-direct v0, v1, Ljava/lang/IllegalStateException;-><init>(Ljava/lang/String;)V
+000010: throw v0
+
+METHOD b(Z)V
+000000: const/4 v0, 0
+000002: invoke-static v1, v0, Lcom/vivo/connbase/e0/g/g;->a(Z Ljava/lang/String;)V
+000008: return-void 

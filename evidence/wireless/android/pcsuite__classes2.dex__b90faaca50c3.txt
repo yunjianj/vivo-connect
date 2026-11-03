@@ -1,0 +1,58 @@
+APK pcsuite/updateApk/pcsuite.apk
+DEX classes2.dex
+CLASS Lcom/vivo/connect/sdk/f/c$q0;
+SUPER Lcom/vivo/connbase/IAdvertiseCallback$b;
+FIELDS
+d Landroid/bluetooth/le/AdvertiseCallback; = None
+e Landroid/bluetooth/le/AdvertiseSettings; = None
+f Lcom/vivo/connect/sdk/f/c; = None
+
+METHOD <init>(Lcom/vivo/connect/sdk/f/c; Landroid/bluetooth/le/AdvertiseCallback; Landroid/bluetooth/le/AdvertiseSettings;)V
+000000: iput-object v1, v0, Lcom/vivo/connect/sdk/f/c$q0;->f Lcom/vivo/connect/sdk/f/c;
+000004: iput-object v2, v0, Lcom/vivo/connect/sdk/f/c$q0;->d Landroid/bluetooth/le/AdvertiseCallback;
+000008: iput-object v3, v0, Lcom/vivo/connect/sdk/f/c$q0;->e Landroid/bluetooth/le/AdvertiseSettings;
+00000c: invoke-direct v0, Lcom/vivo/connbase/IAdvertiseCallback$b;-><init>()V
+000012: return-void 
+
+METHOD onStartFailure(I)V
+000000: new-instance v0, Ljava/lang/StringBuilder;
+000004: const-string v1, "onStartFailure callback:"
+000008: invoke-direct v0, v1, Ljava/lang/StringBuilder;-><init>(Ljava/lang/String;)V
+00000e: iget-object v1, v2, Lcom/vivo/connect/sdk/f/c$q0;->d Landroid/bluetooth/le/AdvertiseCallback;
+000012: invoke-virtual v0, v1, Ljava/lang/StringBuilder;->append(Ljava/lang/Object;)Ljava/lang/StringBuilder;
+000018: invoke-virtual v0, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
+00001e: move-result-object v0
+000020: const-string v1, "ConnectClientImpl"
+000024: invoke-static v1, v0, Lcom/vivo/connect/logger/EasyLog;->i(Ljava/lang/String; Ljava/lang/String;)V
+00002a: iget-object v2, v2, Lcom/vivo/connect/sdk/f/c$q0;->d Landroid/bluetooth/le/AdvertiseCallback;
+00002e: if-eqz v2, +011h
+000032: invoke-virtual v2, v3, Landroid/bluetooth/le/AdvertiseCallback;->onStartFailure(I)V
+000038: return-void 
+00003a: move-exception v2
+00003c: new-instance v3, Ljava/lang/StringBuilder;
+000040: const-string v0, "onStartFailure call error:"
+000044: invoke-direct v3, v0, Ljava/lang/StringBuilder;-><init>(Ljava/lang/String;)V
+00004a: invoke-static v2, v3, v1, Landroidx/appcompat/widget/view/b;->c(Ljava/lang/Exception; Ljava/lang/StringBuilder; Ljava/lang/String;)V
+000050: return-void 
+
+METHOD onStartSuccess(Landroid/bluetooth/le/AdvertiseSettings;)V
+000000: new-instance v3, Ljava/lang/StringBuilder;
+000004: const-string v0, "onStartSuccess callback:"
+000008: invoke-direct v3, v0, Ljava/lang/StringBuilder;-><init>(Ljava/lang/String;)V
+00000e: iget-object v0, v2, Lcom/vivo/connect/sdk/f/c$q0;->d Landroid/bluetooth/le/AdvertiseCallback;
+000012: invoke-virtual v3, v0, Ljava/lang/StringBuilder;->append(Ljava/lang/Object;)Ljava/lang/StringBuilder;
+000018: invoke-virtual v3, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
+00001e: move-result-object v3
+000020: const-string v0, "ConnectClientImpl"
+000024: invoke-static v0, v3, Lcom/vivo/connect/logger/EasyLog;->i(Ljava/lang/String; Ljava/lang/String;)V
+00002a: iget-object v3, v2, Lcom/vivo/connect/sdk/f/c$q0;->d Landroid/bluetooth/le/AdvertiseCallback;
+00002e: if-eqz v3, +013h
+000032: iget-object v2, v2, Lcom/vivo/connect/sdk/f/c$q0;->e Landroid/bluetooth/le/AdvertiseSettings;
+000036: invoke-virtual v3, v2, Landroid/bluetooth/le/AdvertiseCallback;->onStartSuccess(Landroid/bluetooth/le/AdvertiseSettings;)V
+00003c: return-void 
+00003e: move-exception v2
+000040: new-instance v3, Ljava/lang/StringBuilder;
+000044: const-string v1, "onStartSuccess call error:"
+000048: invoke-direct v3, v1, Ljava/lang/StringBuilder;-><init>(Ljava/lang/String;)V
+00004e: invoke-static v2, v3, v0, Landroidx/appcompat/widget/view/b;->c(Ljava/lang/Exception; Ljava/lang/StringBuilder; Ljava/lang/String;)V
+000054: return-void 

@@ -1,0 +1,37 @@
+APK pcsuite/updateApk/pcsuite.apk
+DEX classes2.dex
+CLASS Lcom/vivo/pcsuite/connect/ConnectControlModel$10;
+SUPER Ljava/lang/Object;
+FIELDS
+a Lcom/vivo/connect/discovery/ScanInfo; = None
+b Ljava/lang/String; = None
+c Lcom/vivo/pcsuite/connect/ConnectControlModel; = None
+
+METHOD <init>(Lcom/vivo/pcsuite/connect/ConnectControlModel; Lcom/vivo/connect/discovery/ScanInfo; Ljava/lang/String;)V
+000000: invoke-direct v0, Ljava/lang/Object;-><init>()V
+000006: iput-object v1, v0, Lcom/vivo/pcsuite/connect/ConnectControlModel$10;->c Lcom/vivo/pcsuite/connect/ConnectControlModel;
+00000a: iput-object v2, v0, Lcom/vivo/pcsuite/connect/ConnectControlModel$10;->a Lcom/vivo/connect/discovery/ScanInfo;
+00000e: iput-object v3, v0, Lcom/vivo/pcsuite/connect/ConnectControlModel$10;->b Ljava/lang/String;
+000012: return-void 
+
+METHOD run()V
+000000: invoke-static LL2/i;->q()LL2/i;
+000006: move-result-object v0
+000008: const/4 v1, 3
+00000a: const/4 v2, 0
+00000c: invoke-virtual v0, v1, v2, LL2/i;->s(I Ljava/lang/String;)V
+000012: iget-object v1, v3, Lcom/vivo/pcsuite/connect/ConnectControlModel$10;->a Lcom/vivo/connect/discovery/ScanInfo;
+000016: invoke-virtual v1, Lcom/vivo/connect/discovery/ScanInfo;->getDeviceName()Ljava/lang/String;
+00001c: move-result-object v2
+00001e: invoke-virtual v0, v2, LL2/i;->x(Ljava/lang/String;)V
+000024: invoke-virtual v1, Lcom/vivo/connect/discovery/ScanInfo;->getAccount()Ljava/lang/String;
+00002a: move-result-object v1
+00002c: invoke-virtual v0, v1, LL2/i;->A(Ljava/lang/String;)V
+000032: new-instance v1, Lcom/vivo/pcsuite/connect/ConnectControlModel$10$2;
+000036: invoke-direct v1, v3, Lcom/vivo/pcsuite/connect/ConnectControlModel$10$2;-><init>(Lcom/vivo/pcsuite/connect/ConnectControlModel$10;)V
+00003c: invoke-virtual v0, v1, LL2/i;->z(LL2/i$c;)V
+000042: new-instance v1, Lcom/vivo/pcsuite/connect/ConnectControlModel$10$1;
+000046: invoke-direct v1, v3, Lcom/vivo/pcsuite/connect/ConnectControlModel$10$1;-><init>(Lcom/vivo/pcsuite/connect/ConnectControlModel$10;)V
+00004c: invoke-virtual v0, v1, LL2/i;->y(LL2/i$c;)V
+000052: invoke-virtual v0, LL2/i;->B()V
+000058: return-void 

@@ -1,0 +1,68 @@
+APK pcsuite/updateApk/pcsuite.apk
+DEX classes2.dex
+CLASS Lcom/vivo/connect/sdk/f/c$g1;
+SUPER Ljava/lang/Object;
+FIELDS
+e Ljava/lang/String; = ':getRemoteAppVersionRunnable'
+a Landroid/os/Messenger; = None
+b Ljava/lang/String; = None
+c Ljava/lang/String; = None
+d Lcom/vivo/connect/sdk/f/c; = None
+
+METHOD <init>(Lcom/vivo/connect/sdk/f/c; Landroid/os/Messenger; Ljava/lang/String; Ljava/lang/String;)V
+000000: iput-object v1, v0, Lcom/vivo/connect/sdk/f/c$g1;->d Lcom/vivo/connect/sdk/f/c;
+000004: iput-object v2, v0, Lcom/vivo/connect/sdk/f/c$g1;->a Landroid/os/Messenger;
+000008: iput-object v3, v0, Lcom/vivo/connect/sdk/f/c$g1;->b Ljava/lang/String;
+00000c: iput-object v4, v0, Lcom/vivo/connect/sdk/f/c$g1;->c Ljava/lang/String;
+000010: invoke-direct v0, Ljava/lang/Object;-><init>()V
+000016: return-void 
+
+METHOD run()V
+000000: const-string v0, "ConnectClientImpl"
+000004: const-string v1, "mConnectApi is null:"
+000008: new-instance v2, Ljava/lang/StringBuilder;
+00000c: invoke-direct v2, v1, Ljava/lang/StringBuilder;-><init>(Ljava/lang/String;)V
+000012: iget-object v1, v4, Lcom/vivo/connect/sdk/f/c$g1;->d Lcom/vivo/connect/sdk/f/c;
+000016: invoke-static v1, Lcom/vivo/connect/sdk/f/c;->a(Lcom/vivo/connect/sdk/f/c;)Lcom/vivo/connbase/IClient;
+00001c: move-result-object v1
+00001e: if-nez v1, +004h
+000022: const/4 v1, 1
+000024: goto +2h
+000026: const/4 v1, 0
+000028: invoke-virtual v2, v1, Ljava/lang/StringBuilder;->append(Z)Ljava/lang/StringBuilder;
+00002e: invoke-virtual v2, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
+000034: move-result-object v1
+000036: invoke-static v0, v1, Lcom/vivo/connect/logger/EasyLog;->i(Ljava/lang/String; Ljava/lang/String;)V
+00003c: iget-object v1, v4, Lcom/vivo/connect/sdk/f/c$g1;->d Lcom/vivo/connect/sdk/f/c;
+000040: invoke-static v1, Lcom/vivo/connect/sdk/f/c;->a(Lcom/vivo/connect/sdk/f/c;)Lcom/vivo/connbase/IClient;
+000046: move-result-object v1
+000048: if-eqz v1, +014h
+00004c: iget-object v1, v4, Lcom/vivo/connect/sdk/f/c$g1;->d Lcom/vivo/connect/sdk/f/c;
+000050: invoke-static v1, Lcom/vivo/connect/sdk/f/c;->a(Lcom/vivo/connect/sdk/f/c;)Lcom/vivo/connbase/IClient;
+000056: move-result-object v1
+000058: iget-object v2, v4, Lcom/vivo/connect/sdk/f/c$g1;->a Landroid/os/Messenger;
+00005c: iget-object v3, v4, Lcom/vivo/connect/sdk/f/c$g1;->b Ljava/lang/String;
+000060: iget-object v4, v4, Lcom/vivo/connect/sdk/f/c$g1;->c Ljava/lang/String;
+000064: invoke-interface v1, v2, v3, v4, Lcom/vivo/connbase/IClient;->getRemoteAppVersion(Landroid/os/Messenger; Ljava/lang/String; Ljava/lang/String;)V
+00006a: return-void 
+00006c: move-exception v4
+00006e: goto +21h
+000070: iget-object v1, v4, Lcom/vivo/connect/sdk/f/c$g1;->d Lcom/vivo/connect/sdk/f/c;
+000074: const-string v2, ":getRemoteAppVersionRunnable"
+000078: invoke-static v1, v2, Lcom/vivo/connect/sdk/f/c;->a(Lcom/vivo/connect/sdk/f/c; Ljava/lang/String;)Z
+00007e: move-result v1
+000080: if-nez v1, +003h
+000084: return-void 
+000086: iget-object v1, v4, Lcom/vivo/connect/sdk/f/c$g1;->d Lcom/vivo/connect/sdk/f/c;
+00008a: invoke-static v1, Lcom/vivo/connect/sdk/f/c;->a(Lcom/vivo/connect/sdk/f/c;)Lcom/vivo/connbase/IClient;
+000090: move-result-object v1
+000092: iget-object v2, v4, Lcom/vivo/connect/sdk/f/c$g1;->a Landroid/os/Messenger;
+000096: iget-object v3, v4, Lcom/vivo/connect/sdk/f/c$g1;->b Ljava/lang/String;
+00009a: iget-object v4, v4, Lcom/vivo/connect/sdk/f/c$g1;->c Ljava/lang/String;
+00009e: invoke-interface v1, v2, v3, v4, Lcom/vivo/connbase/IClient;->getRemoteAppVersion(Landroid/os/Messenger; Ljava/lang/String; Ljava/lang/String;)V
+0000a4: const-string v4, "getRemoteAppVersion called"
+0000a8: invoke-static v0, v4, Lcom/vivo/connect/logger/EasyLog;->i(Ljava/lang/String; Ljava/lang/String;)V
+0000ae: return-void 
+0000b0: const-string v1, "getRemoteAppVersion error:"
+0000b4: invoke-static v4, v1, v0, LV5/S;->h(Ljava/lang/Exception; Ljava/lang/String; Ljava/lang/String;)V
+0000ba: return-void 

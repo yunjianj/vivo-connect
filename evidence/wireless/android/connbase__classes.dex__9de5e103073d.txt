@@ -1,0 +1,1406 @@
+APK pcsuite/updateApk/connbase.apk
+DEX classes.dex
+CLASS Lcom/vivo/connbase/m0/a/e;
+SUPER Ljava/lang/Object;
+FIELDS
+r Ljava/lang/String; = 'WifiP2pServerImpl'
+s I = 5000
+t I = 30000
+u I = 120000
+v Lcom/vivo/connbase/m0/a/g/b; = None
+a Ljava/lang/String; = None
+b Ljava/lang/String; = None
+c Landroid/content/Context; = None
+d Landroid/net/wifi/p2p/WifiP2pManager; = None
+e Landroid/net/wifi/p2p/WifiP2pManager$Channel; = None
+f Landroid/net/wifi/WifiManager; = None
+g Landroid/os/Handler; = None
+h Lcom/vivo/connbase/m0/a/f; = None
+i Landroid/content/BroadcastReceiver; = None
+j Ljava/util/List; = None
+k Lcom/vivo/connbase/m0/a/e$t; = None
+l Z = None
+m Z = None
+n Ljava/lang/Runnable; = None
+o Ljava/lang/Runnable; = None
+p Landroid/content/BroadcastReceiver; = None
+q Z = None
+
+METHOD <clinit>()V
+000000: new-instance v0, Lcom/vivo/connbase/m0/a/g/b;
+000004: invoke-direct v0, Lcom/vivo/connbase/m0/a/g/b;-><init>()V
+00000a: sput-object v0, Lcom/vivo/connbase/m0/a/e;->v Lcom/vivo/connbase/m0/a/g/b;
+00000e: return-void 
+
+METHOD <init>(Landroid/content/Context;)V
+000000: invoke-direct v3, Ljava/lang/Object;-><init>()V
+000006: new-instance v0, Lcom/vivo/connbase/m0/a/f;
+00000a: invoke-direct v0, Lcom/vivo/connbase/m0/a/f;-><init>()V
+000010: iput-object v0, v3, Lcom/vivo/connbase/m0/a/e;->h Lcom/vivo/connbase/m0/a/f;
+000014: new-instance v0, Ljava/util/ArrayList;
+000018: invoke-direct v0, Ljava/util/ArrayList;-><init>()V
+00001e: iput-object v0, v3, Lcom/vivo/connbase/m0/a/e;->j Ljava/util/List;
+000022: const/4 v0, 0
+000024: iput-boolean v0, v3, Lcom/vivo/connbase/m0/a/e;->l Z
+000028: iput-boolean v0, v3, Lcom/vivo/connbase/m0/a/e;->m Z
+00002c: new-instance v1, Lcom/vivo/connbase/m0/a/e$j;
+000030: invoke-direct v1, v3, Lcom/vivo/connbase/m0/a/e$j;-><init>(Lcom/vivo/connbase/m0/a/e;)V
+000036: iput-object v1, v3, Lcom/vivo/connbase/m0/a/e;->n Ljava/lang/Runnable;
+00003a: new-instance v1, Lcom/vivo/connbase/m0/a/e$k;
+00003e: invoke-direct v1, v3, Lcom/vivo/connbase/m0/a/e$k;-><init>(Lcom/vivo/connbase/m0/a/e;)V
+000044: iput-object v1, v3, Lcom/vivo/connbase/m0/a/e;->o Ljava/lang/Runnable;
+000048: new-instance v1, Lcom/vivo/connbase/m0/a/e$l;
+00004c: invoke-direct v1, v3, Lcom/vivo/connbase/m0/a/e$l;-><init>(Lcom/vivo/connbase/m0/a/e;)V
+000052: iput-object v1, v3, Lcom/vivo/connbase/m0/a/e;->p Landroid/content/BroadcastReceiver;
+000056: iput-boolean v0, v3, Lcom/vivo/connbase/m0/a/e;->q Z
+00005a: iput-object v4, v3, Lcom/vivo/connbase/m0/a/e;->c Landroid/content/Context;
+00005e: new-instance v0, Landroid/os/Handler;
+000062: invoke-static Landroid/os/Looper;->getMainLooper()Landroid/os/Looper;
+000068: move-result-object v1
+00006a: invoke-direct v0, v1, Landroid/os/Handler;-><init>(Landroid/os/Looper;)V
+000070: iput-object v0, v3, Lcom/vivo/connbase/m0/a/e;->g Landroid/os/Handler;
+000074: iget-object v0, v3, Lcom/vivo/connbase/m0/a/e;->c Landroid/content/Context;
+000078: const-string v1, "wifi"
+00007c: invoke-virtual v0, v1, Landroid/content/Context;->getSystemService(Ljava/lang/String;)Ljava/lang/Object;
+000082: move-result-object v0
+000084: check-cast v0, Landroid/net/wifi/WifiManager;
+000088: iput-object v0, v3, Lcom/vivo/connbase/m0/a/e;->f Landroid/net/wifi/WifiManager;
+00008c: iget-object v0, v3, Lcom/vivo/connbase/m0/a/e;->c Landroid/content/Context;
+000090: const-string v1, "wifip2p"
+000094: invoke-virtual v0, v1, Landroid/content/Context;->getSystemService(Ljava/lang/String;)Ljava/lang/Object;
+00009a: move-result-object v0
+00009c: check-cast v0, Landroid/net/wifi/p2p/WifiP2pManager;
+0000a0: iput-object v0, v3, Lcom/vivo/connbase/m0/a/e;->d Landroid/net/wifi/p2p/WifiP2pManager;
+0000a4: invoke-virtual v4, Landroid/content/Context;->getApplicationContext()Landroid/content/Context;
+0000aa: move-result-object v4
+0000ac: iget-object v0, v3, Lcom/vivo/connbase/m0/a/e;->p Landroid/content/BroadcastReceiver;
+0000b0: new-instance v1, Landroid/content/IntentFilter;
+0000b4: const-string v2, "android.net.wifi.WIFI_AP_STATE_CHANGED"
+0000b8: invoke-direct v1, v2, Landroid/content/IntentFilter;-><init>(Ljava/lang/String;)V
+0000be: invoke-virtual v4, v0, v1, Landroid/content/Context;->registerReceiver(Landroid/content/BroadcastReceiver; Landroid/content/IntentFilter;)Landroid/content/Intent;
+0000c4: return-void 
+
+METHOD a(Lcom/vivo/connbase/m0/a/e; Landroid/net/wifi/p2p/WifiP2pManager$Channel;)Landroid/net/wifi/p2p/WifiP2pManager$Channel;
+000000: iput-object v1, v0, Lcom/vivo/connbase/m0/a/e;->e Landroid/net/wifi/p2p/WifiP2pManager$Channel;
+000004: return-object v1
+
+METHOD a(I)V
+000000: sget-object v0, Lcom/vivo/connbase/m0/a/e;->v Lcom/vivo/connbase/m0/a/g/b;
+000004: if-eqz v0, +005h
+000008: invoke-virtual v0, v2, Lcom/vivo/connbase/m0/a/g/b;->b(I)Lcom/vivo/connbase/m0/a/g/b;
+00000e: return-void 
+
+METHOD a(Landroid/net/wifi/p2p/WifiP2pDevice;)V
+000000: new-instance v0, Ljava/lang/StringBuilder;
+000004: invoke-direct v0, Ljava/lang/StringBuilder;-><init>()V
+00000a: const-string v1, "Found target device: "
+00000e: invoke-virtual v0, v1, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+000014: iget-object v1, v7, Landroid/net/wifi/p2p/WifiP2pDevice;->deviceAddress Ljava/lang/String;
+000018: invoke-static v1, Lcom/vivo/connbase/wifi/utils/f;->a(Ljava/lang/String;)Ljava/lang/String;
+00001e: move-result-object v1
+000020: invoke-virtual v0, v1, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+000026: invoke-virtual v0, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
+00002c: move-result-object v0
+00002e: const-string v1, "WifiP2pServerImpl"
+000032: invoke-static v1, v0, Lc/c/f/a/b;->k(Ljava/lang/String; Ljava/lang/String;)V
+000038: const-string v0, "P2p-connectGroup"
+00003c: invoke-static v0, Lcom/vivo/connbase/wifi/utils/a;->b(Ljava/lang/String;)V
+000042: new-instance v0, Landroid/net/wifi/p2p/WifiP2pConfig;
+000046: invoke-direct v0, Landroid/net/wifi/p2p/WifiP2pConfig;-><init>()V
+00004c: iget-object v7, v7, Landroid/net/wifi/p2p/WifiP2pDevice;->deviceAddress Ljava/lang/String;
+000050: iput-object v7, v0, Landroid/net/wifi/p2p/WifiP2pConfig;->deviceAddress Ljava/lang/String;
+000054: invoke-direct v6, Lcom/vivo/connbase/m0/a/e;->p()V
+00005a: iget-object v7, v6, Lcom/vivo/connbase/m0/a/e;->d Landroid/net/wifi/p2p/WifiP2pManager;
+00005e: iget-object v2, v6, Lcom/vivo/connbase/m0/a/e;->e Landroid/net/wifi/p2p/WifiP2pManager$Channel;
+000062: new-instance v3, Lcom/vivo/connbase/m0/a/e$d;
+000066: new-instance v4, Ljava/lang/StringBuilder;
+00006a: invoke-direct v4, Ljava/lang/StringBuilder;-><init>()V
+000070: const-string v5, "Connect device: "
+000074: invoke-virtual v4, v5, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+00007a: iget-object v5, v0, Landroid/net/wifi/p2p/WifiP2pConfig;->deviceAddress Ljava/lang/String;
+00007e: invoke-static v5, Lcom/vivo/connbase/wifi/utils/f;->a(Ljava/lang/String;)Ljava/lang/String;
+000084: move-result-object v5
+000086: invoke-virtual v4, v5, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+00008c: invoke-virtual v4, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
+000092: move-result-object v4
+000094: invoke-direct v3, v6, v1, v4, Lcom/vivo/connbase/m0/a/e$d;-><init>(Lcom/vivo/connbase/m0/a/e; Ljava/lang/String; Ljava/lang/String;)V
+00009a: invoke-virtual v7, v2, v0, v3, Landroid/net/wifi/p2p/WifiP2pManager;->connect(Landroid/net/wifi/p2p/WifiP2pManager$Channel; Landroid/net/wifi/p2p/WifiP2pConfig; Landroid/net/wifi/p2p/WifiP2pManager$ActionListener;)V
+0000a0: return-void 
+
+METHOD a(Landroid/net/wifi/p2p/WifiP2pGroup;)V
+000000: new-instance v0, Ljava/lang/StringBuilder;
+000004: invoke-direct v0, Ljava/lang/StringBuilder;-><init>()V
+00000a: const-string v1, "Connect to group ext: "
+00000e: invoke-virtual v0, v1, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+000014: invoke-virtual v0, v3, Ljava/lang/StringBuilder;->append(Ljava/lang/Object;)Ljava/lang/StringBuilder;
+00001a: invoke-virtual v0, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
+000020: move-result-object v0
+000022: const-string v1, "WifiP2pServerImpl"
+000026: invoke-static v1, v0, Lc/c/f/a/b;->k(Ljava/lang/String; Ljava/lang/String;)V
+00002c: new-instance v0, Lcom/vivo/connbase/m0/a/e$e;
+000030: invoke-direct v0, v2, v3, Lcom/vivo/connbase/m0/a/e$e;-><init>(Lcom/vivo/connbase/m0/a/e; Landroid/net/wifi/p2p/WifiP2pGroup;)V
+000036: invoke-direct v2, v0, Lcom/vivo/connbase/m0/a/e;->a(Ljava/lang/Runnable;)V
+00003c: return-void 
+
+METHOD a(Landroid/net/wifi/p2p/WifiP2pGroup; I)V
+000000: const/16 v0, 502
+000004: invoke-direct v4, v0, Lcom/vivo/connbase/m0/a/e;->a(I)V
+00000a: iget-object v0, v4, Lcom/vivo/connbase/m0/a/e;->j Ljava/util/List;
+00000e: monitor-enter v0
+000010: iget-object v1, v4, Lcom/vivo/connbase/m0/a/e;->j Ljava/util/List;
+000014: invoke-interface v1, Ljava/util/List;->iterator()Ljava/util/Iterator;
+00001a: move-result-object v1
+00001c: invoke-interface v1, Ljava/util/Iterator;->hasNext()Z
+000022: move-result v2
+000024: if-eqz v2, +00eh
+000028: invoke-interface v1, Ljava/util/Iterator;->next()Ljava/lang/Object;
+00002e: move-result-object v2
+000030: check-cast v2, Lcom/vivo/connbase/m0/a/c;
+000034: iget-boolean v3, v4, Lcom/vivo/connbase/m0/a/e;->q Z
+000038: invoke-interface v2, v5, v6, v3, Lcom/vivo/connbase/m0/a/c;->a(Landroid/net/wifi/p2p/WifiP2pGroup; I Z)V
+00003e: goto -11h
+000040: monitor-exit v0
+000042: return-void 
+000044: move-exception v5
+000046: monitor-exit v0
+000048: throw v5
+
+METHOD a(Landroid/net/wifi/p2p/WifiP2pInfo;)V
+000000: if-eqz v3, +033h
+000004: new-instance v0, Ljava/lang/StringBuilder;
+000008: invoke-direct v0, Ljava/lang/StringBuilder;-><init>()V
+00000e: const-string v1, "isGroupFormed:"
+000012: invoke-virtual v0, v1, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+000018: iget-boolean v1, v2, Lcom/vivo/connbase/m0/a/e;->l Z
+00001c: invoke-virtual v0, v1, Ljava/lang/StringBuilder;->append(Z)Ljava/lang/StringBuilder;
+000022: const-string v1, ", p2pInfo.groupFormed="
+000026: invoke-virtual v0, v1, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+00002c: iget-boolean v1, v3, Landroid/net/wifi/p2p/WifiP2pInfo;->groupFormed Z
+000030: invoke-virtual v0, v1, Ljava/lang/StringBuilder;->append(Z)Ljava/lang/StringBuilder;
+000036: invoke-virtual v0, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
+00003c: move-result-object v0
+00003e: const-string v1, "WifiP2pServerImpl"
+000042: invoke-static v1, v0, Lc/c/f/a/b;->k(Ljava/lang/String; Ljava/lang/String;)V
+000048: iget-boolean v0, v2, Lcom/vivo/connbase/m0/a/e;->l Z
+00004c: if-eqz v0, +009h
+000050: iget-boolean v0, v3, Landroid/net/wifi/p2p/WifiP2pInfo;->groupFormed Z
+000054: if-nez v0, +005h
+000058: invoke-direct v2, Lcom/vivo/connbase/m0/a/e;->n()V
+00005e: iget-boolean v3, v3, Landroid/net/wifi/p2p/WifiP2pInfo;->groupFormed Z
+000062: iput-boolean v3, v2, Lcom/vivo/connbase/m0/a/e;->l Z
+000066: return-void 
+
+METHOD a(Landroid/net/wifi/p2p/WifiP2pManager$ActionListener;)V
+000000: const-string v0, "WifiP2pServerImpl"
+000004: const-string v1, "stopPeerDiscovery..."
+000008: invoke-static v0, v1, Lc/c/f/a/b;->k(Ljava/lang/String; Ljava/lang/String;)V
+00000e: iget-object v1, v3, Lcom/vivo/connbase/m0/a/e;->h Lcom/vivo/connbase/m0/a/f;
+000012: const/4 v2, 0
+000014: invoke-virtual v1, v2, Lcom/vivo/connbase/m0/a/f;->a(Lcom/vivo/connbase/m0/a/f$b;)V
+00001a: iget-object v1, v3, Lcom/vivo/connbase/m0/a/e;->e Landroid/net/wifi/p2p/WifiP2pManager$Channel;
+00001e: if-eqz v1, +012h
+000022: if-nez v4, +009h
+000026: new-instance v4, Lcom/vivo/connbase/m0/a/b;
+00002a: const-string v1, "Stop peer discovery"
+00002e: invoke-direct v4, v0, v1, Lcom/vivo/connbase/m0/a/b;-><init>(Ljava/lang/String; Ljava/lang/String;)V
+000034: iget-object v0, v3, Lcom/vivo/connbase/m0/a/e;->d Landroid/net/wifi/p2p/WifiP2pManager;
+000038: iget-object v1, v3, Lcom/vivo/connbase/m0/a/e;->e Landroid/net/wifi/p2p/WifiP2pManager$Channel;
+00003c: invoke-virtual v0, v1, v4, Landroid/net/wifi/p2p/WifiP2pManager;->stopPeerDiscovery(Landroid/net/wifi/p2p/WifiP2pManager$Channel; Landroid/net/wifi/p2p/WifiP2pManager$ActionListener;)V
+000042: return-void 
+
+METHOD a(Lcom/vivo/connbase/m0/a/e;)V
+000000: invoke-direct v0, Lcom/vivo/connbase/m0/a/e;->q()V
+000006: return-void 
+
+METHOD a(Lcom/vivo/connbase/m0/a/e; Landroid/net/wifi/p2p/WifiP2pDevice;)V
+000000: invoke-direct v0, v1, Lcom/vivo/connbase/m0/a/e;->a(Landroid/net/wifi/p2p/WifiP2pDevice;)V
+000006: return-void 
+
+METHOD a(Lcom/vivo/connbase/m0/a/e; Landroid/net/wifi/p2p/WifiP2pGroup; I)V
+000000: invoke-direct v0, v1, v2, Lcom/vivo/connbase/m0/a/e;->a(Landroid/net/wifi/p2p/WifiP2pGroup; I)V
+000006: return-void 
+
+METHOD a(Lcom/vivo/connbase/m0/a/e; Landroid/net/wifi/p2p/WifiP2pInfo;)V
+000000: invoke-direct v0, v1, Lcom/vivo/connbase/m0/a/e;->a(Landroid/net/wifi/p2p/WifiP2pInfo;)V
+000006: return-void 
+
+METHOD a(Lcom/vivo/connbase/m0/a/e; Landroid/net/wifi/p2p/WifiP2pManager$ActionListener;)V
+000000: invoke-direct v0, v1, Lcom/vivo/connbase/m0/a/e;->a(Landroid/net/wifi/p2p/WifiP2pManager$ActionListener;)V
+000006: return-void 
+
+METHOD a(Lcom/vivo/connbase/m0/a/e; Lcom/vivo/connbase/m0/a/g/b;)V
+000000: invoke-direct v0, v1, Lcom/vivo/connbase/m0/a/e;->a(Lcom/vivo/connbase/m0/a/g/b;)V
+000006: return-void 
+
+METHOD a(Lcom/vivo/connbase/m0/a/e; Ljava/lang/String;)V
+000000: invoke-direct v0, v1, Lcom/vivo/connbase/m0/a/e;->d(Ljava/lang/String;)V
+000006: return-void 
+
+METHOD a(Lcom/vivo/connbase/m0/a/e; Ljava/lang/String; Z)V
+000000: invoke-direct v0, v1, v2, Lcom/vivo/connbase/m0/a/e;->a(Ljava/lang/String; Z)V
+000006: return-void 
+
+METHOD a(Lcom/vivo/connbase/m0/a/e; Ljava/net/InetAddress; Z)V
+000000: invoke-direct v0, v1, v2, Lcom/vivo/connbase/m0/a/e;->a(Ljava/net/InetAddress; Z)V
+000006: return-void 
+
+METHOD a(Lcom/vivo/connbase/m0/a/e; Z)V
+000000: invoke-direct v0, v1, Lcom/vivo/connbase/m0/a/e;->b(Z)V
+000006: return-void 
+
+METHOD a(Lcom/vivo/connbase/m0/a/g/b;)V
+000000: iget-object v0, v2, Lcom/vivo/connbase/m0/a/e;->h Lcom/vivo/connbase/m0/a/f;
+000004: new-instance v1, Lcom/vivo/connbase/m0/a/e$b;
+000008: invoke-direct v1, v2, v3, Lcom/vivo/connbase/m0/a/e$b;-><init>(Lcom/vivo/connbase/m0/a/e; Lcom/vivo/connbase/m0/a/g/b;)V
+00000e: invoke-virtual v0, v1, Lcom/vivo/connbase/m0/a/f;->a(Lcom/vivo/connbase/m0/a/f$a;)V
+000014: return-void 
+
+METHOD a(Ljava/lang/Runnable;)V
+000000: const-string v0, "WifiP2pServerImpl"
+000004: const-string v1, "resetP2pNetworks..."
+000008: invoke-static v0, v1, Lc/c/f/a/b;->k(Ljava/lang/String; Ljava/lang/String;)V
+00000e: new-instance v0, Lcom/vivo/connbase/m0/a/e$r;
+000012: invoke-direct v0, v2, v3, Lcom/vivo/connbase/m0/a/e$r;-><init>(Lcom/vivo/connbase/m0/a/e; Ljava/lang/Runnable;)V
+000018: const-string v3, "Reset networks"
+00001c: invoke-static v0, v3, Lcom/vivo/connbase/wifi/utils/h;->a(Ljava/lang/Runnable; Ljava/lang/String;)V
+000022: return-void 
+
+METHOD a(Ljava/lang/String; Z)V
+000000: const/16 v0, 502
+000004: invoke-direct v5, v0, Lcom/vivo/connbase/m0/a/e;->a(I)V
+00000a: iget-object v0, v5, Lcom/vivo/connbase/m0/a/e;->j Ljava/util/List;
+00000e: monitor-enter v0
+000010: const-string v1, "WifiP2pServerImpl"
+000014: new-instance v2, Ljava/lang/StringBuilder;
+000018: invoke-direct v2, Ljava/lang/StringBuilder;-><init>()V
+00001e: const-string v3, "notifyOnConnected mObservers: "
+000022: invoke-virtual v2, v3, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+000028: new-instance v3, Lcom/google/gson/Gson;
+00002c: invoke-direct v3, Lcom/google/gson/Gson;-><init>()V
+000032: iget-object v4, v5, Lcom/vivo/connbase/m0/a/e;->j Ljava/util/List;
+000036: invoke-virtual v3, v4, Lcom/google/gson/Gson;->toJson(Ljava/lang/Object;)Ljava/lang/String;
+00003c: move-result-object v3
+00003e: invoke-virtual v2, v3, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+000044: invoke-virtual v2, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
+00004a: move-result-object v2
+00004c: invoke-static v1, v2, Lc/c/f/a/b;->k(Ljava/lang/String; Ljava/lang/String;)V
+000052: iget-object v1, v5, Lcom/vivo/connbase/m0/a/e;->j Ljava/util/List;
+000056: invoke-interface v1, Ljava/util/List;->iterator()Ljava/util/Iterator;
+00005c: move-result-object v1
+00005e: invoke-interface v1, Ljava/util/Iterator;->hasNext()Z
+000064: move-result v2
+000066: if-eqz v2, +00ch
+00006a: invoke-interface v1, Ljava/util/Iterator;->next()Ljava/lang/Object;
+000070: move-result-object v2
+000072: check-cast v2, Lcom/vivo/connbase/m0/a/c;
+000076: invoke-interface v2, v6, v7, Lcom/vivo/connbase/m0/a/c;->onConnected(Ljava/lang/String; Z)V
+00007c: goto -fh
+00007e: monitor-exit v0
+000080: return-void 
+000082: move-exception v6
+000084: monitor-exit v0
+000086: throw v6
+
+METHOD a(Ljava/net/InetAddress; Z)V
+000000: new-instance v0, Lcom/vivo/connbase/m0/a/e$q;
+000004: invoke-direct v0, v1, v2, v3, Lcom/vivo/connbase/m0/a/e$q;-><init>(Lcom/vivo/connbase/m0/a/e; Ljava/net/InetAddress; Z)V
+00000a: const-string v2, "Check address reachable"
+00000e: invoke-static v0, v2, Lcom/vivo/connbase/wifi/utils/h;->a(Ljava/lang/Runnable; Ljava/lang/String;)V
+000014: return-void 
+
+METHOD a(Z)V
+000000: new-instance v0, Ljava/lang/StringBuilder;
+000004: invoke-direct v0, Ljava/lang/StringBuilder;-><init>()V
+00000a: const-string v1, "Trying to be foreground: "
+00000e: invoke-virtual v0, v1, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+000014: invoke-virtual v0, v4, Ljava/lang/StringBuilder;->append(Z)Ljava/lang/StringBuilder;
+00001a: invoke-virtual v0, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
+000020: move-result-object v0
+000022: const-string v1, "WifiP2pServerImpl"
+000026: invoke-static v1, v0, Lc/c/f/a/b;->k(Ljava/lang/String; Ljava/lang/String;)V
+00002c: if-eqz v4, +028h
+000030: iget-object v4, v3, Lcom/vivo/connbase/m0/a/e;->c Landroid/content/Context;
+000034: const-string v0, "power"
+000038: invoke-virtual v4, v0, Landroid/content/Context;->getSystemService(Ljava/lang/String;)Ljava/lang/Object;
+00003e: move-result-object v4
+000040: check-cast v4, Landroid/os/PowerManager;
+000044: invoke-virtual v4, Landroid/os/PowerManager;->isPowerSaveMode()Z
+00004a: move-result v4
+00004c: new-instance v0, Ljava/lang/StringBuilder;
+000050: invoke-direct v0, Ljava/lang/StringBuilder;-><init>()V
+000056: const-string v2, "Power save mode: "
+00005a: invoke-virtual v0, v2, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+000060: invoke-virtual v0, v4, Ljava/lang/StringBuilder;->append(Z)Ljava/lang/StringBuilder;
+000066: invoke-virtual v0, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
+00006c: move-result-object v4
+00006e: invoke-static v1, v4, Lc/c/f/a/b;->k(Ljava/lang/String; Ljava/lang/String;)V
+000074: sget v4, Landroid/os/Build$VERSION;->SDK_INT I
+000078: const/16 v0, 29
+00007c: return-void 
+
+METHOD b(Lcom/vivo/connbase/m0/a/e;)Lcom/vivo/connbase/m0/a/f;
+000000: iget-object v0, v0, Lcom/vivo/connbase/m0/a/e;->h Lcom/vivo/connbase/m0/a/f;
+000004: return-object v0
+
+METHOD b(Lcom/vivo/connbase/m0/a/e; Ljava/lang/String;)V
+000000: invoke-direct v0, v1, Lcom/vivo/connbase/m0/a/e;->c(Ljava/lang/String;)V
+000006: return-void 
+
+METHOD b(Lcom/vivo/connbase/m0/a/e; Z)V
+000000: invoke-direct v0, v1, Lcom/vivo/connbase/m0/a/e;->a(Z)V
+000006: return-void 
+
+METHOD b(Z)V
+000000: invoke-direct v4, Lcom/vivo/connbase/m0/a/e;->q()V
+000006: iget-object v0, v4, Lcom/vivo/connbase/m0/a/e;->g Landroid/os/Handler;
+00000a: new-instance v1, Lcom/vivo/connbase/m0/a/e$a;
+00000e: invoke-direct v1, v4, Lcom/vivo/connbase/m0/a/e$a;-><init>(Lcom/vivo/connbase/m0/a/e;)V
+000014: if-eqz v5, +005h
+000018: const-wide/16 v2, 500
+00001c: goto +3h
+00001e: const-wide/16 v2, 0
+000022: invoke-virtual v0, v1, v2, v3, Landroid/os/Handler;->postDelayed(Ljava/lang/Runnable; J)Z
+000028: return-void 
+
+METHOD b(Ljava/lang/String;)Z
+000000: const/4 v0, 0
+000002: if-eqz v7, +029h
+000006: const-string v1, "DIRECT-vs-"
+00000a: invoke-virtual v7, v1, Ljava/lang/String;->startsWith(Ljava/lang/String;)Z
+000010: move-result v1
+000012: invoke-virtual v7, Ljava/lang/String;->length()I
+000018: move-result v2
+00001a: const/16 v3, 16
+00001e: const/4 v4, 1
+000020: if-ne v2, v3, +004h
+000024: move v2, v4
+000026: goto +2h
+000028: move v2, v0
+00002a: const-string v3, "vivoShare-"
+00002e: invoke-virtual v7, v3, Ljava/lang/String;->startsWith(Ljava/lang/String;)Z
+000034: move-result v3
+000036: const-string v5, "fastCon"
+00003a: invoke-virtual v7, v5, Ljava/lang/String;->endsWith(Ljava/lang/String;)Z
+000040: move-result v7
+000042: if-eqz v1, +004h
+000046: if-nez v2, +006h
+00004a: if-nez v3, +004h
+00004e: if-eqz v7, +003h
+000052: move v0, v4
+000054: return v0
+
+METHOD c(Lcom/vivo/connbase/m0/a/e;)Landroid/content/Context;
+000000: iget-object v0, v0, Lcom/vivo/connbase/m0/a/e;->c Landroid/content/Context;
+000004: return-object v0
+
+METHOD c(Lcom/vivo/connbase/m0/a/e; Z)V
+000000: invoke-direct v0, v1, Lcom/vivo/connbase/m0/a/e;->c(Z)V
+000006: return-void 
+
+METHOD c(Ljava/lang/String;)V
+000000: iget-object v0, v3, Lcom/vivo/connbase/m0/a/e;->j Ljava/util/List;
+000004: monitor-enter v0
+000006: iget-object v1, v3, Lcom/vivo/connbase/m0/a/e;->j Ljava/util/List;
+00000a: invoke-interface v1, Ljava/util/List;->iterator()Ljava/util/Iterator;
+000010: move-result-object v1
+000012: invoke-interface v1, Ljava/util/Iterator;->hasNext()Z
+000018: move-result v2
+00001a: if-eqz v2, +00ch
+00001e: invoke-interface v1, Ljava/util/Iterator;->next()Ljava/lang/Object;
+000024: move-result-object v2
+000026: check-cast v2, Lcom/vivo/connbase/m0/a/c;
+00002a: invoke-interface v2, v4, Lcom/vivo/connbase/m0/a/c;->onDeviceChanged(Ljava/lang/String;)V
+000030: goto -fh
+000032: monitor-exit v0
+000034: return-void 
+000036: move-exception v4
+000038: monitor-exit v0
+00003a: throw v4
+
+METHOD c(Z)V
+000000: new-instance v0, Ljava/lang/StringBuilder;
+000004: invoke-direct v0, Ljava/lang/StringBuilder;-><init>()V
+00000a: const-string v1, "setAcceptTimeout: "
+00000e: invoke-virtual v0, v1, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+000014: invoke-virtual v0, v4, Ljava/lang/StringBuilder;->append(Z)Ljava/lang/StringBuilder;
+00001a: invoke-virtual v0, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
+000020: move-result-object v0
+000022: const-string v1, "WifiP2pServerImpl"
+000026: invoke-static v1, v0, Lc/c/f/a/b;->k(Ljava/lang/String; Ljava/lang/String;)V
+00002c: if-eqz v4, +00dh
+000030: iget-object v4, v3, Lcom/vivo/connbase/m0/a/e;->g Landroid/os/Handler;
+000034: iget-object v0, v3, Lcom/vivo/connbase/m0/a/e;->o Ljava/lang/Runnable;
+000038: const-wide/32 v1, 120000
+00003e: invoke-virtual v4, v0, v1, v2, Landroid/os/Handler;->postDelayed(Ljava/lang/Runnable; J)Z
+000044: goto +8h
+000046: iget-object v4, v3, Lcom/vivo/connbase/m0/a/e;->g Landroid/os/Handler;
+00004a: iget-object v0, v3, Lcom/vivo/connbase/m0/a/e;->o Ljava/lang/Runnable;
+00004e: invoke-virtual v4, v0, Landroid/os/Handler;->removeCallbacks(Ljava/lang/Runnable;)V
+000054: return-void 
+
+METHOD d(I I)I
+000000: const/4 v0, 0
+000002: iput-boolean v0, v6, Lcom/vivo/connbase/m0/a/e;->q Z
+000006: iget-object v1, v6, Lcom/vivo/connbase/m0/a/e;->f Landroid/net/wifi/WifiManager;
+00000a: invoke-static v1, Lcom/vivo/connbase/wifi/utils/WifiUtils;->is5GHzSupported(Landroid/net/wifi/WifiManager;)Z
+000010: move-result v1
+000012: iget-object v2, v6, Lcom/vivo/connbase/m0/a/e;->f Landroid/net/wifi/WifiManager;
+000016: invoke-static v2, Lcom/vivo/connbase/wifi/utils/WifiUtils;->getCurrentWifiFrequency(Landroid/net/wifi/WifiManager;)I
+00001c: move-result v2
+00001e: new-instance v3, Ljava/lang/StringBuilder;
+000022: invoke-direct v3, Ljava/lang/StringBuilder;-><init>()V
+000028: const-string v4, "selectLargeBandWidthChannel:"
+00002c: invoke-virtual v3, v4, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+000032: invoke-virtual v3, v2, Ljava/lang/StringBuilder;->append(I)Ljava/lang/StringBuilder;
+000038: const-string v4, ",other side:"
+00003c: invoke-virtual v3, v4, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+000042: invoke-virtual v3, v8, Ljava/lang/StringBuilder;->append(I)Ljava/lang/StringBuilder;
+000048: const-string v4, ", is 5G support:"
+00004c: invoke-virtual v3, v4, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+000052: invoke-virtual v3, v1, Ljava/lang/StringBuilder;->append(Z)Ljava/lang/StringBuilder;
+000058: invoke-virtual v3, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
+00005e: move-result-object v3
+000060: const-string v4, "WifiP2pServerImpl"
+000064: invoke-static v4, v3, Lc/c/f/a/b;->k(Ljava/lang/String; Ljava/lang/String;)V
+00006a: const/4 v3, -1
+00006c: const/4 v4, 1
+00006e: const/16 v5, 5000
+000072: if-eq v2, v3, +02fh
+000076: if-eq v8, v3, +02dh
+00007a: if-le v2, v5, +006h
+00007e: if-le v8, v5, +004h
+000082: if-eq v7, v4, +00eh
+000086: if-ge v2, v5, +006h
+00008a: if-ge v8, v5, +004h
+00008e: if-eqz v7, +008h
+000092: if-le v2, v5, +00bh
+000096: if-ge v8, v5, +009h
+00009a: if-ne v7, v4, +007h
+00009e: invoke-static v2, Lcom/vivo/connbase/wifi/utils/WifiUtils;->getChannelByFrequency(I)I
+0000a4: move-result v3
+0000a6: goto +2h
+0000a8: move v3, v0
+0000aa: if-ge v2, v5, +00ah
+0000ae: if-le v8, v5, +008h
+0000b2: if-ne v7, v4, +006h
+0000b6: invoke-static v8, Lcom/vivo/connbase/wifi/utils/WifiUtils;->getChannelByFrequency(I)I
+0000bc: move-result v3
+0000be: if-le v2, v5, +021h
+0000c2: if-le v8, v5, +01fh
+0000c6: if-eq v2, v8, +01dh
+0000ca: iput-boolean v4, v6, Lcom/vivo/connbase/m0/a/e;->q Z
+0000ce: goto +19h
+0000d0: if-ne v2, v3, +005h
+0000d4: if-ne v8, v3, +003h
+0000d8: goto +13h
+0000da: if-ne v7, v4, +012h
+0000de: if-le v2, v5, +008h
+0000e2: invoke-static v2, Lcom/vivo/connbase/wifi/utils/WifiUtils;->getChannelByFrequency(I)I
+0000e8: move-result v2
+0000ea: move v3, v2
+0000ec: goto +2h
+0000ee: move v3, v0
+0000f0: if-le v8, v5, +008h
+0000f4: invoke-static v8, Lcom/vivo/connbase/wifi/utils/WifiUtils;->getChannelByFrequency(I)I
+0000fa: move-result v3
+0000fc: goto +2h
+0000fe: move v3, v0
+000100: if-nez v3, +00fh
+000104: iput-boolean v0, v6, Lcom/vivo/connbase/m0/a/e;->q Z
+000108: if-ne v7, v4, +008h
+00010c: if-eqz v1, +00ah
+000110: const/16 v7, 36
+000114: move v4, v7
+000116: goto +5h
+000118: if-nez v7, +003h
+00011c: goto +2h
+00011e: move v4, v3
+000120: return v4
+
+METHOD d()Lcom/vivo/connbase/m0/a/g/b;
+000000: sget-object v0, Lcom/vivo/connbase/m0/a/e;->v Lcom/vivo/connbase/m0/a/g/b;
+000004: return-object v0
+
+METHOD d(Lcom/vivo/connbase/m0/a/e;)V
+000000: invoke-direct v0, Lcom/vivo/connbase/m0/a/e;->o()V
+000006: return-void 
+
+METHOD d(Lcom/vivo/connbase/m0/a/e; Z)V
+000000: invoke-direct v0, v1, Lcom/vivo/connbase/m0/a/e;->d(Z)V
+000006: return-void 
+
+METHOD d(Ljava/lang/String;)V
+000000: iget-object v0, v5, Lcom/vivo/connbase/m0/a/e;->j Ljava/util/List;
+000004: monitor-enter v0
+000006: iget-object v1, v5, Lcom/vivo/connbase/m0/a/e;->f Landroid/net/wifi/WifiManager;
+00000a: invoke-static v1, Lcom/vivo/connbase/wifi/utils/WifiUtils;->is5GHzSupported(Landroid/net/wifi/WifiManager;)Z
+000010: move-result v1
+000012: if-eqz v1, +004h
+000016: const/4 v1, 1
+000018: goto +2h
+00001a: const/4 v1, 0
+00001c: invoke-direct v5, Lcom/vivo/connbase/m0/a/e;->e()I
+000022: move-result v2
+000024: iget-object v3, v5, Lcom/vivo/connbase/m0/a/e;->j Ljava/util/List;
+000028: invoke-interface v3, Ljava/util/List;->iterator()Ljava/util/Iterator;
+00002e: move-result-object v3
+000030: invoke-interface v3, Ljava/util/Iterator;->hasNext()Z
+000036: move-result v4
+000038: if-eqz v4, +00ch
+00003c: invoke-interface v3, Ljava/util/Iterator;->next()Ljava/lang/Object;
+000042: move-result-object v4
+000044: check-cast v4, Lcom/vivo/connbase/m0/a/c;
+000048: invoke-interface v4, v6, v1, v2, Lcom/vivo/connbase/m0/a/c;->a(Ljava/lang/String; I I)V
+00004e: goto -fh
+000050: monitor-exit v0
+000052: return-void 
+000054: move-exception v6
+000056: monitor-exit v0
+000058: throw v6
+
+METHOD d(Z)V
+000000: new-instance v0, Ljava/lang/StringBuilder;
+000004: invoke-direct v0, Ljava/lang/StringBuilder;-><init>()V
+00000a: const-string v1, "setJoinTimeout: "
+00000e: invoke-virtual v0, v1, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+000014: invoke-virtual v0, v4, Ljava/lang/StringBuilder;->append(Z)Ljava/lang/StringBuilder;
+00001a: invoke-virtual v0, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
+000020: move-result-object v0
+000022: const-string v1, "WifiP2pServerImpl"
+000026: invoke-static v1, v0, Lc/c/f/a/b;->k(Ljava/lang/String; Ljava/lang/String;)V
+00002c: if-eqz v4, +00ch
+000030: iget-object v4, v3, Lcom/vivo/connbase/m0/a/e;->g Landroid/os/Handler;
+000034: iget-object v0, v3, Lcom/vivo/connbase/m0/a/e;->n Ljava/lang/Runnable;
+000038: const-wide/16 v1, 30000
+00003c: invoke-virtual v4, v0, v1, v2, Landroid/os/Handler;->postDelayed(Ljava/lang/Runnable; J)Z
+000042: goto +8h
+000044: iget-object v4, v3, Lcom/vivo/connbase/m0/a/e;->g Landroid/os/Handler;
+000048: iget-object v0, v3, Lcom/vivo/connbase/m0/a/e;->n Ljava/lang/Runnable;
+00004c: invoke-virtual v4, v0, Landroid/os/Handler;->removeCallbacks(Ljava/lang/Runnable;)V
+000052: return-void 
+
+METHOD e()I
+000000: iget-object v0, v3, Lcom/vivo/connbase/m0/a/e;->c Landroid/content/Context;
+000004: invoke-static v0, Lcom/vivo/connbase/wifi/utils/WifiUtils;->canSetAddressStrategy(Landroid/content/Context;)Z
+00000a: move-result v0
+00000c: invoke-static Lcom/vivo/connbase/m0/a/g/c;->a()Z
+000012: move-result v1
+000014: invoke-direct v3, Lcom/vivo/connbase/m0/a/e;->g()Z
+00001a: move-result v2
+00001c: if-nez v2, +006h
+000020: if-nez v1, +004h
+000024: const/4 v0, 0
+000026: return v0
+000028: if-eqz v0, +004h
+00002c: const/4 v0, 2
+00002e: return v0
+000030: const/4 v0, 1
+000032: return v0
+
+METHOD e(I I)I
+000000: iget-object v0, v8, Lcom/vivo/connbase/m0/a/e;->f Landroid/net/wifi/WifiManager;
+000004: invoke-static v0, Lcom/vivo/connbase/wifi/utils/WifiUtils;->getCurrentWifiFrequency(Landroid/net/wifi/WifiManager;)I
+00000a: move-result v0
+00000c: iget-object v1, v8, Lcom/vivo/connbase/m0/a/e;->f Landroid/net/wifi/WifiManager;
+000010: invoke-static v1, Lcom/vivo/connbase/wifi/utils/WifiUtils;->is5GHzSupported(Landroid/net/wifi/WifiManager;)Z
+000016: move-result v1
+000018: invoke-static v10, Lcom/vivo/connbase/wifi/utils/WifiUtils;->getChannelByFrequency(I)I
+00001e: move-result v2
+000020: invoke-static v0, Lcom/vivo/connbase/wifi/utils/WifiUtils;->getChannelByFrequency(I)I
+000026: move-result v3
+000028: new-instance v4, Ljava/lang/StringBuilder;
+00002c: invoke-direct v4, Ljava/lang/StringBuilder;-><init>()V
+000032: const-string v5, "Current AP frequency = "
+000036: invoke-virtual v4, v5, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+00003c: invoke-virtual v4, v0, Ljava/lang/StringBuilder;->append(I)Ljava/lang/StringBuilder;
+000042: const-string v5, ", channel = "
+000046: invoke-virtual v4, v5, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+00004c: invoke-virtual v4, v3, Ljava/lang/StringBuilder;->append(I)Ljava/lang/StringBuilder;
+000052: const-string v6, ", 5GHz = "
+000056: invoke-virtual v4, v6, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+00005c: invoke-virtual v4, v1, Ljava/lang/StringBuilder;->append(Z)Ljava/lang/StringBuilder;
+000062: const-string v7, ", Remote AP frequency = "
+000066: invoke-virtual v4, v7, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+00006c: invoke-virtual v4, v10, Ljava/lang/StringBuilder;->append(I)Ljava/lang/StringBuilder;
+000072: invoke-virtual v4, v5, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+000078: invoke-virtual v4, v2, Ljava/lang/StringBuilder;->append(I)Ljava/lang/StringBuilder;
+00007e: invoke-virtual v4, v6, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+000084: const/4 v5, 0
+000086: const/4 v6, 1
+000088: if-ne v9, v6, +004h
+00008c: move v7, v6
+00008e: goto +2h
+000090: move v7, v5
+000092: invoke-virtual v4, v7, Ljava/lang/StringBuilder;->append(Z)Ljava/lang/StringBuilder;
+000098: invoke-virtual v4, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
+00009e: move-result-object v4
+0000a0: const-string v7, "WifiP2pServerImpl"
+0000a4: invoke-static v7, v4, Lc/c/f/a/b;->k(Ljava/lang/String; Ljava/lang/String;)V
+0000aa: if-eqz v1, +093h
+0000ae: if-ne v9, v6, +091h
+0000b2: invoke-static Lcom/vivo/connbase/wifi/utils/PhoneUtils;->isSamsung()Z
+0000b8: move-result v9
+0000ba: const/16 v1, 36
+0000be: if-nez v9, +058h
+0000c2: invoke-static Lcom/vivo/connbase/wifi/utils/PhoneUtils;->isMTK()Z
+0000c8: move-result v9
+0000ca: if-eqz v9, +003h
+0000ce: goto +50h
+0000d0: invoke-virtual v8, v10, v2, Lcom/vivo/connbase/m0/a/e;->c(I I)Z
+0000d6: move-result v9
+0000d8: if-eqz v9, +00ah
+0000dc: invoke-virtual v8, v0, v3, Lcom/vivo/connbase/m0/a/e;->c(I I)Z
+0000e2: move-result v9
+0000e4: if-eqz v9, +004h
+0000e8: goto/16 +074h
+0000ec: invoke-virtual v8, v10, v2, Lcom/vivo/connbase/m0/a/e;->b(I I)Z
+0000f2: move-result v9
+0000f4: if-eqz v9, +010h
+0000f8: invoke-virtual v8, v0, v3, Lcom/vivo/connbase/m0/a/e;->b(I I)Z
+0000fe: move-result v9
+000100: if-eqz v9, +00ah
+000104: iget-object v9, v8, Lcom/vivo/connbase/m0/a/e;->f Landroid/net/wifi/WifiManager;
+000108: invoke-static v9, v6, Lcom/vivo/connbase/wifi/utils/WifiUtils;->getLessOverlappingChannelOfBand(Landroid/net/wifi/WifiManager; Z)I
+00010e: move-result v2
+000110: goto/16 +066h
+000114: invoke-virtual v8, v10, v2, Lcom/vivo/connbase/m0/a/e;->c(I I)Z
+00011a: move-result v9
+00011c: if-nez v9, +008h
+000120: invoke-virtual v8, v10, v2, Lcom/vivo/connbase/m0/a/e;->b(I I)Z
+000126: move-result v9
+000128: if-eqz v9, +005h
+00012c: if-eqz v3, +003h
+000130: goto +4eh
+000132: invoke-virtual v8, v0, v3, Lcom/vivo/connbase/m0/a/e;->c(I I)Z
+000138: move-result v9
+00013a: if-nez v9, +008h
+00013e: invoke-virtual v8, v0, v3, Lcom/vivo/connbase/m0/a/e;->b(I I)Z
+000144: move-result v9
+000146: if-eqz v9, +005h
+00014a: if-eqz v2, +003h
+00014e: goto +47h
+000150: if-nez v3, +004h
+000154: if-eqz v2, -028h
+000158: if-lt v3, v1, +003h
+00015c: goto +38h
+00015e: if-lt v2, v1, +003h
+000162: goto +3dh
+000164: if-eqz v3, -030h
+000168: if-ne v3, v2, -032h
+00016c: goto +30h
+00016e: invoke-virtual v8, v10, v2, Lcom/vivo/connbase/m0/a/e;->c(I I)Z
+000174: move-result v9
+000176: if-nez v9, +022h
+00017a: invoke-virtual v8, v0, v3, Lcom/vivo/connbase/m0/a/e;->c(I I)Z
+000180: move-result v9
+000182: if-eqz v9, +003h
+000186: goto +1ah
+000188: invoke-virtual v8, v10, v2, Lcom/vivo/connbase/m0/a/e;->b(I I)Z
+00018e: move-result v9
+000190: if-nez v9, +00fh
+000194: invoke-virtual v8, v0, v3, Lcom/vivo/connbase/m0/a/e;->b(I I)Z
+00019a: move-result v9
+00019c: if-eqz v9, +003h
+0001a0: goto +7h
+0001a2: if-lt v3, v1, +003h
+0001a6: goto +13h
+0001a8: if-lt v2, v1, -052h
+0001ac: goto +18h
+0001ae: if-lt v2, v1, +003h
+0001b2: goto +15h
+0001b4: if-lt v3, v1, -058h
+0001b8: goto +ah
+0001ba: if-ge v2, v1, +005h
+0001be: if-eqz v2, +003h
+0001c2: goto +dh
+0001c4: if-ge v3, v1, +006h
+0001c8: if-eqz v3, +004h
+0001cc: move v2, v3
+0001ce: goto +7h
+0001d0: iget-object v9, v8, Lcom/vivo/connbase/m0/a/e;->f Landroid/net/wifi/WifiManager;
+0001d4: invoke-static v9, v5, Lcom/vivo/connbase/wifi/utils/WifiUtils;->getLessOverlappingChannelOfBand(Landroid/net/wifi/WifiManager; Z)I
+0001da: move-result v2
+0001dc: new-instance v9, Ljava/lang/StringBuilder;
+0001e0: invoke-direct v9, Ljava/lang/StringBuilder;-><init>()V
+0001e6: const-string v10, "selectLowLatencyChannel = "
+0001ea: invoke-virtual v9, v10, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+0001f0: invoke-virtual v9, v2, Ljava/lang/StringBuilder;->append(I)Ljava/lang/StringBuilder;
+0001f6: invoke-virtual v9, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
+0001fc: move-result-object v9
+0001fe: invoke-static v7, v9, Lc/c/f/a/b;->k(Ljava/lang/String; Ljava/lang/String;)V
+000204: return v2
+
+METHOD e(Lcom/vivo/connbase/m0/a/e;)Landroid/os/Handler;
+000000: iget-object v0, v0, Lcom/vivo/connbase/m0/a/e;->g Landroid/os/Handler;
+000004: return-object v0
+
+METHOD e(Lcom/vivo/connbase/m0/a/e; Z)Z
+000000: iput-boolean v1, v0, Lcom/vivo/connbase/m0/a/e;->m Z
+000004: return v1
+
+METHOD f(Lcom/vivo/connbase/m0/a/e;)Ljava/lang/String;
+000000: iget-object v0, v0, Lcom/vivo/connbase/m0/a/e;->b Ljava/lang/String;
+000004: return-object v0
+
+METHOD f()V
+000000: iget-object v0, v4, Lcom/vivo/connbase/m0/a/e;->d Landroid/net/wifi/p2p/WifiP2pManager;
+000004: iget-object v1, v4, Lcom/vivo/connbase/m0/a/e;->c Landroid/content/Context;
+000008: invoke-static Landroid/os/Looper;->getMainLooper()Landroid/os/Looper;
+00000e: move-result-object v2
+000010: const/4 v3, 0
+000012: invoke-virtual v0, v1, v2, v3, Landroid/net/wifi/p2p/WifiP2pManager;->initialize(Landroid/content/Context; Landroid/os/Looper; Landroid/net/wifi/p2p/WifiP2pManager$ChannelListener;)Landroid/net/wifi/p2p/WifiP2pManager$Channel;
+000018: move-result-object v0
+00001a: iput-object v0, v4, Lcom/vivo/connbase/m0/a/e;->e Landroid/net/wifi/p2p/WifiP2pManager$Channel;
+00001e: if-eqz v0, +043h
+000022: invoke-direct v4, Lcom/vivo/connbase/m0/a/e;->g()Z
+000028: move-result v0
+00002a: const/4 v1, 1
+00002c: if-eqz v0, +020h
+000030: iget-object v0, v4, Lcom/vivo/connbase/m0/a/e;->d Landroid/net/wifi/p2p/WifiP2pManager;
+000034: iget-object v2, v4, Lcom/vivo/connbase/m0/a/e;->e Landroid/net/wifi/p2p/WifiP2pManager$Channel;
+000038: new-instance v3, Lcom/vivo/connbase/m0/a/e$m;
+00003c: invoke-direct v3, v4, Lcom/vivo/connbase/m0/a/e$m;-><init>(Lcom/vivo/connbase/m0/a/e;)V
+000042: invoke-virtual v0, v2, v3, Landroid/net/wifi/p2p/WifiP2pManager;->requestDeviceInfo(Landroid/net/wifi/p2p/WifiP2pManager$Channel; Landroid/net/wifi/p2p/WifiP2pManager$DeviceInfoListener;)V
+000048: iget-object v0, v4, Lcom/vivo/connbase/m0/a/e;->h Lcom/vivo/connbase/m0/a/f;
+00004c: iget-object v2, v4, Lcom/vivo/connbase/m0/a/e;->c Landroid/content/Context;
+000050: invoke-virtual v0, v2, v1, Lcom/vivo/connbase/m0/a/f;->a(Landroid/content/Context; Z)V
+000056: iget-object v0, v4, Lcom/vivo/connbase/m0/a/e;->h Lcom/vivo/connbase/m0/a/f;
+00005a: new-instance v1, Lcom/vivo/connbase/m0/a/e$n;
+00005e: invoke-direct v1, v4, Lcom/vivo/connbase/m0/a/e$n;-><init>(Lcom/vivo/connbase/m0/a/e;)V
+000064: invoke-virtual v0, v1, Lcom/vivo/connbase/m0/a/f;->a(Lcom/vivo/connbase/m0/a/f$c;)V
+00006a: goto +12h
+00006c: iget-object v0, v4, Lcom/vivo/connbase/m0/a/e;->h Lcom/vivo/connbase/m0/a/f;
+000070: new-instance v2, Lcom/vivo/connbase/m0/a/e$o;
+000074: invoke-direct v2, v4, Lcom/vivo/connbase/m0/a/e$o;-><init>(Lcom/vivo/connbase/m0/a/e;)V
+00007a: invoke-virtual v0, v2, Lcom/vivo/connbase/m0/a/f;->a(Lcom/vivo/connbase/m0/a/f$c;)V
+000080: iget-object v0, v4, Lcom/vivo/connbase/m0/a/e;->h Lcom/vivo/connbase/m0/a/f;
+000084: iget-object v2, v4, Lcom/vivo/connbase/m0/a/e;->c Landroid/content/Context;
+000088: invoke-virtual v0, v2, v1, Lcom/vivo/connbase/m0/a/f;->a(Landroid/content/Context; Z)V
+00008e: iget-object v0, v4, Lcom/vivo/connbase/m0/a/e;->h Lcom/vivo/connbase/m0/a/f;
+000092: new-instance v1, Lcom/vivo/connbase/m0/a/e$p;
+000096: invoke-direct v1, v4, Lcom/vivo/connbase/m0/a/e$p;-><init>(Lcom/vivo/connbase/m0/a/e;)V
+00009c: invoke-virtual v0, v1, Lcom/vivo/connbase/m0/a/f;->a(Lcom/vivo/connbase/m0/a/f$d;)V
+0000a2: goto +bh
+0000a4: const-string v0, "WifiP2pServerImpl"
+0000a8: const-string v1, "P2pChannel is null"
+0000ac: invoke-static v0, v1, Lc/c/f/a/b;->g(Ljava/lang/String; Ljava/lang/String;)V
+0000b2: invoke-direct v4, Lcom/vivo/connbase/m0/a/e;->m()V
+0000b8: return-void 
+
+METHOD g(Lcom/vivo/connbase/m0/a/e;)Lcom/vivo/connbase/m0/a/e$t;
+000000: iget-object v0, v0, Lcom/vivo/connbase/m0/a/e;->k Lcom/vivo/connbase/m0/a/e$t;
+000004: return-object v0
+
+METHOD g()Z
+000000: new-instance v0, Ljava/lang/StringBuilder;
+000004: invoke-direct v0, Ljava/lang/StringBuilder;-><init>()V
+00000a: const-string v1, "Build.VERSION.SDK_INT="
+00000e: invoke-virtual v0, v1, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+000014: sget v1, Landroid/os/Build$VERSION;->SDK_INT I
+000018: invoke-virtual v0, v1, Ljava/lang/StringBuilder;->append(I)Ljava/lang/StringBuilder;
+00001e: invoke-virtual v0, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
+000024: move-result-object v0
+000026: const-string v1, "WifiP2pServerImpl"
+00002a: invoke-static v1, v0, Lc/c/f/a/b;->k(Ljava/lang/String; Ljava/lang/String;)V
+000030: sget v0, Landroid/os/Build$VERSION;->SDK_INT I
+000034: const/16 v1, 28
+000038: if-le v0, v1, +004h
+00003c: const/4 v0, 1
+00003e: goto +2h
+000040: const/4 v0, 0
+000042: return v0
+
+METHOD h(Lcom/vivo/connbase/m0/a/e;)V
+000000: invoke-direct v0, Lcom/vivo/connbase/m0/a/e;->j()V
+000006: return-void 
+
+METHOD h()Z
+000000: iget-object v0, v1, Lcom/vivo/connbase/m0/a/e;->e Landroid/net/wifi/p2p/WifiP2pManager$Channel;
+000004: if-eqz v0, +00ch
+000008: iget-object v0, v1, Lcom/vivo/connbase/m0/a/e;->h Lcom/vivo/connbase/m0/a/f;
+00000c: invoke-virtual v0, Lcom/vivo/connbase/m0/a/f;->a()Z
+000012: move-result v0
+000014: if-eqz v0, +004h
+000018: const/4 v0, 1
+00001a: goto +2h
+00001c: const/4 v0, 0
+00001e: return v0
+
+METHOD i()V
+000000: iget-object v0, v3, Lcom/vivo/connbase/m0/a/e;->j Ljava/util/List;
+000004: monitor-enter v0
+000006: iget-object v1, v3, Lcom/vivo/connbase/m0/a/e;->j Ljava/util/List;
+00000a: invoke-interface v1, Ljava/util/List;->iterator()Ljava/util/Iterator;
+000010: move-result-object v1
+000012: invoke-interface v1, Ljava/util/Iterator;->hasNext()Z
+000018: move-result v2
+00001a: if-eqz v2, +00ch
+00001e: invoke-interface v1, Ljava/util/Iterator;->next()Ljava/lang/Object;
+000024: move-result-object v2
+000026: check-cast v2, Lcom/vivo/connbase/m0/a/c;
+00002a: invoke-interface v2, Lcom/vivo/connbase/m0/a/c;->onAcceptFailed()V
+000030: goto -fh
+000032: monitor-exit v0
+000034: return-void 
+000036: move-exception v1
+000038: monitor-exit v0
+00003a: throw v1
+
+METHOD i(Lcom/vivo/connbase/m0/a/e;)V
+000000: invoke-direct v0, Lcom/vivo/connbase/m0/a/e;->k()V
+000006: return-void 
+
+METHOD j()V
+000000: const/16 v0, 503
+000004: invoke-direct v3, v0, Lcom/vivo/connbase/m0/a/e;->a(I)V
+00000a: iget-object v0, v3, Lcom/vivo/connbase/m0/a/e;->j Ljava/util/List;
+00000e: monitor-enter v0
+000010: iget-object v1, v3, Lcom/vivo/connbase/m0/a/e;->j Ljava/util/List;
+000014: invoke-interface v1, Ljava/util/List;->iterator()Ljava/util/Iterator;
+00001a: move-result-object v1
+00001c: invoke-interface v1, Ljava/util/Iterator;->hasNext()Z
+000022: move-result v2
+000024: if-eqz v2, +00ch
+000028: invoke-interface v1, Ljava/util/Iterator;->next()Ljava/lang/Object;
+00002e: move-result-object v2
+000030: check-cast v2, Lcom/vivo/connbase/m0/a/c;
+000034: invoke-interface v2, Lcom/vivo/connbase/m0/a/c;->onConnectFailed()V
+00003a: goto -fh
+00003c: monitor-exit v0
+00003e: return-void 
+000040: move-exception v1
+000042: monitor-exit v0
+000044: throw v1
+
+METHOD j(Lcom/vivo/connbase/m0/a/e;)Z
+000000: invoke-direct v0, Lcom/vivo/connbase/m0/a/e;->g()Z
+000006: move-result v0
+000008: return v0
+
+METHOD k(Lcom/vivo/connbase/m0/a/e;)Ljava/lang/String;
+000000: iget-object v0, v0, Lcom/vivo/connbase/m0/a/e;->a Ljava/lang/String;
+000004: return-object v0
+
+METHOD k()V
+000000: const/16 v0, 501
+000004: invoke-direct v3, v0, Lcom/vivo/connbase/m0/a/e;->a(I)V
+00000a: iget-object v0, v3, Lcom/vivo/connbase/m0/a/e;->j Ljava/util/List;
+00000e: monitor-enter v0
+000010: iget-object v1, v3, Lcom/vivo/connbase/m0/a/e;->j Ljava/util/List;
+000014: invoke-interface v1, Ljava/util/List;->iterator()Ljava/util/Iterator;
+00001a: move-result-object v1
+00001c: invoke-interface v1, Ljava/util/Iterator;->hasNext()Z
+000022: move-result v2
+000024: if-eqz v2, +00ch
+000028: invoke-interface v1, Ljava/util/Iterator;->next()Ljava/lang/Object;
+00002e: move-result-object v2
+000030: check-cast v2, Lcom/vivo/connbase/m0/a/c;
+000034: invoke-interface v2, Lcom/vivo/connbase/m0/a/c;->b()V
+00003a: goto -fh
+00003c: monitor-exit v0
+00003e: return-void 
+000040: move-exception v1
+000042: monitor-exit v0
+000044: throw v1
+
+METHOD l()V
+000000: const/16 v0, 505
+000004: invoke-direct v3, v0, Lcom/vivo/connbase/m0/a/e;->a(I)V
+00000a: iget-object v0, v3, Lcom/vivo/connbase/m0/a/e;->j Ljava/util/List;
+00000e: monitor-enter v0
+000010: iget-object v1, v3, Lcom/vivo/connbase/m0/a/e;->j Ljava/util/List;
+000014: invoke-interface v1, Ljava/util/List;->iterator()Ljava/util/Iterator;
+00001a: move-result-object v1
+00001c: invoke-interface v1, Ljava/util/Iterator;->hasNext()Z
+000022: move-result v2
+000024: if-eqz v2, +00ch
+000028: invoke-interface v1, Ljava/util/Iterator;->next()Ljava/lang/Object;
+00002e: move-result-object v2
+000030: check-cast v2, Lcom/vivo/connbase/m0/a/c;
+000034: invoke-interface v2, Lcom/vivo/connbase/m0/a/c;->onDisconnected()V
+00003a: goto -fh
+00003c: monitor-exit v0
+00003e: return-void 
+000040: move-exception v1
+000042: monitor-exit v0
+000044: throw v1
+
+METHOD l(Lcom/vivo/connbase/m0/a/e;)V
+000000: invoke-direct v0, Lcom/vivo/connbase/m0/a/e;->l()V
+000006: return-void 
+
+METHOD m()V
+000000: const/16 v0, 503
+000004: invoke-direct v3, v0, Lcom/vivo/connbase/m0/a/e;->a(I)V
+00000a: iget-object v0, v3, Lcom/vivo/connbase/m0/a/e;->j Ljava/util/List;
+00000e: monitor-enter v0
+000010: iget-object v1, v3, Lcom/vivo/connbase/m0/a/e;->j Ljava/util/List;
+000014: invoke-interface v1, Ljava/util/List;->iterator()Ljava/util/Iterator;
+00001a: move-result-object v1
+00001c: invoke-interface v1, Ljava/util/Iterator;->hasNext()Z
+000022: move-result v2
+000024: if-eqz v2, +00ch
+000028: invoke-interface v1, Ljava/util/Iterator;->next()Ljava/lang/Object;
+00002e: move-result-object v2
+000030: check-cast v2, Lcom/vivo/connbase/m0/a/c;
+000034: invoke-interface v2, Lcom/vivo/connbase/m0/a/c;->onOpenFailed()V
+00003a: goto -fh
+00003c: monitor-exit v0
+00003e: return-void 
+000040: move-exception v1
+000042: monitor-exit v0
+000044: throw v1
+
+METHOD m(Lcom/vivo/connbase/m0/a/e;)V
+000000: invoke-direct v0, Lcom/vivo/connbase/m0/a/e;->p()V
+000006: return-void 
+
+METHOD n()V
+000000: const/16 v0, 507
+000004: invoke-direct v3, v0, Lcom/vivo/connbase/m0/a/e;->a(I)V
+00000a: iget-object v0, v3, Lcom/vivo/connbase/m0/a/e;->j Ljava/util/List;
+00000e: monitor-enter v0
+000010: iget-object v1, v3, Lcom/vivo/connbase/m0/a/e;->j Ljava/util/List;
+000014: invoke-interface v1, Ljava/util/List;->iterator()Ljava/util/Iterator;
+00001a: move-result-object v1
+00001c: invoke-interface v1, Ljava/util/Iterator;->hasNext()Z
+000022: move-result v2
+000024: if-eqz v2, +00ch
+000028: invoke-interface v1, Ljava/util/Iterator;->next()Ljava/lang/Object;
+00002e: move-result-object v2
+000030: check-cast v2, Lcom/vivo/connbase/m0/a/c;
+000034: invoke-interface v2, Lcom/vivo/connbase/m0/a/c;->a()V
+00003a: goto -fh
+00003c: monitor-exit v0
+00003e: return-void 
+000040: move-exception v1
+000042: monitor-exit v0
+000044: throw v1
+
+METHOD n(Lcom/vivo/connbase/m0/a/e;)V
+000000: invoke-direct v0, Lcom/vivo/connbase/m0/a/e;->i()V
+000006: return-void 
+
+METHOD o()V
+000000: const-string v0, "WifiP2pServerImpl"
+000004: const-string v1, "reset..."
+000008: invoke-static v0, v1, Lc/c/f/a/b;->k(Ljava/lang/String; Ljava/lang/String;)V
+00000e: iget-object v0, v2, Lcom/vivo/connbase/m0/a/e;->h Lcom/vivo/connbase/m0/a/f;
+000012: const/4 v1, 0
+000014: invoke-virtual v0, v1, Lcom/vivo/connbase/m0/a/f;->a(Lcom/vivo/connbase/m0/a/f$b;)V
+00001a: iget-object v0, v2, Lcom/vivo/connbase/m0/a/e;->h Lcom/vivo/connbase/m0/a/f;
+00001e: invoke-virtual v0, v1, Lcom/vivo/connbase/m0/a/f;->a(Lcom/vivo/connbase/m0/a/f$a;)V
+000024: invoke-direct v2, Lcom/vivo/connbase/m0/a/e;->g()Z
+00002a: move-result v0
+00002c: if-nez v0, +007h
+000030: iget-object v0, v2, Lcom/vivo/connbase/m0/a/e;->h Lcom/vivo/connbase/m0/a/f;
+000034: invoke-virtual v0, v1, Lcom/vivo/connbase/m0/a/f;->a(Lcom/vivo/connbase/m0/a/f$c;)V
+00003a: iput-object v1, v2, Lcom/vivo/connbase/m0/a/e;->b Ljava/lang/String;
+00003e: const/4 v0, 0
+000040: invoke-direct v2, v0, Lcom/vivo/connbase/m0/a/e;->d(Z)V
+000046: invoke-direct v2, v0, Lcom/vivo/connbase/m0/a/e;->c(Z)V
+00004c: invoke-virtual v2, Lcom/vivo/connbase/m0/a/e;->c()V
+000052: return-void 
+
+METHOD o(Lcom/vivo/connbase/m0/a/e;)V
+000000: invoke-direct v0, Lcom/vivo/connbase/m0/a/e;->f()V
+000006: return-void 
+
+METHOD p()V
+000000: iget-object v0, v2, Lcom/vivo/connbase/m0/a/e;->h Lcom/vivo/connbase/m0/a/f;
+000004: new-instance v1, Lcom/vivo/connbase/m0/a/e$c;
+000008: invoke-direct v1, v2, Lcom/vivo/connbase/m0/a/e$c;-><init>(Lcom/vivo/connbase/m0/a/e;)V
+00000e: invoke-virtual v0, v1, Lcom/vivo/connbase/m0/a/f;->a(Lcom/vivo/connbase/m0/a/f$a;)V
+000014: return-void 
+
+METHOD p(Lcom/vivo/connbase/m0/a/e;)V
+000000: invoke-direct v0, Lcom/vivo/connbase/m0/a/e;->m()V
+000006: return-void 
+
+METHOD q(Lcom/vivo/connbase/m0/a/e;)Landroid/net/wifi/p2p/WifiP2pManager$Channel;
+000000: iget-object v0, v0, Lcom/vivo/connbase/m0/a/e;->e Landroid/net/wifi/p2p/WifiP2pManager$Channel;
+000004: return-object v0
+
+METHOD q()V
+000000: const/4 v0, 0
+000002: invoke-direct v1, v0, Lcom/vivo/connbase/m0/a/e;->a(Landroid/net/wifi/p2p/WifiP2pManager$ActionListener;)V
+000008: return-void 
+
+METHOD r(Lcom/vivo/connbase/m0/a/e;)Landroid/net/wifi/p2p/WifiP2pManager;
+000000: iget-object v0, v0, Lcom/vivo/connbase/m0/a/e;->d Landroid/net/wifi/p2p/WifiP2pManager;
+000004: return-object v0
+
+METHOD a(Ljava/lang/String;)Lcom/vivo/connbase/m0/a/e;
+000000: iput-object v1, v0, Lcom/vivo/connbase/m0/a/e;->a Ljava/lang/String;
+000004: return-object v0
+
+METHOD a(I I)V
+000000: invoke-direct v5, v6, v7, Lcom/vivo/connbase/m0/a/e;->d(I I)I
+000006: move-result v6
+000008: invoke-static v6, Lcom/vivo/connbase/wifi/utils/WifiUtils;->getFrequencyByChannel(I)I
+00000e: move-result v7
+000010: invoke-static Ljava/util/UUID;->randomUUID()Ljava/util/UUID;
+000016: move-result-object v0
+000018: invoke-virtual v0, Ljava/util/UUID;->toString()Ljava/lang/String;
+00001e: move-result-object v0
+000020: const/4 v1, 0
+000022: const/4 v2, 6
+000024: invoke-virtual v0, v1, v2, Ljava/lang/String;->substring(I I)Ljava/lang/String;
+00002a: move-result-object v0
+00002c: invoke-virtual v0, Ljava/lang/String;->toUpperCase()Ljava/lang/String;
+000032: move-result-object v0
+000034: sget-object v2, Lcom/vivo/connbase/m0/a/e;->v Lcom/vivo/connbase/m0/a/g/b;
+000038: new-instance v3, Ljava/lang/StringBuilder;
+00003c: invoke-direct v3, Ljava/lang/StringBuilder;-><init>()V
+000042: const-string v4, "DIRECT-vs-"
+000046: invoke-virtual v3, v4, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+00004c: invoke-virtual v3, v0, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+000052: invoke-virtual v3, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
+000058: move-result-object v0
+00005a: invoke-virtual v2, v0, Lcom/vivo/connbase/m0/a/g/b;->b(Ljava/lang/String;)Lcom/vivo/connbase/m0/a/g/b;
+000060: sget-object v0, Lcom/vivo/connbase/m0/a/e;->v Lcom/vivo/connbase/m0/a/g/b;
+000064: invoke-static Ljava/util/UUID;->randomUUID()Ljava/util/UUID;
+00006a: move-result-object v2
+00006c: invoke-virtual v2, Ljava/util/UUID;->toString()Ljava/lang/String;
+000072: move-result-object v2
+000074: const/16 v3, 8
+000078: invoke-virtual v2, v1, v3, Ljava/lang/String;->substring(I I)Ljava/lang/String;
+00007e: move-result-object v1
+000080: invoke-virtual v0, v1, Lcom/vivo/connbase/m0/a/g/b;->c(Ljava/lang/String;)Lcom/vivo/connbase/m0/a/g/b;
+000086: sget-object v0, Lcom/vivo/connbase/m0/a/e;->v Lcom/vivo/connbase/m0/a/g/b;
+00008a: invoke-virtual v0, v7, Lcom/vivo/connbase/m0/a/g/b;->a(I)Lcom/vivo/connbase/m0/a/g/b;
+000090: sget-object v7, Lcom/vivo/connbase/m0/a/e;->v Lcom/vivo/connbase/m0/a/g/b;
+000094: const/4 v0, 1
+000096: invoke-virtual v7, v0, Lcom/vivo/connbase/m0/a/g/b;->a(Z)Lcom/vivo/connbase/m0/a/g/b;
+00009c: new-instance v7, Lcom/vivo/connbase/m0/a/e$f;
+0000a0: invoke-direct v7, v5, v6, Lcom/vivo/connbase/m0/a/e$f;-><init>(Lcom/vivo/connbase/m0/a/e; I)V
+0000a6: invoke-direct v5, v7, Lcom/vivo/connbase/m0/a/e;->a(Ljava/lang/Runnable;)V
+0000ac: return-void 
+
+METHOD a(I I Ljava/lang/String;)V
+000000: const-string v0, "WifiP2pServerImpl"
+000004: const-string v1, "createGroupForClient"
+000008: invoke-static v0, v1, Lc/c/f/a/b;->k(Ljava/lang/String; Ljava/lang/String;)V
+00000e: sget-object v0, Lcom/vivo/connbase/m0/a/e;->v Lcom/vivo/connbase/m0/a/g/b;
+000012: monitor-enter v0
+000014: const-string v1, "WifiP2pServerImpl"
+000018: new-instance v2, Ljava/lang/StringBuilder;
+00001c: invoke-direct v2, Ljava/lang/StringBuilder;-><init>()V
+000022: const-string v3, "Creating group for client: "
+000026: invoke-virtual v2, v3, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+00002c: invoke-virtual v2, v7, Ljava/lang/StringBuilder;->append(I)Ljava/lang/StringBuilder;
+000032: const-string v3, ", "
+000036: invoke-virtual v2, v3, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+00003c: invoke-static v9, Lcom/vivo/connbase/wifi/utils/f;->a(Ljava/lang/String;)Ljava/lang/String;
+000042: move-result-object v3
+000044: invoke-virtual v2, v3, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+00004a: const-string v3, ",clientMacAddress = "
+00004e: invoke-virtual v2, v3, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+000054: invoke-virtual v2, v9, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+00005a: const-string v3, ", otherFrequency="
+00005e: invoke-virtual v2, v3, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+000064: invoke-virtual v2, v8, Ljava/lang/StringBuilder;->append(I)Ljava/lang/StringBuilder;
+00006a: invoke-virtual v2, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
+000070: move-result-object v2
+000072: invoke-static v1, v2, Lc/c/f/a/b;->f(Ljava/lang/String; Ljava/lang/String;)V
+000078: sget-object v1, Lcom/vivo/connbase/m0/a/e;->v Lcom/vivo/connbase/m0/a/g/b;
+00007c: const/16 v2, 501
+000080: if-eqz v1, +0a0h
+000084: iget-object v1, v6, Lcom/vivo/connbase/m0/a/e;->a Ljava/lang/String;
+000088: invoke-static v9, v1, Landroid/text/TextUtils;->equals(Ljava/lang/CharSequence; Ljava/lang/CharSequence;)Z
+00008e: move-result v1
+000090: if-eqz v1, +098h
+000094: sget-object v1, Lcom/vivo/connbase/m0/a/e;->v Lcom/vivo/connbase/m0/a/g/b;
+000098: invoke-virtual v1, Lcom/vivo/connbase/m0/a/g/b;->f()I
+00009e: move-result v1
+0000a0: const-string v3, "WifiP2pServerImpl"
+0000a4: new-instance v4, Ljava/lang/StringBuilder;
+0000a8: invoke-direct v4, Ljava/lang/StringBuilder;-><init>()V
+0000ae: const-string v5, "status = "
+0000b2: invoke-virtual v4, v5, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+0000b8: invoke-virtual v4, v1, Ljava/lang/StringBuilder;->append(I)Ljava/lang/StringBuilder;
+0000be: invoke-virtual v4, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
+0000c4: move-result-object v4
+0000c6: invoke-static v3, v4, Lc/c/f/a/b;->f(Ljava/lang/String; Ljava/lang/String;)V
+0000cc: if-ne v1, v2, +027h
+0000d0: const-string v7, "WifiP2pServerImpl"
+0000d4: const-string v8, "status == STATUS_P2P_CREATING "
+0000d8: invoke-static v7, v8, Lc/c/f/a/b;->f(Ljava/lang/String; Ljava/lang/String;)V
+0000de: iget-object v7, v6, Lcom/vivo/connbase/m0/a/e;->j Ljava/util/List;
+0000e2: invoke-interface v7, Ljava/util/List;->iterator()Ljava/util/Iterator;
+0000e8: move-result-object v7
+0000ea: invoke-interface v7, Ljava/util/Iterator;->hasNext()Z
+0000f0: move-result v8
+0000f2: if-eqz v8, +012h
+0000f6: invoke-interface v7, Ljava/util/Iterator;->next()Ljava/lang/Object;
+0000fc: move-result-object v8
+0000fe: check-cast v8, Lcom/vivo/connbase/m0/a/c;
+000102: sget-object v9, Lcom/vivo/connbase/m0/a/e;->v Lcom/vivo/connbase/m0/a/g/b;
+000106: invoke-virtual v9, Lcom/vivo/connbase/m0/a/g/b;->b()I
+00010c: move-result v9
+00010e: invoke-interface v8, v9, Lcom/vivo/connbase/m0/a/c;->a(I)V
+000114: goto -15h
+000116: monitor-exit v0
+000118: return-void 
+00011a: const/16 v3, 502
+00011e: if-ne v1, v3, +051h
+000122: sget-object v1, Lcom/vivo/connbase/m0/a/e;->v Lcom/vivo/connbase/m0/a/g/b;
+000126: invoke-virtual v1, Lcom/vivo/connbase/m0/a/g/b;->g()Landroid/net/wifi/p2p/WifiP2pGroup;
+00012c: move-result-object v1
+00012e: if-eqz v1, +049h
+000132: const-string v7, "WifiP2pServerImpl"
+000136: new-instance v8, Ljava/lang/StringBuilder;
+00013a: invoke-direct v8, Ljava/lang/StringBuilder;-><init>()V
+000140: const-string v9, "status == STATUS_P2P_CREATED"
+000144: invoke-virtual v8, v9, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+00014a: new-instance v9, Lcom/google/gson/Gson;
+00014e: invoke-direct v9, Lcom/google/gson/Gson;-><init>()V
+000154: iget-object v1, v6, Lcom/vivo/connbase/m0/a/e;->j Ljava/util/List;
+000158: invoke-virtual v9, v1, Lcom/google/gson/Gson;->toJson(Ljava/lang/Object;)Ljava/lang/String;
+00015e: move-result-object v9
+000160: invoke-virtual v8, v9, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+000166: invoke-virtual v8, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
+00016c: move-result-object v8
+00016e: invoke-static v7, v8, Lc/c/f/a/b;->f(Ljava/lang/String; Ljava/lang/String;)V
+000174: iget-object v7, v6, Lcom/vivo/connbase/m0/a/e;->j Ljava/util/List;
+000178: invoke-interface v7, Ljava/util/List;->iterator()Ljava/util/Iterator;
+00017e: move-result-object v7
+000180: invoke-interface v7, Ljava/util/Iterator;->hasNext()Z
+000186: move-result v8
+000188: if-eqz v8, +01ah
+00018c: invoke-interface v7, Ljava/util/Iterator;->next()Ljava/lang/Object;
+000192: move-result-object v8
+000194: check-cast v8, Lcom/vivo/connbase/m0/a/c;
+000198: sget-object v9, Lcom/vivo/connbase/m0/a/e;->v Lcom/vivo/connbase/m0/a/g/b;
+00019c: invoke-virtual v9, Lcom/vivo/connbase/m0/a/g/b;->g()Landroid/net/wifi/p2p/WifiP2pGroup;
+0001a2: move-result-object v9
+0001a4: sget-object v1, Lcom/vivo/connbase/m0/a/e;->v Lcom/vivo/connbase/m0/a/g/b;
+0001a8: invoke-virtual v1, Lcom/vivo/connbase/m0/a/g/b;->b()I
+0001ae: move-result v1
+0001b0: iget-boolean v2, v6, Lcom/vivo/connbase/m0/a/e;->q Z
+0001b4: invoke-interface v8, v9, v1, v2, Lcom/vivo/connbase/m0/a/c;->a(Landroid/net/wifi/p2p/WifiP2pGroup; I Z)V
+0001ba: goto -1dh
+0001bc: monitor-exit v0
+0001be: return-void 
+0001c0: const-string v1, "WifiP2pServerImpl"
+0001c4: const-string v3, "created new"
+0001c8: invoke-static v1, v3, Lc/c/f/a/b;->f(Ljava/lang/String; Ljava/lang/String;)V
+0001ce: invoke-virtual v6, v9, Lcom/vivo/connbase/m0/a/e;->a(Ljava/lang/String;)Lcom/vivo/connbase/m0/a/e;
+0001d4: invoke-direct v6, v2, Lcom/vivo/connbase/m0/a/e;->a(I)V
+0001da: monitor-exit v0
+0001dc: invoke-virtual v6, v7, v8, Lcom/vivo/connbase/m0/a/e;->a(I I)V
+0001e2: return-void 
+0001e4: move-exception v7
+0001e6: monitor-exit v0
+0001e8: throw v7
+
+METHOD a(Landroid/net/wifi/p2p/WifiP2pConfig;)V
+000000: new-instance v0, Lcom/vivo/connbase/m0/a/e$g;
+000004: invoke-direct v0, v1, v2, Lcom/vivo/connbase/m0/a/e$g;-><init>(Lcom/vivo/connbase/m0/a/e; Landroid/net/wifi/p2p/WifiP2pConfig;)V
+00000a: invoke-direct v1, v0, Lcom/vivo/connbase/m0/a/e;->a(Ljava/lang/Runnable;)V
+000010: return-void 
+
+METHOD a(Lcom/vivo/connbase/m0/a/c;)V
+000000: iget-object v0, v2, Lcom/vivo/connbase/m0/a/e;->j Ljava/util/List;
+000004: monitor-enter v0
+000006: iget-object v1, v2, Lcom/vivo/connbase/m0/a/e;->j Ljava/util/List;
+00000a: invoke-interface v1, v3, Ljava/util/List;->contains(Ljava/lang/Object;)Z
+000010: move-result v1
+000012: if-nez v1, +007h
+000016: iget-object v1, v2, Lcom/vivo/connbase/m0/a/e;->j Ljava/util/List;
+00001a: invoke-interface v1, v3, Ljava/util/List;->add(Ljava/lang/Object;)Z
+000020: monitor-exit v0
+000022: return-void 
+000024: move-exception v3
+000026: monitor-exit v0
+000028: throw v3
+
+METHOD a(Ljava/lang/String; Ljava/lang/String; Ljava/lang/String; I)V
+000000: new-instance v0, Ljava/lang/StringBuilder;
+000004: invoke-direct v0, Ljava/lang/StringBuilder;-><init>()V
+00000a: const-string v1, "Connecting GO: "
+00000e: invoke-virtual v0, v1, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+000014: invoke-virtual v0, v4, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+00001a: const-string v1, ", frequency="
+00001e: invoke-virtual v0, v1, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+000024: invoke-virtual v0, v7, Ljava/lang/StringBuilder;->append(I)Ljava/lang/StringBuilder;
+00002a: invoke-virtual v0, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
+000030: move-result-object v0
+000032: const-string v1, "WifiP2pServerImpl"
+000036: invoke-static v1, v0, Lc/c/f/a/b;->k(Ljava/lang/String; Ljava/lang/String;)V
+00003c: const/4 v0, 1
+00003e: invoke-direct v3, v0, Lcom/vivo/connbase/m0/a/e;->d(Z)V
+000044: iput-object v6, v3, Lcom/vivo/connbase/m0/a/e;->b Ljava/lang/String;
+000048: invoke-static v4, Landroid/text/TextUtils;->isEmpty(Ljava/lang/CharSequence;)Z
+00004e: move-result v6
+000050: const/4 v2, 0
+000052: if-nez v6, +00bh
+000056: invoke-static v5, Landroid/text/TextUtils;->isEmpty(Ljava/lang/CharSequence;)Z
+00005c: move-result v6
+00005e: if-nez v6, +005h
+000062: if-eqz v7, +003h
+000066: goto +2h
+000068: move v0, v2
+00006a: new-instance v6, Lcom/vivo/connbase/m0/a/g/b;
+00006e: invoke-direct v6, Lcom/vivo/connbase/m0/a/g/b;-><init>()V
+000074: invoke-virtual v6, v4, Lcom/vivo/connbase/m0/a/g/b;->b(Ljava/lang/String;)Lcom/vivo/connbase/m0/a/g/b;
+00007a: move-result-object v4
+00007c: invoke-virtual v4, v5, Lcom/vivo/connbase/m0/a/g/b;->c(Ljava/lang/String;)Lcom/vivo/connbase/m0/a/g/b;
+000082: move-result-object v4
+000084: invoke-virtual v4, v2, Lcom/vivo/connbase/m0/a/g/b;->a(Z)Lcom/vivo/connbase/m0/a/g/b;
+00008a: move-result-object v4
+00008c: invoke-virtual v4, v7, Lcom/vivo/connbase/m0/a/g/b;->a(I)Lcom/vivo/connbase/m0/a/g/b;
+000092: if-eqz v0, +015h
+000096: invoke-virtual v6, Lcom/vivo/connbase/m0/a/g/b;->a()Landroid/net/wifi/p2p/WifiP2pGroup;
+00009c: move-result-object v4
+00009e: if-eqz v4, +00fh
+0000a2: const-string v4, "Method selected: Ext"
+0000a6: invoke-static v1, v4, Lc/c/f/a/b;->k(Ljava/lang/String; Ljava/lang/String;)V
+0000ac: invoke-virtual v6, Lcom/vivo/connbase/m0/a/g/b;->a()Landroid/net/wifi/p2p/WifiP2pGroup;
+0000b2: move-result-object v4
+0000b4: invoke-direct v3, v4, Lcom/vivo/connbase/m0/a/e;->a(Landroid/net/wifi/p2p/WifiP2pGroup;)V
+0000ba: goto +32h
+0000bc: if-eqz v0, +015h
+0000c0: invoke-direct v3, Lcom/vivo/connbase/m0/a/e;->g()Z
+0000c6: move-result v4
+0000c8: if-eqz v4, +00fh
+0000cc: const-string v4, "Method selected: Q"
+0000d0: invoke-static v1, v4, Lc/c/f/a/b;->k(Ljava/lang/String; Ljava/lang/String;)V
+0000d6: invoke-static v6, Lcom/vivo/connbase/m0/a/g/a;->a(Lcom/vivo/connbase/m0/a/g/b;)Landroid/net/wifi/p2p/WifiP2pConfig;
+0000dc: move-result-object v4
+0000de: invoke-virtual v3, v4, Lcom/vivo/connbase/m0/a/e;->a(Landroid/net/wifi/p2p/WifiP2pConfig;)V
+0000e4: goto +1dh
+0000e6: const-string v4, "Method selected: Classic"
+0000ea: invoke-static v1, v4, Lc/c/f/a/b;->k(Ljava/lang/String; Ljava/lang/String;)V
+0000f0: new-instance v4, Lcom/vivo/connbase/m0/a/e$t;
+0000f4: const/4 v5, 0
+0000f6: invoke-direct v4, v3, v5, Lcom/vivo/connbase/m0/a/e$t;-><init>(Lcom/vivo/connbase/m0/a/e; Lcom/vivo/connbase/m0/a/e$j;)V
+0000fc: iput-object v4, v3, Lcom/vivo/connbase/m0/a/e;->k Lcom/vivo/connbase/m0/a/e$t;
+000100: iget-object v5, v3, Lcom/vivo/connbase/m0/a/e;->g Landroid/os/Handler;
+000104: const-wide/16 v6, 5000
+000108: invoke-virtual v5, v4, v6, v7, Landroid/os/Handler;->postDelayed(Ljava/lang/Runnable; J)Z
+00010e: new-instance v4, Lcom/vivo/connbase/m0/a/e$i;
+000112: invoke-direct v4, v3, Lcom/vivo/connbase/m0/a/e$i;-><init>(Lcom/vivo/connbase/m0/a/e;)V
+000118: invoke-direct v3, v4, Lcom/vivo/connbase/m0/a/e;->a(Ljava/lang/Runnable;)V
+00011e: return-void 
+
+METHOD a()Z
+000000: iget-object v0, v1, Lcom/vivo/connbase/m0/a/e;->f Landroid/net/wifi/WifiManager;
+000004: invoke-virtual v0, Landroid/net/wifi/WifiManager;->isP2pSupported()Z
+00000a: move-result v0
+00000c: if-eqz v0, +016h
+000010: iget-object v0, v1, Lcom/vivo/connbase/m0/a/e;->f Landroid/net/wifi/WifiManager;
+000014: invoke-virtual v0, Landroid/net/wifi/WifiManager;->isWifiEnabled()Z
+00001a: move-result v0
+00001c: if-eqz v0, +00eh
+000020: invoke-direct v1, Lcom/vivo/connbase/m0/a/e;->h()Z
+000026: move-result v0
+000028: if-eqz v0, +008h
+00002c: iget-boolean v0, v1, Lcom/vivo/connbase/m0/a/e;->m Z
+000030: if-nez v0, +004h
+000034: const/4 v0, 1
+000036: goto +2h
+000038: const/4 v0, 0
+00003a: return v0
+
+METHOD b()I
+000000: iget-object v0, v1, Lcom/vivo/connbase/m0/a/e;->f Landroid/net/wifi/WifiManager;
+000004: invoke-static v0, Lcom/vivo/connbase/wifi/utils/WifiUtils;->getCurrentWifiFrequency(Landroid/net/wifi/WifiManager;)I
+00000a: move-result v0
+00000c: return v0
+
+METHOD b(Lcom/vivo/connbase/m0/a/c;)V
+000000: iget-object v0, v2, Lcom/vivo/connbase/m0/a/e;->j Ljava/util/List;
+000004: monitor-enter v0
+000006: iget-object v1, v2, Lcom/vivo/connbase/m0/a/e;->j Ljava/util/List;
+00000a: invoke-interface v1, v3, Ljava/util/List;->remove(Ljava/lang/Object;)Z
+000010: monitor-exit v0
+000012: invoke-static Lcom/vivo/connbase/App;->m()Lcom/vivo/connbase/App;
+000018: move-result-object v3
+00001a: iget-object v0, v2, Lcom/vivo/connbase/m0/a/e;->p Landroid/content/BroadcastReceiver;
+00001e: invoke-virtual v3, v0, Landroid/app/Application;->unregisterReceiver(Landroid/content/BroadcastReceiver;)V
+000024: return-void 
+000026: move-exception v3
+000028: monitor-exit v0
+00002a: throw v3
+
+METHOD b(I I)Z
+000000: const/4 v0, -1
+000002: if-eq v2, v0, +00ah
+000006: const/16 v0, 5180
+00000a: if-ge v2, v0, +006h
+00000e: if-nez v3, +004h
+000012: const/4 v2, 1
+000014: goto +2h
+000016: const/4 v2, 0
+000018: return v2
+
+METHOD c()V
+000000: const/4 v0, 0
+000002: invoke-direct v1, v0, Lcom/vivo/connbase/m0/a/e;->a(Ljava/lang/Runnable;)V
+000008: return-void 
+
+METHOD c(I I)Z
+000000: const/16 v0, 5180
+000004: if-lt v2, v0, +006h
+000008: if-nez v3, +004h
+00000c: const/4 v2, 1
+00000e: goto +2h
+000010: const/4 v2, 0
+000012: return v2
+
+METHOD cancelConnect()V
+000000: const/4 v0, 0
+000002: invoke-direct v1, v0, Lcom/vivo/connbase/m0/a/e;->d(Z)V
+000008: invoke-direct v1, v0, Lcom/vivo/connbase/m0/a/e;->c(Z)V
+00000e: invoke-virtual v1, Lcom/vivo/connbase/m0/a/e;->c()V
+000014: return-void 
+
+METHOD close()V
+000000: const-string v0, "WifiP2pServerImpl"
+000004: const-string v1, "Closing..."
+000008: invoke-static v0, v1, Lc/c/f/a/b;->k(Ljava/lang/String; Ljava/lang/String;)V
+00000e: iget-object v0, v3, Lcom/vivo/connbase/m0/a/e;->c Landroid/content/Context;
+000012: iget-object v1, v3, Lcom/vivo/connbase/m0/a/e;->i Landroid/content/BroadcastReceiver;
+000016: invoke-virtual v0, v1, Landroid/content/Context;->unregisterReceiver(Landroid/content/BroadcastReceiver;)V
+00001c: iget-object v0, v3, Lcom/vivo/connbase/m0/a/e;->h Lcom/vivo/connbase/m0/a/f;
+000020: const/4 v1, 0
+000022: invoke-virtual v0, v1, Lcom/vivo/connbase/m0/a/f;->a(Lcom/vivo/connbase/m0/a/f$c;)V
+000028: iget-object v0, v3, Lcom/vivo/connbase/m0/a/e;->h Lcom/vivo/connbase/m0/a/f;
+00002c: invoke-virtual v0, v1, Lcom/vivo/connbase/m0/a/f;->a(Lcom/vivo/connbase/m0/a/f$d;)V
+000032: iget-object v0, v3, Lcom/vivo/connbase/m0/a/e;->h Lcom/vivo/connbase/m0/a/f;
+000036: iget-object v1, v3, Lcom/vivo/connbase/m0/a/e;->c Landroid/content/Context;
+00003a: const/4 v2, 0
+00003c: invoke-virtual v0, v1, v2, Lcom/vivo/connbase/m0/a/f;->a(Landroid/content/Context; Z)V
+000042: invoke-direct v3, Lcom/vivo/connbase/m0/a/e;->o()V
+000048: return-void 
+
+METHOD open()V
+000000: const-string v0, "WifiP2pServerImpl"
+000004: const-string v1, "open"
+000008: invoke-static v0, v1, Lc/c/f/a/b;->k(Ljava/lang/String; Ljava/lang/String;)V
+00000e: iget-object v1, v4, Lcom/vivo/connbase/m0/a/e;->f Landroid/net/wifi/WifiManager;
+000012: invoke-virtual v1, Landroid/net/wifi/WifiManager;->isWifiEnabled()Z
+000018: move-result v1
+00001a: if-eqz v1, +006h
+00001e: invoke-direct v4, Lcom/vivo/connbase/m0/a/e;->f()V
+000024: goto +2ah
+000026: new-instance v1, Lcom/vivo/connbase/m0/a/e$h;
+00002a: invoke-direct v1, v4, Lcom/vivo/connbase/m0/a/e$h;-><init>(Lcom/vivo/connbase/m0/a/e;)V
+000030: iput-object v1, v4, Lcom/vivo/connbase/m0/a/e;->i Landroid/content/BroadcastReceiver;
+000034: new-instance v1, Landroid/content/IntentFilter;
+000038: const-string v2, "android.net.wifi.WIFI_STATE_CHANGED"
+00003c: invoke-direct v1, v2, Landroid/content/IntentFilter;-><init>(Ljava/lang/String;)V
+000042: iget-object v2, v4, Lcom/vivo/connbase/m0/a/e;->c Landroid/content/Context;
+000046: iget-object v3, v4, Lcom/vivo/connbase/m0/a/e;->i Landroid/content/BroadcastReceiver;
+00004a: invoke-virtual v2, v3, v1, Landroid/content/Context;->registerReceiver(Landroid/content/BroadcastReceiver; Landroid/content/IntentFilter;)Landroid/content/Intent;
+000050: iget-object v1, v4, Lcom/vivo/connbase/m0/a/e;->f Landroid/net/wifi/WifiManager;
+000054: const/4 v2, 1
+000056: invoke-virtual v1, v2, Landroid/net/wifi/WifiManager;->setWifiEnabled(Z)Z
+00005c: move-result v1
+00005e: if-nez v1, +00dh
+000062: const-string v1, "setWifiEnabled(true) failed, were hotspot or airplane mode activated?"
+000066: invoke-static v0, v1, Lc/c/f/a/b;->g(Ljava/lang/String; Ljava/lang/String;)V
+00006c: invoke-direct v4, Lcom/vivo/connbase/m0/a/e;->m()V
+000072: invoke-virtual v4, Lcom/vivo/connbase/m0/a/e;->close()V
+000078: return-void 

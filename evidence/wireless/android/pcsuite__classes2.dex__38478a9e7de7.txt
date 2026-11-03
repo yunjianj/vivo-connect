@@ -1,0 +1,63 @@
+APK pcsuite/updateApk/pcsuite.apk
+DEX classes2.dex
+CLASS Lcom/vivo/connect/sdk/f/c$j2;
+SUPER Ljava/lang/Object;
+FIELDS
+f Ljava/lang/String; = ':startScanRunnable'
+a Landroid/os/Messenger; = None
+b Ljava/lang/String; = None
+c Lcom/vivo/connect/discovery/ScanOptions; = None
+d Lcom/vivo/connbase/IScanCallback; = None
+e Lcom/vivo/connect/sdk/f/c; = None
+
+METHOD <init>(Lcom/vivo/connect/sdk/f/c; Landroid/os/Messenger; Ljava/lang/String; Lcom/vivo/connect/discovery/ScanOptions; Lcom/vivo/connbase/IScanCallback;)V
+000000: iput-object v1, v0, Lcom/vivo/connect/sdk/f/c$j2;->e Lcom/vivo/connect/sdk/f/c;
+000004: iput-object v2, v0, Lcom/vivo/connect/sdk/f/c$j2;->a Landroid/os/Messenger;
+000008: iput-object v3, v0, Lcom/vivo/connect/sdk/f/c$j2;->b Ljava/lang/String;
+00000c: iput-object v4, v0, Lcom/vivo/connect/sdk/f/c$j2;->c Lcom/vivo/connect/discovery/ScanOptions;
+000010: iput-object v5, v0, Lcom/vivo/connect/sdk/f/c$j2;->d Lcom/vivo/connbase/IScanCallback;
+000014: invoke-direct v0, Ljava/lang/Object;-><init>()V
+00001a: return-void 
+
+METHOD run()V
+000000: const-string v0, "ConnectClientImpl"
+000004: iget-object v1, v5, Lcom/vivo/connect/sdk/f/c$j2;->e Lcom/vivo/connect/sdk/f/c;
+000008: invoke-static v1, Lcom/vivo/connect/sdk/f/c;->a(Lcom/vivo/connect/sdk/f/c;)Lcom/vivo/connbase/IClient;
+00000e: move-result-object v1
+000010: if-eqz v1, +01ch
+000014: const-string v1, "ready to call startScan1"
+000018: invoke-static v0, v1, Lcom/vivo/connect/logger/EasyLog;->i(Ljava/lang/String; Ljava/lang/String;)V
+00001e: iget-object v1, v5, Lcom/vivo/connect/sdk/f/c$j2;->e Lcom/vivo/connect/sdk/f/c;
+000022: invoke-static v1, Lcom/vivo/connect/sdk/f/c;->a(Lcom/vivo/connect/sdk/f/c;)Lcom/vivo/connbase/IClient;
+000028: move-result-object v1
+00002a: iget-object v2, v5, Lcom/vivo/connect/sdk/f/c$j2;->a Landroid/os/Messenger;
+00002e: iget-object v3, v5, Lcom/vivo/connect/sdk/f/c$j2;->b Ljava/lang/String;
+000032: iget-object v4, v5, Lcom/vivo/connect/sdk/f/c$j2;->c Lcom/vivo/connect/discovery/ScanOptions;
+000036: invoke-static v4, Lcom/vivo/connect/sdk/i/b;->a(Lcom/vivo/connect/discovery/ScanOptions;)Ljava/lang/String;
+00003c: move-result-object v4
+00003e: iget-object v5, v5, Lcom/vivo/connect/sdk/f/c$j2;->d Lcom/vivo/connbase/IScanCallback;
+000042: goto +20h
+000044: move-exception v5
+000046: goto +27h
+000048: iget-object v1, v5, Lcom/vivo/connect/sdk/f/c$j2;->e Lcom/vivo/connect/sdk/f/c;
+00004c: const-string v2, ":startScanRunnable"
+000050: invoke-static v1, v2, Lcom/vivo/connect/sdk/f/c;->a(Lcom/vivo/connect/sdk/f/c; Ljava/lang/String;)Z
+000056: move-result v1
+000058: if-nez v1, +003h
+00005c: return-void 
+00005e: const-string v1, "ready to call startScan2"
+000062: invoke-static v0, v1, Lcom/vivo/connect/logger/EasyLog;->i(Ljava/lang/String; Ljava/lang/String;)V
+000068: iget-object v1, v5, Lcom/vivo/connect/sdk/f/c$j2;->e Lcom/vivo/connect/sdk/f/c;
+00006c: invoke-static v1, Lcom/vivo/connect/sdk/f/c;->a(Lcom/vivo/connect/sdk/f/c;)Lcom/vivo/connbase/IClient;
+000072: move-result-object v1
+000074: iget-object v2, v5, Lcom/vivo/connect/sdk/f/c$j2;->a Landroid/os/Messenger;
+000078: iget-object v3, v5, Lcom/vivo/connect/sdk/f/c$j2;->b Ljava/lang/String;
+00007c: iget-object v4, v5, Lcom/vivo/connect/sdk/f/c$j2;->c Lcom/vivo/connect/discovery/ScanOptions;
+000080: goto -25h
+000082: invoke-interface v1, v2, v3, v4, v5, Lcom/vivo/connbase/IClient;->startScan(Landroid/os/Messenger; Ljava/lang/String; Ljava/lang/String; Lcom/vivo/connbase/IScanCallback;)V
+000088: const-string v5, "call startScan end."
+00008c: invoke-static v0, v5, Lcom/vivo/connect/logger/EasyLog;->i(Ljava/lang/String; Ljava/lang/String;)V
+000092: return-void 
+000094: const-string v1, "start scan err:"
+000098: invoke-static v5, v1, v0, LV5/S;->h(Ljava/lang/Exception; Ljava/lang/String; Ljava/lang/String;)V
+00009e: return-void 

@@ -1,0 +1,39 @@
+APK pcsuite/updateApk/connbase.apk
+DEX classes.dex
+CLASS Lcom/vivo/connbase/wifi/utils/f;
+SUPER Ljava/lang/Object;
+FIELDS
+a Z = True
+
+METHOD <clinit>()V
+000000: return-void 
+
+METHOD <init>()V
+000000: invoke-direct v0, Ljava/lang/Object;-><init>()V
+000006: return-void 
+
+METHOD a(Ljava/lang/String;)Ljava/lang/String;
+000000: if-nez v2, +004h
+000004: const/4 v2, 0
+000006: return-object v2
+000008: invoke-virtual v2, Ljava/lang/String;->length()I
+00000e: move-result v0
+000010: if-nez v0, +005h
+000014: const-string v2, ""
+000018: return-object v2
+00001a: const-string v0, "null"
+00001e: invoke-virtual v0, v2, Ljava/lang/String;->equals(Ljava/lang/Object;)Z
+000024: move-result v1
+000026: if-eqz v1, +003h
+00002a: return-object v0
+00002c: sget-boolean v0, Lcom/vivo/connbase/wifi/utils/f;->a Z
+000030: if-eqz v0, +011h
+000034: const-string v0, "UTF-8"
+000038: invoke-static v0, Ljava/nio/charset/Charset;->forName(Ljava/lang/String;)Ljava/nio/charset/Charset;
+00003e: move-result-object v0
+000040: invoke-virtual v2, v0, Ljava/lang/String;->getBytes(Ljava/nio/charset/Charset;)[B
+000046: move-result-object v2
+000048: const/4 v0, 0
+00004a: invoke-static v2, v0, Landroid/util/Base64;->encodeToString([B I)Ljava/lang/String;
+000050: move-result-object v2
+000052: return-object v2

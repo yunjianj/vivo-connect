@@ -1,0 +1,42 @@
+APK pcsuite/updateApk/pcsuite.apk
+DEX classes2.dex
+CLASS Lcom/vivo/pcsuite/service/AdbPortalService$a;
+SUPER Ljava/lang/Object;
+FIELDS
+a Landroid/content/Intent; = None
+b Lcom/vivo/pcsuite/service/AdbPortalService; = None
+
+METHOD <init>(Lcom/vivo/pcsuite/service/AdbPortalService; Landroid/content/Intent;)V
+000000: invoke-direct v0, Ljava/lang/Object;-><init>()V
+000006: iput-object v1, v0, Lcom/vivo/pcsuite/service/AdbPortalService$a;->b Lcom/vivo/pcsuite/service/AdbPortalService;
+00000a: iput-object v2, v0, Lcom/vivo/pcsuite/service/AdbPortalService$a;->a Landroid/content/Intent;
+00000e: return-void 
+
+METHOD run()V
+000000: iget-object v0, v2, Lcom/vivo/pcsuite/service/AdbPortalService$a;->b Lcom/vivo/pcsuite/service/AdbPortalService;
+000004: invoke-static v0, Lcom/vivo/pcsuite/service/AdbPortalService;->a(Lcom/vivo/pcsuite/service/AdbPortalService;)Ljava/lang/ref/WeakReference;
+00000a: move-result-object v1
+00000c: if-eqz v1, +031h
+000010: invoke-static v0, Lcom/vivo/pcsuite/service/AdbPortalService;->a(Lcom/vivo/pcsuite/service/AdbPortalService;)Ljava/lang/ref/WeakReference;
+000016: move-result-object v1
+000018: invoke-virtual v1, Ljava/lang/ref/Reference;->get()Ljava/lang/Object;
+00001e: move-result-object v1
+000020: if-eqz v1, +027h
+000024: iget-object v2, v2, Lcom/vivo/pcsuite/service/AdbPortalService$a;->a Landroid/content/Intent;
+000028: invoke-static v0, v2, Lcom/vivo/pcsuite/service/AdbPortalService;->b(Lcom/vivo/pcsuite/service/AdbPortalService; Landroid/content/Intent;)V
+00002e: const-string/jumbo v0, token
+000034: invoke-virtual v2, v0, Landroid/content/Intent;->hasExtra(Ljava/lang/String;)Z
+00003a: move-result v1
+00003c: if-eqz v1, +019h
+000040: invoke-virtual v2, v0, Landroid/content/Intent;->getStringExtra(Ljava/lang/String;)Ljava/lang/String;
+000046: move-result-object v2
+000048: goto +10h
+00004a: move-exception v2
+00004c: new-instance v0, Ljava/lang/StringBuilder;
+000050: const-string v1, "get usb token error22 = "
+000054: invoke-direct v0, v1, Ljava/lang/StringBuilder;-><init>(Ljava/lang/String;)V
+00005a: const-string v1, "AdbPortalService"
+00005e: invoke-static v2, v0, v1, LS5/f;->g(Ljava/lang/Exception; Ljava/lang/StringBuilder; Ljava/lang/String;)V
+000064: const-string v2, ""
+000068: invoke-static v2, Lcom/vivo/castsdk/common/GlobalSettings;->setRemoteToken(Ljava/lang/String;)V
+00006e: return-void 

@@ -1,0 +1,58 @@
+APK pcsuite/updateApk/connbase.apk
+DEX classes2.dex
+CLASS Lcom/vivo/pcsuite/pcconnect/wifip2p/WifiP2pService$l;
+SUPER Ljava/lang/Object;
+FIELDS
+a Ljava/net/InetAddress; = None
+b Z = None
+c Lcom/vivo/pcsuite/pcconnect/wifip2p/WifiP2pService; = None
+
+METHOD <init>(Lcom/vivo/pcsuite/pcconnect/wifip2p/WifiP2pService; Ljava/net/InetAddress; Z)V
+000000: iput-object v1, v0, Lcom/vivo/pcsuite/pcconnect/wifip2p/WifiP2pService$l;->c Lcom/vivo/pcsuite/pcconnect/wifip2p/WifiP2pService;
+000004: iput-object v2, v0, Lcom/vivo/pcsuite/pcconnect/wifip2p/WifiP2pService$l;->a Ljava/net/InetAddress;
+000008: iput-boolean v3, v0, Lcom/vivo/pcsuite/pcconnect/wifip2p/WifiP2pService$l;->b Z
+00000c: invoke-direct v0, Ljava/lang/Object;-><init>()V
+000012: return-void 
+
+METHOD run()V
+000000: const/4 v0, 0
+000002: move v1, v0
+000004: const/16 v2, 10
+000008: const-string v3, "pcsuite_WifiP2pService"
+00000c: if-ge v1, v2, +031h
+000010: iget-object v2, v6, Lcom/vivo/pcsuite/pcconnect/wifip2p/WifiP2pService$l;->a Ljava/net/InetAddress;
+000014: const/16 v4, 200
+000018: invoke-virtual v2, v4, Ljava/net/InetAddress;->isReachable(I)Z
+00001e: move-result v2
+000020: if-eqz v2, +016h
+000024: const-string v0, "P2p-connectGroup"
+000028: invoke-static v0, Lcom/vivo/pcsuite/pcconnect/b;->a(Ljava/lang/String;)V
+00002e: iget-object v0, v6, Lcom/vivo/pcsuite/pcconnect/wifip2p/WifiP2pService$l;->c Lcom/vivo/pcsuite/pcconnect/wifip2p/WifiP2pService;
+000032: iget-object v1, v6, Lcom/vivo/pcsuite/pcconnect/wifip2p/WifiP2pService$l;->a Ljava/net/InetAddress;
+000036: invoke-virtual v1, Ljava/net/InetAddress;->getHostAddress()Ljava/lang/String;
+00003c: move-result-object v1
+00003e: iget-boolean v2, v6, Lcom/vivo/pcsuite/pcconnect/wifip2p/WifiP2pService$l;->b Z
+000042: invoke-static v0, v1, v2, Lcom/vivo/pcsuite/pcconnect/wifip2p/WifiP2pService;->a(Lcom/vivo/pcsuite/pcconnect/wifip2p/WifiP2pService; Ljava/lang/String; Z)V
+000048: const/4 v0, 1
+00004a: goto +12h
+00004c: const-string v2, "isReachable=false, waiting..."
+000050: invoke-static v3, v2, Lc/c/f/a/b;->p(Ljava/lang/String; Ljava/lang/String;)V
+000056: const-wide/16 v4, 200
+00005a: invoke-static v4, v5, Ljava/lang/Thread;->sleep(J)V
+000060: add-int/lit8 v1, v1, 1
+000064: goto -30h
+000066: move-exception v0
+000068: goto +10h
+00006a: move-exception v0
+00006c: goto +eh
+00006e: if-nez v0, +017h
+000072: const-string v0, "Network can't reach."
+000076: invoke-static v3, v0, Lc/c/f/a/b;->g(Ljava/lang/String; Ljava/lang/String;)V
+00007c: iget-object v0, v6, Lcom/vivo/pcsuite/pcconnect/wifip2p/WifiP2pService$l;->c Lcom/vivo/pcsuite/pcconnect/wifip2p/WifiP2pService;
+000080: invoke-static v0, Lcom/vivo/pcsuite/pcconnect/wifip2p/WifiP2pService;->f(Lcom/vivo/pcsuite/pcconnect/wifip2p/WifiP2pService;)V
+000086: goto +bh
+000088: const-string v1, "Checking isReachable exception"
+00008c: invoke-static v3, v1, v0, Lc/c/f/a/b;->b(Ljava/lang/String; Ljava/lang/String; Ljava/lang/Throwable;)V
+000092: iget-object v0, v6, Lcom/vivo/pcsuite/pcconnect/wifip2p/WifiP2pService$l;->c Lcom/vivo/pcsuite/pcconnect/wifip2p/WifiP2pService;
+000096: invoke-static v0, Lcom/vivo/pcsuite/pcconnect/wifip2p/WifiP2pService;->f(Lcom/vivo/pcsuite/pcconnect/wifip2p/WifiP2pService;)V
+00009c: return-void 

@@ -1,0 +1,82 @@
+APK pcsuite/updateApk/connbase.apk
+DEX classes2.dex
+CLASS Lcom/vivo/pcsuite/pcconnect/l;
+SUPER Landroid/content/BroadcastReceiver;
+FIELDS
+c Ljava/lang/String; = 'ScreenStateReceiver'
+a Z = None
+b Lcom/vivo/pcsuite/pcconnect/l$a; = None
+
+METHOD <init>()V
+000000: invoke-direct v1, Landroid/content/BroadcastReceiver;-><init>()V
+000006: const/4 v0, 0
+000008: iput-boolean v0, v1, Lcom/vivo/pcsuite/pcconnect/l;->a Z
+00000c: return-void 
+
+METHOD a()Landroid/content/IntentFilter;
+000000: new-instance v0, Landroid/content/IntentFilter;
+000004: invoke-direct v0, Landroid/content/IntentFilter;-><init>()V
+00000a: const-string v1, "android.intent.action.SCREEN_ON"
+00000e: invoke-virtual v0, v1, Landroid/content/IntentFilter;->addAction(Ljava/lang/String;)V
+000014: const-string v1, "android.intent.action.SCREEN_OFF"
+000018: invoke-virtual v0, v1, Landroid/content/IntentFilter;->addAction(Ljava/lang/String;)V
+00001e: return-object v0
+
+METHOD a(Landroid/content/Context; Z)V
+000000: iget-boolean v0, v1, Lcom/vivo/pcsuite/pcconnect/l;->a Z
+000004: if-eq v3, v0, +016h
+000008: invoke-virtual v2, Landroid/content/Context;->getApplicationContext()Landroid/content/Context;
+00000e: move-result-object v2
+000010: if-eqz v3, +00ah
+000014: invoke-direct v1, Lcom/vivo/pcsuite/pcconnect/l;->a()Landroid/content/IntentFilter;
+00001a: move-result-object v0
+00001c: invoke-virtual v2, v1, v0, Landroid/content/Context;->registerReceiver(Landroid/content/BroadcastReceiver; Landroid/content/IntentFilter;)Landroid/content/Intent;
+000022: goto +4h
+000024: invoke-virtual v2, v1, Landroid/content/Context;->unregisterReceiver(Landroid/content/BroadcastReceiver;)V
+00002a: iput-boolean v3, v1, Lcom/vivo/pcsuite/pcconnect/l;->a Z
+00002e: goto +8h
+000030: const-string v2, "ScreenStateReceiver"
+000034: const-string v3, "BroadcastReceiver state equals to command, do nothing."
+000038: invoke-static v2, v3, Lc/c/f/a/b;->p(Ljava/lang/String; Ljava/lang/String;)V
+00003e: return-void 
+
+METHOD a(Lcom/vivo/pcsuite/pcconnect/l$a;)V
+000000: iput-object v1, v0, Lcom/vivo/pcsuite/pcconnect/l;->b Lcom/vivo/pcsuite/pcconnect/l$a;
+000004: return-void 
+
+METHOD onReceive(Landroid/content/Context; Landroid/content/Intent;)V
+000000: invoke-virtual v4, Landroid/content/Intent;->getAction()Ljava/lang/String;
+000006: move-result-object v3
+000008: invoke-virtual v2, Landroid/content/BroadcastReceiver;->isInitialStickyBroadcast()Z
+00000e: move-result v4
+000010: new-instance v0, Ljava/lang/StringBuilder;
+000014: invoke-direct v0, Ljava/lang/StringBuilder;-><init>()V
+00001a: const-string v1, "ScreenStateReceiver: action:"
+00001e: invoke-virtual v0, v1, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+000024: invoke-virtual v0, v3, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+00002a: const-string v1, ", isInitialStickyBroadcast="
+00002e: invoke-virtual v0, v1, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+000034: invoke-virtual v0, v4, Ljava/lang/StringBuilder;->append(Z)Ljava/lang/StringBuilder;
+00003a: invoke-virtual v0, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
+000040: move-result-object v0
+000042: const-string v1, "ScreenStateReceiver"
+000046: invoke-static v1, v0, Lc/c/f/a/b;->k(Ljava/lang/String; Ljava/lang/String;)V
+00004c: const-string v0, "android.intent.action.SCREEN_ON"
+000050: invoke-virtual v0, v3, Ljava/lang/String;->equals(Ljava/lang/Object;)Z
+000056: move-result v0
+000058: if-eqz v0, +00ch
+00005c: if-nez v4, +00ah
+000060: iget-object v0, v2, Lcom/vivo/pcsuite/pcconnect/l;->b Lcom/vivo/pcsuite/pcconnect/l$a;
+000064: if-eqz v0, +006h
+000068: const/4 v1, 1
+00006a: invoke-interface v0, v1, Lcom/vivo/pcsuite/pcconnect/l$a;->a(Z)V
+000070: const-string v0, "android.intent.action.SCREEN_OFF"
+000074: invoke-virtual v0, v3, Ljava/lang/String;->equals(Ljava/lang/Object;)Z
+00007a: move-result v3
+00007c: if-eqz v3, +00ch
+000080: if-nez v4, +00ah
+000084: iget-object v3, v2, Lcom/vivo/pcsuite/pcconnect/l;->b Lcom/vivo/pcsuite/pcconnect/l$a;
+000088: if-eqz v3, +006h
+00008c: const/4 v4, 0
+00008e: invoke-interface v3, v4, Lcom/vivo/pcsuite/pcconnect/l$a;->a(Z)V
+000094: return-void 

@@ -1,0 +1,43 @@
+APK pcsuite/updateApk/pcsuite.apk
+DEX classes2.dex
+CLASS Lcom/vivo/pcsuite/connect/ConnectControlModel$10$1;
+SUPER Ljava/lang/Object;
+FIELDS
+a Lcom/vivo/pcsuite/connect/ConnectControlModel$10; = None
+
+METHOD <init>(Lcom/vivo/pcsuite/connect/ConnectControlModel$10;)V
+000000: invoke-direct v0, Ljava/lang/Object;-><init>()V
+000006: iput-object v1, v0, Lcom/vivo/pcsuite/connect/ConnectControlModel$10$1;->a Lcom/vivo/pcsuite/connect/ConnectControlModel$10;
+00000a: return-void 
+
+METHOD onStatus(Z Z)V
+000000: const-string v2, "pcsuite_ConnectControlModel"
+000004: const-string/jumbo v0, wlan connect click reject button
+00000a: invoke-static v2, v0, Lcom/vivo/connect/logger/EasyLog;->i(Ljava/lang/String; Ljava/lang/String;)V
+000010: iget-object v1, v1, Lcom/vivo/pcsuite/connect/ConnectControlModel$10$1;->a Lcom/vivo/pcsuite/connect/ConnectControlModel$10;
+000014: iget-object v2, v1, Lcom/vivo/pcsuite/connect/ConnectControlModel$10;->c Lcom/vivo/pcsuite/connect/ConnectControlModel;
+000018: invoke-virtual v2, Lcom/vivo/pcsuite/connect/ConnectControlModel;->removeDialogRunnable()V
+00001e: const-string v2, "0"
+000022: if-eqz v3, +005h
+000026: const-string v3, "1"
+00002a: goto +2h
+00002c: move-object v3, v2
+00002e: invoke-static v2, v3, Lcom/vivo/pcsuite/util/o0;->U(Ljava/lang/String; Ljava/lang/String;)V
+000034: const/4 v2, -1
+000036: invoke-static v2, Lcom/vivo/pcsuite/service/PcSuiteObserver;->G(I)V
+00003c: iget-object v2, v1, Lcom/vivo/pcsuite/connect/ConnectControlModel$10;->c Lcom/vivo/pcsuite/connect/ConnectControlModel;
+000040: iget-object v1, v1, Lcom/vivo/pcsuite/connect/ConnectControlModel$10;->a Lcom/vivo/connect/discovery/ScanInfo;
+000044: invoke-virtual v1, Lcom/vivo/connect/discovery/ScanInfo;->getDeviceId()Ljava/lang/String;
+00004a: move-result-object v1
+00004c: invoke-virtual v2, v1, Lcom/vivo/pcsuite/connect/ConnectControlModel;->rejectConnect(Ljava/lang/String;)V
+000052: sget-object v1, Lcom/vivo/pcsuite/PcSuiteApplication;->I1 Lcom/vivo/pcsuite/PcSuiteApplication;
+000056: invoke-virtual v1, Lcom/vivo/pcsuite/PcSuiteApplication;->A()Ljava/lang/StringBuffer;
+00005c: move-result-object v1
+00005e: const-string v2, "0000000"
+000062: invoke-virtual v1, v2, Ljava/lang/StringBuffer;->append(Ljava/lang/String;)Ljava/lang/StringBuffer;
+000068: invoke-static Lcom/vivo/pcsuite/util/o0;->B0()V
+00006e: invoke-static Lcom/vivo/pcsuite/service/PcSuiteObserver;->t()Lcom/vivo/pcsuite/service/PcSuiteObserver;
+000074: move-result-object v1
+000076: if-eqz v1, +005h
+00007a: invoke-virtual v1, Lcom/vivo/pcsuite/service/PcSuiteObserver;->Q()V
+000080: return-void 

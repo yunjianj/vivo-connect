@@ -1,0 +1,60 @@
+APK pcsuite/updateApk/connbase.apk
+DEX classes.dex
+CLASS Lcom/vivo/connbase/connect/ShortConnectIntentService;
+SUPER Landroid/app/IntentService;
+FIELDS
+a Ljava/lang/String; = 'ConnectIntentServiceTAG'
+b Ljava/lang/String; = 'device_id'
+c Ljava/lang/String; = 'mac'
+
+METHOD <init>()V
+000000: const-string v0, "ConnectIntentService"
+000004: invoke-direct v1, v0, Landroid/app/IntentService;-><init>(Ljava/lang/String;)V
+00000a: return-void 
+
+METHOD a(Landroid/content/Context; Ljava/lang/String; Ljava/lang/String;)V
+000000: new-instance v0, Landroid/content/Intent;
+000004: const-class v1, Lcom/vivo/connbase/connect/ShortConnectIntentService;
+000008: invoke-direct v0, v2, v1, Landroid/content/Intent;-><init>(Landroid/content/Context; Ljava/lang/Class;)V
+00000e: const-string v1, "device_id"
+000012: invoke-virtual v0, v1, v3, Landroid/content/Intent;->putExtra(Ljava/lang/String; Ljava/lang/String;)Landroid/content/Intent;
+000018: const-string v3, "mac"
+00001c: invoke-virtual v0, v3, v4, Landroid/content/Intent;->putExtra(Ljava/lang/String; Ljava/lang/String;)Landroid/content/Intent;
+000022: invoke-virtual v2, v0, Landroid/content/Context;->startService(Landroid/content/Intent;)Landroid/content/ComponentName;
+000028: return-void 
+
+METHOD onHandleIntent(Landroid/content/Intent;)V
+000000: const-string v0, "device_id"
+000004: invoke-virtual v4, v0, Landroid/content/Intent;->getStringExtra(Ljava/lang/String;)Ljava/lang/String;
+00000a: move-result-object v0
+00000c: const-string v1, "mac"
+000010: invoke-virtual v4, v1, Landroid/content/Intent;->getStringExtra(Ljava/lang/String;)Ljava/lang/String;
+000016: move-result-object v4
+000018: new-instance v1, Ljava/lang/StringBuilder;
+00001c: invoke-direct v1, Ljava/lang/StringBuilder;-><init>()V
+000022: const-string v2, "onHandleIntent d="
+000026: invoke-virtual v1, v2, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+00002c: invoke-virtual v1, v0, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+000032: const-string v2, ", mac="
+000036: invoke-virtual v1, v2, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+00003c: invoke-virtual v1, v4, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+000042: invoke-virtual v1, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
+000048: move-result-object v1
+00004a: const-string v2, "ConnectIntentServiceTAG"
+00004e: invoke-static v2, v1, Lc/c/f/a/b;->a(Ljava/lang/String; Ljava/lang/String;)V
+000054: invoke-static v0, Landroid/text/TextUtils;->isEmpty(Ljava/lang/CharSequence;)Z
+00005a: move-result v1
+00005c: if-nez v1, +015h
+000060: invoke-static v4, Landroid/text/TextUtils;->isEmpty(Ljava/lang/CharSequence;)Z
+000066: move-result v1
+000068: if-eqz v1, +003h
+00006c: goto +dh
+00006e: invoke-static Lcom/vivo/connbase/App;->m()Lcom/vivo/connbase/App;
+000074: move-result-object v1
+000076: invoke-virtual v1, Lcom/vivo/connbase/App;->e()Lcom/vivo/connbase/h0/a;
+00007c: move-result-object v1
+00007e: invoke-virtual v1, v0, v4, Lcom/vivo/connbase/h0/a;->d(Ljava/lang/String; Ljava/lang/String;)V
+000084: return-void 
+000086: const-string v4, "deviceId or mac address should not be null"
+00008a: invoke-static v2, v4, Lc/c/f/a/b;->p(Ljava/lang/String; Ljava/lang/String;)V
+000090: return-void 

@@ -1,0 +1,37 @@
+APK pcsuite/updateApk/connbase.apk
+DEX classes.dex
+CLASS Lcom/vivo/connbase/App$c;
+SUPER Landroid/content/BroadcastReceiver;
+FIELDS
+a Lcom/vivo/connbase/App; = None
+
+METHOD <init>(Lcom/vivo/connbase/App;)V
+000000: iput-object v1, v0, Lcom/vivo/connbase/App$c;->a Lcom/vivo/connbase/App;
+000004: invoke-direct v0, Landroid/content/BroadcastReceiver;-><init>()V
+00000a: return-void 
+
+METHOD onReceive(Landroid/content/Context; Landroid/content/Intent;)V
+000000: if-eqz v3, +033h
+000004: const/high16 v2, -2147483648
+000008: const-string v0, "android.bluetooth.adapter.extra.STATE"
+00000c: invoke-virtual v3, v0, v2, Landroid/content/Intent;->getIntExtra(Ljava/lang/String; I)I
+000012: move-result v2
+000014: new-instance v3, Ljava/lang/StringBuilder;
+000018: invoke-direct v3, Ljava/lang/StringBuilder;-><init>()V
+00001e: const-string v0, "bindShareLink onReceive state: "
+000022: invoke-virtual v3, v0, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+000028: invoke-virtual v3, v2, Ljava/lang/StringBuilder;->append(I)Ljava/lang/StringBuilder;
+00002e: invoke-virtual v3, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
+000034: move-result-object v3
+000036: const-string v0, "App"
+00003a: invoke-static v0, v3, Lc/c/f/a/b;->k(Ljava/lang/String; Ljava/lang/String;)V
+000040: const/16 v3, 12
+000044: if-ne v2, v3, +008h
+000048: iget-object v2, v1, Lcom/vivo/connbase/App$c;->a Lcom/vivo/connbase/App;
+00004c: invoke-static v2, Lcom/vivo/connbase/App;->d(Lcom/vivo/connbase/App;)V
+000052: goto +ah
+000054: const/16 v3, 10
+000058: if-ne v2, v3, +007h
+00005c: iget-object v2, v1, Lcom/vivo/connbase/App$c;->a Lcom/vivo/connbase/App;
+000060: invoke-static v2, Lcom/vivo/connbase/App;->e(Lcom/vivo/connbase/App;)V
+000066: return-void 

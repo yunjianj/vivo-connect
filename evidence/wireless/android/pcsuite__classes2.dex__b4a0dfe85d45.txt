@@ -1,0 +1,89 @@
+APK pcsuite/updateApk/pcsuite.apk
+DEX classes2.dex
+CLASS Lcom/vivo/connect/sdk/f/c$e;
+SUPER Ljava/lang/Object;
+FIELDS
+e Ljava/lang/String; = ':disconnectRunnable'
+a Landroid/os/Messenger; = None
+b Ljava/lang/String; = None
+c Ljava/lang/String; = None
+d Lcom/vivo/connect/sdk/f/c; = None
+
+METHOD <init>(Lcom/vivo/connect/sdk/f/c; Landroid/os/Messenger; Ljava/lang/String; Ljava/lang/String;)V
+000000: iput-object v1, v0, Lcom/vivo/connect/sdk/f/c$e;->d Lcom/vivo/connect/sdk/f/c;
+000004: iput-object v2, v0, Lcom/vivo/connect/sdk/f/c$e;->a Landroid/os/Messenger;
+000008: iput-object v3, v0, Lcom/vivo/connect/sdk/f/c$e;->b Ljava/lang/String;
+00000c: iput-object v4, v0, Lcom/vivo/connect/sdk/f/c$e;->c Ljava/lang/String;
+000010: invoke-direct v0, Ljava/lang/Object;-><init>()V
+000016: return-void 
+
+METHOD run()V
+000000: const-string v0, "ConnectClientImpl"
+000004: const-string v1, "disconnect error:"
+000008: const/4 v2, 0
+00000a: iget-object v3, v7, Lcom/vivo/connect/sdk/f/c$e;->d Lcom/vivo/connect/sdk/f/c;
+00000e: invoke-static v3, Lcom/vivo/connect/sdk/f/c;->a(Lcom/vivo/connect/sdk/f/c;)Lcom/vivo/connbase/IClient;
+000014: move-result-object v3
+000016: if-eqz v3, +018h
+00001a: const-string v3, "mConnectApi is not null, call mConnectApi.disconnect()1"
+00001e: invoke-static v0, v3, Lcom/vivo/connect/logger/EasyLog;->i(Ljava/lang/String; Ljava/lang/String;)V
+000024: iget-object v3, v7, Lcom/vivo/connect/sdk/f/c$e;->d Lcom/vivo/connect/sdk/f/c;
+000028: invoke-static v3, Lcom/vivo/connect/sdk/f/c;->a(Lcom/vivo/connect/sdk/f/c;)Lcom/vivo/connbase/IClient;
+00002e: move-result-object v3
+000030: iget-object v4, v7, Lcom/vivo/connect/sdk/f/c$e;->a Landroid/os/Messenger;
+000034: iget-object v5, v7, Lcom/vivo/connect/sdk/f/c$e;->b Ljava/lang/String;
+000038: iget-object v6, v7, Lcom/vivo/connect/sdk/f/c$e;->c Ljava/lang/String;
+00003c: goto +30h
+00003e: move-exception v0
+000040: goto +5ch
+000042: move-exception v3
+000044: goto +3dh
+000046: iget-object v3, v7, Lcom/vivo/connect/sdk/f/c$e;->d Lcom/vivo/connect/sdk/f/c;
+00004a: const-string v4, ":disconnectRunnable"
+00004e: invoke-static v3, v4, Lcom/vivo/connect/sdk/f/c;->a(Lcom/vivo/connect/sdk/f/c; Ljava/lang/String;)Z
+000054: move-result v3
+000056: if-nez v3, +010h
+00005a: iget-object v0, v7, Lcom/vivo/connect/sdk/f/c$e;->d Lcom/vivo/connect/sdk/f/c;
+00005e: invoke-static v0, Lcom/vivo/connect/sdk/f/c;->e(Lcom/vivo/connect/sdk/f/c;)Z
+000064: move-result v0
+000066: if-eqz v0, +048h
+00006a: iget-object v7, v7, Lcom/vivo/connect/sdk/f/c$e;->d Lcom/vivo/connect/sdk/f/c;
+00006e: invoke-static v7, v2, Lcom/vivo/connect/sdk/f/c;->a(Lcom/vivo/connect/sdk/f/c; Z)Z
+000074: return-void 
+000076: const-string v3, "await end, call mConnectApi.disconnect()"
+00007a: invoke-static v0, v3, Lcom/vivo/connect/logger/EasyLog;->i(Ljava/lang/String; Ljava/lang/String;)V
+000080: const-string v3, "mConnectApi is not null, call mConnectApi.disconnect()2"
+000084: invoke-static v0, v3, Lcom/vivo/connect/logger/EasyLog;->i(Ljava/lang/String; Ljava/lang/String;)V
+00008a: iget-object v3, v7, Lcom/vivo/connect/sdk/f/c$e;->d Lcom/vivo/connect/sdk/f/c;
+00008e: invoke-static v3, Lcom/vivo/connect/sdk/f/c;->a(Lcom/vivo/connect/sdk/f/c;)Lcom/vivo/connbase/IClient;
+000094: move-result-object v3
+000096: iget-object v4, v7, Lcom/vivo/connect/sdk/f/c$e;->a Landroid/os/Messenger;
+00009a: goto -33h
+00009c: invoke-interface v3, v4, v5, v6, Lcom/vivo/connbase/IClient;->disconnect(Landroid/os/Messenger; Ljava/lang/String; Ljava/lang/String;)V
+0000a2: const-string v3, "disconnect call end"
+0000a6: invoke-static v0, v3, Lcom/vivo/connect/logger/EasyLog;->i(Ljava/lang/String; Ljava/lang/String;)V
+0000ac: iget-object v0, v7, Lcom/vivo/connect/sdk/f/c$e;->d Lcom/vivo/connect/sdk/f/c;
+0000b0: invoke-static v0, Lcom/vivo/connect/sdk/f/c;->e(Lcom/vivo/connect/sdk/f/c;)Z
+0000b6: move-result v0
+0000b8: if-eqz v0, +01fh
+0000bc: goto +18h
+0000be: new-instance v4, Ljava/lang/StringBuilder;
+0000c2: invoke-direct v4, v1, Ljava/lang/StringBuilder;-><init>(Ljava/lang/String;)V
+0000c8: invoke-virtual v4, v3, Ljava/lang/StringBuilder;->append(Ljava/lang/Object;)Ljava/lang/StringBuilder;
+0000ce: invoke-virtual v4, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
+0000d4: move-result-object v1
+0000d6: invoke-static v0, v1, Lcom/vivo/connect/logger/EasyLog;->e(Ljava/lang/String; Ljava/lang/String;)V
+0000dc: iget-object v0, v7, Lcom/vivo/connect/sdk/f/c$e;->d Lcom/vivo/connect/sdk/f/c;
+0000e0: invoke-static v0, Lcom/vivo/connect/sdk/f/c;->e(Lcom/vivo/connect/sdk/f/c;)Z
+0000e6: move-result v0
+0000e8: if-eqz v0, +007h
+0000ec: iget-object v7, v7, Lcom/vivo/connect/sdk/f/c$e;->d Lcom/vivo/connect/sdk/f/c;
+0000f0: invoke-static v7, v2, Lcom/vivo/connect/sdk/f/c;->a(Lcom/vivo/connect/sdk/f/c; Z)Z
+0000f6: return-void 
+0000f8: iget-object v1, v7, Lcom/vivo/connect/sdk/f/c$e;->d Lcom/vivo/connect/sdk/f/c;
+0000fc: invoke-static v1, Lcom/vivo/connect/sdk/f/c;->e(Lcom/vivo/connect/sdk/f/c;)Z
+000102: move-result v1
+000104: if-eqz v1, +007h
+000108: iget-object v7, v7, Lcom/vivo/connect/sdk/f/c$e;->d Lcom/vivo/connect/sdk/f/c;
+00010c: invoke-static v7, v2, Lcom/vivo/connect/sdk/f/c;->a(Lcom/vivo/connect/sdk/f/c; Z)Z
+000112: throw v0

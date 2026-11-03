@@ -1,0 +1,50 @@
+APK pcsuite/updateApk/connbase.apk
+DEX classes.dex
+CLASS Lcom/vivo/connbase/nfc/c$a;
+SUPER Ljava/lang/Object;
+FIELDS
+a Lcom/vivo/connbase/nfc/c; = None
+
+METHOD <init>(Lcom/vivo/connbase/nfc/c;)V
+000000: iput-object v1, v0, Lcom/vivo/connbase/nfc/c$a;->a Lcom/vivo/connbase/nfc/c;
+000004: invoke-direct v0, Ljava/lang/Object;-><init>()V
+00000a: return-void 
+
+METHOD run()V
+000000: iget-object v0, v4, Lcom/vivo/connbase/nfc/c$a;->a Lcom/vivo/connbase/nfc/c;
+000004: invoke-static v0, Lcom/vivo/connbase/nfc/c;->a(Lcom/vivo/connbase/nfc/c;)Z
+00000a: move-result v0
+00000c: if-eqz v0, +046h
+000010: iget-object v0, v4, Lcom/vivo/connbase/nfc/c$a;->a Lcom/vivo/connbase/nfc/c;
+000014: invoke-static v0, Lcom/vivo/connbase/nfc/c;->b(Lcom/vivo/connbase/nfc/c;)Lcom/vivo/connbase/nfc/c$c;
+00001a: move-result-object v0
+00001c: invoke-virtual v0, Lcom/vivo/connbase/nfc/c$c;->c()Z
+000022: move-result v0
+000024: if-eqz v0, +03ah
+000028: iget-object v0, v4, Lcom/vivo/connbase/nfc/c$a;->a Lcom/vivo/connbase/nfc/c;
+00002c: invoke-static v0, Lcom/vivo/connbase/nfc/c;->b(Lcom/vivo/connbase/nfc/c;)Lcom/vivo/connbase/nfc/c$c;
+000032: move-result-object v0
+000034: invoke-virtual v0, Lcom/vivo/connbase/nfc/c$c;->a()Ljava/lang/String;
+00003a: move-result-object v0
+00003c: invoke-static Lcom/vivo/connbase/d0/a;->h()Lcom/vivo/connbase/d0/a;
+000042: move-result-object v1
+000044: const-wide/16 v2, 0
+000048: invoke-virtual v1, v0, v2, v3, Lcom/vivo/connbase/d0/a;->a(Ljava/lang/String; J)V
+00004e: const-wide/16 v0, 5000
+000052: invoke-static v0, v1, Ljava/lang/Thread;->sleep(J)V
+000058: goto -2ch
+00005a: move-exception v0
+00005c: invoke-virtual v0, Ljava/lang/Exception;->printStackTrace()V
+000062: new-instance v1, Ljava/lang/StringBuilder;
+000066: invoke-direct v1, Ljava/lang/StringBuilder;-><init>()V
+00006c: const-string v2, "autoConnectRunnable:"
+000070: invoke-virtual v1, v2, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+000076: invoke-virtual v0, Ljava/lang/Exception;->toString()Ljava/lang/String;
+00007c: move-result-object v0
+00007e: invoke-virtual v1, v0, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+000084: invoke-virtual v1, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
+00008a: move-result-object v0
+00008c: const-string v1, "BtAutoConnectManager"
+000090: invoke-static v1, v0, Lc/c/f/a/b;->k(Ljava/lang/String; Ljava/lang/String;)V
+000096: goto -4bh
+000098: return-void 

@@ -1,0 +1,137 @@
+APK pcsuite/updateApk/connbase.apk
+DEX classes2.dex
+CLASS Lcom/vivo/pcsuite/pcconnect/o/a;
+SUPER Ljava/lang/Object;
+FIELDS
+a Landroid/content/Context; = None
+b Landroid/app/AlertDialog; = None
+c Landroid/widget/TextView; = None
+d Landroid/widget/TextView; = None
+e Landroid/widget/CheckBox; = None
+f Z = None
+g Ljava/lang/String; = None
+h Ljava/lang/String; = None
+i Lcom/vivo/pcsuite/pcconnect/o/a$d; = None
+j Lcom/vivo/pcsuite/pcconnect/o/a$d; = None
+
+METHOD <init>(Landroid/content/Context;)V
+000000: invoke-direct v1, Ljava/lang/Object;-><init>()V
+000006: const/4 v0, 1
+000008: iput-boolean v0, v1, Lcom/vivo/pcsuite/pcconnect/o/a;->f Z
+00000c: iput-object v2, v1, Lcom/vivo/pcsuite/pcconnect/o/a;->a Landroid/content/Context;
+000010: invoke-direct v1, Lcom/vivo/pcsuite/pcconnect/o/a;->b()Lcom/vivo/pcsuite/pcconnect/o/a;
+000016: return-void 
+
+METHOD a(Lcom/vivo/pcsuite/pcconnect/o/a;)Z
+000000: iget-boolean v0, v0, Lcom/vivo/pcsuite/pcconnect/o/a;->f Z
+000004: return v0
+
+METHOD a(Lcom/vivo/pcsuite/pcconnect/o/a; Z)Z
+000000: iput-boolean v1, v0, Lcom/vivo/pcsuite/pcconnect/o/a;->f Z
+000004: return v1
+
+METHOD b(Lcom/vivo/pcsuite/pcconnect/o/a;)Landroid/content/Context;
+000000: iget-object v0, v0, Lcom/vivo/pcsuite/pcconnect/o/a;->a Landroid/content/Context;
+000004: return-object v0
+
+METHOD b()Lcom/vivo/pcsuite/pcconnect/o/a;
+000000: iget-object v0, v4, Lcom/vivo/pcsuite/pcconnect/o/a;->a Landroid/content/Context;
+000004: invoke-static v0, Landroid/view/LayoutInflater;->from(Landroid/content/Context;)Landroid/view/LayoutInflater;
+00000a: move-result-object v0
+00000c: sget v1, Lcom/vivo/pcsuite/pcconnect/k$k;->dialog_pc_request_connect I
+000010: const/4 v2, 0
+000012: invoke-virtual v0, v1, v2, Landroid/view/LayoutInflater;->inflate(I Landroid/view/ViewGroup;)Landroid/view/View;
+000018: move-result-object v0
+00001a: sget v1, Lcom/vivo/pcsuite/pcconnect/k$h;->connect_computer_name_tv I
+00001e: invoke-virtual v0, v1, Landroid/view/View;->findViewById(I)Landroid/view/View;
+000024: move-result-object v1
+000026: check-cast v1, Landroid/widget/TextView;
+00002a: iput-object v1, v4, Lcom/vivo/pcsuite/pcconnect/o/a;->c Landroid/widget/TextView;
+00002e: sget v1, Lcom/vivo/pcsuite/pcconnect/k$h;->connect_user_name_tv I
+000032: invoke-virtual v0, v1, Landroid/view/View;->findViewById(I)Landroid/view/View;
+000038: move-result-object v1
+00003a: check-cast v1, Landroid/widget/TextView;
+00003e: iput-object v1, v4, Lcom/vivo/pcsuite/pcconnect/o/a;->d Landroid/widget/TextView;
+000042: sget v1, Lcom/vivo/pcsuite/pcconnect/k$h;->keep_auto_connect_ck I
+000046: invoke-virtual v0, v1, Landroid/view/View;->findViewById(I)Landroid/view/View;
+00004c: move-result-object v1
+00004e: check-cast v1, Landroid/widget/CheckBox;
+000052: iput-object v1, v4, Lcom/vivo/pcsuite/pcconnect/o/a;->e Landroid/widget/CheckBox;
+000056: iget-object v1, v4, Lcom/vivo/pcsuite/pcconnect/o/a;->a Landroid/content/Context;
+00005a: invoke-static v1, Lcom/vivo/pcsuite/pcconnect/ble/j;->a(Landroid/content/Context;)Z
+000060: move-result v1
+000062: iput-boolean v1, v4, Lcom/vivo/pcsuite/pcconnect/o/a;->f Z
+000066: iget-object v2, v4, Lcom/vivo/pcsuite/pcconnect/o/a;->e Landroid/widget/CheckBox;
+00006a: invoke-virtual v2, v1, Landroid/widget/CheckBox;->setChecked(Z)V
+000070: iget-object v1, v4, Lcom/vivo/pcsuite/pcconnect/o/a;->e Landroid/widget/CheckBox;
+000074: new-instance v2, Lcom/vivo/pcsuite/pcconnect/o/a$a;
+000078: invoke-direct v2, v4, Lcom/vivo/pcsuite/pcconnect/o/a$a;-><init>(Lcom/vivo/pcsuite/pcconnect/o/a;)V
+00007e: invoke-virtual v1, v2, Landroid/widget/CheckBox;->setOnCheckedChangeListener(Landroid/widget/CompoundButton$OnCheckedChangeListener;)V
+000084: sget v1, Lcom/vivo/pcsuite/pcconnect/k$h;->connect_btn I
+000088: invoke-virtual v0, v1, Landroid/view/View;->findViewById(I)Landroid/view/View;
+00008e: move-result-object v1
+000090: new-instance v2, Lcom/vivo/pcsuite/pcconnect/o/a$b;
+000094: invoke-direct v2, v4, Lcom/vivo/pcsuite/pcconnect/o/a$b;-><init>(Lcom/vivo/pcsuite/pcconnect/o/a;)V
+00009a: invoke-virtual v1, v2, Landroid/view/View;->setOnClickListener(Landroid/view/View$OnClickListener;)V
+0000a0: sget v1, Lcom/vivo/pcsuite/pcconnect/k$h;->cancel_btn I
+0000a4: invoke-virtual v0, v1, Landroid/view/View;->findViewById(I)Landroid/view/View;
+0000aa: move-result-object v1
+0000ac: new-instance v2, Lcom/vivo/pcsuite/pcconnect/o/a$c;
+0000b0: invoke-direct v2, v4, Lcom/vivo/pcsuite/pcconnect/o/a$c;-><init>(Lcom/vivo/pcsuite/pcconnect/o/a;)V
+0000b6: invoke-virtual v1, v2, Landroid/view/View;->setOnClickListener(Landroid/view/View$OnClickListener;)V
+0000bc: new-instance v1, Landroid/app/AlertDialog$Builder;
+0000c0: iget-object v2, v4, Lcom/vivo/pcsuite/pcconnect/o/a;->a Landroid/content/Context;
+0000c4: const v3, 51314792
+0000ca: invoke-direct v1, v2, v3, Landroid/app/AlertDialog$Builder;-><init>(Landroid/content/Context; I)V
+0000d0: invoke-virtual v1, Landroid/app/AlertDialog$Builder;->create()Landroid/app/AlertDialog;
+0000d6: move-result-object v1
+0000d8: iput-object v1, v4, Lcom/vivo/pcsuite/pcconnect/o/a;->b Landroid/app/AlertDialog;
+0000dc: invoke-virtual v1, Landroid/app/AlertDialog;->getWindow()Landroid/view/Window;
+0000e2: move-result-object v1
+0000e4: const/16 v2, 2003
+0000e8: invoke-virtual v1, v2, Landroid/view/Window;->setType(I)V
+0000ee: iget-object v1, v4, Lcom/vivo/pcsuite/pcconnect/o/a;->b Landroid/app/AlertDialog;
+0000f2: invoke-virtual v1, v0, Landroid/app/AlertDialog;->setView(Landroid/view/View;)V
+0000f8: iget-object v0, v4, Lcom/vivo/pcsuite/pcconnect/o/a;->b Landroid/app/AlertDialog;
+0000fc: const/4 v1, 0
+0000fe: invoke-virtual v0, v1, Landroid/app/AlertDialog;->setCanceledOnTouchOutside(Z)V
+000104: return-object v4
+
+METHOD c(Lcom/vivo/pcsuite/pcconnect/o/a;)Lcom/vivo/pcsuite/pcconnect/o/a$d;
+000000: iget-object v0, v0, Lcom/vivo/pcsuite/pcconnect/o/a;->i Lcom/vivo/pcsuite/pcconnect/o/a$d;
+000004: return-object v0
+
+METHOD d(Lcom/vivo/pcsuite/pcconnect/o/a;)Landroid/app/AlertDialog;
+000000: iget-object v0, v0, Lcom/vivo/pcsuite/pcconnect/o/a;->b Landroid/app/AlertDialog;
+000004: return-object v0
+
+METHOD e(Lcom/vivo/pcsuite/pcconnect/o/a;)Lcom/vivo/pcsuite/pcconnect/o/a$d;
+000000: iget-object v0, v0, Lcom/vivo/pcsuite/pcconnect/o/a;->j Lcom/vivo/pcsuite/pcconnect/o/a$d;
+000004: return-object v0
+
+METHOD a(Lcom/vivo/pcsuite/pcconnect/o/a$d;)Lcom/vivo/pcsuite/pcconnect/o/a;
+000000: iput-object v1, v0, Lcom/vivo/pcsuite/pcconnect/o/a;->j Lcom/vivo/pcsuite/pcconnect/o/a$d;
+000004: return-object v0
+
+METHOD a(Ljava/lang/String;)Lcom/vivo/pcsuite/pcconnect/o/a;
+000000: iput-object v1, v0, Lcom/vivo/pcsuite/pcconnect/o/a;->g Ljava/lang/String;
+000004: return-object v0
+
+METHOD a()V
+000000: iget-object v0, v2, Lcom/vivo/pcsuite/pcconnect/o/a;->d Landroid/widget/TextView;
+000004: iget-object v1, v2, Lcom/vivo/pcsuite/pcconnect/o/a;->h Ljava/lang/String;
+000008: invoke-virtual v0, v1, Landroid/widget/TextView;->setText(Ljava/lang/CharSequence;)V
+00000e: iget-object v0, v2, Lcom/vivo/pcsuite/pcconnect/o/a;->c Landroid/widget/TextView;
+000012: iget-object v1, v2, Lcom/vivo/pcsuite/pcconnect/o/a;->g Ljava/lang/String;
+000016: invoke-virtual v0, v1, Landroid/widget/TextView;->setText(Ljava/lang/CharSequence;)V
+00001c: iget-object v0, v2, Lcom/vivo/pcsuite/pcconnect/o/a;->b Landroid/app/AlertDialog;
+000020: invoke-virtual v0, Landroid/app/AlertDialog;->show()V
+000026: return-void 
+
+METHOD b(Lcom/vivo/pcsuite/pcconnect/o/a$d;)Lcom/vivo/pcsuite/pcconnect/o/a;
+000000: iput-object v1, v0, Lcom/vivo/pcsuite/pcconnect/o/a;->i Lcom/vivo/pcsuite/pcconnect/o/a$d;
+000004: return-object v0
+
+METHOD b(Ljava/lang/String;)Lcom/vivo/pcsuite/pcconnect/o/a;
+000000: iput-object v1, v0, Lcom/vivo/pcsuite/pcconnect/o/a;->h Ljava/lang/String;
+000004: return-object v0

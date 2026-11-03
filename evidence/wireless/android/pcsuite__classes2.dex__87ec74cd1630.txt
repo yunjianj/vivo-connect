@@ -1,0 +1,39 @@
+APK pcsuite/updateApk/pcsuite.apk
+DEX classes2.dex
+CLASS Lcom/vivo/pcsuite/connect/ConnectControlModel$1;
+SUPER Ljava/lang/Object;
+FIELDS
+a Lcom/vivo/pcsuite/connect/ConnectControlModel; = None
+
+METHOD <init>(Lcom/vivo/pcsuite/connect/ConnectControlModel;)V
+000000: invoke-direct v0, Ljava/lang/Object;-><init>()V
+000006: iput-object v1, v0, Lcom/vivo/pcsuite/connect/ConnectControlModel$1;->a Lcom/vivo/pcsuite/connect/ConnectControlModel;
+00000a: return-void 
+
+METHOD onSuccess(Ljava/lang/Boolean;)V
+000000: new-instance v0, Ljava/lang/StringBuilder;
+000004: const-string v1, "checkAppAuthorization result : "
+000008: invoke-direct v0, v1, Ljava/lang/StringBuilder;-><init>(Ljava/lang/String;)V
+00000e: invoke-virtual v0, v3, Ljava/lang/StringBuilder;->append(Ljava/lang/Object;)Ljava/lang/StringBuilder;
+000014: invoke-virtual v0, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
+00001a: move-result-object v0
+00001c: const-string v1, "pcsuite_ConnectControlModel"
+000020: invoke-static v1, v0, Lcom/vivo/connect/logger/EasyLog;->i(Ljava/lang/String; Ljava/lang/String;)V
+000026: invoke-virtual v3, Ljava/lang/Boolean;->booleanValue()Z
+00002c: move-result v3
+00002e: if-eqz v3, +008h
+000032: iget-object v2, v2, Lcom/vivo/pcsuite/connect/ConnectControlModel$1;->a Lcom/vivo/pcsuite/connect/ConnectControlModel;
+000036: invoke-virtual v2, Lcom/vivo/pcsuite/connect/ConnectControlModel;->initPcOtherShare()V
+00003c: return-void 
+00003e: sget-object v3, Lcom/vivo/pcsuite/PcSuiteApplication;->I1 Lcom/vivo/pcsuite/PcSuiteApplication;
+000042: invoke-static v3, Lcom/vivo/connect/ConnectBase;->getConnectionClient(Landroid/content/Context;)Lcom/vivo/connect/ConnectClient;
+000048: move-result-object v3
+00004a: new-instance v0, Lcom/vivo/pcsuite/connect/a;
+00004e: invoke-direct v0, v2, Lcom/vivo/pcsuite/connect/a;-><init>(Lcom/vivo/pcsuite/connect/ConnectControlModel$1;)V
+000054: invoke-virtual v3, v0, Lcom/vivo/connect/ConnectClient;->openAuthorization(Lcom/vivo/connect/CheckAuthorizationCallback;)Lcom/vivo/connect/tasks/Task;
+00005a: return-void 
+
+METHOD onSuccess(Ljava/lang/Object;)V
+000000: check-cast v1, Ljava/lang/Boolean;
+000004: invoke-virtual v0, v1, Lcom/vivo/pcsuite/connect/ConnectControlModel$1;->onSuccess(Ljava/lang/Boolean;)V
+00000a: return-void 

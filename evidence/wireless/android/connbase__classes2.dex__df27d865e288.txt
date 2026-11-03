@@ -1,0 +1,26 @@
+APK pcsuite/updateApk/connbase.apk
+DEX classes2.dex
+CLASS Lcom/vivo/pcsuite/pcconnect/wifip2p/WifiP2pService$q;
+SUPER Ljava/lang/Object;
+FIELDS
+a Lcom/vivo/pcsuite/pcconnect/wifip2p/WifiP2pService; = None
+
+METHOD <init>(Lcom/vivo/pcsuite/pcconnect/wifip2p/WifiP2pService;)V
+000000: iput-object v1, v0, Lcom/vivo/pcsuite/pcconnect/wifip2p/WifiP2pService$q;->a Lcom/vivo/pcsuite/pcconnect/wifip2p/WifiP2pService;
+000004: invoke-direct v0, Ljava/lang/Object;-><init>()V
+00000a: return-void 
+
+METHOD onDeviceInfoAvailable(Landroid/net/wifi/p2p/WifiP2pDevice;)V
+000000: const-string v0, "pcsuite_WifiP2pService"
+000004: const-string v1, "initialize onDeviceInfoAvailable ..."
+000008: invoke-static v0, v1, Lc/c/f/a/b;->k(Ljava/lang/String; Ljava/lang/String;)V
+00000e: if-eqz v3, +00ah
+000012: iget-object v0, v2, Lcom/vivo/pcsuite/pcconnect/wifip2p/WifiP2pService$q;->a Lcom/vivo/pcsuite/pcconnect/wifip2p/WifiP2pService;
+000016: iget-object v3, v3, Landroid/net/wifi/p2p/WifiP2pDevice;->deviceAddress Ljava/lang/String;
+00001a: invoke-static v0, v3, Lcom/vivo/pcsuite/pcconnect/wifip2p/WifiP2pService;->a(Lcom/vivo/pcsuite/pcconnect/wifip2p/WifiP2pService; Ljava/lang/String;)V
+000020: goto +bh
+000022: const-string v3, "onDeviceInfoAvailable Device info is null."
+000026: invoke-static v0, v3, Lc/c/f/a/b;->g(Ljava/lang/String; Ljava/lang/String;)V
+00002c: iget-object v3, v2, Lcom/vivo/pcsuite/pcconnect/wifip2p/WifiP2pService$q;->a Lcom/vivo/pcsuite/pcconnect/wifip2p/WifiP2pService;
+000030: invoke-static v3, Lcom/vivo/pcsuite/pcconnect/wifip2p/WifiP2pService;->o(Lcom/vivo/pcsuite/pcconnect/wifip2p/WifiP2pService;)V
+000036: return-void 

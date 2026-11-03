@@ -1,0 +1,88 @@
+APK pcsuite/updateApk/connbase.apk
+DEX classes.dex
+CLASS Lcom/vivo/connbase/r$b$a;
+SUPER Ljava/lang/Object;
+FIELDS
+f Lcom/vivo/connbase/r; = None
+e Landroid/os/IBinder; = None
+
+METHOD <init>(Landroid/os/IBinder;)V
+000000: invoke-direct v0, Ljava/lang/Object;-><init>()V
+000006: iput-object v1, v0, Lcom/vivo/connbase/r$b$a;->e Landroid/os/IBinder;
+00000a: return-void 
+
+METHOD a(I)V
+000000: invoke-static Landroid/os/Parcel;->obtain()Landroid/os/Parcel;
+000006: move-result-object v0
+000008: invoke-static Landroid/os/Parcel;->obtain()Landroid/os/Parcel;
+00000e: move-result-object v1
+000010: const-string v2, "com.vivo.connbase.IAdvertiseCallback"
+000014: invoke-virtual v0, v2, Landroid/os/Parcel;->writeInterfaceToken(Ljava/lang/String;)V
+00001a: invoke-virtual v0, v6, Landroid/os/Parcel;->writeInt(I)V
+000020: iget-object v2, v5, Lcom/vivo/connbase/r$b$a;->e Landroid/os/IBinder;
+000024: const/4 v3, 2
+000026: const/4 v4, 0
+000028: invoke-interface v2, v3, v0, v1, v4, Landroid/os/IBinder;->transact(I Landroid/os/Parcel; Landroid/os/Parcel; I)Z
+00002e: move-result v2
+000030: if-nez v2, +016h
+000034: invoke-static Lcom/vivo/connbase/r$b;->c()Lcom/vivo/connbase/r;
+00003a: move-result-object v2
+00003c: if-eqz v2, +010h
+000040: invoke-static Lcom/vivo/connbase/r$b;->c()Lcom/vivo/connbase/r;
+000046: move-result-object v2
+000048: invoke-interface v2, v6, Lcom/vivo/connbase/r;->a(I)V
+00004e: invoke-virtual v1, Landroid/os/Parcel;->recycle()V
+000054: invoke-virtual v0, Landroid/os/Parcel;->recycle()V
+00005a: return-void 
+00005c: invoke-virtual v1, Landroid/os/Parcel;->readException()V
+000062: invoke-virtual v1, Landroid/os/Parcel;->recycle()V
+000068: invoke-virtual v0, Landroid/os/Parcel;->recycle()V
+00006e: return-void 
+000070: move-exception v6
+000072: invoke-virtual v1, Landroid/os/Parcel;->recycle()V
+000078: invoke-virtual v0, Landroid/os/Parcel;->recycle()V
+00007e: throw v6
+
+METHOD a(Landroid/bluetooth/le/AdvertiseSettings;)V
+000000: invoke-static Landroid/os/Parcel;->obtain()Landroid/os/Parcel;
+000006: move-result-object v0
+000008: invoke-static Landroid/os/Parcel;->obtain()Landroid/os/Parcel;
+00000e: move-result-object v1
+000010: const-string v2, "com.vivo.connbase.IAdvertiseCallback"
+000014: invoke-virtual v0, v2, Landroid/os/Parcel;->writeInterfaceToken(Ljava/lang/String;)V
+00001a: const/4 v2, 1
+00001c: const/4 v3, 0
+00001e: if-eqz v6, +009h
+000022: invoke-virtual v0, v2, Landroid/os/Parcel;->writeInt(I)V
+000028: invoke-virtual v6, v0, v3, Landroid/bluetooth/le/AdvertiseSettings;->writeToParcel(Landroid/os/Parcel; I)V
+00002e: goto +4h
+000030: invoke-virtual v0, v3, Landroid/os/Parcel;->writeInt(I)V
+000036: iget-object v4, v5, Lcom/vivo/connbase/r$b$a;->e Landroid/os/IBinder;
+00003a: invoke-interface v4, v2, v0, v1, v3, Landroid/os/IBinder;->transact(I Landroid/os/Parcel; Landroid/os/Parcel; I)Z
+000040: move-result v2
+000042: if-nez v2, +016h
+000046: invoke-static Lcom/vivo/connbase/r$b;->c()Lcom/vivo/connbase/r;
+00004c: move-result-object v2
+00004e: if-eqz v2, +010h
+000052: invoke-static Lcom/vivo/connbase/r$b;->c()Lcom/vivo/connbase/r;
+000058: move-result-object v2
+00005a: invoke-interface v2, v6, Lcom/vivo/connbase/r;->a(Landroid/bluetooth/le/AdvertiseSettings;)V
+000060: invoke-virtual v1, Landroid/os/Parcel;->recycle()V
+000066: invoke-virtual v0, Landroid/os/Parcel;->recycle()V
+00006c: return-void 
+00006e: invoke-virtual v1, Landroid/os/Parcel;->readException()V
+000074: invoke-virtual v1, Landroid/os/Parcel;->recycle()V
+00007a: invoke-virtual v0, Landroid/os/Parcel;->recycle()V
+000080: return-void 
+000082: move-exception v6
+000084: invoke-virtual v1, Landroid/os/Parcel;->recycle()V
+00008a: invoke-virtual v0, Landroid/os/Parcel;->recycle()V
+000090: throw v6
+
+METHOD asBinder()Landroid/os/IBinder;
+000000: iget-object v0, v1, Lcom/vivo/connbase/r$b$a;->e Landroid/os/IBinder;
+000004: return-object v0
+
+METHOD c()Ljava/lang/String;
+000000: const-string v0, "com.vivo.connbase.IAdvertiseCallback"
+000004: return-object v0

@@ -1,0 +1,75 @@
+APK pcsuite/updateApk/connbase.apk
+DEX classes.dex
+CLASS Lcom/vivo/connbase/connect/g;
+SUPER Ljava/lang/Object;
+FIELDS
+a Ljava/lang/String; = None
+b Landroid/bluetooth/BluetoothGatt; = None
+c Landroid/bluetooth/BluetoothDevice; = None
+d Ljava/lang/String; = None
+e Z = None
+
+METHOD <init>()V
+000000: invoke-direct v0, Ljava/lang/Object;-><init>()V
+000006: return-void 
+
+METHOD a()Landroid/bluetooth/BluetoothGatt;
+000000: iget-object v0, v1, Lcom/vivo/connbase/connect/g;->b Landroid/bluetooth/BluetoothGatt;
+000004: return-object v0
+
+METHOD a(Landroid/bluetooth/BluetoothDevice;)V
+000000: iput-object v1, v0, Lcom/vivo/connbase/connect/g;->c Landroid/bluetooth/BluetoothDevice;
+000004: return-void 
+
+METHOD a(Landroid/bluetooth/BluetoothGatt;)V
+000000: iput-object v1, v0, Lcom/vivo/connbase/connect/g;->b Landroid/bluetooth/BluetoothGatt;
+000004: return-void 
+
+METHOD a(Ljava/lang/String;)V
+000000: iput-object v1, v0, Lcom/vivo/connbase/connect/g;->d Ljava/lang/String;
+000004: return-void 
+
+METHOD a(Z)V
+000000: iput-boolean v1, v0, Lcom/vivo/connbase/connect/g;->e Z
+000004: return-void 
+
+METHOD b()Landroid/bluetooth/BluetoothDevice;
+000000: iget-object v0, v1, Lcom/vivo/connbase/connect/g;->c Landroid/bluetooth/BluetoothDevice;
+000004: return-object v0
+
+METHOD b(Ljava/lang/String;)V
+000000: iput-object v1, v0, Lcom/vivo/connbase/connect/g;->a Ljava/lang/String;
+000004: return-void 
+
+METHOD c()Ljava/lang/String;
+000000: iget-object v0, v1, Lcom/vivo/connbase/connect/g;->d Ljava/lang/String;
+000004: return-object v0
+
+METHOD d()Ljava/lang/String;
+000000: iget-object v0, v1, Lcom/vivo/connbase/connect/g;->a Ljava/lang/String;
+000004: return-object v0
+
+METHOD e()Z
+000000: iget-boolean v0, v1, Lcom/vivo/connbase/connect/g;->e Z
+000004: return v0
+
+METHOD toString()Ljava/lang/String;
+000000: new-instance v0, Ljava/lang/StringBuilder;
+000004: invoke-direct v0, Ljava/lang/StringBuilder;-><init>()V
+00000a: const-string v1, "ConnectedDeviceInfo{ma='"
+00000e: invoke-virtual v0, v1, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+000014: iget-object v1, v2, Lcom/vivo/connbase/connect/g;->a Ljava/lang/String;
+000018: invoke-static v1, Lcom/vivo/connbase/e0/g/h;->b(Ljava/lang/String;)Ljava/lang/String;
+00001e: move-result-object v1
+000020: invoke-virtual v0, v1, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+000026: const/16 v1, 39
+00002a: invoke-virtual v0, v1, Ljava/lang/StringBuilder;->append(C)Ljava/lang/StringBuilder;
+000030: const-string v1, ", asServer="
+000034: invoke-virtual v0, v1, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+00003a: iget-boolean v1, v2, Lcom/vivo/connbase/connect/g;->e Z
+00003e: invoke-virtual v0, v1, Ljava/lang/StringBuilder;->append(Z)Ljava/lang/StringBuilder;
+000044: const/16 v1, 125
+000048: invoke-virtual v0, v1, Ljava/lang/StringBuilder;->append(C)Ljava/lang/StringBuilder;
+00004e: invoke-virtual v0, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
+000054: move-result-object v0
+000056: return-object v0

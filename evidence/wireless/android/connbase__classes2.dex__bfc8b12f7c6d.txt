@@ -1,0 +1,251 @@
+APK pcsuite/updateApk/connbase.apk
+DEX classes2.dex
+CLASS Lcom/vivo/pcsuite/pcconnect/p/a;
+SUPER Ljava/lang/Object;
+FIELDS
+k Ljava/lang/String; = 'a'
+l Lcom/vivo/pcsuite/pcconnect/p/a; = None
+a Ljava/lang/Object; = None
+b Ljava/lang/Class; = None
+c Ljava/lang/reflect/Method; = None
+d Ljava/lang/reflect/Method; = None
+e Ljava/lang/reflect/Method; = None
+f Ljava/lang/reflect/Method; = None
+g Z = None
+h Lcom/vivo/pcsuite/pcconnect/p/a$c; = None
+i Landroid/app/IProcessObserver; = None
+j Landroid/app/a; = None
+
+METHOD <clinit>()V
+000000: return-void 
+
+METHOD <init>()V
+000000: invoke-direct v5, Ljava/lang/Object;-><init>()V
+000006: new-instance v0, Lcom/vivo/pcsuite/pcconnect/p/a$a;
+00000a: invoke-direct v0, v5, Lcom/vivo/pcsuite/pcconnect/p/a$a;-><init>(Lcom/vivo/pcsuite/pcconnect/p/a;)V
+000010: iput-object v0, v5, Lcom/vivo/pcsuite/pcconnect/p/a;->i Landroid/app/IProcessObserver;
+000014: new-instance v0, Lcom/vivo/pcsuite/pcconnect/p/a$b;
+000018: invoke-direct v0, v5, Lcom/vivo/pcsuite/pcconnect/p/a$b;-><init>(Lcom/vivo/pcsuite/pcconnect/p/a;)V
+00001e: iput-object v0, v5, Lcom/vivo/pcsuite/pcconnect/p/a;->j Landroid/app/a;
+000022: const-string v0, "android.app.ActivityManagerNative"
+000026: invoke-static v0, Lcom/vivo/pcsuite/pcconnect/p/b;->a(Ljava/lang/String;)Ljava/lang/Class;
+00002c: move-result-object v0
+00002e: const-string v1, "android.app.IActivityManager"
+000032: invoke-static v1, Lcom/vivo/pcsuite/pcconnect/p/b;->a(Ljava/lang/String;)Ljava/lang/Class;
+000038: move-result-object v1
+00003a: iput-object v1, v5, Lcom/vivo/pcsuite/pcconnect/p/a;->b Ljava/lang/Class;
+00003e: const-string v2, "getDefault"
+000042: const/4 v3, 0
+000044: const/4 v4, 0
+000046: new-array v4, v4, [Ljava/lang/Object;
+00004a: invoke-static v0, v1, v2, v3, v4, Lcom/vivo/pcsuite/pcconnect/p/b;->a(Ljava/lang/Class; Ljava/lang/Class; Ljava/lang/String; [Ljava/lang/Class; [Ljava/lang/Object;)Ljava/lang/Object;
+000050: move-result-object v0
+000052: iput-object v0, v5, Lcom/vivo/pcsuite/pcconnect/p/a;->a Ljava/lang/Object;
+000056: goto +22h
+000058: move-exception v0
+00005a: goto +6h
+00005c: move-exception v0
+00005e: goto +4h
+000060: move-exception v0
+000062: goto +2h
+000064: move-exception v0
+000066: sget-object v1, Lcom/vivo/pcsuite/pcconnect/p/a;->k Ljava/lang/String;
+00006a: new-instance v2, Ljava/lang/StringBuilder;
+00006e: invoke-direct v2, Ljava/lang/StringBuilder;-><init>()V
+000074: const-string v3, "ActivityManagerDelegate error :"
+000078: invoke-virtual v2, v3, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+00007e: invoke-virtual v0, Ljava/lang/ReflectiveOperationException;->getMessage()Ljava/lang/String;
+000084: move-result-object v0
+000086: invoke-virtual v2, v0, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+00008c: invoke-virtual v2, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
+000092: move-result-object v0
+000094: invoke-static v1, v0, Lc/c/f/a/b;->g(Ljava/lang/String; Ljava/lang/String;)V
+00009a: return-void 
+
+METHOD a(Lcom/vivo/pcsuite/pcconnect/p/a;)Lcom/vivo/pcsuite/pcconnect/p/a$c;
+000000: iget-object v0, v0, Lcom/vivo/pcsuite/pcconnect/p/a;->h Lcom/vivo/pcsuite/pcconnect/p/a$c;
+000004: return-object v0
+
+METHOD a()Ljava/lang/String;
+000000: sget-object v0, Lcom/vivo/pcsuite/pcconnect/p/a;->k Ljava/lang/String;
+000004: return-object v0
+
+METHOD b()Lcom/vivo/pcsuite/pcconnect/p/a;
+000000: sget-object v0, Lcom/vivo/pcsuite/pcconnect/p/a;->l Lcom/vivo/pcsuite/pcconnect/p/a;
+000004: if-nez v0, +015h
+000008: const-class v0, Lcom/vivo/pcsuite/pcconnect/p/a;
+00000c: monitor-enter v0
+00000e: sget-object v1, Lcom/vivo/pcsuite/pcconnect/p/a;->l Lcom/vivo/pcsuite/pcconnect/p/a;
+000012: if-nez v1, +009h
+000016: new-instance v1, Lcom/vivo/pcsuite/pcconnect/p/a;
+00001a: invoke-direct v1, Lcom/vivo/pcsuite/pcconnect/p/a;-><init>()V
+000020: sput-object v1, Lcom/vivo/pcsuite/pcconnect/p/a;->l Lcom/vivo/pcsuite/pcconnect/p/a;
+000024: monitor-exit v0
+000026: goto +4h
+000028: move-exception v1
+00002a: monitor-exit v0
+00002c: throw v1
+00002e: sget-object v0, Lcom/vivo/pcsuite/pcconnect/p/a;->l Lcom/vivo/pcsuite/pcconnect/p/a;
+000032: return-object v0
+
+METHOD a(Lcom/vivo/pcsuite/pcconnect/p/a$c;)V
+000000: const/4 v6, 0
+000002: iput-object v6, v5, Lcom/vivo/pcsuite/pcconnect/p/a;->h Lcom/vivo/pcsuite/pcconnect/p/a$c;
+000006: iget-object v6, v5, Lcom/vivo/pcsuite/pcconnect/p/a;->a Ljava/lang/Object;
+00000a: if-eqz v6, +087h
+00000e: iget-object v6, v5, Lcom/vivo/pcsuite/pcconnect/p/a;->b Ljava/lang/Class;
+000012: if-eqz v6, +083h
+000016: iget-boolean v0, v5, Lcom/vivo/pcsuite/pcconnect/p/a;->g Z
+00001a: const/4 v1, 0
+00001c: const/4 v2, 1
+00001e: if-eqz v0, +037h
+000022: iget-object v0, v5, Lcom/vivo/pcsuite/pcconnect/p/a;->f Ljava/lang/reflect/Method;
+000026: if-nez v0, +013h
+00002a: const-string v0, "unregisterVivoProcessObserver"
+00002e: new-array v3, v2, [Ljava/lang/Class;
+000032: const-class v4, Landroid/app/a;
+000036: aput-object v4, v3, v1
+00003a: invoke-virtual v6, v0, v3, Ljava/lang/Class;->getDeclaredMethod(Ljava/lang/String; [Ljava/lang/Class;)Ljava/lang/reflect/Method;
+000040: move-result-object v6
+000042: iput-object v6, v5, Lcom/vivo/pcsuite/pcconnect/p/a;->f Ljava/lang/reflect/Method;
+000046: invoke-virtual v6, v2, Ljava/lang/reflect/Method;->setAccessible(Z)V
+00004c: iget-object v6, v5, Lcom/vivo/pcsuite/pcconnect/p/a;->f Ljava/lang/reflect/Method;
+000050: iget-object v0, v5, Lcom/vivo/pcsuite/pcconnect/p/a;->a Ljava/lang/Object;
+000054: new-array v2, v2, [Ljava/lang/Object;
+000058: iget-object v3, v5, Lcom/vivo/pcsuite/pcconnect/p/a;->j Landroid/app/a;
+00005c: aput-object v3, v2, v1
+000060: invoke-virtual v6, v0, v2, Ljava/lang/reflect/Method;->invoke(Ljava/lang/Object; [Ljava/lang/Object;)Ljava/lang/Object;
+000066: sget-object v6, Lcom/vivo/pcsuite/pcconnect/p/a;->k Ljava/lang/String;
+00006a: const-string v0, " unregister vivoProcessObserver "
+00006e: invoke-static v6, v0, Lc/c/f/a/b;->g(Ljava/lang/String; Ljava/lang/String;)V
+000074: iput-boolean v1, v5, Lcom/vivo/pcsuite/pcconnect/p/a;->g Z
+000078: goto +57h
+00007a: move-exception v6
+00007c: sget-object v0, Lcom/vivo/pcsuite/pcconnect/p/a;->k Ljava/lang/String;
+000080: const-string v1, " unregister vivoProcessObserver failed"
+000084: invoke-static v0, v1, v6, Lc/c/f/a/b;->b(Ljava/lang/String; Ljava/lang/String; Ljava/lang/Throwable;)V
+00008a: goto +4eh
+00008c: iget-object v0, v5, Lcom/vivo/pcsuite/pcconnect/p/a;->d Ljava/lang/reflect/Method;
+000090: if-nez v0, +013h
+000094: const-string v0, "unregisterProcessObserver"
+000098: new-array v3, v2, [Ljava/lang/Class;
+00009c: const-class v4, Landroid/app/IProcessObserver;
+0000a0: aput-object v4, v3, v1
+0000a4: invoke-virtual v6, v0, v3, Ljava/lang/Class;->getMethod(Ljava/lang/String; [Ljava/lang/Class;)Ljava/lang/reflect/Method;
+0000aa: move-result-object v6
+0000ac: iput-object v6, v5, Lcom/vivo/pcsuite/pcconnect/p/a;->d Ljava/lang/reflect/Method;
+0000b0: invoke-virtual v6, v2, Ljava/lang/reflect/Method;->setAccessible(Z)V
+0000b6: iget-object v6, v5, Lcom/vivo/pcsuite/pcconnect/p/a;->d Ljava/lang/reflect/Method;
+0000ba: iget-object v0, v5, Lcom/vivo/pcsuite/pcconnect/p/a;->a Ljava/lang/Object;
+0000be: new-array v2, v2, [Ljava/lang/Object;
+0000c2: iget-object v3, v5, Lcom/vivo/pcsuite/pcconnect/p/a;->i Landroid/app/IProcessObserver;
+0000c6: aput-object v3, v2, v1
+0000ca: invoke-virtual v6, v0, v2, Ljava/lang/reflect/Method;->invoke(Ljava/lang/Object; [Ljava/lang/Object;)Ljava/lang/Object;
+0000d0: sget-object v6, Lcom/vivo/pcsuite/pcconnect/p/a;->k Ljava/lang/String;
+0000d4: const-string v0, "ActivityManagerService unregisterProcessObserver success!"
+0000d8: invoke-static v6, v0, Lc/c/f/a/b;->g(Ljava/lang/String; Ljava/lang/String;)V
+0000de: goto +24h
+0000e0: move-exception v6
+0000e2: goto +4h
+0000e4: move-exception v6
+0000e6: goto +2h
+0000e8: move-exception v6
+0000ea: sget-object v0, Lcom/vivo/pcsuite/pcconnect/p/a;->k Ljava/lang/String;
+0000ee: new-instance v1, Ljava/lang/StringBuilder;
+0000f2: invoke-direct v1, Ljava/lang/StringBuilder;-><init>()V
+0000f8: const-string v2, "unregisterProcessObserver error : "
+0000fc: invoke-virtual v1, v2, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+000102: invoke-virtual v1, v6, Ljava/lang/StringBuilder;->append(Ljava/lang/Object;)Ljava/lang/StringBuilder;
+000108: invoke-virtual v1, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
+00010e: move-result-object v6
+000110: invoke-static v0, v6, Lc/c/f/a/b;->g(Ljava/lang/String; Ljava/lang/String;)V
+000116: goto +8h
+000118: sget-object v6, Lcom/vivo/pcsuite/pcconnect/p/a;->k Ljava/lang/String;
+00011c: const-string v0, "ActivityManagerService is null, unregisterActivityObserver failed"
+000120: invoke-static v6, v0, Lc/c/f/a/b;->g(Ljava/lang/String; Ljava/lang/String;)V
+000126: return-void 
+
+METHOD a(Lcom/vivo/pcsuite/pcconnect/p/a$c; I [Ljava/lang/String;)V
+000000: iget-object v0, v7, Lcom/vivo/pcsuite/pcconnect/p/a;->h Lcom/vivo/pcsuite/pcconnect/p/a$c;
+000004: if-nez v0, +0a2h
+000008: iput-object v8, v7, Lcom/vivo/pcsuite/pcconnect/p/a;->h Lcom/vivo/pcsuite/pcconnect/p/a$c;
+00000c: iget-object v8, v7, Lcom/vivo/pcsuite/pcconnect/p/a;->a Ljava/lang/Object;
+000010: if-eqz v8, +095h
+000014: iget-object v8, v7, Lcom/vivo/pcsuite/pcconnect/p/a;->b Ljava/lang/Class;
+000018: if-eqz v8, +091h
+00001c: const/4 v0, 0
+00001e: const/4 v1, 1
+000020: iget-object v2, v7, Lcom/vivo/pcsuite/pcconnect/p/a;->e Ljava/lang/reflect/Method;
+000024: const/4 v3, 2
+000026: const/4 v4, 3
+000028: if-nez v2, +01bh
+00002c: const-string v2, "registerVivoProcessObserverWithPkg"
+000030: new-array v5, v4, [Ljava/lang/Class;
+000034: const-class v6, Landroid/app/a;
+000038: aput-object v6, v5, v0
+00003c: sget-object v6, Ljava/lang/Integer;->TYPE Ljava/lang/Class;
+000040: aput-object v6, v5, v1
+000044: const-class v6, [Ljava/lang/String;
+000048: aput-object v6, v5, v3
+00004c: invoke-virtual v8, v2, v5, Ljava/lang/Class;->getDeclaredMethod(Ljava/lang/String; [Ljava/lang/Class;)Ljava/lang/reflect/Method;
+000052: move-result-object v8
+000054: iput-object v8, v7, Lcom/vivo/pcsuite/pcconnect/p/a;->e Ljava/lang/reflect/Method;
+000058: invoke-virtual v8, v1, Ljava/lang/reflect/Method;->setAccessible(Z)V
+00005e: iget-object v8, v7, Lcom/vivo/pcsuite/pcconnect/p/a;->e Ljava/lang/reflect/Method;
+000062: iget-object v2, v7, Lcom/vivo/pcsuite/pcconnect/p/a;->a Ljava/lang/Object;
+000066: new-array v4, v4, [Ljava/lang/Object;
+00006a: iget-object v5, v7, Lcom/vivo/pcsuite/pcconnect/p/a;->j Landroid/app/a;
+00006e: aput-object v5, v4, v0
+000072: invoke-static v9, Ljava/lang/Integer;->valueOf(I)Ljava/lang/Integer;
+000078: move-result-object v9
+00007a: aput-object v9, v4, v1
+00007e: aput-object v10, v4, v3
+000082: invoke-virtual v8, v2, v4, Ljava/lang/reflect/Method;->invoke(Ljava/lang/Object; [Ljava/lang/Object;)Ljava/lang/Object;
+000088: sget-object v8, Lcom/vivo/pcsuite/pcconnect/p/a;->k Ljava/lang/String;
+00008c: const-string v9, " register vivoProcessObserver "
+000090: invoke-static v8, v9, Lc/c/f/a/b;->g(Ljava/lang/String; Ljava/lang/String;)V
+000096: iput-boolean v1, v7, Lcom/vivo/pcsuite/pcconnect/p/a;->g Z
+00009a: goto +57h
+00009c: move-exception v8
+00009e: goto +4h
+0000a0: move-exception v8
+0000a2: goto +2h
+0000a4: move-exception v8
+0000a6: sget-object v9, Lcom/vivo/pcsuite/pcconnect/p/a;->k Ljava/lang/String;
+0000aa: const-string v10, "register vivoProcessObserver failed"
+0000ae: invoke-static v9, v10, v8, Lc/c/f/a/b;->b(Ljava/lang/String; Ljava/lang/String; Ljava/lang/Throwable;)V
+0000b4: iget-object v9, v7, Lcom/vivo/pcsuite/pcconnect/p/a;->c Ljava/lang/reflect/Method;
+0000b8: if-nez v9, +015h
+0000bc: iget-object v9, v7, Lcom/vivo/pcsuite/pcconnect/p/a;->b Ljava/lang/Class;
+0000c0: const-string v10, "registerProcessObserver"
+0000c4: new-array v2, v1, [Ljava/lang/Class;
+0000c8: const-class v3, Landroid/app/IProcessObserver;
+0000cc: aput-object v3, v2, v0
+0000d0: invoke-virtual v9, v10, v2, Ljava/lang/Class;->getMethod(Ljava/lang/String; [Ljava/lang/Class;)Ljava/lang/reflect/Method;
+0000d6: move-result-object v9
+0000d8: iput-object v9, v7, Lcom/vivo/pcsuite/pcconnect/p/a;->c Ljava/lang/reflect/Method;
+0000dc: invoke-virtual v9, v1, Ljava/lang/reflect/Method;->setAccessible(Z)V
+0000e2: iget-object v9, v7, Lcom/vivo/pcsuite/pcconnect/p/a;->c Ljava/lang/reflect/Method;
+0000e6: iget-object v10, v7, Lcom/vivo/pcsuite/pcconnect/p/a;->a Ljava/lang/Object;
+0000ea: new-array v1, v1, [Ljava/lang/Object;
+0000ee: iget-object v2, v7, Lcom/vivo/pcsuite/pcconnect/p/a;->i Landroid/app/IProcessObserver;
+0000f2: aput-object v2, v1, v0
+0000f6: invoke-virtual v9, v10, v1, Ljava/lang/reflect/Method;->invoke(Ljava/lang/Object; [Ljava/lang/Object;)Ljava/lang/Object;
+0000fc: sget-object v9, Lcom/vivo/pcsuite/pcconnect/p/a;->k Ljava/lang/String;
+000100: const-string v10, "ActivityManagerService is null, registerActivityObserver failed"
+000104: invoke-static v9, v10, Lc/c/f/a/b;->g(Ljava/lang/String; Ljava/lang/String;)V
+00010a: goto +1fh
+00010c: sget-object v9, Lcom/vivo/pcsuite/pcconnect/p/a;->k Ljava/lang/String;
+000110: new-instance v10, Ljava/lang/StringBuilder;
+000114: invoke-direct v10, Ljava/lang/StringBuilder;-><init>()V
+00011a: const-string v0, "registerProcessObserver error :"
+00011e: invoke-virtual v10, v0, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+000124: invoke-virtual v10, v8, Ljava/lang/StringBuilder;->append(Ljava/lang/Object;)Ljava/lang/StringBuilder;
+00012a: invoke-virtual v10, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
+000130: move-result-object v8
+000132: invoke-static v9, v8, Lc/c/f/a/b;->g(Ljava/lang/String; Ljava/lang/String;)V
+000138: goto +8h
+00013a: sget-object v8, Lcom/vivo/pcsuite/pcconnect/p/a;->k Ljava/lang/String;
+00013e: const-string v9, "ActivityManagerService registerActivityObserver success!"
+000142: invoke-static v8, v9, Lc/c/f/a/b;->g(Ljava/lang/String; Ljava/lang/String;)V
+000148: return-void 

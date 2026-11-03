@@ -1,0 +1,65 @@
+APK pcsuite/updateApk/connbase.apk
+DEX classes.dex
+CLASS Lcom/vivo/connbase/VivoConnectService$u;
+SUPER Ljava/lang/Object;
+FIELDS
+a Ljava/lang/String; = None
+b Ljava/lang/String; = None
+c I = None
+d Z = None
+
+METHOD <init>(Ljava/lang/String; Ljava/lang/String; I Z)V
+000000: invoke-direct v0, Ljava/lang/Object;-><init>()V
+000006: iput-object v1, v0, Lcom/vivo/connbase/VivoConnectService$u;->a Ljava/lang/String;
+00000a: iput-object v2, v0, Lcom/vivo/connbase/VivoConnectService$u;->b Ljava/lang/String;
+00000e: iput v3, v0, Lcom/vivo/connbase/VivoConnectService$u;->c I
+000012: iput-boolean v4, v0, Lcom/vivo/connbase/VivoConnectService$u;->d Z
+000016: return-void 
+
+METHOD <init>(Ljava/lang/String; Ljava/lang/String; I Z Lcom/vivo/connbase/VivoConnectService$g;)V
+000000: invoke-direct v0, v1, v2, v3, v4, Lcom/vivo/connbase/VivoConnectService$u;-><init>(Ljava/lang/String; Ljava/lang/String; I Z)V
+000006: return-void 
+
+METHOD a()I
+000000: iget v0, v1, Lcom/vivo/connbase/VivoConnectService$u;->c I
+000004: return v0
+
+METHOD b()Ljava/lang/String;
+000000: iget-object v0, v1, Lcom/vivo/connbase/VivoConnectService$u;->a Ljava/lang/String;
+000004: return-object v0
+
+METHOD c()Ljava/lang/String;
+000000: iget-object v0, v1, Lcom/vivo/connbase/VivoConnectService$u;->b Ljava/lang/String;
+000004: return-object v0
+
+METHOD d()Z
+000000: iget-boolean v0, v1, Lcom/vivo/connbase/VivoConnectService$u;->d Z
+000004: return v0
+
+METHOD toString()Ljava/lang/String;
+000000: new-instance v0, Ljava/lang/StringBuilder;
+000004: invoke-direct v0, Ljava/lang/StringBuilder;-><init>()V
+00000a: const-string v1, "WifiP2pGroupInfo{NetworkName='"
+00000e: invoke-virtual v0, v1, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+000014: iget-object v1, v3, Lcom/vivo/connbase/VivoConnectService$u;->a Ljava/lang/String;
+000018: invoke-virtual v0, v1, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+00001e: const/16 v1, 39
+000022: invoke-virtual v0, v1, Ljava/lang/StringBuilder;->append(C)Ljava/lang/StringBuilder;
+000028: const-string v2, ", passphrase='"
+00002c: invoke-virtual v0, v2, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+000032: iget-object v2, v3, Lcom/vivo/connbase/VivoConnectService$u;->b Ljava/lang/String;
+000036: invoke-virtual v0, v2, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+00003c: invoke-virtual v0, v1, Ljava/lang/StringBuilder;->append(C)Ljava/lang/StringBuilder;
+000042: const-string v1, ", frequency="
+000046: invoke-virtual v0, v1, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+00004c: iget v1, v3, Lcom/vivo/connbase/VivoConnectService$u;->c I
+000050: invoke-virtual v0, v1, Ljava/lang/StringBuilder;->append(I)Ljava/lang/StringBuilder;
+000056: const-string v1, ", needSwitch="
+00005a: invoke-virtual v0, v1, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+000060: iget-boolean v1, v3, Lcom/vivo/connbase/VivoConnectService$u;->d Z
+000064: invoke-virtual v0, v1, Ljava/lang/StringBuilder;->append(Z)Ljava/lang/StringBuilder;
+00006a: const/16 v1, 125
+00006e: invoke-virtual v0, v1, Ljava/lang/StringBuilder;->append(C)Ljava/lang/StringBuilder;
+000074: invoke-virtual v0, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
+00007a: move-result-object v0
+00007c: return-object v0

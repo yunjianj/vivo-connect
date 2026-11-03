@@ -1,0 +1,331 @@
+APK pcsuite/updateApk/pcsuite.apk
+DEX classes2.dex
+CLASS Lcom/vivo/pcsuite/pcconnect/Device;
+SUPER Ljava/lang/Object;
+FIELDS
+CREATOR Landroid/os/Parcelable$Creator; = None
+address Ljava/lang/String; = None
+band I = None
+deviceId Ljava/lang/String; = None
+deviceName Ljava/lang/String; = None
+deviceType I = None
+isOwnerId Z = None
+openId Ljava/lang/String; = None
+signal I = None
+userName Ljava/lang/String; = None
+version I = None
+
+METHOD <clinit>()V
+000000: new-instance v0, Lcom/vivo/pcsuite/pcconnect/Device$1;
+000004: invoke-direct v0, Lcom/vivo/pcsuite/pcconnect/Device$1;-><init>()V
+00000a: sput-object v0, Lcom/vivo/pcsuite/pcconnect/Device;->CREATOR Landroid/os/Parcelable$Creator;
+00000e: return-void 
+
+METHOD <init>()V
+000000: invoke-direct v1, Ljava/lang/Object;-><init>()V
+000006: const/4 v0, 4
+000008: iput v0, v1, Lcom/vivo/pcsuite/pcconnect/Device;->deviceType I
+00000c: return-void 
+
+METHOD <init>(Landroid/os/Parcel;)V
+000000: invoke-direct v1, Ljava/lang/Object;-><init>()V
+000006: const/4 v0, 4
+000008: iput v0, v1, Lcom/vivo/pcsuite/pcconnect/Device;->deviceType I
+00000c: invoke-virtual v2, Landroid/os/Parcel;->readString()Ljava/lang/String;
+000012: move-result-object v0
+000014: iput-object v0, v1, Lcom/vivo/pcsuite/pcconnect/Device;->deviceId Ljava/lang/String;
+000018: invoke-virtual v2, Landroid/os/Parcel;->readString()Ljava/lang/String;
+00001e: move-result-object v0
+000020: iput-object v0, v1, Lcom/vivo/pcsuite/pcconnect/Device;->deviceName Ljava/lang/String;
+000024: invoke-virtual v2, Landroid/os/Parcel;->readByte()B
+00002a: move-result v0
+00002c: if-eqz v0, +004h
+000030: const/4 v0, 1
+000032: goto +2h
+000034: const/4 v0, 0
+000036: iput-boolean v0, v1, Lcom/vivo/pcsuite/pcconnect/Device;->isOwnerId Z
+00003a: invoke-virtual v2, Landroid/os/Parcel;->readInt()I
+000040: move-result v0
+000042: iput v0, v1, Lcom/vivo/pcsuite/pcconnect/Device;->signal I
+000046: invoke-virtual v2, Landroid/os/Parcel;->readInt()I
+00004c: move-result v0
+00004e: iput v0, v1, Lcom/vivo/pcsuite/pcconnect/Device;->version I
+000052: invoke-virtual v2, Landroid/os/Parcel;->readInt()I
+000058: move-result v0
+00005a: iput v0, v1, Lcom/vivo/pcsuite/pcconnect/Device;->band I
+00005e: invoke-virtual v2, Landroid/os/Parcel;->readString()Ljava/lang/String;
+000064: move-result-object v0
+000066: iput-object v0, v1, Lcom/vivo/pcsuite/pcconnect/Device;->userName Ljava/lang/String;
+00006a: invoke-virtual v2, Landroid/os/Parcel;->readString()Ljava/lang/String;
+000070: move-result-object v0
+000072: iput-object v0, v1, Lcom/vivo/pcsuite/pcconnect/Device;->address Ljava/lang/String;
+000076: invoke-virtual v2, Landroid/os/Parcel;->readInt()I
+00007c: move-result v0
+00007e: iput v0, v1, Lcom/vivo/pcsuite/pcconnect/Device;->deviceType I
+000082: invoke-virtual v2, Landroid/os/Parcel;->readString()Ljava/lang/String;
+000088: move-result-object v2
+00008a: iput-object v2, v1, Lcom/vivo/pcsuite/pcconnect/Device;->openId Ljava/lang/String;
+00008e: return-void 
+
+METHOD <init>(Ljava/lang/String; Ljava/lang/String; I I)V
+000000: invoke-direct v1, Ljava/lang/Object;-><init>()V
+000006: const/4 v0, 4
+000008: iput v0, v1, Lcom/vivo/pcsuite/pcconnect/Device;->deviceType I
+00000c: iput-object v2, v1, Lcom/vivo/pcsuite/pcconnect/Device;->deviceId Ljava/lang/String;
+000010: iput-object v3, v1, Lcom/vivo/pcsuite/pcconnect/Device;->deviceName Ljava/lang/String;
+000014: iput v4, v1, Lcom/vivo/pcsuite/pcconnect/Device;->signal I
+000018: iput v5, v1, Lcom/vivo/pcsuite/pcconnect/Device;->version I
+00001c: return-void 
+
+METHOD macEncrypt(Ljava/lang/String;)Ljava/lang/String;
+000000: if-eqz v3, +04ah
+000004: invoke-virtual v3, Ljava/lang/String;->length()I
+00000a: move-result v0
+00000c: const/16 v1, 17
+000010: if-ne v0, v1, +042h
+000014: const/4 v0, 0
+000016: const/4 v1, 2
+000018: invoke-virtual v3, v0, v1, Ljava/lang/String;->substring(I I)Ljava/lang/String;
+00001e: move-result-object v0
+000020: invoke-virtual v3, Ljava/lang/String;->length()I
+000026: move-result v2
+000028: sub-int/2addr v2, v1
+00002a: invoke-virtual v3, Ljava/lang/String;->length()I
+000030: move-result v1
+000032: invoke-virtual v3, v2, v1, Ljava/lang/String;->substring(I I)Ljava/lang/String;
+000038: move-result-object v1
+00003a: new-instance v2, Ljava/lang/StringBuilder;
+00003e: invoke-direct v2, Ljava/lang/StringBuilder;-><init>()V
+000044: invoke-virtual v2, v0, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+00004a: const-string v0, ":**:**:**:**:"
+00004e: invoke-virtual v2, v0, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+000054: invoke-virtual v2, v1, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+00005a: invoke-virtual v2, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
+000060: move-result-object v3
+000062: return-object v3
+000064: move-exception v0
+000066: new-instance v1, Ljava/lang/StringBuilder;
+00006a: const-string v2, "macEncry e："
+00006e: invoke-direct v1, v2, Ljava/lang/StringBuilder;-><init>(Ljava/lang/String;)V
+000074: invoke-virtual v0, Ljava/lang/Throwable;->getMessage()Ljava/lang/String;
+00007a: move-result-object v0
+00007c: invoke-virtual v1, v0, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+000082: invoke-virtual v1, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
+000088: move-result-object v0
+00008a: const-string v1, "Device"
+00008e: invoke-static v1, v0, Landroid/util/Log;->e(Ljava/lang/String; Ljava/lang/String;)I
+000094: return-object v3
+
+METHOD describeContents()I
+000000: const/4 v0, 0
+000002: return v0
+
+METHOD equals(Ljava/lang/Object;)Z
+000000: const/4 v0, 1
+000002: if-ne v4, v5, +003h
+000006: return v0
+000008: const/4 v1, 0
+00000a: if-eqz v5, +024h
+00000e: invoke-virtual v4, Ljava/lang/Object;->getClass()Ljava/lang/Class;
+000014: move-result-object v2
+000016: invoke-virtual v5, Ljava/lang/Object;->getClass()Ljava/lang/Class;
+00001c: move-result-object v3
+00001e: if-eq v2, v3, +003h
+000022: goto +18h
+000024: check-cast v5, Lcom/vivo/pcsuite/pcconnect/Device;
+000028: iget-object v2, v4, Lcom/vivo/pcsuite/pcconnect/Device;->address Ljava/lang/String;
+00002c: iget-object v3, v5, Lcom/vivo/pcsuite/pcconnect/Device;->address Ljava/lang/String;
+000030: invoke-virtual v2, v3, Ljava/lang/String;->equals(Ljava/lang/Object;)Z
+000036: move-result v2
+000038: if-eqz v2, +00dh
+00003c: iget-object v4, v4, Lcom/vivo/pcsuite/pcconnect/Device;->openId Ljava/lang/String;
+000040: iget-object v5, v5, Lcom/vivo/pcsuite/pcconnect/Device;->openId Ljava/lang/String;
+000044: invoke-virtual v4, v5, Ljava/lang/String;->equals(Ljava/lang/Object;)Z
+00004a: move-result v4
+00004c: if-eqz v4, +003h
+000050: return v0
+000052: return v1
+
+METHOD getAddress()Ljava/lang/String;
+000000: iget-object v0, v0, Lcom/vivo/pcsuite/pcconnect/Device;->address Ljava/lang/String;
+000004: return-object v0
+
+METHOD getBand()I
+000000: iget v0, v0, Lcom/vivo/pcsuite/pcconnect/Device;->band I
+000004: return v0
+
+METHOD getDeviceId()Ljava/lang/String;
+000000: iget-object v0, v0, Lcom/vivo/pcsuite/pcconnect/Device;->deviceId Ljava/lang/String;
+000004: return-object v0
+
+METHOD getDeviceName()Ljava/lang/String;
+000000: iget-object v0, v0, Lcom/vivo/pcsuite/pcconnect/Device;->deviceName Ljava/lang/String;
+000004: return-object v0
+
+METHOD getDeviceType()I
+000000: iget v0, v0, Lcom/vivo/pcsuite/pcconnect/Device;->deviceType I
+000004: return v0
+
+METHOD getOpenId()Ljava/lang/String;
+000000: iget-object v0, v0, Lcom/vivo/pcsuite/pcconnect/Device;->openId Ljava/lang/String;
+000004: return-object v0
+
+METHOD getSignal()I
+000000: iget v0, v0, Lcom/vivo/pcsuite/pcconnect/Device;->signal I
+000004: return v0
+
+METHOD getUserName()Ljava/lang/String;
+000000: iget-object v0, v0, Lcom/vivo/pcsuite/pcconnect/Device;->userName Ljava/lang/String;
+000004: return-object v0
+
+METHOD getVersion()I
+000000: iget v0, v0, Lcom/vivo/pcsuite/pcconnect/Device;->version I
+000004: return v0
+
+METHOD hashCode()I
+000000: iget-object v0, v1, Lcom/vivo/pcsuite/pcconnect/Device;->address Ljava/lang/String;
+000004: iget-object v1, v1, Lcom/vivo/pcsuite/pcconnect/Device;->openId Ljava/lang/String;
+000008: filled-new-array v0, v1, [Ljava/lang/Object;
+00000e: move-result-object v1
+000010: invoke-static v1, Ljava/util/Objects;->hash([Ljava/lang/Object;)I
+000016: move-result v1
+000018: return v1
+
+METHOD isOwnerId()Z
+000000: iget-boolean v0, v0, Lcom/vivo/pcsuite/pcconnect/Device;->isOwnerId Z
+000004: return v0
+
+METHOD readFromParcel(Landroid/os/Parcel;)V
+000000: invoke-virtual v3, Landroid/os/Parcel;->readString()Ljava/lang/String;
+000006: move-result-object v0
+000008: iput-object v0, v2, Lcom/vivo/pcsuite/pcconnect/Device;->deviceId Ljava/lang/String;
+00000c: invoke-virtual v3, Landroid/os/Parcel;->readString()Ljava/lang/String;
+000012: move-result-object v0
+000014: iput-object v0, v2, Lcom/vivo/pcsuite/pcconnect/Device;->deviceName Ljava/lang/String;
+000018: invoke-virtual v3, Landroid/os/Parcel;->readByte()B
+00001e: move-result v0
+000020: const/4 v1, 1
+000022: if-ne v0, v1, +003h
+000026: goto +2h
+000028: const/4 v1, 0
+00002a: iput-boolean v1, v2, Lcom/vivo/pcsuite/pcconnect/Device;->isOwnerId Z
+00002e: invoke-virtual v3, Landroid/os/Parcel;->readInt()I
+000034: move-result v0
+000036: iput v0, v2, Lcom/vivo/pcsuite/pcconnect/Device;->signal I
+00003a: invoke-virtual v3, Landroid/os/Parcel;->readInt()I
+000040: move-result v0
+000042: iput v0, v2, Lcom/vivo/pcsuite/pcconnect/Device;->version I
+000046: invoke-virtual v3, Landroid/os/Parcel;->readInt()I
+00004c: move-result v0
+00004e: iput v0, v2, Lcom/vivo/pcsuite/pcconnect/Device;->band I
+000052: invoke-virtual v3, Landroid/os/Parcel;->readString()Ljava/lang/String;
+000058: move-result-object v0
+00005a: iput-object v0, v2, Lcom/vivo/pcsuite/pcconnect/Device;->userName Ljava/lang/String;
+00005e: invoke-virtual v3, Landroid/os/Parcel;->readString()Ljava/lang/String;
+000064: move-result-object v0
+000066: iput-object v0, v2, Lcom/vivo/pcsuite/pcconnect/Device;->address Ljava/lang/String;
+00006a: invoke-virtual v3, Landroid/os/Parcel;->readInt()I
+000070: move-result v0
+000072: iput v0, v2, Lcom/vivo/pcsuite/pcconnect/Device;->deviceType I
+000076: invoke-virtual v3, Landroid/os/Parcel;->readString()Ljava/lang/String;
+00007c: move-result-object v3
+00007e: iput-object v3, v2, Lcom/vivo/pcsuite/pcconnect/Device;->openId Ljava/lang/String;
+000082: return-void 
+
+METHOD setAddress(Ljava/lang/String;)V
+000000: iput-object v1, v0, Lcom/vivo/pcsuite/pcconnect/Device;->address Ljava/lang/String;
+000004: return-void 
+
+METHOD setBand(I)V
+000000: iput v1, v0, Lcom/vivo/pcsuite/pcconnect/Device;->band I
+000004: return-void 
+
+METHOD setDeviceId(Ljava/lang/String;)V
+000000: iput-object v1, v0, Lcom/vivo/pcsuite/pcconnect/Device;->deviceId Ljava/lang/String;
+000004: return-void 
+
+METHOD setDeviceName(Ljava/lang/String;)V
+000000: iput-object v1, v0, Lcom/vivo/pcsuite/pcconnect/Device;->deviceName Ljava/lang/String;
+000004: return-void 
+
+METHOD setDeviceType(I)V
+000000: iput v1, v0, Lcom/vivo/pcsuite/pcconnect/Device;->deviceType I
+000004: return-void 
+
+METHOD setOpenId(Ljava/lang/String;)V
+000000: iput-object v1, v0, Lcom/vivo/pcsuite/pcconnect/Device;->openId Ljava/lang/String;
+000004: return-void 
+
+METHOD setOwnerId(Z)V
+000000: iput-boolean v1, v0, Lcom/vivo/pcsuite/pcconnect/Device;->isOwnerId Z
+000004: return-void 
+
+METHOD setSignal(I)V
+000000: iput v1, v0, Lcom/vivo/pcsuite/pcconnect/Device;->signal I
+000004: return-void 
+
+METHOD setUserName(Ljava/lang/String;)V
+000000: iput-object v1, v0, Lcom/vivo/pcsuite/pcconnect/Device;->userName Ljava/lang/String;
+000004: return-void 
+
+METHOD setVersion(I)V
+000000: iput v1, v0, Lcom/vivo/pcsuite/pcconnect/Device;->version I
+000004: return-void 
+
+METHOD toString()Ljava/lang/String;
+000000: new-instance v0, Ljava/lang/StringBuilder;
+000004: const-string v1, "Device{, deviceName='"
+000008: invoke-direct v0, v1, Ljava/lang/StringBuilder;-><init>(Ljava/lang/String;)V
+00000e: iget-object v1, v2, Lcom/vivo/pcsuite/pcconnect/Device;->deviceName Ljava/lang/String;
+000012: invoke-virtual v0, v1, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+000018: const-string v1, "', isOd="
+00001c: invoke-virtual v0, v1, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+000022: iget-boolean v1, v2, Lcom/vivo/pcsuite/pcconnect/Device;->isOwnerId Z
+000026: invoke-virtual v0, v1, Ljava/lang/StringBuilder;->append(Z)Ljava/lang/StringBuilder;
+00002c: const-string v1, ", signal="
+000030: invoke-virtual v0, v1, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+000036: iget v1, v2, Lcom/vivo/pcsuite/pcconnect/Device;->signal I
+00003a: invoke-virtual v0, v1, Ljava/lang/StringBuilder;->append(I)Ljava/lang/StringBuilder;
+000040: const-string v1, ", version="
+000044: invoke-virtual v0, v1, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+00004a: iget v1, v2, Lcom/vivo/pcsuite/pcconnect/Device;->version I
+00004e: invoke-virtual v0, v1, Ljava/lang/StringBuilder;->append(I)Ljava/lang/StringBuilder;
+000054: const-string v1, ", band="
+000058: invoke-virtual v0, v1, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+00005e: iget v1, v2, Lcom/vivo/pcsuite/pcconnect/Device;->band I
+000062: invoke-virtual v0, v1, Ljava/lang/StringBuilder;->append(I)Ljava/lang/StringBuilder;
+000068: const-string v1, ", userName='"
+00006c: invoke-virtual v0, v1, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+000072: iget-object v1, v2, Lcom/vivo/pcsuite/pcconnect/Device;->userName Ljava/lang/String;
+000076: invoke-virtual v0, v1, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+00007c: const-string v1, "', deviceType='"
+000080: invoke-virtual v0, v1, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+000086: iget v2, v2, Lcom/vivo/pcsuite/pcconnect/Device;->deviceType I
+00008a: const-string v1, "'}"
+00008e: invoke-static v0, v1, v2, LS5/f;->c(Ljava/lang/StringBuilder; Ljava/lang/String; I)Ljava/lang/String;
+000094: move-result-object v2
+000096: return-object v2
+
+METHOD writeToParcel(Landroid/os/Parcel; I)V
+000000: iget-object v2, v0, Lcom/vivo/pcsuite/pcconnect/Device;->deviceId Ljava/lang/String;
+000004: invoke-virtual v1, v2, Landroid/os/Parcel;->writeString(Ljava/lang/String;)V
+00000a: iget-object v2, v0, Lcom/vivo/pcsuite/pcconnect/Device;->deviceName Ljava/lang/String;
+00000e: invoke-virtual v1, v2, Landroid/os/Parcel;->writeString(Ljava/lang/String;)V
+000014: iget-boolean v2, v0, Lcom/vivo/pcsuite/pcconnect/Device;->isOwnerId Z
+000018: int-to-byte v2, v2
+00001a: invoke-virtual v1, v2, Landroid/os/Parcel;->writeByte(B)V
+000020: iget v2, v0, Lcom/vivo/pcsuite/pcconnect/Device;->signal I
+000024: invoke-virtual v1, v2, Landroid/os/Parcel;->writeInt(I)V
+00002a: iget v2, v0, Lcom/vivo/pcsuite/pcconnect/Device;->version I
+00002e: invoke-virtual v1, v2, Landroid/os/Parcel;->writeInt(I)V
+000034: iget v2, v0, Lcom/vivo/pcsuite/pcconnect/Device;->band I
+000038: invoke-virtual v1, v2, Landroid/os/Parcel;->writeInt(I)V
+00003e: iget-object v2, v0, Lcom/vivo/pcsuite/pcconnect/Device;->userName Ljava/lang/String;
+000042: invoke-virtual v1, v2, Landroid/os/Parcel;->writeString(Ljava/lang/String;)V
+000048: iget-object v2, v0, Lcom/vivo/pcsuite/pcconnect/Device;->address Ljava/lang/String;
+00004c: invoke-virtual v1, v2, Landroid/os/Parcel;->writeString(Ljava/lang/String;)V
+000052: iget v2, v0, Lcom/vivo/pcsuite/pcconnect/Device;->deviceType I
+000056: invoke-virtual v1, v2, Landroid/os/Parcel;->writeInt(I)V
+00005c: iget-object v0, v0, Lcom/vivo/pcsuite/pcconnect/Device;->openId Ljava/lang/String;
+000060: invoke-virtual v1, v0, Landroid/os/Parcel;->writeString(Ljava/lang/String;)V
+000066: return-void 

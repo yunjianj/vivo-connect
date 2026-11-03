@@ -1,0 +1,124 @@
+APK pcsuite/updateApk/pcsuite.apk
+DEX classes2.dex
+CLASS Lcom/vivo/pcsuite/connect/ConnectControlModel$ApRunnable;
+SUPER Ljava/lang/Object;
+FIELDS
+a Ljava/lang/ref/WeakReference; = None
+
+METHOD <init>(Lcom/vivo/pcsuite/PcSuiteApplication;)V
+000000: invoke-direct v1, Ljava/lang/Object;-><init>()V
+000006: new-instance v0, Ljava/lang/ref/WeakReference;
+00000a: invoke-direct v0, v2, Ljava/lang/ref/WeakReference;-><init>(Ljava/lang/Object;)V
+000010: iput-object v0, v1, Lcom/vivo/pcsuite/connect/ConnectControlModel$ApRunnable;->a Ljava/lang/ref/WeakReference;
+000014: return-void 
+
+METHOD run()V
+000000: iget-object v4, v4, Lcom/vivo/pcsuite/connect/ConnectControlModel$ApRunnable;->a Ljava/lang/ref/WeakReference;
+000004: invoke-virtual v4, Ljava/lang/ref/Reference;->get()Ljava/lang/Object;
+00000a: move-result-object v4
+00000c: check-cast v4, Lcom/vivo/pcsuite/PcSuiteApplication;
+000010: invoke-static Lk2/g;->Q()Z
+000016: move-result v0
+000018: const-string v1, "ApRunnable  is timeout 22 connectCloud:"
+00001c: const-string v2, "pcsuite_ConnectControlModel"
+000020: invoke-static v1, v2, v0, LZ1/b;->c(Ljava/lang/String; Ljava/lang/String; Z)V
+000026: if-eqz v0, +004h
+00002a: goto/16 +0d4h
+00002e: if-eqz v4, +0d2h
+000032: const-string v4, "ApRunnable  is timeout 22"
+000036: invoke-static v2, v4, Lcom/vivo/connect/logger/EasyLog;->i(Ljava/lang/String; Ljava/lang/String;)V
+00003c: sget-object v4, Lcom/vivo/pcsuite/connect/ConnectControlModel;->currentConnectBean Lcom/vivo/pcsuite/pcconnect/PCBean;
+000040: if-eqz v4, +00fh
+000044: invoke-static Lcom/vivo/pcsuite/connect/ConnectControlModel;->getInstance()Lcom/vivo/pcsuite/connect/ConnectControlModel;
+00004a: move-result-object v4
+00004c: sget-object v0, Lcom/vivo/pcsuite/connect/ConnectControlModel;->currentConnectBean Lcom/vivo/pcsuite/pcconnect/PCBean;
+000050: invoke-virtual v0, Lcom/vivo/pcsuite/pcconnect/PCBean;->getDeviceId()Ljava/lang/String;
+000056: move-result-object v0
+000058: invoke-virtual v4, v0, Lcom/vivo/pcsuite/connect/ConnectControlModel;->disconnectWlan(Ljava/lang/String;)V
+00005e: sget-object v4, Lcom/vivo/pcsuite/PcSuiteApplication;->I1 Lcom/vivo/pcsuite/PcSuiteApplication;
+000062: invoke-virtual v4, Lcom/vivo/pcsuite/PcSuiteApplication;->M()Z
+000068: move-result v4
+00006a: const/4 v0, 2
+00006c: if-eqz v4, +011h
+000070: invoke-static Lde/greenrobot/event/EventBus;->getDefault()Lde/greenrobot/event/EventBus;
+000076: move-result-object v4
+000078: new-instance v1, Lcom/vivo/pcsuite/entity/EventBean;
+00007c: const-string v3, "cloud connectFail"
+000080: invoke-direct v1, v0, v2, v3, Lcom/vivo/pcsuite/entity/EventBean;-><init>(I Ljava/lang/String; Ljava/lang/Object;)V
+000086: invoke-virtual v4, v1, Lde/greenrobot/event/EventBus;->post(Ljava/lang/Object;)V
+00008c: return-void 
+00008e: sget-object v4, Lcom/vivo/pcsuite/PcSuiteApplication;->I1 Lcom/vivo/pcsuite/PcSuiteApplication;
+000092: invoke-virtual v4, Lcom/vivo/pcsuite/PcSuiteApplication;->l()I
+000098: move-result v4
+00009a: const-string v1, "connectFail"
+00009e: if-ne v4, v0, +026h
+0000a2: new-instance v4, Ljava/lang/StringBuilder;
+0000a6: const-string v3, "pc_ble timeout "
+0000aa: invoke-direct v4, v3, Ljava/lang/StringBuilder;-><init>(Ljava/lang/String;)V
+0000b0: sget-object v3, Lcom/vivo/pcsuite/PcSuiteApplication;->I1 Lcom/vivo/pcsuite/PcSuiteApplication;
+0000b4: invoke-virtual v3, Lcom/vivo/pcsuite/PcSuiteApplication;->u()Ljava/lang/StringBuffer;
+0000ba: move-result-object v3
+0000bc: invoke-virtual v4, v3, Ljava/lang/StringBuilder;->append(Ljava/lang/Object;)Ljava/lang/StringBuilder;
+0000c2: invoke-virtual v4, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
+0000c8: move-result-object v4
+0000ca: invoke-static v2, v4, Lcom/vivo/connect/logger/EasyLog;->i(Ljava/lang/String; Ljava/lang/String;)V
+0000d0: invoke-static Lde/greenrobot/event/EventBus;->getDefault()Lde/greenrobot/event/EventBus;
+0000d6: move-result-object v4
+0000d8: new-instance v3, Lcom/vivo/pcsuite/entity/EventBean;
+0000dc: invoke-direct v3, v0, v2, v1, Lcom/vivo/pcsuite/entity/EventBean;-><init>(I Ljava/lang/String; Ljava/lang/Object;)V
+0000e2: invoke-virtual v4, v3, Lde/greenrobot/event/EventBus;->post(Ljava/lang/Object;)V
+0000e8: return-void 
+0000ea: const/4 v3, 4
+0000ec: if-ne v4, v3, +026h
+0000f0: new-instance v4, Ljava/lang/StringBuilder;
+0000f4: const-string v3, "phone_ble timeout "
+0000f8: invoke-direct v4, v3, Ljava/lang/StringBuilder;-><init>(Ljava/lang/String;)V
+0000fe: sget-object v3, Lcom/vivo/pcsuite/PcSuiteApplication;->I1 Lcom/vivo/pcsuite/PcSuiteApplication;
+000102: invoke-virtual v3, Lcom/vivo/pcsuite/PcSuiteApplication;->B()Ljava/lang/StringBuffer;
+000108: move-result-object v3
+00010a: invoke-virtual v4, v3, Ljava/lang/StringBuilder;->append(Ljava/lang/Object;)Ljava/lang/StringBuilder;
+000110: invoke-virtual v4, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
+000116: move-result-object v4
+000118: invoke-static v2, v4, Lcom/vivo/connect/logger/EasyLog;->i(Ljava/lang/String; Ljava/lang/String;)V
+00011e: invoke-static Lde/greenrobot/event/EventBus;->getDefault()Lde/greenrobot/event/EventBus;
+000124: move-result-object v4
+000126: new-instance v3, Lcom/vivo/pcsuite/entity/EventBean;
+00012a: invoke-direct v3, v0, v2, v1, Lcom/vivo/pcsuite/entity/EventBean;-><init>(I Ljava/lang/String; Ljava/lang/Object;)V
+000130: invoke-virtual v4, v3, Lde/greenrobot/event/EventBus;->post(Ljava/lang/Object;)V
+000136: return-void 
+000138: const/4 v3, 3
+00013a: if-ne v4, v3, +026h
+00013e: new-instance v4, Ljava/lang/StringBuilder;
+000142: const-string v3, "pc_wlan timeout "
+000146: invoke-direct v4, v3, Ljava/lang/StringBuilder;-><init>(Ljava/lang/String;)V
+00014c: sget-object v3, Lcom/vivo/pcsuite/PcSuiteApplication;->I1 Lcom/vivo/pcsuite/PcSuiteApplication;
+000150: invoke-virtual v3, Lcom/vivo/pcsuite/PcSuiteApplication;->A()Ljava/lang/StringBuffer;
+000156: move-result-object v3
+000158: invoke-virtual v4, v3, Ljava/lang/StringBuilder;->append(Ljava/lang/Object;)Ljava/lang/StringBuilder;
+00015e: invoke-virtual v4, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
+000164: move-result-object v4
+000166: invoke-static v2, v4, Lcom/vivo/connect/logger/EasyLog;->i(Ljava/lang/String; Ljava/lang/String;)V
+00016c: invoke-static Lde/greenrobot/event/EventBus;->getDefault()Lde/greenrobot/event/EventBus;
+000172: move-result-object v4
+000174: new-instance v3, Lcom/vivo/pcsuite/entity/EventBean;
+000178: invoke-direct v3, v0, v2, v1, Lcom/vivo/pcsuite/entity/EventBean;-><init>(I Ljava/lang/String; Ljava/lang/Object;)V
+00017e: invoke-virtual v4, v3, Lde/greenrobot/event/EventBus;->post(Ljava/lang/Object;)V
+000184: return-void 
+000186: const/4 v3, 5
+000188: if-ne v4, v3, +025h
+00018c: new-instance v4, Ljava/lang/StringBuilder;
+000190: const-string v3, "phone_wlan timeout "
+000194: invoke-direct v4, v3, Ljava/lang/StringBuilder;-><init>(Ljava/lang/String;)V
+00019a: sget-object v3, Lcom/vivo/pcsuite/PcSuiteApplication;->I1 Lcom/vivo/pcsuite/PcSuiteApplication;
+00019e: invoke-virtual v3, Lcom/vivo/pcsuite/PcSuiteApplication;->D()Ljava/lang/StringBuffer;
+0001a4: move-result-object v3
+0001a6: invoke-virtual v4, v3, Ljava/lang/StringBuilder;->append(Ljava/lang/Object;)Ljava/lang/StringBuilder;
+0001ac: invoke-virtual v4, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
+0001b2: move-result-object v4
+0001b4: invoke-static v2, v4, Lcom/vivo/connect/logger/EasyLog;->i(Ljava/lang/String; Ljava/lang/String;)V
+0001ba: invoke-static Lde/greenrobot/event/EventBus;->getDefault()Lde/greenrobot/event/EventBus;
+0001c0: move-result-object v4
+0001c2: new-instance v3, Lcom/vivo/pcsuite/entity/EventBean;
+0001c6: invoke-direct v3, v0, v2, v1, Lcom/vivo/pcsuite/entity/EventBean;-><init>(I Ljava/lang/String; Ljava/lang/Object;)V
+0001cc: invoke-virtual v4, v3, Lde/greenrobot/event/EventBus;->post(Ljava/lang/Object;)V
+0001d2: return-void 

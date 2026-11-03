@@ -1,0 +1,22 @@
+APK pcsuite/updateApk/connbase.apk
+DEX classes.dex
+CLASS Lcom/vivo/connbase/i;
+SUPER Ljava/lang/Object;
+FIELDS
+a Lcom/vivo/connbase/VivoConnectService; = None
+b Z = None
+c Z = None
+
+METHOD <init>(Lcom/vivo/connbase/VivoConnectService; Z Z)V
+000000: invoke-direct v0, Ljava/lang/Object;-><init>()V
+000006: iput-object v1, v0, Lcom/vivo/connbase/i;->a Lcom/vivo/connbase/VivoConnectService;
+00000a: iput-boolean v2, v0, Lcom/vivo/connbase/i;->b Z
+00000e: iput-boolean v3, v0, Lcom/vivo/connbase/i;->c Z
+000012: return-void 
+
+METHOD run()V
+000000: iget-object v0, v3, Lcom/vivo/connbase/i;->a Lcom/vivo/connbase/VivoConnectService;
+000004: iget-boolean v1, v3, Lcom/vivo/connbase/i;->b Z
+000008: iget-boolean v2, v3, Lcom/vivo/connbase/i;->c Z
+00000c: invoke-virtual v0, v1, v2, Lcom/vivo/connbase/VivoConnectService;->a(Z Z)V
+000012: return-void 

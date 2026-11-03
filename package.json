@@ -1,0 +1,22 @@
+{
+  "name": "vivo-connect-backend",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "start": "node backend/src/server.mjs",
+    "test": "node --test backend/test/*.test.mjs",
+    "check": "node --check backend/src/server.mjs",
+    "test:browser": "node tools/smoke_login_browser.mjs",
+    "scan": "sh tools/run-native.sh",
+    "ui": "sh tools/run-native.sh",
+    "test:desktop-ui": "sh tools/test-native-qt.sh",
+    "test:scan-ui": "node tools/smoke_scan_ui.mjs",
+    "ui:web": "node tools/open-scan.mjs",
+    "test:web-ui": "node tools/smoke_desktop_ui.mjs",
+    "test:slint-ui": "cargo test --locked --release -j2 --manifest-path native/Cargo.toml --target-dir build/native"
+  },
+  "engines": {
+    "node": ">=22"
+  }
+}

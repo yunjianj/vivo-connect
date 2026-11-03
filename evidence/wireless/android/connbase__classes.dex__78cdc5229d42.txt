@@ -1,0 +1,244 @@
+APK pcsuite/updateApk/connbase.apk
+DEX classes.dex
+CLASS Lcom/vivo/connbase/l0/f/a;
+SUPER Ljava/lang/Object;
+FIELDS
+h Ljava/lang/String; = 'HeartSendTask'
+i J = 5000
+j Ljava/lang/Object; = None
+a Ljava/util/Timer; = None
+b Lcom/vivo/connbase/l0/f/a$a; = None
+c Lcom/vivo/connbase/h0/d/z4; = None
+d Lcom/vivo/connbase/l0/e/b; = None
+e Lcom/vivo/connbase/l0/f/a$b; = None
+f Ljava/util/Map; = None
+g Z = None
+
+METHOD <clinit>()V
+000000: new-instance v0, Ljava/lang/Object;
+000004: invoke-direct v0, Ljava/lang/Object;-><init>()V
+00000a: sput-object v0, Lcom/vivo/connbase/l0/f/a;->j Ljava/lang/Object;
+00000e: return-void 
+
+METHOD <init>(Lcom/vivo/connbase/h0/d/z4; Lcom/vivo/connbase/l0/e/b;)V
+000000: invoke-direct v1, Ljava/lang/Object;-><init>()V
+000006: new-instance v0, Ljava/util/HashMap;
+00000a: invoke-direct v0, Ljava/util/HashMap;-><init>()V
+000010: iput-object v0, v1, Lcom/vivo/connbase/l0/f/a;->f Ljava/util/Map;
+000014: const/4 v0, 0
+000016: iput-boolean v0, v1, Lcom/vivo/connbase/l0/f/a;->g Z
+00001a: iput-object v2, v1, Lcom/vivo/connbase/l0/f/a;->c Lcom/vivo/connbase/h0/d/z4;
+00001e: iput-object v3, v1, Lcom/vivo/connbase/l0/f/a;->d Lcom/vivo/connbase/l0/e/b;
+000022: return-void 
+
+METHOD a(Lcom/vivo/connbase/l0/f/a; Ljava/lang/String; Ljava/lang/String; Z)Lcom/vivo/connbase/l0/d/b;
+000000: invoke-direct v0, v1, v2, v3, Lcom/vivo/connbase/l0/f/a;->a(Ljava/lang/String; Ljava/lang/String; Z)Lcom/vivo/connbase/l0/d/b;
+000006: move-result-object v0
+000008: return-object v0
+
+METHOD a(Ljava/lang/String; Ljava/lang/String; Z)Lcom/vivo/connbase/l0/d/b;
+000000: invoke-static v6, Landroid/text/TextUtils;->isEmpty(Ljava/lang/CharSequence;)Z
+000006: move-result v0
+000008: const/4 v1, 0
+00000a: if-eqz v0, +003h
+00000e: return-object v1
+000010: const-string v0, "**ping-socket"
+000014: if-eqz v7, +004h
+000018: const-string v0, "**pong-socket"
+00001c: sget-object v7, Ljava/nio/charset/StandardCharsets;->UTF_8 Ljava/nio/charset/Charset;
+000020: invoke-virtual v0, v7, Ljava/lang/String;->getBytes(Ljava/nio/charset/Charset;)[B
+000026: move-result-object v7
+000028: invoke-static v7, Lcom/vivo/connbase/l0/d/b;->b([B)Lcom/vivo/connbase/l0/d/b;
+00002e: move-result-object v7
+000030: const-wide/32 v2, 12345678
+000036: invoke-virtual v7, v2, v3, Lcom/vivo/connbase/l0/d/b;->a(J)V
+00003c: invoke-virtual v7, v6, Lcom/vivo/connbase/l0/d/b;->e(Ljava/lang/String;)V
+000042: invoke-virtual v7, v5, Lcom/vivo/connbase/l0/d/b;->f(Ljava/lang/String;)V
+000048: invoke-static Lcom/vivo/connbase/App;->m()Lcom/vivo/connbase/App;
+00004e: move-result-object v5
+000050: invoke-virtual v5, Lcom/vivo/connbase/App;->d()Ljava/lang/String;
+000056: move-result-object v5
+000058: invoke-virtual v7, v5, Lcom/vivo/connbase/l0/d/b;->a(Ljava/lang/String;)V
+00005e: const/4 v5, 1
+000060: invoke-virtual v7, v5, Lcom/vivo/connbase/l0/d/b;->a(I)V
+000066: return-object v7
+000068: move-exception v5
+00006a: new-instance v6, Ljava/lang/StringBuilder;
+00006e: invoke-direct v6, Ljava/lang/StringBuilder;-><init>()V
+000074: const-string v7, "createHeartPayload e:"
+000078: invoke-virtual v6, v7, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+00007e: invoke-virtual v5, Ljava/lang/Exception;->getMessage()Ljava/lang/String;
+000084: move-result-object v5
+000086: invoke-virtual v6, v5, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+00008c: invoke-virtual v6, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
+000092: move-result-object v5
+000094: const-string v6, "HeartSendTask"
+000098: invoke-static v6, v5, Lc/c/f/a/b;->k(Ljava/lang/String; Ljava/lang/String;)V
+00009e: return-object v1
+
+METHOD a(Lcom/vivo/connbase/l0/f/a;)Ljava/util/Map;
+000000: iget-object v0, v0, Lcom/vivo/connbase/l0/f/a;->f Ljava/util/Map;
+000004: return-object v0
+
+METHOD b(Lcom/vivo/connbase/l0/f/a;)Lcom/vivo/connbase/l0/e/b;
+000000: iget-object v0, v0, Lcom/vivo/connbase/l0/f/a;->d Lcom/vivo/connbase/l0/e/b;
+000004: return-object v0
+
+METHOD a(Lcom/vivo/connbase/l0/f/a$b;)V
+000000: iput-object v1, v0, Lcom/vivo/connbase/l0/f/a;->e Lcom/vivo/connbase/l0/f/a$b;
+000004: return-void 
+
+METHOD a(Ljava/lang/String; Ljava/lang/String; Ljava/lang/Long;)V
+000000: iget-object v0, v1, Lcom/vivo/connbase/l0/f/a;->f Ljava/util/Map;
+000004: invoke-static v2, v3, Lcom/vivo/connbase/connect/l;->a(Ljava/lang/String; Ljava/lang/String;)Lcom/vivo/connbase/connect/l;
+00000a: move-result-object v2
+00000c: invoke-interface v0, v2, v4, Ljava/util/Map;->put(Ljava/lang/Object; Ljava/lang/Object;)Ljava/lang/Object;
+000012: return-void 
+
+METHOD a(Z)V
+000000: iput-boolean v1, v0, Lcom/vivo/connbase/l0/f/a;->g Z
+000004: return-void 
+
+METHOD a()Z
+000000: iget-boolean v0, v1, Lcom/vivo/connbase/l0/f/a;->g Z
+000004: return v0
+
+METHOD b()V
+000000: new-instance v0, Ljava/lang/StringBuilder;
+000004: invoke-direct v0, Ljava/lang/StringBuilder;-><init>()V
+00000a: const-string v1, "start, timerRunning:"
+00000e: invoke-virtual v0, v1, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+000014: iget-boolean v1, v9, Lcom/vivo/connbase/l0/f/a;->g Z
+000018: invoke-virtual v0, v1, Ljava/lang/StringBuilder;->append(Z)Ljava/lang/StringBuilder;
+00001e: const-string v1, ", mSocketHeartTimer:"
+000022: invoke-virtual v0, v1, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+000028: iget-object v1, v9, Lcom/vivo/connbase/l0/f/a;->a Ljava/util/Timer;
+00002c: invoke-virtual v0, v1, Ljava/lang/StringBuilder;->append(Ljava/lang/Object;)Ljava/lang/StringBuilder;
+000032: invoke-virtual v0, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
+000038: move-result-object v0
+00003a: const-string v1, "HeartSendTask"
+00003e: invoke-static v1, v0, Lc/c/f/a/b;->k(Ljava/lang/String; Ljava/lang/String;)V
+000044: iget-boolean v0, v9, Lcom/vivo/connbase/l0/f/a;->g Z
+000048: if-eqz v0, +006h
+00004c: iget-object v0, v9, Lcom/vivo/connbase/l0/f/a;->a Ljava/util/Timer;
+000050: if-nez v0, +033h
+000054: sget-object v0, Lcom/vivo/connbase/l0/f/a;->j Ljava/lang/Object;
+000058: monitor-enter v0
+00005a: iget-boolean v1, v9, Lcom/vivo/connbase/l0/f/a;->g Z
+00005e: if-eqz v1, +006h
+000062: iget-object v1, v9, Lcom/vivo/connbase/l0/f/a;->a Ljava/util/Timer;
+000066: if-nez v1, +027h
+00006a: const/4 v1, 1
+00006c: iput-boolean v1, v9, Lcom/vivo/connbase/l0/f/a;->g Z
+000070: new-instance v1, Ljava/util/Timer;
+000074: invoke-direct v1, Ljava/util/Timer;-><init>()V
+00007a: iput-object v1, v9, Lcom/vivo/connbase/l0/f/a;->a Ljava/util/Timer;
+00007e: new-instance v1, Lcom/vivo/connbase/l0/f/a$a;
+000082: iget-object v2, v9, Lcom/vivo/connbase/l0/f/a;->c Lcom/vivo/connbase/h0/d/z4;
+000086: iget-object v3, v9, Lcom/vivo/connbase/l0/f/a;->d Lcom/vivo/connbase/l0/e/b;
+00008a: invoke-direct v1, v9, v2, v3, Lcom/vivo/connbase/l0/f/a$a;-><init>(Lcom/vivo/connbase/l0/f/a; Lcom/vivo/connbase/h0/d/z4; Lcom/vivo/connbase/l0/e/b;)V
+000090: iput-object v1, v9, Lcom/vivo/connbase/l0/f/a;->b Lcom/vivo/connbase/l0/f/a$a;
+000094: iget-object v2, v9, Lcom/vivo/connbase/l0/f/a;->e Lcom/vivo/connbase/l0/f/a$b;
+000098: invoke-virtual v1, v2, Lcom/vivo/connbase/l0/f/a$a;->a(Lcom/vivo/connbase/l0/f/a$b;)V
+00009e: iget-object v3, v9, Lcom/vivo/connbase/l0/f/a;->a Ljava/util/Timer;
+0000a2: iget-object v4, v9, Lcom/vivo/connbase/l0/f/a;->b Lcom/vivo/connbase/l0/f/a$a;
+0000a6: const-wide/16 v5, 1000
+0000aa: const-wide/16 v7, 5000
+0000ae: invoke-virtual/range v3 ... v8, Ljava/util/Timer;->schedule(Ljava/util/TimerTask; J J)V
+0000b4: monitor-exit v0
+0000b6: return-void 
+0000b8: move-exception v1
+0000ba: monitor-exit v0
+0000bc: throw v1
+
+METHOD c()V
+000000: new-instance v0, Ljava/lang/StringBuilder;
+000004: invoke-direct v0, Ljava/lang/StringBuilder;-><init>()V
+00000a: const-string v1, "HeartPacket, stop; timerRunning = "
+00000e: invoke-virtual v0, v1, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+000014: iget-boolean v1, v2, Lcom/vivo/connbase/l0/f/a;->g Z
+000018: invoke-virtual v0, v1, Ljava/lang/StringBuilder;->append(Z)Ljava/lang/StringBuilder;
+00001e: invoke-virtual v0, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
+000024: move-result-object v0
+000026: const-string v1, "HeartSendTask"
+00002a: invoke-static v1, v0, Lc/c/f/a/b;->k(Ljava/lang/String; Ljava/lang/String;)V
+000030: iget-boolean v0, v2, Lcom/vivo/connbase/l0/f/a;->g Z
+000034: if-eqz v0, +021h
+000038: const/4 v0, 0
+00003a: iput-boolean v0, v2, Lcom/vivo/connbase/l0/f/a;->g Z
+00003e: iget-object v0, v2, Lcom/vivo/connbase/l0/f/a;->a Ljava/util/Timer;
+000042: if-eqz v0, +00ch
+000046: iget-object v0, v2, Lcom/vivo/connbase/l0/f/a;->a Ljava/util/Timer;
+00004a: invoke-virtual v0, Ljava/util/Timer;->cancel()V
+000050: iget-object v0, v2, Lcom/vivo/connbase/l0/f/a;->a Ljava/util/Timer;
+000054: invoke-virtual v0, Ljava/util/Timer;->purge()I
+00005a: iget-object v0, v2, Lcom/vivo/connbase/l0/f/a;->b Lcom/vivo/connbase/l0/f/a$a;
+00005e: if-eqz v0, +005h
+000062: invoke-virtual v0, Ljava/util/TimerTask;->cancel()Z
+000068: iget-object v0, v2, Lcom/vivo/connbase/l0/f/a;->f Ljava/util/Map;
+00006c: if-eqz v0, +005h
+000070: invoke-interface v0, Ljava/util/Map;->clear()V
+000076: return-void 
+
+METHOD d()V
+000000: new-instance v0, Ljava/lang/StringBuilder;
+000004: invoke-direct v0, Ljava/lang/StringBuilder;-><init>()V
+00000a: const-string v1, "stopHeartTimerIfNeed mTransferApi:"
+00000e: invoke-virtual v0, v1, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+000014: iget-object v1, v2, Lcom/vivo/connbase/l0/f/a;->d Lcom/vivo/connbase/l0/e/b;
+000018: invoke-virtual v0, v1, Ljava/lang/StringBuilder;->append(Ljava/lang/Object;)Ljava/lang/StringBuilder;
+00001e: const-string v1, ", mTransferApi map size:"
+000022: invoke-virtual v0, v1, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+000028: iget-object v1, v2, Lcom/vivo/connbase/l0/f/a;->d Lcom/vivo/connbase/l0/e/b;
+00002c: invoke-virtual v1, Lcom/vivo/connbase/l0/e/b;->e()Ljava/util/Map;
+000032: move-result-object v1
+000034: invoke-interface v1, Ljava/util/Map;->size()I
+00003a: move-result v1
+00003c: invoke-virtual v0, v1, Ljava/lang/StringBuilder;->append(I)Ljava/lang/StringBuilder;
+000042: invoke-virtual v0, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
+000048: move-result-object v0
+00004a: const-string v1, "HeartSendTask"
+00004e: invoke-static v1, v0, Lc/c/f/a/b;->k(Ljava/lang/String; Ljava/lang/String;)V
+000054: iget-object v0, v2, Lcom/vivo/connbase/l0/f/a;->d Lcom/vivo/connbase/l0/e/b;
+000058: if-eqz v0, +01bh
+00005c: invoke-virtual v0, Lcom/vivo/connbase/l0/e/b;->e()Ljava/util/Map;
+000062: move-result-object v0
+000064: invoke-interface v0, Ljava/util/Map;->size()I
+00006a: move-result v0
+00006c: if-nez v0, +011h
+000070: iget-object v0, v2, Lcom/vivo/connbase/l0/f/a;->d Lcom/vivo/connbase/l0/e/b;
+000074: invoke-virtual v0, Lcom/vivo/connbase/l0/e/b;->e()Ljava/util/Map;
+00007a: move-result-object v0
+00007c: invoke-interface v0, Ljava/util/Map;->size()I
+000082: move-result v0
+000084: if-nez v0, +005h
+000088: invoke-virtual v2, Lcom/vivo/connbase/l0/f/a;->c()V
+00008e: return-void 
+
+METHOD e()V
+000000: iget-object v0, v3, Lcom/vivo/connbase/l0/f/a;->f Ljava/util/Map;
+000004: invoke-interface v0, Ljava/util/Map;->size()I
+00000a: move-result v0
+00000c: add-int/lit8 v0, v0, -1
+000010: if-ltz v0, +02bh
+000014: iget-object v1, v3, Lcom/vivo/connbase/l0/f/a;->f Ljava/util/Map;
+000018: invoke-static v0, Ljava/lang/Integer;->valueOf(I)Ljava/lang/Integer;
+00001e: move-result-object v2
+000020: invoke-interface v1, v2, Ljava/util/Map;->get(Ljava/lang/Object;)Ljava/lang/Object;
+000026: move-result-object v2
+000028: invoke-interface v1, v2, Ljava/util/Map;->containsKey(Ljava/lang/Object;)Z
+00002e: move-result v1
+000030: if-eqz v1, +018h
+000034: iget-object v1, v3, Lcom/vivo/connbase/l0/f/a;->f Ljava/util/Map;
+000038: invoke-static v0, Ljava/lang/Integer;->valueOf(I)Ljava/lang/Integer;
+00003e: move-result-object v2
+000040: invoke-interface v1, v2, Ljava/util/Map;->get(Ljava/lang/Object;)Ljava/lang/Object;
+000046: move-result-object v2
+000048: invoke-interface v1, v2, Ljava/util/Map;->remove(Ljava/lang/Object;)Ljava/lang/Object;
+00004e: iget-object v1, v3, Lcom/vivo/connbase/l0/f/a;->f Ljava/util/Map;
+000052: invoke-static v0, Ljava/lang/Integer;->valueOf(I)Ljava/lang/Integer;
+000058: move-result-object v2
+00005a: invoke-interface v1, v2, Ljava/util/Map;->remove(Ljava/lang/Object;)Ljava/lang/Object;
+000060: add-int/lit8 v0, v0, -1
+000064: goto -2ah
+000066: return-void 

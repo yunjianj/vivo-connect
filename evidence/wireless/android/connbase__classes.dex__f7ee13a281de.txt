@@ -1,0 +1,100 @@
+APK pcsuite/updateApk/connbase.apk
+DEX classes.dex
+CLASS Lb/g/e/e;
+SUPER Ljava/lang/Object;
+FIELDS
+a D = 4636388754964724318
+b D = 16473
+c D = 4637362376909166477
+d D = 4576258758203452558
+e D = 4651156726645941862
+f I = 10
+g I = 1
+h Ljava/lang/ThreadLocal; = None
+
+METHOD b(I I I [D)V
+000000: move-object/from16 v0, v19
+000004: array-length v1, v0
+000006: const/4 v2, 3
+000008: if-ne v1, v2, +0aah
+00000c: move/from16 v1, v16
+000010: int-to-double v1, v1
+000012: const-wide v3, 4643176031446892544
+00001c: div-double/2addr v1, v3
+00001e: const-wide v5, 4585990280393462802
+000028: cmpg-double v7, v1, v5
+00002c: const-wide v8, 4623462931452961751
+000036: const-wide v10, 4612586738352862003
+000040: const-wide v12, 4607430116779522785
+00004a: const-wide v14, 4588087156379966505
+000054: if-gez v7, +004h
+000058: div-double/2addr v1, v8
+00005a: goto +7h
+00005c: add-double/2addr v1, v14
+00005e: div-double/2addr v1, v12
+000060: invoke-static v1, v2, v10, v11, Ljava/lang/Math;->pow(D D)D
+000066: move-result-wide v1
+000068: move/from16 v7, v17
+00006c: int-to-double v10, v7
+00006e: div-double/2addr v10, v3
+000070: cmpg-double v7, v10, v5
+000074: if-gez v7, +004h
+000078: div-double/2addr v10, v8
+00007a: goto +ch
+00007c: add-double/2addr v10, v14
+00007e: div-double/2addr v10, v12
+000080: const-wide v12, 4612586738352862003
+00008a: invoke-static v10, v11, v12, v13, Ljava/lang/Math;->pow(D D)D
+000090: move-result-wide v10
+000092: move/from16 v7, v18
+000096: int-to-double v12, v7
+000098: div-double/2addr v12, v3
+00009a: cmpg-double v3, v12, v5
+00009e: if-gez v3, +004h
+0000a2: div-double/2addr v12, v8
+0000a4: goto +11h
+0000a6: add-double/2addr v12, v14
+0000a8: const-wide v3, 4607430116779522785
+0000b2: div-double/2addr v12, v3
+0000b4: const-wide v3, 4612586738352862003
+0000be: invoke-static v12, v13, v3, v4, Ljava/lang/Math;->pow(D D)D
+0000c4: move-result-wide v12
+0000c6: const/4 v3, 0
+0000c8: const-wide v4, 4601100757863216290
+0000d2: mul-double/2addr v4, v1
+0000d4: const-wide v6, 4600113568824896677
+0000de: mul-double/2addr v6, v10
+0000e0: add-double/2addr v4, v6
+0000e2: const-wide v6, 4595671218152458420
+0000ec: mul-double/2addr v6, v12
+0000ee: add-double/2addr v4, v6
+0000f0: const-wide/high16 v6, 4636737291354636288
+0000f4: mul-double/2addr v4, v6
+0000f6: aput-wide v4, v0, v3
+0000fa: const/4 v3, 1
+0000fc: const-wide v4, 4596827742536767164
+000106: mul-double/2addr v4, v1
+000108: const-wide v8, 4604617168452267173
+000112: mul-double/2addr v8, v10
+000114: add-double/2addr v4, v8
+000116: const-wide v8, 4589866978952703325
+000120: mul-double/2addr v8, v12
+000122: add-double/2addr v4, v8
+000124: mul-double/2addr v4, v6
+000126: aput-wide v4, v0, v3
+00012a: const/4 v3, 2
+00012c: const-wide v4, 4581220067668151973
+000136: mul-double/2addr v1, v4
+000138: const-wide v4, 4593253685872485938
+000142: mul-double/2addr v10, v4
+000144: add-double/2addr v1, v10
+000146: const-wide v4, 4606736562436907729
+000150: mul-double/2addr v12, v4
+000152: add-double/2addr v1, v12
+000154: mul-double/2addr v1, v6
+000156: aput-wide v1, v0, v3
+00015a: return-void 
+00015c: new-instance v0, Ljava/lang/IllegalArgumentException;
+000160: const-string v1, "outXyz must have a length of 3."
+000164: invoke-direct v0, v1, Ljava/lang/IllegalArgumentException;-><init>(Ljava/lang/String;)V
+00016a: throw v0

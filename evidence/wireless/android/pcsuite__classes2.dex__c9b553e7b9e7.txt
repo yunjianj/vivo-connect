@@ -1,0 +1,81 @@
+APK pcsuite/updateApk/pcsuite.apk
+DEX classes2.dex
+CLASS Lcom/vivo/connect/sdk/f/c$t;
+SUPER Ljava/lang/Object;
+FIELDS
+f Ljava/lang/String; = ':cancelTransmitRunnable'
+a Landroid/os/Messenger; = None
+b Ljava/lang/String; = None
+c J = None
+d Ljava/lang/String; = None
+e Lcom/vivo/connect/sdk/f/c; = None
+
+METHOD <init>(Lcom/vivo/connect/sdk/f/c; Landroid/os/Messenger; Ljava/lang/String; J Ljava/lang/String;)V
+000000: iput-object v1, v0, Lcom/vivo/connect/sdk/f/c$t;->e Lcom/vivo/connect/sdk/f/c;
+000004: iput-object v2, v0, Lcom/vivo/connect/sdk/f/c$t;->a Landroid/os/Messenger;
+000008: iput-object v3, v0, Lcom/vivo/connect/sdk/f/c$t;->b Ljava/lang/String;
+00000c: iput-wide v4, v0, Lcom/vivo/connect/sdk/f/c$t;->c J
+000010: iput-object v6, v0, Lcom/vivo/connect/sdk/f/c$t;->d Ljava/lang/String;
+000014: invoke-direct v0, Ljava/lang/Object;-><init>()V
+00001a: return-void 
+
+METHOD run()V
+000000: const-string v1, "ConnectClientImpl"
+000004: const-string v0, "run "
+000008: invoke-static v1, v0, Lcom/vivo/connect/logger/EasyLog;->i(Ljava/lang/String; Ljava/lang/String;)V
+00000e: iget-object v0, v13, Lcom/vivo/connect/sdk/f/c$t;->e Lcom/vivo/connect/sdk/f/c;
+000012: invoke-static v0, Lcom/vivo/connect/sdk/f/c;->a(Lcom/vivo/connect/sdk/f/c;)Lcom/vivo/connbase/IClient;
+000018: move-result-object v0
+00001a: if-eqz v0, +019h
+00001e: iget-object v0, v13, Lcom/vivo/connect/sdk/f/c$t;->e Lcom/vivo/connect/sdk/f/c;
+000022: invoke-static v0, Lcom/vivo/connect/sdk/f/c;->a(Lcom/vivo/connect/sdk/f/c;)Lcom/vivo/connbase/IClient;
+000028: move-result-object v0
+00002a: iget-object v2, v13, Lcom/vivo/connect/sdk/f/c$t;->a Landroid/os/Messenger;
+00002e: iget-object v3, v13, Lcom/vivo/connect/sdk/f/c$t;->b Ljava/lang/String;
+000032: iget-wide v4, v13, Lcom/vivo/connect/sdk/f/c$t;->c J
+000036: iget-object v6, v13, Lcom/vivo/connect/sdk/f/c$t;->d Ljava/lang/String;
+00003a: move-object v7, v0
+00003c: move-object v8, v2
+00003e: move-object v9, v3
+000040: move-wide v10, v4
+000042: move-object v12, v6
+000044: goto +21h
+000046: move-exception v0
+000048: move-object v13, v0
+00004a: goto +43h
+00004c: const-string v0, "run else"
+000050: invoke-static v1, v0, Lcom/vivo/connect/logger/EasyLog;->i(Ljava/lang/String; Ljava/lang/String;)V
+000056: iget-object v0, v13, Lcom/vivo/connect/sdk/f/c$t;->e Lcom/vivo/connect/sdk/f/c;
+00005a: const-string v2, ":cancelTransmitRunnable"
+00005e: invoke-static v0, v2, Lcom/vivo/connect/sdk/f/c;->a(Lcom/vivo/connect/sdk/f/c; Ljava/lang/String;)Z
+000064: move-result v0
+000066: if-nez v0, +003h
+00006a: goto +32h
+00006c: iget-object v0, v13, Lcom/vivo/connect/sdk/f/c$t;->e Lcom/vivo/connect/sdk/f/c;
+000070: invoke-static v0, Lcom/vivo/connect/sdk/f/c;->a(Lcom/vivo/connect/sdk/f/c;)Lcom/vivo/connbase/IClient;
+000076: move-result-object v0
+000078: iget-object v2, v13, Lcom/vivo/connect/sdk/f/c$t;->a Landroid/os/Messenger;
+00007c: iget-object v3, v13, Lcom/vivo/connect/sdk/f/c$t;->b Ljava/lang/String;
+000080: iget-wide v4, v13, Lcom/vivo/connect/sdk/f/c$t;->c J
+000084: goto -27h
+000086: invoke-interface/range v7 ... v12, Lcom/vivo/connbase/IClient;->cancelTransmit(Landroid/os/Messenger; Ljava/lang/String; J Ljava/lang/String;)V
+00008c: iget-object v0, v13, Lcom/vivo/connect/sdk/f/c$t;->e Lcom/vivo/connect/sdk/f/c;
+000090: invoke-static v0, Lcom/vivo/connect/sdk/f/c;->h(Lcom/vivo/connect/sdk/f/c;)Lcom/vivo/connect/transfer/Payload;
+000096: move-result-object v0
+000098: if-eqz v0, +01bh
+00009c: iget-object v0, v13, Lcom/vivo/connect/sdk/f/c$t;->e Lcom/vivo/connect/sdk/f/c;
+0000a0: invoke-static v0, Lcom/vivo/connect/sdk/f/c;->h(Lcom/vivo/connect/sdk/f/c;)Lcom/vivo/connect/transfer/Payload;
+0000a6: move-result-object v0
+0000a8: invoke-virtual v0, Lcom/vivo/connect/transfer/Payload;->getId()J
+0000ae: move-result-wide v2
+0000b0: iget-wide v4, v13, Lcom/vivo/connect/sdk/f/c$t;->c J
+0000b4: cmp-long v0, v2, v4
+0000b8: if-nez v0, +00bh
+0000bc: iget-object v0, v13, Lcom/vivo/connect/sdk/f/c$t;->e Lcom/vivo/connect/sdk/f/c;
+0000c0: iget-object v2, v13, Lcom/vivo/connect/sdk/f/c$t;->d Ljava/lang/String;
+0000c4: iget-object v13, v13, Lcom/vivo/connect/sdk/f/c$t;->b Ljava/lang/String;
+0000c8: invoke-static v0, v2, v13, Lcom/vivo/connect/sdk/f/c;->a(Lcom/vivo/connect/sdk/f/c; Ljava/lang/String; Ljava/lang/String;)V
+0000ce: return-void 
+0000d0: const-string v0, "cancel transmit error:"
+0000d4: invoke-static v13, v0, v1, LV5/S;->h(Ljava/lang/Exception; Ljava/lang/String; Ljava/lang/String;)V
+0000da: return-void 

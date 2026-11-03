@@ -1,0 +1,37 @@
+APK pcsuite/updateApk/pcsuite.apk
+DEX classes2.dex
+CLASS Lcom/vivo/pcsuite/service/PcSuiteInCallService$f;
+SUPER Ljava/lang/Object;
+FIELDS
+a Lcom/vivo/pcsuite/service/PcSuiteInCallService; = None
+
+METHOD <init>(Lcom/vivo/pcsuite/service/PcSuiteInCallService;)V
+000000: invoke-direct v0, Ljava/lang/Object;-><init>()V
+000006: iput-object v1, v0, Lcom/vivo/pcsuite/service/PcSuiteInCallService$f;->a Lcom/vivo/pcsuite/service/PcSuiteInCallService;
+00000a: return-void 
+
+METHOD onPermissionResultChecked(LG2/a;)V
+000000: const-string v0, "PcSuiteInCallService"
+000004: const-string v1, "2"
+000008: const/16 v2, 24
+00000c: if-nez v6, +00bh
+000010: invoke-static v2, v1, Lcom/vivo/pcsuite/service/PcSuiteInCallService;->n(I Ljava/lang/String;)V
+000016: const-string v5, "permissionResult is null"
+00001a: invoke-static v0, v5, LD1/a;->h(Ljava/lang/String; Ljava/lang/String;)V
+000020: return-void 
+000022: new-instance v3, Ljava/lang/StringBuilder;
+000026: const-string v4, "permissionResult: "
+00002a: invoke-direct v3, v4, Ljava/lang/StringBuilder;-><init>(Ljava/lang/String;)V
+000030: invoke-virtual v6, LG2/a;->toString()Ljava/lang/String;
+000036: move-result-object v4
+000038: invoke-virtual v3, v4, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+00003e: invoke-virtual v3, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
+000044: move-result-object v3
+000046: invoke-static v0, v3, LD1/a;->h(Ljava/lang/String; Ljava/lang/String;)V
+00004c: iget-boolean v6, v6, LG2/a;->d Z
+000050: if-eqz v6, +008h
+000054: iget-object v5, v5, Lcom/vivo/pcsuite/service/PcSuiteInCallService$f;->a Lcom/vivo/pcsuite/service/PcSuiteInCallService;
+000058: invoke-static v5, Lcom/vivo/pcsuite/service/PcSuiteInCallService;->c(Lcom/vivo/pcsuite/service/PcSuiteInCallService;)V
+00005e: return-void 
+000060: invoke-static v2, v1, Lcom/vivo/pcsuite/service/PcSuiteInCallService;->n(I Ljava/lang/String;)V
+000066: return-void 

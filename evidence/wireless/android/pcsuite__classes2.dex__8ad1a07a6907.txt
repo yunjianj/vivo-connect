@@ -1,0 +1,43 @@
+APK pcsuite/updateApk/pcsuite.apk
+DEX classes2.dex
+CLASS Lcom/vivo/connect/sdk/f/g$e;
+SUPER Ljava/lang/Object;
+FIELDS
+a Lcom/vivo/connect/sdk/f/g; = None
+
+METHOD <init>(Lcom/vivo/connect/sdk/f/g;)V
+000000: iput-object v1, v0, Lcom/vivo/connect/sdk/f/g$e;->a Lcom/vivo/connect/sdk/f/g;
+000004: invoke-direct v0, Ljava/lang/Object;-><init>()V
+00000a: return-void 
+
+METHOD onServiceConnected(Landroid/content/ComponentName; Landroid/os/IBinder;)V
+000000: new-instance v2, Ljava/lang/StringBuilder;
+000004: const-string v0, "onServiceConnected, service="
+000008: invoke-direct v2, v0, Ljava/lang/StringBuilder;-><init>(Ljava/lang/String;)V
+00000e: invoke-virtual v2, v3, Ljava/lang/StringBuilder;->append(Ljava/lang/Object;)Ljava/lang/StringBuilder;
+000014: invoke-virtual v2, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
+00001a: move-result-object v2
+00001c: const-string v0, "ScenceSyncImpl"
+000020: invoke-static v0, v2, Lcom/vivo/connect/logger/EasyLog;->i(Ljava/lang/String; Ljava/lang/String;)V
+000026: iget-object v2, v1, Lcom/vivo/connect/sdk/f/g$e;->a Lcom/vivo/connect/sdk/f/g;
+00002a: invoke-static v3, Lcom/vivo/connbase/ISceneSync$b;->a(Landroid/os/IBinder;)Lcom/vivo/connbase/ISceneSync;
+000030: move-result-object v3
+000032: iput-object v3, v2, Lcom/vivo/connect/sdk/f/g;->e Lcom/vivo/connbase/ISceneSync;
+000036: goto +5h
+000038: move-exception v2
+00003a: invoke-virtual v2, Ljava/lang/Throwable;->printStackTrace()V
+000040: iget-object v1, v1, Lcom/vivo/connect/sdk/f/g$e;->a Lcom/vivo/connect/sdk/f/g;
+000044: invoke-static v1, Lcom/vivo/connect/sdk/f/g;->a(Lcom/vivo/connect/sdk/f/g;)V
+00004a: return-void 
+
+METHOD onServiceDisconnected(Landroid/content/ComponentName;)V
+000000: const-string v2, "ScenceSyncImpl"
+000004: const-string v0, "onServiceDisconnected"
+000008: invoke-static v2, v0, Lcom/vivo/connect/logger/EasyLog;->i(Ljava/lang/String; Ljava/lang/String;)V
+00000e: iget-object v2, v1, Lcom/vivo/connect/sdk/f/g$e;->a Lcom/vivo/connect/sdk/f/g;
+000012: const/4 v0, 0
+000014: invoke-static v2, v0, Lcom/vivo/connect/sdk/f/g;->a(Lcom/vivo/connect/sdk/f/g; Z)Z
+00001a: iget-object v1, v1, Lcom/vivo/connect/sdk/f/g$e;->a Lcom/vivo/connect/sdk/f/g;
+00001e: const/4 v2, 0
+000020: iput-object v2, v1, Lcom/vivo/connect/sdk/f/g;->e Lcom/vivo/connbase/ISceneSync;
+000024: return-void 

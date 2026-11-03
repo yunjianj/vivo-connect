@@ -1,0 +1,47 @@
+APK pcsuite/updateApk/pcsuite.apk
+DEX classes2.dex
+CLASS Lcom/vivo/connect/sdk/f/c$x;
+SUPER Ljava/lang/Object;
+FIELDS
+c Ljava/lang/String; = ':getConnectedP2pInfo'
+a Landroid/os/Messenger; = None
+b Lcom/vivo/connect/sdk/f/c; = None
+
+METHOD <init>(Lcom/vivo/connect/sdk/f/c; Landroid/os/Messenger;)V
+000000: iput-object v1, v0, Lcom/vivo/connect/sdk/f/c$x;->b Lcom/vivo/connect/sdk/f/c;
+000004: iput-object v2, v0, Lcom/vivo/connect/sdk/f/c$x;->a Landroid/os/Messenger;
+000008: invoke-direct v0, Ljava/lang/Object;-><init>()V
+00000e: return-void 
+
+METHOD run()V
+000000: const-string v0, "getConnectedP2pInfo end"
+000004: const-string v1, "ConnectClientImpl"
+000008: const-string v2, "getConnectedP2pInfo start"
+00000c: invoke-static v1, v2, Lcom/vivo/connect/logger/EasyLog;->i(Ljava/lang/String; Ljava/lang/String;)V
+000012: iget-object v2, v4, Lcom/vivo/connect/sdk/f/c$x;->b Lcom/vivo/connect/sdk/f/c;
+000016: invoke-static v2, Lcom/vivo/connect/sdk/f/c;->a(Lcom/vivo/connect/sdk/f/c;)Lcom/vivo/connbase/IClient;
+00001c: move-result-object v2
+00001e: if-eqz v2, +010h
+000022: iget-object v2, v4, Lcom/vivo/connect/sdk/f/c$x;->b Lcom/vivo/connect/sdk/f/c;
+000026: invoke-static v2, Lcom/vivo/connect/sdk/f/c;->a(Lcom/vivo/connect/sdk/f/c;)Lcom/vivo/connbase/IClient;
+00002c: move-result-object v2
+00002e: iget-object v4, v4, Lcom/vivo/connect/sdk/f/c$x;->a Landroid/os/Messenger;
+000032: invoke-interface v2, v4, Lcom/vivo/connbase/IClient;->getConnectedP2pInfo(Landroid/os/Messenger;)V
+000038: goto +15h
+00003a: move-exception v4
+00003c: goto +17h
+00003e: iget-object v2, v4, Lcom/vivo/connect/sdk/f/c$x;->b Lcom/vivo/connect/sdk/f/c;
+000042: const-string v3, ":getConnectedP2pInfo"
+000046: invoke-static v2, v3, Lcom/vivo/connect/sdk/f/c;->a(Lcom/vivo/connect/sdk/f/c; Ljava/lang/String;)Z
+00004c: move-result v2
+00004e: if-nez v2, +003h
+000052: return-void 
+000054: iget-object v2, v4, Lcom/vivo/connect/sdk/f/c$x;->b Lcom/vivo/connect/sdk/f/c;
+000058: invoke-static v2, Lcom/vivo/connect/sdk/f/c;->a(Lcom/vivo/connect/sdk/f/c;)Lcom/vivo/connbase/IClient;
+00005e: move-result-object v2
+000060: goto -19h
+000062: invoke-static v1, v0, Lcom/vivo/connect/logger/EasyLog;->i(Ljava/lang/String; Ljava/lang/String;)V
+000068: return-void 
+00006a: const-string v0, "getConnectedP2pInfo error:"
+00006e: invoke-static v4, v0, v1, LV5/S;->h(Ljava/lang/Exception; Ljava/lang/String; Ljava/lang/String;)V
+000074: return-void 

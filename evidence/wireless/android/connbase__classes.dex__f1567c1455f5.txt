@@ -1,0 +1,104 @@
+APK pcsuite/updateApk/connbase.apk
+DEX classes.dex
+CLASS Lcom/vivo/connbase/connect/i;
+SUPER Ljava/lang/Object;
+FIELDS
+i Ljava/lang/String; = 'ConnectionRequest'
+a I = None
+b Landroid/os/Messenger; = None
+c Ljava/lang/String; = None
+d Ljava/lang/String; = None
+e Ljava/lang/String; = None
+f Ljava/lang/String; = None
+g Lcom/vivo/connbase/IConnectionCallback; = None
+h J = None
+
+METHOD <init>(I Landroid/os/Messenger; Ljava/lang/String; Ljava/lang/String; Ljava/lang/String; Ljava/lang/String; Lcom/vivo/connbase/IConnectionCallback;)V
+000000: invoke-direct v0, Ljava/lang/Object;-><init>()V
+000006: iput v1, v0, Lcom/vivo/connbase/connect/i;->a I
+00000a: iput-object v2, v0, Lcom/vivo/connbase/connect/i;->b Landroid/os/Messenger;
+00000e: iput-object v3, v0, Lcom/vivo/connbase/connect/i;->c Ljava/lang/String;
+000012: iput-object v4, v0, Lcom/vivo/connbase/connect/i;->d Ljava/lang/String;
+000016: iput-object v6, v0, Lcom/vivo/connbase/connect/i;->f Ljava/lang/String;
+00001a: iput-object v7, v0, Lcom/vivo/connbase/connect/i;->g Lcom/vivo/connbase/IConnectionCallback;
+00001e: iput-object v5, v0, Lcom/vivo/connbase/connect/i;->e Ljava/lang/String;
+000022: invoke-static Ljava/lang/System;->currentTimeMillis()J
+000028: move-result-wide v1
+00002a: iput-wide v1, v0, Lcom/vivo/connbase/connect/i;->h J
+00002e: return-void 
+
+METHOD a()Lcom/vivo/connbase/IConnectionCallback;
+000000: iget-object v0, v1, Lcom/vivo/connbase/connect/i;->g Lcom/vivo/connbase/IConnectionCallback;
+000004: return-object v0
+
+METHOD a(Ljava/lang/String;)V
+000000: iput-object v1, v0, Lcom/vivo/connbase/connect/i;->f Ljava/lang/String;
+000004: return-void 
+
+METHOD b()I
+000000: iget v0, v1, Lcom/vivo/connbase/connect/i;->a I
+000004: return v0
+
+METHOD c()Ljava/lang/String;
+000000: iget-object v0, v1, Lcom/vivo/connbase/connect/i;->d Ljava/lang/String;
+000004: return-object v0
+
+METHOD d()Landroid/os/Messenger;
+000000: iget-object v0, v1, Lcom/vivo/connbase/connect/i;->b Landroid/os/Messenger;
+000004: return-object v0
+
+METHOD e()Ljava/lang/String;
+000000: iget-object v0, v1, Lcom/vivo/connbase/connect/i;->c Ljava/lang/String;
+000004: return-object v0
+
+METHOD equals(Ljava/lang/Object;)Z
+000000: const/4 v0, 1
+000002: if-ne v4, v5, +003h
+000006: return v0
+000008: const/4 v1, 0
+00000a: if-eqz v5, +024h
+00000e: const-class v2, Lcom/vivo/connbase/connect/i;
+000012: invoke-virtual v5, Ljava/lang/Object;->getClass()Ljava/lang/Class;
+000018: move-result-object v3
+00001a: if-eq v2, v3, +003h
+00001e: goto +1ah
+000020: check-cast v5, Lcom/vivo/connbase/connect/i;
+000024: iget-object v2, v4, Lcom/vivo/connbase/connect/i;->d Ljava/lang/String;
+000028: iget-object v3, v5, Lcom/vivo/connbase/connect/i;->d Ljava/lang/String;
+00002c: invoke-virtual v2, v3, Ljava/lang/String;->equals(Ljava/lang/Object;)Z
+000032: move-result v2
+000034: if-eqz v2, +00dh
+000038: iget-object v2, v4, Lcom/vivo/connbase/connect/i;->e Ljava/lang/String;
+00003c: iget-object v5, v5, Lcom/vivo/connbase/connect/i;->e Ljava/lang/String;
+000040: invoke-virtual v2, v5, Ljava/lang/String;->equals(Ljava/lang/Object;)Z
+000046: move-result v5
+000048: if-eqz v5, +003h
+00004c: goto +2h
+00004e: move v0, v1
+000050: return v0
+000052: return v1
+
+METHOD f()Ljava/lang/String;
+000000: iget-object v0, v1, Lcom/vivo/connbase/connect/i;->f Ljava/lang/String;
+000004: return-object v0
+
+METHOD g()J
+000000: iget-wide v0, v2, Lcom/vivo/connbase/connect/i;->h J
+000004: return-wide v0
+
+METHOD h()Ljava/lang/String;
+000000: iget-object v0, v1, Lcom/vivo/connbase/connect/i;->e Ljava/lang/String;
+000004: return-object v0
+
+METHOD hashCode()I
+000000: const/4 v0, 2
+000002: new-array v0, v0, [Ljava/lang/Object;
+000006: iget-object v1, v3, Lcom/vivo/connbase/connect/i;->d Ljava/lang/String;
+00000a: const/4 v2, 0
+00000c: aput-object v1, v0, v2
+000010: iget-object v1, v3, Lcom/vivo/connbase/connect/i;->e Ljava/lang/String;
+000014: const/4 v2, 1
+000016: aput-object v1, v0, v2
+00001a: invoke-static v0, Ljava/util/Objects;->hash([Ljava/lang/Object;)I
+000020: move-result v0
+000022: return v0

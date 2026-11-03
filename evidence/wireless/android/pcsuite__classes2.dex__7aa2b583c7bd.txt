@@ -1,0 +1,25 @@
+APK pcsuite/updateApk/pcsuite.apk
+DEX classes2.dex
+CLASS Lcom/vivo/pcsuite/connect/ConnectModel$3;
+SUPER Ljava/lang/Object;
+FIELDS
+
+
+METHOD onFailure(Lokhttp3/e; Ljava/io/IOException;)V
+000000: new-instance v0, Ljava/lang/StringBuilder;
+000004: const-string v1, "request pc direct address fail "
+000008: invoke-direct v0, v1, Ljava/lang/StringBuilder;-><init>(Ljava/lang/String;)V
+00000e: invoke-virtual v2, Ljava/lang/Throwable;->getMessage()Ljava/lang/String;
+000014: move-result-object v1
+000016: invoke-virtual v0, v1, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+00001c: invoke-virtual v0, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
+000022: move-result-object v0
+000024: const-string v1, "ConnectModel"
+000028: invoke-static v1, v0, Lcom/vivo/connect/logger/EasyLog;->i(Ljava/lang/String; Ljava/lang/String;)V
+00002e: return-void 
+
+METHOD onResponse(Lokhttp3/e; Lokhttp3/z;)V
+000000: const-string v0, "ConnectModel"
+000004: const-string v1, "request pc direct address successs"
+000008: invoke-static v0, v1, Lcom/vivo/connect/logger/EasyLog;->i(Ljava/lang/String; Ljava/lang/String;)V
+00000e: return-void 

@@ -1,0 +1,487 @@
+APK pcsuite/updateApk/connbase.apk
+DEX classes2.dex
+CLASS Lcom/vivo/pcsuite/pcconnect/ShareLinkService$q;
+SUPER Lcom/vivo/pcsuite/pcconnect/IShareLinkManager$Stub;
+FIELDS
+e Lcom/vivo/pcsuite/pcconnect/ShareLinkService; = None
+
+METHOD <init>(Lcom/vivo/pcsuite/pcconnect/ShareLinkService;)V
+000000: iput-object v1, v0, Lcom/vivo/pcsuite/pcconnect/ShareLinkService$q;->e Lcom/vivo/pcsuite/pcconnect/ShareLinkService;
+000004: invoke-direct v0, Lcom/vivo/pcsuite/pcconnect/IShareLinkManager$Stub;-><init>()V
+00000a: return-void 
+
+METHOD <init>(Lcom/vivo/pcsuite/pcconnect/ShareLinkService; Lcom/vivo/pcsuite/pcconnect/ShareLinkService$e;)V
+000000: invoke-direct v0, v1, Lcom/vivo/pcsuite/pcconnect/ShareLinkService$q;-><init>(Lcom/vivo/pcsuite/pcconnect/ShareLinkService;)V
+000006: return-void 
+
+METHOD appResponse(I)V
+000000: iget-object v0, v7, Lcom/vivo/pcsuite/pcconnect/ShareLinkService$q;->e Lcom/vivo/pcsuite/pcconnect/ShareLinkService;
+000004: invoke-static v0, Lcom/vivo/pcsuite/pcconnect/ShareLinkService;->v(Lcom/vivo/pcsuite/pcconnect/ShareLinkService;)Lcom/vivo/pcsuite/pcconnect/ble/IBluetoothLe;
+00000a: move-result-object v0
+00000c: if-eqz v0, +043h
+000010: if-eqz v8, +02eh
+000014: const/4 v0, 1
+000016: if-eq v8, v0, +01ch
+00001a: const/4 v0, 4
+00001c: if-eq v8, v0, +011h
+000020: iget-object v0, v7, Lcom/vivo/pcsuite/pcconnect/ShareLinkService$q;->e Lcom/vivo/pcsuite/pcconnect/ShareLinkService;
+000024: invoke-static v0, Lcom/vivo/pcsuite/pcconnect/ShareLinkService;->v(Lcom/vivo/pcsuite/pcconnect/ShareLinkService;)Lcom/vivo/pcsuite/pcconnect/ble/IBluetoothLe;
+00002a: move-result-object v1
+00002c: const/4 v2, 0
+00002e: const/4 v4, 0
+000030: const/4 v5, 0
+000032: const/4 v6, 0
+000034: move v3, v8
+000036: invoke-interface/range v1 ... v6, Lcom/vivo/pcsuite/pcconnect/ble/IBluetoothLe;->writeResponse(I I Ljava/lang/String; Ljava/lang/String; Ljava/lang/String;)V
+00003c: goto +2bh
+00003e: iget-object v8, v7, Lcom/vivo/pcsuite/pcconnect/ShareLinkService$q;->e Lcom/vivo/pcsuite/pcconnect/ShareLinkService;
+000042: invoke-static v8, Lcom/vivo/pcsuite/pcconnect/ShareLinkService;->v(Lcom/vivo/pcsuite/pcconnect/ShareLinkService;)Lcom/vivo/pcsuite/pcconnect/ble/IBluetoothLe;
+000048: move-result-object v0
+00004a: const/4 v1, 1
+00004c: goto +8h
+00004e: iget-object v8, v7, Lcom/vivo/pcsuite/pcconnect/ShareLinkService$q;->e Lcom/vivo/pcsuite/pcconnect/ShareLinkService;
+000052: invoke-static v8, Lcom/vivo/pcsuite/pcconnect/ShareLinkService;->v(Lcom/vivo/pcsuite/pcconnect/ShareLinkService;)Lcom/vivo/pcsuite/pcconnect/ble/IBluetoothLe;
+000058: move-result-object v0
+00005a: const/4 v1, 0
+00005c: const/4 v2, 1
+00005e: const/4 v3, 0
+000060: const/4 v4, 0
+000062: const/4 v5, 0
+000064: invoke-interface/range v0 ... v5, Lcom/vivo/pcsuite/pcconnect/ble/IBluetoothLe;->writeResponse(I I Ljava/lang/String; Ljava/lang/String; Ljava/lang/String;)V
+00006a: goto +14h
+00006c: iget-object v8, v7, Lcom/vivo/pcsuite/pcconnect/ShareLinkService$q;->e Lcom/vivo/pcsuite/pcconnect/ShareLinkService;
+000070: invoke-static v8, Lcom/vivo/pcsuite/pcconnect/ShareLinkService;->v(Lcom/vivo/pcsuite/pcconnect/ShareLinkService;)Lcom/vivo/pcsuite/pcconnect/ble/IBluetoothLe;
+000076: move-result-object v0
+000078: const/4 v1, 0
+00007a: const/4 v2, 0
+00007c: const/4 v3, 0
+00007e: const/4 v4, 0
+000080: const/4 v5, 0
+000082: invoke-interface/range v0 ... v5, Lcom/vivo/pcsuite/pcconnect/ble/IBluetoothLe;->writeResponse(I I Ljava/lang/String; Ljava/lang/String; Ljava/lang/String;)V
+000088: iget-object v8, v7, Lcom/vivo/pcsuite/pcconnect/ShareLinkService$q;->e Lcom/vivo/pcsuite/pcconnect/ShareLinkService;
+00008c: invoke-static v8, Lcom/vivo/pcsuite/pcconnect/ShareLinkService;->k(Lcom/vivo/pcsuite/pcconnect/ShareLinkService;)V
+000092: return-void 
+
+METHOD cancelConnect()V
+000000: invoke-static Lcom/vivo/pcsuite/pcconnect/ShareLinkService;->k()Ljava/lang/String;
+000006: move-result-object v0
+000008: const-string v1, "cancelConnect"
+00000c: invoke-static v0, v1, Lc/c/f/a/b;->a(Ljava/lang/String; Ljava/lang/String;)V
+000012: iget-object v0, v2, Lcom/vivo/pcsuite/pcconnect/ShareLinkService$q;->e Lcom/vivo/pcsuite/pcconnect/ShareLinkService;
+000016: invoke-static v0, Lcom/vivo/pcsuite/pcconnect/ShareLinkService;->v(Lcom/vivo/pcsuite/pcconnect/ShareLinkService;)Lcom/vivo/pcsuite/pcconnect/ble/IBluetoothLe;
+00001c: move-result-object v0
+00001e: if-eqz v0, +00bh
+000022: iget-object v0, v2, Lcom/vivo/pcsuite/pcconnect/ShareLinkService$q;->e Lcom/vivo/pcsuite/pcconnect/ShareLinkService;
+000026: invoke-static v0, Lcom/vivo/pcsuite/pcconnect/ShareLinkService;->v(Lcom/vivo/pcsuite/pcconnect/ShareLinkService;)Lcom/vivo/pcsuite/pcconnect/ble/IBluetoothLe;
+00002c: move-result-object v0
+00002e: invoke-interface v0, Lcom/vivo/pcsuite/pcconnect/ble/IBluetoothLe;->cancelConnect()V
+000034: iget-object v0, v2, Lcom/vivo/pcsuite/pcconnect/ShareLinkService$q;->e Lcom/vivo/pcsuite/pcconnect/ShareLinkService;
+000038: invoke-static v0, Lcom/vivo/pcsuite/pcconnect/ShareLinkService;->j(Lcom/vivo/pcsuite/pcconnect/ShareLinkService;)Ljava/lang/String;
+00003e: move-result-object v0
+000040: if-eqz v0, +007h
+000044: iget-object v0, v2, Lcom/vivo/pcsuite/pcconnect/ShareLinkService$q;->e Lcom/vivo/pcsuite/pcconnect/ShareLinkService;
+000048: invoke-virtual v0, Lcom/vivo/pcsuite/pcconnect/ShareLinkService;->d()V
+00004e: return-void 
+
+METHOD close()V
+000000: iget-object v0, v1, Lcom/vivo/pcsuite/pcconnect/ShareLinkService$q;->e Lcom/vivo/pcsuite/pcconnect/ShareLinkService;
+000004: invoke-static v0, Lcom/vivo/pcsuite/pcconnect/ShareLinkService;->i(Lcom/vivo/pcsuite/pcconnect/ShareLinkService;)V
+00000a: return-void 
+
+METHOD connect(Ljava/lang/String;)V
+000000: iget-object v0, v2, Lcom/vivo/pcsuite/pcconnect/ShareLinkService$q;->e Lcom/vivo/pcsuite/pcconnect/ShareLinkService;
+000004: sget-object v1, Lcom/vivo/pcsuite/pcconnect/ShareLinkService$n;->b Lcom/vivo/pcsuite/pcconnect/ShareLinkService$n;
+000008: invoke-static v0, v1, Lcom/vivo/pcsuite/pcconnect/ShareLinkService;->a(Lcom/vivo/pcsuite/pcconnect/ShareLinkService; Lcom/vivo/pcsuite/pcconnect/ShareLinkService$n;)Lcom/vivo/pcsuite/pcconnect/ShareLinkService$n;
+00000e: iget-object v0, v2, Lcom/vivo/pcsuite/pcconnect/ShareLinkService$q;->e Lcom/vivo/pcsuite/pcconnect/ShareLinkService;
+000012: invoke-static v0, Lcom/vivo/pcsuite/pcconnect/ShareLinkService;->n(Lcom/vivo/pcsuite/pcconnect/ShareLinkService;)Lcom/vivo/pcsuite/pcconnect/m;
+000018: move-result-object v0
+00001a: invoke-virtual v0, Lcom/vivo/pcsuite/pcconnect/m;->b()V
+000020: iget-object v0, v2, Lcom/vivo/pcsuite/pcconnect/ShareLinkService$q;->e Lcom/vivo/pcsuite/pcconnect/ShareLinkService;
+000024: invoke-static v0, v3, Lcom/vivo/pcsuite/pcconnect/ShareLinkService;->a(Lcom/vivo/pcsuite/pcconnect/ShareLinkService; Ljava/lang/String;)Ljava/lang/String;
+00002a: iget-object v3, v2, Lcom/vivo/pcsuite/pcconnect/ShareLinkService$q;->e Lcom/vivo/pcsuite/pcconnect/ShareLinkService;
+00002e: const/4 v0, 1
+000030: invoke-static v3, v0, Lcom/vivo/pcsuite/pcconnect/ShareLinkService;->b(Lcom/vivo/pcsuite/pcconnect/ShareLinkService; Z)Z
+000036: iget-object v3, v2, Lcom/vivo/pcsuite/pcconnect/ShareLinkService$q;->e Lcom/vivo/pcsuite/pcconnect/ShareLinkService;
+00003a: invoke-static v3, Lcom/vivo/pcsuite/pcconnect/ShareLinkService;->v(Lcom/vivo/pcsuite/pcconnect/ShareLinkService;)Lcom/vivo/pcsuite/pcconnect/ble/IBluetoothLe;
+000040: move-result-object v3
+000042: if-eqz v3, +028h
+000046: iget-object v3, v2, Lcom/vivo/pcsuite/pcconnect/ShareLinkService$q;->e Lcom/vivo/pcsuite/pcconnect/ShareLinkService;
+00004a: invoke-static v3, Lcom/vivo/pcsuite/pcconnect/ShareLinkService;->v(Lcom/vivo/pcsuite/pcconnect/ShareLinkService;)Lcom/vivo/pcsuite/pcconnect/ble/IBluetoothLe;
+000050: move-result-object v0
+000052: iget-object v1, v2, Lcom/vivo/pcsuite/pcconnect/ShareLinkService$q;->e Lcom/vivo/pcsuite/pcconnect/ShareLinkService;
+000056: invoke-static v1, Lcom/vivo/pcsuite/pcconnect/ShareLinkService;->g(Lcom/vivo/pcsuite/pcconnect/ShareLinkService;)Ljava/lang/String;
+00005c: move-result-object v1
+00005e: invoke-interface v0, v1, Lcom/vivo/pcsuite/pcconnect/ble/IBluetoothLe;->getBandById(Ljava/lang/String;)I
+000064: move-result v0
+000066: invoke-static v3, v0, Lcom/vivo/pcsuite/pcconnect/ShareLinkService;->a(Lcom/vivo/pcsuite/pcconnect/ShareLinkService; I)I
+00006c: iget-object v3, v2, Lcom/vivo/pcsuite/pcconnect/ShareLinkService$q;->e Lcom/vivo/pcsuite/pcconnect/ShareLinkService;
+000070: invoke-static v3, Lcom/vivo/pcsuite/pcconnect/ShareLinkService;->v(Lcom/vivo/pcsuite/pcconnect/ShareLinkService;)Lcom/vivo/pcsuite/pcconnect/ble/IBluetoothLe;
+000076: move-result-object v0
+000078: iget-object v1, v2, Lcom/vivo/pcsuite/pcconnect/ShareLinkService$q;->e Lcom/vivo/pcsuite/pcconnect/ShareLinkService;
+00007c: invoke-static v1, Lcom/vivo/pcsuite/pcconnect/ShareLinkService;->g(Lcom/vivo/pcsuite/pcconnect/ShareLinkService;)Ljava/lang/String;
+000082: move-result-object v1
+000084: invoke-interface v0, v1, Lcom/vivo/pcsuite/pcconnect/ble/IBluetoothLe;->getVersionById(Ljava/lang/String;)I
+00008a: move-result v0
+00008c: invoke-static v3, v0, Lcom/vivo/pcsuite/pcconnect/ShareLinkService;->b(Lcom/vivo/pcsuite/pcconnect/ShareLinkService; I)I
+000092: iget-object v3, v2, Lcom/vivo/pcsuite/pcconnect/ShareLinkService$q;->e Lcom/vivo/pcsuite/pcconnect/ShareLinkService;
+000096: const/4 v0, 0
+000098: invoke-static v3, v0, Lcom/vivo/pcsuite/pcconnect/ShareLinkService;->b(Lcom/vivo/pcsuite/pcconnect/ShareLinkService; Ljava/lang/String;)Ljava/lang/String;
+00009e: iget-object v3, v2, Lcom/vivo/pcsuite/pcconnect/ShareLinkService$q;->e Lcom/vivo/pcsuite/pcconnect/ShareLinkService;
+0000a2: invoke-static v3, Lcom/vivo/pcsuite/pcconnect/ShareLinkService;->g(Lcom/vivo/pcsuite/pcconnect/ShareLinkService;)Ljava/lang/String;
+0000a8: move-result-object v0
+0000aa: invoke-static v3, v0, Lcom/vivo/pcsuite/pcconnect/ShareLinkService;->c(Lcom/vivo/pcsuite/pcconnect/ShareLinkService; Ljava/lang/String;)Ljava/lang/String;
+0000b0: iget-object v3, v2, Lcom/vivo/pcsuite/pcconnect/ShareLinkService$q;->e Lcom/vivo/pcsuite/pcconnect/ShareLinkService;
+0000b4: invoke-static v3, Lcom/vivo/pcsuite/pcconnect/ShareLinkService;->k(Lcom/vivo/pcsuite/pcconnect/ShareLinkService;)V
+0000ba: return-void 
+
+METHOD connectSuccess(Ljava/lang/String;)V
+000000: iget-object v0, v3, Lcom/vivo/pcsuite/pcconnect/ShareLinkService$q;->e Lcom/vivo/pcsuite/pcconnect/ShareLinkService;
+000004: invoke-static v0, v4, Lcom/vivo/pcsuite/pcconnect/ble/j;->a(Landroid/content/Context; Ljava/lang/String;)V
+00000a: invoke-static Lcom/vivo/pcsuite/pcconnect/ShareLinkService;->k()Ljava/lang/String;
+000010: move-result-object v0
+000012: new-instance v1, Ljava/lang/StringBuilder;
+000016: invoke-direct v1, Ljava/lang/StringBuilder;-><init>()V
+00001c: const-string v2, "connectSuccess: dd  "
+000020: invoke-virtual v1, v2, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+000026: invoke-static v4, Lcom/vivo/pcsuite/pcconnect/g;->a(Ljava/lang/String;)Ljava/lang/String;
+00002c: move-result-object v4
+00002e: invoke-virtual v1, v4, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+000034: invoke-virtual v1, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
+00003a: move-result-object v4
+00003c: invoke-static v0, v4, Lc/c/f/a/b;->k(Ljava/lang/String; Ljava/lang/String;)V
+000042: return-void 
+
+METHOD connectbyrfcomm(I Ljava/lang/String; Ljava/lang/String; I)V
+000000: invoke-static Lcom/vivo/pcsuite/pcconnect/ShareLinkService;->k()Ljava/lang/String;
+000006: move-result-object v0
+000008: new-instance v1, Ljava/lang/StringBuilder;
+00000c: invoke-direct v1, Ljava/lang/StringBuilder;-><init>()V
+000012: const-string v2, "connectbyrfcomm flag: "
+000016: invoke-virtual v1, v2, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+00001c: invoke-virtual v1, v4, Ljava/lang/StringBuilder;->append(I)Ljava/lang/StringBuilder;
+000022: const-string v2, ", version: "
+000026: invoke-virtual v1, v2, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+00002c: invoke-virtual v1, v7, Ljava/lang/StringBuilder;->append(I)Ljava/lang/StringBuilder;
+000032: invoke-virtual v1, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
+000038: move-result-object v1
+00003a: invoke-static v0, v1, Lc/c/f/a/b;->k(Ljava/lang/String; Ljava/lang/String;)V
+000040: iget-object v0, v3, Lcom/vivo/pcsuite/pcconnect/ShareLinkService$q;->e Lcom/vivo/pcsuite/pcconnect/ShareLinkService;
+000044: sget-object v1, Lcom/vivo/pcsuite/pcconnect/ShareLinkService$n;->b Lcom/vivo/pcsuite/pcconnect/ShareLinkService$n;
+000048: invoke-static v0, v1, Lcom/vivo/pcsuite/pcconnect/ShareLinkService;->a(Lcom/vivo/pcsuite/pcconnect/ShareLinkService; Lcom/vivo/pcsuite/pcconnect/ShareLinkService$n;)Lcom/vivo/pcsuite/pcconnect/ShareLinkService$n;
+00004e: iget-object v0, v3, Lcom/vivo/pcsuite/pcconnect/ShareLinkService$q;->e Lcom/vivo/pcsuite/pcconnect/ShareLinkService;
+000052: invoke-static v0, v4, Lcom/vivo/pcsuite/pcconnect/ShareLinkService;->c(Lcom/vivo/pcsuite/pcconnect/ShareLinkService; I)I
+000058: iget-object v4, v3, Lcom/vivo/pcsuite/pcconnect/ShareLinkService$q;->e Lcom/vivo/pcsuite/pcconnect/ShareLinkService;
+00005c: invoke-static v4, Lcom/vivo/pcsuite/pcconnect/ShareLinkService;->n(Lcom/vivo/pcsuite/pcconnect/ShareLinkService;)Lcom/vivo/pcsuite/pcconnect/m;
+000062: move-result-object v4
+000064: invoke-virtual v4, Lcom/vivo/pcsuite/pcconnect/m;->b()V
+00006a: iget-object v4, v3, Lcom/vivo/pcsuite/pcconnect/ShareLinkService$q;->e Lcom/vivo/pcsuite/pcconnect/ShareLinkService;
+00006e: invoke-static v4, v5, Lcom/vivo/pcsuite/pcconnect/ShareLinkService;->a(Lcom/vivo/pcsuite/pcconnect/ShareLinkService; Ljava/lang/String;)Ljava/lang/String;
+000074: const-string v4, "nfc123"
+000078: invoke-virtual v4, v6, Ljava/lang/String;->equals(Ljava/lang/Object;)Z
+00007e: move-result v4
+000080: const/4 v5, 1
+000082: if-eqz v4, +008h
+000086: iget-object v4, v3, Lcom/vivo/pcsuite/pcconnect/ShareLinkService$q;->e Lcom/vivo/pcsuite/pcconnect/ShareLinkService;
+00008a: invoke-static v4, v5, Lcom/vivo/pcsuite/pcconnect/ShareLinkService;->d(Lcom/vivo/pcsuite/pcconnect/ShareLinkService; I)I
+000090: goto +7h
+000092: iget-object v4, v3, Lcom/vivo/pcsuite/pcconnect/ShareLinkService$q;->e Lcom/vivo/pcsuite/pcconnect/ShareLinkService;
+000096: const/4 v0, 0
+000098: invoke-static v4, v0, Lcom/vivo/pcsuite/pcconnect/ShareLinkService;->d(Lcom/vivo/pcsuite/pcconnect/ShareLinkService; I)I
+00009e: iget-object v4, v3, Lcom/vivo/pcsuite/pcconnect/ShareLinkService$q;->e Lcom/vivo/pcsuite/pcconnect/ShareLinkService;
+0000a2: invoke-static v4, v6, Lcom/vivo/pcsuite/pcconnect/ShareLinkService;->b(Lcom/vivo/pcsuite/pcconnect/ShareLinkService; Ljava/lang/String;)Ljava/lang/String;
+0000a8: iget-object v4, v3, Lcom/vivo/pcsuite/pcconnect/ShareLinkService$q;->e Lcom/vivo/pcsuite/pcconnect/ShareLinkService;
+0000ac: invoke-static v4, v7, Lcom/vivo/pcsuite/pcconnect/ShareLinkService;->b(Lcom/vivo/pcsuite/pcconnect/ShareLinkService; I)I
+0000b2: iget-object v4, v3, Lcom/vivo/pcsuite/pcconnect/ShareLinkService$q;->e Lcom/vivo/pcsuite/pcconnect/ShareLinkService;
+0000b6: invoke-static v4, v5, Lcom/vivo/pcsuite/pcconnect/ShareLinkService;->b(Lcom/vivo/pcsuite/pcconnect/ShareLinkService; Z)Z
+0000bc: iget-object v4, v3, Lcom/vivo/pcsuite/pcconnect/ShareLinkService$q;->e Lcom/vivo/pcsuite/pcconnect/ShareLinkService;
+0000c0: invoke-static v4, Lcom/vivo/pcsuite/pcconnect/ShareLinkService;->v(Lcom/vivo/pcsuite/pcconnect/ShareLinkService;)Lcom/vivo/pcsuite/pcconnect/ble/IBluetoothLe;
+0000c6: move-result-object v4
+0000c8: if-eqz v4, +015h
+0000cc: iget-object v4, v3, Lcom/vivo/pcsuite/pcconnect/ShareLinkService$q;->e Lcom/vivo/pcsuite/pcconnect/ShareLinkService;
+0000d0: invoke-static v4, Lcom/vivo/pcsuite/pcconnect/ShareLinkService;->v(Lcom/vivo/pcsuite/pcconnect/ShareLinkService;)Lcom/vivo/pcsuite/pcconnect/ble/IBluetoothLe;
+0000d6: move-result-object v5
+0000d8: iget-object v6, v3, Lcom/vivo/pcsuite/pcconnect/ShareLinkService$q;->e Lcom/vivo/pcsuite/pcconnect/ShareLinkService;
+0000dc: invoke-static v6, Lcom/vivo/pcsuite/pcconnect/ShareLinkService;->g(Lcom/vivo/pcsuite/pcconnect/ShareLinkService;)Ljava/lang/String;
+0000e2: move-result-object v6
+0000e4: invoke-interface v5, v6, Lcom/vivo/pcsuite/pcconnect/ble/IBluetoothLe;->getBandById(Ljava/lang/String;)I
+0000ea: move-result v5
+0000ec: invoke-static v4, v5, Lcom/vivo/pcsuite/pcconnect/ShareLinkService;->a(Lcom/vivo/pcsuite/pcconnect/ShareLinkService; I)I
+0000f2: iget-object v4, v3, Lcom/vivo/pcsuite/pcconnect/ShareLinkService$q;->e Lcom/vivo/pcsuite/pcconnect/ShareLinkService;
+0000f6: const/4 v5, 0
+0000f8: invoke-static v4, v5, Lcom/vivo/pcsuite/pcconnect/ShareLinkService;->c(Lcom/vivo/pcsuite/pcconnect/ShareLinkService; Ljava/lang/String;)Ljava/lang/String;
+0000fe: iget-object v4, v3, Lcom/vivo/pcsuite/pcconnect/ShareLinkService$q;->e Lcom/vivo/pcsuite/pcconnect/ShareLinkService;
+000102: invoke-static v4, Lcom/vivo/pcsuite/pcconnect/ShareLinkService;->k(Lcom/vivo/pcsuite/pcconnect/ShareLinkService;)V
+000108: return-void 
+
+METHOD disconnect()V
+000000: iget-object v0, v1, Lcom/vivo/pcsuite/pcconnect/ShareLinkService$q;->e Lcom/vivo/pcsuite/pcconnect/ShareLinkService;
+000004: invoke-virtual v0, Lcom/vivo/pcsuite/pcconnect/ShareLinkService;->c()V
+00000a: return-void 
+
+METHOD disconnectBle()V
+000000: iget-object v0, v1, Lcom/vivo/pcsuite/pcconnect/ShareLinkService$q;->e Lcom/vivo/pcsuite/pcconnect/ShareLinkService;
+000004: invoke-static v0, Lcom/vivo/pcsuite/pcconnect/ShareLinkService;->v(Lcom/vivo/pcsuite/pcconnect/ShareLinkService;)Lcom/vivo/pcsuite/pcconnect/ble/IBluetoothLe;
+00000a: move-result-object v0
+00000c: invoke-interface v0, Lcom/vivo/pcsuite/pcconnect/ble/IBluetoothLe;->disconnectWithoutState()V
+000012: return-void 
+
+METHOD getDevicesSignal(I I)Ljava/util/Map;
+000000: iget-object v0, v1, Lcom/vivo/pcsuite/pcconnect/ShareLinkService$q;->e Lcom/vivo/pcsuite/pcconnect/ShareLinkService;
+000004: invoke-static v0, Lcom/vivo/pcsuite/pcconnect/ShareLinkService;->v(Lcom/vivo/pcsuite/pcconnect/ShareLinkService;)Lcom/vivo/pcsuite/pcconnect/ble/IBluetoothLe;
+00000a: move-result-object v0
+00000c: if-eqz v0, +00dh
+000010: iget-object v0, v1, Lcom/vivo/pcsuite/pcconnect/ShareLinkService$q;->e Lcom/vivo/pcsuite/pcconnect/ShareLinkService;
+000014: invoke-static v0, Lcom/vivo/pcsuite/pcconnect/ShareLinkService;->v(Lcom/vivo/pcsuite/pcconnect/ShareLinkService;)Lcom/vivo/pcsuite/pcconnect/ble/IBluetoothLe;
+00001a: move-result-object v0
+00001c: invoke-interface v0, v2, v3, Lcom/vivo/pcsuite/pcconnect/ble/IBluetoothLe;->getDevicesSignal(I I)Ljava/util/Map;
+000022: move-result-object v2
+000024: return-object v2
+000026: invoke-static Lcom/vivo/pcsuite/pcconnect/ShareLinkService;->k()Ljava/lang/String;
+00002c: move-result-object v2
+00002e: const-string v3, "getDevicesSignal when bluetooth haven't initialized"
+000032: invoke-static v2, v3, Lc/c/f/a/b;->p(Ljava/lang/String; Ljava/lang/String;)V
+000038: invoke-static Ljava/util/Collections;->emptyMap()Ljava/util/Map;
+00003e: move-result-object v2
+000040: return-object v2
+
+METHOD isConnected()Z
+000000: iget-object v0, v1, Lcom/vivo/pcsuite/pcconnect/ShareLinkService$q;->e Lcom/vivo/pcsuite/pcconnect/ShareLinkService;
+000004: invoke-static v0, Lcom/vivo/pcsuite/pcconnect/ShareLinkService;->l(Lcom/vivo/pcsuite/pcconnect/ShareLinkService;)Z
+00000a: move-result v0
+00000c: return v0
+
+METHOD isConnecting()Z
+000000: invoke-virtual v2, Lcom/vivo/pcsuite/pcconnect/ShareLinkService$q;->isShareOpened()Z
+000006: move-result v0
+000008: if-eqz v0, +00eh
+00000c: iget-object v0, v2, Lcom/vivo/pcsuite/pcconnect/ShareLinkService$q;->e Lcom/vivo/pcsuite/pcconnect/ShareLinkService;
+000010: invoke-static v0, Lcom/vivo/pcsuite/pcconnect/ShareLinkService;->f(Lcom/vivo/pcsuite/pcconnect/ShareLinkService;)Lcom/vivo/pcsuite/pcconnect/ShareLinkService$n;
+000016: move-result-object v0
+000018: sget-object v1, Lcom/vivo/pcsuite/pcconnect/ShareLinkService$n;->b Lcom/vivo/pcsuite/pcconnect/ShareLinkService$n;
+00001c: if-ne v0, v1, +004h
+000020: const/4 v0, 1
+000022: goto +2h
+000024: const/4 v0, 0
+000026: return v0
+
+METHOD isDeviceInMatch(Ljava/lang/String;)Z
+000000: iget-object v0, v1, Lcom/vivo/pcsuite/pcconnect/ShareLinkService$q;->e Lcom/vivo/pcsuite/pcconnect/ShareLinkService;
+000004: invoke-static v0, Lcom/vivo/pcsuite/pcconnect/ShareLinkService;->v(Lcom/vivo/pcsuite/pcconnect/ShareLinkService;)Lcom/vivo/pcsuite/pcconnect/ble/IBluetoothLe;
+00000a: move-result-object v0
+00000c: if-eqz v0, +00dh
+000010: iget-object v0, v1, Lcom/vivo/pcsuite/pcconnect/ShareLinkService$q;->e Lcom/vivo/pcsuite/pcconnect/ShareLinkService;
+000014: invoke-static v0, Lcom/vivo/pcsuite/pcconnect/ShareLinkService;->v(Lcom/vivo/pcsuite/pcconnect/ShareLinkService;)Lcom/vivo/pcsuite/pcconnect/ble/IBluetoothLe;
+00001a: move-result-object v0
+00001c: invoke-interface v0, v2, Lcom/vivo/pcsuite/pcconnect/ble/IBluetoothLe;->isDeviceInMatch(Ljava/lang/String;)Z
+000022: move-result v2
+000024: return v2
+000026: invoke-static Lcom/vivo/pcsuite/pcconnect/ShareLinkService;->k()Ljava/lang/String;
+00002c: move-result-object v2
+00002e: const-string v0, "Bluetooth not initialize"
+000032: invoke-static v2, v0, Lc/c/f/a/b;->p(Ljava/lang/String; Ljava/lang/String;)V
+000038: const/4 v2, 0
+00003a: return v2
+
+METHOD isScanning()Z
+000000: invoke-virtual v1, Lcom/vivo/pcsuite/pcconnect/ShareLinkService$q;->isShareOpened()Z
+000006: move-result v0
+000008: if-eqz v0, +00ch
+00000c: iget-object v0, v1, Lcom/vivo/pcsuite/pcconnect/ShareLinkService$q;->e Lcom/vivo/pcsuite/pcconnect/ShareLinkService;
+000010: invoke-static v0, Lcom/vivo/pcsuite/pcconnect/ShareLinkService;->m(Lcom/vivo/pcsuite/pcconnect/ShareLinkService;)Z
+000016: move-result v0
+000018: if-eqz v0, +004h
+00001c: const/4 v0, 1
+00001e: goto +2h
+000020: const/4 v0, 0
+000022: return v0
+
+METHOD isShareOpened()Z
+000000: iget-object v0, v1, Lcom/vivo/pcsuite/pcconnect/ShareLinkService$q;->e Lcom/vivo/pcsuite/pcconnect/ShareLinkService;
+000004: invoke-virtual v0, Lcom/vivo/pcsuite/pcconnect/ShareLinkService;->e()Z
+00000a: move-result v0
+00000c: return v0
+
+METHOD onExOne(Ljava/lang/String; Ljava/lang/String;)Ljava/lang/String;
+000000: const/4 v1, 0
+000002: return-object v1
+
+METHOD onExTwo(Ljava/lang/String; [B)Ljava/lang/String;
+000000: const/4 v1, 0
+000002: return-object v1
+
+METHOD open(Ljava/lang/String; Ljava/lang/String;)V
+000000: invoke-static Lcom/vivo/pcsuite/pcconnect/ShareLinkService;->k()Ljava/lang/String;
+000006: move-result-object v1
+000008: const-string v2, "Stub.open()"
+00000c: invoke-static v1, v2, Lc/c/f/a/b;->k(Ljava/lang/String; Ljava/lang/String;)V
+000012: iget-object v1, v0, Lcom/vivo/pcsuite/pcconnect/ShareLinkService$q;->e Lcom/vivo/pcsuite/pcconnect/ShareLinkService;
+000016: sget-object v2, Lcom/vivo/pcsuite/pcconnect/ShareLinkService$r;->b Lcom/vivo/pcsuite/pcconnect/ShareLinkService$r;
+00001a: invoke-static v1, v2, Lcom/vivo/pcsuite/pcconnect/ShareLinkService;->a(Lcom/vivo/pcsuite/pcconnect/ShareLinkService; Lcom/vivo/pcsuite/pcconnect/ShareLinkService$r;)Lcom/vivo/pcsuite/pcconnect/ShareLinkService$r;
+000020: iget-object v1, v0, Lcom/vivo/pcsuite/pcconnect/ShareLinkService$q;->e Lcom/vivo/pcsuite/pcconnect/ShareLinkService;
+000024: invoke-static v1, Lcom/vivo/pcsuite/pcconnect/ShareLinkService;->n(Lcom/vivo/pcsuite/pcconnect/ShareLinkService;)Lcom/vivo/pcsuite/pcconnect/m;
+00002a: move-result-object v1
+00002c: invoke-virtual v1, Lcom/vivo/pcsuite/pcconnect/m;->e()V
+000032: return-void 
+
+METHOD registerLinkObserver(Lcom/vivo/pcsuite/pcconnect/ShareLinkObserver;)V
+000000: invoke-static Lcom/vivo/pcsuite/pcconnect/ShareLinkService;->k()Ljava/lang/String;
+000006: move-result-object v0
+000008: const-string v1, "registerLinkObserver"
+00000c: invoke-static v0, v1, Lc/c/f/a/b;->a(Ljava/lang/String; Ljava/lang/String;)V
+000012: iget-object v0, v5, Lcom/vivo/pcsuite/pcconnect/ShareLinkService$q;->e Lcom/vivo/pcsuite/pcconnect/ShareLinkService;
+000016: invoke-virtual v0, Landroid/app/Service;->getPackageManager()Landroid/content/pm/PackageManager;
+00001c: move-result-object v0
+00001e: invoke-static Landroid/os/Binder;->getCallingUid()I
+000024: move-result v1
+000026: invoke-virtual v0, v1, Landroid/content/pm/PackageManager;->getPackagesForUid(I)[Ljava/lang/String;
+00002c: move-result-object v0
+00002e: if-eqz v0, +026h
+000032: array-length v1, v0
+000034: if-lez v1, +023h
+000038: const/4 v1, 0
+00003a: array-length v2, v0
+00003c: if-ge v1, v2, +01fh
+000040: invoke-static Lcom/vivo/pcsuite/pcconnect/ShareLinkService;->k()Ljava/lang/String;
+000046: move-result-object v2
+000048: new-instance v3, Ljava/lang/StringBuilder;
+00004c: invoke-direct v3, Ljava/lang/StringBuilder;-><init>()V
+000052: const-string v4, "registerLinkObserver package: "
+000056: invoke-virtual v3, v4, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+00005c: aget-object v4, v0, v1
+000060: invoke-virtual v3, v4, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+000066: invoke-virtual v3, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
+00006c: move-result-object v3
+00006e: invoke-static v2, v3, Lc/c/f/a/b;->a(Ljava/lang/String; Ljava/lang/String;)V
+000074: add-int/lit8 v1, v1, 1
+000078: goto -1fh
+00007a: iget-object v0, v5, Lcom/vivo/pcsuite/pcconnect/ShareLinkService$q;->e Lcom/vivo/pcsuite/pcconnect/ShareLinkService;
+00007e: invoke-static v0, Lcom/vivo/pcsuite/pcconnect/ShareLinkService;->n(Lcom/vivo/pcsuite/pcconnect/ShareLinkService;)Lcom/vivo/pcsuite/pcconnect/m;
+000084: move-result-object v0
+000086: invoke-virtual v0, v6, Lcom/vivo/pcsuite/pcconnect/m;->a(Lcom/vivo/pcsuite/pcconnect/ShareLinkObserver;)V
+00008c: iget-object v6, v5, Lcom/vivo/pcsuite/pcconnect/ShareLinkService$q;->e Lcom/vivo/pcsuite/pcconnect/ShareLinkService;
+000090: invoke-static v6, Lcom/vivo/pcsuite/pcconnect/ShareLinkService;->v(Lcom/vivo/pcsuite/pcconnect/ShareLinkService;)Lcom/vivo/pcsuite/pcconnect/ble/IBluetoothLe;
+000096: move-result-object v6
+000098: if-eqz v6, +00bh
+00009c: iget-object v6, v5, Lcom/vivo/pcsuite/pcconnect/ShareLinkService$q;->e Lcom/vivo/pcsuite/pcconnect/ShareLinkService;
+0000a0: invoke-static v6, Lcom/vivo/pcsuite/pcconnect/ShareLinkService;->v(Lcom/vivo/pcsuite/pcconnect/ShareLinkService;)Lcom/vivo/pcsuite/pcconnect/ble/IBluetoothLe;
+0000a6: move-result-object v6
+0000a8: invoke-interface v6, Lcom/vivo/pcsuite/pcconnect/ble/IBluetoothLe;->onClientBind()V
+0000ae: return-void 
+
+METHOD sendInfo(Ljava/lang/String;)V
+000000: iget-object v0, v1, Lcom/vivo/pcsuite/pcconnect/ShareLinkService$q;->e Lcom/vivo/pcsuite/pcconnect/ShareLinkService;
+000004: invoke-static v0, Lcom/vivo/pcsuite/pcconnect/ShareLinkService;->v(Lcom/vivo/pcsuite/pcconnect/ShareLinkService;)Lcom/vivo/pcsuite/pcconnect/ble/IBluetoothLe;
+00000a: move-result-object v0
+00000c: if-eqz v0, +00bh
+000010: iget-object v0, v1, Lcom/vivo/pcsuite/pcconnect/ShareLinkService$q;->e Lcom/vivo/pcsuite/pcconnect/ShareLinkService;
+000014: invoke-static v0, Lcom/vivo/pcsuite/pcconnect/ShareLinkService;->v(Lcom/vivo/pcsuite/pcconnect/ShareLinkService;)Lcom/vivo/pcsuite/pcconnect/ble/IBluetoothLe;
+00001a: move-result-object v0
+00001c: invoke-interface v0, v2, Lcom/vivo/pcsuite/pcconnect/ble/IBluetoothLe;->sendInfo(Ljava/lang/String;)V
+000022: return-void 
+
+METHOD sendIsAuto(Ljava/lang/String; Z)V
+000000: iget-object v0, v4, Lcom/vivo/pcsuite/pcconnect/ShareLinkService$q;->e Lcom/vivo/pcsuite/pcconnect/ShareLinkService;
+000004: invoke-static v0, Lcom/vivo/pcsuite/pcconnect/ble/j;->b(Landroid/content/Context;)Ljava/lang/String;
+00000a: move-result-object v0
+00000c: invoke-static Lcom/vivo/pcsuite/pcconnect/ShareLinkService;->k()Ljava/lang/String;
+000012: move-result-object v1
+000014: new-instance v2, Ljava/lang/StringBuilder;
+000018: invoke-direct v2, Ljava/lang/StringBuilder;-><init>()V
+00001e: const-string v3, "sendIsAuto: dd:"
+000022: invoke-virtual v2, v3, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+000028: invoke-static v5, Lcom/vivo/pcsuite/pcconnect/g;->a(Ljava/lang/String;)Ljava/lang/String;
+00002e: move-result-object v3
+000030: invoke-virtual v2, v3, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+000036: const-string v3, " ,lastLinkDevice:"
+00003a: invoke-virtual v2, v3, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+000040: invoke-virtual v2, v0, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+000046: const-string v3, " ,isAuto"
+00004a: invoke-virtual v2, v3, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+000050: invoke-virtual v2, v6, Ljava/lang/StringBuilder;->append(Z)Ljava/lang/StringBuilder;
+000056: invoke-virtual v2, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
+00005c: move-result-object v2
+00005e: invoke-static v1, v2, Lc/c/f/a/b;->k(Ljava/lang/String; Ljava/lang/String;)V
+000064: invoke-static v5, v0, Landroid/text/TextUtils;->equals(Ljava/lang/CharSequence; Ljava/lang/CharSequence;)Z
+00006a: move-result v5
+00006c: if-eqz v5, +007h
+000070: iget-object v5, v4, Lcom/vivo/pcsuite/pcconnect/ShareLinkService$q;->e Lcom/vivo/pcsuite/pcconnect/ShareLinkService;
+000074: invoke-static v5, v6, Lcom/vivo/pcsuite/pcconnect/ble/j;->a(Landroid/content/Context; Z)V
+00007a: return-void 
+
+METHOD startAdvertising(Z)V
+000000: invoke-static Lcom/vivo/pcsuite/pcconnect/ShareLinkService;->k()Ljava/lang/String;
+000006: move-result-object v0
+000008: new-instance v1, Ljava/lang/StringBuilder;
+00000c: invoke-direct v1, Ljava/lang/StringBuilder;-><init>()V
+000012: const-string v2, "stopAdvertising  "
+000016: invoke-virtual v1, v2, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+00001c: iget-object v2, v3, Lcom/vivo/pcsuite/pcconnect/ShareLinkService$q;->e Lcom/vivo/pcsuite/pcconnect/ShareLinkService;
+000020: invoke-static v2, Lcom/vivo/pcsuite/pcconnect/ShareLinkService;->v(Lcom/vivo/pcsuite/pcconnect/ShareLinkService;)Lcom/vivo/pcsuite/pcconnect/ble/IBluetoothLe;
+000026: move-result-object v2
+000028: invoke-virtual v1, v2, Ljava/lang/StringBuilder;->append(Ljava/lang/Object;)Ljava/lang/StringBuilder;
+00002e: const-string v2, "  isSplash:"
+000032: invoke-virtual v1, v2, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+000038: invoke-virtual v1, v4, Ljava/lang/StringBuilder;->append(Z)Ljava/lang/StringBuilder;
+00003e: invoke-virtual v1, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
+000044: move-result-object v1
+000046: invoke-static v0, v1, Lc/c/f/a/b;->k(Ljava/lang/String; Ljava/lang/String;)V
+00004c: iget-object v0, v3, Lcom/vivo/pcsuite/pcconnect/ShareLinkService$q;->e Lcom/vivo/pcsuite/pcconnect/ShareLinkService;
+000050: invoke-static v0, v4, Lcom/vivo/pcsuite/pcconnect/ShareLinkService;->a(Lcom/vivo/pcsuite/pcconnect/ShareLinkService; Z)Z
+000056: iget-object v0, v3, Lcom/vivo/pcsuite/pcconnect/ShareLinkService$q;->e Lcom/vivo/pcsuite/pcconnect/ShareLinkService;
+00005a: invoke-static v0, Lcom/vivo/pcsuite/pcconnect/ShareLinkService;->v(Lcom/vivo/pcsuite/pcconnect/ShareLinkService;)Lcom/vivo/pcsuite/pcconnect/ble/IBluetoothLe;
+000060: move-result-object v0
+000062: if-eqz v0, +00bh
+000066: iget-object v0, v3, Lcom/vivo/pcsuite/pcconnect/ShareLinkService$q;->e Lcom/vivo/pcsuite/pcconnect/ShareLinkService;
+00006a: invoke-static v0, Lcom/vivo/pcsuite/pcconnect/ShareLinkService;->v(Lcom/vivo/pcsuite/pcconnect/ShareLinkService;)Lcom/vivo/pcsuite/pcconnect/ble/IBluetoothLe;
+000070: move-result-object v0
+000072: invoke-interface v0, v4, Lcom/vivo/pcsuite/pcconnect/ble/IBluetoothLe;->startBleAdvertising(Z)V
+000078: return-void 
+
+METHOD startScan()V
+000000: iget-object v0, v1, Lcom/vivo/pcsuite/pcconnect/ShareLinkService$q;->e Lcom/vivo/pcsuite/pcconnect/ShareLinkService;
+000004: invoke-virtual v0, Lcom/vivo/pcsuite/pcconnect/ShareLinkService;->g()V
+00000a: iget-object v0, v1, Lcom/vivo/pcsuite/pcconnect/ShareLinkService$q;->e Lcom/vivo/pcsuite/pcconnect/ShareLinkService;
+00000e: invoke-virtual v0, Lcom/vivo/pcsuite/pcconnect/ShareLinkService;->i()V
+000014: return-void 
+
+METHOD stopAdvertising()V
+000000: invoke-static Lcom/vivo/pcsuite/pcconnect/ShareLinkService;->k()Ljava/lang/String;
+000006: move-result-object v0
+000008: new-instance v1, Ljava/lang/StringBuilder;
+00000c: invoke-direct v1, Ljava/lang/StringBuilder;-><init>()V
+000012: const-string v2, "stopAdvertising  "
+000016: invoke-virtual v1, v2, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+00001c: iget-object v2, v3, Lcom/vivo/pcsuite/pcconnect/ShareLinkService$q;->e Lcom/vivo/pcsuite/pcconnect/ShareLinkService;
+000020: invoke-static v2, Lcom/vivo/pcsuite/pcconnect/ShareLinkService;->v(Lcom/vivo/pcsuite/pcconnect/ShareLinkService;)Lcom/vivo/pcsuite/pcconnect/ble/IBluetoothLe;
+000026: move-result-object v2
+000028: invoke-virtual v1, v2, Ljava/lang/StringBuilder;->append(Ljava/lang/Object;)Ljava/lang/StringBuilder;
+00002e: invoke-virtual v1, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
+000034: move-result-object v1
+000036: invoke-static v0, v1, Lc/c/f/a/b;->k(Ljava/lang/String; Ljava/lang/String;)V
+00003c: iget-object v0, v3, Lcom/vivo/pcsuite/pcconnect/ShareLinkService$q;->e Lcom/vivo/pcsuite/pcconnect/ShareLinkService;
+000040: invoke-static v0, Lcom/vivo/pcsuite/pcconnect/ShareLinkService;->v(Lcom/vivo/pcsuite/pcconnect/ShareLinkService;)Lcom/vivo/pcsuite/pcconnect/ble/IBluetoothLe;
+000046: move-result-object v0
+000048: if-eqz v0, +00bh
+00004c: iget-object v0, v3, Lcom/vivo/pcsuite/pcconnect/ShareLinkService$q;->e Lcom/vivo/pcsuite/pcconnect/ShareLinkService;
+000050: invoke-static v0, Lcom/vivo/pcsuite/pcconnect/ShareLinkService;->v(Lcom/vivo/pcsuite/pcconnect/ShareLinkService;)Lcom/vivo/pcsuite/pcconnect/ble/IBluetoothLe;
+000056: move-result-object v0
+000058: invoke-interface v0, Lcom/vivo/pcsuite/pcconnect/ble/IBluetoothLe;->stopBleAdvertising()V
+00005e: return-void 
+
+METHOD stopScan()V
+000000: invoke-static Lcom/vivo/pcsuite/pcconnect/ShareLinkService;->k()Ljava/lang/String;
+000006: move-result-object v0
+000008: const-string v1, "stopScan "
+00000c: invoke-static v0, v1, Lc/c/f/a/b;->k(Ljava/lang/String; Ljava/lang/String;)V
+000012: iget-object v0, v2, Lcom/vivo/pcsuite/pcconnect/ShareLinkService$q;->e Lcom/vivo/pcsuite/pcconnect/ShareLinkService;
+000016: invoke-virtual v0, Lcom/vivo/pcsuite/pcconnect/ShareLinkService;->j()V
+00001c: iget-object v0, v2, Lcom/vivo/pcsuite/pcconnect/ShareLinkService$q;->e Lcom/vivo/pcsuite/pcconnect/ShareLinkService;
+000020: invoke-virtual v0, Lcom/vivo/pcsuite/pcconnect/ShareLinkService;->h()V
+000026: return-void 
+
+METHOD unregisterLinkObserver(Lcom/vivo/pcsuite/pcconnect/ShareLinkObserver;)V
+000000: iget-object v0, v1, Lcom/vivo/pcsuite/pcconnect/ShareLinkService$q;->e Lcom/vivo/pcsuite/pcconnect/ShareLinkService;
+000004: invoke-static v0, Lcom/vivo/pcsuite/pcconnect/ShareLinkService;->n(Lcom/vivo/pcsuite/pcconnect/ShareLinkService;)Lcom/vivo/pcsuite/pcconnect/m;
+00000a: move-result-object v0
+00000c: invoke-virtual v0, v2, Lcom/vivo/pcsuite/pcconnect/m;->b(Lcom/vivo/pcsuite/pcconnect/ShareLinkObserver;)V
+000012: return-void 

@@ -1,0 +1,115 @@
+APK pcsuite/updateApk/connbase.apk
+DEX classes.dex
+CLASS Lcom/vivo/connbase/e0/e/n;
+SUPER Ljava/lang/Object;
+FIELDS
+A I = 219
+B I = 220
+C I = 221
+D I = 222
+E I = 223
+F I = 224
+G I = 225
+H I = 226
+I I = 227
+J I = 228
+K I = 229
+L I = 230
+M I = 233
+N I = 234
+O I = 235
+P I = 236
+Q I = 237
+R I = 238
+S I = 301
+T I = 302
+U I = 303
+V I = 304
+W I = 305
+X I = 306
+Y I = 307
+Z I = 308
+a I = 0
+a0 I = 309
+b I = 101
+b0 I = 310
+c I = 102
+c0 I = 311
+d I = 103
+d0 I = 312
+e I = 104
+e0 I = 313
+f I = 105
+f0 I = 314
+g I = 106
+g0 I = 401
+h I = 107
+h0 I = 402
+i I = 201
+i0 I = 403
+j I = 202
+j0 I = 404
+k I = 203
+k0 I = 405
+l I = 204
+l0 I = 406
+m I = 205
+m0 I = 407
+n I = 206
+n0 I = 408
+o I = 207
+o0 I = 500
+p I = 208
+p0 I = 501
+q I = 209
+q0 I = 502
+r I = 210
+r0 I = 503
+s I = 211
+s0 I = 504
+t I = 212
+t0 I = 505
+u I = 213
+u0 I = 506
+v I = 214
+v0 I = 507
+w I = 215
+w0 I = 508
+x I = 216
+y I = 217
+z I = 218
+
+METHOD <init>()V
+000000: invoke-direct v0, Ljava/lang/Object;-><init>()V
+000006: return-void 
+
+METHOD a(I)Ljava/lang/String;
+000000: if-eqz v1, +02dh
+000004: const/16 v0, 204
+000008: if-eq v1, v0, +026h
+00000c: const/16 v0, 233
+000010: if-eq v1, v0, +01fh
+000014: const/16 v0, 101
+000018: if-eq v1, v0, +018h
+00001c: const/16 v0, 102
+000020: if-eq v1, v0, +011h
+000024: packed-switch v1, +000001eh
+00002a: const-string v1, "UNKNOWN STATUS"
+00002e: return-object v1
+000030: const-string v1, "STATUS_TRANSFER_CANCEL"
+000034: return-object v1
+000036: const-string v1, "STATUS_TRANSFER_FAILED"
+00003a: return-object v1
+00003c: const-string v1, "STATUS_TRANSFERRING"
+000040: return-object v1
+000042: const-string v1, "STATUS_SCANNING_FAILED"
+000046: return-object v1
+000048: const-string v1, "STATUS_ADVERTISING_FAILED"
+00004c: return-object v1
+00004e: const-string v1, "STATUS_CONNECT_ERROR"
+000052: return-object v1
+000054: const-string v1, "STATUS_CONNECTION_REJECTED"
+000058: return-object v1
+00005a: const-string v1, "STATUS_SUCCESS"
+00005e: return-object v1
+000060: packed-switch-payload 12d 12e 12f

@@ -1,0 +1,122 @@
+APK pcsuite/updateApk/pcsuite.apk
+DEX classes2.dex
+CLASS Lcom/vivo/connect/sdk/f/c$r;
+SUPER Ljava/lang/Object;
+FIELDS
+g Ljava/lang/String; = ':sendPayloadRunnable'
+a Lcom/vivo/connect/transfer/Payload; = None
+b Landroid/os/Messenger; = None
+c Ljava/lang/String; = None
+d Ljava/lang/String; = None
+e I = None
+f Lcom/vivo/connect/sdk/f/c; = None
+
+METHOD <init>(Lcom/vivo/connect/sdk/f/c; Lcom/vivo/connect/transfer/Payload; Landroid/os/Messenger; Ljava/lang/String; Ljava/lang/String; I)V
+000000: iput-object v1, v0, Lcom/vivo/connect/sdk/f/c$r;->f Lcom/vivo/connect/sdk/f/c;
+000004: iput-object v2, v0, Lcom/vivo/connect/sdk/f/c$r;->a Lcom/vivo/connect/transfer/Payload;
+000008: iput-object v3, v0, Lcom/vivo/connect/sdk/f/c$r;->b Landroid/os/Messenger;
+00000c: iput-object v4, v0, Lcom/vivo/connect/sdk/f/c$r;->c Ljava/lang/String;
+000010: iput-object v5, v0, Lcom/vivo/connect/sdk/f/c$r;->d Ljava/lang/String;
+000014: iput v6, v0, Lcom/vivo/connect/sdk/f/c$r;->e I
+000018: invoke-direct v0, Ljava/lang/Object;-><init>()V
+00001e: return-void 
+
+METHOD run()V
+000000: const-string v1, "ConnectClientImpl"
+000004: const-string v0, "payload json:"
+000008: iget-object v2, v11, Lcom/vivo/connect/sdk/f/c$r;->a Lcom/vivo/connect/transfer/Payload;
+00000c: invoke-static v2, Lcom/vivo/connect/sdk/i/b;->a(Lcom/vivo/connect/transfer/Payload;)Ljava/lang/String;
+000012: move-result-object v7
+000014: new-instance v2, Ljava/lang/StringBuilder;
+000018: invoke-direct v2, v0, Ljava/lang/StringBuilder;-><init>(Ljava/lang/String;)V
+00001e: invoke-virtual v2, v7, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+000024: invoke-virtual v2, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
+00002a: move-result-object v0
+00002c: invoke-static v1, v0, Lcom/vivo/connect/logger/EasyLog;->i(Ljava/lang/String; Ljava/lang/String;)V
+000032: iget-object v0, v11, Lcom/vivo/connect/sdk/f/c$r;->f Lcom/vivo/connect/sdk/f/c;
+000036: invoke-static v0, Lcom/vivo/connect/sdk/f/c;->a(Lcom/vivo/connect/sdk/f/c;)Lcom/vivo/connbase/IClient;
+00003c: move-result-object v0
+00003e: const/4 v2, 3
+000040: const/4 v10, 0
+000042: if-eqz v0, +032h
+000046: iget-object v0, v11, Lcom/vivo/connect/sdk/f/c$r;->a Lcom/vivo/connect/transfer/Payload;
+00004a: invoke-virtual v0, Lcom/vivo/connect/transfer/Payload;->getType()I
+000050: move-result v0
+000052: if-ne v0, v2, +012h
+000056: iget-object v0, v11, Lcom/vivo/connect/sdk/f/c$r;->a Lcom/vivo/connect/transfer/Payload;
+00005a: invoke-virtual v0, Lcom/vivo/connect/transfer/Payload;->asStream()Lcom/vivo/connect/transfer/Payload$Stream;
+000060: move-result-object v0
+000062: invoke-virtual v0, Lcom/vivo/connect/transfer/Payload$Stream;->getParcelFileDescriptors()[Landroid/os/ParcelFileDescriptor;
+000068: move-result-object v0
+00006a: move-object v9, v0
+00006c: goto +6h
+00006e: move-exception v0
+000070: move-object v11, v0
+000072: goto/16 +076h
+000076: move-object v9, v10
+000078: const-string v0, "ready to sendPayload1"
+00007c: invoke-static v1, v0, Lcom/vivo/connect/logger/EasyLog;->i(Ljava/lang/String; Ljava/lang/String;)V
+000082: iget-object v0, v11, Lcom/vivo/connect/sdk/f/c$r;->f Lcom/vivo/connect/sdk/f/c;
+000086: invoke-static v0, Lcom/vivo/connect/sdk/f/c;->a(Lcom/vivo/connect/sdk/f/c;)Lcom/vivo/connbase/IClient;
+00008c: move-result-object v3
+00008e: iget-object v4, v11, Lcom/vivo/connect/sdk/f/c$r;->b Landroid/os/Messenger;
+000092: iget-object v5, v11, Lcom/vivo/connect/sdk/f/c$r;->c Ljava/lang/String;
+000096: iget-object v6, v11, Lcom/vivo/connect/sdk/f/c$r;->d Ljava/lang/String;
+00009a: iget v8, v11, Lcom/vivo/connect/sdk/f/c$r;->e I
+00009e: invoke-interface/range v3 ... v9, Lcom/vivo/connbase/IClient;->sendPayload(Landroid/os/Messenger; Ljava/lang/String; Ljava/lang/String; Ljava/lang/String; I [Landroid/os/ParcelFileDescriptor;)V
+0000a4: goto +37h
+0000a6: iget-object v0, v11, Lcom/vivo/connect/sdk/f/c$r;->f Lcom/vivo/connect/sdk/f/c;
+0000aa: const-string v3, ":sendPayloadRunnable"
+0000ae: invoke-static v0, v3, Lcom/vivo/connect/sdk/f/c;->a(Lcom/vivo/connect/sdk/f/c; Ljava/lang/String;)Z
+0000b4: move-result v0
+0000b6: if-nez v0, +003h
+0000ba: goto +63h
+0000bc: iget-object v0, v11, Lcom/vivo/connect/sdk/f/c$r;->a Lcom/vivo/connect/transfer/Payload;
+0000c0: invoke-virtual v0, Lcom/vivo/connect/transfer/Payload;->getType()I
+0000c6: move-result v0
+0000c8: if-ne v0, v2, +00eh
+0000cc: iget-object v0, v11, Lcom/vivo/connect/sdk/f/c$r;->a Lcom/vivo/connect/transfer/Payload;
+0000d0: invoke-virtual v0, Lcom/vivo/connect/transfer/Payload;->asStream()Lcom/vivo/connect/transfer/Payload$Stream;
+0000d6: move-result-object v0
+0000d8: invoke-virtual v0, Lcom/vivo/connect/transfer/Payload$Stream;->getParcelFileDescriptors()[Landroid/os/ParcelFileDescriptor;
+0000de: move-result-object v0
+0000e0: move-object v9, v0
+0000e2: goto +2h
+0000e4: move-object v9, v10
+0000e6: const-string v0, "ready to sendPayload2"
+0000ea: invoke-static v1, v0, Lcom/vivo/connect/logger/EasyLog;->i(Ljava/lang/String; Ljava/lang/String;)V
+0000f0: iget-object v0, v11, Lcom/vivo/connect/sdk/f/c$r;->f Lcom/vivo/connect/sdk/f/c;
+0000f4: invoke-static v0, Lcom/vivo/connect/sdk/f/c;->a(Lcom/vivo/connect/sdk/f/c;)Lcom/vivo/connbase/IClient;
+0000fa: move-result-object v3
+0000fc: iget-object v4, v11, Lcom/vivo/connect/sdk/f/c$r;->b Landroid/os/Messenger;
+000100: iget-object v5, v11, Lcom/vivo/connect/sdk/f/c$r;->c Ljava/lang/String;
+000104: iget-object v6, v11, Lcom/vivo/connect/sdk/f/c$r;->d Ljava/lang/String;
+000108: iget v8, v11, Lcom/vivo/connect/sdk/f/c$r;->e I
+00010c: invoke-interface/range v3 ... v9, Lcom/vivo/connbase/IClient;->sendPayload(Landroid/os/Messenger; Ljava/lang/String; Ljava/lang/String; Ljava/lang/String; I [Landroid/os/ParcelFileDescriptor;)V
+000112: const-string v0, "sendPayload end"
+000116: invoke-static v1, v0, Lcom/vivo/connect/logger/EasyLog;->i(Ljava/lang/String; Ljava/lang/String;)V
+00011c: iget-object v0, v11, Lcom/vivo/connect/sdk/f/c$r;->a Lcom/vivo/connect/transfer/Payload;
+000120: invoke-virtual v0, Lcom/vivo/connect/transfer/Payload;->getType()I
+000126: move-result v0
+000128: if-ne v0, v2, +02ch
+00012c: iget-object v0, v11, Lcom/vivo/connect/sdk/f/c$r;->f Lcom/vivo/connect/sdk/f/c;
+000130: iget-object v2, v11, Lcom/vivo/connect/sdk/f/c$r;->a Lcom/vivo/connect/transfer/Payload;
+000134: invoke-static v0, v2, Lcom/vivo/connect/sdk/f/c;->a(Lcom/vivo/connect/sdk/f/c; Lcom/vivo/connect/transfer/Payload;)Lcom/vivo/connect/transfer/Payload;
+00013a: iget-object v0, v11, Lcom/vivo/connect/sdk/f/c$r;->a Lcom/vivo/connect/transfer/Payload;
+00013e: invoke-virtual v0, Lcom/vivo/connect/transfer/Payload;->asStream()Lcom/vivo/connect/transfer/Payload$Stream;
+000144: move-result-object v0
+000146: invoke-virtual v0, Lcom/vivo/connect/transfer/Payload$Stream;->flush()Z
+00014c: iget-object v11, v11, Lcom/vivo/connect/sdk/f/c$r;->f Lcom/vivo/connect/sdk/f/c;
+000150: invoke-static v11, v10, Lcom/vivo/connect/sdk/f/c;->a(Lcom/vivo/connect/sdk/f/c; Lcom/vivo/connect/transfer/Payload;)Lcom/vivo/connect/transfer/Payload;
+000156: return-void 
+000158: move-exception v0
+00015a: move-object v11, v0
+00015c: throw v11
+00015e: new-instance v0, Ljava/lang/StringBuilder;
+000162: const-string v2, "send payload error:"
+000166: invoke-direct v0, v2, Ljava/lang/StringBuilder;-><init>(Ljava/lang/String;)V
+00016c: invoke-virtual v0, v11, Ljava/lang/StringBuilder;->append(Ljava/lang/Object;)Ljava/lang/StringBuilder;
+000172: invoke-virtual v0, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
+000178: move-result-object v11
+00017a: invoke-static v1, v11, Lcom/vivo/connect/logger/EasyLog;->e(Ljava/lang/String; Ljava/lang/String;)V
+000180: return-void 

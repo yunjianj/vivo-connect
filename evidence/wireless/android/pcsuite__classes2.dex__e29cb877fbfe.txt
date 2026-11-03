@@ -1,0 +1,1862 @@
+APK pcsuite/updateApk/pcsuite.apk
+DEX classes2.dex
+CLASS Lcom/vivo/pcsuite/connect/ConnectControlModel;
+SUPER Ljava/lang/Object;
+FIELDS
+BUSINESS_NAME Ljava/lang/String; = 'businessName'
+PCSUITE_TRANSFER Ljava/lang/String; = 'pcsuiteTransfer'
+SERVICE_ID Ljava/lang/String; = 'com.vivo.pcsuite.SERVICE'
+currentConnectBean Lcom/vivo/pcsuite/pcconnect/PCBean; = None
+o Lcom/vivo/pcsuite/pcconnect/PcOtherShare; = None
+p Z = False
+a I = None
+b Lcom/vivo/pcsuite/connect/ConnectControlModel$ApRunnable; = None
+c Lcom/vivo/pcsuite/connect/ConnectControlModel$DialogRunnable; = None
+d Lcom/vivo/pcsuite/interfaces/ConnectListener; = None
+e Landroid/os/Handler; = None
+f Z = None
+g Lcom/vivo/pcsuite/common/gson/ConnDetail; = None
+h Z = None
+i Lcom/vivo/pcsuite/connect/ConnectControlModel$AgreeRunnable; = None
+j Ljava/lang/String; = None
+k Lcom/vivo/pcsuite/connect/ConnectControlModel$CloudConnectRunnable; = None
+l Ljava/lang/String; = None
+m Z = None
+n Lcom/vivo/connect/ConnectionCallback; = None
+
+METHOD <init>()V
+000000: invoke-direct v2, Ljava/lang/Object;-><init>()V
+000006: const/16 v0, 30000
+00000a: iput v0, v2, Lcom/vivo/pcsuite/connect/ConnectControlModel;->a I
+00000e: new-instance v0, Landroid/os/Handler;
+000012: invoke-static Landroid/os/Looper;->getMainLooper()Landroid/os/Looper;
+000018: move-result-object v1
+00001a: invoke-direct v0, v1, Landroid/os/Handler;-><init>(Landroid/os/Looper;)V
+000020: iput-object v0, v2, Lcom/vivo/pcsuite/connect/ConnectControlModel;->e Landroid/os/Handler;
+000024: const/4 v0, 0
+000026: iput-boolean v0, v2, Lcom/vivo/pcsuite/connect/ConnectControlModel;->m Z
+00002a: new-instance v0, Lcom/vivo/pcsuite/connect/ConnectControlModel$8;
+00002e: invoke-direct v0, v2, Lcom/vivo/pcsuite/connect/ConnectControlModel$8;-><init>(Lcom/vivo/pcsuite/connect/ConnectControlModel;)V
+000034: iput-object v0, v2, Lcom/vivo/pcsuite/connect/ConnectControlModel;->n Lcom/vivo/connect/ConnectionCallback;
+000038: return-void 
+
+METHOD a(Lcom/vivo/pcsuite/connect/ConnectControlModel;)Lcom/vivo/pcsuite/connect/ConnectControlModel$CloudConnectRunnable;
+000000: iget-object v0, v0, Lcom/vivo/pcsuite/connect/ConnectControlModel;->k Lcom/vivo/pcsuite/connect/ConnectControlModel$CloudConnectRunnable;
+000004: return-object v0
+
+METHOD b(Lcom/vivo/pcsuite/connect/ConnectControlModel;)Ljava/lang/String;
+000000: iget-object v0, v0, Lcom/vivo/pcsuite/connect/ConnectControlModel;->l Ljava/lang/String;
+000004: return-object v0
+
+METHOD c(Lcom/vivo/pcsuite/connect/ConnectControlModel;)Lcom/vivo/pcsuite/common/gson/ConnDetail;
+000000: iget-object v0, v0, Lcom/vivo/pcsuite/connect/ConnectControlModel;->g Lcom/vivo/pcsuite/common/gson/ConnDetail;
+000004: return-object v0
+
+METHOD d(Lcom/vivo/pcsuite/connect/ConnectControlModel;)Lcom/vivo/pcsuite/interfaces/ConnectListener;
+000000: iget-object v0, v0, Lcom/vivo/pcsuite/connect/ConnectControlModel;->d Lcom/vivo/pcsuite/interfaces/ConnectListener;
+000004: return-object v0
+
+METHOD e(Lcom/vivo/pcsuite/connect/ConnectControlModel;)Landroid/os/Handler;
+000000: iget-object v0, v0, Lcom/vivo/pcsuite/connect/ConnectControlModel;->e Landroid/os/Handler;
+000004: return-object v0
+
+METHOD f(Ljava/lang/String;)V
+000000: invoke-static v0, Lcom/vivo/pcsuite/connect/ConnectControlModel;->l(Ljava/lang/String;)V
+000006: return-void 
+
+METHOD g(Lcom/vivo/pcsuite/connect/ConnectControlModel; Ljava/lang/String; Ljava/lang/String; Ljava/lang/String; Z)V
+000000: const/4 v5, 1
+000002: move-object v0, v6
+000004: move-object v1, v7
+000006: move-object v2, v8
+000008: move-object v3, v9
+00000a: move v4, v10
+00000c: invoke-direct/range v0 ... v5, Lcom/vivo/pcsuite/connect/ConnectControlModel;->m(Ljava/lang/String; Ljava/lang/String; Ljava/lang/String; Z Z)V
+000012: return-void 
+
+METHOD getCurrentConnectBean()Lcom/vivo/pcsuite/pcconnect/PCBean;
+000000: sget-object v0, Lcom/vivo/pcsuite/connect/ConnectControlModel;->currentConnectBean Lcom/vivo/pcsuite/pcconnect/PCBean;
+000004: return-object v0
+
+METHOD getInstance()Lcom/vivo/pcsuite/connect/ConnectControlModel;
+000000: invoke-static Lcom/vivo/pcsuite/connect/ConnectControlModel$Instance;->a()Lcom/vivo/pcsuite/connect/ConnectControlModel;
+000006: move-result-object v0
+000008: return-object v0
+
+METHOD h(Lcom/vivo/pcsuite/connect/ConnectControlModel; Lcom/vivo/connect/discovery/ScanInfo; Z Ljava/lang/String;)V
+000000: const/4 v0, 1
+000002: invoke-direct v1, v2, v3, v0, v4, Lcom/vivo/pcsuite/connect/ConnectControlModel;->n(Lcom/vivo/connect/discovery/ScanInfo; Z Z Ljava/lang/String;)V
+000008: return-void 
+
+METHOD i()Lcom/vivo/pcsuite/pcconnect/PcOtherShare;
+000000: sget-object v0, Lcom/vivo/pcsuite/connect/ConnectControlModel;->o Lcom/vivo/pcsuite/pcconnect/PcOtherShare;
+000004: return-object v0
+
+METHOD j()Z
+000000: sget-boolean v0, Lcom/vivo/pcsuite/connect/ConnectControlModel;->p Z
+000004: return v0
+
+METHOD k(Z)V
+000000: sput-boolean v0, Lcom/vivo/pcsuite/connect/ConnectControlModel;->p Z
+000004: return-void 
+
+METHOD l(Ljava/lang/String;)V
+000000: const-string v0, "pcsuite_ConnectControlModel"
+000004: const-string v1, " accept  Connect for pc by wlan"
+000008: invoke-static v0, v1, Lcom/vivo/connect/logger/EasyLog;->i(Ljava/lang/String; Ljava/lang/String;)V
+00000e: sget-object v0, Lcom/vivo/pcsuite/PcSuiteApplication;->I1 Lcom/vivo/pcsuite/PcSuiteApplication;
+000012: invoke-virtual v0, Lcom/vivo/pcsuite/PcSuiteApplication;->A()Ljava/lang/StringBuffer;
+000018: move-result-object v0
+00001a: const-string v1, "1"
+00001e: invoke-virtual v0, v1, Ljava/lang/StringBuffer;->append(Ljava/lang/String;)Ljava/lang/StringBuffer;
+000024: sget-object v0, Lcom/vivo/pcsuite/PcSuiteApplication;->I1 Lcom/vivo/pcsuite/PcSuiteApplication;
+000028: invoke-static v0, Lcom/vivo/connect/ConnectBase;->getConnectionClient(Landroid/content/Context;)Lcom/vivo/connect/ConnectClient;
+00002e: move-result-object v0
+000030: new-instance v1, Lcom/vivo/pcsuite/connect/ConnectControlModel$9;
+000034: invoke-direct v1, Ljava/lang/Object;-><init>()V
+00003a: const-string v2, "com.vivo.pcsuite.SERVICE"
+00003e: invoke-virtual v0, v2, v3, v1, Lcom/vivo/connect/ConnectClient;->acceptConnection(Ljava/lang/String; Ljava/lang/String; Lcom/vivo/connect/transfer/PayloadCallback;)Lcom/vivo/connect/tasks/Task;
+000044: return-void 
+
+METHOD m(Ljava/lang/String; Ljava/lang/String; Ljava/lang/String; Z Z)V
+000000: new-instance v0, Lcom/vivo/pcsuite/pcconnect/PCBean;
+000004: invoke-direct v0, Lcom/vivo/pcsuite/pcconnect/PCBean;-><init>()V
+00000a: const/4 v1, 1
+00000c: invoke-virtual v0, v1, Lcom/vivo/pcsuite/pcconnect/PCBean;->setOnLine(Z)V
+000012: invoke-virtual v0, v4, Lcom/vivo/pcsuite/pcconnect/PCBean;->setDeviceName(Ljava/lang/String;)V
+000018: invoke-virtual v0, v6, Lcom/vivo/pcsuite/pcconnect/PCBean;->setUserName(Ljava/lang/String;)V
+00001e: invoke-virtual v0, v5, Lcom/vivo/pcsuite/pcconnect/PCBean;->setDeviceId(Ljava/lang/String;)V
+000024: invoke-virtual v0, v7, Lcom/vivo/pcsuite/pcconnect/PCBean;->setAutoLink(Z)V
+00002a: const/4 v5, 0
+00002c: invoke-virtual v0, v5, Lcom/vivo/pcsuite/pcconnect/PCBean;->setFindType(I)V
+000032: invoke-virtual v0, v8, Lcom/vivo/pcsuite/pcconnect/PCBean;->setLast(Z)V
+000038: sput-object v0, Lcom/vivo/pcsuite/connect/ConnectControlModel;->currentConnectBean Lcom/vivo/pcsuite/pcconnect/PCBean;
+00003c: new-instance v7, Lcom/google/gson/Gson;
+000040: invoke-direct v7, Lcom/google/gson/Gson;-><init>()V
+000046: invoke-virtual v7, v0, Lcom/google/gson/Gson;->toJson(Ljava/lang/Object;)Ljava/lang/String;
+00004c: move-result-object v7
+00004e: sget-object v8, Lcom/vivo/pcsuite/PcSuiteApplication;->I1 Lcom/vivo/pcsuite/PcSuiteApplication;
+000052: const-string v1, "pcSuite_info"
+000056: invoke-virtual v8, v1, v5, Landroid/content/Context;->getSharedPreferences(Ljava/lang/String; I)Landroid/content/SharedPreferences;
+00005c: move-result-object v8
+00005e: invoke-interface v8, Landroid/content/SharedPreferences;->edit()Landroid/content/SharedPreferences$Editor;
+000064: move-result-object v8
+000066: const-string v1, "last_connect_device"
+00006a: invoke-interface v8, v1, v7, Landroid/content/SharedPreferences$Editor;->putString(Ljava/lang/String; Ljava/lang/String;)Landroid/content/SharedPreferences$Editor;
+000070: invoke-interface v8, Landroid/content/SharedPreferences$Editor;->apply()V
+000076: invoke-static Lcom/vivo/pcsuite/util/j0;->a()Z
+00007c: move-result v7
+00007e: new-instance v8, Ljava/lang/StringBuilder;
+000082: const-string v1, "startConnectByBle agreePriPro:"
+000086: invoke-direct v8, v1, Ljava/lang/StringBuilder;-><init>(Ljava/lang/String;)V
+00008c: invoke-virtual v8, v7, Ljava/lang/StringBuilder;->append(Z)Ljava/lang/StringBuilder;
+000092: invoke-virtual v8, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
+000098: move-result-object v8
+00009a: const-string v1, "pcsuite_ConnectControlModel"
+00009e: invoke-static v1, v8, Lcom/vivo/connect/logger/EasyLog;->i(Ljava/lang/String; Ljava/lang/String;)V
+0000a4: new-instance v8, Ljava/lang/StringBuilder;
+0000a8: const-string v2, "startConnectByBle agreePriPro: "
+0000ac: invoke-direct v8, v2, Ljava/lang/StringBuilder;-><init>(Ljava/lang/String;)V
+0000b2: invoke-virtual v8, v7, Ljava/lang/StringBuilder;->append(Z)Ljava/lang/StringBuilder;
+0000b8: invoke-virtual v8, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
+0000be: move-result-object v8
+0000c0: invoke-static v1, v8, Lcom/vivo/connect/logger/EasyLog;->i(Ljava/lang/String; Ljava/lang/String;)V
+0000c6: const/4 v8, 5
+0000c8: if-eqz v7, +005h
+0000cc: invoke-virtual v3, v8, Lcom/vivo/pcsuite/connect/ConnectControlModel;->showConnectIngByPC(I)V
+0000d2: invoke-static v5, Lcom/vivo/pcsuite/service/PcSuiteObserver;->G(I)V
+0000d8: invoke-virtual v3, Lcom/vivo/pcsuite/connect/ConnectControlModel;->postApTimeTask()V
+0000de: invoke-static Lcom/vivo/pcsuite/connect/ConnectControlModel;->getInstance()Lcom/vivo/pcsuite/connect/ConnectControlModel;
+0000e4: move-result-object v3
+0000e6: invoke-virtual v3, v0, Lcom/vivo/pcsuite/connect/ConnectControlModel;->setCurrentConnectBean(Lcom/vivo/pcsuite/pcconnect/PCBean;)V
+0000ec: sget-object v3, Lcom/vivo/pcsuite/PcSuiteApplication;->I1 Lcom/vivo/pcsuite/PcSuiteApplication;
+0000f0: invoke-static v3, v8, v4, v6, Lcom/vivo/pcsuite/service/PcSuiteObserver;->K(Lcom/vivo/pcsuite/PcSuiteApplication; I Ljava/lang/String; Ljava/lang/String;)V
+0000f6: return-void 
+
+METHOD n(Lcom/vivo/connect/discovery/ScanInfo; Z Z Ljava/lang/String;)V
+000000: new-instance v0, Lcom/vivo/pcsuite/pcconnect/PCBean;
+000004: invoke-direct v0, Lcom/vivo/pcsuite/pcconnect/PCBean;-><init>()V
+00000a: const/4 v1, 1
+00000c: invoke-virtual v0, v1, Lcom/vivo/pcsuite/pcconnect/PCBean;->setOnLine(Z)V
+000012: invoke-static Landroid/os/SystemClock;->elapsedRealtime()J
+000018: move-result-wide v2
+00001a: invoke-virtual v0, v2, v3, Lcom/vivo/pcsuite/pcconnect/PCBean;->setTime(J)V
+000020: invoke-virtual v5, Lcom/vivo/connect/discovery/ScanInfo;->isSameOpenId()Z
+000026: move-result v2
+000028: invoke-virtual v0, v2, Lcom/vivo/pcsuite/pcconnect/PCBean;->setOwnerId(Z)V
+00002e: invoke-virtual v5, Lcom/vivo/connect/discovery/ScanInfo;->getDeviceName()Ljava/lang/String;
+000034: move-result-object v2
+000036: invoke-virtual v0, v2, Lcom/vivo/pcsuite/pcconnect/PCBean;->setDeviceName(Ljava/lang/String;)V
+00003c: invoke-virtual v5, Lcom/vivo/connect/discovery/ScanInfo;->getAccount()Ljava/lang/String;
+000042: move-result-object v2
+000044: invoke-virtual v0, v2, Lcom/vivo/pcsuite/pcconnect/PCBean;->setUserName(Ljava/lang/String;)V
+00004a: invoke-virtual v5, Lcom/vivo/connect/discovery/ScanInfo;->getDeviceId()Ljava/lang/String;
+000050: move-result-object v2
+000052: invoke-virtual v0, v2, Lcom/vivo/pcsuite/pcconnect/PCBean;->setDeviceId(Ljava/lang/String;)V
+000058: invoke-virtual v0, v6, Lcom/vivo/pcsuite/pcconnect/PCBean;->setAutoLink(Z)V
+00005e: invoke-virtual v0, v1, Lcom/vivo/pcsuite/pcconnect/PCBean;->setFindType(I)V
+000064: invoke-virtual v0, v7, Lcom/vivo/pcsuite/pcconnect/PCBean;->setLast(Z)V
+00006a: sput-object v0, Lcom/vivo/pcsuite/connect/ConnectControlModel;->currentConnectBean Lcom/vivo/pcsuite/pcconnect/PCBean;
+00006e: new-instance v6, Lcom/google/gson/Gson;
+000072: invoke-direct v6, Lcom/google/gson/Gson;-><init>()V
+000078: invoke-virtual v6, v0, Lcom/google/gson/Gson;->toJson(Ljava/lang/Object;)Ljava/lang/String;
+00007e: move-result-object v6
+000080: sget-object v7, Lcom/vivo/pcsuite/PcSuiteApplication;->I1 Lcom/vivo/pcsuite/PcSuiteApplication;
+000084: const-string v1, "pcSuite_info"
+000088: const/4 v2, 0
+00008a: invoke-virtual v7, v1, v2, Landroid/content/Context;->getSharedPreferences(Ljava/lang/String; I)Landroid/content/SharedPreferences;
+000090: move-result-object v7
+000092: invoke-interface v7, Landroid/content/SharedPreferences;->edit()Landroid/content/SharedPreferences$Editor;
+000098: move-result-object v7
+00009a: const-string v1, "last_connect_device"
+00009e: invoke-interface v7, v1, v6, Landroid/content/SharedPreferences$Editor;->putString(Ljava/lang/String; Ljava/lang/String;)Landroid/content/SharedPreferences$Editor;
+0000a4: invoke-interface v7, Landroid/content/SharedPreferences$Editor;->apply()V
+0000aa: invoke-static Lcom/vivo/pcsuite/util/j0;->a()Z
+0000b0: move-result v6
+0000b2: const/4 v7, 3
+0000b4: if-eqz v6, +005h
+0000b8: invoke-virtual v4, v7, Lcom/vivo/pcsuite/connect/ConnectControlModel;->showConnectIngByPC(I)V
+0000be: invoke-static v2, Lcom/vivo/pcsuite/service/PcSuiteObserver;->G(I)V
+0000c4: invoke-virtual v4, Lcom/vivo/pcsuite/connect/ConnectControlModel;->postApTimeTask()V
+0000ca: invoke-static Lcom/vivo/pcsuite/connect/ConnectControlModel;->getInstance()Lcom/vivo/pcsuite/connect/ConnectControlModel;
+0000d0: move-result-object v6
+0000d2: invoke-virtual v6, v0, Lcom/vivo/pcsuite/connect/ConnectControlModel;->setCurrentConnectBean(Lcom/vivo/pcsuite/pcconnect/PCBean;)V
+0000d8: invoke-static Lcom/vivo/pcsuite/common/filemanager/utils/e;->e()Lcom/vivo/pcsuite/common/gson/ConnDetail;
+0000de: move-result-object v6
+0000e0: invoke-virtual v6, Lcom/vivo/pcsuite/common/gson/ConnDetail;->setWlanConnectStartTime()V
+0000e6: sget-object v6, Lcom/vivo/pcsuite/PcSuiteApplication;->I1 Lcom/vivo/pcsuite/PcSuiteApplication;
+0000ea: invoke-virtual v5, Lcom/vivo/connect/discovery/ScanInfo;->getDeviceName()Ljava/lang/String;
+0000f0: move-result-object v0
+0000f2: invoke-virtual v5, Lcom/vivo/connect/discovery/ScanInfo;->getAccount()Ljava/lang/String;
+0000f8: move-result-object v1
+0000fa: new-instance v2, Landroid/content/Intent;
+0000fe: invoke-direct v2, Landroid/content/Intent;-><init>()V
+000104: const-string v3, "connect_type"
+000108: invoke-virtual v2, v3, v7, Landroid/content/Intent;->putExtra(Ljava/lang/String; I)Landroid/content/Intent;
+00010e: const-string v7, "pc_name"
+000112: invoke-virtual v2, v7, v0, Landroid/content/Intent;->putExtra(Ljava/lang/String; Ljava/lang/String;)Landroid/content/Intent;
+000118: const-string/jumbo v7, user_name
+00011e: invoke-virtual v2, v7, v1, Landroid/content/Intent;->putExtra(Ljava/lang/String; Ljava/lang/String;)Landroid/content/Intent;
+000124: const-string v7, "REMOTE_DEVICE_TYPE"
+000128: invoke-virtual v2, v7, v8, Landroid/content/Intent;->putExtra(Ljava/lang/String; Ljava/lang/String;)Landroid/content/Intent;
+00012e: const-class v7, Lcom/vivo/pcsuite/service/PcSuiteObserver;
+000132: invoke-virtual v2, v6, v7, Landroid/content/Intent;->setClass(Landroid/content/Context; Ljava/lang/Class;)Landroid/content/Intent;
+000138: invoke-static v6, v2, Lcom/vivo/pcsuite/service/PcSuiteObserver;->O(Landroid/content/Context; Landroid/content/Intent;)V
+00013e: sget-object v6, Lcom/vivo/pcsuite/PcSuiteApplication;->I1 Lcom/vivo/pcsuite/PcSuiteApplication;
+000142: invoke-static v6, Lcom/vivo/pcsuite/util/a0;->g(Lcom/vivo/pcsuite/PcSuiteApplication;)Z
+000148: move-result v6
+00014a: const-string v7, "pcsuite_ConnectControlModel"
+00014e: const-string/jumbo v8, wifiEnabe : 
+000154: invoke-static v8, v7, v6, LZ1/b;->c(Ljava/lang/String; Ljava/lang/String; Z)V
+00015a: if-nez v6, +00fh
+00015e: new-instance v6, Lcom/vivo/pcsuite/connect/ConnectControlModel$11;
+000162: invoke-direct v6, v4, v5, Lcom/vivo/pcsuite/connect/ConnectControlModel$11;-><init>(Lcom/vivo/pcsuite/connect/ConnectControlModel; Lcom/vivo/connect/discovery/ScanInfo;)V
+000168: const-wide/16 v7, 1000
+00016c: iget-object v4, v4, Lcom/vivo/pcsuite/connect/ConnectControlModel;->e Landroid/os/Handler;
+000170: invoke-virtual v4, v6, v7, v8, Landroid/os/Handler;->postDelayed(Ljava/lang/Runnable; J)Z
+000176: return-void 
+000178: invoke-virtual v5, Lcom/vivo/connect/discovery/ScanInfo;->getDeviceId()Ljava/lang/String;
+00017e: move-result-object v4
+000180: invoke-static v4, Lcom/vivo/pcsuite/connect/ConnectControlModel;->l(Ljava/lang/String;)V
+000186: return-void 
+
+METHOD add(Lcom/vivo/pcsuite/pcconnect/PCBean;)V
+000000: return-void 
+
+METHOD addConnectListener(Lcom/vivo/pcsuite/interfaces/ConnectListener;)V
+000000: iput-object v1, v0, Lcom/vivo/pcsuite/connect/ConnectControlModel;->d Lcom/vivo/pcsuite/interfaces/ConnectListener;
+000004: return-void 
+
+METHOD agreeBle()V
+000000: new-instance v4, Ljava/lang/StringBuilder;
+000004: const-string v0, "agreeBle :"
+000008: invoke-direct v4, v0, Ljava/lang/StringBuilder;-><init>(Ljava/lang/String;)V
+00000e: sget-object v0, Lcom/vivo/pcsuite/connect/ConnectControlModel;->o Lcom/vivo/pcsuite/pcconnect/PcOtherShare;
+000012: const/4 v1, 0
+000014: const/4 v2, 1
+000016: if-nez v0, +004h
+00001a: move v0, v2
+00001c: goto +2h
+00001e: move v0, v1
+000020: const-string v3, "pcsuite_ConnectControlModel"
+000024: invoke-static v4, v0, v3, Landroidx/appcompat/widget/b;->i(Ljava/lang/StringBuilder; Z Ljava/lang/String;)V
+00002a: sget-object v4, Lcom/vivo/pcsuite/connect/ConnectControlModel;->o Lcom/vivo/pcsuite/pcconnect/PcOtherShare;
+00002e: if-eqz v4, +010h
+000032: sget-object v4, Lcom/vivo/pcsuite/connect/ConnectControlModel;->o Lcom/vivo/pcsuite/pcconnect/PcOtherShare;
+000036: invoke-virtual v4, v1, Lcom/vivo/pcsuite/pcconnect/PcOtherShare;->response(I)V
+00003c: sget-object v4, Lcom/vivo/pcsuite/PcSuiteApplication;->I1 Lcom/vivo/pcsuite/PcSuiteApplication;
+000040: invoke-virtual v4, Lcom/vivo/pcsuite/PcSuiteApplication;->u()Ljava/lang/StringBuffer;
+000046: move-result-object v4
+000048: invoke-virtual v4, v2, Ljava/lang/StringBuffer;->append(I)Ljava/lang/StringBuffer;
+00004e: return-void 
+
+METHOD cancelBle()V
+000000: new-instance v2, Ljava/lang/StringBuilder;
+000004: const-string v0, "cancelBle :"
+000008: invoke-direct v2, v0, Ljava/lang/StringBuilder;-><init>(Ljava/lang/String;)V
+00000e: sget-object v0, Lcom/vivo/pcsuite/connect/ConnectControlModel;->o Lcom/vivo/pcsuite/pcconnect/PcOtherShare;
+000012: if-nez v0, +004h
+000016: const/4 v0, 1
+000018: goto +2h
+00001a: const/4 v0, 0
+00001c: const-string v1, "pcsuite_ConnectControlModel"
+000020: invoke-static v2, v0, v1, Landroidx/appcompat/widget/b;->i(Ljava/lang/StringBuilder; Z Ljava/lang/String;)V
+000026: sget-object v2, Lcom/vivo/pcsuite/connect/ConnectControlModel;->o Lcom/vivo/pcsuite/pcconnect/PcOtherShare;
+00002a: if-eqz v2, +007h
+00002e: sget-object v2, Lcom/vivo/pcsuite/connect/ConnectControlModel;->o Lcom/vivo/pcsuite/pcconnect/PcOtherShare;
+000032: invoke-virtual v2, Lcom/vivo/pcsuite/pcconnect/PcOtherShare;->cancelConn()V
+000038: const/4 v2, -1
+00003a: invoke-static v2, Lcom/vivo/pcsuite/service/PcSuiteObserver;->G(I)V
+000040: return-void 
+
+METHOD cancelBleByResponse()V
+000000: new-instance v2, Ljava/lang/StringBuilder;
+000004: const-string v0, "cancelBleByResponse :"
+000008: invoke-direct v2, v0, Ljava/lang/StringBuilder;-><init>(Ljava/lang/String;)V
+00000e: sget-object v0, Lcom/vivo/pcsuite/connect/ConnectControlModel;->o Lcom/vivo/pcsuite/pcconnect/PcOtherShare;
+000012: if-nez v0, +004h
+000016: const/4 v0, 1
+000018: goto +2h
+00001a: const/4 v0, 0
+00001c: const-string v1, "pcsuite_ConnectControlModel"
+000020: invoke-static v2, v0, v1, Landroidx/appcompat/widget/b;->i(Ljava/lang/StringBuilder; Z Ljava/lang/String;)V
+000026: sget-object v2, Lcom/vivo/pcsuite/connect/ConnectControlModel;->o Lcom/vivo/pcsuite/pcconnect/PcOtherShare;
+00002a: if-eqz v2, +016h
+00002e: sget-object v2, Lcom/vivo/pcsuite/connect/ConnectControlModel;->o Lcom/vivo/pcsuite/pcconnect/PcOtherShare;
+000032: const/4 v0, 3
+000034: invoke-virtual v2, v0, Lcom/vivo/pcsuite/pcconnect/PcOtherShare;->response(I)V
+00003a: sget-object v2, Lcom/vivo/pcsuite/PcSuiteApplication;->I1 Lcom/vivo/pcsuite/PcSuiteApplication;
+00003e: invoke-virtual v2, Lcom/vivo/pcsuite/PcSuiteApplication;->u()Ljava/lang/StringBuffer;
+000044: move-result-object v2
+000046: const-string v0, "0000000"
+00004a: invoke-virtual v2, v0, Ljava/lang/StringBuffer;->append(Ljava/lang/String;)Ljava/lang/StringBuffer;
+000050: invoke-static Lcom/vivo/pcsuite/util/o0;->C0()V
+000056: return-void 
+
+METHOD cancelBleConnect()V
+000000: const-string v0, "pcsuite_ConnectControlModel"
+000004: const-string v1, "dialog cancelBleConnect"
+000008: invoke-static v0, v1, Lcom/vivo/connect/logger/EasyLog;->i(Ljava/lang/String; Ljava/lang/String;)V
+00000e: invoke-virtual v2, Lcom/vivo/pcsuite/connect/ConnectControlModel;->removeDialogRunnable()V
+000014: const/4 v0, -1
+000016: invoke-static v0, Lcom/vivo/pcsuite/service/PcSuiteObserver;->G(I)V
+00001c: invoke-virtual v2, Lcom/vivo/pcsuite/connect/ConnectControlModel;->cancelBleByResponse()V
+000022: invoke-static Lcom/vivo/pcsuite/service/PcSuiteObserver;->t()Lcom/vivo/pcsuite/service/PcSuiteObserver;
+000028: move-result-object v2
+00002a: if-eqz v2, +005h
+00002e: invoke-virtual v2, Lcom/vivo/pcsuite/service/PcSuiteObserver;->Q()V
+000034: return-void 
+
+METHOD cancelWlanConnect()V
+000000: const-string v0, "pcsuite_ConnectControlModel"
+000004: const-string v1, "dialog cancelWlanConnect"
+000008: invoke-static v0, v1, Lcom/vivo/connect/logger/EasyLog;->i(Ljava/lang/String; Ljava/lang/String;)V
+00000e: invoke-virtual v2, Lcom/vivo/pcsuite/connect/ConnectControlModel;->removeDialogRunnable()V
+000014: const/4 v0, -1
+000016: invoke-static v0, Lcom/vivo/pcsuite/service/PcSuiteObserver;->G(I)V
+00001c: iget-object v0, v2, Lcom/vivo/pcsuite/connect/ConnectControlModel;->j Ljava/lang/String;
+000020: invoke-virtual v2, v0, Lcom/vivo/pcsuite/connect/ConnectControlModel;->rejectConnect(Ljava/lang/String;)V
+000026: sget-object v2, Lcom/vivo/pcsuite/PcSuiteApplication;->I1 Lcom/vivo/pcsuite/PcSuiteApplication;
+00002a: invoke-virtual v2, Lcom/vivo/pcsuite/PcSuiteApplication;->A()Ljava/lang/StringBuffer;
+000030: move-result-object v2
+000032: const-string v0, "0000000"
+000036: invoke-virtual v2, v0, Ljava/lang/StringBuffer;->append(Ljava/lang/String;)Ljava/lang/StringBuffer;
+00003c: invoke-static Lcom/vivo/pcsuite/util/o0;->B0()V
+000042: invoke-static Lcom/vivo/pcsuite/service/PcSuiteObserver;->t()Lcom/vivo/pcsuite/service/PcSuiteObserver;
+000048: move-result-object v2
+00004a: if-eqz v2, +005h
+00004e: invoke-virtual v2, Lcom/vivo/pcsuite/service/PcSuiteObserver;->Q()V
+000054: return-void 
+
+METHOD connect(Ljava/lang/String; Ljava/lang/String; Z)V
+000000: const-string v0, "connect deviceName:"
+000004: const-string v1, "pcsuite_ConnectControlModel"
+000008: invoke-static v0, v8, v1, Landroidx/constraintlayout/core/motion/a;->d(Ljava/lang/String; Ljava/lang/String; Ljava/lang/String;)V
+00000e: const/4 v0, 0
+000010: sput-boolean v0, Lcom/vivo/pcsuite/connect/ConnectControlModel;->p Z
+000014: iput-object v8, v7, Lcom/vivo/pcsuite/connect/ConnectControlModel;->l Ljava/lang/String;
+000018: const/4 v2, 0
+00001a: if-eqz v10, +029h
+00001e: new-instance v3, Lorg/json/JSONObject;
+000022: invoke-direct v3, Lorg/json/JSONObject;-><init>()V
+000028: const-string v4, "businessName"
+00002c: const-string v5, "pcsuiteTransfer"
+000030: invoke-virtual v3, v4, v5, Lorg/json/JSONObject;->put(Ljava/lang/String; Ljava/lang/Object;)Lorg/json/JSONObject;
+000036: goto +1ch
+000038: move-exception v4
+00003a: goto +3h
+00003c: move-exception v4
+00003e: move-object v3, v2
+000040: new-instance v5, Ljava/lang/StringBuilder;
+000044: const-string v6, "connect json error = "
+000048: invoke-direct v5, v6, Ljava/lang/StringBuilder;-><init>(Ljava/lang/String;)V
+00004e: invoke-virtual v4, Ljava/lang/Throwable;->getMessage()Ljava/lang/String;
+000054: move-result-object v4
+000056: invoke-virtual v5, v4, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+00005c: invoke-virtual v5, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
+000062: move-result-object v4
+000064: invoke-static v1, v4, Lcom/vivo/connect/logger/EasyLog;->e(Ljava/lang/String; Ljava/lang/String;)V
+00006a: goto +2h
+00006c: move-object v3, v2
+00006e: new-instance v1, Lcom/vivo/connect/ConnectOptions$Builder;
+000072: invoke-direct v1, Lcom/vivo/connect/ConnectOptions$Builder;-><init>()V
+000078: invoke-virtual v1, v0, Lcom/vivo/connect/ConnectOptions$Builder;->setTransferMode(I)Lcom/vivo/connect/ConnectOptions$Builder;
+00007e: move-result-object v1
+000080: invoke-virtual v1, v0, Lcom/vivo/connect/ConnectOptions$Builder;->setDataAmount(I)Lcom/vivo/connect/ConnectOptions$Builder;
+000086: move-result-object v0
+000088: const/4 v1, 1
+00008a: invoke-virtual v0, v1, Lcom/vivo/connect/ConnectOptions$Builder;->setConnectChannel(I)Lcom/vivo/connect/ConnectOptions$Builder;
+000090: move-result-object v0
+000092: const-string v1, "com.vivo.pcsuite.SERVICE"
+000096: invoke-virtual v0, v1, Lcom/vivo/connect/ConnectOptions$Builder;->setServiceId(Ljava/lang/String;)Lcom/vivo/connect/ConnectOptions$Builder;
+00009c: move-result-object v0
+00009e: if-nez v3, +003h
+0000a2: goto +5h
+0000a4: invoke-virtual v3, Lorg/json/JSONObject;->toString()Ljava/lang/String;
+0000aa: move-result-object v2
+0000ac: invoke-virtual v0, v2, Lcom/vivo/connect/ConnectOptions$Builder;->setExtraInfo(Ljava/lang/String;)Lcom/vivo/connect/ConnectOptions$Builder;
+0000b2: move-result-object v0
+0000b4: invoke-virtual v0, Lcom/vivo/connect/ConnectOptions$Builder;->build()Lcom/vivo/connect/ConnectOptions;
+0000ba: move-result-object v0
+0000bc: sget-object v1, Lcom/vivo/pcsuite/PcSuiteApplication;->I1 Lcom/vivo/pcsuite/PcSuiteApplication;
+0000c0: invoke-static v1, Lcom/vivo/connect/ConnectBase;->getConnectionClient(Landroid/content/Context;)Lcom/vivo/connect/ConnectClient;
+0000c6: move-result-object v1
+0000c8: iget-object v7, v7, Lcom/vivo/pcsuite/connect/ConnectControlModel;->n Lcom/vivo/connect/ConnectionCallback;
+0000cc: invoke-virtual v1, v8, v9, v0, v7, Lcom/vivo/connect/ConnectClient;->connect(Ljava/lang/String; Ljava/lang/String; Lcom/vivo/connect/ConnectOptions; Lcom/vivo/connect/ConnectionCallback;)Lcom/vivo/connect/tasks/Task;
+0000d2: move-result-object v7
+0000d4: new-instance v9, Lcom/vivo/pcsuite/connect/ConnectControlModel$7;
+0000d8: invoke-direct v9, v8, v10, Lcom/vivo/pcsuite/connect/ConnectControlModel$7;-><init>(Ljava/lang/String; Z)V
+0000de: invoke-virtual v7, v9, Lcom/vivo/connect/tasks/Task;->addOnCompleteListener(Lcom/vivo/connect/tasks/OnCompleteListener;)Lcom/vivo/connect/tasks/Task;
+0000e4: return-void 
+
+METHOD disconnect()V
+000000: const-string v0, "pcsuite_ConnectControlModel"
+000004: const-string v1, "disconnect"
+000008: invoke-static v0, v1, Lcom/vivo/connect/logger/EasyLog;->d(Ljava/lang/String; Ljava/lang/String;)V
+00000e: new-instance v0, Lcom/vivo/pcsuite/connect/ConnectControlModel$6;
+000012: invoke-direct v0, v2, Lcom/vivo/pcsuite/connect/ConnectControlModel$6;-><init>(Lcom/vivo/pcsuite/connect/ConnectControlModel;)V
+000018: invoke-static v0, Lcom/vivo/castsdk/sdk/common/utils/ThreadPoolUtils;->postOnBackgroundThread(Ljava/lang/Runnable;)Ljava/util/concurrent/Future;
+00001e: return-void 
+
+METHOD disconnectBle()V
+000000: new-instance v2, Ljava/lang/StringBuilder;
+000004: const-string v0, "disconnectBle :"
+000008: invoke-direct v2, v0, Ljava/lang/StringBuilder;-><init>(Ljava/lang/String;)V
+00000e: sget-object v0, Lcom/vivo/pcsuite/connect/ConnectControlModel;->o Lcom/vivo/pcsuite/pcconnect/PcOtherShare;
+000012: if-nez v0, +004h
+000016: const/4 v0, 1
+000018: goto +2h
+00001a: const/4 v0, 0
+00001c: const-string v1, "pcsuite_ConnectControlModel"
+000020: invoke-static v2, v0, v1, Landroidx/appcompat/widget/b;->i(Ljava/lang/StringBuilder; Z Ljava/lang/String;)V
+000026: sget-object v2, Lcom/vivo/pcsuite/connect/ConnectControlModel;->o Lcom/vivo/pcsuite/pcconnect/PcOtherShare;
+00002a: if-eqz v2, +007h
+00002e: sget-object v2, Lcom/vivo/pcsuite/connect/ConnectControlModel;->o Lcom/vivo/pcsuite/pcconnect/PcOtherShare;
+000032: invoke-virtual v2, Lcom/vivo/pcsuite/pcconnect/PcOtherShare;->disconnect()V
+000038: return-void 
+
+METHOD disconnectWlan(Ljava/lang/String;)V
+000000: const-string v1, "pcsuite_ConnectControlModel"
+000004: const-string/jumbo v0, wlan disconnect 
+00000a: invoke-static v1, v0, Lcom/vivo/connect/logger/EasyLog;->i(Ljava/lang/String; Ljava/lang/String;)V
+000010: sget-object v1, Lcom/vivo/pcsuite/PcSuiteApplication;->I1 Lcom/vivo/pcsuite/PcSuiteApplication;
+000014: invoke-static v1, Lcom/vivo/connect/ConnectBase;->getConnectionClient(Landroid/content/Context;)Lcom/vivo/connect/ConnectClient;
+00001a: move-result-object v1
+00001c: const-string v0, "com.vivo.pcsuite.SERVICE"
+000020: invoke-virtual v1, v0, v2, Lcom/vivo/connect/ConnectClient;->disconnect(Ljava/lang/String; Ljava/lang/String;)Lcom/vivo/connect/tasks/Task;
+000026: const/4 v1, -1
+000028: invoke-static v1, Lcom/vivo/pcsuite/service/PcSuiteObserver;->G(I)V
+00002e: return-void 
+
+METHOD getPcOtherShare()Lcom/vivo/pcsuite/pcconnect/PcOtherShare;
+000000: sget-object v0, Lcom/vivo/pcsuite/connect/ConnectControlModel;->o Lcom/vivo/pcsuite/pcconnect/PcOtherShare;
+000004: return-object v0
+
+METHOD hasBind()Z
+000000: iget-boolean v0, v0, Lcom/vivo/pcsuite/connect/ConnectControlModel;->f Z
+000004: return v0
+
+METHOD init()V
+000000: invoke-static Lcom/vivo/pcsuite/common/filemanager/utils/e;->e()Lcom/vivo/pcsuite/common/gson/ConnDetail;
+000006: move-result-object v0
+000008: iput-object v0, v2, Lcom/vivo/pcsuite/connect/ConnectControlModel;->g Lcom/vivo/pcsuite/common/gson/ConnDetail;
+00000c: sget-object v0, Lcom/vivo/pcsuite/PcSuiteApplication;->I1 Lcom/vivo/pcsuite/PcSuiteApplication;
+000010: invoke-static v0, Lcom/vivo/connect/ConnectBase;->getConnectionClient(Landroid/content/Context;)Lcom/vivo/connect/ConnectClient;
+000016: move-result-object v0
+000018: invoke-virtual v0, Lcom/vivo/connect/ConnectClient;->checkAppAuthorization()Lcom/vivo/connect/tasks/Task;
+00001e: move-result-object v0
+000020: new-instance v1, Lcom/vivo/pcsuite/connect/ConnectControlModel$1;
+000024: invoke-direct v1, v2, Lcom/vivo/pcsuite/connect/ConnectControlModel$1;-><init>(Lcom/vivo/pcsuite/connect/ConnectControlModel;)V
+00002a: invoke-virtual v0, v1, Lcom/vivo/connect/tasks/Task;->addOnSuccessListener(Lcom/vivo/connect/tasks/OnSuccessListener;)Lcom/vivo/connect/tasks/Task;
+000030: return-void 
+
+METHOD initPcOtherShare()V
+000000: const-string v0, "pcOtherShare is null,need to init,pcShare is "
+000004: const-string v1, "pcsuite_ConnectControlModel"
+000008: new-instance v2, Ljava/lang/StringBuilder;
+00000c: const-string v3, "pcOtherShare = "
+000010: invoke-direct v2, v3, Ljava/lang/StringBuilder;-><init>(Ljava/lang/String;)V
+000016: sget-object v3, Lcom/vivo/pcsuite/connect/ConnectControlModel;->o Lcom/vivo/pcsuite/pcconnect/PcOtherShare;
+00001a: const/4 v4, 1
+00001c: if-nez v3, +004h
+000020: move v3, v4
+000022: goto +2h
+000024: const/4 v3, 0
+000026: invoke-virtual v2, v3, Ljava/lang/StringBuilder;->append(Z)Ljava/lang/StringBuilder;
+00002c: invoke-virtual v2, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
+000032: move-result-object v2
+000034: invoke-static v1, v2, Lcom/vivo/connect/logger/EasyLog;->i(Ljava/lang/String; Ljava/lang/String;)V
+00003a: const-string v1, "pcsuite_ConnectControlModel"
+00003e: new-instance v2, Ljava/lang/StringBuilder;
+000042: const-string v3, "hasBind = "
+000046: invoke-direct v2, v3, Ljava/lang/StringBuilder;-><init>(Ljava/lang/String;)V
+00004c: iget-boolean v3, v5, Lcom/vivo/pcsuite/connect/ConnectControlModel;->f Z
+000050: invoke-static v2, v3, v1, Landroidx/appcompat/widget/b;->i(Ljava/lang/StringBuilder; Z Ljava/lang/String;)V
+000056: sget-object v1, Lcom/vivo/pcsuite/connect/ConnectControlModel;->o Lcom/vivo/pcsuite/pcconnect/PcOtherShare;
+00005a: if-nez v1, +052h
+00005e: monitor-enter v5
+000060: sget-object v1, Lcom/vivo/pcsuite/connect/ConnectControlModel;->o Lcom/vivo/pcsuite/pcconnect/PcOtherShare;
+000064: if-nez v1, +049h
+000068: const-string v1, "pcsuite_ConnectControlModel"
+00006c: new-instance v2, Ljava/lang/StringBuilder;
+000070: invoke-direct v2, v0, Ljava/lang/StringBuilder;-><init>(Ljava/lang/String;)V
+000076: sget-object v0, Lcom/vivo/pcsuite/connect/ConnectControlModel;->o Lcom/vivo/pcsuite/pcconnect/PcOtherShare;
+00007a: invoke-virtual v2, v0, Ljava/lang/StringBuilder;->append(Ljava/lang/Object;)Ljava/lang/StringBuilder;
+000080: const-string v0, " hasBind : "
+000084: invoke-virtual v2, v0, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+00008a: iget-boolean v0, v5, Lcom/vivo/pcsuite/connect/ConnectControlModel;->f Z
+00008e: invoke-virtual v2, v0, Ljava/lang/StringBuilder;->append(Z)Ljava/lang/StringBuilder;
+000094: invoke-virtual v2, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
+00009a: move-result-object v0
+00009c: invoke-static v1, v0, Lcom/vivo/connect/logger/EasyLog;->i(Ljava/lang/String; Ljava/lang/String;)V
+0000a2: const-string v0, "pcsuite_ConnectControlModel"
+0000a6: const-string v1, "init"
+0000aa: invoke-static v0, v1, Lcom/vivo/connect/logger/EasyLog;->d(Ljava/lang/String; Ljava/lang/String;)V
+0000b0: sget-object v0, Lcom/vivo/pcsuite/PcSuiteApplication;->I1 Lcom/vivo/pcsuite/PcSuiteApplication;
+0000b4: invoke-static v0, Lcom/vivo/connect/ConnectBase;->getPcShare(Landroid/content/Context;)Lcom/vivo/pcsuite/pcconnect/IPcShare;
+0000ba: move-result-object v0
+0000bc: check-cast v0, Lcom/vivo/pcsuite/pcconnect/PcOtherShare;
+0000c0: sput-object v0, Lcom/vivo/pcsuite/connect/ConnectControlModel;->o Lcom/vivo/pcsuite/pcconnect/PcOtherShare;
+0000c4: sget-object v0, Lcom/vivo/pcsuite/connect/ConnectControlModel;->o Lcom/vivo/pcsuite/pcconnect/PcOtherShare;
+0000c8: invoke-virtual v0, v5, Lcom/vivo/pcsuite/pcconnect/PcOtherShare;->setInfoListener(Lcom/vivo/pcsuite/pcconnect/IPcShare$InfoListener;)V
+0000ce: sget-object v0, Lcom/vivo/pcsuite/connect/ConnectControlModel;->o Lcom/vivo/pcsuite/pcconnect/PcOtherShare;
+0000d2: invoke-virtual v0, v5, Lcom/vivo/pcsuite/pcconnect/PcOtherShare;->setShareCallback(Lcom/vivo/pcsuite/pcconnect/IPcShare$PcShareCallback;)V
+0000d8: sget-object v0, Lcom/vivo/pcsuite/connect/ConnectControlModel;->o Lcom/vivo/pcsuite/pcconnect/PcOtherShare;
+0000dc: invoke-virtual v0, v5, Lcom/vivo/pcsuite/pcconnect/PcOtherShare;->addConnectListener(Lcom/vivo/pcsuite/pcconnect/IPcShare$PCConnectListener;)V
+0000e2: sget-object v0, Lcom/vivo/pcsuite/connect/ConnectControlModel;->o Lcom/vivo/pcsuite/pcconnect/PcOtherShare;
+0000e6: invoke-virtual v0, Lcom/vivo/pcsuite/pcconnect/PcOtherShare;->init()V
+0000ec: iput-boolean v4, v5, Lcom/vivo/pcsuite/connect/ConnectControlModel;->f Z
+0000f0: goto +3h
+0000f2: move-exception v0
+0000f4: goto +3h
+0000f6: monitor-exit v5
+0000f8: return-void 
+0000fa: monitor-exit v5
+0000fc: throw v0
+0000fe: iget-boolean v0, v5, Lcom/vivo/pcsuite/connect/ConnectControlModel;->f Z
+000102: if-nez v0, +011h
+000106: const-string v0, "pcsuite_ConnectControlModel"
+00010a: const-string v1, "pcOtherShare hasBind is false,need reInit "
+00010e: invoke-static v0, v1, Lcom/vivo/connect/logger/EasyLog;->i(Ljava/lang/String; Ljava/lang/String;)V
+000114: sget-object v0, Lcom/vivo/pcsuite/connect/ConnectControlModel;->o Lcom/vivo/pcsuite/pcconnect/PcOtherShare;
+000118: invoke-virtual v0, Lcom/vivo/pcsuite/pcconnect/PcOtherShare;->init()V
+00011e: iput-boolean v4, v5, Lcom/vivo/pcsuite/connect/ConnectControlModel;->f Z
+000122: return-void 
+000124: const-string v5, "pcsuite_ConnectControlModel"
+000128: const-string v0, "pcOtherShare is not null or is not bind ,return"
+00012c: invoke-static v5, v0, Lcom/vivo/connect/logger/EasyLog;->i(Ljava/lang/String; Ljava/lang/String;)V
+000132: return-void 
+
+METHOD isBleIsSameAccount()Z
+000000: iget-boolean v0, v0, Lcom/vivo/pcsuite/connect/ConnectControlModel;->h Z
+000004: return v0
+
+METHOD onConnectFailed(I)V
+000000: invoke-static Lk2/g;->Q()Z
+000006: move-result v0
+000008: new-instance v1, Ljava/lang/StringBuilder;
+00000c: const-string v2, "onConnectFailed : "
+000010: invoke-direct v1, v2, Ljava/lang/StringBuilder;-><init>(Ljava/lang/String;)V
+000016: invoke-virtual v1, v7, Ljava/lang/StringBuilder;->append(I)Ljava/lang/StringBuilder;
+00001c: const-string v2, " connectCloud:"
+000020: invoke-virtual v1, v2, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+000026: invoke-virtual v1, v0, Ljava/lang/StringBuilder;->append(Z)Ljava/lang/StringBuilder;
+00002c: invoke-virtual v1, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
+000032: move-result-object v1
+000034: const-string v2, "pcsuite_ConnectControlModel"
+000038: invoke-static v2, v1, Lcom/vivo/connect/logger/EasyLog;->i(Ljava/lang/String; Ljava/lang/String;)V
+00003e: if-eqz v0, +003h
+000042: return-void 
+000044: sget-object v0, Lcom/vivo/pcsuite/PcSuiteApplication;->I1 Lcom/vivo/pcsuite/PcSuiteApplication;
+000048: invoke-virtual v0, Lcom/vivo/pcsuite/PcSuiteApplication;->l()I
+00004e: move-result v0
+000050: const-string v1, "01"
+000054: const/4 v3, 1
+000056: const/4 v4, 2
+000058: if-ne v0, v4, +075h
+00005c: sget-object v0, Lcom/vivo/pcsuite/PcSuiteApplication;->I1 Lcom/vivo/pcsuite/PcSuiteApplication;
+000060: invoke-virtual v0, Lcom/vivo/pcsuite/PcSuiteApplication;->u()Ljava/lang/StringBuffer;
+000066: move-result-object v0
+000068: invoke-virtual v0, Ljava/lang/StringBuffer;->toString()Ljava/lang/String;
+00006e: move-result-object v0
+000070: const-string v5, "6"
+000074: invoke-virtual v0, v5, Ljava/lang/String;->equals(Ljava/lang/Object;)Z
+00007a: move-result v0
+00007c: if-eqz v0, +00dh
+000080: sget-object v0, Lcom/vivo/pcsuite/PcSuiteApplication;->I1 Lcom/vivo/pcsuite/PcSuiteApplication;
+000084: invoke-virtual v0, Lcom/vivo/pcsuite/PcSuiteApplication;->u()Ljava/lang/StringBuffer;
+00008a: move-result-object v0
+00008c: const-string v5, "1"
+000090: invoke-virtual v0, v5, Ljava/lang/StringBuffer;->append(Ljava/lang/String;)Ljava/lang/StringBuffer;
+000096: sget-object v0, Lcom/vivo/pcsuite/PcSuiteApplication;->I1 Lcom/vivo/pcsuite/PcSuiteApplication;
+00009a: invoke-virtual v0, Lcom/vivo/pcsuite/PcSuiteApplication;->u()Ljava/lang/StringBuffer;
+0000a0: move-result-object v0
+0000a2: new-instance v5, Ljava/lang/StringBuilder;
+0000a6: invoke-direct v5, v1, Ljava/lang/StringBuilder;-><init>(Ljava/lang/String;)V
+0000ac: invoke-virtual v5, v7, Ljava/lang/StringBuilder;->append(I)Ljava/lang/StringBuilder;
+0000b2: invoke-virtual v5, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
+0000b8: move-result-object v1
+0000ba: invoke-virtual v0, v1, Ljava/lang/StringBuffer;->append(Ljava/lang/String;)Ljava/lang/StringBuffer;
+0000c0: new-instance v0, Ljava/lang/StringBuilder;
+0000c4: const-string v1, "pc ble connect fail , "
+0000c8: invoke-direct v0, v1, Ljava/lang/StringBuilder;-><init>(Ljava/lang/String;)V
+0000ce: sget-object v1, Lcom/vivo/pcsuite/PcSuiteApplication;->I1 Lcom/vivo/pcsuite/PcSuiteApplication;
+0000d2: invoke-virtual v1, Lcom/vivo/pcsuite/PcSuiteApplication;->u()Ljava/lang/StringBuffer;
+0000d8: move-result-object v1
+0000da: invoke-virtual v0, v1, Ljava/lang/StringBuilder;->append(Ljava/lang/Object;)Ljava/lang/StringBuilder;
+0000e0: invoke-virtual v0, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
+0000e6: move-result-object v0
+0000e8: invoke-static v2, v0, Lcom/vivo/connect/logger/EasyLog;->i(Ljava/lang/String; Ljava/lang/String;)V
+0000ee: const/4 v0, 3
+0000f0: if-ne v7, v0, +00fh
+0000f4: invoke-static Lcom/vivo/pcsuite/util/j0;->c()Z
+0000fa: move-result v0
+0000fc: if-eqz v0, +009h
+000100: invoke-static LL2/i;->q()LL2/i;
+000106: move-result-object v0
+000108: invoke-virtual v0, LL2/i;->o()V
+00010e: iget-object v0, v6, Lcom/vivo/pcsuite/connect/ConnectControlModel;->d Lcom/vivo/pcsuite/interfaces/ConnectListener;
+000112: if-eqz v0, +005h
+000116: invoke-interface v0, v7, Lcom/vivo/pcsuite/interfaces/ConnectListener;->onConnectFailed(I)V
+00011c: if-eq v7, v3, +069h
+000120: invoke-static Lde/greenrobot/event/EventBus;->getDefault()Lde/greenrobot/event/EventBus;
+000126: move-result-object v0
+000128: new-instance v1, Lcom/vivo/pcsuite/entity/EventBean;
+00012c: invoke-static v7, Ljava/lang/Integer;->valueOf(I)Ljava/lang/Integer;
+000132: move-result-object v3
+000134: invoke-direct v1, v4, v2, v3, Lcom/vivo/pcsuite/entity/EventBean;-><init>(I Ljava/lang/String; Ljava/lang/Object;)V
+00013a: invoke-virtual v0, v1, Lde/greenrobot/event/EventBus;->post(Ljava/lang/Object;)V
+000140: goto +57h
+000142: const/4 v5, 4
+000144: if-ne v0, v5, +055h
+000148: sget-object v0, Lcom/vivo/pcsuite/PcSuiteApplication;->I1 Lcom/vivo/pcsuite/PcSuiteApplication;
+00014c: invoke-virtual v0, Lcom/vivo/pcsuite/PcSuiteApplication;->B()Ljava/lang/StringBuffer;
+000152: move-result-object v0
+000154: new-instance v5, Ljava/lang/StringBuilder;
+000158: invoke-direct v5, v1, Ljava/lang/StringBuilder;-><init>(Ljava/lang/String;)V
+00015e: invoke-virtual v5, v7, Ljava/lang/StringBuilder;->append(I)Ljava/lang/StringBuilder;
+000164: invoke-virtual v5, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
+00016a: move-result-object v1
+00016c: invoke-virtual v0, v1, Ljava/lang/StringBuffer;->append(Ljava/lang/String;)Ljava/lang/StringBuffer;
+000172: new-instance v0, Ljava/lang/StringBuilder;
+000176: const-string v1, "phone ble connect fail , "
+00017a: invoke-direct v0, v1, Ljava/lang/StringBuilder;-><init>(Ljava/lang/String;)V
+000180: sget-object v1, Lcom/vivo/pcsuite/PcSuiteApplication;->I1 Lcom/vivo/pcsuite/PcSuiteApplication;
+000184: invoke-virtual v1, Lcom/vivo/pcsuite/PcSuiteApplication;->B()Ljava/lang/StringBuffer;
+00018a: move-result-object v1
+00018c: invoke-virtual v0, v1, Ljava/lang/StringBuilder;->append(Ljava/lang/Object;)Ljava/lang/StringBuilder;
+000192: invoke-virtual v0, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
+000198: move-result-object v0
+00019a: invoke-static v2, v0, Lcom/vivo/connect/logger/EasyLog;->i(Ljava/lang/String; Ljava/lang/String;)V
+0001a0: sget-object v0, Lcom/vivo/pcsuite/PcSuiteApplication;->I1 Lcom/vivo/pcsuite/PcSuiteApplication;
+0001a4: invoke-virtual v0, Lcom/vivo/pcsuite/PcSuiteApplication;->B()Ljava/lang/StringBuffer;
+0001aa: move-result-object v0
+0001ac: const/16 v1, 8
+0001b0: invoke-static v0, v1, Lcom/vivo/pcsuite/util/StringUtils;->a(Ljava/lang/StringBuffer; I)V
+0001b6: invoke-static Lcom/vivo/pcsuite/util/o0;->E0()V
+0001bc: iget-object v0, v6, Lcom/vivo/pcsuite/connect/ConnectControlModel;->d Lcom/vivo/pcsuite/interfaces/ConnectListener;
+0001c0: if-eqz v0, +005h
+0001c4: invoke-interface v0, v7, Lcom/vivo/pcsuite/interfaces/ConnectListener;->onConnectFailed(I)V
+0001ca: if-eq v7, v3, +012h
+0001ce: invoke-static Lde/greenrobot/event/EventBus;->getDefault()Lde/greenrobot/event/EventBus;
+0001d4: move-result-object v0
+0001d6: new-instance v1, Lcom/vivo/pcsuite/entity/EventBean;
+0001da: invoke-static v7, Ljava/lang/Integer;->valueOf(I)Ljava/lang/Integer;
+0001e0: move-result-object v3
+0001e2: invoke-direct v1, v4, v2, v3, Lcom/vivo/pcsuite/entity/EventBean;-><init>(I Ljava/lang/String; Ljava/lang/Object;)V
+0001e8: invoke-virtual v0, v1, Lde/greenrobot/event/EventBus;->post(Ljava/lang/Object;)V
+0001ee: iget-object v6, v6, Lcom/vivo/pcsuite/connect/ConnectControlModel;->g Lcom/vivo/pcsuite/common/gson/ConnDetail;
+0001f2: if-eqz v6, +013h
+0001f6: new-instance v0, Ljava/lang/StringBuilder;
+0001fa: const-string v1, "ble errorCode:"
+0001fe: invoke-direct v0, v1, Ljava/lang/StringBuilder;-><init>(Ljava/lang/String;)V
+000204: invoke-virtual v0, v7, Ljava/lang/StringBuilder;->append(I)Ljava/lang/StringBuilder;
+00020a: invoke-virtual v0, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
+000210: move-result-object v7
+000212: invoke-virtual v6, v7, Lcom/vivo/pcsuite/common/gson/ConnDetail;->setFailReason(Ljava/lang/String;)V
+000218: invoke-static Lcom/vivo/pcsuite/common/filemanager/utils/e;->z()V
+00021e: return-void 
+
+METHOD onConnectStateChanged()V
+000000: return-void 
+
+METHOD onConnected(Ljava/lang/String; Z Z I)V
+000000: const-string v0, "pcsuite_ConnectControlModel"
+000004: const-string v1, "onConnected network_type : "
+000008: invoke-static v6, v1, v0, LV5/S;->j(I Ljava/lang/String; Ljava/lang/String;)V
+00000e: const/4 v0, 3
+000010: if-ne v6, v0, +012h
+000014: sget-object v0, Lcom/vivo/pcsuite/PcSuiteApplication;->I1 Lcom/vivo/pcsuite/PcSuiteApplication;
+000018: invoke-virtual v0, Lcom/vivo/pcsuite/PcSuiteApplication;->l()I
+00001e: move-result v0
+000020: const/4 v1, 1
+000022: if-ne v0, v1, +009h
+000026: invoke-static Lcom/vivo/pcsuite/connect/ConnectModel;->getInstance()Lcom/vivo/pcsuite/connect/ConnectModel;
+00002c: move-result-object v0
+00002e: invoke-virtual v0, Lcom/vivo/pcsuite/connect/ConnectModel;->accessPcDirectIp()V
+000034: iget-object v2, v2, Lcom/vivo/pcsuite/connect/ConnectControlModel;->d Lcom/vivo/pcsuite/interfaces/ConnectListener;
+000038: if-eqz v2, +005h
+00003c: invoke-interface v2, v3, v4, v5, v6, Lcom/vivo/pcsuite/interfaces/ConnectListener;->onConnected(Ljava/lang/String; Z Z I)V
+000042: return-void 
+
+METHOD onDisconnected()V
+000000: iget-object v0, v0, Lcom/vivo/pcsuite/connect/ConnectControlModel;->d Lcom/vivo/pcsuite/interfaces/ConnectListener;
+000004: if-eqz v0, +005h
+000008: invoke-interface v0, Lcom/vivo/pcsuite/interfaces/ConnectListener;->onDisconnected()V
+00000e: return-void 
+
+METHOD onInitStatus(Z)V
+000000: const-string v0, "pcsuite_ConnectControlModel"
+000004: const-string v1, "onInitStatus b "
+000008: invoke-static v1, v0, v3, LZ1/b;->c(Ljava/lang/String; Ljava/lang/String; Z)V
+00000e: iput-boolean v3, v2, Lcom/vivo/pcsuite/connect/ConnectControlModel;->f Z
+000012: iget-object v2, v2, Lcom/vivo/pcsuite/connect/ConnectControlModel;->d Lcom/vivo/pcsuite/interfaces/ConnectListener;
+000016: if-eqz v2, +005h
+00001a: invoke-interface v2, v3, Lcom/vivo/pcsuite/interfaces/ConnectListener;->onInitStatus(Z)V
+000020: return-void 
+
+METHOD onOpenResult(Z)V
+000000: return-void 
+
+METHOD onOpenWifi()V
+000000: return-void 
+
+METHOD onReceiverAutoStatus(Z Z Z Lcom/vivo/pcsuite/pcconnect/PCBean;)V
+000000: new-instance v0, Ljava/lang/StringBuilder;
+000004: const-string v1, "onReceiverAutoStatus  show:"
+000008: invoke-direct v0, v1, Ljava/lang/StringBuilder;-><init>(Ljava/lang/String;)V
+00000e: invoke-virtual v0, v3, Ljava/lang/StringBuilder;->append(Z)Ljava/lang/StringBuilder;
+000014: const-string v1, "  isConnect:"
+000018: invoke-virtual v0, v1, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+00001e: invoke-virtual v0, v4, Ljava/lang/StringBuilder;->append(Z)Ljava/lang/StringBuilder;
+000024: const-string v1, "  isAuto:"
+000028: invoke-virtual v0, v1, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+00002e: invoke-virtual v0, v5, Ljava/lang/StringBuilder;->append(Z)Ljava/lang/StringBuilder;
+000034: const-string v1, "  device:"
+000038: invoke-virtual v0, v1, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+00003e: invoke-virtual v6, Lcom/vivo/pcsuite/pcconnect/PCBean;->toString()Ljava/lang/String;
+000044: move-result-object v1
+000046: invoke-virtual v0, v1, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+00004c: invoke-virtual v0, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
+000052: move-result-object v0
+000054: const-string v1, "pcsuite_ConnectControlModel"
+000058: invoke-static v1, v0, Lcom/vivo/connect/logger/EasyLog;->i(Ljava/lang/String; Ljava/lang/String;)V
+00005e: iget-object v2, v2, Lcom/vivo/pcsuite/connect/ConnectControlModel;->d Lcom/vivo/pcsuite/interfaces/ConnectListener;
+000062: if-eqz v2, +005h
+000066: invoke-interface v2, v3, v4, v5, v6, Lcom/vivo/pcsuite/interfaces/ConnectListener;->onReceiverAutoStatus(Z Z Z Lcom/vivo/pcsuite/pcconnect/PCBean;)V
+00006c: return-void 
+
+METHOD onReceiverSendInfo(Ljava/lang/String;)V
+000000: const-string v0, "onReceiverSendInfo :"
+000004: const-string v1, "pcsuite_ConnectControlModel"
+000008: invoke-static v0, v4, v1, Landroidx/constraintlayout/core/motion/a;->d(Ljava/lang/String; Ljava/lang/String; Ljava/lang/String;)V
+00000e: new-instance v0, Lorg/json/JSONObject;
+000012: invoke-direct v0, v4, Lorg/json/JSONObject;-><init>(Ljava/lang/String;)V
+000018: const-string v4, "action"
+00001c: invoke-virtual v0, v4, Lorg/json/JSONObject;->getInt(Ljava/lang/String;)I
+000022: move-result v4
+000024: if-nez v4, +022h
+000028: invoke-static Lde/greenrobot/event/EventBus;->getDefault()Lde/greenrobot/event/EventBus;
+00002e: move-result-object v4
+000030: new-instance v0, Lcom/vivo/pcsuite/entity/EventBean;
+000034: const/4 v2, 4
+000036: invoke-direct v0, v2, v1, Lcom/vivo/pcsuite/entity/EventBean;-><init>(I Ljava/lang/String;)V
+00003c: invoke-virtual v4, v0, Lde/greenrobot/event/EventBus;->post(Ljava/lang/Object;)V
+000042: const/4 v4, 1
+000044: invoke-static v4, Lm2/b;->b(I)Lm2/b;
+00004a: move-result-object v4
+00004c: new-instance v0, Lcom/vivo/pcsuite/connect/ConnectControlModel$3;
+000050: invoke-direct v0, v3, Lcom/vivo/pcsuite/connect/ConnectControlModel$3;-><init>(Lcom/vivo/pcsuite/connect/ConnectControlModel;)V
+000056: invoke-virtual v4, v0, Lm2/b;->e(Ljava/lang/Runnable;)V
+00005c: invoke-virtual v4, Lm2/b;->d()V
+000062: return-void 
+000064: move-exception v3
+000066: goto +2h
+000068: return-void 
+00006a: new-instance v4, Ljava/lang/StringBuilder;
+00006e: const-string v0, "onReceiverSendInfo "
+000072: invoke-direct v4, v0, Ljava/lang/StringBuilder;-><init>(Ljava/lang/String;)V
+000078: invoke-virtual v4, v3, Ljava/lang/StringBuilder;->append(Ljava/lang/Object;)Ljava/lang/StringBuilder;
+00007e: invoke-virtual v4, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
+000084: move-result-object v3
+000086: invoke-static v1, v3, Lcom/vivo/connect/logger/EasyLog;->e(Ljava/lang/String; Ljava/lang/String;)V
+00008c: return-void 
+
+METHOD onRequest(Ljava/lang/String; Ljava/lang/String; Ljava/lang/String;)V
+000000: invoke-static Lk2/g;->Q()Z
+000006: move-result v0
+000008: const-string v1, " userName : "
+00000c: const-string v2, "  connectCloud:"
+000010: const-string v3, "on Request deviceName : "
+000014: invoke-static v3, v10, v1, v12, v2, LP/d;->d(Ljava/lang/String; Ljava/lang/String; Ljava/lang/String; Ljava/lang/String; Ljava/lang/String;)Ljava/lang/StringBuilder;
+00001a: move-result-object v1
+00001c: const-string v2, "pcsuite_ConnectControlModel"
+000020: invoke-static v1, v0, v2, Landroidx/appcompat/widget/b;->i(Ljava/lang/StringBuilder; Z Ljava/lang/String;)V
+000026: const/4 v1, 1
+000028: if-nez v0, +048h
+00002c: invoke-static Lcom/vivo/pcsuite/service/PcSuiteObserver;->q()I
+000032: move-result v0
+000034: if-ne v0, v1, +00bh
+000038: const-string v10, "connect success ,return busy connect"
+00003c: invoke-static v2, v10, Lcom/vivo/connect/logger/EasyLog;->i(Ljava/lang/String; Ljava/lang/String;)V
+000042: invoke-virtual v9, Lcom/vivo/pcsuite/connect/ConnectControlModel;->responseBleBusy()V
+000048: return-void 
+00004a: invoke-static Lcom/vivo/pcsuite/service/PcSuiteObserver;->q()I
+000050: move-result v0
+000052: if-nez v0, +033h
+000056: sget-object v10, Lcom/vivo/pcsuite/connect/ConnectControlModel;->currentConnectBean Lcom/vivo/pcsuite/pcconnect/PCBean;
+00005a: if-eqz v10, +026h
+00005e: invoke-virtual v10, Lcom/vivo/pcsuite/pcconnect/PCBean;->getDeviceId()Ljava/lang/String;
+000064: move-result-object v10
+000066: invoke-virtual v10, v11, Ljava/lang/String;->equals(Ljava/lang/Object;)Z
+00006c: move-result v10
+00006e: if-eqz v10, +013h
+000072: const-string v10, "Connecting and is same device,reset time and continue connect"
+000076: invoke-static v2, v10, Lcom/vivo/connect/logger/EasyLog;->i(Ljava/lang/String; Ljava/lang/String;)V
+00007c: const-string v10, "postTimer 1"
+000080: invoke-static v2, v10, Lcom/vivo/connect/logger/EasyLog;->i(Ljava/lang/String; Ljava/lang/String;)V
+000086: invoke-virtual v9, Lcom/vivo/pcsuite/connect/ConnectControlModel;->postApTimeTask()V
+00008c: invoke-virtual v9, Lcom/vivo/pcsuite/connect/ConnectControlModel;->agreeBle()V
+000092: return-void 
+000094: const-string v10, "connecting and is not same device ,return busy connect"
+000098: invoke-static v2, v10, Lcom/vivo/connect/logger/EasyLog;->i(Ljava/lang/String; Ljava/lang/String;)V
+00009e: invoke-virtual v9, Lcom/vivo/pcsuite/connect/ConnectControlModel;->responseBleBusy()V
+0000a4: return-void 
+0000a6: const-string v10, "connecting and curConnectBean is null ,return busy connect"
+0000aa: invoke-static v2, v10, Lcom/vivo/connect/logger/EasyLog;->i(Ljava/lang/String; Ljava/lang/String;)V
+0000b0: invoke-virtual v9, Lcom/vivo/pcsuite/connect/ConnectControlModel;->responseBleBusy()V
+0000b6: return-void 
+0000b8: sget-object v0, Lcom/vivo/pcsuite/PcSuiteApplication;->I1 Lcom/vivo/pcsuite/PcSuiteApplication;
+0000bc: invoke-virtual v0, Lcom/vivo/pcsuite/PcSuiteApplication;->u()Ljava/lang/StringBuffer;
+0000c2: move-result-object v0
+0000c4: const-string v3, "6"
+0000c8: invoke-virtual v0, v3, Ljava/lang/StringBuffer;->append(Ljava/lang/String;)Ljava/lang/StringBuffer;
+0000ce: sget-object v0, Lcom/vivo/pcsuite/PcSuiteApplication;->I1 Lcom/vivo/pcsuite/PcSuiteApplication;
+0000d2: const/4 v3, 2
+0000d4: invoke-virtual v0, v3, Lcom/vivo/pcsuite/PcSuiteApplication;->y0(I)V
+0000da: const-string v0, "startConnect for pc by ble111"
+0000de: invoke-static v2, v0, Lcom/vivo/connect/logger/EasyLog;->i(Ljava/lang/String; Ljava/lang/String;)V
+0000e4: invoke-static Lcom/vivo/pcsuite/util/j0;->b()Ljava/lang/String;
+0000ea: move-result-object v0
+0000ec: invoke-virtual v0, Ljava/lang/String;->isEmpty()Z
+0000f2: move-result v3
+0000f4: if-nez v3, +01ah
+0000f8: invoke-virtual v0, v11, Ljava/lang/String;->equals(Ljava/lang/Object;)Z
+0000fe: move-result v0
+000100: if-eqz v0, +014h
+000104: const-string v0, " ble is autoConnect"
+000108: invoke-static v2, v0, Lcom/vivo/connect/logger/EasyLog;->i(Ljava/lang/String; Ljava/lang/String;)V
+00010e: const/4 v7, 1
+000110: const/4 v8, 0
+000112: move-object v3, v9
+000114: move-object v4, v10
+000116: move-object v5, v11
+000118: move-object v6, v12
+00011a: invoke-direct/range v3 ... v8, Lcom/vivo/pcsuite/connect/ConnectControlModel;->m(Ljava/lang/String; Ljava/lang/String; Ljava/lang/String; Z Z)V
+000120: invoke-virtual v3, Lcom/vivo/pcsuite/connect/ConnectControlModel;->agreeBle()V
+000126: return-void 
+000128: move-object v3, v9
+00012a: move-object v4, v10
+00012c: move-object v5, v11
+00012e: move-object v6, v12
+000130: invoke-static Lcom/vivo/pcsuite/util/o0;->W()V
+000136: const-string v9, " show ble request dialog"
+00013a: invoke-static v2, v9, Lcom/vivo/connect/logger/EasyLog;->i(Ljava/lang/String; Ljava/lang/String;)V
+000140: invoke-static v1, Lm2/b;->b(I)Lm2/b;
+000146: move-result-object v9
+000148: new-instance v10, Lcom/vivo/pcsuite/connect/ConnectControlModel$2;
+00014c: invoke-direct v10, v3, v4, v6, v5, Lcom/vivo/pcsuite/connect/ConnectControlModel$2;-><init>(Lcom/vivo/pcsuite/connect/ConnectControlModel; Ljava/lang/String; Ljava/lang/String; Ljava/lang/String;)V
+000152: invoke-virtual v9, v10, Lm2/b;->e(Ljava/lang/Runnable;)V
+000158: invoke-virtual v9, Lm2/b;->d()V
+00015e: return-void 
+
+METHOD onRequest(Ljava/lang/String; Ljava/lang/String; Ljava/lang/String; I)V
+000000: const-string v0, " userName : "
+000004: const-string v1, " isSameAccount : "
+000008: const-string v2, "on new Request deviceName : "
+00000c: invoke-static v2, v12, v0, v14, v1, LP/d;->d(Ljava/lang/String; Ljava/lang/String; Ljava/lang/String; Ljava/lang/String; Ljava/lang/String;)Ljava/lang/StringBuilder;
+000012: move-result-object v0
+000014: const-string v1, "pcsuite_ConnectControlModel"
+000018: invoke-static v0, v1, v15, LZ1/g;->f(Ljava/lang/StringBuilder; Ljava/lang/String; I)V
+00001e: const/4 v0, 0
+000020: const/4 v2, 1
+000022: if-ne v15, v2, +004h
+000026: move v7, v2
+000028: goto +2h
+00002a: move v7, v0
+00002c: invoke-virtual v11, v7, Lcom/vivo/pcsuite/connect/ConnectControlModel;->setBleIsSameAccount(Z)V
+000032: invoke-static Lk2/g;->Q()Z
+000038: move-result v7
+00003a: const-string v8, "on new Request connectCloud  :"
+00003e: invoke-static v8, v1, v7, LZ1/b;->c(Ljava/lang/String; Ljava/lang/String; Z)V
+000044: if-nez v7, +048h
+000048: invoke-static Lcom/vivo/pcsuite/service/PcSuiteObserver;->q()I
+00004e: move-result v7
+000050: if-ne v7, v2, +00bh
+000054: const-string v0, "connect success ,return busy connect"
+000058: invoke-static v1, v0, Lcom/vivo/connect/logger/EasyLog;->i(Ljava/lang/String; Ljava/lang/String;)V
+00005e: invoke-virtual v11, Lcom/vivo/pcsuite/connect/ConnectControlModel;->responseBleBusy()V
+000064: return-void 
+000066: invoke-static Lcom/vivo/pcsuite/service/PcSuiteObserver;->q()I
+00006c: move-result v7
+00006e: if-nez v7, +033h
+000072: sget-object v0, Lcom/vivo/pcsuite/connect/ConnectControlModel;->currentConnectBean Lcom/vivo/pcsuite/pcconnect/PCBean;
+000076: if-eqz v0, +026h
+00007a: invoke-virtual v0, Lcom/vivo/pcsuite/pcconnect/PCBean;->getDeviceId()Ljava/lang/String;
+000080: move-result-object v0
+000082: invoke-virtual v0, v13, Ljava/lang/String;->equals(Ljava/lang/Object;)Z
+000088: move-result v0
+00008a: if-eqz v0, +013h
+00008e: const-string v0, "Connecting and is same device,reset time and continue connect"
+000092: invoke-static v1, v0, Lcom/vivo/connect/logger/EasyLog;->i(Ljava/lang/String; Ljava/lang/String;)V
+000098: const-string v0, "removeTimer 3"
+00009c: invoke-static v1, v0, Lcom/vivo/connect/logger/EasyLog;->i(Ljava/lang/String; Ljava/lang/String;)V
+0000a2: invoke-virtual v11, Lcom/vivo/pcsuite/connect/ConnectControlModel;->postApTimeTask()V
+0000a8: invoke-virtual v11, Lcom/vivo/pcsuite/connect/ConnectControlModel;->agreeBle()V
+0000ae: return-void 
+0000b0: const-string v0, "connecting and is not same device ,return busy connect"
+0000b4: invoke-static v1, v0, Lcom/vivo/connect/logger/EasyLog;->i(Ljava/lang/String; Ljava/lang/String;)V
+0000ba: invoke-virtual v11, Lcom/vivo/pcsuite/connect/ConnectControlModel;->responseBleBusy()V
+0000c0: return-void 
+0000c2: const-string v0, "connecting and curConnectBean is null ,return busy connect"
+0000c6: invoke-static v1, v0, Lcom/vivo/connect/logger/EasyLog;->i(Ljava/lang/String; Ljava/lang/String;)V
+0000cc: invoke-virtual v11, Lcom/vivo/pcsuite/connect/ConnectControlModel;->responseBleBusy()V
+0000d2: return-void 
+0000d4: sget-object v8, Lcom/vivo/pcsuite/PcSuiteApplication;->I1 Lcom/vivo/pcsuite/PcSuiteApplication;
+0000d8: invoke-virtual v8, Lcom/vivo/pcsuite/PcSuiteApplication;->u()Ljava/lang/StringBuffer;
+0000de: move-result-object v8
+0000e0: const-string v9, "6"
+0000e4: invoke-virtual v8, v9, Ljava/lang/StringBuffer;->append(Ljava/lang/String;)Ljava/lang/StringBuffer;
+0000ea: sget-object v8, Lcom/vivo/pcsuite/PcSuiteApplication;->I1 Lcom/vivo/pcsuite/PcSuiteApplication;
+0000ee: const/4 v9, 2
+0000f0: invoke-virtual v8, v9, Lcom/vivo/pcsuite/PcSuiteApplication;->y0(I)V
+0000f6: const-string v8, "startConnect for pc by ble222"
+0000fa: invoke-static v1, v8, Lcom/vivo/connect/logger/EasyLog;->i(Ljava/lang/String; Ljava/lang/String;)V
+000100: invoke-static Lcom/bbk/account/base/BBKAccountManager;->getInstance()Lcom/bbk/account/base/BBKAccountManager;
+000106: move-result-object v8
+000108: sget-object v9, Lcom/vivo/pcsuite/PcSuiteApplication;->I1 Lcom/vivo/pcsuite/PcSuiteApplication;
+00010c: invoke-virtual v8, v9, Lcom/bbk/account/base/BBKAccountManager;->init(Landroid/content/Context;)V
+000112: invoke-static Lcom/bbk/account/base/BBKAccountManager;->getInstance()Lcom/bbk/account/base/BBKAccountManager;
+000118: move-result-object v8
+00011a: invoke-virtual v8, Lcom/bbk/account/base/BBKAccountManager;->getOpenid()Ljava/lang/String;
+000120: move-result-object v8
+000122: if-eqz v8, +015h
+000126: invoke-virtual v8, Ljava/lang/String;->isEmpty()Z
+00012c: move-result v9
+00012e: if-nez v9, +00fh
+000132: sget-object v9, Lcom/vivo/pcsuite/PcSuiteApplication;->I1 Lcom/vivo/pcsuite/PcSuiteApplication;
+000136: const-string v10, "pcSuite_info"
+00013a: invoke-virtual v9, v10, v0, Landroid/content/Context;->getSharedPreferences(Ljava/lang/String; I)Landroid/content/SharedPreferences;
+000140: move-result-object v0
+000142: invoke-interface v0, v8, v2, Landroid/content/SharedPreferences;->getBoolean(Ljava/lang/String; Z)Z
+000148: move-result v0
+00014a: goto +2h
+00014c: move v0, v2
+00014e: if-ne v15, v2, +014h
+000152: const-string v0, " ble is autoConnect"
+000156: invoke-static v1, v0, Lcom/vivo/connect/logger/EasyLog;->i(Ljava/lang/String; Ljava/lang/String;)V
+00015c: const/4 v7, 1
+00015e: const/4 v8, 0
+000160: move-object v3, v11
+000162: move-object v4, v12
+000164: move-object v5, v13
+000166: move-object v6, v14
+000168: invoke-direct/range v3 ... v8, Lcom/vivo/pcsuite/connect/ConnectControlModel;->m(Ljava/lang/String; Ljava/lang/String; Ljava/lang/String; Z Z)V
+00016e: invoke-virtual v11, Lcom/vivo/pcsuite/connect/ConnectControlModel;->agreeBle()V
+000174: return-void 
+000176: invoke-static Lcom/vivo/pcsuite/util/o0;->W()V
+00017c: invoke-virtual v11, Lcom/vivo/pcsuite/connect/ConnectControlModel;->postDialogRunnable()V
+000182: const-string v3, " show ble request dialog"
+000186: invoke-static v1, v3, Lcom/vivo/connect/logger/EasyLog;->i(Ljava/lang/String; Ljava/lang/String;)V
+00018c: invoke-static v2, Lm2/b;->b(I)Lm2/b;
+000192: move-result-object v9
+000194: move v5, v0
+000196: new-instance v0, Lcom/vivo/pcsuite/connect/ConnectControlModel$4;
+00019a: move-object v1, v11
+00019c: move-object v2, v12
+00019e: move-object v7, v13
+0001a0: move-object v3, v14
+0001a2: move v4, v15
+0001a4: move-object v6, v8
+0001a6: invoke-direct/range v0 ... v7, Lcom/vivo/pcsuite/connect/ConnectControlModel$4;-><init>(Lcom/vivo/pcsuite/connect/ConnectControlModel; Ljava/lang/String; Ljava/lang/String; I Z Ljava/lang/String; Ljava/lang/String;)V
+0001ac: invoke-virtual v9, v0, Lm2/b;->e(Ljava/lang/Runnable;)V
+0001b2: invoke-virtual v9, Lm2/b;->d()V
+0001b8: return-void 
+
+METHOD onScanResult(Z)V
+000000: return-void 
+
+METHOD onShareStateChanged()V
+000000: return-void 
+
+METHOD onWifiEnabled()V
+000000: return-void 
+
+METHOD postAgreeTimeTask()V
+000000: const-string v0, "pcsuite_ConnectControlModel"
+000004: const-string v1, "enter AgreeTimeTask "
+000008: invoke-static v0, v1, Lcom/vivo/connect/logger/EasyLog;->i(Ljava/lang/String; Ljava/lang/String;)V
+00000e: invoke-virtual v4, Lcom/vivo/pcsuite/connect/ConnectControlModel;->removeAgreeTimer()V
+000014: iget-object v0, v4, Lcom/vivo/pcsuite/connect/ConnectControlModel;->e Landroid/os/Handler;
+000018: if-eqz v0, +010h
+00001c: new-instance v1, Lcom/vivo/pcsuite/connect/ConnectControlModel$AgreeRunnable;
+000020: sget-object v2, Lcom/vivo/pcsuite/PcSuiteApplication;->I1 Lcom/vivo/pcsuite/PcSuiteApplication;
+000024: invoke-direct v1, v2, Lcom/vivo/pcsuite/connect/ConnectControlModel$AgreeRunnable;-><init>(Lcom/vivo/pcsuite/PcSuiteApplication;)V
+00002a: iput-object v1, v4, Lcom/vivo/pcsuite/connect/ConnectControlModel;->i Lcom/vivo/pcsuite/connect/ConnectControlModel$AgreeRunnable;
+00002e: const-wide/16 v2, 3500
+000032: invoke-virtual v0, v1, v2, v3, Landroid/os/Handler;->postDelayed(Ljava/lang/Runnable; J)Z
+000038: return-void 
+
+METHOD postApTimeTask()V
+000000: new-instance v0, Ljava/lang/StringBuilder;
+000004: const-string v1, "postApTimeTask mHandler is null: "
+000008: invoke-direct v0, v1, Ljava/lang/StringBuilder;-><init>(Ljava/lang/String;)V
+00000e: iget-object v1, v4, Lcom/vivo/pcsuite/connect/ConnectControlModel;->e Landroid/os/Handler;
+000012: if-nez v1, +004h
+000016: const/4 v2, 1
+000018: goto +2h
+00001a: const/4 v2, 0
+00001c: invoke-virtual v0, v2, Ljava/lang/StringBuilder;->append(Z)Ljava/lang/StringBuilder;
+000022: invoke-virtual v0, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
+000028: move-result-object v0
+00002a: const-string v2, "pcsuite_ConnectControlModel"
+00002e: invoke-static v2, v0, Lcom/vivo/connect/logger/EasyLog;->i(Ljava/lang/String; Ljava/lang/String;)V
+000034: invoke-virtual v4, Lcom/vivo/pcsuite/connect/ConnectControlModel;->removeTimer()V
+00003a: if-eqz v1, +011h
+00003e: new-instance v0, Lcom/vivo/pcsuite/connect/ConnectControlModel$ApRunnable;
+000042: sget-object v2, Lcom/vivo/pcsuite/PcSuiteApplication;->I1 Lcom/vivo/pcsuite/PcSuiteApplication;
+000046: invoke-direct v0, v2, Lcom/vivo/pcsuite/connect/ConnectControlModel$ApRunnable;-><init>(Lcom/vivo/pcsuite/PcSuiteApplication;)V
+00004c: iput-object v0, v4, Lcom/vivo/pcsuite/connect/ConnectControlModel;->b Lcom/vivo/pcsuite/connect/ConnectControlModel$ApRunnable;
+000050: iget v4, v4, Lcom/vivo/pcsuite/connect/ConnectControlModel;->a I
+000054: int-to-long v2, v4
+000056: invoke-virtual v1, v0, v2, v3, Landroid/os/Handler;->postDelayed(Ljava/lang/Runnable; J)Z
+00005c: return-void 
+
+METHOD postCloudConnectRunnable(Ljava/util/List; I Lcom/vivo/pcsuite/entity/PcDeviceInfo; Landroid/app/Activity;)V
+000000: new-instance v0, Ljava/lang/StringBuilder;
+000004: const-string v1, "postCloudConnectRunnable = "
+000008: invoke-direct v0, v1, Ljava/lang/StringBuilder;-><init>(Ljava/lang/String;)V
+00000e: iget-object v1, v9, Lcom/vivo/pcsuite/connect/ConnectControlModel;->e Landroid/os/Handler;
+000012: if-eqz v1, +004h
+000016: const/4 v2, 1
+000018: goto +2h
+00001a: const/4 v2, 0
+00001c: invoke-virtual v0, v2, Ljava/lang/StringBuilder;->append(Z)Ljava/lang/StringBuilder;
+000022: invoke-virtual v0, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
+000028: move-result-object v0
+00002a: const-string v2, "pcsuite_ConnectControlModel"
+00002e: invoke-static v2, v0, Lcom/vivo/connect/logger/EasyLog;->i(Ljava/lang/String; Ljava/lang/String;)V
+000034: invoke-virtual v9, Lcom/vivo/pcsuite/connect/ConnectControlModel;->removeCloudConnectRunnable()V
+00003a: if-eqz v1, +014h
+00003e: new-instance v3, Lcom/vivo/pcsuite/connect/ConnectControlModel$CloudConnectRunnable;
+000042: sget-object v4, Lcom/vivo/pcsuite/PcSuiteApplication;->I1 Lcom/vivo/pcsuite/PcSuiteApplication;
+000046: move-object v5, v10
+000048: move v6, v11
+00004a: move-object v7, v12
+00004c: move-object v8, v13
+00004e: invoke-direct/range v3 ... v8, Lcom/vivo/pcsuite/connect/ConnectControlModel$CloudConnectRunnable;-><init>(Lcom/vivo/pcsuite/PcSuiteApplication; Ljava/util/List; I Lcom/vivo/pcsuite/entity/PcDeviceInfo; Landroid/app/Activity;)V
+000054: iput-object v3, v9, Lcom/vivo/pcsuite/connect/ConnectControlModel;->k Lcom/vivo/pcsuite/connect/ConnectControlModel$CloudConnectRunnable;
+000058: const-wide/16 v9, 5000
+00005c: invoke-virtual v1, v3, v9, v10, Landroid/os/Handler;->postDelayed(Ljava/lang/Runnable; J)Z
+000062: return-void 
+
+METHOD postDialogRunnable()V
+000000: invoke-virtual v4, Lcom/vivo/pcsuite/connect/ConnectControlModel;->removeDialogRunnable()V
+000006: iget-object v0, v4, Lcom/vivo/pcsuite/connect/ConnectControlModel;->e Landroid/os/Handler;
+00000a: if-eqz v0, +011h
+00000e: new-instance v1, Lcom/vivo/pcsuite/connect/ConnectControlModel$DialogRunnable;
+000012: sget-object v2, Lcom/vivo/pcsuite/PcSuiteApplication;->I1 Lcom/vivo/pcsuite/PcSuiteApplication;
+000016: invoke-direct v1, v2, Lcom/vivo/pcsuite/connect/ConnectControlModel$DialogRunnable;-><init>(Lcom/vivo/pcsuite/PcSuiteApplication;)V
+00001c: iput-object v1, v4, Lcom/vivo/pcsuite/connect/ConnectControlModel;->c Lcom/vivo/pcsuite/connect/ConnectControlModel$DialogRunnable;
+000020: iget v4, v4, Lcom/vivo/pcsuite/connect/ConnectControlModel;->a I
+000024: int-to-long v2, v4
+000026: invoke-virtual v0, v1, v2, v3, Landroid/os/Handler;->postDelayed(Ljava/lang/Runnable; J)Z
+00002c: return-void 
+
+METHOD qrConnectP2P(Ljava/lang/String; Ljava/lang/String; Ljava/lang/String;)V
+000000: new-instance v2, Ljava/lang/StringBuilder;
+000004: const-string v0, "start Connect By  qrConnectP2P:"
+000008: invoke-direct v2, v0, Ljava/lang/StringBuilder;-><init>(Ljava/lang/String;)V
+00000e: sget-object v0, Lcom/vivo/pcsuite/connect/ConnectControlModel;->o Lcom/vivo/pcsuite/pcconnect/PcOtherShare;
+000012: if-nez v0, +004h
+000016: const/4 v0, 1
+000018: goto +2h
+00001a: const/4 v0, 0
+00001c: const-string v1, "pcsuite_ConnectControlModel"
+000020: invoke-static v2, v0, v1, Landroidx/appcompat/widget/b;->i(Ljava/lang/StringBuilder; Z Ljava/lang/String;)V
+000026: sget-object v2, Lcom/vivo/pcsuite/connect/ConnectControlModel;->o Lcom/vivo/pcsuite/pcconnect/PcOtherShare;
+00002a: if-eqz v2, +007h
+00002e: sget-object v2, Lcom/vivo/pcsuite/connect/ConnectControlModel;->o Lcom/vivo/pcsuite/pcconnect/PcOtherShare;
+000032: invoke-virtual v2, v3, v4, v5, Lcom/vivo/pcsuite/pcconnect/PcOtherShare;->qrConnectP2P(Ljava/lang/String; Ljava/lang/String; Ljava/lang/String;)V
+000038: return-void 
+
+METHOD rejectBusyConnect(Ljava/lang/String;)V
+000000: const-string v1, "pcsuite_ConnectControlModel"
+000004: const-string v0, " busy  Connect for pc by wlan"
+000008: invoke-static v1, v0, Lcom/vivo/connect/logger/EasyLog;->i(Ljava/lang/String; Ljava/lang/String;)V
+00000e: new-instance v1, Lcom/vivo/connect/parames/CommonOptions;
+000012: invoke-direct v1, Lcom/vivo/connect/parames/CommonOptions;-><init>()V
+000018: invoke-virtual v1, v2, Lcom/vivo/connect/parames/CommonOptions;->setDeviceId(Ljava/lang/String;)V
+00001e: const-string v2, "com.vivo.pcsuite.SERVICE"
+000022: invoke-virtual v1, v2, Lcom/vivo/connect/parames/CommonOptions;->setServiceId(Ljava/lang/String;)V
+000028: const/16 v2, 11
+00002c: invoke-static v2, Ljava/lang/Integer;->valueOf(I)Ljava/lang/Integer;
+000032: move-result-object v2
+000034: invoke-virtual v1, v2, Lcom/vivo/connect/parames/CommonOptions;->setErrorCode(Ljava/lang/Integer;)V
+00003a: sget-object v2, Lcom/vivo/pcsuite/PcSuiteApplication;->I1 Lcom/vivo/pcsuite/PcSuiteApplication;
+00003e: invoke-static v2, Lcom/vivo/connect/ConnectBase;->getConnectionClient(Landroid/content/Context;)Lcom/vivo/connect/ConnectClient;
+000044: move-result-object v2
+000046: invoke-virtual v2, v1, Lcom/vivo/connect/ConnectClient;->rejectConnection(Lcom/vivo/connect/parames/CommonOptions;)Lcom/vivo/connect/tasks/Task;
+00004c: return-void 
+
+METHOD rejectCloudBusyConnect(Ljava/lang/String;)V
+000000: const-string v1, "pcsuite_ConnectControlModel"
+000004: const-string v0, " cloud transfer busy"
+000008: invoke-static v1, v0, Lcom/vivo/connect/logger/EasyLog;->i(Ljava/lang/String; Ljava/lang/String;)V
+00000e: new-instance v1, Lcom/vivo/connect/parames/CommonOptions;
+000012: invoke-direct v1, Lcom/vivo/connect/parames/CommonOptions;-><init>()V
+000018: invoke-virtual v1, v2, Lcom/vivo/connect/parames/CommonOptions;->setDeviceId(Ljava/lang/String;)V
+00001e: const-string v2, "com.vivo.pcsuite.SERVICE"
+000022: invoke-virtual v1, v2, Lcom/vivo/connect/parames/CommonOptions;->setServiceId(Ljava/lang/String;)V
+000028: const/16 v2, 13
+00002c: invoke-static v2, Ljava/lang/Integer;->valueOf(I)Ljava/lang/Integer;
+000032: move-result-object v2
+000034: invoke-virtual v1, v2, Lcom/vivo/connect/parames/CommonOptions;->setErrorCode(Ljava/lang/Integer;)V
+00003a: sget-object v2, Lcom/vivo/pcsuite/PcSuiteApplication;->I1 Lcom/vivo/pcsuite/PcSuiteApplication;
+00003e: invoke-static v2, Lcom/vivo/connect/ConnectBase;->getConnectionClient(Landroid/content/Context;)Lcom/vivo/connect/ConnectClient;
+000044: move-result-object v2
+000046: invoke-virtual v2, v1, Lcom/vivo/connect/ConnectClient;->rejectConnection(Lcom/vivo/connect/parames/CommonOptions;)Lcom/vivo/connect/tasks/Task;
+00004c: return-void 
+
+METHOD rejectConnect(Ljava/lang/String;)V
+000000: const-string v1, "pcsuite_ConnectControlModel"
+000004: const-string v0, " cancel  Connect for pc by wlan"
+000008: invoke-static v1, v0, Lcom/vivo/connect/logger/EasyLog;->i(Ljava/lang/String; Ljava/lang/String;)V
+00000e: sget-object v1, Lcom/vivo/pcsuite/PcSuiteApplication;->I1 Lcom/vivo/pcsuite/PcSuiteApplication;
+000012: invoke-static v1, Lcom/vivo/connect/ConnectBase;->getConnectionClient(Landroid/content/Context;)Lcom/vivo/connect/ConnectClient;
+000018: move-result-object v1
+00001a: const-string v0, "com.vivo.pcsuite.SERVICE"
+00001e: invoke-virtual v1, v0, v2, Lcom/vivo/connect/ConnectClient;->rejectConnection(Ljava/lang/String; Ljava/lang/String;)Lcom/vivo/connect/tasks/Task;
+000024: return-void 
+
+METHOD remove(Lcom/vivo/pcsuite/pcconnect/PCBean;)V
+000000: return-void 
+
+METHOD removeAgreeTimer()V
+000000: new-instance v0, Ljava/lang/StringBuilder;
+000004: const-string v1, "removeAgreeTimer agreeRunnable is null: "
+000008: invoke-direct v0, v1, Ljava/lang/StringBuilder;-><init>(Ljava/lang/String;)V
+00000e: iget-object v1, v3, Lcom/vivo/pcsuite/connect/ConnectControlModel;->i Lcom/vivo/pcsuite/connect/ConnectControlModel$AgreeRunnable;
+000012: if-nez v1, +004h
+000016: const/4 v1, 1
+000018: goto +2h
+00001a: const/4 v1, 0
+00001c: const-string v2, "pcsuite_ConnectControlModel"
+000020: invoke-static v0, v1, v2, Landroidx/appcompat/widget/b;->i(Ljava/lang/StringBuilder; Z Ljava/lang/String;)V
+000026: iget-object v0, v3, Lcom/vivo/pcsuite/connect/ConnectControlModel;->e Landroid/os/Handler;
+00002a: if-eqz v0, +013h
+00002e: iget-object v1, v3, Lcom/vivo/pcsuite/connect/ConnectControlModel;->i Lcom/vivo/pcsuite/connect/ConnectControlModel$AgreeRunnable;
+000032: if-eqz v1, +00fh
+000036: const-string v1, "enter remove"
+00003a: invoke-static v2, v1, Lcom/vivo/connect/logger/EasyLog;->i(Ljava/lang/String; Ljava/lang/String;)V
+000040: iget-object v1, v3, Lcom/vivo/pcsuite/connect/ConnectControlModel;->i Lcom/vivo/pcsuite/connect/ConnectControlModel$AgreeRunnable;
+000044: invoke-virtual v0, v1, Landroid/os/Handler;->removeCallbacks(Ljava/lang/Runnable;)V
+00004a: const/4 v0, 0
+00004c: iput-object v0, v3, Lcom/vivo/pcsuite/connect/ConnectControlModel;->i Lcom/vivo/pcsuite/connect/ConnectControlModel$AgreeRunnable;
+000050: return-void 
+
+METHOD removeCloudConnectRunnable()V
+000000: new-instance v0, Ljava/lang/StringBuilder;
+000004: const-string v1, "removeCloudConnectRunnable = "
+000008: invoke-direct v0, v1, Ljava/lang/StringBuilder;-><init>(Ljava/lang/String;)V
+00000e: iget-object v1, v3, Lcom/vivo/pcsuite/connect/ConnectControlModel;->k Lcom/vivo/pcsuite/connect/ConnectControlModel$CloudConnectRunnable;
+000012: if-eqz v1, +004h
+000016: const/4 v1, 1
+000018: goto +2h
+00001a: const/4 v1, 0
+00001c: const-string v2, "pcsuite_ConnectControlModel"
+000020: invoke-static v0, v1, v2, Landroidx/appcompat/widget/b;->i(Ljava/lang/StringBuilder; Z Ljava/lang/String;)V
+000026: iget-object v0, v3, Lcom/vivo/pcsuite/connect/ConnectControlModel;->e Landroid/os/Handler;
+00002a: if-eqz v0, +00ch
+00002e: iget-object v1, v3, Lcom/vivo/pcsuite/connect/ConnectControlModel;->k Lcom/vivo/pcsuite/connect/ConnectControlModel$CloudConnectRunnable;
+000032: if-eqz v1, +008h
+000036: invoke-virtual v0, v1, Landroid/os/Handler;->removeCallbacks(Ljava/lang/Runnable;)V
+00003c: const/4 v0, 0
+00003e: iput-object v0, v3, Lcom/vivo/pcsuite/connect/ConnectControlModel;->k Lcom/vivo/pcsuite/connect/ConnectControlModel$CloudConnectRunnable;
+000042: return-void 
+
+METHOD removeDialogRunnable()V
+000000: new-instance v0, Ljava/lang/StringBuilder;
+000004: const-string v1, "removeDialogRunnable mDialogRunnable is null: "
+000008: invoke-direct v0, v1, Ljava/lang/StringBuilder;-><init>(Ljava/lang/String;)V
+00000e: iget-object v1, v3, Lcom/vivo/pcsuite/connect/ConnectControlModel;->c Lcom/vivo/pcsuite/connect/ConnectControlModel$DialogRunnable;
+000012: if-nez v1, +004h
+000016: const/4 v1, 1
+000018: goto +2h
+00001a: const/4 v1, 0
+00001c: const-string v2, "pcsuite_ConnectControlModel"
+000020: invoke-static v0, v1, v2, Landroidx/appcompat/widget/b;->i(Ljava/lang/StringBuilder; Z Ljava/lang/String;)V
+000026: iget-object v0, v3, Lcom/vivo/pcsuite/connect/ConnectControlModel;->e Landroid/os/Handler;
+00002a: if-eqz v0, +013h
+00002e: iget-object v1, v3, Lcom/vivo/pcsuite/connect/ConnectControlModel;->c Lcom/vivo/pcsuite/connect/ConnectControlModel$DialogRunnable;
+000032: if-eqz v1, +00fh
+000036: const-string v1, "remove dialogRunnable"
+00003a: invoke-static v2, v1, Lcom/vivo/connect/logger/EasyLog;->i(Ljava/lang/String; Ljava/lang/String;)V
+000040: iget-object v1, v3, Lcom/vivo/pcsuite/connect/ConnectControlModel;->c Lcom/vivo/pcsuite/connect/ConnectControlModel$DialogRunnable;
+000044: invoke-virtual v0, v1, Landroid/os/Handler;->removeCallbacks(Ljava/lang/Runnable;)V
+00004a: const/4 v0, 0
+00004c: iput-object v0, v3, Lcom/vivo/pcsuite/connect/ConnectControlModel;->c Lcom/vivo/pcsuite/connect/ConnectControlModel$DialogRunnable;
+000050: return-void 
+
+METHOD removeListener()V
+000000: const/4 v0, 0
+000002: iput-object v0, v1, Lcom/vivo/pcsuite/connect/ConnectControlModel;->d Lcom/vivo/pcsuite/interfaces/ConnectListener;
+000006: return-void 
+
+METHOD removeTimer()V
+000000: new-instance v0, Ljava/lang/StringBuilder;
+000004: const-string v1, "removeTimer mHandler is null: "
+000008: invoke-direct v0, v1, Ljava/lang/StringBuilder;-><init>(Ljava/lang/String;)V
+00000e: iget-object v1, v4, Lcom/vivo/pcsuite/connect/ConnectControlModel;->e Landroid/os/Handler;
+000012: if-nez v1, +004h
+000016: const/4 v2, 1
+000018: goto +2h
+00001a: const/4 v2, 0
+00001c: const-string v3, "pcsuite_ConnectControlModel"
+000020: invoke-static v0, v2, v3, Landroidx/appcompat/widget/b;->i(Ljava/lang/StringBuilder; Z Ljava/lang/String;)V
+000026: if-eqz v1, +007h
+00002a: iget-object v4, v4, Lcom/vivo/pcsuite/connect/ConnectControlModel;->b Lcom/vivo/pcsuite/connect/ConnectControlModel$ApRunnable;
+00002e: invoke-virtual v1, v4, Landroid/os/Handler;->removeCallbacks(Ljava/lang/Runnable;)V
+000034: return-void 
+
+METHOD requestWithExtra(Ljava/lang/String; Ljava/lang/String; Ljava/lang/String; I Ljava/lang/String;)V
+000000: move/from16 v4, v17
+000004: move-object/from16 v0, v18
+000008: const-string v1, "extra_info"
+00000c: const-string v2, "ble businessName = "
+000010: const-string v3, "requestWithExtra userName : "
+000014: const-string v5, "requestWithExtra isSameAccount : "
+000018: const-string v6, " new requestWithExtra "
+00001c: move-object/from16 v10, v16
+000020: invoke-static v6, v14, v3, v10, v5, LP/d;->d(Ljava/lang/String; Ljava/lang/String; Ljava/lang/String; Ljava/lang/String; Ljava/lang/String;)Ljava/lang/StringBuilder;
+000026: move-result-object v3
+000028: invoke-virtual v3, v4, Ljava/lang/StringBuilder;->append(I)Ljava/lang/StringBuilder;
+00002e: const-string v5, " extraJson = "
+000032: invoke-virtual v3, v5, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+000038: invoke-virtual v3, v0, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+00003e: invoke-virtual v3, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
+000044: move-result-object v3
+000046: const-string v5, "pcsuite_ConnectControlModel"
+00004a: invoke-static v5, v3, Lcom/vivo/connect/logger/EasyLog;->i(Ljava/lang/String; Ljava/lang/String;)V
+000050: const-string v3, ""
+000054: const/4 v6, 1
+000056: const/4 v7, 0
+000058: new-instance v8, Lorg/json/JSONObject;
+00005c: invoke-direct v8, v0, Lorg/json/JSONObject;-><init>(Ljava/lang/String;)V
+000062: const-string v0, "isAutoConnect"
+000066: invoke-virtual v8, v0, Lorg/json/JSONObject;->optString(Ljava/lang/String;)Ljava/lang/String;
+00006c: move-result-object v9
+00006e: const-string v0, "pcPcsuiteVersion"
+000072: invoke-virtual v8, v0, Lorg/json/JSONObject;->optInt(Ljava/lang/String;)I
+000078: move-result v11
+00007a: const-string/jumbo v0, token
+000080: invoke-virtual v8, v0, Lorg/json/JSONObject;->optString(Ljava/lang/String;)Ljava/lang/String;
+000086: move-result-object v3
+000088: invoke-virtual v8, v1, Lorg/json/JSONObject;->has(Ljava/lang/String;)Z
+00008e: move-result v0
+000090: if-eqz v0, +05fh
+000094: invoke-virtual v8, v1, Lorg/json/JSONObject;->optString(Ljava/lang/String;)Ljava/lang/String;
+00009a: move-result-object v0
+00009c: new-instance v1, Lorg/json/JSONObject;
+0000a0: invoke-direct v1, v0, Lorg/json/JSONObject;-><init>(Ljava/lang/String;)V
+0000a6: const-string v0, "businessName"
+0000aa: invoke-virtual v1, v0, Lorg/json/JSONObject;->optString(Ljava/lang/String;)Ljava/lang/String;
+0000b0: move-result-object v0
+0000b2: const-string v8, "connectType"
+0000b6: invoke-virtual v1, v8, Lorg/json/JSONObject;->optInt(Ljava/lang/String;)I
+0000bc: move-result v1
+0000be: new-instance v8, Ljava/lang/StringBuilder;
+0000c2: invoke-direct v8, v2, Ljava/lang/StringBuilder;-><init>(Ljava/lang/String;)V
+0000c8: invoke-virtual v8, v0, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+0000ce: invoke-virtual v8, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
+0000d4: move-result-object v2
+0000d6: invoke-static v5, v2, Lcom/vivo/connect/logger/EasyLog;->i(Ljava/lang/String; Ljava/lang/String;)V
+0000dc: invoke-static v0, Landroid/text/TextUtils;->isEmpty(Ljava/lang/CharSequence;)Z
+0000e2: move-result v2
+0000e4: if-nez v2, +06eh
+0000e8: const-string v2, "pcsuiteTransfer"
+0000ec: invoke-virtual v2, v0, Ljava/lang/String;->equals(Ljava/lang/Object;)Z
+0000f2: move-result v0
+0000f4: if-eqz v0, +018h
+0000f8: invoke-static Lk2/y;->H()Lk2/y;
+0000fe: move-result-object v0
+000100: invoke-virtual v0, v6, Lk2/y;->W(Z)V
+000106: sget-object v0, Lcom/vivo/pcsuite/PcSuiteApplication;->I1 Lcom/vivo/pcsuite/PcSuiteApplication;
+00010a: invoke-virtual v0, v6, Lcom/vivo/pcsuite/PcSuiteApplication;->O0(Z)V
+000110: goto/16 +058h
+000114: move-exception v0
+000116: move-object v2, v3
+000118: move-object v3, v9
+00011a: goto +30h
+00011c: move-exception v0
+00011e: move-object v2, v3
+000120: move-object v3, v9
+000122: goto +39h
+000124: invoke-static Lk2/y;->H()Lk2/y;
+00012a: move-result-object v0
+00012c: invoke-virtual v0, v7, Lk2/y;->W(Z)V
+000132: sget-object v0, Lcom/vivo/pcsuite/PcSuiteApplication;->I1 Lcom/vivo/pcsuite/PcSuiteApplication;
+000136: invoke-virtual v0, v7, Lcom/vivo/pcsuite/PcSuiteApplication;->O0(Z)V
+00013c: goto +42h
+00013e: move-exception v0
+000140: move-object v2, v3
+000142: move v1, v7
+000144: goto -16h
+000146: move-exception v0
+000148: move-object v2, v3
+00014a: move v1, v7
+00014c: goto -16h
+00014e: move v1, v7
+000150: goto +38h
+000152: move-exception v0
+000154: move-object v2, v3
+000156: move v1, v7
+000158: move v11, v1
+00015a: goto -21h
+00015c: move-exception v0
+00015e: move-object v2, v3
+000160: move v1, v7
+000162: move v11, v1
+000164: goto -22h
+000166: move-exception v0
+000168: move-object v2, v3
+00016a: move v1, v7
+00016c: move v11, v1
+00016e: goto +6h
+000170: move-exception v0
+000172: move-object v2, v3
+000174: move v1, v7
+000176: move v11, v1
+000178: goto +eh
+00017a: new-instance v8, Ljava/lang/StringBuilder;
+00017e: const-string v9, "requestWithExtra error: "
+000182: invoke-direct v8, v9, Ljava/lang/StringBuilder;-><init>(Ljava/lang/String;)V
+000188: invoke-static v0, v8, v5, LS5/f;->g(Ljava/lang/Exception; Ljava/lang/StringBuilder; Ljava/lang/String;)V
+00018e: move-object v9, v3
+000190: move-object v3, v2
+000192: goto +17h
+000194: new-instance v8, Ljava/lang/StringBuilder;
+000198: const-string v9, "requestWithExtra connect JSON: "
+00019c: invoke-direct v8, v9, Ljava/lang/StringBuilder;-><init>(Ljava/lang/String;)V
+0001a2: invoke-virtual v0, Ljava/lang/Throwable;->getMessage()Ljava/lang/String;
+0001a8: move-result-object v0
+0001aa: invoke-virtual v8, v0, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+0001b0: invoke-virtual v8, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
+0001b6: move-result-object v0
+0001b8: invoke-static v5, v0, Lcom/vivo/connect/logger/EasyLog;->e(Ljava/lang/String; Ljava/lang/String;)V
+0001be: goto -18h
+0001c0: new-instance v0, Ljava/lang/StringBuilder;
+0001c4: const-string v2, "ble connect = "
+0001c8: invoke-direct v0, v2, Ljava/lang/StringBuilder;-><init>(Ljava/lang/String;)V
+0001ce: invoke-static Lcom/vivo/pcsuite/service/PcSuiteObserver;->q()I
+0001d4: move-result v2
+0001d6: invoke-virtual v0, v2, Ljava/lang/StringBuilder;->append(I)Ljava/lang/StringBuilder;
+0001dc: invoke-virtual v0, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
+0001e2: move-result-object v0
+0001e4: invoke-static v5, v0, Lcom/vivo/connect/logger/EasyLog;->i(Ljava/lang/String; Ljava/lang/String;)V
+0001ea: invoke-static Lcom/vivo/pcsuite/service/PcSuiteObserver;->q()I
+0001f0: move-result v0
+0001f2: if-eq v0, v6, +008h
+0001f6: invoke-static Lcom/vivo/pcsuite/service/PcSuiteObserver;->q()I
+0001fc: move-result v0
+0001fe: if-nez v0, +008h
+000202: invoke-static Lk2/g;->Q()Z
+000208: move-result v0
+00020a: if-eqz v0, +005h
+00020e: invoke-static v3, Lcom/vivo/castsdk/common/GlobalSettings;->setRemoteToken(Ljava/lang/String;)V
+000214: invoke-static v9, Landroid/text/TextUtils;->isEmpty(Ljava/lang/CharSequence;)Z
+00021a: move-result v0
+00021c: if-nez v0, +015h
+000220: const/16 v0, 520
+000224: if-lt v11, v0, +011h
+000228: const-string v0, "0"
+00022c: invoke-virtual v9, v0, Ljava/lang/String;->equals(Ljava/lang/Object;)Z
+000232: move-result v0
+000234: if-eqz v0, +007h
+000238: invoke-static Lcom/vivo/pcsuite/util/j0;->c()Z
+00023e: move-result v0
+000240: goto +7h
+000242: move v0, v7
+000244: goto +5h
+000246: invoke-static Lcom/vivo/pcsuite/util/j0;->c()Z
+00024c: move-result v0
+00024e: if-ne v4, v6, +004h
+000252: move v2, v6
+000254: goto +2h
+000256: move v2, v7
+000258: invoke-virtual v13, v2, Lcom/vivo/pcsuite/connect/ConnectControlModel;->setBleIsSameAccount(Z)V
+00025e: invoke-static Lk2/g;->Q()Z
+000264: move-result v2
+000266: const-string v8, "on new requestWithExtra : "
+00026a: invoke-static v8, v5, v2, LZ1/b;->c(Ljava/lang/String; Ljava/lang/String; Z)V
+000270: if-nez v2, +05fh
+000274: invoke-static Lcom/vivo/pcsuite/service/PcSuiteObserver;->q()I
+00027a: move-result v2
+00027c: if-ne v2, v6, +00bh
+000280: const-string v14, "requestWithExtra connect success ,return busy connect"
+000284: invoke-static v5, v14, Lcom/vivo/connect/logger/EasyLog;->i(Ljava/lang/String; Ljava/lang/String;)V
+00028a: invoke-virtual v13, Lcom/vivo/pcsuite/connect/ConnectControlModel;->responseBleBusy()V
+000290: return-void 
+000292: invoke-static Lcom/vivo/pcsuite/service/PcSuiteObserver;->q()I
+000298: move-result v2
+00029a: if-nez v2, +039h
+00029e: sget-object v14, Lcom/vivo/pcsuite/connect/ConnectControlModel;->currentConnectBean Lcom/vivo/pcsuite/pcconnect/PCBean;
+0002a2: if-eqz v14, +02bh
+0002a6: invoke-virtual v14, Lcom/vivo/pcsuite/pcconnect/PCBean;->getDeviceId()Ljava/lang/String;
+0002ac: move-result-object v14
+0002ae: invoke-virtual v14, v15, Ljava/lang/String;->equals(Ljava/lang/Object;)Z
+0002b4: move-result v14
+0002b6: if-eqz v14, +017h
+0002ba: const-string v14, "requestWithExtra Connecting and is same device,reset time and continue connect"
+0002be: invoke-static v5, v14, Lcom/vivo/connect/logger/EasyLog;->i(Ljava/lang/String; Ljava/lang/String;)V
+0002c4: invoke-static v3, Lcom/vivo/castsdk/common/GlobalSettings;->setRemoteToken(Ljava/lang/String;)V
+0002ca: const-string v14, "requestWithExtra removeTimer 3"
+0002ce: invoke-static v5, v14, Lcom/vivo/connect/logger/EasyLog;->i(Ljava/lang/String; Ljava/lang/String;)V
+0002d4: invoke-virtual v13, Lcom/vivo/pcsuite/connect/ConnectControlModel;->postApTimeTask()V
+0002da: invoke-virtual v13, Lcom/vivo/pcsuite/connect/ConnectControlModel;->agreeBle()V
+0002e0: goto/16 +0c8h
+0002e4: const-string v14, "requestWithExtra connecting and is not same device ,return busy connect"
+0002e8: invoke-static v5, v14, Lcom/vivo/connect/logger/EasyLog;->i(Ljava/lang/String; Ljava/lang/String;)V
+0002ee: invoke-virtual v13, Lcom/vivo/pcsuite/connect/ConnectControlModel;->responseBleBusy()V
+0002f4: goto/16 +0beh
+0002f8: const-string v14, "requestWithExtra connecting and curConnectBean is null ,return busy connect"
+0002fc: invoke-static v5, v14, Lcom/vivo/connect/logger/EasyLog;->i(Ljava/lang/String; Ljava/lang/String;)V
+000302: invoke-virtual v13, Lcom/vivo/pcsuite/connect/ConnectControlModel;->responseBleBusy()V
+000308: goto/16 +0b4h
+00030c: invoke-static Lcom/vivo/pcsuite/service/PcSuiteObserver;->q()I
+000312: move-result v2
+000314: const/16 v3, 50
+000318: if-ne v2, v3, +00bh
+00031c: const-string v14, "cloud transfer , return device busy"
+000320: invoke-static v5, v14, Lcom/vivo/connect/logger/EasyLog;->i(Ljava/lang/String; Ljava/lang/String;)V
+000326: invoke-virtual v13, Lcom/vivo/pcsuite/connect/ConnectControlModel;->responseTransBleBusy()V
+00032c: return-void 
+00032e: sget-object v2, Lcom/vivo/pcsuite/PcSuiteApplication;->I1 Lcom/vivo/pcsuite/PcSuiteApplication;
+000332: invoke-virtual v2, Lcom/vivo/pcsuite/PcSuiteApplication;->u()Ljava/lang/StringBuffer;
+000338: move-result-object v2
+00033a: const-string v3, "6"
+00033e: invoke-virtual v2, v3, Ljava/lang/StringBuffer;->append(Ljava/lang/String;)Ljava/lang/StringBuffer;
+000344: sget-object v2, Lcom/vivo/pcsuite/PcSuiteApplication;->I1 Lcom/vivo/pcsuite/PcSuiteApplication;
+000348: const/4 v3, 2
+00034a: invoke-virtual v2, v3, Lcom/vivo/pcsuite/PcSuiteApplication;->y0(I)V
+000350: const-string v2, "requestWithExtra startConnect for pc by ble333"
+000354: invoke-static v5, v2, Lcom/vivo/connect/logger/EasyLog;->i(Ljava/lang/String; Ljava/lang/String;)V
+00035a: invoke-static Lcom/bbk/account/base/BBKAccountManager;->getInstance()Lcom/bbk/account/base/BBKAccountManager;
+000360: move-result-object v2
+000362: sget-object v3, Lcom/vivo/pcsuite/PcSuiteApplication;->I1 Lcom/vivo/pcsuite/PcSuiteApplication;
+000366: invoke-virtual v2, v3, Lcom/bbk/account/base/BBKAccountManager;->init(Landroid/content/Context;)V
+00036c: invoke-static Lcom/bbk/account/base/BBKAccountManager;->getInstance()Lcom/bbk/account/base/BBKAccountManager;
+000372: move-result-object v2
+000374: invoke-virtual v2, Lcom/bbk/account/base/BBKAccountManager;->getOpenid()Ljava/lang/String;
+00037a: move-result-object v2
+00037c: if-eqz v2, +015h
+000380: invoke-virtual v2, Ljava/lang/String;->isEmpty()Z
+000386: move-result v3
+000388: if-nez v3, +00fh
+00038c: sget-object v3, Lcom/vivo/pcsuite/PcSuiteApplication;->I1 Lcom/vivo/pcsuite/PcSuiteApplication;
+000390: const-string v8, "pcSuite_info"
+000394: invoke-virtual v3, v8, v7, Landroid/content/Context;->getSharedPreferences(Ljava/lang/String; I)Landroid/content/SharedPreferences;
+00039a: move-result-object v3
+00039c: invoke-interface v3, v2, v6, Landroid/content/SharedPreferences;->getBoolean(Ljava/lang/String; Z)Z
+0003a2: move-result v3
+0003a4: goto +2h
+0003a6: move v3, v6
+0003a8: if-ne v4, v6, +004h
+0003ac: if-eqz v0, +050h
+0003b0: const/4 v0, 3
+0003b2: if-eq v1, v0, +04dh
+0003b6: sget-object v0, Lcom/vivo/pcsuite/PcSuiteApplication;->I1 Lcom/vivo/pcsuite/PcSuiteApplication;
+0003ba: invoke-virtual v0, Lcom/vivo/pcsuite/PcSuiteApplication;->Q()Z
+0003c0: move-result v0
+0003c2: if-eqz v0, +003h
+0003c6: goto +43h
+0003c8: invoke-static Lk2/y;->H()Lk2/y;
+0003ce: move-result-object v0
+0003d0: invoke-virtual v0, Lk2/y;->N()Z
+0003d6: move-result v0
+0003d8: if-eqz v0, +013h
+0003dc: const-string v0, "cloud trans bleDialog"
+0003e0: invoke-static v5, v0, Lcom/vivo/connect/logger/EasyLog;->i(Ljava/lang/String; Ljava/lang/String;)V
+0003e6: const/4 v11, 1
+0003e8: const/4 v12, 0
+0003ea: move-object v7, v13
+0003ec: move-object v8, v14
+0003ee: move-object v9, v15
+0003f0: invoke-direct/range v7 ... v12, Lcom/vivo/pcsuite/connect/ConnectControlModel;->m(Ljava/lang/String; Ljava/lang/String; Ljava/lang/String; Z Z)V
+0003f6: invoke-virtual v13, Lcom/vivo/pcsuite/connect/ConnectControlModel;->agreeBle()V
+0003fc: return-void 
+0003fe: invoke-static Lcom/vivo/pcsuite/util/o0;->W()V
+000404: invoke-virtual v13, Lcom/vivo/pcsuite/connect/ConnectControlModel;->postDialogRunnable()V
+00040a: const-string v0, "requestWithExtra show new ble request dialog"
+00040e: invoke-static v5, v0, Lcom/vivo/connect/logger/EasyLog;->i(Ljava/lang/String; Ljava/lang/String;)V
+000414: sget-object v0, Lcom/vivo/pcsuite/PcSuiteApplication;->I1 Lcom/vivo/pcsuite/PcSuiteApplication;
+000418: invoke-virtual v0, v14, Lcom/vivo/pcsuite/PcSuiteApplication;->C0(Ljava/lang/String;)V
+00041e: invoke-static v6, Lm2/b;->b(I)Lm2/b;
+000424: move-result-object v9
+000426: new-instance v0, Lcom/vivo/pcsuite/connect/ConnectControlModel$5;
+00042a: move-object v1, v13
+00042c: move-object v7, v15
+00042e: move-object v6, v2
+000430: move v5, v3
+000432: move-object v2, v14
+000434: move-object/from16 v3, v16
+000438: invoke-direct/range v0 ... v7, Lcom/vivo/pcsuite/connect/ConnectControlModel$5;-><init>(Lcom/vivo/pcsuite/connect/ConnectControlModel; Ljava/lang/String; Ljava/lang/String; I Z Ljava/lang/String; Ljava/lang/String;)V
+00043e: invoke-virtual v9, v0, Lm2/b;->e(Ljava/lang/Runnable;)V
+000444: invoke-virtual v9, Lm2/b;->d()V
+00044a: goto +13h
+00044c: const-string v0, "requestWithExtra ble is autoConnect"
+000450: invoke-static v5, v0, Lcom/vivo/connect/logger/EasyLog;->i(Ljava/lang/String; Ljava/lang/String;)V
+000456: const/4 v11, 1
+000458: const/4 v12, 0
+00045a: move-object v7, v13
+00045c: move-object v8, v14
+00045e: move-object v9, v15
+000460: move-object/from16 v10, v16
+000464: invoke-direct/range v7 ... v12, Lcom/vivo/pcsuite/connect/ConnectControlModel;->m(Ljava/lang/String; Ljava/lang/String; Ljava/lang/String; Z Z)V
+00046a: invoke-virtual v13, Lcom/vivo/pcsuite/connect/ConnectControlModel;->agreeBle()V
+000470: return-void 
+
+METHOD responseBleBusy()V
+000000: new-instance v2, Ljava/lang/StringBuilder;
+000004: const-string v0, "responseBusyBle :"
+000008: invoke-direct v2, v0, Ljava/lang/StringBuilder;-><init>(Ljava/lang/String;)V
+00000e: sget-object v0, Lcom/vivo/pcsuite/connect/ConnectControlModel;->o Lcom/vivo/pcsuite/pcconnect/PcOtherShare;
+000012: if-nez v0, +004h
+000016: const/4 v0, 1
+000018: goto +2h
+00001a: const/4 v0, 0
+00001c: const-string v1, "pcsuite_ConnectControlModel"
+000020: invoke-static v2, v0, v1, Landroidx/appcompat/widget/b;->i(Ljava/lang/StringBuilder; Z Ljava/lang/String;)V
+000026: sget-object v2, Lcom/vivo/pcsuite/connect/ConnectControlModel;->o Lcom/vivo/pcsuite/pcconnect/PcOtherShare;
+00002a: if-eqz v2, +008h
+00002e: sget-object v2, Lcom/vivo/pcsuite/connect/ConnectControlModel;->o Lcom/vivo/pcsuite/pcconnect/PcOtherShare;
+000032: const/4 v0, 4
+000034: invoke-virtual v2, v0, Lcom/vivo/pcsuite/pcconnect/PcOtherShare;->response(I)V
+00003a: return-void 
+
+METHOD responseTransBleBusy()V
+000000: new-instance v2, Ljava/lang/StringBuilder;
+000004: const-string v0, "responseTransBleBusy :"
+000008: invoke-direct v2, v0, Ljava/lang/StringBuilder;-><init>(Ljava/lang/String;)V
+00000e: sget-object v0, Lcom/vivo/pcsuite/connect/ConnectControlModel;->o Lcom/vivo/pcsuite/pcconnect/PcOtherShare;
+000012: if-nez v0, +004h
+000016: const/4 v0, 1
+000018: goto +2h
+00001a: const/4 v0, 0
+00001c: const-string v1, "pcsuite_ConnectControlModel"
+000020: invoke-static v2, v0, v1, Landroidx/appcompat/widget/b;->i(Ljava/lang/StringBuilder; Z Ljava/lang/String;)V
+000026: sget-object v2, Lcom/vivo/pcsuite/connect/ConnectControlModel;->o Lcom/vivo/pcsuite/pcconnect/PcOtherShare;
+00002a: if-eqz v2, +009h
+00002e: sget-object v2, Lcom/vivo/pcsuite/connect/ConnectControlModel;->o Lcom/vivo/pcsuite/pcconnect/PcOtherShare;
+000032: const/16 v0, 13
+000036: invoke-virtual v2, v0, Lcom/vivo/pcsuite/pcconnect/PcOtherShare;->response(I)V
+00003c: return-void 
+
+METHOD setApTime(I)V
+000000: iput v1, v0, Lcom/vivo/pcsuite/connect/ConnectControlModel;->a I
+000004: return-void 
+
+METHOD setBleIsSameAccount(Z)V
+000000: iput-boolean v1, v0, Lcom/vivo/pcsuite/connect/ConnectControlModel;->h Z
+000004: return-void 
+
+METHOD setCurrentConnectBean(Lcom/vivo/pcsuite/pcconnect/PCBean;)V
+000000: sput-object v1, Lcom/vivo/pcsuite/connect/ConnectControlModel;->currentConnectBean Lcom/vivo/pcsuite/pcconnect/PCBean;
+000004: return-void 
+
+METHOD showConnectIngByPC(I)V
+000000: new-instance v1, Ljava/lang/StringBuilder;
+000004: const-string v2, "showConnectIngByPc currentConnectBean : "
+000008: invoke-direct v1, v2, Ljava/lang/StringBuilder;-><init>(Ljava/lang/String;)V
+00000e: sget-object v2, Lcom/vivo/pcsuite/connect/ConnectControlModel;->currentConnectBean Lcom/vivo/pcsuite/pcconnect/PCBean;
+000012: invoke-virtual v1, v2, Ljava/lang/StringBuilder;->append(Ljava/lang/Object;)Ljava/lang/StringBuilder;
+000018: invoke-virtual v1, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
+00001e: move-result-object v1
+000020: const-string v2, "pcsuite_ConnectControlModel"
+000024: invoke-static v2, v1, Lcom/vivo/connect/logger/EasyLog;->i(Ljava/lang/String; Ljava/lang/String;)V
+00002a: sget-object v1, Lcom/vivo/pcsuite/connect/ConnectControlModel;->currentConnectBean Lcom/vivo/pcsuite/pcconnect/PCBean;
+00002e: if-eqz v1, +029h
+000032: new-instance v1, Ljava/lang/StringBuilder;
+000036: const-string v0, "showConnectIngByPC:"
+00003a: invoke-direct v1, v0, Ljava/lang/StringBuilder;-><init>(Ljava/lang/String;)V
+000040: sget-object v0, Lcom/vivo/pcsuite/connect/ConnectControlModel;->currentConnectBean Lcom/vivo/pcsuite/pcconnect/PCBean;
+000044: invoke-virtual v0, Lcom/vivo/pcsuite/pcconnect/PCBean;->toString()Ljava/lang/String;
+00004a: move-result-object v0
+00004c: invoke-virtual v1, v0, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+000052: invoke-virtual v1, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
+000058: move-result-object v1
+00005a: invoke-static v2, v1, Lcom/vivo/connect/logger/EasyLog;->i(Ljava/lang/String; Ljava/lang/String;)V
+000060: const/4 v1, 1
+000062: invoke-static v1, Lm2/b;->b(I)Lm2/b;
+000068: move-result-object v1
+00006a: new-instance v2, Lcom/vivo/pcsuite/connect/ConnectControlModel$12;
+00006e: invoke-direct v2, Ljava/lang/Object;-><init>()V
+000074: invoke-virtual v1, v2, Lm2/b;->e(Ljava/lang/Runnable;)V
+00007a: invoke-virtual v1, Lm2/b;->d()V
+000080: return-void 
+
+METHOD startConnect(Lcom/vivo/connect/discovery/ScanInfo;)V
+000000: const-string v0, "deviceType"
+000004: invoke-static Lcom/vivo/pcsuite/util/B;->o()Z
+00000a: move-result v1
+00000c: if-eqz v1, +004h
+000010: goto/16 +1d2h
+000014: if-nez v11, +004h
+000018: goto/16 +1ceh
+00001c: invoke-virtual v11, Lcom/vivo/connect/discovery/ScanInfo;->getDeviceId()Ljava/lang/String;
+000022: move-result-object v1
+000024: iput-object v1, v10, Lcom/vivo/pcsuite/connect/ConnectControlModel;->j Ljava/lang/String;
+000028: new-instance v1, Ljava/lang/StringBuilder;
+00002c: const-string v2, " start wlan request isSameOpenId : "
+000030: invoke-direct v1, v2, Ljava/lang/StringBuilder;-><init>(Ljava/lang/String;)V
+000036: invoke-virtual v11, Lcom/vivo/connect/discovery/ScanInfo;->isSameOpenId()Z
+00003c: move-result v2
+00003e: invoke-virtual v1, v2, Ljava/lang/StringBuilder;->append(Z)Ljava/lang/StringBuilder;
+000044: invoke-virtual v1, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
+00004a: move-result-object v1
+00004c: const-string v2, "pcsuite_ConnectControlModel"
+000050: invoke-static v2, v1, Lcom/vivo/connect/logger/EasyLog;->i(Ljava/lang/String; Ljava/lang/String;)V
+000056: new-instance v1, Ljava/lang/StringBuilder;
+00005a: const-string v3, "PcSuiteObserver.getConnectState()："
+00005e: invoke-direct v1, v3, Ljava/lang/StringBuilder;-><init>(Ljava/lang/String;)V
+000064: invoke-static Lcom/vivo/pcsuite/service/PcSuiteObserver;->q()I
+00006a: move-result v3
+00006c: invoke-virtual v1, v3, Ljava/lang/StringBuilder;->append(I)Ljava/lang/StringBuilder;
+000072: invoke-virtual v1, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
+000078: move-result-object v1
+00007a: invoke-static v2, v1, Lcom/vivo/connect/logger/EasyLog;->i(Ljava/lang/String; Ljava/lang/String;)V
+000080: invoke-static Lk2/g;->Q()Z
+000086: move-result v1
+000088: const-string v3, " start wlan request connectCloud state : "
+00008c: invoke-static v3, v2, v1, LZ1/b;->c(Ljava/lang/String; Ljava/lang/String; Z)V
+000092: const/4 v3, 1
+000094: if-nez v1, +073h
+000098: invoke-static Lcom/vivo/pcsuite/service/PcSuiteObserver;->q()I
+00009e: move-result v1
+0000a0: if-ne v1, v3, +00fh
+0000a4: const-string v0, "pc wlan request ,and phone is already connect successfully,return busy"
+0000a8: invoke-static v2, v0, Lcom/vivo/connect/logger/EasyLog;->i(Ljava/lang/String; Ljava/lang/String;)V
+0000ae: invoke-virtual v11, Lcom/vivo/connect/discovery/ScanInfo;->getDeviceId()Ljava/lang/String;
+0000b4: move-result-object v11
+0000b6: invoke-virtual v10, v11, Lcom/vivo/pcsuite/connect/ConnectControlModel;->rejectBusyConnect(Ljava/lang/String;)V
+0000bc: return-void 
+0000be: invoke-static Lcom/vivo/pcsuite/service/PcSuiteObserver;->q()I
+0000c4: move-result v1
+0000c6: if-nez v1, +045h
+0000ca: sget-object v0, Lcom/vivo/pcsuite/connect/ConnectControlModel;->currentConnectBean Lcom/vivo/pcsuite/pcconnect/PCBean;
+0000ce: if-eqz v0, +034h
+0000d2: invoke-virtual v0, Lcom/vivo/pcsuite/pcconnect/PCBean;->getDeviceId()Ljava/lang/String;
+0000d8: move-result-object v0
+0000da: invoke-virtual v11, Lcom/vivo/connect/discovery/ScanInfo;->getDeviceId()Ljava/lang/String;
+0000e0: move-result-object v1
+0000e2: invoke-virtual v0, v1, Ljava/lang/String;->equals(Ljava/lang/Object;)Z
+0000e8: move-result v0
+0000ea: if-eqz v0, +019h
+0000ee: const-string v0, "pc wlan request and is the same device ,reset timeout and continue last connect"
+0000f2: invoke-static v2, v0, Lcom/vivo/connect/logger/EasyLog;->i(Ljava/lang/String; Ljava/lang/String;)V
+0000f8: invoke-virtual v11, Lcom/vivo/connect/discovery/ScanInfo;->getToken()Ljava/lang/String;
+0000fe: move-result-object v0
+000100: invoke-static v0, Lcom/vivo/castsdk/common/GlobalSettings;->setRemoteToken(Ljava/lang/String;)V
+000106: invoke-virtual v11, Lcom/vivo/connect/discovery/ScanInfo;->getDeviceId()Ljava/lang/String;
+00010c: move-result-object v11
+00010e: invoke-static v11, Lcom/vivo/pcsuite/connect/ConnectControlModel;->l(Ljava/lang/String;)V
+000114: invoke-virtual v10, Lcom/vivo/pcsuite/connect/ConnectControlModel;->postApTimeTask()V
+00011a: return-void 
+00011c: const-string v0, "pc wlan request , connecting and is not same device ,return busy connect"
+000120: invoke-static v2, v0, Lcom/vivo/connect/logger/EasyLog;->i(Ljava/lang/String; Ljava/lang/String;)V
+000126: invoke-virtual v11, Lcom/vivo/connect/discovery/ScanInfo;->getDeviceId()Ljava/lang/String;
+00012c: move-result-object v11
+00012e: invoke-virtual v10, v11, Lcom/vivo/pcsuite/connect/ConnectControlModel;->rejectBusyConnect(Ljava/lang/String;)V
+000134: return-void 
+000136: const-string v0, "pc wlan request , connecting and curConnectBean is null ,return busy connect"
+00013a: invoke-static v2, v0, Lcom/vivo/connect/logger/EasyLog;->i(Ljava/lang/String; Ljava/lang/String;)V
+000140: invoke-virtual v11, Lcom/vivo/connect/discovery/ScanInfo;->getDeviceId()Ljava/lang/String;
+000146: move-result-object v11
+000148: invoke-virtual v10, v11, Lcom/vivo/pcsuite/connect/ConnectControlModel;->rejectBusyConnect(Ljava/lang/String;)V
+00014e: return-void 
+000150: invoke-static Lcom/vivo/pcsuite/service/PcSuiteObserver;->q()I
+000156: move-result v1
+000158: const/16 v4, 50
+00015c: if-ne v1, v4, +00fh
+000160: const-string v0, "cloud transfer , return device busy"
+000164: invoke-static v2, v0, Lcom/vivo/connect/logger/EasyLog;->i(Ljava/lang/String; Ljava/lang/String;)V
+00016a: invoke-virtual v11, Lcom/vivo/connect/discovery/ScanInfo;->getDeviceId()Ljava/lang/String;
+000170: move-result-object v11
+000172: invoke-virtual v10, v11, Lcom/vivo/pcsuite/connect/ConnectControlModel;->rejectCloudBusyConnect(Ljava/lang/String;)V
+000178: return-void 
+00017a: const-string v1, "startConnect for pc by wlan"
+00017e: invoke-static v2, v1, Lcom/vivo/connect/logger/EasyLog;->i(Ljava/lang/String; Ljava/lang/String;)V
+000184: sget-object v1, Lcom/vivo/pcsuite/PcSuiteApplication;->I1 Lcom/vivo/pcsuite/PcSuiteApplication;
+000188: invoke-virtual v1, Lcom/vivo/pcsuite/PcSuiteApplication;->A()Ljava/lang/StringBuffer;
+00018e: move-result-object v1
+000190: const-string v4, "7"
+000194: invoke-virtual v1, v4, Ljava/lang/StringBuffer;->append(Ljava/lang/String;)Ljava/lang/StringBuffer;
+00019a: sget-object v1, Lcom/vivo/pcsuite/PcSuiteApplication;->I1 Lcom/vivo/pcsuite/PcSuiteApplication;
+00019e: const/4 v4, 3
+0001a0: invoke-virtual v1, v4, Lcom/vivo/pcsuite/PcSuiteApplication;->y0(I)V
+0001a6: invoke-virtual v11, Lcom/vivo/connect/discovery/ScanInfo;->getCustomizedData()[B
+0001ac: move-result-object v1
+0001ae: new-instance v5, Ljava/lang/String;
+0001b2: sget-object v6, Ljava/nio/charset/StandardCharsets;->UTF_8 Ljava/nio/charset/Charset;
+0001b6: invoke-direct v5, v1, v6, Ljava/lang/String;-><init>([B Ljava/nio/charset/Charset;)V
+0001bc: const-string v1, "customizedString = "
+0001c0: invoke-virtual v1, v5, Ljava/lang/String;->concat(Ljava/lang/String;)Ljava/lang/String;
+0001c6: move-result-object v1
+0001c8: invoke-static v2, v1, Lcom/vivo/connect/logger/EasyLog;->i(Ljava/lang/String; Ljava/lang/String;)V
+0001ce: const-string v1, ""
+0001d2: const/4 v6, 0
+0001d4: new-instance v7, Lorg/json/JSONObject;
+0001d8: invoke-direct v7, v5, Lorg/json/JSONObject;-><init>(Ljava/lang/String;)V
+0001de: const-string v5, "isAutoConnectNew"
+0001e2: invoke-virtual v7, v5, Lorg/json/JSONObject;->optString(Ljava/lang/String;)Ljava/lang/String;
+0001e8: move-result-object v1
+0001ea: const-string v5, "pcPcsuiteVersion"
+0001ee: invoke-virtual v7, v5, Lorg/json/JSONObject;->optInt(Ljava/lang/String;)I
+0001f4: move-result v5
+0001f6: const-string v8, "connectType"
+0001fa: invoke-virtual v7, v8, Lorg/json/JSONObject;->optInt(Ljava/lang/String;)I
+000200: move-result v8
+000202: invoke-virtual v7, v0, Lorg/json/JSONObject;->optString(Ljava/lang/String;)Ljava/lang/String;
+000208: move-result-object v9
+00020a: invoke-static v9, Landroid/text/TextUtils;->isEmpty(Ljava/lang/CharSequence;)Z
+000210: move-result v9
+000212: if-nez v9, +028h
+000216: invoke-virtual v7, v0, Lorg/json/JSONObject;->optString(Ljava/lang/String;)Ljava/lang/String;
+00021c: move-result-object v0
+00021e: invoke-static v0, Ljava/lang/Integer;->parseInt(Ljava/lang/String;)I
+000224: move-result v0
+000226: goto +37h
+000228: move-exception v0
+00022a: goto +11h
+00022c: move-exception v0
+00022e: goto +1ch
+000230: move-exception v0
+000232: move v8, v6
+000234: goto +ch
+000236: move-exception v0
+000238: move v8, v6
+00023a: goto +16h
+00023c: move-exception v0
+00023e: move v5, v6
+000240: move v8, v5
+000242: goto +5h
+000244: move-exception v0
+000246: move v5, v6
+000248: move v8, v5
+00024a: goto +eh
+00024c: new-instance v7, Ljava/lang/StringBuilder;
+000250: const-string/jumbo v9, wlan connect Exception = 
+000256: invoke-direct v7, v9, Ljava/lang/StringBuilder;-><init>(Ljava/lang/String;)V
+00025c: invoke-static v0, v7, v2, LS5/f;->g(Ljava/lang/Exception; Ljava/lang/StringBuilder; Ljava/lang/String;)V
+000262: move v0, v6
+000264: goto +18h
+000266: new-instance v7, Ljava/lang/StringBuilder;
+00026a: const-string/jumbo v9, wlan connect JSONException = 
+000270: invoke-direct v7, v9, Ljava/lang/StringBuilder;-><init>(Ljava/lang/String;)V
+000276: invoke-virtual v0, Ljava/lang/Throwable;->getMessage()Ljava/lang/String;
+00027c: move-result-object v0
+00027e: invoke-virtual v7, v0, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+000284: invoke-virtual v7, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
+00028a: move-result-object v0
+00028c: invoke-static v2, v0, Lcom/vivo/connect/logger/EasyLog;->e(Ljava/lang/String; Ljava/lang/String;)V
+000292: goto -18h
+000294: const/16 v7, 8
+000298: if-ne v7, v0, +005h
+00029c: const-string v0, "ipad"
+0002a0: goto +3h
+0002a2: const-string v0, "pc"
+0002a6: invoke-static Lcom/vivo/pcsuite/connect/ConnectedState;->getInstance()Lcom/vivo/pcsuite/connect/ConnectedState;
+0002ac: move-result-object v7
+0002ae: invoke-virtual v7, v0, Lcom/vivo/pcsuite/connect/ConnectedState;->onConnected(Ljava/lang/String;)V
+0002b4: invoke-static v1, Landroid/text/TextUtils;->isEmpty(Ljava/lang/CharSequence;)Z
+0002ba: move-result v7
+0002bc: if-nez v7, +015h
+0002c0: const/16 v7, 520
+0002c4: if-lt v5, v7, +011h
+0002c8: const-string v5, "0"
+0002cc: invoke-virtual v1, v5, Ljava/lang/String;->equals(Ljava/lang/Object;)Z
+0002d2: move-result v1
+0002d4: if-eqz v1, +007h
+0002d8: invoke-static Lcom/vivo/pcsuite/util/j0;->c()Z
+0002de: move-result v1
+0002e0: goto +7h
+0002e2: move v1, v6
+0002e4: goto +5h
+0002e6: invoke-static Lcom/vivo/pcsuite/util/j0;->c()Z
+0002ec: move-result v1
+0002ee: invoke-virtual v11, Lcom/vivo/connect/discovery/ScanInfo;->isSameOpenId()Z
+0002f4: move-result v5
+0002f6: if-eqz v5, +004h
+0002fa: if-eqz v1, +055h
+0002fe: if-eq v8, v4, +053h
+000302: sget-object v1, Lcom/vivo/pcsuite/PcSuiteApplication;->I1 Lcom/vivo/pcsuite/PcSuiteApplication;
+000306: invoke-virtual v1, Lcom/vivo/pcsuite/PcSuiteApplication;->Q()Z
+00030c: move-result v1
+00030e: if-eqz v1, +003h
+000312: goto +49h
+000314: invoke-static Lk2/y;->H()Lk2/y;
+00031a: move-result-object v1
+00031c: invoke-virtual v1, Lk2/y;->N()Z
+000322: move-result v1
+000324: if-eqz v1, +00bh
+000328: const-string v1, "cloud trans wlanDialog"
+00032c: invoke-static v2, v1, Lcom/vivo/connect/logger/EasyLog;->i(Ljava/lang/String; Ljava/lang/String;)V
+000332: invoke-direct v10, v11, v3, v6, v0, Lcom/vivo/pcsuite/connect/ConnectControlModel;->n(Lcom/vivo/connect/discovery/ScanInfo; Z Z Ljava/lang/String;)V
+000338: return-void 
+00033a: invoke-static LL2/i;->q()LL2/i;
+000340: move-result-object v1
+000342: invoke-virtual v1, LL2/i;->v()Z
+000348: move-result v1
+00034a: if-eqz v1, +009h
+00034e: const-string/jumbo v10, wlan retry connect
+000354: invoke-static v2, v10, Lcom/vivo/connect/logger/EasyLog;->i(Ljava/lang/String; Ljava/lang/String;)V
+00035a: return-void 
+00035c: invoke-static Lcom/vivo/pcsuite/util/o0;->W()V
+000362: sget-object v1, Lcom/vivo/pcsuite/PcSuiteApplication;->I1 Lcom/vivo/pcsuite/PcSuiteApplication;
+000366: invoke-virtual v11, Lcom/vivo/connect/discovery/ScanInfo;->getDeviceName()Ljava/lang/String;
+00036c: move-result-object v4
+00036e: invoke-virtual v1, v4, Lcom/vivo/pcsuite/PcSuiteApplication;->C0(Ljava/lang/String;)V
+000374: invoke-virtual v10, Lcom/vivo/pcsuite/connect/ConnectControlModel;->postDialogRunnable()V
+00037a: const-string v1, " show wlan request dialog"
+00037e: invoke-static v2, v1, Lcom/vivo/connect/logger/EasyLog;->i(Ljava/lang/String; Ljava/lang/String;)V
+000384: invoke-static v3, Lm2/b;->b(I)Lm2/b;
+00038a: move-result-object v1
+00038c: new-instance v2, Lcom/vivo/pcsuite/connect/ConnectControlModel$10;
+000390: invoke-direct v2, v10, v11, v0, Lcom/vivo/pcsuite/connect/ConnectControlModel$10;-><init>(Lcom/vivo/pcsuite/connect/ConnectControlModel; Lcom/vivo/connect/discovery/ScanInfo; Ljava/lang/String;)V
+000396: invoke-virtual v1, v2, Lm2/b;->e(Ljava/lang/Runnable;)V
+00039c: invoke-virtual v1, Lm2/b;->d()V
+0003a2: goto +9h
+0003a4: const-string v1, "auto connect by wlan"
+0003a8: invoke-static v2, v1, Lcom/vivo/connect/logger/EasyLog;->i(Ljava/lang/String; Ljava/lang/String;)V
+0003ae: invoke-direct v10, v11, v3, v6, v0, Lcom/vivo/pcsuite/connect/ConnectControlModel;->n(Lcom/vivo/connect/discovery/ScanInfo; Z Z Ljava/lang/String;)V
+0003b4: return-void 

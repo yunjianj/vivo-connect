@@ -1,0 +1,261 @@
+
+samples/windows/v7.0.6.0-cn/pcsuite/vivoScreen/AvCSDK.dll:     file format pei-i386
+
+Characteristics 0x2102
+	executable
+	32 bit words
+	DLL
+
+Time/Date		Fri Oct  9 11:13:02 2026
+Magic			010b	(PE32)
+MajorLinkerVersion	14
+MinorLinkerVersion	16
+SizeOfCode		00026200
+SizeOfInitializedData	0000b200
+SizeOfUninitializedData	00000000
+AddressOfEntryPoint	000015af
+BaseOfCode		00001000
+BaseOfData		00028000
+ImageBase		10000000
+SectionAlignment	00001000
+FileAlignment		00000200
+MajorOSystemVersion	6
+MinorOSystemVersion	0
+MajorImageVersion	0
+MinorImageVersion	0
+MajorSubsystemVersion	6
+MinorSubsystemVersion	0
+Win32Version		00000000
+SizeOfImage		00037000
+SizeOfHeaders		00000400
+CheckSum		00039218
+Subsystem		00000003	(Windows CUI)
+DllCharacteristics	00000140
+					DYNAMIC_BASE
+					NX_COMPAT
+SizeOfStackReserve	00100000
+SizeOfStackCommit	00001000
+SizeOfHeapReserve	00100000
+SizeOfHeapCommit	00001000
+LoaderFlags		00000000
+NumberOfRvaAndSizes	00000010
+
+The Data Directory
+Entry 0 0002dbe0 00000175 Export Directory [.edata (or where ever we found it)]
+Entry 1 000303f8 00000104 Import Directory [parts of .idata]
+Entry 2 00034000 0000043c Resource Directory [.rsrc]
+Entry 3 00000000 00000000 Exception Directory [.pdata]
+Entry 4 00031200 00002940 Security Directory
+Entry 5 00035000 00001388 Base Relocation Directory [.reloc]
+Entry 6 0002ac70 00000038 Debug Directory
+Entry 7 00000000 00000000 Description Directory
+Entry 8 00000000 00000000 Special Directory
+Entry 9 0002af1c 00000018 Thread Storage Directory [.tls]
+Entry a 0002aca8 00000040 Load Configuration Directory
+Entry b 00000000 00000000 Bound Import Directory
+Entry c 00030000 000003f8 Import Address Table Directory
+Entry d 00000000 00000000 Delay Import Directory
+Entry e 00000000 00000000 CLR Runtime Header
+Entry f 00000000 00000000 Reserved
+
+There is an import table in .idata at 0x100303f8
+
+The Import Tables (interpreted .idata section contents)
+ vma:            Hint    Time      Forward  DLL       First
+                 Table   Stamp     Chain    Name      Thunk
+ 000303f8	000304fc 00000000 00000000 00030c36 00030000
+
+	DLL Name: BaseTool.dll
+	vma:     Ordinal  Hint  Member-Name  Bound-To
+	00030000  <none>  0002  ??0DllLoader@SystemTool@@QAE@XZ
+	00030004  <none>  0039  ??1DllLoader@SystemTool@@QAE@XZ
+	00030008  <none>  01a1  ?Load@DllLoader@SystemTool@@QAE_NV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@PAV34@@Z
+	0003000c  <none>  0277  ?Unload@DllLoader@SystemTool@@QAEXXZ
+	00030010  <none>  018a  ?IsLoad@DllLoader@SystemTool@@QAE_NPAV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@@Z
+	00030014  <none>  0187  ?IsHasFunc@DllLoader@SystemTool@@QAE_NV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@PAV34@@Z
+	00030018  <none>  0130  ?GetFunc@DllLoader@SystemTool@@QAEPAXV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@PAV34@@Z
+	0003001c  <none>  0270  ?TransformAsUnixPath@Directory@IO@SystemTool@@SA_NV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@AAV45@@Z
+	00030020  <none>  0109  ?GenerateByRandom@Uuid@GUID@SystemTool@@SA?AV123@XZ
+	00030024  <none>  0264  ?ToString@Uuid@GUID@SystemTool@@QAE?AV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@XZ
+	00030028  <none>  0283  GetLogger
+
+ 0003040c	000306d8 00000000 00000000 00030c56 000301dc
+
+	DLL Name: Performance.dll
+	vma:     Ordinal  Hint  Member-Name  Bound-To
+	000301dc  <none>  0000  GetPerformance
+
+ 00030420	0003055c 00000000 00000000 00030c78 00030060
+
+	DLL Name: CommonCenter.dll
+	vma:     Ordinal  Hint  Member-Name  Bound-To
+	00030060  <none>  0000  GetCommonCenter
+
+ 00030434	0003058c 00000000 00000000 00030ca0 00030090
+
+	DLL Name: KERNEL32.dll
+	vma:     Ordinal  Hint  Member-Name  Bound-To
+	00030090  <none>  0313  GetSystemTimeAsFileTime
+	00030094  <none>  013e  DisableThreadLibraryCalls
+	00030098  <none>  0240  GetCurrentThreadId
+	0003009c  <none>  023c  GetCurrentProcessId
+	000300a0  <none>  047e  QueryPerformanceCounter
+	000300a4  <none>  05c8  TerminateProcess
+	000300a8  <none>  023b  GetCurrentProcess
+	000300ac  <none>  02fa  GetStartupInfoW
+	000300b0  <none>  05a8  SetUnhandledExceptionFilter
+	000300b4  <none>  05ea  UnhandledExceptionFilter
+	000300b8  <none>  03ad  IsDebuggerPresent
+	000300bc  <none>  03b5  IsProcessorFeaturePresent
+	000300c0  <none>  02d6  GetProcAddress
+	000300c4  <none>  029f  GetModuleHandleW
+	000300c8  <none>  00d9  CreateEventW
+	000300cc  <none>  0615  WaitForSingleObjectEx
+	000300d0  <none>  04fc  ResetEvent
+	000300d4  <none>  054c  SetEvent
+	000300d8  <none>  012e  DeleteCriticalSection
+	000300dc  <none>  038d  InitializeCriticalSectionAndSpinCount
+	000300e0  <none>  03ed  LeaveCriticalSection
+	000300e4  <none>  0153  EnterCriticalSection
+	000300e8  <none>  009d  CloseHandle
+	000300ec  <none>  0391  InitializeSListHead
+
+ 00030448	00030628 00000000 00000000 00031012 0003012c
+
+	DLL Name: MSVCP140.dll
+	vma:     Ordinal  Hint  Member-Name  Bound-To
+	0003012c  <none>  0581  _Mtx_destroy_in_situ
+	00030130  <none>  0585  _Mtx_lock
+	00030134  <none>  0589  _Mtx_unlock
+	00030138  <none>  0274  ?_Throw_C_error@std@@YAXH@Z
+	0003013c  <none>  019e  ?_Decref@facet@locale@std@@UAEPAV_Facet_base@3@XZ
+	00030140  <none>  01f2  ?_Incref@facet@locale@std@@UAEXXZ
+	00030144  <none>  03e7  ?id@?$numpunct@D@std@@2V0locale@2@A
+	00030148  <none>  01d5  ?_Getgloballocale@locale@std@@CAPAV_Locimp@12@XZ
+	0003014c  <none>  020f  ?_Init@locale@std@@CAPAV_Locimp@12@_N@Z
+	00030150  <none>  00ab  ??1facet@locale@std@@MAE@XZ
+	00030154  <none>  0075  ??0facet@locale@std@@IAE@I@Z
+	00030158  <none>  0131  ??Bid@locale@std@@QAEIXZ
+	0003015c  <none>  0283  ?_W_Getmonths@_Locinfo@std@@QBEPBGXZ
+	00030160  <none>  0282  ?_W_Getdays@_Locinfo@std@@QBEPBGXZ
+	00030164  <none>  01e1  ?_Gettrue@_Locinfo@std@@QBEPBDXZ
+	00030168  <none>  01cb  ?_Getfalse@_Locinfo@std@@QBEPBDXZ
+	0003016c  <none>  01c8  ?_Getcvt@_Locinfo@std@@QBE?AU_Cvtvec@@XZ
+	00030170  <none>  00a4  ??1_Locinfo@std@@QAE@XZ
+	00030174  <none>  006c  ??0_Locinfo@std@@QAE@PBD@Z
+	00030178  <none>  057d  _Mbrtowc
+	0003017c  <none>  05cc  _Xtime_get_ticks
+	00030180  <none>  028c  ?_Xbad_function_call@std@@YAXXZ
+	00030184  <none>  028f  ?_Xout_of_range@std@@YAXPBD@Z
+	00030188  <none>  0584  _Mtx_init_in_situ
+	0003018c  <none>  006d  ??0_Lockit@std@@QAE@H@Z
+	00030190  <none>  00a5  ??1_Lockit@std@@QAE@XZ
+	00030194  <none>  028b  ?_Xbad_alloc@std@@YAXXZ
+	00030198  <none>  028e  ?_Xlength_error@std@@YAXPBD@Z
+
+ 0003045c	00030708 00000000 00000000 000310fe 0003020c
+
+	DLL Name: VCRUNTIME140.dll
+	vma:     Ordinal  Hint  Member-Name  Bound-To
+	0003020c  <none>  0048  memset
+	00030210  <none>  0047  memmove
+	00030214  <none>  0046  memcpy
+	00030218  <none>  0044  memchr
+	0003021c  <none>  0010  __CxxFrameHandler3
+	00030220  <none>  0035  _except_handler4_common
+	00030224  <none>  0022  __std_exception_destroy
+	00030228  <none>  0021  __std_exception_copy
+	0003022c  <none>  0025  __std_type_info_destroy_list
+	00030230  <none>  0023  __std_terminate
+	00030234  <none>  003d  _purecall
+	00030238  <none>  0001  _CxxThrowException
+
+ 00030470	00030820 00000000 00000000 00031302 00030324
+
+	DLL Name: api-ms-win-crt-runtime-l1-1-0.dll
+	vma:     Ordinal  Hint  Member-Name  Bound-To
+	00030324  <none>  0035  _initialize_narrow_environment
+	00030328  <none>  0041  _seh_filter_dll
+	0003032c  <none>  001f  _crt_atexit
+	00030330  <none>  0036  _initialize_onexit_table
+	00030334  <none>  0024  _execute_onexit_table
+	00030338  <none>  003b  _invalid_parameter_noinfo_noreturn
+	0003033c  <none>  006a  terminate
+	00030340  <none>  0039  _initterm_e
+	00030344  <none>  0038  _initterm
+	00030348  <none>  0017  _cexit
+	0003034c  <none>  001e  _crt_at_quick_exit
+	00030350  <none>  003e  _register_onexit_function
+	00030354  <none>  0019  _configure_narrow_argv
+
+ 00030484	0003076c 00000000 00000000 00031324 00030270
+
+	DLL Name: api-ms-win-crt-heap-l1-1-0.dll
+	vma:     Ordinal  Hint  Member-Name  Bound-To
+	00030270  <none>  0019  malloc
+	00030274  <none>  0017  calloc
+	00030278  <none>  0008  _callnewh
+	0003027c  <none>  0018  free
+
+ 00030498	000307d8 00000000 00000000 00031344 000302dc
+
+	DLL Name: api-ms-win-crt-math-l1-1-0.dll
+	vma:     Ordinal  Hint  Member-Name  Bound-To
+	000302dc  <none>  003e  _dtest
+	000302e0  <none>  0060  _ldtest
+	000302e4  <none>  004a  _fdsign
+	000302e8  <none>  003c  _dsign
+	000302ec  <none>  005e  _ldsign
+	000302f0  <none>  004c  _fdtest
+
+ 000304ac	00030888 00000000 00000000 00031364 0003038c
+
+	DLL Name: api-ms-win-crt-stdio-l1-1-0.dll
+	vma:     Ordinal  Hint  Member-Name  Bound-To
+	0003038c  <none>  000b  __stdio_common_vsnprintf_s
+	00030390  <none>  0003  __stdio_common_vfprintf
+	00030394  <none>  0000  __acrt_iob_func
+
+ 000304c0	000307a8 00000000 00000000 00031384 000302ac
+
+	DLL Name: api-ms-win-crt-locale-l1-1-0.dll
+	vma:     Ordinal  Hint  Member-Name  Bound-To
+	000302ac  <none>  0012  localeconv
+
+ 000304d4	000308c0 00000000 00000000 000313a6 000303c4
+
+	DLL Name: api-ms-win-crt-time-l1-1-0.dll
+	vma:     Ordinal  Hint  Member-Name  Bound-To
+	000303c4  <none>  0024  _localtime64_s
+	000303c8  <none>  0046  strftime
+
+ 000304e8	00000000 00000000 00000000 00000000 00000000
+
+There is an export table in .rdata at 0x1002dbe0
+
+The Export Tables (interpreted .rdata section contents)
+
+Export Flags 			0
+Time/Date stamp 		ffffffff
+Major/Minor 			0/0
+Name 				0002dc1c AvCSDK.dll
+Ordinal Base 			1
+Number in:
+	Export Address Table 		00000002
+	[Name Pointer/Ordinal] Table	00000002
+Table Addresses
+	Export Address Table 		0002dc08
+	Name Pointer Table 		0002dc10
+	Ordinal Table 			0002dc18
+
+Export Address Table -- Ordinal Base 1
+	          Ordinal  Address  Type
+	[   0] +base[   1] 000018e3 Export RVA
+	[   1] +base[   2] 00001316 Export RVA
+
+[Ordinal/Name Pointer] Table -- Ordinal Base 1
+	          Ordinal   Hint Name
+	[   0] +base[   1]  0000 CreateModule
+	[   1] +base[   2]  0001 DestoryModule
+
+

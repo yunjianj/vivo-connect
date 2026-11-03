@@ -1,0 +1,53 @@
+APK pcsuite/updateApk/connbase.apk
+DEX classes2.dex
+CLASS Lcom/vivo/pcsuite/pcconnect/wifip2p/deputy/PhoenixReceiver;
+SUPER Landroid/content/BroadcastReceiver;
+FIELDS
+a Ljava/lang/String; = 'Phoenix'
+b Ljava/lang/String; = 'com.vivo.easyshare.intent.action.PROCESS_KILLED'
+
+METHOD <init>()V
+000000: invoke-direct v0, Landroid/content/BroadcastReceiver;-><init>()V
+000006: return-void 
+
+METHOD onReceive(Landroid/content/Context; Landroid/content/Intent;)V
+000000: const/4 v0, 0
+000002: if-eqz v6, +007h
+000006: invoke-virtual v6, Landroid/content/Intent;->getAction()Ljava/lang/String;
+00000c: move-result-object v6
+00000e: goto +2h
+000010: move-object v6, v0
+000012: new-instance v1, Ljava/lang/StringBuilder;
+000016: invoke-direct v1, Ljava/lang/StringBuilder;-><init>()V
+00001c: const-string v2, "onReceive: "
+000020: invoke-virtual v1, v2, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+000026: invoke-virtual v1, v6, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+00002c: invoke-virtual v1, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
+000032: move-result-object v1
+000034: const-string v2, "Phoenix"
+000038: invoke-static v2, v1, Lc/c/f/a/b;->a(Ljava/lang/String; Ljava/lang/String;)V
+00003e: const-string v1, "com.vivo.easyshare.intent.action.PROCESS_KILLED"
+000042: invoke-virtual v1, v6, Ljava/lang/String;->equals(Ljava/lang/Object;)Z
+000048: move-result v6
+00004a: if-eqz v6, +030h
+00004e: const-string v6, "wifip2p"
+000052: invoke-virtual v5, v6, Landroid/content/Context;->getSystemService(Ljava/lang/String;)Ljava/lang/Object;
+000058: move-result-object v6
+00005a: check-cast v6, Landroid/net/wifi/p2p/WifiP2pManager;
+00005e: if-eqz v6, +01eh
+000062: invoke-static Landroid/os/Looper;->getMainLooper()Landroid/os/Looper;
+000068: move-result-object v1
+00006a: invoke-virtual v6, v5, v1, v0, Landroid/net/wifi/p2p/WifiP2pManager;->initialize(Landroid/content/Context; Landroid/os/Looper; Landroid/net/wifi/p2p/WifiP2pManager$ChannelListener;)Landroid/net/wifi/p2p/WifiP2pManager$Channel;
+000070: move-result-object v0
+000072: if-eqz v0, +014h
+000076: const-string v1, "Removing exist group."
+00007a: invoke-static v2, v1, Lc/c/f/a/b;->k(Ljava/lang/String; Ljava/lang/String;)V
+000080: new-instance v1, Lcom/vivo/pcsuite/pcconnect/wifip2p/c;
+000084: const-string v3, "Remove group"
+000088: invoke-direct v1, v2, v3, Lcom/vivo/pcsuite/pcconnect/wifip2p/c;-><init>(Ljava/lang/String; Ljava/lang/String;)V
+00008e: invoke-virtual v6, v0, v1, Landroid/net/wifi/p2p/WifiP2pManager;->removeGroup(Landroid/net/wifi/p2p/WifiP2pManager$Channel; Landroid/net/wifi/p2p/WifiP2pManager$ActionListener;)V
+000094: invoke-static v6, v0, Lcom/vivo/pcsuite/pcconnect/wifip2p/g/c;->a(Landroid/net/wifi/p2p/WifiP2pManager; Landroid/net/wifi/p2p/WifiP2pManager$Channel;)V
+00009a: const-string v6, "Resetting states..."
+00009e: invoke-static v2, v6, Lc/c/f/a/b;->k(Ljava/lang/String; Ljava/lang/String;)V
+0000a4: invoke-static v5, Lcom/vivo/pcsuite/pcconnect/wifip2p/deputy/b;->b(Landroid/content/Context;)V
+0000aa: return-void 

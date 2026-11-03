@@ -1,0 +1,397 @@
+APK pcsuite/updateApk/pcsuite.apk
+DEX classes2.dex
+CLASS Lcom/vivo/pcsuite/connect/ConnectControlModel$8;
+SUPER Ljava/lang/Object;
+FIELDS
+a Lcom/vivo/pcsuite/connect/ConnectControlModel; = None
+
+METHOD <init>(Lcom/vivo/pcsuite/connect/ConnectControlModel;)V
+000000: invoke-direct v0, Ljava/lang/Object;-><init>()V
+000006: iput-object v1, v0, Lcom/vivo/pcsuite/connect/ConnectControlModel$8;->a Lcom/vivo/pcsuite/connect/ConnectControlModel;
+00000a: return-void 
+
+METHOD onConnectionInitiated(Ljava/lang/String; Lcom/vivo/connect/ConnectionInfo;)V
+000000: new-instance v0, Ljava/lang/StringBuilder;
+000004: const-string/jumbo v1, wlan onConnectionInitiated isIncomingConnection:
+00000a: invoke-direct v0, v1, Ljava/lang/StringBuilder;-><init>(Ljava/lang/String;)V
+000010: invoke-virtual v2, Lcom/vivo/connect/ConnectionInfo;->toString()Ljava/lang/String;
+000016: move-result-object v1
+000018: invoke-virtual v0, v1, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+00001e: invoke-virtual v0, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
+000024: move-result-object v0
+000026: const-string v1, "pcsuite_ConnectControlModel"
+00002a: invoke-static v1, v0, Lcom/vivo/connect/logger/EasyLog;->i(Ljava/lang/String; Ljava/lang/String;)V
+000030: return-void 
+
+METHOD onConnectionResult(Ljava/lang/String; Lcom/vivo/connect/ConnectionResult;)V
+000000: invoke-virtual v9, Lcom/vivo/connect/ConnectionResult;->getStatus()I
+000006: move-result v8
+000008: const-string/jumbo v0, wlan onConnectionResult status:
+00000e: const-string v1, "pcsuite_ConnectControlModel"
+000012: invoke-static v8, v0, v1, LV5/S;->j(I Ljava/lang/String; Ljava/lang/String;)V
+000018: iget-object v7, v7, Lcom/vivo/pcsuite/connect/ConnectControlModel$8;->a Lcom/vivo/pcsuite/connect/ConnectControlModel;
+00001c: invoke-static v7, Lcom/vivo/pcsuite/connect/ConnectControlModel;->a(Lcom/vivo/pcsuite/connect/ConnectControlModel;)Lcom/vivo/pcsuite/connect/ConnectControlModel$CloudConnectRunnable;
+000022: move-result-object v0
+000024: if-nez v0, +003h
+000028: return-void 
+00002a: const/4 v0, 3
+00002c: const/4 v2, 1
+00002e: if-nez v8, +09dh
+000032: invoke-virtual v9, Lcom/vivo/connect/ConnectionResult;->getExtra_info()Ljava/lang/String;
+000038: move-result-object v8
+00003a: new-instance v9, Ljava/lang/StringBuilder;
+00003e: const-string/jumbo v3, wlan extraInfo = 
+000044: invoke-direct v9, v3, Ljava/lang/StringBuilder;-><init>(Ljava/lang/String;)V
+00004a: invoke-virtual v9, v8, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+000050: invoke-virtual v9, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
+000056: move-result-object v9
+000058: invoke-static v1, v9, Lcom/vivo/connect/logger/EasyLog;->i(Ljava/lang/String; Ljava/lang/String;)V
+00005e: invoke-static v8, Landroid/text/TextUtils;->isEmpty(Ljava/lang/CharSequence;)Z
+000064: move-result v9
+000066: if-nez v9, +03ch
+00006a: new-instance v9, Lorg/json/JSONObject;
+00006e: invoke-direct v9, v8, Lorg/json/JSONObject;-><init>(Ljava/lang/String;)V
+000074: goto +18h
+000076: move-exception v8
+000078: new-instance v9, Ljava/lang/StringBuilder;
+00007c: const-string v3, "onConnectionResult error = "
+000080: invoke-direct v9, v3, Ljava/lang/StringBuilder;-><init>(Ljava/lang/String;)V
+000086: invoke-virtual v8, Ljava/lang/Throwable;->getMessage()Ljava/lang/String;
+00008c: move-result-object v8
+00008e: invoke-virtual v9, v8, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+000094: invoke-virtual v9, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
+00009a: move-result-object v8
+00009c: invoke-static v1, v8, Lcom/vivo/connect/logger/EasyLog;->e(Ljava/lang/String; Ljava/lang/String;)V
+0000a2: const/4 v9, 0
+0000a4: if-eqz v9, +01dh
+0000a8: const-string/jumbo v8, token
+0000ae: invoke-virtual v9, v8, Lorg/json/JSONObject;->optString(Ljava/lang/String;)Ljava/lang/String;
+0000b4: move-result-object v8
+0000b6: new-instance v9, Ljava/lang/StringBuilder;
+0000ba: const-string v3, "cloud connect tk = "
+0000be: invoke-direct v9, v3, Ljava/lang/StringBuilder;-><init>(Ljava/lang/String;)V
+0000c4: invoke-virtual v9, v8, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+0000ca: invoke-virtual v9, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
+0000d0: move-result-object v9
+0000d2: invoke-static v1, v9, Lcom/vivo/connect/logger/EasyLog;->i(Ljava/lang/String; Ljava/lang/String;)V
+0000d8: invoke-static v8, Lcom/vivo/castsdk/common/GlobalSettings;->setRemoteToken(Ljava/lang/String;)V
+0000de: iput-boolean v2, v7, Lcom/vivo/pcsuite/connect/ConnectControlModel;->m Z
+0000e2: invoke-virtual v7, Lcom/vivo/pcsuite/connect/ConnectControlModel;->removeCloudConnectRunnable()V
+0000e8: invoke-static Lcom/bbk/account/base/BBKAccountManager;->getInstance()Lcom/bbk/account/base/BBKAccountManager;
+0000ee: move-result-object v8
+0000f0: invoke-virtual v8, Lcom/bbk/account/base/BBKAccountManager;->getUserName()Ljava/lang/String;
+0000f6: move-result-object v8
+0000f8: new-instance v9, Ljava/lang/StringBuilder;
+0000fc: const-string v3, "onConnectionResult userName = "
+000100: invoke-direct v9, v3, Ljava/lang/StringBuilder;-><init>(Ljava/lang/String;)V
+000106: invoke-virtual v9, v8, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+00010c: invoke-virtual v9, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
+000112: move-result-object v9
+000114: invoke-static v1, v9, Lcom/vivo/connect/logger/EasyLog;->i(Ljava/lang/String; Ljava/lang/String;)V
+00011a: new-instance v9, Ljava/lang/StringBuilder;
+00011e: const-string v3, "runningTask = "
+000122: invoke-direct v9, v3, Ljava/lang/StringBuilder;-><init>(Ljava/lang/String;)V
+000128: invoke-static Lcom/vivo/pcsuite/connect/ConnectControlModel;->j()Z
+00012e: move-result v3
+000130: invoke-static v9, v3, v1, Landroidx/appcompat/widget/b;->i(Ljava/lang/StringBuilder; Z Ljava/lang/String;)V
+000136: invoke-static Lcom/vivo/pcsuite/connect/ConnectControlModel;->j()Z
+00013c: move-result v9
+00013e: if-nez v9, +23ah
+000142: sget-object v9, Lcom/vivo/pcsuite/PcSuiteApplication;->I1 Lcom/vivo/pcsuite/PcSuiteApplication;
+000146: invoke-virtual v9, v2, Lcom/vivo/pcsuite/PcSuiteApplication;->t0(Z)V
+00014c: invoke-virtual v7, Lcom/vivo/pcsuite/connect/ConnectControlModel;->postApTimeTask()V
+000152: sget-object v9, Lcom/vivo/pcsuite/PcSuiteApplication;->I1 Lcom/vivo/pcsuite/PcSuiteApplication;
+000156: invoke-static v7, Lcom/vivo/pcsuite/connect/ConnectControlModel;->b(Lcom/vivo/pcsuite/connect/ConnectControlModel;)Ljava/lang/String;
+00015c: move-result-object v7
+00015e: invoke-static v9, v0, v7, v8, Lcom/vivo/pcsuite/service/PcSuiteObserver;->K(Lcom/vivo/pcsuite/PcSuiteApplication; I Ljava/lang/String; Ljava/lang/String;)V
+000164: goto/16 +227h
+000168: const/16 v9, 12
+00016c: const/16 v3, 8
+000170: const/4 v4, 5
+000172: const-string v5, "011"
+000176: const/4 v6, 0
+000178: if-ne v8, v9, +0a4h
+00017c: sget-object v8, Lcom/vivo/pcsuite/PcSuiteApplication;->I1 Lcom/vivo/pcsuite/PcSuiteApplication;
+000180: invoke-virtual v8, v6, Lcom/vivo/pcsuite/PcSuiteApplication;->t0(Z)V
+000186: invoke-static v6, Lcom/vivo/pcsuite/connect/ConnectControlModel;->k(Z)V
+00018c: const-string/jumbo v8, wlan connect same type busy
+000192: invoke-static v1, v8, Lcom/vivo/connect/logger/EasyLog;->i(Ljava/lang/String; Ljava/lang/String;)V
+000198: iput-boolean v2, v7, Lcom/vivo/pcsuite/connect/ConnectControlModel;->m Z
+00019c: invoke-static v7, Lcom/vivo/pcsuite/connect/ConnectControlModel;->c(Lcom/vivo/pcsuite/connect/ConnectControlModel;)Lcom/vivo/pcsuite/common/gson/ConnDetail;
+0001a2: move-result-object v8
+0001a4: if-eqz v8, +00ch
+0001a8: invoke-static v7, Lcom/vivo/pcsuite/connect/ConnectControlModel;->c(Lcom/vivo/pcsuite/connect/ConnectControlModel;)Lcom/vivo/pcsuite/common/gson/ConnDetail;
+0001ae: move-result-object v8
+0001b0: const-string/jumbo v2, wlan errorCode:12
+0001b6: invoke-virtual v8, v2, Lcom/vivo/pcsuite/common/gson/ConnDetail;->setFailReason(Ljava/lang/String;)V
+0001bc: sget-object v8, Lcom/vivo/pcsuite/PcSuiteApplication;->I1 Lcom/vivo/pcsuite/PcSuiteApplication;
+0001c0: invoke-virtual v8, Lcom/vivo/pcsuite/PcSuiteApplication;->l()I
+0001c6: move-result v8
+0001c8: if-ne v8, v0, +038h
+0001cc: sget-object v8, Lcom/vivo/pcsuite/PcSuiteApplication;->I1 Lcom/vivo/pcsuite/PcSuiteApplication;
+0001d0: invoke-virtual v8, Lcom/vivo/pcsuite/PcSuiteApplication;->A()Ljava/lang/StringBuffer;
+0001d6: move-result-object v8
+0001d8: invoke-virtual v8, v5, Ljava/lang/StringBuffer;->append(Ljava/lang/String;)Ljava/lang/StringBuffer;
+0001de: new-instance v8, Ljava/lang/StringBuilder;
+0001e2: const-string v0, "pc wlan connect fail111 , "
+0001e6: invoke-direct v8, v0, Ljava/lang/StringBuilder;-><init>(Ljava/lang/String;)V
+0001ec: sget-object v0, Lcom/vivo/pcsuite/PcSuiteApplication;->I1 Lcom/vivo/pcsuite/PcSuiteApplication;
+0001f0: invoke-virtual v0, Lcom/vivo/pcsuite/PcSuiteApplication;->A()Ljava/lang/StringBuffer;
+0001f6: move-result-object v0
+0001f8: invoke-virtual v8, v0, Ljava/lang/StringBuilder;->append(Ljava/lang/Object;)Ljava/lang/StringBuilder;
+0001fe: invoke-virtual v8, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
+000204: move-result-object v8
+000206: invoke-static v1, v8, Lcom/vivo/connect/logger/EasyLog;->i(Ljava/lang/String; Ljava/lang/String;)V
+00020c: invoke-static v7, Lcom/vivo/pcsuite/connect/ConnectControlModel;->d(Lcom/vivo/pcsuite/connect/ConnectControlModel;)Lcom/vivo/pcsuite/interfaces/ConnectListener;
+000212: move-result-object v8
+000214: if-eqz v8, +009h
+000218: invoke-static v7, Lcom/vivo/pcsuite/connect/ConnectControlModel;->d(Lcom/vivo/pcsuite/connect/ConnectControlModel;)Lcom/vivo/pcsuite/interfaces/ConnectListener;
+00021e: move-result-object v7
+000220: invoke-interface v7, v9, Lcom/vivo/pcsuite/interfaces/ConnectListener;->onConnectFailed(I)V
+000226: invoke-static LL2/i;->q()LL2/i;
+00022c: move-result-object v7
+00022e: invoke-virtual v7, LL2/i;->o()V
+000234: goto/16 +1bfh
+000238: if-ne v8, v4, +1bdh
+00023c: sget-object v8, Lcom/vivo/pcsuite/PcSuiteApplication;->I1 Lcom/vivo/pcsuite/PcSuiteApplication;
+000240: invoke-virtual v8, Lcom/vivo/pcsuite/PcSuiteApplication;->D()Ljava/lang/StringBuffer;
+000246: move-result-object v8
+000248: invoke-virtual v8, v5, Ljava/lang/StringBuffer;->append(Ljava/lang/String;)Ljava/lang/StringBuffer;
+00024e: new-instance v8, Ljava/lang/StringBuilder;
+000252: const-string v0, "phone wlan connect fail111 , "
+000256: invoke-direct v8, v0, Ljava/lang/StringBuilder;-><init>(Ljava/lang/String;)V
+00025c: sget-object v0, Lcom/vivo/pcsuite/PcSuiteApplication;->I1 Lcom/vivo/pcsuite/PcSuiteApplication;
+000260: invoke-virtual v0, Lcom/vivo/pcsuite/PcSuiteApplication;->D()Ljava/lang/StringBuffer;
+000266: move-result-object v0
+000268: invoke-virtual v8, v0, Ljava/lang/StringBuilder;->append(Ljava/lang/Object;)Ljava/lang/StringBuilder;
+00026e: invoke-virtual v8, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
+000274: move-result-object v8
+000276: invoke-static v1, v8, Lcom/vivo/connect/logger/EasyLog;->i(Ljava/lang/String; Ljava/lang/String;)V
+00027c: sget-object v8, Lcom/vivo/pcsuite/PcSuiteApplication;->I1 Lcom/vivo/pcsuite/PcSuiteApplication;
+000280: invoke-virtual v8, Lcom/vivo/pcsuite/PcSuiteApplication;->D()Ljava/lang/StringBuffer;
+000286: move-result-object v8
+000288: invoke-static v8, v3, Lcom/vivo/pcsuite/util/StringUtils;->a(Ljava/lang/StringBuffer; I)V
+00028e: invoke-static Lcom/vivo/pcsuite/util/o0;->L0()V
+000294: invoke-static v7, Lcom/vivo/pcsuite/connect/ConnectControlModel;->d(Lcom/vivo/pcsuite/connect/ConnectControlModel;)Lcom/vivo/pcsuite/interfaces/ConnectListener;
+00029a: move-result-object v8
+00029c: if-eqz v8, +009h
+0002a0: invoke-static v7, Lcom/vivo/pcsuite/connect/ConnectControlModel;->d(Lcom/vivo/pcsuite/connect/ConnectControlModel;)Lcom/vivo/pcsuite/interfaces/ConnectListener;
+0002a6: move-result-object v7
+0002a8: invoke-interface v7, v9, Lcom/vivo/pcsuite/interfaces/ConnectListener;->onConnectFailed(I)V
+0002ae: invoke-static LL2/i;->q()LL2/i;
+0002b4: move-result-object v7
+0002b6: invoke-virtual v7, LL2/i;->o()V
+0002bc: goto/16 +17bh
+0002c0: const/16 v9, 11
+0002c4: if-ne v8, v9, +09eh
+0002c8: sget-object v8, Lcom/vivo/pcsuite/PcSuiteApplication;->I1 Lcom/vivo/pcsuite/PcSuiteApplication;
+0002cc: invoke-virtual v8, v6, Lcom/vivo/pcsuite/PcSuiteApplication;->t0(Z)V
+0002d2: invoke-static v6, Lcom/vivo/pcsuite/connect/ConnectControlModel;->k(Z)V
+0002d8: iput-boolean v2, v7, Lcom/vivo/pcsuite/connect/ConnectControlModel;->m Z
+0002dc: invoke-static v7, Lcom/vivo/pcsuite/connect/ConnectControlModel;->c(Lcom/vivo/pcsuite/connect/ConnectControlModel;)Lcom/vivo/pcsuite/common/gson/ConnDetail;
+0002e2: move-result-object v8
+0002e4: if-eqz v8, +00ch
+0002e8: invoke-static v7, Lcom/vivo/pcsuite/connect/ConnectControlModel;->c(Lcom/vivo/pcsuite/connect/ConnectControlModel;)Lcom/vivo/pcsuite/common/gson/ConnDetail;
+0002ee: move-result-object v8
+0002f0: const-string/jumbo v9, wlan errorCode:1
+0002f6: invoke-virtual v8, v9, Lcom/vivo/pcsuite/common/gson/ConnDetail;->setFailReason(Ljava/lang/String;)V
+0002fc: sget-object v8, Lcom/vivo/pcsuite/PcSuiteApplication;->I1 Lcom/vivo/pcsuite/PcSuiteApplication;
+000300: invoke-virtual v8, Lcom/vivo/pcsuite/PcSuiteApplication;->l()I
+000306: move-result v8
+000308: if-ne v8, v0, +038h
+00030c: sget-object v8, Lcom/vivo/pcsuite/PcSuiteApplication;->I1 Lcom/vivo/pcsuite/PcSuiteApplication;
+000310: invoke-virtual v8, Lcom/vivo/pcsuite/PcSuiteApplication;->A()Ljava/lang/StringBuffer;
+000316: move-result-object v8
+000318: invoke-virtual v8, v5, Ljava/lang/StringBuffer;->append(Ljava/lang/String;)Ljava/lang/StringBuffer;
+00031e: new-instance v8, Ljava/lang/StringBuilder;
+000322: const-string v9, "pc wlan connect fail222 , "
+000326: invoke-direct v8, v9, Ljava/lang/StringBuilder;-><init>(Ljava/lang/String;)V
+00032c: sget-object v9, Lcom/vivo/pcsuite/PcSuiteApplication;->I1 Lcom/vivo/pcsuite/PcSuiteApplication;
+000330: invoke-virtual v9, Lcom/vivo/pcsuite/PcSuiteApplication;->A()Ljava/lang/StringBuffer;
+000336: move-result-object v9
+000338: invoke-virtual v8, v9, Ljava/lang/StringBuilder;->append(Ljava/lang/Object;)Ljava/lang/StringBuilder;
+00033e: invoke-virtual v8, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
+000344: move-result-object v8
+000346: invoke-static v1, v8, Lcom/vivo/connect/logger/EasyLog;->i(Ljava/lang/String; Ljava/lang/String;)V
+00034c: invoke-static v7, Lcom/vivo/pcsuite/connect/ConnectControlModel;->d(Lcom/vivo/pcsuite/connect/ConnectControlModel;)Lcom/vivo/pcsuite/interfaces/ConnectListener;
+000352: move-result-object v8
+000354: if-eqz v8, +009h
+000358: invoke-static v7, Lcom/vivo/pcsuite/connect/ConnectControlModel;->d(Lcom/vivo/pcsuite/connect/ConnectControlModel;)Lcom/vivo/pcsuite/interfaces/ConnectListener;
+00035e: move-result-object v7
+000360: invoke-interface v7, v2, Lcom/vivo/pcsuite/interfaces/ConnectListener;->onConnectFailed(I)V
+000366: invoke-static LL2/i;->q()LL2/i;
+00036c: move-result-object v7
+00036e: invoke-virtual v7, LL2/i;->o()V
+000374: goto/16 +11fh
+000378: if-ne v8, v4, +11dh
+00037c: sget-object v8, Lcom/vivo/pcsuite/PcSuiteApplication;->I1 Lcom/vivo/pcsuite/PcSuiteApplication;
+000380: invoke-virtual v8, Lcom/vivo/pcsuite/PcSuiteApplication;->D()Ljava/lang/StringBuffer;
+000386: move-result-object v8
+000388: invoke-virtual v8, v5, Ljava/lang/StringBuffer;->append(Ljava/lang/String;)Ljava/lang/StringBuffer;
+00038e: new-instance v8, Ljava/lang/StringBuilder;
+000392: const-string v9, "phone wlan connect fail222 , "
+000396: invoke-direct v8, v9, Ljava/lang/StringBuilder;-><init>(Ljava/lang/String;)V
+00039c: sget-object v9, Lcom/vivo/pcsuite/PcSuiteApplication;->I1 Lcom/vivo/pcsuite/PcSuiteApplication;
+0003a0: invoke-virtual v9, Lcom/vivo/pcsuite/PcSuiteApplication;->D()Ljava/lang/StringBuffer;
+0003a6: move-result-object v9
+0003a8: invoke-virtual v8, v9, Ljava/lang/StringBuilder;->append(Ljava/lang/Object;)Ljava/lang/StringBuilder;
+0003ae: invoke-virtual v8, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
+0003b4: move-result-object v8
+0003b6: invoke-static v1, v8, Lcom/vivo/connect/logger/EasyLog;->i(Ljava/lang/String; Ljava/lang/String;)V
+0003bc: sget-object v8, Lcom/vivo/pcsuite/PcSuiteApplication;->I1 Lcom/vivo/pcsuite/PcSuiteApplication;
+0003c0: invoke-virtual v8, Lcom/vivo/pcsuite/PcSuiteApplication;->D()Ljava/lang/StringBuffer;
+0003c6: move-result-object v8
+0003c8: invoke-static v8, v3, Lcom/vivo/pcsuite/util/StringUtils;->a(Ljava/lang/StringBuffer; I)V
+0003ce: invoke-static Lcom/vivo/pcsuite/util/o0;->L0()V
+0003d4: invoke-static v7, Lcom/vivo/pcsuite/connect/ConnectControlModel;->d(Lcom/vivo/pcsuite/connect/ConnectControlModel;)Lcom/vivo/pcsuite/interfaces/ConnectListener;
+0003da: move-result-object v8
+0003dc: if-eqz v8, +009h
+0003e0: invoke-static v7, Lcom/vivo/pcsuite/connect/ConnectControlModel;->d(Lcom/vivo/pcsuite/connect/ConnectControlModel;)Lcom/vivo/pcsuite/interfaces/ConnectListener;
+0003e6: move-result-object v7
+0003e8: invoke-interface v7, v2, Lcom/vivo/pcsuite/interfaces/ConnectListener;->onConnectFailed(I)V
+0003ee: invoke-static LL2/i;->q()LL2/i;
+0003f4: move-result-object v7
+0003f6: invoke-virtual v7, LL2/i;->o()V
+0003fc: goto/16 +0dbh
+000400: sget-object v9, Lcom/vivo/pcsuite/PcSuiteApplication;->I1 Lcom/vivo/pcsuite/PcSuiteApplication;
+000404: invoke-virtual v9, v6, Lcom/vivo/pcsuite/PcSuiteApplication;->t0(Z)V
+00040a: invoke-static v6, Lcom/vivo/pcsuite/connect/ConnectControlModel;->k(Z)V
+000410: iput-boolean v6, v7, Lcom/vivo/pcsuite/connect/ConnectControlModel;->m Z
+000414: const/16 v9, 201
+000418: if-eq v8, v9, +018h
+00041c: const/16 v9, 202
+000420: if-eq v8, v9, +013h
+000424: const/16 v9, 204
+000428: if-eq v8, v9, +00dh
+00042c: const/16 v9, 208
+000430: const/4 v2, 7
+000432: if-eq v8, v9, +00bh
+000436: const/16 v9, 209
+00043a: if-eq v8, v9, +007h
+00043e: move v2, v6
+000440: goto +4h
+000442: move v2, v0
+000444: goto +2h
+000446: const/4 v2, 2
+000448: sget-object v8, Lcom/vivo/pcsuite/PcSuiteApplication;->I1 Lcom/vivo/pcsuite/PcSuiteApplication;
+00044c: invoke-virtual v8, Lcom/vivo/pcsuite/PcSuiteApplication;->l()I
+000452: move-result v8
+000454: invoke-static v7, Lcom/vivo/pcsuite/connect/ConnectControlModel;->c(Lcom/vivo/pcsuite/connect/ConnectControlModel;)Lcom/vivo/pcsuite/common/gson/ConnDetail;
+00045a: move-result-object v9
+00045c: if-eqz v9, +018h
+000460: invoke-static v7, Lcom/vivo/pcsuite/connect/ConnectControlModel;->c(Lcom/vivo/pcsuite/connect/ConnectControlModel;)Lcom/vivo/pcsuite/common/gson/ConnDetail;
+000466: move-result-object v9
+000468: new-instance v5, Ljava/lang/StringBuilder;
+00046c: const-string/jumbo v6, wlan errorCode:
+000472: invoke-direct v5, v6, Ljava/lang/StringBuilder;-><init>(Ljava/lang/String;)V
+000478: invoke-virtual v5, v2, Ljava/lang/StringBuilder;->append(I)Ljava/lang/StringBuilder;
+00047e: invoke-virtual v5, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
+000484: move-result-object v5
+000486: invoke-virtual v9, v5, Lcom/vivo/pcsuite/common/gson/ConnDetail;->setFailReason(Ljava/lang/String;)V
+00048c: const-string v9, "01"
+000490: if-ne v8, v0, +043h
+000494: sget-object v8, Lcom/vivo/pcsuite/PcSuiteApplication;->I1 Lcom/vivo/pcsuite/PcSuiteApplication;
+000498: invoke-virtual v8, Lcom/vivo/pcsuite/PcSuiteApplication;->A()Ljava/lang/StringBuffer;
+00049e: move-result-object v8
+0004a0: new-instance v0, Ljava/lang/StringBuilder;
+0004a4: invoke-direct v0, v9, Ljava/lang/StringBuilder;-><init>(Ljava/lang/String;)V
+0004aa: invoke-virtual v0, v2, Ljava/lang/StringBuilder;->append(I)Ljava/lang/StringBuilder;
+0004b0: invoke-virtual v0, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
+0004b6: move-result-object v9
+0004b8: invoke-virtual v8, v9, Ljava/lang/StringBuffer;->append(Ljava/lang/String;)Ljava/lang/StringBuffer;
+0004be: new-instance v8, Ljava/lang/StringBuilder;
+0004c2: const-string v9, "pc wlan connect fail , "
+0004c6: invoke-direct v8, v9, Ljava/lang/StringBuilder;-><init>(Ljava/lang/String;)V
+0004cc: sget-object v9, Lcom/vivo/pcsuite/PcSuiteApplication;->I1 Lcom/vivo/pcsuite/PcSuiteApplication;
+0004d0: invoke-virtual v9, Lcom/vivo/pcsuite/PcSuiteApplication;->A()Ljava/lang/StringBuffer;
+0004d6: move-result-object v9
+0004d8: invoke-virtual v8, v9, Ljava/lang/StringBuilder;->append(Ljava/lang/Object;)Ljava/lang/StringBuilder;
+0004de: invoke-virtual v8, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
+0004e4: move-result-object v8
+0004e6: invoke-static v1, v8, Lcom/vivo/connect/logger/EasyLog;->i(Ljava/lang/String; Ljava/lang/String;)V
+0004ec: invoke-static v7, Lcom/vivo/pcsuite/connect/ConnectControlModel;->d(Lcom/vivo/pcsuite/connect/ConnectControlModel;)Lcom/vivo/pcsuite/interfaces/ConnectListener;
+0004f2: move-result-object v8
+0004f4: if-eqz v8, +009h
+0004f8: invoke-static v7, Lcom/vivo/pcsuite/connect/ConnectControlModel;->d(Lcom/vivo/pcsuite/connect/ConnectControlModel;)Lcom/vivo/pcsuite/interfaces/ConnectListener;
+0004fe: move-result-object v7
+000500: invoke-interface v7, v2, Lcom/vivo/pcsuite/interfaces/ConnectListener;->onConnectFailed(I)V
+000506: invoke-static LL2/i;->q()LL2/i;
+00050c: move-result-object v7
+00050e: invoke-virtual v7, LL2/i;->o()V
+000514: goto +4fh
+000516: if-ne v8, v4, +04eh
+00051a: sget-object v8, Lcom/vivo/pcsuite/PcSuiteApplication;->I1 Lcom/vivo/pcsuite/PcSuiteApplication;
+00051e: invoke-virtual v8, Lcom/vivo/pcsuite/PcSuiteApplication;->D()Ljava/lang/StringBuffer;
+000524: move-result-object v8
+000526: new-instance v0, Ljava/lang/StringBuilder;
+00052a: invoke-direct v0, v9, Ljava/lang/StringBuilder;-><init>(Ljava/lang/String;)V
+000530: invoke-virtual v0, v2, Ljava/lang/StringBuilder;->append(I)Ljava/lang/StringBuilder;
+000536: invoke-virtual v0, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
+00053c: move-result-object v9
+00053e: invoke-virtual v8, v9, Ljava/lang/StringBuffer;->append(Ljava/lang/String;)Ljava/lang/StringBuffer;
+000544: new-instance v8, Ljava/lang/StringBuilder;
+000548: const-string v9, "phone wlan connect fail , "
+00054c: invoke-direct v8, v9, Ljava/lang/StringBuilder;-><init>(Ljava/lang/String;)V
+000552: sget-object v9, Lcom/vivo/pcsuite/PcSuiteApplication;->I1 Lcom/vivo/pcsuite/PcSuiteApplication;
+000556: invoke-virtual v9, Lcom/vivo/pcsuite/PcSuiteApplication;->D()Ljava/lang/StringBuffer;
+00055c: move-result-object v9
+00055e: invoke-virtual v8, v9, Ljava/lang/StringBuilder;->append(Ljava/lang/Object;)Ljava/lang/StringBuilder;
+000564: invoke-virtual v8, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
+00056a: move-result-object v8
+00056c: invoke-static v1, v8, Lcom/vivo/connect/logger/EasyLog;->i(Ljava/lang/String; Ljava/lang/String;)V
+000572: sget-object v8, Lcom/vivo/pcsuite/PcSuiteApplication;->I1 Lcom/vivo/pcsuite/PcSuiteApplication;
+000576: invoke-virtual v8, Lcom/vivo/pcsuite/PcSuiteApplication;->D()Ljava/lang/StringBuffer;
+00057c: move-result-object v8
+00057e: invoke-static v8, v3, Lcom/vivo/pcsuite/util/StringUtils;->a(Ljava/lang/StringBuffer; I)V
+000584: invoke-static Lcom/vivo/pcsuite/util/o0;->L0()V
+00058a: invoke-static v7, Lcom/vivo/pcsuite/connect/ConnectControlModel;->d(Lcom/vivo/pcsuite/connect/ConnectControlModel;)Lcom/vivo/pcsuite/interfaces/ConnectListener;
+000590: move-result-object v8
+000592: if-eqz v8, +009h
+000596: invoke-static v7, Lcom/vivo/pcsuite/connect/ConnectControlModel;->d(Lcom/vivo/pcsuite/connect/ConnectControlModel;)Lcom/vivo/pcsuite/interfaces/ConnectListener;
+00059c: move-result-object v7
+00059e: invoke-interface v7, v2, Lcom/vivo/pcsuite/interfaces/ConnectListener;->onConnectFailed(I)V
+0005a4: invoke-static LL2/i;->q()LL2/i;
+0005aa: move-result-object v7
+0005ac: invoke-virtual v7, LL2/i;->o()V
+0005b2: invoke-static Lcom/vivo/pcsuite/common/filemanager/utils/e;->z()V
+0005b8: return-void 
+
+METHOD onDisconnected(Ljava/lang/String; I)V
+000000: new-instance v0, Ljava/lang/StringBuilder;
+000004: const-string v1, "onDisconnected:"
+000008: invoke-direct v0, v1, Ljava/lang/StringBuilder;-><init>(Ljava/lang/String;)V
+00000e: invoke-virtual v0, v3, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+000014: const-string v3, ", dataAmount="
+000018: invoke-virtual v0, v3, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+00001e: invoke-virtual v0, v4, Ljava/lang/StringBuilder;->append(I)Ljava/lang/StringBuilder;
+000024: const-string v3, " wlanIsConnect:"
+000028: invoke-virtual v0, v3, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+00002e: iget-object v2, v2, Lcom/vivo/pcsuite/connect/ConnectControlModel$8;->a Lcom/vivo/pcsuite/connect/ConnectControlModel;
+000032: iget-boolean v3, v2, Lcom/vivo/pcsuite/connect/ConnectControlModel;->m Z
+000036: const-string v4, "pcsuite_ConnectControlModel"
+00003a: invoke-static v0, v3, v4, Landroidx/appcompat/widget/b;->i(Ljava/lang/StringBuilder; Z Ljava/lang/String;)V
+000040: iget-boolean v2, v2, Lcom/vivo/pcsuite/connect/ConnectControlModel;->m Z
+000044: if-nez v2, +016h
+000048: const-string v2, "send fail message:"
+00004c: invoke-static v4, v2, Lcom/vivo/connect/logger/EasyLog;->i(Ljava/lang/String; Ljava/lang/String;)V
+000052: invoke-static Lde/greenrobot/event/EventBus;->getDefault()Lde/greenrobot/event/EventBus;
+000058: move-result-object v2
+00005a: new-instance v3, Lcom/vivo/pcsuite/entity/EventBean;
+00005e: const/4 v0, 2
+000060: const-string v1, "connectFail"
+000064: invoke-direct v3, v0, v4, v1, Lcom/vivo/pcsuite/entity/EventBean;-><init>(I Ljava/lang/String; Ljava/lang/Object;)V
+00006a: invoke-virtual v2, v3, Lde/greenrobot/event/EventBus;->post(Ljava/lang/Object;)V
+000070: return-void 
+
+METHOD onTransferLayerSwitched(Ljava/lang/String; Lcom/vivo/connect/SwitchLayerResult;)V
+000000: new-instance v0, Ljava/lang/StringBuilder;
+000004: const-string v1, "onTransferLayerSwitched "
+000008: invoke-direct v0, v1, Ljava/lang/StringBuilder;-><init>(Ljava/lang/String;)V
+00000e: invoke-virtual v2, Lcom/vivo/connect/SwitchLayerResult;->getStatus()I
+000014: move-result v1
+000016: invoke-virtual v0, v1, Ljava/lang/StringBuilder;->append(I)Ljava/lang/StringBuilder;
+00001c: invoke-virtual v0, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
+000022: move-result-object v0
+000024: const-string v1, "pcsuite_ConnectControlModel"
+000028: invoke-static v1, v0, Lcom/vivo/connect/logger/EasyLog;->i(Ljava/lang/String; Ljava/lang/String;)V
+00002e: return-void 

@@ -1,0 +1,62 @@
+APK pcsuite/updateApk/pcsuite.apk
+DEX classes2.dex
+CLASS Lcom/vivo/pcsuite/service/i;
+SUPER Ljava/lang/Object;
+FIELDS
+a Lcom/vivo/pcsuite/service/PcSuiteObserver; = None
+
+METHOD <init>(Lcom/vivo/pcsuite/service/PcSuiteObserver;)V
+000000: invoke-direct v0, Ljava/lang/Object;-><init>()V
+000006: iput-object v1, v0, Lcom/vivo/pcsuite/service/i;->a Lcom/vivo/pcsuite/service/PcSuiteObserver;
+00000a: return-void 
+
+METHOD run()V
+000000: const-string v0, "pcsuite_PcSuiteObserver"
+000004: sget v1, Lcom/vivo/pcsuite/service/PcSuiteObserver;->D I
+000008: const-string/jumbo v1, vivo.keepAlive.advanced_support
+00000e: const/4 v2, 0
+000010: sget-object v3, Lcom/vivo/pcsuite/PcSuiteApplication;->I1 Lcom/vivo/pcsuite/PcSuiteApplication;
+000014: invoke-virtual v3, Landroid/content/Context;->getPackageManager()Landroid/content/pm/PackageManager;
+00001a: move-result-object v3
+00001c: const-string v4, "com.vivo.pem"
+000020: const/16 v5, 128
+000024: invoke-virtual v3, v4, v5, Landroid/content/pm/PackageManager;->getApplicationInfo(Ljava/lang/String; I)Landroid/content/pm/ApplicationInfo;
+00002a: move-result-object v3
+00002c: iget-object v4, v3, Landroid/content/pm/ApplicationInfo;->metaData Landroid/os/Bundle;
+000030: if-eqz v4, +014h
+000034: invoke-virtual v4, v1, Landroid/os/BaseBundle;->containsKey(Ljava/lang/String;)Z
+00003a: move-result v4
+00003c: if-eqz v4, +00eh
+000040: iget-object v3, v3, Landroid/content/pm/ApplicationInfo;->metaData Landroid/os/Bundle;
+000044: invoke-virtual v3, v1, v2, Landroid/os/BaseBundle;->getBoolean(Ljava/lang/String; Z)Z
+00004a: move-result v2
+00004c: goto +6h
+00004e: const-string v1, "package not found: com.vivo.pem"
+000052: invoke-static v0, v1, Lcom/vivo/connect/logger/EasyLog;->e(Ljava/lang/String; Ljava/lang/String;)V
+000058: sget v1, Lcom/vivo/pcsuite/service/PcSuiteObserver;->D I
+00005c: const-string v1, "keepAlive: newApiSupported="
+000060: invoke-static v1, v0, v2, LZ1/b;->c(Ljava/lang/String; Ljava/lang/String; Z)V
+000066: iget-object v6, v6, Lcom/vivo/pcsuite/service/i;->a Lcom/vivo/pcsuite/service/PcSuiteObserver;
+00006a: if-eqz v2, +01ah
+00006e: invoke-static v6, Lcom/vivo/pcsuite/service/PcSuiteObserver;->e(Lcom/vivo/pcsuite/service/PcSuiteObserver;)Lcom/vivo/pcsuite/util/b0;
+000074: move-result-object v0
+000076: if-nez v0, +00ch
+00007a: new-instance v0, Lcom/vivo/pcsuite/util/b0;
+00007e: sget-object v1, Lcom/vivo/pcsuite/PcSuiteApplication;->I1 Lcom/vivo/pcsuite/PcSuiteApplication;
+000082: invoke-direct v0, v1, Lcom/vivo/pcsuite/util/b0;-><init>(Lcom/vivo/pcsuite/PcSuiteApplication;)V
+000088: invoke-static v6, v0, Lcom/vivo/pcsuite/service/PcSuiteObserver;->h(Lcom/vivo/pcsuite/service/PcSuiteObserver; Lcom/vivo/pcsuite/util/b0;)V
+00008e: invoke-static v6, Lcom/vivo/pcsuite/service/PcSuiteObserver;->e(Lcom/vivo/pcsuite/service/PcSuiteObserver;)Lcom/vivo/pcsuite/util/b0;
+000094: move-result-object v6
+000096: invoke-virtual v6, Lcom/vivo/pcsuite/util/b0;->h()V
+00009c: goto +18h
+00009e: invoke-static v6, Lcom/vivo/pcsuite/service/PcSuiteObserver;->c(Lcom/vivo/pcsuite/service/PcSuiteObserver;)Lcom/vivo/pcsuite/util/d0;
+0000a4: move-result-object v0
+0000a6: if-nez v0, +00ch
+0000aa: new-instance v0, Lcom/vivo/pcsuite/util/d0;
+0000ae: sget-object v1, Lcom/vivo/pcsuite/PcSuiteApplication;->I1 Lcom/vivo/pcsuite/PcSuiteApplication;
+0000b2: invoke-direct v0, v1, Lcom/vivo/pcsuite/util/d0;-><init>(Lcom/vivo/pcsuite/PcSuiteApplication;)V
+0000b8: invoke-static v6, v0, Lcom/vivo/pcsuite/service/PcSuiteObserver;->f(Lcom/vivo/pcsuite/service/PcSuiteObserver; Lcom/vivo/pcsuite/util/d0;)V
+0000be: invoke-static v6, Lcom/vivo/pcsuite/service/PcSuiteObserver;->c(Lcom/vivo/pcsuite/service/PcSuiteObserver;)Lcom/vivo/pcsuite/util/d0;
+0000c4: move-result-object v6
+0000c6: invoke-virtual v6, Lcom/vivo/pcsuite/util/d0;->i()V
+0000cc: return-void 

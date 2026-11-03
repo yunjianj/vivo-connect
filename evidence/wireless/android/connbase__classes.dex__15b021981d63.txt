@@ -1,0 +1,220 @@
+APK pcsuite/updateApk/connbase.apk
+DEX classes.dex
+CLASS Lcom/vivo/connbase/nfc/m;
+SUPER Ljava/lang/Object;
+FIELDS
+a Ljava/lang/String; = 'SceneUtils'
+b Ljava/lang/String; = 'com.vivo.test.example.CC'
+c Ljava/lang/String; = 'com.example.share'
+d Ljava/lang/String; = 'com.vivo.upnpserver'
+e Ljava/lang/String; = 'com.vivo.cast.SERVICE'
+f Ljava/lang/String; = 'com.vivo.share'
+g Ljava/lang/String; = 'com.vivo.share.ACCOUNT_SERVICE'
+h Ljava/util/Set; = None
+i Ljava/util/Map; = None
+j Ljava/util/List; = None
+
+METHOD <clinit>()V
+000000: new-instance v0, Ljava/util/HashSet;
+000004: invoke-direct v0, Ljava/util/HashSet;-><init>()V
+00000a: sput-object v0, Lcom/vivo/connbase/nfc/m;->h Ljava/util/Set;
+00000e: new-instance v0, Lcom/vivo/connbase/nfc/m$a;
+000012: const/4 v1, 2
+000014: invoke-direct v0, v1, Lcom/vivo/connbase/nfc/m$a;-><init>(I)V
+00001a: sput-object v0, Lcom/vivo/connbase/nfc/m;->i Ljava/util/Map;
+00001e: new-instance v0, Lcom/vivo/connbase/nfc/m$b;
+000022: invoke-direct v0, Lcom/vivo/connbase/nfc/m$b;-><init>()V
+000028: sput-object v0, Lcom/vivo/connbase/nfc/m;->j Ljava/util/List;
+00002c: return-void 
+
+METHOD <init>()V
+000000: invoke-direct v0, Ljava/lang/Object;-><init>()V
+000006: return-void 
+
+METHOD a(Lcom/vivo/connbase/nfc/k;)Ljava/lang/String;
+000000: const-string v0, "SceneUtils"
+000004: const-string v1, "matchScene"
+000008: invoke-static v0, v1, Lc/c/f/a/b;->a(Ljava/lang/String; Ljava/lang/String;)V
+00000e: if-eqz v2, +015h
+000012: invoke-virtual v2, Lcom/vivo/connbase/nfc/k;->b()Ljava/lang/String;
+000018: move-result-object v0
+00001a: invoke-static v0, Lcom/vivo/connbase/nfc/m;->f(Ljava/lang/String;)Z
+000020: move-result v0
+000022: if-eqz v0, +00bh
+000026: invoke-virtual v2, Lcom/vivo/connbase/nfc/k;->c()Z
+00002c: move-result v2
+00002e: if-eqz v2, +005h
+000032: const-string v2, "com.vivo.share.ACCOUNT_SERVICE"
+000036: return-object v2
+000038: const-string v2, "com.vivo.cast.SERVICE"
+00003c: return-object v2
+
+METHOD a(Ljava/lang/String;)V
+000000: new-instance v0, Ljava/lang/StringBuilder;
+000004: invoke-direct v0, Ljava/lang/StringBuilder;-><init>()V
+00000a: const-string v1, "addRegPackageName:"
+00000e: invoke-virtual v0, v1, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+000014: invoke-virtual v0, v2, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+00001a: invoke-virtual v0, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
+000020: move-result-object v0
+000022: const-string v1, "SceneUtils"
+000026: invoke-static v1, v0, Lc/c/f/a/b;->a(Ljava/lang/String; Ljava/lang/String;)V
+00002c: sget-object v0, Lcom/vivo/connbase/nfc/m;->h Ljava/util/Set;
+000030: invoke-interface v0, v2, Ljava/util/Set;->add(Ljava/lang/Object;)Z
+000036: return-void 
+
+METHOD a()Z
+000000: const/4 v0, 0
+000002: return v0
+
+METHOD a(Lcom/vivo/connbase/nfc/NfcTouchedInfo; Lcom/vivo/connbase/nfc/NfcTouchedInfo;)Z
+000000: invoke-static Lcom/vivo/connbase/App;->m()Lcom/vivo/connbase/App;
+000006: move-result-object v0
+000008: invoke-static v0, Lcom/vivo/connbase/wifi/utils/WifiUtils;->isWifiEnable(Landroid/content/Context;)Z
+00000e: move-result v0
+000010: const/4 v1, 0
+000012: if-nez v0, +003h
+000016: return v1
+000018: invoke-static Landroid/bluetooth/BluetoothAdapter;->getDefaultAdapter()Landroid/bluetooth/BluetoothAdapter;
+00001e: move-result-object v0
+000020: invoke-virtual v0, Landroid/bluetooth/BluetoothAdapter;->isEnabled()Z
+000026: move-result v0
+000028: if-nez v0, +003h
+00002c: return v1
+00002e: invoke-static Lcom/vivo/connbase/nfc/m;->a()Z
+000034: move-result v0
+000036: if-nez v0, +003h
+00003a: return v1
+00003c: invoke-virtual v3, Lcom/vivo/connbase/nfc/NfcTouchedInfo;->getOpenId()Ljava/lang/String;
+000042: move-result-object v0
+000044: invoke-virtual v4, Lcom/vivo/connbase/nfc/NfcTouchedInfo;->getOpenId()Ljava/lang/String;
+00004a: move-result-object v2
+00004c: invoke-static v0, Landroid/text/TextUtils;->isEmpty(Ljava/lang/CharSequence;)Z
+000052: move-result v0
+000054: if-nez v0, +019h
+000058: invoke-static v2, Landroid/text/TextUtils;->isEmpty(Ljava/lang/CharSequence;)Z
+00005e: move-result v0
+000060: if-nez v0, +013h
+000064: invoke-virtual v3, Lcom/vivo/connbase/nfc/NfcTouchedInfo;->getOpenId()Ljava/lang/String;
+00006a: move-result-object v3
+00006c: invoke-virtual v4, Lcom/vivo/connbase/nfc/NfcTouchedInfo;->getOpenId()Ljava/lang/String;
+000072: move-result-object v4
+000074: invoke-virtual v3, v4, Ljava/lang/String;->equals(Ljava/lang/Object;)Z
+00007a: move-result v3
+00007c: if-nez v3, +003h
+000080: goto +3h
+000082: const/4 v3, 1
+000084: return v3
+000086: return v1
+
+METHOD b(Lcom/vivo/connbase/nfc/k;)Lcom/vivo/connbase/nfc/NfcTouchedInfo;
+000000: invoke-static v3, Lcom/vivo/connbase/nfc/m;->a(Lcom/vivo/connbase/nfc/k;)Ljava/lang/String;
+000006: move-result-object v0
+000008: new-instance v1, Lcom/vivo/connbase/nfc/NfcTouchedInfo$b;
+00000c: invoke-direct v1, Lcom/vivo/connbase/nfc/NfcTouchedInfo$b;-><init>()V
+000012: invoke-virtual v3, Lcom/vivo/connbase/nfc/k;->b()Ljava/lang/String;
+000018: move-result-object v2
+00001a: invoke-virtual v1, v2, Lcom/vivo/connbase/nfc/NfcTouchedInfo$b;->e(Ljava/lang/String;)Lcom/vivo/connbase/nfc/NfcTouchedInfo$b;
+000020: move-result-object v1
+000022: invoke-virtual v3, Lcom/vivo/connbase/nfc/k;->a()Ljava/lang/String;
+000028: move-result-object v2
+00002a: invoke-virtual v1, v2, Lcom/vivo/connbase/nfc/NfcTouchedInfo$b;->c(Ljava/lang/String;)Lcom/vivo/connbase/nfc/NfcTouchedInfo$b;
+000030: move-result-object v1
+000032: invoke-virtual v3, Lcom/vivo/connbase/nfc/k;->c()Z
+000038: move-result v3
+00003a: invoke-virtual v1, v3, Lcom/vivo/connbase/nfc/NfcTouchedInfo$b;->a(Z)Lcom/vivo/connbase/nfc/NfcTouchedInfo$b;
+000040: move-result-object v3
+000042: invoke-static v0, Lcom/vivo/connbase/nfc/m;->d(Ljava/lang/String;)Ljava/lang/String;
+000048: move-result-object v0
+00004a: invoke-virtual v3, v0, Lcom/vivo/connbase/nfc/NfcTouchedInfo$b;->h(Ljava/lang/String;)Lcom/vivo/connbase/nfc/NfcTouchedInfo$b;
+000050: move-result-object v3
+000052: invoke-static Lcom/vivo/connbase/c0/z;->a()Ljava/lang/String;
+000058: move-result-object v0
+00005a: invoke-virtual v3, v0, Lcom/vivo/connbase/nfc/NfcTouchedInfo$b;->b(Ljava/lang/String;)Lcom/vivo/connbase/nfc/NfcTouchedInfo$b;
+000060: move-result-object v3
+000062: invoke-static Lcom/vivo/connbase/App;->m()Lcom/vivo/connbase/App;
+000068: move-result-object v0
+00006a: invoke-virtual v0, Lcom/vivo/connbase/App;->d()Ljava/lang/String;
+000070: move-result-object v0
+000072: invoke-virtual v3, v0, Lcom/vivo/connbase/nfc/NfcTouchedInfo$b;->a(Ljava/lang/String;)Lcom/vivo/connbase/nfc/NfcTouchedInfo$b;
+000078: move-result-object v3
+00007a: invoke-static Lcom/vivo/connbase/App;->m()Lcom/vivo/connbase/App;
+000080: move-result-object v0
+000082: invoke-static v0, Lcom/bbk/account/base/BBKAccountManager;->getInstance(Landroid/content/Context;)Lcom/bbk/account/base/BBKAccountManager;
+000088: move-result-object v0
+00008a: invoke-virtual v0, Lcom/bbk/account/base/BBKAccountManager;->getOpenid()Ljava/lang/String;
+000090: move-result-object v0
+000092: invoke-virtual v3, v0, Lcom/vivo/connbase/nfc/NfcTouchedInfo$b;->d(Ljava/lang/String;)Lcom/vivo/connbase/nfc/NfcTouchedInfo$b;
+000098: move-result-object v3
+00009a: invoke-static Lcom/vivo/connbase/e0/g/e;->c()Ljava/lang/String;
+0000a0: move-result-object v0
+0000a2: invoke-virtual v3, v0, Lcom/vivo/connbase/nfc/NfcTouchedInfo$b;->g(Ljava/lang/String;)Lcom/vivo/connbase/nfc/NfcTouchedInfo$b;
+0000a8: move-result-object v3
+0000aa: invoke-static Lcom/vivo/connbase/e0/g/e;->a()Ljava/lang/String;
+0000b0: move-result-object v0
+0000b2: invoke-virtual v3, v0, Lcom/vivo/connbase/nfc/NfcTouchedInfo$b;->f(Ljava/lang/String;)Lcom/vivo/connbase/nfc/NfcTouchedInfo$b;
+0000b8: move-result-object v3
+0000ba: invoke-static Lcom/vivo/connbase/wifi/utils/PhoneUtils;->isVivoPad()Z
+0000c0: move-result v0
+0000c2: invoke-virtual v3, v0, Lcom/vivo/connbase/nfc/NfcTouchedInfo$b;->a(I)Lcom/vivo/connbase/nfc/NfcTouchedInfo$b;
+0000c8: move-result-object v3
+0000ca: invoke-virtual v3, Lcom/vivo/connbase/nfc/NfcTouchedInfo$b;->a()Lcom/vivo/connbase/nfc/NfcTouchedInfo;
+0000d0: move-result-object v3
+0000d2: return-object v3
+
+METHOD b(Ljava/lang/String;)Ljava/lang/String;
+000000: new-instance v0, Ljava/lang/StringBuilder;
+000004: invoke-direct v0, Ljava/lang/StringBuilder;-><init>()V
+00000a: const-string v1, "getPackageName:"
+00000e: invoke-virtual v0, v1, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+000014: invoke-virtual v0, v2, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+00001a: invoke-virtual v0, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
+000020: move-result-object v0
+000022: const-string v1, "SceneUtils"
+000026: invoke-static v1, v0, Lc/c/f/a/b;->k(Ljava/lang/String; Ljava/lang/String;)V
+00002c: return-object v2
+
+METHOD c(Ljava/lang/String;)Ljava/lang/String;
+000000: sget-object v0, Lcom/vivo/connbase/nfc/m;->i Ljava/util/Map;
+000004: invoke-interface v0, v1, Ljava/util/Map;->get(Ljava/lang/Object;)Ljava/lang/Object;
+00000a: move-result-object v1
+00000c: check-cast v1, Ljava/lang/String;
+000010: return-object v1
+
+METHOD d(Ljava/lang/String;)Ljava/lang/String;
+000000: new-instance v0, Ljava/lang/StringBuilder;
+000004: invoke-direct v0, Ljava/lang/StringBuilder;-><init>()V
+00000a: const-string v1, "getServiceId:"
+00000e: invoke-virtual v0, v1, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+000014: invoke-virtual v0, v2, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+00001a: invoke-virtual v0, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
+000020: move-result-object v0
+000022: const-string v1, "SceneUtils"
+000026: invoke-static v1, v0, Lc/c/f/a/b;->k(Ljava/lang/String; Ljava/lang/String;)V
+00002c: return-object v2
+
+METHOD e(Ljava/lang/String;)Z
+000000: sget-object v0, Lcom/vivo/connbase/nfc/m;->j Ljava/util/List;
+000004: invoke-interface v0, v1, Ljava/util/List;->contains(Ljava/lang/Object;)Z
+00000a: move-result v1
+00000c: return v1
+
+METHOD f(Ljava/lang/String;)Z
+000000: sget-object v0, Lcom/vivo/connbase/nfc/m;->h Ljava/util/Set;
+000004: invoke-interface v0, v1, Ljava/util/Set;->contains(Ljava/lang/Object;)Z
+00000a: move-result v1
+00000c: return v1
+
+METHOD g(Ljava/lang/String;)V
+000000: new-instance v0, Ljava/lang/StringBuilder;
+000004: invoke-direct v0, Ljava/lang/StringBuilder;-><init>()V
+00000a: const-string v1, "removeRegPackageName:"
+00000e: invoke-virtual v0, v1, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+000014: invoke-virtual v0, v2, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+00001a: invoke-virtual v0, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
+000020: move-result-object v0
+000022: const-string v1, "SceneUtils"
+000026: invoke-static v1, v0, Lc/c/f/a/b;->a(Ljava/lang/String; Ljava/lang/String;)V
+00002c: sget-object v0, Lcom/vivo/connbase/nfc/m;->h Ljava/util/Set;
+000030: invoke-interface v0, v2, Ljava/util/Set;->remove(Ljava/lang/Object;)Z
+000036: return-void 

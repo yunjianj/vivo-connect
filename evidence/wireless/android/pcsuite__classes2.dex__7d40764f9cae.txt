@@ -1,0 +1,248 @@
+APK pcsuite/updateApk/pcsuite.apk
+DEX classes2.dex
+CLASS Lcom/vivo/connect/sdk/f/g;
+SUPER Ljava/lang/Object;
+FIELDS
+j Ljava/lang/String; = 'ScenceSyncImpl'
+k Ljava/lang/String; = 'com.vivo.connbase.action.VIVO_SCENE_SYNC_SERVICE'
+l Ljava/lang/String; = 'com.vivo.connbase'
+m Ljava/lang/String; = 'com.vivo.connbase.nfc.SceneSyncService'
+a Ljava/lang/ref/WeakReference; = None
+b Ljava/util/concurrent/CountDownLatch; = None
+c Z = None
+d Z = None
+e Lcom/vivo/connbase/ISceneSync; = None
+f I = None
+g Landroid/os/HandlerThread; = None
+h Landroid/os/Handler; = None
+i Landroid/content/ServiceConnection; = None
+
+METHOD <init>(Landroid/content/Context;)V
+000000: invoke-direct v1, Ljava/lang/Object;-><init>()V
+000006: const/4 v0, 1
+000008: iput v0, v1, Lcom/vivo/connect/sdk/f/g;->f I
+00000c: new-instance v0, Lcom/vivo/connect/sdk/f/g$e;
+000010: invoke-direct v0, v1, Lcom/vivo/connect/sdk/f/g$e;-><init>(Lcom/vivo/connect/sdk/f/g;)V
+000016: iput-object v0, v1, Lcom/vivo/connect/sdk/f/g;->i Landroid/content/ServiceConnection;
+00001a: new-instance v0, Ljava/lang/ref/WeakReference;
+00001e: invoke-direct v0, v2, Ljava/lang/ref/WeakReference;-><init>(Ljava/lang/Object;)V
+000024: iput-object v0, v1, Lcom/vivo/connect/sdk/f/g;->a Ljava/lang/ref/WeakReference;
+000028: new-instance v2, Ljava/lang/StringBuilder;
+00002c: const-string v0, "ConnSDKWorkThread"
+000030: invoke-direct v2, v0, Ljava/lang/StringBuilder;-><init>(Ljava/lang/String;)V
+000036: iget v0, v1, Lcom/vivo/connect/sdk/f/g;->f I
+00003a: invoke-virtual v2, v0, Ljava/lang/StringBuilder;->append(I)Ljava/lang/StringBuilder;
+000040: invoke-virtual v2, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
+000046: move-result-object v2
+000048: new-instance v0, Landroid/os/HandlerThread;
+00004c: invoke-direct v0, v2, Landroid/os/HandlerThread;-><init>(Ljava/lang/String;)V
+000052: iput-object v0, v1, Lcom/vivo/connect/sdk/f/g;->g Landroid/os/HandlerThread;
+000056: invoke-virtual v0, Ljava/lang/Thread;->start()V
+00005c: new-instance v2, Landroid/os/Handler;
+000060: iget-object v0, v1, Lcom/vivo/connect/sdk/f/g;->g Landroid/os/HandlerThread;
+000064: invoke-virtual v0, Landroid/os/HandlerThread;->getLooper()Landroid/os/Looper;
+00006a: move-result-object v0
+00006c: invoke-direct v2, v0, Landroid/os/Handler;-><init>(Landroid/os/Looper;)V
+000072: iput-object v2, v1, Lcom/vivo/connect/sdk/f/g;->h Landroid/os/Handler;
+000076: return-void 
+
+METHOD a(Lcom/vivo/connect/sdk/f/g;)V
+000000: invoke-virtual v0, Lcom/vivo/connect/sdk/f/g;->b()V
+000006: return-void 
+
+METHOD a(Lcom/vivo/connect/sdk/f/g; Ljava/lang/String;)Z
+000000: invoke-virtual v0, v1, Lcom/vivo/connect/sdk/f/g;->a(Ljava/lang/String;)Z
+000006: move-result v0
+000008: return v0
+
+METHOD a(Lcom/vivo/connect/sdk/f/g; Z)Z
+000000: iput-boolean v1, v0, Lcom/vivo/connect/sdk/f/g;->c Z
+000004: return v1
+
+METHOD a()Z
+000000: const-string v0, "bindService called:"
+000004: const-string v1, "bind ScenceSyncService"
+000008: const-string v2, "ScenceSyncImpl"
+00000c: invoke-static v2, v1, Lcom/vivo/connect/logger/EasyLog;->i(Ljava/lang/String; Ljava/lang/String;)V
+000012: const-string v1, "bindService called:com.vivo.connbase.action.VIVO_SCENE_SYNC_SERVICE---com.vivo.connbase--com.vivo.connbase.nfc.SceneSyncService---1"
+000016: invoke-static v2, v1, Lcom/vivo/connect/logger/EasyLog;->i(Ljava/lang/String; Ljava/lang/String;)V
+00001c: new-instance v1, Landroid/content/Intent;
+000020: const-string v3, "com.vivo.connbase.action.VIVO_SCENE_SYNC_SERVICE"
+000024: invoke-direct v1, v3, Landroid/content/Intent;-><init>(Ljava/lang/String;)V
+00002a: new-instance v3, Landroid/content/ComponentName;
+00002e: const-string v4, "com.vivo.connbase"
+000032: const-string v5, "com.vivo.connbase.nfc.SceneSyncService"
+000036: invoke-direct v3, v4, v5, Landroid/content/ComponentName;-><init>(Ljava/lang/String; Ljava/lang/String;)V
+00003c: invoke-virtual v1, v3, Landroid/content/Intent;->setComponent(Landroid/content/ComponentName;)Landroid/content/Intent;
+000042: iget-object v3, v6, Lcom/vivo/connect/sdk/f/g;->a Ljava/lang/ref/WeakReference;
+000046: invoke-virtual v3, Ljava/lang/ref/Reference;->get()Ljava/lang/Object;
+00004c: move-result-object v3
+00004e: check-cast v3, Landroid/content/Context;
+000052: iget-object v4, v6, Lcom/vivo/connect/sdk/f/g;->i Landroid/content/ServiceConnection;
+000056: const/4 v5, 1
+000058: invoke-virtual v3, v1, v4, v5, Landroid/content/Context;->bindService(Landroid/content/Intent; Landroid/content/ServiceConnection; I)Z
+00005e: move-result v1
+000060: iput-boolean v1, v6, Lcom/vivo/connect/sdk/f/g;->c Z
+000064: new-instance v1, Ljava/lang/StringBuilder;
+000068: invoke-direct v1, v0, Ljava/lang/StringBuilder;-><init>(Ljava/lang/String;)V
+00006e: iget-boolean v0, v6, Lcom/vivo/connect/sdk/f/g;->c Z
+000072: invoke-virtual v1, v0, Ljava/lang/StringBuilder;->append(Z)Ljava/lang/StringBuilder;
+000078: invoke-virtual v1, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
+00007e: move-result-object v0
+000080: invoke-static v2, v0, Lcom/vivo/connect/logger/EasyLog;->i(Ljava/lang/String; Ljava/lang/String;)V
+000086: iget-boolean v6, v6, Lcom/vivo/connect/sdk/f/g;->c Z
+00008a: return v6
+00008c: move-exception v0
+00008e: new-instance v1, Ljava/lang/StringBuilder;
+000092: const-string v3, "bind ScenceSyncService err:"
+000096: invoke-direct v1, v3, Ljava/lang/StringBuilder;-><init>(Ljava/lang/String;)V
+00009c: invoke-virtual v1, v0, Ljava/lang/StringBuilder;->append(Ljava/lang/Object;)Ljava/lang/StringBuilder;
+0000a2: invoke-virtual v1, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
+0000a8: move-result-object v0
+0000aa: invoke-static v2, v0, Lcom/vivo/connect/logger/EasyLog;->e(Ljava/lang/String; Ljava/lang/String;)V
+0000b0: invoke-virtual v6, Lcom/vivo/connect/sdk/f/g;->b()V
+0000b6: const/4 v6, 0
+0000b8: return v6
+
+METHOD a(Ljava/lang/String;)Z
+000000: iget-object v0, v6, Lcom/vivo/connect/sdk/f/g;->b Ljava/util/concurrent/CountDownLatch;
+000004: const/4 v1, 0
+000006: if-nez v0, +008h
+00000a: const-string v6, "mCountDownLatch is null"
+00000e: invoke-static v7, v6, Lcom/vivo/connect/logger/EasyLog;->e(Ljava/lang/String; Ljava/lang/String;)V
+000014: return v1
+000016: iget-object v0, v6, Lcom/vivo/connect/sdk/f/g;->b Ljava/util/concurrent/CountDownLatch;
+00001a: invoke-virtual v0, Ljava/util/concurrent/CountDownLatch;->getCount()J
+000020: move-result-wide v2
+000022: new-instance v0, Ljava/lang/StringBuilder;
+000026: const-string/jumbo v4, waitServiceConnected:
+00002c: invoke-direct v0, v4, Ljava/lang/StringBuilder;-><init>(Ljava/lang/String;)V
+000032: invoke-virtual v0, v2, v3, Ljava/lang/StringBuilder;->append(J)Ljava/lang/StringBuilder;
+000038: invoke-virtual v0, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
+00003e: move-result-object v0
+000040: invoke-static v7, v0, Lcom/vivo/connect/logger/EasyLog;->i(Ljava/lang/String; Ljava/lang/String;)V
+000046: const-wide/16 v4, 0
+00004a: cmp-long v0, v2, v4
+00004e: if-eqz v0, +00ch
+000052: iget-object v0, v6, Lcom/vivo/connect/sdk/f/g;->b Ljava/util/concurrent/CountDownLatch;
+000056: invoke-virtual v0, Ljava/util/concurrent/CountDownLatch;->await()V
+00005c: const-string v0, "count down complete"
+000060: invoke-static v7, v0, Lcom/vivo/connect/logger/EasyLog;->i(Ljava/lang/String; Ljava/lang/String;)V
+000066: iget-object v6, v6, Lcom/vivo/connect/sdk/f/g;->e Lcom/vivo/connbase/ISceneSync;
+00006a: if-nez v6, +005h
+00006e: const-string v6, "mConnectApi is null"
+000072: goto -32h
+000074: const/4 v6, 1
+000076: return v6
+
+METHOD b()V
+000000: iget-object v0, v4, Lcom/vivo/connect/sdk/f/g;->b Ljava/util/concurrent/CountDownLatch;
+000004: if-eqz v0, +02ch
+000008: iget-object v0, v4, Lcom/vivo/connect/sdk/f/g;->b Ljava/util/concurrent/CountDownLatch;
+00000c: invoke-virtual v0, Ljava/util/concurrent/CountDownLatch;->getCount()J
+000012: move-result-wide v0
+000014: const-wide/16 v2, 0
+000018: cmp-long v0, v0, v2
+00001c: if-eqz v0, +020h
+000020: new-instance v0, Ljava/lang/StringBuilder;
+000024: const-string v1, "countDown:"
+000028: invoke-direct v0, v1, Ljava/lang/StringBuilder;-><init>(Ljava/lang/String;)V
+00002e: iget-object v1, v4, Lcom/vivo/connect/sdk/f/g;->b Ljava/util/concurrent/CountDownLatch;
+000032: invoke-virtual v1, Ljava/util/concurrent/CountDownLatch;->getCount()J
+000038: move-result-wide v1
+00003a: invoke-virtual v0, v1, v2, Ljava/lang/StringBuilder;->append(J)Ljava/lang/StringBuilder;
+000040: invoke-virtual v0, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
+000046: move-result-object v0
+000048: const-string v1, "ScenceSyncImpl"
+00004c: invoke-static v1, v0, Lcom/vivo/connect/logger/EasyLog;->i(Ljava/lang/String; Ljava/lang/String;)V
+000052: iget-object v0, v4, Lcom/vivo/connect/sdk/f/g;->b Ljava/util/concurrent/CountDownLatch;
+000056: invoke-virtual v0, Ljava/util/concurrent/CountDownLatch;->countDown()V
+00005c: const/4 v0, 0
+00005e: iput-boolean v0, v4, Lcom/vivo/connect/sdk/f/g;->d Z
+000062: return-void 
+
+METHOD c()Z
+000000: const-string v0, "mScenceSyncApi is null:"
+000004: monitor-enter v4
+000006: const-string v1, "ScenceSyncImpl"
+00000a: const-string/jumbo v2, tryBindService
+000010: invoke-static v1, v2, Lcom/vivo/connect/logger/EasyLog;->i(Ljava/lang/String; Ljava/lang/String;)V
+000016: const-string v1, "ScenceSyncImpl"
+00001a: new-instance v2, Ljava/lang/StringBuilder;
+00001e: invoke-direct v2, v0, Ljava/lang/StringBuilder;-><init>(Ljava/lang/String;)V
+000024: iget-object v0, v4, Lcom/vivo/connect/sdk/f/g;->e Lcom/vivo/connbase/ISceneSync;
+000028: const/4 v3, 1
+00002a: if-nez v0, +004h
+00002e: move v0, v3
+000030: goto +2h
+000032: const/4 v0, 0
+000034: invoke-virtual v2, v0, Ljava/lang/StringBuilder;->append(Z)Ljava/lang/StringBuilder;
+00003a: invoke-virtual v2, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
+000040: move-result-object v0
+000042: invoke-static v1, v0, Lcom/vivo/connect/logger/EasyLog;->i(Ljava/lang/String; Ljava/lang/String;)V
+000048: iget-object v0, v4, Lcom/vivo/connect/sdk/f/g;->e Lcom/vivo/connbase/ISceneSync;
+00004c: if-nez v0, +017h
+000050: iget-boolean v0, v4, Lcom/vivo/connect/sdk/f/g;->d Z
+000054: if-nez v0, +013h
+000058: new-instance v0, Ljava/util/concurrent/CountDownLatch;
+00005c: invoke-direct v0, v3, Ljava/util/concurrent/CountDownLatch;-><init>(I)V
+000062: iput-object v0, v4, Lcom/vivo/connect/sdk/f/g;->b Ljava/util/concurrent/CountDownLatch;
+000066: iput-boolean v3, v4, Lcom/vivo/connect/sdk/f/g;->d Z
+00006a: invoke-virtual v4, Lcom/vivo/connect/sdk/f/g;->a()Z
+000070: move-result v0
+000072: monitor-exit v4
+000074: return v0
+000076: move-exception v0
+000078: goto +3h
+00007a: monitor-exit v4
+00007c: return v3
+00007e: monitor-exit v4
+000080: throw v0
+
+METHOD localBtOn(Ljava/lang/Boolean;)V
+000000: invoke-virtual v1, Lcom/vivo/connect/sdk/f/g;->c()Z
+000006: move-result v0
+000008: if-nez v0, +00ah
+00000c: const-string v1, "ScenceSyncImpl"
+000010: const-string v2, "bindService error"
+000014: invoke-static v1, v2, Lcom/vivo/connect/logger/EasyLog;->e(Ljava/lang/String; Ljava/lang/String;)V
+00001a: return-void 
+00001c: new-instance v0, Lcom/vivo/connect/sdk/f/g$d;
+000020: invoke-direct v0, v1, v2, Lcom/vivo/connect/sdk/f/g$d;-><init>(Lcom/vivo/connect/sdk/f/g; Ljava/lang/Boolean;)V
+000026: iget-object v1, v1, Lcom/vivo/connect/sdk/f/g;->h Landroid/os/Handler;
+00002a: invoke-virtual v1, v0, Landroid/os/Handler;->post(Ljava/lang/Runnable;)Z
+000030: return-void 
+
+METHOD setTagTouchedCallBack(Ljava/lang/String; Lcom/vivo/connect/TagTouchedCallback;)V
+000000: const-string v0, "setTagTouchedCallBack()"
+000004: const-string v1, "ScenceSyncImpl"
+000008: invoke-static v1, v0, Lcom/vivo/connect/logger/EasyLog;->i(Ljava/lang/String; Ljava/lang/String;)V
+00000e: invoke-virtual v2, Lcom/vivo/connect/sdk/f/g;->c()Z
+000014: move-result v0
+000016: if-nez v0, +008h
+00001a: const-string v2, "bindService error"
+00001e: invoke-static v1, v2, Lcom/vivo/connect/logger/EasyLog;->e(Ljava/lang/String; Ljava/lang/String;)V
+000024: return-void 
+000026: new-instance v0, Lcom/vivo/connect/sdk/f/g$b;
+00002a: invoke-direct v0, v2, v4, Lcom/vivo/connect/sdk/f/g$b;-><init>(Lcom/vivo/connect/sdk/f/g; Lcom/vivo/connect/TagTouchedCallback;)V
+000030: new-instance v4, Lcom/vivo/connect/sdk/f/g$c;
+000034: invoke-direct v4, v2, v3, v0, Lcom/vivo/connect/sdk/f/g$c;-><init>(Lcom/vivo/connect/sdk/f/g; Ljava/lang/String; Lcom/vivo/connbase/ITagTouchedCallback;)V
+00003a: iget-object v2, v2, Lcom/vivo/connect/sdk/f/g;->h Landroid/os/Handler;
+00003e: invoke-virtual v2, v4, Landroid/os/Handler;->post(Ljava/lang/Runnable;)Z
+000044: return-void 
+
+METHOD sync(Lcom/vivo/connbase/nfc/Scene;)V
+000000: const-string/jumbo v0, sync()
+000006: const-string v1, "ScenceSyncImpl"
+00000a: invoke-static v1, v0, Lcom/vivo/connect/logger/EasyLog;->i(Ljava/lang/String; Ljava/lang/String;)V
+000010: invoke-virtual v2, Lcom/vivo/connect/sdk/f/g;->c()Z
+000016: move-result v0
+000018: if-nez v0, +008h
+00001c: const-string v2, "bindService error"
+000020: invoke-static v1, v2, Lcom/vivo/connect/logger/EasyLog;->e(Ljava/lang/String; Ljava/lang/String;)V
+000026: return-void 
+000028: new-instance v0, Lcom/vivo/connect/sdk/f/g$a;
+00002c: invoke-direct v0, v2, v3, Lcom/vivo/connect/sdk/f/g$a;-><init>(Lcom/vivo/connect/sdk/f/g; Lcom/vivo/connbase/nfc/Scene;)V
+000032: iget-object v2, v2, Lcom/vivo/connect/sdk/f/g;->h Landroid/os/Handler;
+000036: invoke-virtual v2, v0, Landroid/os/Handler;->post(Ljava/lang/Runnable;)Z
+00003c: return-void 

@@ -1,0 +1,57 @@
+APK pcsuite/updateApk/connbase.apk
+DEX classes.dex
+CLASS Lcom/vivo/connbase/e0/g/c$b;
+SUPER Ljava/lang/Object;
+FIELDS
+a Ljava/util/List; = None
+b Z = None
+
+METHOD <init>()V
+000000: invoke-direct v1, Ljava/lang/Object;-><init>()V
+000006: new-instance v0, Ljava/util/ArrayList;
+00000a: invoke-direct v0, Ljava/util/ArrayList;-><init>()V
+000010: iput-object v0, v1, Lcom/vivo/connbase/e0/g/c$b;->a Ljava/util/List;
+000014: const/4 v0, 0
+000016: iput-boolean v0, v1, Lcom/vivo/connbase/e0/g/c$b;->b Z
+00001a: return-void 
+
+METHOD a(Landroid/content/Context;)V
+000000: iget-boolean v0, v2, Lcom/vivo/connbase/e0/g/c$b;->b Z
+000004: if-nez v0, +020h
+000008: const/4 v0, 1
+00000a: iput-boolean v0, v2, Lcom/vivo/connbase/e0/g/c$b;->b Z
+00000e: iget-object v0, v2, Lcom/vivo/connbase/e0/g/c$b;->a Ljava/util/List;
+000012: invoke-interface v0, Ljava/util/List;->iterator()Ljava/util/Iterator;
+000018: move-result-object v0
+00001a: invoke-interface v0, Ljava/util/Iterator;->hasNext()Z
+000020: move-result v1
+000022: if-eqz v1, +00ch
+000026: invoke-interface v0, Ljava/util/Iterator;->next()Ljava/lang/Object;
+00002c: move-result-object v1
+00002e: check-cast v1, Lcom/vivo/connbase/e0/g/c$c;
+000032: invoke-virtual v1, v3, Lcom/vivo/connbase/e0/g/c$c;->a(Landroid/content/Context;)V
+000038: goto -fh
+00003a: iget-object v3, v2, Lcom/vivo/connbase/e0/g/c$b;->a Ljava/util/List;
+00003e: invoke-interface v3, Ljava/util/List;->clear()V
+000044: return-void 
+
+METHOD a(Lcom/vivo/connbase/e0/g/c$c;)V
+000000: invoke-virtual v2, Lcom/vivo/connbase/e0/g/c$c;->a()Z
+000006: move-result v0
+000008: if-nez v0, +00fh
+00000c: iget-object v0, v1, Lcom/vivo/connbase/e0/g/c$b;->a Ljava/util/List;
+000010: invoke-interface v0, v2, Ljava/util/List;->contains(Ljava/lang/Object;)Z
+000016: move-result v0
+000018: if-nez v0, +007h
+00001c: iget-object v0, v1, Lcom/vivo/connbase/e0/g/c$b;->a Ljava/util/List;
+000020: invoke-interface v0, v2, Ljava/util/List;->add(Ljava/lang/Object;)Z
+000026: return-void 
+
+METHOD a()Z
+000000: iget-boolean v0, v1, Lcom/vivo/connbase/e0/g/c$b;->b Z
+000004: return v0
+
+METHOD b(Lcom/vivo/connbase/e0/g/c$c;)V
+000000: iget-object v0, v1, Lcom/vivo/connbase/e0/g/c$b;->a Ljava/util/List;
+000004: invoke-interface v0, v2, Ljava/util/List;->remove(Ljava/lang/Object;)Z
+00000a: return-void 

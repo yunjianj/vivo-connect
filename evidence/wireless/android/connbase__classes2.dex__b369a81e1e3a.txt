@@ -1,0 +1,185 @@
+APK pcsuite/updateApk/connbase.apk
+DEX classes2.dex
+CLASS Lcom/vivo/pcsuite/pcconnect/wifip2p/g/b;
+SUPER Ljava/lang/Object;
+FIELDS
+f Ljava/lang/String; = 'WifiP2pGroupProxy'
+a Ljava/lang/String; = None
+b Ljava/lang/String; = None
+c I = None
+d Z = None
+e Ljava/lang/String; = None
+
+METHOD <init>()V
+000000: invoke-direct v0, Ljava/lang/Object;-><init>()V
+000006: return-void 
+
+METHOD a()Landroid/net/wifi/p2p/WifiP2pGroup;
+000000: const-string v0, """
+000004: const-class v1, Ljava/lang/String;
+000008: new-instance v2, Landroid/net/wifi/p2p/WifiP2pGroup;
+00000c: invoke-direct v2, Landroid/net/wifi/p2p/WifiP2pGroup;-><init>()V
+000012: const-class v3, Landroid/net/wifi/p2p/WifiP2pGroup;
+000016: const-string v4, "setNetworkName"
+00001a: const/4 v5, 1
+00001c: new-array v6, v5, [Ljava/lang/Class;
+000020: const/4 v7, 0
+000022: aput-object v1, v6, v7
+000026: invoke-virtual v3, v4, v6, Ljava/lang/Class;->getDeclaredMethod(Ljava/lang/String; [Ljava/lang/Class;)Ljava/lang/reflect/Method;
+00002c: move-result-object v4
+00002e: new-array v6, v5, [Ljava/lang/Object;
+000032: new-instance v8, Ljava/lang/StringBuilder;
+000036: invoke-direct v8, Ljava/lang/StringBuilder;-><init>()V
+00003c: invoke-virtual v8, v0, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+000042: iget-object v9, v10, Lcom/vivo/pcsuite/pcconnect/wifip2p/g/b;->a Ljava/lang/String;
+000046: invoke-virtual v8, v9, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+00004c: invoke-virtual v8, v0, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+000052: invoke-virtual v8, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
+000058: move-result-object v0
+00005a: aput-object v0, v6, v7
+00005e: invoke-virtual v4, v2, v6, Ljava/lang/reflect/Method;->invoke(Ljava/lang/Object; [Ljava/lang/Object;)Ljava/lang/Object;
+000064: const-string v0, "setPassphrase"
+000068: new-array v4, v5, [Ljava/lang/Class;
+00006c: aput-object v1, v4, v7
+000070: invoke-virtual v3, v0, v4, Ljava/lang/Class;->getDeclaredMethod(Ljava/lang/String; [Ljava/lang/Class;)Ljava/lang/reflect/Method;
+000076: move-result-object v0
+000078: new-array v1, v5, [Ljava/lang/Object;
+00007c: iget-object v4, v10, Lcom/vivo/pcsuite/pcconnect/wifip2p/g/b;->b Ljava/lang/String;
+000080: aput-object v4, v1, v7
+000084: invoke-virtual v0, v2, v1, Ljava/lang/reflect/Method;->invoke(Ljava/lang/Object; [Ljava/lang/Object;)Ljava/lang/Object;
+00008a: const-string v0, "setFreqency"
+00008e: new-array v1, v5, [Ljava/lang/Class;
+000092: sget-object v4, Ljava/lang/Integer;->TYPE Ljava/lang/Class;
+000096: aput-object v4, v1, v7
+00009a: invoke-virtual v3, v0, v1, Ljava/lang/Class;->getDeclaredMethod(Ljava/lang/String; [Ljava/lang/Class;)Ljava/lang/reflect/Method;
+0000a0: move-result-object v0
+0000a2: new-array v1, v5, [Ljava/lang/Object;
+0000a6: iget v4, v10, Lcom/vivo/pcsuite/pcconnect/wifip2p/g/b;->c I
+0000aa: invoke-static v4, Ljava/lang/Integer;->valueOf(I)Ljava/lang/Integer;
+0000b0: move-result-object v4
+0000b2: aput-object v4, v1, v7
+0000b6: invoke-virtual v0, v2, v1, Ljava/lang/reflect/Method;->invoke(Ljava/lang/Object; [Ljava/lang/Object;)Ljava/lang/Object;
+0000bc: const-string v0, "setIsGroupOwner"
+0000c0: new-array v1, v5, [Ljava/lang/Class;
+0000c4: sget-object v4, Ljava/lang/Boolean;->TYPE Ljava/lang/Class;
+0000c8: aput-object v4, v1, v7
+0000cc: invoke-virtual v3, v0, v1, Ljava/lang/Class;->getDeclaredMethod(Ljava/lang/String; [Ljava/lang/Class;)Ljava/lang/reflect/Method;
+0000d2: move-result-object v0
+0000d4: new-array v1, v5, [Ljava/lang/Object;
+0000d8: iget-boolean v4, v10, Lcom/vivo/pcsuite/pcconnect/wifip2p/g/b;->d Z
+0000dc: invoke-static v4, Ljava/lang/Boolean;->valueOf(Z)Ljava/lang/Boolean;
+0000e2: move-result-object v4
+0000e4: aput-object v4, v1, v7
+0000e8: invoke-virtual v0, v2, v1, Ljava/lang/reflect/Method;->invoke(Ljava/lang/Object; [Ljava/lang/Object;)Ljava/lang/Object;
+0000ee: new-instance v0, Landroid/net/wifi/p2p/WifiP2pDevice;
+0000f2: invoke-direct v0, Landroid/net/wifi/p2p/WifiP2pDevice;-><init>()V
+0000f8: iget-object v1, v10, Lcom/vivo/pcsuite/pcconnect/wifip2p/g/b;->e Ljava/lang/String;
+0000fc: iput-object v1, v0, Landroid/net/wifi/p2p/WifiP2pDevice;->deviceAddress Ljava/lang/String;
+000100: const-string v1, "setOwner"
+000104: new-array v4, v5, [Ljava/lang/Class;
+000108: const-class v6, Landroid/net/wifi/p2p/WifiP2pDevice;
+00010c: aput-object v6, v4, v7
+000110: invoke-virtual v3, v1, v4, Ljava/lang/Class;->getDeclaredMethod(Ljava/lang/String; [Ljava/lang/Class;)Ljava/lang/reflect/Method;
+000116: move-result-object v1
+000118: new-array v3, v5, [Ljava/lang/Object;
+00011c: aput-object v0, v3, v7
+000120: invoke-virtual v1, v2, v3, Ljava/lang/reflect/Method;->invoke(Ljava/lang/Object; [Ljava/lang/Object;)Ljava/lang/Object;
+000126: return-object v2
+000128: move-exception v0
+00012a: goto +4h
+00012c: move-exception v0
+00012e: goto +2h
+000130: move-exception v0
+000132: new-instance v1, Ljava/lang/StringBuilder;
+000136: invoke-direct v1, Ljava/lang/StringBuilder;-><init>()V
+00013c: const-string v2, "Generate WifiP2pGroup error: "
+000140: invoke-virtual v1, v2, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+000146: invoke-virtual v0, Ljava/lang/Object;->getClass()Ljava/lang/Class;
+00014c: move-result-object v2
+00014e: invoke-virtual v2, Ljava/lang/Class;->getName()Ljava/lang/String;
+000154: move-result-object v2
+000156: invoke-virtual v1, v2, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+00015c: const-string v2, ": "
+000160: invoke-virtual v1, v2, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+000166: invoke-virtual v0, Ljava/lang/ReflectiveOperationException;->getMessage()Ljava/lang/String;
+00016c: move-result-object v0
+00016e: invoke-virtual v1, v0, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+000174: invoke-virtual v1, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
+00017a: move-result-object v0
+00017c: const-string v1, "WifiP2pGroupProxy"
+000180: invoke-static v1, v0, Lc/c/f/a/b;->p(Ljava/lang/String; Ljava/lang/String;)V
+000186: const/4 v0, 0
+000188: return-object v0
+
+METHOD a(I)Lcom/vivo/pcsuite/pcconnect/wifip2p/g/b;
+000000: iput v1, v0, Lcom/vivo/pcsuite/pcconnect/wifip2p/g/b;->c I
+000004: return-object v0
+
+METHOD a(Ljava/lang/String;)Lcom/vivo/pcsuite/pcconnect/wifip2p/g/b;
+000000: iput-object v1, v0, Lcom/vivo/pcsuite/pcconnect/wifip2p/g/b;->e Ljava/lang/String;
+000004: return-object v0
+
+METHOD a(Z)Lcom/vivo/pcsuite/pcconnect/wifip2p/g/b;
+000000: iput-boolean v1, v0, Lcom/vivo/pcsuite/pcconnect/wifip2p/g/b;->d Z
+000004: return-object v0
+
+METHOD b()I
+000000: iget v0, v1, Lcom/vivo/pcsuite/pcconnect/wifip2p/g/b;->c I
+000004: return v0
+
+METHOD b(Ljava/lang/String;)Lcom/vivo/pcsuite/pcconnect/wifip2p/g/b;
+000000: iput-object v1, v0, Lcom/vivo/pcsuite/pcconnect/wifip2p/g/b;->a Ljava/lang/String;
+000004: return-object v0
+
+METHOD c(Ljava/lang/String;)Lcom/vivo/pcsuite/pcconnect/wifip2p/g/b;
+000000: iput-object v1, v0, Lcom/vivo/pcsuite/pcconnect/wifip2p/g/b;->b Ljava/lang/String;
+000004: return-object v0
+
+METHOD c()Ljava/lang/String;
+000000: iget-object v0, v1, Lcom/vivo/pcsuite/pcconnect/wifip2p/g/b;->a Ljava/lang/String;
+000004: return-object v0
+
+METHOD d()Ljava/lang/String;
+000000: iget-object v0, v1, Lcom/vivo/pcsuite/pcconnect/wifip2p/g/b;->e Ljava/lang/String;
+000004: return-object v0
+
+METHOD e()Ljava/lang/String;
+000000: iget-object v0, v1, Lcom/vivo/pcsuite/pcconnect/wifip2p/g/b;->b Ljava/lang/String;
+000004: return-object v0
+
+METHOD f()Z
+000000: iget-boolean v0, v1, Lcom/vivo/pcsuite/pcconnect/wifip2p/g/b;->d Z
+000004: return v0
+
+METHOD toString()Ljava/lang/String;
+000000: new-instance v0, Ljava/lang/StringBuilder;
+000004: invoke-direct v0, Ljava/lang/StringBuilder;-><init>()V
+00000a: const-string v1, "WifiP2pGroupProxy{mNetworkName='"
+00000e: invoke-virtual v0, v1, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+000014: iget-object v1, v3, Lcom/vivo/pcsuite/pcconnect/wifip2p/g/b;->a Ljava/lang/String;
+000018: invoke-virtual v0, v1, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+00001e: const/16 v1, 39
+000022: invoke-virtual v0, v1, Ljava/lang/StringBuilder;->append(C)Ljava/lang/StringBuilder;
+000028: const-string v2, ", mPassphrase='"
+00002c: invoke-virtual v0, v2, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+000032: iget-object v2, v3, Lcom/vivo/pcsuite/pcconnect/wifip2p/g/b;->b Ljava/lang/String;
+000036: invoke-virtual v0, v2, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+00003c: invoke-virtual v0, v1, Ljava/lang/StringBuilder;->append(C)Ljava/lang/StringBuilder;
+000042: const-string v2, ", mFrequency="
+000046: invoke-virtual v0, v2, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+00004c: iget v2, v3, Lcom/vivo/pcsuite/pcconnect/wifip2p/g/b;->c I
+000050: invoke-virtual v0, v2, Ljava/lang/StringBuilder;->append(I)Ljava/lang/StringBuilder;
+000056: const-string v2, ", mIsGroupOwner="
+00005a: invoke-virtual v0, v2, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+000060: iget-boolean v2, v3, Lcom/vivo/pcsuite/pcconnect/wifip2p/g/b;->d Z
+000064: invoke-virtual v0, v2, Ljava/lang/StringBuilder;->append(Z)Ljava/lang/StringBuilder;
+00006a: const-string v2, ", mGroupOwnerMac='"
+00006e: invoke-virtual v0, v2, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+000074: iget-object v2, v3, Lcom/vivo/pcsuite/pcconnect/wifip2p/g/b;->e Ljava/lang/String;
+000078: invoke-virtual v0, v2, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+00007e: invoke-virtual v0, v1, Ljava/lang/StringBuilder;->append(C)Ljava/lang/StringBuilder;
+000084: const/16 v1, 125
+000088: invoke-virtual v0, v1, Ljava/lang/StringBuilder;->append(C)Ljava/lang/StringBuilder;
+00008e: invoke-virtual v0, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
+000094: move-result-object v0
+000096: return-object v0

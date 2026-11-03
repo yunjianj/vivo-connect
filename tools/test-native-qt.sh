@@ -1,0 +1,6 @@
+#!/bin/sh
+set -eu
+project_dir=$(CDPATH= cd -- "$(dirname -- "$0")/.." && pwd)
+cmake -S "$project_dir/native-qt" -B "$project_dir/build/native-qt" -DCMAKE_BUILD_TYPE=MinSizeRel
+cmake --build "$project_dir/build/native-qt" -j2
+QT_QPA_PLATFORM=offscreen "$project_dir/build/native-qt/vivo-connect-qt" --self-test

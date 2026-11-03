@@ -1,0 +1,102 @@
+APK pcsuite/updateApk/connbase.apk
+DEX classes.dex
+CLASS Lcom/vivo/connbase/l0/a;
+SUPER Ljava/lang/Object;
+FIELDS
+a Ljava/lang/String; = 'FileUtils'
+
+METHOD <init>()V
+000000: invoke-direct v0, Ljava/lang/Object;-><init>()V
+000006: return-void 
+
+METHOD a(Landroid/content/Context; Ljava/io/File;)Landroid/net/Uri;
+000000: const-string v0, "com.vivo.connbase.fileprovider"
+000004: invoke-static v1, v0, v2, Lb/g/c/d;->a(Landroid/content/Context; Ljava/lang/String; Ljava/io/File;)Landroid/net/Uri;
+00000a: move-result-object v1
+00000c: return-object v1
+00000e: const-string v1, "FileUtils"
+000012: const-string v2, "getUriFromFileProvider error!"
+000016: invoke-static v1, v2, Lc/c/f/a/b;->g(Ljava/lang/String; Ljava/lang/String;)V
+00001c: const/4 v1, 0
+00001e: return-object v1
+
+METHOD a(Landroid/content/Context; Ljava/lang/String;)Ljava/lang/String;
+000000: const-string v0, "readAsset:"
+000004: const-string v1, "FileUtils"
+000008: invoke-virtual v6, Landroid/content/Context;->getAssets()Landroid/content/res/AssetManager;
+00000e: move-result-object v6
+000010: const/4 v2, 0
+000012: invoke-virtual v6, v7, Landroid/content/res/AssetManager;->open(Ljava/lang/String;)Ljava/io/InputStream;
+000018: move-result-object v6
+00001a: new-instance v7, Ljava/io/StringWriter;
+00001e: invoke-direct v7, Ljava/io/StringWriter;-><init>()V
+000024: new-instance v3, Ljava/io/InputStreamReader;
+000028: invoke-direct v3, v6, Ljava/io/InputStreamReader;-><init>(Ljava/io/InputStream;)V
+00002e: const/16 v6, 4096
+000032: new-array v6, v6, [C
+000036: invoke-virtual v3, v6, Ljava/io/InputStreamReader;->read([C)I
+00003c: move-result v4
+00003e: if-lez v4, +007h
+000042: const/4 v5, 0
+000044: invoke-virtual v7, v6, v5, v4, Ljava/io/StringWriter;->write([C I I)V
+00004a: goto -ah
+00004c: invoke-virtual v7, Ljava/io/StringWriter;->toString()Ljava/lang/String;
+000052: move-result-object v6
+000054: invoke-virtual v3, Ljava/io/InputStreamReader;->close()V
+00005a: goto +18h
+00005c: move-exception v7
+00005e: new-instance v2, Ljava/lang/StringBuilder;
+000062: invoke-direct v2, Ljava/lang/StringBuilder;-><init>()V
+000068: invoke-virtual v2, v0, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+00006e: invoke-virtual v7, Ljava/io/IOException;->toString()Ljava/lang/String;
+000074: move-result-object v7
+000076: invoke-virtual v2, v7, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+00007c: invoke-virtual v2, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
+000082: move-result-object v7
+000084: invoke-static v1, v7, Lc/c/f/a/b;->g(Ljava/lang/String; Ljava/lang/String;)V
+00008a: return-object v6
+00008c: move-exception v6
+00008e: goto +5h
+000090: move-exception v6
+000092: goto +39h
+000094: move-exception v6
+000096: move-object v3, v2
+000098: new-instance v7, Ljava/lang/StringBuilder;
+00009c: invoke-direct v7, Ljava/lang/StringBuilder;-><init>()V
+0000a2: invoke-virtual v7, v0, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+0000a8: invoke-virtual v6, Ljava/io/IOException;->toString()Ljava/lang/String;
+0000ae: move-result-object v6
+0000b0: invoke-virtual v7, v6, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+0000b6: invoke-virtual v7, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
+0000bc: move-result-object v6
+0000be: invoke-static v1, v6, Lc/c/f/a/b;->g(Ljava/lang/String; Ljava/lang/String;)V
+0000c4: if-eqz v3, +01dh
+0000c8: invoke-virtual v3, Ljava/io/InputStreamReader;->close()V
+0000ce: goto +18h
+0000d0: move-exception v6
+0000d2: new-instance v7, Ljava/lang/StringBuilder;
+0000d6: invoke-direct v7, Ljava/lang/StringBuilder;-><init>()V
+0000dc: invoke-virtual v7, v0, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+0000e2: invoke-virtual v6, Ljava/io/IOException;->toString()Ljava/lang/String;
+0000e8: move-result-object v6
+0000ea: invoke-virtual v7, v6, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+0000f0: invoke-virtual v7, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
+0000f6: move-result-object v6
+0000f8: invoke-static v1, v6, Lc/c/f/a/b;->g(Ljava/lang/String; Ljava/lang/String;)V
+0000fe: return-object v2
+000100: move-exception v6
+000102: move-object v2, v3
+000104: if-eqz v2, +01dh
+000108: invoke-virtual v2, Ljava/io/InputStreamReader;->close()V
+00010e: goto +18h
+000110: move-exception v7
+000112: new-instance v2, Ljava/lang/StringBuilder;
+000116: invoke-direct v2, Ljava/lang/StringBuilder;-><init>()V
+00011c: invoke-virtual v2, v0, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+000122: invoke-virtual v7, Ljava/io/IOException;->toString()Ljava/lang/String;
+000128: move-result-object v7
+00012a: invoke-virtual v2, v7, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+000130: invoke-virtual v2, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
+000136: move-result-object v7
+000138: invoke-static v1, v7, Lc/c/f/a/b;->g(Ljava/lang/String; Ljava/lang/String;)V
+00013e: throw v6

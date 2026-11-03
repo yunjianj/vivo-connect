@@ -1,0 +1,631 @@
+DEX classes2.dex
+CLASS Lcom/vivo/connbase/common/utils/l;
+FIELDS
+a Ljava/lang/String;
+b Ljava/lang/String;
+c Ljava/lang/String;
+d Z
+e Ljava/lang/String;
+f Ljava/lang/String;
+g Ljava/lang/String;
+h Ljava/lang/String;
+i Ljava/lang/String;
+j Ljava/lang/String;
+k Lcom/bbk/account/base/listener/UnRegisterble;
+
+METHOD <clinit>()V
+000000: return-void 
+
+METHOD <init>()V
+000000: invoke-direct v0, Ljava/lang/Object;-><init>()V
+000006: return-void 
+
+METHOD A()V
+000000: const-class v0, Lcom/vivo/connbase/common/utils/l;
+000004: monitor-enter v0
+000006: invoke-static Lcom/vivo/connbase/App;->getInstance()Lcom/vivo/connbase/App;
+00000c: move-result-object v1
+00000e: invoke-static v1, Lcom/bbk/account/base/BBKAccountManager;->getInstance(Landroid/content/Context;)Lcom/bbk/account/base/BBKAccountManager;
+000014: move-result-object v1
+000016: invoke-virtual v1, Lcom/bbk/account/base/BBKAccountManager;->isLogin()Z
+00001c: move-result v1
+00001e: if-nez v1, +00ah
+000022: const-string v1, ""
+000026: sput-object v1, Lcom/vivo/connbase/common/utils/l;->g Ljava/lang/String;
+00002a: monitor-exit v0
+00002c: return-void 
+00002e: move-exception v1
+000030: goto +2fh
+000032: invoke-static Lcom/vivo/connbase/App;->getInstance()Lcom/vivo/connbase/App;
+000038: move-result-object v1
+00003a: invoke-static v1, Lcom/bbk/account/base/BBKAccountManager;->getInstance(Landroid/content/Context;)Lcom/bbk/account/base/BBKAccountManager;
+000040: move-result-object v1
+000042: invoke-virtual v1, Lcom/bbk/account/base/BBKAccountManager;->getvivoToken()Ljava/lang/String;
+000048: move-result-object v1
+00004a: sput-object v1, Lcom/vivo/connbase/common/utils/l;->g Ljava/lang/String;
+00004e: sget-object v1, Lcom/vivo/connbase/common/utils/l;->g Ljava/lang/String;
+000052: invoke-static v1, Landroid/text/TextUtils;->isEmpty(Ljava/lang/CharSequence;)Z
+000058: move-result v1
+00005a: if-nez v1, +018h
+00005e: sget-object v1, Lcom/vivo/connbase/common/utils/l;->g Ljava/lang/String;
+000062: sget-object v2, Lcom/vivo/connbase/common/utils/l;->h Ljava/lang/String;
+000066: invoke-virtual v1, v2, Ljava/lang/String;->equals(Ljava/lang/Object;)Z
+00006c: move-result v1
+00006e: if-nez v1, +00eh
+000072: sget-object v1, Lcom/vivo/connbase/common/utils/l;->g Ljava/lang/String;
+000076: sput-object v1, Lcom/vivo/connbase/common/utils/l;->h Ljava/lang/String;
+00007a: invoke-static Ls5/h;->n()Ls5/h;
+000080: move-result-object v1
+000082: const/4 v2, 0
+000084: invoke-virtual v1, v2, Ls5/h;->J(Z)V
+00008a: monitor-exit v0
+00008c: return-void 
+00008e: monitor-exit v0
+000090: throw v1
+
+METHOD B()V
+000000: const-string/jumbo v0, updateSelfAvatarUrl
+000006: const-string v1, "OpenIdUtilsTAG"
+00000a: invoke-static v1, v0, Lj7/a;->o(Ljava/lang/String; Ljava/lang/String;)V
+000010: sget-object v0, Lcom/vivo/connbase/common/utils/l;->k Lcom/bbk/account/base/listener/UnRegisterble;
+000014: if-eqz v0, +009h
+000018: const-string/jumbo v0, updateSelfAvatarUrl nickNameRealTimeUnRegisterble != null
+00001e: invoke-static v1, v0, Lj7/a;->o(Ljava/lang/String; Ljava/lang/String;)V
+000024: return-void 
+000026: invoke-static Lk4/b;->d()Z
+00002c: move-result v0
+00002e: if-eqz v0, +008h
+000032: const-string v0, "OverSeas does not support getNickNameRealTime !"
+000036: invoke-static v1, v0, Lj7/a;->o(Ljava/lang/String; Ljava/lang/String;)V
+00003c: return-void 
+00003e: invoke-static Ljava/lang/System;->currentTimeMillis()J
+000044: move-result-wide v0
+000046: invoke-static Lcom/vivo/connbase/App;->getInstance()Lcom/vivo/connbase/App;
+00004c: move-result-object v2
+00004e: invoke-static v2, Lcom/bbk/account/base/BBKAccountManager;->getInstance(Landroid/content/Context;)Lcom/bbk/account/base/BBKAccountManager;
+000054: move-result-object v2
+000056: new-instance v3, Lcom/vivo/connbase/common/utils/l$a;
+00005a: invoke-direct v3, v0, v1, Lcom/vivo/connbase/common/utils/l$a;-><init>(J)V
+000060: invoke-static Lcom/vivo/connbase/App;->getInstance()Lcom/vivo/connbase/App;
+000066: move-result-object v0
+000068: invoke-virtual v2, v3, v0, Lcom/bbk/account/base/BBKAccountManager;->getNickNameRealTime(Lcom/bbk/account/base/OnNickNameRealTimeListener; Landroid/content/Context;)Lcom/bbk/account/base/listener/UnRegisterble;
+00006e: move-result-object v0
+000070: sput-object v0, Lcom/vivo/connbase/common/utils/l;->k Lcom/bbk/account/base/listener/UnRegisterble;
+000074: return-void 
+
+METHOD a()Lcom/bbk/account/base/listener/UnRegisterble;
+000000: sget-object v0, Lcom/vivo/connbase/common/utils/l;->k Lcom/bbk/account/base/listener/UnRegisterble;
+000004: return-object v0
+
+METHOD b()Ljava/lang/String;
+000000: sget-object v0, Lcom/vivo/connbase/common/utils/l;->b Ljava/lang/String;
+000004: return-object v0
+
+METHOD c()Ljava/lang/String;
+000000: sget-object v0, Lcom/vivo/connbase/common/utils/l;->c Ljava/lang/String;
+000004: return-object v0
+
+METHOD d(Lcom/bbk/account/base/listener/UnRegisterble;)V
+000000: sput-object v0, Lcom/vivo/connbase/common/utils/l;->k Lcom/bbk/account/base/listener/UnRegisterble;
+000004: return-void 
+
+METHOD e(Ljava/lang/String;)V
+000000: sput-object v0, Lcom/vivo/connbase/common/utils/l;->b Ljava/lang/String;
+000004: return-void 
+
+METHOD f(Ljava/lang/String;)V
+000000: sput-object v0, Lcom/vivo/connbase/common/utils/l;->c Ljava/lang/String;
+000004: return-void 
+
+METHOD g()Z
+000000: invoke-static Lcom/vivo/connbase/App;->getInstance()Lcom/vivo/connbase/App;
+000006: move-result-object v0
+000008: invoke-static v0, Lcom/bbk/account/base/BBKAccountManager;->getInstance(Landroid/content/Context;)Lcom/bbk/account/base/BBKAccountManager;
+00000e: move-result-object v0
+000010: invoke-virtual v0, Lcom/bbk/account/base/BBKAccountManager;->getvivoToken()Ljava/lang/String;
+000016: move-result-object v0
+000018: invoke-static v0, Landroid/text/TextUtils;->isEmpty(Ljava/lang/CharSequence;)Z
+00001e: move-result v1
+000020: const-string v2, "OpenIdUtilsTAG"
+000024: if-nez v1, +015h
+000028: sget-object v1, Lcom/vivo/connbase/common/utils/l;->g Ljava/lang/String;
+00002c: invoke-static v1, v0, Landroid/text/TextUtils;->equals(Ljava/lang/CharSequence; Ljava/lang/CharSequence;)Z
+000032: move-result v0
+000034: if-nez v0, +00dh
+000038: invoke-static Lcom/vivo/connbase/common/utils/l;->A()V
+00003e: const-string/jumbo v0, token updated
+000044: invoke-static v2, v0, Lj7/a;->o(Ljava/lang/String; Ljava/lang/String;)V
+00004a: const/4 v0, 1
+00004c: return v0
+00004e: const-string v0, "same token"
+000052: invoke-static v2, v0, Lj7/a;->o(Ljava/lang/String; Ljava/lang/String;)V
+000058: const/4 v0, 0
+00005a: return v0
+
+METHOD h(Ljava/lang/String;)Ljava/lang/String;
+000000: new-instance v0, Ljava/lang/StringBuilder;
+000004: invoke-direct v0, Ljava/lang/StringBuilder;-><init>()V
+00000a: const-string v1, "mNetworkActive="
+00000e: invoke-virtual v0, v1, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+000014: sget-boolean v1, Lcom/vivo/connbase/common/utils/l;->d Z
+000018: invoke-virtual v0, v1, Ljava/lang/StringBuilder;->append(Z)Ljava/lang/StringBuilder;
+00001e: const-string v1, ", avatar="
+000022: invoke-virtual v0, v1, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+000028: sget-object v1, Lcom/vivo/connbase/common/utils/l;->b Ljava/lang/String;
+00002c: invoke-virtual v0, v1, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+000032: invoke-virtual v0, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
+000038: move-result-object v0
+00003a: const-string v1, "OpenIdUtilsTAG"
+00003e: invoke-static v1, v0, Lj7/a;->a(Ljava/lang/String; Ljava/lang/String;)V
+000044: sget-object v0, Lcom/vivo/connbase/common/utils/l;->b Ljava/lang/String;
+000048: invoke-static v0, Landroid/text/TextUtils;->isEmpty(Ljava/lang/CharSequence;)Z
+00004e: move-result v0
+000050: if-eqz v0, +00ch
+000054: invoke-static Lcom/vivo/connbase/App;->getInstance()Lcom/vivo/connbase/App;
+00005a: move-result-object v0
+00005c: invoke-static v0, Lcom/vivo/connbase/common/utils/s;->d(Landroid/content/Context;)Ljava/lang/String;
+000062: move-result-object v0
+000064: sput-object v0, Lcom/vivo/connbase/common/utils/l;->b Ljava/lang/String;
+000068: sget-object v0, Lcom/vivo/connbase/common/utils/l;->b Ljava/lang/String;
+00006c: invoke-static v0, Landroid/text/TextUtils;->isEmpty(Ljava/lang/CharSequence;)Z
+000072: move-result v0
+000074: if-nez v0, +011h
+000078: invoke-static Lcom/vivo/connbase/App;->getInstance()Lcom/vivo/connbase/App;
+00007e: move-result-object v0
+000080: invoke-virtual v0, Lcom/vivo/connbase/App;->getECDHSessionMgr()Lcom/vivo/connbase/connect/x;
+000086: move-result-object v0
+000088: sget-object v1, Lcom/vivo/connbase/common/utils/l;->b Ljava/lang/String;
+00008c: invoke-virtual v0, v2, v1, Lcom/vivo/connbase/connect/x;->j(Ljava/lang/String; Ljava/lang/String;)Ljava/lang/String;
+000092: move-result-object v2
+000094: return-object v2
+000096: sget-object v2, Lcom/vivo/connbase/common/utils/l;->b Ljava/lang/String;
+00009a: return-object v2
+
+METHOD i(Ljava/lang/String;)Ljava/lang/String;
+000000: new-instance v0, Ljava/lang/StringBuilder;
+000004: invoke-direct v0, Ljava/lang/StringBuilder;-><init>()V
+00000a: const-string v1, "mNetworkActive="
+00000e: invoke-virtual v0, v1, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+000014: sget-boolean v1, Lcom/vivo/connbase/common/utils/l;->d Z
+000018: invoke-virtual v0, v1, Ljava/lang/StringBuilder;->append(Z)Ljava/lang/StringBuilder;
+00001e: const-string v1, ", selfNickName="
+000022: invoke-virtual v0, v1, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+000028: sget-object v1, Lcom/vivo/connbase/common/utils/l;->c Ljava/lang/String;
+00002c: invoke-virtual v0, v1, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+000032: invoke-virtual v0, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
+000038: move-result-object v0
+00003a: const-string v1, "OpenIdUtilsTAG"
+00003e: invoke-static v1, v0, Lj7/a;->a(Ljava/lang/String; Ljava/lang/String;)V
+000044: sget-object v0, Lcom/vivo/connbase/common/utils/l;->c Ljava/lang/String;
+000048: invoke-static v0, Landroid/text/TextUtils;->isEmpty(Ljava/lang/CharSequence;)Z
+00004e: move-result v0
+000050: if-eqz v0, +00ch
+000054: invoke-static Lcom/vivo/connbase/App;->getInstance()Lcom/vivo/connbase/App;
+00005a: move-result-object v0
+00005c: invoke-static v0, Lcom/vivo/connbase/common/utils/s;->o(Landroid/content/Context;)Ljava/lang/String;
+000062: move-result-object v0
+000064: sput-object v0, Lcom/vivo/connbase/common/utils/l;->c Ljava/lang/String;
+000068: sget-object v0, Lcom/vivo/connbase/common/utils/l;->c Ljava/lang/String;
+00006c: invoke-static v0, Landroid/text/TextUtils;->isEmpty(Ljava/lang/CharSequence;)Z
+000072: move-result v0
+000074: if-nez v0, +011h
+000078: invoke-static Lcom/vivo/connbase/App;->getInstance()Lcom/vivo/connbase/App;
+00007e: move-result-object v0
+000080: invoke-virtual v0, Lcom/vivo/connbase/App;->getECDHSessionMgr()Lcom/vivo/connbase/connect/x;
+000086: move-result-object v0
+000088: sget-object v1, Lcom/vivo/connbase/common/utils/l;->c Ljava/lang/String;
+00008c: invoke-virtual v0, v2, v1, Lcom/vivo/connbase/connect/x;->j(Ljava/lang/String; Ljava/lang/String;)Ljava/lang/String;
+000092: move-result-object v2
+000094: return-object v2
+000096: sget-object v2, Lcom/vivo/connbase/common/utils/l;->c Ljava/lang/String;
+00009a: return-object v2
+
+METHOD j()Ljava/lang/String;
+000000: sget-object v0, Lcom/vivo/connbase/common/utils/l;->e Ljava/lang/String;
+000004: invoke-static v0, Landroid/text/TextUtils;->isEmpty(Ljava/lang/CharSequence;)Z
+00000a: move-result v0
+00000c: if-eqz v0, +005h
+000010: const-string v0, "No Login Account"
+000014: return-object v0
+000016: sget-object v0, Lcom/vivo/connbase/common/utils/l;->e Ljava/lang/String;
+00001a: return-object v0
+
+METHOD k(Ljava/lang/String;)[B
+000000: const/4 v0, 4
+000002: new-array v1, v0, [B
+000006: fill-array-data v1, +000003dh
+00000c: invoke-static v4, Landroid/text/TextUtils;->isEmpty(Ljava/lang/CharSequence;)Z
+000012: move-result v2
+000014: if-eqz v2, +003h
+000018: return-object v1
+00001a: const-string v2, "SHA-256"
+00001e: invoke-static v2, Ljava/security/MessageDigest;->getInstance(Ljava/lang/String;)Ljava/security/MessageDigest;
+000024: move-result-object v2
+000026: sget-object v3, Ljava/nio/charset/StandardCharsets;->UTF_8 Ljava/nio/charset/Charset;
+00002a: invoke-virtual v4, v3, Ljava/lang/String;->getBytes(Ljava/nio/charset/Charset;)[B
+000030: move-result-object v4
+000032: invoke-virtual v2, v4, Ljava/security/MessageDigest;->digest([B)[B
+000038: move-result-object v4
+00003a: const/4 v2, 0
+00003c: invoke-static v4, v2, v0, Ljava/util/Arrays;->copyOfRange([B I I)[B
+000042: move-result-object v4
+000044: return-object v4
+000046: move-exception v4
+000048: new-instance v0, Ljava/lang/StringBuilder;
+00004c: invoke-direct v0, Ljava/lang/StringBuilder;-><init>()V
+000052: const-string v2, "MessageDigest error:"
+000056: invoke-virtual v0, v2, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+00005c: invoke-virtual v4, Ljava/lang/Object;->toString()Ljava/lang/String;
+000062: move-result-object v4
+000064: invoke-virtual v0, v4, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+00006a: invoke-virtual v0, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
+000070: move-result-object v4
+000072: const-string v0, "OpenIdUtilsTAG"
+000076: invoke-static v0, v4, Lj7/a;->i(Ljava/lang/String; Ljava/lang/String;)V
+00007c: return-object v1
+00007e: nop 
+000080: fill-array-data-payload b'\x00\x00\x00\x00' | \x00\x00\x00\x00
+
+METHOD l()Ljava/lang/String;
+000000: sget-object v0, Lcom/vivo/connbase/common/utils/l;->f Ljava/lang/String;
+000004: return-object v0
+
+METHOD m()Ljava/lang/String;
+000000: sget-object v0, Lcom/vivo/connbase/common/utils/l;->h Ljava/lang/String;
+000004: return-object v0
+
+METHOD n()Ljava/lang/String;
+000000: new-instance v0, Ljava/lang/StringBuilder;
+000004: invoke-direct v0, Ljava/lang/StringBuilder;-><init>()V
+00000a: const-string v1, "mNetworkActive="
+00000e: invoke-virtual v0, v1, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+000014: sget-boolean v1, Lcom/vivo/connbase/common/utils/l;->d Z
+000018: invoke-virtual v0, v1, Ljava/lang/StringBuilder;->append(Z)Ljava/lang/StringBuilder;
+00001e: const-string v1, ", avatar="
+000022: invoke-virtual v0, v1, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+000028: sget-object v1, Lcom/vivo/connbase/common/utils/l;->b Ljava/lang/String;
+00002c: invoke-virtual v0, v1, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+000032: invoke-virtual v0, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
+000038: move-result-object v0
+00003a: const-string v1, "OpenIdUtilsTAG"
+00003e: invoke-static v1, v0, Lj7/a;->a(Ljava/lang/String; Ljava/lang/String;)V
+000044: sget-object v0, Lcom/vivo/connbase/common/utils/l;->b Ljava/lang/String;
+000048: invoke-static v0, Landroid/text/TextUtils;->isEmpty(Ljava/lang/CharSequence;)Z
+00004e: move-result v0
+000050: if-eqz v0, +00ch
+000054: invoke-static Lcom/vivo/connbase/App;->getInstance()Lcom/vivo/connbase/App;
+00005a: move-result-object v0
+00005c: invoke-static v0, Lcom/vivo/connbase/common/utils/s;->d(Landroid/content/Context;)Ljava/lang/String;
+000062: move-result-object v0
+000064: sput-object v0, Lcom/vivo/connbase/common/utils/l;->b Ljava/lang/String;
+000068: sget-object v0, Lcom/vivo/connbase/common/utils/l;->b Ljava/lang/String;
+00006c: return-object v0
+
+METHOD o()Ljava/lang/String;
+000000: new-instance v0, Ljava/lang/StringBuilder;
+000004: invoke-direct v0, Ljava/lang/StringBuilder;-><init>()V
+00000a: const-string v1, "mNetworkActive="
+00000e: invoke-virtual v0, v1, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+000014: sget-boolean v1, Lcom/vivo/connbase/common/utils/l;->d Z
+000018: invoke-virtual v0, v1, Ljava/lang/StringBuilder;->append(Z)Ljava/lang/StringBuilder;
+00001e: const-string v1, ", selfNickName="
+000022: invoke-virtual v0, v1, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+000028: sget-object v1, Lcom/vivo/connbase/common/utils/l;->c Ljava/lang/String;
+00002c: invoke-virtual v0, v1, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+000032: invoke-virtual v0, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
+000038: move-result-object v0
+00003a: const-string v1, "OpenIdUtilsTAG"
+00003e: invoke-static v1, v0, Lj7/a;->a(Ljava/lang/String; Ljava/lang/String;)V
+000044: sget-object v0, Lcom/vivo/connbase/common/utils/l;->c Ljava/lang/String;
+000048: invoke-static v0, Landroid/text/TextUtils;->isEmpty(Ljava/lang/CharSequence;)Z
+00004e: move-result v0
+000050: if-eqz v0, +00ch
+000054: invoke-static Lcom/vivo/connbase/App;->getInstance()Lcom/vivo/connbase/App;
+00005a: move-result-object v0
+00005c: invoke-static v0, Lcom/vivo/connbase/common/utils/s;->o(Landroid/content/Context;)Ljava/lang/String;
+000062: move-result-object v0
+000064: sput-object v0, Lcom/vivo/connbase/common/utils/l;->c Ljava/lang/String;
+000068: sget-object v0, Lcom/vivo/connbase/common/utils/l;->c Ljava/lang/String;
+00006c: return-object v0
+
+METHOD p()Ljava/lang/String;
+000000: sget-object v0, Lcom/vivo/connbase/common/utils/l;->e Ljava/lang/String;
+000004: invoke-static v0, Landroid/text/TextUtils;->isEmpty(Ljava/lang/CharSequence;)Z
+00000a: move-result v0
+00000c: if-eqz v0, +024h
+000010: invoke-static Lcom/vivo/connbase/App;->getInstance()Lcom/vivo/connbase/App;
+000016: move-result-object v0
+000018: invoke-static v0, Lcom/bbk/account/base/BBKAccountManager;->getInstance(Landroid/content/Context;)Lcom/bbk/account/base/BBKAccountManager;
+00001e: move-result-object v0
+000020: invoke-virtual v0, Lcom/bbk/account/base/BBKAccountManager;->getOpenid()Ljava/lang/String;
+000026: move-result-object v0
+000028: sput-object v0, Lcom/vivo/connbase/common/utils/l;->e Ljava/lang/String;
+00002c: invoke-static v0, Landroid/text/TextUtils;->isEmpty(Ljava/lang/CharSequence;)Z
+000032: move-result v0
+000034: if-nez v0, +010h
+000038: sget-object v0, Lcom/vivo/connbase/common/utils/l;->e Ljava/lang/String;
+00003c: sget-object v1, Lcom/vivo/connbase/common/utils/l;->f Ljava/lang/String;
+000040: invoke-virtual v0, v1, Ljava/lang/String;->equals(Ljava/lang/Object;)Z
+000046: move-result v0
+000048: if-nez v0, +006h
+00004c: sget-object v0, Lcom/vivo/connbase/common/utils/l;->e Ljava/lang/String;
+000050: sput-object v0, Lcom/vivo/connbase/common/utils/l;->f Ljava/lang/String;
+000054: sget-object v0, Lcom/vivo/connbase/common/utils/l;->e Ljava/lang/String;
+000058: return-object v0
+
+METHOD q()Ljava/lang/String;
+000000: const-string v0, "OpenIdUtilsTAG"
+000004: const-string v1, ""
+000008: invoke-static Lcom/vivo/connbase/common/utils/l;->p()Ljava/lang/String;
+00000e: move-result-object v2
+000010: invoke-static v2, Landroid/text/TextUtils;->isEmpty(Ljava/lang/CharSequence;)Z
+000016: move-result v3
+000018: if-eqz v3, +003h
+00001c: return-object v1
+00001e: const-string v3, "SHA-256"
+000022: invoke-static v3, Ljava/security/MessageDigest;->getInstance(Ljava/lang/String;)Ljava/security/MessageDigest;
+000028: move-result-object v3
+00002a: sget-object v4, Ljava/nio/charset/StandardCharsets;->UTF_8 Ljava/nio/charset/Charset;
+00002e: invoke-virtual v2, v4, Ljava/lang/String;->getBytes(Ljava/nio/charset/Charset;)[B
+000034: move-result-object v2
+000036: invoke-virtual v3, v2, Ljava/security/MessageDigest;->digest([B)[B
+00003c: move-result-object v2
+00003e: new-instance v3, Ljava/lang/StringBuilder;
+000042: invoke-direct v3, Ljava/lang/StringBuilder;-><init>()V
+000048: const/4 v4, 0
+00004a: if-eqz v2, +01eh
+00004e: array-length v5, v2
+000050: move v6, v4
+000052: if-ge v6, v5, +01ah
+000056: aget-byte v7, v2, v6
+00005a: const-string v8, "%02x"
+00005e: invoke-static v7, Ljava/lang/Byte;->valueOf(B)Ljava/lang/Byte;
+000064: move-result-object v7
+000066: filled-new-array v7, [Ljava/lang/Object;
+00006c: move-result-object v7
+00006e: invoke-static v8, v7, Ljava/lang/String;->format(Ljava/lang/String; [Ljava/lang/Object;)Ljava/lang/String;
+000074: move-result-object v7
+000076: invoke-virtual v3, v7, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+00007c: add-int/lit8 v6, v6, 1
+000080: goto -17h
+000082: move-exception v2
+000084: goto +26h
+000086: invoke-virtual v3, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
+00008c: move-result-object v2
+00008e: invoke-virtual v2, Ljava/lang/String;->length()I
+000094: move-result v3
+000096: const/16 v5, 8
+00009a: if-le v3, v5, +006h
+00009e: invoke-virtual v2, v4, v5, Ljava/lang/String;->substring(I I)Ljava/lang/String;
+0000a4: move-result-object v2
+0000a6: new-instance v3, Ljava/lang/StringBuilder;
+0000aa: invoke-direct v3, Ljava/lang/StringBuilder;-><init>()V
+0000b0: const-string v4, "getSelfOpenIdHashStr:od="
+0000b4: invoke-virtual v3, v4, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+0000ba: invoke-virtual v3, v2, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+0000c0: invoke-virtual v3, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
+0000c6: move-result-object v3
+0000c8: invoke-static v0, v3, Lj7/a;->o(Ljava/lang/String; Ljava/lang/String;)V
+0000ce: return-object v2
+0000d0: new-instance v3, Ljava/lang/StringBuilder;
+0000d4: invoke-direct v3, Ljava/lang/StringBuilder;-><init>()V
+0000da: const-string v4, "getSelfOpenIdHashStr:"
+0000de: invoke-virtual v3, v4, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+0000e4: invoke-virtual v3, v2, Ljava/lang/StringBuilder;->append(Ljava/lang/Object;)Ljava/lang/StringBuilder;
+0000ea: invoke-virtual v3, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
+0000f0: move-result-object v2
+0000f2: invoke-static v0, v2, Lj7/a;->i(Ljava/lang/String; Ljava/lang/String;)V
+0000f8: return-object v1
+
+METHOD r()Ljava/lang/String;
+000000: sget-object v0, Lcom/vivo/connbase/common/utils/l;->i Ljava/lang/String;
+000004: return-object v0
+
+METHOD s(Z)Ljava/lang/String;
+000000: if-eqz v0, +005h
+000004: sget-object v0, Lcom/vivo/connbase/common/utils/l;->j Ljava/lang/String;
+000008: return-object v0
+00000a: sget-object v0, Lcom/vivo/connbase/common/utils/l;->i Ljava/lang/String;
+00000e: return-object v0
+
+METHOD t()Ljava/lang/String;
+000000: sget-object v0, Lcom/vivo/connbase/common/utils/l;->g Ljava/lang/String;
+000004: invoke-static v0, Landroid/text/TextUtils;->isEmpty(Ljava/lang/CharSequence;)Z
+00000a: move-result v0
+00000c: if-eqz v0, +026h
+000010: invoke-static Lcom/vivo/connbase/App;->getInstance()Lcom/vivo/connbase/App;
+000016: move-result-object v0
+000018: invoke-static v0, Lcom/bbk/account/base/BBKAccountManager;->getInstance(Landroid/content/Context;)Lcom/bbk/account/base/BBKAccountManager;
+00001e: move-result-object v0
+000020: invoke-virtual v0, Lcom/bbk/account/base/BBKAccountManager;->getvivoToken()Ljava/lang/String;
+000026: move-result-object v0
+000028: sput-object v0, Lcom/vivo/connbase/common/utils/l;->g Ljava/lang/String;
+00002c: sget-object v0, Lcom/vivo/connbase/common/utils/l;->g Ljava/lang/String;
+000030: invoke-static v0, Landroid/text/TextUtils;->isEmpty(Ljava/lang/CharSequence;)Z
+000036: move-result v0
+000038: if-nez v0, +010h
+00003c: sget-object v0, Lcom/vivo/connbase/common/utils/l;->g Ljava/lang/String;
+000040: sget-object v1, Lcom/vivo/connbase/common/utils/l;->h Ljava/lang/String;
+000044: invoke-virtual v0, v1, Ljava/lang/String;->equals(Ljava/lang/Object;)Z
+00004a: move-result v0
+00004c: if-nez v0, +006h
+000050: sget-object v0, Lcom/vivo/connbase/common/utils/l;->g Ljava/lang/String;
+000054: sput-object v0, Lcom/vivo/connbase/common/utils/l;->h Ljava/lang/String;
+000058: sget-object v0, Lcom/vivo/connbase/common/utils/l;->g Ljava/lang/String;
+00005c: return-object v0
+
+METHOD u(Ljava/lang/String;)Z
+000000: invoke-static v2, Landroid/text/TextUtils;->isEmpty(Ljava/lang/CharSequence;)Z
+000006: move-result v0
+000008: if-eqz v0, +004h
+00000c: const/4 v2, 0
+00000e: return v2
+000010: new-instance v0, Ljava/lang/StringBuilder;
+000014: invoke-direct v0, Ljava/lang/StringBuilder;-><init>()V
+00001a: const-string v1, "isSameOd: SameOpenId"
+00001e: invoke-virtual v0, v1, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+000024: invoke-virtual v0, v2, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+00002a: const-string v1, " myOpenId"
+00002e: invoke-virtual v0, v1, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+000034: invoke-static Lcom/vivo/connbase/common/utils/l;->p()Ljava/lang/String;
+00003a: move-result-object v1
+00003c: invoke-virtual v0, v1, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+000042: invoke-virtual v0, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
+000048: move-result-object v0
+00004a: const-string v1, "OpenIdUtilsTAG"
+00004e: invoke-static v1, v0, Lj7/a;->a(Ljava/lang/String; Ljava/lang/String;)V
+000054: invoke-static Lcom/vivo/connbase/common/utils/l;->p()Ljava/lang/String;
+00005a: move-result-object v0
+00005c: invoke-static v2, v0, Landroid/text/TextUtils;->equals(Ljava/lang/CharSequence; Ljava/lang/CharSequence;)Z
+000062: move-result v2
+000064: return v2
+
+METHOD v(Ljava/lang/String; [B)Z
+000000: invoke-static v2, Lcom/vivo/connbase/common/utils/l;->k(Ljava/lang/String;)[B
+000006: move-result-object v2
+000008: new-instance v0, Ljava/lang/StringBuilder;
+00000c: invoke-direct v0, Ljava/lang/StringBuilder;-><init>()V
+000012: const-string v1, "isSameOd: other"
+000016: invoke-virtual v0, v1, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+00001c: invoke-static v3, Ljava/util/Arrays;->toString([B)Ljava/lang/String;
+000022: move-result-object v1
+000024: invoke-virtual v0, v1, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+00002a: const-string v1, " my open hash"
+00002e: invoke-virtual v0, v1, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+000034: invoke-static v2, Ljava/util/Arrays;->toString([B)Ljava/lang/String;
+00003a: move-result-object v1
+00003c: invoke-virtual v0, v1, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+000042: invoke-virtual v0, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
+000048: move-result-object v0
+00004a: const-string v1, "OpenIdUtilsTAG"
+00004e: invoke-static v1, v0, Lj7/a;->a(Ljava/lang/String; Ljava/lang/String;)V
+000054: invoke-static v2, Lcom/vivo/connbase/common/utils/c;->e([B)Z
+00005a: move-result v0
+00005c: if-nez v0, +00eh
+000060: invoke-static v3, Lcom/vivo/connbase/common/utils/c;->e([B)Z
+000066: move-result v0
+000068: if-eqz v0, +003h
+00006c: goto +6h
+00006e: invoke-static v2, v3, Lcom/vivo/connbase/common/utils/c;->h([B [B)Z
+000074: move-result v2
+000076: return v2
+000078: const/4 v2, 0
+00007a: return v2
+
+METHOD w(I Ljava/lang/String; Ljava/lang/String;)Z
+000000: new-instance v0, Ljava/lang/StringBuilder;
+000004: invoke-direct v0, Ljava/lang/StringBuilder;-><init>()V
+00000a: const-string/jumbo v1, verifyAccount remoteConnVersion:
+000010: invoke-virtual v0, v1, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+000016: invoke-virtual v0, v2, Ljava/lang/StringBuilder;->append(I)Ljava/lang/StringBuilder;
+00001c: const-string v1, ", remoteKeyAgreementParams:"
+000020: invoke-virtual v0, v1, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+000026: invoke-virtual v0, v4, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+00002c: invoke-virtual v0, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
+000032: move-result-object v0
+000034: const-string v1, "OpenIdUtilsTAG"
+000038: invoke-static v1, v0, Lj7/a;->q(Ljava/lang/String; Ljava/lang/String;)V
+00003e: const/4 v0, 7
+000040: if-gt v0, v2, +015h
+000044: invoke-static v4, Landroid/text/TextUtils;->isEmpty(Ljava/lang/CharSequence;)Z
+00004a: move-result v2
+00004c: if-nez v2, +00fh
+000050: invoke-static Ld5/f;->i()Ld5/f;
+000056: move-result-object v2
+000058: invoke-static Lcom/vivo/connbase/common/utils/l;->p()Ljava/lang/String;
+00005e: move-result-object v0
+000060: invoke-virtual v2, v0, v3, v4, Ld5/f;->e(Ljava/lang/String; Ljava/lang/String; Ljava/lang/String;)Z
+000066: move-result v2
+000068: return v2
+00006a: const/4 v2, 1
+00006c: return v2
+
+METHOD x(Z)V
+000000: new-instance v0, Ljava/lang/StringBuilder;
+000004: invoke-direct v0, Ljava/lang/StringBuilder;-><init>()V
+00000a: const-string v1, "resetNetworkState oldState="
+00000e: invoke-virtual v0, v1, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+000014: sget-boolean v1, Lcom/vivo/connbase/common/utils/l;->d Z
+000018: invoke-virtual v0, v1, Ljava/lang/StringBuilder;->append(Z)Ljava/lang/StringBuilder;
+00001e: const-string v1, ", newState="
+000022: invoke-virtual v0, v1, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+000028: invoke-virtual v0, v2, Ljava/lang/StringBuilder;->append(Z)Ljava/lang/StringBuilder;
+00002e: invoke-virtual v0, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
+000034: move-result-object v0
+000036: const-string v1, "OpenIdUtilsTAG"
+00003a: invoke-static v1, v0, Lj7/a;->o(Ljava/lang/String; Ljava/lang/String;)V
+000040: sput-boolean v2, Lcom/vivo/connbase/common/utils/l;->d Z
+000044: return-void 
+
+METHOD y()V
+000000: const-string v0, "getOpend start."
+000004: const-string v1, "OpenIdUtilsTAG"
+000008: invoke-static v1, v0, Lj7/a;->o(Ljava/lang/String; Ljava/lang/String;)V
+00000e: invoke-static Lcom/vivo/connbase/App;->getInstance()Lcom/vivo/connbase/App;
+000014: move-result-object v0
+000016: invoke-static v0, Lcom/bbk/account/base/BBKAccountManager;->getInstance(Landroid/content/Context;)Lcom/bbk/account/base/BBKAccountManager;
+00001c: move-result-object v0
+00001e: invoke-virtual v0, Lcom/bbk/account/base/BBKAccountManager;->isLogin()Z
+000024: move-result v0
+000026: if-nez v0, +00ch
+00002a: const-string v0, ""
+00002e: sput-object v0, Lcom/vivo/connbase/common/utils/l;->e Ljava/lang/String;
+000032: const-string v0, "getOped end.isLogin = false"
+000036: invoke-static v1, v0, Lj7/a;->o(Ljava/lang/String; Ljava/lang/String;)V
+00003c: return-void 
+00003e: invoke-static Lcom/vivo/connbase/App;->getInstance()Lcom/vivo/connbase/App;
+000044: move-result-object v0
+000046: invoke-static v0, Lcom/bbk/account/base/BBKAccountManager;->getInstance(Landroid/content/Context;)Lcom/bbk/account/base/BBKAccountManager;
+00004c: move-result-object v0
+00004e: invoke-virtual v0, Lcom/bbk/account/base/BBKAccountManager;->getOpenid()Ljava/lang/String;
+000054: move-result-object v0
+000056: sput-object v0, Lcom/vivo/connbase/common/utils/l;->e Ljava/lang/String;
+00005a: invoke-static v0, Landroid/text/TextUtils;->isEmpty(Ljava/lang/CharSequence;)Z
+000060: move-result v0
+000062: if-nez v0, +010h
+000066: sget-object v0, Lcom/vivo/connbase/common/utils/l;->e Ljava/lang/String;
+00006a: sget-object v2, Lcom/vivo/connbase/common/utils/l;->f Ljava/lang/String;
+00006e: invoke-virtual v0, v2, Ljava/lang/String;->equals(Ljava/lang/Object;)Z
+000074: move-result v0
+000076: if-nez v0, +006h
+00007a: sget-object v0, Lcom/vivo/connbase/common/utils/l;->e Ljava/lang/String;
+00007e: sput-object v0, Lcom/vivo/connbase/common/utils/l;->f Ljava/lang/String;
+000082: const-string v0, "getOped end."
+000086: invoke-static v1, v0, Lj7/a;->o(Ljava/lang/String; Ljava/lang/String;)V
+00008c: return-void 
+
+METHOD z()V
+000000: const-string v0, "setUserName start."
+000004: const-string v1, "OpenIdUtilsTAG"
+000008: invoke-static v1, v0, Lj7/a;->o(Ljava/lang/String; Ljava/lang/String;)V
+00000e: invoke-static Lcom/vivo/connbase/App;->getInstance()Lcom/vivo/connbase/App;
+000014: move-result-object v0
+000016: invoke-static v0, Lcom/bbk/account/base/BBKAccountManager;->getInstance(Landroid/content/Context;)Lcom/bbk/account/base/BBKAccountManager;
+00001c: move-result-object v0
+00001e: invoke-virtual v0, Lcom/bbk/account/base/BBKAccountManager;->isLogin()Z
+000024: move-result v0
+000026: if-nez v0, +00eh
+00002a: const-string v0, ""
+00002e: sput-object v0, Lcom/vivo/connbase/common/utils/l;->i Ljava/lang/String;
+000032: sput-object v0, Lcom/vivo/connbase/common/utils/l;->j Ljava/lang/String;
+000036: const-string v0, "setUsame end.isLogin = false"
+00003a: invoke-static v1, v0, Lj7/a;->o(Ljava/lang/String; Ljava/lang/String;)V
+000040: return-void 
+000042: invoke-static Lcom/vivo/connbase/App;->getInstance()Lcom/vivo/connbase/App;
+000048: move-result-object v0
+00004a: invoke-static v0, Lcom/bbk/account/base/BBKAccountManager;->getInstance(Landroid/content/Context;)Lcom/bbk/account/base/BBKAccountManager;
+000050: move-result-object v0
+000052: invoke-virtual v0, Lcom/bbk/account/base/BBKAccountManager;->getUserName()Ljava/lang/String;
+000058: move-result-object v0
+00005a: sput-object v0, Lcom/vivo/connbase/common/utils/l;->i Ljava/lang/String;
+00005e: invoke-static Lcom/vivo/connbase/App;->getInstance()Lcom/vivo/connbase/App;
+000064: move-result-object v0
+000066: invoke-static v0, Lcom/bbk/account/base/BBKAccountManager;->getInstance(Landroid/content/Context;)Lcom/bbk/account/base/BBKAccountManager;
+00006c: move-result-object v0
+00006e: const/4 v2, 1
+000070: invoke-virtual v0, v2, Lcom/bbk/account/base/BBKAccountManager;->getUserName(Z)Ljava/lang/String;
+000076: move-result-object v0
+000078: sput-object v0, Lcom/vivo/connbase/common/utils/l;->j Ljava/lang/String;
+00007c: const-string v0, "setUserName end."
+000080: invoke-static v1, v0, Lj7/a;->o(Ljava/lang/String; Ljava/lang/String;)V
+000086: return-void 

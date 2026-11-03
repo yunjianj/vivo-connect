@@ -1,0 +1,54 @@
+APK pcsuite/updateApk/pcsuite.apk
+DEX classes2.dex
+CLASS Lcom/vivo/connect/sdk/f/c$d0;
+SUPER Ljava/lang/Object;
+FIELDS
+e Ljava/lang/String; = ':setConnectionCallback'
+a Landroid/os/Messenger; = None
+b Lcom/vivo/connect/ConnectOptions; = None
+c Lcom/vivo/connbase/IConnectionCallback; = None
+d Lcom/vivo/connect/sdk/f/c; = None
+
+METHOD <init>(Lcom/vivo/connect/sdk/f/c; Landroid/os/Messenger; Lcom/vivo/connect/ConnectOptions; Lcom/vivo/connbase/IConnectionCallback;)V
+000000: iput-object v1, v0, Lcom/vivo/connect/sdk/f/c$d0;->d Lcom/vivo/connect/sdk/f/c;
+000004: iput-object v2, v0, Lcom/vivo/connect/sdk/f/c$d0;->a Landroid/os/Messenger;
+000008: iput-object v3, v0, Lcom/vivo/connect/sdk/f/c$d0;->b Lcom/vivo/connect/ConnectOptions;
+00000c: iput-object v4, v0, Lcom/vivo/connect/sdk/f/c$d0;->c Lcom/vivo/connbase/IConnectionCallback;
+000010: invoke-direct v0, Ljava/lang/Object;-><init>()V
+000016: return-void 
+
+METHOD run()V
+000000: iget-object v0, v3, Lcom/vivo/connect/sdk/f/c$d0;->d Lcom/vivo/connect/sdk/f/c;
+000004: invoke-static v0, Lcom/vivo/connect/sdk/f/c;->a(Lcom/vivo/connect/sdk/f/c;)Lcom/vivo/connbase/IClient;
+00000a: move-result-object v0
+00000c: if-nez v0, +01eh
+000010: iget-object v0, v3, Lcom/vivo/connect/sdk/f/c$d0;->d Lcom/vivo/connect/sdk/f/c;
+000014: const-string v1, ":setConnectionCallback"
+000018: invoke-static v0, v1, Lcom/vivo/connect/sdk/f/c;->a(Lcom/vivo/connect/sdk/f/c; Ljava/lang/String;)Z
+00001e: move-result v0
+000020: if-nez v0, +003h
+000024: return-void 
+000026: iget-object v0, v3, Lcom/vivo/connect/sdk/f/c$d0;->d Lcom/vivo/connect/sdk/f/c;
+00002a: invoke-static v0, Lcom/vivo/connect/sdk/f/c;->a(Lcom/vivo/connect/sdk/f/c;)Lcom/vivo/connbase/IClient;
+000030: move-result-object v0
+000032: iget-object v1, v3, Lcom/vivo/connect/sdk/f/c$d0;->a Landroid/os/Messenger;
+000036: iget-object v2, v3, Lcom/vivo/connect/sdk/f/c$d0;->b Lcom/vivo/connect/ConnectOptions;
+00003a: invoke-static v2, Lcom/vivo/connect/sdk/i/b;->a(Lcom/vivo/connect/ConnectOptions;)Ljava/lang/String;
+000040: move-result-object v2
+000042: iget-object v3, v3, Lcom/vivo/connect/sdk/f/c$d0;->c Lcom/vivo/connbase/IConnectionCallback;
+000046: goto +ch
+000048: iget-object v0, v3, Lcom/vivo/connect/sdk/f/c$d0;->d Lcom/vivo/connect/sdk/f/c;
+00004c: invoke-static v0, Lcom/vivo/connect/sdk/f/c;->a(Lcom/vivo/connect/sdk/f/c;)Lcom/vivo/connbase/IClient;
+000052: move-result-object v0
+000054: iget-object v1, v3, Lcom/vivo/connect/sdk/f/c$d0;->a Landroid/os/Messenger;
+000058: iget-object v2, v3, Lcom/vivo/connect/sdk/f/c$d0;->b Lcom/vivo/connect/ConnectOptions;
+00005c: goto -11h
+00005e: invoke-interface v0, v1, v2, v3, Lcom/vivo/connbase/IClient;->setConnectionCallbackParames(Landroid/os/Messenger; Ljava/lang/String; Lcom/vivo/connbase/IConnectionCallback;)V
+000064: return-void 
+000066: move-exception v3
+000068: new-instance v0, Ljava/lang/StringBuilder;
+00006c: const-string v1, "setConnectionCallback  err:"
+000070: invoke-direct v0, v1, Ljava/lang/StringBuilder;-><init>(Ljava/lang/String;)V
+000076: const-string v1, "ConnectClientImpl"
+00007a: invoke-static v3, v0, v1, LS5/f;->g(Ljava/lang/Exception; Ljava/lang/StringBuilder; Ljava/lang/String;)V
+000080: return-void 
