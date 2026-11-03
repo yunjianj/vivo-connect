@@ -17,12 +17,12 @@ export const tokenFor = ip => {
   return crypto.createHash('sha256').update(ip + nonce).digest('hex');
 };
 export function official(name) {
-  const candidates = [process.env.VIVO_OFFICIAL_APP, path.join(ROOT, 'analysis/app')].filter(Boolean);
+  const candidates = [process.env.VIVO_OFFICIAL_APP, path.join(ROOT, 'runtime/windows/v7.0.6.0-cn/app'), path.join(ROOT, 'analysis/app')].filter(Boolean);
   for (const dir of candidates) {
     try { return createRequire(path.join(path.resolve(dir), 'package.json'))(name); }
     catch (e) { if (e.code !== 'MODULE_NOT_FOUND') throw e; }
   }
-  throw new ApiError(503, 'OFFICIAL_MODULE_MISSING', `缺少官方随包模块 ${name}；请运行 python tools/extract_asar.py 或配置 VIVO_OFFICIAL_APP`);
+  throw new ApiError(503, 'OFFICIAL_MODULE_MISSING', `缺少随包模块 ${name}；请重新克隆仓库或配置 VIVO_OFFICIAL_APP`);
 }
 export async function privateJson(file, value) {
   await fs.mkdir(path.dirname(file), { recursive: true, mode: 0o700 });

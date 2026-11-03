@@ -1,4 +1,5 @@
 import path from 'node:path';
+import fs from 'node:fs/promises';
 import os from 'node:os';
 import net from 'node:net';
 import crypto from 'node:crypto';
@@ -126,8 +127,11 @@ export class PhoneManager {
     s.serial = options.serial; s.ip = '127.0.0.1';
     const { client } = this.adb();
     if (!(await client.isInstalled(s.serial, 'com.vivo.pcsuite'))) {
-      if (!options.installApk) throw new ApiError(409, 'PHONE_APP_MISSING', '手机未安装官方 com.vivo.pcsuite；可显式设置 installApk=true 安装随包 APK');
-      await client.install(s.serial, path.join(ROOT, 'samples/windows/v7.0.6.0-cn/pcsuite/updateApk/pcsuite.apk'));
+      if (!options.installApk) throw new ApiError(409, 'PHONE_APP_MISSING', '手机未安装官方 com.vivo.pcsuite；请先在手机安装官方应用，或在有合法 APK 时显式设置 installApk=true');
+      const apk = process.env.VIVO_PHONE_APK || path.join(ROOT, 'samples/windows/v7.0.6.0-cn/pcsuite/updateApk/pcsuite.apk');
+      try { await fs.access(apk); }
+      catch { throw new ApiError(409, 'PHONE_APK_MISSING', '当前发行包不含 vivo 手机 APK；请先在手机安装官方应用，或通过 VIVO_PHONE_APK 提供合法取得的 APK'); }
+      await client.install(s.serial, apk);
     }
     await client.startActivity(s.serial, { action: 'vivo.intent.action.PCSUITE_INTENT', flags: 268435456, extras: { intent_from: 1104 } });
     const service = { component: 'com.vivo.pcsuite/.service.AdbPortalService', extras: { from: 'pc', foreground: 0,

@@ -1,6 +1,6 @@
 # 基础后端：账号、手机连接与文件收发
 
-实现位于 [backend/src](../backend/src/server.mjs)，提供本机 REST API 和异步任务。账号登录使用官方 vivo 网页；手机继续运行官方 APK。后端优先加载安装包自带的 JavaScript 依赖，Linux 仅替代 Windows 原生连接服务和 Electron 进程/UI 编排。
+实现位于 [backend/src](../backend/src/server.mjs)，提供本机 REST API 和异步任务。账号登录使用官方 vivo 网页；手机继续运行官方 APK。仓库在 `runtime/windows/v7.0.6.0-cn/app` 中提供 Linux 所需的开源 Node.js 模块闭包，Linux 仅替代 Windows 原生连接服务和 Electron 进程/UI 编排。
 
 已实现的范围是：官方账号登录回调、账号本地持久化/退出；USB、官方云扫码连接和旧版同网段无线配对；`/version`、`/base-info` 与心跳；浏览手机文件、电脑上传手机、从手机下载到电脑，以及手机文件移动、重命名、删除、创建目录和查询目录大小。文件收发使用手机官方文件 API，不使用 ADB push/pull 替代业务传输。“接收文件”当前是选择手机路径后主动下载，不包括手机分享面板主动推送及后台自动接收。
 
@@ -11,13 +11,13 @@
 | 部分 | 使用方式 | Linux 的替代范围 |
 |---|---|---|
 | 账号登录 | 直接打开 `passport.vivo.com.cn` 官方登录页，client_id=130，保留官方 psuite 回调地址 | 自动检测浏览器，优先用官方 ChromeDriver/WebDriver 读取回调，CDP 备用；不接收账号密码 |
-| 手机服务 | 官方 `com.vivo.pcsuite`；USB 可显式安装本地随包 APK | 没有重写手机端 APK |
-| USB | 官方随包 `@vivo/adbkit` 2.11.3，Linux Android platform-tools 的 adb | 原 adbkit 丢弃 tcp:0 返回端口，只有分配/移除转发端口用官方 adb CLI |
+| 手机服务 | 官方 `com.vivo.pcsuite`；手机需已安装官方应用，项目不分发 APK | 没有重写手机端 APK |
+| USB | `runtime/windows/v7.0.6.0-cn/app` 中的 `@vivo/adbkit` 2.11.3，Linux Android platform-tools 的 adb | 原 adbkit 丢弃 tcp:0 返回端口，只有分配/移除转发端口用官方 adb CLI |
 | 心跳 | 随包 `ws` 8.20.0 | 重写会话管理，保留手机 WSS 子协议与消息 |
 | 文件归档 | 随包 `tar` 6.2.1、`mime-types` 2.1.35 | 重写任务编排与检查，保留 TAR 传输格式 |
 | 局域网发现/配对 | 保留官方 UDP/TCP 报文 | vivoesService.exe 没有 Linux 实现，使用原生 Node 网络 API 实现协议 |
 
-加载器优先读取 `VIVO_OFFICIAL_APP`，其次本仓库的 `analysis/app`，不依赖全局 npm 包，也不把官方源码再复制一份。[加载器](../backend/src/core.mjs)
+加载器优先读取 `VIVO_OFFICIAL_APP`，其次仓库内的版本化运行模块，再回退到本地完整提取目录 `analysis/app`；不依赖全局 npm 包。[加载器](../backend/src/core.mjs)
 
 登录参数和凭据顺序的证据是 [renderer loginUrl](../analysis/pretty/renderer.js#L42622)、[官方 preload 回调](../analysis/pretty/preload-welcome.js#L86)、[handleLoginSuccess](../analysis/pretty/renderer.js#L42831)。USB 使用 [DeviceManager](../evidence/main-modules/89.js) 的 activity/service 参数。文件参数及预检规则来自 [手机协议](phone-protocol.md)、[上传预检响应处理](../evidence/main-modules/162.js#L74)；无线报文来源见 [无线配对](wireless-pairing.md)。
 

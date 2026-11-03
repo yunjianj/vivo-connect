@@ -16,7 +16,7 @@
 npm start
 ```
 
-Arch Linux 软件包可在本机准备好 Windows 样本后，通过 `./packaging/arch/build.sh` 构建。安装、依赖和定制方式见 [Arch 打包说明](packaging/arch/README.md)。
+Arch Linux 软件包可直接通过 `./packaging/arch/build.sh` 构建。安装、依赖和定制方式见 [Arch 打包说明](packaging/arch/README.md)。
 
 ## 文档
 
@@ -30,7 +30,7 @@ Arch Linux 软件包可在本机准备好 Windows 样本后，通过 `./packagin
 
 ## 样本与分析范围
 
-Windows 原版安装包与提取目录按版本放在 `samples/windows/v7.0.6.0-cn/`，并由 Git 忽略；克隆仓库后需自行准备合法取得的样本。README 与样本清单记录了版本、Electron 运行时和 Windows 兼容线。公开仓库不包含原版安装包、展开后的 Windows 程序目录、账号配置或构建缓存。
+Windows 原版安装包与完整提取目录按版本放在 `samples/windows/v7.0.6.0-cn/`，并由 Git 忽略；这些样本只用于再分析。Linux 运行所需的开源 Node.js 模块闭包已单独放在 `runtime/windows/v7.0.6.0-cn/`，克隆后无需准备 Windows 安装包。手机端官方 APK 不随公开仓库分发；手机已安装官方应用时可直接连接，需要安装时请通过 vivo 官方渠道获取。公开仓库不包含 Windows 安装包、程序主体、账号配置或构建缓存。
 
 仓库中的 `evidence/` 保存静态分析索引与验证记录；`analysis/` 是从本机样本生成的完整提取产物，默认不纳入版本控制。静态证据不能代替不同手机、系统版本和网络条件下的实机验证。
 
@@ -48,4 +48,4 @@ python tools/build_http_index.py
 python tools/verify_evidence.py
 ```
 
-缺失的 ASAR unpacked 文件会记入 `evidence/extraction.json`，不会伪装成已恢复源码。项目没有授予 vivo 专有样本、商标或第三方组件的再分发许可；请按各权利人的条款使用样本。
+缺失的 ASAR unpacked 文件会记入 `evidence/extraction.json`，不会伪装成已恢复源码。公开运行模块遵循其随包许可证；项目没有授予 vivo 安装包、商标或手机 APK 的再分发许可，请按各权利人的条款使用本地样本。
