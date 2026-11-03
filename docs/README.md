@@ -8,7 +8,7 @@
 | [原生桌面客户端](native-gui.md) | Qt 客户端、Wayland 拖放、依赖、构建、自检和实机验证 |
 | [Arch Linux 软件包](../packaging/arch/README.md) | pacman 软件包构建、安装、卸载和桌面图标定制 |
 
-## 连接协议
+## 技术参考
 
 | 文档 | 适用内容 |
 |---|---|
@@ -16,7 +16,7 @@
 | [无线配对](wireless-pairing.md) | UDP 发现、TCP 授权、连接 token、Wi-Fi Direct 和参考实现 |
 | [手机连接与文件管理](phone-protocol.md) | USB 启动、版本协商、HTTPS/WSS、手机文件接口和传输流程 |
 
-## 本机服务与逆向索引
+## 协议与历史资料
 
 | 文档 | 适用内容 |
 |---|---|
@@ -28,7 +28,7 @@
 | [Bridge 方法清单](bridge-catalog.md) | 静态可见的主进程导出方法及来源位置 |
 | [原生包装接口](native-wrappers.md) | Node 原生模块包装函数与对应源码位置 |
 
-## 移植与证据
+## 移植资料
 
 | 文档 | 适用内容 |
 |---|---|

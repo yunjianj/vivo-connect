@@ -1,7 +1,7 @@
 # Local build: consumes the official files already extracted in this checkout.
 pkgname=vivo-connect
 pkgver=0.1.0
-pkgrel=3
+pkgrel=4
 pkgdesc='Native Linux client for connecting and transferring files with vivo devices'
 arch=('x86_64')
 url='https://www.vivo.com.cn/'
@@ -25,7 +25,7 @@ prepare() {
   rm -rf "$srcdir/vivo-connect"
   mkdir -p "$srcdir/vivo-connect" "$srcdir/vivo-connect/analysis/app" "$srcdir/vivo-connect/samples/windows/v7.0.6.0-cn/pcsuite/updateApk"
   cd "$srcdir/vivo-connect"
-  cp -a "$_repo/backend" "$_repo/native-qt" "$_repo/tools" "$_repo/patches" .
+  cp -a "$_repo/backend" "$_repo/native-qt" "$_repo/icons" "$_repo/tools" "$_repo/patches" .
   install -Dm644 "$_repo/packaging/systemd/vivo-connect-p2p.service" packaging/systemd/vivo-connect-p2p.service
   node "$_repo/packaging/arch/collect-official.cjs" "$_official" analysis/app
   if [[ -f "$_apk" ]]; then install -m644 "$_apk" samples/windows/v7.0.6.0-cn/pcsuite/updateApk/pcsuite.apk; fi
@@ -33,11 +33,7 @@ prepare() {
     install -m644 "$VIVO_ICON" icon.png
     python -c 'import pathlib,sys; assert pathlib.Path(sys.argv[1]).read_bytes().startswith(b"\x89PNG\r\n\x1a\n"), "VIVO_ICON must be PNG"' icon.png
   else
-    if [[ -f "$_official/dist/electron/static/logo.ico" ]]; then
-      python "$_repo/packaging/arch/extract-icon.py" "$_official/dist/electron/static/logo.ico" icon.png
-    else
-      python "$_repo/packaging/arch/create-icon.py" icon.png
-    fi
+    install -m644 icons/icon-256.png icon.png
   fi
   sed "s/@DESKTOP_ID@/$_desktop_id/g" "$_repo/packaging/arch/io.github.vivo_connect.VivoConnect.desktop.in" > app.desktop
   desktop-file-validate app.desktop

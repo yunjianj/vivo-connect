@@ -801,7 +801,7 @@ public:
         shortcut(tree,QKeySequence(Qt::Key_F2),[this]{renameSelected();},Qt::WidgetWithChildrenShortcut);
         if (simulatedTray || QSystemTrayIcon::isSystemTrayAvailable()) {
             QIcon icon=QApplication::windowIcon();
-            if (icon.isNull()) icon=QIcon(project+"/analysis/app/dist/electron/static/logo.ico");
+            if (icon.isNull()) icon=QIcon(":/icons/app.png");
             if (icon.isNull()) icon=style()->standardIcon(QStyle::SP_ComputerIcon);
             tray=new QSystemTrayIcon(icon,this); tray->setToolTip("vivo Connect");
             auto *menu=new QMenu(this); auto *open=menu->addAction("打开软件");
@@ -823,7 +823,9 @@ public:
 int main(int argc, char **argv) {
     if (qEnvironmentVariableIsSet("WAYLAND_DISPLAY") && !qEnvironmentVariableIsSet("QT_QPA_PLATFORM")) qputenv("QT_QPA_PLATFORM", "wayland");
     QApplication app(argc,argv); app.setApplicationName("vivo Connect"); app.setDesktopFileName(QString::fromUtf8(VIVO_DESKTOP_ID));
-    app.setWindowIcon(QIcon::fromTheme(QString::fromUtf8(VIVO_DESKTOP_ID)));
+    QIcon appIcon=QDir(QString::fromUtf8(PROJECT_ROOT)).canonicalPath()==QStringLiteral("/usr/lib/vivo-connect") ? QIcon::fromTheme(QString::fromUtf8(VIVO_DESKTOP_ID)) : QIcon();
+    if (appIcon.isNull()) appIcon=QIcon(":/icons/app.png");
+    app.setWindowIcon(appIcon);
     auto args=app.arguments();
     if (args.contains("--self-test")) {
         QTemporaryDir autostartTest;

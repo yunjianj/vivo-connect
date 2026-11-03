@@ -1,39 +1,19 @@
 # 基础后端：账号、手机连接与文件收发
 
-实现位于 [backend/src](../backend/src/server.mjs)，提供本机 REST API 和异步任务。账号登录使用官方 vivo 网页；手机继续运行官方 APK。仓库在 `runtime/windows/v7.0.6.0-cn/app` 中提供 Linux 所需的开源 Node.js 模块闭包，Linux 仅替代 Windows 原生连接服务和 Electron 进程/UI 编排。
+后端位于 [backend/src](../backend/src/server.mjs)，提供本机 REST API 和异步任务，支持账号登录、设备连接、自动重连及文件管理。桌面客户端通常会自动启动后端。
 
-已实现的范围是：官方账号登录回调、账号本地持久化/退出；USB、官方云扫码连接和旧版同网段无线配对；`/version`、`/base-info` 与心跳；浏览手机文件、电脑上传手机、从手机下载到电脑，以及手机文件移动、重命名、删除、创建目录和查询目录大小。文件收发使用手机官方文件 API，不使用 ADB push/pull 替代业务传输。“接收文件”当前是选择手机路径后主动下载，不包括手机分享面板主动推送及后台自动接收。
-
-本地模拟手机集成测试已通过；尚无真实账号登录或真机互通记录。新版 seed/sign 挑战获取和 BLE 发现尚未实现；新增不依赖 BLE 的实验性本地扫码 P2P GO 路径（仍需管理员/真机验证）。对于常规局域网，目标手机若拒绝旧配对，可优先尝试官方扫码连接、USB，或由正常官方配对取得的已有连接 token。
-
-## 官方复用清单
-
-| 部分 | 使用方式 | Linux 的替代范围 |
-|---|---|---|
-| 账号登录 | 直接打开 `passport.vivo.com.cn` 官方登录页，client_id=130，保留官方 psuite 回调地址 | 自动检测浏览器，优先用官方 ChromeDriver/WebDriver 读取回调，CDP 备用；不接收账号密码 |
-| 手机服务 | 官方 `com.vivo.pcsuite`；手机需已安装官方应用，项目不分发 APK | 没有重写手机端 APK |
-| USB | `runtime/windows/v7.0.6.0-cn/app` 中的 `@vivo/adbkit` 2.11.3，Linux Android platform-tools 的 adb | 原 adbkit 丢弃 tcp:0 返回端口，只有分配/移除转发端口用官方 adb CLI |
-| 心跳 | 随包 `ws` 8.20.0 | 重写会话管理，保留手机 WSS 子协议与消息 |
-| 文件归档 | 随包 `tar` 6.2.1、`mime-types` 2.1.35 | 重写任务编排与检查，保留 TAR 传输格式 |
-| 局域网发现/配对 | 保留官方 UDP/TCP 报文 | vivoesService.exe 没有 Linux 实现，使用原生 Node 网络 API 实现协议 |
-
-加载器优先读取 `VIVO_OFFICIAL_APP`，其次仓库内的版本化运行模块，再回退到本地完整提取目录 `analysis/app`；不依赖全局 npm 包。[加载器](../backend/src/core.mjs)
-
-登录参数和凭据顺序的证据是 [renderer loginUrl](../analysis/pretty/renderer.js#L42622)、[官方 preload 回调](../analysis/pretty/preload-welcome.js#L86)、[handleLoginSuccess](../analysis/pretty/renderer.js#L42831)。USB 使用 [DeviceManager](../evidence/main-modules/89.js) 的 activity/service 参数。文件参数及预检规则来自 [手机协议](phone-protocol.md)、[上传预检响应处理](../evidence/main-modules/162.js#L74)；无线报文来源见 [无线配对](wireless-pairing.md)。
+已实现 Wi-Fi Direct、局域网扫码和 USB 连接，以及文件浏览、上传、下载、移动、重命名、删除、创建目录和查询目录大小。“接收文件”是选择手机路径后主动下载，不包括手机分享面板主动推送及后台自动接收。连接和自动重连受设备授权、网络与手机系统版本影响。
 
 ## 运行
 
-需要 Node.js 22 或以上、Python 3（只在提取样本时需要）、Linux Android platform-tools 的 `adb`（USB）、Chromium/Google Chrome（账号网页登录）。测试另需要 OpenSSL 创建本地测试证书；扫码图片和扫码页需要本机 qrencode（Arch Linux 软件包同名）。无需运行 Windows EXE 或安装 Electron。
+需要 Node.js 22 或以上。USB 连接需要 Android platform-tools 的 `adb`；二维码图片需要 `qrencode`；自动账号登录需要 Chromium 或 Google Chrome。Wi-Fi Direct 及服务所需依赖参见[桌面客户端](native-gui.md)和 [Arch 软件包说明](../packaging/arch/README.md)。测试使用 OpenSSL 创建本地测试证书。
 
 ```sh
-# 从仓库根目录执行
-# 已有 analysis/app 时无需重复提取；原始 Windows 样本须保留在 `samples/windows/v7.0.6.0-cn/`
-python tools/extract_asar.py
-# 自动检测已安装的 Chromium/Chrome；有匹配 chromedriver 时优先采用 WebDriver
+# 在仓库根目录运行
 npm start
 ```
 
-无需 `npm install`：运行库直接来自本地官方样本。自动登录会检测系统 Chromium/Chrome，优先使用匹配版本的 chromedriver（Arch Linux 可安装 chromium 和 chromedriver）；无驱动时使用 CDP。可用 VIVO_BROWSER / VIVO_WEBDRIVER 指定路径。自动登录需要桌面图形会话；任意其他浏览器可用手动模式，不读取已有个人浏览器的 Cookie。安装包和提取目录已被 Git 忽略，因此克隆仓库后须在本地另行放置样本并提取。
+运行所需 Node.js 模块已随仓库提供，无需执行 `npm install`。自动登录会检测系统 Chromium/Chrome，优先使用匹配版本的 chromedriver；无驱动时使用 CDP。可通过 `VIVO_BROWSER` 和 `VIVO_WEBDRIVER` 指定路径。自动登录需要桌面图形会话；也可使用其他浏览器手动登录，不读取已有浏览器的 Cookie。
 
 默认只监听 `127.0.0.1:8765`。持久设备 ID、API 凭据放在 `.vivo-connect/config.json`，账号凭据在 `.vivo-connect/account.json`，文件权限为 0600。每次登录使用隔离浏览器目录，登录结束删除，不读取个人日常浏览器的数据。状态目录已加入 `.gitignore`。
 
@@ -43,7 +23,7 @@ npm start
 |---|---|
 | `PORT` | 8765；始终绑定 127.0.0.1 |
 | `VIVO_STATE_DIR` | 仓库根 `.vivo-connect` |
-| `VIVO_OFFICIAL_APP` | 官方 ASAR 提取目录，含 package.json 和 node_modules |
+| `VIVO_OFFICIAL_APP` | 可选，覆盖项目提供的 Node.js 运行模块目录 |
 | `VIVO_BROWSER` | 可选，覆盖自动检测到的 Chromium/Chrome 路径 |
 | `VIVO_WEBDRIVER` | 可选，chromedriver 路径；默认在 PATH 中查找 |
 | `QRENCODE` | 可选，qrencode 可执行文件路径；生成二维码图片，默认从 PATH 查找 |

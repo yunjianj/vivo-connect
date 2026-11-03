@@ -1,51 +1,57 @@
 # vivo Connect
 
-基于 vivo Windows 客户端 **7.0.6.0-cn** 与配套 Android APK 进行协议分析，并实现 Linux 手机连接、文件管理和桌面客户端。当前桌面界面使用 C++ / Qt Widgets，复用本机 Node.js 后端。
+适用于 Linux 的 vivo 手机连接与文件管理工具。桌面客户端使用 C++ 和 Qt Widgets，支持 Wayland，并通过本机后端管理设备连接和文件传输。
 
-## 快速开始
+## 功能
 
-需要 Node.js 22+、Qt 6 Widgets/Network/DBus、CMake、FUSE 3、Python、qrencode，以及项目说明中列出的无线与 Android 工具。运行桌面客户端：
+- 使用 vivo 账号登录，通过 Wi-Fi Direct 或局域网扫码连接手机；后端也支持 USB 连接。
+- 浏览手机共享存储，上传、接收、移动、重命名和删除文件，支持拖放、右键菜单与快捷键。
+- 同步文本剪贴板，查看和取消文件传输任务。
+- 断线后尝试自动重连；支持托盘后台运行和登录桌面时自动启动。
+- 可选 Wi-Fi Direct 持久服务，供后续连接使用。
+
+功能可用性取决于手机型号、系统版本、授权状态和网络环境；Wi-Fi Direct 重启后可能需要重新扫码。详见[桌面客户端使用说明](docs/native-gui.md)。
+
+## Arch Linux 安装
+
+在项目根目录构建并安装：
+
+```sh
+./packaging/arch/build.sh
+sudo pacman -U build/packages/vivo-connect-0.1.0-4-x86_64.pkg.tar.zst
+```
+
+从应用菜单或运行 `vivo-connect` 启动。依赖、桌面图标定制、Wi-Fi Direct 服务及卸载说明见 [Arch Linux 软件包](packaging/arch/README.md)。
+
+## 从源码运行
+
+需要 Node.js 22+、C++17 编译器、CMake、pkg-config、Qt 6 Widgets/Network/DBus、Qt Wayland、FUSE 3 开发库和 `qrencode`。Wi-Fi Direct、USB 和自动账号登录还需要相应的系统组件，详见[桌面客户端](docs/native-gui.md)和[后端说明](docs/backend.md)。
 
 ```sh
 ./tools/run-native.sh
 ```
 
-也可单独运行后端：
+客户端会启动本机后端。也可以在项目根目录单独运行 `npm start`，并参考[本机 API 文档](docs/backend.md)。
+
+## 使用与故障排查
+
+1. 启动客户端并登录账号，在“添加设备”中选择连接方式。
+2. 使用 Wi-Fi Direct 时，选择无线网卡并按提示授权；也可在“Wi-Fi Direct 设置”中启用持久服务。
+3. 扫描二维码、在手机上确认连接。连接后可在“手机文件”中管理文件。
+4. 关闭主窗口后，系统托盘可用时程序继续在后台运行；通过托盘菜单退出程序。
+
+连接失败、扫码、传输及服务错误的说明和排查方法见[后端文档](docs/backend.md)，桌面操作和已知限制见[桌面客户端文档](docs/native-gui.md)。
+
+## 文档与测试
+
+- [文档索引](docs/README.md)
+- [后端运行与 API](docs/backend.md)
+- [桌面客户端](docs/native-gui.md)
+- [Arch Linux 构建与安装](packaging/arch/README.md)
+
+在项目根目录运行测试：
 
 ```sh
-npm start
+npm test
+./tools/test-native-qt.sh
 ```
-
-Arch Linux 软件包可直接通过 `./packaging/arch/build.sh` 构建。安装、依赖和定制方式见 [Arch 打包说明](packaging/arch/README.md)。
-
-## 文档
-
-[文档索引](docs/README.md)按上手运行、协议分析、逆向索引和移植参考整理了全部文档。常用入口：
-
-- [后端运行和 API](docs/backend.md)
-- [Qt 桌面客户端](docs/native-gui.md)
-- [官方账号重连协议](docs/official-reconnect.md)
-- [手机连接与文件管理协议](docs/phone-protocol.md)
-- [Windows 样本与版本说明](samples/windows/v7.0.6.0-cn/README.md)
-
-## 样本与分析范围
-
-Windows 原版安装包与完整提取目录按版本放在 `samples/windows/v7.0.6.0-cn/`，并由 Git 忽略；这些样本只用于再分析。Linux 运行所需的开源 Node.js 模块闭包已单独放在 `runtime/windows/v7.0.6.0-cn/`，克隆后无需准备 Windows 安装包。手机端官方 APK 不随公开仓库分发；手机已安装官方应用时可直接连接，需要安装时请通过 vivo 官方渠道获取。公开仓库不包含 Windows 安装包、程序主体、账号配置或构建缓存。
-
-仓库中的 `evidence/` 保存静态分析索引与验证记录；`analysis/` 是从本机样本生成的完整提取产物，默认不纳入版本控制。静态证据不能代替不同手机、系统版本和网络条件下的实机验证。
-
-## 重新生成静态索引
-
-在仓库根目录执行。流程只读取本地样本，不启动 Windows 程序、不安装 APK，也不连接手机或远端服务：
-
-```sh
-python tools/extract_asar.py
-node tools/format_bundles.cjs
-node tools/index_interfaces.cjs
-node tools/catalog_interfaces.cjs
-python tools/native_inventory.py
-python tools/build_http_index.py
-python tools/verify_evidence.py
-```
-
-缺失的 ASAR unpacked 文件会记入 `evidence/extraction.json`，不会伪装成已恢复源码。公开运行模块遵循其随包许可证；项目没有授予 vivo 安装包、商标或手机 APK 的再分发许可，请按各权利人的条款使用本地样本。

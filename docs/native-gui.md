@@ -8,7 +8,7 @@
 ./tools/run-native.sh
 ```
 
-`npm run ui` 和 `npm run scan` 也调用此入口。启动时会通过 CMake 检查并构建，依赖 Node.js、C++17 编译器、CMake、pkg-config、FUSE 3 开发库、Qt 6 Widgets/Network/DBus 和 Qt Wayland 平台插件；普通文件拖出还需可用的 `/dev/fuse` 与 `fusermount3`，扫码需要 `qrencode`。界面自动启动并等待后端就绪，关闭时停止由它启动的后端。如果对应端口上已有使用相同状态目录的后端，界面会复用它，关闭界面不会停止该后端。多个界面复用同一个自动启动的后端时，启动后端的那个界面关闭会停止它。
+`npm run ui` 和 `npm run scan` 也调用此入口。启动时会通过 CMake 检查并构建，依赖 Node.js、C++17 编译器、CMake、pkg-config、FUSE 3 开发库、Qt 6 Widgets/Network/DBus 和 Qt Wayland 平台插件；普通文件拖出还需可用的 `/dev/fuse` 与 `fusermount3`，扫码需要 `qrencode`。界面自动启动并等待后端就绪，退出程序时停止由它启动的后端。如果对应端口上已有使用相同状态目录的后端，界面会复用它，退出时不会停止该后端。多个界面复用同一个自动启动的后端时，启动后端的那个界面退出会停止它。
 
 默认从 `.vivo-connect/config.json` 读取本机访问凭据，支持 `--state-dir`、`--port` 和 `VIVO_STATE_DIR`、`PORT`。凭据仅发送至本机后端，不写入 GUI 日志。可用 `--quit-after 秒数` 进行短时启动检查。
 
