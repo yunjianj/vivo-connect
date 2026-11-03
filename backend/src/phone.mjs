@@ -10,6 +10,7 @@ import { ApiError, official, requireThat, ROOT, tokenFor, abortError } from './c
 import { request, requestJson, checkBusiness } from './http.mjs';
 import { pairLan, discover } from './pairing.mjs';
 import { selectInterface } from './network.mjs';
+import { receiveClipboard } from './clipboard.mjs';
 const exec = promisify(execFile);
 
 export class PhoneManager {
@@ -139,11 +140,12 @@ export class PhoneManager {
     const ws = s.ws = new WebSocket(s.baseUrl.replace(/^http/, 'ws') + '/ws/heart-beat',
       ['v1.hc.vivo.com.cn', s.token], { rejectUnauthorized: s.rejectUnauthorized, localAddress: s.localIp, handshakeTimeout: 10000, maxPayload: 4 * 1024 * 1024 });
     ws.on('error', () => { s.status = 'disconnected'; s.lastError = '心跳连接异常'; });
-    ws.on('close', () => { clearInterval(s.heartTimer); s.status = 'disconnected'; });
+    ws.on('close', () => { clearInterval(s.heartTimer); s.status = 'disconnected'; delete s.clipboard; });
     let lastResponse = Date.now();
     ws.on('pong', () => { lastResponse = Date.now(); });
-    ws.on('message', data => {
+    ws.on('message', (data, isBinary) => {
       s.lastMessageAt = lastResponse = Date.now();
+      if (s.status !== 'disconnected') receiveClipboard(s, data, isBinary);
       if (data.toString() === 'close') { s.lastError = '手机关闭了会话'; ws.close(); }
     });
     await once(ws, 'open', { signal });
@@ -161,18 +163,21 @@ export class PhoneManager {
   async transferResult(s, outcome, params) {
     const prefix = { success: 'TRANS_FILE_SUCCESS:', fail: 'TRANS_FILE_FAIL:', cancel: 'TRANS_FILE_CANCEL:' }[outcome];
     requireThat(prefix, '传输结果类型无效');
-    if (s.status !== 'connected' || s.ws?.readyState !== 1) throw new ApiError(502, 'TRANSFER_NOTIFY_FAILED', '手机连接已断开，无法通知传输结果');
+    return this.sendMessage(s, prefix + JSON.stringify(params), 'TRANSFER_NOTIFY_FAILED', '无法通知手机传输结果');
+  }
+  async sendMessage(s, message, code, messageText) {
+    if (s.status !== 'connected' || s.ws?.readyState !== 1) throw new ApiError(502, code, messageText);
     await new Promise((resolve, reject) => {
-      const timer = setTimeout(() => reject(new ApiError(504, 'TRANSFER_NOTIFY_FAILED', '通知手机传输结果超时')), 5000);
+      const timer = setTimeout(() => reject(new ApiError(504, code, messageText)), 5000);
       try {
-        s.ws.send(prefix + JSON.stringify(params), error => {
+        s.ws.send(message, error => {
           clearTimeout(timer);
-          if (error) reject(new ApiError(502, 'TRANSFER_NOTIFY_FAILED', '无法发送手机传输结果'));
+          if (error) reject(new ApiError(502, code, messageText));
           else resolve();
         });
       } catch {
         clearTimeout(timer);
-        reject(new ApiError(502, 'TRANSFER_NOTIFY_FAILED', '无法发送手机传输结果'));
+        reject(new ApiError(502, code, messageText));
       }
     });
   }
@@ -185,6 +190,7 @@ export class PhoneManager {
     return value;
   }
   async cleanup(s) {
+    delete s.clipboard;
     clearInterval(s.heartTimer); s.ws?.terminate();
     if (s.forwardPort) await exec(process.env.ADB || 'adb', ['-s', s.serial, 'forward', '--remove', `tcp:${s.forwardPort}`], { timeout: 5000 }).catch(() => {});
   }

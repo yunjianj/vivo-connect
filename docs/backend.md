@@ -295,6 +295,32 @@ curl -X POST -H "Authorization: Bearer $TOKEN" -H 'Content-Type: application/jso
 
 `GET /api/jobs/<id>/file?path=<result.files中的相对路径>` 可以通过带鉴权 HTTP 取回已完成文件。只允许访问该任务结果清单中的文件。
 
+## 文本剪贴板同步
+
+后端复用手机 `/ws/heart-beat` 通道中的 `CLIPBOARD_TEXT:` 消息，支持 USB、LAN、Wi-Fi Direct 等已连接会话。每个会话在内存中保留最新一条文本，不落盘、不输出正文日志，也不在设备列表或任务列表中返回内容。协议按前缀后原始文本处理，保留冒号、换行、Unicode 和空字符串，不将文本解析为 JSON 或命令。仅支持文本，单条最多 64 KiB（UTF-8 字节数），超限手机消息和二进制消息直接忽略。
+
+需要完整本地 API Bearer token；旧网页票据不能访问这些接口：
+
+| 方法 | 路径 | 用途 / 请求体 |
+|---|---|---|
+| GET | `/api/sessions/<id>/clipboard` | 读取该会话最新文本和同步状态 |
+| PUT | `/api/sessions/<id>/clipboard` | 向手机发送 `{"text":"电脑上的文本"}`，空文本为 `{"text":""}` |
+| PATCH | `/api/sessions/<id>/clipboard` | 本地暂停或恢复：`{"enabled":false}` / `{"enabled":true}` |
+
+GET 返回 `{enabled,text,revision,source,updatedAt}`。尚未收到或发送文本时 `text/source/updatedAt` 为 null；`source` 为 `phone` 或 `pc`。客户端可轮询 `revision` 判断是否更新，并将 `source=phone` 的新文本写入桌面系统剪贴板；桌面剪贴板变化时调用 PUT。同一文本重复收到或写入不会增加 revision，也不会回传手机，PUT 用 `sent=false` 标记跳过；`sent=true` 仅表示 WebSocket 发送完成，手机没有单独的写入确认消息。
+
+```sh
+curl -H "Authorization: Bearer $TOKEN" \
+  "http://127.0.0.1:8765/api/sessions/$SESSION_ID/clipboard"
+curl -X PUT -H "Authorization: Bearer $TOKEN" -H 'Content-Type: application/json' \
+  -d '{"text":"从电脑同步到手机📋"}' \
+  "http://127.0.0.1:8765/api/sessions/$SESSION_ID/clipboard"
+```
+
+会话默认接收文本，暂停时清除缓存并忽略手机后续文本，恢复后等待新的文本。此开关仅控制本地处理，不修改手机设置。断开或重连清空缓存并重置状态，客户端重新建立会话后应重新读取配置；多台手机之间不自动广播内容。暂停写入返回 `409 CLIPBOARD_DISABLED`，断连返回 `409 SESSION_DISCONNECTED`，同一会话并发发送返回 `409 CLIPBOARD_BUSY`，发送失败或超时返回 `CLIPBOARD_SEND_FAILED` 且不缓存未发送文本。
+
+Qt 客户端提供当前设备的文本剪贴板双向同步和暂停开关，KDE Wayland 下使用 Klipper 读取后台变化；Slint 客户端尚未接入。协议来源见 [sendClipboardText](../analysis/pretty/app-connection.js#L12598) 和 [接收处理](../analysis/pretty/app-connection.js#L16572)。后端已使用模拟手机验证双向文本、重复抑制、暂停、清理、隔离、大小限制及发送竞争；真实手机可能仍需开启系统互联剪贴板权限。
+
 ## 手机文件管理
 
 以下接口均为 `POST /api/sessions/<sessionId>/files/<操作>`，使用本地 API Bearer token 和 JSON 请求体；会话必须已连接。它们同步返回 HTTP 200 和结果，无需轮询任务。原有 `POST .../files` 列表接口保持不变。

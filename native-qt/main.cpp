@@ -1,5 +1,6 @@
 #include <QtWidgets>
 #include <QtNetwork>
+#include <QtDBus>
 #include <functional>
 
 static bool invalidMoveTarget(QString source, QString target) {
@@ -27,7 +28,8 @@ public:
         req.setHeader(QNetworkRequest::ContentTypeHeader, "application/json");
         req.setAttribute(QNetworkRequest::RedirectPolicyAttribute, QNetworkRequest::ManualRedirectPolicy);
         req.setTransferTimeout(25000);
-        QNetworkReply *reply = method == "GET" ? net.get(req) : method == "DELETE" ? net.deleteResource(req) : net.post(req, QJsonDocument(body).toJson(QJsonDocument::Compact));
+        QByteArray payload=QJsonDocument(body).toJson(QJsonDocument::Compact);
+        QNetworkReply *reply = method == "GET" ? net.get(req) : method == "DELETE" ? net.deleteResource(req) : method == "PUT" ? net.put(req,payload) : method == "PATCH" ? net.sendCustomRequest(req,"PATCH",payload) : net.post(req,payload);
         QEventLoop loop; QObject::connect(reply, &QNetworkReply::finished, &loop, &QEventLoop::quit); loop.exec();
         const int status = reply->attribute(QNetworkRequest::HttpStatusCodeAttribute).toInt();
         QJsonParseError parse; const auto doc = QJsonDocument::fromJson(reply->readAll(), &parse);
@@ -162,8 +164,22 @@ public:
     void moved(int direction) { if (!target(direction).isEmpty()) current+=direction; }
 };
 
+static void showAccountState(QLabel *label, QPushButton *button, const QJsonObject &account, bool available) {
+    if (!available) { label->setText("账号状态不可用"); button->hide(); return; }
+    const bool loggedIn=account.value("loggedIn").toBool();
+    const auto login=account.value("login").toObject();
+    const bool waiting=!loggedIn && login.value("status").toString()=="waiting";
+    const bool failed=!loggedIn && login.value("status").toString()=="failed";
+    QString name=account.value("nickName").toString().trimmed();
+    label->setText(loggedIn ? (name.isEmpty()?"vivo 账号已登录":"已登录："+name)
+                   : waiting ? "正在等待账号登录…" : failed ? "账号登录未完成" : "vivo 账号未登录");
+    label->setToolTip(failed ? login.value("error").toString() : QString());
+    button->setText(failed?"重试登录":"登录账号");
+    button->setEnabled(!waiting); button->setVisible(!loggedIn);
+}
+
 class Window : public QMainWindow {
-    Api api;
+    Api api, clipboardApi;
     QString project, state, selected, directory = "/storage/emulated/0", root = "/storage/emulated/0";
     QJsonArray sessions;
     QListWidget *devices = new QListWidget;
@@ -172,7 +188,14 @@ class Window : public QMainWindow {
     QLineEdit *search = new QLineEdit;
     QLabel *info = new QLabel("正在连接本机服务…");
     QLabel *account = new QLabel;
+    QPushButton *accountButton = new QPushButton("登录账号");
+    QPushButton *reconnectButton = new QPushButton("重新连接"), *disconnectButton = new QPushButton("断开连接");
+    QCheckBox *clipboardToggle = new QCheckBox("同步文本剪贴板");
     QTimer poll;
+    QTimer clipboardTimer;
+    QString clipboardSession, clipboardBaseline, clipboardPending;
+    qint64 clipboardRevision = -1;
+    bool clipboardInitialized=false, clipboardEnabled=false, clipboardBusy=false, clipboardApplying=false, clipboardHasBaseline=false, clipboardHasPending=false;
     DirectoryHistory history;
     bool refreshing = false, waitingDirect = false;
     QString connectJob, pairJob, lease;
@@ -196,6 +219,55 @@ class Window : public QMainWindow {
     QString apiPath(QString p) const { p = actual(p); return p == root ? "/" : p; }
     bool connected() const { for (auto s : sessions) if (s.toObject().value("id").toString() == selected && s.toObject().value("status") == "connected") return true; return false; }
     QString route(QString suffix) const { return "/api/sessions/" + selected + suffix; }
+    bool kdeClipboardText(QString &text) {
+        QDBusInterface klipper("org.kde.klipper", "/klipper", "org.kde.klipper.klipper", QDBusConnection::sessionBus());
+        if (!klipper.isValid()) return false;
+        QDBusReply<QString> result=klipper.call("getClipboardContents");
+        if (!result.isValid()) return false;
+        text=result.value(); return true;
+    }
+    void resetClipboard() {
+        clipboardSession.clear(); clipboardRevision=-1; clipboardInitialized=false; clipboardEnabled=false;
+        clipboardHasBaseline=false; clipboardHasPending=false; clipboardBaseline.clear(); clipboardPending.clear();
+        QSignalBlocker block(clipboardToggle); clipboardToggle->setChecked(false); clipboardToggle->setEnabled(false);
+    }
+    void updateClipboard() {
+        if (clipboardBusy) return;
+        if (!connected()) { resetClipboard(); return; }
+        if (clipboardSession!=selected) { resetClipboard(); clipboardSession=selected; }
+        clipboardBusy=true; const QString session=clipboardSession, path=route("/clipboard");
+        auto value=clipboardApi.call("GET",path).toObject();
+        if (session!=selected || !connected()) { clipboardBusy=false; resetClipboard(); return; }
+        if (!clipboardApi.error.isEmpty()) { clipboardBusy=false; clipboardToggle->setEnabled(false); clipboardToggle->setToolTip("剪贴板同步接口不可用："+clipboardApi.error); return; }
+        clipboardEnabled=value.value("enabled").toBool();
+        { QSignalBlocker block(clipboardToggle); clipboardToggle->setEnabled(true); clipboardToggle->setChecked(clipboardEnabled); }
+        clipboardToggle->setToolTip("同步当前设备的文本；关闭后清除本次同步状态");
+        qint64 revision=qint64(value.value("revision").toDouble());
+        if (clipboardEnabled && value.value("source").toString()=="phone" && value.value("text").isString() && revision!=clipboardRevision) {
+            QString text=value.value("text").toString(); clipboardApplying=true; clipboardBaseline=text; clipboardHasBaseline=true; clipboardHasPending=false;
+            QDBusInterface klipper("org.kde.klipper", "/klipper", "org.kde.klipper.klipper", QDBusConnection::sessionBus());
+            bool written=klipper.isValid() && klipper.call("setClipboardContents",text).type()!=QDBusMessage::ErrorMessage;
+            if (!written) QApplication::clipboard()->setText(text);
+            clipboardApplying=false;
+        }
+        clipboardRevision=revision;
+        QString observed; bool kde=kdeClipboardText(observed);
+        const auto *mime=QApplication::clipboard()->mimeData();
+        if (kde && !(mime && mime->hasUrls()) && (!observed.isEmpty() || (mime && mime->hasText()) || !clipboardHasBaseline)) {
+            if (clipboardInitialized && clipboardEnabled && clipboardHasBaseline && observed!=clipboardBaseline) { clipboardPending=observed; clipboardHasPending=true; }
+            clipboardBaseline=observed; clipboardHasBaseline=true;
+        }
+        clipboardInitialized=true;
+        if (clipboardEnabled && clipboardHasPending) {
+            QString text=clipboardPending; clipboardHasPending=false;
+            if (text.toUtf8().size()>65536) report("剪贴板文本超过 64 KiB，未同步");
+            else {
+                clipboardApi.call("PUT",path,{{"text",text}});
+                if (!clipboardApi.error.isEmpty() && session==selected) report("剪贴板同步失败："+clipboardApi.error);
+            }
+        }
+        clipboardBusy=false;
+    }
     void refresh() {
         if (refreshing) return;
         refreshing = true;
@@ -215,7 +287,9 @@ class Window : public QMainWindow {
             if (o.value("id").toString() == selected) { devices->setCurrentItem(item); QString r = phone.value("innerRoot").toString(); if (!r.isEmpty() && r != "/") root = r; }
           }
         }
-        auto acc = api.call("GET", "/api/account").toObject(); account->setText(acc.value("loggedIn").toBool() ? "vivo 账号已登录" : "登录 vivo 账号");
+        reconnectButton->setEnabled(!selected.isEmpty() && !connected()); disconnectButton->setEnabled(connected());
+        auto acc = api.call("GET", "/api/account").toObject();
+        showAccountState(account,accountButton,acc,api.error.isEmpty());
         if (!connectJob.isEmpty()) {
             auto job = api.call("GET", "/api/jobs/" + connectJob).toObject(); QString status = job.value("status").toString();
             if (status == "succeeded") { selected = job.value("result").toObject().value("id").toString(); connectJob.clear(); report("手机已连接"); QTimer::singleShot(0, this, [this]{ browse(root); }); }
@@ -228,7 +302,7 @@ class Window : public QMainWindow {
             if (status == "succeeded") { selected = job.value("result").toObject().value("id").toString(); pairJob.clear(); if (pairDialog) pairDialog->accept(); report("手机已连接"); QTimer::singleShot(0, this, [this]{ browse(root); }); }
             else if (status == "failed" || status == "cancelled") { pairJob.clear(); if (pairStatus) pairStatus->setText(job.value("error").toObject().value("message").toString("连接已结束，请刷新二维码")); }
         }
-        int desired = (waitingDirect || !pairJob.isEmpty() || !connectJob.isEmpty()) ? 1000 : 5000;
+        int desired = (waitingDirect || !pairJob.isEmpty() || !connectJob.isEmpty() || acc.value("login").toObject().value("status").toString()=="waiting") ? 1000 : 5000;
         if (poll.interval() != desired) poll.setInterval(desired);
         refreshing = false;
     }
@@ -410,7 +484,7 @@ class Window : public QMainWindow {
     }
     void pair() {
         QDialog dialog(this); pairDialog=&dialog; dialog.setWindowTitle("连接手机"); dialog.resize(430, 500); QVBoxLayout layout(&dialog);
-        QComboBox modes; modes.addItems({"Wi-Fi Direct · 保留校园网", "局域网扫码"}); pairMode=&modes; layout.addWidget(&modes);
+        QComboBox modes; modes.addItems({"Wi-Fi Direct", "局域网扫码"}); pairMode=&modes; layout.addWidget(&modes);
         QComboBox interfaces; wireless=&interfaces; QDir net("/sys/class/net"); for (auto name : net.entryList(QDir::Dirs|QDir::NoDotAndDotDot)) if (!name.startsWith("p2p-") && QFileInfo::exists(net.filePath(name+"/wireless"))) interfaces.addItem(name); layout.addWidget(&interfaces);
         QLabel image; image.setFixedSize(280,280); image.setAlignment(Qt::AlignCenter); qrLabel=&image; layout.addWidget(&image,0,Qt::AlignCenter);
         QLabel status("选择方式并生成二维码"); status.setWordWrap(true); pairStatus=&status; layout.addWidget(&status);
@@ -433,14 +507,15 @@ protected:
         QMainWindow::closeEvent(event);
     }
 public:
-    Window(QString project, QString state, int port) : api(state, port), project(std::move(project)), state(std::move(state)), port(port) {
+    Window(QString project, QString state, int port) : api(state, port), clipboardApi(state,port), project(std::move(project)), state(std::move(state)), port(port) {
         setWindowTitle("vivo Connect · 手机文件"); resize(1080,760); setMinimumSize(820,620);
         qApp->installEventFilter(new MouseNavigation(this,[this](int direction){navigateHistory(direction);}));
         auto *central = new QWidget; setCentralWidget(central); auto *outer = new QHBoxLayout(central); outer->setContentsMargins(0,0,0,0); outer->setSpacing(0);
         auto *sidebar = new QWidget; sidebar->setFixedWidth(230); sidebar->setObjectName("sidebar"); auto *side = new QVBoxLayout(sidebar); side->setContentsMargins(18,18,18,18);
         auto *brand = new QLabel("↔  vivo Connect"); QFont brandFont=brand->font(); brandFont.setPointSize(17); brandFont.setBold(true); brand->setFont(brandFont); side->addWidget(brand); side->addWidget(new QLabel("我的设备")); side->addWidget(devices,1);
-        auto *pairButton = new QPushButton("＋ 添加设备"); auto *reconnectButton = new QPushButton("重新连接"); auto *disconnectButton = new QPushButton("断开连接"); auto *accountButton = new QPushButton("登录账号"); auto *jobs = new QPushButton("传输记录");
-        side->addWidget(pairButton); side->addWidget(reconnectButton); side->addWidget(disconnectButton); side->addWidget(jobs); side->addWidget(account); side->addWidget(accountButton); outer->addWidget(sidebar);
+        auto *pairButton = new QPushButton("＋ 添加设备"); auto *jobs = new QPushButton("传输记录");
+        account->setText("正在获取账号状态…"); accountButton->hide(); reconnectButton->setEnabled(false); disconnectButton->setEnabled(false);
+        side->addWidget(pairButton); side->addWidget(reconnectButton); side->addWidget(disconnectButton); side->addWidget(jobs); clipboardToggle->setEnabled(false); side->addWidget(clipboardToggle); side->addWidget(account); side->addWidget(accountButton); outer->addWidget(sidebar);
         auto *content = new QWidget; auto *column = new QVBoxLayout(content); column->setContentsMargins(28,24,28,24); column->setSpacing(12);
         auto *heading = new QLabel("手机文件"); QFont h=heading->font();h.setPointSize(20);h.setBold(true);heading->setFont(h);column->addWidget(heading);
         auto *nav = new QHBoxLayout; auto *back = new QPushButton("←"); auto *forward = new QPushButton("→"); back->setToolTip("后退 (Alt+←)"); forward->setToolTip("前进 (Alt+→)"); auto *home = new QPushButton("手机存储"); auto *up = new QPushButton("上一级"); auto *reload = new QPushButton("刷新"); path->setText(root + "/"); nav->addWidget(back);nav->addWidget(forward);nav->addWidget(home);nav->addWidget(up);nav->addWidget(path,1);nav->addWidget(reload);column->addLayout(nav);
@@ -452,7 +527,22 @@ public:
         tree->dragStatus=[this](QString message){ report(message); };
         connect(devices,&QListWidget::currentItemChanged,this,[this](QListWidgetItem *item){ if (!item) return; selected=item->data(Qt::UserRole).toString(); history.select(selected); directory=root; tree->clear(); refresh(); if (connected()) browse(root); });
         connect(pairButton,&QPushButton::clicked,this,[this]{ pair(); });
-        connect(accountButton,&QPushButton::clicked,this,[this]{ auto a=api.call("GET","/api/account").toObject(); if (!a.value("loggedIn").toBool()) { api.call("POST","/api/account/login"); report(api.error.isEmpty()?"请在官方登录窗口完成登录":api.error, !api.error.isEmpty()); } });
+        connect(clipboardToggle,&QCheckBox::clicked,this,[this](bool enabled){
+            if (!connected() || clipboardBusy || clipboardSession!=selected) { updateClipboard(); return; }
+            clipboardBusy=true; QString session=selected;
+            clipboardApi.call("PATCH",route("/clipboard"),{{"enabled",enabled}});
+            QString error=clipboardApi.error; clipboardBusy=false;
+            clipboardHasPending=false;
+            if (!error.isEmpty() && session==selected) report("剪贴板设置失败："+error);
+            updateClipboard();
+        });
+        connect(QApplication::clipboard(),&QClipboard::dataChanged,this,[this]{
+            if (clipboardApplying || !clipboardInitialized || !clipboardEnabled || clipboardSession!=selected || !connected()) return;
+            auto *mime=QApplication::clipboard()->mimeData(); if (!mime || !mime->hasText() || mime->hasUrls()) return;
+            QString text=mime->text(); if (clipboardHasBaseline && text==clipboardBaseline) return;
+            clipboardBaseline=text; clipboardHasBaseline=true; clipboardPending=text; clipboardHasPending=true;
+        });
+        connect(accountButton,&QPushButton::clicked,this,[this]{ api.call("POST","/api/account/login"); auto error=api.error; report(error.isEmpty()?"请在官方登录窗口完成登录":error,!error.isEmpty()); refresh(); });
         connect(disconnectButton,&QPushButton::clicked,this,[this]{ if (!connected()) return; api.call("POST",route("/disconnect")); report(api.error.isEmpty()?"已断开连接":api.error,!api.error.isEmpty()); refresh(); });
         connect(reconnectButton,&QPushButton::clicked,this,[this]{ if (connected()) { report("手机已连接"); return; } if (selected.isEmpty()) { pair(); return; } auto r=api.call("POST",route("/reconnect")).toObject(); if (!api.error.isEmpty()) { report(api.error); pair(); } else { connectJob=r.value("id").toString(); report("正在重新连接…"); } });
         connect(jobs,&QPushButton::clicked,this,[this]{ showJobs(); }); connect(back,&QPushButton::clicked,this,[this]{navigateHistory(-1);}); connect(forward,&QPushButton::clicked,this,[this]{navigateHistory(1);}); connect(home,&QPushButton::clicked,this,[this]{ browse(root); }); connect(up,&QPushButton::clicked,this,[this]{ goUp(); }); connect(reload,&QPushButton::clicked,this,[this]{ browse(directory); }); connect(path,&QLineEdit::returnPressed,this,[this]{ browse(path->text()); });
@@ -474,6 +564,7 @@ public:
         shortcut(tree,QKeySequence(Qt::Key_Delete),[this]{deleteSelected();},Qt::WidgetWithChildrenShortcut);
         shortcut(tree,QKeySequence(Qt::Key_F2),[this]{renameSelected();},Qt::WidgetWithChildrenShortcut);
         connect(&poll,&QTimer::timeout,this,[this]{refresh();}); poll.start(1500);
+        connect(&clipboardTimer,&QTimer::timeout,this,[this]{updateClipboard();}); clipboardTimer.start(1200);
         if (!api.valid()) report("找不到后端配置，请先启动后端"); else QTimer::singleShot(0, this, [this]{ refresh(); if (connected()) browse(root); });
     }
 };
@@ -482,6 +573,15 @@ int main(int argc, char **argv) {
     QApplication app(argc,argv); app.setApplicationName("vivo Connect");
     auto args=app.arguments();
     if (args.contains("--self-test")) {
+        QLabel accountLabel; QPushButton loginButton;
+        showAccountState(&accountLabel,&loginButton,{{"loggedIn",true}},true);
+        if (!loginButton.isHidden() || accountLabel.text()!="vivo 账号已登录") return 24;
+        showAccountState(&accountLabel,&loginButton,{{"loggedIn",false},{"login",QJsonObject{{"status","waiting"}}}},true);
+        if (loginButton.isHidden() || loginButton.isEnabled()) return 25;
+        showAccountState(&accountLabel,&loginButton,{{"loggedIn",false},{"login",QJsonObject{{"status","failed"}}}},true);
+        if (loginButton.isHidden() || !loginButton.isEnabled() || loginButton.text()!="重试登录") return 26;
+        showAccountState(&accountLabel,&loginButton,{},false);
+        if (!loginButton.isHidden() || accountLabel.text()!="账号状态不可用") return 27;
         if (!invalidMoveTarget("/storage/emulated/0/a", "/storage/emulated/0/a") ||
             !invalidMoveTarget("/storage/emulated/0/a", "/storage/emulated/0/a/sub") ||
             !invalidMoveTarget("/storage/emulated/0/a", "/storage/emulated/0") ||
@@ -532,6 +632,10 @@ int main(int argc, char **argv) {
         Api mock(temporary.path(), server.serverPort());
         if (!mock.call("POST", "/api/test", {{"name", "example"}}).toObject().value("ok").toBool()) return 10;
         if (!request.toLower().contains("authorization: bearer qt-test-token") || !request.contains("\"name\":\"example\"")) return 11;
+        request.clear(); mock.call("PUT", "/api/test", {{"text", "clipboard-test"}});
+        if (!mock.error.isEmpty() || !request.startsWith("PUT /api/test ") || !request.contains("clipboard-test")) return 22;
+        request.clear(); mock.call("PATCH", "/api/test", {{"enabled", false}});
+        if (!mock.error.isEmpty() || !request.startsWith("PATCH /api/test ") || !request.contains("\"enabled\":false")) return 23;
         server.close();
         mock.call("GET", "/api/p2p/status");
         if (!mock.error.contains("后端") || !mock.error.contains("--port")) return 12;

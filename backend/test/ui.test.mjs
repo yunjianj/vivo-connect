@@ -27,6 +27,10 @@ test('local scan UI redeems a one-use ticket and grants only scoped APIs',async 
  assert.equal((await redeem()).status,401);
  const allowed=await fetch(base+'/api/account',{headers:{Authorization:`Bearer ${token}`}});assert.equal(allowed.status,200);
  const denied=await fetch(base+'/api/sessions/phone/uploads',{method:'POST',headers:{Authorization:`Bearer ${token}`}});assert.equal(denied.status,401);
+ for(const method of ['GET','PUT','PATCH']) {
+  const response=await fetch(base+'/api/sessions/phone/clipboard',{method,headers:{Authorization:`Bearer ${token}`}});
+  assert.equal(response.status,401);
+ }
  app.accounts.start=async()=>({status:'waiting'});
  assert.equal((await fetch(base+'/api/account/login',{method:'POST',headers:{Authorization:`Bearer ${token}`}})).status,202);
  assert.equal((await fetch(base+'/api/p2p/register',{method:'POST',headers:{Authorization:`Bearer ${token}`}})).status,401);

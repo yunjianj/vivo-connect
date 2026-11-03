@@ -14,6 +14,7 @@ import { collect } from '../src/http.mjs';
 import { encodeFrame, Decoder, pairLan, searchPacket, parseDiscovery } from '../src/pairing.mjs';
 import { loginUrl, isLoginCallback, parseLoginPayload, AccountManager } from '../src/account.mjs';
 import { inspectTar, validArchivePath, sha256 } from '../src/transfers.mjs';
+import { ClipboardManager, receiveClipboard, CLIPBOARD_LIMIT } from '../src/clipboard.mjs';
 
 async function temp(t) {
   const dir = await fs.mkdtemp(path.join(os.tmpdir(), 'vivo-backend-test-'));
@@ -76,7 +77,8 @@ async function mockPhone(t, dir) {
     records.protocols = req.headers['sec-websocket-protocol'];
     socket.on('message', data => {
       const message = data.toString();
-      if (message.startsWith('TRANS_FILE_')) records.transferResults.push(message);
+      if (message.startsWith('CLIPBOARD_TEXT:')) (records.clipboardMessages ??= []).push(message);
+      else if (message.startsWith('TRANS_FILE_')) records.transferResults.push(message);
       else records.heartbeat = message;
       socket.send('ok');
     });
@@ -334,4 +336,77 @@ test('QR fallback and explicit reconnect retain one stable device while distinct
   phone.records.baseInfo={...phone.records.baseInfo,phoneBleId:'phone-b'};
   assert.notEqual(await connect('other-phone-token'),id);
   assert.equal(app.phones.list().length,2,'same model/build/name/IP is not device identity');
+});
+
+test('clipboard API exchanges exact text over heartbeat WS, deduplicates echoes and scopes content', async t => {
+  const dir = await temp(t), phone = await mockPhone(t, dir);
+  const app = await createBackend({ stateDir: path.join(dir, 'state') }); t.after(() => app.close()); await listen(app.server);
+  const start = await api(app, 'POST', '/api/sessions', { mode: 'existing', ip: '127.0.0.1', port: phone.port, token: 'clipboard-test' });
+  const id = (await waitJob(app, start.data.id)).result.id;
+  const route = `/api/sessions/${id}/clipboard`;
+  assert.equal((await api(app, 'GET', route)).data.text, null);
+  const text = '手机📱:https://example.test/a:b\n第二行\u0000{"text":"原始文本"}';
+  for (const socket of phone.ws.clients) socket.send('CLIPBOARD_TEXT:' + text);
+  for (let i = 0; i < 100 && app.phones.get(id).clipboard?.text !== text; i++) await delay(5);
+  const received = (await api(app, 'GET', route)).data;
+  assert.equal(received.text, text); assert.equal(received.source, 'phone'); assert.equal(received.revision, 1);
+  assert(!JSON.stringify((await api(app, 'GET', '/api/sessions')).data).includes('第二行'));
+  assert.equal((await api(app, 'PUT', route, { text })).data.sent, false);
+  assert.equal(phone.records.clipboardMessages?.length || 0, 0);
+  const outbound = '电脑📋:line1\nline2';
+  const sent = await api(app, 'PUT', route, { text: outbound });
+  assert.equal(sent.status, 200); assert.equal(sent.data.source, 'pc'); assert.equal(sent.data.revision, 2);
+  for (let i = 0; i < 100 && !phone.records.clipboardMessages?.length; i++) await delay(5);
+  assert.deepEqual(phone.records.clipboardMessages, ['CLIPBOARD_TEXT:' + outbound]);
+  for (const socket of phone.ws.clients) socket.send('CLIPBOARD_TEXT:' + outbound);
+  await delay(20);
+  assert.equal((await api(app, 'GET', route)).data.revision, 2);
+  assert.equal((await api(app, 'PUT', route, { text: '' })).data.text, '');
+  assert.equal((await api(app, 'PUT', route, { text: '中'.repeat(CLIPBOARD_LIMIT) })).status, 400);
+  assert.equal((await api(app, 'PUT', route, { text: 123 })).status, 400);
+  assert.equal((await api(app, 'PATCH', route, { enabled: 'false' })).status, 400);
+  const paused = await api(app, 'PATCH', route, { enabled: false }); assert.equal(paused.data.text, null);
+  for (const socket of phone.ws.clients) socket.send('CLIPBOARD_TEXT:ignored');
+  await delay(20);
+  assert.equal((await api(app, 'GET', route)).data.text, null);
+  assert.equal((await api(app, 'PUT', route, { text: 'disabled' })).status, 409);
+  await api(app, 'PATCH', route, { enabled: true });
+  assert.equal((await api(app, 'GET', route, undefined, false)).status, 401);
+  assert.equal((await api(app, 'GET', '/api/sessions/missing/clipboard')).status, 404);
+  app.phones.sessions.set('other', { id: 'other', status: 'disconnected' });
+  assert.equal((await api(app, 'GET', '/api/sessions/other/clipboard')).data.text, null);
+  await api(app, 'POST', `/api/sessions/${id}/disconnect`, {});
+  assert.equal((await api(app, 'GET', route)).data.text, null);
+  assert.equal((await api(app, 'PUT', route, { text: 'offline' })).data.error.code, 'SESSION_DISCONNECTED');
+});
+
+test('clipboard ignores unrelated, binary and oversized messages; empty text and exact size are supported', () => {
+  const s = { status: 'connected' }, phones = { get: () => s }, clipboard = new ClipboardManager(phones);
+  for (const [message, binary] of [['ok', false], ['CLIPBOARD_TEXT:binary', true], ['CLIPBOARD_TEXT:' + 'x'.repeat(CLIPBOARD_LIMIT + 1), false]]) {
+    receiveClipboard(s, Buffer.from(message), binary);
+    assert.equal(clipboard.read('test').revision, 0);
+  }
+  receiveClipboard(s, Buffer.from('CLIPBOARD_TEXT:' + 'x'.repeat(CLIPBOARD_LIMIT)));
+  assert.equal(clipboard.read('test').text.length, CLIPBOARD_LIMIT);
+  receiveClipboard(s, Buffer.from('CLIPBOARD_TEXT:'));
+  assert.equal(clipboard.read('test').text, '');
+});
+
+test('clipboard send errors and concurrent updates cannot publish stale text', async () => {
+  const s = { status: 'connected', ws: { readyState: 1 } };
+  let complete;
+  const phones = { get: () => s, sendMessage: () => new Promise(resolve => { complete = resolve; }) };
+  const clipboard = new ClipboardManager(phones);
+  const first = clipboard.write('test', { text: 'old' });
+  await assert.rejects(clipboard.write('test', { text: 'concurrent' }), { code: 'CLIPBOARD_BUSY' });
+  receiveClipboard(s, Buffer.from('CLIPBOARD_TEXT:newer phone text'));
+  complete(); await first;
+  assert.equal(clipboard.read('test').text, 'newer phone text');
+  const second = clipboard.write('test', { text: 'before pause' });
+  clipboard.configure('test', { enabled: false }); clipboard.configure('test', { enabled: true });
+  complete(); await second;
+  assert.equal(clipboard.read('test').text, null);
+  phones.sendMessage = async () => { throw new Error('socket failed'); };
+  await assert.rejects(clipboard.write('test', { text: 'unsent' }), /socket failed/);
+  assert.equal(clipboard.read('test').text, null);
 });
