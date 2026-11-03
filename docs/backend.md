@@ -26,7 +26,7 @@
 需要 Node.js 22 或以上、Python 3（只在提取样本时需要）、Linux Android platform-tools 的 `adb`（USB）、Chromium/Google Chrome（账号网页登录）。测试另需要 OpenSSL 创建本地测试证书；扫码图片和扫码页需要本机 qrencode（Arch Linux 软件包同名）。无需运行 Windows EXE 或安装 Electron。
 
 ```sh
-cd /home/archuser/Projects/vivo_connect
+# 从仓库根目录执行
 # 已有 analysis/app 时无需重复提取；原始 Windows 样本须保留在 `samples/windows/v7.0.6.0-cn/`
 python tools/extract_asar.py
 # 自动检测已安装的 Chromium/Chrome；有匹配 chromedriver 时优先采用 WebDriver
@@ -238,7 +238,8 @@ npm run scan
 补丁已对官方 1.58.1 源文件检查应用兼容性。之后维护系统包时，应将其加入该版本 NetworkManager 的构建配方，在源码目录执行以下检查，再通过系统包管理器安装构建产物；不要覆盖正在运行的系统可执行文件：
 
 ```sh
-patch --dry-run -p1 -i /home/archuser/Projects/vivo_connect/patches/networkmanager-1.58.1-preserve-external-p2p.patch
+PROJECT_ROOT=/path/to/vivo_connect
+patch --dry-run -p1 -i "$PROJECT_ROOT/patches/networkmanager-1.58.1-preserve-external-p2p.patch"
 ```
 
 该系统补丁只保留备用；目前优先尝试项目独立 supplicant，无需应用它。不修改系统包、不重启网络。安装验证需另安排允许校园网短暂中断的时间，并覆盖原有校园网重连、NetworkManager 自身 P2P 连接/断开、外部自主 GO 保持、Ctrl-C 清理和手机加入。当前不必重复运行相同的恢复命令：它无法修复 NetworkManager 的所有权问题。
@@ -327,7 +328,7 @@ python tools/test_p2p_service.py
 
 ```sh
 curl -X POST -H "Authorization: Bearer $TOKEN" -H 'Content-Type: application/json' \
-  -d '{"paths":["/home/archuser/Downloads/example.txt"],"savePath":"/sdcard/Download","ifDuplicated":"rename"}' \
+  -d '{"paths":["/path/to/example.txt"],"savePath":"/sdcard/Download","ifDuplicated":"rename"}' \
   http://127.0.0.1:8765/api/sessions/<sessionId>/uploads
 ```
 

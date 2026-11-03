@@ -1,45 +1,42 @@
-# vivo 互传 7.0.6 接口逆向与跨平台移植
+# vivo Connect
 
-本仓库以提供的 Windows 安装目录和内嵌 Android APK 为样本，整理连接、文件管理、本机服务、Electron IPC、同步与原生组件边界。可以据此设计新的跨平台客户端；投屏媒体传输、蓝牙配对底层和云同步引擎仍需进一步还原，不能仅凭已列出的 HTTP 接口实现全部功能。
+基于 vivo Windows 客户端 **7.0.6.0-cn** 与配套 Android APK 进行协议分析，并实现 Linux 手机连接、文件管理和桌面客户端。当前桌面界面使用 C++ / Qt Widgets，复用本机 Node.js 后端。
 
-## 基础后端
+## 快速开始
 
-已新增账号登录、手机连接和文件收发后端，优先复用官方账号网页、手机 APK、`@vivo/adbkit`、WebSocket 和 TAR 库。原生 GUI 使用 **C++ + Qt Widgets**，在 Wayland 下支持桌面文件双向拖放；运行 `./tools/run-native.sh` 打开设备界面，后端随界面自动启动和关闭。详情见 [原生 GUI](docs/native-gui.md)。
+需要 Node.js 22+、Qt 6 Widgets/Network/DBus、CMake、FUSE 3、Python、qrencode，以及项目说明中列出的无线与 Android 工具。运行桌面客户端：
 
-校园网隔离场景使用项目独立 supplicant 管理 P2P GO，不修改 NetworkManager；已实测手机直连、文件上传及回读哈希一致。API、依赖和验证范围见 [后端使用文档](docs/backend.md)。
+```sh
+./tools/run-native.sh
+```
 
-Arch Linux 可通过 `./packaging/arch/build.sh` 构建 pacman 软件包。安装、卸载、桌面标识与图标配置见 [Arch 打包说明](packaging/arch/README.md)。
+也可单独运行后端：
 
-## 样本与文档
+```sh
+npm start
+```
 
-Windows 原版逆向样本集中在 [`samples/windows/v7.0.6.0-cn/`](samples/windows/v7.0.6.0-cn/README.md)，版本为 vivo 互传 **7.0.6.0-cn**；该目录说明 Electron 22 对应的 Windows 兼容线、样本文件和校验值。原版安装包与提取目录被 Git 忽略，克隆仓库后需自行放入。
+Arch Linux 软件包可在本机准备好 Windows 样本后，通过 `./packaging/arch/build.sh` 构建。安装、依赖和定制方式见 [Arch 打包说明](packaging/arch/README.md)。
 
-## 文档入口
+## 文档
 
-| 文档 | 内容 |
-|---|---|
-| [无线配对核心协议](docs/wireless-pairing.md) | UDP 2200 发现、TCP 10191 授权、token、新版 seed/sign 与参考实现 |
-| [分析范围和架构](docs/architecture.md) | 样本、可信度、端口、进程与协议分层 |
-| [手机连接与文件管理](docs/phone-protocol.md) | USB 启动、版本协商、HTTPS、WSS 心跳、文件接口与传输流程 |
-| [本机 HTTP 服务](docs/local-services.md) | 9199 与 9200 的鉴权、请求参数、返回码、特殊路由 |
-| [本机路由清单](docs/local-routes.md) | 42 个 9199 HTTP 路由、15 个 9200 注册表路由及 WebSocket 根路由 |
-| [进程通信与同步](docs/ipc-sync.md) | Bridge 信封、原生子进程 WebSocket、SyncService 消息 |
-| [Bridge 方法清单](docs/bridge-catalog.md) | 130 个静态可见导出方法及实现位置 |
-| [原生包装层清单](docs/native-wrappers.md) | 81 个 Node 原生模块包装函数签名 |
-| [移植实施与验证](docs/porting.md) | 推荐模块边界、分阶段实现、真机验证和未解问题 |
-| [HTTP 调用与路径索引](docs/http-index.md) | 自动提取的调用点和路径候选，便于补充接口 |
+[文档索引](docs/README.md)按上手运行、协议分析、逆向索引和移植参考整理了全部文档。常用入口：
 
-## 可复用产物
+- [后端运行和 API](docs/backend.md)
+- [Qt 桌面客户端](docs/native-gui.md)
+- [官方账号重连协议](docs/official-reconnect.md)
+- [手机连接与文件管理协议](docs/phone-protocol.md)
+- [Windows 样本与版本说明](samples/windows/v7.0.6.0-cn/README.md)
 
-- [无线配对参考实现](tools/wireless_pairing.py)、[离线检查](tools/verify_wireless.py)、[原生函数索引](evidence/wireless/native-functions.json)、[Android 方法索引](evidence/wireless/android-methods.json)。
-- [原始 Protobuf 定义](evidence/proto/1fe88f158662.proto)：从连接 bundle 的字符串常量直接提取，含 MessageBase、ForwardMessage、注册、连接和流量消息。
-- [本机路由及完整处理函数](evidence/local-routes.json)、[IPC 调用索引](evidence/ipc.json)、[HTTP 调用配置](evidence/http.json)。
-- [原生 PE 导入导出与字符串](evidence/native.json)、[Android DEX 字符串交叉验证](evidence/android-strings.json)。
-- `analysis/pretty/` 是仅美化、没有重命名的全部 207 个顶层 JavaScript bundle；`evidence/main-modules/` 按主进程 webpack 模块号切分，首行记录 bundle 原始位置。
+## 样本与分析范围
 
-## 重现分析
+Windows 原版安装包与提取目录按版本放在 `samples/windows/v7.0.6.0-cn/`，并由 Git 忽略；克隆仓库后需自行准备合法取得的样本。README 与样本清单记录了版本、Electron 运行时和 Windows 兼容线。公开仓库不包含原版安装包、展开后的 Windows 程序目录、账号配置或构建缓存。
 
-在仓库根目录执行，使用本机 Python 3、Node.js 和 GNU objdump。脚本读取样本，不启动 Windows 程序、不安装 APK、不连接手机或远端服务。格式化和语法索引复用样本自带的 Terser 与 Acorn；只执行这些分析工具，不执行应用业务 bundle。
+仓库中的 `evidence/` 保存静态分析索引与验证记录；`analysis/` 是从本机样本生成的完整提取产物，默认不纳入版本控制。静态证据不能代替不同手机、系统版本和网络条件下的实机验证。
+
+## 重新生成静态索引
+
+在仓库根目录执行。流程只读取本地样本，不启动 Windows 程序、不安装 APK，也不连接手机或远端服务：
 
 ```sh
 python tools/extract_asar.py
@@ -51,6 +48,4 @@ python tools/build_http_index.py
 python tools/verify_evidence.py
 ```
 
-若系统有 protoc，验证脚本还会编译 proto 并输出 `evidence/proto/connection.pb`；当前样本已编译通过。代码链接、注册路由数量及 1746 个主进程模块的来源一致性检查结果见 [verification.json](evidence/verification.json)。
-
-ASAR 中标为 unpacked 的部分第三方开发文件在提供的目录中不存在。提取器跳过并逐项记录在 [extraction.json](evidence/extraction.json)，不把缺失文件当作已恢复源码。这里的静态结论针对本地样本，不代表当前在线服务或其他版本的兼容承诺。
+缺失的 ASAR unpacked 文件会记入 `evidence/extraction.json`，不会伪装成已恢复源码。项目没有授予 vivo 专有样本、商标或第三方组件的再分发许可；请按各权利人的条款使用样本。
