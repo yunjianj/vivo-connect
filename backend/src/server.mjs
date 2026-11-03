@@ -17,6 +17,8 @@ import { P2pManager } from './p2p.mjs';
 import { ScanManager } from './scan.mjs';
 import { FileManager } from './files.mjs';
 import { ClipboardManager } from './clipboard.mjs';
+import { RememberedDevices } from './remembered.mjs';
+import { OfficialPreconnect } from './preconnect.mjs';
 
 export async function createBackend({ stateDir, accountManager, phoneManager } = {}) {
   const state = await initState(stateDir);
@@ -24,11 +26,18 @@ export async function createBackend({ stateDir, accountManager, phoneManager } =
   const phones = phoneManager || new PhoneManager(state, accounts);
   const ui = new LocalUi();
   const jobs = new Jobs();
+  const remembered = new RememberedDevices(state, phones, jobs);
+  phones.remembered = remembered;
+  await remembered.load();
   phones.onReplace = id => jobs.cancelSession(id, { exceptKind: 'reconnect' });
   const transfers = new Transfers(state, phones);
   const files = new FileManager(phones);
   const clipboard = new ClipboardManager(phones);
   const p2p = new P2pManager(state, phones, jobs);
+  p2p.preconnect = new OfficialPreconnect(state, accounts);
+  phones.reconnectWireless = (session, signal) => p2p.reconnect(session, signal);
+  phones.shouldReconnectWireless = () => p2p.status().ready;
+  phones.reconnectState = session => p2p.reconnectState(session);
   const scans = new ScanManager(state, accounts, phones, jobs);
   const reply = (res, status, value) => {
     res.writeHead(status, { 'content-type': 'application/json; charset=utf-8', 'cache-control': 'no-store', 'x-content-type-options': 'nosniff' });
@@ -59,7 +68,8 @@ export async function createBackend({ stateDir, accountManager, phoneManager } =
       if (route === 'POST /api/account/login/complete') return reply(res, 200, await accounts.complete(body));
       if (route === 'DELETE /api/account') {
         // A logged-in phone must not retain stale account metadata after logout.
-        await jobs.close(); await phones.close(); await accounts.logout();
+        for (const s of phones.sessions.values()) s.autoConnect = false;
+        await jobs.close(); await phones.forgetAll(); await accounts.logout();
         return reply(res, 200, { loggedIn: false });
       }
       if (route === 'GET /api/p2p/status') return reply(res,200,p2p.status());
@@ -92,6 +102,7 @@ export async function createBackend({ stateDir, accountManager, phoneManager } =
         const [, id, action] = connectionAction;
         phones.get(id);
         if (action === 'disconnect') {
+          phones.get(id).autoConnect = false;
           await jobs.cancelSession(id);
           return reply(res, 200, await phones.pause(id));
         }
@@ -100,7 +111,7 @@ export async function createBackend({ stateDir, accountManager, phoneManager } =
       let match = url.pathname.match(/^\/api\/sessions\/([\w-]+)(?:\/(files|uploads|downloads))?$/);
       if (match) {
         const [, id, action] = match;
-        if (req.method === 'DELETE' && !action) { await jobs.cancelSession(id); await phones.disconnect(id); return reply(res, 200, { disconnected: true }); }
+        if (req.method === 'DELETE' && !action) { phones.get(id).autoConnect = false; await jobs.cancelSession(id); await phones.disconnect(id); return reply(res, 200, { disconnected: true }); }
         if (req.method === 'GET' && !action) return reply(res, 200, phones.public(phones.get(id)));
         if (req.method === 'POST' && action === 'files') return reply(res, 200, await phones.files(id, body));
         if (req.method === 'POST' && ['uploads', 'downloads'].includes(action)) {
@@ -131,7 +142,9 @@ export async function createBackend({ stateDir, accountManager, phoneManager } =
   });
   // Browser-selected files are streamed locally before the phone job starts.
   server.requestTimeout = 300000; server.headersTimeout = 10000;
-  return { state, server, accounts, phones, jobs, transfers, scans, p2p, async close() {
+  remembered.start();
+  return { state, server, accounts, phones, jobs, transfers, scans, p2p, remembered, async close() {
+    remembered.stop();
     const closed = server.listening ? new Promise(resolve => server.close(resolve)) : Promise.resolve();
     await p2p.close(); await jobs.close(); await phones.close(); await accounts.close();
     server.closeAllConnections(); await closed;

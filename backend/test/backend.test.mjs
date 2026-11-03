@@ -45,8 +45,8 @@ async function mockPhone(t, dir) {
       records.headers.push(req.headers); records.requests.push(req.url);
       const url = new URL(req.url, 'https://localhost');
       const json = value => { res.setHeader('content-type', 'application/json'); res.end(JSON.stringify(value)); };
-      if (url.pathname === '/version') return json({ code: records.rejectVersion ? '0004' : '0000', data: { enpVer: 1 } });
-      if (url.pathname === '/base-info') return json({ code: '0000', data: records.baseInfo || { mobileDeviceName: 'mock vivo', mobileDeviceId: 'mock-phone' } });
+      if (url.pathname === '/version') { records.versionBody = JSON.parse((await collect(req)).toString()); return json({ code: records.rejectVersion ? '0004' : '0000', data: { enpVer: 1 } }); }
+      if (url.pathname === '/base-info') { records.baseBody = JSON.parse((await collect(req)).toString()); return json({ code: '0000', data: records.baseInfo || { mobileDeviceName: 'mock vivo', mobileDeviceId: 'mock-phone' } }); }
       if (url.pathname === '/pc_file_manager/channel') return json({ code: '0000', data: [{ savePath: '/sdcard/手机.txt', fileSize: size }] });
       if (url.pathname === '/pc_file_manager/drop_files_info') {
         records.preflight = JSON.parse((await collect(req)).toString());
@@ -66,7 +66,10 @@ async function mockPhone(t, dir) {
         await tar.x({ file, cwd: out, strict: true });
         return json(records.unconfirmedUpload?{}:{ data: { dropFileItems: records.preflight.dropFileItems.map(item => ({ fileName: item.fileName, savePath: '/sdcard/Download/' + item.fileName })) } });
       }
-      if (url.pathname === '/pc_file_manager/download_info') return json({ totalCount: 1, totalSize: records.badDownloadSize ? size+1 : size });
+      if (url.pathname === '/pc_file_manager/download_info') {
+        records.downloadPreflight = JSON.parse((await collect(req)).toString());
+        return json({ totalCount: 1, totalSize: records.badDownloadSize ? size+1 : size });
+      }
       if (url.pathname === '/pc_file_manager/download' && records.slowDownload) { res.writeHead(200); res.write(Buffer.alloc(1024)); return; }
       if (url.pathname === '/pc_file_manager/download') { res.setHeader('content-type', 'application/x-tar'); tar.c({ cwd: source }, ['手机.txt']).pipe(res); return; }
       res.writeHead(404); res.end();
@@ -162,6 +165,7 @@ test('HTTPS/WSS connection, upload, download, hashes and failure states', async 
   const download = await api(app, 'POST', `/api/sessions/${id}/downloads`, { paths: ['/sdcard/手机.txt'] });
   const downloaded = await waitJob(app, download.data.id); assert.equal(downloaded.status, 'succeeded', JSON.stringify(downloaded.error));
   assert.equal(await sha256(phone.file), downloaded.result.files[0].sha256);
+  assert.equal(phone.records.downloadPreflight.total, (await fs.stat(phone.file)).size, 'phone progress denominator must be payload bytes, not zero or TAR bytes');
   for (let i = 0; i < 100 && phone.records.transferResults.length < 1; i++) await delay(5);
   assert.deepEqual(phone.records.transferResults, ['TRANS_FILE_SUCCESS:' + JSON.stringify({ successCount: 1, id: download.data.id })]);
   const binary = await fetch(`http://127.0.0.1:${app.server.address().port}/api/jobs/${download.data.id}/file?path=${encodeURIComponent('手机.txt')}`, { headers: { authorization: `Bearer ${app.state.apiToken}` } });
@@ -176,6 +180,10 @@ test('HTTPS/WSS connection, upload, download, hashes and failure states', async 
   phone.records.badDownloadSize = false; phone.records.slowDownload = true;
   const cancel = await api(app, 'POST', `/api/sessions/${id}/downloads`, { paths: ['/sdcard/手机.txt'] });
   for (let i=0; i<500 && !phone.records.requests.includes(`/pc_file_manager/download?id=${cancel.data.id}`); i++) await delay(5);
+  for (let i=0; i<100 && app.jobs.get(cancel.data.id).bytes === 0; i++) await delay(5);
+  const partial = app.jobs.public(app.jobs.get(cancel.data.id));
+  assert.equal(partial.status, 'running'); assert(partial.bytes > 0 && partial.bytes < partial.totalSize);
+  assert.equal(phone.records.downloadPreflight.total, partial.totalSize);
   await api(app, 'POST', `/api/jobs/${cancel.data.id}/cancel`);
   assert.equal((await waitJob(app, cancel.data.id)).status, 'cancelled');
   await assert.rejects(fs.stat(path.join(app.state.dir, 'tmp', cancel.data.id)), { code: 'ENOENT' });
@@ -409,4 +417,65 @@ test('clipboard send errors and concurrent updates cannot publish stale text', a
   phones.sendMessage = async () => { throw new Error('socket failed'); };
   await assert.rejects(clipboard.write('test', { text: 'unsent' }), /socket failed/);
   assert.equal(clipboard.read('test').text, null);
+});
+
+test('remembered devices restore privately and reconnect without scanning after restart or network loss', async t => {
+  const dir = await temp(t), phone = await mockPhone(t, dir), stateDir = path.join(dir, 'state');
+  let app = await createBackend({ stateDir }); t.after(() => app.close()); await listen(app.server);
+  const start = await api(app, 'POST', '/api/sessions', { mode: 'existing', ip: '127.0.0.1', port: phone.port, token: 'remembered-private-token', transport: 'wifi-direct' });
+  const first = await waitJob(app, start.data.id); assert.equal(first.status, 'succeeded');
+  const id = first.result.id;
+  const file = path.join(stateDir, 'devices.json');
+  assert.equal((await fs.stat(file)).mode & 0o777, 0o600);
+  assert.equal(JSON.parse(await fs.readFile(file)).devices[0].token, 'remembered-private-token');
+  await app.close();
+  app = await createBackend({ stateDir }); await listen(app.server);
+  // This test exercises the connection protocol over loopback, without a GO.
+  app.p2p.reconnectState = () => null;
+  assert.equal(app.phones.list()[0].id, id); assert.equal(app.phones.list()[0].status, 'disconnected');
+  app.remembered.tick();
+  let job = [...app.jobs.items.values()].find(j => j.kind === 'reconnect'); assert(job);
+  assert.equal((await waitJob(app, job.id)).status, 'succeeded');
+  assert.equal(app.phones.list().length, 1); assert.equal(app.phones.get(id).status, 'connected');
+  assert.equal(phone.records.versionBody.isAutoConnect, true); assert.equal(phone.records.baseBody.isAutoConnect, true);
+  assert(!JSON.stringify(app.phones.list()).includes('remembered-private-token'));
+  assert(!JSON.stringify([...app.jobs.items.values()].map(j => app.jobs.public(j))).includes('remembered-private-token'));
+  app.phones.get(id).ws.terminate();
+  for (let i = 0; i < 100 && app.phones.get(id).status !== 'disconnected'; i++) await delay(5);
+  app.remembered.tick(); job = [...app.jobs.items.values()].at(-1);
+  assert.equal((await waitJob(app, job.id)).status, 'succeeded');
+  assert.equal(app.phones.get(id).status, 'connected');
+  assert(phone.records.requests.every(route => !/scan|preconnect|notifyConnection/.test(route)));
+  await api(app, 'POST', `/api/sessions/${id}/disconnect`, {});
+  const count = app.jobs.items.size; app.remembered.tick(); assert.equal(app.jobs.items.size, count);
+  await app.close();
+  app = await createBackend({ stateDir }); await listen(app.server);
+  assert.equal(app.phones.get(id).autoConnect, false); app.remembered.tick(); assert.equal(app.jobs.items.size, 0);
+  await api(app, 'DELETE', `/api/sessions/${id}`);
+  assert.equal(JSON.parse(await fs.readFile(file)).devices.length, 0);
+});
+
+test('automatic reconnect backs off transport errors, stops on rejected credentials, and rejects a different device', async t => {
+  const dir = await temp(t), phone = await mockPhone(t, dir);
+  const app = await createBackend({ stateDir: path.join(dir, 'state') }); t.after(() => app.close()); await listen(app.server);
+  const start = await api(app, 'POST', '/api/sessions', { mode: 'existing', ip: '127.0.0.1', port: phone.port, token: 'remembered-auth-token' });
+  const id = (await waitJob(app, start.data.id)).result.id;
+  app.phones.get(id).ws.terminate();
+  for (let i=0; i<100 && app.phones.get(id).status !== 'disconnected'; i++) await delay(5);
+  phone.records.rejectVersion = true;
+  app.remembered.tick();
+  const job = [...app.jobs.items.values()].at(-1);
+  assert.equal((await waitJob(app, job.id)).status, 'failed');
+  assert.equal(app.phones.get(id).autoConnect, false); assert.equal(app.phones.get(id).needsAuthorization, true);
+  const count = app.jobs.items.size; app.remembered.tick(); assert.equal(app.jobs.items.size, count);
+  phone.records.rejectVersion = false;
+  phone.records.baseInfo = { mobileDeviceId: 'different-phone', mobileDeviceName: 'same address' };
+  const retry = await api(app, 'POST', `/api/sessions/${id}/reconnect`, {});
+  const done = await waitJob(app, retry.data.id);
+  assert.equal(done.error.code, 'DEVICE_IDENTITY_MISMATCH');
+  assert.equal(app.phones.get(id).info.mobileDeviceId, 'mock-phone');
+  assert.equal(app.phones.get(id).status, 'disconnected');
+  await api(app, 'DELETE', '/api/account');
+  assert.equal(app.phones.list().length, 0);
+  assert.equal(JSON.parse(await fs.readFile(path.join(app.state.dir, 'devices.json'))).devices.length, 0);
 });

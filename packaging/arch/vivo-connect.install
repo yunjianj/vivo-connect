@@ -1,0 +1,18 @@
+# Remove the optional service only when the application is removed, not upgraded.
+post_install() {
+  if [ -e /etc/vivo-connect-p2p/service.json ]; then
+    /usr/bin/python3 -I /usr/lib/vivo-connect/tools/install_p2p_service.py refresh
+  fi
+}
+
+post_upgrade() {
+  post_install
+}
+
+pre_remove() {
+  if [ -e /etc/systemd/system/vivo-connect-p2p.service ] || [ -e /etc/vivo-connect-p2p/service.json ]; then
+    if ! /usr/bin/python3 -I /usr/lib/vivo-connect/tools/install_p2p_service.py uninstall; then
+      printf '%s\n' 'vivo-connect: 无法自动移除 Wi-Fi Direct 服务；请检查 systemctl 状态，使用 /usr/local/lib/vivo-connect-p2p/tools/install_p2p_service.py uninstall 清理。' >&2
+    fi
+  fi
+}

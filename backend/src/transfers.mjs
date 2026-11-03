@@ -52,6 +52,64 @@ export async function sha256(file) {
 export class Transfers {
   constructor(state, phones) { this.state = state; this.phones = phones; }
   session(id) { const s = this.phones.get(id); requireThat(s.status === 'connected', '手机会话已断开'); return s; }
+  async downloadSize(s, paths, signal) {
+    const root = s.info?.innerRoot || '/storage/emulated/0';
+    const canonical = value => {
+      let normalized = path.posix.normalize(value);
+      for (const alias of ['/sdcard', '/mnt/sdcard', '/storage/self/primary']) {
+        if (normalized === alias || normalized.startsWith(alias + '/')) { normalized = root + normalized.slice(alias.length); break; }
+      }
+      return normalized;
+    };
+    const sources = paths.map(canonical);
+    requireThat(new Set(sources).size === sources.length && !sources.some(p => sources.some(other => other !== p && p.startsWith(other + '/'))), '下载路径不能重复或同时包含父目录和子路径');
+    const parents = new Map();
+    for (const source of sources) {
+      const parent = path.posix.dirname(source);
+      if (!parents.has(parent)) parents.set(parent, new Set());
+      parents.get(parent).add(source);
+    }
+    let total = 0;
+    for (const [parent, pending] of parents) {
+      // Resolve metadata before download_info: its total drives the phone UI.
+      // Follow the same FILELIST schema as the official file browser.
+      for (let pageIndex = 0; pending.size && pageIndex < 100; pageIndex++) {
+        abortError(signal);
+        const response = await this.phones.files(s.id, { type: 'REQUEST_POSTS_FILELIST',
+          data: parent === root ? '/' : parent, versionTag: 1, pageIndex, pageNumber: 200 }, signal);
+        // Phone versions may return the list directly as {dataList, totalCount},
+        // or wrap it in data (sometimes serialized as JSON).
+        let data = response?.data ?? response;
+        if (typeof data === 'string') {
+          try { data = JSON.parse(data); } catch { throw new ApiError(502, 'DOWNLOAD_SIZE_UNKNOWN', '手机返回的文件信息无效'); }
+        }
+        const items = Array.isArray(data) ? data : data?.dataList;
+        if (!Array.isArray(items)) throw new ApiError(502, 'DOWNLOAD_SIZE_UNKNOWN', '无法获取下载文件大小，请刷新手机文件列表后重试');
+        for (const item of items) {
+          if (typeof item.savePath !== 'string') continue;
+          const source = canonical(item.savePath);
+          if (!pending.has(source)) continue;
+          let size = item.fileSize;
+          if (item.isDirectory === true || item.isDirectory === 'true') {
+            const result = await this.phones.stream(s, '/pc_file_manager/query_directory_size?' + new URLSearchParams({ path: item.savePath }), { signal });
+            let value;
+            try { value = JSON.parse((await collect(result)).toString('utf8')); }
+            catch { throw new ApiError(502, 'DOWNLOAD_SIZE_UNKNOWN', '手机返回的目录大小无效'); }
+            if (String(value?.code) !== '0000') throw new ApiError(502, 'DOWNLOAD_SIZE_UNKNOWN', '手机未允许查询目录大小');
+            size = value.data?.size;
+          }
+          if (typeof size === 'string' && /^\d+$/.test(size)) size = Number(size);
+          if (!Number.isSafeInteger(size) || size < 0) throw new ApiError(502, 'DOWNLOAD_SIZE_UNKNOWN', '无法确定下载文件大小，请刷新手机文件列表后重试');
+          total += size;
+          if (!Number.isSafeInteger(total) || total > LIMIT) throw new ApiError(413, 'TRANSFER_TOO_LARGE', '下载文件大小超过 50 GiB');
+          pending.delete(source);
+        }
+        if (items.length < 200) break;
+      }
+      if (pending.size) throw new ApiError(404, 'DOWNLOAD_FILE_NOT_FOUND', '无法在手机目录中找到所选下载文件，请刷新后重试');
+    }
+    return total;
+  }
   async upload(sessionId, options, job, signal) {
     const s = this.session(sessionId);
     requireThat(Array.isArray(options.paths) && options.paths.length > 0 && options.paths.length <= 1000 && options.paths.every(p => typeof p === 'string' && path.isAbsolute(p)), 'paths 必须是本地绝对路径数组（1–1000 项）');
@@ -114,17 +172,19 @@ export class Transfers {
     let prepared = false, saved = false, totalCount = options.paths.length;
     try {
       job.phase = 'preflight';
+      const totalSize = await this.downloadSize(s, options.paths, signal);
+      job.totalSize = totalSize;
       const pre = await this.phones.json(s, `/pc_file_manager/download_info?id=${job.id}`, { downloadList: options.paths,
-        type: 'FROM_PC_FILE_MANAGER', total: 0, isDir: Boolean(options.isDirectory), isAlbum: false, albumList: [], dirList: [] }, signal);
+        type: 'FROM_PC_FILE_MANAGER', total: totalSize, isDir: Boolean(options.isDirectory), isAlbum: false, albumList: [], dirList: [] }, signal);
       if (!pre || typeof pre !== 'object' || (Array.isArray(pre) && pre.length) ||
           (pre.code !== undefined && String(pre.code) !== '0000') ||
           (pre.status !== undefined && Number(pre.status) !== 0)) throw new ApiError(409, 'DOWNLOAD_PREFLIGHT_REJECTED', '手机拒绝下载预检或部分文件已不存在');
       prepared = true;
       if (Number.isSafeInteger(pre.totalCount) && pre.totalCount > 0) totalCount = pre.totalCount;
       if (pre.totalSize !== undefined && (!Number.isSafeInteger(pre.totalSize) || pre.totalSize < 0 || pre.totalSize > LIMIT)) throw new ApiError(413, 'TRANSFER_TOO_LARGE', '预检文件大小超过范围');
-      job.totalSize = pre.totalSize;
+      job.totalSize = pre.totalSize ?? totalSize;
       const disk = await fs.statfs(temp); const available = disk.bavail * disk.bsize;
-      if (pre.totalSize && available < pre.totalSize * 2 + 104857600) throw new ApiError(409, 'LOCAL_STORAGE_FULL', '本地空间不足以暂存并解包文件');
+      if (available < job.totalSize * 2 + 104857600) throw new ApiError(409, 'LOCAL_STORAGE_FULL', '本地空间不足以暂存并解包文件');
       job.phase = 'downloading';
       const response = await this.phones.stream(s, `/pc_file_manager/download?id=${job.id}`, { signal, timeout: 3600000 });
       const counter = new Transform({ transform(chunk, enc, done) {
@@ -134,7 +194,7 @@ export class Transfers {
       await pipeline(response, counter, createWriteStream(archivePath, { flags: 'wx', mode: 0o600 }), { signal });
       abortError(signal); job.phase = 'verifying';
       const manifest = await inspectTar(archivePath);
-      if (pre.totalSize !== undefined && pre.totalSize !== manifest.totalSize) throw new ApiError(502, 'DOWNLOAD_SIZE_MISMATCH', '实际归档大小与手机预检不一致');
+      if (job.totalSize !== manifest.totalSize) throw new ApiError(502, 'DOWNLOAD_SIZE_MISMATCH', '实际归档大小与手机预检不一致');
       await fs.mkdir(output, { mode: 0o700 });
       await official('tar').x({ file: archivePath, cwd: output, strict: true, preservePaths: false, noChmod: true, noMtime: true });
       const files = [];

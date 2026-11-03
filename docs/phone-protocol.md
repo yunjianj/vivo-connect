@@ -152,7 +152,7 @@ getHomeData 还追加 firstFlag，默认 false。通用 API 的 pageNumber 常�
 
 ### 手机到 PC
 
-1. POST `/pc_file_manager/download_info?id=<task-id>`，JSON 包含 downloadList、type、total、isDir、isAlbum、albumList、dirList。
+1. POST `/pc_file_manager/download_info?id=<task-id>`，JSON 包含 downloadList、type、total、isDir、isAlbum、albumList、dirList。`total` 为所选文件内容的总字节数（目录为递归总量，不含 TAR 头），用于手机发送进度；不能用固定 0 代表未知大小。[官方 totalSize → total 映射](../evidence/main-modules/1698.js#L226)
 2. 普通 type 为 `FROM_PC_FILE_MANAGER`，部分业务使用自己的类型。此预检 timeout 为 300 秒。
 3. 此直连预检分支从 body 顶层读取 totalCount、totalSize；不要假设它采用通用的 data 包装。serviceUrl 是任务层保留的重定向地址字段，是否由具体分支填充需按实现区分。
 4. 下载阶段优先使用 serviceUrl，否则使用 `/pc_file_manager/download?id=<task-id>`。目录传输采用流式接收与归档处理，不能把整包直接当作一个普通文件保存。

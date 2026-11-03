@@ -56,10 +56,14 @@ class Nl80211:
     def delete_interface(self,index):
         # Mutating operation: caller must verify explicit ownership and type.
         self.request(self.family,8,attr(3,struct.pack('I',index)),ack=True)
-    def create_go(self,phy,name):
+    def create_go(self,phy,name,mac=None):
         # Allocate only a GO data interface, never another station/P2P_DEVICE.
         if not name.startswith('p2p-vc-') or len(name)>15:raise ValueError('Invalid private GO name')
-        self.request(self.family,7,attr(1,struct.pack('I',phy))+attr(4,name.encode()+b'\0')+attr(5,struct.pack('I',9)),ack=True)
+        args=attr(1,struct.pack('I',phy))+attr(4,name.encode()+b'\0')+attr(5,struct.pack('I',9))
+        if mac is not None:
+            if not isinstance(mac,bytes) or len(mac)!=6 or mac[0]&1:raise ValueError('Invalid GO MAC')
+            args+=attr(6,mac)
+        self.request(self.family,7,args,ack=True)
     def probe(self,interface,include_channels=False):
         index=socket.if_nametoindex(interface);args=attr(3,struct.pack('I',index))
         info=dict(attributes(self.request(self.family,5,args)[0]));phy=number(info[1]);combos=[];frequencies={}

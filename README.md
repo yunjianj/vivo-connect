@@ -8,6 +8,8 @@
 
 校园网隔离场景使用项目独立 supplicant 管理 P2P GO，不修改 NetworkManager；已实测手机直连、文件上传及回读哈希一致。API、依赖和验证范围见 [后端使用文档](docs/backend.md)。
 
+Arch Linux 可通过 `./packaging/arch/build.sh` 构建 pacman 软件包。安装、卸载、桌面标识与图标配置见 [Arch 打包说明](packaging/arch/README.md)。
+
 ## 样本与文档
 
 Windows 原版逆向样本集中在 [`samples/windows/v7.0.6.0-cn/`](samples/windows/v7.0.6.0-cn/README.md)，版本为 vivo 互传 **7.0.6.0-cn**；该目录说明 Electron 22 对应的 Windows 兼容线、样本文件和校验值。原版安装包与提取目录被 Git 忽略，克隆仓库后需自行放入。

@@ -51,3 +51,65 @@ test('helper progress distinguishes wireless authentication, DHCP and callback w
  jobs.cancel(qr.jobId);await job.done;await p2p.close();assert.equal(p2p.progress,null);
  assert.equal(p2p.status().pairingActive,false);
 });
+
+test('reconnect distinguishes a ready group from a phone actually joined to it', () => {
+ const p2p=new P2pManager({}, {}, new Jobs());
+ const session={transport:'wifi-direct',ip:'192.168.49.79'};
+ assert.equal(p2p.reconnectState(session).code,'P2P_NOT_READY');
+ assert.equal(p2p.reconnectState({transport:'usb'}),null);
+ p2p.network={ip:'192.168.49.1'};p2p.expires=Date.now()+15000;
+ p2p.progress={associatedStations:0,authorizedStations:0};
+ assert.equal(p2p.reconnectState(session).code,'P2P_PHONE_NOT_JOINED');
+ p2p.progress.associatedStations=1;
+ assert.equal(p2p.reconnectState(session).code,'P2P_AUTHENTICATING');
+ p2p.progress.authorizedStations=1;assert.equal(p2p.reconnectState(session),null);
+ p2p.network.ip='192.168.50.1';assert.equal(p2p.reconnectState(session).code,'P2P_ADDRESS_CHANGED');
+});
+
+test('persistent invitation requests require a remembered device with auto reconnect enabled', () => {
+ const session={remembered:true,transport:'wifi-direct',status:'disconnected',autoConnect:true};
+ const p2p=new P2pManager({}, {sessions:new Map([['phone',session]])}, new Jobs());
+ p2p.network={id:'helper'};
+ assert.equal(p2p.heartbeat('helper',{}).reconnectRequested,true);
+ session.autoConnect=false;assert.equal(p2p.heartbeat('helper',{}).reconnectRequested,false);
+ session.autoConnect=true;session.needsAuthorization=true;assert.equal(p2p.heartbeat('helper',{}).reconnectRequested,false);
+ session.needsAuthorization=false;session.status='connected';assert.equal(p2p.heartbeat('helper',{}).reconnectRequested,false);
+});
+
+test('failed invitations and missing wireless pairing are not mislabeled as first use', () => {
+ const p2p=new P2pManager({}, {}, new Jobs());
+ p2p.network={ip:'192.168.49.1',persistentGroup:true};p2p.expires=Date.now()+15000;
+ const session={transport:'wifi-direct',ip:'192.168.49.79'};
+ p2p.progress={associatedStations:0,authorizedStations:0,persistentPeers:0};
+ assert.equal(p2p.reconnectState(session).code,'P2P_PAIRING_UNAVAILABLE');
+ p2p.progress.invitationStatus=8;
+ assert.equal(p2p.reconnectState(session).code,'P2P_INVITATION_FAILED');
+});
+
+test('an active GO without a persistent network is not a restorable pairing', () => {
+ const p2p=new P2pManager({}, {}, new Jobs());
+ p2p.network={ip:'192.168.49.1',persistentGroup:true};p2p.expires=Date.now()+15000;
+ p2p.progress={authorizedStations:0,associatedStations:0,persistentNetworks:0,persistentPeers:0};
+ assert.equal(p2p.reconnectState({transport:'wifi-direct',ip:'192.168.49.79'}).code,'P2P_PROFILE_UNAVAILABLE');
+});
+
+test('verified official reconnect opens and closes the helper pairing window without a QR task', async () => {
+ const phones={accounts:{account:{openId:'account'}},connect:async(options,signal,previous)=>{
+  assert.equal(p2p.status().pairingActive,true);assert.equal(previous,session);return {status:'connected'};
+ }};
+ const p2p=new P2pManager({},phones,new Jobs());
+ p2p.network={...network,ip:'192.168.49.1'};p2p.expires=Date.now()+15000;
+ const session={transport:'wifi-direct',ip:'192.168.49.20'};
+ p2p.progress={authorizedStations:0,persistentPeers:0,persistentNetworks:0};
+ p2p.preconnect={connect:async(s,n,signal,complete,authorize)=>{
+  assert.equal(p2p.status().pairingActive,false);const release=authorize();
+  try{const status=p2p.heartbeat(network.id,{});assert.equal(status.pairingActive,true);assert.equal(typeof status.pairingId,'string');
+   return await complete({token:'new-token'});
+  }finally{release();}
+ }};
+ assert.equal(p2p.reconnectState(session),null);
+ assert.deepEqual(await p2p.reconnect(session),{status:'connected'});
+ assert.equal(p2p.status().pairingActive,false);assert.equal(p2p.status().pairingId,undefined);
+ assert.equal(p2p.pending,undefined);
+ p2p.autoPairing={id:'expired',networkId:network.id,expires:Date.now()-1};assert.equal(p2p.status().pairingActive,false);
+});

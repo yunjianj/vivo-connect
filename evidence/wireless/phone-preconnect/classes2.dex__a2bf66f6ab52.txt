@@ -1,0 +1,185 @@
+DEX classes2.dex
+CLASS Lcom/vivo/connbase/classicBluetooth/r;
+FIELDS
+a Ljava/lang/String;
+b Ln4/d;
+c Ln4/d;
+d Ljava/util/concurrent/atomic/AtomicLong;
+e Ljava/util/concurrent/ExecutorService;
+f Ljava/util/Map;
+
+METHOD <clinit>()V
+000000: new-instance v0, Ljava/util/concurrent/atomic/AtomicLong;
+000004: invoke-direct v0, Ljava/util/concurrent/atomic/AtomicLong;-><init>()V
+00000a: sput-object v0, Lcom/vivo/connbase/classicBluetooth/r;->d Ljava/util/concurrent/atomic/AtomicLong;
+00000e: invoke-static Ljava/util/concurrent/Executors;->newCachedThreadPool()Ljava/util/concurrent/ExecutorService;
+000014: move-result-object v0
+000016: sput-object v0, Lcom/vivo/connbase/classicBluetooth/r;->e Ljava/util/concurrent/ExecutorService;
+00001a: new-instance v0, Ljava/util/HashMap;
+00001e: invoke-direct v0, Ljava/util/HashMap;-><init>()V
+000024: sput-object v0, Lcom/vivo/connbase/classicBluetooth/r;->f Ljava/util/Map;
+000028: return-void 
+
+METHOD <init>()V
+000000: invoke-direct v0, Ljava/lang/Object;-><init>()V
+000006: return-void 
+
+METHOD a(I Ljava/lang/String; Ln4/d;)Lcom/vivo/connbase/classicBluetooth/r$a;
+000000: new-instance v0, Lcom/vivo/connbase/classicBluetooth/r$a;
+000004: const/4 v1, 0
+000006: invoke-direct v0, v2, v3, v4, v1, Lcom/vivo/connbase/classicBluetooth/r$a;-><init>(I Ljava/lang/String; Ln4/d; Lcom/vivo/connbase/classicBluetooth/s;)V
+00000c: return-object v0
+
+METHOD b(I Ljava/lang/String;)Lcom/vivo/connbase/classicBluetooth/r$a;
+000000: const-class v0, Lcom/vivo/connbase/classicBluetooth/r;
+000004: monitor-enter v0
+000006: sget-object v1, Lcom/vivo/connbase/classicBluetooth/r;->f Ljava/util/Map;
+00000a: invoke-interface v1, v5, Ljava/util/Map;->get(Ljava/lang/Object;)Ljava/lang/Object;
+000010: move-result-object v2
+000012: check-cast v2, Ljava/util/Map;
+000016: if-nez v2, +00dh
+00001a: new-instance v2, Ljava/util/HashMap;
+00001e: invoke-direct v2, Ljava/util/HashMap;-><init>()V
+000024: invoke-interface v1, v5, v2, Ljava/util/Map;->put(Ljava/lang/Object; Ljava/lang/Object;)Ljava/lang/Object;
+00002a: goto +3h
+00002c: move-exception v4
+00002e: goto +1fh
+000030: invoke-static v4, Ljava/lang/Integer;->valueOf(I)Ljava/lang/Integer;
+000036: move-result-object v1
+000038: invoke-interface v2, v1, Ljava/util/Map;->get(Ljava/lang/Object;)Ljava/lang/Object;
+00003e: move-result-object v1
+000040: check-cast v1, Lcom/vivo/connbase/classicBluetooth/r$a;
+000044: if-nez v1, +012h
+000048: invoke-static v4, Ljava/lang/Integer;->valueOf(I)Ljava/lang/Integer;
+00004e: move-result-object v1
+000050: invoke-static v4, Lcom/vivo/connbase/classicBluetooth/r;->c(I)Ln4/d;
+000056: move-result-object v3
+000058: invoke-static v4, v5, v3, Lcom/vivo/connbase/classicBluetooth/r;->a(I Ljava/lang/String; Ln4/d;)Lcom/vivo/connbase/classicBluetooth/r$a;
+00005e: move-result-object v4
+000060: invoke-interface v2, v1, v4, Ljava/util/Map;->put(Ljava/lang/Object; Ljava/lang/Object;)Ljava/lang/Object;
+000066: move-object v1, v4
+000068: monitor-exit v0
+00006a: return-object v1
+00006c: monitor-exit v0
+00006e: throw v4
+
+METHOD c(I)Ln4/d;
+000000: const/4 v0, 1
+000002: if-ne v0, v1, +005h
+000006: sget-object v1, Lcom/vivo/connbase/classicBluetooth/r;->b Ln4/d;
+00000a: return-object v1
+00000c: const/4 v0, 2
+00000e: if-ne v0, v1, +005h
+000012: sget-object v1, Lcom/vivo/connbase/classicBluetooth/r;->c Ln4/d;
+000016: return-object v1
+000018: const/4 v1, 0
+00001a: return-object v1
+
+METHOD d()J
+000000: const-class v0, Lcom/vivo/connbase/classicBluetooth/r;
+000004: monitor-enter v0
+000006: sget-object v1, Lcom/vivo/connbase/classicBluetooth/r;->d Ljava/util/concurrent/atomic/AtomicLong;
+00000a: invoke-virtual v1, Ljava/util/concurrent/atomic/AtomicLong;->incrementAndGet()J
+000010: move-result-wide v1
+000012: monitor-exit v0
+000014: return-wide v1
+000016: move-exception v1
+000018: monitor-exit v0
+00001a: throw v1
+
+METHOD e(I Ljava/lang/String; Ljava/lang/String; Ljava/lang/String;)V
+000000: invoke-static v6, v8, Lcom/vivo/connbase/classicBluetooth/r;->b(I Ljava/lang/String;)Lcom/vivo/connbase/classicBluetooth/r$a;
+000006: move-result-object v6
+000008: if-eqz v6, +031h
+00000c: new-instance v0, Lcom/vivo/connbase/classicBluetooth/r$b;
+000010: invoke-static Lcom/vivo/connbase/classicBluetooth/r;->d()J
+000016: move-result-wide v4
+000018: move-object v3, v7
+00001a: move-object v1, v8
+00001c: move-object v2, v9
+00001e: invoke-direct/range v0 ... v5, Lcom/vivo/connbase/classicBluetooth/r$b;-><init>(Ljava/lang/String; Ljava/lang/String; Ljava/lang/String; J)V
+000024: invoke-static v6, v0, Lcom/vivo/connbase/classicBluetooth/r$a;->a(Lcom/vivo/connbase/classicBluetooth/r$a; Lcom/vivo/connbase/classicBluetooth/r$b;)V
+00002a: invoke-static v6, Lcom/vivo/connbase/classicBluetooth/r$a;->b(Lcom/vivo/connbase/classicBluetooth/r$a;)Z
+000030: move-result v7
+000032: if-nez v7, +01ch
+000036: const-class v7, Lcom/vivo/connbase/classicBluetooth/r;
+00003a: monitor-enter v7
+00003c: invoke-static v6, Lcom/vivo/connbase/classicBluetooth/r$a;->b(Lcom/vivo/connbase/classicBluetooth/r$a;)Z
+000042: move-result v8
+000044: if-nez v8, +00fh
+000048: const/4 v8, 1
+00004a: invoke-virtual v6, v8, Lcom/vivo/connbase/classicBluetooth/r$a;->e(Z)V
+000050: sget-object v8, Lcom/vivo/connbase/classicBluetooth/r;->e Ljava/util/concurrent/ExecutorService;
+000054: invoke-interface v8, v6, Ljava/util/concurrent/ExecutorService;->submit(Ljava/lang/Runnable;)Ljava/util/concurrent/Future;
+00005a: goto +4h
+00005c: move-exception v0
+00005e: move-object v6, v0
+000060: goto +3h
+000062: monitor-exit v7
+000064: return-void 
+000066: monitor-exit v7
+000068: throw v6
+00006a: return-void 
+
+METHOD f(Ljava/lang/String; Ljava/lang/String;)V
+000000: if-eqz v5, +046h
+000004: invoke-virtual v5, Ljava/lang/String;->length()I
+00000a: move-result v0
+00000c: const/4 v1, 4
+00000e: if-le v0, v1, +03fh
+000012: const/4 v0, 0
+000014: invoke-virtual v5, v0, v1, Ljava/lang/String;->substring(I I)Ljava/lang/String;
+00001a: move-result-object v0
+00001c: invoke-virtual v5, v1, Ljava/lang/String;->substring(I)Ljava/lang/String;
+000022: move-result-object v1
+000024: const-string v2, "#ble"
+000028: invoke-virtual v2, v0, Ljava/lang/String;->equals(Ljava/lang/Object;)Z
+00002e: move-result v2
+000030: if-eqz v2, +007h
+000034: const/4 v5, 2
+000036: invoke-static v5, v0, v4, v1, Lcom/vivo/connbase/classicBluetooth/r;->e(I Ljava/lang/String; Ljava/lang/String; Ljava/lang/String;)V
+00003c: return-void 
+00003e: const-string v2, "#bri"
+000042: invoke-virtual v2, v0, Ljava/lang/String;->equals(Ljava/lang/Object;)Z
+000048: move-result v2
+00004a: const/4 v3, 1
+00004c: if-nez v2, +01ch
+000050: const-string v2, "#inn"
+000054: invoke-virtual v2, v0, Ljava/lang/String;->equals(Ljava/lang/Object;)Z
+00005a: move-result v2
+00005c: if-eqz v2, +003h
+000060: goto +12h
+000062: const-string v2, "#pcc"
+000066: invoke-virtual v2, v0, Ljava/lang/String;->equals(Ljava/lang/Object;)Z
+00006c: move-result v2
+00006e: if-eqz v2, +007h
+000072: const/4 v5, 3
+000074: invoke-static v5, v0, v4, v1, Lcom/vivo/connbase/classicBluetooth/r;->e(I Ljava/lang/String; Ljava/lang/String; Ljava/lang/String;)V
+00007a: return-void 
+00007c: invoke-static v3, v0, v4, v5, Lcom/vivo/connbase/classicBluetooth/r;->e(I Ljava/lang/String; Ljava/lang/String; Ljava/lang/String;)V
+000082: return-void 
+000084: invoke-static v3, v0, v4, v1, Lcom/vivo/connbase/classicBluetooth/r;->e(I Ljava/lang/String; Ljava/lang/String; Ljava/lang/String;)V
+00008a: return-void 
+00008c: const-string v4, "Dispatcher"
+000090: const-string v5, "onDataRecved:data is null"
+000094: invoke-static v4, v5, Lj7/a;->i(Ljava/lang/String; Ljava/lang/String;)V
+00009a: return-void 
+
+METHOD g(Ljava/lang/String; Ljava/lang/Exception;)V
+000000: sget-object v0, Lcom/vivo/connbase/classicBluetooth/r;->b Ln4/d;
+000004: if-eqz v0, +005h
+000008: invoke-interface v0, v1, v2, Ln4/a;->b(Ljava/lang/String; Ljava/lang/Exception;)V
+00000e: sget-object v0, Lcom/vivo/connbase/classicBluetooth/r;->c Ln4/d;
+000012: if-eqz v0, +005h
+000016: invoke-interface v0, v1, v2, Ln4/a;->b(Ljava/lang/String; Ljava/lang/Exception;)V
+00001c: sget-object v2, Lcom/vivo/connbase/classicBluetooth/r;->f Ljava/util/Map;
+000020: invoke-interface v2, v1, Ljava/util/Map;->remove(Ljava/lang/Object;)Ljava/lang/Object;
+000026: return-void 
+
+METHOD h(Ln4/d;)V
+000000: sput-object v0, Lcom/vivo/connbase/classicBluetooth/r;->c Ln4/d;
+000004: return-void 
+
+METHOD i(Ln4/d;)V
+000000: sput-object v0, Lcom/vivo/connbase/classicBluetooth/r;->b Ln4/d;
+000004: return-void 

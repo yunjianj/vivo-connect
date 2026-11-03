@@ -1,0 +1,60 @@
+{
+  "observedOn": "2026-11-03",
+  "scope": "Read-only inspection of installed backend, system service, journal and user-authorized phone Wi-Fi P2P diagnostics; no network or account changes",
+  "installedService": {
+    "active": true,
+    "persistentGroup": true,
+    "persistentServiceCodeMatchesWorkspaceBeforeDiagnosticsChange": true,
+    "backendAccountLoggedIn": true
+  },
+  "observations": {
+    "invitationCommandsAcceptedBySupplicant": 2,
+    "successfulAutomaticReconnectObserved": false,
+    "latestAssociatedStations": 0,
+    "latestAuthorizedStations": 0,
+    "persistentPeersEarlier": 1,
+    "persistentPeersLater": 0,
+    "invitationResultStatusRecordedByOldService": false
+  },
+  "conclusions": [
+    "The installed system already uses the persistent service; omission of the manual installer command does not establish an outdated-service cause.",
+    "Supplicant accepting an invitation command does not establish phone acceptance or association.",
+    "Phone diagnostics show com.vivo.connbase requesting persistent group information and deleting persistent groups at three disconnects. Persistent invitations alone cannot restore the official authenticated preconnection channel."
+  ],
+  "codeChanges": [
+    "Capture only numeric P2P-INVITATION-RESULT status, without retaining event credentials or addresses.",
+    "Distinguish failed invitation and unavailable wireless pairing from first-time pairing in backend state."
+  ],
+  "authorizedReadOnlyControlInspection": {
+    "completed": true,
+    "groupState": "COMPLETED",
+    "groupMode": "P2P GO",
+    "networks": [
+      {
+        "id": 0,
+        "flags": "[CURRENT]",
+        "mode": "3",
+        "disabled": "0",
+        "peerCount": 0
+      }
+    ],
+    "persistentNetworkCount": 0,
+    "stationCount": 0,
+    "invitationResponseObservedDuring20SecondWatch": false
+  },
+  "validation": {
+    "backendTestsPassed": 61,
+    "privateHelperTestsPassed": 21,
+    "diagnosticChangesDeployed": false,
+    "phoneAutomaticReconnectFixed": true,
+    "scope": "Official same-account preconnection used instead of relying on persistent invitations; installed client/new GO recovery verified, actual host reboot not performed."
+  },
+  "authorizedPhoneInspection": {
+    "source": "adb shell dumpsys wifip2p",
+    "requestingPackage": "com.vivo.connbase",
+    "disconnectSequencesWithPersistentGroupDeletion": 3,
+    "persistentGroupCount": 0,
+    "runtimeIdentifiersAndRawDumpStored": false
+  },
+  "officialPreconnectionFollowup": "wireless/phone-preconnect/verification.json"
+}

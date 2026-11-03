@@ -199,7 +199,9 @@ class Helper:
     def __init__(self,args):
         self.args=args;self.group=None;self.dhcp=None;self.registered=False;self.stop=False;self.id=str(uuid.uuid4());self.events=None;self.before_kernel=None;self.group_requested=False
         self.config=json.loads((pathlib.Path(args.state_dir)/'config.json').read_text());self.backend=f'http://127.0.0.1:{args.port}'
-    def stage(self,name,**safe):print(json.dumps({'stage':name,**safe},ensure_ascii=False),flush=True)
+    def stage(self,name,**safe):
+        self.diagnostic_stage=name
+        print(json.dumps({'stage':name,**safe},ensure_ascii=False),flush=True)
     def api(self,route,body=None,method=None):
         data=json.dumps(body).encode() if body is not None else None
         request=urllib.request.Request(self.backend+route,data=data,method=method or ('POST' if data else 'GET'),headers={'Authorization':'Bearer '+self.config['apiToken'],'Content-Type':'application/json'})
@@ -359,27 +361,40 @@ class Helper:
         return subprocess.Popen(self.dhcp_command(group_iface,network,ip),stdout=subprocess.DEVNULL,stderr=subprocess.DEVNULL)
     def configure_group(self,cap):
         group_iface=self.group['interface'];self.stage('group-created',interface=group_iface)
+        self.stage('group-check-station')
         if station_snapshot(self.args.interface)!=self.original:raise RuntimeError('检测到校园网连接发生变化，正在回滚本次 P2P 组')
+        self.stage('group-check-interface')
         client=Nl80211()
         try:
             values=dict(attributes(client.request(client.family,5,__import__('wifi_capabilities').attr(3,__import__('struct').pack('I',__import__('socket').if_nametoindex(group_iface))))[0]))
             if number(values.get(1,b''))!=cap['phy'] or number(values.get(5,b''))!=9:raise RuntimeError('新接口并非同网卡的 P2P GO，拒绝配置')
         finally:client.close()
+        self.stage('group-select-subnet')
         network=choose_subnet(json.loads(run(['ip','-j','route','show','table','main'])))
         ip=str(network.network_address+1);self.address=ip+'/24'
+        self.stage('group-configure-address')
         run(['ip','link','set','dev',group_iface,'up']);run(['ip','address','add',self.address,'dev',group_iface])
+        self.stage('group-check-route')
         route=json.loads(run(['ip','-j','route','get',str(network.network_address+20),'from',ip]))
         if not route or route[0].get('dev')!=group_iface:raise RuntimeError('独立子网被路由策略重定向，拒绝修改 VPN/校园网策略；请为 P2P 子网配置直连后重试')
+        self.stage('group-read-credentials')
         ssid,passphrase,bssid=self.credentials()
+        self.stage('group-start-dhcp')
         self.dhcp=self.start_dhcp(group_iface,network,ip)
         time.sleep(.3)
-        if self.dhcp.poll() is not None:raise RuntimeError('独立接口 DHCP 服务启动失败（可能端口占用或权限问题）')
+        if self.dhcp.poll() is not None:
+            reader=getattr(self,'dhcp_reader',None)
+            if reader:reader.join(timeout=1)
+            self.stage('group-dhcp-failed',diagnostics=list(getattr(self,'dhcp_diagnostics',[])))
+            raise RuntimeError('独立接口 DHCP 服务启动失败（可能端口占用或权限问题）')
+        self.stage('group-register-backend')
         if station_snapshot(self.args.interface)!=self.original:raise RuntimeError('校园网连接发生变化，正在回滚')
         self.api('/api/p2p/register',{'id':self.id,'stationInterface':self.args.interface,'groupInterface':group_iface,'ip':ip,'cidr':str(network),
             'ssid':ssid,'passphrase':passphrase,'bssid':bssid,'frequency':self.frequency_plan['goFrequency'],'stationFrequency':cap['frequency']})
         self.registered=True
         print(json.dumps({'status':'ready','interface':group_iface,'gateway':ip,'stationPreserved':True,'frequency':self.frequency_plan['goFrequency'],'stationFrequency':cap['frequency']},ensure_ascii=False),flush=True)
         if getattr(self.args,'owner_pid',None):self.stage('gui-owned',cleanupOnWindowExit=True)
+        elif getattr(self.args,'service_managed',False):self.stage('system-service-owned',cleanupOnWindowExit=False)
         else:print('保持本终端运行；另一个终端执行 npm run scan 并选择 Wi-Fi Direct。Ctrl-C 清理本次直连网络。',flush=True)
         while not self.stop:
             time.sleep(2)

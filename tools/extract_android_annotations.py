@@ -1,9 +1,16 @@
 #!/usr/bin/env python3
 """Extract DEX field annotations, including Gson wire names, without execution."""
-import pathlib,zipfile,struct,json,re
+import pathlib,zipfile,struct,json,re,argparse
+parser=argparse.ArgumentParser(description=__doc__)
+parser.add_argument('--apk',type=pathlib.Path)
+parser.add_argument('--output',type=pathlib.Path)
+parser.add_argument('--class-prefix',action='append')
+args=parser.parse_args()
 root=pathlib.Path(__file__).resolve().parent.parent;result=[]
-for apk in ['connbase','pcsuite']:
- with zipfile.ZipFile(root/f'samples/windows/v7.0.6.0-cn/pcsuite/updateApk/{apk}.apk') as z:
+paths=[args.apk] if args.apk else [root/f'samples/windows/v7.0.6.0-cn/pcsuite/updateApk/{apk}.apk' for apk in ['connbase','pcsuite']]
+for apk_path in paths:
+ apk=apk_path.stem
+ with zipfile.ZipFile(apk_path) as z:
   for dex in z.namelist():
    if not re.fullmatch(r'classes\d*\.dex',dex):continue
    b=z.read(dex)
@@ -35,10 +42,10 @@ for apk in ['connbase','pcsuite']:
     return {'type':types[typ],'elements':items},at
    for i in range(u(96)):
     at=u(100)+i*32;cls=types[u(at)];ann=u(at+20)
-    if not ann or not cls.startswith('Lcom/vivo/'):continue
+    if not ann or not any(cls.startswith(prefix) for prefix in (args.class_prefix or ['Lcom/vivo/'])):continue
     for j in range(u(ann+4)):
      fid,aset=struct.unpack_from('<II',b,ann+16+8*j);fieldat=u(84)+fid*8;name=strings[u(fieldat+4)];typ=types[struct.unpack_from('<H',b,fieldat+2)[0]]
      for k in range(u(aset)):
       aoff=u(aset+4+k*4);a,_=annotation(aoff+1)
       result.append({'apk':apk,'dex':dex,'class':cls,'field':name,'fieldType':typ,'annotation':a})
-p=root/'evidence/wireless/android-field-annotations.json';p.write_text(json.dumps(result,indent=2,ensure_ascii=False)+'\n');print(f'{len(result)} field annotations')
+p=args.output or root/'evidence/wireless/android-field-annotations.json';p.write_text(json.dumps(result,indent=2,ensure_ascii=False)+'\n');print(f'{len(result)} field annotations')

@@ -129,6 +129,15 @@ class PrivateTests(unittest.TestCase):
             self.assertEqual(e.popen.call_count,1);self.assertFalse(e.helper.registered)
             e.nl.delete_interface.assert_called_once_with(7)
             self.assertFalse(any(c[:3]==['ip','address','add'] for c in e.commands))
+    def test_dhcp_signal_failure_does_not_abandon_owned_interface_cleanup(self):
+        with private_environment() as e:
+            e.helper.start()
+            e.helper.dhcp=Mock()
+            e.helper.dhcp.terminate.side_effect=PermissionError(errno.EPERM,'test-owned-child')
+            e.helper.cleanup()
+            e.process.terminate.assert_called()
+            e.nl.delete_interface.assert_called_once_with(7)
+            e.stage.assert_any_call('private-child-stop-failed',child='dhcp',errno=errno.EPERM)
     def test_wrong_kernel_frequency_does_not_configure_group(self):
         with private_environment(frequency=2437) as e:
             with self.assertRaisesRegex(RuntimeError,'未就绪'):e.helper.start()
@@ -156,6 +165,14 @@ class PrivateTests(unittest.TestCase):
             e.helper.start();e.helper.stop=False;e.control.drain.return_value=['P2P-GROUP-REMOVED']
             with self.assertRaisesRegex(RuntimeError,'已结束'):e.helper.check_group_alive()
             e.helper.cleanup()
+    def test_invitation_result_records_only_numeric_status(self):
+        control=object.__new__(p.Control)
+        control.events=collections.deque();control.provision_requests=collections.deque();control.invitation_results=collections.deque(maxlen=16)
+        control.event('<3>P2P-INVITATION-RESULT status=8 peer=02:01:02:03:04:05 passphrase="do-not-retain"')
+        control.event('<3>P2P-INVITATION-RESULT status=999')
+        control.event('<3>P2P-INVITATION-RESULT status=invalid')
+        self.assertEqual(list(control.invitation_results),[8])
+        self.assertEqual(list(control.events),[])
     def test_missing_binary_never_enters_network_preflight(self):
         helper=object.__new__(p.PrivateHelper);helper.preflight=Mock()
         with patch.object(p,'verified_binary',side_effect=RuntimeError('missing')):

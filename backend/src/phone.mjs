@@ -23,7 +23,9 @@ export class PhoneManager {
   async discover(options) { return discover({ ...options, deviceId: this.state.deviceId, openId: this.accounts.account?.openId }); }
   list() { return [...this.sessions.values()].map(s => this.public(s)); }
   public(s) { return { id: s.id, mode: s.mode, transport: s.transport || s.mode, ip: s.ip, pcIp: s.localIp, serial: s.serial, baseUrl: s.baseUrl, status: s.status,
-    phone: s.info, version: s.version, lastMessageAt: s.lastMessageAt, lastError: s.lastError }; }
+    phone: s.info, version: s.version, lastMessageAt: s.lastMessageAt, lastError: s.lastError,
+    autoConnect: s.autoConnect !== false, reconnecting: Boolean(s.reconnecting), needsAuthorization: Boolean(s.needsAuthorization), nextRetryAt: s.retryAt,
+    reconnectWait: s.status === 'disconnected' && s.autoConnect !== false ? this.reconnectState?.(s) || null : null }; }
   get(id) { const session = this.sessions.get(id); if (!session) throw new ApiError(404, 'SESSION_NOT_FOUND', '手机会话不存在'); return session; }
   prepareConnection(options) {
     requireThat(['lan', 'usb', 'existing'].includes(options.mode), 'mode 应为 lan、usb 或 existing');
@@ -39,7 +41,7 @@ export class PhoneManager {
     requireThat(['lan', 'usb', 'existing'].includes(options.mode), 'mode 应为 lan、usb 或 existing');
     const mode = options.mode;
     const connectionId = typeof options.connectionId === 'string' && options.connectionId.length <= 128 ? options.connectionId : crypto.randomUUID();
-    const s = { id: crypto.randomUUID(), connectionId, mode, transport: options.transport, status: 'connecting', token: options.mode === 'existing' ? options.token : tokenFor(options.pcIp || ''), rejectUnauthorized: options.verifyTls === true };
+    const s = { id: crypto.randomUUID(), connectionId, mode, transport: options.transport, preconnect: options.preconnect || replacing?.preconnect, status: 'connecting', isAutoConnect: options.isAutoConnect === true, autoConnect: true, token: options.mode === 'existing' ? options.token : tokenFor(options.pcIp || ''), rejectUnauthorized: options.verifyTls === true };
     requireThat(typeof s.token === 'string' && /^[A-Za-z0-9._~-]{4,256}$/.test(s.token), '连接 token 格式错误');
     this.sessions.set(s.id, s);
     try {
@@ -78,12 +80,15 @@ export class PhoneManager {
       const user = this.accounts.account;
       const base = await this.json(s, '/base-info', { pc_name: this.state.name, pcDeviceId: this.state.deviceId,
         isLogin: Boolean(user?.openId), openid: user?.openId || '', pcLoginAccount: user?.phone || '',
-        isAutoConnect: false, pcSystemType: process.env.VIVO_PC_SYSTEM_TYPE || '1', isSupVdfs: false,
+        isAutoConnect: s.isAutoConnect, pcSystemType: process.env.VIVO_PC_SYSTEM_TYPE || '1', isSupVdfs: false,
         token: s.token, isPcOsSupportExtScreen: false, pcBleId: '', deviceAvatarUri: '' }, signal);
       s.info = checkBusiness(base, '/base-info').data;
+      if (replacing && !this.sameDevice(replacing, s)) throw new ApiError(409, 'DEVICE_IDENTITY_MISMATCH', '目标地址上的设备与历史设备不一致');
       await this.heartbeat(s, signal);
+      abortError(signal);
       if (s.ws.readyState !== s.ws.OPEN) throw new ApiError(502, 'HEARTBEAT_CLOSED', '手机心跳连接已断开');
-      s.status = 'connected'; await this.adoptDevice(s, replacing); return this.public(s);
+      s.status = 'connected'; s.remembered = true; await this.adoptDevice(s, replacing);
+      await this.remembered?.save(); return this.public(s);
     } catch (error) {
       await this.cleanup(s); this.sessions.delete(s.id); throw error;
     }
@@ -110,7 +115,7 @@ export class PhoneManager {
     this.sessions.set(stableId, session);
   }
   versionBody(s) { return { version: '7.0.6', connBaseVersionCode: 1155, pcSuiteVersionCode: 70007,
-    timestamp: Date.now(), connectionId: s.connectionId, pcDeviceId: this.state.deviceId, isAutoConnect: false,
+    timestamp: Date.now(), connectionId: s.connectionId, pcDeviceId: this.state.deviceId, isAutoConnect: s.isAutoConnect === true,
     token: s.token, isOversea: false, pcOsType: 'linux', pcOsVersion: os.release() }; }
   options(s, extra = {}) { return { rejectUnauthorized: s.rejectUnauthorized, localAddress: s.localIp, ...extra,
     headers: { newToken: s.token, version: '7.0.6', 'X-ES-HTTP-VERSION': '1', ...extra.headers } }; }
@@ -181,11 +186,11 @@ export class PhoneManager {
       }
     });
   }
-  async files(id, params = {}) {
+  async files(id, params = {}, signal) {
     const s = this.get(id);
     requireThat(s.status === 'connected', '手机会话已断开');
     const value = await this.json(s, '/pc_file_manager/channel', { category: '', data: '', fileCount: 0,
-      sortCondition: 0, groupBy: 0, type: 'REQUEST_POSTS_HOMEDATA', pageIndex: 0, pageNumber: 200, firstFlag: false, ...params });
+      sortCondition: 0, groupBy: 0, type: 'REQUEST_POSTS_HOMEDATA', pageIndex: 0, pageNumber: 200, firstFlag: false, ...params }, signal);
     if (value?.code !== undefined && String(value.code) !== '0000') throw new ApiError(502, 'FILE_LIST_REJECTED', '手机未允许读取文件', { phoneCode: value.code });
     return value;
   }
@@ -195,26 +200,37 @@ export class PhoneManager {
     if (s.forwardPort) await exec(process.env.ADB || 'adb', ['-s', s.serial, 'forward', '--remove', `tcp:${s.forwardPort}`], { timeout: 5000 }).catch(() => {});
   }
   async pause(id) {
-    const s = this.get(id); await this.cleanup(s); s.status = 'disconnected';
+    const s = this.get(id); s.autoConnect = false; await this.cleanup(s); s.status = 'disconnected';
+    await this.remembered?.save();
     return this.public(s);
   }
-  async reconnect(id, signal) {
+  async reconnect(id, signal, { automatic = false } = {}) {
+    abortError(signal);
     const s = this.get(id);
     if (s.status === 'connected') return this.public(s);
     if (s.reconnecting) throw new ApiError(409, 'RECONNECT_ACTIVE', '设备正在重新连接');
+    if (!automatic) { s.autoConnect = true; s.needsAuthorization = false; }
     s.reconnecting = true;
     try {
       await this.cleanup(s);
+      if(s.transport==='wifi-direct'&&this.reconnectWireless&&this.shouldReconnectWireless?.(s)!==false)return await this.reconnectWireless(s,signal);
       const url = new URL(s.baseUrl);
       const result = await this.connect(s.mode === 'usb'
-        ? { mode: 'usb', serial: s.serial, verifyTls: s.rejectUnauthorized }
+        ? { mode: 'usb', serial: s.serial, verifyTls: s.rejectUnauthorized, isAutoConnect: true }
         : { mode: 'existing', ip: s.ip, pcIp: s.localIp, token: s.token,
             port: Number(url.port || (url.protocol === 'http:' ? 80 : 443)),
             scheme: url.protocol.slice(0, -1), transport: s.transport || s.mode,
-            verifyTls: s.rejectUnauthorized }, signal, s);
+            verifyTls: s.rejectUnauthorized, isAutoConnect: true }, signal, s);
       return result;
-    } finally { s.reconnecting = false; }
+    } catch (error) {
+      if (!automatic && !signal?.aborted) await this.remembered?.failed(s, error);
+      throw error;
+    } finally {
+      s.reconnecting = false;
+      if (!automatic) await this.remembered?.save();
+    }
   }
-  async disconnect(id) { const s = this.get(id); await this.cleanup(s); this.sessions.delete(id); }
-  async close() { await Promise.all([...this.sessions.values()].map(s => this.cleanup(s))); this.sessions.clear(); }
+  async disconnect(id) { const s = this.get(id); s.autoConnect = false; await this.cleanup(s); this.sessions.delete(id); await this.remembered?.save(); }
+  async forgetAll() { await Promise.all([...this.sessions.values()].map(s => this.cleanup(s))); this.sessions.clear(); await this.remembered?.save(); }
+  async close() { this.remembered?.stop(); await this.remembered?.writing; await Promise.all([...this.sessions.values()].map(s => this.cleanup(s))); this.sessions.clear(); }
 }

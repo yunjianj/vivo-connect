@@ -34,11 +34,15 @@ static bool materialize(Entry *e) {
     QElapsedTimer timer; timer.start();
     while(timer.elapsed()<3600000) {
         auto j=call("GET","/api/jobs/"+id); QString status=j.value("status").toString();
-        if(status=="succeeded") {
-            QDir dir(j.value("result").toObject().value("directory").toString());
+        auto error=j.value("error").toObject();
+        const bool notifyFailed=status=="failed" && error.value("code").toString()=="TRANSFER_NOTIFY_FAILED";
+        if(status=="succeeded" || notifyFailed) {
+            auto result=notifyFailed?error.value("details").toObject():j.value("result").toObject();
+            QDir dir(result.value("directory").toString());
             QString base=QFileInfo(dir.absolutePath()).canonicalFilePath(), root=QFileInfo(stateDir+"/downloads").canonicalFilePath();
             QString file=QFileInfo(dir.filePath(e->name)).canonicalFilePath();
             if(root.isEmpty() || !base.startsWith(root+"/") || !file.startsWith(base+"/") || (e->directory ? !QFileInfo(file).isDir() : (!QFileInfo(file).isFile() || QFileInfo(file).size()!=e->size)))return false;
+            if(notifyFailed) fprintf(stderr,"TRANSFER_NOTIFY_FAILED\n");
             e->local=file; return true;
         }
         if(status=="failed" || status=="cancelled" || status.isEmpty()) return false;

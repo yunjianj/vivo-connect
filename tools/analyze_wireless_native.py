@@ -1,6 +1,9 @@
 #!/usr/bin/env python3
 """Annotate local PE disassembly with string references; no target execution."""
-import pathlib,struct,re,json,bisect,subprocess
+import pathlib,struct,re,json,bisect,subprocess,argparse
+parser=argparse.ArgumentParser(description=__doc__)
+parser.add_argument('--function',action='append',default=[],type=lambda value:int(value,0))
+args=parser.parse_args()
 root=pathlib.Path(__file__).resolve().parent.parent
 exe=root/'samples/windows/v7.0.6.0-cn/pcsuite/vivoesService/win32/vivoesService.exe';b=exe.read_bytes();pe=struct.unpack_from('<I',b,0x3c)[0];count=struct.unpack_from('<H',b,pe+6)[0];opt=struct.unpack_from('<H',b,pe+20)[0];base=struct.unpack_from('<I',b,pe+24+28)[0];sections=[]
 for i in range(count):
@@ -44,15 +47,17 @@ for addr,index,asm in ins:
   if text:
    refs.append(dict(address=addr,function=fn(addr),line=index+1,stringVA=va,fileOffset=va_offset(va),value=text))
    if re.fullmatch(r'[A-Za-z][\w:]+::[\w]+',text):names.setdefault(fn(addr),text)
-wanted={r['function'] for r in refs if re.search(r'SSDPSocket::|Worker::connectSSDP|Worker::initTcp|Worker::sendTcp|Worker::recvTcp|BleGattClient::|ConnectFlow::(?:wlan|btBuild|btData|retryWlan)|TcpSocketBase::|DataBuilderV[12]::|BleScanner::',r['value'])}
-wanted.update(fn(x) for x in [0x498590,0x5eef50,0x5ee680,0x5ef010,0x5f38c0,0x60ed40,0x60f590,0x4a3010,0x5e9010,0x5e8cb0,0x5e8d90])
+wanted={r['function'] for r in refs if re.search(r'SSDPSocket::|Worker::connectSSDP|Worker::initTcp|Worker::sendTcp|Worker::recvTcp|BleGattClient::|BtFarawayDevice::|ClassicRfcommClient::|BluetoothClassicBase::|ConnectFlow::(?:wlan|btBuild|btData|retryWlan)|TcpSocketBase::|DataBuilderV[12]::|BleScanner::',r['value'])}
+wanted.update(fn(x) for x in [0x4199f0,0x42c1d0,0x498590,0x5eef50,0x5ee680,0x5ef010,0x5f38c0,0x60ed40,0x60f590,0x4a3010,0x5e9010,0x5e8b00,0x5e8cb0,0x5e8d90])
+wanted.update(fn(x) for x in args.function)
 out=root/'evidence/wireless/native';out.mkdir(exist_ok=True,parents=True)
 byline={}
 for r in refs:byline.setdefault(r['line']-1,[]).append(r['value'])
 functions=[]
+instruction_addresses=[instruction[0] for instruction in ins]
 for start in sorted(wanted):
  idx=bisect.bisect_right(starts,start);end=starts[idx] if idx<len(starts) else 2**32
- selected=[(addr,index,asm) for addr,index,asm in ins if start<=addr<end and asm!='int3'];body=[]
+ selected=[instruction for instruction in ins[bisect.bisect_left(instruction_addresses,start):bisect.bisect_left(instruction_addresses,end)] if instruction[2]!='int3'];body=[]
  for addr,index,asm in selected:
   comments=byline.get(index,[]);call=re.match(r'call\s+0x([0-9a-f]+)',asm)
   if call:

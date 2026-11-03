@@ -26,13 +26,16 @@ class Control:
     """Attached datagram control; credentials remain in memory, never logs."""
     def __init__(self,server,client):
         self.socket=socket.socket(socket.AF_UNIX,socket.SOCK_DGRAM)
-        self.path=pathlib.Path(client);self.events=collections.deque(maxlen=64);self.provision_requests=collections.deque(maxlen=8)
+        self.path=pathlib.Path(client);self.events=collections.deque(maxlen=64);self.provision_requests=collections.deque(maxlen=8);self.invitation_results=collections.deque(maxlen=16)
         try:self.socket.bind(str(client));self.socket.connect(str(server));self.socket.settimeout(2)
         except BaseException:self.close();raise
     def event(self,text):
         if text.startswith('<') and '>' in text:text=text.split('>',1)[1]
         # P2P-GROUP-STARTED contains a passphrase. Keep only its event name.
         name=text.split(' ',1)[0].strip()
+        if name=='P2P-INVITATION-RESULT':
+            match=re.search(r'(?:^|\s)status=(\d{1,3})(?:\s|$)',text)
+            if match and int(match[1])<=255:self.invitation_results.append(int(match[1]))
         if name=='P2P-PROV-DISC-PBC-REQ':
             fields=text.split()
             if len(fields)>1 and re.fullmatch(r'(?:[0-9a-fA-F]{2}:){5}[0-9a-fA-F]{2}',fields[1]):
@@ -103,7 +106,7 @@ class PrivateHelper(Helper):
         self.link_events=queue.SimpleQueue();self.progress={'associatedStations':0,'authorizedStations':0,'dhcpDiscoveries':0,'dhcpOffers':0,'dhcpAcks':0,'provisionRequests':0,'pairingAuthorizations':0,'wpsFailures':0,'wpsSuccesses':0,'pskFailures':0};self.last_progress=None
         self.pairing_id=None;self.pairing_peer=None;self.pairing_until=0
     def recover_private_orphans(self,cap):
-        for runtime,server,proof in owned_runtime_groups():
+        for runtime,server,proof in owned_runtime_groups(pathlib.Path(getattr(getattr(self,'args',None),'runtime_dir','/run'))):
             info=next((i for i in kernel_interfaces() if i['name']==server.name),None)
             if not inactive_private_group(info,cap['phy']):continue
             if proof and any(info.get(k)!=proof.get(k) for k in ('name','index','phy','type')):continue
@@ -139,16 +142,17 @@ class PrivateHelper(Helper):
     def start(self):
         binary=verified_binary() # No interface is created for a missing/stale build.
         cap=self.preflight()
-        self.runtime=pathlib.Path(tempfile.mkdtemp(prefix='vivo-p2p-',dir='/run'))
+        self.runtime=pathlib.Path(tempfile.mkdtemp(prefix='vivo-p2p-',dir=getattr(self.args,'runtime_dir','/run')))
         config=self.runtime/'supplicant.conf'
         config.write_text('ctrl_interface='+str(self.runtime/'ctrl')+'\n'
                           'device_name=vivo-connect-linux\ndevice_type=1-0050F204-1\n'
                           'config_methods=virtual_push_button\np2p_no_group_iface=1\nap_scan=1\n')
         config.chmod(0o600)
-        name='p2p-vc-'+self.id.replace('-','')[:6]
+        process_config=self.supplicant_config(config)
+        name=self.interface_name()
         self.stage('private-create-interface',interface=name,phy=cap['phy'],goFrequency=self.frequency_plan['goFrequency'])
         client=Nl80211()
-        try:client.create_go(cap['phy'],name)
+        try:self.create_private_interface(client,cap['phy'],name)
         finally:client.close()
         # Record ownership immediately, including for failed process startup.
         self.owned=next((i for i in kernel_interfaces() if i['name']==name),None)
@@ -157,7 +161,7 @@ class PrivateHelper(Helper):
         record=self.runtime/'interface.json'
         record.write_text(json.dumps({k:self.owned[k] for k in ('name','index','phy','type')}));record.chmod(0o600)
         self.guard()
-        self.private=subprocess.Popen([str(binary),'-Dnl80211','-i',name,'-c',str(config)],
+        self.private=subprocess.Popen([str(binary),'-Dnl80211','-i',name,'-c',str(process_config)],
             stdout=subprocess.PIPE,stderr=subprocess.STDOUT,text=True,env={**os.environ,'LC_ALL':'C'})
         def read_output():
             for line in self.private.stdout:
@@ -174,7 +178,7 @@ class PrivateHelper(Helper):
         if self.control.request('VIVO_P2P_GROUP_ONLY')!=MARKER:raise RuntimeError('进程未确认 GO 专用构建，拒绝继续')
         if self.control.request('ATTACH')!='OK':raise RuntimeError('无法订阅独立组事件')
         self.stage('private-create-group',interface=name,control='private-unix',systemDbus=False)
-        if self.control.request('P2P_GROUP_ADD freq='+str(self.frequency_plan['goFrequency']))!='OK':
+        if self.control.request(self.group_command())!='OK':
             raise RuntimeError('独立 supplicant 拒绝创建 GO；未退回系统 GroupAdd')
         for _ in range(150):
             self.guard();events=self.control.drain()
@@ -187,7 +191,13 @@ class PrivateHelper(Helper):
             self.stage('private-group-timeout',kernelInterface=self.same_owned(),diagnostics=list(self.diagnostics))
             raise RuntimeError('独立 GO 未就绪；没有配置地址或 DHCP')
         self.group={'interface':name}
+        self.group_started()
         self.configure_group(cap)
+    def supplicant_config(self,config):return config
+    def interface_name(self):return 'p2p-vc-'+self.id.replace('-','')[:6]
+    def create_private_interface(self,client,phy,name):client.create_go(phy,name)
+    def group_command(self):return 'P2P_GROUP_ADD freq='+str(self.frequency_plan['goFrequency'])
+    def group_started(self):pass
     def credentials(self):
         status=parse_status(self.control.request('STATUS'))
         # Android's connectGroupOwner targets the GO's P2P Device Address,
@@ -207,14 +217,23 @@ class PrivateHelper(Helper):
     def start_dhcp(self,group_iface,network,ip):
         process=subprocess.Popen(self.dhcp_command(group_iface,network,ip)+['--log-dhcp','--log-facility=-'],
             stdout=subprocess.PIPE,stderr=subprocess.STDOUT,text=True,env={**os.environ,'LC_ALL':'C'})
+        self.dhcp_diagnostics=[]
         def read_dhcp():
             for line in process.stdout:
                 # Hostnames, MACs and raw lease lines never leave this reader.
                 for marker,key in [('DHCPDISCOVER(','dhcpDiscoveries'),('DHCPOFFER(','dhcpOffers'),('DHCPACK(','dhcpAcks')]:
                     if marker in line:self.link_events.put(key)
+                for marker,key in [('setting capabilities failed','capability-setup-failed'),('missing required capability','missing-capability'),('Permission denied','permission-denied'),('Operation not permitted','operation-not-permitted'),('Address already in use','address-in-use'),('Read-only file system','read-only-filesystem'),('unknown interface','interface-unavailable')]:
+                    if marker.lower() in line.lower() and key not in self.dhcp_diagnostics:self.dhcp_diagnostics.append(key)
         self.dhcp_reader=threading.Thread(target=read_dhcp,daemon=True);self.dhcp_reader.start()
         return process
     def update_progress(self,events):
+        results=getattr(self.control,'invitation_results',None)
+        if isinstance(results,collections.deque):
+            while results:
+                status=results.popleft()
+                self.progress['invitationStatus']=status
+                self.stage('persistent-invitation-result',status=status,success=status==0)
         mapping={'P2P-PROV-DISC-PBC-REQ':'provisionRequests','WPS-FAIL':'wpsFailures','WPS-TIMEOUT':'wpsFailures','WPS-SUCCESS':'wpsSuccesses','WPS-REG-SUCCESS':'wpsSuccesses','AP-STA-POSSIBLE-PSK-MISMATCH':'pskFailures'}
         for event in events:
             if event in mapping:self.progress[mapping[event]]+=1
@@ -255,9 +274,14 @@ class PrivateHelper(Helper):
             try:self.api('/api/p2p/unregister',{'id':self.id})
             except Exception:pass
         if self.dhcp is not None:
-            self.dhcp.terminate()
-            try:self.dhcp.wait(timeout=3)
-            except subprocess.TimeoutExpired:self.dhcp.kill();self.dhcp.wait()
+            try:
+                self.dhcp.terminate()
+                try:self.dhcp.wait(timeout=3)
+                except subprocess.TimeoutExpired:self.dhcp.kill();self.dhcp.wait()
+            except OSError as error:
+                # Continue cleaning the owned supplicant/interface even if a
+                # dropped-UID DHCP child cannot be signalled by an old unit.
+                self.stage('private-child-stop-failed',child='dhcp',errno=error.errno)
             if self.dhcp_reader:self.dhcp_reader.join(timeout=1)
         if self.control:
             # Only this process's group. Never issue system supplicant commands.

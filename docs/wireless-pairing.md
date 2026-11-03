@@ -125,6 +125,8 @@ extra_info.sign = lowercase_hex(ciphertext)
 
 随包 connbase.apk 是较旧实现，不能据其旧版配对成功分支断言新版 seed/sign 已得到手机端交叉确认。参考实现暴露离线 `modern_sign()`，要求调用方提供真实 peerChallenge；它不执行完整新版握手。
 
+当前手机系统组件的后续交叉验证见 [官方重连协议追踪](official-reconnect.md)：已确认经典蓝牙 RFCOMM 预连接、手机侧签名公式和同账号比较。此节早期记录中的 `peerChallenge` 在该蓝牙路径上具体为 `phoneUniqueId + phoneRandomId`；当前手机也直接确认了全零 IV。发现及真机重启闭环仍未完成。
+
 ## 6. BLE 的已知边界
 
 手机 LeDiscoveryUseCaseImpl 中确认出现下列 UUID，暂保留符号角色，避免把所有 UUID 都误标为同一种服务：

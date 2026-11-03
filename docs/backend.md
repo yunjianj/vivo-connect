@@ -128,7 +128,7 @@ curl -H "Authorization: Bearer $TOKEN" http://127.0.0.1:8765/api/jobs/<连接请
 
 空发现数组只表示本次没收到官方发现响应，需检查手机官方互传入口、共同局域网、组播/AP 隔离等条件；它不表示已配对。配对等待手机正常授权。新系统若要求未恢复的挑战协议，会明确失败/超时，不假装建立会话。已有正常授权连接可使用 `{"mode":"existing","ip":"…","token":"…"}` 完成 HTTPS/WSS 接入；不会凭空取得官方账号或配对凭据。
 
-USB、LAN 和 existing 均返回 202 和连接任务 ID。轮询 `GET /api/jobs/<id>`：成功任务的 `result.id` 是 session ID。只有版本/基础信息检查通过且心跳通道打开后才报告 connected。连接 token 只保存在进程内，重启需要重新连接。
+USB、LAN 和 existing 均返回 202 和连接任务 ID。轮询 `GET /api/jobs/<id>`：成功任务的 `result.id` 是 session ID。只有版本/基础信息检查通过且心跳通道打开后才报告 connected。成功连接的设备及连接凭据保存到状态目录 `devices.json`（0600），后端重启后可恢复并尝试自动重连；凭据不通过设备或任务查询接口返回。
 
 旧的网页扫码调试界面可按以下方式使用。保持后端运行，在另一个终端执行：
 
@@ -198,7 +198,7 @@ npm run scan
 
 扫码页在助手已就绪时自动选择“Wi-Fi Direct（保留校园网，实验性）”；也可手动选择后刷新。使用手机官方互传扫描新码。旧的局域网/云二维码不会自动变成直连二维码。助手 Ctrl-C 时只清理本次添加的 P2P 组、IP 和 DHCP 进程，后端停止/重启或助手心跳失败时也会触发清理。
 
-管理员步骤为什么必要：创建 GO、为新增接口分配 IP、监听 DHCP 需要相应权限；本次免密 sudo 只读检查返回“a password is required”。密码仅在你的终端由 sudo 接收，不传入 API、不交给助手参数，也不应贴到聊天。当前代码没有安装永久提权服务或放宽系统 D-Bus 策略。
+管理员步骤为什么必要：创建 GO、为新增接口分配 IP、监听 DHCP 需要相应权限。默认临时模式由终端 sudo 或 GUI 的 pkexec 授权；另有下文的一次安装系统服务模式。密码仅在系统授权窗口或你的终端由 sudo 接收，不传入 API、不交给助手参数，也不应贴到聊天。两种模式均不放宽系统 supplicant 的 D-Bus 策略。
 
 独立副本采用 [官方 wpa_supplicant 2.12](https://w1.fi/releases/wpa_supplicant-2.12.tar.gz)，固定 SHA-256 为 `08e23937e16d0155e55cab2b51f51fbe10d80a1aa91c4e15442645059b737ef6`。构建需要 Python、C 编译器、make、patch、pkg-config，以及 libnl3 / OpenSSL 开发文件。本工作区依赖齐全且已成功编译。也可用 `--archive <官方源码包>` 离线构建，校验仍强制执行；不会运行 make install。源码、许可证、编译日志和产物仅保存在被 Git 忽略的 `build/private-p2p/`，运行前核对产物和构建输入的哈希。
 
@@ -208,7 +208,7 @@ npm run scan
 
 真实构建产物的无网卡回归可执行 `python tools/smoke_p2p_private.py`：实际启动独立全局控制服务，不添加无线接口，检查 PING、构建标记、空接口列表和拒绝普通 station 名称。`python tools/test_p2p_private.py` 的 17 项检查覆盖模拟启动/注册、拒绝组创建、频率不符、校园网变化、组结束、凭据日志过滤和清理边界。随后通过只读检查已观测到 `p2p-vc-*` 独立接口（2412 MHz）与校园网 `wlp2s0`（5785 MHz）同时运行，后端 `ready=true`，网关 `192.168.49.1`，并已有等待手机加入的直连扫码任务。后续补齐 WPS 授权后，已确认真实手机取得 `192.168.49.79` 并建立 `wifi-direct` 会话，HTTPS/WSS 连接成功；已实测 8 字节 example.txt 上传、回读及 SHA-256 一致；大文件和目录的真机表现尚未验证。
 
-2026-11-01 手机扫码实测曾出现连接超时：当时新增进度显示 `provisionRequests=1`，而关联、认证及 DHCP 均为 0，确认手机已请求 P2P 配对但 GO 尚未授权。已补上上游要求的 WPS PBC 步骤：仅当后端有等待中的二维码时，对最近 15 秒内发起 PBC 请求的单个 P2P Device Address 执行 `WPS_PBC p2p_dev_addr=...`。窗口最长 120 秒，二维码取消、过期或更换时关闭；实测修复后无线认证、DHCP 及手机回调均成功，不会在无二维码时向周围所有设备开放 WPS。依据为构建源码中的 `wpa_supplicant/README-P2P` 与 `ctrl_iface.c` 的 WPS_PBC 处理。补丁仍复用上游 WPS 实现，不改系统 supplicant。
+2026-11-01 手机扫码实测曾出现连接超时：当时新增进度显示 `provisionRequests=1`，而关联、认证及 DHCP 均为 0，确认手机已请求 P2P 配对但 GO 尚未授权。已补上上游要求的 WPS PBC 步骤：仅当后端有等待中的二维码或已经通过同账号蓝牙校验的自动重连窗口时，对最近 15 秒内发起 PBC 请求的单个 P2P Device Address 执行 `WPS_PBC p2p_dev_addr=...`。窗口最长 120 秒，二维码取消、过期或更换时关闭；实测修复后无线认证、DHCP 及手机回调均成功，不会在无二维码时向周围所有设备开放 WPS。依据为构建源码中的 `wpa_supplicant/README-P2P` 与 `ctrl_iface.c` 的 WPS_PBC 处理。补丁仍复用上游 WPS 实现，不改系统 supplicant。
 
 二维码的 wm 现优先使用 `STATUS.p2p_device_address`，缺失时才回退 BSSID；Android 的组拥有者设备地址与数据接口 BSSID 不一定相同。是否与本次超时有关尚无单独实验证据。
 
@@ -263,7 +263,61 @@ sudo python tools/p2p_helper.py --interface wlp2s0 --driver system --recover-sta
 
 其他连接选项：`port` 默认 10380，仅 LAN/existing；`scheme` 默认 https，可显式设 http；`verifyTls=true` 开启手机证书验证。默认复用官方局部请求的自签名证书兼容行为（不验证手机证书链）；它只作用于手机会话，不影响官方账号网站的 TLS 验证。证书固定和正式 Linux 平台能力协商仍需真机完善。
 
-`GET /api/sessions` 查看会话，`GET /api/sessions/<id>` 查看状态，`DELETE /api/sessions/<id>` 取消该会话传输、关闭心跳并移除本后端创建的 USB 转发。收到手机 close 或 WebSocket 关闭后状态转为 disconnected，不进行未经确认的自动重连。
+`GET /api/sessions` 查看会话，`GET /api/sessions/<id>` 查看状态，`DELETE /api/sessions/<id>` 取消该会话传输、关闭心跳、移除本后端创建的 USB 转发并遗忘设备。收到手机 close 或 WebSocket 关闭后状态转为 disconnected，已记住且未暂停的设备会自动重试连接。
+
+### 一次安装的系统服务模式
+
+可选 `vivo-connect-p2p.service` 由 systemd 管理无线组，绑定一个普通用户、一个无线网卡、一个状态目录和本机后端端口。安装时需要一次管理员授权，之后打开普通客户端即可；服务发现该用户的后端就绪后创建独立 GO，GUI 自动等待它就绪，不再调用 pkexec。服务保持运行时，关闭 GUI 不会清理组，后端短暂退出时保留网络并关闭 WPS 授权窗口；后端恢复后重注册相同的组、网关和密码。
+
+先以普通用户构建组件，并运行一次客户端生成 `config.json`。以下以源码目录、`wlp2s0` 和默认端口为例；安装前退出旧界面和手动助手，避免旧助手继续占用组锁：
+
+```sh
+# 普通用户构建（已有且校验通过时可跳过）
+python tools/build_p2p_supplicant.py
+# 一次安装；--state-dir 必须与平时运行客户端的 VIVO_STATE_DIR 一致
+sudo python3 -I tools/install_p2p_service.py install \
+  --user "$USER" --interface wlp2s0 --state-dir "$PWD/.vivo-connect" --port 8765
+# 后续照常以普通用户打开软件，无需 sudo
+./tools/run-native.sh
+```
+
+安装器复制已校验的助手、GO 专用 supplicant、构建记录及输入到 `/usr/local/lib/vivo-connect-p2p/`，由 root 管理；配置位于 `/etc/vivo-connect-p2p/service.json`，不含 token 或组密码。服务只读取指定用户权限为 0600 的后端配置，运行时目录为 `/run/vivo-connect-p2p/`。不会从用户可修改的项目目录执行 root 代码，也不添加免密 sudo、setuid 或宽泛 Polkit 规则。源码更新后，应重新安装更新此独立副本。
+
+服务带 `NoNewPrivileges`、能力范围和文件系统限制。systemd 的 `Restart=on-failure` 用于服务进程异常后的恢复（[官方说明](https://www.freedesktop.org/software/systemd/man/259/systemd.service.html)）；服务内部对后端或校园网暂不可用的情况等待重试。它不会启动 root 身份的文件后端，也不更改 NetworkManager 的校园网连接。
+
+```sh
+# 普通用户查看状态；日志查看权限取决于发行版配置
+systemctl status vivo-connect-p2p.service
+journalctl -u vivo-connect-p2p.service -b
+# 完整卸载服务，保留普通用户账号配置和下载文件
+sudo python3 -I /usr/local/lib/vivo-connect-p2p/tools/install_p2p_service.py uninstall
+```
+
+无需管理员权限即可生成安装预览或运行离线验证：
+
+```sh
+python tools/install_p2p_service.py install --user "$USER" --interface wlp2s0 \
+  --state-dir "$PWD/.vivo-connect" --destdir /tmp/vivo-p2p-service-preview
+python tools/test_p2p_service.py
+```
+
+系统服务已补充持久组协议：在 `/var/lib/vivo-connect-p2p/<uid>-<interface>/` 以 0700 目录、0600 文件保存固定的 GO 地址，以及 supplicant 自身写出的 SSID、PSK 和已配对客户端列表；不同配置用户或网卡使用不同资料。启用 `update_config=1` 和 `persistent_reconnect=1`，创建组使用 `P2P_GROUP_ADD persistent`，恢复使用 `persistent=<network-id>`，不再每次启动生成全新的组。独立 supplicant 已启用配置写入，旧版 `CONFIG_NO_CONFIG_WRITE=y` 构建不能用于此模式。
+
+后台在存在启用自动重连的历史设备时，只对持久客户端列表中的具体设备地址进行定向发现及 `P2P_INVITE group=… peer=…` 邀请，每次至少间隔 15 秒；发现阶段限定到该客户端，间隔 6 秒。暂停、手机已关联或正在显式扫码配对时不发起自动邀请，不通过开放 WPS 代替历史配对。接收端是否接受邀请仍由手机决定。机制依据为上游 [P2P_GROUP_ADD / P2P_INVITE 控制接口](https://w1.fi/wpa_supplicant/devel/ctrl_iface_page.html) 和本地 `wpa_supplicant-2.12/wpa_supplicant/README-P2P`。
+
+从旧临时组迁移时，需初始化新组的配对资料；能否在之后复用，取决于手机是否也保存并接受该组，不能保证扫码一次后就能免扫码恢复。仅安装应用包不会替换已经复制到 `/usr/local/lib/vivo-connect-p2p` 的旧服务，因此还需重新运行服务安装器更新副本。服务卸载保留 `/var/lib/vivo-connect-p2p` 配对资料，重新安装可复用。已通过持久身份/配置恢复、配置保存失败、定向邀请、退避、暂停和 netlink MAC 参数等离线测试；更新后的真实手机邀请和重启恢复尚待验证，不将离线测试称为真机免扫码已成功。
+
+真机排查补充：已观测到系统服务运行新版持久组代码、Linux 客户端已登录，但邀请命令被 supplicant 接受后手机没有入组，可复用客户端计数从 1 降为 0。这不支持“再执行安装命令即可修复”或“扫码一次以后保证免扫码”的结论。上游 `wpas_p2p_invitation_result()` 在收到 `P2P_SC_FAIL_UNKNOWN_GROUP` 时会删除对应持久客户端，但尚未取得本机此次失败的响应码，不能据此直接断言手机返回了该状态。
+
+手机样本还有一个兼容性限制：[Android Q 入组分支](../evidence/wireless/android/connbase__classes.dex__9de5e103073d.txt#L1220) 调用的 [ConfigBuilderProxy](../evidence/wireless/android/connbase__classes.dex__05137d27627f.txt#L30) 设置网络名、密码、频率后直接 build，未调用 `enablePersistentMode(true)`；[Android 官方源码](https://android.googlesource.com/platform/packages/modules/Wifi/+/refs/tags/android-14.0.0_r29/framework/java/android/net/wifi/p2p/WifiP2pConfig.java) 明确默认不保存组配置。这只证明该样本分支的行为，不能替代当前手机 ROM 的动态验证；同一代码还存在厂商 Ext 与 Classic 分支。电脑端持久组不是完整的官方免扫码预连接实现。
+
+可用 `sudo python3 -I tools/diagnose_p2p.py --seconds 20` 对运行中的私有控制套接字做只读观察。脚本只允许 STATUS、LIST_NETWORKS、指定字段的 GET_NETWORK、STA 查询及 ATTACH/DETACH；输出邀请状态数值和配置摘要，不输出密码、原始 MAC，不发起发现、邀请、WPS 或网络重启。它用于获取实际失败原因，并不修复手机端的持久配对或官方预连接协议。
+
+### 官方自动连接与账号登录
+
+官方设置名是“自动连接同账号设备”，中文说明为“登录账号后，自动连接附近同账号的手机/平板。”（[设置绑定](../analysis/pretty/renderer.js#L56023)、[官方中文资源](../analysis/pretty/locales-zh_CN.js)）。`AutoConnectManager` 读取此开关，再检查预连接发现结果中的 `auth_status`、`connect_status`，然后调用原生预连接服务；不是只保存扫码 token 后直连旧地址。[自动连接判断](../analysis/pretty/app-connection.js#L1521)
+
+因此应在 Linux 客户端登录与手机相同的 vivo 账号，并允许手机端的设备互联/自动连接；只有 Windows 官方版已登录，不代表本客户端已具备同账号信任状态。后端 `/base-info` 会发送当前账号的 `isLogin/openid/pcLoginAccount` 和自动连接标志，[官方字段来源](../analysis/pretty/app-connection.js#L14264)。现有 token 在网络仍存活时可能允许未登录恢复，但不等同于官方的同账号发现与信任链。当前原生 BLE 预连接尚未完整移植，不能保证仅登录账号就覆盖所有手机后台唤醒场景。
 
 ## 浏览、发送与接收文件
 
@@ -287,7 +341,9 @@ curl -X POST -H "Authorization: Bearer $TOKEN" -H 'Content-Type: application/jso
   http://127.0.0.1:8765/api/sessions/<sessionId>/downloads
 ```
 
-下载先发送 download_info，TAR 写入临时目录，完整接收后检查条目、大小和安全路径，再解包。完成的文件位于 `.vivo-connect/downloads/<job-id>/`；每个普通文件返回 SHA256。此哈希用于本地校验，尚未与手机端哈希进行对比。目录可传 `"isDirectory":true`。不自动覆盖用户现有下载文件。
+下载先查询所选路径的文件列表元数据，目录另用 `query_directory_size` 查询递归字节数，合计后作为 `download_info.total` 传给手机。该字段是手机发送进度的总字节数，不能固定为 0（非空文件会因缺少分母直接显示 100%）；它不包含 TAR 头。文件列表支持分页和共享存储路径别名，单个父目录最多查询 100 页，每页 200 项。无法获取大小时返回 `DOWNLOAD_SIZE_UNKNOWN`，无法找到所选文件时返回 `DOWNLOAD_FILE_NOT_FOUND`，不以 0 代替未知大小；真正的空文件允许大小为 0。下载路径不允许重复或同时包含父目录和子路径，避免总量重复计算。若手机预检未返回 totalSize，任务继续使用查询到的总字节数。
+
+TAR 写入临时目录，完整接收后检查条目、大小和安全路径，再解包。完成的文件位于 `.vivo-connect/downloads/<job-id>/`；每个普通文件返回 SHA256。此哈希用于本地校验，尚未与手机端哈希进行对比。目录可传 `"isDirectory":true`。不自动覆盖用户现有下载文件。
 
 接收归档并完成解包、大小检查、SHA-256 计算和落盘后，后端通过 `/ws/heart-beat` 发送 `TRANS_FILE_SUCCESS:{"successCount":…, "id":"<job-id>"}`，结束手机“正在发送”的状态。只结束 HTTP 流会让手机继续等待完成通知，可能停在 99%。失败和取消分别发送官方 `TRANS_FILE_FAIL` / `TRANS_FILE_CANCEL` 消息，不发送成功通知。计数优先使用手机预检返回的 `totalCount`，缺省时使用请求路径数量。协议依据为官方 [transFileSuccess](../analysis/pretty/app-modules.js#L539) 和 [目录传输完成处理](../analysis/pretty/app-modules.js#L17214)。
 
@@ -360,6 +416,14 @@ python tools/test_p2p_helper.py
 
 ### 保留设备的断连与重连
 
-原生 GUI 使用 `POST /api/sessions/:id/disconnect` 关闭传输和心跳但保留设备记录，返回断连会话；使用 `POST /api/sessions/:id/reconnect` 提交恢复任务，返回 202 的 job。恢复成功后 result 为恢复的会话，复用原设备 ID；重新扫码也按手机稳定身份合并旧条目；失败保留旧设备供再次重试或扫码。手机已关闭服务或原地址不可达时，GUI 回退原连接方式的扫码。凭据仅在后端内存中保留，不通过公开会话/任务接口返回。原 `DELETE /api/sessions/:id` 仍表示删除会话。
+成功连接后，后端在 `devices.json` 保存设备标识、连接方式、手机及本机地址、USB 序列号和连接 token，最多恢复 50 个设备；不保存剪贴板正文或账号资料。文件权限为 0600。后端启动及意外掉线后，自动复用已授权的 HTTPS/WSS 地址和凭据，无需再次扫码；USB 则重新创建 ADB 转发。恢复握手的 `/version`、`/base-info` 均发送 `isAutoConnect=true`，并在采用会话前核对手机身份，保持原 session ID。
 
-Wi-Fi Direct 的启动授权由原生客户端调用系统 pkexec 完成，后端 HTTP 接口不执行提权命令。详见[原生客户端](native-gui.md)。
+自动连接串行执行，失败后按 5、10、20、40、60 秒上限退避，并防止与手动连接/扫码任务重复。手机明确拒绝授权、协议不兼容或身份不一致时停止自动重试，标记 `needsAuthorization=true`；网络不可达时继续等待，不主动打开扫码。`GET /api/sessions` 另返回 `autoConnect`、`reconnecting`、`needsAuthorization`、`nextRetryAt`，任务仍可从 `/api/jobs` 查询。
+
+Wi-Fi Direct 自动重连先区分“组已就绪”和“手机已入组”。组未就绪、手机尚未关联或认证、直连子网发生变化时，不向历史手机地址创建重连请求；会话用 `reconnectWait={code,message}` 返回等待原因。系统服务的 `ready=true` 只代表 GO 和 DHCP 已启动，`authorizedStations=0` 表示没有已认证的手机，不能据此宣称手机可达。手机入组后立即解除等待并恢复自动重连，不沿用旧的失败退避。Qt 显示“等待手机加入直连组”，可点击“加入直连组”主动打开二维码；网络重建后的首次入组仍可能需要手机扫码。
+
+原生 GUI 的“断开连接”使用 `POST /api/sessions/:id/disconnect`，保留设备但暂停自动重连，暂停状态跨重启保留；离线设备也可点击此按钮停止重试。“重新连接”使用 `POST /api/sessions/:id/reconnect`，返回 202 的 job，并恢复自动连接。`DELETE /api/sessions/:id` 遗忘设备，退出账号会遗忘全部设备。Qt 界面显示正在重连、等待重连、暂停或需要授权，失败不再自动弹扫码窗口；需要重新授权时可主动点击“添加设备”。
+
+2026-11-03 已接入官方同账号预连接：读取官方账号设备发现记录，取得 GUID、蓝牙地址和真实随机挑战，经经典蓝牙 `#pcc` 通道校验同账号、发送签名建链请求；在认证后为本次自动重连开放短时入组窗口，再用同一 token 完成 HTTPS/WSS。已验证客户端完整退出、新进程启动后自动重连，无需创建扫码任务。发现信息以 0600 权限保存，支持新进程恢复及同账号离线缓存。蓝牙助手仅在一次连接期间运行，结束即退出，不新增常驻守护进程。手机端仍按官方逻辑检查登录账号、Wi-Fi、蓝牙和解锁状态；忙碌/失败重试会让出至少 35 秒清理窗口。协议证据和真机验证边界见 [官方重连实现](official-reconnect.md)。
+
+Wi-Fi Direct 默认由原生客户端调用系统 pkexec 授权；安装系统服务模式后由固定配置的服务准备网络，GUI 不再请求授权。后端 HTTP 接口不执行提权命令。详见[原生客户端](native-gui.md)。
