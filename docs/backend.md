@@ -209,24 +209,9 @@ npm run scan
 
 旧的 `--driver system` 组启动跟踪在 GroupAdd 前订阅并用唯一探针确认事件监听就绪，优先读取官方 GroupStarted 中的 interface_object / group_object，再核验内核接口为同 phy 的独立 P2P GO 且实际频率匹配；GroupAdd 返回成功本身不视为 ready。订阅只接受 supplicant 的 GroupStarted、GroupFormationFailure、GroupFinished，不记录含密码的协商事件。失败时记录未就绪内核接口与有限的属性错误，并清理本次新建的半创建接口；不会静默吞掉全部 D-Bus 属性错误。独立总线回归可执行 `dbus-run-session -- python tools/test_p2p_bus.py`，它不访问系统 Wi-Fi。
 
-#### NetworkManager 外部组回收修复（已准备，未安装）
+#### NetworkManager 外部组回收问题
 
-2026-11-01 的系统日志确认：supplicant 已在 2412 MHz 达到 AP-ENABLED / P2P-GROUP-STARTED，NetworkManager 1.58.1 同时记录 `group start but we are not trying to connect`，随后该 GO 被撤销。由此得到的源码解释是：`GroupStarted` 创建临时的 NMSupplicantInterface 包装对象；空闲的 NMDeviceWifiP2P 不保留它；包装对象释放时强制调用 RemoveInterface，于是读取 `/Interfaces/4` 的 Ifname 报对象不存在。延长超时、改用 wpa_cli 或只把虚拟 P2P 设备设为 unmanaged，均不能消除底层包装对象的回收行为。
-
-已准备 [NetworkManager 1.58.1 补丁](../patches/networkmanager-1.58.1-preserve-external-p2p.patch)，仅调整析构时的所有权判断：通过既有对象路径发现的组（requested_driver=UNKNOWN）不因最后一个观察引用释放而删除；NetworkManager 主动创建的管理接口维持原清理行为，其自身 P2P 会话仍由 supplicant_group_interface_release 显式 Disconnect。补丁**尚未编译、安装或真机验证**，不应当作已经打通 Wi-Fi Direct。原始源码 SHA-256、观测摘要和补丁状态见 [根因记录](../evidence/networkmanager-p2p-conflict.json)。
-
-补丁已对官方 1.58.1 源文件检查应用兼容性。之后维护系统包时，应将其加入该版本 NetworkManager 的构建配方，在源码目录执行以下检查，再通过系统包管理器安装构建产物；不要覆盖正在运行的系统可执行文件：
-
-```sh
-PROJECT_ROOT=/path/to/vivo_connect
-patch --dry-run -p1 -i "$PROJECT_ROOT/patches/networkmanager-1.58.1-preserve-external-p2p.patch"
-```
-
-该系统补丁只保留备用；目前优先尝试项目独立 supplicant，无需应用它。不修改系统包、不重启网络。安装验证需另安排允许校园网短暂中断的时间，并覆盖原有校园网重连、NetworkManager 自身 P2P 连接/断开、外部自主 GO 保持、Ctrl-C 清理和手机加入。当前不必重复运行相同的恢复命令：它无法修复 NetworkManager 的所有权问题。
-
-助手现在先处理同批事件中的 GroupFinished / GroupFormationFailure，再读新对象属性。仅对对象消失类错误保留等待；权限错误仍立即暴露。该调整让错误指向组被撤销，不代表绕过了系统冲突。
-
-对应官方源码：[GroupStarted / dispose / set_state_down](https://github.com/NetworkManager/NetworkManager/blob/1.58.1/src/core/supplicant/nm-supplicant-interface.c)、[创建已发现对象的包装](https://github.com/NetworkManager/NetworkManager/blob/1.58.1/src/core/supplicant/nm-supplicant-manager.c)、[空闲事件处理及显式 Disconnect](https://github.com/NetworkManager/NetworkManager/blob/1.58.1/src/core/devices/wifi/nm-device-wifi-p2p.c)。
+系统管理的 supplicant 组可能被 NetworkManager 回收。当前默认使用项目独立 Wi-Fi Direct 助手，不需要修改或重启 NetworkManager。相关诊断记录见 [根因记录](../evidence/networkmanager-p2p-conflict.json)。
 
 早期助手失败退出可能留下 DOWN、无地址、频率为 0 的 GO 接口。仅在确认是本次实验的残留后，显式指定名称恢复，例如：
 
@@ -356,7 +341,7 @@ curl -X PUT -H "Authorization: Bearer $TOKEN" -H 'Content-Type: application/json
 
 会话默认接收文本，暂停时清除缓存并忽略手机后续文本，恢复后等待新的文本。此开关仅控制本地处理，不修改手机设置。断开或重连清空缓存并重置状态，客户端重新建立会话后应重新读取配置；多台手机之间不自动广播内容。暂停写入返回 `409 CLIPBOARD_DISABLED`，断连返回 `409 SESSION_DISCONNECTED`，同一会话并发发送返回 `409 CLIPBOARD_BUSY`，发送失败或超时返回 `CLIPBOARD_SEND_FAILED` 且不缓存未发送文本。
 
-Qt 客户端提供当前设备的文本剪贴板双向同步和暂停开关，KDE Wayland 下使用 Klipper 读取后台变化；Slint 客户端尚未接入。协议来源见 [sendClipboardText](../analysis/pretty/app-connection.js#L12598) 和 [接收处理](../analysis/pretty/app-connection.js#L16572)。后端已使用模拟手机验证双向文本、重复抑制、暂停、清理、隔离、大小限制及发送竞争；真实手机可能仍需开启系统互联剪贴板权限。
+Qt 客户端提供当前设备的文本剪贴板双向同步和暂停开关，KDE Wayland 下使用 Klipper 读取后台变化。协议来源见 [sendClipboardText](../analysis/pretty/app-connection.js#L12598) 和 [接收处理](../analysis/pretty/app-connection.js#L16572)。后端已使用模拟手机验证双向文本、重复抑制、暂停、清理、隔离、大小限制及发送竞争；真实手机可能仍需开启系统互联剪贴板权限。
 
 ## 手机文件管理
 

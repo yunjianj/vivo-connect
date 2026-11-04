@@ -1,6 +1,6 @@
 # 原生桌面客户端
 
-默认界面由 [C++ 和 Qt Widgets](../native-qt/main.cpp) 实现，作为单个原生进程运行，使用 Wayland 与桌面交互。它复用现有 Node 后端、官方账号网页和项目独立 Wi-Fi Direct 助手，不嵌入浏览器。原 Slint 客户端保留为可选入口 `./tools/run-slint.sh`。
+默认界面由 [C++ 和 Qt Widgets](../native-qt/main.cpp) 实现，作为单个原生进程运行，使用 Wayland 与桌面交互。它复用现有 Node 后端、官方账号网页和项目独立 Wi-Fi Direct 助手，不嵌入浏览器。
 
 从项目根目录启动界面：
 
@@ -38,6 +38,6 @@ npm test
 
 Qt 自检覆盖本机接口鉴权、电脑文件拖入事件和拖出 URI 的两种读取方式。手机实测中，电脑到手机的拖入传输完成，修正 URI 格式后手机文件拖到电脑文件管理器成功。Wayland 窗口通过协议事件检查。
 
-2026-11-02 在本机实测，单个 Qt GUI 在连接本机后端、显示文件列表时稳定 PSS 约 **51 MiB**，RSS 约 **106 MiB**；随后实际使用中约为 PSS 46–54 MiB，正式窗口连接手机后的采样约为 PSS 46 MiB、RSS 104 MiB。PSS 按共享内存比例计算，Node 后端、桌面、无线助手和临时文件选择器另计。之前的 Slint 软件渲染窗口 PSS 约 28 MiB，但其 Winit Wayland 后端缺少跨应用文件拖放。正常使用仅运行一套 GUI。
+2026-11-02 在本机实测，单个 Qt GUI 在连接本机后端、显示文件列表时稳定 PSS 约 **51 MiB**，RSS 约 **106 MiB**；随后实际使用中约为 PSS 46–54 MiB，正式窗口连接手机后的采样约为 PSS 46 MiB、RSS 104 MiB。PSS 按共享内存比例计算，Node 后端、桌面、无线助手和临时文件选择器另计。正常使用仅运行一套 GUI。
 
 [Qt Wayland 实机与内存记录](../evidence/qt-wayland-native-verification.json)。
