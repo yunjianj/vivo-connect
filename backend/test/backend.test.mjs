@@ -130,6 +130,15 @@ test('API authenticates local calls and preserves private identity', async t => 
   const dir = await temp(t); const app = await createBackend({ stateDir: dir }); t.after(() => app.close()); await listen(app.server);
   assert.equal((await api(app, 'GET', '/api/account', undefined, false)).status, 401);
   const publicAccount = await api(app, 'GET', '/api/account'); assert.equal(publicAccount.data.loggedIn, false);
+  for (const [method, route] of [
+    ['GET', '/'], ['GET', '/scan'], ['GET', '/scan/app.js'], ['GET', '/scan/style.css'],
+    ['POST', '/api/ui/tickets'], ['POST', '/api/ui/redeem'], ['POST', '/api/ui/files'],
+  ]) {
+    const result = await api(app, method, route, method === 'POST' ? {} : undefined);
+    assert.equal(result.status, 404, route);
+    assert.equal(result.data.error.code, 'NOT_FOUND', route);
+  }
+  assert.equal((await api(app, 'POST', '/api/ui/redeem', {}, false)).status, 401);
   assert.equal((await fs.stat(path.join(dir, 'config.json'))).mode & 0o777, 0o600);
   const body = await fetch(`http://127.0.0.1:${app.server.address().port}/api/account`, { headers: { authorization: `Bearer ${app.state.apiToken}`, origin: 'https://evil.example' } });
   assert.equal(body.status, 403);

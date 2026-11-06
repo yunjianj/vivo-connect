@@ -12,7 +12,6 @@ import { PhoneManager } from './phone.mjs';
 import { Jobs } from './jobs.mjs';
 import { Transfers } from './transfers.mjs';
 import { networkInterfaces } from './network.mjs';
-import { LocalUi } from './ui.mjs';
 import { P2pManager } from './p2p.mjs';
 import { ScanManager } from './scan.mjs';
 import { FileManager } from './files.mjs';
@@ -24,7 +23,6 @@ export async function createBackend({ stateDir, accountManager, phoneManager } =
   const state = await initState(stateDir);
   const accounts = accountManager || new AccountManager(state); await accounts.load();
   const phones = phoneManager || new PhoneManager(state, accounts);
-  const ui = new LocalUi();
   const jobs = new Jobs();
   const remembered = new RememberedDevices(state, phones, jobs);
   phones.remembered = remembered;
@@ -49,11 +47,9 @@ export async function createBackend({ stateDir, accountManager, phoneManager } =
       requireThat(/^(127\.0\.0\.1|localhost)(:\d+)?$/.test(host), '不接受此 Host');
       if (req.headers.origin && req.headers.origin !== `http://${host}`) throw new ApiError(403, 'ORIGIN_REJECTED', '不接受跨站请求');
       const url = new URL(req.url, `http://${host}`);
-      if (await ui.public(req, res, url, reply)) return;
       if (req.method === 'GET' && url.pathname === '/health') return reply(res, 200, { ok: true });
       const authorization = Buffer.from(req.headers.authorization || ''); const expected = Buffer.from(`Bearer ${state.apiToken}`);
-      if ((authorization.length !== expected.length || !crypto.timingSafeEqual(authorization, expected)) && !ui.authorized(req.headers.authorization, `${req.method} ${url.pathname}`)) throw new ApiError(401, 'UNAUTHORIZED', '需要本地 API Bearer token');
-      if(req.method==='POST'&&url.pathname==='/api/ui/files')return reply(res,202,await ui.upload(req,url,{state,transfers,jobs}));
+      if (authorization.length !== expected.length || !crypto.timingSafeEqual(authorization, expected)) throw new ApiError(401, 'UNAUTHORIZED', '需要本地 API Bearer token');
       let body = {};
       if (['POST', 'PUT', 'PATCH'].includes(req.method)) {
         const raw = await collect(req, 1024 * 1024);
@@ -62,7 +58,6 @@ export async function createBackend({ stateDir, accountManager, phoneManager } =
         requireThat(body && typeof body === 'object' && !Array.isArray(body), '请求体应为对象');
       }
       const route = `${req.method} ${url.pathname}`;
-      if (route === 'POST /api/ui/tickets') return reply(res, 201, ui.ticket());
       if (route === 'GET /api/account') return reply(res, 200, accounts.status());
       if (route === 'POST /api/account/login') return reply(res, 202, await accounts.start(body));
       if (route === 'POST /api/account/login/complete') return reply(res, 200, await accounts.complete(body));
@@ -140,7 +135,6 @@ export async function createBackend({ stateDir, accountManager, phoneManager } =
       else res.destroy();
     }
   });
-  // Browser-selected files are streamed locally before the phone job starts.
   server.requestTimeout = 300000; server.headersTimeout = 10000;
   remembered.start();
   return { state, server, accounts, phones, jobs, transfers, scans, p2p, remembered, async close() {

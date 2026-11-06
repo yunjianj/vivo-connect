@@ -75,7 +75,7 @@ node tools/import-account.mjs /绝对路径/保存的回调页.html
 
 默认前端为 C++ + Qt Widgets 原生桌面程序。后端运行后执行 `./tools/run-native.sh`；`npm run ui` / `npm run scan` 也指向原生入口。设备管理、二维码、账号登录与文件收发均在原生窗口中操作。构建、依赖与内存实测见 [原生 GUI 文档](native-gui.md)。
 
-下文网页相关描述仅适用于可选的旧调试入口 `npm run ui:web`。
+旧 Web 界面已移除；后端不再提供页面、网页票据或浏览器文件上传接口。所有本地 API（健康检查除外）使用配置文件中的 Bearer token。
 
 ## 连接手机
 
@@ -110,31 +110,7 @@ curl -H "Authorization: Bearer $TOKEN" http://127.0.0.1:8765/api/jobs/<连接请
 
 USB、LAN 和 existing 均返回 202 和连接任务 ID。轮询 `GET /api/jobs/<id>`：成功任务的 `result.id` 是 session ID。只有版本/基础信息检查通过且心跳通道打开后才报告 connected。成功连接的设备及连接凭据保存到状态目录 `devices.json`（0600），后端重启后可恢复并尝试自动重连；凭据不通过设备或任务查询接口返回。
 
-旧的网页扫码调试界面可按以下方式使用。保持后端运行，在另一个终端执行：
-
-```sh
-npm run ui:web
-```
-
-命令自动读取本地 API 配置，通过一次性票据打开系统默认浏览器。页面自动选择本机网卡、显示真实二维码图片及倒计时，轮询连接阶段；官方返回扫码超时 10003 时自动刷新。手机使用**官方互传的“连接电脑 / 扫一扫”**扫描图片，而不是用普通浏览器打开 qrText 链接。进入页面后也可明确选择网卡、刷新或停止等待。
-
-### 旧网页调试界面
-
-运行 `npm run ui:web` 打开旧网页调试界面。布局参考 [KDE Connect](https://apps.kde.org/kdeconnect/) 的桌面设备管理方式，采用 Breeze 浅色、侧边设备列表与右侧功能区域，保持项目自己的名称和图标。
-
-- 已连接设备直接显示概览；添加设备使用二维码弹窗，仍有刷新、停止及配对阶段反馈。
-- 左下角可启动官方账号登录，页面轮询登录结果，不读取或显示账号 token。
-- 支持系统文件选择器、多文件与拖放发送，可设置手机保存目录；浏览器单文件上限 512 MiB，重名默认保留并改名。
-- 手机文件页使用官方 FILELIST 请求（data 为官方虚拟首页 `/` 或手机返回的实际目录路径，versionTag=1）。可进入文件夹、接收文件，也可直接输入手机文件路径接收。
-- 传输记录展示真实任务进度、失败原因与取消按钮，接收完成后可保存到浏览器的下载目录。重启后端不保留内存中的任务历史。
-
-页面使用同一后端的 `/scan`，无需单独启动前端或填写 API token。60 秒一次性票据只在浏览器 fragment 中传递，兑换后从 URL 清除；浏览器得到一小时有效的界面凭据，仅存于当前标签页 sessionStorage。它允许账号登录、设备查询/扫码、手机文件查询/下载、浏览器选中文件上传及任务查询/取消；不允许系统网络注册、签发新票据、导入账号回调或直接传入电脑任意路径上传。直接打开未授权页面时会提示先运行 `npm run ui:web`。
-
-浏览器通过 `POST /api/ui/files?sessionId=…&name=…&savePath=…` 发送文件二进制，`X-File-Size` 声明大小。后端检查名称、实际大小、空间和会话，仅在私有随机暂存目录落盘，再交给已有官方上传流程；完成、失败或取消后清理暂存文件。页面凭据不能访问原有 paths 上传接口，从而避免变成任意本地文件读取入口。更新到本版需重启后端；现有手机会话随重启失效，需要重新连接。
-
-验证：`npm run test:web-ui` 使用真实无头浏览器和模拟手机，覆盖已有设备概览、拖放上传、手机目录、接收操作与 390px 窄屏布局；`npm run test:scan-ui` 验证二维码及配对进度。预览图在 `/tmp/vivo-desktop-ui.png`。
-
-API 方式仍保留，并且 pcIp 现在可省略自动选择：
+原生客户端显示扫码二维码，也可使用 API 获取，pcIp 可省略以自动选择：
 
 ```sh
 curl -X POST -H "Authorization: Bearer $TOKEN" -H 'Content-Type: application/json' \
@@ -321,7 +297,7 @@ TAR 写入临时目录，完整接收后检查条目、大小和安全路径，�
 
 后端复用手机 `/ws/heart-beat` 通道中的 `CLIPBOARD_TEXT:` 消息，支持 USB、LAN、Wi-Fi Direct 等已连接会话。每个会话在内存中保留最新一条文本，不落盘、不输出正文日志，也不在设备列表或任务列表中返回内容。协议按前缀后原始文本处理，保留冒号、换行、Unicode 和空字符串，不将文本解析为 JSON 或命令。仅支持文本，单条最多 64 KiB（UTF-8 字节数），超限手机消息和二进制消息直接忽略。
 
-需要完整本地 API Bearer token；旧网页票据不能访问这些接口：
+需要本地 API Bearer token：
 
 | 方法 | 路径 | 用途 / 请求体 |
 |---|---|---|
@@ -359,7 +335,7 @@ Qt 客户端提供当前设备的文本剪贴板双向同步和暂停开关，KD
 
 删除调用官方 `/pc_file_manager/delete_info`（`list` 为手机路径、`bucketId=[]`），根据官方 UI 使用的 `total/successTotal/failType` 检查结果。无法确认全部完成时返回 HTTP 502 `FILE_DELETE_INCOMPLETE`，`details.response` 保留手机统计；部分文件可能已删除，应刷新文件列表后决定下一步。是否进入回收站由手机决定，不承诺可恢复。批量删除限制为 1–1000 个路径，拒绝重复路径及同时选中的父子路径。路径必须为手机绝对路径，拒绝 `.`、`..`、控制字符、反斜杠；禁止移动、重命名或删除 `/`。
 
-目录创建沿用手机 GET `/pc_file_manager/create_directory?path=…&name=…`，对本地调用方仍提供 POST；目录大小使用 `/pc_file_manager/query_directory_size`。新增接口只提供后端能力，尚未接入原生或网页 UI，网页票据也未增加这些操作权限。实现见 [files.mjs](../backend/src/files.mjs)，回归测试见 [files.test.mjs](../backend/test/files.test.mjs)。
+目录创建沿用手机 GET `/pc_file_manager/create_directory?path=…&name=…`，对本地调用方仍提供 POST；目录大小使用 `/pc_file_manager/query_directory_size`。新增接口只提供后端能力，尚未接入原生 UI。实现见 [files.mjs](../backend/src/files.mjs)，回归测试见 [files.test.mjs](../backend/test/files.test.mjs)。
 
 ## 任务、取消与错误
 
@@ -376,7 +352,7 @@ npm test
 python tools/test_p2p_helper.py
 ```
 
-当前 26 项 Node 测试、30 项旧网络助手测试及 17 项独立模式测试通过，见 [验证记录](../evidence/backend-verification.json)。测试使用本机模拟手机的 TCP、HTTPS、自签名证书和 WSS，以及模拟 CDP/WebDriver 回调，不连接真实账号或真实手机。扫码 UI 的真实浏览器回归可执行 `npm run test:scan-ui`，它使用模拟云返回、真实二维码生成器，验证图片显示和任务轮询。另可执行 `npm run test:browser`，用真实无头 Chromium/ChromeDriver 访问本地延迟 10 秒才出现回调字段且一直加载资源的页面，回归旧版 8 秒退出问题；不会访问官方账号。覆盖官方扫码 sid/getPhone 到会话的 token 交接、帧拆包、授权忙碌后接受、同 token 鉴权、会话建立、上传/下载后哈希一致、拒绝预检、大小不一致、归档路径/链接拒绝、API 鉴权、取消、账号回调持久化和 USB 启动参数/转发清理。
+当前 26 项 Node 测试、30 项旧网络助手测试及 17 项独立模式测试通过，见 [验证记录](../evidence/backend-verification.json)。测试使用本机模拟手机的 TCP、HTTPS、自签名证书和 WSS，以及模拟 CDP/WebDriver 回调，不连接真实账号或真实手机。原生界面回归可执行 `npm run test:desktop-ui`。另可执行 `npm run test:browser`，用真实无头 Chromium/ChromeDriver 访问本地延迟 10 秒才出现回调字段且一直加载资源的页面，回归旧版 8 秒退出问题；不会访问官方账号。覆盖官方扫码 sid/getPhone 到会话的 token 交接、帧拆包、授权忙碌后接受、同 token 鉴权、会话建立、上传/下载后哈希一致、拒绝预检、大小不一致、归档路径/链接拒绝、API 鉴权、取消、账号回调持久化和 USB 启动参数/转发清理。
 
 真机仍需确认：官方网页和回调是否保持样本契约、手机是否允许旧版 LAN 配对、Linux 平台字段、HTTPS/HTTP 切换与证书、目录归档及权限响应。后端会暴露这些真实失败，不将模拟测试结果表述为真机已通过。
 
