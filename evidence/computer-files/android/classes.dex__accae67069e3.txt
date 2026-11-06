@@ -1,0 +1,165 @@
+DEX classes.dex
+CLASS Ls3/d$d;
+FIELDS
+a Ljava/lang/String;
+b Ljava/lang/String;
+c Ljava/lang/String;
+d Ljava/lang/String;
+e Ljava/lang/String;
+f Ljava/lang/String;
+g Ljava/lang/String;
+h Ljava/lang/String;
+i I
+j Ljava/lang/String;
+k Ljava/util/Map;
+
+METHOD <init>(Ljava/lang/String; Ljava/lang/String; Ljava/lang/String; Ljava/lang/String; Ljava/lang/String; Ljava/lang/String; Ljava/lang/String; Ljava/lang/String; I Ljava/lang/String;)V
+000000: invoke-direct v1, Ljava/lang/Object;-><init>()V
+000006: const/4 v0, -1
+000008: iput v0, v1, Ls3/d$d;->i I
+00000c: new-instance v0, Ljava/util/concurrent/ConcurrentHashMap;
+000010: invoke-direct v0, Ljava/util/concurrent/ConcurrentHashMap;-><init>()V
+000016: iput-object v0, v1, Ls3/d$d;->k Ljava/util/Map;
+00001a: iput-object v2, v1, Ls3/d$d;->a Ljava/lang/String;
+00001e: iput-object v3, v1, Ls3/d$d;->b Ljava/lang/String;
+000022: iput-object v4, v1, Ls3/d$d;->c Ljava/lang/String;
+000026: iput-object v5, v1, Ls3/d$d;->d Ljava/lang/String;
+00002a: iput-object v6, v1, Ls3/d$d;->e Ljava/lang/String;
+00002e: iput-object v7, v1, Ls3/d$d;->f Ljava/lang/String;
+000032: iput-object v8, v1, Ls3/d$d;->g Ljava/lang/String;
+000036: iput-object v9, v1, Ls3/d$d;->h Ljava/lang/String;
+00003a: iput v10, v1, Ls3/d$d;->i I
+00003e: iput-object v11, v1, Ls3/d$d;->j Ljava/lang/String;
+000042: return-void 
+
+METHOD <init>(Ljava/lang/String; Ljava/lang/String; Ljava/lang/String; Ljava/lang/String; Ljava/lang/String; Ljava/lang/String; Ljava/lang/String; Ljava/lang/String; Ljava/lang/String;)V
+000000: invoke-direct v1, Ljava/lang/Object;-><init>()V
+000006: const/4 v0, -1
+000008: iput v0, v1, Ls3/d$d;->i I
+00000c: new-instance v0, Ljava/util/concurrent/ConcurrentHashMap;
+000010: invoke-direct v0, Ljava/util/concurrent/ConcurrentHashMap;-><init>()V
+000016: iput-object v0, v1, Ls3/d$d;->k Ljava/util/Map;
+00001a: iput-object v2, v1, Ls3/d$d;->a Ljava/lang/String;
+00001e: iput-object v3, v1, Ls3/d$d;->b Ljava/lang/String;
+000022: iput-object v4, v1, Ls3/d$d;->c Ljava/lang/String;
+000026: iput-object v5, v1, Ls3/d$d;->d Ljava/lang/String;
+00002a: iput-object v6, v1, Ls3/d$d;->e Ljava/lang/String;
+00002e: iput-object v7, v1, Ls3/d$d;->f Ljava/lang/String;
+000032: iput-object v8, v1, Ls3/d$d;->g Ljava/lang/String;
+000036: iput-object v9, v1, Ls3/d$d;->h Ljava/lang/String;
+00003a: iput-object v10, v1, Ls3/d$d;->j Ljava/lang/String;
+00003e: return-void 
+
+METHOD a(Ls3/d$d;)I
+000000: iget v0, v0, Ls3/d$d;->i I
+000004: return v0
+
+METHOD b(Ls3/d$d; I)I
+000000: iput v1, v0, Ls3/d$d;->i I
+000004: return v1
+
+METHOD c(Ls3/d$d;)Ljava/lang/String;
+000000: iget-object v0, v0, Ls3/d$d;->j Ljava/lang/String;
+000004: return-object v0
+
+METHOD d(Ls3/d$d; Ljava/lang/String;)Ljava/lang/String;
+000000: iput-object v1, v0, Ls3/d$d;->j Ljava/lang/String;
+000004: return-object v1
+
+METHOD e()Ljava/lang/String;
+000000: iget-object v0, v1, Ls3/d$d;->f Ljava/lang/String;
+000004: return-object v0
+
+METHOD f(Ljava/lang/String;)Ls3/d$c;
+000000: iget-object v0, v3, Ls3/d$d;->k Ljava/util/Map;
+000004: invoke-interface v0, Ljava/util/Map;->size()I
+00000a: move-result v0
+00000c: const-string v1, "CONNECT_PcSuitProxy"
+000010: const/4 v2, 0
+000012: if-nez v0, +008h
+000016: const-string v4, "getAppInfo map is null"
+00001a: invoke-static v1, v4, Lz3/o;->p(Ljava/lang/String; Ljava/lang/String;)V
+000020: return-object v2
+000022: invoke-static v4, Landroid/text/TextUtils;->isEmpty(Ljava/lang/CharSequence;)Z
+000028: move-result v0
+00002a: if-eqz v0, +008h
+00002e: const-string v4, "getAppInfo key is null"
+000032: invoke-static v1, v4, Lz3/o;->p(Ljava/lang/String; Ljava/lang/String;)V
+000038: return-object v2
+00003a: iget-object v0, v3, Ls3/d$d;->k Ljava/util/Map;
+00003e: invoke-interface v0, v4, Ljava/util/Map;->containsKey(Ljava/lang/Object;)Z
+000044: move-result v0
+000046: if-eqz v0, +00bh
+00004a: iget-object v0, v3, Ls3/d$d;->k Ljava/util/Map;
+00004e: invoke-interface v0, v4, Ljava/util/Map;->get(Ljava/lang/Object;)Ljava/lang/Object;
+000054: move-result-object v4
+000056: check-cast v4, Ls3/d$c;
+00005a: return-object v4
+00005c: return-object v2
+
+METHOD g()I
+000000: iget v0, v1, Ls3/d$d;->i I
+000004: return v0
+
+METHOD h()Ljava/lang/String;
+000000: iget-object v0, v1, Ls3/d$d;->h Ljava/lang/String;
+000004: return-object v0
+
+METHOD i()Ljava/lang/String;
+000000: iget-object v0, v1, Ls3/d$d;->b Ljava/lang/String;
+000004: return-object v0
+
+METHOD j()Ljava/lang/String;
+000000: iget-object v0, v1, Ls3/d$d;->c Ljava/lang/String;
+000004: return-object v0
+
+METHOD k()Ljava/lang/String;
+000000: iget-object v0, v1, Ls3/d$d;->e Ljava/lang/String;
+000004: return-object v0
+
+METHOD l()Ljava/lang/String;
+000000: iget-object v0, v1, Ls3/d$d;->a Ljava/lang/String;
+000004: return-object v0
+
+METHOD m()Ljava/lang/String;
+000000: iget-object v0, v1, Ls3/d$d;->d Ljava/lang/String;
+000004: return-object v0
+
+METHOD n(Ljava/lang/String; Ls3/d$c;)V
+000000: iget-object v0, v1, Ls3/d$d;->k Ljava/util/Map;
+000004: invoke-interface v0, v2, v3, Ljava/util/Map;->put(Ljava/lang/Object; Ljava/lang/Object;)Ljava/lang/Object;
+00000a: return-void 
+
+METHOD toString()Ljava/lang/String;
+000000: new-instance v0, Ljava/lang/StringBuilder;
+000004: invoke-direct v0, Ljava/lang/StringBuilder;-><init>()V
+00000a: const-string v1, "PcSuitInfo{mDeviceId='"
+00000e: invoke-virtual v0, v1, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+000014: iget-object v1, v3, Ls3/d$d;->b Ljava/lang/String;
+000018: invoke-virtual v0, v1, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+00001e: const/16 v1, 39
+000022: invoke-virtual v0, v1, Ljava/lang/StringBuilder;->append(C)Ljava/lang/StringBuilder;
+000028: const-string v2, ", mDeviceName='"
+00002c: invoke-virtual v0, v2, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+000032: iget-object v2, v3, Ls3/d$d;->c Ljava/lang/String;
+000036: invoke-virtual v0, v2, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+00003c: invoke-virtual v0, v1, Ljava/lang/StringBuilder;->append(C)Ljava/lang/StringBuilder;
+000042: const-string v2, ", mConnectType='"
+000046: invoke-virtual v0, v2, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+00004c: iget-object v2, v3, Ls3/d$d;->h Ljava/lang/String;
+000050: invoke-virtual v0, v2, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+000056: invoke-virtual v0, v1, Ljava/lang/StringBuilder;->append(C)Ljava/lang/StringBuilder;
+00005c: const-string v2, ", mDeviceType='"
+000060: invoke-virtual v0, v2, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+000066: iget-object v2, v3, Ls3/d$d;->j Ljava/lang/String;
+00006a: invoke-virtual v0, v2, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+000070: invoke-virtual v0, v1, Ljava/lang/StringBuilder;->append(C)Ljava/lang/StringBuilder;
+000076: const-string v1, ", mConnectStatus="
+00007a: invoke-virtual v0, v1, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+000080: iget v1, v3, Ls3/d$d;->i I
+000084: invoke-virtual v0, v1, Ljava/lang/StringBuilder;->append(I)Ljava/lang/StringBuilder;
+00008a: const/16 v1, 125
+00008e: invoke-virtual v0, v1, Ljava/lang/StringBuilder;->append(C)Ljava/lang/StringBuilder;
+000094: invoke-virtual v0, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
+00009a: move-result-object v0
+00009c: return-object v0

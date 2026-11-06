@@ -1,0 +1,76 @@
+const downloadService = require('../service/download');
+
+const utils = require('../utils');
+const pathUtils = require('path');
+
+const __logInfo = (fun, text)=>{
+    // console.log(fun, text)
+    global?.__log?.info(`[fileTransfer-controller-download][${fun}] ${text}`) || (()=>{})
+};
+
+
+module.exports = {
+    downloadResponse,
+    stopDownloadResponse,
+    recoverDownloadResponse,
+    deleteDownloadResponse,
+    downloadFinishResponse
+}
+
+/**
+ * 响应手机端预下载请求
+ * @param {*} value 
+*/
+async function downloadResponse(value, msgId) {
+    const result = await downloadService.download(value);
+
+    utils.sendJsonByDataChannel('download', result, msgId);
+}
+
+
+/**
+ * 响应手机端发起暂停下载
+ * @param {*} value 
+*/
+async function stopDownloadResponse(value, msgId) {
+    const result = await downloadService.stopDownload(value);
+
+    utils.sendJsonByDataChannel('stopDownload', result, msgId);
+}
+
+
+
+/**
+ * 响应手机端发起恢复下载
+ * @param {*} value 
+*/
+async function recoverDownloadResponse(value, msgId) {
+    const result = await downloadService.recoverDownload(value);
+
+    utils.sendJsonByDataChannel('recoverDownload', result, msgId);
+}
+
+
+
+/**
+ * 响应手机端删除下载任务
+ * @param {*} value 
+*/
+async function deleteDownloadResponse(value, msgId) {
+    const result = await downloadService.deleteDownload(value);
+
+    utils.sendJsonByDataChannel('deleteDownload', result, msgId);
+}
+
+
+/**
+ * 手机通知pc文件接收完成
+ * @param {*} value 
+*/
+async function downloadFinishResponse(value, msgId) {
+    const result = await downloadService.downloadFinish(value);
+
+    utils.sendJsonByDataChannel('downloadFinish', result, msgId);
+}
+
+

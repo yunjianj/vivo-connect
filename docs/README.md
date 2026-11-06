@@ -15,6 +15,7 @@
 | [官方账号重连协议](official-reconnect.md) | 同账号设备发现、蓝牙挑战、签名建链与自动重连验证 |
 | [无线配对](wireless-pairing.md) | UDP 发现、TCP 授权、连接 token、Wi-Fi Direct 和参考实现 |
 | [手机连接与文件管理](phone-protocol.md) | USB 启动、版本协商、HTTPS/WSS、手机文件接口和传输流程 |
+| [手机访问电脑文件：逆向记录](computer-files-reverse-engineering.md) | 旧 VDFS 与新版随身文件站的协议区别、源码恢复及未完成边界；实现已撤回 |
 
 ## 协议与历史资料
 

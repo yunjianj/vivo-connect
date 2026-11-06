@@ -1,0 +1,131 @@
+// Static excerpts of the official client; evidence only, not executable.
+// Official app-connection.js:9647-9684
+        t.createRandom = (e, t) => Math.floor(e + Math.random() * (t - e)), t.createRandomStr = e => {
+            e = "number" != typeof e || isNaN(e) ? 16 : e;
+            let n = "";
+            for (let o = 0; o < e; o++) {
+                const e = t.createRandom(0, u);
+                n += d[e];
+            }
+            return n;
+        };
+        const _ = t.createRandomStr(32), C = t.createRandomStr(16);
+        function E(e) {
+            let t = "";
+            try {
+                t = JSON.parse(e);
+            } catch (t) {
+                window._log.info(`[common.ts][parseJson] jsonStr: ${e}, err: ${t}`);
+            }
+            return t;
+        }
+        function v(e, t) {
+            var n, o;
+            if (!e || !t || "string" != typeof e || "string" != typeof t) return;
+            const i = e.split("."), c = t.split("."), s = i.length > c.length ? i.length : c.length;
+            for (let e = 0; e < s; e++) {
+                const t = parseInt(null !== (n = i[e]) && void 0 !== n ? n : "0"), r = parseInt(null !== (o = c[e]) && void 0 !== o ? o : "0");
+                if (isNaN(t)) return;
+                if (isNaN(r)) return 1;
+                if (t > r) return 1;
+                if (t !== r) {
+                    if (t < r) return -1;
+                } else if (e === s - 1) return 0;
+            }
+        }
+        t.getApplicationKey = () => ({
+            key: _,
+            iv: C
+        }), t.throttleFun = (e, t) => {
+            if ("function" != typeof e) return () => {};
+
+// Official app-connection.js:13021-13060
+                });
+            }
+            sendToMoblieDeviceInit() {
+                return o.__awaiter(this, void 0, void 0, function*() {
+                    return new Promise((e, t) => {
+                        var n;
+                        if (this.appInfo.length || this.isMac) {
+                            const o = r.default.getUserInfo();
+                            this.appInfo.forEach(e => {
+                                (null == e ? void 0 : e.appName) == i.APP_NAME.SUPER_CLIPBOARD && (e.switchEnable = 0 != h.default.getItem("pc_clipboard_switch"));
+                            });
+                            const c = {
+                                type: i.APP_PROCESS_EVENT_NAME.START_UP,
+                                data: {
+                                    version: 1,
+                                    pcInfo: {
+                                        ip: this.device.pcIp || (null === (n = g.default.getInstance().getModuleStatus().pcIp) || void 0 === n ? void 0 : n[0]) || "",
+                                        pcDeviceId: this.applicationInitData.pcDeviceId,
+                                        pcDeviceName: this.maskHostName(N.default.getHostName()) || "",
+                                        key: this.applicationInitData.key,
+                                        iv: this.applicationInitData.iv,
+                                        accountOpenId: m.getLoginAccount() || "",
+                                        accountName: o.nickName || "",
+                                        connectType: this.device.connectFlag
+                                    },
+                                    appInfo: this.appInfo
+                                }
+                            };
+                            let s = setTimeout(() => {
+                                t({
+                                    code: -1,
+                                    msg: I.MESSAGE_EVENT_TYPE.SHADOW_LIKE + " timeout 15s"
+                                });
+                            }, 15e3);
+                            this.initApplicationsSuccCallback = () => {
+                                s && (clearTimeout(s), s = null), e(!0);
+                            }, this.sendMessage(I.MESSAGE_EVENT_TYPE.SHADOW_LIKE + JSON.stringify(c));
+                        } else window._log.info(`[ConnectionModule][MobileDevice.ts][sendToMoblieDeviceInit] appInfo.len: ${this.appInfo.length}, isMac: ${this.isMac}`), 
+                        t({
+                            code: -2,
+
+// Official app-connection.js:15910-15935
+            [N.MESSAGE_EVENT_TYPE.SHADOW_LIKE](e) {
+                var t, n, r, a, l, d, u, _, C, E, v, f, p;
+                return o.__awaiter(this, void 0, void 0, function*() {
+                    if (null === (t = this.mobileDevice) || void 0 === t || t.initApplicationsSuccCallback(), 
+                    (null == e ? void 0 : e.type) === i.APP_PROCESS_EVENT_NAME.START_UP) {
+                        window._log.info("[ConnectionModule][connect-websocket-message-handler.ts][SHADOW_LIKE] type: " + e.type);
+                        const t = e.data;
+                        if (!0 === (null == t ? void 0 : t.shadowLikeEnable) || "true" === (null == t ? void 0 : t.shadowLikeEnable)) {
+                            window._log.info("[ConnectionModule][connect-websocket-message-handler.ts][SHADOW_LIKE] shadowLikeEnable: true"), 
+                            t.mobileDeviceInfo.mobileDeviceId ? this.mobileDevice.device.appMobileDeviceId = t.mobileDeviceInfo.mobileDeviceId : this.mobileDevice.device.appMobileDeviceId || (this.mobileDevice.device.appMobileDeviceId = ""), 
+                            void 0 === this.mobileDevice.device.cooperationSwitchState && (this.mobileDevice.device.cooperationSwitchState = !1), 
+                            this.mobileDevice.onStateChanged(), this.mobileDevice.device.appMobileDeviceId && this.mobileDevice.device.mobileDeviceId == this.mobileDevice.vivoScreenServer.deviceId && this.mobileDevice.vivoScreenServer.sendMsg(i.APP_PROCESS_EVENT_NAME.ON_UPDATA_MOBILE_DEVICE_ID, {
+                                mobileDeviceId: this.mobileDevice.device.appMobileDeviceId
+                            });
+                            const e = this.mobileDevice.device.connectFlag === i.CONNECT_MODE.USB;
+                            null === (n = t.appInfo) || void 0 === n || n.forEach(t => {
+                                switch (t.appName) {
+                                  case i.APP_NAME.VDFS:
+                                    t.port = e ? (this.mobileDevice.device.port || c.default.connectionServerPort) + 2 : t.port;
+                                    break;
+
+                                  case i.APP_NAME.ANYWHERE_CONTROL:
+                                    t.port = e ? (this.mobileDevice.device.port || c.default.connectionServerPort) + 3 : t.port, 
+                                    t.isSupported || (this.mobileDevice.device.cooperationSwitchState = void 0);
+                                    break;
+
+
+// Official app-connection.js:15985-16003
+                            try {
+                                const e = yield null === (d = this.mobileDevice.vdfsApplicationServer) || void 0 === d ? void 0 : d.invoke(i.APP_PROCESS_EVENT_NAME.ON_MOBILE_DEVICE_CONNECTED, p);
+                                T.state.vdfsServer = !0, window._log.info("[ConnectionModule][connect-websocket-message-handler.ts][SHADOW_LIKE] vdfsServer readyRes: " + e);
+                            } catch (e) {
+                                window._log.info("[ConnectionModule][connect-websocket-message-handler.ts][SHADOW_LIKE] vdfsServer readyRes err: " + e);
+                            }
+                            try {
+                                const e = yield null === (u = this.mobileDevice.vdfsApplicationClient) || void 0 === u ? void 0 : u.invoke(i.APP_PROCESS_EVENT_NAME.ON_MOBILE_DEVICE_CONNECTED, p);
+                                T.state.vdfsClient = !0, window._log.info("[ConnectionModule][connect-websocket-message-handler.ts][SHADOW_LIKE] vdfsClient readyRes: " + e);
+                            } catch (e) {
+                                window._log.info("[ConnectionModule][connect-websocket-message-handler.ts][SHADOW_LIKE] vdfsClient readyRes err: " + e);
+                            }
+                            this.mobileDevice.sendMessage(N.MESSAGE_EVENT_TYPE.SHADOW_LIKE + JSON.stringify({
+                                type: i.APP_PROCESS_EVENT_NAME.READY,
+                                data: T
+                            })), null === (_ = this.mobileDevice.keyboardMouseCoordinationServer) || void 0 === _ || _.off(i.APP_PROCESS_EVENT_NAME.ON_PHONE_BIZ_APP_CONNECTED, I.default.phoneBizAppConnected), 
+                            null === (C = this.mobileDevice.keyboardMouseCoordinationServer) || void 0 === C || C.once(i.APP_PROCESS_EVENT_NAME.ON_PHONE_BIZ_APP_CONNECTED, I.default.phoneBizAppConnected.bind(this)), 
+                            I.default.KMCSReadied(this.mobileDevice);
+                        } else this.mobileDevice.device.cooperationSwitchState = void 0, this.mobileDevice.isNeedAutoKMCS = !1;

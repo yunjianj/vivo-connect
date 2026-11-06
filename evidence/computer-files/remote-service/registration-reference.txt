@@ -1,0 +1,78 @@
+// main.js:23941-23973
+        }), void p.info("[SET_IDENTITY]set桌面端注册信息:" + t)) : void p.warn("[store]err in SET_IDENTITY >>>> identity = " + t),
+        async GET_DEVICE_REGISTER({commit: e, dispatch: t, state: n}, r) {
+            const o = n.identity || a.default.getItem("deviceNoIdentity");
+            if (p.info(`[dispatch('common/GET_DEVICE_REGISTER')]: state.identity = ${o}----from=${JSON.stringify(r)}`), 
+            !o) return void p.warn("[dispatch]获取桌面端注册信息 error: state.identity = " + o);
+            const i = -1 < o.indexOf("_") ? o : l.decryptInfo(o, d.DEVICE_IDENTITY_ENCRYPT_KEY), u = (l.sha256Hash(i), 
+            a.default.getItem("priDeviceToken")), f = a.default.getItem("countryCode"), m = {
+                deviceType: l.getDeviceType(),
+                identity: i,
+                deviceDefaultName: l.getComputerName() || "",
+                version: a.default.getItem("appVersion") || "",
+                deviceToken: n.deviceInfo.deviceToken,
+                pcDeviceId: l.getPcsuiteLocalStorage("newDeviceId"),
+                priDeviceToken: u || "",
+                countryCode: f
+            };
+            p.info("getDeviceRegist priDeviceToken =========> " + JSON.stringify(m)), await s.getDeviceRegist(m).then(async n => {
+                if (n) {
+                    p.info("getDeviceRegist获取设备信息结果 " + JSON.stringify(n));
+                    const r = l.getFormatKey(n.deviceNo);
+                    e("SET_DATA", {
+                        key: "cryptKey",
+                        value: r
+                    }), n.tempPassword = c.decryptTask(n.tempPassword), p.warn(`[common/GET_DEVICE_REGISTER] res decryptTask=========>${n.tempPassword} --priDeviceToken=${m.priDeviceToken}`), 
+                    await t("RESET_DEVICE_INFO", n), m.priDeviceToken || (a.default.setItem("priDeviceToken", n.deviceToken, !0), 
+                    a.default.setItem("priDeviceTokenTime", n.timestamp, !0)), n.priDeviceToken && n.priDeviceToken != a.default.getItem("priDeviceToken") && a.default.setItem("priDeviceToken", n.priDeviceToken, !0), 
+                    Promise.resolve(n);
+                }
+            }, e => {
+                p.error("err in GET_DEVICE_REGISTER=========>  " + JSON.stringify(e.message));
+            });
+        },
+        RESET_DEVICE_INFO: ({commit: e}, t) => t && "[object Object]" === Object.prototype.toString.call(t) ? (t.timestamp = Date.now(), 
+
+// main.js:16988-17029
+    });
+    const o = n(4), i = o.__importDefault(n(292)), a = o.__importDefault(n(5)), s = n(9).getBaseDomainApi("BASE_API"), u = n(3), l = o.__importDefault(n(43)), d = n(303);
+    let c, f = !1;
+    const {initRenderLog: m} = n(22), h = m();
+    h.info("BASE_API IN REQUEST========>" + s);
+    const p = i.default.create({
+        proxy: !1,
+        baseURL: s,
+        withCredentials: !0,
+        timeout: 5e3
+    }), g = {}, y = {}, v = function() {
+        let e = a.default.getItem("deviceInfo"), t = null;
+        return e && e.deviceToken && (t = e.deviceToken), t;
+    }, _ = function() {
+        let e = a.default.getItem("deviceInfo"), t = "";
+        return e && e.deviceNo && (t = e.deviceNo), h.info("[Request]getDeviceNo ==> " + t), 
+        t;
+    }, M = function() {
+        return a.default.getItem("countryCode");
+    }, b = function() {
+        let e = u.storageGetUserInfo(), t = null;
+        return e && e.vivo_account_cookie_iqoo_vivotoken && (t = e.vivo_account_cookie_iqoo_vivotoken), 
+        t;
+    };
+    p.interceptors.request.use(e => {
+        const {headers: t, method: n, params: o, url: i} = e;
+        if (e.headers = Object.assign(Object.assign({}, t), {
+            deviceToken: v(),
+            authToken: b(),
+            countryCode: M(),
+            "Content-Type": "application/json;charset=UTF-8"
+        }), null == i ? void 0 : i.includes("/maodun/")) try {
+            const t = d.encryptTask("ok");
+            o.cipherText = t, e.params.cipherText = t, h.info(`[Request]req in request 2 ${n}-${i} =>>> 矛盾接口，成功插入字段cipherText = ${t}`);
+        } catch (e) {
+            h.error(`[Request]req in request 5 ${n}-${i} =>>> 矛盾接口，成功插入字段cipherText error = ${e}`);
+        }
+        const a = (null == n ? void 0 : n.toLocaleLowerCase()) || "";
+        return [ "post", "put", "delete" ].includes(a) && (e.data = Object.assign({}, o), 
+        delete e.params), h.info(`[Request]req in request 3 methodLowerCase=${a}-isRefreshToken=${f}-config=${JSON.stringify(e)}`), 
+        f && i ? (r(i, e), {
+            url: ""

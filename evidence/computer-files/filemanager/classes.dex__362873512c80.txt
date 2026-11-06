@@ -1,0 +1,57 @@
+DEX classes.dex
+CLASS La5/b$b;
+FIELDS
+a Lcom/vivo/proxy/bean/DdsDeviceInfo;
+
+METHOD <init>(Lcom/vivo/proxy/bean/DdsDeviceInfo;)V
+000000: iput-object v1, v0, La5/b$b;->a Lcom/vivo/proxy/bean/DdsDeviceInfo;
+000004: invoke-direct v0, Ljava/lang/Object;-><init>()V
+00000a: return-void 
+
+METHOD onReceived(Lcom/vivo/vdfs/data/bean/ImmDataBean; Z I)V
+000000: new-instance v0, Ljava/lang/StringBuilder;
+000004: invoke-direct v0, Ljava/lang/StringBuilder;-><init>()V
+00000a: const-string v1, "onReceived b: "
+00000e: invoke-virtual v0, v1, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+000014: invoke-virtual v0, v2, Ljava/lang/StringBuilder;->append(Z)Ljava/lang/StringBuilder;
+00001a: const-string v1, " i: "
+00001e: invoke-virtual v0, v1, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+000024: invoke-virtual v0, v3, Ljava/lang/StringBuilder;->append(I)Ljava/lang/StringBuilder;
+00002a: invoke-virtual v0, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
+000030: move-result-object v0
+000032: const-string v1, "AbilityVdfsUtils"
+000036: invoke-static v1, v0, Lx5/t;->a(Ljava/lang/String; Ljava/lang/String;)V
+00003c: return-void 
+
+METHOD onReply(Lcom/vivo/vdfs/data/bean/ImmDataBean;)V
+000000: const-string v0, "AbilityVdfsUtils"
+000004: new-instance v1, Ljava/lang/String;
+000008: iget-object v5, v5, Lcom/vivo/vdfs/data/bean/ImmDataBean;->data [B
+00000c: invoke-direct v1, v5, Ljava/lang/String;-><init>([B)V
+000012: new-instance v5, Ljava/lang/StringBuilder;
+000016: invoke-direct v5, Ljava/lang/StringBuilder;-><init>()V
+00001c: const-string v2, "requestFileManagerVersionCode version: "
+000020: invoke-virtual v5, v2, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+000026: invoke-virtual v5, v1, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+00002c: const-string v2, "requestFileManagerVersionCode"
+000030: iget-object v3, v4, La5/b$b;->a Lcom/vivo/proxy/bean/DdsDeviceInfo;
+000034: invoke-static v2, v3, La5/b;->J(Ljava/lang/String; Lcom/vivo/proxy/bean/DdsDeviceInfo;)Ljava/lang/String;
+00003a: move-result-object v2
+00003c: invoke-virtual v5, v2, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+000042: invoke-virtual v5, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
+000048: move-result-object v5
+00004a: invoke-static v0, v5, Lx5/t;->g(Ljava/lang/String; Ljava/lang/String;)V
+000050: iget-object v4, v4, La5/b$b;->a Lcom/vivo/proxy/bean/DdsDeviceInfo;
+000054: invoke-virtual v4, Lcom/vivo/proxy/bean/DdsDeviceInfo;->getDeviceId()Ljava/lang/String;
+00005a: move-result-object v4
+00005c: invoke-static v4, v1, La5/b;->F(Ljava/lang/String; Ljava/lang/String;)V
+000062: invoke-static Lgs/c;->c()Lgs/c;
+000068: move-result-object v4
+00006a: new-instance v5, Ll2/f;
+00006e: invoke-direct v5, Ll2/f;-><init>()V
+000074: invoke-virtual v4, v5, Lgs/c;->l(Ljava/lang/Object;)V
+00007a: goto +7h
+00007c: move-exception v4
+00007e: const-string v5, "request versionCode failed "
+000082: invoke-static v0, v5, v4, Lx5/t;->e(Ljava/lang/String; Ljava/lang/String; Ljava/lang/Throwable;)V
+000088: return-void 

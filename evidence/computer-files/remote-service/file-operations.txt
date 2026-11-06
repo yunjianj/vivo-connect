@@ -1,0 +1,317 @@
+const utils = require('../utils');
+const fs = require('fs');
+const pathUtils = require('path');
+const constants = require('../utils/const');
+
+const __logInfo = (fun, text)=>{
+    console.log(fun, text)
+    global?.__log?.info(`[fileTransfer-service-normal][${fun}] ${text}`) || (()=>{})
+};
+
+
+module.exports = {
+    getFileList,
+    deleteFile,
+    mkdir,
+    confirmFileExist,
+    fileStats
+}
+
+/**
+ * todo 存在乱码情况，需要处理
+ * 获取指定目录路径文件列表
+ * @param {*} path 目录路径, root 表示一级路径，其它路径 
+ * @param {*} ability 移动端支持的能力
+ * @returns [] 
+ */
+async function getFileList(path, ability) {
+    let list = [];
+    // win端一级目录
+    if (process.platform === "win32" && path === 'root') {
+        //获取磁盘信息
+        const drivers = utils.getWinDrives();
+        drivers.forEach(driver => {
+            list.push({
+                type: 'driver',
+                path:  driver.path,
+                name: `${driver.label? driver.label : driver.caption} (${driver.caption}:)`
+            }) 
+        });
+        // 添加媒体目录
+        const mediaFolders = await utils.getWinMediaDirs();
+        list.push(...mediaFolders);
+    } else {
+        // mac端或者win 非一级目录
+        const fileList = require('../worker/fileList');
+        list = await fileList(path);
+        // mac 一级目录添加个人收藏目录
+        if(process.platform === "darwin" && path === '/') {
+            const needMacRaiseLevel= ability?.needMacRaiseLevel;
+            // needMacRaiseLevel为true表示mac需要提升用户目录到首页
+            if(needMacRaiseLevel) {
+                const favoritesDirs = await utils.getMacFavoritesDirs();
+                list = [...favoritesDirs, ...list];
+            }
+        }
+    }
+    return list;
+}
+
+/**
+ * 删除指定文件到回收站
+ * @param {*} paths Array<string>
+ */
+async function deleteFile({ paths = []} = {}) {
+    return new Promise(async resolve=>{
+        
+        const taskProimse = [];
+        paths.forEach(path=>{
+            taskProimse.push(new Promise(async resolve=>{
+                const exit = fs.existsSync(path);
+                if (exit) {
+                    // 判断文件是否有删除权限
+                    try {
+                        fs.accessSync(path, fs.constants.W_OK);
+                        if (!await utils.judgeFileCanWriteSync(path)) {
+                            throw Error('文件被占用')
+                        }            
+                    
+                        // 目录不为空，则错误
+                        if (!utils.isDirectoryEmptySync(path)) {
+                            resolve({
+                                code: 5,
+                                path: utils.normalizePath(path),
+                                msg: '文件夹目录不为空'
+                            })
+                        } else {
+                            resolve({
+                                code: 0,
+                                path: utils.normalizePath(path)
+                            })
+                        }
+                    } catch (err) {
+                        resolve({
+                            code: 2,
+                            path: utils.normalizePath(path),
+                            msg: '权限不足'
+                        })
+                    }
+                } else {
+                    resolve({
+                        code: 1,
+                        path: utils.normalizePath(path),
+                        msg: '文件不存在'  
+                    })
+                }
+            }))
+            
+        });
+
+        const result = await Promise.all(taskProimse);
+
+        __logInfo('deleteFile result ===>', JSON.stringify(result))
+      
+        const res = result.filter(re=>re.code == 0);
+        
+        if (res.length == 0) { // 文件都不存在
+            resolve(result);
+            return;
+        }
+
+        function response(res) {
+            let index = 0
+            const r = result.map(item=>{
+                if (item.code == 0) {
+                    const b = res[index];
+                    index++;
+                    return {
+                        code: b.code,
+                        msg: b.msg,
+                        path: utils.normalizePath(item.path),
+                    };
+                } 
+                return item;
+            })
+            
+            resolve(r);
+        }
+
+        // mac 锁屏登录，ui是没起的，所有删除文件进入回收站逻辑，要改成service自己来做
+        if (!global.isWindows && global.uid == 0) {
+            global.__log.info("mac 锁屏界面，进行了文件删除")
+            const trash = require('../utils/trash/index');
+            const taskArr = [];
+            res.map(r=>r.path).forEach(p=>{
+                taskArr.push(new Promise(resolve=>{
+                    trash(pathUtils.join(p), { glob: false }).then(()=>{
+                        resolve({
+                            code: 0,
+                            msg: '删除成功',
+                            path: pathUtils.join(p)    
+                        })
+                    }).catch((e)=>{
+                        resolve({
+                            code: 99,
+                            msg: e.message,
+                            path: pathUtils.join(p)      
+                        })
+                    })
+                }))
+            })
+
+            const result  = await Promise.all(taskArr);
+            response(result)
+        } else {
+            // 存在的文件，发送到pc进行删除
+            const taskId = Date.now() + Math.round(Math.random() * 10);
+            // 发送到pc工程，electron来删除
+            const { sendToVivoRemoteIpcServer } = require('../../ipc/use');
+            sendToVivoRemoteIpcServer({
+                id: 'move2Trash',
+                value: {
+                    taskId,
+                    params: res.map(r=>r.path)
+                }
+            });
+
+            //将回调放入队列中等待回调
+            if (!global.__deleteFileTask) {
+                global.__deleteFileTask = {}; 
+            }
+
+            
+            setTimeout(()=>{
+                response(res.map(item=>{
+                    return {
+                        code: 4,
+                        msg: '删除超时',
+                        path: item.path      
+                    }                   
+                }))
+            }, 30000); // 30s的执行超时
+
+            global.__deleteFileTask[taskId] = response;
+        }
+    })
+}
+
+/**
+ * 创建文件夹
+ * @param {*} path 要创建文件夹的基础目录
+ * @returns 0 | 1 , 0 成功， 1 失败
+ */
+async function mkdir(dirpath) {
+    let code = 0;
+    let msg = '创建成功';
+    if (fs.existsSync(dirpath)) {
+        code = 1;
+        msg = '目录已存在';
+    } else {
+        code = utils.mkdirsSync(dirpath);
+        if (code === 99) {
+            msg = '创建失败'
+        }
+    } 
+
+    return  {
+        path: utils.normalizePath(dirpath),
+        code,
+        msg
+    };
+}
+
+/**
+ * 判断确认文件是否存在
+ */
+async function confirmFileExist({ paths = []} = {}) {
+    const existTaskPromise = [];
+
+    paths.forEach(path=>{
+        existTaskPromise.push(new Promise(async resolve=>{
+            const { status, stats} = await utils.getFileStats(path);
+            const result = {
+                path: utils.normalizePath(path),
+                status,
+                exist: status !== constants.statusCode.notFound ,
+                read: false,
+                isFile: false,
+                isDir: false,
+                isLink: false,
+                size: 0,
+                time: 0
+            }
+
+            if (status === 0) {
+                result.read = (stats.mode & fs.constants.R_OK) === fs.constants.R_OK;
+                result.isFile = stats.isFile();
+                result.isDir = stats.isDirectory();
+                result.isLink = stats.isSymbolicLink();
+                result.size = stats.size || 0;
+                result.time = new Date(stats.mtimeMs || stats.birthtimeMs).getTime();
+               
+
+                // 是文件
+                if (result.isFile) {
+                    result.status = 0
+                } 
+                // 是目录
+                else if (result.isDir) {
+                    result.status = 3;
+                }
+                // 非文件, 是符号链接 
+                else if(result.isLink) {
+                    result.status = 4;
+                }
+            }
+
+            resolve(result);
+        }))
+    });
+
+    return Promise.all(existTaskPromise);
+}
+
+/**
+ * 获取文件stas
+ */
+async function fileStats({ paths = []} = {}) {
+    const existTaskPromise = [];
+
+    paths.forEach(path=>{
+        existTaskPromise.push(new Promise(async resolve=>{
+            const { status, stats} = await utils.getFileStats(path);
+            const result = {
+                path: utils.normalizePath(path),
+                exist: status !== constants.statusCode.notFound ,
+                read: false,
+                write: false,
+                exec: false,
+                isFile: false,
+                isDir: false,
+                isLink: false,
+                dirIsEmpty: false,
+                size: 0,
+            }
+
+            if (status === 0) {
+                result.read = (stats.mode & fs.constants.R_OK) === fs.constants.R_OK;
+                result.write = (stats.mode & fs.constants.W_OK) === fs.constants.W_OK;
+                if (result.write) {
+                    result.write = await utils.judgeFileCanWriteSync(path);
+                }
+                result.exec = (stats.mode & fs.constants.X_OK) === fs.constants.X_OK;
+                result.isFile = stats.isFile();
+                result.isDir = stats.isDirectory();
+                result.isLink = stats.isSymbolicLink();
+                result.size = stats.size;
+                if (result.isDir) { // 如果是目录，判断目录是否为空
+                    result.dirIsEmpty = utils.isDirectoryEmptySync(path);
+                }
+            }
+
+            resolve(result);
+        }))
+    });
+
+    return Promise.all(existTaskPromise);
+}

@@ -1,0 +1,40 @@
+    /**
+    * @description: 首次创建websocket实例
+    */
+    createWs() {
+        // 执行前判断网络是否OK， 不ok就不发出去了， 不然1s 会执行一直重试， 一直打印日志， 一直重试。
+        // 网络恢复后后触发重试， 不用一直重试等到网络恢复
+        let networkOnline = isNetworkOnline();
+        if(!networkOnline) {
+            global.__log.info(`before createWs----------------------> networkOnline ${networkOnline}`);
+            return;
+        }
+        let deviceNo = getDeviceNo()
+        let deviceToken = getDeviceToken();
+        let openId = getOpenId();
+        this.createWsTime = Date.now()
+        const curUrl = this.url.replace('deviceNo', deviceNo)
+        //  1.7.0 文件传输 增加字段 fileTransport=1, 用于服务器判断，当前pc版本是否支持文件传输， 1表示只纸质windows文件传输， 为2表示win、mac 都支持文件传输, needAccountAuth 表示身边支持Miami校验
+        let url = curUrl + `&retry=${this.connRetry}&pcProcessId=${process.pid}&fileTransport=2&needAccountAuth=1&p2pSecurity=1`
+        // global.__log.info(`、、、、、、、、、、、、、、、createWs--------> this.url = ${url}-timestamp =${Date.now()}-process.pid=${process.pid}`);
+        global.__log.info(`、、、、、、、、、、、、、、、createWs--------> this.url = ${url} -timestamp =${this.createWsTime}-process.pid=${process.pid}-${deviceNo}`);
+        // 不直接复用WebSocketClient原因， WebSocketClient 每一次调用 connect(), 内部都会new一个新的connection，因为WebSocketClient 实例没有被销毁
+        // 每调用一次 connect， 内部的就会生成一个新的connection， 当监听到连接成功、 close时， WebSocketClient内部存在的connection 都会抛出事件， 
+        // 导致外层监听到很多次 connect、error、close 事件
+        this.WebSocketClient = new WebSocketClient({
+            closeTimeout: 0,
+        });
+         // 监听事件
+        this.listenOpen();
+        this.listenFailed();
+        this.WebSocketClient.connect(url, null, 'https://wwww.vivo.xyz', {
+            openId,
+            deviceToken,
+        });    
+    }
+    /**
+    * @description:再次创建时，添加防抖
+    */
+    reCreateWs(from) {
+        if(from == "listenFailed" || from == "handeClose") {
+            // 如果连接失败的时长小于最大disconnectDuration，将继续加大重试的间隙时间, 最大保持索引为7

@@ -1,0 +1,114 @@
+const pathUtils = require('path');
+
+const normalService = require('../service/normal');
+const utils = require('../utils');
+const { checkUsersDirAcessPermission } = require('../utils');
+
+const __logInfo = (fun, text)=>{
+    global?.__log?.info(`[fileTransfer-controller-normal]${fun} ${text}`) || (()=>{})
+};
+
+
+module.exports = {
+    fileListResponse,
+    mkdirResponse,
+    delFileResponse,
+    confirmFileExistResponse,
+    fileStatsResponse
+}
+
+
+/**
+ * 响应手机端获取文件列表请求
+ * @param {*} value 
+ */
+async function fileListResponse(value, msgId, ability) {
+    // 手机端支持密码校验的版本才去校验目录权限，这个功能需要依赖用户选择了校验哪个账户, 不然会造成吧反应罐可以访问的， 返回空的列表手机端提示服务器异常
+    const needAccountAuth = global?.ability?.needAccountAuth;
+    if(needAccountAuth == 1) {
+         // 首先检测是否有权限目录的访问权限， 如果没有权限code为1，
+        const agreeAcess = checkUsersDirAcessPermission(value)
+        __logInfo('agreeAcess=======>', agreeAcess);
+        // 无权限返回无权限
+        if(!agreeAcess) {
+            utils.sendJsonByDataChannel('fileList', {
+                baseDir: utils.normalizePath(value),
+                mikdirPermission: false,
+                total: 0,
+                index: 0,
+                list: [],
+                code: -1
+            }, msgId);
+            return
+        }
+    }
+    const list = await normalService.getFileList(value, ability);
+    // console.log('list===========>', list)
+    // 根据条数设置总分页数
+    const pageSize = 1000;
+    const totalPage = Math.ceil(list.length / pageSize) || 1;
+    for (let pageIndex = 0; pageIndex < totalPage; pageIndex++) {
+        const startIndex = pageIndex * pageSize;
+        const endIndex = startIndex + pageSize;
+
+        const listSlice = list.slice(startIndex, endIndex);
+        // 获取目录下是否有创建文件夹的权限
+        const mikdirPermission = await utils.checkWritePermission(value);
+        utils.sendJsonByDataChannel('fileList', {
+            baseDir: utils.normalizePath(value),
+            mikdirPermission,
+            total: totalPage,
+            index: pageIndex,
+            list: listSlice,
+            code: 0,
+        }, msgId);
+        await utils.sleep(100); // 每间隔一百ms发送一次
+    }
+}
+
+
+/**
+ * 响应手机端新建文件目录请求
+ * @param {*} value 
+ */
+async function mkdirResponse(value, msgId) {
+    const { baseDir, name } = value;
+    const dirpath = pathUtils.join(baseDir, name);
+    const result = await normalService.mkdir(dirpath);
+
+    utils.sendJsonByDataChannel('mkdir',result, msgId);
+}
+
+
+/**
+ * 响应手机端删除文件请求
+ * @param {*} value 
+ */
+async function delFileResponse(value, msgId) {
+    const result = await normalService.deleteFile(value);
+
+    utils.sendJsonByDataChannel('delFile', result, msgId);
+}
+
+
+/**
+ * 响应手机端确认文件是否在pc还存在请求
+ * @param {*} value 
+ */
+async function confirmFileExistResponse(value, msgId) {
+    const result = await normalService.confirmFileExist(value);
+
+    utils.sendJsonByDataChannel('confirmFileExist', result, msgId);
+}
+
+
+/**
+ * 响应手机端确认文件是否在pc还存在请求
+ * @param {*} value 
+ */
+async function fileStatsResponse(value, msgId) {
+    const result = await normalService.fileStats(value);
+
+    utils.sendJsonByDataChannel('fileStats', result, msgId);
+}
+

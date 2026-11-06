@@ -1,0 +1,96 @@
+DEX classes.dex
+CLASS Ls3/d$e;
+FIELDS
+
+
+METHOD <init>(Landroid/os/Looper;)V
+000000: invoke-direct v0, v1, Landroid/os/Handler;-><init>(Landroid/os/Looper;)V
+000006: return-void 
+
+METHOD handleMessage(Landroid/os/Message;)V
+000000: new-instance v0, Ljava/lang/StringBuilder;
+000004: invoke-direct v0, Ljava/lang/StringBuilder;-><init>()V
+00000a: const-string v1, "handleMessage : "
+00000e: invoke-virtual v0, v1, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+000014: iget v1, v7, Landroid/os/Message;->what I
+000018: invoke-virtual v0, v1, Ljava/lang/StringBuilder;->append(I)Ljava/lang/StringBuilder;
+00001e: invoke-virtual v0, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
+000024: move-result-object v0
+000026: const-string v1, "CONNECT_PcSuitProxyHandler"
+00002a: invoke-static v1, v0, Lz3/o;->i(Ljava/lang/String; Ljava/lang/String;)V
+000030: iget v7, v7, Landroid/os/Message;->what I
+000034: const/4 v0, 1
+000036: if-eq v7, v0, +08bh
+00003a: const/4 v2, 2
+00003c: const/4 v3, 3
+00003e: if-eq v7, v2, +04bh
+000042: if-eq v7, v3, +008h
+000046: const-string v7, "unknown what"
+00004a: invoke-static v1, v7, Lz3/o;->p(Ljava/lang/String; Ljava/lang/String;)V
+000050: return-void 
+000052: new-instance v7, Ljava/lang/StringBuilder;
+000056: invoke-direct v7, Ljava/lang/StringBuilder;-><init>()V
+00005c: const-string v0, "parserDeviceStatus pcInfo："
+000060: invoke-virtual v7, v0, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+000066: invoke-static Ls3/d;->p()Ls3/d$d;
+00006c: move-result-object v0
+00006e: invoke-virtual v0, Ls3/d$d;->toString()Ljava/lang/String;
+000074: move-result-object v0
+000076: invoke-virtual v7, v0, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+00007c: invoke-virtual v7, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
+000082: move-result-object v7
+000084: invoke-static v1, v7, Lz3/o;->i(Ljava/lang/String; Ljava/lang/String;)V
+00008a: invoke-static Ls3/d;->p()Ls3/d$d;
+000090: move-result-object v7
+000092: invoke-static v7, Ls3/d;->q(Ls3/d$d;)Lcom/vivo/vdfs/DeviceDiscovery/VDDeviceInfo;
+000098: move-result-object v2
+00009a: invoke-static Ls3/d;->p()Ls3/d$d;
+0000a0: move-result-object v7
+0000a2: invoke-static v7, Ls3/d$d;->a(Ls3/d$d;)I
+0000a8: move-result v7
+0000aa: if-ltz v7, +006h
+0000ae: const/16 v7, 101
+0000b2: move v5, v7
+0000b4: goto +4h
+0000b6: const/16 v7, 103
+0000ba: goto -4h
+0000bc: invoke-static Lu3/y;->H()Lu3/y;
+0000c2: move-result-object v0
+0000c4: const/4 v3, 0
+0000c6: const/16 v4, 16
+0000ca: const/4 v1, 0
+0000cc: invoke-virtual/range v0 ... v5, Lu3/y;->w(Ll3/p; Lcom/vivo/vdfs/DeviceDiscovery/VDDeviceInfo; Landroid/os/Bundle; I I)V
+0000d2: return-void 
+0000d4: invoke-static Ls3/d;->o()Ls3/d;
+0000da: move-result-object v7
+0000dc: invoke-static v7, Ls3/d;->h(Ls3/d;)V
+0000e2: invoke-static Ls3/d;->p()Ls3/d$d;
+0000e8: move-result-object v7
+0000ea: invoke-virtual v7, Ls3/d$d;->i()Ljava/lang/String;
+0000f0: move-result-object v7
+0000f2: invoke-static v7, Ll3/v;->f0(Ljava/lang/String;)Ll3/p;
+0000f8: move-result-object v7
+0000fa: if-eqz v7, +023h
+0000fe: invoke-static Lg3/e;->o()Lg3/e;
+000104: move-result-object v1
+000106: invoke-virtual v7, Ll3/p;->j()Ljava/lang/String;
+00010c: move-result-object v2
+00010e: invoke-virtual v7, Ll3/p;->l()I
+000114: move-result v4
+000116: invoke-virtual v1, v2, v3, v4, Lg3/e;->j(Ljava/lang/String; I I)I
+00011c: invoke-virtual v7, Ll3/p;->J()Z
+000122: move-result v1
+000124: if-nez v1, +00dh
+000128: const/16 v1, 16
+00012c: invoke-virtual v7, Ll3/p;->j()Ljava/lang/String;
+000132: move-result-object v7
+000134: const-string v2, "com.vivo.pcsuite.relay"
+000138: invoke-static v2, v1, v7, v0, Lr3/k;->S(Ljava/lang/String; I Ljava/lang/String; Z)V
+00013e: return-void 
+000140: const-string v7, "connect pc but DeviceInfoInternal is NULL."
+000144: invoke-static v1, v7, Lz3/o;->p(Ljava/lang/String; Ljava/lang/String;)V
+00014a: return-void 
+00014c: invoke-static Ls3/d;->o()Ls3/d;
+000152: move-result-object v7
+000154: invoke-static v7, Ls3/d;->g(Ls3/d;)V
+00015a: return-void 

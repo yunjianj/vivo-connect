@@ -1,0 +1,45 @@
+DEX classes.dex
+CLASS Ls3/d$a;
+FIELDS
+a Ls3/d;
+
+METHOD <init>(Ls3/d;)V
+000000: iput-object v1, v0, Ls3/d$a;->a Ls3/d;
+000004: invoke-direct v0, Ljava/lang/Object;-><init>()V
+00000a: return-void 
+
+METHOD a()V
+000000: const-string v0, "CONNECT_PcSuitProxy"
+000004: const-string v1, "initPCSuit onFailed"
+000008: invoke-static v0, v1, Lz3/o;->p(Ljava/lang/String; Ljava/lang/String;)V
+00000e: const/4 v0, 0
+000010: invoke-static v0, Ls3/d;->i(Z)Z
+000016: return-void 
+
+METHOD onDisconnect()V
+000000: const-string v0, "CONNECT_PcSuitProxy"
+000004: const-string v1, "initPCSuit onDisconnect"
+000008: invoke-static v0, v1, Lz3/o;->i(Ljava/lang/String; Ljava/lang/String;)V
+00000e: const/4 v0, 0
+000010: invoke-static v0, Ls3/d;->i(Z)Z
+000016: iget-object v0, v2, Ls3/d$a;->a Ls3/d;
+00001a: invoke-static v0, Ls3/d;->j(Ls3/d;)V
+000020: return-void 
+
+METHOD onLinkToDeath()V
+000000: const-string v0, "CONNECT_PcSuitProxy"
+000004: const-string v1, "initPCSuit onLinkToDeath"
+000008: invoke-static v0, v1, Lz3/o;->C(Ljava/lang/String; Ljava/lang/String;)V
+00000e: const/4 v0, 0
+000010: invoke-static v0, Ls3/d;->i(Z)Z
+000016: iget-object v0, v2, Ls3/d$a;->a Ls3/d;
+00001a: invoke-static v0, Ls3/d;->j(Ls3/d;)V
+000020: return-void 
+
+METHOD onSuccess()V
+000000: const-string v0, "CONNECT_PcSuitProxy"
+000004: const-string v1, "initPCSuit onSuccess"
+000008: invoke-static v0, v1, Lz3/o;->i(Ljava/lang/String; Ljava/lang/String;)V
+00000e: const/4 v0, 1
+000010: invoke-static v0, Ls3/d;->i(Z)Z
+000016: return-void 

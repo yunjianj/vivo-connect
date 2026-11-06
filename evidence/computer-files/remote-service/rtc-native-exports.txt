@@ -1,0 +1,104 @@
+// 新建一个名为调用webrtc
+const  { timelog } = require('../utils/common');
+timelog('service start-up', 'require ffi-napi start');
+const ffi = require('ffi-napi');
+timelog('service start-up', 'require ffi-napi end');
+const { getPublicFilePath }  = require("../utils/env.js");
+
+// interface cpp {
+//     vivoav_set_notify_callback: any,
+//     vivoav_connect_server: any,// mac 上的lib的测试方法
+//     vivoav_disconnect_server: any,
+//     vivoav_answer_call: any,
+//     vivoav_control: any,
+//     vivoav_set_capture_fps: any,
+//     vivoav_cancel_call:any,
+//     add: any,
+//     minus: any,
+//     multiply: any,
+//     divide: any,
+//     yujing: any,
+//     registerCallback: any,
+//     Add: any,// mac 上的lib的测试方法
+//     hello: any,
+//     world: any,
+   
+//  }
+let cpplib;
+let vivoRtcPath  = getPublicFilePath("vivo_rtc");
+// let vivoRtcPath  = getPublicFilePath("libsimpletest");
+
+global.__log?.info(`vivoRtcPath==========> in platform:${ process.platform}---vivoRtcPath: ${vivoRtcPath} `);
+try {
+    let funcObj =  {
+        vivoav_set_notify_callback: ['void', ['pointer']], // 注册回调, c++ 返回一些状态信息
+        vivoav_connect_server:['void', ['string','string', 'int', 'string', 'string']], // 传递设备的域名， sip账号信息， 顺序为 SIP 服务地址，端口， SIP帐号，密码、
+        vivoav_set_stun_server: ['void', ['string']],   // 注册stun打洞服务 ,传递stun服务域名
+        vivoav_answer_call: ['void', ['int']], // 是否接听
+        vivoav_disconnect_server:['void', []], // 关闭程序调用
+        vivoav_control:['int', ['int']], // SDK提供音视频控制接口(如暂停或恢复音频、视频)，type=1-暂停声音、2-暂停视频、4-恢复声音、8-恢复视频、16-打开隐私屏、32-关闭隐私屏
+        vivoav_set_capture_fps:['void', ['int']], // 设置视频流截取帧率， 默认30，
+        vivoav_cancel_call: ['void', ['int']], // 断开sip连接调用
+        vivoav_get_screen_infos: ['string', []], // 获取屏幕信息@returns JSON字符串 成功; "" 失败
+        vivoav_select_screen: ['int', ['int']], // 选择屏幕id，@returns 0-成功、<0-失败
+        vivoav_set_aes_gcm_key: ['int', ['string', 'string', 'string', 'int']], // 设置aeskey @returns 0-成功、<0-失败
+        try_change_desktop: ['void', []],  // 切换当前激活桌面，用于锁屏页面是输入密码
+        get_mac_addr: ['string', []], // 物理网卡mac地址
+        get_csproduct_uuid: ['string', []], // 主板smBIOS UUID
+        control_power: ['void', ['int']], // PowerControlType 1-注销, 2-关机, 3-重启
+        vivoav_enable_stats: ['void', ['bool', "int"]], // 调试状态信息\视频质量和网络质量数据:true开启，dll将rtc状态15通知返回监听数据, 
+        vivoav_restore_screen: ['void', []], // 恢复电脑原有分辨率
+        vivoav_store_screen: ['void', []], // 记录电脑原有分辨率
+        vivoav_set_log_dir: ['void', ['string']], //设置rtc sdk的日志输出目录，融合 量子套件所需
+        vivoav_set_product_version: ['void', ['string']], // 重新定义sip的user agent格式
+        vivoav_auto_fit_screen: ['int', ['string', 'int', 'int', 'float']], // 设置电脑屏幕分辨率或dpi
+        vivoav_close_full_screen_adapt: ['int', []],// 关闭全屏适配
+        vivoav_set_screen_1080p: ['int', []],// 设置1080p分辨率
+        vivoav_set_data_channel_message_callback: ['bool', ['pointer']], // 监听键鼠指令消息
+        vivoav_set_data_channel_message_callback_ex: ['bool', ['pointer']], // 监听protobuf数据
+        vivoav_set_cursor_data_callback:  ['bool', ['pointer']], // 监听光标变化数据
+        vivoav_data_channel_send: ['int', ['string', 'int']], // 发送键鼠指令消息
+        vivoav_data_channel_send_ex: ['int', ['uint8', 'string', 'int', 'int']], // 发送protobuf数据
+        vivoav_set_data_channel_heartbeat: ['bool', ['int']], // 设置datachannel是否要开启心跳,并超时时间，0 表示不开启，15 默认值
+        vivoav_full_screen_error: ['string', []],// 获取全屏适配失败描述
+        vivoav_test_full_screen_adapt: ['int', []],// 测试全屏适配
+        get_current_user_name: ['string', []],
+        check_screen_locked: ['int', []],// 获取当前会话窗口是否锁屏
+        vivoav_set_3rdparty_programs: ['int', ['string']], // 设置3方软件白名单
+        vivoav_set_connect_type: ['void', ['int']], //0:远程控制 1:远程文件
+        vivoav_set_file_storage_dir: ['void', ['string']], //设置原子拖拽文件储存目录
+        vivoav_create_crypto_params: ['string', ['string', 'int']], // 创建获取端到端加密参数
+        vivoav_set_region: ['void', ['int']] // 设置webrtc 内外销标记
+    }
+    // win外销才设置当前套件设置的语言
+    if(process.platform == "win32") {
+        funcObj["vivoav_set_language"] =   ['void', ['string', 'bool', 'bool']] // 设置当前的语言（外销）
+    }
+    console.log('funcObj==================>', funcObj)
+    cpplib = ffi.Library(vivoRtcPath, funcObj, {
+        verbose: true
+    })
+
+    // 设置vivo_rtc 内外销环境标记
+    try {
+        global.__log?.info(`vivo_rtc 设置内外销环境==========================>`);
+        cpplib.vivoav_set_region(process.env.REGION == "foreign" ? 1 : 0)
+        global.__log?.info(`vivo_rtc 设置内外销环境====成功====================>`);
+    } catch(e) {
+        global.__log?.info(`vivo_rtc 设置内外销环境====失败====================>error: ${e.message}`);
+    }
+
+    // cpplib = ffi.Library(vivoRtcPath, {
+    //     test: ['string', []], // test返回1+1
+    // }, {
+    //     verbose: true
+    // })
+    // const testValue = cpplib.test();
+    global.__log?.info(`vivo_rtc加载成功==========================>`);
+} catch (error) {
+    global.__log?.info(`vivo_rtc加载失败============》${error}`);
+}
+module.exports =  { 
+    cpplib,
+}
+

@@ -1,0 +1,944 @@
+DEX classes.dex
+CLASS La5/b;
+FIELDS
+a Ljava/util/Map;
+b Ljava/util/Map;
+c Ljava/util/Map;
+
+METHOD <clinit>()V
+000000: new-instance v0, Ljava/util/HashMap;
+000004: invoke-direct v0, Ljava/util/HashMap;-><init>()V
+00000a: sput-object v0, La5/b;->a Ljava/util/Map;
+00000e: new-instance v0, Ljava/util/HashMap;
+000012: invoke-direct v0, Ljava/util/HashMap;-><init>()V
+000018: sput-object v0, La5/b;->b Ljava/util/Map;
+00001c: new-instance v0, Ljava/util/HashMap;
+000020: invoke-direct v0, Ljava/util/HashMap;-><init>()V
+000026: sput-object v0, La5/b;->c Ljava/util/Map;
+00002a: return-void 
+
+METHOD A(Lcom/vivo/proxy/bean/DdsDeviceInfo; Ljava/lang/String; Z)Z
+000000: const/4 v0, 0
+000002: if-eqz v2, +053h
+000006: invoke-static v3, Landroid/text/TextUtils;->isEmpty(Ljava/lang/CharSequence;)Z
+00000c: move-result v1
+00000e: if-eqz v1, +003h
+000012: goto +4bh
+000014: if-eqz v4, +012h
+000018: invoke-static v2, La5/b;->m(Lcom/vivo/proxy/bean/DdsDeviceInfo;)Ljava/lang/String;
+00001e: move-result-object v2
+000020: invoke-static v2, Landroid/text/TextUtils;->isEmpty(Ljava/lang/CharSequence;)Z
+000026: move-result v4
+000028: if-eqz v4, +003h
+00002c: return v0
+00002e: invoke-virtual v3, v2, Ljava/lang/String;->startsWith(Ljava/lang/String;)Z
+000034: move-result v2
+000036: return v2
+000038: invoke-virtual v2, Lcom/vivo/proxy/bean/DdsDeviceInfo;->getAndroidVersion()Ljava/lang/String;
+00003e: move-result-object v2
+000040: invoke-static v2, Landroid/text/TextUtils;->isEmpty(Ljava/lang/CharSequence;)Z
+000046: move-result v4
+000048: const-string v0, "AbilityVdfsUtils"
+00004c: const-string v1, "/storage/emulated/999"
+000050: if-eqz v4, +00ch
+000054: const-string v2, "getVdfsCloneRootPath, androidVersion is empty"
+000058: invoke-static v0, v2, Lx5/t;->a(Ljava/lang/String; Ljava/lang/String;)V
+00005e: invoke-virtual v3, v1, Ljava/lang/String;->startsWith(Ljava/lang/String;)Z
+000064: move-result v2
+000066: return v2
+000068: invoke-static v2, Ljava/lang/Integer;->parseInt(Ljava/lang/String;)I
+00006e: move-result v2
+000070: const/16 v4, 30
+000074: if-ne v2, v4, +00bh
+000078: const-string v2, "/storage/caf-999"
+00007c: invoke-virtual v3, v2, Ljava/lang/String;->startsWith(Ljava/lang/String;)Z
+000082: move-result v2
+000084: return v2
+000086: move-exception v2
+000088: goto +6h
+00008a: invoke-virtual v3, v1, Ljava/lang/String;->startsWith(Ljava/lang/String;)Z
+000090: move-result v2
+000092: return v2
+000094: const-string v4, "getVdfsCloneRootPath"
+000098: invoke-static v0, v4, v2, Lx5/t;->e(Ljava/lang/String; Ljava/lang/String; Ljava/lang/Throwable;)V
+00009e: invoke-virtual v3, v1, Ljava/lang/String;->startsWith(Ljava/lang/String;)Z
+0000a4: move-result v2
+0000a6: return v2
+0000a8: return v0
+
+METHOD B(Ljava/lang/String; Ljava/lang/String;)Z
+000000: invoke-static v3, Landroid/text/TextUtils;->isEmpty(Ljava/lang/CharSequence;)Z
+000006: move-result v0
+000008: const/4 v1, 0
+00000a: if-eqz v0, +003h
+00000e: return v1
+000010: invoke-static v2, Landroid/text/TextUtils;->isEmpty(Ljava/lang/CharSequence;)Z
+000016: move-result v0
+000018: if-eqz v0, +003h
+00001c: return v1
+00001e: invoke-virtual v3, v2, Ljava/lang/String;->startsWith(Ljava/lang/String;)Z
+000024: move-result v2
+000026: return v2
+
+METHOD C(Ljava/lang/String;)Z
+000000: invoke-static Lu4/w;->A()Lu4/w;
+000006: move-result-object v0
+000008: invoke-virtual v0, Lu4/w;->w()Lcom/vivo/proxy/device/DdsDeviceManager;
+00000e: move-result-object v0
+000010: const/4 v1, 0
+000012: if-nez v0, +003h
+000016: return v1
+000018: sget-object v2, La5/b;->b Ljava/util/Map;
+00001c: invoke-interface v2, v6, Ljava/util/Map;->containsKey(Ljava/lang/Object;)Z
+000022: move-result v3
+000024: const/4 v4, 1
+000026: if-eqz v3, +00dh
+00002a: invoke-interface v2, v6, Ljava/util/Map;->get(Ljava/lang/Object;)Ljava/lang/Object;
+000030: move-result-object v0
+000032: check-cast v0, Ljava/lang/Integer;
+000036: invoke-virtual v0, Ljava/lang/Integer;->intValue()I
+00003c: move-result v0
+00003e: goto +1bh
+000040: const-string v3, "vdfs_remote_version"
+000044: filled-new-array v3, [Ljava/lang/String;
+00004a: move-result-object v5
+00004c: invoke-virtual v0, v6, v4, v5, Lcom/vivo/proxy/device/DdsDeviceManager;->getRemoteProperties(Ljava/lang/String; I [Ljava/lang/String;)Landroid/os/Bundle;
+000052: move-result-object v0
+000054: if-nez v0, +003h
+000058: return v1
+00005a: invoke-virtual v0, v3, Landroid/os/BaseBundle;->getInt(Ljava/lang/String;)I
+000060: move-result v0
+000062: if-lez v0, +009h
+000066: invoke-static v0, Ljava/lang/Integer;->valueOf(I)Ljava/lang/Integer;
+00006c: move-result-object v3
+00006e: invoke-interface v2, v6, v3, Ljava/util/Map;->put(Ljava/lang/Object; Ljava/lang/Object;)Ljava/lang/Object;
+000074: new-instance v2, Ljava/lang/StringBuilder;
+000078: invoke-direct v2, Ljava/lang/StringBuilder;-><init>()V
+00007e: const-string v3, "isVdfsSupportFileStation vdfsVersion:"
+000082: invoke-virtual v2, v3, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+000088: invoke-virtual v2, v0, Ljava/lang/StringBuilder;->append(I)Ljava/lang/StringBuilder;
+00008e: const-string v3, " device:"
+000092: invoke-virtual v2, v3, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+000098: invoke-static v6, La5/b;->e(Ljava/lang/String;)Ljava/lang/String;
+00009e: move-result-object v6
+0000a0: invoke-virtual v2, v6, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+0000a6: invoke-virtual v2, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
+0000ac: move-result-object v6
+0000ae: const-string v2, "AbilityVdfsUtils"
+0000b2: invoke-static v2, v6, Lx5/t;->g(Ljava/lang/String; Ljava/lang/String;)V
+0000b8: const v6, 20000803
+0000be: if-lt v0, v6, +003h
+0000c2: move v1, v4
+0000c4: return v1
+
+METHOD D(Lcom/vivo/proxy/bean/DdsDeviceInfo;)V
+000000: invoke-static v3, Lsl/n;->d(Lcom/vivo/proxy/bean/DdsDeviceInfo;)Z
+000006: move-result v0
+000008: const-string v1, "AbilityVdfsUtils"
+00000c: if-eqz v0, +02ah
+000010: invoke-static Lz4/b;->g()Lz4/b;
+000016: move-result-object v0
+000018: invoke-virtual v0, Lz4/b;->k()Z
+00001e: move-result v0
+000020: if-nez v0, +003h
+000024: goto +1eh
+000026: const-string v0, "requestFileManagerVersionCode"
+00002a: invoke-static v1, v0, Lx5/t;->g(Ljava/lang/String; Ljava/lang/String;)V
+000030: invoke-virtual v3, Lcom/vivo/proxy/bean/DdsDeviceInfo;->getDeviceId()Ljava/lang/String;
+000036: move-result-object v0
+000038: const-string v1, "6"
+00003c: const/4 v2, 0
+00003e: invoke-static v0, v1, v2, Lcom/vivo/vdfs/data/bean/ImmDataBean;->request(Ljava/lang/String; Ljava/lang/String; [B)Lcom/vivo/vdfs/data/bean/ImmDataBean;
+000044: move-result-object v0
+000046: invoke-static Lu4/w;->A()Lu4/w;
+00004c: move-result-object v1
+00004e: new-instance v2, La5/b$b;
+000052: invoke-direct v2, v3, La5/b$b;-><init>(Lcom/vivo/proxy/bean/DdsDeviceInfo;)V
+000058: invoke-virtual v1, v0, v2, Lu4/w;->U(Lcom/vivo/vdfs/data/bean/ImmDataBean; Lcom/vivo/vdfs/sdk/IImmDataListener;)Ljava/lang/String;
+00005e: return-void 
+000060: invoke-static v3, La5/b;->I(Lcom/vivo/proxy/bean/DdsDeviceInfo;)Ljava/lang/String;
+000066: move-result-object v3
+000068: invoke-static v1, v3, Lx5/t;->a(Ljava/lang/String; Ljava/lang/String;)V
+00006e: return-void 
+
+METHOD E(Lcom/vivo/proxy/bean/DdsDeviceInfo;)V
+000000: invoke-static v3, Lsl/n;->d(Lcom/vivo/proxy/bean/DdsDeviceInfo;)Z
+000006: move-result v0
+000008: if-eqz v0, +02bh
+00000c: invoke-static Lz4/b;->g()Lz4/b;
+000012: move-result-object v0
+000014: invoke-virtual v0, Lz4/b;->k()Z
+00001a: move-result v0
+00001c: if-eqz v0, +021h
+000020: invoke-static v3, La5/b;->y(Lcom/vivo/proxy/bean/DdsDeviceInfo;)Z
+000026: move-result v0
+000028: if-nez v0, +003h
+00002c: goto +19h
+00002e: invoke-virtual v3, Lcom/vivo/proxy/bean/DdsDeviceInfo;->getDeviceId()Ljava/lang/String;
+000034: move-result-object v0
+000036: const-string v1, "4"
+00003a: const/4 v2, 0
+00003c: invoke-static v0, v1, v2, Lcom/vivo/vdfs/data/bean/ImmDataBean;->request(Ljava/lang/String; Ljava/lang/String; [B)Lcom/vivo/vdfs/data/bean/ImmDataBean;
+000042: move-result-object v0
+000044: invoke-static Lu4/w;->A()Lu4/w;
+00004a: move-result-object v1
+00004c: new-instance v2, La5/b$a;
+000050: invoke-direct v2, v3, La5/b$a;-><init>(Lcom/vivo/proxy/bean/DdsDeviceInfo;)V
+000056: invoke-virtual v1, v0, v2, Lu4/w;->U(Lcom/vivo/vdfs/data/bean/ImmDataBean; Lcom/vivo/vdfs/sdk/IImmDataListener;)Ljava/lang/String;
+00005c: return-void 
+00005e: const-string v0, "AbilityVdfsUtils"
+000062: invoke-static v3, La5/b;->I(Lcom/vivo/proxy/bean/DdsDeviceInfo;)Ljava/lang/String;
+000068: move-result-object v3
+00006a: invoke-static v0, v3, Lx5/t;->a(Ljava/lang/String; Ljava/lang/String;)V
+000070: return-void 
+
+METHOD F(Ljava/lang/String; Ljava/lang/String;)V
+000000: sget-object v0, La5/b;->a Ljava/util/Map;
+000004: invoke-interface v0, v1, v2, Ljava/util/Map;->put(Ljava/lang/Object; Ljava/lang/Object;)Ljava/lang/Object;
+00000a: return-void 
+
+METHOD G(Lcom/android/filemanager/ability/bean/BaseFileWrapper; Ljava/lang/String; Ljava/lang/String; Lcom/vivo/proxy/bean/DdsDeviceInfo;)V
+000000: if-eqz v1, +064h
+000004: invoke-static v2, Landroid/text/TextUtils;->isEmpty(Ljava/lang/CharSequence;)Z
+00000a: move-result v0
+00000c: if-eqz v0, +003h
+000010: goto +5ch
+000012: invoke-static v3, Landroid/text/TextUtils;->isEmpty(Ljava/lang/CharSequence;)Z
+000018: move-result v0
+00001a: if-eqz v0, +027h
+00001e: if-nez v4, +003h
+000022: return-void 
+000024: invoke-virtual v1, Lcom/android/filemanager/ability/bean/BaseFileWrapper;->getAbsolutePath()Ljava/lang/String;
+00002a: move-result-object v3
+00002c: invoke-static v3, Landroid/text/TextUtils;->isEmpty(Ljava/lang/CharSequence;)Z
+000032: move-result v3
+000034: if-eqz v3, +005h
+000038: invoke-virtual v1, v2, Lcom/android/filemanager/ability/bean/BaseFileWrapper;->setAbsolutePath(Ljava/lang/String;)V
+00003e: invoke-static Lu4/w;->A()Lu4/w;
+000044: move-result-object v3
+000046: invoke-virtual v3, v4, v2, Lu4/w;->F(Lcom/vivo/proxy/bean/DdsDeviceInfo; Ljava/lang/String;)Ljava/lang/String;
+00004c: move-result-object v2
+00004e: invoke-virtual v1, v2, Lcom/android/filemanager/ability/bean/BaseFileWrapper;->setAbsolutePath(Ljava/lang/String;)V
+000054: goto +3ah
+000056: move-exception v1
+000058: const-string v2, "AbilityVdfsUtils"
+00005c: const-string v3, "setDistributedFilePath"
+000060: invoke-static v2, v3, v1, Lx5/t;->e(Ljava/lang/String; Ljava/lang/String; Ljava/lang/Throwable;)V
+000066: goto +31h
+000068: sget-object v4, Ljava/io/File;->separator Ljava/lang/String;
+00006c: invoke-virtual v2, v4, Ljava/lang/String;->startsWith(Ljava/lang/String;)Z
+000072: move-result v0
+000074: if-eqz v0, +015h
+000078: new-instance v4, Ljava/lang/StringBuilder;
+00007c: invoke-direct v4, Ljava/lang/StringBuilder;-><init>()V
+000082: invoke-virtual v4, v3, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+000088: invoke-virtual v4, v2, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+00008e: invoke-virtual v4, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
+000094: move-result-object v2
+000096: invoke-virtual v1, v2, Lcom/android/filemanager/ability/bean/BaseFileWrapper;->setAbsolutePath(Ljava/lang/String;)V
+00009c: goto +16h
+00009e: new-instance v0, Ljava/lang/StringBuilder;
+0000a2: invoke-direct v0, Ljava/lang/StringBuilder;-><init>()V
+0000a8: invoke-virtual v0, v3, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+0000ae: invoke-virtual v0, v4, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+0000b4: invoke-virtual v0, v2, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+0000ba: invoke-virtual v0, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
+0000c0: move-result-object v2
+0000c2: invoke-virtual v1, v2, Lcom/android/filemanager/ability/bean/BaseFileWrapper;->setAbsolutePath(Ljava/lang/String;)V
+0000c8: return-void 
+
+METHOD H(Lcom/vivo/proxy/bean/DdsDeviceInfo;)Z
+000000: const/4 v0, 0
+000002: if-nez v4, +003h
+000006: return v0
+000008: invoke-virtual v4, Lcom/vivo/proxy/bean/DdsDeviceInfo;->getDeviceType()I
+00000e: move-result v1
+000010: const/16 v2, 512
+000014: const/4 v3, 1
+000016: if-ne v1, v2, +003h
+00001a: return v3
+00001c: invoke-static v4, La5/b;->y(Lcom/vivo/proxy/bean/DdsDeviceInfo;)Z
+000022: move-result v1
+000024: if-eqz v1, +003h
+000028: return v0
+00002a: invoke-virtual v4, Lcom/vivo/proxy/bean/DdsDeviceInfo;->getDeviceId()Ljava/lang/String;
+000030: move-result-object v1
+000032: invoke-static v1, La5/b;->k(Ljava/lang/String;)Ljava/lang/String;
+000038: move-result-object v1
+00003a: invoke-static v1, Landroid/text/TextUtils;->isEmpty(Ljava/lang/CharSequence;)Z
+000040: move-result v2
+000042: if-eqz v2, +003h
+000046: return v0
+000048: invoke-virtual v4, Lcom/vivo/proxy/bean/DdsDeviceInfo;->getDeviceType()I
+00004e: move-result v4
+000050: const/16 v2, 256
+000054: if-ne v4, v2, +00ch
+000058: const/16 v4, 6637
+00005c: invoke-static v1, Ljava/lang/Integer;->parseInt(Ljava/lang/String;)I
+000062: move-result v1
+000064: if-gt v4, v1, +00eh
+000068: move v0, v3
+00006a: goto +bh
+00006c: const v4, 61002000
+000072: invoke-static v1, Ljava/lang/Integer;->parseInt(Ljava/lang/String;)I
+000078: move-result v1
+00007a: if-gt v4, v1, +003h
+00007e: goto -bh
+000080: return v0
+
+METHOD I(Lcom/vivo/proxy/bean/DdsDeviceInfo;)Ljava/lang/String;
+000000: invoke-static v0, Lsl/n;->l(Lcom/vivo/proxy/bean/DdsDeviceInfo;)Ljava/lang/String;
+000006: move-result-object v0
+000008: return-object v0
+
+METHOD J(Ljava/lang/String; Lcom/vivo/proxy/bean/DdsDeviceInfo;)Ljava/lang/String;
+000000: invoke-static v0, v1, Lsl/n;->m(Ljava/lang/String; Lcom/vivo/proxy/bean/DdsDeviceInfo;)Ljava/lang/String;
+000006: move-result-object v0
+000008: return-object v0
+
+METHOD K(Ljava/lang/String;)Ljava/lang/String;
+000000: invoke-static v2, Landroid/text/TextUtils;->isEmpty(Ljava/lang/CharSequence;)Z
+000006: move-result v0
+000008: if-eqz v0, +003h
+00000c: return-object v2
+00000e: invoke-static v2, La6/j;->p(Ljava/lang/String;)Z
+000014: move-result v0
+000016: if-nez v0, +003h
+00001a: return-object v2
+00001c: const-string v0, "/storage/"
+000020: invoke-virtual v2, v0, Ljava/lang/String;->indexOf(Ljava/lang/String;)I
+000026: move-result v0
+000028: const/4 v1, -1
+00002a: if-le v0, v1, +007h
+00002e: invoke-virtual v2, v0, Ljava/lang/String;->substring(I)Ljava/lang/String;
+000034: move-result-object v2
+000036: return-object v2
+000038: const-string v0, "AbilityVdfsUtils"
+00003c: const-string v1, "translateToLocalPath"
+000040: invoke-static v0, v1, Lx5/t;->a(Ljava/lang/String; Ljava/lang/String;)V
+000046: return-object v2
+
+METHOD a(Ljava/lang/String;)Ljava/lang/String;
+000000: invoke-static v2, Landroid/text/TextUtils;->isEmpty(Ljava/lang/CharSequence;)Z
+000006: move-result v0
+000008: if-nez v0, +018h
+00000c: const-string v0, "/mnt/vdfs/"
+000010: invoke-virtual v2, v0, Ljava/lang/String;->startsWith(Ljava/lang/String;)Z
+000016: move-result v0
+000018: if-eqz v0, +010h
+00001c: const-string v0, "/storage/"
+000020: invoke-virtual v2, v0, Ljava/lang/String;->indexOf(Ljava/lang/String;)I
+000026: move-result v0
+000028: const/4 v1, -1
+00002a: if-le v0, v1, +007h
+00002e: invoke-virtual v2, v0, Ljava/lang/String;->substring(I)Ljava/lang/String;
+000034: move-result-object v2
+000036: return-object v2
+000038: new-instance v0, Ljava/lang/StringBuilder;
+00003c: invoke-direct v0, Ljava/lang/StringBuilder;-><init>()V
+000042: const-string v1, "convertMntPathToStoragePath fail mntPath="
+000046: invoke-virtual v0, v1, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+00004c: invoke-virtual v0, v2, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+000052: invoke-virtual v0, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
+000058: move-result-object v0
+00005a: const-string v1, "AbilityVdfsUtils"
+00005e: invoke-static v1, v0, Lx5/t;->a(Ljava/lang/String; Ljava/lang/String;)V
+000064: return-object v2
+
+METHOD b(Ljava/lang/String; Landroid/content/Context;)Lorg/apache/commons/lang3/tuple/Triple;
+000000: sget v0, Lcom/android/filemanager/ability/R$string;->recent_no_days I
+000004: invoke-virtual v3, v0, Landroid/content/Context;->getString(I)Ljava/lang/String;
+00000a: move-result-object v0
+00000c: invoke-static v2, v0, Landroid/text/TextUtils;->equals(Ljava/lang/CharSequence; Ljava/lang/CharSequence;)Z
+000012: move-result v0
+000014: if-eqz v0, +019h
+000018: const/4 v2, 1
+00001a: invoke-static v2, Ljava/lang/Integer;->valueOf(I)Ljava/lang/Integer;
+000020: move-result-object v2
+000022: sget v3, Lcom/android/filemanager/ability/R$drawable;->file_station_recent I
+000026: invoke-static v3, Ljava/lang/Integer;->valueOf(I)Ljava/lang/Integer;
+00002c: move-result-object v3
+00002e: const v0, 1061406
+000034: invoke-static v0, Ljava/lang/Integer;->valueOf(I)Ljava/lang/Integer;
+00003a: move-result-object v0
+00003c: invoke-static v2, v3, v0, Lorg/apache/commons/lang3/tuple/Triple;->ofNonNull(Ljava/lang/Object; Ljava/lang/Object; Ljava/lang/Object;)Lorg/apache/commons/lang3/tuple/Triple;
+000042: move-result-object v2
+000044: return-object v2
+000046: sget v0, Lcom/android/filemanager/ability/R$string;->fileTypeSuffix_audio I
+00004a: invoke-virtual v3, v0, Landroid/content/Context;->getString(I)Ljava/lang/String;
+000050: move-result-object v0
+000052: invoke-static v2, v0, Landroid/text/TextUtils;->equals(Ljava/lang/CharSequence; Ljava/lang/CharSequence;)Z
+000058: move-result v0
+00005a: const/4 v1, -1
+00005c: if-eqz v0, +016h
+000060: const/4 v2, 4
+000062: invoke-static v2, Ljava/lang/Integer;->valueOf(I)Ljava/lang/Integer;
+000068: move-result-object v2
+00006a: sget v3, Lcom/android/filemanager/ability/R$drawable;->main_file_fix_file_audio_svg I
+00006e: invoke-static v3, Ljava/lang/Integer;->valueOf(I)Ljava/lang/Integer;
+000074: move-result-object v3
+000076: invoke-static v1, Ljava/lang/Integer;->valueOf(I)Ljava/lang/Integer;
+00007c: move-result-object v0
+00007e: invoke-static v2, v3, v0, Lorg/apache/commons/lang3/tuple/Triple;->ofNonNull(Ljava/lang/Object; Ljava/lang/Object; Ljava/lang/Object;)Lorg/apache/commons/lang3/tuple/Triple;
+000084: move-result-object v2
+000086: return-object v2
+000088: sget v0, Lcom/android/filemanager/ability/R$string;->video I
+00008c: invoke-virtual v3, v0, Landroid/content/Context;->getString(I)Ljava/lang/String;
+000092: move-result-object v0
+000094: invoke-static v2, v0, Landroid/text/TextUtils;->equals(Ljava/lang/CharSequence; Ljava/lang/CharSequence;)Z
+00009a: move-result v0
+00009c: if-eqz v0, +016h
+0000a0: const/4 v2, 3
+0000a2: invoke-static v2, Ljava/lang/Integer;->valueOf(I)Ljava/lang/Integer;
+0000a8: move-result-object v2
+0000aa: sget v3, Lcom/android/filemanager/ability/R$drawable;->main_file_fix_file_video_svg I
+0000ae: invoke-static v3, Ljava/lang/Integer;->valueOf(I)Ljava/lang/Integer;
+0000b4: move-result-object v3
+0000b6: invoke-static v1, Ljava/lang/Integer;->valueOf(I)Ljava/lang/Integer;
+0000bc: move-result-object v0
+0000be: invoke-static v2, v3, v0, Lorg/apache/commons/lang3/tuple/Triple;->ofNonNull(Ljava/lang/Object; Ljava/lang/Object; Ljava/lang/Object;)Lorg/apache/commons/lang3/tuple/Triple;
+0000c4: move-result-object v2
+0000c6: return-object v2
+0000c8: sget v0, Lcom/android/filemanager/ability/R$string;->picture I
+0000cc: invoke-virtual v3, v0, Landroid/content/Context;->getString(I)Ljava/lang/String;
+0000d2: move-result-object v0
+0000d4: invoke-static v2, v0, Landroid/text/TextUtils;->equals(Ljava/lang/CharSequence; Ljava/lang/CharSequence;)Z
+0000da: move-result v0
+0000dc: if-eqz v0, +016h
+0000e0: const/4 v2, 2
+0000e2: invoke-static v2, Ljava/lang/Integer;->valueOf(I)Ljava/lang/Integer;
+0000e8: move-result-object v2
+0000ea: sget v3, Lcom/android/filemanager/ability/R$drawable;->main_file_fix_file_pic_svg I
+0000ee: invoke-static v3, Ljava/lang/Integer;->valueOf(I)Ljava/lang/Integer;
+0000f4: move-result-object v3
+0000f6: invoke-static v1, Ljava/lang/Integer;->valueOf(I)Ljava/lang/Integer;
+0000fc: move-result-object v0
+0000fe: invoke-static v2, v3, v0, Lorg/apache/commons/lang3/tuple/Triple;->ofNonNull(Ljava/lang/Object; Ljava/lang/Object; Ljava/lang/Object;)Lorg/apache/commons/lang3/tuple/Triple;
+000104: move-result-object v2
+000106: return-object v2
+000108: sget v0, Lcom/android/filemanager/ability/R$string;->file I
+00010c: invoke-virtual v3, v0, Landroid/content/Context;->getString(I)Ljava/lang/String;
+000112: move-result-object v0
+000114: invoke-static v2, v0, Landroid/text/TextUtils;->equals(Ljava/lang/CharSequence; Ljava/lang/CharSequence;)Z
+00011a: move-result v0
+00011c: if-eqz v0, +016h
+000120: const/4 v2, 5
+000122: invoke-static v2, Ljava/lang/Integer;->valueOf(I)Ljava/lang/Integer;
+000128: move-result-object v2
+00012a: sget v3, Lcom/android/filemanager/ability/R$drawable;->main_file_fix_file_doc_svg I
+00012e: invoke-static v3, Ljava/lang/Integer;->valueOf(I)Ljava/lang/Integer;
+000134: move-result-object v3
+000136: invoke-static v1, Ljava/lang/Integer;->valueOf(I)Ljava/lang/Integer;
+00013c: move-result-object v0
+00013e: invoke-static v2, v3, v0, Lorg/apache/commons/lang3/tuple/Triple;->ofNonNull(Ljava/lang/Object; Ljava/lang/Object; Ljava/lang/Object;)Lorg/apache/commons/lang3/tuple/Triple;
+000144: move-result-object v2
+000146: return-object v2
+000148: sget v0, Lcom/android/filemanager/ability/R$string;->presssed I
+00014c: invoke-virtual v3, v0, Landroid/content/Context;->getString(I)Ljava/lang/String;
+000152: move-result-object v0
+000154: invoke-static v2, v0, Landroid/text/TextUtils;->equals(Ljava/lang/CharSequence; Ljava/lang/CharSequence;)Z
+00015a: move-result v0
+00015c: if-eqz v0, +016h
+000160: const/4 v2, 7
+000162: invoke-static v2, Ljava/lang/Integer;->valueOf(I)Ljava/lang/Integer;
+000168: move-result-object v2
+00016a: sget v3, Lcom/android/filemanager/ability/R$drawable;->main_file_fix_file_compress_svg I
+00016e: invoke-static v3, Ljava/lang/Integer;->valueOf(I)Ljava/lang/Integer;
+000174: move-result-object v3
+000176: invoke-static v1, Ljava/lang/Integer;->valueOf(I)Ljava/lang/Integer;
+00017c: move-result-object v0
+00017e: invoke-static v2, v3, v0, Lorg/apache/commons/lang3/tuple/Triple;->ofNonNull(Ljava/lang/Object; Ljava/lang/Object; Ljava/lang/Object;)Lorg/apache/commons/lang3/tuple/Triple;
+000184: move-result-object v2
+000186: return-object v2
+000188: sget v0, Lcom/android/filemanager/ability/R$string;->apk I
+00018c: invoke-virtual v3, v0, Landroid/content/Context;->getString(I)Ljava/lang/String;
+000192: move-result-object v0
+000194: invoke-static v2, v0, Landroid/text/TextUtils;->equals(Ljava/lang/CharSequence; Ljava/lang/CharSequence;)Z
+00019a: move-result v0
+00019c: if-eqz v0, +016h
+0001a0: const/4 v2, 6
+0001a2: invoke-static v2, Ljava/lang/Integer;->valueOf(I)Ljava/lang/Integer;
+0001a8: move-result-object v2
+0001aa: sget v3, Lcom/android/filemanager/ability/R$drawable;->main_file_fix_file_apk_svg I
+0001ae: invoke-static v3, Ljava/lang/Integer;->valueOf(I)Ljava/lang/Integer;
+0001b4: move-result-object v3
+0001b6: invoke-static v1, Ljava/lang/Integer;->valueOf(I)Ljava/lang/Integer;
+0001bc: move-result-object v0
+0001be: invoke-static v2, v3, v0, Lorg/apache/commons/lang3/tuple/Triple;->ofNonNull(Ljava/lang/Object; Ljava/lang/Object; Ljava/lang/Object;)Lorg/apache/commons/lang3/tuple/Triple;
+0001c4: move-result-object v2
+0001c6: return-object v2
+0001c8: sget v0, Lcom/android/filemanager/ability/R$string;->quick_access I
+0001cc: invoke-virtual v3, v0, Landroid/content/Context;->getString(I)Ljava/lang/String;
+0001d2: move-result-object v0
+0001d4: invoke-static v2, v0, Landroid/text/TextUtils;->equals(Ljava/lang/CharSequence; Ljava/lang/CharSequence;)Z
+0001da: move-result v0
+0001dc: if-eqz v0, +01ah
+0001e0: const/16 v2, 8
+0001e4: invoke-static v2, Ljava/lang/Integer;->valueOf(I)Ljava/lang/Integer;
+0001ea: move-result-object v2
+0001ec: sget v3, Lcom/android/filemanager/ability/R$drawable;->device_quick_access I
+0001f0: invoke-static v3, Ljava/lang/Integer;->valueOf(I)Ljava/lang/Integer;
+0001f6: move-result-object v3
+0001f8: const v0, 1061045
+0001fe: invoke-static v0, Ljava/lang/Integer;->valueOf(I)Ljava/lang/Integer;
+000204: move-result-object v0
+000206: invoke-static v2, v3, v0, Lorg/apache/commons/lang3/tuple/Triple;->ofNonNull(Ljava/lang/Object; Ljava/lang/Object; Ljava/lang/Object;)Lorg/apache/commons/lang3/tuple/Triple;
+00020c: move-result-object v2
+00020e: return-object v2
+000210: sget v0, Lcom/android/filemanager/ability/R$string;->device_storage I
+000214: invoke-virtual v3, v0, Landroid/content/Context;->getString(I)Ljava/lang/String;
+00021a: move-result-object v0
+00021c: invoke-static v2, v0, Landroid/text/TextUtils;->equals(Ljava/lang/CharSequence; Ljava/lang/CharSequence;)Z
+000222: move-result v0
+000224: if-nez v0, +023h
+000228: sget v0, Lcom/android/filemanager/ability/R$string;->internal_storage I
+00022c: invoke-virtual v3, v0, Landroid/content/Context;->getString(I)Ljava/lang/String;
+000232: move-result-object v3
+000234: invoke-static v2, v3, Landroid/text/TextUtils;->equals(Ljava/lang/CharSequence; Ljava/lang/CharSequence;)Z
+00023a: move-result v2
+00023c: if-eqz v2, +003h
+000240: goto +15h
+000242: const/4 v2, 0
+000244: invoke-static v2, Ljava/lang/Integer;->valueOf(I)Ljava/lang/Integer;
+00024a: move-result-object v2
+00024c: sget v3, Lcom/android/filemanager/ability/R$drawable;->ic_category_more_applications I
+000250: invoke-static v3, Ljava/lang/Integer;->valueOf(I)Ljava/lang/Integer;
+000256: move-result-object v3
+000258: invoke-static v1, Ljava/lang/Integer;->valueOf(I)Ljava/lang/Integer;
+00025e: move-result-object v0
+000260: invoke-static v2, v3, v0, Lorg/apache/commons/lang3/tuple/Triple;->ofNonNull(Ljava/lang/Object; Ljava/lang/Object; Ljava/lang/Object;)Lorg/apache/commons/lang3/tuple/Triple;
+000266: move-result-object v2
+000268: return-object v2
+00026a: const/16 v2, 9
+00026e: invoke-static v2, Ljava/lang/Integer;->valueOf(I)Ljava/lang/Integer;
+000274: move-result-object v2
+000276: sget v3, Lcom/android/filemanager/ability/R$drawable;->main_file_inter_disk_icon_svg I
+00027a: invoke-static v3, Ljava/lang/Integer;->valueOf(I)Ljava/lang/Integer;
+000280: move-result-object v3
+000282: const v0, 1061235
+000288: invoke-static v0, Ljava/lang/Integer;->valueOf(I)Ljava/lang/Integer;
+00028e: move-result-object v0
+000290: invoke-static v2, v3, v0, Lorg/apache/commons/lang3/tuple/Triple;->ofNonNull(Ljava/lang/Object; Ljava/lang/Object; Ljava/lang/Object;)Lorg/apache/commons/lang3/tuple/Triple;
+000296: move-result-object v2
+000298: return-object v2
+
+METHOD c(Lcom/vivo/proxy/bean/DdsDeviceInfo;)Ljava/lang/String;
+000000: if-nez v0, +004h
+000004: const/4 v0, 0
+000006: return-object v0
+000008: invoke-virtual v0, Lcom/vivo/proxy/bean/DdsDeviceInfo;->getDeviceId()Ljava/lang/String;
+00000e: move-result-object v0
+000010: invoke-static v0, La5/b;->d(Ljava/lang/String;)Ljava/lang/String;
+000016: move-result-object v0
+000018: return-object v0
+
+METHOD d(Ljava/lang/String;)Ljava/lang/String;
+000000: if-nez v1, +004h
+000004: const/4 v1, 0
+000006: return-object v1
+000008: invoke-static Lcom/vivo/proxy/util/DdsDeviceIdUtils;->getInstance()Lcom/vivo/proxy/util/DdsDeviceIdUtils;
+00000e: move-result-object v0
+000010: invoke-virtual v0, v1, Lcom/vivo/proxy/util/DdsDeviceIdUtils;->getConnCenterId(Ljava/lang/String;)Ljava/lang/String;
+000016: move-result-object v1
+000018: return-object v1
+
+METHOD e(Ljava/lang/String;)Ljava/lang/String;
+000000: invoke-static v0, Lsl/n;->b(Ljava/lang/String;)Ljava/lang/String;
+000006: move-result-object v0
+000008: return-object v0
+
+METHOD f(Lcom/vivo/proxy/bean/DdsDeviceInfo;)Landroid/util/Pair;
+000000: const v0, 1061235
+000006: invoke-static v0, Ljava/lang/Integer;->valueOf(I)Ljava/lang/Integer;
+00000c: move-result-object v0
+00000e: if-nez v2, +00dh
+000012: sget v2, Lcom/android/filemanager/ability/R$drawable;->internal_disk_side_svg I
+000016: invoke-static v2, Ljava/lang/Integer;->valueOf(I)Ljava/lang/Integer;
+00001c: move-result-object v2
+00001e: invoke-static v2, v0, Landroid/util/Pair;->create(Ljava/lang/Object; Ljava/lang/Object;)Landroid/util/Pair;
+000024: move-result-object v2
+000026: return-object v2
+000028: invoke-virtual v2, Lcom/vivo/proxy/bean/DdsDeviceInfo;->getDeviceType()I
+00002e: move-result v2
+000030: const/16 v1, 32
+000034: if-eq v2, v1, +023h
+000038: const/16 v1, 256
+00003c: if-eq v2, v1, +00dh
+000040: sget v2, Lcom/android/filemanager/ability/R$drawable;->internal_disk_side_svg I
+000044: invoke-static v2, Ljava/lang/Integer;->valueOf(I)Ljava/lang/Integer;
+00004a: move-result-object v2
+00004c: invoke-static v2, v0, Landroid/util/Pair;->create(Ljava/lang/Object; Ljava/lang/Object;)Landroid/util/Pair;
+000052: move-result-object v2
+000054: return-object v2
+000056: sget v2, Lcom/android/filemanager/ability/R$drawable;->ic_vdfs_pad I
+00005a: invoke-static v2, Ljava/lang/Integer;->valueOf(I)Ljava/lang/Integer;
+000060: move-result-object v2
+000062: const v0, 1061375
+000068: invoke-static v0, Ljava/lang/Integer;->valueOf(I)Ljava/lang/Integer;
+00006e: move-result-object v0
+000070: invoke-static v2, v0, Landroid/util/Pair;->create(Ljava/lang/Object; Ljava/lang/Object;)Landroid/util/Pair;
+000076: move-result-object v2
+000078: return-object v2
+00007a: sget v2, Lcom/android/filemanager/ability/R$drawable;->ic_phone_stroage I
+00007e: invoke-static v2, Ljava/lang/Integer;->valueOf(I)Ljava/lang/Integer;
+000084: move-result-object v2
+000086: const v0, 1062387
+00008c: invoke-static v0, Ljava/lang/Integer;->valueOf(I)Ljava/lang/Integer;
+000092: move-result-object v0
+000094: invoke-static v2, v0, Landroid/util/Pair;->create(Ljava/lang/Object; Ljava/lang/Object;)Landroid/util/Pair;
+00009a: move-result-object v2
+00009c: return-object v2
+
+METHOD g(Lcom/vivo/proxy/bean/DdsDeviceInfo;)Ljava/lang/String;
+000000: if-nez v0, +005h
+000004: const-string v0, "no devices"
+000008: return-object v0
+00000a: invoke-virtual v0, Lcom/vivo/proxy/bean/DdsDeviceInfo;->getDeviceName()Ljava/lang/String;
+000010: move-result-object v0
+000012: return-object v0
+
+METHOD h(Ljava/lang/String; Ljava/lang/String;)Ljava/lang/String;
+000000: invoke-static v3, Landroid/text/TextUtils;->isEmpty(Ljava/lang/CharSequence;)Z
+000006: move-result v0
+000008: if-nez v0, +034h
+00000c: invoke-static v2, Landroid/text/TextUtils;->isEmpty(Ljava/lang/CharSequence;)Z
+000012: move-result v0
+000014: if-eqz v0, +003h
+000018: goto +2ch
+00001a: sget-object v0, Ljava/io/File;->separator Ljava/lang/String;
+00001e: invoke-virtual v3, v0, Ljava/lang/String;->startsWith(Ljava/lang/String;)Z
+000024: move-result v1
+000026: if-eqz v1, +012h
+00002a: new-instance v0, Ljava/lang/StringBuilder;
+00002e: invoke-direct v0, Ljava/lang/StringBuilder;-><init>()V
+000034: invoke-virtual v0, v2, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+00003a: invoke-virtual v0, v3, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+000040: invoke-virtual v0, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
+000046: move-result-object v2
+000048: return-object v2
+00004a: new-instance v1, Ljava/lang/StringBuilder;
+00004e: invoke-direct v1, Ljava/lang/StringBuilder;-><init>()V
+000054: invoke-virtual v1, v2, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+00005a: invoke-virtual v1, v0, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+000060: invoke-virtual v1, v3, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+000066: invoke-virtual v1, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
+00006c: move-result-object v2
+00006e: return-object v2
+000070: return-object v3
+
+METHOD i(Landroid/content/Context; Lcom/vivo/proxy/bean/DdsDeviceInfo;)Ljava/lang/String;
+000000: invoke-virtual v2, Lcom/vivo/proxy/bean/DdsDeviceInfo;->getDeviceType()I
+000006: move-result v2
+000008: const/16 v0, 256
+00000c: if-ne v2, v0, +009h
+000010: sget v2, Lcom/android/filemanager/ability/R$string;->device_storage I
+000014: invoke-virtual v1, v2, Landroid/content/Context;->getString(I)Ljava/lang/String;
+00001a: move-result-object v1
+00001c: goto +4h
+00001e: sget v2, Lcom/android/filemanager/ability/R$string;->internal_storage I
+000022: goto -7h
+000024: return-object v1
+
+METHOD j(Lcom/vivo/proxy/bean/DdsDeviceInfo;)Ljava/lang/String;
+000000: invoke-static v2, La5/b;->l(Lcom/vivo/proxy/bean/DdsDeviceInfo;)Ljava/lang/String;
+000006: move-result-object v0
+000008: if-nez v0, +004h
+00000c: const/4 v2, 0
+00000e: return-object v2
+000010: invoke-static Lw4/e;->e()Lw4/e;
+000016: move-result-object v1
+000018: invoke-virtual v1, v2, Lw4/e;->c(Lcom/vivo/proxy/bean/DdsDeviceInfo;)Ljava/lang/String;
+00001e: move-result-object v2
+000020: invoke-static v2, Landroid/text/TextUtils;->isEmpty(Ljava/lang/CharSequence;)Z
+000026: move-result v1
+000028: if-eqz v1, +006h
+00002c: invoke-static Lcom/android/filemanager/common/manager/storage/c;->c()Ljava/lang/String;
+000032: move-result-object v2
+000034: new-instance v1, Ljava/io/File;
+000038: invoke-direct v1, v0, v2, Ljava/io/File;-><init>(Ljava/lang/String; Ljava/lang/String;)V
+00003e: invoke-virtual v1, Ljava/io/File;->getAbsolutePath()Ljava/lang/String;
+000044: move-result-object v2
+000046: return-object v2
+
+METHOD k(Ljava/lang/String;)Ljava/lang/String;
+000000: sget-object v0, La5/b;->a Ljava/util/Map;
+000004: invoke-interface v0, v1, Ljava/util/Map;->get(Ljava/lang/Object;)Ljava/lang/Object;
+00000a: move-result-object v1
+00000c: check-cast v1, Ljava/lang/String;
+000010: return-object v1
+
+METHOD l(Lcom/vivo/proxy/bean/DdsDeviceInfo;)Ljava/lang/String;
+000000: if-nez v5, +004h
+000004: const/4 v5, 0
+000006: return-object v5
+000008: sget-object v0, La5/b;->c Ljava/util/Map;
+00000c: invoke-virtual v5, Lcom/vivo/proxy/bean/DdsDeviceInfo;->getDeviceId()Ljava/lang/String;
+000012: move-result-object v1
+000014: invoke-interface v0, v1, Ljava/util/Map;->containsKey(Ljava/lang/Object;)Z
+00001a: move-result v1
+00001c: if-eqz v1, +00dh
+000020: invoke-virtual v5, Lcom/vivo/proxy/bean/DdsDeviceInfo;->getDeviceId()Ljava/lang/String;
+000026: move-result-object v5
+000028: invoke-interface v0, v5, Ljava/util/Map;->get(Ljava/lang/Object;)Ljava/lang/Object;
+00002e: move-result-object v5
+000030: check-cast v5, Ljava/lang/String;
+000034: return-object v5
+000036: invoke-static Lu4/w;->A()Lu4/w;
+00003c: move-result-object v1
+00003e: sget-object v2, Ljava/io/File;->separator Ljava/lang/String;
+000042: invoke-virtual v1, v5, v2, Lu4/w;->F(Lcom/vivo/proxy/bean/DdsDeviceInfo; Ljava/lang/String;)Ljava/lang/String;
+000048: move-result-object v1
+00004a: invoke-static v1, Landroid/text/TextUtils;->isEmpty(Ljava/lang/CharSequence;)Z
+000050: move-result v3
+000052: if-eqz v3, +003h
+000056: return-object v1
+000058: new-instance v3, Ljava/lang/StringBuilder;
+00005c: invoke-direct v3, Ljava/lang/StringBuilder;-><init>()V
+000062: invoke-virtual v3, v2, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+000068: invoke-virtual v3, v2, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+00006e: invoke-virtual v3, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
+000074: move-result-object v3
+000076: invoke-virtual v1, v3, Ljava/lang/String;->endsWith(Ljava/lang/String;)Z
+00007c: move-result v3
+00007e: const/4 v4, 0
+000080: if-eqz v3, +00dh
+000084: invoke-virtual v1, Ljava/lang/String;->length()I
+00008a: move-result v2
+00008c: add-int/lit8 v2, v2, -2
+000090: invoke-virtual v1, v4, v2, Ljava/lang/String;->substring(I I)Ljava/lang/String;
+000096: move-result-object v1
+000098: goto +11h
+00009a: invoke-virtual v1, v2, Ljava/lang/String;->endsWith(Ljava/lang/String;)Z
+0000a0: move-result v2
+0000a2: if-eqz v2, +00ch
+0000a6: invoke-virtual v1, Ljava/lang/String;->length()I
+0000ac: move-result v2
+0000ae: add-int/lit8 v2, v2, -1
+0000b2: invoke-virtual v1, v4, v2, Ljava/lang/String;->substring(I I)Ljava/lang/String;
+0000b8: move-result-object v1
+0000ba: invoke-virtual v5, Lcom/vivo/proxy/bean/DdsDeviceInfo;->getDeviceId()Ljava/lang/String;
+0000c0: move-result-object v5
+0000c2: invoke-interface v0, v5, v1, Ljava/util/Map;->put(Ljava/lang/Object; Ljava/lang/Object;)Ljava/lang/Object;
+0000c8: return-object v1
+
+METHOD m(Lcom/vivo/proxy/bean/DdsDeviceInfo;)Ljava/lang/String;
+000000: if-nez v4, +005h
+000004: const-string v4, ""
+000008: return-object v4
+00000a: invoke-virtual v4, Lcom/vivo/proxy/bean/DdsDeviceInfo;->getAndroidVersion()Ljava/lang/String;
+000010: move-result-object v0
+000012: invoke-static v0, Landroid/text/TextUtils;->isEmpty(Ljava/lang/CharSequence;)Z
+000018: move-result v1
+00001a: const-string v2, "AbilityVdfsUtils"
+00001e: const-string v3, "/storage/emulated/999"
+000022: if-eqz v1, +010h
+000026: const-string v0, "getVdfsCloneRootPath, androidVersion is empty"
+00002a: invoke-static v2, v0, Lx5/t;->a(Ljava/lang/String; Ljava/lang/String;)V
+000030: invoke-static Lu4/w;->A()Lu4/w;
+000036: move-result-object v0
+000038: invoke-virtual v0, v4, v3, Lu4/w;->F(Lcom/vivo/proxy/bean/DdsDeviceInfo; Ljava/lang/String;)Ljava/lang/String;
+00003e: move-result-object v4
+000040: return-object v4
+000042: invoke-static v0, Ljava/lang/Integer;->parseInt(Ljava/lang/String;)I
+000048: move-result v0
+00004a: const/16 v1, 30
+00004e: if-ne v0, v1, +00fh
+000052: invoke-static Lu4/w;->A()Lu4/w;
+000058: move-result-object v0
+00005a: const-string v1, "/storage/caf-999"
+00005e: invoke-virtual v0, v4, v1, Lu4/w;->F(Lcom/vivo/proxy/bean/DdsDeviceInfo; Ljava/lang/String;)Ljava/lang/String;
+000064: move-result-object v4
+000066: return-object v4
+000068: move-exception v0
+00006a: goto +ah
+00006c: invoke-static Lu4/w;->A()Lu4/w;
+000072: move-result-object v0
+000074: invoke-virtual v0, v4, v3, Lu4/w;->F(Lcom/vivo/proxy/bean/DdsDeviceInfo; Ljava/lang/String;)Ljava/lang/String;
+00007a: move-result-object v4
+00007c: return-object v4
+00007e: const-string v1, "getVdfsCloneRootPath"
+000082: invoke-static v2, v1, v0, Lx5/t;->e(Ljava/lang/String; Ljava/lang/String; Ljava/lang/Throwable;)V
+000088: invoke-static Lu4/w;->A()Lu4/w;
+00008e: move-result-object v0
+000090: invoke-virtual v0, v4, v3, Lu4/w;->F(Lcom/vivo/proxy/bean/DdsDeviceInfo; Ljava/lang/String;)Ljava/lang/String;
+000096: move-result-object v4
+000098: return-object v4
+
+METHOD n(Lcom/vivo/proxy/bean/DdsDeviceInfo;)Ljava/lang/String;
+000000: if-nez v1, +004h
+000004: const/4 v1, 0
+000006: return-object v1
+000008: invoke-virtual v1, Lcom/vivo/proxy/bean/DdsDeviceInfo;->getDeviceId()Ljava/lang/String;
+00000e: move-result-object v1
+000010: invoke-static Lcom/vivo/proxy/util/DdsDeviceIdUtils;->getInstance()Lcom/vivo/proxy/util/DdsDeviceIdUtils;
+000016: move-result-object v0
+000018: invoke-virtual v0, v1, Lcom/vivo/proxy/util/DdsDeviceIdUtils;->getVdfsDeviceId(Ljava/lang/String;)Ljava/lang/String;
+00001e: move-result-object v1
+000020: return-object v1
+
+METHOD o(Lcom/vivo/proxy/bean/DdsDeviceInfo;)I
+000000: const/4 v0, -1
+000002: if-nez v2, +003h
+000006: return v0
+000008: invoke-virtual v2, Lcom/vivo/proxy/bean/DdsDeviceInfo;->getAndroidVersion()Ljava/lang/String;
+00000e: move-result-object v2
+000010: invoke-static v2, Landroid/text/TextUtils;->isEmpty(Ljava/lang/CharSequence;)Z
+000016: move-result v1
+000018: if-eqz v1, +003h
+00001c: return v0
+00001e: invoke-virtual v2, Ljava/lang/String;->trim()Ljava/lang/String;
+000024: move-result-object v2
+000026: invoke-static v2, Landroid/text/TextUtils;->isDigitsOnly(Ljava/lang/CharSequence;)Z
+00002c: move-result v1
+00002e: if-eqz v1, +007h
+000032: invoke-static v2, Ljava/lang/Integer;->parseInt(Ljava/lang/String;)I
+000038: move-result v2
+00003a: return v2
+00003c: return v0
+
+METHOD p(Lcom/vivo/proxy/bean/DdsDeviceInfo;)Z
+000000: invoke-static v1, La5/b;->o(Lcom/vivo/proxy/bean/DdsDeviceInfo;)I
+000006: move-result v1
+000008: const/16 v0, 30
+00000c: if-lt v1, v0, +004h
+000010: const/4 v1, 1
+000012: goto +2h
+000014: const/4 v1, 0
+000016: return v1
+
+METHOD q(Lcom/vivo/proxy/bean/DdsDeviceInfo;)Z
+000000: invoke-static v1, La5/b;->o(Lcom/vivo/proxy/bean/DdsDeviceInfo;)I
+000006: move-result v1
+000008: const/16 v0, 29
+00000c: if-lt v1, v0, +004h
+000010: const/4 v1, 1
+000012: goto +2h
+000014: const/4 v1, 0
+000016: return v1
+
+METHOD r(Lcom/vivo/proxy/bean/DdsDeviceInfo;)Z
+000000: invoke-static v0, Lsl/n;->d(Lcom/vivo/proxy/bean/DdsDeviceInfo;)Z
+000006: move-result v0
+000008: return v0
+
+METHOD s(Lcom/vivo/proxy/bean/DdsDeviceInfo; Lcom/vivo/proxy/bean/DdsDeviceInfo;)Z
+000000: invoke-static v0, v1, Lsl/n;->e(Lcom/vivo/proxy/bean/DdsDeviceInfo; Lcom/vivo/proxy/bean/DdsDeviceInfo;)Z
+000006: move-result v0
+000008: return v0
+
+METHOD t(Lcom/vivo/proxy/bean/DdsDeviceInfo; Ljava/lang/String;)Z
+000000: if-nez v0, +004h
+000004: const/4 v0, 0
+000006: return v0
+000008: invoke-static v0, La5/b;->j(Lcom/vivo/proxy/bean/DdsDeviceInfo;)Ljava/lang/String;
+00000e: move-result-object v0
+000010: invoke-static v0, v1, Landroid/text/TextUtils;->equals(Ljava/lang/CharSequence; Ljava/lang/CharSequence;)Z
+000016: move-result v0
+000018: return v0
+
+METHOD u(Lcom/vivo/proxy/bean/DdsDeviceInfo;)Z
+000000: if-eqz v1, +00ch
+000004: invoke-virtual v1, Lcom/vivo/proxy/bean/DdsDeviceInfo;->getDeviceType()I
+00000a: move-result v1
+00000c: const/16 v0, 512
+000010: if-ne v1, v0, +004h
+000014: const/4 v1, 1
+000016: goto +2h
+000018: const/4 v1, 0
+00001a: return v1
+
+METHOD v()Z
+000000: invoke-static Lt4/y;->j()Z
+000006: move-result v0
+000008: if-nez v0, +01eh
+00000c: invoke-static Lz4/b;->g()Lz4/b;
+000012: move-result-object v0
+000014: invoke-virtual v0, Lz4/b;->k()Z
+00001a: move-result v0
+00001c: if-eqz v0, +014h
+000020: invoke-static Ly5/c;->e()Z
+000026: move-result v0
+000028: if-eqz v0, +00eh
+00002c: invoke-static Lg5/e;->d()Lg5/e;
+000032: move-result-object v0
+000034: invoke-virtual v0, Lg5/e;->y()Z
+00003a: move-result v0
+00003c: if-nez v0, +004h
+000040: const/4 v0, 1
+000042: goto +2h
+000044: const/4 v0, 0
+000046: return v0
+
+METHOD w(Lcom/vivo/proxy/bean/DdsDeviceInfo;)Z
+000000: const/4 v0, 0
+000002: if-nez v4, +003h
+000006: return v0
+000008: invoke-static v4, La5/b;->u(Lcom/vivo/proxy/bean/DdsDeviceInfo;)Z
+00000e: move-result v1
+000010: const/4 v2, 1
+000012: if-eqz v1, +003h
+000016: return v2
+000018: invoke-virtual v4, Lcom/vivo/proxy/bean/DdsDeviceInfo;->getDeviceId()Ljava/lang/String;
+00001e: move-result-object v4
+000020: invoke-static v4, Landroid/text/TextUtils;->isEmpty(Ljava/lang/CharSequence;)Z
+000026: move-result v1
+000028: if-eqz v1, +003h
+00002c: return v0
+00002e: invoke-static v4, La5/b;->k(Ljava/lang/String;)Ljava/lang/String;
+000034: move-result-object v4
+000036: new-instance v1, Ljava/lang/StringBuilder;
+00003a: invoke-direct v1, Ljava/lang/StringBuilder;-><init>()V
+000040: const-string v3, "isRemoteFileManagerSupportFileStation fileManagerVersionCode:"
+000044: invoke-virtual v1, v3, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+00004a: invoke-virtual v1, v4, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+000050: invoke-virtual v1, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
+000056: move-result-object v1
+000058: const-string v3, "AbilityVdfsUtils"
+00005c: invoke-static v3, v1, Lx5/t;->a(Ljava/lang/String; Ljava/lang/String;)V
+000062: invoke-static v4, Ljava/lang/Integer;->parseInt(Ljava/lang/String;)I
+000068: move-result v4
+00006a: const v1, 90100000
+000070: if-lt v4, v1, +003h
+000074: move v0, v2
+000076: return v0
+000078: new-instance v1, Ljava/lang/StringBuilder;
+00007c: invoke-direct v1, Ljava/lang/StringBuilder;-><init>()V
+000082: const-string v2, "isRemoteFileManagerSupportFileStation parse fail,fileManagerVersionCode:"
+000086: invoke-virtual v1, v2, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+00008c: invoke-virtual v1, v4, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+000092: invoke-virtual v1, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
+000098: move-result-object v4
+00009a: invoke-static v3, v4, Lx5/t;->d(Ljava/lang/String; Ljava/lang/String;)V
+0000a0: return v0
+
+METHOD x(Lcom/vivo/proxy/bean/DdsDeviceInfo;)Z
+000000: if-eqz v1, +00ch
+000004: invoke-virtual v1, Lcom/vivo/proxy/bean/DdsDeviceInfo;->getDeviceType()I
+00000a: move-result v1
+00000c: const/16 v0, 256
+000010: if-ne v1, v0, +004h
+000014: const/4 v1, 1
+000016: goto +2h
+000018: const/4 v1, 0
+00001a: return v1
+
+METHOD y(Lcom/vivo/proxy/bean/DdsDeviceInfo;)Z
+000000: if-eqz v1, +014h
+000004: const/16 v0, 29
+000008: invoke-static v0, Ljava/lang/String;->valueOf(I)Ljava/lang/String;
+00000e: move-result-object v0
+000010: invoke-virtual v1, Lcom/vivo/proxy/bean/DdsDeviceInfo;->getAndroidVersion()Ljava/lang/String;
+000016: move-result-object v1
+000018: invoke-virtual v0, v1, Ljava/lang/String;->equals(Ljava/lang/Object;)Z
+00001e: move-result v1
+000020: if-eqz v1, +004h
+000024: const/4 v1, 1
+000026: goto +2h
+000028: const/4 v1, 0
+00002a: return v1
+
+METHOD z(Lcom/vivo/proxy/bean/DdsDeviceInfo; Ljava/lang/String;)Z
+000000: const/4 v0, 1
+000002: invoke-static v1, v2, v0, La5/b;->A(Lcom/vivo/proxy/bean/DdsDeviceInfo; Ljava/lang/String; Z)Z
+000008: move-result v1
+00000a: return v1

@@ -1,0 +1,96 @@
+DEX classes.dex
+CLASS Ls3/d$b;
+FIELDS
+a Ls3/d;
+
+METHOD <init>(Ls3/d;)V
+000000: iput-object v1, v0, Ls3/d$b;->a Ls3/d;
+000004: invoke-direct v0, Ljava/lang/Object;-><init>()V
+00000a: return-void 
+
+METHOD b(I)V
+000000: return-void 
+
+METHOD d(I Ljava/lang/String;)V
+000000: return-void 
+
+METHOD f(Ljava/lang/String;)V
+000000: new-instance v0, Ljava/lang/StringBuilder;
+000004: invoke-direct v0, Ljava/lang/StringBuilder;-><init>()V
+00000a: const-string v1, "registerResquestCallback info = "
+00000e: invoke-virtual v0, v1, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+000014: invoke-virtual v0, v3, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+00001a: invoke-virtual v0, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
+000020: move-result-object v0
+000022: const-string v1, "CONNECT_PcSuitProxy"
+000026: invoke-static v1, v0, Lz3/o;->i(Ljava/lang/String; Ljava/lang/String;)V
+00002c: invoke-static v3, Landroid/text/TextUtils;->isEmpty(Ljava/lang/CharSequence;)Z
+000032: move-result v0
+000034: if-nez v0, +081h
+000038: invoke-static Lcom/vivo/vdfs/common/monitor/Monitor;->isVdfsEnable()Z
+00003e: move-result v0
+000040: if-nez v0, +003h
+000044: goto +79h
+000046: iget-object v0, v2, Ls3/d$b;->a Ls3/d;
+00004a: invoke-static v0, v3, Ls3/d;->k(Ls3/d; Ljava/lang/String;)Z
+000050: move-result v0
+000052: if-eqz v0, +020h
+000056: iget-object v3, v2, Ls3/d$b;->a Ls3/d;
+00005a: invoke-static v3, Ls3/d;->l(Ls3/d;)Ls3/d$e;
+000060: move-result-object v3
+000062: const/4 v0, 1
+000064: invoke-virtual v3, v0, Landroid/os/Handler;->removeMessages(I)V
+00006a: iget-object v3, v2, Ls3/d$b;->a Ls3/d;
+00006e: invoke-static v3, Ls3/d;->l(Ls3/d;)Ls3/d$e;
+000074: move-result-object v3
+000076: iget-object v1, v2, Ls3/d$b;->a Ls3/d;
+00007a: invoke-static v1, Ls3/d;->l(Ls3/d;)Ls3/d$e;
+000080: move-result-object v1
+000082: invoke-virtual v1, v0, Landroid/os/Handler;->obtainMessage(I)Landroid/os/Message;
+000088: move-result-object v0
+00008a: invoke-virtual v3, v0, Landroid/os/Handler;->sendMessage(Landroid/os/Message;)Z
+000090: return-void 
+000092: iget-object v0, v2, Ls3/d$b;->a Ls3/d;
+000096: invoke-static v0, v3, Ls3/d;->d(Ls3/d; Ljava/lang/String;)Z
+00009c: move-result v0
+00009e: if-eqz v0, +020h
+0000a2: iget-object v3, v2, Ls3/d$b;->a Ls3/d;
+0000a6: invoke-static v3, Ls3/d;->l(Ls3/d;)Ls3/d$e;
+0000ac: move-result-object v3
+0000ae: const/4 v0, 2
+0000b0: invoke-virtual v3, v0, Landroid/os/Handler;->removeMessages(I)V
+0000b6: iget-object v3, v2, Ls3/d$b;->a Ls3/d;
+0000ba: invoke-static v3, Ls3/d;->l(Ls3/d;)Ls3/d$e;
+0000c0: move-result-object v3
+0000c2: iget-object v1, v2, Ls3/d$b;->a Ls3/d;
+0000c6: invoke-static v1, Ls3/d;->l(Ls3/d;)Ls3/d$e;
+0000cc: move-result-object v1
+0000ce: invoke-virtual v1, v0, Landroid/os/Handler;->obtainMessage(I)Landroid/os/Message;
+0000d4: move-result-object v0
+0000d6: invoke-virtual v3, v0, Landroid/os/Handler;->sendMessage(Landroid/os/Message;)Z
+0000dc: return-void 
+0000de: iget-object v0, v2, Ls3/d$b;->a Ls3/d;
+0000e2: invoke-static v0, v3, Ls3/d;->e(Ls3/d; Ljava/lang/String;)Z
+0000e8: move-result v0
+0000ea: if-eqz v0, +020h
+0000ee: iget-object v3, v2, Ls3/d$b;->a Ls3/d;
+0000f2: invoke-static v3, Ls3/d;->l(Ls3/d;)Ls3/d$e;
+0000f8: move-result-object v3
+0000fa: const/4 v0, 3
+0000fc: invoke-virtual v3, v0, Landroid/os/Handler;->removeMessages(I)V
+000102: iget-object v3, v2, Ls3/d$b;->a Ls3/d;
+000106: invoke-static v3, Ls3/d;->l(Ls3/d;)Ls3/d$e;
+00010c: move-result-object v3
+00010e: iget-object v1, v2, Ls3/d$b;->a Ls3/d;
+000112: invoke-static v1, Ls3/d;->l(Ls3/d;)Ls3/d$e;
+000118: move-result-object v1
+00011a: invoke-virtual v1, v0, Landroid/os/Handler;->obtainMessage(I)Landroid/os/Message;
+000120: move-result-object v0
+000122: invoke-virtual v3, v0, Landroid/os/Handler;->sendMessage(Landroid/os/Message;)Z
+000128: return-void 
+00012a: iget-object v0, v2, Ls3/d$b;->a Ls3/d;
+00012e: invoke-static v0, v3, Ls3/d;->f(Ls3/d; Ljava/lang/String;)Z
+000134: return-void 
+000136: const-string v3, "registerResquestCallback info = null or switch = off"
+00013a: invoke-static v1, v3, Lz3/o;->i(Ljava/lang/String; Ljava/lang/String;)V
+000140: return-void 

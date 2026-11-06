@@ -1,0 +1,87 @@
+//  datachannel消息通道， 传输指令、文件传输类型等json字符串
+function setDataChannelMessageCallback () {
+    global.setDataChannelMessageCallback = ffi.Callback('void', ['string', 'int'], function(msg, len){
+        
+        // msg = JSON.stringify({
+        //     msgId: Date.now(),
+        //     data:{
+        //         type: "fileTransfer",
+        //         name: "fileSearch",
+        //         value:{
+        //             searchKey: 'vbs',
+        //             searchToken: [],
+        //             searchPaths: ["/Users/11101807/Documents/document"],
+        //             pageSize: 100,
+        //             pageIndex: 0,
+        //             sortType: 4,
+        //             filter:0
+        //         }
+        //     }
+        // })
+        // if(global.isWindows) {
+        //     msg = JSON.stringify({
+        //         msgId: Date.now(),
+        //         data:{
+        //             type: "fileTransfer",
+        //             name: "fileSearch",
+        //             value: {
+        //                 searchKey: 'pc-remote-control',
+        //                 searchToken: [],
+        //                 searchPaths: ["F:\\project\\"],
+        //                 pageSize: 100,
+        //                 pageIndex: 0,
+        //                 sortType: 4,
+        //                 filter: 1
+        //             }
+        //         }
+        //     })
+        // }
+        try {
+            const res = JSON.parse(msg);
+            const eventType = res?.data?.type;
+
+            if (['mouse', 'key', 'changeWidgetState'].includes(eventType)) {
+                // global.__log.info(`dataChannel接收到键鼠数据=====eventType:${eventType}, params：${JSON.stringify(res?.data || {})}`);
+                listenRemoteDirectiveEvent(res);
+            } 
+            // 1.7.0 文件传输 回调增加文件传输相关处理
+            else if(eventType === 'fileTransfer') {
+                const methodName = res?.data?.name;
+                const ability = res?.data?.ability || {}
+                global.__log.info(`fileTransfer req=====》method:${methodName} params：${JSON.stringify(res?.data?.value || {})} msgId:${res.msgId}---ability=${JSON.stringify(ability)}`);
+                const fileTranser = require('../fileTransfer/index');
+                const fun = fileTranser[`${methodName}Response`];
+                if (typeof fun === 'function') {
+                    fun(res?.data?.value, res.msgId, ability);
+                } 
+            }
+        } catch(e) {
+            global.__log.info('dataChannel接收到数据=====》'+e.message + '====='+len);
+        }
+    });
+    const res = cpplib.vivoav_set_data_channel_message_callback(global.setDataChannelMessageCallback);  
+    global.__log.info('setDataChannelMessageCallback==result===》'+res);
+}
+
+// 1.7.0 文件传输 datachannel消息通道（处理json外的其它数据格式，例如protobuf格式）
+// 传输文件内容，二进制数据
+function setDataChannelMessageCallbackEx () {
+    global.setDataChannelMessageCallbackEx = ffi.Callback('void', ['uint8', 'char *', 'int'], function(type, msg, len){   
+        try {
+            const newBuffer = ref.reinterpret(msg, len);
+            const buffer  = Buffer.from(newBuffer);
+
+            //文件传输
+           if (type == 0) {
+                // global.__log.info(`dataChannelEx接收到fileTransfer数据=====》len:${buffer.length}`);
+                const { receiveFileStream } = require('../fileTransfer/index');
+                receiveFileStream(buffer);
+           }
+        } catch(e) {
+            global.__log.info(`dataChannelEx接收到数据===error==》msg:${msg}`+e.message + '====='+len);
+        }
+    });
+    const res = cpplib.vivoav_set_data_channel_message_callback_ex(global.setDataChannelMessageCallbackEx);  
+    global.__log.info(`setDataChannelMessageCallbackEx==result===`+res);
+}
+

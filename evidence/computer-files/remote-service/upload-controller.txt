@@ -1,0 +1,103 @@
+const pathUtils = require('path');
+const fs = require('fs');
+
+const uploadService = require('../service/upload');
+const utils = require('../utils');
+const FileTransferProto = require('../protobuf/index').FileTransfer;
+
+const __logInfo = (fun, text)=>{
+    console.log(fun, text)
+    global?.__log?.info(`[fileTransfer-controller-upload][${fun}] ${text}`) || (()=>{})
+};
+
+module.exports = {
+    receiveFileStream,
+    uploadResponse,
+    stopUploadResponse,
+    recoverUploadResponse,
+    deleteUploadResponse
+}
+
+let tempMd5 = '';
+let tempPath = '';
+/**
+ * 响应手机端预上传请求
+ * @param {*} value 
+*/
+async function uploadResponse(value, msgId) {
+    const { baseDir = '', name = '', md5 }  = value;
+    let result = {
+        code: 0
+    };
+    if (!baseDir || !name || !md5) {
+        result.code = 99;
+        __logInfo('uploadResponse', '参数不正确')
+    } else {
+        result = await uploadService.upload(value);
+    }
+    tempMd5 = result.md5;
+    tempPath = result.path;
+    utils.sendJsonByDataChannel('upload', result, msgId);
+}
+
+
+/**
+ * 暂停文件上传
+ * @param {*} value 
+*/
+async function stopUploadResponse(value, msgId) {
+   const result = await uploadService.stopUpload(value);
+
+    utils.sendJsonByDataChannel('stopUpload', result, msgId);
+}
+
+
+/**
+ * 响应手机端发起恢复上传
+ * @param {*} value 
+*/
+async function recoverUploadResponse(value, msgId) {
+    const result = await uploadService.recoverUpload(value);
+
+    tempMd5 = result.md5;
+    tempPath = result.path;
+    utils.sendJsonByDataChannel('recoverUpload', result, msgId);
+}
+
+
+/**
+ * 响应手机端发起恢复上传
+ * @param {*} value 
+*/
+async function deleteUploadResponse(value, msgId) {
+    const result = await uploadService.deleteUpload(value);
+
+    utils.sendJsonByDataChannel('deleteUpload', result, msgId);
+}
+
+
+
+/**
+ * 文件分片接收
+ */
+function receiveFileStream(value) {
+    
+    try {
+        const message = FileTransferProto.decode(value);
+        const verfiy  = FileTransferProto.verify(message);
+
+        if (verfiy) {
+            __logInfo('receiveFileStream-unverfiy', verfiy);
+            return;
+        }
+        const body = FileTransferProto.toObject(message);
+
+        // __logInfo('receiveFileStream', `md5:${body.md5}, index:${body.index}, size:${body.size}, partSize: ${body.files.length}`)
+    
+        uploadService.receiveFileStream(body);
+    } catch(e){
+        __logInfo('receiveFileStream-error', e.message)
+    }
+   
+}
+
