@@ -423,11 +423,23 @@ class Window : public QMainWindow {
         if (!connected()) { report("请先连接手机"); return false; }
         const QString resolved = actual(destination);
         if (resolved != root && !resolved.startsWith(root + "/")) { report("请选择手机共享存储中的目录"); return false; }
-        auto response = api.call("POST", route("/files"), {{"type", "REQUEST_POSTS_FILELIST"}, {"data", apiPath(resolved)}, {"versionTag", 1}});
-        if (!api.error.isEmpty()) { report(api.error); return false; }
-        auto obj = response.toObject(); QJsonValue payload = obj.contains("data") ? obj.value("data") : response;
-        if (payload.isString()) payload = QJsonDocument::fromJson(payload.toString().toUtf8()).object();
-        QJsonArray files = payload.isArray() ? payload.toArray() : payload.toObject().value("dataList").toArray();
+        const QString device=selected; QJsonArray files; QSet<QString> seen;
+        constexpr int pageSize=200, maxPages=10000;
+        bool complete=false;
+        for (int page=0; page<maxPages; ++page) {
+            auto response = api.call("POST", "/api/sessions/"+device+"/files", {{"type", "REQUEST_POSTS_FILELIST"}, {"data", apiPath(resolved)}, {"versionTag", 1}, {"pageIndex",page}, {"pageNumber",pageSize}});
+            if (!api.error.isEmpty()) { report(api.error); return false; }
+            if (selected!=device || !connected()) { report("设备已切换或断开，请重新打开目录"); return false; }
+            auto obj = response.toObject(); QJsonValue payload = obj.contains("data") ? obj.value("data") : response;
+            if (payload.isString()) { QJsonParseError error; auto parsed=QJsonDocument::fromJson(payload.toString().toUtf8(),&error); if(error.error!=QJsonParseError::NoError) { report("手机返回的目录数据无效"); return false; } payload=parsed.isArray()?QJsonValue(parsed.array()):QJsonValue(parsed.object()); }
+            QJsonValue list=payload.isArray()?payload:payload.toObject().value("dataList");
+            if (!list.isArray()) { report("手机返回的目录数据无效"); return false; }
+            auto entries=list.toArray(); int added=0;
+            for (const auto &entry:entries) { QString full=entry.toObject().value("savePath").toString(); if (!full.isEmpty() && !seen.contains(full)) { seen.insert(full); files.append(entry); ++added; } }
+            if (entries.size()<pageSize) { complete=true; break; }
+            if (!added) { report("手机返回了重复的目录分页，请刷新后重试"); return false; }
+        }
+        if (!complete) { report("目录项目过多，无法完整读取"); return false; }
         directory = resolved; if (record) history.record(selected, directory); path->setText(directory + (directory == root ? "/" : "")); tree->clear();
         for (auto value : files) { auto f = value.toObject(); QString filename = f.value("fileName").toString(), full = f.value("savePath").toString(); if (full.isEmpty()) continue;
             bool isDir = f.value("isDirectory").toBool() || f.value("isDirectory").toString() == "true";
@@ -436,7 +448,7 @@ class Window : public QMainWindow {
             item->setData(0, Qt::UserRole, full); item->setData(0, Qt::UserRole + 1, isDir); item->setIcon(0, style()->standardIcon(isDir ? QStyle::SP_DirIcon : QStyle::SP_FileIcon)); tree->addTopLevelItem(item);
             item->setData(0, Qt::UserRole + 2, size);
         }
-        filter(); report(QString("%1 个项目").arg(tree->topLevelItemCount())); return true;
+        filter(); tree->scrollToTop(); report(QString("%1 个项目").arg(tree->topLevelItemCount())); return true;
     }
     void navigateHistory(int direction) { QString target=history.target(direction); if (!target.isEmpty() && browse(target, false)) history.moved(direction); }
     void goUp() { browse(directory==root?root:QFileInfo(directory).path()); }

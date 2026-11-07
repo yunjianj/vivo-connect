@@ -4,7 +4,7 @@
 
 ```sh
 ./packaging/arch/build.sh
-sudo pacman -U build/packages/vivo-connect-0.1.0-7-x86_64.pkg.tar.zst
+sudo pacman -U build/packages/vivo-connect-0.1.0-8-x86_64.pkg.tar.zst
 ```
 
 仓库已包含所需的 Node.js 运行模块，来源和许可证见 [运行模块说明](../../runtime/windows/v7.0.6.0-cn/)。手机已经安装官方应用时可使用 USB 连接；要启用明确请求的 APK 安装选项，可通过 `VIVO_PHONE_APK` 指向合法取得的 APK。默认使用项目 `icons/` 中的图标，以及 `build/private-p2p/wpa_supplicant-2.12.tar.gz`；如无线组件源码包不存在，构建脚本会从上游下载固定版本并验证 SHA-256。私有无线组件在构建期间重新编译，不覆盖系统服务。
