@@ -5,6 +5,7 @@
 | 文档 | 适用内容 |
 |---|---|
 | [后端运行和 API](backend.md) | 安装要求、启动方式、配置、账号登录、设备连接、文件收发与本机 API |
+| [手机图库](gallery.md) | PC 浏览手机相册、缩略图、导入导出、删除及 Windows 协议依据 |
 | [原生桌面客户端](native-gui.md) | Qt 客户端、Wayland 拖放、依赖、构建、自检和实机验证 |
 | [Arch Linux 软件包](../packaging/arch/README.md) | pacman 软件包构建、安装、卸载和桌面图标定制 |
 

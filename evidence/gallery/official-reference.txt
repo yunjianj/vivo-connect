@@ -1,0 +1,164 @@
+--- analysis/pretty/app-modules.js:134-152 ---
+        t.THUMB_URL = "/pc_file_manager/thumb", t.DOWNLOAD_THUMB_NEW = "/pc_file_manager/new/thumb", 
+        t.HTTP_REQUEST_WEB_THUMB = "http_request_web_thumb", t.HTTP_REQUEST_SINGLE_DOWNLOAD = "http_request_single_download", 
+        t.API_FM_SYNC_DATA_HISTORY = "/sync_data/history", t.pageNumber = 500, t.cloudPageNumber = 100, 
+        t.getHomeData = (e, t = !1) => c.requestPost(e, "/pc_file_manager/channel", Object.assign(Object.assign({}, n.DEFAULT_CHANNEL_PARAMS), {
+            firstFlag: t
+        })), t.getDataList = (e, t, a = !1) => c.requestPost(e, "/pc_file_manager/channel", t, {
+            noCancel: a
+        }), t.getInitDataList = (e, t) => c.requestPost(e, "/pc_file_manager/channel", t), 
+        t.getAblumList = e => u.getLoadError() ? Promise.reject(new Error("load error mock")) : c.requestGet(e, "/pc_back/album_collect_info"), 
+        t.getAlbumData = (e, t, a, i, r, o = n.SORT_TYPY.BY_TIME_DESC) => c.requestPost(e, "/pc_back/album_collect_detail", {
+            list: t,
+            keyID: a,
+            pageIndex: i,
+            pageNumber: r,
+            sortCondition: o
+        }), t.getTabCount = (e, t) => c.requestGet(e, "/pc_file_manager/tab_count", {
+            type: t
+        }), t.getWxOrQqTabCount = (e, t) => i.__awaiter(void 0, void 0, void 0, function*() {
+            var a, i;
+
+--- analysis/pretty/app-modules.js:260-267 ---
+        }), t.getThumbData = function(e, a) {
+            let i = Object.assign(Object.assign({}, a), {
+                type: "fileManager"
+            });
+            const n = {
+                priortityLevel: l.PriorityLevelEnum.MEDIUM_LOW
+            };
+            return c.requestGet(e, t.THUMB_URL, i, n);
+
+--- analysis/pretty/app-modules.js:2204-2221 ---
+            e.RECENTFILE = "REQUEST_POSTS_ONE_MOTH_LIST", e.VIDEOLIST = "REQUEST_POSTS_VIDEOLIST", 
+            e.IMAGELIST = "REQUEST_POSTS_IMAGELIST", e.AUDIOLIST = "REQUEST_POSTS_AUDIOLIST", 
+            e.DOCSLIST = "REQUEST_POSTS_DOCSLIST", e.DOCSLISTNEW = "REQUEST_POSTS_WEB_DOCSLIST", 
+            e.WECHAT = "REQUEST_POSTS_NEW_WECHAT", e.QQ = "REQUEST_POSTS_NEW_QQ", e.FILELIST = "REQUEST_POSTS_FILELIST", 
+            e.HOMEDATA = "REQUEST_POSTS_HOMEDATA", e.RECENTEDELETE = "REQUEST_POSTS_RECENTE_DELETE_LIST", 
+            e.APP = "REQUEST_POSTS_NEW_APP";
+        }(n = t.REQUEST_POSTS_TYPE || (t.REQUEST_POSTS_TYPE = {})), function(e) {
+            e[e.BY_NAME_ASC = 0] = "BY_NAME_ASC", e[e.BY_NAME_DESC = 1] = "BY_NAME_DESC", e[e.BY_TYPE_ASC = 2] = "BY_TYPE_ASC", 
+            e[e.BY_TYPE_DESC = 3] = "BY_TYPE_DESC", e[e.BY_TIME_ASC = 4] = "BY_TIME_ASC", e[e.BY_TIME_DESC = 5] = "BY_TIME_DESC", 
+            e[e.BY_SIZE_ASC = 6] = "BY_SIZE_ASC", e[e.BY_SIZE_DESC = 7] = "BY_SIZE_DESC", e[e.BY_DEFAULT = 8] = "BY_DEFAULT";
+        }(r = t.SORT_TYPY || (t.SORT_TYPY = {})), function(e) {
+            e[e.BY_NAME_DESC = 1] = "BY_NAME_DESC", e[e.BY_TYPE_DESC = 3] = "BY_TYPE_DESC", 
+            e[e.BY_SIZE_ASC = 5] = "BY_SIZE_ASC", e[e.BY_SIZE_DESC = 15] = "BY_SIZE_DESC", e[e.BY_TIME_ASC = 6] = "BY_TIME_ASC", 
+            e[e.BY_TIME_DESC = 16] = "BY_TIME_DESC";
+        }(t.RECYCLE_SORT_TYPY || (t.RECYCLE_SORT_TYPY = {})), function(e) {
+            e[e.BY_ADD_TIME_ASC = 4] = "BY_ADD_TIME_ASC", e[e.BY_ADD_TIME_DESC = 5] = "BY_ADD_TIME_DESC", 
+            e[e.BY_SHOOT_TIME_ASC = 8] = "BY_SHOOT_TIME_ASC", e[e.BY_SHOOT_TIME_DESC = 9] = "BY_SHOOT_TIME_DESC";
+        }(t.IMAGE_SORT_TYPY || (t.IMAGE_SORT_TYPY = {})), function(e) {
+
+--- analysis/pretty/app-modules.js:5143-5159 ---
+        }, t.getThumbByClaw = function(e) {
+            return i.__awaiter(this, void 0, void 0, function*() {
+                if (process.env.IS_WEB) return;
+                const {ipcRenderer: t} = a(4), {requestId: i, deviceId: n, savePath: o} = e;
+                try {
+                    const e = yield r.getThumbData(n, {
+                        fileUri: o,
+                        date: Date.now()
+                    }), a = new Blob([ e.data ], {
+                        type: "image/png"
+                    }), s = yield a.arrayBuffer(), c = Buffer.from(s);
+                    t.send(i, c);
+                } catch (e) {
+                    t.send(i, JSON.stringify(e));
+                }
+            });
+        }, t.getPhoneUrl = function(e) {
+
+--- analysis/pretty/app-modules.js:6850-6890 ---
+                    }, 0), window._fmLog.info("[fm] getAblumList params"), yield u.getAblumList(e.mobileDeviceId).then(i => {
+                        var n, r, o, c, l;
+                        window._fmLog.info("[fm] getAblumList res: " + JSON.stringify(null === (r = null === (n = null == i ? void 0 : i.data) || void 0 === n ? void 0 : n.data) || void 0 === r ? void 0 : r.length)), 
+                        window._fmLog.info("[fm] getAblumList res code " + (null === (o = null == i ? void 0 : i.data) || void 0 === o ? void 0 : o.code));
+                        const d = "9999" != (null === (c = null == i ? void 0 : i.data) || void 0 === c ? void 0 : c.code);
+                        if (a(s.default.UPDATE_IS_CONNECT_ALBUM, d), !Array.isArray(i.data.data)) return window._fmLog.info("[fm] getAblumList err: res is not list"), 
+                        void ("9999" !== (null === (l = null == i ? void 0 : i.data) || void 0 === l ? void 0 : l.code) ? e.albumList && 0 !== e.albumList.length || p.FmEventBus.$emit(T.FM_EVENT_BUS_ENUM.FM_LIST_LOAD_ERROR, {
+                            loadError: !0
+                        }) : p.FmEventBus.$emit(T.FM_EVENT_BUS_ENUM.FM_LIST_LOAD_ERROR, {
+                            loadError: !1
+                        }));
+                        p.FmEventBus.$emit(T.FM_EVENT_BUS_ENUM.FM_LIST_LOAD_ERROR, {
+                            loadError: !1
+                        });
+                        const u = i.data.data.filter(e => e.count > 0 && e.coverData.length > 0).map((e, t) => {
+                            const a = e.coverData[0];
+                            return {
+                                ids: e.bucketIDs,
+                                keyID: e.keyID,
+                                name: e.name,
+                                count: e.count,
+                                isInOtherAlbum: e.isInOtherAlbum,
+                                coverData: {
+                                    date: a.date_added,
+                                    savePath: a.data,
+                                    fileName: a.display_name,
+                                    fileSize: a.size,
+                                    isDirectory: !1,
+                                    index: 0,
+                                    fileType: _.getMimeCategoryFromSuffix(a.display_name)
+                                },
+                                checked: !1,
+                                index: t,
+                                savePath: a.data,
+                                isOtherAlbum: !1
+                            };
+                        });
+                        u.some(e => e.isInOtherAlbum) && u.push({
+                            ids: [],
+                            keyID: "",
+                            name: A.default.tc("fileManager.qi-ta-xiang-ce"),
+
+--- analysis/pretty/190.js:139-177 ---
+                    const {ids: a, keyID: i, pageIndex: s, pageNumber: r, sortCondition: o} = t;
+                    return window._fmLog.info(`[fm] getAlbumData params ids: ${a},keyID: ${i},pageIndex: ${s},pageNumber: ${r},pageNumber: ${o}`), 
+                    yield d.getAlbumData(this.mobileDeviceId, a, i, s, r, o).then(t => {
+                        var a, i, s, r, o, d;
+                        window._fmLog.info("[fm] getAlbumData res data.length: " + (null === (i = null === (a = null == t ? void 0 : t.data) || void 0 === a ? void 0 : a.data) || void 0 === i ? void 0 : i.length)), 
+                        t && Array.isArray(null === (s = null == t ? void 0 : t.data) || void 0 === s ? void 0 : s.data) ? (e.dataList = this.listToDataArr(null === (r = t.data) || void 0 === r ? void 0 : r.data), 
+                        e.totalCount = (null === (d = null === (o = t.data) || void 0 === o ? void 0 : o.data) || void 0 === d ? void 0 : d.length) || 0) : e.isError = !0;
+                    }).catch(t => {
+                        window._fmLog.error("[fm] getAlbumData err:" + JSON.stringify(t)), e.isError = !0;
+                    }), e;
+                });
+            }
+            setData(t) {
+                t.forEach((t, e) => t.index = e), this.setDataCache(t), this.setSavePathKeys(), 
+                this.setIsShowEmptyView(!this.savePathKeys.length), this.updateSavePathKeysCount(this.savePathKeys.length), 
+                this.isFirst = !1, this.startDownloadThumb();
+            }
+            listToDataArr(t) {
+                const e = f.getLivePhotoMock(), a = t.map((t, a) => {
+                    var i;
+                    return {
+                        index: a,
+                        date: 1e3 * t.date_modified,
+                        savePath: t.data,
+                        fileName: t.display_name,
+                        fileSize: t.size,
+                        isDirectory: !1,
+                        fileType: u.getMimeCategoryFromSuffix(t.display_name),
+                        groupId: t.group_id,
+                        groupIndex: t.group_index,
+                        isGroupFirst: !1,
+                        isLivePhoto: !(!e || !(null === (i = t.display_name) || void 0 === i ? void 0 : i.startsWith("动图_"))) || !!t.isLivePhoto,
+                        dateFormat: c.default(1e3 * t.date_modified).format("YYYY/MM/DD HH:mm")
+                    };
+                });
+                return u.setIsGroupFirst(a), a;
+            }
+            setUploadPath() {
+                const {keyID: t} = this.$route.query, {keyID: e} = this.params, a = this.albumList.find(a => a.keyID == t || a.keyID == e);
+
+--- analysis/pretty/app-connection.js:12549-12557 ---
+            fileManageReconnectAlbum() {
+                return new Promise((e, t) => {
+                    let n = setTimeout(() => {
+                        t("TIME_OUT"), window._log.info("[ConnectionModule][MobileDevice.ts][fileManageReconnectAlbum] timeout 4s");
+                    }, 4e3);
+                    this.fileManageReConnectAlbumHandler = t => {
+                        e(t), n && (clearTimeout(n), n = null);
+                    }, this.sendMessage(I.MESSAGE_EVENT_TYPE.FILE_MANAGER_RE_CONNECT_ALBUM);
+                });

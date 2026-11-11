@@ -15,6 +15,7 @@ import { networkInterfaces } from './network.mjs';
 import { P2pManager } from './p2p.mjs';
 import { ScanManager } from './scan.mjs';
 import { FileManager } from './files.mjs';
+import { GalleryManager } from './gallery.mjs';
 import { ClipboardManager } from './clipboard.mjs';
 import { RememberedDevices } from './remembered.mjs';
 import { OfficialPreconnect } from './preconnect.mjs';
@@ -30,6 +31,7 @@ export async function createBackend({ stateDir, accountManager, phoneManager } =
   phones.onReplace = id => jobs.cancelSession(id, { exceptKind: 'reconnect' });
   const transfers = new Transfers(state, phones);
   const files = new FileManager(phones);
+  const gallery = new GalleryManager(phones);
   const clipboard = new ClipboardManager(phones);
   const p2p = new P2pManager(state, phones, jobs);
   p2p.preconnect = new OfficialPreconnect(state, accounts);
@@ -89,6 +91,18 @@ export async function createBackend({ stateDir, accountManager, phoneManager } =
         if (req.method === 'GET') return reply(res, 200, clipboard.read(id));
         if (req.method === 'PUT') return reply(res, 200, await clipboard.write(id, body));
         if (req.method === 'PATCH') return reply(res, 200, clipboard.configure(id, body));
+      }
+      const galleryRoute = url.pathname.match(/^\/api\/sessions\/([\w-]+)\/gallery\/(albums|list|thumbnail)$/);
+      if (galleryRoute) {
+        const [, id, action] = galleryRoute;
+        if (req.method === 'GET' && action === 'albums') return reply(res, 200, await gallery.albums(id));
+        if (req.method === 'POST' && action === 'list') return reply(res, 200, await gallery.list(id, body));
+        if (req.method === 'POST' && action === 'thumbnail') {
+          const controller = new AbortController();
+          const cancel = () => controller.abort(); res.once('close', cancel);
+          try { return reply(res, 200, await gallery.thumbnail(id, body, controller.signal)); }
+          finally { res.off('close', cancel); }
+        }
       }
       const fileAction = url.pathname.match(/^\/api\/sessions\/([\w-]+)\/files\/(move|rename|delete|mkdir|size)$/);
       if (req.method === 'POST' && fileAction) return reply(res, 200, await files.execute(fileAction[1], fileAction[2], body));
