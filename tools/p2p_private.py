@@ -26,16 +26,13 @@ class Control:
     """Attached datagram control; credentials remain in memory, never logs."""
     def __init__(self,server,client):
         self.socket=socket.socket(socket.AF_UNIX,socket.SOCK_DGRAM)
-        self.path=pathlib.Path(client);self.events=collections.deque(maxlen=64);self.provision_requests=collections.deque(maxlen=8);self.invitation_results=collections.deque(maxlen=16)
+        self.path=pathlib.Path(client);self.events=collections.deque(maxlen=64);self.provision_requests=collections.deque(maxlen=8)
         try:self.socket.bind(str(client));self.socket.connect(str(server));self.socket.settimeout(2)
         except BaseException:self.close();raise
     def event(self,text):
         if text.startswith('<') and '>' in text:text=text.split('>',1)[1]
         # P2P-GROUP-STARTED contains a passphrase. Keep only its event name.
         name=text.split(' ',1)[0].strip()
-        if name=='P2P-INVITATION-RESULT':
-            match=re.search(r'(?:^|\s)status=(\d{1,3})(?:\s|$)',text)
-            if match and int(match[1])<=255:self.invitation_results.append(int(match[1]))
         if name=='P2P-PROV-DISC-PBC-REQ':
             fields=text.split()
             if len(fields)>1 and re.fullmatch(r'(?:[0-9a-fA-F]{2}:){5}[0-9a-fA-F]{2}',fields[1]):
@@ -228,12 +225,6 @@ class PrivateHelper(Helper):
         self.dhcp_reader=threading.Thread(target=read_dhcp,daemon=True);self.dhcp_reader.start()
         return process
     def update_progress(self,events):
-        results=getattr(self.control,'invitation_results',None)
-        if isinstance(results,collections.deque):
-            while results:
-                status=results.popleft()
-                self.progress['invitationStatus']=status
-                self.stage('persistent-invitation-result',status=status,success=status==0)
         mapping={'P2P-PROV-DISC-PBC-REQ':'provisionRequests','WPS-FAIL':'wpsFailures','WPS-TIMEOUT':'wpsFailures','WPS-SUCCESS':'wpsSuccesses','WPS-REG-SUCCESS':'wpsSuccesses','AP-STA-POSSIBLE-PSK-MISMATCH':'pskFailures'}
         for event in events:
             if event in mapping:self.progress[mapping[event]]+=1

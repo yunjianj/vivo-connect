@@ -9,10 +9,11 @@
 #include <fcntl.h>
 #include <unistd.h>
 
-struct Entry { QString name, phone; qint64 size; bool directory; QString local; std::mutex mutex; };
+struct Entry { QString name, phone, recording; qint64 size; bool directory; QString local; std::mutex mutex; };
 static std::vector<std::unique_ptr<Entry>> entries;
 static QString stateDir, session; static int port;
 static QByteArray token;
+static QTemporaryDir recordingTemp(QDir::tempPath()+"/vivo-record-drag-XXXXXX");
 static std::mutex gateMutex; static std::condition_variable gateCondition; static bool gateReady=false, gateAccepted=false;
 static Entry *findEntry(const char *p) { QString name=QString::fromUtf8(p+1).section('/',0,0); for (auto &e:entries) if(e->name==name)return e.get(); return nullptr; }
 static QJsonObject call(QString method, QString path, QJsonObject body={}) {
@@ -29,7 +30,7 @@ static bool materialize(Entry *e) {
     { std::unique_lock<std::mutex> gate(gateMutex); gateCondition.wait(gate,[]{return gateReady;}); if(!gateAccepted)return false; }
     std::lock_guard<std::mutex> lock(e->mutex);
     if(!e->local.isEmpty()) return true;
-    auto job=call("POST", "/api/sessions/"+session+"/downloads", {{"paths",QJsonArray{e->phone}},{"isDirectory",e->directory}});
+    auto job=e->recording.isEmpty()?call("POST", "/api/sessions/"+session+"/downloads", {{"paths",QJsonArray{e->phone}},{"isDirectory",e->directory}}):call("POST","/api/recordings/"+e->recording+"/download");
     QString id=job.value("id").toString(); if(id.isEmpty())return false;
     QElapsedTimer timer; timer.start();
     while(timer.elapsed()<3600000) {
@@ -37,6 +38,19 @@ static bool materialize(Entry *e) {
         auto error=j.value("error").toObject();
         const bool notifyFailed=status=="failed" && error.value("code").toString()=="TRANSFER_NOTIFY_FAILED";
         if(status=="succeeded" || notifyFailed) {
+            if(!e->recording.isEmpty()) {
+                if(!recordingTemp.isValid())return false;
+                QSaveFile file(recordingTemp.filePath(e->recording)); if(!file.open(QIODevice::WriteOnly))return false;
+                QNetworkAccessManager net; net.setProxy(QNetworkProxy::NoProxy);
+                QNetworkRequest req{QUrl(QString("http://127.0.0.1:%1/api/recordings/%2/file").arg(port).arg(e->recording))};
+                req.setRawHeader("Authorization","Bearer "+token); req.setTransferTimeout(120000); req.setAttribute(QNetworkRequest::RedirectPolicyAttribute,QNetworkRequest::ManualRedirectPolicy);
+                auto *reply=net.get(req); bool ok=true; QEventLoop loop;
+                QObject::connect(reply,&QNetworkReply::readyRead,&loop,[&]{auto data=reply->readAll();if(file.write(data)!=data.size()){ok=false;reply->abort();}});
+                QObject::connect(reply,&QNetworkReply::finished,&loop,&QEventLoop::quit); loop.exec();
+                auto tail=reply->readAll(); if(file.write(tail)!=tail.size())ok=false;
+                ok=ok && reply->error()==QNetworkReply::NoError && reply->attribute(QNetworkRequest::HttpStatusCodeAttribute).toInt()==200 && file.size()==e->size;
+                reply->deleteLater(); if(!ok || !file.commit())return false; e->local=file.fileName(); return true;
+            }
             auto result=notifyFailed?error.value("details").toObject():j.value("result").toObject();
             QDir dir(result.value("directory").toString());
             QString base=QFileInfo(dir.absolutePath()).canonicalFilePath(), root=QFileInfo(stateDir+"/downloads").canonicalFilePath();
@@ -87,8 +101,8 @@ int main(int argc,char **argv) {
     auto config=QJsonDocument::fromJson(line).object();
     stateDir=config.value("state").toString();session=config.value("session").toString();port=config.value("port").toInt();
     QFile f(stateDir+"/config.json");if(!f.open(QIODevice::ReadOnly))return 3;token=QJsonDocument::fromJson(f.readAll()).object().value("apiToken").toString().toUtf8();
-    QSet<QString> names;for(auto v:config.value("files").toArray()) {auto o=v.toObject();auto e=std::make_unique<Entry>();e->name=o.value("name").toString();e->phone=o.value("path").toString();e->directory=o.value("directory").toBool();e->size=qint64(o.value("size").toDouble(-1));if(e->name.isEmpty()||e->name=="."||e->name==".."||e->name.contains('/')||names.contains(e->name)||!e->phone.startsWith('/')||(!e->directory&&e->size<0))return 4;names.insert(e->name);entries.push_back(std::move(e));}
-    if(entries.empty()||token.isEmpty()||port<1||session.isEmpty())return 5;
+    QSet<QString> names;for(auto v:config.value("files").toArray()) {auto o=v.toObject();auto e=std::make_unique<Entry>();e->name=o.value("name").toString();e->phone=o.value("path").toString();e->recording=o.value("recordingId").toString();e->directory=o.value("directory").toBool();e->size=qint64(o.value("size").toDouble(-1));if(e->name.isEmpty()||e->name=="."||e->name==".."||e->name.contains('/')||names.contains(e->name)||(!e->recording.isEmpty() ? (!QRegularExpression("^[a-f0-9]{64}$").match(e->recording).hasMatch() || e->directory) : (!e->phone.startsWith('/') || session.isEmpty()))||(!e->directory&&e->size<0))return 4;names.insert(e->name);entries.push_back(std::move(e));}
+    if(entries.empty()||token.isEmpty()||port<1)return 5;
     std::thread([]{ char c=0; bool accepted=::read(STDIN_FILENO,&c,1)==1 && c=='1'; {std::lock_guard<std::mutex> lock(gateMutex);gateAccepted=accepted;gateReady=true;} gateCondition.notify_all(); }).detach();
     struct fuse_operations ops={};ops.getattr=getattr_cb;ops.readdir=readdir_cb;ops.open=open_cb;ops.read=read_cb;ops.release=release_cb;
     char foreground[]="-f";char *args[]={argv[0],foreground,argv[1]};return fuse_main(3,args,&ops,nullptr);

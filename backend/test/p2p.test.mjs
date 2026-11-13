@@ -52,45 +52,29 @@ test('helper progress distinguishes wireless authentication, DHCP and callback w
  assert.equal(p2p.status().pairingActive,false);
 });
 
-test('reconnect distinguishes a ready group from a phone actually joined to it', () => {
- const p2p=new P2pManager({}, {}, new Jobs());
+test('direct reconnect requires official preconnection regardless of saved IP or group clients', async () => {
+ const p2p=new P2pManager({}, {accounts:{account:{openId:'account'}}}, new Jobs());
  const session={transport:'wifi-direct',ip:'192.168.49.79'};
  assert.equal(p2p.reconnectState(session).code,'P2P_NOT_READY');
+ await assert.rejects(p2p.reconnect(session),{code:'P2P_NOT_READY'});
  assert.equal(p2p.reconnectState({transport:'usb'}),null);
- p2p.network={ip:'192.168.49.1'};p2p.expires=Date.now()+15000;
- p2p.progress={associatedStations:0,authorizedStations:0};
- assert.equal(p2p.reconnectState(session).code,'P2P_PHONE_NOT_JOINED');
- p2p.progress.associatedStations=1;
- assert.equal(p2p.reconnectState(session).code,'P2P_AUTHENTICATING');
- p2p.progress.authorizedStations=1;assert.equal(p2p.reconnectState(session),null);
- p2p.network.ip='192.168.50.1';assert.equal(p2p.reconnectState(session).code,'P2P_ADDRESS_CHANGED');
+ p2p.network={ip:'192.168.49.1',persistentGroup:true};p2p.expires=Date.now()+15000;
+ assert.equal(p2p.reconnectState(session).code,'PRECONNECT_UNAVAILABLE');
+ await assert.rejects(p2p.reconnect(session),{code:'PRECONNECT_UNAVAILABLE'});
+ p2p.preconnect={};
+ assert.equal(p2p.reconnectState(session),null);
+ p2p.network.ip='192.168.50.1';assert.equal(p2p.reconnectState(session),null);
+ p2p.phones.accounts.account=null;
+ assert.equal(p2p.reconnectState(session).code,'PRECONNECT_LOGIN_REQUIRED');
 });
 
-test('persistent invitation requests require a remembered device with auto reconnect enabled', () => {
+test('heartbeat never requests invitations or exposes obsolete invitation metrics', () => {
  const session={remembered:true,transport:'wifi-direct',status:'disconnected',autoConnect:true};
  const p2p=new P2pManager({}, {sessions:new Map([['phone',session]])}, new Jobs());
  p2p.network={id:'helper'};
- assert.equal(p2p.heartbeat('helper',{}).reconnectRequested,true);
- session.autoConnect=false;assert.equal(p2p.heartbeat('helper',{}).reconnectRequested,false);
- session.autoConnect=true;session.needsAuthorization=true;assert.equal(p2p.heartbeat('helper',{}).reconnectRequested,false);
- session.needsAuthorization=false;session.status='connected';assert.equal(p2p.heartbeat('helper',{}).reconnectRequested,false);
-});
-
-test('failed invitations and missing wireless pairing are not mislabeled as first use', () => {
- const p2p=new P2pManager({}, {}, new Jobs());
- p2p.network={ip:'192.168.49.1',persistentGroup:true};p2p.expires=Date.now()+15000;
- const session={transport:'wifi-direct',ip:'192.168.49.79'};
- p2p.progress={associatedStations:0,authorizedStations:0,persistentPeers:0};
- assert.equal(p2p.reconnectState(session).code,'P2P_PAIRING_UNAVAILABLE');
- p2p.progress.invitationStatus=8;
- assert.equal(p2p.reconnectState(session).code,'P2P_INVITATION_FAILED');
-});
-
-test('an active GO without a persistent network is not a restorable pairing', () => {
- const p2p=new P2pManager({}, {}, new Jobs());
- p2p.network={ip:'192.168.49.1',persistentGroup:true};p2p.expires=Date.now()+15000;
- p2p.progress={authorizedStations:0,associatedStations:0,persistentNetworks:0,persistentPeers:0};
- assert.equal(p2p.reconnectState({transport:'wifi-direct',ip:'192.168.49.79'}).code,'P2P_PROFILE_UNAVAILABLE');
+ const status=p2p.heartbeat('helper',{authorizedStations:0,persistentPeers:1,reconnectInvitations:2,invitationStatus:8});
+ assert.equal('reconnectRequested' in status,false);
+ assert.deepEqual(status.progress,{authorizedStations:0});
 });
 
 test('verified official reconnect opens and closes the helper pairing window without a QR task', async () => {
@@ -100,7 +84,7 @@ test('verified official reconnect opens and closes the helper pairing window wit
  const p2p=new P2pManager({},phones,new Jobs());
  p2p.network={...network,ip:'192.168.49.1'};p2p.expires=Date.now()+15000;
  const session={transport:'wifi-direct',ip:'192.168.49.20'};
- p2p.progress={authorizedStations:0,persistentPeers:0,persistentNetworks:0};
+ p2p.progress={authorizedStations:0};
  p2p.preconnect={connect:async(s,n,signal,complete,authorize)=>{
   assert.equal(p2p.status().pairingActive,false);const release=authorize();
   try{const status=p2p.heartbeat(network.id,{});assert.equal(status.pairingActive,true);assert.equal(typeof status.pairingId,'string');

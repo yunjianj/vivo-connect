@@ -22,26 +22,16 @@ export class P2pManager{
   if(session.transport!=='wifi-direct')return null;
   const status=this.status();
   if(!status.ready)return {code:'P2P_NOT_READY',message:'等待 Wi-Fi Direct 系统服务准备直连组'};
-  if(this.preconnect){
-   if(!this.phones.accounts?.account?.openId)return {code:'PRECONNECT_LOGIN_REQUIRED',message:'同账号自动重连需要在客户端登录 vivo 账号'};
-   if(this.pending)return {code:'P2P_PAIRING_ACTIVE',message:'等待当前配对任务完成'};
-   return null;
-  }
-  if(status.progress&&status.progress.authorizedStations===0){
-   if(status.progress.associatedStations>0)return {code:'P2P_AUTHENTICATING',message:'手机正在加入直连组，等待无线认证完成'};
-   if(status.progress.persistentNetworks===0)return {code:'P2P_PROFILE_UNAVAILABLE',message:'直连组正在运行，但缺少可恢复的持久网络条目；需要核对手机入组模式与官方预连接'};
-   if(status.progress.invitationStatus>0)return {code:'P2P_INVITATION_FAILED',message:'手机的持久组邀请未成功（状态 '+status.progress.invitationStatus+'）；命令发送成功不代表手机接受，需检查手机互联授权与原生预连接'};
-   if(status.persistentGroup&&status.progress.persistentPeers===0)return {code:'P2P_PAIRING_UNAVAILABLE',message:'已记住设备，但当前组没有可复用的无线配对记录；标准邀请无法自动恢复'};
-   if(status.persistentGroup&&status.progress.persistentPeers>0)return {code:'P2P_REINVITING',message:'正在发现并邀请已配对手机；请打开手机互传，同账号自动连接还需在电脑端登录 vivo 账号'};
-   return {code:'P2P_PHONE_NOT_JOINED',message:status.persistentGroup?'当前持久组尚无配对记录，首次使用请扫码配对一次':'直连组已就绪，但手机尚未加入；请在手机互传中扫码加入当前直连组'};
-  }
-  if(!sameDirectSubnet(session.ip,status.ip))return {code:'P2P_ADDRESS_CHANGED',message:'直连子网已变化，需要手机重新扫码回传当前地址'};
+  if(!this.preconnect)return {code:'PRECONNECT_UNAVAILABLE',message:'官方 Wi-Fi Direct 预连接尚未就绪'};
+  if(!this.phones.accounts?.account?.openId)return {code:'PRECONNECT_LOGIN_REQUIRED',message:'同账号自动重连需要在客户端登录 vivo 账号'};
+  if(this.pending)return {code:'P2P_PAIRING_ACTIVE',message:'等待当前配对任务完成'};
   return null;
  }
  status(){const n=this.network;const lease=this.autoPairing?.networkId===n?.id&&this.autoPairing?.expires>Date.now()?this.autoPairing:null;return {ready:!!n&&this.expires>Date.now(),experimental:true,persistentGroup:n?.persistentGroup===true,...(n?{stationInterface:n.stationInterface,groupInterface:n.groupInterface,ip:n.ip,frequency:n.frequency}:{}),...(this.progress?{progress:this.progress}:{}),pairingActive:!!this.pending||!!lease,...(this.pending?{pairingId:this.pending.jobId}:lease?{pairingId:lease.id}:{}),requiresAdmin:true};}
  async reconnect(session,signal){
   if(!this.status().ready)throw new ApiError(409,'P2P_NOT_READY','等待 Wi-Fi Direct 系统服务准备直连组');
   if(this.pending)throw new ApiError(409,'P2P_PAIRING_ACTIVE','已有等待中的配对任务');
+  if(!this.preconnect)throw new ApiError(409,'PRECONNECT_UNAVAILABLE','官方 Wi-Fi Direct 预连接尚未就绪');
   const network=this.network;
   return this.preconnect.connect(session,network,signal,async options=>{
    if(!this.status().ready||this.network.id!==network.id)throw new ApiError(409,'P2P_NETWORK_CHANGED','预连接期间直连组发生变化，稍后自动重试');
@@ -77,7 +67,7 @@ export class P2pManager{
   if(!this.network||this.network.id!==id)throw new ApiError(404,'P2P_HELPER_GONE','P2P 助手未注册或后端已重启');
   this.expires=Date.now()+15000;
   if(progress&&typeof progress==='object'){
-   const safe={};for(const key of ['associatedStations','authorizedStations','dhcpDiscoveries','dhcpOffers','dhcpAcks','provisionRequests','pairingAuthorizations','wpsFailures','wpsSuccesses','pskFailures','persistentPeers','persistentNetworks','reconnectDiscoveries','reconnectInvitations','invitationStatus']){
+   const safe={};for(const key of ['associatedStations','authorizedStations','dhcpDiscoveries','dhcpOffers','dhcpAcks','provisionRequests','pairingAuthorizations','wpsFailures','wpsSuccesses','pskFailures']){
     if(Number.isSafeInteger(progress[key])&&progress[key]>=0&&progress[key]<=1000000)safe[key]=progress[key];
    }
    this.progress=safe;
@@ -85,7 +75,7 @@ export class P2pManager{
     job.phase=safe.authorizedStations>0?(safe.dhcpAcks>0?'waiting-for-phone-callback':'waiting-for-dhcp'):
       safe.associatedStations>0?'authenticating-wifi':safe.provisionRequests>0?(safe.pairingAuthorizations>0?'pairing-wifi':'waiting-for-wps'):'waiting-for-p2p';}
   }
-  return {...this.status(),reconnectRequested:[...(this.phones.sessions?.values()||[])].some(s=>s.remembered&&s.transport==='wifi-direct'&&s.status==='disconnected'&&s.autoConnect!==false&&!s.needsAuthorization)};
+  return this.status();
  }
  callback(req,res){
   const answer=(status,value)=>{res.writeHead(status,{'content-type':'application/json','cache-control':'no-store'});res.end(JSON.stringify(value));};

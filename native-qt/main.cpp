@@ -6,6 +6,10 @@
 #include <pwd.h>
 #include <unistd.h>
 #include "gallery.h"
+#include "recordings.h"
+#include "notes.h"
+#include "notes-selftest.h"
+#include "recordings-selftest.h"
 #include "gallery-selftest.h"
 
 static QString autostartPath() {
@@ -245,8 +249,8 @@ static QString deviceStatus(const QJsonObject &device) {
     if (device.value("autoConnect").toBool() && !wait.isEmpty()) {
         const QString code=wait.value("code").toString();
         if (code=="P2P_NOT_READY") return "等待直连服务就绪";
-        if (code=="P2P_AUTHENTICATING") return "正在入组认证";
-        return "等待手机加入直连组";
+        if (code=="PRECONNECT_LOGIN_REQUIRED") return "等待登录 vivo 账号";
+        return "等待预连接就绪";
     }
     return device.value("autoConnect").toBool() ? "等待自动重连" : "已暂停连接";
 }
@@ -285,6 +289,8 @@ class Window : public QMainWindow {
     QTabWidget *contentTabs = nullptr;
     QWidget *galleryContainer = nullptr;
     GalleryDialog *gallery = nullptr;
+    RecordingsDialog *recordings = nullptr;
+    NotesPanel *notesPanel = nullptr;
     QString galleryDevice;
     QSystemTrayIcon *tray = nullptr;
     QAction *trayClipboard = nullptr;
@@ -404,8 +410,7 @@ class Window : public QMainWindow {
         if (gallery && !gallery->isOperating() && (!connected() || galleryDevice!=selected)) { gallery->hide(); gallery->deleteLater(); gallery=nullptr; galleryDevice.clear(); if (auto *hint=galleryContainer->findChild<QLabel *>("galleryHint")) hint->show(); }
         if (contentTabs && contentTabs->currentIndex()==1 && connected() && !gallery) { if (auto *hint=galleryContainer->findChild<QLabel *>("galleryHint")) hint->hide(); showGallery(); }
         auto currentDevice=selectedDevice();
-        const QString waitCode=currentDevice.value("reconnectWait").toObject().value("code").toString();
-        reconnectButton->setText(waitCode=="P2P_PHONE_NOT_JOINED" || waitCode=="P2P_ADDRESS_CHANGED" ? "加入直连组" : currentDevice.value("needsAuthorization").toBool()?"重新授权":"重新连接");
+        reconnectButton->setText(currentDevice.value("needsAuthorization").toBool()?"重新授权":"重新连接");
         reconnectButton->setEnabled(!selected.isEmpty() && !connected() && !currentDevice.value("reconnecting").toBool() && connectJob.isEmpty());
         disconnectButton->setEnabled(canPauseDevice(currentDevice));
         auto acc = api.call("GET", "/api/account").toObject();
@@ -508,6 +513,17 @@ class Window : public QMainWindow {
             auto result=drag->exec(Qt::CopyAction,Qt::CopyAction);
             virtualDrag.finish(result!=Qt::IgnoreAction);
         };
+        dialog->copyFiles=[this,device,dialog](QJsonArray files){
+            if(selected!=device || !connected()) { QMessageBox::warning(dialog,"手机相册","设备已断开，请重新连接"); return; }
+            auto virtualFiles=makeVirtualFiles(files);
+            if(virtualFiles.urls.isEmpty()) { QMessageBox::warning(dialog,"手机相册","无法准备复制，请检查 FUSE 和文件信息"); return; }
+            auto *mime=new QMimeData; mime->setUrls(virtualFiles.urls);
+            mime->setData("application/x-kde-cutselection","0");
+            QApplication::clipboard()->setMimeData(mime);
+            // Opening a virtual file triggers its download; merely publishing
+            // the clipboard URLs never reads its contents.
+            virtualFiles.finish(true);
+        };
         dialog->importFiles=[this,device,dialog](QStringList paths){
             if(selected!=device || !connected())return;
             if(paths.isEmpty())paths=QFileDialog::getOpenFileNames(dialog,"导入照片或视频",{},"照片和视频 (*.jpg *.jpeg *.png *.webp *.gif *.heic *.heif *.mp4 *.mov *.mkv *.3gp);;所有文件 (*)");
@@ -537,7 +553,7 @@ class Window : public QMainWindow {
         Q_UNUSED(result);
     }
     VirtualDrag makeVirtualFiles(const QJsonArray &files) {
-        if (!connected() || files.isEmpty()) return {};
+        if (files.isEmpty() || (!files.first().toObject().contains("recordingId") && !connected())) return {};
         QSet<QString> names;
         for (auto v:files) { auto o=v.toObject(); auto name=o.value("name").toString();
             if (name.isEmpty() || names.contains(name) || (!o.value("directory").toBool() && o.value("size").toDouble(-1)<0)) { report("文件名重复或文件大小未知，无法拖出",true); return {}; } names.insert(name); }
@@ -834,6 +850,22 @@ public:
         galleryContainer=new QWidget; auto *galleryLayout=new QVBoxLayout(galleryContainer); galleryLayout->setContentsMargins(28,24,28,24);
         auto *galleryHint=new QLabel("连接手机后查看相册"); galleryHint->setAlignment(Qt::AlignCenter); galleryHint->setObjectName("galleryHint"); galleryLayout->addWidget(galleryHint);
         contentTabs->addTab(galleryContainer,"手机相册"); outer->addWidget(contentTabs,1);
+        auto *recordContainer=new QWidget; auto *recordLayout=new QVBoxLayout(recordContainer); recordLayout->setContentsMargins(24,20,24,20); contentTabs->addTab(recordContainer,"录音机云同步");
+        connect(contentTabs,&QTabWidget::currentChanged,this,[this,recordContainer,recordLayout](int index){if(index==2 && !recordings){recordings=new RecordingsDialog(this->state,this->port,recordContainer);recordLayout->addWidget(recordings);recordings->dragRecording=[this](QJsonArray items,QWidget *source){
+            QJsonArray files; QSet<QString> used;
+            for(const auto &value:items) { auto item=value.toObject();
+            if(!item.value("hasAudio").toBool() || item.value("size").toDouble()<=0){report("所选录音中有音频未上传或大小未知，请单独使用导出操作",true);return;}
+            QString name=item.value("name").toString(); name.replace(QRegularExpression("[/\\\\\\x00-\\x1f]"),"_");
+            if(!QRegularExpression("\\.(m4a|mp3|amr|wav|flac|ogg|opus|aac|mp4|3gp)$",QRegularExpression::CaseInsensitiveOption).match(name).hasMatch())name+=item.value("extension").toString(".m4a");
+            const QFileInfo info(name); QString stem=info.completeBaseName(), suffix=info.suffix(); int number=1; QString unique=name;
+            while(used.contains(unique))unique=stem+QString(" (%1)").arg(number++)+(suffix.isEmpty()?"":"."+suffix);
+            used.insert(unique);files.append(QJsonObject{{"name",unique},{"recordingId",item.value("id")},{"size",item.value("size")},{"directory",false}}); }
+            auto v=makeVirtualFiles(files);
+            if(v.urls.isEmpty()){report("无法创建录音拖放文件，请检查 FUSE 和录音大小",true);return;}
+            auto *mime=new LazyMime("[]",[urls=v.urls]{return urls;}); auto *drag=new QDrag(source);drag->setMimeData(mime);auto result=drag->exec(Qt::CopyAction,Qt::CopyAction);v.finish(result!=Qt::IgnoreAction);
+        };recordings->show();}});
+        auto *notesContainer=new QWidget;auto *notesLayout=new QVBoxLayout(notesContainer);notesLayout->setContentsMargins(24,20,24,20);contentTabs->addTab(notesContainer,"原子笔记云同步");
+        connect(contentTabs,&QTabWidget::currentChanged,this,[this,notesContainer,notesLayout](int index){if(index==3&&!notesPanel){notesPanel=new NotesPanel(this->state,this->port,notesContainer);notesLayout->addWidget(notesPanel);}});
         connect(contentTabs,&QTabWidget::currentChanged,this,[this,galleryHint](int index){ if(index==1 && connected()) { galleryHint->hide(); showGallery(); } });
         setStyleSheet("#sidebar{background:#f8f9fa;border-right:1px solid #d8dfe4} QMainWindow,QWidget{font-size:13px} QPushButton{padding:7px 10px} QTreeWidget{background:white;alternate-background-color:#f7fafc;border:1px solid #d9e0e5} QTreeWidget::item{padding:7px} QTreeWidget::item:selected{background:#dceffa;color:#27343d}"); tree->setAlternatingRowColors(true); tree->setDragDropMode(QAbstractItemView::DragDrop);
         tree->upload=[this](auto p,auto d){ upload(p,d); }; tree->movePhone=[this](auto p,auto d){ movePhone(p,d); }; tree->currentDirectory=[this]{ return directory; };
@@ -864,7 +896,7 @@ public:
         });
         connect(accountButton,&QPushButton::clicked,this,[this]{ api.call("POST","/api/account/login"); auto error=api.error; report(error.isEmpty()?"请在官方登录窗口完成登录":error,!error.isEmpty()); refresh(); });
         connect(disconnectButton,&QPushButton::clicked,this,[this]{ if (selected.isEmpty()) return; api.call("POST",route("/disconnect")); auto error=api.error; if(error.isEmpty() && connectJobDevice==selected){connectJob.clear();connectJobDevice.clear();} report(error.isEmpty()?"连接已断开，自动重连已暂停":error,!error.isEmpty()); refresh(); });
-        connect(reconnectButton,&QPushButton::clicked,this,[this]{ if (connected()) { report("手机已连接"); return; } if (selected.isEmpty()) { report("没有历史设备，请先添加设备"); return; } const auto device=selectedDevice(); const auto wait=device.value("reconnectWait").toObject(); const QString code=wait.value("code").toString(); if(device.value("needsAuthorization").toBool() || code=="P2P_PHONE_NOT_JOINED" || code=="P2P_ADDRESS_CHANGED") { pair(); return; } if(!wait.isEmpty()) { report(wait.value("message").toString()); return; } QString id=selected; auto r=api.call("POST",route("/reconnect")).toObject(); if (!api.error.isEmpty()) { report(api.error); } else { connectJob=r.value("id").toString(); connectJobDevice=id; report("正在重新连接已授权设备…"); refresh(); } });
+        connect(reconnectButton,&QPushButton::clicked,this,[this]{ if (connected()) { report("手机已连接"); return; } if (selected.isEmpty()) { report("没有历史设备，请先添加设备"); return; } const auto device=selectedDevice(); const auto wait=device.value("reconnectWait").toObject(); if(device.value("needsAuthorization").toBool()) { pair(); return; } if(!wait.isEmpty()) { report(wait.value("message").toString()); return; } QString id=selected; auto r=api.call("POST",route("/reconnect")).toObject(); if (!api.error.isEmpty()) { report(api.error); } else { connectJob=r.value("id").toString(); connectJobDevice=id; report("正在重新连接已授权设备…"); refresh(); } });
         connect(jobs,&QPushButton::clicked,this,[this]{ showJobs(); }); connect(back,&QPushButton::clicked,this,[this]{navigateHistory(-1);}); connect(forward,&QPushButton::clicked,this,[this]{navigateHistory(1);}); connect(home,&QPushButton::clicked,this,[this]{ browse(root); }); connect(up,&QPushButton::clicked,this,[this]{ goUp(); }); connect(reload,&QPushButton::clicked,this,[this]{ browse(directory); }); connect(path,&QLineEdit::returnPressed,this,[this]{ browse(path->text()); });
         connect(search,&QLineEdit::textChanged,this,[this]{ filter(); }); connect(choose,&QPushButton::clicked,this,[this]{ auto paths=QFileDialog::getOpenFileNames(this,"选择要发送的文件"); upload(paths,directory); });
         connect(mkdir,&QPushButton::clicked,this,[this]{ bool ok=false; auto name=QInputDialog::getText(this,"新建文件夹","名称",QLineEdit::Normal,"",&ok); if(ok&&!name.isEmpty()) fileOp("mkdir",{{"path",directory},{"name",name}}); });
@@ -995,6 +1027,8 @@ int main(int argc, char **argv) {
         request.clear(); mock.call("PATCH", "/api/test", {{"enabled", false}});
         if (!mock.error.isEmpty() || !request.startsWith("PATCH /api/test ") || !request.contains("\"enabled\":false")) return 23;
         if (!gallerySelfTest(temporary.path())) return 37;
+        if (!recordingsSelfTest(temporary.path())) return 38;
+        if (!notesSelfTest(temporary.path())) return 39;
         server.close();
         mock.call("GET", "/api/p2p/status");
         if (!mock.error.contains("后端") || !mock.error.contains("--port")) return 12;
@@ -1012,7 +1046,7 @@ int main(int argc, char **argv) {
             if (!background.findChild<QAction *>("trayQuit")) return 36;
         }
         QApplication::setQuitOnLastWindowClosed(previousQuit);
-        fprintf(stdout, "Qt drag/drop, MIME, history, gallery, tray lifecycle and local API checks passed\n"); return 0;
+        fprintf(stdout, "Qt drag/drop, MIME, history, gallery, recordings, notes, tray lifecycle and local API checks passed\n"); return 0;
     }
     QString root=QDir(QString::fromUtf8(PROJECT_ROOT)).canonicalPath();
     QString state=qEnvironmentVariable("VIVO_STATE_DIR", root+"/.vivo-connect");

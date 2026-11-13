@@ -74,7 +74,7 @@ class ServiceHelper(PrivateHelper):
     def group_started(self):self.profile().save(self.control)
     def on_heartbeat(self,response):
         super().on_heartbeat(response)
-        self.profile().maintain(self,response)
+        self.profile().save(self.control)
     def api(self,route,body=None,method=None):
         if route=='/api/p2p/register':
             body={**body,'management':'system-service','persistentGroup':True};self.registration=body

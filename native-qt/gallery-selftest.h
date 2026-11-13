@@ -3,7 +3,7 @@
 
 static bool gallerySelfTest(const QString &state) {
     QTcpServer server; if(!server.listen(QHostAddress::LocalHost,0))return false;
-    int active=0, maximum=0, thumbnails=0, exports=0, imports=0;
+    int active=0, maximum=0, thumbnails=0, exports=0, imports=0, copies=0;
     bool authorized=true, albumBody=false; QStringList thumbnailPaths;
     QImage image(32,24,QImage::Format_RGB32); image.fill(Qt::red);
     QByteArray png; QBuffer buffer(&png); buffer.open(QIODevice::WriteOnly); image.save(&buffer,"PNG");
@@ -44,10 +44,13 @@ static bool gallerySelfTest(const QString &state) {
     auto wait=[&](std::function<bool()> condition){ QElapsedTimer time;time.start(); while(!condition() && time.elapsed()<4000){QCoreApplication::processEvents(QEventLoop::AllEvents,10);QThread::msleep(1);}return condition(); };
     dialog.exportFiles=[&](QStringList paths,bool original){if(paths.size()==2 && !original)++exports;};
     dialog.importFiles=[&](QStringList paths){if(paths==QStringList{"/tmp/gallery-test.jpg"})++imports;};
+    dialog.copyFiles=[&](QJsonArray files){if(files.size()==2 && files[0].toObject().contains("path") && files[1].toObject().contains("size"))++copies;};
     dialog.resize(720,500); dialog.show();
     if(!wait([&]{return thumbnails>=2 && grid->count()>=60;}))return false;
     if(maximum>4 || maximum<2 || !authorized)return false;
     grid->item(0)->setSelected(true); grid->item(1)->setSelected(true); save->click(); if(exports!=1)return false;
+    grid->setFocus(); QKeyEvent copy(QEvent::KeyPress,Qt::Key_C,Qt::ControlModifier); QApplication::sendEvent(grid,&copy);
+    if(copies!=1)return false;
     QMimeData desktop; desktop.setUrls({QUrl::fromLocalFile("/tmp/gallery-test.jpg")});
     QDragEnterEvent enter(QPointF(10,10),Qt::CopyAction,&desktop,Qt::LeftButton,Qt::NoModifier); QApplication::sendEvent(grid->viewport(),&enter);
     QDropEvent drop(QPointF(10,10),Qt::CopyAction,&desktop,Qt::LeftButton,Qt::NoModifier); QApplication::sendEvent(grid->viewport(),&drop);

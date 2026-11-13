@@ -1,0 +1,322 @@
+--- analysis/pretty/app-modules-note.js:1036-1058 ---
+        }), t.broadCastMessageToWindow = t.getDeviceList = t.reportDevice = t.getRecentDeleted = t.getUserInfo = t.getSyncState = void 0;
+        const i = o(2), n = i.__importDefault(o(9)), A = i.__importDefault(o(231));
+        t.getSyncState = e => A.default.requestBranch({
+            url: "/sync/getSyncState",
+            syncName: "getSyncState",
+            method: "POST",
+            data: {
+                type: e
+            }
+        }), t.getUserInfo = () => n.default.getItem("userInfo") || {}, t.getRecentDeleted = e => A.default.requestBranch({
+            url: "/service/getRecentlyDeleted/v2",
+            syncName: "getRecentlyDeleted",
+            method: "POST",
+            encrypt: !0,
+            data: e
+        }), t.reportDevice = e => i.__awaiter(void 0, void 0, void 0, function*() {
+            const t = yield new Promise(e => {
+                window.hybridBridge("getDeviceInfo", {}, t => {
+                    e(t);
+                });
+            });
+            return A.default.requestBranch({
+                url: "/device/report",
+
+--- analysis/pretty/app-modules-note.js:2426-2464 ---
+        Object.defineProperty(t, "__esModule", {
+            value: !0
+        }), t.noteExport = t.fetchSyncData = t.combineSync = t.deleteSync = t.updateSync = t.createSync = t.migrate = void 0;
+        const i = o(2), n = i.__importDefault(o(231)), A = o(4057), r = i.__importDefault(o(563));
+        t.migrate = e => n.default.requestBranch({
+            url: "/migrate/submit",
+            syncName: "migrate",
+            method: "POST",
+            data: Object.assign({}, e)
+        }), t.createSync = e => n.default.requestBranch({
+            url: "/sync/createSync/v2",
+            syncName: "createSync",
+            encrypt: !0,
+            method: "POST",
+            data: Object.assign({}, e)
+        }), t.updateSync = e => n.default.requestBranch({
+            url: "/sync/updateSync/v2",
+            syncName: "updateSync",
+            method: "POST",
+            encrypt: !0,
+            data: Object.assign({}, e)
+        }), t.deleteSync = e => n.default.requestBranch({
+            url: "/sync/deleteSync",
+            syncName: "deleteSync",
+            method: "POST",
+            data: Object.assign({}, e)
+        }), t.combineSync = e => n.default.requestBranch({
+            url: "/sync/combineSync/v2",
+            syncName: "deleteSync",
+            encrypt: !0,
+            method: "POST",
+            data: Object.assign({}, e)
+        }), t.fetchSyncData = e => n.default.requestBranch({
+            url: "/sync/getSyncChunk/v2",
+            syncName: "getSyncChunk",
+            method: "POST",
+            data: Object.assign({}, e),
+            encrypt: !0
+        }), t.noteExport = (e, t, o) => {
+
+--- analysis/pretty/app-modules-note.js:3128-3154 ---
+    231: function(e, t, o) {
+        "use strict";
+        Object.defineProperty(t, "__esModule", {
+            value: !0
+        });
+        const i = o(2), n = i.__importDefault(o(128)), A = o(22), r = o(49), s = o(67), a = i.__importDefault(o(563)), l = A.getProxyServer(s.PROXY_ENUM.NOTE_PROXY, "note-api");
+        let c = null;
+        const d = () => {
+            const e = new n.default(l);
+            process.env.IS_WEB || (e.module = r.apiModuleEnum.NOTE_MODULE);
+            const t = e.requestBranch;
+            return e.requestBranch = function(o) {
+                return i.__awaiter(this, void 0, void 0, function*() {
+                    const {data: i, encrypt: n, sync: A} = o;
+                    return !n || !process.env.IS_WEB && A || (o.data = {
+                        jvq_param: a.default.encrypt(JSON.stringify(i)).data
+                    }), t.call(e, o);
+                });
+            }, e;
+        }, u = new Proxy({}, {
+            get: (e, t) => (c || (c = d()), c[t])
+        });
+        t.default = u;
+    },
+    233: function(e, t, o) {
+        "use strict";
+        Object.defineProperty(t, "__esModule", {
+
+--- analysis/pretty/app-modules-note.js:36285-36303 ---
+                let y = m.createTagObject(g.guid, "100");
+                if (Q) {
+                    const e = yield p.getSyncState(0), {updateCount: t} = e || {};
+                    let o = {
+                        type: 0,
+                        lastUpdateCount: t,
+                        noteBooks: [],
+                        notes: [ g ],
+                        tags: [ y ],
+                        resources: v
+                    };
+                    const i = yield r.createSync(o);
+                    return i && d.setLastUpdateCount(i.updateCount), l;
+                }
+                {
+                    s.localData.addNewNote(g, !0), v.length > 0 && (yield c.updateResourcesToLocalData({
+                        newResources: v,
+                        updateResources: [],
+                        toRemoveResources: [],
+
+--- analysis/pretty/app-modules-note.js:36587-36605 ---
+        }, t.deleteNoteService = function(e) {
+            let t = {
+                lastUpdateCount: d.getLastUpdateCount(),
+                delete: [],
+                remove: [ ...e ]
+            };
+            return window._log.info("[note-list]删除笔记" + e.join(",")), s.localData.nextDefaultNote = j(e[e.length - 1]), 
+            u.deleteNote(t).then(t => {
+                if (Q) {
+                    if (t && t.length > 0) {
+                        let e = [];
+                        t.forEach(t => {
+                            e.push(t.updateSequenceNum), s.localData.removeNoteAndTagsResources(t.guid);
+                        }), d.setLastUpdateCount(Math.max(...e));
+                    }
+                } else C.deleteResourcesWhenDeleteNoteService(e), e.forEach(e => {
+                    s.localData.removeNoteAndTagsResources(e);
+                }), v.calendarBatchDelete([ ...e ]);
+                let o = a.default.state.note.noteList.filter(t => !e.includes(t.guid));
+
+--- analysis/pretty/app-modules-note.js:38526-38573 ---
+            url: "/note/getAllNote/v2",
+            syncName: "note_getAllNote",
+            method: "POST",
+            sync: !0,
+            data: Object.assign({}, e),
+            optimize: !0,
+            encrypt: !0
+        }), t.fetchNoteListForNoteBook = (e, t) => r.default.requestBranch({
+            url: "/note/getNoteForNoteBook",
+            syncName: "note_getNoteForNoteBook",
+            method: "POST",
+            sync: !0,
+            data: Object.assign(Object.assign({}, e), {
+                isSeachEncryptNotes: t
+            }),
+            optimize: !0
+        }), t.fetchWebNoteListForEncryBook = e => r.default.requestBranch({
+            url: "/note/getAllNote/v2",
+            method: "POST",
+            data: Object.assign(Object.assign({}, e), {
+                encryptType: 1
+            }),
+            optimize: !0,
+            encrypt: !0
+        }), t.getNote = e => r.default.requestBranch({
+            url: "/note/getContent/v2",
+            syncName: "note_getNoteContent",
+            method: "POST",
+            sync: !0,
+            encrypt: !0,
+            data: {
+                guid: e
+            },
+            optimize: !0
+        }), t.getSingeNote = e => r.default.requestBranch({
+            url: "/note/getIncludeItem/v2",
+            syncName: "note_getSingeNote",
+            method: "POST",
+            sync: !0,
+            encrypt: !0,
+            data: {
+                guid: e,
+                syncProtocolVersion: 200
+            },
+            optimize: !0
+        }), t.getNotesByGuids = e => r.default.requestBranch({
+            url: "",
+            syncName: "note_getNotesByGuids",
+
+--- analysis/pretty/app-modules-note.js:38594-38641 ---
+            }), r.default.requestBranch({
+                url: "/note/expunge",
+                syncName: "note_deleteNote",
+                method: "POST",
+                sync: !0,
+                data: e,
+                optimize: !0
+            });
+        }, t.updateNote = e => {
+            var t;
+            return n.sendNoteBeDirty({
+                guids: e.syncUp.map(e => e.guid),
+                operType: "update_note_notebook",
+                msg: `${A.noteStatus.exMsg},${null === (t = e.syncUp[0]) || void 0 === t ? void 0 : t.noteBookGuid}`
+            }), r.default.requestBranch({
+                url: "/note/update/v2",
+                syncName: "note_updateNote",
+                method: "POST",
+                sync: !0,
+                encrypt: !0,
+                data: e,
+                optimize: !0
+            });
+        }, t.getRecentDeleted = e => r.default.requestBranch({
+            url: "/service/getRecentlyDeleted/v2",
+            syncName: "note_getRecentlyDeleted",
+            sync: !0,
+            method: "POST",
+            data: e,
+            encrypt: !0,
+            optimize: !0
+        }), t.recoverNote = e => (n.sendNoteBeDirty({
+            guids: e.notes || [],
+            operType: "recover",
+            msg: "" + Date.now()
+        }), r.default.requestBranch({
+            url: "/service/recover",
+            syncName: "note_recover",
+            method: "POST",
+            sync: !0,
+            data: e,
+            optimize: !0
+        })), t.getNoteResType = e => r.default.requestBranch({
+            url: "/resource/getNoteResType",
+            syncName: "note_getNoteResType",
+            method: "POST",
+            sync: !0,
+            data: {
+
+--- analysis/pretty/app-modules-note.js:31025-31049 ---
+            function i(t, o) {
+                if (t.length > 1e4) return function(t, o) {
+                    for (var i = -1 ^ o, n = t.length - 7, A = 0; A < n; ) i = (i = (i = (i = (i = (i = (i = (i = i >>> 8 ^ e[255 & (i ^ t[A++])]) >>> 8 ^ e[255 & (i ^ t[A++])]) >>> 8 ^ e[255 & (i ^ t[A++])]) >>> 8 ^ e[255 & (i ^ t[A++])]) >>> 8 ^ e[255 & (i ^ t[A++])]) >>> 8 ^ e[255 & (i ^ t[A++])]) >>> 8 ^ e[255 & (i ^ t[A++])]) >>> 8 ^ e[255 & (i ^ t[A++])];
+                    for (;A < n + 7; ) i = i >>> 8 ^ e[255 & (i ^ t[A++])];
+                    return -1 ^ i;
+                }(t, o);
+                for (var i = -1 ^ o, n = t.length - 3, A = 0; A < n; ) i = (i = (i = (i = i >>> 8 ^ e[255 & (i ^ t[A++])]) >>> 8 ^ e[255 & (i ^ t[A++])]) >>> 8 ^ e[255 & (i ^ t[A++])]) >>> 8 ^ e[255 & (i ^ t[A++])];
+                for (;A < n + 3; ) i = i >>> 8 ^ e[255 & (i ^ t[A++])];
+                return (-1 ^ i) >>> 0;
+            }
+            function n(e) {
+                var t = new Int8Array(8);
+                return t[7] = 255 & e, t[6] = e >> 8 & 255, t[5] = e >> 16 & 255, t[4] = e >> 24 & 255, 
+                e = e.toString(16), e = o.parseInt(e.substr(0, e.length - 8), 16), t[3] = 255 & e, 
+                t[2] = e >> 8 & 255, t[1] = e >> 16 & 255, t[0] = e >> 24 & 255, t;
+            }
+            return {
+                randomGenerate: function(e) {
+                    for (var t = [ "0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z" ], i = "", n = 0; n < e; n++) try {
+                        i += t[o.Math.floor($.random_int() / 4294967296 * t.length)];
+                    } catch (e) {
+                        i += t[o.Math.floor(o.Math.random() * t.length)];
+                    }
+                    return i;
+                },
+
+--- analysis/pretty/app-modules-note.js:31071-31088 ---
+                encrypt: function(e) {
+                    if (0 !== (z = JSON.parse(JSON.stringify(Y))).code) return z.code = 100006, z.data = null, 
+                    z;
+                    J.bufferMagicNum = new Int8Array(X.getInt16Bytes(2, 203));
+                    var o = t(Int8Array, [ J.bufferProtocalType, J.bufferMagicNum, J.bufferKeyVersion, J.bufferEncryptionType, J.bufferKeyToken, J.bufferKeyTokenM, J.bufferAESiv, J.bufferAESkeyRSAPublicLength, J.bufferAESkeyRSAPublic ]), A = t(Int8Array, [ new Int8Array(n(i(o))), o ]), r = t(Int8Array, [ new Int8Array(X.numberToArrayBuffer(A.length + 2)).subarray(14), A ]), s = t(Int8Array, [ r, new Int8Array(X._base64ToArrayBuffer(Uint8Array, X.AESencrypt(e))) ]), a = W(X.transformArrayBufferToBase64(new Uint8Array(s), Uint8Array)).replace(/[+\/]/g, function(e) {
+                        return "+" == e ? "-" : "_";
+                    }).replace(/=/g, "");
+                    return z.code = 0, z.data = a, z;
+                },
+                onceEncodeEncrypt: function(e) {
+                    var o = encodeURIComponent(e);
+                    if (0 !== (z = JSON.parse(JSON.stringify(Y))).code) return z.code = 100006, z.data = null, 
+                    z;
+                    J.bufferMagicNum = new Int8Array(X.getInt16Bytes(2, 203));
+                    var A = t(Int8Array, [ J.bufferProtocalType, J.bufferMagicNum, J.bufferKeyVersion, J.bufferEncryptionType, J.bufferKeyToken, J.bufferKeyTokenM, J.bufferAESiv, J.bufferAESkeyRSAPublicLength, J.bufferAESkeyRSAPublic ]), r = t(Int8Array, [ new Int8Array(n(i(A))), A ]), s = t(Int8Array, [ new Int8Array(X.numberToArrayBuffer(r.length + 2)).subarray(14), r ]), a = t(Int8Array, [ s, new Int8Array(X._base64ToArrayBuffer(Uint8Array, X.AESencrypt(o))) ]), l = W(X.transformArrayBufferToBase64(new Uint8Array(a), Uint8Array)).replace(/[+\/]/g, function(e) {
+                        return "+" == e ? "-" : "_";
+                    }).replace(/=/g, "");
+                    return z.code = 0, z.data = l, z;
+
+--- analysis/pretty/app-modules-note.js:31110-31128 ---
+                decrypt: function(e) {
+                    j = JSON.parse(JSON.stringify(Y));
+                    var t = X._base64ToArrayBuffer(Uint8Array, e.replace(/[-_]/g, function(e) {
+                        return "-" == e ? "+" : "/";
+                    }).replace(/[^A-Za-z0-9\+\/]/g, "")), o = new Int8Array(t).subarray(12, 14);
+                    if (203 === X.getMagicNumber(o, j)) {
+                        var i = X.getView(new Int8Array(t).subarray(17, 18)).getInt8(0) + 34, n = X.getView(new Int8Array(t).subarray(i, i + 2)).getInt16(0), A = new Int8Array(t).subarray(i + 2 + n), r = X.AESDecrypt(W(X.transformArrayBufferToBase64(A, Uint8Array)));
+                        return j.code = 0, j.data = r, j;
+                    }
+                    return j.code = 100009, j.data = null, j;
+                }
+            };
+        }();
+        J.aesKey = Z.randomGenerate(16), J.aesIv = Z.randomGenerate(16), X._publicKeyHttpHeaderParsing("AMwAG0ERY29tLmFuZHJvaWQubm90ZXMAIAABLS0tLS1CRUdJTiBQVUJMSUMgS0VZLS0tLS0KTUlJQklqQU5CZ2txaGtpRzl3MEJBUUVGQUFPQ0FROEFNSUlCQ2dLQ0FRRUF2RElydkxweCsrTUVPNXhlVnk2eVVKcllpNXpLTGRxOU1OTnZiTEd2TGdGN1lMOVZJOWdQV1BKUjJ0NXZJS1ZHaEw4M3MvOE1wNy9aUTgwVG5OekRoYVhmQWtTT202bnBsbWFyMUhGdVpyeUo1Q3JZK2FXNDVzTEpQNzY0aDdpL0NFTU9qMkNweEtnbkdBeFM4SU11cjkwRjJmZmhrUkxyU0NKeG9sclNTMmpGWWkzQjdOZlgvRGlPc2g1cmVmcjZVRmlPMmVtb2d6bXVHMmV5Q2FsMFA1Z21nTFpDWExteGVnOVNJVCtWRzJyMnd3RkhRaml0dEpaRlZsREI0NTA1U2x0Qkd6TnYzYVlJNFY2SktBTHZWcnl4SWdXUzdLV0FpQnd4RU9KVmJFWmdzZXlUNDRrQ1NvcDl3dURXUHF4RWpSRkVOUk9INXpFcHAyeDhpMHNFcVFJREFRQUIKLS0tLS1FTkQgUFVCTElDIEtFWS0tLS0t");
+        try {
+            e.exports = Z, o && (o.MaodunCipher = Z);
+        } catch (e) {
+            o.MaodunCipher = Z;
+        }
+
+--- analysis/pretty/129.js:3922-3937 ---
+                                    if (process.env.IS_WEB) {
+                                        o = (yield n.getSyncState(t)).updateCount;
+                                    }
+                                    const i = {
+                                        notes: [],
+                                        documents: []
+                                    };
+                                    if (t === r.SyncType.Note ? i.notes = e : t === r.SyncType.Doc && (i.documents = e), 
+                                    yield f.recoverNote(Object.assign({
+                                        type: t,
+                                        lastUpdateCount: o
+                                    }, i)), !process.env.IS_WEB) try {
+                                        const t = (yield f.findNotes(e)).filter(t => t.alarmTime > 0);
+                                        t.length > 0 && h.calendarBatchCreate(t, "note");
+                                    } catch (t) {}
+                                });

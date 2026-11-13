@@ -15,16 +15,20 @@ import { networkInterfaces } from './network.mjs';
 import { P2pManager } from './p2p.mjs';
 import { ScanManager } from './scan.mjs';
 import { FileManager } from './files.mjs';
+import { NotesManager } from './notes.mjs';
+import { RecordingManager } from './recordings.mjs';
 import { GalleryManager } from './gallery.mjs';
 import { ClipboardManager } from './clipboard.mjs';
 import { RememberedDevices } from './remembered.mjs';
 import { OfficialPreconnect } from './preconnect.mjs';
 
-export async function createBackend({ stateDir, accountManager, phoneManager } = {}) {
+export async function createBackend({ stateDir, accountManager, phoneManager, recordingOptions, notesOptions } = {}) {
   const state = await initState(stateDir);
   const accounts = accountManager || new AccountManager(state); await accounts.load();
   const phones = phoneManager || new PhoneManager(state, accounts);
   const jobs = new Jobs();
+  const notes = new NotesManager(state, accounts, jobs, notesOptions);
+  const recordings = new RecordingManager(state, accounts, jobs, recordingOptions);
   const remembered = new RememberedDevices(state, phones, jobs);
   phones.remembered = remembered;
   await remembered.load();
@@ -36,7 +40,6 @@ export async function createBackend({ stateDir, accountManager, phoneManager } =
   const p2p = new P2pManager(state, phones, jobs);
   p2p.preconnect = new OfficialPreconnect(state, accounts);
   phones.reconnectWireless = (session, signal) => p2p.reconnect(session, signal);
-  phones.shouldReconnectWireless = () => p2p.status().ready;
   phones.reconnectState = session => p2p.reconnectState(session);
   const scans = new ScanManager(state, accounts, phones, jobs);
   const reply = (res, status, value) => {
@@ -66,7 +69,7 @@ export async function createBackend({ stateDir, accountManager, phoneManager } =
       if (route === 'DELETE /api/account') {
         // A logged-in phone must not retain stale account metadata after logout.
         for (const s of phones.sessions.values()) s.autoConnect = false;
-        await jobs.close(); await phones.forgetAll(); await accounts.logout();
+        await jobs.close(); await phones.forgetAll(); recordings.contexts.clear(); await accounts.logout();
         return reply(res, 200, { loggedIn: false });
       }
       if (route === 'GET /api/p2p/status') return reply(res,200,p2p.status());
@@ -85,6 +88,45 @@ export async function createBackend({ stateDir, accountManager, phoneManager } =
         return reply(res, 202, jobs.create('connect', (_job, signal) => phones.connect(options, signal)));
       }
       if (route === 'GET /api/jobs') return reply(res, 200, [...jobs.items.values()].map(j => jobs.public(j)));
+      if (route === 'GET /api/notes') return reply(res, 200, await notes.list());
+      if (route === 'POST /api/notes/sync') return reply(res, 202, notes.sync());
+      if (route === 'PATCH /api/notes/settings') return reply(res, 200, await notes.configure(body));
+      if (route === 'POST /api/notes/create') return reply(res, 202, notes.modify(null, 'create', body));
+      const noteRoute = url.pathname.match(/^\/api\/notes\/([a-f0-9]{64})(?:\/(rename|save|trash|restore))?$/);
+      if (noteRoute) {
+        const [, id, action] = noteRoute;
+        if (req.method === 'GET' && !action) {
+          const controller = new AbortController(), abort = () => controller.abort(); res.once('close', abort);
+          try { return reply(res, 200, await notes.detail(id, controller.signal)); } finally { res.off('close', abort); }
+        }
+        if (req.method === 'POST' && action) return reply(res, 202, notes.modify(id, action, body));
+      }
+      const attachmentRoute = url.pathname.match(/^\/api\/notes\/([a-f0-9]{64})\/attachments\/([a-f0-9]{64})\/(download|file)$/);
+      if (attachmentRoute) {
+        const [, id, attachment, action] = attachmentRoute;
+        if (req.method === 'POST' && action === 'download') return reply(res, 202, notes.download(id, attachment));
+        if (req.method === 'GET' && action === 'file') {
+          const file = await notes.file(id, attachment), stat = await fs.stat(file.path);
+          res.writeHead(200, { 'content-type': 'application/octet-stream', 'content-length': stat.size,
+            'content-disposition': `attachment; filename*=UTF-8''${encodeURIComponent(file.name)}`, 'cache-control': 'no-store', 'x-content-type-options': 'nosniff' });
+          await pipeline(createReadStream(file.path), res); return;
+        }
+      }
+      if (route === 'GET /api/recordings') return reply(res, 200, await recordings.list());
+      if (route === 'POST /api/recordings/sync') return reply(res, 202, recordings.sync());
+      if (route === 'PATCH /api/recordings/settings') return reply(res, 200, await recordings.configure(body));
+      const recordingRoute = url.pathname.match(/^\/api\/recordings\/([a-f0-9]{64})\/(download|file|rename|trash|restore)$/);
+      if (recordingRoute) {
+        const [, id, action] = recordingRoute;
+        if (req.method === 'POST' && action === 'download') return reply(res, 202, recordings.download(id));
+        if (req.method === 'POST' && ['rename', 'trash', 'restore'].includes(action)) return reply(res, 202, recordings.modify(id, action, body));
+        if (req.method === 'GET' && action === 'file') {
+          const file = await recordings.file(id), stat = await fs.stat(file.path);
+          res.writeHead(200, { 'content-type': 'application/octet-stream', 'content-length': stat.size,
+            'content-disposition': `attachment; filename*=UTF-8''${encodeURIComponent(file.name)}`, 'cache-control': 'no-store', 'x-content-type-options': 'nosniff' });
+          await pipeline(createReadStream(file.path), res); return;
+        }
+      }
       const clipboardRoute = url.pathname.match(/^\/api\/sessions\/([\w-]+)\/clipboard$/);
       if (clipboardRoute) {
         const id = clipboardRoute[1];
@@ -150,9 +192,9 @@ export async function createBackend({ stateDir, accountManager, phoneManager } =
     }
   });
   server.requestTimeout = 300000; server.headersTimeout = 10000;
-  remembered.start();
-  return { state, server, accounts, phones, jobs, transfers, scans, p2p, remembered, async close() {
-    remembered.stop();
+  remembered.start(); recordings.begin(); notes.begin();
+  return { state, server, accounts, phones, jobs, transfers, scans, p2p, remembered, recordings, notes, async close() {
+    remembered.stop(); recordings.close(); notes.close();
     const closed = server.listening ? new Promise(resolve => server.close(resolve)) : Promise.resolve();
     await p2p.close(); await jobs.close(); await phones.close(); await accounts.close();
     server.closeAllConnections(); await closed;

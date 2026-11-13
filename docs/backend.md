@@ -243,11 +243,11 @@ python tools/install_p2p_service.py install --user "$USER" --interface wlp2s0 \
 python tools/test_p2p_service.py
 ```
 
-系统服务已补充持久组协议：在 `/var/lib/vivo-connect-p2p/<uid>-<interface>/` 以 0700 目录、0600 文件保存固定的 GO 地址，以及 supplicant 自身写出的 SSID、PSK 和已配对客户端列表；不同配置用户或网卡使用不同资料。启用 `update_config=1` 和 `persistent_reconnect=1`，创建组使用 `P2P_GROUP_ADD persistent`，恢复使用 `persistent=<network-id>`，不再每次启动生成全新的组。独立 supplicant 已启用配置写入，旧版 `CONFIG_NO_CONFIG_WRITE=y` 构建不能用于此模式。
+系统服务已补充持久组协议：在 `/var/lib/vivo-connect-p2p/<uid>-<interface>/` 以 0700 目录、0600 文件保存固定的 GO 地址，以及 supplicant 自身写出的 SSID、PSK 和已配对客户端列表；不同配置用户或网卡使用不同资料。启用 `update_config=1`，设置 `persistent_reconnect=0` 禁止 supplicant 自动接受持久组恢复，创建组使用 `P2P_GROUP_ADD persistent`，恢复使用 `persistent=<network-id>`，不再每次启动生成全新的组。独立 supplicant 已启用配置写入，旧版 `CONFIG_NO_CONFIG_WRITE=y` 构建不能用于此模式。
 
-后台在存在启用自动重连的历史设备时，只对持久客户端列表中的具体设备地址进行定向发现及 `P2P_INVITE group=… peer=…` 邀请，每次至少间隔 15 秒；发现阶段限定到该客户端，间隔 6 秒。暂停、手机已关联或正在显式扫码配对时不发起自动邀请，不通过开放 WPS 代替历史配对。接收端是否接受邀请仍由手机决定。机制依据为上游 [P2P_GROUP_ADD / P2P_INVITE 控制接口](https://w1.fi/wpa_supplicant/devel/ctrl_iface_page.html) 和本地 `wpa_supplicant-2.12/wpa_supplicant/README-P2P`。
+Wi-Fi Direct 自动重连只使用官方同账号蓝牙预连接，获取本次连接的手机地址和 token。系统服务或预连接不可用时等待或返回明确错误，不使用历史 IP/token 发起直连。已移除基于历史客户端的定向发现、`P2P_INVITE` 邀请、邀请重试与对应状态指标；界面也不再根据旧地址状态自动转入扫码。
 
-从旧临时组迁移时，需初始化新组的配对资料；能否在之后复用，取决于手机是否也保存并接受该组，不能保证扫码一次后就能免扫码恢复。仅安装应用包不会替换已经复制到 `/usr/local/lib/vivo-connect-p2p` 的旧服务，因此还需重新运行服务安装器更新副本。服务卸载保留 `/var/lib/vivo-connect-p2p` 配对资料，重新安装可复用。已通过持久身份/配置恢复、配置保存失败、定向邀请、退避、暂停和 netlink MAC 参数等离线测试；更新后的真实手机邀请和重启恢复尚待验证，不将离线测试称为真机免扫码已成功。
+持久配置仍用于保持 GO 身份、SSID/PSK 和服务重启后的组配置，不代表手机保留配对，也不构成另一条自动重连通道。配置保存失败会报错；服务卸载保留 `/var/lib/vivo-connect-p2p` 资料。已配置系统服务的安装包升级钩子会更新服务副本，源码修改本身不会替换正在运行的副本。
 
 真机排查补充：已观测到系统服务运行新版持久组代码、Linux 客户端已登录，但邀请命令被 supplicant 接受后手机没有入组，可复用客户端计数从 1 降为 0。这不支持“再执行安装命令即可修复”或“扫码一次以后保证免扫码”的结论。上游 `wpas_p2p_invitation_result()` 在收到 `P2P_SC_FAIL_UNKNOWN_GROUP` 时会删除对应持久客户端，但尚未取得本机此次失败的响应码，不能据此直接断言手机返回了该状态。
 
@@ -373,3 +373,11 @@ Wi-Fi Direct 默认由原生客户端调用系统 pkexec 授权；安装系统�
 ## 手机图库 API
 
 新增会话内 `gallery/albums`、`gallery/list` 与 `gallery/thumbnail` 接口，沿用本地鉴权和手机会话凭据。字段、限制及官方协议来源见[手机图库](gallery.md)。
+
+## 录音机云同步 API
+
+录音云同步通过 `/api/recordings` 管理当前账号的增量索引、下载及云端操作，继续使用原有本地 API 鉴权和任务队列；详见[录音云同步文档](recordings.md)。
+
+## 原子笔记云同步 API
+
+通过 `/api/notes` 管理当前账号的增量索引、正文、普通文本写入和附件导出，使用现有本地鉴权与任务队列；详见[原子笔记云同步](notes.md)。

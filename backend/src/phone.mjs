@@ -217,7 +217,10 @@ export class PhoneManager {
     s.reconnecting = true;
     try {
       await this.cleanup(s);
-      if(s.transport==='wifi-direct'&&this.reconnectWireless&&this.shouldReconnectWireless?.(s)!==false)return await this.reconnectWireless(s,signal);
+      if(s.transport==='wifi-direct') {
+        if(!this.reconnectWireless)throw new ApiError(409,'PRECONNECT_UNAVAILABLE','官方 Wi-Fi Direct 预连接尚未就绪');
+        return await this.reconnectWireless(s,signal);
+      }
       const url = new URL(s.baseUrl);
       const result = await this.connect(s.mode === 'usb'
         ? { mode: 'usb', serial: s.serial, verifyTls: s.rejectUnauthorized, isAutoConnect: true }

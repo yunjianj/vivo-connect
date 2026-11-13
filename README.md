@@ -18,7 +18,7 @@
 
 ```sh
 ./packaging/arch/build.sh
-sudo pacman -U build/packages/vivo-connect-0.1.0-6-x86_64.pkg.tar.zst
+sudo pacman -U build/packages/vivo-connect-0.1.0-13-x86_64.pkg.tar.zst
 ```
 
 从应用菜单或运行 `vivo-connect` 启动。依赖、桌面图标定制、Wi-Fi Direct 服务及卸载说明见 [Arch Linux 软件包](packaging/arch/README.md)。
@@ -55,3 +55,7 @@ sudo pacman -U build/packages/vivo-connect-0.1.0-6-x86_64.pkg.tar.zst
 npm test
 ./tools/test-native-qt.sh
 ```
+
+录音机云同步：在客户端登录与手机相同的 vivo 账号后，打开“录音机云同步”标签页。支持云端增量更新、音频播放导出、改名和回收站，详见[录音云同步文档](docs/recordings.md)。
+
+原子笔记云同步：登录与手机相同的 vivo 账号，在“原子笔记云同步”标签页同步笔记、查看正文和导出附件；支持新建笔记、保留原格式及附件的文字编辑、改名与回收站操作，详见[笔记文档](docs/notes.md)。

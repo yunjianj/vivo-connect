@@ -1,8 +1,7 @@
 #!/usr/bin/env python3
-"""Offline durable-profile/reinvitation tests. No wireless commands are executed."""
+"""Offline durable-profile tests. No wireless commands are executed."""
 import os,pathlib,tempfile,unittest
-from types import SimpleNamespace
-from unittest.mock import Mock,patch
+from unittest.mock import Mock
 from p2p_persistent import PersistentGroup,atomic_private
 from wifi_capabilities import Nl80211,attributes
 import struct
@@ -18,20 +17,19 @@ class PersistentTests(unittest.TestCase):
             if command=='LIST_NETWORKS':return 'network id / ssid / bssid / flags\n7\tDIRECT-test\tany\t[P2P-PERSISTENT]\n'
             if command=='GET_NETWORK 7 mode':return '3'
             if command=='GET_NETWORK 7 p2p_client_list':return self.peers
-            if command.startswith('P2P_PEER '):return 'device_name=known phone'
             return 'OK'
         self.control=Mock();self.control.request.side_effect=response
-        self.helper=SimpleNamespace(control=self.control,owned={'name':'p2p-vc-123456'},progress={'associatedStations':0},stage=Mock())
 
     def test_identity_ssid_psk_and_clients_survive_process_restart(self):
         self.profile.prepare(self.runtime)
         networks='network={\n ssid="DIRECT-old"\n psk="old-group-password"\n disabled=2\n mode=3\n p2p_client_list=02:01:02:03:04:05\n}\n'
-        atomic_private(self.profile.file,('ctrl_interface=/run/old/ctrl\n'+networks).encode())
+        atomic_private(self.profile.file,('ctrl_interface=/run/old/ctrl\npersistent_reconnect=1\n'+networks).encode())
         restored=PersistentGroup(self.root/'state')
         self.assertEqual(restored.mac,self.profile.mac)
         result=restored.prepare(self.runtime).read_text()
         self.assertIn(networks,result);self.assertNotIn('/run/old',result)
-        self.assertIn('update_config=1',result);self.assertIn('persistent_reconnect=1',result)
+        self.assertIn('update_config=1',result);self.assertIn('persistent_reconnect=0',result)
+        self.assertNotIn('persistent_reconnect=1',result)
         self.assertEqual(restored.file.stat().st_mode&0o777,0o600)
         self.assertEqual(restored.command(self.control,2412),'P2P_GROUP_ADD persistent=7 freq=2412')
 
@@ -40,33 +38,15 @@ class PersistentTests(unittest.TestCase):
         self.assertEqual(self.profile.command(self.control,2412),'P2P_GROUP_ADD persistent freq=2412')
         with self.assertRaises(RuntimeError):self.profile.save(self.control)
 
-    def test_only_paired_peers_are_invited_and_retries_are_throttled(self):
-        self.profile.maintain(self.helper,{'reconnectRequested':True})
+    def test_saving_clients_never_discovers_or_invites_and_saves_changes(self):
+        self.profile.save(self.control)
+        self.profile.save(self.control)
+        self.assertEqual([c.args[0] for c in self.control.request.call_args_list].count('SAVE_CONFIG'),1)
+        self.peers='02:01:02:03:04:07'
+        self.profile.save(self.control)
         commands=[c.args[0] for c in self.control.request.call_args_list]
-        self.assertIn('SAVE_CONFIG',commands)
-        self.assertIn('P2P_INVITE group=p2p-vc-123456 peer=02:01:02:03:04:05',commands)
-        self.control.reset_mock();self.profile.maintain(self.helper,{'reconnectRequested':True})
-        self.assertFalse(any(c.args[0].startswith('P2P_INVITE') for c in self.control.request.call_args_list))
-        self.assertNotIn('WPS_PBC',commands)
-
-    def test_pause_active_pairing_association_or_no_history_never_starts_invitation(self):
-        for response in ({'reconnectRequested':False},{'reconnectRequested':True,'pairingActive':True}):
-            self.profile.maintain(self.helper,response)
-        self.helper.progress['associatedStations']=1
-        self.profile.maintain(self.helper,{'reconnectRequested':True})
-        self.assertFalse(any(c.args[0].startswith(('P2P_INVITE','P2P_FIND')) for c in self.control.request.call_args_list))
-        self.helper.progress['associatedStations']=0;self.peers='FAIL';self.profile.next_invite=0
-        self.profile.maintain(self.helper,{'reconnectRequested':True})
-        self.assertFalse(any(c.args[0].startswith('P2P_INVITE') for c in self.control.request.call_args_list))
-
-    def test_discovery_targets_exact_saved_peer_then_invites_it(self):
-        original=self.control.request.side_effect
-        self.control.request.side_effect=lambda command:'FAIL' if command.startswith('P2P_PEER ') else original(command)
-        self.profile.maintain(self.helper,{'reconnectRequested':True})
-        self.assertTrue(any(c.args[0]=='P2P_FIND 5 type=social dev_id=02:01:02:03:04:05' for c in self.control.request.call_args_list))
-        self.profile.next_invite=0;self.control.request.side_effect=original;self.control.reset_mock()
-        self.profile.maintain(self.helper,{'reconnectRequested':True})
-        self.assertTrue(any(c.args[0]=='P2P_INVITE group=p2p-vc-123456 peer=02:01:02:03:04:05' for c in self.control.request.call_args_list))
+        self.assertEqual(commands.count('SAVE_CONFIG'),2)
+        self.assertFalse(any(c.startswith(('P2P_INVITE','P2P_FIND','P2P_PEER','WPS_PBC')) for c in commands))
 
     def test_untrusted_or_multicast_peer_entries_and_symlink_state_are_rejected(self):
         self.peers='any 01:01:02:03:04:05 00:00:00:00:00:00 02:01:02:03:04:05/00:00:00:00:00:00;bad'

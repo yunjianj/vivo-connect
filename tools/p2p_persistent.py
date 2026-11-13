@@ -1,5 +1,5 @@
-"""Persistent private GO profile and invitations to previously paired peers only."""
-import hashlib,os,pathlib,re,stat,tempfile,time
+"""Persistent private GO configuration; reconnect uses official preconnection."""
+import hashlib,os,pathlib,re,stat,tempfile
 
 MAC=re.compile(r'(?:[0-9a-f]{2}:){5}[0-9a-f]{2}',re.I)
 def atomic_private(file,data):
@@ -31,7 +31,7 @@ class PersistentGroup:
             raw=bytearray(os.urandom(6));raw[0]=(raw[0]|2)&0xfe;raw=bytes(raw)
             atomic_private(identity,raw)
         if len(raw)!=6 or raw[0]&1 or not raw[0]&2:raise RuntimeError('持久组地址无效')
-        self.mac=raw;self.file=self.directory/'supplicant.conf';self.last_signature=None;self.next_invite=0;self.peer_index=0
+        self.mac=raw;self.file=self.directory/'supplicant.conf';self.last_signature=None
     def prepare(self,runtime_config):
         # Keep the saved network blocks intact, replacing only per-run control
         # paths and fixed service policy. Only the private supplicant writes it.
@@ -39,7 +39,7 @@ class PersistentGroup:
         blocks=''
         start=re.search(r'^network=\{',old,re.M)
         if start:blocks=old[start.start():]
-        header=runtime_config.read_text()+'update_config=1\npersistent_reconnect=1\np2p_device_random_mac_addr=0\np2p_interface_random_mac_addr=0\n'
+        header=runtime_config.read_text()+'update_config=1\npersistent_reconnect=0\np2p_device_random_mac_addr=0\np2p_interface_random_mac_addr=0\n'
         atomic_private(self.file,(header+blocks).encode())
         return self.file
     def networks(self,control):
@@ -58,8 +58,7 @@ class PersistentGroup:
         for network in self.networks(control):
             value=control.request(f'GET_NETWORK {network} p2p_client_list').strip()
             for item in value.split():
-                # Address/mask pairs are a general config representation; only
-                # exact peer addresses can be used as an invitation target.
+                # Keep only exact client addresses for configuration change detection.
                 parts=item.split('/')
                 if len(parts)>2 or (len(parts)==2 and parts[1].lower()!='ff:ff:ff:ff:ff:ff'):continue
                 if MAC.fullmatch(parts[0]) and int(parts[0][:2],16)&1==0 and parts[0].lower()!='00:00:00:00:00:00':peers.append(parts[0].lower())
@@ -69,24 +68,5 @@ class PersistentGroup:
         # actual SSID, PSK and persistent client state, including empty groups.
         signature=hashlib.sha256((' '.join(map(str,self.networks(control)))+' '+str(self.peers(control))).encode()).digest()
         if signature!=self.last_signature:
-            if control.request('SAVE_CONFIG').strip()!='OK':raise RuntimeError('无法保存持久组，拒绝假装支持免扫码重连')
+            if control.request('SAVE_CONFIG').strip()!='OK':raise RuntimeError('无法保存直连组配置')
             self.last_signature=signature
-    def maintain(self,helper,response):
-        self.save(helper.control)
-        helper.progress['persistentNetworks']=len(self.networks(helper.control))
-        helper.progress['persistentPeers']=len(self.peers(helper.control))
-        if response.get('reconnectRequested') is not True or response.get('pairingActive') or helper.progress['associatedStations']>0:return
-        now=time.monotonic()
-        if now<self.next_invite:return
-        peers=self.peers(helper.control)
-        if not peers:return
-        peer=peers[self.peer_index%len(peers)];self.peer_index+=1;self.next_invite=now+15
-        if helper.control.request('P2P_PEER '+peer).startswith('FAIL'):
-            result=helper.control.request('P2P_FIND 5 type=social dev_id='+peer)
-            helper.progress['reconnectDiscoveries']=helper.progress.get('reconnectDiscoveries',0)+1
-            helper.stage('persistent-peer-discovery',accepted=result.strip()=='OK')
-            # Try the same peer after discovery, rather than skipping it.
-            self.peer_index-=1;self.next_invite=now+6;return
-        result=helper.control.request('P2P_INVITE group='+helper.owned['name']+' peer='+peer)
-        helper.progress['reconnectInvitations']=helper.progress.get('reconnectInvitations',0)+1
-        helper.stage('persistent-peer-invitation',accepted=result.strip()=='OK')

@@ -286,7 +286,7 @@ test('retained device reconnects after manual and heartbeat disconnect; failed r
   const dir = await temp(t); const phone = await mockPhone(t, dir);
   const app = await createBackend({stateDir: path.join(dir, 'state')});
   t.after(() => app.close()); await listen(app.server);
-  const start = await api(app, 'POST', '/api/sessions', {mode:'existing', ip:'127.0.0.1', port:phone.port, token:'reconnect-private-token', transport:'wifi-direct'});
+  const start = await api(app, 'POST', '/api/sessions', {mode:'existing', ip:'127.0.0.1', port:phone.port, token:'reconnect-private-token', transport:'lan'});
   let id = (await waitJob(app, start.data.id)).result.id;
   assert.equal((await api(app,'POST',`/api/sessions/${id}/disconnect`,{})).status, 200);
   assert.equal(app.phones.list()[0].status,'disconnected');
@@ -295,7 +295,7 @@ test('retained device reconnects after manual and heartbeat disconnect; failed r
   assert.equal(done.status,'succeeded',JSON.stringify(done.error));
   assert.equal(app.phones.list().length,1);
   id = done.result.id;
-  assert.equal(done.result.transport,'wifi-direct');
+  assert.equal(done.result.transport,'lan');
   assert(!JSON.stringify(done).includes('reconnect-private-token'));
   app.phones.get(id).ws.terminate();
   for(let i=0;i<100 && app.phones.get(id).status==='connected';i++)await delay(5);
@@ -315,7 +315,7 @@ test('silent network loss times out heartbeat and permits reconnect', async t =>
   const app = await createBackend({ stateDir: path.join(dir, 'state') });
   t.after(() => app.close()); await listen(app.server);
   app.phones.heartIntervalMs = 25; app.phones.heartTimeoutMs = 150;
-  const start = await api(app, 'POST', '/api/sessions', { mode: 'existing', ip: '127.0.0.1', port: phone.port, token: 'heartbeat-test-token', transport: 'wifi-direct' });
+  const start = await api(app, 'POST', '/api/sessions', { mode: 'existing', ip: '127.0.0.1', port: phone.port, token: 'heartbeat-test-token', transport: 'lan' });
   const result = await waitJob(app, start.data.id); assert.equal(result.status, 'succeeded');
   const id = result.result.id;
   await delay(250); assert.equal(app.phones.get(id).status, 'connected', 'pong keeps active session alive');
@@ -337,7 +337,7 @@ test('QR fallback and explicit reconnect retain one stable device while distinct
   const app=await createBackend({stateDir:path.join(dir,'state')});t.after(()=>app.close());await listen(app.server);
   phone.records.baseInfo={mobileDeviceName:'same name',mobileDeviceId:'build-id',phoneBleId:'phone-a',innerRoot:'/storage/emulated/0'};
   const connect=async token=>{
-    const job=await api(app,'POST','/api/sessions',{mode:'existing',ip:'127.0.0.1',port:phone.port,token,transport:'wifi-direct'});
+    const job=await api(app,'POST','/api/sessions',{mode:'existing',ip:'127.0.0.1',port:phone.port,token,transport:'lan'});
     const done=await waitJob(app,job.data.id);assert.equal(done.status,'succeeded',JSON.stringify(done.error));return done.result.id;
   };
   const id=await connect('first-token');
@@ -431,7 +431,7 @@ test('clipboard send errors and concurrent updates cannot publish stale text', a
 test('remembered devices restore privately and reconnect without scanning after restart or network loss', async t => {
   const dir = await temp(t), phone = await mockPhone(t, dir), stateDir = path.join(dir, 'state');
   let app = await createBackend({ stateDir }); t.after(() => app.close()); await listen(app.server);
-  const start = await api(app, 'POST', '/api/sessions', { mode: 'existing', ip: '127.0.0.1', port: phone.port, token: 'remembered-private-token', transport: 'wifi-direct' });
+  const start = await api(app, 'POST', '/api/sessions', { mode: 'existing', ip: '127.0.0.1', port: phone.port, token: 'remembered-private-token', transport: 'lan' });
   const first = await waitJob(app, start.data.id); assert.equal(first.status, 'succeeded');
   const id = first.result.id;
   const file = path.join(stateDir, 'devices.json');
@@ -439,8 +439,6 @@ test('remembered devices restore privately and reconnect without scanning after 
   assert.equal(JSON.parse(await fs.readFile(file)).devices[0].token, 'remembered-private-token');
   await app.close();
   app = await createBackend({ stateDir }); await listen(app.server);
-  // This test exercises the connection protocol over loopback, without a GO.
-  app.p2p.reconnectState = () => null;
   assert.equal(app.phones.list()[0].id, id); assert.equal(app.phones.list()[0].status, 'disconnected');
   app.remembered.tick();
   let job = [...app.jobs.items.values()].find(j => j.kind === 'reconnect'); assert(job);
@@ -487,4 +485,20 @@ test('automatic reconnect backs off transport errors, stops on rejected credenti
   await api(app, 'DELETE', '/api/account');
   assert.equal(app.phones.list().length, 0);
   assert.equal(JSON.parse(await fs.readFile(path.join(app.state.dir, 'devices.json'))).devices.length, 0);
+});
+
+
+test('Wi-Fi Direct API reconnect waits for the service even if the saved phone endpoint is reachable', async t => {
+  const dir=await temp(t),phone=await mockPhone(t,dir);
+  const app=await createBackend({stateDir:path.join(dir,'state')});t.after(()=>app.close());await listen(app.server);
+  const start=await api(app,'POST','/api/sessions',{mode:'existing',ip:'127.0.0.1',port:phone.port,token:'old-direct-token',transport:'wifi-direct'});
+  const first=await waitJob(app,start.data.id);assert.equal(first.status,'succeeded');
+  const id=first.result.id;
+  await api(app,'POST',`/api/sessions/${id}/disconnect`,{});
+  const retry=await api(app,'POST',`/api/sessions/${id}/reconnect`,{});
+  const done=await waitJob(app,retry.data.id);
+  assert.equal(done.status,'failed');assert.equal(done.error.code,'P2P_NOT_READY');
+  assert.equal(app.phones.get(id).status,'disconnected');
+  const count=app.jobs.items.size;app.remembered.tick();assert.equal(app.jobs.items.size,count);
+  assert.equal(app.phones.public(app.phones.get(id)).reconnectWait.code,'P2P_NOT_READY');
 });

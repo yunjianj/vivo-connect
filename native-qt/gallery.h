@@ -8,16 +8,17 @@ public:
     std::function<void(QJsonArray)> dragFiles;
     std::function<void(QStringList)> importPaths;
     explicit GalleryGrid(QWidget *parent=nullptr): QListWidget(parent) { setDragDropMode(QAbstractItemView::DragDrop); setDragEnabled(true); setAcceptDrops(true); viewport()->setAcceptDrops(true); }
-protected:
-    void startDrag(Qt::DropActions) override {
+    QJsonArray selectedFiles() const {
         QJsonArray files;
         for (auto *item:selectedItems()) {
             const auto photo=item->data(Qt::UserRole).toJsonObject();
             const auto path=photo.value("savePath").toString(); if(path.isEmpty())continue;
             files.append(QJsonObject{{"name",photo.value("fileName")},{"path",path},{"size",photo.value("fileSize")},{"directory",false}});
         }
-        if(!files.isEmpty() && dragFiles) dragFiles(files);
+        return files;
     }
+protected:
+    void startDrag(Qt::DropActions) override { auto files=selectedFiles(); if(!files.isEmpty() && dragFiles) dragFiles(files); }
     void dragEnterEvent(QDragEnterEvent *e) override { if(e->source()!=this && !e->mimeData()->hasFormat("application/x-vivo-phone-paths") && e->mimeData()->hasUrls()) e->acceptProposedAction(); else e->ignore(); }
     void dragMoveEvent(QDragMoveEvent *e) override { if(e->source()!=this && !e->mimeData()->hasFormat("application/x-vivo-phone-paths") && e->mimeData()->hasUrls()) e->acceptProposedAction(); else e->ignore(); }
     void dropEvent(QDropEvent *e) override {
@@ -38,7 +39,7 @@ class GalleryDialog : public QWidget {
     QLabel *status = new QLabel;
     QPushButton *refreshButton=nullptr, *importButton=nullptr;
     QPushButton *retry = new QPushButton("重试加载");
-    QPushButton *save = new QPushButton("导出所选…"), *remove = new QPushButton("删除所选…"), *open = new QPushButton("打开原图／视频");
+    QPushButton *save = new QPushButton("导出所选"), *remove = new QPushButton("删除所选"), *open = new QPushButton("打开原图／视频");
     QSet<QNetworkReply*> requests;
     int generation=0, page=0, thumbsActive=0;
     QSet<int> thumbsRequested;
@@ -164,12 +165,13 @@ public:
     std::function<void(QStringList,bool)> exportFiles;
     std::function<void(QStringList)> importFiles;
     std::function<void(QJsonArray,QWidget *)> dragFiles;
+    std::function<void(QJsonArray)> copyFiles;
     GalleryDialog(QString state,int port,QString id,QWidget *parent=nullptr):QWidget(parent),base(QString("http://127.0.0.1:%1").arg(port)),session(id) {
         setObjectName("galleryPage");
         QFile config(state+"/config.json"); if(config.open(QIODevice::ReadOnly))token=QJsonDocument::fromJson(config.readAll()).object().value("apiToken").toString().toUtf8();
         net.setProxy(QNetworkProxy::NoProxy);
         auto *layout=new QVBoxLayout(this); auto *toolbar=new QHBoxLayout;
-        auto *refresh=new QPushButton("刷新相册"), *import=new QPushButton("导入到手机…");
+        auto *refresh=new QPushButton("刷新相册"), *import=new QPushButton("导入到手机");
         refreshButton=refresh; importButton=import;
         albums->setObjectName("galleryAlbums"); sort->setObjectName("gallerySort"); retry->setObjectName("galleryRetry"); retry->hide(); save->setObjectName("galleryExport"); status->setObjectName("galleryStatus");
         sort->addItem("最新在前",5); sort->addItem("最早在前",4);
@@ -181,7 +183,7 @@ public:
         grid->importPaths=[this](QStringList paths){operate([this,paths]{if(importFiles)importFiles(paths);});};
         auto *actions=new QHBoxLayout; actions->addWidget(open); actions->addWidget(save); actions->addWidget(remove); actions->addStretch(); actions->addWidget(retry); layout->addLayout(actions);
         status->setWordWrap(true); layout->addWidget(status);
-        auto *hint=new QLabel("拖入文件导入 · 拖出照片导出 · 右键操作 · Ctrl／Shift 多选"); layout->addWidget(hint);
+        auto *hint=new QLabel("拖入文件导入 · 拖出或 Ctrl+C 复制照片 · 右键操作 · Ctrl／Shift 多选"); layout->addWidget(hint);
         connect(refresh,&QPushButton::clicked,this,[this]{if(!operating)loadAlbums();});
         connect(albums,&QComboBox::currentIndexChanged,this,[this]{if(!operating)resetPages();});
         connect(sort,&QComboBox::currentIndexChanged,this,[this]{if(!operating)resetPages();});
@@ -206,14 +208,15 @@ public:
         connect(grid,&QWidget::customContextMenuRequested,this,[this](QPoint pos){
             auto *item=grid->itemAt(pos); if(!item)return;
             if(!item->isSelected()){grid->clearSelection();item->setSelected(true);}
-            QMenu menu(this); auto *openAction=menu.addAction("打开原文件"); auto *exportAction=menu.addAction("导出所选…"); auto *deleteAction=menu.addAction("删除所选…");
-            openAction->setEnabled(open->isEnabled()); exportAction->setEnabled(save->isEnabled()); deleteAction->setEnabled(remove->isEnabled());
+            QMenu menu(this); auto *openAction=menu.addAction("打开原文件"); auto *copyAction=menu.addAction("复制文件"); auto *exportAction=menu.addAction("导出所选"); auto *deleteAction=menu.addAction("删除所选");
+            openAction->setEnabled(open->isEnabled()); copyAction->setEnabled(save->isEnabled()); exportAction->setEnabled(save->isEnabled()); deleteAction->setEnabled(remove->isEnabled());
             auto *chosen=menu.exec(grid->viewport()->mapToGlobal(pos));
-            if(chosen==openAction)open->click(); else if(chosen==exportAction)save->click(); else if(chosen==deleteAction)remove->click();
+            if(chosen==openAction)open->click(); else if(chosen==copyAction){auto files=grid->selectedFiles();operate([this,files]{if(copyFiles)copyFiles(files);});} else if(chosen==exportAction)save->click(); else if(chosen==deleteAction)remove->click();
         });
         auto key=[this](QWidget *owner,QKeySequence sequence,std::function<void()> action){auto *s=new QShortcut(sequence,owner);s->setContext(Qt::WidgetWithChildrenShortcut);connect(s,&QShortcut::activated,this,std::move(action));};
         key(this,QKeySequence(Qt::Key_F5),[refresh]{refresh->click();});
         key(grid,QKeySequence(Qt::Key_Delete),[remove=this->remove]{remove->click();});
+        key(grid,QKeySequence::Copy,[this]{auto files=grid->selectedFiles();if(!files.isEmpty())operate([this,files]{if(copyFiles)copyFiles(files);});});
         key(grid,QKeySequence(Qt::Key_Return),[open=this->open]{open->click();});
         QTimer::singleShot(0,this,[this]{loadAlbums();});
     }

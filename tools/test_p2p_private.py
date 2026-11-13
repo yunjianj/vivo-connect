@@ -165,13 +165,13 @@ class PrivateTests(unittest.TestCase):
             e.helper.start();e.helper.stop=False;e.control.drain.return_value=['P2P-GROUP-REMOVED']
             with self.assertRaisesRegex(RuntimeError,'已结束'):e.helper.check_group_alive()
             e.helper.cleanup()
-    def test_invitation_result_records_only_numeric_status(self):
+    def test_obsolete_invitation_events_are_ignored(self):
         control=object.__new__(p.Control)
-        control.events=collections.deque();control.provision_requests=collections.deque();control.invitation_results=collections.deque(maxlen=16)
+        control.events=collections.deque();control.provision_requests=collections.deque()
         control.event('<3>P2P-INVITATION-RESULT status=8 peer=02:01:02:03:04:05 passphrase="do-not-retain"')
         control.event('<3>P2P-INVITATION-RESULT status=999')
         control.event('<3>P2P-INVITATION-RESULT status=invalid')
-        self.assertEqual(list(control.invitation_results),[8])
+        self.assertFalse(hasattr(control,'invitation_results'))
         self.assertEqual(list(control.events),[])
     def test_missing_binary_never_enters_network_preflight(self):
         helper=object.__new__(p.PrivateHelper);helper.preflight=Mock()

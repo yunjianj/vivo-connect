@@ -1,0 +1,308 @@
+--- analysis/pretty/app-modules.js:16061-16139 ---
+                return n.TrashOpParams;
+            }
+        });
+        const r = i.__importDefault(a(19));
+        function o() {
+            const e = r.default.state.common.userInfo, t = r.default.state.common.appInfo;
+            return {
+                accountregion: (null == e ? void 0 : e.vivo_account_cookie_iqoo_regioncode) || "CN",
+                openid: (null == e ? void 0 : e.openId) || "",
+                countrycode: (null == e ? void 0 : e.vivo_account_cookie_iqoo_regioncode) || "CN",
+                syncUri: "SDK_RECORD",
+                token: (null == e ? void 0 : e.token) || "",
+                uid: (null == e ? void 0 : e.userId) || "",
+                vaid: (null == t ? void 0 : t.vaid) || "",
+                emmcid: (null == t ? void 0 : t.emmcid) || "",
+                av: (null == t ? void 0 : t.av) || "",
+                aaid: (null == t ? void 0 : t.aaid) || "",
+                imei: (null == t ? void 0 : t.imei) || "",
+                sdkVer: (null == t ? void 0 : t.sdkVer) || "",
+                model: (null == t ? void 0 : t.model) || "",
+                appVersionName: (null == t ? void 0 : t.appVersionName) || "",
+                version: (null == t ? void 0 : t.version) || "",
+                an: (null == t ? void 0 : t.an) || ""
+            };
+        }
+        function s(e) {
+            return i.__awaiter(this, void 0, void 0, function*() {
+                const t = (null === (a = r.default._modulesNamespaceMap["api/"]) || void 0 === a ? void 0 : a.root) || window.request || window.$api;
+                var a;
+                if (!t) throw new Error("Request client not found");
+                return t.requestBranch(e);
+            });
+        }
+        t.cloudApi = {
+            pullMapping(e) {
+                return i.__awaiter(this, void 0, void 0, function*() {
+                    const t = yield s({
+                        url: "/suite/web/record/pullmapping",
+                        method: "POST",
+                        sync: !0,
+                        data: Object.assign(Object.assign({}, o()), {
+                            cloudMaxVersion: e.cloudMaxVersion
+                        })
+                    });
+                    if (200 === t.status) return t.data;
+                    throw new Error(t.msg || "pullMapping failed");
+                });
+            },
+            pullData(e) {
+                return i.__awaiter(this, void 0, void 0, function*() {
+                    const t = yield s({
+                        url: "/suite/pc/record/pulldata",
+                        method: "POST",
+                        sync: !0,
+                        data: Object.assign(Object.assign({}, o()), {
+                            cloudMaxVersion: e.cloudMaxVersion,
+                            ids: e.ids
+                        })
+                    });
+                    if (200 === t.status) return t.data;
+                    throw new Error(t.msg || "pullData failed");
+                });
+            },
+            pushData(e) {
+                return i.__awaiter(this, void 0, void 0, function*() {
+                    const t = yield s({
+                        url: "/suite/web/record/pushdata",
+                        method: "POST",
+                        sync: !0,
+                        data: Object.assign(Object.assign({}, o()), {
+                            cloudMaxVersion: e.cloudMaxVersion,
+                            canRepeat: "true",
+                            dataList: e.dataList
+                        })
+                    });
+                    if (200 === t.status) return t.data;
+                    throw new Error(t.msg || "pushData failed");
+                });
+            },
+
+--- analysis/pretty/app-modules.js:24332-24396 ---
+            localChanges: [],
+            conflictGuids: [],
+            guidLocalIdMap: {},
+            localIdGuidMap: {}
+        };
+    },
+    5403: function(e, t, a) {
+        "use strict";
+        Object.defineProperty(t, "__esModule", {
+            value: !0
+        }), t.syncEngine = void 0;
+        const i = a(2), n = a(4068), r = a(4069), o = i.__importDefault(a(19)), s = a(1058);
+        t.syncEngine = {
+            pull() {
+                return i.__awaiter(this, void 0, void 0, function*() {
+                    const e = o.default.state.record.cloudSync.cloudVersion, t = yield n.cloudApi.pullMapping({
+                        cloudMaxVersion: e
+                    });
+                    let a = t.dataList.addList || [], i = t.dataList.updateList || [], c = t.dataList.deleteList || [];
+                    if (t.afterCount > 30) {
+                        const e = [ ...a.map(e => e.guid), ...i.map(e => e.guid), ...c.map(e => e.guid) ], n = yield this.pullDataInBatches(e, t.cloudMaxVersion);
+                        a = n.dataList.addList || [], i = n.dataList.updateList || [], c = n.dataList.deleteList || [];
+                    }
+                    o.default.commit("record/" + s.MutationTypes.SET_CLOUD_VERSION, {
+                        cloudVersion: t.cloudMaxVersion,
+                        cloudMaxVersion: t.cloudMaxVersion
+                    }), o.default.commit("record/" + s.MutationTypes.SET_PENDING_DATA, {
+                        type: "add",
+                        data: a
+                    }), o.default.commit("record/" + s.MutationTypes.SET_PENDING_DATA, {
+                        type: "update",
+                        data: i
+                    }), o.default.commit("record/" + s.MutationTypes.SET_PENDING_DATA, {
+                        type: "delete",
+                        data: c
+                    }), r.cloudDistributor.distribute({
+                        addList: a,
+                        updateList: i,
+                        deleteList: c
+                    }), r.cloudDistributor.clearPending();
+                });
+            },
+            pullDataInBatches(e, t) {
+                return i.__awaiter(this, void 0, void 0, function*() {
+                    const a = [];
+                    for (let t = 0; t < e.length; t += 30) a.push(e.slice(t, t + 30));
+                    let i = {
+                        dataList: {
+                            addList: [],
+                            updateList: [],
+                            deleteList: []
+                        }
+                    };
+                    for (const e of a) {
+                        const a = yield n.cloudApi.pullData({
+                            cloudMaxVersion: t,
+                            ids: e
+                        });
+                        i.dataList.addList.push(...a.dataList.addList || []), i.dataList.updateList.push(...a.dataList.updateList || []), 
+                        i.dataList.deleteList.push(...a.dataList.deleteList || []);
+                    }
+                    return i;
+                });
+            },
+            push() {
+
+--- analysis/pretty/128.js:3984-4012 ---
+        Object.defineProperty(t, "__esModule", {
+            value: !0
+        }), t.networkdownload = t.download = t.previewThumb = t.preview = t.abortUpload = t.deferStsToken = t.getFileDomain = t.confirmRangeUpload = t.confirmUpload = t.rangeUpload = t.thumbUpload = t.upload = t.getStsToken = t.preUpload = void 0;
+        const o = i(7012);
+        const n = i(22), a = e => `/clouddisk-api/api/suite/web/meta/${e}.do`;
+        t.preUpload = function(e) {
+            return o.requestWeb({
+                url: a("preUpload"),
+                sync: !1,
+                token: !0,
+                method: "post",
+                data: Object.assign({
+                    width: 0,
+                    height: 0,
+                    metaType: 99,
+                    rotate: 0,
+                    source: "SKETCH",
+                    category: "NOTES",
+                    requestFrom: "SKETCH_NOTES",
+                    relateFlag: 1,
+                    checkSumVersion: "2"
+                }, e)
+            });
+        }, t.getStsToken = function(e) {
+            return o.requestWeb({
+                token: !0,
+                sync: !1,
+                url: a("getStsToken"),
+                method: "post",
+
+--- analysis/pretty/128.js:4095-4106 ---
+        }, t.getFileDomain = function(e) {
+            return o.requestWeb({
+                token: !0,
+                sync: !1,
+                url: a("fileDomain"),
+                method: "post",
+                data: e
+            });
+        }, t.deferStsToken = function(e) {
+            return o.requestWeb({
+                token: !0,
+                sync: !1,
+
+--- analysis/pretty/128.js:4118-4139 ---
+            });
+        }, t.preview = function(e) {
+            return e.domain && e.metaId && e.stsToken ? `${String(e.domain).replace(/http?s:/, location.protocol)}/api/file/webdisk/source/${e.metaId}?stsToken=${e.stsToken}` : "";
+        }, t.previewThumb = function(e) {
+            return e.domain && e.metaId && e.stsToken && e.openId ? `${String(e.domain).replace(/http?s:/, location.protocol)}/api/file/webdisk/thumb/${e.metaId}/${e.style}?stsToken=${e.stsToken}&openId=${e.openId}` : "";
+        }, t.download = function(e) {
+            const t = (new Date).getTime();
+            return o.requestWeb({
+                timeout: 1e5,
+                url: `${String(e.domain).replace(/http?s:/, location.protocol)}/api/file/webdisk/download.do${e.asMedia ? "?asMedia=true&_t=" + t : "?_t=" + t}`,
+                method: "get",
+                openid: !1,
+                responseType: "blob",
+                headers: {
+                    "x-yun-ststoken": e.stsToken,
+                    "x-yun-openid": e.openId,
+                    "x-yun-metaid": e.metaId
+                },
+                onDownloadProgress(t) {
+                    "function" == typeof e.onprogress && e.onprogress(t);
+                }
+            });
+
+--- analysis/pretty/128.js:17100-17131 ---
+                this._playCancelled = !1;
+            }
+            getWebPlayUrl() {
+                var e, t, i, n, a;
+                return o.__awaiter(this, void 0, void 0, function*() {
+                    const o = this.source.localId;
+                    if (!o) return "";
+                    if (this._webPlayUrl && this._webPlayUrlForLocalId === o) return this._webPlayUrl;
+                    try {
+                        const s = (null === (t = null === (e = this.source) || void 0 === e ? void 0 : e.metaList) || void 0 === t ? void 0 : t[0]) || {}, r = s.metaId;
+                        if (!r) return "";
+                        let l = s.domain || s.domainAddr || "";
+                        if (!l) {
+                            const e = yield m.getFileDomain({
+                                metaIds: [ r ]
+                            }), t = ((null === (i = null == e ? void 0 : e.data) || void 0 === i ? void 0 : i.fileDomain) || []).find(e => e.metaId === r);
+                            l = (null == t ? void 0 : t.domain) || "";
+                        }
+                        if (!l) throw new Error("获取音频域名失败");
+                        const [c, d] = yield Promise.all([ _.default.getOpenId(), m.getStsToken({
+                            tokenType: 2
+                        }) ]), u = (null === (n = null == d ? void 0 : d.data) || void 0 === n ? void 0 : n.stsToken) || (null === (a = null == d ? void 0 : d.data) || void 0 === a ? void 0 : a.ststoken) || (null == d ? void 0 : d.data);
+                        if (!u || !c) throw new Error("获取下载凭证失败");
+                        const h = yield m.download({
+                            domain: l,
+                            metaId: r,
+                            asMedia: !0,
+                            stsToken: String(u),
+                            openId: String(c)
+                        }), p = (null == h ? void 0 : h.data) || h;
+                        if (!(p instanceof Blob)) throw new Error("下载结果非 blob");
+                        const f = URL.createObjectURL(p);
+
+--- analysis/pretty/child-window.js:15594-15635 ---
+        function d(e) {
+            var t, i, o, n;
+            const a = (null === (i = null === (t = null === s.default || void 0 === s.default ? void 0 : s.default.state) || void 0 === t ? void 0 : t.common) || void 0 === i ? void 0 : i.userInfo) || r.default.getItem("userInfo") || {}, l = (null === (n = null === (o = null === s.default || void 0 === s.default ? void 0 : s.default.state) || void 0 === o ? void 0 : o.common) || void 0 === n ? void 0 : n.appInfo) || {};
+            return Object.assign(Object.assign({
+                accountregion: (null == a ? void 0 : a.vivo_account_cookie_iqoo_regioncode) || "CN",
+                countrycode: (null == a ? void 0 : a.vivo_account_cookie_iqoo_regioncode) || "CN",
+                syncUri: "SDK_RECORD",
+                openid: (null == a ? void 0 : a.openId) || "",
+                token: (null == a ? void 0 : a.token) || "",
+                uid: (null == a ? void 0 : a.userId) || "",
+                vaid: (null == l ? void 0 : l.vaid) || "",
+                emmcid: (null == l ? void 0 : l.emmcid) || "",
+                av: (null == l ? void 0 : l.av) || "",
+                aaid: (null == l ? void 0 : l.aaid) || "",
+                imei: (null == l ? void 0 : l.imei) || "",
+                sdkVer: (null == l ? void 0 : l.sdkVer) || "",
+                model: (null == l ? void 0 : l.model) || "",
+                appVersionName: (null == l ? void 0 : l.appVersionName) || "",
+                version: (null == l ? void 0 : l.version) || "",
+                an: (null == l ? void 0 : l.an) || ""
+            }, _), e);
+        }
+        function u(e) {
+            return o.__awaiter(this, void 0, void 0, function*() {
+                const t = (null == e ? void 0 : e.data) || {};
+                if (!t.token || !t.uid) return null;
+                try {
+                    return yield function() {
+                        if (!c) {
+                            const e = process.env.IS_WEB ? "/" : a.default.currentRuntimeConfig.gatewayServer;
+                            c = new n.default(e);
+                        }
+                        return c;
+                    }().request(e);
+                } catch (e) {
+                    const t = e;
+                    if (t && "object" == typeof t && (200 === t.status || 0 === t.code)) return t;
+                    throw e;
+                }
+            });
+        }
+        t.setAccountContext = function(e) {
+
+--- Native sync engine route strings ---
+SHA256: b67b6681c757bb906960ced691f5f11d3238696b63d34aa1da9639a97fb61bfd
+x-yun-ststoken
+x-yun-metaid
+/vclouddisk/api/suite/pc/meta/getStsToken.do
+/vclouddisk/api/suite/pc/meta/fileInfo.do
+x-yun-openid
+/recorder-api/suite/pc/record/pullmapping
+/recorder-api/suite/pc/record/pulldata
+/recorder-api/suite/pc/record/pushdata
+/recorder-api/suite/pc/record/totrash
+/recorder-api/suite/pc/record/restore
+/recorder-api/suite/pc/record/remove
