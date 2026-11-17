@@ -1,0 +1,143 @@
+Official Windows v7.0.6.0-cn recent files static reference. No phone/user data.
+
+SOURCE analysis/pretty/app-modules.js:2203
+        !function(e) {
+            e.RECENTFILE = "REQUEST_POSTS_ONE_MOTH_LIST", e.VIDEOLIST = "REQUEST_POSTS_VIDEOLIST", 
+            e.IMAGELIST = "REQUEST_POSTS_IMAGELIST", e.AUDIOLIST = "REQUEST_POSTS_AUDIOLIST", 
+            e.DOCSLIST = "REQUEST_POSTS_DOCSLIST", e.DOCSLISTNEW = "REQUEST_POSTS_WEB_DOCSLIST", 
+            e.WECHAT = "REQUEST_POSTS_NEW_WECHAT", e.QQ = "REQUEST_POSTS_NEW_QQ", e.FILELIST = "REQUEST_POSTS_FILELIST", 
+            e.HOMEDATA = "REQUEST_POSTS_HOMEDATA", e.RECENTEDELETE = "REQUEST_POSTS_RECENTE_DELETE_LIST", 
+            e.APP = "REQUEST_POSTS_NEW_APP";
+        }(n = t.REQUEST_POSTS_TYPE || (t.REQUEST_POSTS_TYPE = {})), function(e) {
+            e[e.BY_NAME_ASC = 0] = "BY_NAME_ASC", e[e.BY_NAME_DESC = 1] = "BY_NAME_DESC", e[e.BY_TYPE_ASC = 2] = "BY_TYPE_ASC", 
+            e[e.BY_TYPE_DESC = 3] = "BY_TYPE_DESC", e[e.BY_TIME_ASC = 4] = "BY_TIME_ASC", e[e.BY_TIME_DESC = 5] = "BY_TIME_DESC", 
+            e[e.BY_SIZE_ASC = 6] = "BY_SIZE_ASC", e[e.BY_SIZE_DESC = 7] = "BY_SIZE_DESC", e[e.BY_DEFAULT = 8] = "BY_DEFAULT";
+        }(r = t.SORT_TYPY || (t.SORT_TYPY = {})), function(e) {
+            e[e.BY_NAME_DESC = 1] = "BY_NAME_DESC", e[e.BY_TYPE_DESC = 3] = "BY_TYPE_DESC", 
+            e[e.BY_SIZE_ASC = 5] = "BY_SIZE_ASC", e[e.BY_SIZE_DESC = 15] = "BY_SIZE_DESC", e[e.BY_TIME_ASC = 6] = "BY_TIME_ASC", 
+            e[e.BY_TIME_DESC = 16] = "BY_TIME_DESC";
+        }(t.RECYCLE_SORT_TYPY || (t.RECYCLE_SORT_TYPY = {})), function(e) {
+            e[e.BY_ADD_TIME_ASC = 4] = "BY_ADD_TIME_ASC", e[e.BY_ADD_TIME_DESC = 5] = "BY_ADD_TIME_DESC", 
+            e[e.BY_SHOOT_TIME_ASC = 8] = "BY_SHOOT_TIME_ASC", e[e.BY_SHOOT_TIME_DESC = 9] = "BY_SHOOT_TIME_DESC";
+        }(t.IMAGE_SORT_TYPY || (t.IMAGE_SORT_TYPY = {})), function(e) {
+            e[e.BY_NONE = 0] = "BY_NONE", e[e.BY_EACH_DAY = 1] = "BY_EACH_DAY", e[e.BY_EACH_MONTH = 2] = "BY_EACH_MONTH", 
+            e[e.BY_EACH_YEAR = 3] = "BY_EACH_YEAR", e[e.BY_DIRECTORY = 4] = "BY_DIRECTORY", 
+            e[e.BY_DOCUMENT = 5] = "BY_DOCUMENT";
+        }(o = t.GROUP_TYPE || (t.GROUP_TYPE = {})), t.DEFAULT_CHANNEL_PARAMS = {
+            category: "",
+            data: "",
+            fileCount: 0,
+            sortCondition: r.BY_NAME_ASC,
+            groupBy: o.BY_NONE,
+            type: n.HOMEDATA,
+            pageIndex: 0,
+            pageNumber: 200
+        }, t.DEFAULT_RECENTFILE = Object.assign(Object.assign({}, t.DEFAULT_CHANNEL_PARAMS), {
+            sortCondition: r.BY_TIME_DESC,
+            groupBy: o.BY_EACH_DAY,
+            type: n.RECENTFILE
+        }), t.DEFAULT_RECENTDELETE = Object.assign(Object.assign({}, t.DEFAULT_CHANNEL_PARAMS), {
+
+SOURCE analysis/pretty/160.js:290
+    },
+    6877: function(e, t, i) {
+        "use strict";
+        Object.defineProperty(t, "__esModule", {
+            value: !0
+        });
+        const n = i(2), a = n.__importDefault(i(6)), o = i(10), r = n.__importDefault(i(6482)), s = n.__importDefault(i(205)), l = n.__importDefault(i(6485)), c = i(136), u = i(95), d = i(216), h = n.__importDefault(i(12)), m = n.__importDefault(i(1639)), p = n.__importDefault(i(4579)), f = i(15), g = i(4582), v = i(7), _ = o.namespace("fileManager");
+        let C = class extends r.default {
+            constructor() {
+                super(...arguments), this.params = c.DEFAULT_RECENTFILE, this.headerHeight = 152, 
+                this.pageName = "RecentFileView", this.listToDataList = e => {
+                    let t = [], i = [], n = "", a = 0;
+                    try {
+                        e.forEach(e => {
+                            Object.keys(e.dataList).forEach(o => {
+                                t.push({
+                                    startIndex: a,
+                                    groupName: `${o}::${e.time}`,
+                                    groupCount: e.dataList[o].length,
+                                    savePath: "",
+                                    time: e.time,
+                                    isFirst: e.time != n
+                                }), n = e.time;
+                                const r = e.dataList[o].map(t => Object.assign(Object.assign({}, t), {
+                                    fileType: u.getMimeCategoryFromSuffix(t.fileName),
+                                    checked: !1,
+                                    index: a++,
+                                    groupName: `${o}::${e.time}`,
+                                    dateFormat: h.default(t.date).format("YYYY/MM/DD HH:mm"),
+                                    time: n
+                                }));
+                                i = i.concat(r);
+                            });
+                        });
+                    } catch (e) {
+                        window._fmLog.error(`[fm] recent file handle data error: ${String(e)}.`);
+                    }
+                    let o = [];
+                    return t.forEach(e => {
+                        const t = o.find(t => t.groupName == e.groupName);
+                        t ? t.groupCount += e.groupCount : o.push(e);
+                    }), o[0] && (o[0].isFirst = !1), {
+                        dataList: i,
+                        groupList: o
+                    };
+                };
+            }
+            get isGroup() {
+                return !0;
+            }
+            get recentFileClassName() {
+                return "block" == this.layout ? "recent-file-block" : "recent-file-list";
+            }
+            get groupRenderList() {
+                if (this.isDeactivated) return [];
+                const e = this.getListByServerDataList();
+                return f.cloneDeep(e);
+
+SOURCE analysis/pretty/app-modules.js:19302
+            setIsLastPage(e) {
+                this.activeCat !== c.CAT_TYPE.RECENTDELETE && this.setTotalCount(e.totalCount), 
+                window._fmLog.info("[fm][DataMixin.ts][setIsLastPage]0>>>");
+                const t = this.listToDataList(e.dataList);
+                window._fmLog.info("[fm][DataMixin.ts][setIsLastPage]1>>>");
+                const a = t.dataList.map(e => e.savePath);
+                this.isLastPage = a.length < this.getPageNumber(), window._fmLog.info("[fm][DataMixin.ts][setIsLastPage]2>>>"), 
+                this.updateIsLastPage(this.isLastPage), window._fmLog.info("[fm][DataMixin.ts][setIsLastPage]3>>>");
+            }
+
+SOURCE analysis/pretty/app-modules.js:19831
+    4725: function(e, t, a) {
+        "use strict";
+        Object.defineProperty(t, "__esModule", {
+            value: !0
+        }), t.concatList = void 0, t.concatList = (e, t) => {
+            const a = new Map, i = [];
+            for (const t of e) {
+                const e = t.time, n = {};
+                for (const e in t.dataList) n[e] = [ ...t.dataList[e] ];
+                a.set(e, Object.assign(Object.assign({}, t), {
+                    dataList: n
+                })), i.push(e);
+            }
+            for (const e of t) {
+                const t = e.time;
+                if (a.has(t)) {
+                    const i = a.get(t);
+                    for (const t in e.dataList) i.dataList[t] ? i.dataList[t] = [ ...i.dataList[t], ...e.dataList[t] ] : i.dataList[t] = [ ...e.dataList[t] ];
+                    a.set(t, i);
+                } else {
+                    const n = {};
+                    for (const t in e.dataList) n[t] = [ ...e.dataList[t] ];
+                    a.set(t, Object.assign(Object.assign({}, e), {
+                        dataList: n
+                    })), i.push(t);
+                }
+            }
+            return i.map(e => a.get(e));
+        };
+    },
+    488: function(e, t, a) {
+        "use strict";

@@ -11,7 +11,7 @@ import { collect } from '../src/http.mjs';
 
 const photo = '/storage/emulated/0/DCIM/雪 & #.jpg';
 const png = Buffer.from('iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mP8/x8AAwMCAO+jRZkAAAAASUVORK5CYII=', 'base64');
-async function setup(t) {
+async function setup(t, section = 'gallery') {
   const dir = await fs.mkdtemp(path.join(os.tmpdir(), 'vivo-gallery-'));
   t.after(() => fs.rm(dir, { recursive: true, force: true }));
   const records = []; let override;
@@ -41,7 +41,7 @@ async function setup(t) {
   t.after(() => app.close());
   app.server.listen(0, '127.0.0.1'); await once(app.server, 'listening');
   const api = async (action, body, token = app.state.apiToken) => {
-    const response = await fetch(`http://127.0.0.1:${app.server.address().port}/api/sessions/gallery-phone/gallery/${action}`, {
+    const response = await fetch(`http://127.0.0.1:${app.server.address().port}/api/sessions/gallery-phone/${section}/${action}`, {
       method: body === undefined ? 'GET' : 'POST', headers: { authorization: `Bearer ${token}`, 'content-type': 'application/json' }, body: body === undefined ? undefined : JSON.stringify(body)
     });
     return { status: response.status, data: await response.json() };
@@ -143,4 +143,86 @@ test('a phone page-local totalCount cannot hide subsequent full photo or video p
   }
   override({ dataList: [], totalCount: 0 });
   assert.equal((await api('list', { pageNumber: 1 })).data.hasMore, false);
+});
+
+
+test('video, music and Document pages use the exact official category schemas without album authorization', async t => {
+  const { api, records, authState } = await setup(t, 'media');
+  for (const [kind, type, groupBy, category] of [
+    ['videos', 'REQUEST_POSTS_VIDEOLIST', 0, ''],
+    ['music', 'REQUEST_POSTS_AUDIOLIST', 0, ''],
+    ['documents', 'REQUEST_POSTS_WEB_DOCSLIST', 5, 'ALL']
+  ]) {
+    const response = await api('list', { kind, pageIndex: 2, pageNumber: 1, sortCondition: 6 });
+    assert.equal(response.status, 200);
+    assert.deepEqual(records.at(-1).body, {category, data:'', fileCount:0, type, groupBy, sortCondition:6, pageIndex:2, pageNumber:1, firstFlag:false});
+    assert.equal(response.data.hasMore, true);
+    assert.equal(response.data.items[0].fileSize, 120);
+  }
+  assert.equal(authState.requests, 0);
+  assert(records.every(r => r.token === 'private-phone-token'));
+});
+
+test('Document filtering, file sorting, group headers and page-local counts are preserved', async t => {
+  const { api, records, override } = await setup(t, 'media');
+  override({code:'0000',dataList:[{isGroup:true,groupName:'PDF',groupCount:1},{savePath:'/sdcard/Documents/报价 & 合同.pdf',fileName:'报价 & 合同.pdf',fileSize:'81'}],totalCount:1});
+  for (const category of ['ALL','PDF','DOC','XLS','PPT','TXT','VCF','IWORK','CAD','PSD','XMIND','其他']) {
+    const response=await api('list',{kind:'documents',category,pageNumber:1,sortCondition:0});
+    assert.equal(response.status,200);assert.equal(records.at(-1).body.category,category);
+    assert.equal(response.data.items.length,1);assert.equal(response.data.hasMore,true);
+    assert.equal(response.data.items[0].fileName,'报价 & 合同.pdf');
+  }
+  override({code:'0000',dataList:[],totalCount:0});
+  assert.equal((await api('list',{kind:'music'})).data.hasMore,false);
+  for(const sortCondition of [0,1,2,3,4,5,6,7])assert.equal((await api('list',{kind:'music',sortCondition})).status,200);
+});
+
+test('media endpoints reject invalid input and permissions rather than hiding errors as empty files', async t => {
+  const { api, records, override, phones } = await setup(t, 'media');
+  for (const body of [{kind:'photos'},{kind:'album'},{kind:'arbitrary'},{kind:'documents',category:'../PDF'},{kind:'music',sortCondition:8},{kind:'videos',pageNumber:201}])
+    assert.equal((await api('list',body)).status,400);
+  assert.equal(records.length,0);
+  assert.equal((await api('list',{kind:'music'},'wrong')).status,401);
+  override({code:'9999'});
+  assert.equal((await api('list',{kind:'music'})).status,502);
+  override({code:'0000',dataList:{}});
+  assert.equal((await api('list',{kind:'documents'})).status,502);
+  phones.get('gallery-phone').status='disconnected';
+  const count=records.length;assert.equal((await api('list',{kind:'videos'})).status,400);assert.equal(records.length,count);
+});
+
+test('recent files use official month-list request and flatten nested date/type groups in phone order', async t => {
+  const {api, records, override, authState}=await setup(t,'media');
+  const entry=(fileName,size=12)=>({savePath:'/sdcard/Download/'+fileName,fileName,fileSize:size,date:1700000000000});
+  override({code:'0000',dataList:[{time:'今天',dataList:{DOC:[entry('合同.pdf')],AUDIO:[entry('歌曲.mp3')]}},{time:'昨天',dataList:{VIDEO:[entry('视频.mp4')]}}],totalCount:2});
+  const result=await api('list',{kind:'recent',pageNumber:3});
+  assert.equal(result.status,200);assert.equal(result.data.items.length,3);assert.equal(result.data.hasMore,true);
+  assert.deepEqual(records.at(-1).body,{category:'',data:'',fileCount:0,type:'REQUEST_POSTS_ONE_MOTH_LIST',groupBy:1,sortCondition:5,pageIndex:0,pageNumber:3,firstFlag:false});
+  assert.deepEqual(result.data.items.map(v=>[v.fileName,v.recentTime,v.recentType]),[['合同.pdf','今天','DOC'],['歌曲.mp3','今天','AUDIO'],['视频.mp4','昨天','VIDEO']]);
+  assert.equal(result.data.items[2].isVideo,true);assert.equal(authState.requests,0);
+  assert.equal(records.at(-1).token,'private-phone-token');
+  assert(!JSON.stringify(result).includes('private-phone-token'));
+});
+
+test('recent pagination counts files rather than date groups, handles duplicates and empty groups', async t => {
+  const {api,override}=await setup(t,'media');
+  const file={savePath:'/sdcard/Download/a.pdf',fileName:'a.pdf',fileSize:12};
+  override({dataList:[{time:'今天',dataList:{DOC:[file,file],EMPTY:[]}}],totalCount:1});
+  let result=await api('list',{kind:'recent',pageNumber:2});
+  assert.equal(result.data.items.length,1);assert.equal(result.data.hasMore,true);
+  override({dataList:[{time:'昨天',dataList:{DOC:[{...file,isDirectory:'true'}]}}],totalCount:1});
+  result=await api('list',{kind:'recent',pageNumber:2,pageIndex:1});assert.equal(result.data.hasMore,false);assert.equal(result.data.items[0].isDirectory,true);
+  for(const dataList of [[],[{time:'今天',dataList:{DOC:[]}}]]) {
+    override({dataList});result=await api('list',{kind:'recent'});assert.deepEqual(result.data.items,[]);assert.equal(result.data.hasMore,false);
+  }
+});
+
+test('recent malformed groups, permission failures and unsupported sorting are explicit errors', async t => {
+  const {api,records,override}=await setup(t,'media');
+  for(const sortCondition of [0,1,2,3,4,6,7])assert.equal((await api('list',{kind:'recent',sortCondition})).status,400);
+  assert.equal(records.length,0);
+  for(const dataList of [[null],[{dataList:[]}],[{dataList:{DOC:{}}}],[{dataList:{DOC:[null]}}],[{fileName:'not-a-group'}]]) {
+    override({dataList});assert.equal((await api('list',{kind:'recent'})).data.error.code,'GALLERY_DATA_INVALID');
+  }
+  override({code:'9999'});assert.equal((await api('list',{kind:'recent'})).data.error.code,'GALLERY_REJECTED');
 });

@@ -381,3 +381,9 @@ Wi-Fi Direct 默认由原生客户端调用系统 pkexec 授权；安装系统�
 ## 原子笔记云同步 API
 
 通过 `/api/notes` 管理当前账号的增量索引、正文、普通文本写入和附件导出，使用现有本地鉴权与任务队列；详见[原子笔记云同步](notes.md)。
+
+## 手机文件分类 API
+
+`POST /api/sessions/:id/media/list` 提供视频、音乐与 Document 文档的官方分类列表，复用当前手机会话及分页验证。参数、官方请求类型和验证范围见[视频、音乐和文档](media.md)。管理操作继续使用现有 `/files/rename`、`/files/move`、`/files/delete` 与传输任务。
+
+最近文件使用同一路由的 `kind:"recent"`，默认排序为 5，按官方嵌套日期／类型组展开并分页；不接受其他排序。详情见[最近文件接口](media.md#最近文件)。

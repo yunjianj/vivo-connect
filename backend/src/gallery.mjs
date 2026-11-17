@@ -10,13 +10,28 @@ function storagePath(value) {
 }
 function payload(value) {
   if (value?.code !== undefined && String(value.code) !== '0000') {
-    throw new ApiError(502, 'GALLERY_REJECTED', String(value.code) === '9999' ? '请在手机上允许访问图库' : '手机未允许读取图库', { phoneCode: value.code });
+    throw new ApiError(502, 'GALLERY_REJECTED', String(value.code) === '9999' ? '请在手机文件管理中允许访问文件' : '手机未允许读取文件分类', { phoneCode: value.code });
   }
   let data = value?.data ?? value;
   if (typeof data === 'string') {
     try { data = JSON.parse(data); } catch { throw new ApiError(502, 'GALLERY_DATA_INVALID', '手机返回的图库数据无效'); }
   }
   return data;
+}
+function recentFiles(groups) {
+  const files = [];
+  for (const group of groups) {
+    if (!group || typeof group.dataList !== 'object' || !group.dataList || Array.isArray(group.dataList))
+      throw new ApiError(502, 'GALLERY_DATA_INVALID', '手机返回的最近文件分组无效');
+    for (const [type, entries] of Object.entries(group.dataList)) {
+      if (!Array.isArray(entries)) throw new ApiError(502, 'GALLERY_DATA_INVALID', '手机返回的最近文件类型列表无效');
+      for (const item of entries) {
+        if (!item || typeof item !== 'object' || Array.isArray(item)) throw new ApiError(502, 'GALLERY_DATA_INVALID', '手机返回的最近文件条目无效');
+        files.push({ ...item, recentTime: String(group.time ?? ''), recentType: type });
+      }
+    }
+  }
+  return files;
 }
 export function mediaItem(item) {
   const savePath = storagePath(item.savePath ?? item.data);
@@ -68,10 +83,11 @@ export class GalleryManager {
   }
   async list(id, options) {
     const s = this.session(id);
-    const { pageIndex = 0, pageNumber = 100, kind = 'photos', sortCondition = 5 } = options;
+    const { pageIndex = 0, pageNumber = 100, kind = 'photos', sortCondition = 5, category = 'ALL' } = options;
     requireThat(Number.isInteger(pageIndex) && pageIndex >= 0 && pageIndex <= 100000, 'pageIndex 无效');
     requireThat(Number.isInteger(pageNumber) && pageNumber > 0 && pageNumber <= 200, 'pageNumber 必须为 1–200');
-    requireThat(['photos', 'videos', 'album'].includes(kind) && [4, 5].includes(sortCondition), '图库类型或排序无效');
+    requireThat(['photos', 'videos', 'music', 'documents', 'recent', 'album'].includes(kind) && (kind === 'recent' ? [5] : ['photos', 'album'].includes(kind) ? [4, 5] : [0, 1, 2, 3, 4, 5, 6, 7]).includes(sortCondition), '图库类型或排序无效');
+    if (kind === 'documents') requireThat(['ALL', 'PDF', 'DOC', 'XLS', 'PPT', 'TXT', 'VCF', 'IWORK', 'CAD', 'PSD', 'XMIND', '其他'].includes(category), '文档分类无效');
     let raw;
     if (kind === 'album') {
       requireThat(['string', 'number'].includes(typeof options.keyID) && String(options.keyID).length <= 1024 &&
@@ -83,15 +99,15 @@ export class GalleryManager {
       });
     } else {
       if (kind === 'photos') await this.ensureAuthorization(s);
-      raw = await this.phones.json(s, '/pc_file_manager/channel', { category: '', data: '', fileCount: 0,
-        type: kind === 'photos' ? 'REQUEST_POSTS_IMAGELIST' : 'REQUEST_POSTS_VIDEOLIST', groupBy: kind === 'photos' ? 1 : 0,
+      raw = await this.phones.json(s, '/pc_file_manager/channel', { category: kind === 'documents' ? category : '', data: '', fileCount: 0,
+        type: { photos: 'REQUEST_POSTS_IMAGELIST', videos: 'REQUEST_POSTS_VIDEOLIST', music: 'REQUEST_POSTS_AUDIOLIST', documents: 'REQUEST_POSTS_WEB_DOCSLIST', recent: 'REQUEST_POSTS_ONE_MOTH_LIST' }[kind], groupBy: ['photos', 'recent'].includes(kind) ? 1 : kind === 'documents' ? 5 : 0,
         sortCondition, pageIndex, pageNumber, firstFlag: false });
     }
     const data = payload(raw), list = Array.isArray(data) ? data : data?.dataList;
-    if (!Array.isArray(list)) throw new ApiError(502, 'GALLERY_DATA_INVALID', '手机返回的照片列表无效');
+    if (!Array.isArray(list)) throw new ApiError(502, 'GALLERY_DATA_INVALID', '手机返回的文件分类列表无效');
     const seen = new Set();
-    const media = list.filter(item => item.isGroup !== true && item.isGroup !== 1 && item.isGroup !== 'true');
-    const items = media.map(mediaItem).filter(i => { if (seen.has(i.savePath)) return false; seen.add(i.savePath); return true; });
+    const media = (kind === 'recent' ? recentFiles(list) : list).filter(item => item.isGroup !== true && item.isGroup !== 1 && item.isGroup !== 'true');
+    const items = media.map(item => kind === 'recent' ? { ...mediaItem(item), recentTime: item.recentTime, recentType: item.recentType, isDirectory: item.isDirectory === true || item.isDirectory === 'true' } : mediaItem(item)).filter(i => { if (seen.has(i.savePath)) return false; seen.add(i.savePath); return true; });
     // Some phones report the current page size as totalCount (3, even when page 1
     // has another 3 records). A full page must remain navigable regardless of it.
     return { items, pageIndex, hasMore: media.length >= pageNumber, total: null };

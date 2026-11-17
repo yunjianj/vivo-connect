@@ -11,6 +11,7 @@
 #include "notes-selftest.h"
 #include "recordings-selftest.h"
 #include "gallery-selftest.h"
+#include "media-selftest.h"
 
 static QString autostartPath() {
     return QStandardPaths::writableLocation(QStandardPaths::ConfigLocation)+"/autostart/"+QString::fromUtf8(VIVO_DESKTOP_ID)+".desktop";
@@ -132,9 +133,9 @@ class FileTree : public QTreeWidget {
         if (target && internal) for (const auto &source : selectedPaths())
             if (invalidMoveTarget(source, target->data(0, Qt::UserRole).toString())) { target=nullptr; break; }
         if (target == hover) return;
-        if (hover) for (int c=0;c<columnCount();++c) hover->setBackground(c, QBrush());
+        if (hover) for (int c=0;c<columnCount();++c) { hover->setBackground(c, QBrush()); hover->setForeground(c, QBrush()); }
         hover = target;
-        if (hover) for (int c=0;c<columnCount();++c) hover->setBackground(c, QColor("#c8ebd9"));
+        if (hover) for (int c=0;c<columnCount();++c) { hover->setBackground(c, palette().brush(QPalette::Highlight)); hover->setForeground(c, palette().brush(QPalette::HighlightedText)); }
     }
 public:
     std::function<void(QStringList, QString)> upload;
@@ -287,11 +288,16 @@ class Window : public QMainWindow {
     QPushButton *reconnectButton = new QPushButton("重新连接"), *disconnectButton = new QPushButton("断开连接");
     QCheckBox *clipboardToggle = new QCheckBox("同步文本剪贴板");
     QTabWidget *contentTabs = nullptr;
+    QWidget *fileContainer=nullptr, *recordContainer=nullptr, *notesContainer=nullptr;
     QWidget *galleryContainer = nullptr;
     GalleryDialog *gallery = nullptr;
     RecordingsDialog *recordings = nullptr;
     NotesPanel *notesPanel = nullptr;
     QString galleryDevice;
+    bool cloudView=false;
+    QMap<QString,QWidget*> mediaContainers;
+    QMap<QString,GalleryDialog*> mediaPages;
+    QMap<QString,QString> mediaDevices;
     QSystemTrayIcon *tray = nullptr;
     QAction *trayClipboard = nullptr;
     bool quitting = false, simulatedTray = false;
@@ -386,6 +392,17 @@ class Window : public QMainWindow {
         updateClipboard();
         updateTrayClipboard(trayClipboard,clipboardToggle);
     }
+    void updateContentView() {
+        if(!contentTabs)return;
+        const int recordIndex=contentTabs->indexOf(recordContainer), notesIndex=contentTabs->indexOf(notesContainer);
+        if(cloudView) {
+            contentTabs->setTabVisible(recordIndex,true); contentTabs->setTabVisible(notesIndex,true); contentTabs->setCurrentIndex(recordIndex);
+            for(int i=0;i<contentTabs->count();++i)if(i!=recordIndex && i!=notesIndex)contentTabs->setTabVisible(i,false);
+        } else {
+            for(int i=0;i<contentTabs->count();++i)if(i!=recordIndex && i!=notesIndex)contentTabs->setTabVisible(i,true);
+            contentTabs->setCurrentIndex(0); contentTabs->setTabVisible(recordIndex,false); contentTabs->setTabVisible(notesIndex,false);
+        }
+    }
     void refresh() {
         if (refreshing) return;
         refreshing = true;
@@ -398,21 +415,30 @@ class Window : public QMainWindow {
         history.select(selected);
         if (wasConnected && !connected()) { tree->clear(); report("手机连接已断开："+deviceStatus(selectedDevice())); }
         { QSignalBlocker block(devices); devices->clear();
+          auto *cloud=new QListWidgetItem("☁  云端\n "); cloud->setData(Qt::UserRole,QStringLiteral("__cloud__")); devices->addItem(cloud); if(cloudView)devices->setCurrentItem(cloud);
           for (auto x : sessions) { auto o = x.toObject(), phone = o.value("phone").toObject();
             QString name = phone.value("mobileDeviceName").toString("vivo 手机"); bool active = o.value("status") == "connected";
             QString stateText = deviceStatus(o);
             auto *item = new QListWidgetItem((active ? "●  " : "○  ") + name + "\n    " + stateText);
             item->setToolTip(o.value("reconnectWait").toObject().value("message").toString());
             item->setData(Qt::UserRole, o.value("id").toString()); devices->addItem(item);
-            if (o.value("id").toString() == selected) { devices->setCurrentItem(item); QString r = phone.value("innerRoot").toString(); if (!r.isEmpty() && r != "/") root = r; }
+            if (o.value("id").toString() == selected) { if(!cloudView)devices->setCurrentItem(item); QString r = phone.value("innerRoot").toString(); if (!r.isEmpty() && r != "/") root = r; }
           }
         }
         if (gallery && !gallery->isOperating() && (!connected() || galleryDevice!=selected)) { gallery->hide(); gallery->deleteLater(); gallery=nullptr; galleryDevice.clear(); if (auto *hint=galleryContainer->findChild<QLabel *>("galleryHint")) hint->show(); }
-        if (contentTabs && contentTabs->currentIndex()==1 && connected() && !gallery) { if (auto *hint=galleryContainer->findChild<QLabel *>("galleryHint")) hint->hide(); showGallery(); }
+        if (contentTabs && contentTabs->currentWidget()==galleryContainer && connected() && !gallery) { if (auto *hint=galleryContainer->findChild<QLabel *>("galleryHint")) hint->hide(); showGallery(); }
+        for(const auto &kind:mediaContainers.keys()) {
+            auto *page=mediaPages.value(kind);
+            if(page && !page->isOperating() && (!connected() || mediaDevices.value(kind)!=selected)) {
+                page->hide();page->deleteLater();mediaPages.remove(kind);mediaDevices.remove(kind);
+                mediaContainers[kind]->findChild<QLabel*>("mediaHint")->show();
+            }
+            if(contentTabs->currentWidget()==mediaContainers[kind] && connected() && !mediaPages.value(kind))showCollection(kind);
+        }
         auto currentDevice=selectedDevice();
         reconnectButton->setText(currentDevice.value("needsAuthorization").toBool()?"重新授权":"重新连接");
-        reconnectButton->setEnabled(!selected.isEmpty() && !connected() && !currentDevice.value("reconnecting").toBool() && connectJob.isEmpty());
-        disconnectButton->setEnabled(canPauseDevice(currentDevice));
+        reconnectButton->setEnabled(!cloudView && !selected.isEmpty() && !connected() && !currentDevice.value("reconnecting").toBool() && connectJob.isEmpty());
+        disconnectButton->setEnabled(!cloudView && canPauseDevice(currentDevice));
         auto acc = api.call("GET", "/api/account").toObject();
         showAccountState(account,accountButton,acc,api.error.isEmpty());
         if (!connectJob.isEmpty()) {
@@ -425,7 +451,7 @@ class Window : public QMainWindow {
         if (!pairJob.isEmpty()) {
             auto job = api.call("GET", "/api/jobs/" + pairJob).toObject(); QString status = job.value("status").toString();
             if (pairStatus && (status == "queued" || status == "running")) pairStatus->setText("等待手机扫码并确认连接…");
-            if (status == "succeeded") { selected = job.value("result").toObject().value("id").toString(); pairJob.clear(); if (pairDialog) pairDialog->accept(); report("手机已连接"); QTimer::singleShot(0, this, [this]{ browse(root); }); }
+            if (status == "succeeded") { selected = job.value("result").toObject().value("id").toString(); cloudView=false; updateContentView(); pairJob.clear(); if (pairDialog) pairDialog->accept(); report("手机已连接"); QTimer::singleShot(0, this, [this]{ browse(root); }); }
             else if (status == "failed" || status == "cancelled") { pairJob.clear(); if (pairStatus) pairStatus->setText(job.value("error").toObject().value("message").toString("连接已结束，请刷新二维码")); }
         }
         int desired = (waitingDirect || !pairJob.isEmpty() || !connectJob.isEmpty() || acc.value("login").toObject().value("status").toString()=="waiting") ? 1000 : 5000;
@@ -463,18 +489,23 @@ class Window : public QMainWindow {
         }
         filter(); tree->scrollToTop(); report(QString("%1 个项目").arg(tree->topLevelItemCount())); return true;
     }
-    void showGallery() {
+    void showGallery() { showCollection({}); }
+    void showCollection(QString kind) {
         if (!connected()) { report("请先连接手机"); return; }
         const QString device=selected;
-        if (gallery && (galleryDevice==device || gallery->isOperating())) return;
-        if (gallery) { gallery->hide(); gallery->deleteLater(); }
-        auto *dialog=new GalleryDialog(state,port,device,galleryContainer); gallery=dialog; galleryDevice=device;
-        galleryContainer->layout()->addWidget(dialog);
+        auto *existing=kind.isEmpty()?gallery:mediaPages.value(kind);
+        const QString previous=kind.isEmpty()?galleryDevice:mediaDevices.value(kind);
+        if(existing && (previous==device || existing->isOperating()))return;
+        if(existing){existing->hide();existing->deleteLater();}
+        auto *container=kind.isEmpty()?galleryContainer:mediaContainers.value(kind);
+        auto *dialog=new GalleryDialog(state,port,device,container,kind);
+        if(kind.isEmpty()){gallery=dialog;galleryDevice=device;}else{mediaPages[kind]=dialog;mediaDevices[kind]=device;container->findChild<QLabel*>("mediaHint")->hide();}
+        container->layout()->addWidget(dialog);
         dialog->exportFiles=[this,device,dialog](QStringList paths,bool openOriginal){
-            if(selected!=device || !connected()) { QMessageBox::warning(dialog,"手机图库","设备已断开，请重新打开图库"); return; }
+            if(selected!=device || !connected()) { QMessageBox::warning(dialog,"手机文件","设备已断开，请重新连接"); return; }
             QString destination;
-            if(!openOriginal) { destination=QFileDialog::getExistingDirectory(dialog,"选择照片导出目录"); if(destination.isEmpty())return; }
-            QProgressDialog progress("正在准备原文件…","取消",0,0,dialog); progress.setWindowTitle("手机图库"); progress.setWindowModality(Qt::WindowModal); progress.setMinimumDuration(0); progress.show();
+            if(!openOriginal) { destination=QFileDialog::getExistingDirectory(dialog,"选择文件导出目录"); if(destination.isEmpty())return; }
+            QProgressDialog progress("正在准备原文件…","取消",0,0,dialog); progress.setWindowTitle("手机文件"); progress.setWindowModality(Qt::WindowModal); progress.setMinimumDuration(0); progress.show();
             bool notifyFailed=false; int copied=0;
             QStringList pending=paths;
             while(!pending.isEmpty() && !progress.wasCanceled()) {
@@ -501,12 +532,12 @@ class Window : public QMainWindow {
                 }
             }
             progress.close();
-            if(!openOriginal)QMessageBox::information(dialog,"导出照片",QString("已导出 %1 / %2 个文件到所选目录").arg(copied).arg(paths.size())+(notifyFailed?"；手机完成通知失败，详见传输记录":""));
+            if(!openOriginal)QMessageBox::information(dialog,"导出文件",QString("已导出 %1 / %2 个文件到所选目录").arg(copied).arg(paths.size())+(notifyFailed?"；手机完成通知失败，详见传输记录":""));
         };
         dialog->dragFiles=[this,device,dialog](QJsonArray files,QWidget *source){
-            if(selected!=device || !connected()) { QMessageBox::warning(dialog,"手机相册","设备已断开，请重新连接"); return; }
+            if(selected!=device || !connected()) { QMessageBox::warning(dialog,"手机文件","设备已断开，请重新连接"); return; }
             auto virtualDrag=makeVirtualFiles(files);
-            if(virtualDrag.urls.isEmpty()) { QMessageBox::warning(dialog,"手机相册","无法创建拖放文件，请检查 FUSE 和文件信息"); return; }
+            if(virtualDrag.urls.isEmpty()) { QMessageBox::warning(dialog,"手机文件","无法创建拖放文件，请检查 FUSE 和文件信息"); return; }
             QStringList paths; for(const auto &value:files)paths<<value.toObject().value("path").toString();
             auto *mime=new LazyMime(QJsonDocument(QJsonArray::fromStringList(paths)).toJson(QJsonDocument::Compact),[urls=virtualDrag.urls]{return urls;});
             auto *drag=new QDrag(source); drag->setMimeData(mime);
@@ -514,9 +545,9 @@ class Window : public QMainWindow {
             virtualDrag.finish(result!=Qt::IgnoreAction);
         };
         dialog->copyFiles=[this,device,dialog](QJsonArray files){
-            if(selected!=device || !connected()) { QMessageBox::warning(dialog,"手机相册","设备已断开，请重新连接"); return; }
+            if(selected!=device || !connected()) { QMessageBox::warning(dialog,"手机文件","设备已断开，请重新连接"); return; }
             auto virtualFiles=makeVirtualFiles(files);
-            if(virtualFiles.urls.isEmpty()) { QMessageBox::warning(dialog,"手机相册","无法准备复制，请检查 FUSE 和文件信息"); return; }
+            if(virtualFiles.urls.isEmpty()) { QMessageBox::warning(dialog,"手机文件","无法准备复制，请检查 FUSE 和文件信息"); return; }
             auto *mime=new QMimeData; mime->setUrls(virtualFiles.urls);
             mime->setData("application/x-kde-cutselection","0");
             QApplication::clipboard()->setMimeData(mime);
@@ -524,11 +555,11 @@ class Window : public QMainWindow {
             // the clipboard URLs never reads its contents.
             virtualFiles.finish(true);
         };
-        dialog->importFiles=[this,device,dialog](QStringList paths){
+        dialog->importFiles=[this,device,dialog,kind](QStringList paths){
             if(selected!=device || !connected())return;
-            if(paths.isEmpty())paths=QFileDialog::getOpenFileNames(dialog,"导入照片或视频",{},"照片和视频 (*.jpg *.jpeg *.png *.webp *.gif *.heic *.heif *.mp4 *.mov *.mkv *.3gp);;所有文件 (*)");
+            if(paths.isEmpty())paths=QFileDialog::getOpenFileNames(dialog,"导入文件",{},kind=="recent"?"所有文件 (*)":kind=="music"?"音乐 (*.mp3 *.flac *.m4a *.aac *.ogg *.wav *.wma *.ape *.opus);;所有文件 (*)":kind=="documents"?"文档 (*.pdf *.doc *.docx *.xls *.xlsx *.ppt *.pptx *.txt *.csv *.md *.vcf *.pages *.numbers *.key);;所有文件 (*)":kind=="videos"?"视频 (*.mp4 *.mov *.mkv *.avi *.webm *.3gp *.m4v *.ts);;所有文件 (*)":"照片和视频 (*.jpg *.jpeg *.png *.webp *.gif *.heic *.heif *.mp4 *.mov *.mkv *.3gp);;所有文件 (*)");
             if(paths.isEmpty())return;
-            bool ok=false; QString target=QInputDialog::getText(dialog,"导入到手机","手机目标文件夹",QLineEdit::Normal,root+"/DCIM/Camera",&ok);
+            bool ok=false; QString target=QInputDialog::getText(dialog,"导入到手机","手机目标文件夹",QLineEdit::Normal,root+(kind=="recent"?"/Download":kind=="music"?"/Music":kind=="documents"?"/Documents":kind=="videos"?"/Movies":"/DCIM/Camera"),&ok);
             if(ok && !target.isEmpty())upload(paths,actual(target));
         };
     }
@@ -833,25 +864,26 @@ public:
     void quitApplication() { if (serviceOperation && serviceOperation->state()!=QProcess::NotRunning) { report("Wi-Fi Direct 服务设置仍在进行，请稍候"); return; } quitting=true; if (pairDialog) pairDialog->reject(); if (tray) tray->hide(); close(); QCoreApplication::quit(); }
     Window(QString project, QString state, int port, bool testTray=false) : api(state, port), clipboardApi(state,port), project(std::move(project)), state(std::move(state)), simulatedTray(testTray), port(port) {
         setWindowTitle("vivo Connect · 手机文件"); resize(1080,760); setMinimumSize(820,620);
-        qApp->installEventFilter(new MouseNavigation(this,[this](int direction){if (contentTabs && contentTabs->currentIndex()==0) navigateHistory(direction);}));
+        qApp->installEventFilter(new MouseNavigation(this,[this](int direction){if (contentTabs && contentTabs->currentWidget()==fileContainer) navigateHistory(direction);}));
         auto *central = new QWidget; setCentralWidget(central); auto *outer = new QHBoxLayout(central); outer->setContentsMargins(0,0,0,0); outer->setSpacing(0);
         auto *sidebar = new QWidget; sidebar->setFixedWidth(230); sidebar->setObjectName("sidebar"); auto *side = new QVBoxLayout(sidebar); side->setContentsMargins(18,18,18,18);
+        devices->setObjectName("deviceList");
         auto *brand = new QLabel("↔  vivo Connect"); QFont brandFont=brand->font(); brandFont.setPointSize(17); brandFont.setBold(true); brand->setFont(brandFont); side->addWidget(brand); side->addWidget(new QLabel("我的设备")); side->addWidget(devices,1);
         auto *pairButton = new QPushButton("＋ 添加设备"); auto *jobs = new QPushButton("传输记录"); auto *wifiService = new QPushButton("Wi-Fi Direct 设置");
         auto *autostart = new QCheckBox("开机后台启动"); autostart->setChecked(QFileInfo::exists(autostartPath()));
         account->setText("正在获取账号状态…"); accountButton->hide(); reconnectButton->setEnabled(false); disconnectButton->setEnabled(false);
         side->addWidget(pairButton); side->addWidget(reconnectButton); side->addWidget(disconnectButton); side->addWidget(wifiService); side->addWidget(jobs); clipboardToggle->setEnabled(false); side->addWidget(clipboardToggle); side->addWidget(autostart); side->addWidget(account); side->addWidget(accountButton); outer->addWidget(sidebar);
-        auto *content = new QWidget; auto *column = new QVBoxLayout(content); column->setContentsMargins(28,24,28,24); column->setSpacing(12);
-        auto *heading = new QLabel("手机文件"); QFont h=heading->font();h.setPointSize(20);h.setBold(true);heading->setFont(h);column->addWidget(heading);
+        auto *content = new QWidget; fileContainer=content; auto *column = new QVBoxLayout(content); column->setContentsMargins(28,24,28,24); column->setSpacing(12);
+        auto *heading = new QLabel("手机存储"); QFont h=heading->font();h.setPointSize(20);h.setBold(true);heading->setFont(h);column->addWidget(heading);
         auto *nav = new QHBoxLayout; auto *back = new QPushButton("←"); auto *forward = new QPushButton("→"); back->setToolTip("后退 (Alt+←)"); forward->setToolTip("前进 (Alt+→)"); auto *home = new QPushButton("手机存储"); auto *up = new QPushButton("上一级"); auto *reload = new QPushButton("刷新"); path->setText(root + "/"); nav->addWidget(back);nav->addWidget(forward);nav->addWidget(home);nav->addWidget(up);nav->addWidget(path,1);nav->addWidget(reload);column->addLayout(nav);
         auto *actions = new QHBoxLayout; auto *choose = new QPushButton("上传文件"); auto *mkdir = new QPushButton("新建文件夹"); auto *receiveButton = new QPushButton("接收所选文件"); search->setPlaceholderText("搜索当前文件夹"); actions->addWidget(choose); actions->addWidget(mkdir); actions->addWidget(receiveButton); actions->addStretch(1); actions->addWidget(search); column->addLayout(actions);
         column->addWidget(new QLabel("拖入电脑文件上传 · 将手机文件拖到电脑接收 · 右键管理文件")); column->addWidget(tree,1); info->setWordWrap(true); column->addWidget(info);
-        contentTabs=new QTabWidget; contentTabs->setObjectName("contentTabs"); contentTabs->addTab(content,"手机文件");
+        contentTabs=new QTabWidget; contentTabs->setObjectName("contentTabs"); contentTabs->addTab(content,"手机存储");
         galleryContainer=new QWidget; auto *galleryLayout=new QVBoxLayout(galleryContainer); galleryLayout->setContentsMargins(28,24,28,24);
         auto *galleryHint=new QLabel("连接手机后查看相册"); galleryHint->setAlignment(Qt::AlignCenter); galleryHint->setObjectName("galleryHint"); galleryLayout->addWidget(galleryHint);
-        contentTabs->addTab(galleryContainer,"手机相册"); outer->addWidget(contentTabs,1);
-        auto *recordContainer=new QWidget; auto *recordLayout=new QVBoxLayout(recordContainer); recordLayout->setContentsMargins(24,20,24,20); contentTabs->addTab(recordContainer,"录音机云同步");
-        connect(contentTabs,&QTabWidget::currentChanged,this,[this,recordContainer,recordLayout](int index){if(index==2 && !recordings){recordings=new RecordingsDialog(this->state,this->port,recordContainer);recordLayout->addWidget(recordings);recordings->dragRecording=[this](QJsonArray items,QWidget *source){
+        contentTabs->addTab(galleryContainer,"相册"); outer->addWidget(contentTabs,1);
+        recordContainer=new QWidget; auto *recordLayout=new QVBoxLayout(recordContainer); recordLayout->setContentsMargins(24,20,24,20); contentTabs->addTab(recordContainer,"录音机云同步");
+        connect(contentTabs,&QTabWidget::currentChanged,this,[this,recordLayout](int){if(contentTabs->currentWidget()==recordContainer && !recordings){recordings=new RecordingsDialog(this->state,this->port,recordContainer);recordLayout->addWidget(recordings);recordings->dragRecording=[this](QJsonArray items,QWidget *source){
             QJsonArray files; QSet<QString> used;
             for(const auto &value:items) { auto item=value.toObject();
             if(!item.value("hasAudio").toBool() || item.value("size").toDouble()<=0){report("所选录音中有音频未上传或大小未知，请单独使用导出操作",true);return;}
@@ -864,17 +896,28 @@ public:
             if(v.urls.isEmpty()){report("无法创建录音拖放文件，请检查 FUSE 和录音大小",true);return;}
             auto *mime=new LazyMime("[]",[urls=v.urls]{return urls;}); auto *drag=new QDrag(source);drag->setMimeData(mime);auto result=drag->exec(Qt::CopyAction,Qt::CopyAction);v.finish(result!=Qt::IgnoreAction);
         };recordings->show();}});
-        auto *notesContainer=new QWidget;auto *notesLayout=new QVBoxLayout(notesContainer);notesLayout->setContentsMargins(24,20,24,20);contentTabs->addTab(notesContainer,"原子笔记云同步");
-        connect(contentTabs,&QTabWidget::currentChanged,this,[this,notesContainer,notesLayout](int index){if(index==3&&!notesPanel){notesPanel=new NotesPanel(this->state,this->port,notesContainer);notesLayout->addWidget(notesPanel);}});
-        connect(contentTabs,&QTabWidget::currentChanged,this,[this,galleryHint](int index){ if(index==1 && connected()) { galleryHint->hide(); showGallery(); } });
-        setStyleSheet("#sidebar{background:#f8f9fa;border-right:1px solid #d8dfe4} QMainWindow,QWidget{font-size:13px} QPushButton{padding:7px 10px} QTreeWidget{background:white;alternate-background-color:#f7fafc;border:1px solid #d9e0e5} QTreeWidget::item{padding:7px} QTreeWidget::item:selected{background:#dceffa;color:#27343d}"); tree->setAlternatingRowColors(true); tree->setDragDropMode(QAbstractItemView::DragDrop);
+        notesContainer=new QWidget;auto *notesLayout=new QVBoxLayout(notesContainer);notesLayout->setContentsMargins(24,20,24,20);contentTabs->addTab(notesContainer,"原子笔记云同步");
+        connect(contentTabs,&QTabWidget::currentChanged,this,[this,notesLayout](int){if(contentTabs->currentWidget()==notesContainer&&!notesPanel){notesPanel=new NotesPanel(this->state,this->port,notesContainer);notesLayout->addWidget(notesPanel);}});
+        for(const auto &entry:QList<QPair<QString,QString>>{{"recent","最近文件"},{"videos","视频"},{"music","音乐"},{"documents","文档"}}) {
+            auto *container=new QWidget;auto *layout=new QVBoxLayout(container);layout->setContentsMargins(28,24,28,24);
+            auto *hint=new QLabel("连接手机后查看"+entry.second);hint->setObjectName("mediaHint");hint->setAlignment(Qt::AlignCenter);layout->addWidget(hint);
+            mediaContainers[entry.first]=container;contentTabs->addTab(container,entry.second);
+        }
+        connect(contentTabs,&QTabWidget::currentChanged,this,[this](int){
+            if(!connected())return;
+            for(const auto &kind:mediaContainers.keys())if(contentTabs->currentWidget()==mediaContainers[kind])showCollection(kind);
+        });
+        connect(contentTabs,&QTabWidget::currentChanged,this,[this,galleryHint](int){ if(contentTabs->currentWidget()==galleryContainer && connected()) { galleryHint->hide(); showGallery(); } });
+        contentTabs->tabBar()->moveTab(contentTabs->indexOf(mediaContainers.value("recent")),0);
+        updateContentView();
+        setStyleSheet("#sidebar{background:palette(window);border-right:1px solid palette(mid)} QMainWindow,QWidget{font-size:13px} QPushButton{padding:7px 10px} QTreeWidget::item{padding:7px}"); tree->setAlternatingRowColors(true); tree->setDragDropMode(QAbstractItemView::DragDrop);
         tree->upload=[this](auto p,auto d){ upload(p,d); }; tree->movePhone=[this](auto p,auto d){ movePhone(p,d); }; tree->currentDirectory=[this]{ return directory; };
         tree->virtualFiles=[this](auto files){return makeVirtualFiles(files);};
         tree->dragStatus=[this](QString message){ report(message); };
-        connect(devices,&QListWidget::currentItemChanged,this,[this](QListWidgetItem *item){ if (!item) return; selected=item->data(Qt::UserRole).toString(); history.select(selected); directory=root; tree->clear(); refresh(); if (connected()) browse(root); });
+        connect(devices,&QListWidget::currentItemChanged,this,[this](QListWidgetItem *item){ if (!item) return; const QString id=item->data(Qt::UserRole).toString(); if(id=="__cloud__") { cloudView=true;updateContentView();refresh();return; } const bool changed=selected!=id; cloudView=false; selected=id; updateContentView(); if(changed){history.select(selected); directory=root; tree->clear();} refresh(); if (changed && connected()) browse(root); });
         devices->setContextMenuPolicy(Qt::CustomContextMenu);
         connect(devices,&QWidget::customContextMenuRequested,this,[this](QPoint pos){
-            auto *item=devices->itemAt(pos); if(!item)return; QString id=item->data(Qt::UserRole).toString();
+            auto *item=devices->itemAt(pos); if(!item)return; QString id=item->data(Qt::UserRole).toString(); if(id=="__cloud__")return;
             QMenu menu(this); auto *forget=menu.addAction("忘记设备…");
             if(menu.exec(devices->viewport()->mapToGlobal(pos))!=forget)return;
             if(QMessageBox::question(this,"忘记设备","忘记此设备并删除其保存的连接凭据？再次连接可能需要扫码。")!=QMessageBox::Yes)return;
@@ -1027,6 +1070,7 @@ int main(int argc, char **argv) {
         request.clear(); mock.call("PATCH", "/api/test", {{"enabled", false}});
         if (!mock.error.isEmpty() || !request.startsWith("PATCH /api/test ") || !request.contains("\"enabled\":false")) return 23;
         if (!gallerySelfTest(temporary.path())) return 37;
+        if (!mediaSelfTest(temporary.path())) return 48;
         if (!recordingsSelfTest(temporary.path())) return 38;
         if (!notesSelfTest(temporary.path())) return 39;
         server.close();
@@ -1035,6 +1079,12 @@ int main(int argc, char **argv) {
         bool previousQuit=QApplication::quitOnLastWindowClosed();
         {
             Window background(QString::fromUtf8(PROJECT_ROOT),temporary.filePath("missing"),server.serverPort(),true);
+            auto *tabs=background.findChild<QTabWidget *>("contentTabs"); auto *list=background.findChild<QListWidget *>("deviceList");
+            if(!tabs || !list || tabs->tabText(0)!="最近文件" || tabs->tabText(1)!="手机存储" || tabs->isTabVisible(3) || tabs->isTabVisible(4) || !tabs->isTabVisible(0))return 41;
+            auto *cloud=new QListWidgetItem("云端",list);cloud->setData(Qt::UserRole,"__cloud__"); list->setCurrentItem(cloud);
+            if(!tabs->isTabVisible(3) || !tabs->isTabVisible(4) || tabs->isTabVisible(0) || tabs->currentIndex()!=3)return 42;
+            auto *phone=new QListWidgetItem("手机",list);phone->setData(Qt::UserRole,"test-phone");list->setCurrentItem(phone);
+            if(tabs->isTabVisible(3) || tabs->isTabVisible(4) || !tabs->isTabVisible(0) || tabs->currentIndex()!=0)return 43;
             background.show(); background.close();
             if (background.isVisible() || QApplication::quitOnLastWindowClosed()) return 32;
             auto *trayAction=background.findChild<QAction *>("trayClipboard");
@@ -1046,7 +1096,7 @@ int main(int argc, char **argv) {
             if (!background.findChild<QAction *>("trayQuit")) return 36;
         }
         QApplication::setQuitOnLastWindowClosed(previousQuit);
-        fprintf(stdout, "Qt drag/drop, MIME, history, gallery, recordings, notes, tray lifecycle and local API checks passed\n"); return 0;
+        fprintf(stdout, "Qt drag/drop, MIME, history, gallery, media, recordings, notes, tray lifecycle and local API checks passed\n"); return 0;
     }
     QString root=QDir(QString::fromUtf8(PROJECT_ROOT)).canonicalPath();
     QString state=qEnvironmentVariable("VIVO_STATE_DIR", root+"/.vivo-connect");

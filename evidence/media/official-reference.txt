@@ -1,0 +1,196 @@
+Windows v7.0.6.0-cn local static reference: video / audio / Document categories.
+No account or phone data included.
+
+SOURCE analysis/pretty/app-modules.js:133
+        t.protocal = "https://";
+        t.THUMB_URL = "/pc_file_manager/thumb", t.DOWNLOAD_THUMB_NEW = "/pc_file_manager/new/thumb", 
+        t.HTTP_REQUEST_WEB_THUMB = "http_request_web_thumb", t.HTTP_REQUEST_SINGLE_DOWNLOAD = "http_request_single_download", 
+        t.API_FM_SYNC_DATA_HISTORY = "/sync_data/history", t.pageNumber = 500, t.cloudPageNumber = 100, 
+        t.getHomeData = (e, t = !1) => c.requestPost(e, "/pc_file_manager/channel", Object.assign(Object.assign({}, n.DEFAULT_CHANNEL_PARAMS), {
+            firstFlag: t
+        })), t.getDataList = (e, t, a = !1) => c.requestPost(e, "/pc_file_manager/channel", t, {
+            noCancel: a
+        }), t.getInitDataList = (e, t) => c.requestPost(e, "/pc_file_manager/channel", t), 
+        t.getAblumList = e => u.getLoadError() ? Promise.reject(new Error("load error mock")) : c.requestGet(e, "/pc_back/album_collect_info"), 
+
+SOURCE analysis/pretty/app-modules.js:2203
+        !function(e) {
+            e.RECENTFILE = "REQUEST_POSTS_ONE_MOTH_LIST", e.VIDEOLIST = "REQUEST_POSTS_VIDEOLIST", 
+            e.IMAGELIST = "REQUEST_POSTS_IMAGELIST", e.AUDIOLIST = "REQUEST_POSTS_AUDIOLIST", 
+            e.DOCSLIST = "REQUEST_POSTS_DOCSLIST", e.DOCSLISTNEW = "REQUEST_POSTS_WEB_DOCSLIST", 
+            e.WECHAT = "REQUEST_POSTS_NEW_WECHAT", e.QQ = "REQUEST_POSTS_NEW_QQ", e.FILELIST = "REQUEST_POSTS_FILELIST", 
+            e.HOMEDATA = "REQUEST_POSTS_HOMEDATA", e.RECENTEDELETE = "REQUEST_POSTS_RECENTE_DELETE_LIST", 
+            e.APP = "REQUEST_POSTS_NEW_APP";
+        }(n = t.REQUEST_POSTS_TYPE || (t.REQUEST_POSTS_TYPE = {})), function(e) {
+            e[e.BY_NAME_ASC = 0] = "BY_NAME_ASC", e[e.BY_NAME_DESC = 1] = "BY_NAME_DESC", e[e.BY_TYPE_ASC = 2] = "BY_TYPE_ASC", 
+            e[e.BY_TYPE_DESC = 3] = "BY_TYPE_DESC", e[e.BY_TIME_ASC = 4] = "BY_TIME_ASC", e[e.BY_TIME_DESC = 5] = "BY_TIME_DESC", 
+            e[e.BY_SIZE_ASC = 6] = "BY_SIZE_ASC", e[e.BY_SIZE_DESC = 7] = "BY_SIZE_DESC", e[e.BY_DEFAULT = 8] = "BY_DEFAULT";
+        }(r = t.SORT_TYPY || (t.SORT_TYPY = {})), function(e) {
+            e[e.BY_NAME_DESC = 1] = "BY_NAME_DESC", e[e.BY_TYPE_DESC = 3] = "BY_TYPE_DESC", 
+            e[e.BY_SIZE_ASC = 5] = "BY_SIZE_ASC", e[e.BY_SIZE_DESC = 15] = "BY_SIZE_DESC", e[e.BY_TIME_ASC = 6] = "BY_TIME_ASC", 
+            e[e.BY_TIME_DESC = 16] = "BY_TIME_DESC";
+        }(t.RECYCLE_SORT_TYPY || (t.RECYCLE_SORT_TYPY = {})), function(e) {
+            e[e.BY_ADD_TIME_ASC = 4] = "BY_ADD_TIME_ASC", e[e.BY_ADD_TIME_DESC = 5] = "BY_ADD_TIME_DESC", 
+            e[e.BY_SHOOT_TIME_ASC = 8] = "BY_SHOOT_TIME_ASC", e[e.BY_SHOOT_TIME_DESC = 9] = "BY_SHOOT_TIME_DESC";
+        }(t.IMAGE_SORT_TYPY || (t.IMAGE_SORT_TYPY = {})), function(e) {
+            e[e.BY_NONE = 0] = "BY_NONE", e[e.BY_EACH_DAY = 1] = "BY_EACH_DAY", e[e.BY_EACH_MONTH = 2] = "BY_EACH_MONTH", 
+            e[e.BY_EACH_YEAR = 3] = "BY_EACH_YEAR", e[e.BY_DIRECTORY = 4] = "BY_DIRECTORY", 
+            e[e.BY_DOCUMENT = 5] = "BY_DOCUMENT";
+        }(o = t.GROUP_TYPE || (t.GROUP_TYPE = {})), t.DEFAULT_CHANNEL_PARAMS = {
+            category: "",
+            data: "",
+            fileCount: 0,
+            sortCondition: r.BY_NAME_ASC,
+            groupBy: o.BY_NONE,
+            type: n.HOMEDATA,
+            pageIndex: 0,
+            pageNumber: 200
+        }, t.DEFAULT_RECENTFILE = Object.assign(Object.assign({}, t.DEFAULT_CHANNEL_PARAMS), {
+            sortCondition: r.BY_TIME_DESC,
+            groupBy: o.BY_EACH_DAY,
+            type: n.RECENTFILE
+        }), t.DEFAULT_RECENTDELETE = Object.assign(Object.assign({}, t.DEFAULT_CHANNEL_PARAMS), {
+            sortCondition: r.BY_TIME_DESC,
+            groupBy: o.BY_EACH_DAY,
+            type: n.RECENTEDELETE
+        }), t.DEFAULT_IMAGE = Object.assign(Object.assign({}, t.DEFAULT_CHANNEL_PARAMS), {
+            sortCondition: r.BY_TIME_DESC,
+            groupBy: o.BY_EACH_DAY,
+            type: n.IMAGELIST
+        }), t.DEFAULT_IMAGE_FOLDER = Object.assign(Object.assign({}, t.DEFAULT_CHANNEL_PARAMS), {
+            sortCondition: r.BY_TIME_DESC,
+            groupBy: o.BY_DIRECTORY,
+            type: n.IMAGELIST
+        }), t.DEFAULT_VEDIO = Object.assign(Object.assign({}, t.DEFAULT_CHANNEL_PARAMS), {
+            sortCondition: r.BY_TIME_DESC,
+            type: n.VIDEOLIST
+        }), t.DEFAULT_AUDIO = Object.assign(Object.assign({}, t.DEFAULT_CHANNEL_PARAMS), {
+            sortCondition: r.BY_TIME_DESC,
+            type: n.AUDIOLIST
+        }), t.DEFAULT_DOC = Object.assign(Object.assign({}, t.DEFAULT_CHANNEL_PARAMS), {
+            data: "[PDF, DOC, XLS, PPT, TXT, VCF,IWORK,CAD, PSD, XMIND, 其他]",
+            groupBy: o.BY_DOCUMENT,
+            sortCondition: r.BY_TIME_DESC,
+            type: n.DOCSLIST
+        }), t.DEFAULT_APP = Object.assign(Object.assign({}, t.DEFAULT_CHANNEL_PARAMS), {
+            data: "[PDF, DOC, XLS, PPT, TXT, VCF,IWORK,CAD, PSD, XMIND, 其他]",
+            groupBy: o.BY_DOCUMENT,
+            sortCondition: r.BY_TIME_DESC,
+            type: n.APP
+        }), function(e) {
+            e.ALL = "ALL", e.PDF = "PDF", e.DOC = "DOC", e.XLS = "XLS", e.PPT = "PPT", e.TXT = "TXT", 
+            e.VCF = "VCF", e.IWORK = "IWORK", e.CAD = "CAD", e.PSD = "PSD", e.XMIND = "XMIND", 
+            e.OTHER = "其他";
+        }(s = t.DOC_TYPE || (t.DOC_TYPE = {})), t.DEFAULT_DOC_NEW = Object.assign(Object.assign({}, t.DEFAULT_CHANNEL_PARAMS), {
+            groupBy: o.BY_DOCUMENT,
+            sortCondition: r.BY_TIME_DESC,
+            type: n.DOCSLISTNEW,
+            category: s.ALL
+        }), t.getWxQqParam = (e, a, s = "") => {
+            let c = n.WECHAT;
+
+SOURCE analysis/pretty/168.js:260
+            value: !0
+        });
+        const n = i(2), o = n.__importDefault(i(6)), a = i(7), r = n.__importDefault(i(6482)), s = n.__importDefault(i(6485)), l = i(136), u = i(95), c = i(216);
+        let d = class extends r.default {
+            constructor() {
+                super(...arguments), this.params = l.DEFAULT_DOC_NEW, this.currentCount = 0, this.pageName = "DocView";
+            }
+            get isGroup() {
+                return this.params.sortCondition == l.SORT_TYPY.BY_TYPE_ASC;
+            }
+            homeDataChange() {
+                this.isDeactivated || (this.currentCount = u.getCurrentCount(this.homeData, this.activeCat));
+            }
+            created() {
+                this.params.category = l.DOC_TYPE.ALL, c.taskPageShow({
+                    tab_name: 4
+                });
+            }
+            getData() {
+                return n.__awaiter(this, void 0, void 0, function*() {
+                    this.checkTabCount();
+                });
+            }
+            updateCurrentCount() {
+                return n.__awaiter(this, void 0, void 0, function*() {
+                    const {remoteCount: t} = yield this.setTabCount();
+                    this.currentCount = Number(t);
+                });
+            }
+            setParamsCategory(t) {
+                this.$emit("handlePageScrollToNum", 0), this.params.category = t, this.refreshDataList();
+            }
+            setTotalCount(t) {
+                this.totalCount = t;
+            }
+        };
+        n.__decorate([ a.Watch("homeData", {
+            immediate: !0
+        }) ], d.prototype, "homeDataChange", null), d = n.__decorate([ o.default({
+            components: {
+                GroupTitle: s.default
+            }
+        }) ], d), e.default = d;
+    }
+} ]);
+
+SOURCE analysis/pretty/app-modules.js:43428
+
+              case c.CAT_TYPE.QQ:
+                a = e.qqCount;
+            }
+            return a;
+        }, t.listToDataList = e => {
+            let a = [], i = [], n = 0;
+            e.forEach(e => {
+                e.isGroup && e.groupCount && e.groupCount > 0 && a.push({
+                    startIndex: n,
+                    groupCount: e.groupCount,
+                    groupName: e.groupName || "",
+                    savePath: e.savePath
+                }), e.isGroup || (e.index = n, e.fileType = t.getMimeCategoryFromSuffix(e.fileName), 
+                e.checked = !1, i.push(e), n++);
+            });
+            let r = [];
+            return a.forEach(e => {
+                const t = r.find(t => t.groupName == e.groupName);
+                t ? t.groupCount += e.groupCount : r.push(e);
+            }), {
+                dataList: i,
+                groupList: r
+            };
+        }, t.getfileTypeFromMimeCategory = (e, t) => {
+
+SOURCE analysis/pretty/191.js:63
+        let l = class extends i.default {
+            constructor() {
+                super(...arguments), this.params = o.DEFAULT_AUDIO, this.currentCount = 0, this.pageName = "AudioView";
+            }
+            homeDataChange() {
+                this.isDeactivated || (this.currentCount = c.getCurrentCount(this.homeData, this.activeCat));
+            }
+            created() {
+                s.taskPageShow({
+                    tab_name: 3
+                });
+            }
+            getData() {
+                return a.__awaiter(this, void 0, void 0, function*() {
+                    this.checkTabCount();
+                });
+            }
+            updateCurrentCount() {
+                return a.__awaiter(this, void 0, void 0, function*() {
+                    const {remoteCount: t} = yield this.setTabCount();
+                    this.currentCount = Number(t);
+                });
+            }
+        };
+        a.__decorate([ r.Watch("homeData", {
+            immediate: !0
+        }) ], l.prototype, "homeDataChange", null), l = a.__decorate([ u.default ], l), 
+        e.default = l;
+    }
+} ]);

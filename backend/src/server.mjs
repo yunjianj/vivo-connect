@@ -134,6 +134,11 @@ export async function createBackend({ stateDir, accountManager, phoneManager, re
         if (req.method === 'PUT') return reply(res, 200, await clipboard.write(id, body));
         if (req.method === 'PATCH') return reply(res, 200, clipboard.configure(id, body));
       }
+      const mediaRoute = url.pathname.match(/^\/api\/sessions\/([\w-]+)\/media\/list$/);
+      if (req.method === 'POST' && mediaRoute) {
+        requireThat(['videos', 'music', 'documents', 'recent'].includes(body.kind), '文件分类无效');
+        return reply(res, 200, await gallery.list(mediaRoute[1], body));
+      }
       const galleryRoute = url.pathname.match(/^\/api\/sessions\/([\w-]+)\/gallery\/(albums|list|thumbnail)$/);
       if (galleryRoute) {
         const [, id, action] = galleryRoute;
