@@ -2,6 +2,7 @@
 #include <QtWidgets>
 #include <QtNetwork>
 #include <functional>
+#include "file-icons.h"
 
 class GalleryGrid : public QListWidget {
 public:
@@ -173,7 +174,7 @@ class GalleryDialog : public QWidget {
                 if(collectionKind=="recent") {const QString path=photo.value("savePath").toString();if(recentPaths.contains(path))continue;recentPaths.insert(path);}
                 const QString file=photo.value("fileName").toString();
                 auto *item=new QListWidgetItem((photo.value("isVideo").toBool()?"▶ ":"")+file,grid);
-                item->setData(Qt::UserRole,photo); item->setIcon(style()->standardIcon(photo.value("isDirectory").toBool()?QStyle::SP_DirIcon:photo.value("isVideo").toBool()?QStyle::SP_MediaPlay:QStyle::SP_FileIcon));
+                item->setData(Qt::UserRole,photo); item->setIcon(phoneFileIcon(file,photo.value("isDirectory").toBool(),style()));
                 QString detail=photo.value("savePath").toString();
                 qint64 size=qint64(photo.value("fileSize").toDouble(-1)); if(size>=0)detail+="\n"+QLocale().formattedDataSize(size);
                 qint64 date=qint64(photo.value("date").toDouble()); if(date>0)detail+="\n"+QDateTime::fromMSecsSinceEpoch(date).toString("yyyy-MM-dd HH:mm");

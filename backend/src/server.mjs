@@ -173,7 +173,8 @@ export async function createBackend({ stateDir, accountManager, phoneManager, re
         if (req.method === 'POST' && ['uploads', 'downloads'].includes(action)) {
           transfers.session(id);
           return reply(res, 202, jobs.create(action === 'uploads' ? 'upload' : 'download',
-            (job, signal) => transfers[action === 'uploads' ? 'upload' : 'download'](id, body, job, signal), id));
+            (job, signal) => transfers[action === 'uploads' ? 'upload' : 'download'](id, body, job, signal), id,
+            { fileNames: Array.isArray(body.paths) ? body.paths.filter(p => typeof p === 'string').map(p => path.basename(p)).filter(Boolean) : [] }));
         }
       }
       match = url.pathname.match(/^\/api\/jobs\/([\w-]+)(?:\/(cancel|file))?$/);

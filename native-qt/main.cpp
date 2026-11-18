@@ -13,6 +13,35 @@
 #include "gallery-selftest.h"
 #include "media-selftest.h"
 
+class SmoothWheel : public QObject {
+public:
+    using QObject::QObject;
+    bool eventFilter(QObject *watched,QEvent *event) override {
+        if(event->type()==QEvent::Polish) {
+            if(auto *view=qobject_cast<QAbstractItemView *>(watched))view->setVerticalScrollMode(QAbstractItemView::ScrollPerPixel);
+            return false;
+        }
+        if(event->type()!=QEvent::Wheel)return false;
+        auto *viewport=qobject_cast<QWidget *>(watched);
+        auto *area=viewport?qobject_cast<QAbstractScrollArea *>(viewport->parentWidget()):nullptr;
+        if(!area || area->viewport()!=viewport)return false;
+        auto *wheel=static_cast<QWheelEvent *>(event);auto *bar=area->verticalScrollBar();
+        auto *animation=bar->findChild<QPropertyAnimation *>("smoothWheelAnimation",Qt::FindDirectChildrenOnly);
+        // Keep touchpad pixel deltas and horizontal/modified gestures native.
+        if(!wheel->pixelDelta().isNull() || wheel->modifiers()!=Qt::NoModifier || wheel->angleDelta().y()==0) {
+            if(animation)animation->stop();return false;
+        }
+        if(bar->maximum()<=bar->minimum())return false;
+        if(!animation){animation=new QPropertyAnimation(bar,"value",bar);animation->setObjectName("smoothWheelAnimation");animation->setDuration(160);animation->setEasingCurve(QEasingCurve::OutCubic);}
+        const int base=animation->state()==QAbstractAnimation::Running?animation->endValue().toInt():bar->value();
+        const double lines=qMax(1,QApplication::wheelScrollLines());
+        const int distance=qMax(1,int(qRound(lines*area->fontMetrics().lineSpacing()*qAbs(wheel->angleDelta().y())/120.0)));
+        const int target=qBound(bar->minimum(),base+(wheel->angleDelta().y()>0?-distance:distance),bar->maximum());
+        if(target==base && animation->state()!=QAbstractAnimation::Running)return false;
+        animation->stop();animation->setStartValue(bar->value());animation->setEndValue(target);animation->start();wheel->accept();return true;
+    }
+};
+
 static QString autostartPath() {
     return QStandardPaths::writableLocation(QStandardPaths::ConfigLocation)+"/autostart/"+QString::fromUtf8(VIVO_DESKTOP_ID)+".desktop";
 }
@@ -66,6 +95,18 @@ static QString transferLabel(const QJsonObject &job) {
     if (phase=="verifying") return "正在校验和解包";
     if (phase=="notifying") return "正在通知手机";
     return "准备中";
+}
+static QString transferNames(const QJsonObject &job) {
+    QStringList names; for (const auto &v:job.value("fileNames").toArray()) if (!v.toString().isEmpty()) names << v.toString();
+    if (names.isEmpty()) return "文件名不可用";
+    return names.size()==1 ? names.first() : QString("%1 等 %2 项").arg(names.first()).arg(names.size());
+}
+static QString transferProgress(const QJsonObject &job) {
+    if (job.value("status").toString()=="succeeded") return "100%";
+    const qint64 total=phoneFileSize(job.value("totalSize"));
+    if (total<=0) return "进度未知";
+    const double bytes=qMax(0.0,job.value("bytes").toDouble());
+    return QString("约 %1%").arg(int(qMin(99.0,bytes/double(total)*100)));
 }
 
 class Api {
@@ -484,7 +525,7 @@ class Window : public QMainWindow {
             bool isDir = f.value("isDirectory").toBool() || f.value("isDirectory").toString() == "true";
             qint64 size=phoneFileSize(f.value("fileSize"));
             auto *item = new QTreeWidgetItem({filename, isDir ? "文件夹" : "文件", isDir ? "—" : size<0 ? "未知" : QLocale().formattedDataSize(size)});
-            item->setData(0, Qt::UserRole, full); item->setData(0, Qt::UserRole + 1, isDir); item->setIcon(0, style()->standardIcon(isDir ? QStyle::SP_DirIcon : QStyle::SP_FileIcon)); tree->addTopLevelItem(item);
+            item->setData(0, Qt::UserRole, full); item->setData(0, Qt::UserRole + 1, isDir); item->setIcon(0, phoneFileIcon(filename,isDir,style())); tree->addTopLevelItem(item);
             item->setData(0, Qt::UserRole + 2, size);
         }
         filter(); tree->scrollToTop(); report(QString("%1 个项目").arg(tree->topLevelItemCount())); return true;
@@ -697,9 +738,9 @@ class Window : public QMainWindow {
             QString rootPath=QFileInfo(state+"/downloads").canonicalFilePath();
             open.setEnabled(!base.isEmpty() && !rootPath.isEmpty() && base.startsWith(rootPath+"/"));
             if (job.isEmpty()) { details.setText("选择任务查看详情"); return; }
-            QString text=transferLabel(job);
+            QString text=transferNames(job)+"\n"+transferLabel(job)+" · "+transferProgress(job);
             auto error=job.value("error").toObject(); if (!error.value("message").toString().isEmpty()) text+="\n"+error.value("message").toString();
-            if (job.value("totalSize").isDouble()) text+="\n文件总大小："+QLocale().formattedDataSize(qint64(job.value("totalSize").toDouble()));
+            if (phoneFileSize(job.value("totalSize"))>=0) text+="\n文件总大小："+QLocale().formattedDataSize(phoneFileSize(job.value("totalSize")));
             text+="\n已传输归档数据："+QLocale().formattedDataSize(qint64(job.value("bytes").toDouble()));
             if (open.isEnabled()) text+="\n接收目录："+base;
             details.setText(text);
@@ -707,11 +748,15 @@ class Window : public QMainWindow {
         auto update = [&] {
             QString selectedId=list.currentItem()?list.currentItem()->data(Qt::UserRole).toString():QString();
             auto jobs=api.call("GET", "/api/jobs").toArray();
-            { QSignalBlocker block(&list); list.clear(); for (auto v:jobs) { auto j=v.toObject(); QString kind=j.value("kind").toString(); if (kind!="upload" && kind!="download") continue;
-              auto *item=new QListWidgetItem((kind=="upload"?"发送":"接收")+QString("  %1  ·  %2").arg(transferLabel(j),QLocale().formattedDataSize(qint64(j.value("bytes").toDouble()))));
+            const int scroll=list.verticalScrollBar()->value();
+            { QSignalBlocker block(&list); list.clear(); for (qsizetype i=jobs.size(); i>0; --i) { auto j=jobs.at(i-1).toObject(); QString kind=j.value("kind").toString(); if (kind!="upload" && kind!="download") continue;
+              const qint64 total=phoneFileSize(j.value("totalSize"));
+              QString size=total>=0?QLocale().formattedDataSize(total):QString("大小未知");
+              auto *item=new QListWidgetItem(transferNames(j)+"\n"+(kind=="upload"?"发送":"接收")+QString(" · %1 · %2 · 文件 %3 · 已传输 %4").arg(transferLabel(j),transferProgress(j),size,QLocale().formattedDataSize(qint64(j.value("bytes").toDouble()))));
+              QStringList names; for(const auto &v:j.value("fileNames").toArray()) names<<v.toString(); item->setToolTip(names.join("\n"));
               item->setData(Qt::UserRole,j.value("id").toString()); item->setData(Qt::UserRole+1,j); list.addItem(item);
               if (item->data(Qt::UserRole).toString()==selectedId) list.setCurrentItem(item);
-            } }
+            } list.verticalScrollBar()->setValue(scroll); }
             render();
         };
         connect(&list,&QListWidget::currentItemChanged,&dialog,[&]{render();});
@@ -982,9 +1027,16 @@ public:
 int main(int argc, char **argv) {
     if (qEnvironmentVariableIsSet("WAYLAND_DISPLAY") && !qEnvironmentVariableIsSet("QT_QPA_PLATFORM")) qputenv("QT_QPA_PLATFORM", "wayland");
     QApplication app(argc,argv); app.setApplicationName("vivo Connect"); app.setDesktopFileName(QString::fromUtf8(VIVO_DESKTOP_ID));
+    app.installEventFilter(new SmoothWheel(&app));
     app.setWindowIcon(QIcon(":/icons/app.png"));
     auto args=app.arguments();
     if (args.contains("--self-test")) {
+        QPlainTextEdit scrolling; scrolling.resize(300,120); QStringList scrollLines;for(int i=0;i<100;++i)scrollLines<<QString("line %1").arg(i);scrolling.setPlainText(scrollLines.join('\n'));scrolling.show();app.processEvents();
+        QWheelEvent wheel(QPointF(20,20),QPointF(20,20),QPoint(),QPoint(0,-120),Qt::NoButton,Qt::NoModifier,Qt::NoScrollPhase,false);
+        QApplication::sendEvent(scrolling.viewport(),&wheel); QEventLoop scrollLoop;QTimer::singleShot(220,&scrollLoop,&QEventLoop::quit);scrollLoop.exec();
+        if(scrolling.verticalScrollBar()->value()<=0)return 51; scrolling.close();
+        if(fileIconCategory("音乐.FLAC")!="audio" || fileIconCategory("备份.tar.gz")!="archive" || fileIconCategory("文档.pdf")!="document" || fileIconCategory("图片.png")!="image")return 49;
+        if(phoneFileIcon("备份.zip",false,app.style()).isNull() || phoneFileIcon("音乐.mp3",false,app.style()).isNull() || phoneFileIcon("文件夹",true,app.style()).isNull())return 50;
         QTemporaryDir autostartTest;
         QString autostartError, testPath=autostartTest.path()+"/autostart/test.desktop";
         if (!autostartTest.isValid() || !setAutostart(testPath,true,"/tmp/test app","/tmp/state % $",8765,autostartError)) return 41;
@@ -1006,6 +1058,11 @@ int main(int argc, char **argv) {
         if (savedTransferResult(notified)!=saved || !transferLabel(notified).contains("通知手机失败")) return 28;
         if (!savedTransferResult(QJsonObject{{"status","failed"},{"error",QJsonObject{{"code","OTHER"},{"details",saved}}}}).isEmpty()) return 29;
         if (transferLabel({{"status","running"},{"phase","notifying"}})!="正在通知手机") return 30;
+        if (transferNames({{"fileNames",QJsonArray{"a.txt","b.txt"}}})!="a.txt 等 2 项" ||
+            transferProgress({{"status","running"},{"totalSize",100},{"bytes",50}})!="约 50%" ||
+            transferProgress({{"status","running"},{"totalSize",1},{"bytes",1000}})!="约 99%" ||
+            transferProgress({{"status","succeeded"},{"totalSize",0}})!="100%" ||
+            transferProgress({{"status","queued"}})!="进度未知") return 52;
         QLabel accountLabel; QPushButton loginButton;
         showAccountState(&accountLabel,&loginButton,{{"loggedIn",true}},true);
         if (!loginButton.isHidden() || accountLabel.text()!="vivo 账号已登录") return 24;

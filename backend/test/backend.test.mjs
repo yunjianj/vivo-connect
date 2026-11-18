@@ -167,11 +167,13 @@ test('HTTPS/WSS connection, upload, download, hashes and failure states', async 
   assert.equal((await api(app, 'POST', `/api/sessions/${id}/files`, {})).data.data[0].savePath, '/sdcard/手机.txt');
   const source = path.join(dir, '电脑📄.txt'); await fs.writeFile(source, 'PC to phone\n'.repeat(200000));
   const upload = await api(app, 'POST', `/api/sessions/${id}/uploads`, { paths: [source], savePath: '/sdcard/Download' });
+  assert.deepEqual(upload.data.fileNames, ['电脑📄.txt']);
   const uploaded = await waitJob(app, upload.data.id); assert.equal(uploaded.status, 'succeeded', JSON.stringify(uploaded.error));
   assert.equal(await sha256(source), await sha256(path.join(dir, 'uploaded', path.basename(source))));
   assert.equal(phone.records.preflight.type, 'TO_PC_FILE_MANAGER');
   assert.equal(phone.records.preflight.dropFileItems[0].fileName, path.basename(source));
   const download = await api(app, 'POST', `/api/sessions/${id}/downloads`, { paths: ['/sdcard/手机.txt'] });
+  assert.deepEqual(download.data.fileNames, ['手机.txt']);
   const downloaded = await waitJob(app, download.data.id); assert.equal(downloaded.status, 'succeeded', JSON.stringify(downloaded.error));
   assert.equal(await sha256(phone.file), downloaded.result.files[0].sha256);
   assert.equal(phone.records.downloadPreflight.total, (await fs.stat(phone.file)).size, 'phone progress denominator must be payload bytes, not zero or TAR bytes');

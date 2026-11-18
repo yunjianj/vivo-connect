@@ -2,9 +2,9 @@ import crypto from 'node:crypto';
 import { ApiError } from './core.mjs';
 export class Jobs {
   items = new Map();
-  create(kind, action, sessionId) {
+  create(kind, action, sessionId, metadata = {}) {
     const job = { id: crypto.randomUUID(), kind, sessionId, status: 'queued', createdAt: new Date().toISOString(),
-      bytes: 0, controller: new AbortController() };
+      bytes: 0, ...metadata, controller: new AbortController() };
     this.items.set(job.id, job);
     job.done = Promise.resolve().then(async () => {
       job.status = 'running';
