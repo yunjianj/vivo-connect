@@ -88,12 +88,16 @@ test('verified official reconnect opens and closes the helper pairing window wit
  p2p.preconnect={connect:async(s,n,signal,complete,authorize)=>{
   assert.equal(p2p.status().pairingActive,false);const release=authorize();
   try{const status=p2p.heartbeat(network.id,{});assert.equal(status.pairingActive,true);assert.equal(typeof status.pairingId,'string');
+   assert.equal(status.pairingMode,'reconnect');
+   phones.sessions=new Map([['active',{transport:'wifi-direct',status:'connected'}]]);
+   assert.equal(p2p.heartbeat(network.id,{}).pairingMode,undefined);
    return await complete({token:'new-token'});
   }finally{release();}
  }};
  assert.equal(p2p.reconnectState(session),null);
  assert.deepEqual(await p2p.reconnect(session),{status:'connected'});
  assert.equal(p2p.status().pairingActive,false);assert.equal(p2p.status().pairingId,undefined);
+ assert.equal(p2p.heartbeat(network.id,{}).pairingMode,undefined);
  assert.equal(p2p.pending,undefined);
  p2p.autoPairing={id:'expired',networkId:network.id,expires:Date.now()-1};assert.equal(p2p.status().pairingActive,false);
 });

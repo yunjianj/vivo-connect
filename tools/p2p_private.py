@@ -249,9 +249,12 @@ class PrivateHelper(Helper):
             self.control.request('WPS_CANCEL');self.pairing_peer=None
             self.stage('private-pairing-window-closed')
         self.pairing_id=pairing_id
+        # A verified reconnect can need WPS while the GO still lists an old station.
+        allow_rejoin=response.get('pairingMode')=='reconnect'
         while self.control.provision_requests:
             peer,created=self.control.provision_requests.popleft()
-            if not active or now-created>15 or self.pairing_peer or self.progress['authorizedStations']>0:continue
+            if not active or now-created>15 or self.pairing_peer:continue
+            if self.progress['authorizedStations']>0 and not allow_rejoin:continue
             # Upstream WPS_PBC's p2p_dev_addr filter authorizes only this
             # requesting P2P Device, not every nearby WPS enrollee.
             result=self.control.request('WPS_PBC p2p_dev_addr='+peer)

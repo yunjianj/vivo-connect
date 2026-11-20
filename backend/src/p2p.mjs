@@ -38,6 +38,7 @@ export class P2pManager{
    return this.phones.connect({...options,verifyTls:session.rejectUnauthorized},signal,session);
   },()=>{
    if(!this.status().ready||this.network.id!==network.id)throw new ApiError(409,'P2P_NETWORK_CHANGED','预连接期间直连组发生变化');
+   if(this.pending||this.status().pairingActive)throw new ApiError(409,'P2P_PAIRING_ACTIVE','已有等待中的配对任务');
    const lease=this.autoPairing={id:crypto.randomUUID(),networkId:network.id,expires:Date.now()+60000};
    return ()=>{if(this.autoPairing===lease)this.autoPairing=null;};
   });
@@ -75,7 +76,10 @@ export class P2pManager{
     job.phase=safe.authorizedStations>0?(safe.dhcpAcks>0?'waiting-for-phone-callback':'waiting-for-dhcp'):
       safe.associatedStations>0?'authenticating-wifi':safe.provisionRequests>0?(safe.pairingAuthorizations>0?'pairing-wifi':'waiting-for-wps'):'waiting-for-p2p';}
   }
-  return this.status();
+  const status=this.status();
+  const reconnecting=status.pairingId!==undefined && status.pairingId===this.autoPairing?.id;
+  const connected=[...(this.phones.sessions?.values() || [])].some(s=>s.transport==='wifi-direct' && s.status==='connected');
+  return {...status, ...(reconnecting && !connected ? {pairingMode:'reconnect'} : {})};
  }
  callback(req,res){
   const answer=(status,value)=>{res.writeHead(status,{'content-type':'application/json','cache-control':'no-store'});res.end(JSON.stringify(value));};

@@ -236,6 +236,20 @@ class PrivateTests(unittest.TestCase):
                 e.control.provision_requests.append(('02:01:02:03:04:05',time.monotonic()-age))
                 e.helper.on_heartbeat({'pairingActive':active,'pairingId':'qr-job'})
                 e.control.request.assert_not_called()
+    def test_verified_reconnect_authorizes_fresh_request_with_stale_station(self):
+        with private_environment() as e:
+            e.helper.control=e.control
+            e.helper.progress['authorizedStations']=1
+            peer='02:01:02:03:04:05'
+            e.control.provision_requests.append(('02:01:02:03:04:06',time.monotonic()-20))
+            e.control.provision_requests.append((peer,time.monotonic()))
+            heartbeat={'pairingActive':True,'pairingId':'reconnect-job','pairingMode':'reconnect'}
+            e.helper.on_heartbeat(heartbeat)
+            e.control.provision_requests.append((peer,time.monotonic()))
+            e.helper.on_heartbeat(heartbeat)
+            e.control.request.assert_called_once_with('WPS_PBC p2p_dev_addr='+peer)
+            e.helper.on_heartbeat({'pairingActive':False})
+            self.assertEqual(e.control.request.call_args.args[0],'WPS_CANCEL')
     def test_control_keeps_only_valid_pbc_peer_for_targeted_authorization(self):
         control=object.__new__(p.Control);control.events=collections.deque();control.provision_requests=collections.deque()
         control.event('<3>P2P-PROV-DISC-PBC-REQ 02:01:02:03:04:05 dev_name=private-name')
