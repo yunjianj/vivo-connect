@@ -19,6 +19,8 @@ import { NotesManager } from './notes.mjs';
 import { RecordingManager } from './recordings.mjs';
 import { GalleryManager } from './gallery.mjs';
 import { ClipboardManager } from './clipboard.mjs';
+import { MirrorManager } from './mirror.mjs';
+import { configureNotifications, drainNotifications } from './notifications.mjs';
 import { RememberedDevices } from './remembered.mjs';
 import { OfficialPreconnect } from './preconnect.mjs';
 
@@ -37,6 +39,7 @@ export async function createBackend({ stateDir, accountManager, phoneManager, re
   const files = new FileManager(phones);
   const gallery = new GalleryManager(phones);
   const clipboard = new ClipboardManager(phones);
+  const mirror = new MirrorManager(phones);
   const p2p = new P2pManager(state, phones, jobs);
   p2p.preconnect = new OfficialPreconnect(state, accounts);
   phones.reconnectWireless = (session, signal) => p2p.reconnect(session, signal);
@@ -127,6 +130,21 @@ export async function createBackend({ stateDir, accountManager, phoneManager, re
           await pipeline(createReadStream(file.path), res); return;
         }
       }
+      if (route === 'POST /api/notifications/drain') return reply(res, 200, drainNotifications(phones.sessions.values()));
+      const notificationRoute = url.pathname.match(/^\/api\/sessions\/([\w-]+)\/notifications$/);
+      if (req.method === 'PATCH' && notificationRoute) {
+        return reply(res, 200, await configureNotifications(phones, phones.get(notificationRoute[1]), body.enabled));
+      }
+      const mirrorRoute = url.pathname.match(/^\/api\/sessions\/([\w-]+)\/mirror(?:\/(input|stream|lens))?$/);
+      if (mirrorRoute) {
+        const [, id, action] = mirrorRoute;
+        if (req.method === 'POST' && action === 'input') return reply(res, 200, mirror.input(id, body));
+        if (req.method === 'POST' && action === 'lens') return reply(res, 200, await mirror.switchCameraLens(id, body.facing));
+        if (req.method === 'GET' && action === 'stream') return mirror.stream(id, res);
+        if (!action && req.method === 'POST') return reply(res, 202, mirror.start(id, body));
+        if (!action && req.method === 'GET') return reply(res, 200, mirror.poll(id));
+        if (!action && req.method === 'DELETE') { mirror.stop(id); return reply(res, 200, { stopped: true }); }
+      }
       const clipboardRoute = url.pathname.match(/^\/api\/sessions\/([\w-]+)\/clipboard$/);
       if (clipboardRoute) {
         const id = clipboardRoute[1];
@@ -200,13 +218,15 @@ export async function createBackend({ stateDir, accountManager, phoneManager, re
   server.requestTimeout = 300000; server.headersTimeout = 10000;
   remembered.start(); recordings.begin(); notes.begin();
   return { state, server, accounts, phones, jobs, transfers, scans, p2p, remembered, recordings, notes, async close() {
-    remembered.stop(); recordings.close(); notes.close();
+    mirror.stop(); remembered.stop(); recordings.close(); notes.close();
     const closed = server.listening ? new Promise(resolve => server.close(resolve)) : Promise.resolve();
     await p2p.close(); await jobs.close(); await phones.close(); await accounts.close();
     server.closeAllConnections(); await closed;
   } };
 }
 if (process.argv[1] && path.resolve(process.argv[1]) === fileURLToPath(import.meta.url)) {
+  // Linux process names are limited to 15 bytes; KDE uses this name for icons.
+  process.title = 'vivo-backend';
   const backend = await createBackend();
   const port = Number(process.env.PORT || 8765);
   requireThat(Number.isInteger(port) && port > 0 && port <= 65535, 'PORT 必须是有效端口');

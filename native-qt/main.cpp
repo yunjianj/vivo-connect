@@ -1,11 +1,13 @@
 #include <QtWidgets>
 #include <QtNetwork>
 #include <QtDBus>
+#include <algorithm>
 #include <cmath>
 #include <functional>
 #include <pwd.h>
 #include <unistd.h>
 #include "gallery.h"
+#include "mirror.h"
 #include "recordings.h"
 #include "notes.h"
 #include "notes-selftest.h"
@@ -316,7 +318,7 @@ static bool trustedServiceSource(const QString &project) {
 }
 
 class Window : public QMainWindow {
-    Api api, clipboardApi;
+    Api api, clipboardApi, notificationApi;
     QString project, state, selected, directory = "/storage/emulated/0", root = "/storage/emulated/0";
     QJsonArray sessions;
     QListWidget *devices = new QListWidget;
@@ -328,9 +330,16 @@ class Window : public QMainWindow {
     QPushButton *accountButton = new QPushButton("登录账号");
     QPushButton *reconnectButton = new QPushButton("重新连接"), *disconnectButton = new QPushButton("断开连接");
     QCheckBox *clipboardToggle = new QCheckBox("同步文本剪贴板");
+    QPushButton *cameraButton = new QPushButton("共享手机摄像头和麦克风");
+    QPushButton *mirrorButton = new QPushButton("手机投屏与操控");
+    QPointer<MirrorDialog> mirrorWindow;
+    QCheckBox *notificationToggle = new QCheckBox("同步手机通知");
+    bool notificationBusy = false;
     QTabWidget *contentTabs = nullptr;
     QWidget *fileContainer=nullptr, *recordContainer=nullptr, *notesContainer=nullptr;
     QWidget *galleryContainer = nullptr;
+    QWidget *featuresContainer = nullptr;
+    QLabel *featuresInfo = nullptr;
     GalleryDialog *gallery = nullptr;
     RecordingsDialog *recordings = nullptr;
     NotesPanel *notesPanel = nullptr;
@@ -358,6 +367,7 @@ class Window : public QMainWindow {
 
     void report(QString message, bool warning = false) {
         info->setText(message);
+        if (featuresInfo) featuresInfo->setText(message);
         if (warning) QMessageBox::warning(this, "vivo Connect", message);
     }
     QString actual(QString p) const {
@@ -433,6 +443,52 @@ class Window : public QMainWindow {
         updateClipboard();
         updateTrayClipboard(trayClipboard,clipboardToggle);
     }
+    void updateNotifications() {
+        if (notificationBusy) return;
+        const auto device = selectedDevice();
+        notificationToggle->setEnabled(connected());
+        notificationToggle->setChecked(device.value("notificationsEnabled").toBool());
+        const bool anyEnabled = std::any_of(sessions.begin(), sessions.end(), [](const QJsonValue &value) {
+            return value.toObject().value("notificationsEnabled").toBool();
+        });
+        if (!anyEnabled) return;
+
+        QScopedValueRollback<bool> guard(notificationBusy, true);
+        const auto batch = notificationApi.call("POST", "/api/notifications/drain").toObject();
+        for (const auto &value : batch.value("notifications").toArray()) {
+            const auto event = value.toObject();
+            const auto app = event.value("appName").toString();
+            const auto title = event.value("title").toString();
+            const auto summary = title.isEmpty() ? app : QString("【%1】%2").arg(app, title);
+            auto message = QDBusMessage::createMethodCall("org.freedesktop.Notifications", "/org/freedesktop/Notifications",
+                                                         "org.freedesktop.Notifications", "Notify");
+            message.setArguments({QString("vivo Connect"), uint(0), QString("smartphone"), summary,
+                                  event.value("content").toString().toHtmlEscaped(), QStringList{},
+                                  QVariantMap{{"desktop-entry", QApplication::desktopFileName()}}, -1});
+            auto *reply = new QDBusPendingCallWatcher(QDBusConnection::sessionBus().asyncCall(message), this);
+            connect(reply, &QDBusPendingCallWatcher::finished, this, [this, reply] {
+                const QDBusPendingReply<uint> result = *reply;
+                if (result.isError()) report("无法显示手机通知，请检查桌面通知服务");
+                reply->deleteLater();
+            });
+        }
+    }
+    void setNotificationEnabled(bool enabled) {
+        if (notificationBusy || !connected()) {
+            notificationToggle->setChecked(selectedDevice().value("notificationsEnabled").toBool());
+            return;
+        }
+        QString error;
+        {
+            QScopedValueRollback<bool> guard(notificationBusy, true);
+            notificationApi.call("PATCH", route("/notifications"), {{"enabled", enabled}});
+            error = notificationApi.error;
+        }
+        refresh();
+        updateNotifications();
+        if (!error.isEmpty()) report("通知同步设置失败：" + error);
+        else report(enabled ? "已请求同步手机通知，请在手机上允许通知接力" : "已关闭手机通知同步");
+    }
     void updateContentView() {
         if(!contentTabs)return;
         const int recordIndex=contentTabs->indexOf(recordContainer), notesIndex=contentTabs->indexOf(notesContainer);
@@ -476,6 +532,8 @@ class Window : public QMainWindow {
             }
             if(contentTabs->currentWidget()==mediaContainers[kind] && connected() && !mediaPages.value(kind))showCollection(kind);
         }
+        mirrorButton->setEnabled(connected());
+        cameraButton->setEnabled(connected());
         auto currentDevice=selectedDevice();
         reconnectButton->setText(currentDevice.value("needsAuthorization").toBool()?"重新授权":"重新连接");
         reconnectButton->setEnabled(!cloudView && !selected.isEmpty() && !connected() && !currentDevice.value("reconnecting").toBool() && connectJob.isEmpty());
@@ -904,10 +962,11 @@ protected:
         if (!quitting && tray) QTimer::singleShot(0,qApp,&QCoreApplication::quit);
     }
 public:
+    ~Window() override { delete mirrorWindow.data(); }
     void showMainWindow() { showNormal(); raise(); activateWindow(); }
     bool hasTray() const { return tray && (simulatedTray || QSystemTrayIcon::isSystemTrayAvailable()); }
     void quitApplication() { if (serviceOperation && serviceOperation->state()!=QProcess::NotRunning) { report("Wi-Fi Direct 服务设置仍在进行，请稍候"); return; } quitting=true; if (pairDialog) pairDialog->reject(); if (tray) tray->hide(); close(); QCoreApplication::quit(); }
-    Window(QString project, QString state, int port, bool testTray=false) : api(state, port), clipboardApi(state,port), project(std::move(project)), state(std::move(state)), simulatedTray(testTray), port(port) {
+    Window(QString project, QString state, int port, bool testTray=false) : api(state, port), clipboardApi(state,port), notificationApi(state,port), project(std::move(project)), state(std::move(state)), simulatedTray(testTray), port(port) {
         setWindowTitle("vivo Connect · 手机文件"); resize(1080,760); setMinimumSize(820,620);
         qApp->installEventFilter(new MouseNavigation(this,[this](int direction){if (contentTabs && contentTabs->currentWidget()==fileContainer) navigateHistory(direction);}));
         auto *central = new QWidget; setCentralWidget(central); auto *outer = new QHBoxLayout(central); outer->setContentsMargins(0,0,0,0); outer->setSpacing(0);
@@ -917,7 +976,8 @@ public:
         auto *pairButton = new QPushButton("＋ 添加设备"); auto *jobs = new QPushButton("传输记录"); auto *wifiService = new QPushButton("Wi-Fi Direct 设置");
         auto *autostart = new QCheckBox("开机后台启动"); autostart->setChecked(QFileInfo::exists(autostartPath()));
         account->setText("正在获取账号状态…"); accountButton->hide(); reconnectButton->setEnabled(false); disconnectButton->setEnabled(false);
-        side->addWidget(pairButton); side->addWidget(reconnectButton); side->addWidget(disconnectButton); side->addWidget(wifiService); side->addWidget(jobs); clipboardToggle->setEnabled(false); side->addWidget(clipboardToggle); side->addWidget(autostart); side->addWidget(account); side->addWidget(accountButton); outer->addWidget(sidebar);
+        side->addWidget(pairButton); side->addWidget(reconnectButton); side->addWidget(disconnectButton); side->addWidget(wifiService); side->addWidget(jobs); side->addWidget(autostart); side->addWidget(account); side->addWidget(accountButton); outer->addWidget(sidebar);
+        mirrorButton->setEnabled(false); cameraButton->setEnabled(false); clipboardToggle->setEnabled(false); notificationToggle->setEnabled(false);
         auto *content = new QWidget; fileContainer=content; auto *column = new QVBoxLayout(content); column->setContentsMargins(28,24,28,24); column->setSpacing(12);
         auto *heading = new QLabel("手机存储"); QFont h=heading->font();h.setPointSize(20);h.setBold(true);heading->setFont(h);column->addWidget(heading);
         auto *nav = new QHBoxLayout; auto *back = new QPushButton("←"); auto *forward = new QPushButton("→"); back->setToolTip("后退 (Alt+←)"); forward->setToolTip("前进 (Alt+→)"); auto *home = new QPushButton("手机存储"); auto *up = new QPushButton("上一级"); auto *reload = new QPushButton("刷新"); path->setText(root + "/"); nav->addWidget(back);nav->addWidget(forward);nav->addWidget(home);nav->addWidget(up);nav->addWidget(path,1);nav->addWidget(reload);column->addLayout(nav);
@@ -948,6 +1008,23 @@ public:
             auto *hint=new QLabel("连接手机后查看"+entry.second);hint->setObjectName("mediaHint");hint->setAlignment(Qt::AlignCenter);layout->addWidget(hint);
             mediaContainers[entry.first]=container;contentTabs->addTab(container,entry.second);
         }
+        auto *featuresScroll=new QScrollArea; featuresScroll->setWidgetResizable(true); featuresScroll->setFrameShape(QFrame::NoFrame);
+        featuresContainer=featuresScroll; featuresContainer->setObjectName("featuresPage");
+        auto *featuresBody=new QWidget; featuresScroll->setWidget(featuresBody);
+        auto *featuresLayout=new QVBoxLayout(featuresBody); featuresLayout->setContentsMargins(28,24,28,24); featuresLayout->setSpacing(16);
+        auto *featuresHeading=new QLabel("设备功能"); featuresHeading->setFont(h); featuresLayout->addWidget(featuresHeading);
+        auto *featuresHint=new QLabel("以下功能针对当前选择的手机，连接后即可使用。"); featuresHint->setWordWrap(true); featuresLayout->addWidget(featuresHint);
+        auto addFeature=[featuresLayout](const QString &title,const QString &description,QWidget *control) {
+            auto *group=new QGroupBox(title); auto *layout=new QVBoxLayout(group);
+            auto *label=new QLabel(description); label->setWordWrap(true); layout->addWidget(label);
+            auto *row=new QHBoxLayout; row->addWidget(control); row->addStretch(); layout->addLayout(row); featuresLayout->addWidget(group);
+        };
+        addFeature("手机投屏", "查看并操控手机屏幕。", mirrorButton);
+        addFeature("摄像头共享", "预览手机摄像头，并可将画面共享给电脑应用。", cameraButton);
+        addFeature("通知同步", "在电脑上接收当前手机的通知。", notificationToggle);
+        addFeature("剪贴板同步", "在电脑和当前手机之间同步文本剪贴板。", clipboardToggle);
+        featuresInfo=new QLabel; featuresInfo->setWordWrap(true); featuresLayout->addWidget(featuresInfo); featuresLayout->addStretch();
+        contentTabs->addTab(featuresContainer,"功能");
         connect(contentTabs,&QTabWidget::currentChanged,this,[this](int){
             if(!connected())return;
             for(const auto &kind:mediaContainers.keys())if(contentTabs->currentWidget()==mediaContainers[kind])showCollection(kind);
@@ -970,11 +1047,48 @@ public:
             if(!error.isEmpty())report(error,true); else {if(selected==id){selected.clear();tree->clear();} report("已忘记设备");refresh();}
         });
         connect(pairButton,&QPushButton::clicked,this,[this]{ pair(); });
+        connect(cameraButton, &QPushButton::clicked, this, [this] {
+            if (!connected()) return;
+            if (mirrorWindow) { mirrorWindow->show(); mirrorWindow->raise(); return; }
+            const auto device = selected;
+            QDialog setup(this);
+            setup.setWindowTitle("共享手机摄像头和麦克风");
+            auto *layout = new QFormLayout(&setup);
+            auto *lens = new QComboBox;
+            lens->addItem("后置摄像头", "rear");
+            lens->addItem("前置摄像头", "front");
+            auto *output = new QComboBox;
+            output->addItem("仅在此应用预览", "");
+            for (const auto &path : PhoneWebcam::devices()) output->addItem(path, path);
+            auto *audio = new QCheckBox("同时共享麦克风");
+            layout->addRow("镜头", lens);
+            layout->addRow("输出", output);
+            if (output->count() == 1) layout->addRow(new QLabel("会议软件使用摄像头需要可写的 v4l2loopback 设备。"));
+            layout->addRow(audio);
+            auto *buttons = new QDialogButtonBox(QDialogButtonBox::Ok | QDialogButtonBox::Cancel);
+            buttons->button(QDialogButtonBox::Ok)->setText("请求手机授权");
+            connect(buttons, &QDialogButtonBox::accepted, &setup, &QDialog::accept);
+            connect(buttons, &QDialogButtonBox::rejected, &setup, &QDialog::reject);
+            layout->addRow(buttons);
+            if (setup.exec() != QDialog::Accepted || device != selected || !connected() || mirrorWindow) return;
+            mirrorWindow = new MirrorDialog(this->state, this->port, device, lens->currentData().toString(),
+                                            audio->isChecked(), output->currentData().toString());
+            mirrorWindow->show();
+        });
+        connect(mirrorButton, &QPushButton::clicked, this, [this] {
+            if (!connected()) return;
+            if (!mirrorWindow) mirrorWindow = new MirrorDialog(this->state, this->port, selected);
+            mirrorWindow->show();
+            mirrorWindow->raise();
+            mirrorWindow->activateWindow();
+        });
         connect(wifiService,&QPushButton::clicked,this,[this]{wifiServiceSettings();});
         connect(autostart,&QCheckBox::clicked,this,[this,autostart](bool enabled){
             QString error; const QString launcher=this->project=="/usr/lib/vivo-connect" ? "/usr/bin/vivo-connect" : QCoreApplication::applicationFilePath();
             if (!setAutostart(autostartPath(),enabled,launcher,this->state,this->port,error)) { QSignalBlocker block(autostart); autostart->setChecked(!enabled); report("设置开机启动失败："+error,true); }
         });
+        notificationToggle->setToolTip("在当前手机会话中接收系统通知。手机可能需要开启通知接力并授权。");
+        connect(notificationToggle, &QCheckBox::clicked, this, [this](bool enabled) { setNotificationEnabled(enabled); });
         connect(clipboardToggle,&QCheckBox::clicked,this,[this](bool enabled){setClipboardEnabled(enabled);});
         connect(QApplication::clipboard(),&QClipboard::dataChanged,this,[this]{
             if (clipboardApplying || !clipboardInitialized || !clipboardEnabled || clipboardSession!=selected || !connected()) return;
@@ -1019,7 +1133,7 @@ public:
             QApplication::setQuitOnLastWindowClosed(false);
             if (!simulatedTray) tray->show();
         }
-        connect(&poll,&QTimer::timeout,this,[this]{refresh();}); poll.start(1500);
+        connect(&poll,&QTimer::timeout,this,[this]{refresh();updateNotifications();}); poll.start(1500);
         connect(&clipboardTimer,&QTimer::timeout,this,[this]{updateClipboard();}); clipboardTimer.start(1200);
         if (!api.valid()) report("找不到后端配置，请先启动后端"); else QTimer::singleShot(0, this, [this]{ refresh(); if (connected()) browse(root); });
     }
@@ -1138,10 +1252,17 @@ int main(int argc, char **argv) {
             Window background(QString::fromUtf8(PROJECT_ROOT),temporary.filePath("missing"),server.serverPort(),true);
             auto *tabs=background.findChild<QTabWidget *>("contentTabs"); auto *list=background.findChild<QListWidget *>("deviceList");
             if(!tabs || !list || tabs->tabText(0)!="最近文件" || tabs->tabText(1)!="手机存储" || tabs->isTabVisible(3) || tabs->isTabVisible(4) || !tabs->isTabVisible(0))return 41;
+            auto *features=background.findChild<QWidget *>("featuresPage");
+            const int featureIndex=tabs->indexOf(features);
+            if(!features || featureIndex<0 || tabs->tabText(featureIndex)!="功能" || !tabs->isTabVisible(featureIndex))return 53;
+            for(const auto &text:{QString("手机投屏与操控"),QString("共享手机摄像头和麦克风")}) {
+                bool found=false; for(auto *button:features->findChildren<QPushButton *>()) if(button->text()==text && !button->isEnabled())found=true;
+                if(!found)return 54;
+            }
             auto *cloud=new QListWidgetItem("云端",list);cloud->setData(Qt::UserRole,"__cloud__"); list->setCurrentItem(cloud);
-            if(!tabs->isTabVisible(3) || !tabs->isTabVisible(4) || tabs->isTabVisible(0) || tabs->currentIndex()!=3)return 42;
+            if(!tabs->isTabVisible(3) || !tabs->isTabVisible(4) || tabs->isTabVisible(0) || tabs->isTabVisible(featureIndex) || tabs->currentIndex()!=3)return 42;
             auto *phone=new QListWidgetItem("手机",list);phone->setData(Qt::UserRole,"test-phone");list->setCurrentItem(phone);
-            if(tabs->isTabVisible(3) || tabs->isTabVisible(4) || !tabs->isTabVisible(0) || tabs->currentIndex()!=0)return 43;
+            if(tabs->isTabVisible(3) || tabs->isTabVisible(4) || !tabs->isTabVisible(0) || !tabs->isTabVisible(featureIndex) || tabs->currentIndex()!=0)return 43;
             background.show(); background.close();
             if (background.isVisible() || QApplication::quitOnLastWindowClosed()) return 32;
             auto *trayAction=background.findChild<QAction *>("trayClipboard");

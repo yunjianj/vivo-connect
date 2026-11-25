@@ -10,6 +10,8 @@ set(VIVO_PROJECT_ROOT "${CMAKE_CURRENT_SOURCE_DIR}/.." CACHE PATH "Application r
 set(VIVO_DESKTOP_ID "io.github.vivo_connect.VivoConnect" CACHE STRING "Desktop application ID")
 target_compile_definitions(vivo-connect-qt PRIVATE PROJECT_ROOT="${VIVO_PROJECT_ROOT}" VIVO_DESKTOP_ID="${VIVO_DESKTOP_ID}")
 find_package(PkgConfig REQUIRED)
+pkg_check_modules(AVVIDEO REQUIRED IMPORTED_TARGET libavcodec libavutil libswscale)
+target_link_libraries(vivo-connect-qt PRIVATE PkgConfig::AVVIDEO)
 pkg_check_modules(FUSE3 REQUIRED IMPORTED_TARGET fuse3)
 add_executable(vivo-drag-fuse drag-fuse.cpp)
 target_link_libraries(vivo-drag-fuse PRIVATE Qt6::Core Qt6::Network PkgConfig::FUSE3)

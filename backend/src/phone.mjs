@@ -12,6 +12,8 @@ import { request, requestJson, checkBusiness } from './http.mjs';
 import { pairLan, discover } from './pairing.mjs';
 import { selectInterface } from './network.mjs';
 import { receiveClipboard } from './clipboard.mjs';
+import { receiveNotification } from './notifications.mjs';
+import { rememberCameraStatus } from './camera.mjs';
 const exec = promisify(execFile);
 
 export class PhoneManager {
@@ -25,6 +27,7 @@ export class PhoneManager {
   list() { return [...this.sessions.values()].map(s => this.public(s)); }
   public(s) { return { id: s.id, mode: s.mode, transport: s.transport || s.mode, ip: s.ip, pcIp: s.localIp, serial: s.serial, baseUrl: s.baseUrl, status: s.status,
     phone: s.info, version: s.version, lastMessageAt: s.lastMessageAt, lastError: s.lastError,
+    notificationsEnabled: s.status === 'connected' && Boolean(s.notifications),
     autoConnect: s.autoConnect !== false, reconnecting: Boolean(s.reconnecting), needsAuthorization: Boolean(s.needsAuthorization), nextRetryAt: s.retryAt,
     reconnectWait: s.status === 'disconnected' && s.autoConnect !== false ? this.reconnectState?.(s) || null : null }; }
   get(id) { const session = this.sessions.get(id); if (!session) throw new ApiError(404, 'SESSION_NOT_FOUND', '手机会话不存在'); return session; }
@@ -149,12 +152,14 @@ export class PhoneManager {
     const ws = s.ws = new WebSocket(s.baseUrl.replace(/^http/, 'ws') + '/ws/heart-beat',
       ['v1.hc.vivo.com.cn', s.token], { rejectUnauthorized: s.rejectUnauthorized, localAddress: s.localIp, handshakeTimeout: 10000, maxPayload: 4 * 1024 * 1024 });
     ws.on('error', () => { s.status = 'disconnected'; s.lastError = '心跳连接异常'; });
-    ws.on('close', () => { clearInterval(s.heartTimer); s.status = 'disconnected'; delete s.clipboard; });
+    ws.on('close', () => { clearInterval(s.heartTimer); s.status = 'disconnected'; delete s.clipboard; delete s.notifications; });
     let lastResponse = Date.now();
     ws.on('pong', () => { lastResponse = Date.now(); });
     ws.on('message', (data, isBinary) => {
       s.lastMessageAt = lastResponse = Date.now();
       if (s.status !== 'disconnected') receiveClipboard(s, data, isBinary);
+      receiveNotification(s, data, isBinary);
+      rememberCameraStatus(s, data, isBinary);
       if (data.toString() === 'close') { s.lastError = '手机关闭了会话'; ws.close(); }
     });
     await once(ws, 'open', { signal });
@@ -200,6 +205,7 @@ export class PhoneManager {
   }
   async cleanup(s) {
     delete s.clipboard;
+    delete s.notifications;
     clearInterval(s.heartTimer); s.ws?.terminate();
     if (s.forwardPort) await exec(process.env.ADB || 'adb', ['-s', s.serial, 'forward', '--remove', `tcp:${s.forwardPort}`], { timeout: 5000 }).catch(() => {});
   }

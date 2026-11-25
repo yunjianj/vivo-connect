@@ -81,6 +81,7 @@ async function mockPhone(t, dir) {
     socket.on('message', data => {
       const message = data.toString();
       if (message.startsWith('CLIPBOARD_TEXT:')) (records.clipboardMessages ??= []).push(message);
+      else if (message.startsWith('PC_CONFIG:')) (records.pcConfigs ??= []).push(JSON.parse(message.slice(10)));
       else if (message.startsWith('TRANS_FILE_')) records.transferResults.push(message);
       else records.heartbeat = message;
       socket.send('ok');
@@ -503,4 +504,56 @@ test('Wi-Fi Direct API reconnect waits for the service even if the saved phone e
   assert.equal(app.phones.get(id).status,'disconnected');
   const count=app.jobs.items.size;app.remembered.tick();assert.equal(app.jobs.items.size,count);
   assert.equal(app.phones.public(app.phones.get(id)).reconnectWait.code,'P2P_NOT_READY');
+});
+
+test('notification relay uses the official control channel and delivers only opted-in events once', async t => {
+  const dir = await temp(t), phone = await mockPhone(t, dir);
+  const app = await createBackend({ stateDir: path.join(dir, 'state') });
+  t.after(() => app.close());
+  await listen(app.server);
+  const start = await api(app, 'POST', '/api/sessions', { mode: 'existing', ip: '127.0.0.1', port: phone.port, token: 'notification-test' });
+  const id = (await waitJob(app, start.data.id)).result.id;
+  const settings = `/api/sessions/${id}/notifications`;
+  const drain = async () => (await api(app, 'POST', '/api/notifications/drain', {})).data.notifications;
+  const socket = [...phone.ws.clients][0];
+  const prefix = 'NOTIFY_CLIENT_RECEIVED_NOTIFICATION:';
+  const message = prefix + JSON.stringify({ appName: '日历', title: '提醒', content: '会议：10:00\n线上', pendingIntentId: 'private' });
+
+  // A marker on the same WebSocket proves the preceding events were processed.
+  let revision = 0;
+  async function deliver(...messages) {
+    for (const msg of messages) socket.send(msg);
+    const marker = 'notification-test-marker-' + (++revision);
+    socket.send('CLIPBOARD_TEXT:' + marker);
+    for (let i = 0; i < 100 && app.phones.get(id).clipboard?.text !== marker; i++) await delay(5);
+    assert.equal(app.phones.get(id).clipboard?.text, marker);
+  }
+
+  await deliver(message);
+  assert.deepEqual(await drain(), []);
+  assert.equal((await api(app, 'PATCH', settings, { enabled: 'true' })).status, 400);
+  assert.deepEqual((await api(app, 'PATCH', settings, { enabled: true })).data, { enabled: true });
+  await deliver(prefix + '{', Buffer.from(message), message);
+  assert.deepEqual(phone.records.pcConfigs, [
+    { update_place: 'notify', notify: true, notifyOn: true },
+    { update_place: 'notifyOn', notify: true, notifyOn: true }
+  ]);
+  assert.equal(app.phones.list()[0].notificationsEnabled, true);
+  assert(!JSON.stringify(app.phones.list()).includes('会议'));
+  const events = await drain();
+  assert.deepEqual(events.map(({ receivedAt, ...event }) => event), [
+    { appName: '日历', title: '提醒', content: '会议：10:00\n线上' }
+  ]);
+  assert.deepEqual(await drain(), []);
+  await deliver(message);
+  assert.deepEqual((await api(app, 'PATCH', settings, { enabled: false })).data, { enabled: false });
+  await deliver(message);
+  assert.deepEqual(await drain(), []);
+  assert.equal(phone.records.pcConfigs.at(-1).notifyOn, false);
+  assert.equal((await api(app, 'PATCH', settings, { enabled: true })).status, 200);
+  await deliver(message);
+  assert.equal((await api(app, 'POST', `/api/sessions/${id}/disconnect`, {})).status, 200);
+  assert.equal(app.phones.list()[0].notificationsEnabled, false);
+  assert.deepEqual(await drain(), []);
+  assert.equal((await api(app, 'PATCH', settings, { enabled: true })).status, 400);
 });

@@ -1,14 +1,14 @@
 # Local build: consumes the official files already extracted in this checkout.
 pkgname=vivo-connect
-pkgver=0.2.2
+pkgver=0.3.0
 pkgrel=1
 pkgdesc='Native Linux client for connecting and transferring files with vivo devices'
 arch=('x86_64')
 url='https://www.vivo.com.cn/'
 license=('LicenseRef-Project-Unspecified' 'LicenseRef-vivo-proprietary' 'BSD-3-Clause')
-depends=('nodejs>=22' 'qt6-base' 'qt6-wayland' 'fuse3' 'qrencode' 'python' 'python-dbus' 'python-gobject' 'bluez' 'polkit' 'dnsmasq' 'iproute2' 'libnl' 'openssl')
+depends=('nodejs>=22' 'qt6-base' 'qt6-wayland' 'fuse3' 'qrencode' 'python' 'python-dbus' 'python-gobject' 'bluez' 'polkit' 'dnsmasq' 'iproute2' 'libnl' 'openssl' 'ffmpeg')
 makedepends=('base-devel' 'cmake' 'pkgconf' 'desktop-file-utils')
-optdepends=('chromium: automated vivo account login' 'chromedriver: WebDriver account login' 'android-tools: USB connections' 'networkmanager: Wi-Fi Direct network monitoring')
+optdepends=('chromium: automated vivo account login' 'chromedriver: WebDriver account login' 'android-tools: USB connections' 'pipewire-audio: virtual phone microphone' 'v4l2loopback-dkms: virtual phone webcam' 'networkmanager: Wi-Fi Direct network monitoring')
 install=vivo-connect.install
 # Both stripping and debugedit can change the verified private supplicant.
 options=('!strip' '!debug')
@@ -74,5 +74,8 @@ package() {
   install -Dm755 "$repo/packaging/arch/vivo-connect" "$pkgdir/usr/bin/vivo-connect"
   install -Dm644 app.desktop "$pkgdir/usr/share/applications/$desktop_id.desktop"
   install -Dm644 icon.png "$pkgdir/usr/share/icons/hicolor/256x256/apps/$desktop_id.app.png"
+  # Plasma's process list resolves icons by the executable's process name.
+  install -Dm644 icon.png "$pkgdir/usr/share/icons/hicolor/256x256/apps/vivo-connect-qt.png"
+  install -Dm644 icon.png "$pkgdir/usr/share/icons/hicolor/256x256/apps/vivo-backend.png"
   install -Dm644 build/private-p2p/bin/COPYING "$pkgdir/usr/share/licenses/$pkgname/wpa_supplicant-COPYING"
 }
