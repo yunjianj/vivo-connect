@@ -5,7 +5,6 @@ and remains subject to the licenses included alongside each package:
 
 - `@vivo/adbkit`, `adbkit-logcat`, `adbkit-monkey`: Apache-2.0
 - `ws`: MIT
-- `tar` and its dependencies: ISC or MIT
 - `mime-types` and `mime-db`: MIT
 - `node-forge`: BSD-3-Clause or GPL-2.0, at the recipient's option
 

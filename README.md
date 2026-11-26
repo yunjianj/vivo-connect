@@ -19,14 +19,14 @@
 
 ```sh
 ./packaging/arch/build.sh
-sudo pacman -U build/packages/vivo-connect-0.3.0-1-x86_64.pkg.tar.zst
+sudo pacman -U build/packages/vivo-connect-0.3.1-1-x86_64.pkg.tar.zst
 ```
 
 从应用菜单或运行 `vivo-connect` 启动。依赖、桌面图标定制、Wi-Fi Direct 服务及卸载说明见 [Arch Linux 软件包](packaging/arch/README.md)。
 
 ## 从源码运行
 
-需要 Node.js 22+、C++17 编译器、CMake、pkg-config、Qt 6 Widgets/Network/DBus、Qt Wayland、FUSE 3 开发库和 `qrencode`。Wi-Fi Direct、USB 和自动账号登录还需要相应的系统组件，详见[桌面客户端](docs/native-gui.md)和[后端说明](docs/backend.md)。
+需要 Node.js 22+、C++17 编译器、CMake、pkg-config、Qt 6 Widgets/Network/DBus、Qt Wayland、FUSE 3 开发库、`qrencode` 和系统 GNU tar（`/usr/bin/tar`）。Wi-Fi Direct、USB 和自动账号登录还需要相应的系统组件，详见[桌面客户端](docs/native-gui.md)和[后端说明](docs/backend.md)。
 
 ```sh
 ./tools/run-native.sh

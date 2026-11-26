@@ -5,7 +5,7 @@ const {createRequire} = require('node:module');
 const [sourceArg, destArg] = process.argv.slice(2);
 const source = path.resolve(sourceArg), dest = path.resolve(destArg);
 const modules = path.join(source, 'node_modules');
-const todo = ['ws', 'tar', 'mime-types', '@vivo/adbkit'].map(name => [name, source]);
+const todo = ['ws', 'mime-types', '@vivo/adbkit'].map(name => [name, source]);
 const seen = new Set();
 fs.mkdirSync(dest, {recursive: true});
 fs.copyFileSync(path.join(source, 'package.json'), path.join(dest, 'package.json'));

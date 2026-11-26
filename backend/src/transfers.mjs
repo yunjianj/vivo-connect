@@ -2,12 +2,34 @@ import fs from 'node:fs/promises';
 import { createReadStream, createWriteStream } from 'node:fs';
 import path from 'node:path';
 import crypto from 'node:crypto';
+import { spawn } from 'node:child_process';
+import { createInterface } from 'node:readline';
 import { Transform } from 'node:stream';
 import { pipeline } from 'node:stream/promises';
 import { official, requireThat, ApiError, abortError } from './core.mjs';
 import { collect } from './http.mjs';
 
 const LIMIT = 50 * 1024 ** 3;
+function runTar(args, signal, errorCode, message) {
+  abortError(signal);
+  const env = { ...process.env, LC_ALL: 'C' };
+  delete env.TAR_OPTIONS;
+  const child = spawn('/usr/bin/tar', ['--force-local', ...args], {
+    env, signal, stdio: ['ignore', 'pipe', 'ignore']
+  });
+  let spawnError;
+  child.on('error', error => { spawnError = error; });
+  const done = new Promise((resolve, reject) => {
+    child.once('close', (code, stoppedBy) => {
+      if (signal?.aborted) reject(signal.reason);
+      else if (spawnError?.code === 'ENOENT') reject(new ApiError(500, 'TAR_UNAVAILABLE', '文件传输需要安装系统 GNU tar'));
+      else if (spawnError || code !== 0) reject(new ApiError(502, errorCode, message, { exitCode: code, signal: stoppedBy }));
+      else resolve();
+    });
+  });
+  return { child, done };
+}
+
 async function stageTree(source, dest, signal, budget) {
   abortError(signal);
   const stat = await fs.lstat(source);
@@ -32,17 +54,50 @@ export function validArchivePath(name) {
   return typeof name === 'string' && name.length > 0 && !name.includes('\0') && !name.includes('\\') &&
     !path.posix.isAbsolute(name) && !/^[A-Za-z]:/.test(name) && !name.split('/').includes('..');
 }
-export async function inspectTar(file, maxBytes = LIMIT) {
-  const tar = official('tar'); const entries = []; const seen = new Set(); let bad, totalSize = 0;
-  await tar.t({ file, strict: true, onentry: entry => {
-    const name = entry.path.replace(/\/$/, '');
-    if (!validArchivePath(name) || !['File', 'Directory'].includes(entry.type) || seen.has(name)) bad = '归档含不安全路径、链接、重复路径或特殊文件';
-    seen.add(name); totalSize += entry.size;
-    if (!Number.isSafeInteger(totalSize) || totalSize > maxBytes) bad = '解包大小超过本地限制';
-    entries.push({ path: name, type: entry.type, size: entry.size });
-  } });
-  if (bad || !entries.length) throw new ApiError(502, 'INVALID_ARCHIVE', bad || '手机返回了空归档');
-  return { entries, totalSize };
+const tarEscapes = { a: '\u0007', b: '\b', f: '\f', n: '\n', r: '\r', t: '\t', v: '\v', '"': '"', '\\': '\\' };
+const utf8Path = new TextDecoder('utf-8', { fatal: true, ignoreBOM: true });
+export async function inspectTar(file, maxBytes = LIMIT, signal) {
+  const { child, done } = runTar([
+    // Keep raw paths visible to validation before tar can strip leading slashes.
+    '--list', '--verbose', '--absolute-names', '--numeric-owner', '--full-time', '--quoting-style=c', '--file', file
+  ], signal, 'INVALID_ARCHIVE', '系统 tar 无法读取手机归档');
+  const entries = [], seen = new Set();
+  let totalSize = 0;
+  const readManifest = async () => {
+    const lines = createInterface({ input: child.stdout, crlfDelay: Infinity });
+    for await (const line of lines) {
+      abortError(signal);
+      // In the C locale, GNU tar quotes each name and escapes non-ASCII bytes in octal.
+      const member = /^([-d])\S{9} +\d+\/\d+ +(\d+) +\S+ +\S+ +"((?:[^"\\]|\\(?:[0-3][0-7]{2}|[abfnrtv"\\]))*)"$/.exec(line);
+      const invalidMember = () => new ApiError(502, 'INVALID_ARCHIVE', '归档含不安全路径、链接、重复路径或特殊文件');
+      if (!member) throw invalidMember();
+      const [, kind, sizeText, quotedName] = member;
+      let rawName;
+      try {
+        const bytes = quotedName.replace(/\\([0-3][0-7]{2}|[abfnrtv"\\])/g,
+          (_, escape) => tarEscapes[escape] ?? String.fromCharCode(parseInt(escape, 8)));
+        rawName = utf8Path.decode(Buffer.from(bytes, 'latin1'));
+      } catch { throw invalidMember(); }
+      if (!validArchivePath(rawName)) throw invalidMember();
+      const name = path.posix.normalize(rawName).replace(/\/$/, '');
+      if (seen.has(name)) throw invalidMember();
+      seen.add(name);
+      // vivo may store the directory's filesystem size in its TAR header.
+      // Directory entries carry no file payload and do not count toward the transfer total.
+      const size = kind === 'd' ? 0 : Number(sizeText);
+      totalSize += size;
+      if (!Number.isSafeInteger(totalSize) || totalSize > maxBytes) throw new ApiError(502, 'INVALID_ARCHIVE', '解包大小超过本地限制');
+      entries.push({ path: name, type: kind === 'd' ? 'Directory' : 'File', size });
+    }
+  };
+  try {
+    await Promise.all([done, readManifest()]);
+    if (!entries.length) throw new ApiError(502, 'INVALID_ARCHIVE', '手机返回了空归档');
+    return { entries, totalSize };
+  } finally {
+    child.kill();
+    await done.catch(() => {});
+  }
 }
 export async function sha256(file) {
   const hash = crypto.createHash('sha256');
@@ -52,10 +107,10 @@ export async function sha256(file) {
 export class Transfers {
   constructor(state, phones) { this.state = state; this.phones = phones; }
   session(id) { const s = this.phones.get(id); requireThat(s.status === 'connected', '手机会话已断开'); return s; }
-  async downloadSize(s, paths, signal) {
+  async downloadSelection(s, paths, signal) {
     const root = s.info?.innerRoot || '/storage/emulated/0';
     const canonical = value => {
-      let normalized = path.posix.normalize(value);
+      let normalized = path.posix.normalize(value).replace(/\/$/, '') || '/';
       for (const alias of ['/sdcard', '/mnt/sdcard', '/storage/self/primary']) {
         if (normalized === alias || normalized.startsWith(alias + '/')) { normalized = root + normalized.slice(alias.length); break; }
       }
@@ -69,7 +124,8 @@ export class Transfers {
       if (!parents.has(parent)) parents.set(parent, new Set());
       parents.get(parent).add(source);
     }
-    let total = 0;
+    const directories = new Set();
+    let totalSize = 0;
     for (const [parent, pending] of parents) {
       // Resolve metadata before download_info: its total drives the phone UI.
       // Follow the same FILELIST schema as the official file browser.
@@ -91,6 +147,7 @@ export class Transfers {
           if (!pending.has(source)) continue;
           let size = item.fileSize;
           if (item.isDirectory === true || item.isDirectory === 'true') {
+            directories.add(source);
             const result = await this.phones.stream(s, '/pc_file_manager/query_directory_size?' + new URLSearchParams({ path: item.savePath }), { signal });
             let value;
             try { value = JSON.parse((await collect(result)).toString('utf8')); }
@@ -100,15 +157,20 @@ export class Transfers {
           }
           if (typeof size === 'string' && /^\d+$/.test(size)) size = Number(size);
           if (!Number.isSafeInteger(size) || size < 0) throw new ApiError(502, 'DOWNLOAD_SIZE_UNKNOWN', '无法确定下载文件大小，请刷新手机文件列表后重试');
-          total += size;
-          if (!Number.isSafeInteger(total) || total > LIMIT) throw new ApiError(413, 'TRANSFER_TOO_LARGE', '下载文件大小超过 50 GiB');
+          totalSize += size;
+          if (!Number.isSafeInteger(totalSize) || totalSize > LIMIT) throw new ApiError(413, 'TRANSFER_TOO_LARGE', '下载文件大小超过 50 GiB');
           pending.delete(source);
         }
         if (items.length < 200) break;
       }
       if (pending.size) throw new ApiError(404, 'DOWNLOAD_FILE_NOT_FOUND', '无法在手机目录中找到所选下载文件，请刷新后重试');
     }
-    return total;
+    const downloadList = [], dirList = [];
+    for (const [index, source] of sources.entries()) {
+      const list = directories.has(source) ? dirList : downloadList;
+      list.push(paths[index]);
+    }
+    return { totalSize, downloadList, dirList };
   }
   async upload(sessionId, options, job, signal) {
     const s = this.session(sessionId);
@@ -142,15 +204,18 @@ export class Transfers {
       const codeRejected = pre?.code !== undefined && !/^0+$/.test(String(pre.code));
       if (preResponse.statusCode !== 200 || statusRejected || codeRejected) throw new ApiError(409, 'UPLOAD_PREFLIGHT_REJECTED', '手机拒绝上传预检',
         { httpStatus: preResponse.statusCode, status: pre?.status, phoneCode: pre?.code });
-      const archive = official('tar').c({ cwd: stage, portable: true, strict: true }, [...roots]);
+      const { child: archive, done } = runTar([
+        '--create', '--file', '-', '--directory', stage, '--format=posix', '--owner=0', '--group=0', '--numeric-owner',
+        '--pax-option=delete=atime,delete=ctime,exthdr.name=%d/PaxHeaders/%f', '--', ...roots
+      ], signal, 'TAR_CREATE_FAILED', '系统 tar 无法打包上传文件');
       const counter = new Transform({ transform(chunk, enc, done) { job.bytes += chunk.length; done(null, chunk); } });
-      archive.on('error', error => counter.destroy(error)); counter.on('close', () => archive.destroy());
-      const abort = () => { archive.destroy(signal.reason); counter.destroy(signal.reason); };
-      signal.addEventListener('abort', abort, { once: true });
       job.phase = 'uploading';
       try {
-        const response = await this.phones.stream(s, `/upload/drop_file_to_phone?id=${job.id}&type=tar`,
-          { method: 'POST', body: archive.pipe(counter), signal, timeout: 3600000, headers: { 'content-type': 'application/x-tar' } });
+        const [response] = await Promise.all([
+          this.phones.stream(s, `/upload/drop_file_to_phone?id=${job.id}&type=tar`,
+            { method: 'POST', body: counter, signal, timeout: 3600000, headers: { 'content-type': 'application/x-tar' } }),
+          pipeline(archive.stdout, counter, { signal }), done
+        ]);
         let result;
         try { result = JSON.parse((await collect(response)).toString('utf8')); }
         catch { throw new ApiError(502, 'UPLOAD_UNCONFIRMED', '上传响应不是有效 JSON，不能确认完成'); }
@@ -160,7 +225,11 @@ export class Transfers {
             !(allMapped || result.status === 0 || result.status === '0')) throw new ApiError(502, 'UPLOAD_UNCONFIRMED', '手机未确认上传完成', { phoneCode: result.code, status: result.status });
         return { id: job.id, files: mapped || items.map(i => ({ fileName: i.fileName })), totalSize,
           confirmation: 'phone-response', contentHashComparedWithPhone: false };
-      } finally { signal.removeEventListener('abort', abort); archive.destroy(); counter.destroy(); }
+      } finally {
+        archive.kill();
+        counter.destroy();
+        await done.catch(() => {});
+      }
     } finally { await fs.rm(stage, { recursive: true, force: true }); }
   }
   async download(sessionId, options, job, signal) {
@@ -172,17 +241,22 @@ export class Transfers {
     let prepared = false, saved = false, totalCount = options.paths.length;
     try {
       job.phase = 'preflight';
-      const totalSize = await this.downloadSize(s, options.paths, signal);
+      const { totalSize, downloadList, dirList } = await this.downloadSelection(s, options.paths, signal);
       job.totalSize = totalSize;
-      const pre = await this.phones.json(s, `/pc_file_manager/download_info?id=${job.id}`, { downloadList: options.paths,
-        type: 'FROM_PC_FILE_MANAGER', total: totalSize, isDir: Boolean(options.isDirectory), isAlbum: false, albumList: [], dirList: [] }, signal);
+      const pre = await this.phones.json(s, `/pc_file_manager/download_info?id=${job.id}`, {
+        id: job.id, downloadList, dirList, type: 'FROM_PC_FILE_MANAGER', total: totalSize,
+        isDir: dirList.length > 0 || Boolean(options.isDirectory), isAlbum: false, albumList: []
+      }, signal);
+      const info = pre?.data ?? pre;
       if (!pre || typeof pre !== 'object' || (Array.isArray(pre) && pre.length) ||
+          (Array.isArray(info) && info.length) ||
           (pre.code !== undefined && String(pre.code) !== '0000') ||
           (pre.status !== undefined && Number(pre.status) !== 0)) throw new ApiError(409, 'DOWNLOAD_PREFLIGHT_REJECTED', '手机拒绝下载预检或部分文件已不存在');
       prepared = true;
-      if (Number.isSafeInteger(pre.totalCount) && pre.totalCount > 0) totalCount = pre.totalCount;
-      if (pre.totalSize !== undefined && (!Number.isSafeInteger(pre.totalSize) || pre.totalSize < 0 || pre.totalSize > LIMIT)) throw new ApiError(413, 'TRANSFER_TOO_LARGE', '预检文件大小超过范围');
-      job.totalSize = pre.totalSize ?? totalSize;
+      if (Number.isSafeInteger(info.totalCount) && info.totalCount > 0) totalCount = info.totalCount;
+      if (info.totalSize !== undefined && (!Number.isSafeInteger(info.totalSize) || info.totalSize < 0 || info.totalSize > LIMIT)) throw new ApiError(413, 'TRANSFER_TOO_LARGE', '预检文件大小超过范围');
+      // A zero preflight total can accompany nonempty directories on the phone.
+      job.totalSize = info.totalSize || totalSize;
       const disk = await fs.statfs(temp); const available = disk.bavail * disk.bsize;
       if (available < job.totalSize * 2 + 104857600) throw new ApiError(409, 'LOCAL_STORAGE_FULL', '本地空间不足以暂存并解包文件');
       job.phase = 'downloading';
@@ -193,10 +267,15 @@ export class Transfers {
       } });
       await pipeline(response, counter, createWriteStream(archivePath, { flags: 'wx', mode: 0o600 }), { signal });
       abortError(signal); job.phase = 'verifying';
-      const manifest = await inspectTar(archivePath);
+      const manifest = await inspectTar(archivePath, LIMIT, signal);
       if (job.totalSize !== manifest.totalSize) throw new ApiError(502, 'DOWNLOAD_SIZE_MISMATCH', '实际归档大小与手机预检不一致');
       await fs.mkdir(output, { mode: 0o700 });
-      await official('tar').x({ file: archivePath, cwd: output, strict: true, preservePaths: false, noChmod: true, noMtime: true });
+      const extraction = runTar([
+        '--extract', '--file', archivePath, '--directory', output, '--no-same-owner', '--no-same-permissions',
+        '--touch', '--no-overwrite-dir'
+      ], signal, 'INVALID_ARCHIVE', '系统 tar 无法解包手机归档');
+      extraction.child.stdout.resume();
+      await extraction.done;
       const files = [];
       for (const entry of manifest.entries) {
         abortError(signal);

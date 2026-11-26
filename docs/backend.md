@@ -6,7 +6,7 @@
 
 ## 运行
 
-需要 Node.js 22 或以上。USB 连接需要 Android platform-tools 的 `adb`；二维码图片需要 `qrencode`；自动账号登录需要 Chromium 或 Google Chrome。Wi-Fi Direct 及服务所需依赖参见[桌面客户端](native-gui.md)和 [Arch 软件包说明](../packaging/arch/README.md)。测试使用 OpenSSL 创建本地测试证书。
+需要 Node.js 22 或以上。文件传输使用系统 GNU tar（`/usr/bin/tar`）打包、检查和解包。USB 连接需要 Android platform-tools 的 `adb`；二维码图片需要 `qrencode`；自动账号登录需要 Chromium 或 Google Chrome。Wi-Fi Direct 及服务所需依赖参见[桌面客户端](native-gui.md)和 [Arch 软件包说明](../packaging/arch/README.md)。测试使用 OpenSSL 创建本地测试证书。
 
 ```sh
 # 在仓库根目录运行
@@ -285,7 +285,9 @@ curl -X POST -H "Authorization: Bearer $TOKEN" -H 'Content-Type: application/jso
 
 下载先查询所选路径的文件列表元数据，目录另用 `query_directory_size` 查询递归字节数，合计后作为 `download_info.total` 传给手机。该字段是手机发送进度的总字节数，不能固定为 0（非空文件会因缺少分母直接显示 100%）；它不包含 TAR 头。文件列表支持分页和共享存储路径别名，单个父目录最多查询 100 页，每页 200 项。无法获取大小时返回 `DOWNLOAD_SIZE_UNKNOWN`，无法找到所选文件时返回 `DOWNLOAD_FILE_NOT_FOUND`，不以 0 代替未知大小；真正的空文件允许大小为 0。下载路径不允许重复或同时包含父目录和子路径，避免总量重复计算。若手机预检未返回 totalSize，任务继续使用查询到的总字节数。
 
-TAR 写入临时目录，完整接收后检查条目、大小和安全路径，再解包。完成的文件位于 `.vivo-connect/downloads/<job-id>/`；每个普通文件返回 SHA256。此哈希用于本地校验，尚未与手机端哈希进行对比。目录可传 `"isDirectory":true`。不自动覆盖用户现有下载文件。
+后端根据手机文件列表区分文件与目录。预检请求用 `downloadList` 传文件，`dirList` 传目录，含目录时设置 `isDir`。预检返回的 `totalSize` 和 `totalCount` 可位于响应顶层或 `data` 内。手机有时会为非空目录返回 `totalSize: 0`，此时沿用预检前查询到的字节数。归档大小校验只统计普通文件的内容。
+
+TAR 写入临时目录，完整接收后检查条目、大小和安全路径，再解包。完成的文件位于 `.vivo-connect/downloads/<job-id>/`；每个普通文件返回 SHA256。此哈希用于本地校验，尚未与手机端哈希进行对比。不自动覆盖用户现有下载文件。
 
 接收归档并完成解包、大小检查、SHA-256 计算和落盘后，后端通过 `/ws/heart-beat` 发送 `TRANS_FILE_SUCCESS:{"successCount":…, "id":"<job-id>"}`，结束手机“正在发送”的状态。只结束 HTTP 流会让手机继续等待完成通知，可能停在 99%。失败和取消分别发送官方 `TRANS_FILE_FAIL` / `TRANS_FILE_CANCEL` 消息，不发送成功通知。计数优先使用手机预检返回的 `totalCount`，缺省时使用请求路径数量。协议依据为官方 [transFileSuccess](../analysis/pretty/app-modules.js#L539) 和 [目录传输完成处理](../analysis/pretty/app-modules.js#L17214)。
 

@@ -32,10 +32,11 @@ async function api(app, method, route, body, authorized = true) {
   return { status: response.status, data: await response.json() };
 }
 async function mockPhone(t, dir) {
-  const tar = official('tar'), WebSocket = official('ws');
+  const WebSocket = official('ws');
   const source = path.join(dir, 'phone-source'); await fs.mkdir(source);
   const file = path.join(source, '手机.txt'); await fs.writeFile(file, '手机到电脑📱\n'.repeat(5000));
   const size = (await fs.stat(file)).size;
+  const downloadArchive = execFileSync('/usr/bin/tar', ['-cf', '-', '-C', source, '手机.txt']);
   const key = path.join(dir, 'key.pem'), cert = path.join(dir, 'cert.pem');
   execFileSync('openssl', ['req', '-x509', '-newkey', 'rsa:2048', '-nodes', '-keyout', key, '-out', cert,
     '-days', '1', '-subj', '/CN=127.0.0.1'], { stdio: 'ignore' });
@@ -63,7 +64,7 @@ async function mockPhone(t, dir) {
         const file = path.join(dir, 'uploaded.tar'); await fs.writeFile(file, data);
         records.uploadManifest = await inspectTar(file);
         const out = path.join(dir, 'uploaded'); await fs.mkdir(out, { recursive: true });
-        await tar.x({ file, cwd: out, strict: true });
+        execFileSync('/usr/bin/tar', ['-xf', file, '-C', out]);
         return json(records.unconfirmedUpload?{}:{ data: { dropFileItems: records.preflight.dropFileItems.map(item => ({ fileName: item.fileName, savePath: '/sdcard/Download/' + item.fileName })) } });
       }
       if (url.pathname === '/pc_file_manager/download_info') {
@@ -71,7 +72,7 @@ async function mockPhone(t, dir) {
         return json({ totalCount: 1, totalSize: records.badDownloadSize ? size+1 : size });
       }
       if (url.pathname === '/pc_file_manager/download' && records.slowDownload) { res.writeHead(200); res.write(Buffer.alloc(1024)); return; }
-      if (url.pathname === '/pc_file_manager/download') { res.setHeader('content-type', 'application/x-tar'); tar.c({ cwd: source }, ['手机.txt']).pipe(res); return; }
+      if (url.pathname === '/pc_file_manager/download') { res.setHeader('content-type', 'application/x-tar'); res.end(downloadArchive); return; }
       res.writeHead(404); res.end();
     } catch (e) { res.writeHead(500); res.end(e.message); }
   });
@@ -166,9 +167,9 @@ test('HTTPS/WSS connection, upload, download, hashes and failure states', async 
   assert(!JSON.stringify(connected).includes(token));
   assert.match(phone.records.protocols, /v1\.hc\.vivo\.com\.cn/); assert(phone.records.protocols.includes(token));
   assert.equal((await api(app, 'POST', `/api/sessions/${id}/files`, {})).data.data[0].savePath, '/sdcard/手机.txt');
-  const source = path.join(dir, '电脑📄.txt'); await fs.writeFile(source, 'PC to phone\n'.repeat(200000));
+  const source = path.join(dir, '--电脑📄.txt'); await fs.writeFile(source, 'PC to phone\n'.repeat(200000));
   const upload = await api(app, 'POST', `/api/sessions/${id}/uploads`, { paths: [source], savePath: '/sdcard/Download' });
-  assert.deepEqual(upload.data.fileNames, ['电脑📄.txt']);
+  assert.deepEqual(upload.data.fileNames, ['--电脑📄.txt']);
   const uploaded = await waitJob(app, upload.data.id); assert.equal(uploaded.status, 'succeeded', JSON.stringify(uploaded.error));
   assert.equal(await sha256(source), await sha256(path.join(dir, 'uploaded', path.basename(source))));
   assert.equal(phone.records.preflight.type, 'TO_PC_FILE_MANAGER');
@@ -252,8 +253,29 @@ test('upload accepts official HTTP-200 preflight without status but still requir
 test('archive validation rejects links and unsafe paths', async t => {
   assert(!validArchivePath('../escape')); assert(!validArchivePath('/absolute')); assert(!validArchivePath('a/../../b')); assert(!validArchivePath('C:\\escape')); assert(validArchivePath('正常/文件.txt'));
   const dir = await temp(t); await fs.writeFile(path.join(dir, 'real'), 'data'); await fs.symlink('real', path.join(dir, 'link'));
-  const file = path.join(dir, 'links.tar'); await official('tar').c({ file, cwd: dir }, ['link']);
-  await assert.rejects(inspectTar(file), { code: 'INVALID_ARCHIVE' });
+  const file = path.join(dir, 'receive.tar');
+  for (const members of [['link'], ['real', './real'], ['--transform=s/^real$/\\/real/', 'real']]) {
+    execFileSync('/usr/bin/tar', ['-cf', file, '-C', dir, ...members]);
+    await assert.rejects(inspectTar(file), { code: 'INVALID_ARCHIVE' });
+  }
+});
+
+test('system tar preserves Unicode, quoted filenames and PAX long names in the manifest', async t => {
+  const dir = await temp(t);
+  const folder = '--folder';
+  const name = '长文件名'.repeat(20) + ' "测试"\n.txt';
+  await fs.mkdir(path.join(dir, folder));
+  await fs.writeFile(path.join(dir, folder, name), 'test');
+  const file = path.join(dir, 'receive.tar');
+  execFileSync('/usr/bin/tar', ['--format=posix', '-cf', file, '-C', dir, '--', folder]);
+  assert.deepEqual(await inspectTar(file), {
+    entries: [
+      { path: folder, type: 'Directory', size: 0 },
+      { path: folder + '/' + name, type: 'File', size: 4 }
+    ],
+    totalSize: 4
+  });
+  await assert.rejects(inspectTar(file, 3), { code: 'INVALID_ARCHIVE' });
 });
 
 test('job cancellation does not report successful completion', async t => {
